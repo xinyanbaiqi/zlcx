@@ -4,9 +4,13 @@ PPG（光电容积脉搏波）芯片数字部分的RTL、testbench与合同文�
 
 本仓库仅作备份与展示用途，不授权使用，详见 [LICENSE](LICENSE)。
 
+**在本仓库内进行任何Verilog相关工作（生成/分析/验证/复核/lint等），必须使用
+`.claude/skills/erie-verilog-generator/` 这个skill，见 [CLAUDE.md](CLAUDE.md)。**
+
 ## 目录结构
 
 ```
+.claude/skills/erie-verilog-generator/   本仓库Verilog工作的强制skill（Apache-2.0，见其自带LICENSE）
 rtl/                        每个功能模块一个子目录，包含该模块当前的RTL、testbench、约束/filelist与回归脚本
 contracts/                  各模块接口合同、系统级合同闭合矩阵、验收ID别名映射表
 verification_reports/       独立复核 / gap修复 / 阶段性关闭报告——记录验证逻辑与结论，不含中间过程
