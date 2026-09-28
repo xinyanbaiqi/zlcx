@@ -1,0 +1,208 @@
+{
+  "whitelist_self_consistency_check": {
+    "ppg_pulse_cdc_sync_internal_chain": {
+      "start_signal": "flag_source_toggle",
+      "chain": [
+        "flag_source_toggle",
+        "flag_dest_sync_meta",
+        "flag_dest_sync_stable",
+        "flag_dest_sync_prev"
+      ],
+      "depth": 3,
+      "class": "1",
+      "verdict": "SAFE",
+      "note": "不走'这是白名单'捷径，直接用Class 1结构判据核实IP自己的两级同步链本身是否安全"
+    },
+    "ppg_reset_sync_is_definition_itself": {
+      "class": "2a",
+      "verdict": "SAFE_IP_VERIFIED",
+      "note": "该IP本身就是Class 2(a)标准2FF释放同步的定义来源，对它自己跑'是否例化了ppg_reset_sync'没有意义；自洽性在这里是平凡成立的，如实记录而不是省略"
+    },
+    "ppg_config_cdc_bridge_internal_gated_capture": {
+      "target_register": "reg_source_config",
+      "width": "[C_CONFIG_WIDTH - 1:0]",
+      "class": "3a",
+      "verdict": "SAFE_GATED_CAPTURE",
+      "gate_evaluation": {
+        "gate_header_line": "end else if(flag_request_sync != flag_destination_ack)begin",
+        "gate_signals": [
+          {
+            "signal": "flag_request_sync",
+            "safe": true,
+            "reason": "本模块内经2级裸寄存器同步链，满足Class 1'至少2级同步'的安全规则"
+          },
+          {
+            "signal": "flag_destination_ack",
+            "safe": true,
+            "reason": "本模块内经3级裸寄存器同步链，满足Class 1'至少2级同步'的安全规则"
+          }
+        ],
+        "all_safe": true
+      },
+      "note": "门控条件flag_request_sync!=flag_destination_ack里的两个标识符都是本模块内部寄存器，不经其他白名单IP连线——专门验证Class 3判据'信号自身同步链深度>=2'这条分支本身可靠"
+    }
+  },
+  "class1_external_async_audit": [
+    {
+      "module": "ppg_adc_async_stage_capture",
+      "signal": "i_clk_stage1_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": [
+        "i_clk_stage1_dout_low_async",
+        "flag_stage1_done_meta",
+        "flag_stage1_done_sync"
+      ],
+      "depth": 2,
+      "verdict": "SAFE"
+    },
+    {
+      "module": "ppg_adc_async_stage_capture",
+      "signal": "i_clk_stage2_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": [
+        "i_clk_stage2_dout_low_async",
+        "flag_stage2_done_meta",
+        "flag_stage2_done_sync"
+      ],
+      "depth": 2,
+      "verdict": "SAFE"
+    },
+    {
+      "module": "ppg_adc_measurement_idac_integration",
+      "signal": "i_clk_stage1_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": null,
+      "depth": null,
+      "verdict": "NOT_CONSUMED_IN_THIS_MODULE",
+      "note": "该信号在本模块内只是端口直通给子实例，未被本模块任何always块读取；真实同步链在被例化的子模块内，见该子模块自己的独立审计条目"
+    },
+    {
+      "module": "ppg_adc_measurement_idac_integration",
+      "signal": "i_clk_stage2_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": null,
+      "depth": null,
+      "verdict": "NOT_CONSUMED_IN_THIS_MODULE",
+      "note": "该信号在本模块内只是端口直通给子实例，未被本模块任何always块读取；真实同步链在被例化的子模块内，见该子模块自己的独立审计条目"
+    },
+    {
+      "module": "ppg_chip_digital_top",
+      "signal": "w_idle_mux_async",
+      "kind": "decl",
+      "class": "1",
+      "chain": [
+        "w_idle_mux_async",
+        "reg_idle_sync_meta",
+        "reg_idle_sync_stable"
+      ],
+      "depth": 2,
+      "verdict": "SAFE"
+    },
+    {
+      "module": "ppg_control_top",
+      "signal": "i_clk_stage1_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": null,
+      "depth": null,
+      "verdict": "NOT_CONSUMED_IN_THIS_MODULE",
+      "note": "该信号在本模块内只是端口直通给子实例，未被本模块任何always块读取；真实同步链在被例化的子模块内，见该子模块自己的独立审计条目"
+    },
+    {
+      "module": "ppg_control_top",
+      "signal": "i_clk_stage2_dout_low_async",
+      "kind": "port",
+      "class": "1",
+      "chain": null,
+      "depth": null,
+      "verdict": "NOT_CONSUMED_IN_THIS_MODULE",
+      "note": "该信号在本模块内只是端口直通给子实例，未被本模块任何always块读取；真实同步链在被例化的子模块内，见该子模块自己的独立审计条目"
+    }
+  ],
+  "class2_standard_reset_sync": [
+    {
+      "instance_name": "ppg_reset_sync_clk2m_Inst",
+      "connections": {
+        "i_clk": "CLK_2M_PAD",
+        "i_async_rstn": "RESET_N",
+        "o_rstn": "w_rstn"
+      },
+      "class": "2a",
+      "verdict": "SAFE_IP_VERIFIED"
+    }
+  ],
+  "class2_borrowed_reset": [
+    {
+      "lhs": "w_source_rstn",
+      "rhs": "w_rstn",
+      "class": "2b",
+      "verdict": "SAFE_DOCUMENTED_BORROW",
+      "evidence_comment": "源域复位借用已稳定的数字域释放结果 // 源域复位直接沿用w_rstn，不用SPI_SCLK驱动的独立两级同步器：SPI_SCLK由主机间歇性提供， // 上电后第一笔真实SPI事务自身的头两个时钟沿如果同时被借用来推动同步链释放，会导致该事务 // 起始若干比特被复位强制清零而错位；w_rstn已在始终运行的CLK_2M_PAD域完成同步且在任何真实 // SPI活动开始前早已稳定，异步喂给源域是安全的，不存在亚稳态风险"
+    }
+  ],
+  "classified_candidates": [
+    {
+      "module": "ppg_spi_register_file",
+      "target_register": "reg_diag_snapshot",
+      "kind": "direct_always_read",
+      "evidence_line": "reg_diag_snapshot_gated <= reg_diag_snapshot; // 门控为真的这一拍，源端早已稳定多拍，安全整体捕获",
+      "class": "3a",
+      "verdict": "SAFE_GATED_CAPTURE",
+      "width": "[303:0]",
+      "gate_evaluation": {
+        "gate_header_line": "end else if(w_diag_snapshot_gate_event)begin",
+        "gate_signals": [
+          {
+            "signal": "w_diag_snapshot_gate_event",
+            "safe": true,
+            "reason": "追溯到白名单IP `ppg_pulse_cdc_sync` 实例 `ppg_pulse_cdc_sync_diag_ready_Inst` 的输出端口 `o_dest_pulse`，视为已经过安全CDC机制处理的信号"
+          }
+        ],
+        "all_safe": true
+      }
+    }
+  ],
+  "phase2_summary": {
+    "candidates_total": 0,
+    "gated_candidates_total": 1
+  },
+  "validation": {
+    "cases": [
+      {
+        "label": "验证用例1：ppg_config_cdc_bridge.v真实门控模式=判定安全",
+        "pass": true,
+        "detail": "实际结果={'target_register': 'reg_source_config', 'width': '[C_CONFIG_WIDTH - 1:0]', 'class': '3a', 'verdict': 'SAFE_GATED_CAPTURE', 'gate_evaluation': {'gate_header_line': 'end else if(flag_request_sync != flag_destination_ack)begin', 'gate_signals': [{'signal': 'flag_request_sync', 'safe': True, 'reason': \"本模块内经2级裸寄存器同步链，满足Class 1'至少2级同步'的安全规则\"}, {'signal': 'flag_destination_ack', 'safe': True, 'reason': \"本模块内经3级裸寄存器同步链，满足Class 1'至少2级同步'的安全规则\"}], 'all_safe': True}, 'note': \"门控条件flag_request_sync!=flag_destination_ack里的两个标识符都是本模块内部寄存器，不经其他白名单IP连线——专门验证Class 3判据'信号自身同步链深度>=2'这条分支本身可靠\"}"
+      },
+      {
+        "label": "验证用例2：Phase2合成V1.2无门控负例（依据changelog重建，非真实历史文件）=判定高风险",
+        "pass": true,
+        "detail": "实际结果={'class': '3', 'verdict': 'HIGH_RISK', 'width': '[303:0]', 'reason': '多bit总线无门控每拍连续采样（读取发生在无独立条件的else fallback分支），这正是真实SPI诊断快照撕裂缺陷（V1.2）的结构形状'}"
+      },
+      {
+        "label": "验证用例3：ppg_pulse_cdc_sync.v自身单bit两级同步=判定安全",
+        "pass": true,
+        "detail": "实际结果={'start_signal': 'flag_source_toggle', 'chain': ['flag_source_toggle', 'flag_dest_sync_meta', 'flag_dest_sync_stable', 'flag_dest_sync_prev'], 'depth': 3, 'class': '1', 'verdict': 'SAFE', 'note': \"不走'这是白名单'捷径，直接用Class 1结构判据核实IP自己的两级同步链本身是否安全\"}"
+      },
+      {
+        "label": "验证用例4：ppg_chip_digital_top.v的w_source_rstn借用w_rstn模式=判定安全（Class 2特例）",
+        "pass": true,
+        "detail": "实际结果={'lhs': 'w_source_rstn', 'rhs': 'w_rstn', 'class': '2b', 'verdict': 'SAFE_DOCUMENTED_BORROW', 'evidence_comment': '源域复位借用已稳定的数字域释放结果 // 源域复位直接沿用w_rstn，不用SPI_SCLK驱动的独立两级同步器：SPI_SCLK由主机间歇性提供， // 上电后第一笔真实SPI事务自身的头两个时钟沿如果同时被借用来推动同步链释放，会导致该事务 // 起始若干比特被复位强制清零而错位；w_rstn已在始终运行的CLK_2M_PAD域完成同步且在任何真实 // SPI活动开始前早已稳定，异步喂给源域是安全的，不存在亚稳态风险'}"
+      },
+      {
+        "label": "验证用例5：门控信号本身是未经白名单IP、无门控手搓跨域的合成陷阱=判定高风险（不能因表面有门控就放行）",
+        "pass": true,
+        "detail": "实际结果={'class': '3', 'verdict': 'HIGH_RISK_UNVERIFIED_GATE', 'width': '[15:0]', 'gate_evaluation': {'gate_header_line': 'end else if(reg_fake_gate)begin', 'gate_signals': [{'signal': 'reg_fake_gate', 'safe': False, 'reason': \"未追溯到任何白名单IP输出端口，本模块内裸寄存器同步链深度仅1级（<2）；门控信号本身可能是未受保护的手搓跨域，'有门控'这个表面结构不能代替对门控信号自身的判定\"}], 'all_safe': False}}"
+      },
+      {
+        "label": "附加真实断言：Phase2唯一真实门控候选最终归类为Class 3(a)门控捕获，安全",
+        "pass": true,
+        "detail": "实际分类结果={'module': 'ppg_spi_register_file', 'target_register': 'reg_diag_snapshot', 'kind': 'direct_always_read', 'evidence_line': 'reg_diag_snapshot_gated <= reg_diag_snapshot; // 门控为真的这一拍，源端早已稳定多拍，安全整体捕获', 'class': '3a', 'verdict': 'SAFE_GATED_CAPTURE', 'width': '[303:0]', 'gate_evaluation': {'gate_header_line': 'end else if(w_diag_snapshot_gate_event)begin', 'gate_signals': [{'signal': 'w_diag_snapshot_gate_event', 'safe': True, 'reason': '追溯到白名单IP `ppg_pulse_cdc_sync` 实例 `ppg_pulse_cdc_sync_diag_ready_Inst` 的输出端口 `o_dest_pulse`，视为已经过安全CDC机制处理的信号'}], 'all_safe': True}}"
+      }
+    ],
+    "all_pass": true
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "control_top_19tb_regression": [
+    {
+      "label": "tb_diag_algo_probe",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_diag_algo_probe/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:15:13",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:15:40",
+      "dependency_count": 33,
+      "is_fresh": false,
+      "missing_dependencies": [],
+      "stale_dependencies": [
+        {
+          "path": "ppg_control_top/tb_ppg_control_top.v",
+          "mtime_iso": "2026-09-17 15:19:15",
+          "age_seconds_newer": 214.4
+        }
+      ]
+    },
+    {
+      "label": "tb_ppg_control_top_adc_numeric_scoreboard",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_adc_numeric_scoreboard/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:28:54",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_baseline_cross",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_baseline_cross/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:22:46",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_fir_tail_isolation",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_fir_tail_isolation/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:28:38",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_idac_bus_isolation",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_idac_bus_isolation/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:30:13",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_injection",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_injection/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:30:26",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_input_light_static_matrix",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_input_light_static_matrix/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:31:16",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_lifecycle_fault_adc_anomaly",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_lifecycle_fault_adc_anomaly/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:30:54",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_long_10_cycles",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_long_10_cycles/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 16:54:46",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_longrun",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_longrun/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 17:19:30",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_no_recheck_control",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_no_recheck_control/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:41:52",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_normal_slow_tracking",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_normal_slow_tracking/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:36:33",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_owner_identity_backpressure",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_owner_identity_backpressure/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:42:23",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_peak_valley_return",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_peak_valley_return/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:47:01",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_periodic_recheck_recovery",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_periodic_recheck_recovery/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:56:07",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_robustness_corner_waveforms",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_robustness_corner_waveforms/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 16:28:44",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_control_top_startup_idac_calibration",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_startup_idac_calibration/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 16:28:59",
+      "dependency_count": 33,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_real_raw_generator_selfcheck",
+      "artifact_path": "ppg_control_top/xsim_regression_20260906/tb_ppg_real_raw_generator_selfcheck/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 15:15:21",
+      "dependency_count": 2,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    }
+  ],
+  "chip_digital_top_regressions": [
+    {
+      "label": "tb_ppg_chip_digital_top (chip_digital_top xsim_regression_20260916)",
+      "artifact_path": "ppg_chip_digital_top/xsim_regression_20260916/tb_ppg_chip_digital_top/xsim.log",
+      "artifact_mtime_iso": "2026-09-16 12:33:42",
+      "dependency_count": 35,
+      "is_fresh": false,
+      "missing_dependencies": [],
+      "stale_dependencies": [
+        {
+          "path": "ppg_precision_window_controller/ppg_precision_window_controller.v",
+          "mtime_iso": "2026-09-17 10:12:52",
+          "age_seconds_newer": 77950.5
+        }
+      ]
+    },
+    {
+      "label": "tb_ppg_control_top (control_top xsim_smoke_recheck_20260910)",
+      "artifact_path": "ppg_control_top/xsim_smoke_recheck_20260910/tb_ppg_control_top/xsim.log",
+      "artifact_mtime_iso": "2026-09-16 13:26:21",
+      "dependency_count": 33,
+      "is_fresh": false,
+      "missing_dependencies": [],
+      "stale_dependencies": [
+        {
+          "path": "ppg_control_top/tb_ppg_control_top.v",
+          "mtime_iso": "2026-09-17 15:19:15",
+          "age_seconds_newer": 93174.0
+        },
+        {
+          "path": "ppg_precision_window_controller/ppg_precision_window_controller.v",
+          "mtime_iso": "2026-09-17 10:12:52",
+          "age_seconds_newer": 74791.8
+        }
+      ]
+    }
+  ],
+  "reconciliation_report": [
+    {
+      "label": "reconciliation_report.md",
+      "artifact_path": "ppg_system_integration/cross_reference_tools/reconciliation_report.md",
+      "artifact_mtime_iso": "2026-09-16 10:09:12",
+      "dependency_count": 56,
+      "is_fresh": false,
+      "missing_dependencies": [],
+      "stale_dependencies": [
+        {
+          "path": "ppg_control_top/tb_ppg_control_top.v",
+          "mtime_iso": "2026-09-17 15:19:15",
+          "age_seconds_newer": 105002.2
+        },
+        {
+          "path": "ppg_system_integration/PPG_ALIAS_MAPPING_TABLE.md",
+          "mtime_iso": "2026-09-17 15:18:11",
+          "age_seconds_newer": 104938.9
+        },
+        {
+          "path": "ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+          "mtime_iso": "2026-09-17 14:41:40",
+          "age_seconds_newer": 102747.2
+        },
+        {
+          "path": "ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+          "mtime_iso": "2026-09-17 14:41:24",
+          "age_seconds_newer": 102731.7
+        },
+        {
+          "path": "ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+          "mtime_iso": "2026-09-17 10:16:13",
+          "age_seconds_newer": 86820.3
+        },
+        {
+          "path": "ppg_precision_window_controller/ppg_precision_window_controller.v",
+          "mtime_iso": "2026-09-17 10:12:52",
+          "age_seconds_newer": 86620.0
+        },
+        {
+          "path": "ppg_system_integration/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "mtime_iso": "2026-09-17 10:03:24",
+          "age_seconds_newer": 86051.6
+        }
+      ]
+    },
+    {
+      "label": "reconciliation_report.json",
+      "artifact_path": "ppg_system_integration/cross_reference_tools/reconciliation_report.json",
+      "artifact_mtime_iso": "2026-09-16 10:09:12",
+      "dependency_count": 56,
+      "is_fresh": false,
+      "missing_dependencies": [],
+      "stale_dependencies": [
+        {
+          "path": "ppg_control_top/tb_ppg_control_top.v",
+          "mtime_iso": "2026-09-17 15:19:15",
+          "age_seconds_newer": 105002.2
+        },
+        {
+          "path": "ppg_system_integration/PPG_ALIAS_MAPPING_TABLE.md",
+          "mtime_iso": "2026-09-17 15:18:11",
+          "age_seconds_newer": 104938.9
+        },
+        {
+          "path": "ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+          "mtime_iso": "2026-09-17 14:41:40",
+          "age_seconds_newer": 102747.2
+        },
+        {
+          "path": "ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+          "mtime_iso": "2026-09-17 14:41:24",
+          "age_seconds_newer": 102731.7
+        },
+        {
+          "path": "ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+          "mtime_iso": "2026-09-17 10:16:13",
+          "age_seconds_newer": 86820.3
+        },
+        {
+          "path": "ppg_precision_window_controller/ppg_precision_window_controller.v",
+          "mtime_iso": "2026-09-17 10:12:52",
+          "age_seconds_newer": 86620.0
+        },
+        {
+          "path": "ppg_system_integration/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "mtime_iso": "2026-09-17 10:03:24",
+          "age_seconds_newer": 86051.6
+        }
+      ]
+    }
+  ],
+  "static_lint_semantic_sweep": {
+    "label": "static_lint_semantic_sweep_report.json",
+    "artifact_path": "ppg_system_integration/cross_reference_tools/static_lint_semantic_sweep_report.json",
+    "artifact_mtime_iso": "2026-09-13 15:54:36",
+    "dependency_count": 93,
+    "is_fresh": false,
+    "missing_dependencies": [],
+    "stale_dependencies": [
+      {
+        "path": "ppg_control_top/tb_ppg_control_top.v",
+        "mtime_iso": "2026-09-17 15:19:15",
+        "age_seconds_newer": 343478.2
+      },
+      {
+        "path": "ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+        "mtime_iso": "2026-09-17 14:41:24",
+        "age_seconds_newer": 341207.7
+      },
+      {
+        "path": "ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v",
+        "mtime_iso": "2026-09-17 10:37:30",
+        "age_seconds_newer": 326573.2
+      },
+      {
+        "path": "ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "mtime_iso": "2026-09-17 10:30:59",
+        "age_seconds_newer": 326182.4
+      },
+      {
+        "path": "ppg_precision_window_controller/ppg_precision_window_controller.v",
+        "mtime_iso": "2026-09-17 10:12:52",
+        "age_seconds_newer": 325096.0
+      },
+      {
+        "path": "ppg_coarse_detection_fir/ppg_coarse_detection_fir.v",
+        "mtime_iso": "2026-09-16 00:35:56",
+        "age_seconds_newer": 204079.9
+      },
+      {
+        "path": "ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+        "mtime_iso": "2026-09-16 00:35:56",
+        "age_seconds_newer": 204079.9
+      },
+      {
+        "path": "ppg_spi_register_file/ppg_spi_register_file.v",
+        "mtime_iso": "2026-09-14 22:14:39",
+        "age_seconds_newer": 109202.2
+      }
+    ]
+  },
+  "module_tb_regression": [
+    {
+      "label": "tb_ppg_coarse_detection_fir",
+      "artifact_path": "ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_coarse_detection_fir/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 14:42:20",
+      "dependency_count": 4,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_peak_valley_window_detector",
+      "artifact_path": "ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_peak_valley_window_detector/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 14:42:01",
+      "dependency_count": 4,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    },
+    {
+      "label": "tb_ppg_precision_window_controller",
+      "artifact_path": "ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log",
+      "artifact_mtime_iso": "2026-09-17 14:42:10",
+      "dependency_count": 4,
+      "is_fresh": true,
+      "missing_dependencies": [],
+      "stale_dependencies": []
+    }
+  ],
+  "_summary": {
+    "total_checked": 27,
+    "fresh": 21,
+    "stale": 6,
+    "missing_artifact": 0,
+    "generated_at": "2026-09-17T09:29:13.741989+00:00"
+  }
+}

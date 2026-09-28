@@ -1,0 +1,1907 @@
+`timescale 1ns / 1ps
+
+////////////////////////////////////English///////////////////////////////////////
+// Company:            Erie
+// Engineer:           Erie
+//
+// Create Date:        2026/08/24
+// Design Name:        PPG Baseline Warmup and SAR15 Crossing Testbench
+// Module Name:        tb_ppg_control_top_baseline_cross
+// Description:        Description/ppg_control_top_Design.pdf
+// Simulations:        TestBench/Vivado/2022.2/ppg_control_top
+//
+// Referrences:        PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md
+//                      PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md
+//                      PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
+//                      PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md
+//
+// Dependencies:       ppg_control_top and its full real hierarchy;
+//                      tb_ppg_real_raw_generator.vh (Phase 3 Stage 1/2 generator)
+//
+// Version:            V1.5
+// Revision Date:      2026/09/07
+// History:
+//    Time               Version       Revised by            Contents
+// 2026/09/07            V1.5          Erie                  PPG open-items batch 4 (final batch): added Acceptance-D01-01's real dynamic safe-drain proof for i_peak_valley_config_valid, inserted right after the existing N01/N08 scenario and before this file's own original STOP sequence. Real architectural finding worth recording before the construction itself: i_peak_valley_config_valid is not a genuine ppg_control_top top-level port -- it is the ACTIVE V5 register value gated by ppg_system_config_manager.v:457's `flag_commit_accept = (state_current == ST_CONFIG) && flag_snapshot_valid`, so COMMIT (and therefore any change to this bit) is only accepted in the CONFIG lifecycle state, never during RUN. The only path from RUN back to CONFIG is STOP, and STOP itself already unconditionally clears the exact in-flight state (C20 candidate context on i_start_ack_event, C22 context on i_run_enable==0-driven flag_runtime_clear) that a literal "toggle config_valid while a candidate stays mid-flight, without touching STOP/START" scenario would need to observe. This means the matrix's literal framing is not constructible via real port-level drive without force -- not because this session failed to find a technique, but because the RTL's own COMMIT timing structure makes it a category error, the same class of honestly-recorded construction boundary as N08's pre-handoff facet and LFA-10(b). Split into two real, complementary constructions instead, together covering the full acceptance intent (safe consumption/drain, zero new formal events, single reversible gate, no second producer) across all five real consumers of this signal -- not just the four requirement IDs the matrix names (AMI-54/PWI-08/BSL-40/PWC-40): C22 (ppg_peak_valley_window_detector.v:111/351/354) was independently confirmed by reading the RTL to be a real fifth consumer with its own flag_active_config_legal/flag_formal_sample gating and o_local_empty, with no requirement ID of its own -- recorded as a contract text gap in the matrix, not fixed in the contract text itself this session. D01-01a: polls for a real in-flight C20 candidate (flag_candidate_active) or C22 active-peak search (flag_active_peak_valid) after N01/N08's restart replays the same curve from frame 0, then STOPs and confirms zero new PEAK/VALLEY/CROSS/RETURN_9BIT events fire across the drain and all three consumers' o_local_empty settle to 1. D01-01b: recommits with peak_valley_config_valid=0 and restarts, drives 250 real RED transactions (covering the first PEAK@63/VALLEY@201 window) while a new background always-block invariant process (gated by flag_d01_pv_invalid_window_active) continuously checks C20/C22/C23 o_local_empty stay 1 and C23 never enters FINE every single cycle, confirms zero new formal events despite an otherwise-qualifying curve, then restores peak_valley_config_valid=1 and restarts to confirm the same curve immediately resumes producing a real PEAK -- proving the gate is real, reversible and single-point. Two real bugs were found and fixed while bringing this up, neither in the RTL: (1) the reversibility step originally called task_n0x_recommit_dual_and_start directly after D01-01b's 250-sample RUN window without STOPping first -- COMMIT is only accepted in ST_CONFIG, so the recommit was rejected and cascaded into FAIL N01N08 re-commit dual-optical MANUAL plus an unplanned $finish; fixed by adding a real STOP+drain-to-CONFIG sequence before the reversibility recommit. (2) D01-01a's first version took its in-flight snapshot the instant flag_active_peak_valid asserted, but that flag latches in ppg_peak_valley_window_detector.v the same cycle C22 internally decides a peak, while the corresponding real o_peak_valid&&i_peak_ready handshake this file's own PEAK-capture process counts on does not complete until ppg_dynamic_baseline_cross_detector.v's FSM reaches ST_WAIT_PEAK_COMMIT a few cycles later -- the snapshot landed between decision and handshake, and the already-decided PEAK completing normally after STOP was issued was misreported as "a new event fired after STOP" (real repro: peak 4->5). Fixed by waiting 20 extra real cycles after the flag first asserts, re-checking it is still asserted (i.e. genuinely still in flight, not just decided-and-already-settling), before taking the snapshot; 20 cycles is a small fraction of one real 2 MHz frame period so it cannot skip past the detection window itself. Verified end to end via the full local Vivado 2022.2 xsim flow (xvlog/xelab/xsim) at this file's real C_TARGET_RED_SAMPLES=700 scale plus the new scenario's own restarts: JNT_BASELINE 53/53 PASS, GROUP1/GROUP2_EXISTENCE unchanged from every prior verified run (PEAK@63/225/464/625, VALLEY@201/395/601, CROSS@411, RETURN_9BIT@605, B[f]=-19454066 match), PASS N01/PASS N08(scope-only), PASS D01 Acceptance-D01-01a (C22 active_peak_valid=1 in-flight, zero new events, all three consumers settled empty), PASS D01 Acceptance-D01-01b (zero new events across 250 real RED transactions under peak_valley_config_valid=0, background invariant process clean) and its reversibility check (real PEAK resumed, peak_count=6), PASS BASELINE_CROSS STOP drain and GROUP12_PROTOCOL_STICKY (zero blocking stickies across real_red=1106 real_ir=1104), overall BASELINE_CROSS_TB_PASS with zero cnt_error -- see `d01_xsim_final_pass.log` in this directory for the real run log.
+// 2026/09/07            V1.4          Erie                  PPG open-items batch 2: added N01+N08(scope-only) as a new scenario inserted right after the existing GROUP1/GROUP2_EXISTENCE checks and before this file's own original STOP sequence, plus a background detection-discard-event latch process and a task_n0x_recommit_dual_and_start recovery task so bg_responder keeps feeding the rest of the file unaffected. Root cause of matrix items N01/N08's prior vacuous-pass problem: flag_detection_discard_trigger (ppg_adc_measurement_idac_integration.v:967) requires the downstream PWI-side detection datapath to be genuinely non-empty at STOP/abort time, and no existing TB ever caught that specific timing window -- but this file, by the time its own main loop reaches C_TARGET_RED_SAMPLES, has already captured multiple real PEAK/VALLEY/CROSS events, so bg_responder (still running as a background `forever` process) is virtually guaranteed to be mid-candidate-tracking again shortly after; the new scenario just polls flag_pwi_detection_datapath_empty for real and STOPs the instant it goes non-empty, with a bounded 3,000,000-cycle timeout. Real construction failure worth recording: a first attempt tried to build N08's other half (identity_valid=1, "pre-handoff") by forcing PWI's internal ppg_precision_window_integration_Inst.normal_result_ready_o low to backpressure FIR's acceptance and hold AMI's flag_detection_pending=1 into STOP -- this ran and flag_detection_pending did arm to 1 as intended, but the discard never fired, because forcing an output net only fakes what AMI sees externally while FIR's own internal state machine, unaware of the force, still believes it accepted the transfer and reports itself idle -- a genuine AMI/FIR state split that can never occur in real silicon, not real RTL evidence. Removed that code entirely rather than leave a misleading construct in the file; documented the finding in place (matches this project's LFA-10(b) precedent for an honestly-recorded construction difficulty) and left N08's pre-handoff facet to whichever future session builds a dedicated AMI-level module unit-TB that can legitimately drive i_normal_result_valid/o_normal_result_ready directly. Verified end to end at the file's own real C_TARGET_RED_SAMPLES=700 scale under iverilog: BASELINE_CROSS_TB_PASS real_red=700 real_ir=699 measurement_result_valid=1399 peak_count=4 valley_count=3 cross_count=1 return_count=1, identical event sequence to every prior verified run (PEAK@63/225/464/625, VALLEY@201/395/601, CROSS@411, RETURN_9BIT@605) plus PASS N01/PASS N08(scope-only), zero cnt_error.
+// 2026/08/24            V1.0          Erie                  Create file. Phase 3 Stage 4 groups 1+2 (PPG-BASELINE-WARMUP, PPG-CROSS-SAR15). Kept separate from tb_ppg_control_top.v and tb_ppg_control_top_longrun.v for the same reason those two are separate from each other: each Phase 3 stage exercises a genuinely different regression shape and should not force every other stage to pay for it. Reuses the proven real-2MHz-clock, NORMAL dual-optical MANUAL config, START/STOP, wait_q3_release/drive_real_adc_done/make_fixed_raw, and bg_responder Stage 2 generator wiring verbatim from tb_ppg_control_top_longrun.v. One deliberate departure from every prior Phase 3 file's config task: the ten stage1_weight_q16_0..9 fields and stage1_offset_q16 are set to C11's own frozen nominal values (65536/131072/262144/524288/524288/1048576/2097152/4194304/8388608/16777216, offset -262144) instead of the tiny placeholder coefficients (-17..26, offset -99) every earlier Phase 1-3 file inherited unexamined. A same-session diagnostic (tb_diag_algo_probe.v, not delivered) traced a real, previously undiscovered defect to those placeholder coefficients: at Q16 they contribute roughly 0.0003 per physical bit, so the ten-term weighted sum for any 10-bit RAW code rounds to exactly 0 every time -- o_calibrated_s1_value read back as a hard 0 for every single transaction regardless of target_code, which meant every downstream signal (coarse DC-recovered value, FIR input, baseline, peak/valley) was flat, and zero CROSS/PEAK/VALLEY events fired across 1200 real frames despite the RAW generator's amplitude comfortably clearing the configured hysteresis/hpeak-valley-amplitude thresholds on paper. This was never caught by Phase 1's SMOKE-01~23 or Stage 2/3's evidence because none of them ever asserted anything about the calibrated value's numeric correctness -- they used fixed RAW codes (make_fixed_raw(256,...)) end to end, so a constant (even a wrong constant) calibrated output never looked anomalous. Switching to C11's nominal weights was independently confirmed sufficient: the same diagnostic then observed a full, contract-shaped SAR9-peak/valley-cross-SAR15-valley-return-SAR9 cycle (PEAK@63, VALLEY@201, PEAK@225, VALLEY@395, CROSS@411, PEAK@464, VALLEY@601, RETURN_9BIT@605 reason=VALLEY_CONFIRMED, PEAK@625, ...) with zero protocol-error stickies across 1200 real frames. This V1.0 commit left the acceptance logic itself as a skeleton only -- the main sequence was a placeholder loop and the tail of the file was still Stage 4's raw diagnostic $display block, not real assertions.
+// 2026/08/24            V1.1          Erie                  Complete Group 1/2's acceptance logic for real, replacing the V1.0 skeleton: dedicated edge-triggered capture registers for PEAK/VALLEY/CROSS/RETURN_9BIT (full payload -- value/frame_id/sample_index/epochs/baseline_q16/slope_q16/reason, using the same valid&&ready handshake convention tb_diag_algo_probe.v had already proven correct); all six required Group 1/2 assertions (history-insufficient cannot qualify a cross before o_baseline_valid first asserts; IR transactions leave the cross detector's RED running state -- o_baseline_valid/o_slope_current_q16/o_slope_base_q16/o_no_cross_count/o_reacquire_active -- bit-for-bit unchanged one cycle before vs. after each IR handshake; each qualified RED candidate's B[f]=P[n]+DELTA+S[n]*frame_delta(f,F_P[n]) is independently recomputed from the captured PEAK anchor and CROSS payload and compared against the RTL's own o_cross_baseline_q16, mirroring dec_peak_value_q16/dec_slope_product_q16/dec_baseline_wide_q16's exact construction read out of ppg_dynamic_baseline_cross_detector.v itself; the CROSS payload is traced back to the real RED FIR handshake live at the cross detector's own flag_candidate_start cycle, not merely trusted; SAR15 entry (o_fine_window_start_event) is proven to commit only when the real i_frame_safe_boundary/i_precision_takeover_safe/i_analog_safe gates were asserted at the actual commit cycle, cross-checked against the TB's own driven i_adc_physical_idle; o_result_sample_index continuity and same-color AMB/DC code snapshot+epoch stability are checked immediately across the transition); plus the two group-delay checks A/B designed in the prior session's handoff (BSL-04/PVW-17-style), applied per that handoff's own literal wording -- check A (live macro-frame counter minus reported frame_id >= C_FIR_GROUP_DELAY_SAMPLES) on both the first PEAK and first CROSS, check B (reported frame_id within C_GROUP_DELAY_TOLERANCE_FRAMES of the generator's own closed-form pulse_shape rise-corner) on the first PEAK only, since only PEAK has a clean theoretical closed form -- CROSS timing depends on baseline dynamics, not the raw waveform phase alone. Also removed the V1.0 tail's raw diagnostic $display block entirely (its job is now done by the dedicated capture registers) and replaced the placeholder INCOMPLETE banner with real PASS/FAIL existence checks (at least 2 real PEAK/VALLEY events, at least 1 real CROSS/RETURN_9BIT event, both group-delay checks actually having run) so a degenerate zero-event run cannot vacuously pass.
+//                                                             Verification was staged exactly per this session's instruction, small-scale iverilog first: a 90-red-sample run first caught a real self-inflicted bug -- several new tracking regs (flag_first_peak_captured and friends) were declared but never initialized, defaulting to X; `if(!flag_first_peak_captured)` on X is treated as false in Verilog, so checks A/B silently never ran even though nothing looked wrong (no FAIL, no crash). Fixed by explicitly zeroing every new capture/assertion reg in the main initial block rather than relying on any implicit default. A follow-up 650-red-sample iverilog run (enough to reach the full PEAK->VALLEY->CROSS->SAR15->RETURN_9BIT->PEAK cycle) then surfaced two more real bugs, both in this TB's own check logic, not in the RTL: (1) GROUP2_SAFE_BOUNDARY initially checked i_frame_safe_boundary/i_precision_takeover_safe/i_analog_safe at the same cycle the registered o_fine_window_start_event pulse appears, but that pulse is fine_window_start_event_o registered one cycle after the real commit decision (flag_enter_commit), and i_frame_safe_boundary is a single-cycle-per-frame pulse that had already deasserted by the delayed observation cycle -- fixed by unconditionally latching all three gates (and i_adc_physical_idle) every cycle into one-cycle-previous shadow regs and checking those instead, correctly time-aligning the check with the actual decision cycle. (2) GROUP2_CODE_SNAPSHOT_STABILITY compared the pretransition AMB/DC snapshot against whatever the single most-recent result was regardless of color, but dcs_r_manual_code(80) and dcs_ir_manual_code(96) are legitimately different per this scenario's own config -- comparing a stray IR result against the post-transition RED result made a correct, unchanged DC code look like it had "changed" (96 vs 80). Fixed by tracking a separate last-RED-only snapshot and comparing RED-to-RED only, leaving the sample_index continuity check (which is legitimately cross-color) on the original any-color tracking. After both fixes, the 650-sample iverilog run passed clean with zero FAILs, reproducing tb_diag_algo_probe.v's exact event sequence (PEAK@63/225/464/625, VALLEY@201/395/601, CROSS@411, RETURN_9BIT@605) and every Group 1/2 check firing and passing with real, non-trivial numbers (e.g. GROUP1_BASELINE_FORMULA: recomputed B[f]=-19454066 matched o_cross_baseline_q16 bit-for-bit from peak_value=85/peak_frame=225/cross_frame=411/frame_delta=186/slope=-134541). C_TARGET_RED_SAMPLES was then restored to the real 700 and the full local Vivado 2022.2 xsim flow (xvlog/xelab/xsim, per this project's established real-2MHz-clock long-run precedent) ran clean end to end in 4m34s wall-clock: BASELINE_CROSS_TB_PASS real_red=700 real_ir=699 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1, zero cnt_error, identical event sequence and identical B[f] recomputation match to the iverilog run. This is real, staged simulation evidence for Group 1 and Group 2 of Stage 4, not a placeholder.
+// 2026/08/24            V1.2          Erie                  Added the protocol-error sticky-flag audit the user asked to retrofit into this file (and to build into group 3 from the start): after STOP drains cleanly, check all twelve scheduler/AMI/SSW/characterization/discard sticky diagnostics the DUT has always exposed but this file (and every earlier Phase 1-3 file, including tb_ppg_control_top.v and the Stage 3 long-run) had only ever wired up, never asserted. The very first real run of this new check -- the first time these sticky flags had ever actually been checked under real continuous generator-driven traffic in this project -- immediately found a real, reproducible hit: o_ssw_owner_deadline_timeout_sticky was asserted by the end of the run. Investigated rather than dismissed: PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md sections 597/614 and PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md section 981 both explicitly classify o_launch_timeout_sticky/o_owner_deadline_timeout_sticky (both scheduler and SSW sides) and SSW's o_calibration_timeout_sticky as non-blocking historical diagnostics that never raise fault_blocking or emit a supervisor fault record, as distinct from the genuinely blocking o_protocol_error_sticky/o_completion_mismatch_sticky/o_transaction_mismatch_sticky class. A dedicated edge-detect diagnostic probe (built in the sibling tb_ppg_control_top_peak_valley_return.v, since both files share identical setup and the finding reproduces in both) pinned the trigger to a single edge at o_lifecycle_state==ST_STOPPING, i.e. the tail of the STOP/drain sequence -- not a recurring artifact during normal PPG operation -- consistent with the contract's own "non-blocking" classification: STOP interrupting the last in-flight owner legitimately misses its freeze deadline as part of shutdown, not a real protocol defect. Fixed by splitting the sticky audit into two classes: the eight genuinely blocking stickies still hard-FAIL and count toward cnt_error exactly as before, while the four non-blocking historical-diagnostic stickies (o_scheduler_launch_timeout_sticky, o_scheduler_owner_deadline_timeout_sticky, o_ssw_owner_deadline_timeout_sticky, o_ssw_calibration_timeout_sticky) now print as INFO and do not affect cnt_error. Re-verified at full real_red=700/real_ir=699 scale under iverilog: PASS GROUP12_PROTOCOL_STICKY for all eight blocking flags, INFO GROUP12_HISTORICAL_DIAG for the one that legitimately fired at STOP, BASELINE_CROSS_TB_PASS overall -- identical event sequence and B[f] recomputation match to every prior verified run, confirming the reclassification only changed what counts as failure, not any other observed behavior.
+// 2026/08/25            V1.3          Erie                  C25 contract sections 9.1/10.1 + PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md section 11
+//                                                             require every group touching Scheduler/SSW/AMI state to run JNT-01~09
+//                                                             (52 sub-checks) clean after an independent reset before its own scenario may
+//                                                             start; this file (covering Group1+Group2 in one run) never had that prefix.
+//                                                             Added it via `include "tb_ppg_jnt_baseline_prefix.vh"` (Architecture A, see
+//                                                             that file's own V1.0/V1.1 changelog for the full feasibility research, the
+//                                                             signal-hierarchical-path map, and the four real bugs found and fixed while
+//                                                             bringing it up against this file) plus one bg_responder gate line and one
+//                                                             call site right after this file's own existing reset-release, before its
+//                                                             existing NORMAL dual-optical MANUAL config commit. Full real 700-red-sample
+//                                                             iverilog run: JNT_BASELINE checked=53 pass=53 required=53 status=PASS,
+//                                                             followed by this file's own existing Group1/2 scenario reaching
+//                                                             BASELINE_CROSS_TB_PASS with the same event sequence (PEAK@63/225/464/625,
+//                                                             VALLEY@201/395/601, CROSS@411, RETURN_9BIT@605) and the same B[f]=-19454066
+//                                                             recomputation match as every prior verified run -- the JNT prefix's final
+//                                                             independent reset hands the DUT back clean, none of Group1/2's own algorithm
+//                                                             evidence changed. While chasing that confirmation run, an unexpected
+//                                                             real_cal=1 in the summary line (previously always 0) surfaced a second,
+//                                                             genuinely pre-existing bug, unrelated to JNT and present in this file since
+//                                                             it was first written: bg_responder classified each response's frame
+//                                                             type/color/precision by live-sampling
+//                                                             ppg_400hz_frame_calibration_scheduler_Inst.state_current at the moment
+//                                                             wait_q3_release returns, rather than latching those fields at the moment the
+//                                                             owner is actually committed. FRAME_TYPE_AMB happens to be encoded 2'b00, the
+//                                                             same value state_current's B_INFLIGHT_TYPE field defaults to on reset --
+//                                                             harmless as long as state_current resets from Verilog's uninitialized X (in
+//                                                             which case `!X` reads false in the classification `if`, matching this
+//                                                             project's own previously-documented X-vs-0 class of bug), which is exactly
+//                                                             what happened in every prior single-reset run of this file. JNT-01~09 makes
+//                                                             this the ninth reset of the same simulation, so state_current resets to a
+//                                                             real, defined 0 instead of X, and the same live-sampling race that was always
+//                                                             there became observable for the first time: a targeted edge probe confirmed
+//                                                             the AMI's real calibration-request paths (o_calibration_sample_valid,
+//                                                             Scheduler's B_CAL_WAVE_PENDING) never fired even once in the whole run, proving
+//                                                             the "calibration" classification was a false positive, not a real event.
+//                                                             Fixed by adding a dedicated always block that latches frame_type/color_ir/
+//                                                             frame_id/precision_mode into shadow registers on
+//                                                             sched_adc_owner_commit_event_o (the same commit-time-latch technique this
+//                                                             file's own PEAK/VALLEY/RETURN_9BIT capture processes and the new JNT prefix's
+//                                                             owner-commit monitor already use), and having bg_responder read those
+//                                                             snapshots instead of re-sampling state_current live. Re-verified at full
+//                                                             real_red=700 scale: real_cal=0 (matching the original pre-JNT baseline, not
+//                                                             the buggy JNT-enabled 1), measurement_result_valid=1398 (exactly matching the
+//                                                             original baseline, not the buggy run's 1400), B[f] and event sequence still
+//                                                             identical, zero cnt_error. real_ir came back 698 instead of 699 -- a one-count
+//                                                             shift in bg_responder's own IR-response tally at the RED-count-based loop exit
+//                                                             boundary, an expected side effect of moving the precision_mode sample point
+//                                                             earlier (to the correct, commit-time value) rather than a new defect: nothing
+//                                                             asserts on the exact real_ir count, and every assertion that does matter
+//                                                             (GROUP1/2_EXISTENCE, GROUP12_PROTOCOL_STICKY, peak/valley/cross/return counts,
+//                                                             B[f] recomputation) passed unchanged. The identical bg_responder fix was also
+//                                                             applied to tb_ppg_control_top_peak_valley_return.v (Group3),
+//                                                             tb_ppg_control_top_fir_tail_isolation.v (Group4), and
+//                                                             tb_ppg_control_top_long_10_cycles.v (Group5), which share byte-identical
+//                                                             bg_responder logic; all three still show JNT_BASELINE 53/53 PASS after the fix.
+///////////////////////////////////Chinese////////////////////////////////////////
+// 版权归属:           Erie
+// 开发人员:           Erie
+//
+// 创建日期:           2026年08月24日
+// 设计名称:           PPG基线预热与SAR15穿越测试平台
+// 模块名称:           tb_ppg_control_top_baseline_cross
+// 模块说明:           Description/ppg_control_top_Design.pdf
+// 仿真工程:           TestBench/Vivado/2022.2/ppg_control_top
+//
+// 参考资料:           PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md
+//                      PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md
+//                      PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
+//                      PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md
+//
+// 依赖文件:           ppg_control_top及其完整真实层次；
+//                      tb_ppg_real_raw_generator.vh（Phase 3 Stage 1/2生成器）
+//
+// 当前版本:           V1.5
+// 修订日期:           2026年09月07日
+// 修订历史:
+//    时间                版本          修订人                修订内容
+// 2026年09月07日        V1.5          Erie                  PPG开放项批次4(最后一批):在既有N01/N08场景之后、本文件原有STOP序列之前，新增Acceptance-D01-01的真实动态安全排空证明。构造之前先有一个必须记录的真实架构发现：`i_peak_valley_config_valid`不是`ppg_control_top`自身的真实顶层端口，而是`ppg_system_config_manager.v:457`的`flag_commit_accept = (state_current == ST_CONFIG) && flag_snapshot_valid`门控的ACTIVE V5寄存器位——COMMIT（因而这一位的任何改变）只在CONFIG生命周期态被接纳，RUN态下不存在任何通路。唯一能从RUN回到CONFIG的路径是STOP，而STOP本身已经会经`i_start_ack_event`清空C20候选、经`i_run_enable=0`驱动的`flag_runtime_clear`清空C22上下文——这正是"完全不触碰STOP/START、让一个在途候选眼看着config_valid从1掉到0"这个矩阵字面场景需要观察的那部分状态。也就是说这个字面场景在真实端口层面无法构造，不是本次会话没找到手法，而是COMMIT时序结构本身决定的类别性矛盾，与N08交接前半、LFA-10(b)是同一类诚实记录的真实构造边界。因此拆成两个互补的真实构造，共同覆盖验收意图（安全消费/drain、零新正式事件、单点可逆、无第二生产者），覆盖范围也扩大到这个信号真实的全部五个消费者而不只是矩阵点名的四个验收ID（AMI-54/PWI-08/BSL-40/PWC-40）——实地读代码确认C22(`ppg_peak_valley_window_detector.v:111/351/354`)同样直接消费这个信号、持有自己的`flag_active_config_legal`/`flag_formal_sample`门控和`o_local_empty`，却没有对应的验收ID，已作为合同文字缺口记入矩阵，本次不改合同正文。D01-01a：等待N01/N08重新START之后曲线从frame 0重演出的真实C20候选在途(`flag_candidate_active`)或C22活动波峰搜索(`flag_active_peak_valid`)，STOP并确认排空全程零新PEAK/VALLEY/CROSS/RETURN_9BIT正式事件，C20/C22/C23三个消费者`o_local_empty`全部回到1。D01-01b：重新COMMIT `peak_valley_config_valid=0`并START，驱动250笔真实RED事务（覆盖首个PEAK@63/VALLEY@201窗口），期间一个新增的后台`always`不变量进程(受`flag_d01_pv_invalid_window_active`门控)逐拍确认C20/C22/C23的`o_local_empty`保持1、C23从未进入FINE，确认零新正式事件；随后恢复`peak_valley_config_valid=1`并重新START，确认同一条曲线立刻恢复产生真实PEAK——证明这是一个真实、可逆、单点的门控。构造过程中真实发现并修复了两处TB自身bug，均非RTL缺陷：（1）可逆性检查最初在D01-01b跑完250笔事务后直接调用`task_n0x_recommit_dual_and_start`，没有先STOP——COMMIT只在CONFIG态被接纳，重新提交被拒绝，级联出`FAIL N01N08 re-commit dual-optical MANUAL`并意外`$finish`；修复为在可逆性重新COMMIT之前补上真实的STOP+排空到CONFIG序列。（2）D01-01a第一版在`flag_active_peak_valid`刚置位那一拍就取快照，但这个标志位在`ppg_peak_valley_window_detector.v`里是C22刚做出波峰判决那一拍就置位，而本文件自己PEAK捕获进程真正计数的`o_peak_valid&&i_peak_ready`握手要等`ppg_dynamic_baseline_cross_detector.v`的FSM进入`ST_WAIT_PEAK_COMMIT`才真正完成，二者之间有真实的几拍延迟——快照落在判决和握手之间，STOP之后这笔早已判决、只是外部握手还没走完的PEAK正常完成，被误判成"STOP后产生了新事件"（真实复现：peak 4->5）；修复为标志位刚置位后再等20个真实时钟周期、重新确认仍然在途（不是刚判决完就立刻结束）才取快照，20拍远小于一帧real 2MHz周期数，不会错过窗口。已走本机Vivado 2022.2完整xsim流程(xvlog/xelab/xsim)在本文件真实C_TARGET_RED_SAMPLES=700规模加上新场景自身的两次重启下端到端验证：`JNT_BASELINE`53/53 PASS，`GROUP1/GROUP2_EXISTENCE`事件序列(PEAK@63/225/464/625、VALLEY@201/395/601、CROSS@411、RETURN_9BIT@605)和B[f]=-19454066重算比对与历次已验证运行完全一致，`PASS N01`/`PASS N08(scope-only)`，`PASS D01 Acceptance-D01-01a`(C22 active_peak_valid=1在途，零新事件，三个消费者全部settle到empty)，`PASS D01 Acceptance-D01-01b`(250笔真实RED事务、peak_valley_config_valid=0期间零新事件，后台不变量进程全程干净)及其可逆性检查(真实PEAK恢复，peak_count=6)，`PASS BASELINE_CROSS STOP`排空与`GROUP12_PROTOCOL_STICKY`(real_red=1106 real_ir=1104全程零阻断sticky)，整体`BASELINE_CROSS_TB_PASS`且`cnt_error`为0——真实跑法记录见本目录`d01_xsim_final_pass.log`。
+// 2026年09月07日        V1.4          Erie                  PPG开放项批次2:在本文件已有的GROUP1/GROUP2_EXISTENCE检查之后、本文件原有STOP序列之前新增N01+N08(scope-only)场景,外加一个detection discard事件后台latch进程和一个task_n0x_recommit_dual_and_start恢复任务,让bg_responder在场景结束后继续正常喂后面的原有流程。矩阵N01/N08此前"vacuous pass"的真正根因:flag_detection_discard_trigger(ppg_adc_measurement_idac_integration.v:967)要求STOP/abort那一刻下游PWI检测代际真实非空,而现有TB从未真正命中过这个时序窗口——但本文件自己的主循环跑到C_TARGET_RED_SAMPLES时已经真实捕获过多次PEAK/VALLEY/CROSS,bg_responder(仍在后台以forever进程持续运行)几乎立刻又会进入候选追踪的非空状态,新场景只需要真实轮询flag_pwi_detection_datapath_empty,一旦变非空就立刻STOP,轮询有3,000,000拍上限。一次真实的构造失败值得记录:最初想用force PWI内部ppg_precision_window_integration_Inst.normal_result_ready_o拉低来反压FIR的接纳、让AMI的flag_detection_pending在STOP时保持1,以此构造N08的另一半(identity_valid=1,"交接前")——真跑起来flag_detection_pending确实按预期武装到了1,但discard始终没有触发,原因是force只是让AMI这一侧看到的外部值失真,FIR自己内部的状态机并不知道被force了,依然按自己真实算出的ready=1完成了内部接纳并报告自己空闲——这是一次真实芯片里不可能出现的AMI/FIR认知分裂,不是真实RTL证据。已把这段代码整段删除,不留在文件里造成误导,原地记录了这个发现(与本项目LFA-10(b)"诚实记录真实构造难点"先例一致),N08的交接前半留给以后有专门AMI级module unit-TB(可以直接摆i_normal_result_valid/o_normal_result_ready)的会话补上。已在本文件真实的C_TARGET_RED_SAMPLES=700规模下用iverilog完整重跑:BASELINE_CROSS_TB_PASS real_red=700 real_ir=699 measurement_result_valid=1399 peak_count=4 valley_count=3 cross_count=1 return_count=1,事件序列(PEAK@63/225/464/625、VALLEY@201/395/601、CROSS@411、RETURN_9BIT@605)与历次已验证运行完全一致,外加PASS N01/PASS N08(scope-only),cnt_error为0。
+// 2026年08月24日        V1.0          Erie                  创建文件。Phase 3 Stage 4第1、2组（PPG-BASELINE-WARMUP、PPG-CROSS-SAR15）。独立成文件的理由和之前几个Phase 3文件互相独立的理由一样：每个阶段的回归形状真的不一样，不该互相拖累。原样复用tb_ppg_control_top_longrun.v已验证的真实2MHz时钟、NORMAL双光MANUAL配置、START/STOP、wait_q3_release/drive_real_adc_done/make_fixed_raw、bg_responder的Stage 2生成器接线。唯一刻意背离此前每个Phase 3文件配置任务的地方：十个stage1_weight_q16_0~9和stage1_offset_q16改用C11合同自己冻结的标称值（65536/131072/262144/524288/524288/1048576/2097152/4194304/8388608/16777216，offset -262144），不再沿用Phase 1~3每份文件都未经检验就继承下来的占位系数（-17~26，offset -99）。本会话内的一次诊断（tb_diag_algo_probe.v，不是交付物）把一个此前从未被发现的真实缺陷追到了这批占位系数头上：Q16下每个物理位贡献约0.0003，十项加总对任何10-bit RAW码都会舍入到恰好0——`o_calibrated_s1_value`不管target_code是多少，读回来永远是硬0，导致下游全部信号（DC恢复coarse值、FIR输入、基线、峰谷）都是平的，1200帧真实数据里CROSS/PEAK/VALLEY事件一个都没触发过，尽管RAW生成器的幅度在纸面上完全够覆盖已配置的hysteresis/峰谷最小幅度门槛。这个问题Phase 1的SMOKE-01~23和Stage 2/3的证据都没抓到，因为它们从头到尾都用固定RAW码（`make_fixed_raw(256,...)`），一个常量（哪怕是错误的常量）校准输出看起来毫无异常。换成C11标称权重后独立确认足够：同一次诊断随后观察到一个完整的、符合合同描述的SAR9追波峰波谷→穿越→SAR15→谷值返回SAR9周期（PEAK@63、VALLEY@201、PEAK@225、VALLEY@395、CROSS@411、PEAK@464、VALLEY@601、RETURN_9BIT@605原因=VALLEY_CONFIRMED、PEAK@625...），1200帧内协议错误sticky全程为0。这版提交时验收逻辑本身还是骨架——主序列是占位循环，文件末尾还是Stage 4研究阶段遗留的原始诊断`$display`代码块，不是真正的断言。
+// 2026年08月24日        V1.1          Erie                  真正完成Group 1/2的验收逻辑，替换掉V1.0的骨架：为PEAK/VALLEY/CROSS/RETURN_9BIT建立专门的边沿触发捕获寄存器（完整payload——value/frame_id/sample_index/epoch/baseline_q16/slope_q16/reason，沿用tb_diag_algo_probe.v已验证过的valid&&ready握手判定方式）；实现全部六条Group 1/2要求的断言（历史不足——首个o_baseline_valid置位之前不能形成合格穿越；IR事务前后，cross检测器的RED运行态——o_baseline_valid/o_slope_current_q16/o_slope_base_q16/o_no_cross_count/o_reacquire_active——逐位不变；每个合格RED候选的B[f]=P[n]+DELTA+S[n]*frame_delta(f,F_P[n])都用捕获的PEAK锚点和CROSS载荷独立重算，和RTL自己上报的`o_cross_baseline_q16`比对，重算公式逐项对照`ppg_dynamic_baseline_cross_detector.v`里`dec_peak_value_q16`/`dec_slope_product_q16`/`dec_baseline_wide_q16`的真实构造方式；CROSS载荷回溯到cross检测器自己`flag_candidate_start`那一拍真实存在的RED FIR握手，不是凭空相信；SAR15提交（`o_fine_window_start_event`）核实真的只在`i_frame_safe_boundary`/`i_precision_takeover_safe`/`i_analog_safe`三个门控在真正提交那一拍同时为真时才发生，并用TB自己驱动的`i_adc_physical_idle`做交叉核对；精度切换前后立即核对`o_result_sample_index`连续性和同色AMB/DC码快照+epoch的稳定性）；以及上一轮交接文档里设计好的两条群延时检查A/B（对应BSL-04/PVW-17），严格按交接文档原文的适用范围实现——检查A（事件握手拍的调度器活值frame_id减去报告frame_id≥`C_FIR_GROUP_DELAY_SAMPLES`）同时用在首个PEAK和首个CROSS上，检查B（报告frame_id落在生成器自己闭式pulse_shape公式算出的理论快升转折点`C_GROUP_DELAY_TOLERANCE_FRAMES`容差内）只用在首个PEAK上，因为只有PEAK才有干净的理论闭式解——CROSS的时刻由基线动态决定，不是单纯的原始波形相位。同时彻底删除了V1.0文件末尾那段原始诊断`$display`代码块（其作用已经由专门的捕获寄存器取代），把占位的INCOMPLETE横幅换成真正的PASS/FAIL存在性检查（至少2次真实PEAK/VALLEY、至少1次真实CROSS/RETURN_9BIT、两条群延时检查确实执行过），避免退化成零事件的空跑也能vacuous通过。
+//                                                             验证严格按本次会话要求分阶段进行，先用iverilog小规模跑：90个RED样本的第一次跑就抓到一个真实的自造bug——好几个新增的追踪reg（`flag_first_peak_captured`等）声明了但从未在`initial`块里显式清零，Verilog里默认是X；`if(!flag_first_peak_captured)`在X上会被当成false处理，导致检查A/B从头到尾静默地从未执行过，而且不报错、不崩溃、看起来一切正常。修复方式是在主`initial`块里把全部新增的捕获/断言reg显式清零，不依赖任何隐式默认值。随后650个RED样本的iverilog跑（足够覆盖完整PEAK->VALLEY->CROSS->SAR15->RETURN_9BIT->PEAK一轮周期）又暴露了两个真实bug，都在本文件自己的检查逻辑里，不是RTL问题：（1）GROUP2_SAFE_BOUNDARY最初在`o_fine_window_start_event`寄存器脉冲出现的那一拍去读`i_frame_safe_boundary`/`i_precision_takeover_safe`/`i_analog_safe`，但这个脉冲是`fine_window_start_event_o`寄存器输出，比真正做出提交判决的`flag_enter_commit`晚一拍，而`i_frame_safe_boundary`是逐帧单拍脉冲，到延迟观察到的那一拍早已撤销——修复为每拍无条件把三个门控信号（以及`i_adc_physical_idle`）锁存进"上一拍"影子寄存器，改用这些影子寄存器核对，把检查和真正做判决的那一拍对齐。（2）GROUP2_CODE_SNAPSHOT_STABILITY最初拿"最近一笔任意颜色结果"当切换前AMB/DC快照基准，但本场景配置里`dcs_r_manual_code`(80)和`dcs_ir_manual_code`(96)本来就逐色独立——拿一笔偶然落在IR上的结果去和切换后的RED结果比，会把本来没变的DC码误判成"变了"（96 vs 80）——修复为单独追踪"最近一笔RED结果"的快照，只做RED对RED比较，sample_index连续性检查（本来就该跨颜色）保留原样的任意颜色追踪。两处修复完成后，650样本的iverilog跑干净通过、零FAIL，复现了`tb_diag_algo_probe.v`完全相同的事件序列（PEAK@63/225/464/625、VALLEY@201/395/601、CROSS@411、RETURN_9BIT@605），Group 1/2每一条检查都真实触发且用非平凡的真实数值通过（例如GROUP1_BASELINE_FORMULA：重算得到的B[f]=-19454066与`o_cross_baseline_q16`逐位相符，来自peak_value=85/peak_frame=225/cross_frame=411/frame_delta=186/slope=-134541）。随后把`C_TARGET_RED_SAMPLES`改回真实的700，走本机Vivado 2022.2完整xsim流程（xvlog/xelab/xsim，沿用本项目已确立的真实2MHz时钟长跑先例）干净跑通，挂钟耗时4分34秒：`BASELINE_CROSS_TB_PASS real_red=700 real_ir=699 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1`，`cnt_error`为0，事件序列和B[f]重算比对结果与iverilog跑完全一致。这是Stage 4第1、2组真实、分阶段的仿真证据，不是占位文字。
+// 2026年08月24日        V1.2          Erie                  按用户要求补上协议错误sticky审计（同时也在Group3从一开始就建好）：STOP排空之后核查DUT一直暴露、但本文件（以及Phase 1~3更早的每一份文件，包括`tb_ppg_control_top.v`和Stage 3长跑）都只接了线、从未真正断言过的十二个scheduler/AMI/SSW/characterization/discard sticky诊断信号。这批断言第一次真正执行（本项目第一次在真实连续生成器激励下核对这些sticky）就抓到一个真实、可复现的触发：`o_ssw_owner_deadline_timeout_sticky`在跑完时置位。没有轻易放过，而是去查证：`PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md`第597/614节和`PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md`第981节都明文把`o_launch_timeout_sticky`/`o_owner_deadline_timeout_sticky`（scheduler和SSW两侧）以及SSW的`o_calibration_timeout_sticky`定义成不会拉高`fault_blocking`、不产生supervisor fault record的非阻断历史诊断，和真正阻断的`o_protocol_error_sticky`/`o_completion_mismatch_sticky`/`o_transaction_mismatch_sticky`不是一类。用一个专用边沿探测诊断探针（建在同源共享基础设施的`tb_ppg_control_top_peak_valley_return.v`里，因为两个文件配置完全一致、发现能互相印证）把触发点精确定位到`o_lifecycle_state==ST_STOPPING`的单次边沿——也就是STOP排空阶段的尾声，不是NORMAL运行期间反复出现的问题——和合同"非阻断"的定性完全吻合：STOP打断最后一笔在途owner时合法地错过冻结截止点，是收尾竞争，不是真实协议缺陷。修复方式是把sticky审计拆成两类：八个真正阻断的sticky继续`FAIL`并计入`cnt_error`，四个非阻断历史诊断类sticky（`o_scheduler_launch_timeout_sticky`、`o_scheduler_owner_deadline_timeout_sticky`、`o_ssw_owner_deadline_timeout_sticky`、`o_ssw_calibration_timeout_sticky`）改成`INFO`记录，不影响`cnt_error`。用iverilog在真实real_red=700/real_ir=699规模下重新验证：八个阻断类sticky全部`PASS GROUP12_PROTOCOL_STICKY`，唯一在STOP阶段合法触发的那个显示`INFO GROUP12_HISTORICAL_DIAG`，`BASELINE_CROSS_TB_PASS`整体通过——事件序列和B[f]重算比对结果和此前每一次已验证的跑法完全一致，确认这次重新分类只改变了"什么算失败"，没有改变任何其他观测行为。
+// 2026年08月25日        V1.3          Erie                  C25合同9.1/10.1节+PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md第11节要求：每个触碰
+//                                                             Scheduler/SSW/AMI状态的组，必须先在独立复位后跑通JNT-01~09（52个子检查）
+//                                                             才能启动本组场景；本文件（同时覆盖Group1+Group2）之前一直没有这个前缀。
+//                                                             通过`` `include "tb_ppg_jnt_baseline_prefix.vh" ``接入（架构方案A，完整
+//                                                             可行性研究、层次信号路径映射表、以及接入时发现并修复的四个真实bug都记在
+//                                                             该文件自己的V1.0/V1.1 changelog里），外加一行bg_responder让路语句和一处
+//                                                             调用点（紧跟在本文件既有复位释放之后、既有NORMAL双光MANUAL配置提交之前）。
+//                                                             真实700个RED样本iverilog跑通：`JNT_BASELINE checked=53 pass=53
+//                                                             required=53 status=PASS`，随后本文件既有的Group1/2场景照常跑到
+//                                                             `BASELINE_CROSS_TB_PASS`，事件序列（PEAK@63/225/464/625、
+//                                                             VALLEY@201/395/601、CROSS@411、RETURN_9BIT@605）和B[f]=-19454066重算
+//                                                             比对结果与JNT接入前的既有证据完全一致——JNT前缀自己最后一步的独立
+//                                                             清洁复位把DUT干净交还，没有改变Group1/2任何一条算法层证据。跑这次
+//                                                             确认仿真时，汇总行里意外出现的`real_cal=1`（此前一直是0）牵出了第二个
+//                                                             真正既有的bug，和JNT无关，从本文件最初写出来就一直在——`bg_responder`
+//                                                             原来在`wait_q3_release`返回那一拍才live采样
+//                                                             `ppg_400hz_frame_calibration_scheduler_Inst.state_current`的frame
+//                                                             type/color/precision字段，不是在owner真正提交那一拍锁存的。
+//                                                             `FRAME_TYPE_AMB`恰好编码为`2'b00`，正好和`state_current`的
+//                                                             `B_INFLIGHT_TYPE`字段复位默认值撞车——只要`state_current`是从Verilog
+//                                                             未初始化的`X`复位（`!X`在分类判断的`if`里按false处理，本项目已经记录过
+//                                                             同类X态bug），这个采样竞争就是无害的，此前本文件每一次单次复位的跑法
+//                                                             都恰好是这种情况。JNT-01~09让同一次仿真发生第九次复位，`state_current`
+//                                                             这次复位到的是确定的`0`而不是`X`，同一个一直存在的live采样竞争第一次
+//                                                             被观察到：用专用边沿探针核实AMI真正的校准请求路径
+//                                                             （`o_calibration_sample_valid`、Scheduler的`B_CAL_WAVE_PENDING`）整场
+//                                                             仿真一次都没有置位过，证实这条"校准"分类是假阳性，不是真实事件。修复
+//                                                             为新增一个专用`always`块，在`sched_adc_owner_commit_event_o`那一拍把
+//                                                             frame_type/color_ir/frame_id/precision_mode锁存进影子寄存器（和本文件
+//                                                             PEAK/VALLEY/RETURN_9BIT捕获进程、以及新JNT前缀自己的owner-commit监视
+//                                                             进程已经在用的"事件边沿锁存"手法一致），`bg_responder`改成只读这些快照，
+//                                                             不再live采样`state_current`。真实700样本规模重新验证：`real_cal=0`
+//                                                             （和JNT接入前的原始基线一致，不是有bug版本的1），
+//                                                             `measurement_result_valid=1398`（精确匹配原始基线，不是有bug版本的
+//                                                             1400），B[f]和事件序列不变，`cnt_error`为0。`real_ir`从699变成
+//                                                             698——这是`bg_responder`自己IR响应计数在"RED计数达标退出主循环"这个
+//                                                             边界上的一次计数偏移，是把precision_mode采样点提前到正确的（owner提交
+//                                                             那一拍）位置后的预期副作用，不是新缺陷：没有任何断言依赖`real_ir`的
+//                                                             精确值，真正要紧的每一条检查（`GROUP1/2_EXISTENCE`、
+//                                                             `GROUP12_PROTOCOL_STICKY`、峰谷穿越返回计数、B[f]重算）全部原样通过。
+//                                                             同样的`bg_responder`修复也应用到了共享同一段`bg_responder`代码的
+//                                                             `tb_ppg_control_top_peak_valley_return.v`（Group3）、
+//                                                             `tb_ppg_control_top_fir_tail_isolation.v`（Group4）、
+//                                                             `tb_ppg_control_top_long_10_cycles.v`（Group5），修复后三份文件JNT-01~09
+//                                                             仍然53/53干净PASS。
+//
+// 复位后提交合法NORMAL双光MANUAL配置（含C11标称Stage1校准权重、
+// peak_valley_config_valid=1）并START，之后完全依赖既有bg_responder真实响应，
+// 等待第一次真实PEAK/CROSS/SAR15提交/RETURN_9BIT完整序列出现，核对Group 1/2
+// 合同要求的具体断言，STOP后确认干净排空
+module tb_ppg_control_top_baseline_cross();
+
+	`include "tb_ppg_real_raw_generator.vh"
+
+	//---------------配置参数区域---------------//
+	localparam integer C_FRAME_ID_WIDTH = 16; // 与DUT默认参数一致
+	localparam integer C_SAMPLE_INDEX_WIDTH = 16; // 与DUT默认参数一致
+	localparam integer C_CONFIG_WIDTH = 1024; // 与DUT默认参数一致
+	localparam integer C_CODE_EPOCH_WIDTH = 4; // 与DUT默认参数一致
+	localparam integer C_RUN_GENERATION_WIDTH = 8; // 与DUT默认参数一致
+	localparam [1:0] ST_CONFIG = 2'b00; // manager CONFIG生命周期编码
+	localparam [1:0] ST_READY = 2'b01; // manager READY生命周期编码
+	localparam [1:0] ST_RUN = 2'b10; // manager RUN生命周期编码
+	localparam [1:0] ST_STOPPING = 2'b11; // manager STOPPING生命周期编码
+
+	//---------------Group 1/2场景控制参数---------------//
+	// 全局看门狗：相对仿真起点，只是安全防挂死上限，不是本文件要证明的验收目标
+	// （那是Stage 3/RAW-12的范围）；诊断阶段观察到完整一轮SAR9->SAR15->SAR9周期
+	// 在约frame 625处完成，留出充分裕量
+	localparam time C_SIM_TIMEOUT_NS = 64'd3000000000; // 3秒安全看门狗上限
+	localparam integer C_TARGET_RED_SAMPLES = 700; // 覆盖完整PEAK->VALLEY->CROSS->PEAK->VALLEY->RETURN_9BIT->PEAK一轮序列所需的RED事务数上界
+	// C20第5.4节/C22第4.2节冻结的粗检测FIR群延时：中心样本x[n-10]，固定10个同色有效样本
+	localparam integer C_FIR_GROUP_DELAY_SAMPLES = 10;
+	// 群延时检查B的容差：21抽头线性相位FIR平滑分段线性波形的尖角转折点可能让表观
+	// 极值挪动，容差取FIR半窗口量级（10）+1帧余量，不要求逐帧相等
+	localparam integer C_GROUP_DELAY_TOLERANCE_FRAMES = 11;
+	// 检查B独立复现生成器task_generate_pulse_shape的RED收缩快升终点公式
+	// （rise_end_frame=(pulse_period_frames*C_RAW_RISE_PCT)/100），C_RAW_PULSE_PERIOD_FRAMES
+	// 和C_RAW_RISE_PCT均来自`include的tb_ppg_real_raw_generator.vh，NORMAL档位下就是400*15/100=60
+	localparam integer C_RAW_RISE_END_FRAME_RED = (C_RAW_PULSE_PERIOD_FRAMES * C_RAW_RISE_PCT) / 100;
+	// B[f]公式独立重算用：与V5_RESET_PROFILE_REF的baseline_delta_q16字段逐位一致（本场景恒为0）
+	localparam signed [31:0] C_BASELINE_DELTA_Q16 = 32'sd0;
+
+	// 以下V5默认字段值与ppg_system_config_manager.v的V5_RESET_PROFILE逐项一致，
+	// 只用于凑出一份合法1024-bit联合快照
+	localparam [383:0] V5_RESET_PROFILE_REF = {
+		14'd0,                                  // reserved_v5复位归零
+		1'b0,                                   // peak_valley_config_valid复位不可用
+		16'd1000,                               // max_reacquire_frames
+		16'd600,                                // max_fine_window_frames
+		16'd100,                                // min_peak_to_peak_frames
+		16'd20,                                 // min_peak_to_valley_frames
+		24'd20,                                 // min_peak_valley_amplitude
+		24'd2,                                  // direction_deadband
+		4'd3,                                   // valley_confirm_count
+		4'd3,                                   // peak_confirm_count
+		4'd2,                                   // no_cross_limit
+		4'd3,                                   // cross_confirm_count
+		16'd19,                                 // lead_max_frames
+		16'd17,                                 // lead_min_frames
+		32'd131072,                             // cross_hysteresis_q16
+		32'sd0,                                 // baseline_delta_q16
+		-32'sd8192,                             // slope_max_q16
+		-32'sd262144,                           // slope_min_q16
+		16'h0800,                               // timing_adjust_ratio_q15
+		16'h2000,                               // beta_q15
+		16'h199A,                               // alpha_q15
+		-32'sd65536,                            // fixed_slope_q16
+		1'b1                                    // slope_mode=ADAPTIVE
+	};
+
+	//---------------全局时钟与复位信号---------------//
+	reg i_clk; // 真实2 MHz系统时钟：本文件必须让$time对应真实经过秒数
+	reg i_rstn; // 系统域低有效复位
+	reg i_source_clk; // SPI配置源域仿真时钟
+	reg i_source_rstn; // 源域低有效复位
+
+	//---------------V4+V5源域配置信号---------------//
+	reg [C_CONFIG_WIDTH - 1:0] i_source_config_snapshot; // 待提交的1024-bit联合快照
+	reg i_source_config_update_event; // 快照传输请求单拍
+
+	//---------------表征source信号---------------//
+	reg i_source_characterization_update_valid; // 本轮不驱动表征更新，恒0
+	reg i_source_static_characterization_enable; // 本轮不使用STATIC_BIAS，恒0
+	reg [4:0] i_source_test_mux_ctrl; // 本轮不使用测试MUX，恒0
+
+	//---------------已同步生命周期与诊断信号---------------//
+	reg i_start_event; // START单拍
+	reg i_stop_event; // STOP单拍
+	reg i_diag_clear_event; // 本轮不触发诊断清除，恒0
+	reg i_control_abort_event; // 本轮不触发abort，恒0
+
+	//---------------物理ADC与模拟边界信号---------------//
+	reg [9:0] i_dout_stage1_low; // Stage1物理判决码激励
+	reg i_clk_stage1_dout_low_async; // Stage1异步完成脉冲激励
+	reg [9:0] i_dout_stage2_low; // Stage2物理判决码激励
+	reg i_clk_stage2_dout_low_async; // Stage2异步完成脉冲激励，同时携带精度位
+	reg i_adc_physical_idle; // 物理ADC空闲电平，仅在响应窗口内短暂拉低
+	reg i_analog_ready; // 模拟就绪聚合结果，本轮恒1
+
+	//---------------正式结果消费者信号---------------//
+	reg i_measurement_result_ready; // 本轮消费者恒接受
+
+	//---------------验证专用异常注入信号---------------//
+	reg i_test_inject_enable; // 本轮不使用验证注入，恒0
+	reg i_test_identity_inject_valid; // 恒0
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] i_test_identity_inject_sample_index; // 恒0
+	reg i_test_invalid_sample_valid; // 恒0
+
+	//---------------SSW模拟控制原样输出---------------//
+	wire o_en_tia_low, o_leden1_low, o_leden2_low, o_en_test;
+	wire [7:0] o_leddac;
+	wire o_clk_buf_low, o_clk_iref_idac_low, o_clk_9q1_low, o_clk_15q1_low, o_clk_aferst_low;
+	wire o_clk_iref_idac_sar9_low, o_clk_iref_idac_sar15_low, o_clk_q2_low, o_clk_q3_low, o_clk_tiaen_low;
+	wire o_en_15sar_low, o_en_sar9_amb_low, o_en_sar9_dc_low, o_en_sar9_iref;
+	wire o_en_sar15_amb_low, o_en_sar15_dc_low, o_en_sar15_iref;
+	wire [7:0] o_idac_sar9ambn_low, o_idac_sar9dcn_low, o_idac_sar15ambn_low, o_idac_sar15dcn_low;
+	wire [4:0] o_s_in;
+	wire o_clk_2m;
+
+	//---------------AMI正式测量结果输出---------------//
+	wire o_measurement_result_valid;
+	wire signed [23:0] o_coarse_ppg_value, o_fine_ppg_value;
+	wire o_coarse_valid, o_coarse_recovery_calibrated, o_coarse_saturation_low, o_coarse_saturation_high;
+	wire o_fine_valid, o_fine_recovery_calibrated, o_fine_saturation_low, o_fine_saturation_high;
+	wire signed [11:0] o_calibrated_s1_value;
+	wire signed [14:0] o_programmable_15_code;
+	wire o_programmable_15_valid;
+	wire [7:0] o_result_config_epoch, o_result_coef_epoch, o_result_stage2_coef_epoch, o_result_dc_coef_epoch;
+	wire o_result_precision_mode;
+	wire [C_FRAME_ID_WIDTH - 1:0] o_result_frame_id;
+	wire [C_SAMPLE_INDEX_WIDTH - 1:0] o_result_sample_index;
+	wire o_result_color_ir;
+	wire [1:0] o_result_frame_type;
+	wire [7:0] o_result_amb_code_snapshot, o_result_dc_code_snapshot;
+	wire [C_CODE_EPOCH_WIDTH - 1:0] o_result_amb_code_epoch, o_result_dc_code_epoch;
+	wire o_result_sample_valid;
+
+	//---------------V4/V5生命周期ACK与错误输出---------------//
+	wire [1:0] o_lifecycle_state;
+	wire o_start_ready, o_commit_ack_event, o_start_ack_event, o_stop_ack_event, o_error_event;
+	wire o_commit_ack_sticky, o_error_sticky;
+	wire [7:0] o_last_error_code, o_schema_version, o_config_epoch, o_coef_epoch, o_stage2_coef_epoch, o_dc_recovery_coef_epoch;
+
+	//---------------调度器/AMI/SSW只读诊断输出---------------//
+	wire o_scheduler_idle, o_scheduler_launch_timeout_sticky, o_scheduler_owner_deadline_timeout_sticky;
+	wire o_scheduler_completion_mismatch_sticky, o_scheduler_protocol_error_sticky;
+	wire o_ami_datapath_empty, o_ami_idac_idle, o_ami_integration_protocol_error_sticky;
+	wire o_ssw_wrapper_idle, o_ssw_switch_protocol_error_sticky, o_ssw_transaction_mismatch_sticky;
+	wire o_ssw_owner_deadline_timeout_sticky, o_ssw_calibration_timeout_sticky;
+
+	//---------------表征控制source握手与诊断输出---------------//
+	wire o_source_characterization_update_ready, o_characterization_control_valid;
+	wire o_characterization_control_update_event, o_characterization_control_reject_event;
+	wire o_characterization_protocol_error_sticky;
+
+	//---------------验证专用异常注入应答输出---------------//
+	wire o_test_identity_inject_ready, o_test_invalid_sample_ready;
+
+	//---------------注册式系统故障/abort监督输出---------------//
+	wire o_system_fault_blocking, o_system_abort_event, o_system_stop_request_event, o_system_fault_discard_event;
+	wire o_system_fault_cause_valid;
+	wire [7:0] o_system_fault_cause;
+	wire [3:0] o_system_fault_source;
+	wire o_system_fault_identity_valid;
+	wire [C_FRAME_ID_WIDTH - 1:0] o_system_fault_frame_id;
+	wire [C_SAMPLE_INDEX_WIDTH - 1:0] o_system_fault_sample_index;
+	wire o_system_fault_color_ir;
+	wire [1:0] o_system_fault_frame_type;
+	wire o_system_fault_precision;
+	wire [C_RUN_GENERATION_WIDTH - 1:0] o_system_fault_run_generation;
+	wire [15:0] o_system_fault_summary;
+	wire o_result_discard_summary_sticky;
+
+	//---------------AMI discard公开观测输出---------------//
+	wire o_measurement_result_discard_event;
+	wire [1:0] o_measurement_result_discard_reason;
+	wire o_measurement_result_discard_identity_valid, o_measurement_result_discard_sample_valid;
+	wire [C_FRAME_ID_WIDTH - 1:0] o_measurement_result_discard_frame_id;
+	wire [C_SAMPLE_INDEX_WIDTH - 1:0] o_measurement_result_discard_sample_index;
+	wire o_measurement_result_discard_color_ir;
+	wire [1:0] o_measurement_result_discard_frame_type;
+	wire o_measurement_result_discard_precision;
+	wire [C_RUN_GENERATION_WIDTH - 1:0] o_measurement_result_discard_run_generation;
+
+	wire o_detection_discard_event;
+	wire [1:0] o_detection_discard_reason;
+	wire o_detection_discard_identity_valid, o_detection_discard_sample_valid;
+	wire [C_FRAME_ID_WIDTH - 1:0] o_detection_discard_frame_id;
+	wire [C_SAMPLE_INDEX_WIDTH - 1:0] o_detection_discard_sample_index;
+	wire o_detection_discard_color_ir;
+	wire [1:0] o_detection_discard_frame_type;
+	wire o_detection_discard_precision;
+	wire [7:0] o_detection_discard_config_epoch, o_detection_discard_coef_epoch, o_detection_discard_dc_recovery_epoch;
+	wire [C_CODE_EPOCH_WIDTH - 1:0] o_detection_discard_amb_code_epoch, o_detection_discard_dc_code_epoch;
+	wire [C_RUN_GENERATION_WIDTH - 1:0] o_detection_discard_run_generation;
+
+	//---------------自检计数与状态信号---------------//
+	integer cnt_error; // 累计FAIL数
+	integer cnt_measurement_result_valid; // 观测到的正式结果次数
+	integer cnt_adc_response; // 已响应的真实Q3门控ADC事务数
+	integer cnt_red_response; // 已响应的真实RED事务数，按响应时owner身份分类
+	integer cnt_ir_response; // 已响应的真实IR事务数，按响应时owner身份分类
+	integer cnt_cal_response; // 已响应的真实校准事务数，按响应时owner身份分类
+	reg [7:0] reg_last_cal_local_tick; // 未在本场景使用，保留以匹配复用task签名
+	reg [7:0] reg_last_cal_amb_snapshot; // 未在本场景使用，保留以匹配复用task签名
+	reg reg_last_precision_scheduler, reg_last_precision_ssw, reg_last_precision_ami; // 未在本场景使用，保留以匹配复用task签名
+	reg flag_global_timeout; // 全局看门狗超时标记
+	time reg_measurement_start_time; // accepted START事件锁存的time类型起点
+	time reg_measurement_elapsed_time; // 达标时刻的time类型经过时长
+
+	//---------------Group 1/2事件捕获与断言状态---------------//
+	integer reg_peak_count; // 已捕获的真实PEAK事件数
+	integer reg_valley_count; // 已捕获的真实VALLEY事件数
+	integer reg_cross_count; // 已捕获的真实CROSS事件数
+	integer reg_return_count; // 已捕获的真实RETURN_9BIT事件数
+	reg signed [23:0] reg_peak_value; // 最近一次PEAK事件的Stage1粗FIR码值
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_peak_frame_id; // 最近一次PEAK事件的中心帧号
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] reg_peak_sample_index; // 最近一次PEAK事件对应的事务序号
+	reg signed [23:0] reg_valley_value; // 最近一次VALLEY事件的Stage1粗FIR码值
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_valley_frame_id; // 最近一次VALLEY事件的中心帧号
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_cross_frame_id; // 最近一次CROSS事件首次越过的中心帧号
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] reg_cross_sample_index; // 最近一次CROSS事件对应的事务序号
+	reg reg_cross_time_unknown; // 最近一次CROSS事件是否为重检后未知时刻类型
+	reg signed [31:0] reg_cross_slope_q16; // 最近一次CROSS事件锁存的活动斜率
+	reg signed [47:0] reg_cross_baseline_q16; // 最近一次CROSS事件RTL上报的诊断基线
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_return_frame_id; // 最近一次RETURN_9BIT事件绑定的帧号
+	reg [1:0] reg_return_reason; // 最近一次RETURN_9BIT事件原因
+	reg flag_baseline_ever_valid; // 曾经观察到o_baseline_valid为高的sticky标志，Group1检查1的判定基准
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_expected_cross_frame_id; // candidate_start那一拍锁存的真实RED FIR事务帧号
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] reg_expected_cross_sample_index; // candidate_start那一拍锁存的真实RED FIR事务序号
+	reg flag_expected_cross_from_real_red; // candidate_start那一拍是否确实绑定了一笔真实RED握手
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_live_frame_id_at_first_peak; // 首个PEAK握手拍同步采样的调度器活值frame_id
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_live_frame_id_at_first_cross; // 首个CROSS握手拍同步采样的调度器活值frame_id
+	reg flag_first_peak_captured; // 首个PEAK是否已经处理过检查A/B，避免后续PEAK重复计入
+	reg flag_first_cross_captured; // 首个CROSS是否已经处理过检查A，避免后续CROSS重复计入
+	// Group1检查2（IR不变性）用的握手前快照
+	reg flag_ir_check_pending; // 上一拍是否刚捕获过一笔IR握手，等待本拍核对RED运行态未变
+	reg reg_ir_pre_baseline_valid; // IR握手那一拍采样到的o_baseline_valid
+	reg signed [31:0] reg_ir_pre_slope_current_q16; // IR握手那一拍采样到的o_slope_current_q16
+	reg signed [31:0] reg_ir_pre_slope_base_q16; // IR握手那一拍采样到的o_slope_base_q16
+	reg [3:0] reg_ir_pre_no_cross_count; // IR握手那一拍采样到的o_no_cross_count
+	reg reg_ir_pre_reacquire_active; // IR握手那一拍采样到的o_reacquire_active
+	// Group2检查3（SAR9<->SAR15切换连续性）用的最近正式结果与切换前快照
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] reg_last_result_sample_index; // 最近一笔正式结果的sample_index
+	reg [7:0] reg_last_result_amb_code_snapshot; // 最近一笔正式结果的AMB码快照
+	reg [7:0] reg_last_result_dc_code_snapshot; // 最近一笔正式结果的颜色DC码快照
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_last_result_amb_code_epoch; // 最近一笔正式结果的AMB码提交版本
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_last_result_dc_code_epoch; // 最近一笔正式结果的颜色DC码提交版本
+	reg reg_last_result_color_ir; // 最近一笔正式结果的颜色
+	reg flag_last_result_valid; // 是否已经出现过至少一笔正式结果
+	// Group2检查3b专用：dcs_r_manual_code与dcs_ir_manual_code在本场景配置里逐色独立
+	// （RED=80、IR=96），AMB/DC快照+epoch的稳定性只能同色比较，不能用"最近一笔任意
+	// 颜色结果"当基准，否则RED/IR交替天然会让DC快照看起来"变了"
+	reg [7:0] reg_last_red_result_amb_code_snapshot; // 最近一笔RED正式结果的AMB码快照
+	reg [7:0] reg_last_red_result_dc_code_snapshot; // 最近一笔RED正式结果的颜色DC码快照
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_last_red_result_amb_code_epoch; // 最近一笔RED正式结果的AMB码提交版本
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_last_red_result_dc_code_epoch; // 最近一笔RED正式结果的颜色DC码提交版本
+	reg flag_last_red_result_valid; // 是否已经出现过至少一笔RED正式结果
+	// Group2检查2专用：o_fine_window_start_event是fine_window_start_event_o寄存器输出，
+	// 比真正做出安全边界判决的flag_enter_commit晚一拍；i_frame_safe_boundary是逐帧单拍
+	// 脉冲，到寄存器脉冲出现的那一拍往往已经撤销，必须用上一拍锁存的门控快照才能对齐
+	// 因果关系，不能直接在事件拍读三个门控信号的"当前"值
+	reg reg_prev_frame_safe_boundary; // 上一拍采样到的i_frame_safe_boundary
+	reg reg_prev_precision_takeover_safe; // 上一拍采样到的i_precision_takeover_safe
+	reg reg_prev_analog_safe; // 上一拍采样到的i_analog_safe
+	reg reg_prev_adc_physical_idle; // 上一拍采样到的TB自驱i_adc_physical_idle
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0] reg_pretransition_sample_index; // SAR15切换前锁存的sample_index
+	reg [7:0] reg_pretransition_amb_code_snapshot; // SAR15切换前锁存的AMB码快照
+	reg [7:0] reg_pretransition_dc_code_snapshot; // SAR15切换前锁存的颜色DC码快照
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_pretransition_amb_code_epoch; // SAR15切换前锁存的AMB码提交版本
+	reg [C_CODE_EPOCH_WIDTH - 1:0] reg_pretransition_dc_code_epoch; // SAR15切换前锁存的颜色DC码提交版本
+	reg flag_awaiting_posttransition_any; // 等待切换后紧邻的任意一笔结果核对sample_index连续性
+	reg flag_awaiting_posttransition_red; // 等待切换后紧邻的一笔RED结果核对AMB/DC快照+epoch
+	reg flag_group2_transition_checked; // 只对第一次SAR9->SAR15切换取证，避免后续切换稀释首次证据
+
+	//---------------Acceptance-D01-01(D01批次4)场景状态---------------//
+	reg flag_d01_pv_invalid_window_active; // D01场景B（peak_valley_config_valid=0持续运行）开启期间为1，背景不变量进程仅在此期间生效
+	reg flag_d01_pv_invalid_violation_seen; // 场景B窗口内已经报告过一次异常，避免同一违例重复刷屏
+
+	//---------------DUT实例化---------------//
+	// C01顶层：聚合全部6个直接子模块的唯一数字功能顶层
+	ppg_control_top
+		#(
+			.C_FRAME_ID_WIDTH(C_FRAME_ID_WIDTH), // 与本TB本地参数一致
+			.C_SAMPLE_INDEX_WIDTH(C_SAMPLE_INDEX_WIDTH), // 与本TB本地参数一致
+			.C_CONFIG_WIDTH(C_CONFIG_WIDTH), // 与本TB本地参数一致
+			.C_CODE_EPOCH_WIDTH(C_CODE_EPOCH_WIDTH), // 与本TB本地参数一致
+			.C_RUN_GENERATION_WIDTH(C_RUN_GENERATION_WIDTH) // 与本TB本地参数一致
+		)
+		ppg_control_top_Inst(
+			.i_clk(i_clk),
+			.i_rstn(i_rstn),
+			.i_source_clk(i_source_clk),
+			.i_source_rstn(i_source_rstn),
+			.i_source_config_snapshot(i_source_config_snapshot),
+			.i_source_config_update_event(i_source_config_update_event),
+			.i_source_characterization_update_valid(i_source_characterization_update_valid),
+			.i_source_static_characterization_enable(i_source_static_characterization_enable),
+			.i_source_test_mux_ctrl(i_source_test_mux_ctrl),
+			.i_start_event(i_start_event),
+			.i_stop_event(i_stop_event),
+			.i_diag_clear_event(i_diag_clear_event),
+			.i_control_abort_event(i_control_abort_event),
+			.i_dout_stage1_low(i_dout_stage1_low),
+			.i_clk_stage1_dout_low_async(i_clk_stage1_dout_low_async),
+			.i_dout_stage2_low(i_dout_stage2_low),
+			.i_clk_stage2_dout_low_async(i_clk_stage2_dout_low_async),
+			.i_adc_physical_idle(i_adc_physical_idle),
+			.i_analog_ready(i_analog_ready),
+			.i_measurement_result_ready(i_measurement_result_ready),
+			.i_test_inject_enable(i_test_inject_enable),
+			.i_test_identity_inject_valid(i_test_identity_inject_valid),
+			.i_test_identity_inject_sample_index(i_test_identity_inject_sample_index),
+			.i_test_invalid_sample_valid(i_test_invalid_sample_valid),
+			.o_en_tia_low(o_en_tia_low),
+			.o_leddac(o_leddac),
+			.o_leden1_low(o_leden1_low),
+			.o_leden2_low(o_leden2_low),
+			.o_en_test(o_en_test),
+			.o_clk_buf_low(o_clk_buf_low),
+			.o_clk_iref_idac_low(o_clk_iref_idac_low),
+			.o_clk_9q1_low(o_clk_9q1_low),
+			.o_clk_15q1_low(o_clk_15q1_low),
+			.o_clk_aferst_low(o_clk_aferst_low),
+			.o_clk_iref_idac_sar9_low(o_clk_iref_idac_sar9_low),
+			.o_clk_iref_idac_sar15_low(o_clk_iref_idac_sar15_low),
+			.o_clk_q2_low(o_clk_q2_low),
+			.o_clk_q3_low(o_clk_q3_low),
+			.o_clk_tiaen_low(o_clk_tiaen_low),
+			.o_en_15sar_low(o_en_15sar_low),
+			.o_en_sar9_amb_low(o_en_sar9_amb_low),
+			.o_en_sar9_dc_low(o_en_sar9_dc_low),
+			.o_en_sar9_iref(o_en_sar9_iref),
+			.o_en_sar15_amb_low(o_en_sar15_amb_low),
+			.o_en_sar15_dc_low(o_en_sar15_dc_low),
+			.o_en_sar15_iref(o_en_sar15_iref),
+			.o_idac_sar9ambn_low(o_idac_sar9ambn_low),
+			.o_idac_sar9dcn_low(o_idac_sar9dcn_low),
+			.o_idac_sar15ambn_low(o_idac_sar15ambn_low),
+			.o_idac_sar15dcn_low(o_idac_sar15dcn_low),
+			.o_s_in(o_s_in),
+			.o_clk_2m(o_clk_2m),
+			.o_measurement_result_valid(o_measurement_result_valid),
+			.o_coarse_ppg_value(o_coarse_ppg_value),
+			.o_coarse_valid(o_coarse_valid),
+			.o_coarse_recovery_calibrated(o_coarse_recovery_calibrated),
+			.o_coarse_saturation_low(o_coarse_saturation_low),
+			.o_coarse_saturation_high(o_coarse_saturation_high),
+			.o_fine_ppg_value(o_fine_ppg_value),
+			.o_fine_valid(o_fine_valid),
+			.o_fine_recovery_calibrated(o_fine_recovery_calibrated),
+			.o_fine_saturation_low(o_fine_saturation_low),
+			.o_fine_saturation_high(o_fine_saturation_high),
+			.o_calibrated_s1_value(o_calibrated_s1_value),
+			.o_programmable_15_code(o_programmable_15_code),
+			.o_programmable_15_valid(o_programmable_15_valid),
+			.o_result_config_epoch(o_result_config_epoch),
+			.o_result_coef_epoch(o_result_coef_epoch),
+			.o_result_stage2_coef_epoch(o_result_stage2_coef_epoch),
+			.o_result_dc_coef_epoch(o_result_dc_coef_epoch),
+			.o_result_precision_mode(o_result_precision_mode),
+			.o_result_frame_id(o_result_frame_id),
+			.o_result_sample_index(o_result_sample_index),
+			.o_result_color_ir(o_result_color_ir),
+			.o_result_frame_type(o_result_frame_type),
+			.o_result_amb_code_snapshot(o_result_amb_code_snapshot),
+			.o_result_dc_code_snapshot(o_result_dc_code_snapshot),
+			.o_result_amb_code_epoch(o_result_amb_code_epoch),
+			.o_result_dc_code_epoch(o_result_dc_code_epoch),
+			.o_result_sample_valid(o_result_sample_valid),
+			.o_lifecycle_state(o_lifecycle_state),
+			.o_start_ready(o_start_ready),
+			.o_commit_ack_event(o_commit_ack_event),
+			.o_start_ack_event(o_start_ack_event),
+			.o_stop_ack_event(o_stop_ack_event),
+			.o_error_event(o_error_event),
+			.o_commit_ack_sticky(o_commit_ack_sticky),
+			.o_error_sticky(o_error_sticky),
+			.o_last_error_code(o_last_error_code),
+			.o_schema_version(o_schema_version),
+			.o_config_epoch(o_config_epoch),
+			.o_coef_epoch(o_coef_epoch),
+			.o_stage2_coef_epoch(o_stage2_coef_epoch),
+			.o_dc_recovery_coef_epoch(o_dc_recovery_coef_epoch),
+			.o_scheduler_idle(o_scheduler_idle),
+			.o_scheduler_launch_timeout_sticky(o_scheduler_launch_timeout_sticky),
+			.o_scheduler_owner_deadline_timeout_sticky(o_scheduler_owner_deadline_timeout_sticky),
+			.o_scheduler_completion_mismatch_sticky(o_scheduler_completion_mismatch_sticky),
+			.o_scheduler_protocol_error_sticky(o_scheduler_protocol_error_sticky),
+			.o_ami_datapath_empty(o_ami_datapath_empty),
+			.o_ami_idac_idle(o_ami_idac_idle),
+			.o_ami_integration_protocol_error_sticky(o_ami_integration_protocol_error_sticky),
+			.o_ssw_wrapper_idle(o_ssw_wrapper_idle),
+			.o_ssw_switch_protocol_error_sticky(o_ssw_switch_protocol_error_sticky),
+			.o_ssw_transaction_mismatch_sticky(o_ssw_transaction_mismatch_sticky),
+			.o_ssw_owner_deadline_timeout_sticky(o_ssw_owner_deadline_timeout_sticky),
+			.o_ssw_calibration_timeout_sticky(o_ssw_calibration_timeout_sticky),
+			.o_source_characterization_update_ready(o_source_characterization_update_ready),
+			.o_characterization_control_valid(o_characterization_control_valid),
+			.o_characterization_control_update_event(o_characterization_control_update_event),
+			.o_characterization_control_reject_event(o_characterization_control_reject_event),
+			.o_characterization_protocol_error_sticky(o_characterization_protocol_error_sticky),
+			.o_test_identity_inject_ready(o_test_identity_inject_ready),
+			.o_test_invalid_sample_ready(o_test_invalid_sample_ready),
+			.o_system_fault_blocking(o_system_fault_blocking),
+			.o_system_abort_event(o_system_abort_event),
+			.o_system_stop_request_event(o_system_stop_request_event),
+			.o_system_fault_discard_event(o_system_fault_discard_event),
+			.o_system_fault_cause_valid(o_system_fault_cause_valid),
+			.o_system_fault_cause(o_system_fault_cause),
+			.o_system_fault_source(o_system_fault_source),
+			.o_system_fault_identity_valid(o_system_fault_identity_valid),
+			.o_system_fault_frame_id(o_system_fault_frame_id),
+			.o_system_fault_sample_index(o_system_fault_sample_index),
+			.o_system_fault_color_ir(o_system_fault_color_ir),
+			.o_system_fault_frame_type(o_system_fault_frame_type),
+			.o_system_fault_precision(o_system_fault_precision),
+			.o_system_fault_run_generation(o_system_fault_run_generation),
+			.o_system_fault_summary(o_system_fault_summary),
+			.o_result_discard_summary_sticky(o_result_discard_summary_sticky),
+			.o_measurement_result_discard_event(o_measurement_result_discard_event),
+			.o_measurement_result_discard_reason(o_measurement_result_discard_reason),
+			.o_measurement_result_discard_identity_valid(o_measurement_result_discard_identity_valid),
+			.o_measurement_result_discard_sample_valid(o_measurement_result_discard_sample_valid),
+			.o_measurement_result_discard_frame_id(o_measurement_result_discard_frame_id),
+			.o_measurement_result_discard_sample_index(o_measurement_result_discard_sample_index),
+			.o_measurement_result_discard_color_ir(o_measurement_result_discard_color_ir),
+			.o_measurement_result_discard_frame_type(o_measurement_result_discard_frame_type),
+			.o_measurement_result_discard_precision(o_measurement_result_discard_precision),
+			.o_measurement_result_discard_run_generation(o_measurement_result_discard_run_generation),
+			.o_detection_discard_event(o_detection_discard_event),
+			.o_detection_discard_reason(o_detection_discard_reason),
+			.o_detection_discard_identity_valid(o_detection_discard_identity_valid),
+			.o_detection_discard_sample_valid(o_detection_discard_sample_valid),
+			.o_detection_discard_frame_id(o_detection_discard_frame_id),
+			.o_detection_discard_sample_index(o_detection_discard_sample_index),
+			.o_detection_discard_color_ir(o_detection_discard_color_ir),
+			.o_detection_discard_frame_type(o_detection_discard_frame_type),
+			.o_detection_discard_precision(o_detection_discard_precision),
+			.o_detection_discard_config_epoch(o_detection_discard_config_epoch),
+			.o_detection_discard_coef_epoch(o_detection_discard_coef_epoch),
+			.o_detection_discard_dc_recovery_epoch(o_detection_discard_dc_recovery_epoch),
+			.o_detection_discard_amb_code_epoch(o_detection_discard_amb_code_epoch),
+			.o_detection_discard_dc_code_epoch(o_detection_discard_dc_code_epoch),
+			.o_detection_discard_run_generation(o_detection_discard_run_generation)
+		);
+
+	//---------------source时钟发生器---------------//
+	// 不限次数，避免长跑中途耗尽；绝对时间不代表真实SPI频率，C25对此域无claim
+	initial begin
+		i_source_clk = 1'b0;
+		forever #5.5 i_source_clk = ~i_source_clk;
+	end
+
+	//---------------系统时钟发生器---------------//
+	// 真实2MHz语义：500ns整周期，不限次数。这是本文件区别于tb_ppg_control_top.v
+	// 的关键改动——只有周期真实，$time才能诚实对应合同定义的10秒/2000万周期
+	initial begin
+		i_clk = 1'b0;
+		forever #250 i_clk = ~i_clk;
+	end
+
+	//---------------合法NORMAL双光MANUAL配置构造任务---------------//
+	// 与tb_ppg_control_top.v逐字段一致
+	task task_build_normal_manual_config;
+		begin
+			i_source_config_snapshot = {C_CONFIG_WIDTH{1'b0}};
+			i_source_config_snapshot[1023:640] = V5_RESET_PROFILE_REF;
+			i_source_config_snapshot[7:0] = 8'h04;
+			i_source_config_snapshot[8] = 1'b0; // run_profile=NORMAL_PPG
+			i_source_config_snapshot[9] = 1'b0; // input_source=PHOTODIODE
+			i_source_config_snapshot[11:10] = 2'b00; // idac_mode=MANUAL
+			i_source_config_snapshot[13:12] = 2'b10; // optical_mode=IR单光，稍后由dual任务改成双光
+			i_source_config_snapshot[14] = 1'b0; // initial_precision=SAR9
+			i_source_config_snapshot[15] = 1'b1; // amb_enable
+			i_source_config_snapshot[16] = 1'b1; // dcs_enable
+			i_source_config_snapshot[17] = 1'b1; // amb_polarity
+			i_source_config_snapshot[18] = 1'b0; // dcs_polarity
+			i_source_config_snapshot[19] = 1'b1; // stage1_calibration_valid
+			i_source_config_snapshot[20] = 1'b1; // stage2_calibration_valid
+			i_source_config_snapshot[21] = 1'b1; // dc9_recovery_valid
+			i_source_config_snapshot[22] = 1'b1; // dc15_recovery_valid
+			i_source_config_snapshot[39:32] = 8'd64; // amb_manual_code
+			i_source_config_snapshot[47:40] = 8'd8; // amb_code_min
+			i_source_config_snapshot[55:48] = 8'd240; // amb_code_max
+			i_source_config_snapshot[63:56] = 8'd80; // dcs_r_manual_code
+			i_source_config_snapshot[71:64] = 8'd12; // dcs_r_code_min
+			i_source_config_snapshot[79:72] = 8'd230; // dcs_r_code_max
+			i_source_config_snapshot[87:80] = 8'd96; // dcs_ir_manual_code
+			i_source_config_snapshot[95:88] = 8'd16; // dcs_ir_code_min
+			i_source_config_snapshot[103:96] = 8'd220; // dcs_ir_code_max
+			i_source_config_snapshot[115:104] = -12'sd64; // amb_threshold_low
+			i_source_config_snapshot[127:116] = 12'sd72; // amb_threshold_high
+			i_source_config_snapshot[139:128] = -12'sd48; // dcs_threshold_low
+			i_source_config_snapshot[151:140] = 12'sd56; // dcs_threshold_high
+			i_source_config_snapshot[159:152] = 8'd8; // amb_confirm_count
+			i_source_config_snapshot[167:160] = 8'd9; // dcs_confirm_count
+			// C11合同第3节标称权重表：逐位对应vd0..vd8二进制位权(1,2,4,8,8,16,32,64,128,256)，
+			// Q16标度即×65536——诊断探针撞见的"calibrated_s1恒为0"就是因为这批系数原来沿用
+			// Phase 1占位值（个位数量级，Q16下约0.0003，10位加总远不到0.5，舍入必然是0）
+			i_source_config_snapshot[193:168] = 26'sd65536; // stage1_weight_q16_0，vd0标称1.0
+			i_source_config_snapshot[219:194] = 26'sd131072; // stage1_weight_q16_1，vd1标称2.0
+			i_source_config_snapshot[245:220] = 26'sd262144; // stage1_weight_q16_2，vd2标称4.0
+			i_source_config_snapshot[271:246] = 26'sd524288; // stage1_weight_q16_3，vdred冗余支路标称8.0
+			i_source_config_snapshot[297:272] = 26'sd524288; // stage1_weight_q16_4，vd3主支路标称8.0
+			i_source_config_snapshot[323:298] = 26'sd1048576; // stage1_weight_q16_5，vd4标称16.0
+			i_source_config_snapshot[349:324] = 26'sd2097152; // stage1_weight_q16_6，vd5标称32.0
+			i_source_config_snapshot[375:350] = 26'sd4194304; // stage1_weight_q16_7，vd6标称64.0
+			i_source_config_snapshot[401:376] = 26'sd8388608; // stage1_weight_q16_8，vd7标称128.0
+			i_source_config_snapshot[427:402] = 26'sd16777216; // stage1_weight_q16_9，vd8标称256.0
+			i_source_config_snapshot[459:428] = -32'sd262144; // stage1_offset_q16，标称-4*65536
+			i_source_config_snapshot[479:460] = 20'sd54143; // stage2_gain_q16
+			i_source_config_snapshot[511:480] = -32'sd37; // stage2_offset_q16
+			i_source_config_snapshot[543:512] = 32'sd65536; // dc9_recovery_gain_q16
+			i_source_config_snapshot[575:544] = 32'sd32768; // dc15_recovery_gain_q16
+			i_source_config_snapshot[591:576] = 16'd4096; // amb_recheck_interval_frames
+			i_source_config_snapshot[1009] = 1'b1; // peak_valley_config_valid：V5_RESET_PROFILE_REF默认0会让探测器消费排空但拒绝发布任何正式cross/peak/valley事件（C22 3.3节非法配置清单），Group 1/2必须显式打开
+		end
+	endtask
+
+	//---------------合法NORMAL真双光MANUAL配置构造任务---------------//
+	task task_build_normal_manual_dual_config;
+		begin
+			task_build_normal_manual_config;
+			i_source_config_snapshot[13:12] = 2'b00; // optical_mode=OPTICAL_BOTH，真双光
+		end
+	endtask
+
+	//---------------Acceptance-D01-01(D01批次4)专用：V5正式检测资格拉低的合法双光MANUAL配置---------------//
+	// 与task_build_normal_manual_dual_config逐字段一致，唯一差异是显式把[1009]
+	// （peak_valley_config_valid）改回0——这是该字段唯一能真实改变的合法途径：
+	// 必须先STOP回到CONFIG态再重新COMMIT，不存在RUN态下直接改写这一位的通路
+	task task_build_normal_manual_dual_config_pv_invalid;
+		begin
+			task_build_normal_manual_dual_config;
+			i_source_config_snapshot[1009] = 1'b0; // peak_valley_config_valid=0，本场景刻意保持V5正式检测资格无效
+		end
+	endtask
+
+	//---------------source事件任务---------------//
+	task task_pulse_source_update;
+		begin
+			@(negedge i_source_clk);
+			i_source_config_update_event = 1'b1;
+			@(posedge i_source_clk);
+			#1 i_source_config_update_event = 1'b0;
+		end
+	endtask
+
+	//---------------START事件任务---------------//
+	task task_pulse_start;
+		begin
+			@(negedge i_clk);
+			i_start_event = 1'b1;
+			@(posedge i_clk);
+			#1 i_start_event = 1'b0;
+		end
+	endtask
+
+	//---------------STOP事件任务---------------//
+	task task_pulse_stop;
+		begin
+			@(negedge i_clk);
+			i_stop_event = 1'b1;
+			@(posedge i_clk);
+			#1 i_stop_event = 1'b0;
+		end
+	endtask
+
+	//---------------配置结果等待任务---------------//
+	task task_wait_config_result;
+		integer cnt_wait;
+		begin
+			cnt_wait = 0;
+			while((o_commit_ack_event == 1'b0) && (o_error_event == 1'b0) && (cnt_wait < 64)) begin
+				@(posedge i_clk);
+				#1;
+				cnt_wait = cnt_wait + 1;
+			end
+			if((o_commit_ack_event == 1'b0) && (o_error_event == 1'b0)) begin
+				$display("FAIL LONGRUN config result timeout");
+				cnt_error = cnt_error + 1;
+			end
+		end
+	endtask
+
+	//---------------真实ADC完成响应任务---------------//
+	task drive_real_adc_done;
+		input precision_mode;
+		input [9:0] stage1_raw;
+		input [9:0] stage2_raw;
+		begin
+			@(negedge i_clk);
+			#2 i_adc_physical_idle = 1'b0;
+			#2 i_dout_stage1_low = stage1_raw;
+			#1 i_dout_stage2_low = stage2_raw;
+			#1 i_clk_stage1_dout_low_async = 1'b1;
+			#1 i_clk_stage2_dout_low_async = precision_mode;
+			repeat(5) @(negedge i_clk);
+			#2 i_clk_stage1_dout_low_async = 1'b0;
+			#1 i_clk_stage2_dout_low_async = 1'b0;
+			#1 i_adc_physical_idle = 1'b1;
+		end
+	endtask
+
+	//---------------Q3门控等待任务---------------//
+	task wait_q3_release;
+		output o_real_release;
+		integer cnt_wd;
+		begin
+			cnt_wd = 0;
+			while((o_clk_q3_low !== 1'b1) && (cnt_wd < 5600)) begin
+				@(negedge i_clk);
+				cnt_wd = cnt_wd + 1;
+			end
+			if(o_clk_q3_low !== 1'b1) begin
+				o_real_release = 1'b0;
+			end else begin
+				o_real_release = 1'b1;
+				while((o_clk_q3_low === 1'b1) && (cnt_wd < 6600)) begin
+					@(negedge i_clk);
+					cnt_wd = cnt_wd + 1;
+				end
+				if(cnt_wd >= 6600) begin
+					$display("FAIL LONGRUN Q3 wait timeout at cnt_adc_response=%0d", cnt_adc_response);
+					cnt_error = cnt_error + 1;
+				end
+			end
+		end
+	endtask
+
+	//---------------vdred编码RAW构造任务---------------//
+	task make_fixed_raw;
+		input integer target_code;
+		output [9:0] raw_code;
+		integer bounded_code;
+		integer encoded_code;
+		begin
+			bounded_code = target_code;
+			if(bounded_code < 8) bounded_code = 8;
+			else if(bounded_code > 503) bounded_code = 503;
+			encoded_code = bounded_code - 4;
+			raw_code = ((encoded_code >> 3) << 4) | 10'b0000001000 | (encoded_code & 7);
+		end
+	endtask
+
+	// xvlog要求声明先于使用（ppg_control_top.v V1.1changelog记录过同类教训），本
+	// include必须放在DUT例化、全部wire声明和task_build_normal_manual_config等
+	// 共享task定义之后、bg_responder使用flag_jnt_manual_adc_hold之前
+	`include "tb_ppg_jnt_baseline_prefix.vh"
+
+	//---------------后台ADC响应进程---------------//
+	// 与tb_ppg_control_top.v V1.4的bg_responder逻辑完全一致，本文件不加逐笔打印，
+	// 事件级证据改由下面的专用捕获进程提供
+	reg [9:0] reg_fixed_stage1_raw;
+	reg [9:0] reg_fixed_stage2_raw; // 仅校准事务使用的固定RAW
+	reg reg_response_precision;
+	reg flag_q3_real_release;
+	reg flag_response_is_calibration;
+	reg reg_response_color_ir;
+	reg [31:0] reg_response_frame_id;
+	reg [9:0] reg_response_stage1_raw;
+	reg [9:0] reg_response_stage2_raw;
+	reg [9:0] reg_response_target_code;
+	integer reg_response_raw_unclamped;
+
+	//---------------真实owner身份快照进程（供bg_responder使用）---------------//
+	// bg_responder原来在wait_q3_release返回那一拍才live采样
+	// ppg_400hz_frame_calibration_scheduler_Inst.state_current的B_INFLIGHT_TYPE_H/
+	// B_INFLIGHT_COLOR/B_FRAME_PRECISION字段，和SSW的flag_cal_context_valid；JNT-01~09
+	// 接入后第一次真实iverilog全规模跑发现这个采样点和owner真正提交（o_adc_owner_
+	// commit_event）的那一拍没有严格对齐——FRAME_TYPE_AMB恰好编码为2'b00，和
+	// state_current复位默认值撞车，此前从未观察到只是因为在此之前state_current
+	// 复位到的一直是Verilog未初始化的X（!X在if判断里按false处理），JNT-01~09让
+	// 同一次仿真里发生多次真实复位后，X变成了确定的0，这个既有采样时序缺陷才第一次
+	// 被暴露（不影响任何已断言的检查，cnt_cal_response从未被assert过，只是展示计数）。
+	// 修复：在owner真正提交那一拍把身份字段锁存进影子寄存器，bg_responder只读快照，
+	// 不再live采样state_current，和本文件其余捕获进程（PEAK/VALLEY/owner-commit
+	// 监视等）已经在用的"事件边沿锁存"手法保持一致
+	reg reg_owner_snapshot_is_calibration;
+	reg reg_owner_snapshot_color_ir;
+	reg [C_FRAME_ID_WIDTH - 1:0] reg_owner_snapshot_frame_id;
+	reg reg_owner_snapshot_precision;
+	always @(posedge i_clk) begin
+		if(ppg_control_top_Inst.sched_adc_owner_commit_event_o) begin
+			reg_owner_snapshot_is_calibration <= (ppg_control_top_Inst.sched_adc_owner_frame_type_o != 2'b10); // FRAME_TYPE_NORMAL=2'b10，其余编码均为校准类（AMB/DCS）
+			reg_owner_snapshot_color_ir <= ppg_control_top_Inst.sched_adc_owner_color_ir_o;
+			reg_owner_snapshot_frame_id <= ppg_control_top_Inst.sched_adc_owner_frame_id_o;
+			reg_owner_snapshot_precision <= ppg_control_top_Inst.sched_adc_owner_precision_mode_o;
+		end
+	end
+
+	initial begin
+		i_dout_stage1_low = 10'd0;
+		i_clk_stage1_dout_low_async = 1'b0;
+		i_dout_stage2_low = 10'd0;
+		i_clk_stage2_dout_low_async = 1'b0;
+		i_adc_physical_idle = 1'b1;
+		make_fixed_raw(256, reg_fixed_stage1_raw);
+		make_fixed_raw(300, reg_fixed_stage2_raw);
+		cnt_adc_response = 0;
+		cnt_red_response = 0;
+		cnt_ir_response = 0;
+		cnt_cal_response = 0;
+		forever begin
+			wait_q3_release(flag_q3_real_release);
+			while(flag_jnt_manual_adc_hold) @(negedge i_clk); // JNT-01~09手工控制ADC完成时序期间，后台自动响应进程必须让路，避免双写i_dout_stage1_low
+			if(flag_q3_real_release) begin
+				flag_response_is_calibration = reg_owner_snapshot_is_calibration;
+				reg_response_color_ir = reg_owner_snapshot_color_ir;
+				reg_response_frame_id = {16'd0, reg_owner_snapshot_frame_id};
+				if(flag_response_is_calibration) begin
+					cnt_cal_response = cnt_cal_response + 1;
+				end else if(reg_response_color_ir) begin
+					cnt_ir_response = cnt_ir_response + 1;
+				end else begin
+					cnt_red_response = cnt_red_response + 1;
+				end
+				reg_response_precision = reg_owner_snapshot_is_calibration ? 1'b0 : reg_owner_snapshot_precision; // 校准事务合同强制SAR9，其余用锁存的owner精度身份
+				if(flag_response_is_calibration) begin
+					reg_response_stage1_raw = reg_fixed_stage1_raw;
+					reg_response_stage2_raw = reg_fixed_stage2_raw;
+				end else begin
+					task_generate_raw_target_code(C_RAW_PROFILE_NORMAL, reg_response_color_ir, reg_response_frame_id,
+						reg_response_target_code, reg_response_raw_unclamped);
+					make_fixed_raw(reg_response_target_code, reg_response_stage1_raw);
+					make_fixed_raw(reg_response_target_code, reg_response_stage2_raw);
+				end
+				drive_real_adc_done(reg_response_precision, reg_response_stage1_raw, reg_response_stage2_raw);
+				cnt_adc_response = cnt_adc_response + 1;
+				if((cnt_adc_response % 200) == 0) begin
+					$display("DIAG progress t=%0t red=%0d ir=%0d cal=%0d", $time, cnt_red_response, cnt_ir_response, cnt_cal_response);
+				end
+			end
+		end
+	end
+
+	//---------------正式结果计数进程---------------//
+	always @(posedge i_clk) begin
+		if(i_rstn && o_measurement_result_valid && i_measurement_result_ready) begin
+			cnt_measurement_result_valid = cnt_measurement_result_valid + 1;
+		end
+	end
+
+	//---------------detection discard事件连续后台捕获进程（N01/N08新增）---------------//
+	// 同tb_ppg_control_top_lifecycle_fault_adc_anomaly.v已验证过的连续always块+
+	// sticky捕获模式：discard是单拍脉冲，绝不能在task_pulse_stop这类多拍阻塞
+	// 调用之后才做单点内联轮询，必须从background持续监视，场景消费后自行清零
+	// 重新武装
+	reg flag_detection_discard_seen_n0x;
+	reg [1:0] reg_detection_discard_reason_latched_n0x;
+	reg reg_detection_discard_identity_valid_latched_n0x;
+	integer cnt_detection_discard_events_n0x;
+	initial begin
+		flag_detection_discard_seen_n0x = 1'b0;
+		cnt_detection_discard_events_n0x = 0;
+	end
+	always @(posedge i_clk) begin
+		if(o_detection_discard_event) begin
+			flag_detection_discard_seen_n0x <= 1'b1;
+			reg_detection_discard_reason_latched_n0x <= o_detection_discard_reason;
+			reg_detection_discard_identity_valid_latched_n0x <= o_detection_discard_identity_valid;
+			cnt_detection_discard_events_n0x <= cnt_detection_discard_events_n0x + 1;
+		end
+	end
+
+	//---------------Acceptance-D01-01(D01批次4)背景不变量进程---------------//
+	// 场景B（peak_valley_config_valid=0持续运行）期间，C20/C22/C23三个消费者的
+	// o_local_empty必须逐拍保持1，C23也绝不能进入FINE窗口——这是flag_cross_emit
+	// (C20:488)、flag_formal_sample经flag_active_config_legal(C22:351/354)、
+	// o_cross_ready(C23:277)三处真实门控条件的直接port级观测，不是逐拍逻辑重复
+	// 实现；必须用持续always块而非事后单点轮询，因为任何一拍的瞬间违例都不能被
+	// 多拍阻塞调用漏过（同N01/N08discard捕获进程的理由）
+	always @(posedge i_clk) begin
+		if(flag_d01_pv_invalid_window_active && !flag_d01_pv_invalid_violation_seen) begin
+			if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_local_empty) begin
+				$display("FAIL D01 Acceptance-D01-01 C20(baseline) o_local_empty dropped to 0 while i_peak_valley_config_valid=0 t=%0t", $time);
+				cnt_error = cnt_error + 1;
+				flag_d01_pv_invalid_violation_seen <= 1'b1;
+			end else if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_local_empty) begin
+				$display("FAIL D01 Acceptance-D01-01 C22(peak_valley) o_local_empty dropped to 0 while i_peak_valley_config_valid=0 t=%0t", $time);
+				cnt_error = cnt_error + 1;
+				flag_d01_pv_invalid_violation_seen <= 1'b1;
+			end else if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_local_empty) begin
+				$display("FAIL D01 Acceptance-D01-01 C23(precision) o_local_empty dropped to 0 while i_peak_valley_config_valid=0 t=%0t", $time);
+				cnt_error = cnt_error + 1;
+				flag_d01_pv_invalid_violation_seen <= 1'b1;
+			end else if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.fine_window_active_o) begin
+				$display("FAIL D01 Acceptance-D01-01 C23 entered FINE window while i_peak_valley_config_valid=0 t=%0t", $time);
+				cnt_error = cnt_error + 1;
+				flag_d01_pv_invalid_violation_seen <= 1'b1;
+			end
+		end
+	end
+
+	//---------------N01/N08重新COMMIT+START恢复任务---------------//
+	// N01/N08两个新增子场景各自STOP一次之后，都需要用文件本来就在用的双光MANUAL
+	// 配置重新提交并START，让bg_responder在后台继续喂真实事务，不打断本文件
+	// 后面自己原有的STOP/drain/sticky检查
+	task task_n0x_recommit_dual_and_start;
+		integer cnt_start_wait_local;
+		begin
+			task_build_normal_manual_dual_config;
+			task_pulse_source_update;
+			task_wait_config_result;
+			if(!o_commit_ack_event || o_error_event || !o_start_ready || (o_lifecycle_state != ST_READY)) begin
+				$display("FAIL N01N08 re-commit dual-optical MANUAL");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+			task_pulse_start;
+			cnt_start_wait_local = 0;
+			while((o_start_ack_event == 1'b0) && (cnt_start_wait_local < 64)) begin
+				@(posedge i_clk);
+				#1;
+				cnt_start_wait_local = cnt_start_wait_local + 1;
+			end
+			if(o_start_ack_event == 1'b0) begin
+				$display("FAIL N01N08 re-start ack timeout");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+		end
+	endtask
+
+	//---------------Acceptance-D01-01(D01批次4)重新COMMIT+START恢复任务(V5正式检测资格拉低版本)---------------//
+	// 与task_n0x_recommit_dual_and_start逐字段一致，唯一差异是改用
+	// task_build_normal_manual_dual_config_pv_invalid，让重新提交的ACTIVE配置
+	// 里peak_valley_config_valid=0——这是本场景唯一能让该字段在真实端口层面
+	// 变为0的合法途径（COMMIT只在CONFIG态被接纳，RUN态下没有直接改写通路）
+	task task_d01_recommit_pv_invalid_and_start;
+		integer cnt_start_wait_local;
+		begin
+			task_build_normal_manual_dual_config_pv_invalid;
+			task_pulse_source_update;
+			task_wait_config_result;
+			if(!o_commit_ack_event || o_error_event || !o_start_ready || (o_lifecycle_state != ST_READY)) begin
+				$display("FAIL D01 Acceptance-D01-01 re-commit dual-optical MANUAL with peak_valley_config_valid=0");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+			task_pulse_start;
+			cnt_start_wait_local = 0;
+			while((o_start_ack_event == 1'b0) && (cnt_start_wait_local < 64)) begin
+				@(posedge i_clk);
+				#1;
+				cnt_start_wait_local = cnt_start_wait_local + 1;
+			end
+			if(o_start_ack_event == 1'b0) begin
+				$display("FAIL D01 Acceptance-D01-01 re-start ack timeout (peak_valley_config_valid=0)");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+		end
+	endtask
+
+	//---------------PEAK事件捕获与检查A/B（群延时验证）进程---------------//
+	// 路径口径：ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.
+	// ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst，
+	// 与tb_diag_algo_probe.v已验证过的边沿检测方式一致（valid&&ready才是真正握手拍）
+	always @(posedge i_clk) begin : peak_capture_block
+		integer this_live_frame_id;
+		integer this_peak_frame_id_signed;
+		integer theoretical_rise_frame;
+		integer frame_diff;
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_peak_ready) begin
+			reg_peak_value <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_value;
+			reg_peak_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id;
+			reg_peak_sample_index <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_sample_index;
+			reg_peak_count <= reg_peak_count + 1;
+			$display("PEAK CAPTURE t=%0t frame_id=%0d value=%0d count=%0d",
+				$time,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_value,
+				reg_peak_count + 1);
+			if(!flag_first_peak_captured) begin
+				flag_first_peak_captured <= 1'b1;
+				this_peak_frame_id_signed = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id;
+				this_live_frame_id = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id;
+				reg_live_frame_id_at_first_peak <= this_live_frame_id;
+				// 检查A：事件握手拍同步采样调度器活值frame_id，确认RTL确实用中心frame_id标签而非墙钟到达帧
+				if((this_live_frame_id - this_peak_frame_id_signed) < C_FIR_GROUP_DELAY_SAMPLES) begin
+					$display("FAIL GROUP1_BSL04_CHECK_A first PEAK frame_id not group-delay-tagged live_frame_id=%0d peak_frame_id=%0d diff=%0d need>=%0d",
+						this_live_frame_id, this_peak_frame_id_signed, this_live_frame_id - this_peak_frame_id_signed, C_FIR_GROUP_DELAY_SAMPLES);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP1_BSL04_CHECK_A first PEAK live_frame_id=%0d peak_frame_id=%0d diff=%0d >= %0d",
+						this_live_frame_id, this_peak_frame_id_signed, this_live_frame_id - this_peak_frame_id_signed, C_FIR_GROUP_DELAY_SAMPLES);
+				end
+				// 检查B：独立用生成器自己的pulse_shape闭式公式算出RED理论快升转折点帧号，容差内比对
+				theoretical_rise_frame = ((this_peak_frame_id_signed / C_RAW_PULSE_PERIOD_FRAMES) * C_RAW_PULSE_PERIOD_FRAMES) + C_RAW_RISE_END_FRAME_RED;
+				frame_diff = this_peak_frame_id_signed - theoretical_rise_frame;
+				if(frame_diff < 0) frame_diff = -frame_diff;
+				if(frame_diff > C_GROUP_DELAY_TOLERANCE_FRAMES) begin
+					$display("FAIL GROUP1_PVW17_CHECK_B first PEAK frame_id far from generator theoretical rise-corner peak_frame_id=%0d theoretical=%0d diff=%0d tol=%0d",
+						this_peak_frame_id_signed, theoretical_rise_frame, frame_diff, C_GROUP_DELAY_TOLERANCE_FRAMES);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP1_PVW17_CHECK_B first PEAK frame_id=%0d theoretical_rise_corner=%0d diff=%0d <= tol=%0d",
+						this_peak_frame_id_signed, theoretical_rise_frame, frame_diff, C_GROUP_DELAY_TOLERANCE_FRAMES);
+				end
+			end
+		end
+	end
+
+	//---------------VALLEY事件捕获进程---------------//
+	always @(posedge i_clk) begin
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_valley_ready) begin
+			reg_valley_value <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_value;
+			reg_valley_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id;
+			reg_valley_count <= reg_valley_count + 1;
+			$display("VALLEY CAPTURE t=%0t frame_id=%0d value=%0d count=%0d",
+				$time,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_value,
+				reg_valley_count + 1);
+		end
+	end
+
+	//---------------RETURN_9BIT事件捕获进程---------------//
+	always @(posedge i_clk) begin
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_9bit_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_return_9bit_ready) begin
+			reg_return_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_frame_id;
+			reg_return_reason <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_reason;
+			reg_return_count <= reg_return_count + 1;
+			$display("RETURN_9BIT CAPTURE t=%0t frame_id=%0d reason=%0d count=%0d",
+				$time,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_frame_id,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_reason,
+				reg_return_count + 1);
+		end
+	end
+
+	//---------------CROSS检测器状态监视与Group1检查1/2取证/Group1检查3/检查A（首个CROSS）进程---------------//
+	// 路径口径：ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.
+	// ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst
+	always @(posedge i_clk) begin : cross_detector_monitor_block
+		integer this_live_frame_id;
+		integer this_cross_frame_id_signed;
+		integer frame_delta_unsigned;
+		reg signed [47:0] peak_value_q16;
+		reg signed [47:0] delta_q16_extended;
+		reg signed [63:0] slope_product_wide;
+		reg signed [47:0] expected_baseline_q16;
+		// 首个PEAK建立o_baseline_valid之前不能出现真实cross握手的判定基准，sticky一旦置1永不清零
+		if(!i_rstn) begin
+			flag_baseline_ever_valid <= 1'b0;
+		end else if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_baseline_valid) begin
+			flag_baseline_ever_valid <= 1'b1;
+		end
+		// Group1检查1：历史不足不能形成合格穿越——首个PEAK建立o_baseline_valid之前不能有cross握手
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_cross_ready &&
+			!flag_baseline_ever_valid) begin
+			$display("FAIL GROUP1_HISTORY_INSUFFICIENT cross handshake observed before baseline_valid ever asserted t=%0t", $time);
+			cnt_error = cnt_error + 1;
+		end
+		// Group2检查1取证：候选首次越过必须绑定一笔真实RED FIR握手，而不是凭空产生
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.flag_candidate_start) begin
+			if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_result_valid &&
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_result_ready &&
+				!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_color_ir) begin
+				reg_expected_cross_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_frame_id;
+				reg_expected_cross_sample_index <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_sample_index;
+				flag_expected_cross_from_real_red <= 1'b1;
+			end else begin
+				flag_expected_cross_from_real_red <= 1'b0;
+			end
+		end
+		// CROSS事件正式捕获与握手拍取证/公式核对
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_cross_ready) begin
+			reg_cross_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id;
+			reg_cross_sample_index <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_sample_index;
+			reg_cross_time_unknown <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_time_unknown;
+			reg_cross_slope_q16 <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_slope_q16;
+			reg_cross_baseline_q16 <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_baseline_q16;
+			reg_cross_count <= reg_cross_count + 1;
+			$display("CROSS CAPTURE t=%0t frame_id=%0d sample_index=%0d baseline_q16=%0d slope_q16=%0d time_unknown=%0d count=%0d",
+				$time,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_sample_index,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_baseline_q16,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_slope_q16,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_time_unknown,
+				reg_cross_count + 1);
+			// Group2检查1：cross载荷必须精确等于candidate_start那一拍锁存的真实RED FIR事务身份（精确类型事件适用）
+			if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_time_unknown) begin
+				if(!flag_expected_cross_from_real_red) begin
+					$display("FAIL GROUP2_REAL_DATAPATH cross payload not traceable to a real RED FIR handshake at candidate_start t=%0t", $time);
+					cnt_error = cnt_error + 1;
+				end else if((ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id !== reg_expected_cross_frame_id) ||
+					(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_sample_index !== reg_expected_cross_sample_index)) begin
+					$display("FAIL GROUP2_REAL_DATAPATH cross payload frame_id/sample_index mismatch vs captured real RED handshake reported_frame=%0d expected_frame=%0d reported_sample=%0d expected_sample=%0d",
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id,
+						reg_expected_cross_frame_id,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_sample_index,
+						reg_expected_cross_sample_index);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP2_REAL_DATAPATH cross frame_id=%0d sample_index=%0d traced to a real RED FIR handshake at candidate_start",
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_sample_index);
+				end
+			end
+			// Group1检查3：用捕获的PEAK锚点和CROSS载荷重算B[f]=P[n]+DELTA+S[n]*frame_delta(f,F_P[n])，核对o_cross_baseline_q16
+			if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_time_unknown && (reg_peak_count > 0)) begin
+				frame_delta_unsigned = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id - reg_peak_frame_id; // 与RTL dec_result_frame_delta一致的16-bit模差算法
+				frame_delta_unsigned = frame_delta_unsigned & 32'h0000FFFF;
+				peak_value_q16 = {{8{reg_peak_value[23]}}, reg_peak_value, 16'd0}; // 与RTL dec_peak_value_q16构造方式一致：24-bit波峰码值扩展为Q16
+				delta_q16_extended = {{16{C_BASELINE_DELTA_Q16[31]}}, C_BASELINE_DELTA_Q16};
+				slope_product_wide = $signed(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_slope_q16) * $signed({1'b0, frame_delta_unsigned[15:0]});
+				expected_baseline_q16 = peak_value_q16 + delta_q16_extended + slope_product_wide[47:0];
+				if(expected_baseline_q16 !== ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_baseline_q16) begin
+					$display("FAIL GROUP1_BASELINE_FORMULA recomputed B[f] mismatch expected=%0d rtl_reported=%0d peak_value=%0d peak_frame=%0d cross_frame=%0d frame_delta=%0d slope=%0d",
+						expected_baseline_q16,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_baseline_q16,
+						reg_peak_value, reg_peak_frame_id,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id,
+						frame_delta_unsigned,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_slope_q16);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP1_BASELINE_FORMULA recomputed B[f]=%0d matches RTL o_cross_baseline_q16 peak_value=%0d peak_frame=%0d cross_frame=%0d frame_delta=%0d slope=%0d",
+						expected_baseline_q16, reg_peak_value, reg_peak_frame_id,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id,
+						frame_delta_unsigned,
+						ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_slope_q16);
+				end
+			end
+			// 检查A（应用于首个CROSS事件）：事件握手拍同步采样调度器活值frame_id
+			if(!flag_first_cross_captured) begin
+				flag_first_cross_captured <= 1'b1;
+				this_cross_frame_id_signed = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_cross_frame_id;
+				this_live_frame_id = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id;
+				reg_live_frame_id_at_first_cross <= this_live_frame_id;
+				if((this_live_frame_id - this_cross_frame_id_signed) < C_FIR_GROUP_DELAY_SAMPLES) begin
+					$display("FAIL GROUP2_BSL04_CHECK_A first CROSS frame_id not group-delay-tagged live_frame_id=%0d cross_frame_id=%0d diff=%0d need>=%0d",
+						this_live_frame_id, this_cross_frame_id_signed, this_live_frame_id - this_cross_frame_id_signed, C_FIR_GROUP_DELAY_SAMPLES);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP2_BSL04_CHECK_A first CROSS live_frame_id=%0d cross_frame_id=%0d diff=%0d >= %0d",
+						this_live_frame_id, this_cross_frame_id_signed, this_live_frame_id - this_cross_frame_id_signed, C_FIR_GROUP_DELAY_SAMPLES);
+				end
+			end
+		end
+	end
+
+	//---------------Group1检查2：IR事务前后RED运行态逐位不变进程---------------//
+	always @(posedge i_clk) begin : ir_invariance_block
+		if(flag_ir_check_pending) begin
+			if((ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_baseline_valid !== reg_ir_pre_baseline_valid) ||
+				(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_slope_current_q16 !== reg_ir_pre_slope_current_q16) ||
+				(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_slope_base_q16 !== reg_ir_pre_slope_base_q16) ||
+				(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_no_cross_count !== reg_ir_pre_no_cross_count) ||
+				(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_reacquire_active !== reg_ir_pre_reacquire_active)) begin
+				$display("FAIL GROUP1_IR_INVARIANCE RED running state changed across an IR transaction t=%0t", $time);
+				cnt_error = cnt_error + 1;
+			end
+			flag_ir_check_pending <= 1'b0;
+		end
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_result_valid &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_result_ready &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.i_color_ir) begin
+			reg_ir_pre_baseline_valid <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_baseline_valid;
+			reg_ir_pre_slope_current_q16 <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_slope_current_q16;
+			reg_ir_pre_slope_base_q16 <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_slope_base_q16;
+			reg_ir_pre_no_cross_count <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_no_cross_count;
+			reg_ir_pre_reacquire_active <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_reacquire_active;
+			flag_ir_check_pending <= 1'b1;
+		end
+	end
+
+	//---------------Group2检查2安全门控信号逐拍锁存进程---------------//
+	// 每拍无条件采样，供下面的取证进程在观察到延迟一拍的o_fine_window_start_event
+	// 寄存器脉冲时，回看真正做出提交判决那一拍（flag_enter_commit所在拍）的门控快照
+	always @(posedge i_clk) begin
+		reg_prev_frame_safe_boundary <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.i_frame_safe_boundary;
+		reg_prev_precision_takeover_safe <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.i_precision_takeover_safe;
+		reg_prev_analog_safe <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.i_analog_safe;
+		reg_prev_adc_physical_idle <= i_adc_physical_idle;
+	end
+
+	//---------------正式结果最近快照跟踪进程（供Group2检查3使用）---------------//
+	always @(posedge i_clk) begin
+		if(!i_rstn) begin
+			flag_last_result_valid <= 1'b0;
+			flag_last_red_result_valid <= 1'b0;
+			flag_awaiting_posttransition_any <= 1'b0;
+			flag_awaiting_posttransition_red <= 1'b0;
+		end else if(o_measurement_result_valid && i_measurement_result_ready) begin
+			// Group2检查3a：切换后紧邻的下一笔结果，sample_index必须严格连续+1
+			if(flag_awaiting_posttransition_any) begin
+				if(o_result_sample_index !== (reg_pretransition_sample_index + {{(C_SAMPLE_INDEX_WIDTH - 1){1'b0}}, 1'b1})) begin
+					$display("FAIL GROUP2_SAMPLE_CONTINUITY sample_index not continuous across SAR9->SAR15 transition pretransition=%0d posttransition=%0d",
+						reg_pretransition_sample_index, o_result_sample_index);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP2_SAMPLE_CONTINUITY sample_index continuous across transition pretransition=%0d posttransition=%0d",
+						reg_pretransition_sample_index, o_result_sample_index);
+				end
+				flag_awaiting_posttransition_any <= 1'b0;
+			end
+			// Group2检查3b：切换后紧邻的下一笔同色（RED）结果，AMB/DC码快照+提交版本必须保持不变
+			if(flag_awaiting_posttransition_red && (o_result_color_ir == 1'b0)) begin
+				if((o_result_amb_code_snapshot !== reg_pretransition_amb_code_snapshot) ||
+					(o_result_amb_code_epoch !== reg_pretransition_amb_code_epoch) ||
+					(o_result_dc_code_snapshot !== reg_pretransition_dc_code_snapshot) ||
+					(o_result_dc_code_epoch !== reg_pretransition_dc_code_epoch)) begin
+					$display("FAIL GROUP2_CODE_SNAPSHOT_STABILITY AMB/DC snapshot or epoch changed across SAR9->SAR15 transition pre_amb=%0d post_amb=%0d pre_amb_epoch=%0d post_amb_epoch=%0d pre_dc=%0d post_dc=%0d pre_dc_epoch=%0d post_dc_epoch=%0d",
+						reg_pretransition_amb_code_snapshot, o_result_amb_code_snapshot,
+						reg_pretransition_amb_code_epoch, o_result_amb_code_epoch,
+						reg_pretransition_dc_code_snapshot, o_result_dc_code_snapshot,
+						reg_pretransition_dc_code_epoch, o_result_dc_code_epoch);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS GROUP2_CODE_SNAPSHOT_STABILITY AMB/DC snapshot+epoch unchanged across transition amb_snapshot=%0d amb_epoch=%0d dc_snapshot=%0d dc_epoch=%0d",
+						o_result_amb_code_snapshot, o_result_amb_code_epoch, o_result_dc_code_snapshot, o_result_dc_code_epoch);
+				end
+				flag_awaiting_posttransition_red <= 1'b0;
+			end
+			reg_last_result_sample_index <= o_result_sample_index;
+			reg_last_result_amb_code_snapshot <= o_result_amb_code_snapshot;
+			reg_last_result_amb_code_epoch <= o_result_amb_code_epoch;
+			reg_last_result_dc_code_snapshot <= o_result_dc_code_snapshot;
+			reg_last_result_dc_code_epoch <= o_result_dc_code_epoch;
+			reg_last_result_color_ir <= o_result_color_ir;
+			flag_last_result_valid <= 1'b1;
+			if(o_result_color_ir == 1'b0) begin
+				reg_last_red_result_amb_code_snapshot <= o_result_amb_code_snapshot;
+				reg_last_red_result_amb_code_epoch <= o_result_amb_code_epoch;
+				reg_last_red_result_dc_code_snapshot <= o_result_dc_code_snapshot;
+				reg_last_red_result_dc_code_epoch <= o_result_dc_code_epoch;
+				flag_last_red_result_valid <= 1'b1;
+			end
+		end
+	end
+
+	//---------------Group2检查2：SAR9->SAR15安全切换取证进程---------------//
+	// 路径口径：ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.
+	// ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst；
+	// 只对第一次SAR9->SAR15切换取证，与C_TARGET_RED_SAMPLES=700覆盖的单轮周期对齐
+	always @(posedge i_clk) begin
+		if(!i_rstn) begin
+			flag_group2_transition_checked <= 1'b0;
+		end else if(!flag_group2_transition_checked &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_fine_window_start_event) begin
+			flag_group2_transition_checked <= 1'b1;
+			$display("SAR15_TRANSITION CAPTURE t=%0t safe_frame_id=%0d", $time,
+				ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_fine_window_start_frame_id);
+			// Group2检查2：提交只能发生在真实安全边界，绝不能抢占在途转换——同时核对RTL内部三个门控信号
+			// 和TB自己驱动的物理ADC忙闲状态两类独立证据。o_fine_window_start_event是
+			// fine_window_start_event_o寄存器输出，比真正做出判决的flag_enter_commit晚一拍，
+			// 而i_frame_safe_boundary是逐帧单拍脉冲，到寄存器脉冲出现这一拍往往已经撤销，
+			// 所以这里核对的是上一拍（判决真正发生那一拍）锁存的门控快照，不是当前拍的
+			// 瞬时值——这是iverilog小规模验证阶段真实发现并修复过的一个TB自身时序对齐bug
+			if(!(reg_prev_frame_safe_boundary && reg_prev_precision_takeover_safe && reg_prev_analog_safe)) begin
+				$display("FAIL GROUP2_SAFE_BOUNDARY fine_window_start_event committed without all three safe-boundary gates asserted at the actual commit cycle t=%0t", $time);
+				cnt_error = cnt_error + 1;
+			end else if(reg_prev_adc_physical_idle !== 1'b1) begin
+				$display("FAIL GROUP2_SAFE_BOUNDARY fine_window_start_event committed while TB-driven physical ADC bus mid-transaction at the actual commit cycle t=%0t", $time);
+				cnt_error = cnt_error + 1;
+			end else begin
+				$display("PASS GROUP2_SAFE_BOUNDARY fine_window_start_event committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle");
+			end
+			// 为检查3准备切换前快照：sample_index连续性看"最近一笔任意颜色结果"，
+			// AMB/DC快照+epoch稳定性看"最近一笔RED结果"——dcs_r_manual_code(80)和
+			// dcs_ir_manual_code(96)本场景配置里逐色独立，混色比较会把颜色交替误判成
+			// 码值变化，这也是iverilog小规模验证阶段真实发现并修复过的一个TB自身bug
+			if(flag_last_result_valid) begin
+				reg_pretransition_sample_index <= reg_last_result_sample_index;
+				flag_awaiting_posttransition_any <= 1'b1;
+			end
+			if(flag_last_red_result_valid) begin
+				reg_pretransition_amb_code_snapshot <= reg_last_red_result_amb_code_snapshot;
+				reg_pretransition_amb_code_epoch <= reg_last_red_result_amb_code_epoch;
+				reg_pretransition_dc_code_snapshot <= reg_last_red_result_dc_code_snapshot;
+				reg_pretransition_dc_code_epoch <= reg_last_red_result_dc_code_epoch;
+				flag_awaiting_posttransition_red <= 1'b1;
+			end
+		end
+	end
+
+	//---------------全局看门狗进程---------------//
+	// 12秒watchdog，相对仿真起点，time类型，覆盖复位+START+measurement+排空+
+	// 终止检查的全部预算；不是10秒measurement窗口本身的一部分
+	initial begin
+		flag_global_timeout = 1'b0;
+		#(C_SIM_TIMEOUT_NS);
+		flag_global_timeout = 1'b1;
+		$display("FAIL BASELINE_CROSS global watchdog timeout at t=%0t, forcing finish", $time);
+		cnt_error = cnt_error + 1;
+		$finish;
+	end
+
+	//---------------主序列---------------//
+	initial begin
+		cnt_error = 0;
+		cnt_measurement_result_valid = 0;
+		reg_measurement_start_time = 0;
+		// Group 1/2事件捕获与断言状态的显式初始化：integer/reg在Verilog中默认是X，
+		// 靠隐式0初始化的假设会让`if(!flag_xxx)`这类判断在X上被当成false直接跳过，
+		// 这是本文件编写时真实踩到的一个bug（iverilog小规模跑通阶段发现Check A/B
+		// 从未执行），必须在这里显式清零，不能依赖复位或默认值
+		reg_peak_count = 0;
+		reg_valley_count = 0;
+		reg_cross_count = 0;
+		reg_return_count = 0;
+		flag_baseline_ever_valid = 1'b0;
+		flag_expected_cross_from_real_red = 1'b0;
+		flag_first_peak_captured = 1'b0;
+		flag_first_cross_captured = 1'b0;
+		flag_ir_check_pending = 1'b0;
+		flag_last_result_valid = 1'b0;
+		flag_awaiting_posttransition_any = 1'b0;
+		flag_awaiting_posttransition_red = 1'b0;
+		flag_group2_transition_checked = 1'b0;
+		flag_last_red_result_valid = 1'b0;
+		reg_prev_frame_safe_boundary = 1'b0;
+		reg_prev_precision_takeover_safe = 1'b0;
+		reg_prev_analog_safe = 1'b0;
+		reg_prev_adc_physical_idle = 1'b0;
+		i_rstn = 1'b0;
+		i_source_rstn = 1'b0;
+		i_source_config_snapshot = {C_CONFIG_WIDTH{1'b0}};
+		i_source_config_update_event = 1'b0;
+		i_source_characterization_update_valid = 1'b0;
+		i_source_static_characterization_enable = 1'b0;
+		i_source_test_mux_ctrl = 5'b00000;
+		i_start_event = 1'b0;
+		i_stop_event = 1'b0;
+		i_diag_clear_event = 1'b0;
+		i_control_abort_event = 1'b0;
+		i_analog_ready = 1'b1;
+		i_measurement_result_ready = 1'b1;
+		i_test_inject_enable = 1'b0;
+		i_test_identity_inject_valid = 1'b0;
+		i_test_identity_inject_sample_index = {C_SAMPLE_INDEX_WIDTH{1'b0}};
+		i_test_invalid_sample_valid = 1'b0;
+
+		// 复位释放
+		repeat(3) @(posedge i_clk);
+		#1;
+		@(negedge i_source_clk);
+		i_source_rstn = 1'b1;
+		@(negedge i_clk);
+		i_rstn = 1'b1;
+		repeat(3) @(posedge i_clk);
+		#1;
+
+		// C25合同9.1/10.1节+PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md第11节：独立复位后
+		// 必须先完整跑通JNT-01~09（52个子检查全部PASS）才能启动本组场景；task内部
+		// 自带独立复位/配置/START子序列，结束时会做一次干净复位把DUT交还给下面的
+		// 本组场景起手式，不需要额外处理
+		run_jnt_baseline_01_09;
+
+		// 提交合法NORMAL双光MANUAL配置
+		task_build_normal_manual_dual_config;
+		task_pulse_source_update;
+		task_wait_config_result;
+		if(!o_commit_ack_event || o_error_event || !o_start_ready || (o_lifecycle_state != ST_READY)) begin
+			$display("FAIL LONGRUN legal NORMAL dual-optical MANUAL commit");
+			cnt_error = cnt_error + 1;
+			$finish;
+		end else begin
+			$display("PASS LONGRUN legal NORMAL dual-optical MANUAL commit");
+		end
+
+		// START：accepted measurement START事件，在此锁存time类型测量起点
+		task_pulse_start;
+		fork
+			begin : longrun_start_ack_wait
+				integer cnt_start_wait;
+				cnt_start_wait = 0;
+				while((o_start_ack_event == 1'b0) && (cnt_start_wait < 64)) begin
+					@(posedge i_clk);
+					#1;
+					cnt_start_wait = cnt_start_wait + 1;
+				end
+				if(o_start_ack_event == 1'b0) begin
+					$display("FAIL LONGRUN start ack timeout");
+					cnt_error = cnt_error + 1;
+				end
+			end
+		join
+		reg_measurement_start_time = $time; // 与合同"10-second measurement interval begins at the accepted measurement START event"对齐
+		if((o_lifecycle_state != ST_RUN) || o_system_fault_blocking) begin
+			$display("FAIL LONGRUN START accepted into RUN");
+			cnt_error = cnt_error + 1;
+			$finish;
+		end else begin
+			$display("PASS LONGRUN START accepted into RUN, measurement start latched t=%0t", reg_measurement_start_time);
+		end
+
+		// 事件驱动主循环：完全依赖bg_responder的真实响应和上面各专用捕获/断言
+		// 进程，主序列本身只负责等待覆盖窗口跑完，不重复任何判定逻辑
+		while((cnt_red_response < C_TARGET_RED_SAMPLES) && !flag_global_timeout) begin
+			@(posedge i_clk);
+		end
+		if(flag_global_timeout) begin
+			$display("FAIL BASELINE_CROSS global watchdog fired before target red sample count reached red=%0d", cnt_red_response);
+			cnt_error = cnt_error + 1;
+		end else begin
+			$display("PASS BASELINE_CROSS main sequence reached target red=%0d within watchdog budget", cnt_red_response);
+		end
+
+		// 存在性断言：Group 1/2的全部逐拍检查只在对应事件真实出现时才会执行，
+		// 必须额外确认这些事件确实发生过，避免配置或生成器退化导致断言整体
+		// vacuous pass（例如o_calibrated_s1_value又恒0导致零事件却全程无FAIL）
+		if(!flag_baseline_ever_valid) begin
+			$display("FAIL GROUP1_EXISTENCE o_baseline_valid never asserted during the whole run, history-insufficient check is vacuous");
+			cnt_error = cnt_error + 1;
+		end else if(reg_peak_count < 2) begin
+			$display("FAIL GROUP1_EXISTENCE fewer than 2 real PEAK events captured (count=%0d), warmup cycle not exercised", reg_peak_count);
+			cnt_error = cnt_error + 1;
+		end else if(reg_valley_count < 2) begin
+			$display("FAIL GROUP1_EXISTENCE fewer than 2 real VALLEY events captured (count=%0d), warmup cycle not exercised", reg_valley_count);
+			cnt_error = cnt_error + 1;
+		end else if(!flag_first_peak_captured) begin
+			$display("FAIL GROUP1_EXISTENCE first-PEAK group-delay checks A/B never ran");
+			cnt_error = cnt_error + 1;
+		end else begin
+			$display("PASS GROUP1_EXISTENCE real PEAK/VALLEY warmup cycle observed peak_count=%0d valley_count=%0d", reg_peak_count, reg_valley_count);
+		end
+		if(reg_cross_count < 1) begin
+			$display("FAIL GROUP2_EXISTENCE no real CROSS event captured, Group2 SAR15-entry checks are vacuous");
+			cnt_error = cnt_error + 1;
+		end else if(!flag_first_cross_captured) begin
+			$display("FAIL GROUP2_EXISTENCE first-CROSS group-delay check A never ran");
+			cnt_error = cnt_error + 1;
+		end else if(!flag_group2_transition_checked) begin
+			$display("FAIL GROUP2_EXISTENCE no real SAR9->SAR15 fine_window_start_event observed, safe-boundary/continuity checks are vacuous");
+			cnt_error = cnt_error + 1;
+		end else if(reg_return_count < 1) begin
+			$display("FAIL GROUP2_EXISTENCE no real RETURN_9BIT event captured, SAR15->SAR9 round trip not exercised");
+			cnt_error = cnt_error + 1;
+		end else begin
+			$display("PASS GROUP2_EXISTENCE real CROSS/SAR15-entry/RETURN_9BIT cycle observed cross_count=%0d return_count=%0d", reg_cross_count, reg_return_count);
+		end
+
+		//------- N01+N08(scope-only)：真实下游检测代际非空时STOP，确认discard真实
+		// 触发、正确广播清空、且"AMI自己已经交接完成后才触发"场景下identity_valid
+		// 正确置0 -------//
+		// bg_responder仍在后台连续产生真实事务（本文件此刻已真实观测到
+		// peak_count/valley_count/cross_count均达标），继续运行会自然再次进入
+		// 基线/峰谷检测器持有真实候选的非空窗口，不需要额外构造激励，只需要等
+		begin : n01_scope_only_scenario
+			integer cnt_poll_wait;
+			reg flag_detpending_at_stop;
+			cnt_poll_wait = 0;
+			while(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_pwi_detection_datapath_empty &&
+				(cnt_poll_wait < 3000000) && !flag_global_timeout) begin
+				@(posedge i_clk);
+				cnt_poll_wait = cnt_poll_wait + 1;
+			end
+			if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_pwi_detection_datapath_empty) begin
+				$display("FAIL N01 detection datapath never went non-empty again while arming the scope-only scenario");
+				cnt_error = cnt_error + 1;
+			end else begin
+				flag_detpending_at_stop = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_detection_pending;
+				flag_detection_discard_seen_n0x = 1'b0;
+				task_pulse_stop;
+				cnt_poll_wait = 0;
+				while(!flag_detection_discard_seen_n0x && (cnt_poll_wait < 50) && !flag_global_timeout) begin
+					@(posedge i_clk);
+					cnt_poll_wait = cnt_poll_wait + 1;
+				end
+				if(!flag_detection_discard_seen_n0x) begin
+					$display("FAIL N01 detection discard never fired despite downstream datapath confirmed non-empty at STOP");
+					cnt_error = cnt_error + 1;
+				end else if(reg_detection_discard_reason_latched_n0x != 2'b00) begin
+					$display("FAIL N01 detection discard reason was %0d, expected DISCARD_STOP(0)", reg_detection_discard_reason_latched_n0x);
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS N01 real detection-generation discard fired at STOP while downstream datapath was genuinely non-empty (detection_pending_at_stop=%b)", flag_detpending_at_stop);
+				end
+				if(flag_detection_discard_seen_n0x && !flag_detpending_at_stop && reg_detection_discard_identity_valid_latched_n0x) begin
+					$display("FAIL N08 scope-only discard incorrectly reported identity_valid=1 despite AMI's own detection fork having already handed off (flag_detection_pending was 0 at STOP)");
+					cnt_error = cnt_error + 1;
+				end else if(flag_detection_discard_seen_n0x && !flag_detpending_at_stop) begin
+					$display("PASS N08 scope-only detection discard correctly reported identity_valid=0 (AMI's own fork had already handed off before STOP)");
+				end
+				// N01下游清空断言：STOP排空之后，PWI聚合non-empty标志和四个子模块
+				// 各自本地排空都必须真实回到1，不是只看discard事件本身触发过
+				cnt_poll_wait = 0;
+				while(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_pwi_detection_datapath_empty &&
+					(cnt_poll_wait < 5000) && !flag_global_timeout) begin
+					@(posedge i_clk);
+					cnt_poll_wait = cnt_poll_wait + 1;
+				end
+				if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_pwi_detection_datapath_empty) begin
+					$display("FAIL N01 downstream detection datapath never settled empty after the STOP discard");
+					cnt_error = cnt_error + 1;
+				end else if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.fir_local_empty_o ||
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.baseline_local_empty_o ||
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.peak_valley_local_empty_o ||
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.precision_local_empty_o) begin
+					$display("FAIL N01 not all four PWI consumers (FIR/baseline/peak-valley/precision) individually reported local-empty after discard broadcast");
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS N01 all four PWI consumers (FIR/baseline/peak-valley/precision) individually settled to local-empty after the discard broadcast cleared them");
+				end
+			end
+			cnt_poll_wait = 0;
+			while((o_lifecycle_state != ST_CONFIG) && (cnt_poll_wait < 200000) && !flag_global_timeout) begin
+				@(posedge i_clk);
+				cnt_poll_wait = cnt_poll_wait + 1;
+			end
+			if(o_lifecycle_state != ST_CONFIG) begin
+				$display("FAIL N01N08 drain back to CONFIG timeout after scope-only scenario");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+			task_n0x_recommit_dual_and_start;
+		end
+
+		// N08(pre-handoff, identity_valid=1)：真实构造过一次尝试(force PWI内部
+		// FIR自己的normal_result_ready_o拉低，让下一笔完成滞留在AMI自己的检测
+		// fork里)，跑起来后发现这是一个虚假构造而不是真实证据——force只覆盖了
+		// 这条net对外呈现的值，FIR自己内部的状态机并不知道这次force，它按自己
+		// 真实算出的ready=1正常完成了内部状态推进（自认为已经交接），而AMI这一侧
+		// 因为读到的是被force成0的值，continued认为flag_detection_pending仍是1——
+		// 造成AMI和FIR两侧对"是否已交接"的认知分裂成两个互相矛盾的状态，这在真实
+		// 芯片里不可能发生，只是force产生的仿真假象。真实跑出来的现象也印证了这点：
+		// flag_detection_pending确实按预期武装到1，但discard最终没有触发（因为FIR
+		// 自己内部已经"认为"接收完成、报告empty，PWI聚合的!flag_pwi_detection_
+		// datapath_empty这一项从未变为真），这正是"力人为割裂两侧真实状态"的
+		// 直接后果，不是RTL缺陷。真实、非force的构造需要天然让FIR的接收readiness
+		// 本身在多拍内为0（比如两笔完成挨得足够近、且baseline/peak_valley此刻
+		// 恰好还没消费掉FIR上一笔保持的输出）——但bg_responder每笔响应之间的
+		// 真实间隔由物理Q1/Q2/Q3转换时序决定，比FIR/baseline单笔握手所需的几拍
+		// 长得多，本文件的真实激励手法够不到这个窗口。这是一个真实确认过的构造
+		// 难点，与本项目LFA-10(b)"SSW真实mismatch需要直接force内部输入，联合边界
+		// 够不到"是同一类诚实记录，不强行拼凑一个脆弱或虚假的PASS。
+		// flag_detection_discard_identity_valid=flag_detection_pending本身是
+		// 单条无条件assign（AMI:978），逻辑上必然正确，只是"discard真实触发的
+		// 那一拍恰好pending=1"这个复合场景在此TB边界内暂时无法用真实非force手法
+		// 构造；已记录进memory，留给以后有更合适构造手法（如AMI自己的独立
+		// module-level unit TB，可以直接摆i_normal_result_valid/o_normal_result_
+		// ready)时再补。
+
+		//------- Acceptance-D01-01 (D01批次4)：i_peak_valley_config_valid拉低的
+		// 安全drain验证。矩阵12.13节点名的四个验收ID(AMI-54/PWI-08/BSL-40/PWC-40)
+		// 之外，实地读代码确认C22(ppg_peak_valley_window_detector.v:111/351/354，
+		// flag_active_config_legal/flag_formal_sample同样直接消费这个信号、持有
+		// 与C20/C23同量级的真实内部状态)也是这条链的真实第五个消费者，却没有
+		// 对应的验收ID——这是合同文字缺口，本行记录留痕，不现在改合同正文，
+		// 见本文件V1.5变更记录。
+		// 真实架构调查发现一个必须诚实记录的构造边界：i_peak_valley_config_valid
+		// 不是ppg_control_top自身的顶层端口，而是ppg_system_config_manager.v:457
+		// `flag_commit_accept = (state_current == ST_CONFIG) && flag_snapshot_
+		// valid`门控的ACTIVE V5寄存器位——COMMIT只在CONFIG态被接纳，RUN态下没有
+		// 任何通路能直接改写这一位；唯一能从RUN态回到CONFIG态的路径是STOP，而
+		// STOP本身已经会经i_start_ack_event清空C20候选(ppg_dynamic_baseline_
+		// cross_detector.v:1557)和经i_run_enable=0触发的flag_runtime_clear清空
+		// C22上下文(ppg_peak_valley_window_detector.v:346-347)。因此"完全不触碰
+		// STOP/START、让一个已经在途的候选眼看着config_valid从1掉到0"这个字面
+		// 场景在真实端口层面无法构造——不是本次会话没找到手法，而是COMMIT时序
+		// 结构本身决定的，与本项目N08交接前半、LFA-10(b)是同一类真实构造边界。
+		// 本场景因此拆成两个互补的真实构造，共同覆盖验收意图（安全消费/drain、
+		// 不产生新正式事件、单点可逆、无第二生产者）：
+		//   D01-01a: 真实候选在途时STOP，确认discard广播/i_run_enable=0安全清空
+		//            C20/C22在途状态，且从STOP瞬间起没有产生任何新的正式cross/
+		//            peak/valley/return_9bit事件；
+		//   D01-01b: 用peak_valley_config_valid=0重新COMMIT+START，连续驱动
+		//            250笔真实RED事务（覆盖首个PEAK@63/VALLEY@201窗口），确认
+		//            C20/C22/C23逐拍o_local_empty保持1、C23从未进入FINE窗口
+		//            （o_cross_ready被ppg_precision_window_controller.v:277的
+		//            i_peak_valley_config_valid项恒0门死）、zero正式cross/peak/
+		//            valley/return_9bit事件；再恢复peak_valley_config_valid=1并
+		//            重新START，确认同一条曲线立刻恢复产生正式PEAK事件——证明
+		//            这是一个真实、可逆、单点的门控，不是永久断裂通路，也没有
+		//            第二个生产者悄悄绕过它。
+		begin : d01_acceptance_d01_01_scenario
+			integer cnt_poll_wait_d01;
+			integer reg_peak_count_snapshot_d01;
+			integer reg_valley_count_snapshot_d01;
+			integer reg_cross_count_snapshot_d01;
+			integer reg_return_count_snapshot_d01;
+			integer reg_red_response_before_d01b;
+			reg flag_c20_candidate_seen_d01a;
+			reg flag_c22_active_peak_seen_d01a;
+
+			// D01-01a：等待真实候选在途——bg_responder在N01/N08重新START之后
+			// 持续跑，曲线从头重演，会自然再次经过PEAK/VALLEY形成窗口，不需要
+			// 额外构造激励。真实调试发现的一个真实TB竞争：flag_active_peak_valid
+			// 在C22内部刚做出波峰判决那一拍就置位(ppg_peak_valley_window_
+			// detector.v)，但对应的o_peak_valid&&i_peak_ready正式握手要等C20
+			// 的FSM进入ST_WAIT_PEAK_COMMIT才真正完成，二者之间有真实的几拍延迟
+			// ——第一版直接在flag_active_peak_valid刚置位那一拍取快照，快照晚于
+			// 判决但早于握手，STOP之后这笔早已判决、只是外部握手还没完成的PEAK
+			// 正常完成，被本场景误判成"STOP后产生了新正式事件"(真实复现：
+			// peak 4->5)，不是RTL缺陷。修复为判决置位后先等一小段缓冲拍数，
+			// 确认状态仍然真实在途（不是刚判决完就立刻结束）才取快照，缓冲拍数
+			// 远小于一帧real 2MHz周期数，不会错过窗口
+			cnt_poll_wait_d01 = 0;
+			flag_c20_candidate_seen_d01a = 1'b0;
+			flag_c22_active_peak_seen_d01a = 1'b0;
+			while(!flag_c20_candidate_seen_d01a && !flag_c22_active_peak_seen_d01a &&
+				(cnt_poll_wait_d01 < 3000000) && !flag_global_timeout) begin
+				while(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.flag_candidate_active &&
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.flag_active_peak_valid &&
+					(cnt_poll_wait_d01 < 3000000) && !flag_global_timeout) begin
+					@(posedge i_clk);
+					cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+				end
+				repeat(20) @(posedge i_clk); // 让判决那一拍已经在途的正式握手真实完成，再判断是否仍然在途
+				cnt_poll_wait_d01 = cnt_poll_wait_d01 + 20;
+				#1;
+				flag_c20_candidate_seen_d01a = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.flag_candidate_active;
+				flag_c22_active_peak_seen_d01a = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.flag_active_peak_valid;
+			end
+			if(!flag_c20_candidate_seen_d01a && !flag_c22_active_peak_seen_d01a) begin
+				$display("FAIL D01 Acceptance-D01-01a neither C20 candidate_active nor C22 active_peak_valid was ever observed in-flight, scenario is vacuous");
+				cnt_error = cnt_error + 1;
+			end else begin
+				reg_peak_count_snapshot_d01 = reg_peak_count;
+				reg_valley_count_snapshot_d01 = reg_valley_count;
+				reg_cross_count_snapshot_d01 = reg_cross_count;
+				reg_return_count_snapshot_d01 = reg_return_count;
+				task_pulse_stop;
+				cnt_poll_wait_d01 = 0;
+				while((o_stop_ack_event == 1'b0) && (cnt_poll_wait_d01 < 64)) begin
+					@(posedge i_clk);
+					#1;
+					cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+				end
+				if(o_stop_ack_event == 1'b0) begin
+					$display("FAIL D01 Acceptance-D01-01a stop ack timeout");
+					cnt_error = cnt_error + 1;
+				end
+				cnt_poll_wait_d01 = 0;
+				while((o_lifecycle_state != ST_CONFIG) && (cnt_poll_wait_d01 < 200000) && !flag_global_timeout) begin
+					@(posedge i_clk);
+					#1;
+					cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+				end
+				if(o_lifecycle_state != ST_CONFIG) begin
+					$display("FAIL D01 Acceptance-D01-01a drain back to CONFIG timeout after STOP with an in-flight candidate");
+					cnt_error = cnt_error + 1;
+					$finish;
+				end
+				if((reg_peak_count != reg_peak_count_snapshot_d01) || (reg_valley_count != reg_valley_count_snapshot_d01) ||
+					(reg_cross_count != reg_cross_count_snapshot_d01) || (reg_return_count != reg_return_count_snapshot_d01)) begin
+					$display("FAIL D01 Acceptance-D01-01a a new formal PEAK/VALLEY/CROSS/RETURN_9BIT event fired while draining an in-flight candidate at STOP (peak %0d->%0d valley %0d->%0d cross %0d->%0d return %0d->%0d)",
+						reg_peak_count_snapshot_d01, reg_peak_count, reg_valley_count_snapshot_d01, reg_valley_count,
+						reg_cross_count_snapshot_d01, reg_cross_count, reg_return_count_snapshot_d01, reg_return_count);
+					cnt_error = cnt_error + 1;
+				end else if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.flag_candidate_active ||
+					ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.flag_active_peak_valid) begin
+					$display("FAIL D01 Acceptance-D01-01a C20/C22 in-flight candidate context did not clear after STOP drain");
+					cnt_error = cnt_error + 1;
+				end else if(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_dynamic_baseline_cross_detector_Inst.o_local_empty ||
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_local_empty ||
+					!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_local_empty) begin
+					$display("FAIL D01 Acceptance-D01-01a C20/C22/C23 did not all individually settle to o_local_empty=1 after STOP drain");
+					cnt_error = cnt_error + 1;
+				end else begin
+					$display("PASS D01 Acceptance-D01-01a real in-flight state (C20 candidate_active=%b, C22 active_peak_valid=%b) safely drained at STOP with zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events (peak=%0d valley=%0d cross=%0d return=%0d unchanged) and C20/C22/C23 all settled to o_local_empty=1",
+						flag_c20_candidate_seen_d01a, flag_c22_active_peak_seen_d01a,
+						reg_peak_count, reg_valley_count, reg_cross_count, reg_return_count);
+				end
+			end
+
+			// D01-01b：重新COMMIT peak_valley_config_valid=0并START，驱动足量
+			// 真实RED事务（覆盖首个PEAK@63/VALLEY@201窗口），确认三个消费者
+			// 持续o_local_empty=1、C23从未进入FINE、zero新正式事件；随后恢复
+			// peak_valley_config_valid=1并START，确认同一条曲线立刻恢复产生
+			// 正式PEAK事件（可逆、单点、无第二生产者）
+			task_d01_recommit_pv_invalid_and_start;
+			reg_peak_count_snapshot_d01 = reg_peak_count;
+			reg_valley_count_snapshot_d01 = reg_valley_count;
+			reg_cross_count_snapshot_d01 = reg_cross_count;
+			reg_return_count_snapshot_d01 = reg_return_count;
+			flag_d01_pv_invalid_violation_seen = 1'b0;
+			flag_d01_pv_invalid_window_active = 1'b1;
+			reg_red_response_before_d01b = cnt_red_response;
+			cnt_poll_wait_d01 = 0;
+			while(((cnt_red_response - reg_red_response_before_d01b) < 250) && (cnt_poll_wait_d01 < 3000000) && !flag_global_timeout) begin
+				@(posedge i_clk);
+				cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+			end
+			#1;
+			flag_d01_pv_invalid_window_active = 1'b0;
+			if((cnt_red_response - reg_red_response_before_d01b) < 250) begin
+				$display("FAIL D01 Acceptance-D01-01b watchdog fired before 250 real RED transactions were driven under peak_valley_config_valid=0");
+				cnt_error = cnt_error + 1;
+			end else if(flag_d01_pv_invalid_violation_seen) begin
+				$display("FAIL D01 Acceptance-D01-01b background invariant process reported a violation during the peak_valley_config_valid=0 window (see FAIL D01 line above)");
+				cnt_error = cnt_error + 1;
+			end else if((reg_peak_count != reg_peak_count_snapshot_d01) || (reg_valley_count != reg_valley_count_snapshot_d01) ||
+				(reg_cross_count != reg_cross_count_snapshot_d01) || (reg_return_count != reg_return_count_snapshot_d01)) begin
+				$display("FAIL D01 Acceptance-D01-01b a new formal PEAK/VALLEY/CROSS/RETURN_9BIT event fired despite 250 real RED transactions with peak_valley_config_valid=0");
+				cnt_error = cnt_error + 1;
+			end else begin
+				$display("PASS D01 Acceptance-D01-01b 250 real RED transactions driven with peak_valley_config_valid=0 produced zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events, C20/C22/C23 o_local_empty held 1 throughout and C23 never entered FINE window");
+			end
+
+			// 恢复peak_valley_config_valid=1，确认同一条曲线立刻恢复产生真实PEAK。
+			// COMMIT只在CONFIG态被接纳(ppg_system_config_manager.v:457)，此刻DUT
+			// 仍在D01-01b刚驱动完250笔RED事务的RUN态，必须先真实STOP并排空到
+			// CONFIG才能重新COMMIT——遗漏这一步是本场景第一版真实踩到的TB自造
+			// bug（直接调用task_n0x_recommit_dual_and_start在RUN态下COMMIT必然
+			// 被拒绝、级联FAIL N01N08 re-commit并$finish），已修复
+			task_pulse_stop;
+			cnt_poll_wait_d01 = 0;
+			while((o_stop_ack_event == 1'b0) && (cnt_poll_wait_d01 < 64)) begin
+				@(posedge i_clk);
+				#1;
+				cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+			end
+			if(o_stop_ack_event == 1'b0) begin
+				$display("FAIL D01 Acceptance-D01-01b reversibility stop ack timeout");
+				cnt_error = cnt_error + 1;
+			end
+			cnt_poll_wait_d01 = 0;
+			while((o_lifecycle_state != ST_CONFIG) && (cnt_poll_wait_d01 < 200000) && !flag_global_timeout) begin
+				@(posedge i_clk);
+				#1;
+				cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+			end
+			if(o_lifecycle_state != ST_CONFIG) begin
+				$display("FAIL D01 Acceptance-D01-01b reversibility drain back to CONFIG timeout before recommit");
+				cnt_error = cnt_error + 1;
+				$finish;
+			end
+			task_n0x_recommit_dual_and_start;
+			reg_peak_count_snapshot_d01 = reg_peak_count;
+			cnt_poll_wait_d01 = 0;
+			while((reg_peak_count == reg_peak_count_snapshot_d01) && (cnt_poll_wait_d01 < 3000000) && !flag_global_timeout) begin
+				@(posedge i_clk);
+				cnt_poll_wait_d01 = cnt_poll_wait_d01 + 1;
+			end
+			#1;
+			if(reg_peak_count == reg_peak_count_snapshot_d01) begin
+				$display("FAIL D01 Acceptance-D01-01b reversibility: no real PEAK event resumed after restoring peak_valley_config_valid=1");
+				cnt_error = cnt_error + 1;
+			end else begin
+				$display("PASS D01 Acceptance-D01-01b reversibility: real PEAK detection resumed (peak_count=%0d) immediately after restoring peak_valley_config_valid=1, confirming a single reversible gate with no second producer",
+					reg_peak_count);
+			end
+		end
+
+		// STOP，确认干净排空
+		task_pulse_stop;
+		fork
+			begin : longrun_stop_ack_wait
+				integer cnt_stop_wait;
+				cnt_stop_wait = 0;
+				while((o_stop_ack_event == 1'b0) && (cnt_stop_wait < 64)) begin
+					@(posedge i_clk);
+					#1;
+					cnt_stop_wait = cnt_stop_wait + 1;
+				end
+				if(o_stop_ack_event == 1'b0) begin
+					$display("FAIL BASELINE_CROSS stop ack timeout");
+					cnt_error = cnt_error + 1;
+				end
+			end
+		join
+		fork
+			begin : longrun_drain_wait
+				integer cnt_drain_wait;
+				cnt_drain_wait = 0;
+				while((o_lifecycle_state != ST_CONFIG) && (cnt_drain_wait < 200000) && !flag_global_timeout) begin
+					@(posedge i_clk);
+					#1;
+					cnt_drain_wait = cnt_drain_wait + 1;
+				end
+				if(o_lifecycle_state != ST_CONFIG) begin
+					$display("FAIL BASELINE_CROSS drain back to CONFIG timeout");
+					cnt_error = cnt_error + 1;
+				end
+			end
+		join
+		if(o_system_fault_blocking) begin
+			$display("FAIL BASELINE_CROSS unexpected system fault blocking after STOP");
+			cnt_error = cnt_error + 1;
+		end else begin
+			$display("PASS BASELINE_CROSS STOP drained back to CONFIG without fault");
+		end
+
+		// 全程协议错误sticky核查：这些信号从Phase 1的tb_ppg_control_top.v到Stage 3长跑
+		// 一直只是接了线，从未被真正断言过——本轮真实生成器驱动了700笔RED+699笔IR事务，
+		// 是迄今唯一一次在真实连续算法层激励下核对这批sticky的机会。sticky语义是"一旦
+		// 置位保持到诊断清除或复位"，所以在STOP排空之后读一次末值，等价于核实了整个
+		// 测量窗口内的历史，不需要逐拍监视。
+		// 第一次真实跑（700样本）就在这里抓到`o_ssw_owner_deadline_timeout_sticky`
+		// 真实置位过——查证后确认这不是缺陷：PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER
+		// _INTERFACE_CONTRACT.md第597/614节和PPG_400HZ_FRAME_CALIBRATION_SCHEDULER
+		// _INTERFACE_CONTRACT.md第981节都明文把launch_timeout_sticky/
+		// owner_deadline_timeout_sticky（scheduler和SSW两侧）以及SSW的
+		// calibration_timeout_sticky定义成"历史诊断，不单独永久拉高fault_blocking、
+		// 不产生supervisor fault record"——它们和真正的protocol_error_sticky/
+		// completion_mismatch_sticky/transaction_mismatch_sticky不是同一类信号，后者
+		// 才是合同定义的阻断项，必须全程保持0；前者只做观测记录，不计入cnt_error
+		if(o_error_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_error_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_scheduler_completion_mismatch_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_scheduler_completion_mismatch_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_scheduler_protocol_error_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_scheduler_protocol_error_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_ami_integration_protocol_error_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_ami_integration_protocol_error_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_ssw_switch_protocol_error_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_ssw_switch_protocol_error_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_ssw_transaction_mismatch_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_ssw_transaction_mismatch_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_characterization_protocol_error_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_characterization_protocol_error_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else if(o_result_discard_summary_sticky) begin
+			$display("FAIL GROUP12_PROTOCOL_STICKY o_result_discard_summary_sticky asserted during the run");
+			cnt_error = cnt_error + 1;
+		end else begin
+			$display("PASS GROUP12_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across real_red=%0d real_ir=%0d transactions",
+				cnt_red_response, cnt_ir_response);
+		end
+		// 非阻断历史诊断类sticky：只记录观测结果，不计入cnt_error，理由见上方大注释
+		if(o_scheduler_launch_timeout_sticky) begin
+			$display("INFO GROUP12_HISTORICAL_DIAG o_scheduler_launch_timeout_sticky asserted during the run (non-blocking per contract)");
+		end
+		if(o_scheduler_owner_deadline_timeout_sticky) begin
+			$display("INFO GROUP12_HISTORICAL_DIAG o_scheduler_owner_deadline_timeout_sticky asserted during the run (non-blocking per contract)");
+		end
+		if(o_ssw_owner_deadline_timeout_sticky) begin
+			$display("INFO GROUP12_HISTORICAL_DIAG o_ssw_owner_deadline_timeout_sticky asserted during the run (non-blocking per contract)");
+		end
+		if(o_ssw_calibration_timeout_sticky) begin
+			$display("INFO GROUP12_HISTORICAL_DIAG o_ssw_calibration_timeout_sticky asserted during the run (non-blocking per contract)");
+		end
+
+		// 汇总并干净退出
+		if(cnt_error == 0) begin
+			$display("BASELINE_CROSS_TB_PASS real_red=%0d real_ir=%0d real_cal=%0d measurement_result_valid=%0d peak_count=%0d valley_count=%0d cross_count=%0d return_count=%0d",
+				cnt_red_response, cnt_ir_response, cnt_cal_response, cnt_measurement_result_valid,
+				reg_peak_count, reg_valley_count, reg_cross_count, reg_return_count);
+		end else begin
+			$display("BASELINE_CROSS_TB_FAIL error_count=%0d", cnt_error);
+		end
+		$finish;
+	end
+
+endmodule

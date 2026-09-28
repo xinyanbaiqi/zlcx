@@ -1,0 +1,4792 @@
+{
+  "modules_scanned_total": 24,
+  "modules_with_deep_assign_chains_total": 23,
+  "modules_with_deep_assign_chains": [
+    "ppg_400hz_frame_calibration_scheduler",
+    "ppg_adc_async_stage_capture",
+    "ppg_adc_dc_recovery",
+    "ppg_adc_measurement_idac_integration",
+    "ppg_adc_pipeline_overlap_corrector",
+    "ppg_adc_programmable_reconstructor",
+    "ppg_adc_s1_programmable_calibrator",
+    "ppg_adc_s1_redundancy_corrector",
+    "ppg_amb_recheck_scheduler",
+    "ppg_characterization_control_cdc",
+    "ppg_chip_digital_top",
+    "ppg_coarse_detection_fir",
+    "ppg_dynamic_baseline_cross_detector",
+    "ppg_idac_code_controller",
+    "ppg_normal_transaction_fork",
+    "ppg_p2s_packer",
+    "ppg_peak_valley_window_detector",
+    "ppg_precision_window_controller",
+    "ppg_precision_window_integration",
+    "ppg_sar9_sar15_safe_selection_wrapper",
+    "ppg_spi_register_file",
+    "ppg_system_config_manager",
+    "ppg_system_fault_abort_supervisor"
+  ],
+  "deep_chain_registers_total": 181,
+  "chain_info_by_module": {
+    "ppg_chip_digital_top": {
+      "reg_dbg_out_select_stable": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_dbg_out_select_stable"
+          ],
+          "1": [
+            "dec_dbg_out_mux"
+          ],
+          "2": [
+            "DBG_OUT"
+          ]
+        }
+      }
+    },
+    "ppg_spi_register_file": {
+      "state_current": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "dec_read_load_addr",
+            "flag_load_read_byte",
+            "flag_read_start",
+            "flag_write_commit"
+          ],
+          "2": [
+            "diag_byte_offset",
+            "flag_cmd_reg_hit",
+            "flag_dbg_select_write"
+          ],
+          "3": [
+            "flag_trigger_abort",
+            "flag_trigger_char_update",
+            "flag_trigger_commit",
+            "flag_trigger_diag_clear",
+            "flag_trigger_start",
+            "flag_trigger_stop"
+          ],
+          "4": [
+            "o_source_config_update_event"
+          ]
+        }
+      },
+      "reg_byte_addr": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_byte_addr"
+          ],
+          "1": [
+            "dec_read_load_addr",
+            "flag_cmd_reg_hit",
+            "flag_dbg_select_write"
+          ],
+          "2": [
+            "diag_byte_offset",
+            "flag_trigger_abort",
+            "flag_trigger_char_update",
+            "flag_trigger_commit",
+            "flag_trigger_diag_clear",
+            "flag_trigger_start",
+            "flag_trigger_stop"
+          ],
+          "3": [
+            "o_source_config_update_event"
+          ]
+        }
+      },
+      "flag_cmd_is_read": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_cmd_is_read"
+          ],
+          "1": [
+            "flag_load_read_byte",
+            "flag_read_start",
+            "flag_write_commit"
+          ],
+          "2": [
+            "flag_cmd_reg_hit",
+            "flag_dbg_select_write"
+          ],
+          "3": [
+            "flag_trigger_abort",
+            "flag_trigger_char_update",
+            "flag_trigger_commit",
+            "flag_trigger_diag_clear",
+            "flag_trigger_start",
+            "flag_trigger_stop"
+          ],
+          "4": [
+            "o_source_config_update_event"
+          ]
+        }
+      },
+      "cnt_bit_in_byte": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_bit_in_byte"
+          ],
+          "1": [
+            "flag_byte_boundary"
+          ],
+          "2": [
+            "flag_load_read_byte",
+            "flag_read_start",
+            "flag_write_commit"
+          ],
+          "3": [
+            "flag_cmd_reg_hit",
+            "flag_dbg_select_write"
+          ],
+          "4": [
+            "flag_trigger_abort",
+            "flag_trigger_char_update",
+            "flag_trigger_commit",
+            "flag_trigger_diag_clear",
+            "flag_trigger_start",
+            "flag_trigger_stop"
+          ],
+          "5": [
+            "o_source_config_update_event"
+          ]
+        }
+      },
+      "reg_shift_in": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_shift_in"
+          ],
+          "1": [
+            "shift_in_next"
+          ],
+          "2": [
+            "flag_trigger_abort",
+            "flag_trigger_char_update",
+            "flag_trigger_commit",
+            "flag_trigger_diag_clear",
+            "flag_trigger_start",
+            "flag_trigger_stop"
+          ],
+          "3": [
+            "o_source_config_update_event"
+          ]
+        }
+      },
+      "reg_mr_latch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_mr_latch"
+          ],
+          "1": [
+            "byte_0114",
+            "byte_0115",
+            "byte_0116",
+            "byte_0117",
+            "byte_0118",
+            "byte_0119",
+            "byte_011A"
+          ],
+          "2": [
+            "diag_snapshot_next"
+          ]
+        }
+      },
+      "reg_dd_latch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_dd_latch"
+          ],
+          "1": [
+            "byte_011B",
+            "byte_011C",
+            "byte_011D",
+            "byte_011E",
+            "byte_011F",
+            "byte_0120",
+            "byte_0121",
+            "byte_0122",
+            "byte_0123",
+            "byte_0124",
+            "byte_0125"
+          ],
+          "2": [
+            "diag_snapshot_next"
+          ]
+        }
+      }
+    },
+    "ppg_p2s_packer": {
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "flag_load",
+            "flag_pop",
+            "o_p2s_frame"
+          ],
+          "2": [
+            "cnt_after_pop",
+            "front_next"
+          ],
+          "3": [
+            "tail_next"
+          ]
+        }
+      },
+      "cnt_tx_bit": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_tx_bit"
+          ],
+          "1": [
+            "flag_pop",
+            "o_p2s_data"
+          ],
+          "2": [
+            "cnt_after_pop",
+            "front_next"
+          ],
+          "3": [
+            "tail_next"
+          ]
+        }
+      },
+      "cnt_queue_depth": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_queue_depth"
+          ],
+          "1": [
+            "cnt_after_pop",
+            "flag_load",
+            "flag_queue_not_full"
+          ],
+          "2": [
+            "flag_push",
+            "front_next",
+            "o_result_ready",
+            "tail_next"
+          ]
+        }
+      }
+    },
+    "ppg_characterization_control_cdc": {
+      "static_characterization_enable_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "static_characterization_enable_o"
+          ],
+          "1": [
+            "flag_destination_static_enable_match",
+            "o_static_characterization_enable"
+          ],
+          "2": [
+            "flag_destination_control_accept"
+          ],
+          "3": [
+            "flag_destination_control_reject"
+          ]
+        }
+      },
+      "control_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "control_valid_o"
+          ],
+          "1": [
+            "flag_destination_control_accept",
+            "o_control_valid"
+          ],
+          "2": [
+            "flag_destination_control_reject"
+          ]
+        }
+      },
+      "reg_source_update_armed": {
+        "write_domain": "SPI_SCLK",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_source_update_armed"
+          ],
+          "1": [
+            "o_source_update_ready"
+          ],
+          "2": [
+            "flag_source_fire"
+          ]
+        }
+      }
+    },
+    "ppg_400hz_frame_calibration_scheduler": {
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "calibration_local_tick_o",
+            "calibration_sample_ready_o",
+            "calibration_subframe_index_o",
+            "current_frame_id_o",
+            "dec_frame_mode",
+            "dec_frame_optical_mode",
+            "flag_cal_context_due",
+            "flag_cal_owner_deadline",
+            "flag_cal_wave_dc_is_ir",
+            "flag_calibration_boundary_o",
+            "flag_calibration_rollover",
+            "flag_candidate_calibration",
+            "flag_candidate_ir",
+            "flag_candidate_red",
+            "flag_completion_match",
+            "flag_completion_success",
+            "flag_frame_start_eligible",
+            "flag_ir_context_due",
+            "flag_ir_owner_deadline",
+            "flag_lifecycle_active",
+            "flag_red_context_due",
+            "flag_red_owner_deadline",
+            "macro_frame_safe_boundary_o",
+            "macro_tick_o",
+            "o_calibration_frame_active",
+            "o_calibration_frame_complete_event",
+            "o_completion_mismatch_sticky",
+            "o_launch_timeout_sticky",
+            "o_macro_frame_start_event",
+            "o_next_sample_index",
+            "o_normal_frame_active",
+            "o_normal_frame_complete_event",
+            "o_owner_deadline_timeout_sticky",
+            "o_protocol_error_sticky",
+            "o_scheduler_fault_color_ir",
+            "o_scheduler_fault_frame_id",
+            "o_scheduler_fault_frame_type",
+            "o_scheduler_fault_identity_valid",
+            "o_scheduler_fault_precision_mode",
+            "o_scheduler_fault_run_generation",
+            "o_scheduler_fault_sample_index",
+            "o_scheduler_fault_valid",
+            "o_scheduler_idle",
+            "o_transaction_inflight",
+            "scheduler_local_fault_blocking_o",
+            "startup_idac_safe_boundary_o",
+            "transaction_amb_code_o",
+            "transaction_amb_epoch_o",
+            "transaction_color_ir_o",
+            "transaction_dc_code_o",
+            "transaction_dc_epoch_o",
+            "transaction_frame_type_o",
+            "transaction_precision_mode_o",
+            "transaction_sample_index_o",
+            "waveform_amb_code_epoch_o",
+            "waveform_amb_code_snapshot_o",
+            "waveform_color_ir_o",
+            "waveform_dc_code_epoch_o",
+            "waveform_dc_code_snapshot_o",
+            "waveform_frame_type_o",
+            "waveform_input_source_o",
+            "waveform_leddac_code_snapshot_o",
+            "waveform_optical_mode_o",
+            "waveform_precision_mode_o"
+          ],
+          "2": [
+            "flag_calibration_request_fire",
+            "flag_ir_required",
+            "flag_red_required",
+            "flag_transaction_candidate",
+            "flag_waveform_is_calibration",
+            "flag_waveform_is_ir",
+            "idac_code_safe_boundary_o",
+            "o_adc_owner_amb_code_epoch",
+            "o_adc_owner_amb_code_snapshot",
+            "o_adc_owner_color_ir",
+            "o_adc_owner_dc_code_epoch",
+            "o_adc_owner_dc_code_snapshot",
+            "o_adc_owner_frame_type",
+            "o_adc_owner_precision_mode",
+            "o_adc_owner_sample_index",
+            "o_calibration_local_tick",
+            "o_calibration_sample_ready",
+            "o_calibration_subframe_index",
+            "o_current_frame_id",
+            "o_macro_frame_safe_boundary",
+            "o_macro_tick",
+            "o_safe_frame_id",
+            "o_scheduler_fault_active",
+            "o_scheduler_local_fault_blocking",
+            "o_startup_idac_safe_boundary",
+            "o_transaction_amb_code_epoch",
+            "o_transaction_amb_code_snapshot",
+            "o_transaction_color_ir",
+            "o_transaction_dc_code_epoch",
+            "o_transaction_dc_code_snapshot",
+            "o_transaction_frame_type",
+            "o_transaction_precision_mode",
+            "o_transaction_sample_index",
+            "o_waveform_amb_code_epoch",
+            "o_waveform_amb_code_snapshot",
+            "o_waveform_color_ir",
+            "o_waveform_dc_code_epoch",
+            "o_waveform_dc_code_snapshot",
+            "o_waveform_frame_type",
+            "o_waveform_input_source",
+            "o_waveform_leddac_code_snapshot",
+            "o_waveform_optical_mode",
+            "o_waveform_precision_mode",
+            "scheduler_fault_cause_o",
+            "transaction_frame_id_o",
+            "transaction_start_valid_o",
+            "waveform_context_valid_o",
+            "waveform_frame_id_o"
+          ],
+          "3": [
+            "adc_owner_commit_event_o",
+            "flag_waveform_fire",
+            "o_adc_owner_frame_id",
+            "o_idac_code_safe_boundary",
+            "o_scheduler_fault_cause",
+            "o_transaction_frame_id",
+            "o_transaction_start_valid",
+            "o_waveform_context_valid",
+            "o_waveform_frame_id"
+          ],
+          "4": [
+            "o_adc_owner_commit_event"
+          ]
+        }
+      }
+    },
+    "ppg_sar9_sar15_safe_selection_wrapper": {
+      "adc_owner_inflight_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "adc_owner_inflight_o"
+          ],
+          "1": [
+            "flag_cal_has_owner",
+            "flag_cal_owner_candidate",
+            "flag_ir_has_owner",
+            "flag_ir_owner_candidate",
+            "flag_owner_release",
+            "flag_red_has_owner",
+            "flag_red_owner_candidate",
+            "o_adc_owner_inflight",
+            "o_wrapper_idle"
+          ],
+          "2": [
+            "flag_cal_timeout",
+            "flag_done_mismatch",
+            "flag_ir_timeout",
+            "flag_owner_identity_match",
+            "flag_owner_q3_closed_combo",
+            "flag_red_timeout",
+            "o_adc_owner_ready"
+          ],
+          "3": [
+            "flag_owner_commit_fire",
+            "flag_ssw_fault_rising",
+            "o_owner_q3_window_closed"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ]
+        }
+      },
+      "switch_protocol_error_sticky_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 7,
+        "frontiers_by_hop": {
+          "0": [
+            "switch_protocol_error_sticky_o"
+          ],
+          "1": [
+            "flag_blocking_fault",
+            "o_switch_protocol_error_sticky"
+          ],
+          "2": [
+            "flag_calibration_mode_legal",
+            "flag_normal_mode_legal",
+            "flag_ssw_fault_rising",
+            "o_ssw_fault_active",
+            "o_wrapper_fault_blocking",
+            "ssw_fault_cause_o"
+          ],
+          "3": [
+            "flag_cal_context_point",
+            "flag_ir_context_point",
+            "flag_red_context_point",
+            "o_ssw_fault_cause"
+          ],
+          "4": [
+            "flag_context_is_cal_raw",
+            "flag_context_is_ir_raw",
+            "flag_context_is_red_raw"
+          ],
+          "5": [
+            "flag_context_is_cal",
+            "flag_context_is_ir",
+            "flag_context_is_red",
+            "flag_waveform_context_ready_raw"
+          ],
+          "6": [
+            "flag_switch_protocol_error_condition",
+            "o_waveform_context_ready"
+          ],
+          "7": [
+            "flag_context_fire"
+          ]
+        }
+      },
+      "transaction_mismatch_sticky_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 7,
+        "frontiers_by_hop": {
+          "0": [
+            "transaction_mismatch_sticky_o"
+          ],
+          "1": [
+            "flag_blocking_fault",
+            "o_transaction_mismatch_sticky"
+          ],
+          "2": [
+            "flag_calibration_mode_legal",
+            "flag_normal_mode_legal",
+            "flag_ssw_fault_rising",
+            "o_ssw_fault_active",
+            "o_wrapper_fault_blocking",
+            "ssw_fault_cause_o"
+          ],
+          "3": [
+            "flag_cal_context_point",
+            "flag_ir_context_point",
+            "flag_red_context_point",
+            "o_ssw_fault_cause"
+          ],
+          "4": [
+            "flag_context_is_cal_raw",
+            "flag_context_is_ir_raw",
+            "flag_context_is_red_raw"
+          ],
+          "5": [
+            "flag_context_is_cal",
+            "flag_context_is_ir",
+            "flag_context_is_red",
+            "flag_waveform_context_ready_raw"
+          ],
+          "6": [
+            "flag_switch_protocol_error_condition",
+            "o_waveform_context_ready"
+          ],
+          "7": [
+            "flag_context_fire"
+          ]
+        }
+      },
+      "reg_run_active": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_run_active"
+          ],
+          "1": [
+            "flag_calibration_mode_legal",
+            "flag_characterization_pd_red_active",
+            "flag_fixed_current_active",
+            "flag_normal_mode_legal",
+            "flag_static_active",
+            "flag_static_bias_input_source_invalid"
+          ],
+          "2": [
+            "flag_cal_context_point",
+            "flag_cal_owner_candidate",
+            "flag_ir_context_point",
+            "flag_ir_owner_candidate",
+            "flag_red_context_point",
+            "flag_red_owner_candidate",
+            "flag_switch_protocol_error_condition",
+            "o_precision_active"
+          ],
+          "3": [
+            "flag_context_is_cal_raw",
+            "flag_context_is_ir_raw",
+            "flag_context_is_red_raw",
+            "flag_owner_identity_match",
+            "flag_ssw_fault_rising",
+            "o_adc_owner_ready"
+          ],
+          "4": [
+            "flag_context_is_cal",
+            "flag_context_is_ir",
+            "flag_context_is_red",
+            "flag_owner_commit_fire",
+            "flag_waveform_context_ready_raw"
+          ],
+          "5": [
+            "flag_owner_commit_error",
+            "o_waveform_context_ready"
+          ],
+          "6": [
+            "flag_context_fire"
+          ]
+        }
+      },
+      "flag_stop_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stop_pending"
+          ],
+          "1": [
+            "flag_cal_owner_candidate",
+            "flag_calibration_mode_legal",
+            "flag_ir_owner_candidate",
+            "flag_normal_mode_legal",
+            "flag_red_owner_candidate",
+            "o_wrapper_fault_blocking"
+          ],
+          "2": [
+            "flag_cal_context_point",
+            "flag_ir_context_point",
+            "flag_owner_identity_match",
+            "flag_red_context_point",
+            "o_adc_owner_ready"
+          ],
+          "3": [
+            "flag_context_is_cal_raw",
+            "flag_context_is_ir_raw",
+            "flag_context_is_red_raw",
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_context_is_cal",
+            "flag_context_is_ir",
+            "flag_context_is_red",
+            "flag_owner_commit_error",
+            "flag_waveform_context_ready_raw"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition",
+            "o_waveform_context_ready"
+          ],
+          "6": [
+            "flag_context_fire",
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_amb_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_amb_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_amb_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_amb_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_color_ir": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_color_ir"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_dc_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_dc_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_dc_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_dc_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_frame_id"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_frame_type": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_frame_type"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "flag_cal_context_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_cal_context_valid"
+          ],
+          "1": [
+            "calibration_wave_active_o",
+            "flag_cal_owner_window",
+            "flag_cal_timeout",
+            "flag_context_is_cal_raw",
+            "o_sar_timing_idle"
+          ],
+          "2": [
+            "flag_cal_owner_candidate",
+            "flag_context_is_cal",
+            "flag_waveform_context_ready_raw",
+            "o_analog_safe",
+            "o_calibration_wave_active",
+            "o_precision_active",
+            "o_wrapper_fault_blocking",
+            "o_wrapper_idle"
+          ],
+          "3": [
+            "flag_owner_identity_match",
+            "flag_switch_protocol_error_condition",
+            "o_adc_owner_ready",
+            "o_waveform_context_ready"
+          ],
+          "4": [
+            "flag_context_fire",
+            "flag_owner_commit_fire",
+            "flag_ssw_fault_rising"
+          ],
+          "5": [
+            "flag_owner_commit_error"
+          ]
+        }
+      },
+      "reg_ir_amb_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_amb_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_amb_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_amb_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_dc_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_dc_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_dc_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_dc_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_frame_id"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_frame_type": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_frame_type"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_precision": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_precision"
+          ],
+          "1": [
+            "flag_ir_q3_end_passed",
+            "flag_ir_wave_active",
+            "flag_ir_wave_last",
+            "flag_owner_identity_match_ir",
+            "o_precision_active"
+          ],
+          "2": [
+            "flag_owner_identity_match",
+            "flag_owner_q3_closed_combo",
+            "o_analog_safe",
+            "o_wrapper_fault_blocking"
+          ],
+          "3": [
+            "flag_owner_commit_fire",
+            "o_owner_q3_window_closed"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "flag_ir_context_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ir_context_valid"
+          ],
+          "1": [
+            "flag_cal_owner_candidate",
+            "flag_context_is_ir_raw",
+            "flag_ir_owner_window",
+            "flag_ir_timeout",
+            "flag_ir_wave_active",
+            "o_sar_timing_idle"
+          ],
+          "2": [
+            "flag_context_is_ir",
+            "flag_ir_owner_candidate",
+            "flag_owner_identity_match",
+            "flag_waveform_context_ready_raw",
+            "o_adc_owner_ready",
+            "o_analog_safe",
+            "o_precision_active",
+            "o_wrapper_fault_blocking",
+            "o_wrapper_idle"
+          ],
+          "3": [
+            "flag_owner_commit_fire",
+            "flag_switch_protocol_error_condition",
+            "o_waveform_context_ready"
+          ],
+          "4": [
+            "flag_context_fire",
+            "flag_owner_commit_error",
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_amb_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_amb_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_amb_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_amb_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_dc_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_dc_code"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_dc_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_dc_epoch"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_frame_id"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_generation": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_generation"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_ir_generation": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_generation"
+          ],
+          "1": [
+            "flag_owner_identity_match_ir"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_cal_generation": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_cal_generation"
+          ],
+          "1": [
+            "flag_owner_identity_match_cal"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_frame_type": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_frame_type"
+          ],
+          "1": [
+            "flag_owner_identity_match_red"
+          ],
+          "2": [
+            "flag_owner_identity_match"
+          ],
+          "3": [
+            "flag_owner_commit_fire"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_red_precision": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_precision"
+          ],
+          "1": [
+            "flag_owner_identity_match_red",
+            "flag_red_q3_end_passed",
+            "flag_red_wave_active",
+            "flag_red_wave_last",
+            "o_precision_active"
+          ],
+          "2": [
+            "flag_owner_identity_match",
+            "flag_owner_q3_closed_combo",
+            "o_analog_safe",
+            "o_wrapper_fault_blocking"
+          ],
+          "3": [
+            "flag_owner_commit_fire",
+            "o_owner_q3_window_closed"
+          ],
+          "4": [
+            "flag_owner_commit_error"
+          ],
+          "5": [
+            "flag_switch_protocol_error_condition"
+          ],
+          "6": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "flag_red_context_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_red_context_valid"
+          ],
+          "1": [
+            "flag_cal_owner_candidate",
+            "flag_context_is_red_raw",
+            "flag_red_owner_window",
+            "flag_red_timeout",
+            "flag_red_wave_active",
+            "o_sar_timing_idle"
+          ],
+          "2": [
+            "flag_context_is_red",
+            "flag_ir_owner_candidate",
+            "flag_owner_identity_match",
+            "flag_red_owner_candidate",
+            "flag_waveform_context_ready_raw",
+            "o_adc_owner_ready",
+            "o_analog_safe",
+            "o_precision_active",
+            "o_wrapper_fault_blocking",
+            "o_wrapper_idle"
+          ],
+          "3": [
+            "flag_owner_commit_fire",
+            "flag_switch_protocol_error_condition",
+            "o_waveform_context_ready"
+          ],
+          "4": [
+            "flag_context_fire",
+            "flag_owner_commit_error",
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_owner_abort_seen": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_owner_abort_seen"
+          ],
+          "1": [
+            "flag_cal_has_owner",
+            "flag_ir_has_owner",
+            "flag_red_has_owner"
+          ],
+          "2": [
+            "flag_cal_timeout",
+            "flag_ir_timeout",
+            "flag_owner_q3_closed_combo",
+            "flag_red_timeout"
+          ],
+          "3": [
+            "o_owner_q3_window_closed"
+          ]
+        }
+      },
+      "reg_owner_sample_index": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_owner_sample_index"
+          ],
+          "1": [
+            "flag_owner_release"
+          ],
+          "2": [
+            "flag_done_mismatch"
+          ],
+          "3": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_owner_generation": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_owner_generation"
+          ],
+          "1": [
+            "flag_owner_release"
+          ],
+          "2": [
+            "flag_done_mismatch"
+          ],
+          "3": [
+            "flag_ssw_fault_rising"
+          ]
+        }
+      },
+      "reg_owner_slot": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_owner_slot"
+          ],
+          "1": [
+            "flag_cal_has_owner",
+            "flag_ir_has_owner",
+            "flag_red_has_owner"
+          ],
+          "2": [
+            "flag_cal_timeout",
+            "flag_ir_timeout",
+            "flag_owner_q3_closed_combo",
+            "flag_red_timeout"
+          ],
+          "3": [
+            "o_owner_q3_window_closed"
+          ]
+        }
+      }
+    },
+    "ppg_adc_measurement_idac_integration": {
+      "result_sample_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "result_sample_valid_o"
+          ],
+          "1": [
+            "flag_detection_discard_sample_valid",
+            "o_result_sample_valid"
+          ],
+          "2": [
+            "o_detection_discard_sample_valid"
+          ]
+        }
+      },
+      "calibration_sample_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "calibration_sample_valid_o"
+          ],
+          "1": [
+            "calibration_request_fire_o",
+            "flag_precision_calibration_ready",
+            "o_calibration_sample_valid",
+            "o_datapath_empty"
+          ],
+          "2": [
+            "o_calibration_request_fire"
+          ]
+        }
+      },
+      "flag_system_fault_discard_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_system_fault_discard_pending"
+          ],
+          "1": [
+            "flag_ami_terminal_action",
+            "flag_measurement_result_discard_reason",
+            "flag_result_abort_discard",
+            "flag_terminal_discard_reason"
+          ],
+          "2": [
+            "flag_adc_completion_success",
+            "flag_amb_sample_accepted",
+            "flag_calibration_result_match",
+            "flag_calibration_result_mismatch",
+            "flag_dcs_sample_accepted",
+            "flag_detection_discard_trigger",
+            "flag_detection_transfer",
+            "flag_late_normal_result",
+            "flag_measurement_result_discard_fire",
+            "flag_measurement_transfer",
+            "flag_result_fork_all_released",
+            "o_detection_discard_reason",
+            "o_measurement_result_valid"
+          ],
+          "3": [
+            "flag_dc_result_ready",
+            "o_detection_discard_event"
+          ],
+          "4": [
+            "flag_dc_result_transfer",
+            "o_test_invalid_sample_ready"
+          ],
+          "5": [
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      },
+      "flag_ami_fault_pending_01": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ami_fault_pending_01"
+          ],
+          "1": [
+            "flag_ami_fault_dispatch_01",
+            "flag_ami_fault_dispatch_02",
+            "flag_ami_fault_dispatch_03",
+            "flag_ami_fault_dispatch_04",
+            "flag_ami_fault_dispatch_05"
+          ],
+          "2": [
+            "o_ami_fault_cause",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_run_generation",
+            "o_ami_fault_sample_index",
+            "o_ami_fault_valid"
+          ]
+        }
+      },
+      "flag_ami_fault_pending_02": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ami_fault_pending_02"
+          ],
+          "1": [
+            "flag_ami_fault_dispatch_02",
+            "flag_ami_fault_dispatch_03",
+            "flag_ami_fault_dispatch_04",
+            "flag_ami_fault_dispatch_05"
+          ],
+          "2": [
+            "o_ami_fault_cause",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_run_generation",
+            "o_ami_fault_sample_index",
+            "o_ami_fault_valid"
+          ]
+        }
+      },
+      "flag_ami_fault_pending_03": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ami_fault_pending_03"
+          ],
+          "1": [
+            "flag_ami_fault_dispatch_03",
+            "flag_ami_fault_dispatch_04",
+            "flag_ami_fault_dispatch_05"
+          ],
+          "2": [
+            "o_ami_fault_cause",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_run_generation",
+            "o_ami_fault_sample_index",
+            "o_ami_fault_valid"
+          ]
+        }
+      },
+      "flag_ami_fault_pending_04": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ami_fault_pending_04"
+          ],
+          "1": [
+            "flag_ami_fault_dispatch_04",
+            "flag_ami_fault_dispatch_05"
+          ],
+          "2": [
+            "o_ami_fault_cause",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_run_generation",
+            "o_ami_fault_sample_index",
+            "o_ami_fault_valid"
+          ]
+        }
+      },
+      "flag_ami_fault_pending_05": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_ami_fault_pending_05"
+          ],
+          "1": [
+            "flag_ami_fault_dispatch_05"
+          ],
+          "2": [
+            "o_ami_fault_cause",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_run_generation",
+            "o_ami_fault_sample_index",
+            "o_ami_fault_valid"
+          ]
+        }
+      },
+      "flag_detection_discard_episode_active": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_detection_discard_episode_active"
+          ],
+          "1": [
+            "flag_detection_discard_trigger"
+          ],
+          "2": [
+            "o_detection_discard_event"
+          ]
+        }
+      },
+      "reg_adc_inflight_sample_index": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_sample_index"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match",
+            "flag_datapath_discard_sample_index",
+            "o_ami_fault_sample_index",
+            "o_test_identity_inject_ready"
+          ],
+          "2": [
+            "flag_adc_completion_success",
+            "flag_test_identity_inject_fire"
+          ],
+          "3": [
+            "dec_completion_sample_index",
+            "flag_adc_completion_normal_emit"
+          ],
+          "4": [
+            "flag_adc_completion_emit"
+          ]
+        }
+      },
+      "reg_adc_inflight_precision_mode": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_precision_mode"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match",
+            "flag_datapath_discard_precision",
+            "o_ami_fault_precision"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_frame_id"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match",
+            "flag_datapath_discard_frame_id",
+            "o_ami_fault_frame_id"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_color_ir": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_color_ir"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match",
+            "flag_datapath_discard_color_ir",
+            "o_ami_fault_color_ir"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_frame_type": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_frame_type"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match",
+            "flag_datapath_discard_frame_type",
+            "o_ami_fault_frame_type"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_amb_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_amb_code"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_dc_code": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_dc_code"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_amb_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_amb_epoch"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "reg_adc_inflight_dc_epoch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adc_inflight_dc_epoch"
+          ],
+          "1": [
+            "flag_adc_completion_owner_match"
+          ],
+          "2": [
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "flag_test_identity_hold": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_test_identity_hold"
+          ],
+          "1": [
+            "flag_adc_completion_abort_release",
+            "flag_adc_completion_normal_emit",
+            "o_ami_fault_active",
+            "o_test_identity_inject_ready",
+            "o_test_invalid_sample_ready"
+          ],
+          "2": [
+            "flag_adc_completion_emit",
+            "flag_adc_completion_success",
+            "flag_test_identity_inject_fire",
+            "flag_test_invalid_sample_fire"
+          ],
+          "3": [
+            "dec_completion_sample_index"
+          ],
+          "4": [
+            "flag_adc_completion_owner_match"
+          ]
+        }
+      },
+      "flag_adc_completion_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_adc_completion_pending"
+          ],
+          "1": [
+            "flag_adc_completion_abort_release",
+            "flag_adc_completion_normal_emit",
+            "o_test_identity_inject_ready"
+          ],
+          "2": [
+            "flag_adc_completion_emit",
+            "flag_adc_completion_success",
+            "flag_test_identity_inject_fire"
+          ],
+          "3": [
+            "dec_completion_sample_index"
+          ],
+          "4": [
+            "flag_adc_completion_owner_match"
+          ]
+        }
+      },
+      "flag_adc_transaction_inflight": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_adc_transaction_inflight"
+          ],
+          "1": [
+            "flag_adc_capture_without_owner",
+            "flag_datapath_discard_color_ir",
+            "flag_datapath_discard_frame_id",
+            "flag_datapath_discard_frame_type",
+            "flag_datapath_discard_identity_valid",
+            "flag_datapath_discard_precision",
+            "flag_datapath_discard_sample_index",
+            "o_adc_chain_idle",
+            "o_ami_fault_color_ir",
+            "o_ami_fault_frame_id",
+            "o_ami_fault_frame_type",
+            "o_ami_fault_identity_valid",
+            "o_ami_fault_precision",
+            "o_ami_fault_sample_index",
+            "o_test_identity_inject_ready",
+            "transaction_start_ready_o"
+          ],
+          "2": [
+            "flag_precision_takeover_safe",
+            "flag_test_identity_inject_fire",
+            "o_datapath_empty",
+            "o_transaction_start_ready"
+          ],
+          "3": [
+            "dec_completion_sample_index",
+            "flag_adc_completion_normal_emit",
+            "o_transaction_start_fire"
+          ],
+          "4": [
+            "flag_adc_completion_emit",
+            "flag_adc_completion_owner_match",
+            "flag_adc_completion_success"
+          ]
+        }
+      },
+      "flag_integration_blocking": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_integration_blocking"
+          ],
+          "1": [
+            "flag_measurement_result_discard_reason",
+            "flag_result_abort_discard",
+            "o_normal_measurement_eligible",
+            "o_wrapper_fault_blocking"
+          ],
+          "2": [
+            "flag_adc_completion_success",
+            "flag_amb_sample_accepted",
+            "flag_calibration_result_match",
+            "flag_calibration_result_mismatch",
+            "flag_dcs_sample_accepted",
+            "flag_detection_transfer",
+            "flag_late_normal_result",
+            "flag_measurement_result_discard_fire",
+            "flag_measurement_transfer",
+            "flag_normal_measurement_active_qualified",
+            "flag_result_fork_all_released",
+            "flag_start_blocked",
+            "o_measurement_result_valid",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "flag_dc_result_ready",
+            "flag_precision_calibration_ready",
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "flag_dc_result_transfer",
+            "o_test_invalid_sample_ready",
+            "o_transaction_start_fire"
+          ],
+          "5": [
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      },
+      "flag_detection_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_detection_pending"
+          ],
+          "1": [
+            "flag_dc_result_ready",
+            "flag_detection_discard_amb_code_epoch",
+            "flag_detection_discard_coef_epoch",
+            "flag_detection_discard_color_ir",
+            "flag_detection_discard_config_epoch",
+            "flag_detection_discard_dc_code_epoch",
+            "flag_detection_discard_dc_recovery_epoch",
+            "flag_detection_discard_frame_id",
+            "flag_detection_discard_frame_type",
+            "flag_detection_discard_identity_valid",
+            "flag_detection_discard_precision",
+            "flag_detection_discard_sample_index",
+            "flag_detection_discard_sample_valid",
+            "flag_detection_transfer",
+            "flag_result_fork_all_released",
+            "o_measurement_output_idle"
+          ],
+          "2": [
+            "flag_dc_result_transfer",
+            "flag_precision_takeover_safe",
+            "o_datapath_empty",
+            "o_detection_discard_amb_code_epoch",
+            "o_detection_discard_coef_epoch",
+            "o_detection_discard_color_ir",
+            "o_detection_discard_config_epoch",
+            "o_detection_discard_dc_code_epoch",
+            "o_detection_discard_dc_recovery_epoch",
+            "o_detection_discard_frame_id",
+            "o_detection_discard_frame_type",
+            "o_detection_discard_identity_valid",
+            "o_detection_discard_precision",
+            "o_detection_discard_sample_index",
+            "o_detection_discard_sample_valid",
+            "o_test_invalid_sample_ready"
+          ],
+          "3": [
+            "flag_late_normal_result",
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      },
+      "flag_measurement_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_measurement_pending"
+          ],
+          "1": [
+            "flag_dc_result_ready",
+            "flag_measurement_result_discard_fire",
+            "flag_measurement_transfer",
+            "flag_result_fork_all_released",
+            "o_measurement_output_idle",
+            "o_measurement_result_valid"
+          ],
+          "2": [
+            "flag_dc_result_transfer",
+            "flag_precision_takeover_safe",
+            "o_datapath_empty",
+            "o_test_invalid_sample_ready"
+          ],
+          "3": [
+            "flag_late_normal_result",
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      },
+      "flag_abort_draining": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_abort_draining"
+          ],
+          "1": [
+            "flag_measurement_result_discard_reason",
+            "flag_result_abort_discard",
+            "flag_start_blocked"
+          ],
+          "2": [
+            "flag_adc_completion_success",
+            "flag_amb_sample_accepted",
+            "flag_calibration_result_match",
+            "flag_calibration_result_mismatch",
+            "flag_dcs_sample_accepted",
+            "flag_detection_transfer",
+            "flag_late_normal_result",
+            "flag_measurement_result_discard_fire",
+            "flag_measurement_transfer",
+            "flag_precision_calibration_ready",
+            "flag_result_fork_all_released",
+            "o_measurement_result_valid",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "flag_dc_result_ready",
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "flag_dc_result_transfer",
+            "o_test_invalid_sample_ready",
+            "o_transaction_start_fire"
+          ],
+          "5": [
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      },
+      "flag_calibration_request_inflight": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_calibration_request_inflight"
+          ],
+          "1": [
+            "flag_calibration_result_match",
+            "flag_calibration_start_match",
+            "flag_precision_calibration_ready",
+            "o_datapath_empty"
+          ],
+          "2": [
+            "flag_calibration_result_mismatch",
+            "flag_start_context_mismatch",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "o_transaction_start_fire"
+          ]
+        }
+      },
+      "reg_inflight_color_ir": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_inflight_color_ir"
+          ],
+          "1": [
+            "flag_calibration_result_consumed",
+            "flag_calibration_result_match",
+            "flag_calibration_start_match"
+          ],
+          "2": [
+            "flag_calibration_result_mismatch",
+            "flag_start_context_mismatch",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "o_transaction_start_fire"
+          ]
+        }
+      },
+      "reg_inflight_frame_type": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_inflight_frame_type"
+          ],
+          "1": [
+            "flag_calibration_result_consumed",
+            "flag_calibration_result_match",
+            "flag_calibration_start_match"
+          ],
+          "2": [
+            "flag_calibration_result_mismatch",
+            "flag_start_context_mismatch",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "o_transaction_start_fire"
+          ]
+        }
+      },
+      "flag_stop_result_draining": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stop_result_draining"
+          ],
+          "1": [
+            "flag_result_abort_discard",
+            "flag_start_blocked"
+          ],
+          "2": [
+            "flag_adc_completion_success",
+            "flag_amb_sample_accepted",
+            "flag_calibration_result_match",
+            "flag_calibration_result_mismatch",
+            "flag_dcs_sample_accepted",
+            "flag_detection_transfer",
+            "flag_late_normal_result",
+            "flag_measurement_result_discard_fire",
+            "flag_measurement_transfer",
+            "flag_precision_calibration_ready",
+            "flag_result_fork_all_released",
+            "o_measurement_result_valid",
+            "transaction_start_ready_o"
+          ],
+          "3": [
+            "flag_dc_result_ready",
+            "o_transaction_start_ready"
+          ],
+          "4": [
+            "flag_dc_result_transfer",
+            "o_test_invalid_sample_ready",
+            "o_transaction_start_fire"
+          ],
+          "5": [
+            "flag_test_invalid_sample_fire"
+          ]
+        }
+      }
+    },
+    "ppg_system_fault_abort_supervisor": {
+      "system_fault_cause_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "system_fault_cause_valid_o"
+          ],
+          "1": [
+            "flag_capture_ami",
+            "flag_capture_scheduler",
+            "flag_capture_ssw",
+            "flag_capture_watchdog",
+            "o_system_fault_cause_valid"
+          ],
+          "2": [
+            "dec_selected_cause",
+            "dec_selected_frame_id",
+            "dec_selected_frame_type",
+            "dec_selected_run_generation",
+            "dec_selected_sample_index",
+            "dec_selected_source",
+            "flag_selected_color_ir",
+            "flag_selected_identity_valid",
+            "flag_selected_precision"
+          ]
+        }
+      },
+      "cnt_adc_drain_watchdog": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_adc_drain_watchdog"
+          ],
+          "1": [
+            "flag_watchdog_timeout_fire"
+          ],
+          "2": [
+            "flag_capture_watchdog",
+            "flag_new_any",
+            "flag_new_summary_bits"
+          ],
+          "3": [
+            "dec_selected_cause",
+            "dec_selected_source",
+            "flag_capture_ami",
+            "flag_capture_scheduler",
+            "flag_capture_ssw",
+            "flag_diag_clear_legal",
+            "flag_episode_open_edge"
+          ],
+          "4": [
+            "dec_selected_frame_id",
+            "dec_selected_frame_type",
+            "dec_selected_run_generation",
+            "dec_selected_sample_index",
+            "flag_selected_color_ir",
+            "flag_selected_identity_valid",
+            "flag_selected_precision"
+          ]
+        }
+      },
+      "flag_watchdog_timeout_latch": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_watchdog_timeout_latch"
+          ],
+          "1": [
+            "flag_watchdog_window_active"
+          ],
+          "2": [
+            "flag_watchdog_timeout_fire"
+          ],
+          "3": [
+            "flag_capture_watchdog",
+            "flag_new_any",
+            "flag_new_summary_bits"
+          ],
+          "4": [
+            "dec_selected_cause",
+            "dec_selected_source",
+            "flag_capture_ami",
+            "flag_capture_scheduler",
+            "flag_capture_ssw",
+            "flag_diag_clear_legal",
+            "flag_episode_open_edge"
+          ],
+          "5": [
+            "dec_selected_frame_id",
+            "dec_selected_frame_type",
+            "dec_selected_run_generation",
+            "dec_selected_sample_index",
+            "flag_selected_color_ir",
+            "flag_selected_identity_valid",
+            "flag_selected_precision"
+          ]
+        }
+      },
+      "flag_watchdog_recovery_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_watchdog_recovery_pending"
+          ],
+          "1": [
+            "flag_watchdog_recovered"
+          ],
+          "2": [
+            "flag_episode_close_condition"
+          ]
+        }
+      }
+    },
+    "ppg_adc_s1_programmable_calibrator": {
+      "calibrated_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "calibrated_valid_o"
+          ],
+          "1": [
+            "flag_output_buffer_available",
+            "flag_output_transfer",
+            "o_calibrated_valid"
+          ],
+          "2": [
+            "o_result_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_normal_transaction_fork": {
+      "measurement_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "measurement_valid_o"
+          ],
+          "1": [
+            "flag_buffer_occupied",
+            "flag_measurement_transfer",
+            "flag_transaction_releasing",
+            "o_local_empty",
+            "o_measurement_run_generation",
+            "o_measurement_valid"
+          ],
+          "2": [
+            "o_normal_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      },
+      "track_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "track_valid_o"
+          ],
+          "1": [
+            "flag_buffer_occupied",
+            "flag_track_transfer",
+            "flag_transaction_releasing",
+            "o_local_empty",
+            "o_track_valid",
+            "o_tracking_run_generation"
+          ],
+          "2": [
+            "o_normal_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_adc_pipeline_overlap_corrector": {
+      "result_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "result_valid_o"
+          ],
+          "1": [
+            "flag_output_buffer_available",
+            "flag_output_transfer",
+            "o_local_empty",
+            "o_nominal_15_valid",
+            "o_result_valid"
+          ],
+          "2": [
+            "o_normal_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_adc_programmable_reconstructor": {
+      "result_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "result_valid_o"
+          ],
+          "1": [
+            "flag_output_buffer_available",
+            "flag_output_transfer",
+            "o_result_valid"
+          ],
+          "2": [
+            "o_result_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_adc_dc_recovery": {
+      "result_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "result_valid_o"
+          ],
+          "1": [
+            "flag_buffer_available",
+            "flag_output_transfer",
+            "o_result_valid"
+          ],
+          "2": [
+            "o_result_ready"
+          ],
+          "3": [
+            "flag_input_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_idac_code_controller": {
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "flag_amb_check_start_allowed",
+            "flag_expect_amb_sample",
+            "flag_expect_dcs_sample",
+            "flag_protocol_event",
+            "flag_track_sample_qualified",
+            "o_amb_sequence_busy",
+            "o_dcs_revalidate_busy",
+            "o_dcs_revalidate_request",
+            "o_dcs_sample_color_ir"
+          ],
+          "2": [
+            "flag_amb_sample_qualified",
+            "flag_dcs_code_increase",
+            "flag_dcs_ir_confirm_trigger",
+            "flag_dcs_r_confirm_trigger",
+            "flag_dcs_sample_qualified",
+            "flag_search_above_high",
+            "flag_search_below_low",
+            "o_amb_sample_request",
+            "o_dcs_sample_request",
+            "o_idac_idle",
+            "o_search_amb_ready",
+            "o_search_dcs_ready",
+            "o_test_saturation_inject_ready"
+          ],
+          "3": [
+            "dcs_ir_next_high",
+            "dcs_ir_next_low",
+            "dcs_r_next_high",
+            "dcs_r_next_low",
+            "flag_amb_code_increase",
+            "flag_amb_confirm_trigger",
+            "flag_amb_transfer",
+            "flag_dcs_ir_adjust_allowed",
+            "flag_dcs_ir_search_has_next",
+            "flag_dcs_r_adjust_allowed",
+            "flag_dcs_r_search_has_next",
+            "flag_dcs_transfer",
+            "flag_search_in_window",
+            "flag_test_saturation_inject_fire"
+          ],
+          "4": [
+            "amb_next_high",
+            "amb_next_low",
+            "dcs_ir_next_sum",
+            "dcs_r_next_sum",
+            "flag_amb_search_has_next",
+            "o_track_ready"
+          ],
+          "5": [
+            "amb_next_sum",
+            "dcs_ir_next_midpoint",
+            "dcs_r_next_midpoint",
+            "flag_track_transfer"
+          ],
+          "6": [
+            "amb_next_midpoint"
+          ]
+        }
+      },
+      "reg_context": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_context"
+          ],
+          "1": [
+            "amb_bound_high",
+            "amb_bound_low",
+            "amb_code_current",
+            "amb_epoch_current",
+            "candidate_amb_code",
+            "candidate_dcs_ir_code",
+            "candidate_dcs_r_code",
+            "cnt_amb_high",
+            "cnt_amb_low",
+            "cnt_dcs_ir_high",
+            "cnt_dcs_ir_low",
+            "cnt_dcs_r_high",
+            "cnt_dcs_r_low",
+            "dcs_ir_bound_high",
+            "dcs_ir_bound_low",
+            "dcs_ir_code_current",
+            "dcs_ir_epoch_current",
+            "dcs_r_bound_high",
+            "dcs_r_bound_low",
+            "dcs_r_code_current",
+            "dcs_r_epoch_current",
+            "flag_amb_commit",
+            "flag_dcs_ir_commit",
+            "flag_dcs_r_commit",
+            "flag_track_sample_qualified",
+            "flag_track_selected_pending",
+            "o_amb_code_update",
+            "o_amb_fault",
+            "o_amb_pending_valid",
+            "o_amb_search_done",
+            "o_amb_search_exhausted",
+            "o_amb_sequence_busy",
+            "o_amb_sequence_done",
+            "o_amb_sequence_failed",
+            "o_controller_fault_color_ir",
+            "o_controller_fault_event",
+            "o_controller_fault_frame_id",
+            "o_controller_fault_frame_type",
+            "o_controller_fault_identity_valid",
+            "o_controller_fault_precision",
+            "o_controller_fault_run_generation",
+            "o_controller_fault_sample_index",
+            "o_dcs_ir_code_update",
+            "o_dcs_ir_fault",
+            "o_dcs_ir_pending_valid",
+            "o_dcs_ir_search_done",
+            "o_dcs_ir_search_exhausted",
+            "o_dcs_ir_track_adjust",
+            "o_dcs_r_code_update",
+            "o_dcs_r_fault",
+            "o_dcs_r_pending_valid",
+            "o_dcs_r_search_done",
+            "o_dcs_r_search_exhausted",
+            "o_dcs_r_track_adjust",
+            "o_dcs_revalidate_busy",
+            "o_dcs_revalidate_done",
+            "o_dcs_revalidate_failed",
+            "o_protocol_error_sticky",
+            "o_startup_search_complete"
+          ],
+          "2": [
+            "amb_next_high",
+            "amb_next_low",
+            "dcs_ir_next_high",
+            "dcs_ir_next_low",
+            "dcs_r_next_high",
+            "dcs_r_next_low",
+            "flag_amb_check_start_allowed",
+            "flag_amb_commit_changes_code",
+            "flag_amb_confirm_trigger",
+            "flag_amb_sample_qualified",
+            "flag_amb_search_has_next",
+            "flag_dcs_ir_adjust_allowed",
+            "flag_dcs_ir_commit_changes_code",
+            "flag_dcs_ir_confirm_trigger",
+            "flag_dcs_ir_search_has_next",
+            "flag_dcs_r_adjust_allowed",
+            "flag_dcs_r_commit_changes_code",
+            "flag_dcs_r_confirm_trigger",
+            "flag_dcs_r_search_has_next",
+            "flag_dcs_sample_qualified",
+            "o_amb_code",
+            "o_amb_code_at_max",
+            "o_amb_code_at_min",
+            "o_amb_code_epoch",
+            "o_controller_fault_blocking",
+            "o_dcs_ir_code",
+            "o_dcs_ir_code_at_max",
+            "o_dcs_ir_code_at_min",
+            "o_dcs_ir_code_epoch",
+            "o_dcs_r_code",
+            "o_dcs_r_code_at_max",
+            "o_dcs_r_code_at_min",
+            "o_dcs_r_code_epoch",
+            "o_idac_idle",
+            "selected_dc_code_value",
+            "selected_dc_epoch_value"
+          ],
+          "3": [
+            "amb_next_sum",
+            "dcs_ir_next_sum",
+            "dcs_r_next_sum",
+            "flag_protocol_event"
+          ],
+          "4": [
+            "amb_next_midpoint",
+            "dcs_ir_next_midpoint",
+            "dcs_r_next_midpoint"
+          ]
+        }
+      }
+    },
+    "ppg_precision_window_integration": {
+      "flag_baseline_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_baseline_pending"
+          ],
+          "1": [
+            "detection_fork_idle_o",
+            "flag_all_current_released",
+            "flag_baseline_transfer"
+          ],
+          "2": [
+            "flag_fir_result_ready",
+            "o_detection_fork_idle"
+          ],
+          "3": [
+            "flag_fir_output_transfer"
+          ]
+        }
+      },
+      "flag_peak_valley_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_peak_valley_pending"
+          ],
+          "1": [
+            "detection_fork_idle_o",
+            "flag_all_current_released",
+            "flag_peak_valley_transfer"
+          ],
+          "2": [
+            "flag_fir_result_ready",
+            "o_detection_fork_idle"
+          ],
+          "3": [
+            "flag_fir_output_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_adc_async_stage_capture": {
+      "capture_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "capture_valid_o"
+          ],
+          "1": [
+            "flag_buffer_available",
+            "flag_output_transfer",
+            "o_capture_valid"
+          ],
+          "2": [
+            "flag_capture_accept"
+          ]
+        }
+      },
+      "reg_capture_mode": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_capture_mode"
+          ],
+          "1": [
+            "flag_selected_done_sync"
+          ],
+          "2": [
+            "flag_capture_accept"
+          ]
+        }
+      },
+      "flag_stage1_done_sync": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stage1_done_sync"
+          ],
+          "1": [
+            "flag_selected_done_sync"
+          ],
+          "2": [
+            "flag_capture_accept"
+          ]
+        }
+      },
+      "flag_stage2_done_sync": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stage2_done_sync"
+          ],
+          "1": [
+            "flag_selected_done_sync"
+          ],
+          "2": [
+            "flag_capture_accept"
+          ]
+        }
+      }
+    },
+    "ppg_adc_s1_redundancy_corrector": {
+      "detect_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "detect_valid_o"
+          ],
+          "1": [
+            "flag_detect_transfer",
+            "flag_output_buffer_available",
+            "o_detect_valid"
+          ],
+          "2": [
+            "flag_capture_transfer",
+            "o_capture_ready"
+          ],
+          "3": [
+            "flag_context_ready"
+          ],
+          "4": [
+            "flag_context_transfer",
+            "o_transaction_ready"
+          ]
+        }
+      },
+      "flag_context_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_context_valid"
+          ],
+          "1": [
+            "flag_capture_transfer",
+            "flag_context_ready",
+            "o_capture_ready"
+          ],
+          "2": [
+            "flag_context_transfer",
+            "o_transaction_ready"
+          ]
+        }
+      }
+    },
+    "ppg_coarse_detection_fir": {
+      "result_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 7,
+        "frontiers_by_hop": {
+          "0": [
+            "result_valid_o"
+          ],
+          "1": [
+            "flag_buffer_available",
+            "flag_fir_idle",
+            "flag_output_transfer",
+            "o_result_valid"
+          ],
+          "2": [
+            "flag_recheck_clear",
+            "o_fir_idle",
+            "o_local_empty",
+            "o_result_ready"
+          ],
+          "3": [
+            "flag_history_clear",
+            "flag_input_transfer"
+          ],
+          "4": [
+            "flag_history_transfer",
+            "flag_test_calibration_loss_active",
+            "flag_transaction_clear"
+          ],
+          "5": [
+            "flag_compute_start",
+            "flag_sample_qualified"
+          ],
+          "6": [
+            "dec_sample_input",
+            "dec_window_qualification"
+          ],
+          "7": [
+            "flag_window_qualified"
+          ]
+        }
+      },
+      "flag_test_calibration_loss_armed": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_test_calibration_loss_armed"
+          ],
+          "1": [
+            "flag_test_calibration_loss_active",
+            "o_test_calibration_loss_inject_ready"
+          ],
+          "2": [
+            "flag_sample_qualified",
+            "flag_test_calibration_loss_inject_fire"
+          ],
+          "3": [
+            "dec_sample_input",
+            "dec_window_qualification"
+          ],
+          "4": [
+            "flag_window_qualified"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "flag_commit_event",
+            "flag_fir_idle",
+            "flag_process_timeout",
+            "o_result_ready"
+          ],
+          "2": [
+            "flag_input_transfer",
+            "flag_recheck_clear",
+            "flag_transaction_clear",
+            "o_fir_idle",
+            "o_local_empty"
+          ],
+          "3": [
+            "flag_history_clear",
+            "flag_history_transfer",
+            "flag_test_calibration_loss_active"
+          ],
+          "4": [
+            "flag_compute_start",
+            "flag_sample_qualified"
+          ],
+          "5": [
+            "dec_sample_input",
+            "dec_window_qualification"
+          ],
+          "6": [
+            "flag_window_qualified"
+          ]
+        }
+      },
+      "reg_accumulator": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_accumulator"
+          ],
+          "1": [
+            "dec_accumulator_ext"
+          ],
+          "2": [
+            "dec_accumulator_magnitude",
+            "dec_rounded_code"
+          ],
+          "3": [
+            "dec_filtered_value",
+            "dec_round_work",
+            "flag_fir_saturation_high",
+            "flag_fir_saturation_low"
+          ],
+          "4": [
+            "dec_commit_payload",
+            "dec_rounded_magnitude"
+          ]
+        }
+      },
+      "cnt_process_cycle": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_process_cycle"
+          ],
+          "1": [
+            "flag_process_timeout"
+          ],
+          "2": [
+            "flag_commit_event",
+            "flag_transaction_clear"
+          ]
+        }
+      },
+      "reg_red_history": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_red_history"
+          ],
+          "1": [
+            "dec_selected_history"
+          ],
+          "2": [
+            "dec_center_amb_code",
+            "dec_center_amb_epoch",
+            "dec_center_coef_epoch",
+            "dec_center_color_ir",
+            "dec_center_config_epoch",
+            "dec_center_dc_code",
+            "dec_center_dc_epoch",
+            "dec_center_dc_recovery_epoch",
+            "dec_center_frame_id",
+            "dec_center_frame_type",
+            "dec_center_precision_mode",
+            "dec_center_sample_index"
+          ],
+          "3": [
+            "enc_center_context"
+          ]
+        }
+      },
+      "reg_ir_history": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_ir_history"
+          ],
+          "1": [
+            "dec_selected_history"
+          ],
+          "2": [
+            "dec_center_amb_code",
+            "dec_center_amb_epoch",
+            "dec_center_coef_epoch",
+            "dec_center_color_ir",
+            "dec_center_config_epoch",
+            "dec_center_dc_code",
+            "dec_center_dc_epoch",
+            "dec_center_dc_recovery_epoch",
+            "dec_center_frame_id",
+            "dec_center_frame_type",
+            "dec_center_precision_mode",
+            "dec_center_sample_index"
+          ],
+          "3": [
+            "enc_center_context"
+          ]
+        }
+      },
+      "cnt_red_sample": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_red_sample"
+          ],
+          "1": [
+            "cnt_selected_sample",
+            "o_history_full_r"
+          ],
+          "2": [
+            "flag_compute_start"
+          ]
+        }
+      },
+      "cnt_ir_sample": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_ir_sample"
+          ],
+          "1": [
+            "cnt_selected_sample",
+            "o_history_full_ir"
+          ],
+          "2": [
+            "flag_compute_start"
+          ]
+        }
+      }
+    },
+    "ppg_dynamic_baseline_cross_detector": {
+      "slope_current_q16_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 7,
+        "frontiers_by_hop": {
+          "0": [
+            "slope_current_q16_o"
+          ],
+          "1": [
+            "dec_slope_product_q16",
+            "flag_current_slope_legal",
+            "o_slope_current_q16"
+          ],
+          "2": [
+            "dec_baseline_wide_q16"
+          ],
+          "3": [
+            "dec_baseline_q16"
+          ],
+          "4": [
+            "dec_baseline_diagnostic_q16",
+            "dec_baseline_high_q16",
+            "dec_baseline_low_q16"
+          ],
+          "5": [
+            "flag_candidate_break",
+            "flag_candidate_continue",
+            "flag_candidate_start",
+            "flag_unknown_cross_emit"
+          ],
+          "6": [
+            "flag_candidate_complete",
+            "flag_cross_emit"
+          ],
+          "7": [
+            "flag_known_cross_emit"
+          ]
+        }
+      },
+      "baseline_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "baseline_valid_o"
+          ],
+          "1": [
+            "flag_candidate_start",
+            "flag_cycle_candidate_complete",
+            "flag_unknown_cross_emit",
+            "o_baseline_valid"
+          ],
+          "2": [
+            "flag_cross_emit",
+            "flag_cycle_candidate_no_cross"
+          ],
+          "3": [
+            "flag_candidate_no_cross_reacquire"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 7,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "dec_shared_operand_a",
+            "dec_shared_operand_b",
+            "flag_arithmetic_busy",
+            "flag_arithmetic_timeout",
+            "flag_divide_zero",
+            "flag_peak_capture_event",
+            "flag_state_invalid",
+            "o_peak_ready",
+            "o_result_ready",
+            "o_valley_ready"
+          ],
+          "2": [
+            "dec_shared_product",
+            "flag_arithmetic_error_event",
+            "flag_peak_commit",
+            "flag_peak_hold_violation",
+            "flag_result_transfer",
+            "flag_valley_transfer",
+            "o_local_empty"
+          ],
+          "3": [
+            "flag_cycle_complete",
+            "flag_fallback_commit",
+            "flag_formal_red_result",
+            "flag_no_cross_reacquire",
+            "flag_peak_transfer"
+          ],
+          "4": [
+            "flag_cross_eligible_red_result",
+            "flag_cycle_no_cross"
+          ],
+          "5": [
+            "flag_candidate_break",
+            "flag_candidate_continue",
+            "flag_candidate_start",
+            "flag_unknown_cross_emit"
+          ],
+          "6": [
+            "flag_candidate_complete",
+            "flag_cross_emit"
+          ],
+          "7": [
+            "flag_known_cross_emit"
+          ]
+        }
+      },
+      "cnt_arithmetic_cycles": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_arithmetic_cycles"
+          ],
+          "1": [
+            "flag_arithmetic_timeout"
+          ],
+          "2": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "flag_pending_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_pending_valid"
+          ],
+          "1": [
+            "flag_arithmetic_timeout",
+            "flag_peak_commit",
+            "flag_peak_hold_violation",
+            "flag_pending_config_violation",
+            "o_local_empty"
+          ],
+          "2": [
+            "flag_arithmetic_error_event",
+            "flag_cycle_complete",
+            "flag_fallback_commit",
+            "flag_no_cross_reacquire",
+            "flag_peak_transfer"
+          ],
+          "3": [
+            "flag_cycle_no_cross"
+          ]
+        }
+      },
+      "flag_pending_adaptive_request": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_pending_adaptive_request"
+          ],
+          "1": [
+            "flag_pending_config_violation"
+          ],
+          "2": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "flag_pending_adaptive_result_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_pending_adaptive_result_valid"
+          ],
+          "1": [
+            "flag_cycle_complete"
+          ],
+          "2": [
+            "flag_cycle_no_cross"
+          ]
+        }
+      },
+      "flag_pending_fallback": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_pending_fallback"
+          ],
+          "1": [
+            "flag_cycle_complete",
+            "flag_fallback_commit",
+            "flag_pending_config_violation"
+          ],
+          "2": [
+            "flag_arithmetic_error_event",
+            "flag_cycle_no_cross"
+          ]
+        }
+      },
+      "reg_arith_new_peak_context": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_new_peak_context"
+          ],
+          "1": [
+            "flag_peak_payload_match"
+          ],
+          "2": [
+            "flag_peak_commit",
+            "flag_peak_hold_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event",
+            "flag_cycle_complete",
+            "flag_fallback_commit",
+            "flag_no_cross_reacquire",
+            "flag_peak_transfer"
+          ],
+          "4": [
+            "flag_cycle_no_cross"
+          ]
+        }
+      },
+      "reg_arith_slope_current_q16": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_slope_current_q16"
+          ],
+          "1": [
+            "dec_arith_slope_candidate",
+            "enc_arith_smooth_difference"
+          ],
+          "2": [
+            "dec_arith_clamped_slope_q16",
+            "dec_shared_operand_a",
+            "flag_pending_candidate_clamp_max",
+            "flag_pending_candidate_clamp_min"
+          ],
+          "3": [
+            "dec_shared_product"
+          ]
+        }
+      },
+      "reg_arith_fixed_slope_q16": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_fixed_slope_q16"
+          ],
+          "1": [
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_alpha_q15": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_alpha_q15"
+          ],
+          "1": [
+            "dec_shared_operand_b",
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "dec_shared_product",
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_beta_q15": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_beta_q15"
+          ],
+          "1": [
+            "dec_shared_operand_b",
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "dec_shared_product",
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_adjust_ratio_q15": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_adjust_ratio_q15"
+          ],
+          "1": [
+            "dec_shared_operand_b",
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "dec_shared_product",
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_slope_min_q16": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_slope_min_q16"
+          ],
+          "1": [
+            "dec_arith_clamped_slope_q16",
+            "flag_pending_candidate_clamp_min",
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_slope_max_q16": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_slope_max_q16"
+          ],
+          "1": [
+            "dec_arith_clamped_slope_q16",
+            "flag_pending_candidate_clamp_max",
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_lead_min_frames": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_lead_min_frames"
+          ],
+          "1": [
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_lead_max_frames": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_lead_max_frames"
+          ],
+          "1": [
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_no_cross_limit": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_no_cross_limit"
+          ],
+          "1": [
+            "flag_pending_config_match"
+          ],
+          "2": [
+            "flag_pending_config_violation"
+          ],
+          "3": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_arith_cycle_amplitude": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_cycle_amplitude"
+          ],
+          "1": [
+            "dec_shared_operand_a"
+          ],
+          "2": [
+            "dec_shared_product"
+          ]
+        }
+      },
+      "reg_arith_period_frames": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_period_frames"
+          ],
+          "1": [
+            "dec_arith_rounded_numerator",
+            "flag_divide_zero"
+          ],
+          "2": [
+            "flag_arithmetic_error_event"
+          ]
+        }
+      },
+      "reg_div_input_data": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_div_input_data"
+          ],
+          "1": [
+            "dec_div_trial_remainder"
+          ],
+          "2": [
+            "dec_div_remainder_next",
+            "flag_div_trial_ge_divisor"
+          ],
+          "3": [
+            "dec_div_quotient_next"
+          ]
+        }
+      },
+      "reg_divisor": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_divisor"
+          ],
+          "1": [
+            "dec_div_remainder_next",
+            "flag_div_trial_ge_divisor"
+          ],
+          "2": [
+            "dec_div_quotient_next"
+          ]
+        }
+      },
+      "reg_div_remainder": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_div_remainder"
+          ],
+          "1": [
+            "dec_div_trial_remainder"
+          ],
+          "2": [
+            "dec_div_remainder_next",
+            "flag_div_trial_ge_divisor"
+          ],
+          "3": [
+            "dec_div_quotient_next"
+          ]
+        }
+      },
+      "reg_arith_slope_base_q16": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_slope_base_q16"
+          ],
+          "1": [
+            "dec_arith_base_abs",
+            "dec_slope_base_q16",
+            "enc_arith_smooth_difference"
+          ],
+          "2": [
+            "dec_shared_operand_a"
+          ],
+          "3": [
+            "dec_shared_product"
+          ]
+        }
+      },
+      "reg_smooth_product": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_smooth_product"
+          ],
+          "1": [
+            "dec_arith_smooth_delta",
+            "dec_arith_smooth_product_abs"
+          ],
+          "2": [
+            "dec_arith_smooth_rounded_abs"
+          ]
+        }
+      },
+      "reg_arith_smooth_delta": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_smooth_delta"
+          ],
+          "1": [
+            "dec_arith_slope_candidate"
+          ],
+          "2": [
+            "dec_arith_clamped_slope_q16",
+            "flag_pending_candidate_clamp_max",
+            "flag_pending_candidate_clamp_min"
+          ]
+        }
+      },
+      "reg_adjust_product": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_adjust_product"
+          ],
+          "1": [
+            "dec_arith_adjust_rounded"
+          ],
+          "2": [
+            "dec_arith_adjust_step"
+          ]
+        }
+      },
+      "reg_arith_timing_term": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_arith_timing_term"
+          ],
+          "1": [
+            "dec_arith_slope_candidate"
+          ],
+          "2": [
+            "dec_arith_clamped_slope_q16",
+            "flag_pending_candidate_clamp_max",
+            "flag_pending_candidate_clamp_min"
+          ]
+        }
+      },
+      "flag_valley_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_valley_valid"
+          ],
+          "1": [
+            "flag_cycle_candidate_complete"
+          ],
+          "2": [
+            "flag_cycle_candidate_no_cross"
+          ],
+          "3": [
+            "flag_candidate_no_cross_reacquire"
+          ]
+        }
+      },
+      "flag_candidate_active": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_candidate_active"
+          ],
+          "1": [
+            "flag_candidate_break",
+            "flag_candidate_continue",
+            "flag_candidate_start"
+          ],
+          "2": [
+            "flag_candidate_complete"
+          ],
+          "3": [
+            "flag_known_cross_emit"
+          ],
+          "4": [
+            "flag_cross_emit"
+          ]
+        }
+      },
+      "cnt_cross_confirm": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_cross_confirm"
+          ],
+          "1": [
+            "flag_candidate_complete"
+          ],
+          "2": [
+            "flag_known_cross_emit"
+          ],
+          "3": [
+            "flag_cross_emit"
+          ]
+        }
+      },
+      "flag_cycle_cross_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_cycle_cross_valid"
+          ],
+          "1": [
+            "flag_cycle_candidate_no_cross",
+            "flag_cycle_epoch_match"
+          ],
+          "2": [
+            "flag_candidate_no_cross_reacquire",
+            "flag_cycle_candidate_complete"
+          ]
+        }
+      },
+      "flag_cross_issued": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_cross_issued"
+          ],
+          "1": [
+            "flag_candidate_start",
+            "flag_known_cross_emit",
+            "flag_unknown_cross_emit"
+          ],
+          "2": [
+            "flag_cross_emit"
+          ]
+        }
+      },
+      "flag_cycle_qualified": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_cycle_qualified"
+          ],
+          "1": [
+            "flag_cycle_candidate_complete"
+          ],
+          "2": [
+            "flag_cycle_candidate_no_cross"
+          ],
+          "3": [
+            "flag_candidate_no_cross_reacquire"
+          ]
+        }
+      },
+      "flag_resume_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_resume_pending"
+          ],
+          "1": [
+            "flag_unknown_cross_emit"
+          ],
+          "2": [
+            "flag_cross_emit"
+          ]
+        }
+      }
+    },
+    "ppg_peak_valley_window_detector": {
+      "peak_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "peak_valid_o"
+          ],
+          "1": [
+            "flag_peak_transfer",
+            "o_detector_idle",
+            "o_peak_valid",
+            "o_result_ready"
+          ],
+          "2": [
+            "flag_input_transfer",
+            "flag_protocol_error_event",
+            "o_local_empty"
+          ],
+          "3": [
+            "flag_red_time_transfer"
+          ],
+          "4": [
+            "flag_config_protocol_error_event",
+            "flag_entry_tail_overflow_event",
+            "flag_entry_tail_reversion_event",
+            "flag_exit_tail_overflow_event",
+            "flag_fine_protocol_fallback_event",
+            "flag_fine_window_timeout_event",
+            "flag_formal_sample",
+            "flag_frame_protocol_error_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_reacquire_timeout_event",
+            "flag_unauthorized_precision_event"
+          ],
+          "5": [
+            "flag_epoch_drift_event",
+            "flag_mode_protocol_error_event",
+            "flag_peak_candidate_event",
+            "flag_tracking_restart",
+            "flag_valley_candidate_event"
+          ],
+          "6": [
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ]
+        }
+      },
+      "valley_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 6,
+        "frontiers_by_hop": {
+          "0": [
+            "valley_valid_o"
+          ],
+          "1": [
+            "flag_valley_transfer",
+            "o_detector_idle",
+            "o_result_ready",
+            "o_valley_valid"
+          ],
+          "2": [
+            "flag_input_transfer",
+            "flag_protocol_error_event",
+            "o_local_empty"
+          ],
+          "3": [
+            "flag_red_time_transfer"
+          ],
+          "4": [
+            "flag_config_protocol_error_event",
+            "flag_entry_tail_overflow_event",
+            "flag_entry_tail_reversion_event",
+            "flag_exit_tail_overflow_event",
+            "flag_fine_protocol_fallback_event",
+            "flag_fine_window_timeout_event",
+            "flag_formal_sample",
+            "flag_frame_protocol_error_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_reacquire_timeout_event",
+            "flag_unauthorized_precision_event"
+          ],
+          "5": [
+            "flag_epoch_drift_event",
+            "flag_mode_protocol_error_event",
+            "flag_peak_candidate_event",
+            "flag_tracking_restart",
+            "flag_valley_candidate_event"
+          ],
+          "6": [
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ]
+        }
+      },
+      "return_9bit_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "return_9bit_valid_o"
+          ],
+          "1": [
+            "flag_fine_protocol_fallback_event",
+            "flag_fine_window_timeout_event",
+            "flag_return_transfer",
+            "o_detector_idle",
+            "o_return_9bit_valid"
+          ],
+          "2": [
+            "flag_protocol_error_event",
+            "o_local_empty"
+          ]
+        }
+      },
+      "fine_window_active_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "fine_window_active_o"
+          ],
+          "1": [
+            "flag_entry_tail_overflow_event",
+            "flag_entry_tail_reversion_event",
+            "flag_fine_center_qualified",
+            "flag_fine_exit_complete",
+            "flag_fine_protocol_fallback_event",
+            "flag_frame_protocol_error_event",
+            "flag_mode_protocol_error_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_precision_drop_event",
+            "flag_unauthorized_precision_event",
+            "flag_valley_accept_event",
+            "flag_valley_restart_event",
+            "o_fine_window_active"
+          ],
+          "2": [
+            "flag_fine_window_timeout_event",
+            "flag_protocol_error_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "reacquire_search_active_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "reacquire_search_active_o"
+          ],
+          "1": [
+            "flag_frame_protocol_error_event",
+            "flag_reacquire_start_event",
+            "flag_reacquire_timeout_event",
+            "o_reacquire_search_active"
+          ],
+          "2": [
+            "flag_protocol_error_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "flag_nonfine_valley_timeout_event",
+            "flag_peak_candidate_event",
+            "flag_reacquire_timeout_event",
+            "flag_valley_candidate_event"
+          ],
+          "2": [
+            "flag_frame_protocol_error_event",
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_tracking_restart",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "3": [
+            "flag_fine_window_timeout_event",
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "cnt_direction_confirm": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_direction_confirm"
+          ],
+          "1": [
+            "cnt_direction_confirm_next"
+          ],
+          "2": [
+            "flag_peak_candidate_event",
+            "flag_valley_candidate_event"
+          ],
+          "3": [
+            "flag_frame_protocol_error_event",
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "4": [
+            "flag_fine_window_timeout_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_protocol_error_event",
+            "flag_reacquire_timeout_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "flag_previous_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 5,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_previous_valid"
+          ],
+          "1": [
+            "flag_frame_contiguous",
+            "flag_frame_protocol_error_event"
+          ],
+          "2": [
+            "flag_direction_falling",
+            "flag_direction_rising",
+            "flag_protocol_error_event"
+          ],
+          "3": [
+            "flag_peak_candidate_event",
+            "flag_valley_candidate_event"
+          ],
+          "4": [
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "5": [
+            "flag_fine_window_timeout_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_reacquire_timeout_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "flag_running_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_running_valid"
+          ],
+          "1": [
+            "flag_epoch_drift_event",
+            "flag_peak_candidate_event",
+            "flag_valley_candidate_event"
+          ],
+          "2": [
+            "flag_frame_protocol_error_event",
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_protocol_error_event",
+            "flag_tracking_restart",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "3": [
+            "flag_fine_window_timeout_event",
+            "flag_nonfine_valley_timeout_event",
+            "flag_reacquire_timeout_event"
+          ]
+        }
+      },
+      "flag_previous_peak_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_previous_peak_valid"
+          ],
+          "1": [
+            "flag_frame_protocol_error_event",
+            "flag_peak_epoch_match",
+            "flag_peak_interval_legal"
+          ],
+          "2": [
+            "flag_peak_accept_event",
+            "flag_protocol_error_event"
+          ],
+          "3": [
+            "flag_peak_reject_event",
+            "flag_reacquire_timeout_event"
+          ],
+          "4": [
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "flag_active_peak_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_active_peak_valid"
+          ],
+          "1": [
+            "flag_nonfine_valley_timeout_event",
+            "flag_valley_candidate_event",
+            "flag_valley_epoch_match"
+          ],
+          "2": [
+            "flag_frame_protocol_error_event",
+            "flag_tracking_restart",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "3": [
+            "flag_fine_window_timeout_event",
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "flag_active_peak_fine_qualified": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_active_peak_fine_qualified"
+          ],
+          "1": [
+            "flag_valley_accept_event",
+            "flag_valley_restart_event"
+          ],
+          "2": [
+            "flag_fine_window_timeout_event",
+            "flag_nonfine_valley_timeout_event"
+          ],
+          "3": [
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "flag_return_accepted": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_return_accepted"
+          ],
+          "1": [
+            "flag_fine_exit_complete",
+            "flag_fine_protocol_fallback_event",
+            "flag_fine_window_timeout_event",
+            "flag_precision_drop_event",
+            "o_detector_idle"
+          ],
+          "2": [
+            "flag_mode_protocol_error_event",
+            "flag_protocol_error_event",
+            "flag_tracking_restart",
+            "o_local_empty"
+          ]
+        }
+      },
+      "flag_entry_precision_tail_active": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_entry_precision_tail_active"
+          ],
+          "1": [
+            "flag_entry_tail_overflow_event",
+            "o_detector_idle",
+            "o_local_empty"
+          ],
+          "2": [
+            "flag_mode_protocol_error_event",
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "flag_entry_precision_tail_complete": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_entry_precision_tail_complete"
+          ],
+          "1": [
+            "flag_entry_tail_reversion_event"
+          ],
+          "2": [
+            "flag_mode_protocol_error_event"
+          ],
+          "3": [
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "cnt_entry_precision_tail": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_entry_precision_tail"
+          ],
+          "1": [
+            "flag_entry_tail_overflow_event"
+          ],
+          "2": [
+            "flag_mode_protocol_error_event"
+          ],
+          "3": [
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "flag_exit_precision_tail_active": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_exit_precision_tail_active"
+          ],
+          "1": [
+            "flag_exit_tail_overflow_event",
+            "flag_mode_protocol_error_event",
+            "flag_unauthorized_precision_event"
+          ],
+          "2": [
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "cnt_exit_precision_tail": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_exit_precision_tail"
+          ],
+          "1": [
+            "flag_exit_tail_overflow_event"
+          ],
+          "2": [
+            "flag_mode_protocol_error_event"
+          ],
+          "3": [
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "reg_fine_window_start_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_fine_window_start_frame_id"
+          ],
+          "1": [
+            "dec_fine_window_age"
+          ],
+          "2": [
+            "flag_fine_center_qualified",
+            "flag_fine_window_timeout_event",
+            "flag_frame_protocol_error_event"
+          ],
+          "3": [
+            "flag_protocol_error_event"
+          ]
+        }
+      },
+      "flag_reacquire_timer_valid": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_reacquire_timer_valid"
+          ],
+          "1": [
+            "flag_frame_protocol_error_event",
+            "flag_reacquire_timeout_event"
+          ],
+          "2": [
+            "flag_protocol_error_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "reg_reacquire_start_frame_id": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "reg_reacquire_start_frame_id"
+          ],
+          "1": [
+            "dec_reacquire_age"
+          ],
+          "2": [
+            "flag_frame_protocol_error_event",
+            "flag_reacquire_timeout_event"
+          ],
+          "3": [
+            "flag_protocol_error_event",
+            "flag_tracking_restart"
+          ]
+        }
+      },
+      "flag_recovery_return_pending": {
+        "write_domain": "CLK_2M",
+        "max_hop": 4,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_recovery_return_pending"
+          ],
+          "1": [
+            "flag_fine_window_timeout_event",
+            "flag_formal_sample",
+            "o_detector_idle"
+          ],
+          "2": [
+            "flag_epoch_drift_event",
+            "flag_frame_protocol_error_event",
+            "flag_peak_candidate_event",
+            "flag_protocol_error_event",
+            "flag_valley_candidate_event",
+            "o_local_empty"
+          ],
+          "3": [
+            "flag_peak_accept_event",
+            "flag_peak_reject_event",
+            "flag_tracking_restart",
+            "flag_valley_accept_event",
+            "flag_valley_epoch_fault_event",
+            "flag_valley_restart_event"
+          ],
+          "4": [
+            "flag_nonfine_valley_timeout_event",
+            "flag_reacquire_timeout_event"
+          ]
+        }
+      }
+    },
+    "ppg_precision_window_controller": {
+      "active_precision_mode_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "active_precision_mode_o"
+          ],
+          "1": [
+            "o_active_precision_mode",
+            "o_cross_ready",
+            "o_return_9bit_ready"
+          ],
+          "2": [
+            "flag_cross_transfer",
+            "flag_return_transfer"
+          ],
+          "3": [
+            "flag_normal_cross_transfer",
+            "flag_normal_return_transfer"
+          ]
+        }
+      },
+      "fine_window_active_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "fine_window_active_o"
+          ],
+          "1": [
+            "o_cross_ready",
+            "o_fine_window_active",
+            "o_return_9bit_ready"
+          ],
+          "2": [
+            "flag_cross_transfer",
+            "flag_return_transfer"
+          ],
+          "3": [
+            "flag_normal_cross_transfer",
+            "flag_normal_return_transfer"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "flag_enter_commit",
+            "flag_pending_state",
+            "flag_return_commit",
+            "o_cross_ready",
+            "o_return_9bit_ready"
+          ],
+          "2": [
+            "flag_cross_transfer",
+            "flag_return_transfer",
+            "flag_switch_timeout_event"
+          ],
+          "3": [
+            "flag_normal_cross_transfer",
+            "flag_normal_return_transfer"
+          ]
+        }
+      },
+      "flag_fault_hold": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_fault_hold"
+          ],
+          "1": [
+            "o_cross_ready",
+            "o_mode_fault_active",
+            "o_return_9bit_ready"
+          ],
+          "2": [
+            "flag_cross_transfer",
+            "flag_return_transfer"
+          ],
+          "3": [
+            "flag_normal_cross_transfer",
+            "flag_normal_return_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_amb_recheck_scheduler": {
+      "cnt_normal_frame_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "cnt_normal_frame_o"
+          ],
+          "1": [
+            "flag_interval_hit",
+            "o_normal_frame_count"
+          ],
+          "2": [
+            "flag_switch_takeover"
+          ],
+          "3": [
+            "o_normal_output_inhibit"
+          ]
+        }
+      },
+      "amb_recheck_pending_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "amb_recheck_pending_o"
+          ],
+          "1": [
+            "flag_interval_hit",
+            "flag_switch_takeover",
+            "o_amb_recheck_pending",
+            "o_scheduler_idle"
+          ],
+          "2": [
+            "o_normal_output_inhibit"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "amb_recheck_busy_o",
+            "dcs_revalidate_accept_o",
+            "enc_sequence_done_o",
+            "enc_sequence_failed_o",
+            "flag_enter_amb",
+            "flag_enter_ir",
+            "flag_interval_hit",
+            "flag_matching_sample_accepted",
+            "flag_stage_result_available",
+            "flag_switch_takeover",
+            "o_calibration_color_ir",
+            "o_calibration_frame_type",
+            "o_calibration_sample_valid",
+            "o_calibration_stage",
+            "o_scheduler_idle"
+          ],
+          "2": [
+            "flag_calibration_transfer",
+            "o_amb_recheck_accept",
+            "o_amb_recheck_busy",
+            "o_amb_sequence_start",
+            "o_calibration_frame_start",
+            "o_dcs_revalidate_accept",
+            "o_normal_output_inhibit",
+            "o_sequence_done",
+            "o_sequence_failed"
+          ]
+        }
+      },
+      "flag_stage_result_done": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stage_result_done"
+          ],
+          "1": [
+            "flag_stage_result_available"
+          ],
+          "2": [
+            "enc_sequence_done_o",
+            "flag_enter_ir",
+            "o_calibration_sample_valid"
+          ],
+          "3": [
+            "flag_calibration_transfer",
+            "o_calibration_color_ir",
+            "o_calibration_frame_start",
+            "o_calibration_stage",
+            "o_sequence_done"
+          ]
+        }
+      },
+      "flag_stage_frame_complete": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_stage_frame_complete"
+          ],
+          "1": [
+            "flag_stage_frame_available"
+          ],
+          "2": [
+            "enc_sequence_done_o",
+            "flag_enter_ir"
+          ],
+          "3": [
+            "o_calibration_color_ir",
+            "o_calibration_frame_start",
+            "o_calibration_stage",
+            "o_sequence_done"
+          ]
+        }
+      },
+      "flag_sample_inflight": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "flag_sample_inflight"
+          ],
+          "1": [
+            "o_calibration_sample_valid",
+            "o_scheduler_idle"
+          ],
+          "2": [
+            "flag_calibration_transfer"
+          ]
+        }
+      }
+    },
+    "ppg_system_config_manager": {
+      "active_config_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "active_config_o"
+          ],
+          "1": [
+            "flag_start_static_bias_valid",
+            "o_active_config"
+          ],
+          "2": [
+            "dec_error_code",
+            "flag_start_ready"
+          ],
+          "3": [
+            "dec_error_present",
+            "flag_start_accept",
+            "o_start_ready"
+          ]
+        }
+      },
+      "active_valid_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "active_valid_o"
+          ],
+          "1": [
+            "flag_start_ready",
+            "o_active_valid"
+          ],
+          "2": [
+            "dec_error_code",
+            "flag_start_accept",
+            "o_start_ready"
+          ],
+          "3": [
+            "dec_error_present"
+          ]
+        }
+      },
+      "error_sticky_o": {
+        "write_domain": "CLK_2M",
+        "max_hop": 3,
+        "frontiers_by_hop": {
+          "0": [
+            "error_sticky_o"
+          ],
+          "1": [
+            "flag_start_ready",
+            "o_error_sticky"
+          ],
+          "2": [
+            "dec_error_code",
+            "flag_start_accept",
+            "o_start_ready"
+          ],
+          "3": [
+            "dec_error_present"
+          ]
+        }
+      },
+      "state_current": {
+        "write_domain": "CLK_2M",
+        "max_hop": 2,
+        "frontiers_by_hop": {
+          "0": [
+            "state_current"
+          ],
+          "1": [
+            "dec_error_code",
+            "dec_lifecycle_state",
+            "flag_commit_accept",
+            "flag_start_ready",
+            "flag_state_invalid",
+            "flag_stop_accept",
+            "o_allow_new_transaction",
+            "o_run_enable"
+          ],
+          "2": [
+            "dec_error_present",
+            "flag_start_accept",
+            "o_active_valid",
+            "o_lifecycle_state",
+            "o_start_ready"
+          ]
+        }
+      }
+    }
+  },
+  "missed_multihop_cross_domain_candidates_total": 0,
+  "missed_multihop_cross_domain_candidates": [],
+  "validation": {
+    "cases": [
+      {
+        "label": "验证用例1：2跳跨域陷阱（reg_source->wire_hop1->wire_hop2，域B无门控读取）必须在跳数2被抓到",
+        "pass": true,
+        "detail": "实际命中=[{'module': 'cdc_phase4_synthetic_multihop_trap', 'target_register': 'reg_source', 'write_domain': 'CLK_2M', 'hop': 2, 'via_wire': 'wire_hop2', 'reader_always_line_start': 32, 'reader_domain': 'SPI_SCLK', 'gated': False, 'evidence_line': 'reg_dest <= wire_hop2;'}]"
+      },
+      {
+        "label": "验证用例2：同域2跳链（真实项目大量同形状命中的合成对照）不误判成跨域风险",
+        "pass": true,
+        "detail": "实际命中=[]，链条信息={'reg_source': {'write_domain': 'CLK_2M', 'max_hop': 2, 'frontiers_by_hop': {0: ['reg_source'], 1: ['wire_hop1'], 2: ['wire_hop2']}}}"
+      },
+      {
+        "label": "附加真实断言：真实项目0条被Phase2漏检的跨域候选，且真实存在跳数>=2的assign链（非平凡空结果）",
+        "pass": true,
+        "detail": "漏检候选=0, 跳数>=2的寄存器数=181, 涉及模块数=23"
+      }
+    ],
+    "all_pass": true
+  }
+}

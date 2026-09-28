@@ -1,0 +1,67 @@
+{
+  "modules_scanned_total": 24,
+  "modules_scanned": [
+    "ppg_400hz_frame_calibration_scheduler",
+    "ppg_adc_async_stage_capture",
+    "ppg_adc_dc_recovery",
+    "ppg_adc_measurement_idac_integration",
+    "ppg_adc_pipeline_overlap_corrector",
+    "ppg_adc_programmable_reconstructor",
+    "ppg_adc_s1_programmable_calibrator",
+    "ppg_adc_s1_redundancy_corrector",
+    "ppg_amb_recheck_scheduler",
+    "ppg_characterization_control_cdc",
+    "ppg_chip_digital_top",
+    "ppg_coarse_detection_fir",
+    "ppg_control_top",
+    "ppg_dynamic_baseline_cross_detector",
+    "ppg_idac_code_controller",
+    "ppg_normal_transaction_fork",
+    "ppg_p2s_packer",
+    "ppg_peak_valley_window_detector",
+    "ppg_precision_window_controller",
+    "ppg_precision_window_integration",
+    "ppg_sar9_sar15_safe_selection_wrapper",
+    "ppg_spi_register_file",
+    "ppg_system_config_manager",
+    "ppg_system_fault_abort_supervisor"
+  ],
+  "modules_skipped_whitelist_ip": [
+    "ppg_config_cdc_bridge",
+    "ppg_pulse_cdc_sync",
+    "ppg_reset_sync"
+  ],
+  "candidates_total": 0,
+  "candidates_by_kind": {},
+  "candidates": [],
+  "gated_candidates_total": 1,
+  "gated_candidates": [
+    {
+      "kind": "direct_always_read",
+      "module": "ppg_spi_register_file",
+      "target_register": "reg_diag_snapshot",
+      "write_domain": "CLK_2M",
+      "reader_always_line_start": 548,
+      "reader_always_line_end": 554,
+      "reader_domain": "SPI_SCLK",
+      "gated": true,
+      "evidence_line": "reg_diag_snapshot_gated <= reg_diag_snapshot; // 门控为真的这一拍，源端早已稳定多拍，安全整体捕获"
+    }
+  ],
+  "validation": {
+    "synthetic_negative_file": "ppg_system_integration/cross_reference_tools/_phase2_synthetic_v1_2_negative.v（运行期临时生成，运行后自动删除，不是长期留存的项目文件）",
+    "cases": [
+      {
+        "label": "合成负例（依据changelog重建，非真实历史文件）：V1.2无门控写法产出未门控主候选",
+        "pass": true,
+        "detail": "主候选=1项, 门控候选=0项, 命中未门控reg_diag_snapshot被reg_diag_sync_meta读取的候选=True"
+      },
+      {
+        "label": "真实V1.3当前代码：reg_diag_snapshot_gated读取reg_diag_snapshot已从主候选消失，改列门控候选",
+        "pass": true,
+        "detail": "是否仍在主候选=False（应为False）, 是否在门控候选=True（应为True）"
+      }
+    ],
+    "all_pass": true
+  }
+}
