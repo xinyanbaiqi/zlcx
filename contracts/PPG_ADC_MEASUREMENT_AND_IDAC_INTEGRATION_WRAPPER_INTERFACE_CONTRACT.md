@@ -1,5 +1,6 @@
 # PPG ADC测量、DC恢复、IDAC与精度窗口集成Wrapper接口合同
 
+> V2.2修订日期：2026-09-30。补记2026-09-18 SID-05修复在AMI RTL V1.15中新增的输入`i_cal_owner_deadline_event`（1 bit；端口声明`ppg_adc_measurement_idac_integration.v:153`；来自调度器`o_cal_owner_deadline_event`，经Top内部网`sched_cal_owner_deadline_event_o`），以及`flag_calibration_request_inflight`因此新增的清零条件（`:1797-1798`）。此前在途标志只在AMB/DCS校准结果被IDAC真实消费（`flag_amb_sample_accepted`/`flag_dcs_sample_accepted`）或STOP/abort/integration阻断时清零；现在调度器报告校准owner截止抑制时也清零，下一拍AMI按仍然有效的请求来源重新拉高`o_calibration_sample_valid`，重新发起同一个尚未得到结果的候选。**为什么**：被截止抑制的请求从未建立ADC owner或事务，不会产生“结果已消费”事件，原逻辑下在途标志永久为1，校准搜索永久卡死（真实RTL缺陷）。**本次改动**：第6.6节端口表新增一行，并补全表后的在途所有权释放说明；第11.3节补清零条件与重新发起行为。不改变AMI-01至AMI-54既有验收编号、结果匹配规则或其它端口。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。AMI模块级`tb_ppg_adc_measurement_idac_integration.v`未连接该输入，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
 > V2.1 fail-closed V5-gate revision, 2026-08-20: AMI remains the sole `o_datapath_empty` aggregate owner and the sole Top-facing parent that forwards V5 named detection configuration and the registered `peak_valley_config_valid` gate into PWI. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects. RTL/TB evidence remains `EVIDENCE_PENDING`.
 > Historical V1.9 change record (non-normative): it added the previously prose-only AMI system-feedback ports for committed precision, NORMAL eligibility, IDAC code/epoch and IDAC idle. Current V2.1 rules above are authoritative.
 
@@ -57,7 +58,7 @@ AMI只在`i_transaction_start_valid && o_transaction_start_ready`真实握手后
 
 1. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
-3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.8；
+3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.9；
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
 5. C11 — `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` V1；
 6. C12 — `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` V1.3；
@@ -477,6 +478,7 @@ calibration_source_qualified =
 | --- | ---: | --- |
 | `o_calibration_sample_valid` | 1 | 当前存在一笔待调度SAR9校准请求 |
 | `i_calibration_sample_ready` | 1 | 帧调度器接受该请求 |
+| `i_cal_owner_deadline_event` | 1 | 帧调度器校准owner截止单周期事件（V2.2补记，SID-05）。输入，来自调度器`o_cal_owner_deadline_event`（Top内部网`sched_cal_owner_deadline_event_o`）；调度器侧为纯组合脉冲，复位期间为0。为1表示在途校准请求在local tick 248截止点前未取得owner、已被调度器抑制，不会有ADC事务或结果返回；AMI据此清除`flag_calibration_request_inflight`并重新发起同一候选（第11.3节）。AMI内部仅此一个消费点 |
 | `o_calibration_frame_type` | 2 | `00`为AMB_CAL，`01`为DCS_CAL |
 | `o_calibration_color_ir` | 1 | DCS请求颜色；AMB时固定为0供诊断 |
 | `o_calibration_precision_mode` | 1 | 固定为0，即SAR9 |
@@ -484,7 +486,7 @@ calibration_source_qualified =
 | `o_calibration_request_fire` | 1 | valid与ready同拍的接受事件 |
 
 请求握手只表示帧调度器取得该校准事务所有权，不等于ADC结果已经返回。wrapper必须保存请求类型、颜色和原因，
-直到匹配的AMB_CAL或DCS_CAL结果被IDAC控制器真实消费。
+直到匹配的AMB_CAL或DCS_CAL结果被IDAC控制器真实消费；若调度器以`i_cal_owner_deadline_event`报告该请求已被owner截止抑制，在途所有权同样释放（V2.2补记，见第11.3节）。
 
 ### 6.7 正式PPG测量输出
 
@@ -982,6 +984,8 @@ STOP / abort / blocking fault
 - 只允许一笔匹配校准ADC事务启动；
 - 不匹配结果被消费以避免死锁，但不得更新搜索，并置协议诊断；
 - STOP、abort和复位撤销未启动请求；已经启动的ADC事务按第13节排空或丢弃。
+
+V2.2补记（SID-05，AMI RTL V1.15）：`flag_calibration_request_inflight`的更新优先级为（`ppg_adc_measurement_idac_integration.v:1791-1802`）：①复位清零；②`i_stop_ack_event`、`i_control_abort_event`或`flag_integration_blocking`清零；③`flag_amb_sample_accepted`、`flag_dcs_sample_accepted`或`i_cal_owner_deadline_event`任一为1时清零；④否则`calibration_request_fire_o`为1时置1。③中的`i_cal_owner_deadline_event`是本版新增条件：调度器在local tick 248截止点抑制了尚未取得owner的校准候选时，这笔请求不会有ADC事务，也不会有结果返回，不释放在途标志，AMI就永远不会再发起请求。在途标志清零后的下一拍，`o_calibration_sample_valid`与在途标志同为0，仲裁寄存器按当时有效的请求来源（周期重检优先于启动搜索，第11.2节）重新锁存类型、颜色和reason并拉高`o_calibration_sample_valid`（`:1357-1410`）；由于没有结果被消费，IDAC搜索状态未推进，重新发起的就是同一个候选。`reg_inflight_frame_type`、`reg_inflight_color_ir`和`reg_inflight_reason`不随截止事件清除，只在下一次请求握手时更新。在途标志为1期间`o_calibration_sample_valid`恒为0（握手当拍清valid、置在途），因此截止事件不会与本侧请求握手同拍冲突。调度器侧“截止与owner提交同拍”的开放观察项见C08第10.3节。
 
 ### 11.4 周期重检闭环
 

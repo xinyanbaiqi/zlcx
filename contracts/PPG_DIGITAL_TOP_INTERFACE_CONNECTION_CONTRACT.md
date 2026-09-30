@@ -11,6 +11,8 @@
 >
 > V1.14 errata, 2026-09-05: correction to V1.13's TOP-06 disposition, not a new architecture or port change. V1.13 reported TOP-06's dynamic-switch-triggered half ("旧15-bit尾部不启动新事务") as genuinely open because its Priority-1b evidence sweep only checked `tb_ppg_control_top.v`/`tb_ppg_control_top_injection.v`/`tb_ppg_control_top_startup_idac_calibration.v` and never checked the Phase 3 Stage 4 files. Real, already-existing evidence was found in `ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v` (created 2026-08-24/25, the same day as the original SMOKE-16 deferral note) -- its GROUP4 checks directly prove the old-precision FIR tail (bounded to `C_FIR_GROUP_DELAY_SAMPLES`=10 samples) cannot arm or start a new detection candidate (`flag_below_seen`/`flag_previous_valid` read back 0, `flag_candidate_start` never fires during the tail) and that the system genuinely recovers to form a second real CROSS from rebuilt post-tail evidence. Real dual-tool evidence: iverilog (650- and 900-sample runs, all GROUP4 checks PASS) and Vivado 2022.2 xsim (`FIR_TAIL_ISOLATION_TB_PASS real_red=900 real_ir=899 real_cal=0 measurement_result_valid=1798 peak_count=5 valley_count=4 cross_count=2 return_count=1`, identical to iverilog). Section 10's TOP-06 row and conclusion updated: all 24 TOP-01~24 items are now `CLOSED`. This errata does not touch G-FP-01~07, which remains its own separate, already-closed ledger-completeness effort (distinct from TOP-01~24 acceptance evidence).
 >
+> V1.15 errata, 2026-09-30: SID-05 contract sync, internal wiring only -- no new Top port and no Top-level logic. Records the Top-internal net `sched_cal_owner_deadline_event_o` added by `ppg_control_top.v` V1.6 (2026-09-18; declared at `ppg_control_top.v:553`). It connects Scheduler output `o_cal_owner_deadline_event` (Scheduler instance connection `:963`; Scheduler RTL V1.8, C08 V1.9) point-to-point to AMI input `i_cal_owner_deadline_event` (AMI instance connection `:1151`; AMI RTL V1.15, C10 V2.2). Why: without it, a calibration candidate suppressed at the local-tick-248 owner deadline left AMI's calibration request permanently in flight and stalled the whole AMB/DCS_CAL search (real RTL defect, `verification_reports/WORKLINE_D_SID05_SID06_20260918.md`). Section 6.3 gains this connection in its calibration-request row plus one paragraph. Evidence: `tb_ppg_control_top_startup_idac_calibration.v` V1.2, iverilog and Vivado 2022.2 xsim 83 PASS/0 FAIL; 2026-09-19 full 19-TB xsim regression 19/19 PASS, 0 FAIL, 1208 PASS total. Like V1.11-V1.14 this is an erratum under the supersession clause below: the normative label stays V1.10, so no dependency citation of C01 changes. Sync record: `verification_reports/CONTRACT_SYNC_SID05_20260930.md`.
+>
 > Normative supersession: V1.10 is this file's only current normative revision. Every V1.3.x/V1.4/V1.9 status, scope, dependency-version or implementation-readiness statement below is retained only as historical context and is expressly non-normative where it differs from V1.10 or the current dependency table in Section 2.1. In particular, no older statement may claim that the final port table is incomplete, defer the required supervisor boundary, permit an alternative supervisor implementation, or redefine contract closure from implementation evidence.
 
 > 历史冻结记录（非规范）：V1.3.5验证专用异常注入接口形状曾被冻结；该记录不定义当前顶层端口、层次、合同状态或实现状态。  
@@ -89,8 +91,8 @@ baselines and drafts are not dependencies and cannot override this table.
 | C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` | V1.7 | ACTIVE, manager-wrapper, generation, fault-blocking and lifecycle routes |
 | C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | sole generation production and STOPPING lifecycle |
 | C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | sole manager parent and transparent manager port forwarding |
-| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.8 | Rule A, owner deadline and scheduler fault records |
-| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | completion, discard, drain, AMI feedback/blocking gate and fault records |
+| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.9 | Rule A, owner deadline and scheduler fault records |
+| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | completion, discard, drain, AMI feedback/blocking gate and fault records |
 | C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.0 | internal detection-chain lifecycle forwarding |
 | C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | waveform/physical owner and SSW fault records |
 | C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.1 | dedicated characterization CDC boundary |
@@ -651,7 +653,7 @@ flag_adc_physical_idle
 
 | AMI输出 | 连接目标 |
 | --- | --- |
-| `o_calibration_sample_valid`和全部请求载荷 | 调度器对应`i_calibration_sample_*`；调度器`o_calibration_sample_ready`回连AMI |
+| `o_calibration_sample_valid`和全部请求载荷 | 调度器对应`i_calibration_sample_*`；调度器`o_calibration_sample_ready`回连AMI；调度器`o_cal_owner_deadline_event`经Top内部网`sched_cal_owner_deadline_event_o`回连AMI `i_cal_owner_deadline_event`（V1.15勘误，非Top端口） |
 | `o_active_precision_mode` | 调度器`i_active_precision_mode`与SSW`i_precision_mode_committed` |
 | `o_switch_hold_new_transaction` | 调度器`i_switch_hold_new_transaction` |
 | `o_normal_measurement_eligible` | 调度器`i_normal_measurement_eligible` |
@@ -670,6 +672,8 @@ RUN期间请求接收：Scheduler复核NORMAL_PPG、PHOTODIODE、AMB/DCS类型�
 ```
 
 顶层只直连AMI与Scheduler的保持型校准请求接口，不把请求或请求reason反馈到配置管理器。640-bit ACTIVE、manager wrapper和顶层均不得增加`calibration_plan`、未来校准类型或预声明校准队列。非法CHARACTERIZATION、外部固定电流或SAR15校准请求必须在任何SSW波形上下文、ADC owner、IDAC自动pending或结果事务启动前被AMI/Scheduler拒绝；SSW保留最终防御性安全隔离。
+
+V1.15勘误（SID-05）：调度器与AMI之间新增一条纯内部单向连线，不新增Top端口，Top层不含任何逻辑：`ppg_400hz_frame_calibration_scheduler.o_cal_owner_deadline_event` → Top内部`wire sched_cal_owner_deadline_event_o`（`ppg_control_top.v:553`）→ `ppg_adc_measurement_idac_integration.i_cal_owner_deadline_event`。两端连接分别位于`ppg_control_top.v:963`（调度器例化`ppg_400hz_frame_calibration_scheduler_Inst`）和`:1151`（AMI例化`ppg_adc_measurement_idac_integration_Inst`）。该网唯一生产者为调度器、唯一消费者为AMI，不得扇出到SSW、supervisor、配置管理器或任何Top输出。语义见C08第10.3节（校准owner在local tick 248截止被抑制时的单周期事件）和C10第11.3节（AMI据此释放校准在途请求并重新发起同一候选）。
 
 AMI V1.3.3合同沿用已验证的ADC完成旁带语义，正式输出为：
 

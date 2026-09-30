@@ -1,5 +1,6 @@
 # PPG 400 Hz帧与校准事务调度器接口合同
 
+> V1.9修订日期：2026-09-30。补记2026-09-18 SID-05修复在调度器RTL V1.8中新增的输出`o_cal_owner_deadline_event`（1 bit；端口声明`ppg_400hz_frame_calibration_scheduler.v:189`，赋值`:567`为`assign o_cal_owner_deadline_event = flag_cal_owner_deadline;`，源信号定义`:467`）。它把既有组合信号`flag_cal_owner_deadline`原样引出：校准宏帧中校准owner-pending到local tick 248仍未提交owner的那一拍为1，唯一消费者是AMI新增输入`i_cal_owner_deadline_event`（经Top内部网`sched_cal_owner_deadline_event_o`，不是Top端口）。**为什么新增**：tick-248截止抑制本身（撤销`B_CAL_WAVE_PENDING`、置`B_OWNER_DEADLINE_TIMEOUT`，`:747-750`）此前就是正确的，但从未回报AMI；AMI的`flag_calibration_request_inflight`只在校准结果被真实消费或STOP/abort/阻断时清零，被截止抑制的请求既无owner也无结果，在途标志永久为1，AMI不再发起请求握手，第9.1节要求的“原请求保留并在下一校准子帧重试”永远不会发生，整个AMB/DCS_CAL搜索永久卡死（真实RTL缺陷）。**本次改动**：第9.1节末段补一句实现说明；第10.3节末尾新增截止回报规则及一条开放观察项；第13.9节端口表新增一行。不改变owner截止数值248、`o_owner_deadline_timeout_sticky`的非阻断历史诊断属性、RED/IR owner截止283/443或FSC-01至FSC-57任何既有条款。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2的SID-05-DCR/SID-05-DCIR截止抑制后恢复断言，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。模块级`tb_ppg_400hz_frame_calibration_scheduler.v`未连接该端口，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
 > V1.8修订日期：2026-08-30。桶1 RTL会话（SID-11+LFA-06+OIB-01+LFA-10(b)专属会话）新增输入`i_owner_q3_window_closed`（来自SSW新状态输出`o_owner_q3_window_closed`），接入`flag_completion_success`（正式成功结果资格判据），额外要求在途owner自身选定的Q3窗口已经关闭，防止早于Q3的CLK_DOUT冒充协议意义上的成功完成（LFA-06缺口的RTL修复）。**门控点特别说明**：`flag_completion_match`（DONE身份逐位匹配、owner是否合法释放）本身**不**引入这项新要求——身份匹配就应该合法释放owner槽位，Q3要求只作用于`flag_completion_success`（是否记为协议意义上的成功、是否置位`B_RED_DONE`/`B_IR_DONE`）。这个门控点的选择是一次真实构造中发现死锁后的修正：门控放在owner释放本身会导致"Q3若因异常提前完成而不再出现"时owner永久卡在in-flight，连带SSW侧`o_wrapper_idle`永远为假、`transaction_mismatch_sticky_o`永远清不掉。AMI自身的独立测量结果流（`o_measurement_result_valid`）不受本次改动影响——AMI-37明文要求AMI自己的完成判定只认真实DONE、不掺Q3，这是刻意的架构边界，不是遗漏，详见`PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` AMI-37。真实证据：`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-06（V1.3，iverilog+Vivado 2022.2 xsim双工具confirmed）。不改变本合同FSC-01至FSC-57任何既有编号条款的行为。
 > V1.7 fail-closed integration review, 2026-08-20: Scheduler semantics remain normative and unchanged, but the system closure verdict is owned solely by the current matrix audit and is `NOT_CLOSED` until every final defect count is zero. Implementation evidence is `EVIDENCE_PENDING`.
 > V1.7 change record: replaces non-normative timing RTL and stale dependency versions with the current active contract set. Scheduler Rule A, fixed handover, owner deadline, Q1/Q2/Q3, RAW path and sample-index allocation do not change.
@@ -54,7 +55,7 @@
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
 3. C06 — `ppg_system_integration/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md` V1.3；
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
-5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.1；
+5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.2；
 6. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.0；
 7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2；
 8. C17 — `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` V2.3；
@@ -531,7 +532,7 @@ calibration_request_qualified =
 
 只有`calibration_request_qualified=1`且本地请求缓冲可用时，`o_calibration_sample_ready`才允许为1。若CHARACTERIZATION、外部固定电流、非法frame type或SAR15请求把`i_calibration_sample_valid`拉高，调度器必须保持ready为0、置`o_protocol_error_sticky`并阻断该请求生成波形上下文、ADC owner、IDAC边界、结果事务或`sample_index`变化。该检查不得改变NORMAL RED/IR接管点、Q3、owner deadline或既有校准local tick。
 
-`o_calibration_sample_ready`表示调度器的一项校准请求缓冲可原子接收全部请求载荷，不要求恰好位于local tick 0。请求握手后由调度器拥有并保持，直到某个后续local tick 0完成波形上下文握手。若该次波形上下文未接管，或已经接管但ADC owner未在local tick 248前提交，调度器不得再次消费上游请求；在无STOP、abort、复位或阻断故障时，原请求保留并在下一校准子帧重试。每个真实ADC owner fire只对应一笔请求，禁止一次请求自动扩增为多笔样本。
+`o_calibration_sample_ready`表示调度器的一项校准请求缓冲可原子接收全部请求载荷，不要求恰好位于local tick 0。请求握手后由调度器拥有并保持，直到某个后续local tick 0完成波形上下文握手。若该次波形上下文未接管，或已经接管但ADC owner未在local tick 248前提交，调度器不得再次消费上游请求；在无STOP、abort、复位或阻断故障时，原请求保留并在下一校准子帧重试。每个真实ADC owner fire只对应一笔请求，禁止一次请求自动扩增为多笔样本。V1.9补记：对“ADC owner未在local tick 248前提交”这一情形，请求载荷在波形上下文握手时已被消费（`B_CAL_REQ_PENDING`在波形fire时清零，`ppg_400hz_frame_calibration_scheduler.v:657-660`），调度器侧不再保留原请求；“原请求保留并在下一校准子帧重试”由调度器输出`o_cal_owner_deadline_event`、AMI释放在途请求并重新握手同一个尚未得到结果的候选来实现（见第10.3节）。这次重新握手不是新的样本请求，不扩增样本数。
 
 ### 9.2 固定SAR9
 
@@ -723,6 +724,10 @@ owner必须在第4.5节截止点之内提交。截止点到达仍未fire时：
 - 置`o_owner_deadline_timeout_sticky`；
 - 双光NORMAL缺少任一颜色结果时不产生完整NORMAL完成；
 - 校准请求保持为同一笔pending，在下一校准子帧重新建立波形上下文。
+
+**校准owner截止回报（V1.9补记，SID-05）**：调度器通过单周期事件输出`o_cal_owner_deadline_event`把校准owner截止回报给AMI。RTL为`assign o_cal_owner_deadline_event = flag_cal_owner_deadline;`（`ppg_400hz_frame_calibration_scheduler.v:567`），源信号`flag_cal_owner_deadline`为`B_FRAME_ACTIVE && 帧模式==CAL && B_CAL_WAVE_PENDING && !B_INFLIGHT && o_calibration_local_tick >= C_CAL_OWNER_DEADLINE`（`:467`，`C_CAL_OWNER_DEADLINE=248`），纯组合，不经额外寄存器，也不以`flag_lifecycle_active`门控。该拍没有owner提交时，次态逻辑在同一拍撤销`B_CAL_WAVE_PENDING`并置`B_OWNER_DEADLINE_TIMEOUT`（`:747-750`），因此事件恰好持续1个2 MHz周期，在`B_CAL_WAVE_PENDING`寄存器清零的同一时钟沿回落；复位时状态向量全零（`:878`），事件为0。该事件不分配或跳过`sample_index`、不建立owner、不产生完成事件，也不汇入`o_scheduler_local_fault_blocking`或`o_scheduler_fault_*`记录。唯一消费者是AMI `i_cal_owner_deadline_event`（经Top内部网`sched_cal_owner_deadline_event_o`，见C01第6.3节），AMI据此释放校准在途请求，并重新发起同一个尚未得到结果的候选（见C10第11.3节）。上一条“校准请求保持为同一笔pending”在owner截止情形下的实现方式是：请求载荷已在波形上下文握手时被消费（`:657-660`），调度器侧不再保留；AMI重新握手时，`o_calibration_sample_ready`在`B_CAL_REQ_ACTIVE`、校准宏帧、`!B_CAL_WAVE_PENDING`、`!B_INFLIGHT`时允许接收（`:429-432`，其余资格见第9.1节），握手置`B_CAL_REQ_PENDING`并重新开放`B_CAL_CONTEXT_SEEN`，由下一校准子帧local tick 0重新建立波形上下文；本宏帧已无剩余子帧时，按第9.6节跨宏帧保留。没有这条回报时，AMI在途标志永不释放，后续子帧不会再有请求握手，`B_CAL_CONTEXT_SEEN`保持封闭，整个AMB/DCS_CAL搜索永久停滞。
+
+**开放观察项（未裁定，暂不作规范要求）**：内部截止处理位于`if(adc_owner_commit_event_o == 1'b0)`分支内（`:736`），而`o_cal_owner_deadline_event`直接转发`flag_cal_owner_deadline`，没有这项同拍提交屏蔽。SSW的校准owner窗口包含local tick 248（`ppg_sar9_sar15_safe_selection_wrapper.v:413`，`<= C_CAL_OWNER_DEADLINE`），因此校准owner理论上可能恰好在local tick 248提交：调度器按正常提交处理，但同一拍仍向AMI输出截止事件。这一同拍情形尚未经仿真确认，已记录在`verification_reports/CONTRACT_SYNC_SID05_20260930.md`待裁定；裁定前，本合同不把该同拍输出列为规范行为。
 
 ### 10.4 完成和owner释放
 
@@ -975,6 +980,7 @@ i_transaction_start_fire
 | `o_next_sample_index` | 参数化 | 下一笔成功启动将使用的序号 |
 | `o_launch_timeout_sticky` | 1 | 至少一个波形上下文错过固定接管点 |
 | `o_owner_deadline_timeout_sticky` | 1 | 波形已接管但ADC owner未在截止点前提交 |
+| `o_cal_owner_deadline_event` | 1 | 校准owner截止单周期事件（V1.9补记，SID-05）。输出，复位值0（组合输出，由复位清零的状态向量导出）。生产者：`flag_cal_owner_deadline`直接转发；校准宏帧中校准owner-pending到local tick 248仍无owner时为1，持续1个2 MHz周期，在`B_CAL_WAVE_PENDING`清零的同一时钟沿回落。唯一消费者：AMI `i_cal_owner_deadline_event`（Top内部网`sched_cal_owner_deadline_event_o`，非Top端口）。不是故障，不进入阻断汇总；语义见第10.3节 |
 | `o_completion_mismatch_sticky` | 1 | DONE sample index与在途事务不匹配 |
 | `o_protocol_error_sticky` | 1 | 编码、握手或上下文协议异常 |
 | `o_scheduler_local_fault_blocking` | 1 | 仅本地活动根因、协议错误或身份错配的阻断汇总；不重复回送AMI/SSW输入故障 |
