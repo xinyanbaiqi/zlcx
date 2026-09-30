@@ -14,7 +14,8 @@ PPG（光电容积脉搏波）芯片数字部分的RTL、testbench与合同文�
 rtl/                        每个功能模块一个子目录，包含该模块当前的RTL、testbench、约束/filelist与回归脚本
 contracts/                  各模块接口合同、系统级合同闭合矩阵、验收ID别名映射表
 verification_reports/       独立复核 / gap修复 / 阶段性关闭报告——记录验证逻辑与结论，不含中间过程
-tools/                      交叉引用核对工具（cross_reference_tools）与批量回归脚本
+tools/                      交叉引用核对工具（cross_reference_tools）
+legacy/                     已退役的testbench与脚本（原样保留，见 legacy/README.md）
 ```
 
 ### rtl/
@@ -26,7 +27,7 @@ tools/                      交叉引用核对工具（cross_reference_tools）�
 - `*.sdc` / `*.f` —— 约束文件与仿真filelist（如存在）
 - `run_*.sh` / `run_*.ps1` —— 回归/仿真驱动脚本（如存在）
 
-`ppg_control_top/` 是数字控制链的顶层，`ppg_chip_digital_top/` 是glue顶层（集成SPI、P2S等）。`rtl/ppg_system_integration/` 只含一份跨模块联合testbench，其余系统级内容在 `contracts/` 与 `verification_reports/` 里。
+`ppg_control_top/` 是数字控制链的顶层，`ppg_chip_digital_top/` 是glue顶层（集成SPI、P2S等）。系统级内容在 `contracts/` 与 `verification_reports/` 里。原来的 `rtl/ppg_system_integration/`（一份scheduler+SSW+AMI三模块联合testbench）已于2026-09-30退役，移入 `legacy/rtl/ppg_system_integration/`，其职责由 `ppg_control_top/` 的19-TB主回归继承。
 
 ### contracts/
 
@@ -38,7 +39,11 @@ tools/                      交叉引用核对工具（cross_reference_tools）�
 
 ### tools/
 
-`cross_reference_tools/` 下是用于CDC（跨时钟域）审计、验收ID核对、回归新鲜度检查、文字滞后扫描的独立Python工具，附带各自最近一次真实运行产出的报告。`aggregate_v1_3_results.py/.ps1`、`run_v1_3_scenarios.ps1` 是联合场景批量回归脚本。
+`cross_reference_tools/` 下是用于CDC（跨时钟域）审计、验收ID核对、回归新鲜度检查、文字滞后扫描的独立Python工具，附带各自最近一次真实运行产出的报告。原来的联合场景批量回归脚本 `run_v1_3_scenarios.ps1`、`aggregate_v1_3_results.py/.ps1` 只服务于已退役的三模块联合testbench，已随它一起移入 `legacy/tools/`。
+
+### legacy/
+
+已退役、不再参与回归的testbench与脚本，用 `git mv` 原样移入，保留原来的相对路径（`legacy/rtl/...`、`legacy/tools/...`）。每个文件的退役原因见 [legacy/README.md](legacy/README.md)。
 
 ## SAR9/SAR15 DC综合入口的版本判断（已解决）
 
