@@ -1,5 +1,6 @@
 # PPG 400 Hz帧与校准事务调度器接口合同
 
+> V1.10修订日期：2026-09-30。合同补记批次2：V1.8修订记录已经描述、但正式端口表一直缺失的输入`i_owner_q3_window_closed`（`ppg_400hz_frame_calibration_scheduler.v:163`声明），本次补进第13.7节端口表；第10.4节补写它对完成成功判定的门控，即`flag_completion_success = flag_completion_match && i_adc_transaction_success && !B_INFLIGHT_DISCARD && i_owner_q3_window_closed`（`:460`）。调度器内部只有NORMAL事务用到这个判据，用来置位`B_RED_DONE`/`B_IR_DONE`（`:714-719`）。以下内容均不改变：owner释放条件`flag_completion_match`（`:459`，不含该门控）、owner截止、FSC-01至FSC-57的任何条款，以及`o_cal_owner_deadline_event`的相关描述。依据：本合同V1.8修订记录，以及该输出的生产者SSW合同C09 V1.9；真实证据为V1.8记录所引的`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-06。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`。
 > V1.9修订日期：2026-09-30。补记2026-09-18 SID-05修复在调度器RTL V1.8中新增的输出`o_cal_owner_deadline_event`（1 bit；端口声明`ppg_400hz_frame_calibration_scheduler.v:189`，赋值`:567`为`assign o_cal_owner_deadline_event = flag_cal_owner_deadline;`，源信号定义`:467`）。它把既有组合信号`flag_cal_owner_deadline`原样引出：校准宏帧中校准owner-pending到local tick 248仍未提交owner的那一拍为1，唯一消费者是AMI新增输入`i_cal_owner_deadline_event`（经Top内部网`sched_cal_owner_deadline_event_o`，不是Top端口）。**为什么新增**：tick-248截止抑制本身（撤销`B_CAL_WAVE_PENDING`、置`B_OWNER_DEADLINE_TIMEOUT`，`:747-750`）此前就是正确的，但从未回报AMI；AMI的`flag_calibration_request_inflight`只在校准结果被真实消费或STOP/abort/阻断时清零，被截止抑制的请求既无owner也无结果，在途标志永久为1，AMI不再发起请求握手，第9.1节要求的“原请求保留并在下一校准子帧重试”永远不会发生，整个AMB/DCS_CAL搜索永久卡死（真实RTL缺陷）。**本次改动**：第9.1节末段补一句实现说明；第10.3节末尾新增截止回报规则及一条开放观察项；第13.9节端口表新增一行。不改变owner截止数值248、`o_owner_deadline_timeout_sticky`的非阻断历史诊断属性、RED/IR owner截止283/443或FSC-01至FSC-57任何既有条款。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2的SID-05-DCR/SID-05-DCIR截止抑制后恢复断言，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。模块级`tb_ppg_400hz_frame_calibration_scheduler.v`未连接该端口，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
 > V1.8修订日期：2026-08-30。桶1 RTL会话（SID-11+LFA-06+OIB-01+LFA-10(b)专属会话）新增输入`i_owner_q3_window_closed`（来自SSW新状态输出`o_owner_q3_window_closed`），接入`flag_completion_success`（正式成功结果资格判据），额外要求在途owner自身选定的Q3窗口已经关闭，防止早于Q3的CLK_DOUT冒充协议意义上的成功完成（LFA-06缺口的RTL修复）。**门控点特别说明**：`flag_completion_match`（DONE身份逐位匹配、owner是否合法释放）本身**不**引入这项新要求——身份匹配就应该合法释放owner槽位，Q3要求只作用于`flag_completion_success`（是否记为协议意义上的成功、是否置位`B_RED_DONE`/`B_IR_DONE`）。这个门控点的选择是一次真实构造中发现死锁后的修正：门控放在owner释放本身会导致"Q3若因异常提前完成而不再出现"时owner永久卡在in-flight，连带SSW侧`o_wrapper_idle`永远为假、`transaction_mismatch_sticky_o`永远清不掉。AMI自身的独立测量结果流（`o_measurement_result_valid`）不受本次改动影响——AMI-37明文要求AMI自己的完成判定只认真实DONE、不掺Q3，这是刻意的架构边界，不是遗漏，详见`PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` AMI-37。真实证据：`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-06（V1.3，iverilog+Vivado 2022.2 xsim双工具confirmed）。不改变本合同FSC-01至FSC-57任何既有编号条款的行为。
 > V1.7 fail-closed integration review, 2026-08-20: Scheduler semantics remain normative and unchanged, but the system closure verdict is owned solely by the current matrix audit and is `NOT_CLOSED` until every final defect count is zero. Implementation evidence is `EVIDENCE_PENDING`.
@@ -55,7 +56,7 @@
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
 3. C06 — `ppg_system_integration/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md` V1.3；
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
-5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.2；
+5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.3；
 6. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.0；
 7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2；
 8. C17 — `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` V2.3；
@@ -754,6 +755,8 @@ owner_release =
 - 完成事件的sample index不匹配：不得释放当前owner，置身份错配/阻断诊断；
 - 当前无owner却收到完成事件：不得借用下一事务或旧波形身份，置协议诊断。
 
+**成功判定的Q3门控（V1.10补记，对应V1.8新增输入）**：上面“匹配完成且`success=1`”在RTL中的准确判据是`flag_completion_success = flag_completion_match && i_adc_transaction_success && !B_INFLIGHT_DISCARD && i_owner_q3_window_closed`（`ppg_400hz_frame_calibration_scheduler.v:460`）。其中`i_owner_q3_window_closed`来自SSW `o_owner_q3_window_closed`，含义是当前在途owner自身选定的Q3窗口已经关闭（按owner保持，见C09），用来保证早于本owner Q3窗口结束的`CLK_DOUT`不被计为成功。这项门控只影响成功判定，不影响owner释放：`flag_completion_match`（`:459`）不含此项，身份和RUN代际都匹配的完成事件照常释放owner。`flag_completion_success`在调度器内只有一个消费点（`:714-719`）：NORMAL事务据此置位`B_RED_DONE`或`B_IR_DONE`；校准事务的成功处理不经过这个判据。若匹配完成且`success=1`、但Q3窗口尚未关闭，owner照常释放，但不置位颜色完成位；由于`i_adc_transaction_success`为1，`B_FRAME_FAILED`也不会被置位（`:720-721`只在`success==0`时置位），所以这个NORMAL宏帧得不到完整成功的完成事件。
+
 真实完成必须经历`CLK_DOUT`两级同步、RAW锁存及事务身份接纳。Q3结束、模拟包络末沿、固定4拍延时或宏帧tick均不得伪造DONE。错误或迟到DONE不得归入下一事务；只有仍保留原始owner身份且sample index匹配的受控迟到完成，才可按上述`success=0`规则释放旧物理owner。
 
 ## 11. IDAC码和epoch快照
@@ -949,6 +952,7 @@ i_transaction_start_fire
 | `i_adc_transaction_complete_event` | 1 | 当前物理ADC事务完成单拍 |
 | `i_adc_transaction_success` | 1 | 完成结果处理资格；0仍释放匹配owner，但禁止计为成功结果 |
 | `i_adc_complete_sample_index` | 参数化 | 完成事务身份回传 |
+| `i_owner_q3_window_closed` | 1 | 来自SSW `o_owner_q3_window_closed`，表示当前在途owner自身选定的Q3窗口已关闭。只进入成功判定`flag_completion_success`（`:460`），不参与owner释放；V1.8新增，V1.10补入本表，语义见第10.4节 |
 | `i_adc_idle` | 1 | 物理ADC和DONE已回到可启动状态 |
 | `i_analog_safe` | 1 | 模拟输出处于允许停止/切换状态 |
 | `i_sar_timing_idle` | 1 | 无在途模拟相位或待完成颜色 |

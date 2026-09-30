@@ -116,7 +116,7 @@ itself closing the broader G-FP-01/G-FP-06 port ledgers:
 Exposure mechanism: these are always-on, unconditional top-level `output`
 ports on `ppg_control_top.v` -- not a CSR/register-map interface, and not
 gated by `C_ENABLE_TEST_INJECTION` the way the verification-only injection
-port groups are. `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:203`
+port groups are. `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:205`
 explicitly separates verification-only injection ("only available in
 verification builds, must be statically disabled in production builds")
 from this interface; line 209 groups "V4 lifecycle ACK/error" together with

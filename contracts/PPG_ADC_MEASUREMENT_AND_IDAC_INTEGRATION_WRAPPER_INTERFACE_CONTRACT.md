@@ -1,5 +1,6 @@
 # PPG ADC测量、DC恢复、IDAC与精度窗口集成Wrapper接口合同
 
+> V2.3修订日期：2026-09-30。合同补记批次2：补入AMI RTL V1.13（2026-08-31）和V1.14（2026-09-05）新增、但正式端口表一直缺失的5个端口。① 第6.5b节补验证专用注入端口对`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready`（`ppg_adc_measurement_idac_integration.v:398-399`，Stage5 Group15 PRC-09/10），并补写这对端口在AMI内原样直通PWI和粗检测FIR、由FIR绑定到下一笔真实样本的行为；② 第6.7节补P2S遥测输出`o_s1_calibration_applied`、`o_s1_raw[9:0]`、`o_s2_raw[9:0]`（`:403-405`）。这三个字段的定义以芯片顶层合同`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`第8.4.5节为准，本合同只写AMI侧的来源和连接。不改变AMI-01至AMI-54的任何既有条款，也不涉及`i_cal_owner_deadline_event`的相关描述。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`（其中记录了P2S三个端口与正式结果是否同拍对应的开放观察项）。
 > V2.2修订日期：2026-09-30。补记2026-09-18 SID-05修复在AMI RTL V1.15中新增的输入`i_cal_owner_deadline_event`（1 bit；端口声明`ppg_adc_measurement_idac_integration.v:153`；来自调度器`o_cal_owner_deadline_event`，经Top内部网`sched_cal_owner_deadline_event_o`），以及`flag_calibration_request_inflight`因此新增的清零条件（`:1797-1798`）。此前在途标志只在AMB/DCS校准结果被IDAC真实消费（`flag_amb_sample_accepted`/`flag_dcs_sample_accepted`）或STOP/abort/integration阻断时清零；现在调度器报告校准owner截止抑制时也清零，下一拍AMI按仍然有效的请求来源重新拉高`o_calibration_sample_valid`，重新发起同一个尚未得到结果的候选。**为什么**：被截止抑制的请求从未建立ADC owner或事务，不会产生“结果已消费”事件，原逻辑下在途标志永久为1，校准搜索永久卡死（真实RTL缺陷）。**本次改动**：第6.6节端口表新增一行，并补全表后的在途所有权释放说明；第11.3节补清零条件与重新发起行为。不改变AMI-01至AMI-54既有验收编号、结果匹配规则或其它端口。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。AMI模块级`tb_ppg_adc_measurement_idac_integration.v`未连接该输入，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
 > V2.1 fail-closed V5-gate revision, 2026-08-20: AMI remains the sole `o_datapath_empty` aggregate owner and the sole Top-facing parent that forwards V5 named detection configuration and the registered `peak_valley_config_valid` gate into PWI. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects. RTL/TB evidence remains `EVIDENCE_PENDING`.
 > Historical V1.9 change record (non-normative): it added the previously prose-only AMI system-feedback ports for committed precision, NORMAL eligibility, IDAC code/epoch and IDAC idle. Current V2.1 rules above are authoritative.
@@ -58,7 +59,7 @@ AMI只在`i_transaction_start_valid && o_transaction_start_ready`真实握手后
 
 1. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
-3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.9；
+3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.10；
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
 5. C11 — `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` V1；
 6. C12 — `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` V1.3；
@@ -420,6 +421,8 @@ ppg_sar9_sar15_safe_selection_wrapper.i_adc_complete_sample_index
 | `i_test_identity_inject_sample_index` | `C_SAMPLE_INDEX_WIDTH` | input | 送入生产completion identity matcher的显式错误`sample_index`，必须不同于当前owner |
 | `i_test_invalid_sample_valid` | 1 | input | 保持型一次性invalid-sample qualification请求valid |
 | `o_test_invalid_sample_ready` | 1 | output | AMI可把invalid请求原子绑定到当前唯一NORMAL owner |
+| `i_test_calibration_loss_inject_valid` | 1 | input | 保持型一次性calibration-loss注入请求valid（V2.3补记，PRC-09/10）；AMI不解释，原样直通PWI、再直通粗检测FIR，见本节末段 |
+| `o_test_calibration_loss_inject_ready` | 1 | output | 粗检测FIR可把calibration-loss请求原子绑定到下一笔真实被接纳的样本；由FIR产生，经PWI原样返回（V2.3补记） |
 
 两个唯一接受事件为：
 
@@ -457,6 +460,8 @@ identity注入只替换一次真实物理完成首次呈交给既有production i
 因为该注入建立在一笔真实物理DONE已经返回的事务上，AMI必须另行保持“测试错配后owner retained”和原始真实完成上下文。若随后收到STOP ack或全局受控abort，AMI把该已保存真实完成以原始identity重新呈交production matcher；只有原始身份匹配后才输出一次原`sample_index`、`success=0`完成旁带，使Scheduler、SSW和AMI按既有规则释放旧owner。STOP与abort并发或先后到达时该释放必须幂等：同一旧owner最多产生一次失败完成旁带，已释放后到达的另一事件不得产生第二次完成。不得生成第二个物理DONE、不得直接由STOP/abort清owner，也不得把错误注入身份用于释放。reset可立即失效数字owner；`diag_clear`单独无效。
 
 invalid-sample注入发生在真实DONE和完整身份成功匹配、DC恢复结果已经形成、但结果进入正式measurement/detection双消费者边界之前。它只把绑定事务的独立sample资格清为0，不改变事务valid、RAW、Stage1/Stage2值、DC恢复值、身份、码快照或epoch。
+
+**calibration-loss注入（V2.3补记，AMI RTL V1.13）**：这一对端口服务PRC-09/10，不属于上面的identity/invalid两类，也不受第3条双请求互斥约束。AMI既不解释也不门控这个请求：`i_test_calibration_loss_inject_valid`原样接到PWI例化的同名输入，`o_test_calibration_loss_inject_ready`原样取自PWI的同名输出（`ppg_adc_measurement_idac_integration.v:2615-2616`）。AMI送给PWI的`i_test_inject_enable`是AMI自己的`flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 0) && i_test_inject_enable`（`:908`、`:2614`），`C_ENABLE_TEST_INJECTION`也逐层传给PWI（`:2461`）；PWI再把这对端口原样直通到粗检测FIR（`ppg_precision_window_integration.v:651-652`）。请求真正的接受和作用都在FIR内：ready为`(C_ENABLE_TEST_INJECTION != 0) && i_test_inject_enable && i_rstn && !flag_test_calibration_loss_armed`，握手条件是ready再加valid（`ppg_coarse_detection_fir.v:312-313`）；握手后绑定寄存器置位，命中下一笔真实被FIR接纳的样本时，把该样本的粗路径校准资格强制视为0（不计入合格样本，`:314-315`），随后自动撤销；命中之前若检测历史被清空也会撤销，复位时清除（`:465-477`）。因此`C_ENABLE_TEST_INJECTION=0`时ready恒为0，valid被忽略，不影响任何生产行为。
 
 ### 6.6 校准请求输出
 
@@ -521,6 +526,9 @@ DC恢复后的完整事务通过第二个无丢失fork送往片内检测和以�
 | `o_result_dc_code_snapshot` | 8 | 本笔颜色DC码快照 |
 | `o_result_amb_code_epoch` | 4 | 本笔AMB版本 |
 | `o_result_dc_code_epoch` | 4 | 本笔颜色DC版本 |
+| `o_s1_calibration_applied` | 1 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_calibration_applied`（`:1029`，来源`:2278`），**不是**本表其余“本笔”字段所取自的`reg_result_fork_payload`里的同名字段；字段用途见芯片顶层合同第8.4.5节 |
+| `o_s1_raw` | 10 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_stage1_raw`（`:1030`，来源`:2299`）；正式结果fork载荷里没有这个字段；字段用途见芯片顶层合同第8.4.5节 |
+| `o_s2_raw` | 10 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_stage2_raw`（`:1031`，来源`:2301`），与`o_s1_raw`取自同一DC恢复载荷；这三个P2S端口与本表“本笔”正式输出是否同拍对应，见批次2合同同步报告的开放观察项 |
 
 9-bit事务仍产生完整输出事务，但`fine_valid=0`；15-bit事务的粗、精细结果和全部元数据属于同一原子事务。
 

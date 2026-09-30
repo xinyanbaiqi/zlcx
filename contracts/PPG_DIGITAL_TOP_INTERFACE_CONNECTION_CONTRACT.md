@@ -13,6 +13,8 @@
 >
 > V1.15 errata, 2026-09-30: SID-05 contract sync, internal wiring only -- no new Top port and no Top-level logic. Records the Top-internal net `sched_cal_owner_deadline_event_o` added by `ppg_control_top.v` V1.6 (2026-09-18; declared at `ppg_control_top.v:553`). It connects Scheduler output `o_cal_owner_deadline_event` (Scheduler instance connection `:963`; Scheduler RTL V1.8, C08 V1.9) point-to-point to AMI input `i_cal_owner_deadline_event` (AMI instance connection `:1151`; AMI RTL V1.15, C10 V2.2). Why: without it, a calibration candidate suppressed at the local-tick-248 owner deadline left AMI's calibration request permanently in flight and stalled the whole AMB/DCS_CAL search (real RTL defect, `verification_reports/WORKLINE_D_SID05_SID06_20260918.md`). Section 6.3 gains this connection in its calibration-request row plus one paragraph. Evidence: `tb_ppg_control_top_startup_idac_calibration.v` V1.2, iverilog and Vivado 2022.2 xsim 83 PASS/0 FAIL; 2026-09-19 full 19-TB xsim regression 19/19 PASS, 0 FAIL, 1208 PASS total. Like V1.11-V1.14 this is an erratum under the supersession clause below: the normative label stays V1.10, so no dependency citation of C01 changes. Sync record: `verification_reports/CONTRACT_SYNC_SID05_20260930.md`.
 >
+> V1.16 errata, 2026-09-30: contract sync batch 2 -- records five Top boundary ports that `ppg_control_top.v` already has but this contract never listed; no RTL change. (1) Verification-injection pair `i_test_calibration_loss_inject_valid` (`ppg_control_top.v:135`) / `o_test_calibration_loss_inject_ready` (`:242`), added by Top V1.2 (2026-08-31, Stage 5 PRC-09/10): Sections 4.1, 4.2, 4.3 and 6.7 now list them in the same verification-only group as the identity/invalid pairs. They connect directly to AMI (`:1372-1373`, `:1551`) and are inert when `C_ENABLE_TEST_INJECTION=0`. (2) P2S telemetry outputs `o_s1_calibration_applied`, `o_s1_raw[9:0]`, `o_s2_raw[9:0]` (`:292-294`), added by Top V1.5 (2026-09-05): Section 4.2 records them as bit-exact pass-throughs of the same-name AMI outputs (`:1375-1377`, `:1601-1603`); their field meaning is owned by `PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md` Section 8.4.5. As with V1.11-V1.15, this is an erratum and the normative label stays V1.10. Sync record: `verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`.
+>
 > Normative supersession: V1.10 is this file's only current normative revision. Every V1.3.x/V1.4/V1.9 status, scope, dependency-version or implementation-readiness statement below is retained only as historical context and is expressly non-normative where it differs from V1.10 or the current dependency table in Section 2.1. In particular, no older statement may claim that the final port table is incomplete, defer the required supervisor boundary, permit an alternative supervisor implementation, or redefine contract closure from implementation evidence.
 
 > 历史冻结记录（非规范）：V1.3.5验证专用异常注入接口形状曾被冻结；该记录不定义当前顶层端口、层次、合同状态或实现状态。  
@@ -91,8 +93,8 @@ baselines and drafts are not dependencies and cannot override this table.
 | C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` | V1.7 | ACTIVE, manager-wrapper, generation, fault-blocking and lifecycle routes |
 | C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | sole generation production and STOPPING lifecycle |
 | C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | sole manager parent and transparent manager port forwarding |
-| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.9 | Rule A, owner deadline and scheduler fault records |
-| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | completion, discard, drain, AMI feedback/blocking gate and fault records |
+| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.10 | Rule A, owner deadline and scheduler fault records |
+| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | completion, discard, drain, AMI feedback/blocking gate and fault records |
 | C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.0 | internal detection-chain lifecycle forwarding |
 | C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | waveform/physical owner and SSW fault records |
 | C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.1 | dedicated characterization CDC boundary |
@@ -206,7 +208,7 @@ the sole system-fault aggregate owner.
 | 已同步START、STOP、诊断清除和`control_abort` | START/STOP只进入V4控制平面；abort和诊断清除同步送调度器、AMI、SSW |
 | ADC物理接口 | 两路RAW码和两路`CLK_DOUT`异步完成电平进入AMI；2 MHz域物理空闲输入`i_adc_physical_idle`形成唯一内部网`flag_adc_physical_idle`并同源扇出 |
 | 正式结果消费者ready | 只接AMI测量结果输出 |
-| 验证专用异常注入 | `i_test_inject_enable`、`i_test_identity_inject_valid`、`i_test_identity_inject_sample_index[C_SAMPLE_INDEX_WIDTH-1:0]`和`i_test_invalid_sample_valid`；只有验证构建可用，生产构建必须静态关闭 |
+| 验证专用异常注入 | `i_test_inject_enable`、`i_test_identity_inject_valid`、`i_test_identity_inject_sample_index[C_SAMPLE_INDEX_WIDTH-1:0]`和`i_test_invalid_sample_valid`；只有验证构建可用，生产构建必须静态关闭；V1.16勘误补记`i_test_calibration_loss_inject_valid`（PRC-09/10），同样只在验证构建可用 |
 
 `static_characterization_enable`与`test_mux_ctrl[4:0]`不属于640-bit ACTIVE V4。顶层只能把SPI source字段接入表征控制CDC；配置管理器、许可拆分和SSW只能接收该CDC的2 MHz域已提交输出，禁止SPI shadow、source快照或bridge内部总线直连资格检查或模拟MUX。
 
@@ -222,11 +224,14 @@ AMI正式测量输出必须新增逐位直连的`o_result_sample_valid`。它与
 
 顶层必须新增`o_active_precision_mode`（V1.11勘误），是AMI `o_active_precision_mode`的逐位直连转发，归入调度器/AMI/SSW只读诊断输出组，紧邻`o_ami_idac_idle`。它是实时、任意时刻有效的系统唯一committed采集精度电平，不是`o_result_precision_mode`那种只在结果事务边界有效的快照；顶层不得对它做保持、锁存或与结果事务绑定。它的唯一权威来源是AMI内部wire（经Scheduler`i_active_precision_mode`和SSW`i_precision_mode_committed`同源消费的那一根），顶层不得另建第二个精度状态寄存器。
 
+顶层必须输出`o_s1_calibration_applied`、`o_s1_raw[9:0]`和`o_s2_raw[9:0]`（V1.16勘误补记；Top V1.5于2026-09-05实现，`ppg_control_top.v:292-294`），分别逐位直连AMI同名输出（AMI例化连接`:1375-1377`，边界赋值`:1601-1603`），Top层没有任何逻辑。它们是芯片顶层glue模块中P2S打包器的遥测字段；字段语义、来源以及“不得改用pad级`DOUT_STAGE1/2_LOW`”等约束，以`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`第8.4.5节为准，本合同不另作定义。它们不属于`o_result_sample_valid`所在的正式测量保持型事务，AMI侧的来源见C10第6.7节。
+
 验证专用握手返回固定为：
 
 ```text
 o_test_identity_inject_ready = AMI.o_test_identity_inject_ready
 o_test_invalid_sample_ready  = AMI.o_test_invalid_sample_ready
+o_test_calibration_loss_inject_ready = AMI.o_test_calibration_loss_inject_ready
 ```
 
 顶层还必须导出注册式`o_system_fault_blocking`和可追踪的`o_system_abort_event`诊断旁带；它们的生产实现与清除规则按第6.7节执行。
@@ -261,6 +266,8 @@ parameter integer C_ENABLE_TEST_INJECTION = 0
 | output | `o_test_identity_inject_ready` | 1 | AMI当前可原子绑定identity请求 |
 | input | `i_test_invalid_sample_valid` | 1 | 保持型one-shot invalid-sample请求 |
 | output | `o_test_invalid_sample_ready` | 1 | AMI当前可原子绑定invalid请求 |
+| input | `i_test_calibration_loss_inject_valid` | 1 | 保持型one-shot calibration-loss请求（V1.16勘误，PRC-09/10），经AMI、PWI原样直通到粗检测FIR |
+| output | `o_test_calibration_loss_inject_ready` | 1 | 粗检测FIR当前可原子绑定calibration-loss请求，经PWI、AMI原样返回（V1.16勘误） |
 | output | `o_result_sample_valid` | 1 | 与正式measurement事务绑定的独立sample qualification |
 | output | `o_system_fault_blocking` | 1 | 注册式系统阻断故障汇总状态 |
 | output | `o_system_abort_event` | 1 | 注册式单周期系统abort诊断/扇出事件 |
@@ -281,7 +288,7 @@ parameter integer C_ENABLE_TEST_INJECTION = 0
 | output | `o_measurement_result_discard_event` / `reason` / `identity_valid` / `sample_valid` / `<TXN_ID>` | `1/2/1/1/each field` | AMI正式结果discard公开观测；identity-valid必须为1，完整字段在事件采样沿稳定，且不产生成功transfer |
 | output | `o_detection_discard_event` / `reason` / `identity_valid` / `sample_valid` / `<TXN_ID>` | `1/2/1/1/each field` | AMI检测generation-scoped discard公开观测；identity-valid为0时除目标`run_generation`外的触发身份与sample-valid为0，PWI内部无ready广播使用同一稳定字段 |
 
-只有联合验证或最终顶层验证构建可显式覆盖为1。生产网表、流片配置和普通功能回归必须保持0，并把`i_test_inject_enable`及三个请求/payload输入约束为非活动值。有效使能定义为：
+只有联合验证或最终顶层验证构建可显式覆盖为1。生产网表、流片配置和普通功能回归必须保持0，并把`i_test_inject_enable`及三个请求/payload输入（V1.16起连同`i_test_calibration_loss_inject_valid`共四个）约束为非活动值。有效使能定义为：
 
 ```text
 flag_test_inject_effective =
@@ -289,7 +296,7 @@ flag_test_inject_effective =
  && flag_test_inject_mode_latched
 ```
 
-当其为0或`i_rstn=0`时，顶层必须向AMI驱动注入enable为0，两个ready输出为0；任何外部请求变化均不得影响Q1/Q2/Q3、RAW、owner、正式结果、算法状态、fault、IDAC、epoch或`sample_index`。顶层不缓存、不重定向、不重新编码请求；参数为1时仍只逐位连接AMI V1.3.4接口，由AMI决定ready和事务绑定。
+当其为0或`i_rstn=0`时，顶层必须向AMI驱动注入enable为0，两个ready输出为0（V1.16：`o_test_calibration_loss_inject_ready`同样为0，由粗检测FIR的ready条件保证）；任何外部请求变化均不得影响Q1/Q2/Q3、RAW、owner、正式结果、算法状态、fault、IDAC、epoch或`sample_index`。顶层不缓存、不重定向、不重新编码请求；参数为1时仍只逐位连接AMI V1.3.4接口，由AMI决定ready和事务绑定。
 
 ### 4.1 V1.10 final system boundary and one-to-one connection requirements
 
@@ -766,6 +773,8 @@ EN_SAR15_DC_LOW
 | `AMI.o_test_identity_inject_ready` | `o_test_identity_inject_ready` |
 | `i_test_invalid_sample_valid` | `AMI.i_test_invalid_sample_valid` |
 | `AMI.o_test_invalid_sample_ready` | `o_test_invalid_sample_ready` |
+| `i_test_calibration_loss_inject_valid` | `AMI.i_test_calibration_loss_inject_valid`（V1.16勘误；AMI内部再经PWI直通粗检测FIR，见C10第6.5b节） |
+| `AMI.o_test_calibration_loss_inject_ready` | `o_test_calibration_loss_inject_ready`（V1.16勘误） |
 
 联合Scheduler+SSW+AMI TB在最终顶层RTL完成前，允许直接驱动同一组AMI公开端口；这只是最终顶层逐位直连的临时集成边界，不得使用层次化force、直接改AMI内部owner/matcher、替换fork ready或另建TB专用完成脉冲。Router-to-overlap不承担identity注入；invalid sample由AMI在DC恢复后形成独立`result_sample_valid`，经precision-window wrapper进入FIR。
 
