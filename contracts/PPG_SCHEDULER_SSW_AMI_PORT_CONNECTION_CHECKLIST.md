@@ -5,7 +5,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 文档版本 | V1.3 |
-| 状态 | 连接合同已完成；模块、联合TB和Top按下表分层记录证据，最终顶层RTL尚未编写 |
+| 状态 | ~~连接合同已完成；模块、联合TB和Top按下表分层记录证据，最终顶层RTL尚未编写~~ 本表为control_top实现前的设计快照，后续状态见§15 |
 | 目标 | 冻结scheduler、SSW和AMI三模块之间的逐端口连接、握手、身份绑定、完成释放及故障方向 |
 | 不包含 | 不修改三模块算法、模拟netlist窗口、Q3坐标、owner deadline、RTL或TB |
 
@@ -418,3 +418,13 @@ scheduler.transaction valid && AMI.transaction ready
 七条指定主连接的端口方向、名称和位宽可以完整一一对应；新增的三根RUN许可网及其高有效极性也已完成合同核对。三模块联合RTL不存在需要新增功能端口的阻断缺口。scheduler和SSW的`success=0`释放措辞已经闭合；共享物理ADC idle也已由顶层V1.3.2冻结为`i_adc_physical_idle -> flag_adc_physical_idle`的唯一同源扇出网络。本核对表列出的连接文档前置项现已全部闭合，但这不等于最终顶层V1.4的其他系统前置条件已经完成。
 
 当前证据仅支持上述分层结论：Scheduler的FSC-01～FSC-57、AMI的AMI-01～AMI-45和SSW的SSW-01～SSW-52均为当前单模块PASS；JNT-01～JNT-09已在当前三模块RTL下以`C_CLK_PERIOD_NS=500`通过52个子检查，属于当前联合基线PASS，但不能替代新增联合矩阵或最终顶层回归。当前联合证据对应`joint_tb_500ns_baseline_xvlog.log`、`joint_tb_500ns_baseline_xelab.log`和`joint_tb_500ns_baseline_xsim.log`，统计为`waveform=12 owner=7 completion=6`。`tb_ppg_scheduler_ssw_ami_integration.v`使用真实`CLK_DOUT`同步与RAW锁存路径产生DONE，不使用固定4拍完成模型；新增RUN许可连接及最终系统级连接仍须待`ppg_control_top.v`实现后验证。
+
+## 15. 后续状态（2026-10-01补记）
+
+本表是`ppg_control_top.v`实现之前的设计快照。第1.1节、第11.1节、第13节PC-20~PC-22和第14节中“顶层RTL尚未编写/待编写”“当前联合基线PASS”等状态描述，都停留在2026-08-17，本节之前的正文保持原样不再更新；当前状态以本节为准：
+
+1. **顶层已实现**：`rtl/ppg_control_top/ppg_control_top.v`于2026-08-23首版实现（文件头V1.0：“First RTL implementation of contract C01 (V1.10)”），此后的版本见其文件头；Scheduler、SSW、AMI三模块在其中按C01逐位互连。
+2. **三模块联合TB已退役**：第14节作为JNT-01~09证据引用的`tb_ppg_scheduler_ssw_ami_integration.v`，已于2026-09-30（commit `50a2b88`）`git mv`到`legacy/rtl/ppg_system_integration/`。原因见`legacy/README.md`：它落后于RTL（08-17之后新增的14个输入没有连接）；JNT-08仍按与合同矛盾的`success==1`断言；`$fopen`写死了原始开发树的绝对路径。
+3. **JNT-01~09证据的现承接方式**：由`rtl/ppg_control_top/`下的19-TB主回归承接，其中14份TB通过`` `include ``共用`rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh`执行JNT-01~09基线。该前缀源自上述联合TB，并已修正JNT-08的断言。最新一次全套回归见`verification_reports/REGRESSION_BASELINE_20260930.md`。
+
+本节只记录状态，不改变上文任何逐端口连接结论。这些连接的现行权威描述是C01、C08、C09和C10；本表仍是矩阵§2所定的non-normative design reference。

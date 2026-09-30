@@ -1,5 +1,6 @@
 # PPG NORMAL事务Fork、IDAC跟踪与AMB周期重检接口合同
 
+> V2.1修订日期：2026-10-01。合同补记批次3：amb_recheck RTL V1.1（2026-08-23）把重检调度器的输入`i_adc_idle`改名为`i_precision_takeover_safe`（纯改名，不改逻辑，`ppg_amb_recheck_scheduler.v:75`）。本合同此前两个名字都没有出现，只在第9.2节笼统写作“ADC……排空”。本次在第9.3节表中补`i_precision_takeover_safe`，以及同样缺失的`i_peak_valley_idle`两行，并在第9.2节补写RTL接管条件的准确六项形式（`:179`）。不改变AMR自检验收条款。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > Current normative version: V2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the NORMAL fork, IDAC tracking and AMB recheck lifecycle rules are normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`.
 > Historical V2 freeze date: 2026-08-08.
 > 适用时钟域：2 MHz数字处理域  
@@ -12,7 +13,7 @@
 | --- | --- | --- | --- |
 | C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | RUN lifecycle and committed ACTIVE ownership. |
 | C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded V4 IDAC-field interpretation. |
-| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.10 | Frame scheduling and AMB-recheck transaction insertion. |
+| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Frame scheduling and AMB-recheck transaction insertion. |
 | C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, transaction fork and generation/discard ownership. |
 | C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3 | Sole IDAC pending/code/epoch and local fault owner. |
 
@@ -428,6 +429,8 @@ counter达到amb_recheck_interval_frames -> 锁存amb_recheck_pending
 请求达到周期后必须保持。无论到期时处于9-bit还是15-bit，都等待下一次15-bit到9-bit切换事件，随后才可
 在安全边界启动固定三阶段校准；不能只产生可能丢失的单拍脉冲。接管条件还必须满足ADC、NORMAL fork、IDAC、FIR和帧边界全部排空，其中`i_fir_idle=1`表示FIR无待消费输出且当前沿未接收输入。若切换事件发生时FIR未空闲，必须保持等待状态，不能丢弃已经锁存的重检资格。
 
+V2.1补记：上述接管条件在RTL中的准确形式是`flag_takeover_safe = i_precision_takeover_safe && i_normal_fork_idle && i_idac_idle && i_fir_idle && i_peak_valley_idle && i_frame_safe_boundary`（`ppg_amb_recheck_scheduler.v:179`），共六项。上文的“ADC”一项对应`i_precision_takeover_safe`（原名`i_adc_idle`，见第9.3节表）；上文未列出的第六项是峰谷检测空闲`i_peak_valley_idle`。`i_fir_idle`在PWI内接的是FIR与检测fork都排空后锁存的`flag_fir_idle_to_scheduler`（`ppg_precision_window_integration.v:999`）。
+
 ### 9.3 调度与控制器握手
 
 系统级语义信号冻结为：
@@ -438,6 +441,8 @@ counter达到amb_recheck_interval_frames -> 锁存amb_recheck_pending
 | `precision_15_to_9_event` | 精度控制 -> 序列控制 | 允许pending请求在下降段开始处启动 |
 | `amb_recheck_accept` | 序列控制 -> 帧计数/调度 | 已在15-bit到9-bit安全边界接管三阶段流程 |
 | `i_fir_idle` | FIR -> 序列控制 | FIR无待消费输出且当前沿未接收输入时为1，作为安全接管条件 |
+| `i_precision_takeover_safe` | AMI -> PWI -> 序列控制 | AMI复合切换安全资格（V2.1补记），原名`i_adc_idle`，amb_recheck RTL V1.1改名，纯改名不改逻辑。AMI侧为`i_adc_idle && o_adc_chain_idle && o_normal_fork_idle && o_measurement_output_idle`（`ppg_adc_measurement_idac_integration.v:962`），经PWI原样转发（`ppg_precision_window_integration.v:996`），不只是物理ADC空闲；是安全接管条件之一 |
+| `i_peak_valley_idle` | 峰谷检测 -> 序列控制 | 峰谷检测器没有待提交事件、允许重检接管时为1（PWI内接`detector_idle_o`，`:1000`）；是安全接管条件之一（V2.1补记） |
 | `amb_sequence_start` | 序列控制 -> IDAC控制器 | 启动一次周期AMB检查上下文 |
 | `amb_sample_request` | IDAC控制器 -> 序列控制 | 当前检查/搜索需要下一笔LED关闭AMB_CAL样本 |
 | `amb_sequence_done` | IDAC控制器 -> 序列控制 | 检查完成或重搜索成功 |

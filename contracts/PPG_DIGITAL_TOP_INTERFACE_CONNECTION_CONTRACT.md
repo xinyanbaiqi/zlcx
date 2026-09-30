@@ -15,6 +15,8 @@
 >
 > V1.16 errata, 2026-09-30: contract sync batch 2 -- records five Top boundary ports that `ppg_control_top.v` already has but this contract never listed; no RTL change. (1) Verification-injection pair `i_test_calibration_loss_inject_valid` (`ppg_control_top.v:135`) / `o_test_calibration_loss_inject_ready` (`:242`), added by Top V1.2 (2026-08-31, Stage 5 PRC-09/10): Sections 4.1, 4.2, 4.3 and 6.7 now list them in the same verification-only group as the identity/invalid pairs. They connect directly to AMI (`:1372-1373`, `:1551`) and are inert when `C_ENABLE_TEST_INJECTION=0`. (2) P2S telemetry outputs `o_s1_calibration_applied`, `o_s1_raw[9:0]`, `o_s2_raw[9:0]` (`:292-294`), added by Top V1.5 (2026-09-05): Section 4.2 records them as bit-exact pass-throughs of the same-name AMI outputs (`:1375-1377`, `:1601-1603`); their field meaning is owned by `PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md` Section 8.4.5. As with V1.11-V1.15, this is an erratum and the normative label stays V1.10. Sync record: `verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`.
 >
+> V1.17 errata, 2026-10-01: contract sync batch 3 -- internal wiring record only; no new Top port and no RTL change. Records the Top-internal net `ssw_owner_q3_window_closed_o` (`ppg_control_top.v:602`), which carries SSW output `o_owner_q3_window_closed` (SSW instance connection `:1076`) to Scheduler input `i_owner_q3_window_closed` (Scheduler instance connection `:941`). It came with the 2026-08-30 Bucket-1 RTL session (Scheduler C08 V1.8, SSW C09 V1.9) but was never listed here. Section 6.2 gains one paragraph. As with V1.11-V1.16, this is an erratum and the normative label stays V1.10. Sync record: `verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`.
+>
 > Normative supersession: V1.10 is this file's only current normative revision. Every V1.3.x/V1.4/V1.9 status, scope, dependency-version or implementation-readiness statement below is retained only as historical context and is expressly non-normative where it differs from V1.10 or the current dependency table in Section 2.1. In particular, no older statement may claim that the final port table is incomplete, defer the required supervisor boundary, permit an alternative supervisor implementation, or redefine contract closure from implementation evidence.
 
 > 历史冻结记录（非规范）：V1.3.5验证专用异常注入接口形状曾被冻结；该记录不定义当前顶层端口、层次、合同状态或实现状态。  
@@ -93,9 +95,9 @@ baselines and drafts are not dependencies and cannot override this table.
 | C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` | V1.7 | ACTIVE, manager-wrapper, generation, fault-blocking and lifecycle routes |
 | C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | sole generation production and STOPPING lifecycle |
 | C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | sole manager parent and transparent manager port forwarding |
-| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.10 | Rule A, owner deadline and scheduler fault records |
+| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Rule A, owner deadline and scheduler fault records |
 | C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | completion, discard, drain, AMI feedback/blocking gate and fault records |
-| C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.0 | internal detection-chain lifecycle forwarding |
+| C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | internal detection-chain lifecycle forwarding |
 | C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | waveform/physical owner and SSW fault records |
 | C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.1 | dedicated characterization CDC boundary |
 | C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.5 | mandatory dedicated registered supervisor boundary |
@@ -655,6 +657,8 @@ flag_adc_physical_idle
 | `o_idac_code_safe_boundary` | `i_idac_code_safe_boundary` |
 
 模拟波形上下文必须在固定接管点与SSW独立握手，ADC结果事务必须在匹配波形已经接管且SSW给出owner资格后再与AMI握手。顶层不得把两套ready/valid组合为同一个fire，也不得另行组合握手条件改变固定接管点或形成组合环。
+
+V1.17勘误：SSW到调度器还有一条纯内部单向连线，它不是Top端口，Top层也没有逻辑：`ppg_sar9_sar15_safe_selection_wrapper.o_owner_q3_window_closed` → Top内部`wire ssw_owner_q3_window_closed_o`（`ppg_control_top.v:602`）→ `ppg_400hz_frame_calibration_scheduler.i_owner_q3_window_closed`。两端连接分别位于`:1076`（SSW例化）和`:941`（调度器例化）。该网唯一的生产者是SSW，唯一的消费者是调度器，只用于调度器的完成成功判定`flag_completion_success`，不参与owner释放（语义见C08第10.4节和C09）。
 
 ### 6.3 AMI状态回授
 

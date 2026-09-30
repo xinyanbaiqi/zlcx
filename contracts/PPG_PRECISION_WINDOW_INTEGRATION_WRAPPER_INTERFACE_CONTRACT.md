@@ -1,5 +1,6 @@
 # PPG精度窗口检测链集成Wrapper接口与握手合同
 
+> V2.1修订日期：2026-10-01。合同补记批次3：补入PWI RTL V1.4（2026-08-31，Stage5 Group15 PRC-09/10）新增、但本合同一直缺失的内容：参数`C_ENABLE_TEST_INJECTION`（`ppg_precision_window_integration.v:72`，默认0），以及3个纯透传端口`i_test_inject_enable`、`i_test_calibration_loss_inject_valid`、`o_test_calibration_loss_inject_ready`（`:249-251`）。第4节参数表新增一行，并新增第5.12节。口径与C10 V2.3第6.5b节（AMI侧）一致：PWI既不解释也不门控，只把参数和三个端口原样接到粗检测FIR例化（`:600`、`:650-652`），请求的接受和作用都在FIR内。不改变PWI-01至PWI-10的任何条款。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > Current normative version: V2.0, 2026-08-20. Status: `ACTIVE_NORMATIVE`; this module consumes only the AMI-forwarded V5 named detection fields, `peak_valley_config_valid` safety gate and config_epoch. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects; RTL/TB evidence remains `EVIDENCE_PENDING`.
 > Historical V1.9 change record (non-normative): it replaced stale dependencies and implementation-result assertions with the then-current parent/child contract set. Current V2.0 rules above are authoritative.
 
@@ -42,7 +43,7 @@
 4. C21 — `ppg_system_integration/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md` V1.2；
 5. C22 — `ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md` V2.6；
 6. C23 — `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` V2.6；
-7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2。
+7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2.1。
 
 若旧集成草案、旧handoff或单模块合同中的集成文字与本文冲突，连接关系和跨模块握手以本文为准；
 各模块内部数学仍以其最新独立合同为准。
@@ -129,6 +130,7 @@ dynamic_baseline_cross_detector   peak_valley_window_detector
 | `C_FIR_GROUP_DELAY_SAMPLES` | 10 | 20阶FIR固定同色群延时 |
 | `C_SWITCH_TIMEOUT_CYCLES` | 10000 | 2 MHz下精度安全提交最大等待周期 |
 | `C_SWITCH_TIMEOUT_COUNTER_WIDTH` | 14 | 精度提交超时计数位宽 |
+| `C_ENABLE_TEST_INJECTION` | 0 | 验证专用注入结构生成使能（V2.1补记）；由AMI逐层传入，PWI只原样传给粗检测FIR（`:600`），生产网表必须为0 |
 
 所有子模块的同名参数必须由wrapper统一向下传递，不允许出现frame、epoch或群延时位宽不一致。
 
@@ -435,6 +437,16 @@ pending request or fault hold. AMI alone may re-export
 export `o_normal_output_inhibit`: it remains the private formal-result gate.
 Top may not directly connect a PWI child output, recreate either safety gate,
 or consume a precision-controller output.
+
+### 5.12 验证专用calibration-loss注入透传端口（V2.1补记）
+
+| 端口 | 位宽 | 方向 | 语义 |
+| --- | ---: | --- | --- |
+| `i_test_inject_enable` | 1 | input | AMI逐层传入的验证注入使能（AMI侧为`(C_ENABLE_TEST_INJECTION != 0) && i_test_inject_enable`，见C10第6.5b节）；PWI原样接到FIR（`:650`），自身不使用 |
+| `i_test_calibration_loss_inject_valid` | 1 | input | 保持型一次性calibration-loss注入请求valid，原样接到FIR（`:651`） |
+| `o_test_calibration_loss_inject_ready` | 1 | output | 原样取自FIR的同名ready（`:652`） |
+
+PWI对这组端口只做透传：全文件grep只有声明（`:249-251`）和FIR例化连接（`:650-652`）两处，wrapper内没有其它使用，不参与第6节FIR双消费者fork、第9节AMB安全接管或任何本地状态。请求的接受、作用和撤销全部在粗检测FIR内实现（`ppg_coarse_detection_fir.v:312-315`、`:465-477`），以FIR合同C19和C10第6.5b节为准：ready为`(C_ENABLE_TEST_INJECTION != 0) && i_test_inject_enable && i_rstn && !flag_test_calibration_loss_armed`；握手后绑定到下一笔被FIR接纳的样本，并把该样本的粗路径校准资格强制视为0。`C_ENABLE_TEST_INJECTION=0`时ready恒为0，valid被忽略。
 
 ## 6. FIR双消费者保持型Fork
 

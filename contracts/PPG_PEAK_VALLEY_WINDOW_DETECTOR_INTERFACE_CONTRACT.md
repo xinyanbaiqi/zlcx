@@ -13,7 +13,7 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.0 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |
+| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |
 | C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.5 | Sole qualified FIR transaction source. |
 | C20 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` | V2.6 | Cross-event collaborator; no shared owner transfer. |
 | C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.6 | Sole precision request/commit consumer. |

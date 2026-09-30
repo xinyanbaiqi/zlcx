@@ -2,6 +2,7 @@
 
 > Current normative version: V2.6, 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. `i_precision_takeover_safe` is an AMI/PWI forwarded composite switch predicate, not physical idle; `i_peak_valley_config_valid` is the registered V5 formal-detection gate. RTL/TB evidence is `EVIDENCE_PENDING`.
 > V2.6 change record: adds the explicit PWI-forwarded `i_peak_valley_config_valid` input and requires it for formal cross consumption, 9-to-15 requests and fine-window control. Safe drain and discard semantics are unchanged.  
+> 2026-09-17内容更新记录（2026-10-01补记；规范标签仍为V2.6，沿用本文件08-20之后“内容更新、标签不变”的惯例）：第21节验收矩阵新增PWC-41“新START不清历史sticky”。第6.2节和第17.1节本来就规定新START不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清；PWC-41补的是验收覆盖，同时对应当天修复的一处RTL实现缺陷：`ppg_precision_window_controller.v`此前把`i_start_ack_event`当成清除条件，修复后见`:494`、`:511`处的`@satisfies: PWC-41`。PWC RTL文件头changelog缺这一条，由任务C处理。依据：`verification_reports/PWC_STICKY_CLEAR_RTL_FIX_20260917.md`。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > 冻结日期：2026-08-20  
 > 目标RTL：`ppg_precision_window_controller.v`  
 > 时钟域：2 MHz数字处理域  
@@ -31,11 +32,11 @@ V2相对V1新增以下冻结内容：
 
 本文与以下当前活动合同共同组成精度窗口控制闭环：
 
-1. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.0；
+1. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.1；
 2. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.3；
 3. C20 — `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` V2.6；
 4. C22 — `ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md` V2.6；
-5. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2。
+5. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2.1。
 
 若旧版`ppg_dual_precision_top.v`、旧时序顶层、旧handoff文字或SPI静态精度控制与本文冲突，以本文和
 上述活动合同为准。旧版`i_spi_precision_mode`只能作为历史参考，不得与本控制器共同拥有NORMAL运行期

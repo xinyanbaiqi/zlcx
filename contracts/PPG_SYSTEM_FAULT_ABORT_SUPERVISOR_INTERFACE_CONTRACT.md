@@ -13,11 +13,11 @@
 | C01 | `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` | V1.10 | Sole direct Top parent, external-abort registration and registered-event fanout boundary. |
 | C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Sole manager STOPPING lifecycle consumer via Top/wrapper forwarding. |
 | C03 | `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | Sole manager parent and `i_system_fault_blocking`/stop-episode forwarding boundary. |
-| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.10 | Scheduler registered fault-record source and stop-drain consumer. |
+| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Scheduler registered fault-record source and stop-drain consumer. |
 | C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | SSW registered fault-record source and stop-drain consumer. |
 | C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI registered fault-record source, discard owner and drain predicate source. |
 | C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3 | IDAC blocking fault is promoted only through AMI's record path. |
-| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.0 | PWI/precision blocking fault is promoted only through AMI's record path. |
+| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | PWI/precision blocking fault is promoted only through AMI's record path. |
 
 ## 1. Ownership and Parameters
 
