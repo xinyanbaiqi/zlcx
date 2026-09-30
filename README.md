@@ -14,7 +14,7 @@ PPG（光电容积脉搏波）芯片数字部分的RTL、testbench与合同文�
 rtl/                        每个功能模块一个子目录，包含该模块当前的RTL、testbench、约束/filelist与回归脚本
 contracts/                  各模块接口合同、系统级合同闭合矩阵、验收ID别名映射表
 verification_reports/       独立复核 / gap修复 / 阶段性关闭报告——记录验证逻辑与结论，不含中间过程
-tools/                      交叉引用核对工具（cross_reference_tools）
+tools/                      交叉引用核对工具（cross_reference_tools）与模块级TB回归入口（run_unit_tb_regression.sh）
 legacy/                     已退役的testbench与脚本（原样保留，见 legacy/README.md）
 ```
 
@@ -40,6 +40,14 @@ legacy/                     已退役的testbench与脚本（原样保留，见 
 ### tools/
 
 `cross_reference_tools/` 下是用于CDC（跨时钟域）审计、验收ID核对、回归新鲜度检查、文字滞后扫描的独立Python工具，附带各自最近一次真实运行产出的报告。原来的联合场景批量回归脚本 `run_v1_3_scenarios.ps1`、`aggregate_v1_3_results.py/.ps1` 只服务于已退役的三模块联合testbench，已随它一起移入 `legacy/tools/`。
+
+`run_unit_tb_regression.sh` 是28份模块级自检testbench的统一回归入口（24份芯片层级内 + 4份孤立模块；19-TB主回归与芯片顶层各有自己的 `rtl/*/run_xsim_regression.sh`）。用法：
+
+```bash
+bash tools/run_unit_tb_regression.sh [-o 输出目录] [-g hier|orphan|all] [TB名 ...]
+```
+
+输出目录默认为仓库同级的 `ppg_unit_tb_runs/<时间戳>/`，指向仓库内的目录会被拒绝；Vivado路径可用环境变量 `VIVADO_BIN` 覆盖。每份TB的依赖文件清单与结论横幅判据都写在脚本里，汇总见输出目录下的 `unit_summary.tsv`。仓库根的 `.gitignore` 忽略xsim运行产物，防止误提交。
 
 ### legacy/
 

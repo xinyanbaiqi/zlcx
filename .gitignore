@@ -1,0 +1,27 @@
+# Simulator / Vivado run products. Regression drivers write these next to the
+# TBs (rtl/*/run_xsim_regression.sh) or into an output dir; never commit them.
+# Prefer running outside the repo (tools/run_unit_tb_regression.sh defaults to
+# <repo parent>/ppg_unit_tb_runs/ and refuses an output dir inside the repo).
+
+# xsim / xvlog / xelab
+xsim.dir/
+*.jou
+*.pb
+*.log
+*.wdb
+*.wcfg.bak
+*.str
+xsim_regression_*/
+.Xil/
+webtalk*
+vivado_pid*.str
+usage_statistics_webtalk.*
+
+# iverilog
+*.vvp
+*.vcd
+
+# run_unit_tb_regression.sh per-run bookkeeping (only if someone forces -o inside a TB dir)
+rc_xvlog
+rc_xelab
+rc_xsim
