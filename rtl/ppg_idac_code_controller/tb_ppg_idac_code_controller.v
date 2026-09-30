@@ -15,12 +15,13 @@
 //
 // Dependencies:       ppg_idac_code_controller.v
 //
-// Version:            V2.1
-// Revision Date:      2026/08/08
+// Version:            V2.2
+// Revision Date:      2026/09/30
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/07            V2.0          Erie                  Create V2 self-checking regression.
 // 2026/08/08            V2.1          Erie                  Add fixed periodic AMB-R-IR sequence coverage.
+// 2026/09/30            V2.2          Erie                  TB maintenance (no RTL change): connect i_run_generation, added by controller RTL V2.2 (2026/08/22) and left floating here ever since. The X on the floating port corrupted the pending-candidate generation tag/compare and caused the long-standing "V2.1 regression found 33 errors" already recorded in the RTL's own V2.3 changelog (2026/08/29) as a stale-TB issue; REGRESSION_BASELINE_20260930.md section 6.2 pinned it to this single port. Driven by a constant 0 for the whole run (no case here exercises cross-generation rejection) and C_RUN_GENERATION_WIDTH is passed explicitly. The test-injection inputs stay unconnected on purpose (C_ENABLE_TEST_INJECTION defaults to 0 so they are gated off). Result: 148 PASS, 0 FAIL (xsim and iverilog).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -36,12 +37,13 @@
 //
 // 依赖文件:           ppg_idac_code_controller.v
 //
-// 当前版本:           V2.1
-// 修订日期:           2026年08月08日
+// 当前版本:           V2.2
+// 修订日期:           2026年09月30日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月07日        V2.0          Erie                  创建V2自检回归。
 // 2026年08月08日        V2.1          Erie                  增加固定AMB、DC_R及DC_IR周期序列覆盖。
+// 2026年09月30日        V2.2          Erie                  TB维护（不改RTL）：连接控制器RTL V2.2（2026/08/22）新增、本TB一直悬空的i_run_generation。悬空的X污染了pending候选的代际锁存与比较，这就是RTL自身V2.3 changelog（2026/08/29）早已记录为"单元TB未同步"的"V2.1 regression found 33 errors"；REGRESSION_BASELINE_20260930.md第6.2节把根因精确到这一个端口。全程驱动常量0（本TB没有用例测跨代际拒绝），并显式传入C_RUN_GENERATION_WIDTH。测试注入输入有意保持不连（C_ENABLE_TEST_INJECTION默认0，已被门控屏蔽）。结果：148 PASS，0 FAIL（xsim与iverilog一致）。
 
 // 覆盖启动搜索、固定周期三路重检以及IDT-01至IDT-15慢速跟踪和取消行为
 module tb_ppg_idac_code_controller
@@ -57,6 +59,7 @@ module tb_ppg_idac_code_controller
 	localparam integer C_CODE_EPOCH_WIDTH = 4; // 三路码版本均使用4 bit
 	localparam integer C_CONFIG_EPOCH_WIDTH = 8; // ACTIVE配置版本使用8 bit
 	localparam integer C_COEF_EPOCH_WIDTH = 8; // Stage1系数版本使用8 bit
+	localparam integer C_RUN_GENERATION_WIDTH = 8; // V2.2:RUN代际字段宽度与DUT默认值一致
 
 	//--------------寄存器信号--------------//
 	// 全局、生命周期和ACTIVE配置驱动
@@ -64,6 +67,7 @@ module tb_ppg_idac_code_controller
 	reg i_rstn;                             // DUT低有效异步复位驱动
 	reg i_run_enable;                       // 控制当前测试是否处于RUN
 	reg i_start_ack_event;                  // 产生合法START应答单拍
+	reg [C_RUN_GENERATION_WIDTH - 1:0]i_run_generation; // V2.2:全程固定RUN代际，本TB不测跨代际拒绝
 	reg i_stop_ack_event;                   // 产生STOP排空单拍
 	reg i_status_clear_event;               // 产生协议sticky清除事件
 	reg i_control_abort_event;              // 产生阻断错误取消事件
@@ -480,6 +484,7 @@ module tb_ppg_idac_code_controller
 		i_rstn = 1'b0;                      // 初始保持异步复位有效
 		i_run_enable = 1'b0;                // 复位期间关闭运行许可
 		i_start_ack_event = 1'b0;           // 初始无START事件
+		i_run_generation = {C_RUN_GENERATION_WIDTH{1'b0}}; // V2.2:代际全程固定为0
 		i_stop_ack_event = 1'b0;            // 初始无STOP事件
 		i_status_clear_event = 1'b0;        // 初始无状态清除命令
 		i_control_abort_event = 1'b0;       // 初始无控制中止事件
@@ -768,13 +773,15 @@ module tb_ppg_idac_code_controller
 		.C_IDAC_CODE_WIDTH(C_IDAC_CODE_WIDTH), // 连接三路IDAC码字段宽度
 		.C_CODE_EPOCH_WIDTH(C_CODE_EPOCH_WIDTH), // 连接安全提交版本字段宽度
 		.C_CONFIG_EPOCH_WIDTH(C_CONFIG_EPOCH_WIDTH), // 连接ACTIVE配置版本字段宽度
-		.C_COEF_EPOCH_WIDTH(C_COEF_EPOCH_WIDTH) // 连接Stage1系数版本字段宽度
+		.C_COEF_EPOCH_WIDTH(C_COEF_EPOCH_WIDTH), // 连接Stage1系数版本字段宽度
+		.C_RUN_GENERATION_WIDTH(C_RUN_GENERATION_WIDTH) // V2.2:连接RUN代际字段宽度
 	)ppg_idac_code_controller_Inst_dut
 	(
 		.i_clk(i_clk),                      // 连接测试平台主时钟
 		.i_rstn(i_rstn),                    // 连接低有效异步复位
 		.i_run_enable(i_run_enable),        // 连接RUN生命周期许可
 		.i_start_ack_event(i_start_ack_event), // 连接合法START应答事件
+		.i_run_generation(i_run_generation), // V2.2:连接固定RUN代际，此前悬空致代际比较为X
 		.i_stop_ack_event(i_stop_ack_event), // 连接STOP接受事件
 		.i_status_clear_event(i_status_clear_event), // 连接状态清除命令
 		.i_control_abort_event(i_control_abort_event), // 连接阻断错误取消事件

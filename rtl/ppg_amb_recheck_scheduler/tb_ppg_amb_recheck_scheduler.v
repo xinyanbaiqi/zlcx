@@ -15,12 +15,13 @@
 //
 // Dependencies:       ppg_amb_recheck_scheduler.v
 //
-// Version:            V1.0
-// Revision Date:      2026/08/11
+// Version:            V1.1
+// Revision Date:      2026/09/30
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/08            V1.0          Erie                  Create file.
 // 2026/08/11            V1.0          Erie                  Verify peak-valley idle takeover gate.
+// 2026/09/30            V1.1          Erie                  TB maintenance (no RTL change): RTL V1.1 (2026/08/23) renamed the input i_adc_idle to i_precision_takeover_safe as a pure port rename with no logic change, so this TB stopped elaborating (xelab "cannot find port 'i_adc_idle'", REGRESSION_BASELINE_20260930.md section 6.3). Renamed the one named-port connection; the TB-side stimulus reg keeps its old name. Result: 35 PASS lines (34 checks + final summary), 0 FAIL (xsim and iverilog).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -36,12 +37,13 @@
 //
 // 依赖文件:           ppg_amb_recheck_scheduler.v
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月11日
+// 当前版本:           V1.1
+// 修订日期:           2026年09月30日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月08日        V1.0          Erie                  创建文件。
 // 2026年08月11日        V1.0          Erie                  验证峰谷检测器空闲接管门禁。
+// 2026年09月30日        V1.1          Erie                  TB维护（不改RTL）：RTL V1.1（2026/08/23）把输入i_adc_idle纯改名为i_precision_takeover_safe，逻辑不变，本TB因此无法elaborate（xelab报"cannot find port 'i_adc_idle'"，见REGRESSION_BASELINE_20260930.md第6.3节）。只改这一处具名端口连接，TB侧激励reg保持原名。结果：35条PASS（34条检查+1条最终汇总），0 FAIL（xsim与iverilog一致）。
 
 // 覆盖周期计数、精度切换等待、固定三帧顺序、反压保持、异常终止和生命周期清理
 module tb_ppg_amb_recheck_scheduler
@@ -614,7 +616,7 @@ module tb_ppg_amb_recheck_scheduler
 		.i_normal_measurement_active(i_normal_measurement_active), // 连接NORMAL活动资格
 		.i_normal_frame_complete_event(i_normal_frame_complete_event), // 连接完整帧事件
 		.i_precision_15_to_9_event(i_precision_15_to_9_event),   // 连接精度下降事件
-		.i_adc_idle(i_adc_idle),                                 // 连接ADC空闲条件
+		.i_precision_takeover_safe(i_adc_idle),                  // V1.1:RTL V1.1已把i_adc_idle纯改名为i_precision_takeover_safe，TB侧激励变量名保持不变
 		.i_normal_fork_idle(i_normal_fork_idle),                 // 连接fork排空条件
 		.i_idac_idle(i_idac_idle),                               // 连接IDAC空闲条件
 		.i_fir_idle(i_fir_idle),                                 // 连接FIR安全接管空闲条件

@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.8
-// Revision Date:   2026-09-08
+// Version:         V1.9
+// Revision Date:   2026-09-30
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -27,6 +27,7 @@
 // 2026-08-23           V1.6       Erie        Add AMI-46/AMI-47: wire the section 6.10 public o_measurement_result_discard_*/o_detection_discard_* ports into the DUT instance (previously entirely omitted from the port map, hence unobservable). AMI-46 holds a formal result under i_measurement_result_ready backpressure and confirms abort emits exactly one public measurement-result discard with reason=ABORT and TXN_ID (frame_id/sample_index) bound to the held transaction. AMI-47 confirms at least one public detection-generation-flush broadcast occurs across the regression. All 47 cases now pass with a clean $finish.
 // 2026-08-23           V1.7       Erie        Fix a stale AMI-40 assertion found while re-running this regression against the DUT's V1.11 fix (flag_stop_result_draining now also arms when STOP catches a real owner still in flight, per contract section 13's frozen late-DONE rule 1). AMI-40 previously asserted adc_complete_success_snapshot==1 for exactly this STOP-with-owner-inflight case; the contract requires success=0 (a single original-identity discard release that must never enter the formal result or detection chain), matching how AMI-22/32/39 already test the equivalent abort case. Corrected the assertion and strengthened it with !o_measurement_result_valid && o_measurement_output_idle. All 47 cases (AMI-01 through AMI-47) still pass with a clean $finish.
 // 2026-09-08           V1.8       Erie        Add N08-01: wire the remaining section 6.10 o_detection_discard_identity_valid/frame_id/sample_index/color_ir ports into the DUT instance (previously entirely unconnected). N08-01 drives two back-to-back RED NORMAL transactions with the new send_normal_sample_tight task (same code-to-raw math as send_normal_sample minus the 20-cycle settle); the second transaction latches AMI's own flag_detection_pending while FIR is still mid-MAC on the first one's already-warm 21-tap window, then abort proves o_detection_discard_identity_valid/frame_id/sample_index/color_ir are bound to that still-resident second transaction's real identity before hand-off to PWI. This closes the pre-handoff half of N08 that a prior full-chip-level attempt (tb_ppg_control_top_baseline_cross.v) could not reach because its background stimulus generator's physical pacing was wider than the window; this module-level unit TB drives transactions directly and is not bound by that pacing floor. 48 cases (AMI-01 through AMI-47 plus N08-01) pass with a clean $finish.
+// 2026-09-30           V1.9       Erie        TB maintenance (no RTL change): explicitly drive the SID-05 input i_cal_owner_deadline_event (added 2026-09-18) from a reg initialised to 0, next to i_system_fault_discard_event. It had been left unconnected (xelab VRFC 10-3645); a floating Z only ever acted like 0 here, as REGRESSION_BASELINE_20260930.md section 6.6 already showed with a tie-0 probe. This TB has no scheduler, so no deadline event can occur; no new assertion is added (the tick-248 deadline test is a separate task). Expected and observed: identical result, 48 cases (AMI-01 through AMI-47 plus N08-01) pass.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -42,8 +43,8 @@
 // 依赖文件:
 //      DUT及全部真实集成子模块
 //
-// 当前版本:        V1.8
-// 修订日期:        2026年09月08日
+// 当前版本:        V1.9
+// 修订日期:        2026年09月30日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -54,6 +55,7 @@
 // 2026-08-23           V1.6       Erie        新增AMI-46/AMI-47：把合同6.10节公开的o_measurement_result_discard_*/o_detection_discard_*端口接入DUT例化（此前整组端口在例化里完全缺席，无法被观察）。AMI-46在i_measurement_result_ready反压保持正式结果在途期间触发abort，验证只产生一次公开正式结果丢弃、reason=ABORT且TXN_ID（frame_id/sample_index）绑定被丢弃事务。AMI-47验证全程至少产生一次公开检测代际清空广播。47项全部通过，仿真正常$finish
 // 2026-08-23           V1.7       Erie        拿DUT V1.11修复（flag_stop_result_draining现在也在STOP恰好命中真实owner在途时置位，对应合同13节冻结的迟到DONE规则第1条）重跑这份回归时发现并修复AMI-40一条过时断言：原来对"STOP恰好命中owner在途"这个场景断言adc_complete_success_snapshot==1，但合同要求的是success=0（以原始身份释放一次discard，绝不进入正式结果或检测链），和AMI-22/32/39已经在测的abort等价场景应该一致。订正断言并加强为!o_measurement_result_valid && o_measurement_output_idle。AMI-01至AMI-47全部47项仍然通过，仿真正常$finish
 // 2026-09-08           V1.8       Erie        新增N08-01：把6.10节剩余的o_detection_discard_identity_valid/frame_id/sample_index/color_ir端口接入DUT例化（此前完全未连接）。N08-01用新增的send_normal_sample_tight任务（与send_normal_sample共用码转换算法，只是不等20拍settle）背靠背驱动两笔RED NORMAL事务，第二笔完成让AMI自身flag_detection_pending武装到1时，FIR恰好还在处理第一笔样本已经预热到21点满窗后触发的MAC计算，借此天然卡住多拍窗口，随后abort验证o_detection_discard_identity_valid/frame_id/sample_index/color_ir真实绑定这笔仍在AMI侧、尚未交接给PWI的事务身份。此前在ppg_control_top整机级TB（tb_ppg_control_top_baseline_cross.v）尝试过这个场景但因bg_responder背景激励的真实物理节拍比这个窗口更宽而够不到；这份AMI自身module-level unit TB直接驱动事务，不受该节拍下限约束。48项（AMI-01至AMI-47加N08-01）全部通过，仿真正常$finish
+// 2026-09-30           V1.9       Erie        TB维护（不改RTL）：用初值为0的寄存器显式驱动SID-05新增输入i_cal_owner_deadline_event（2026-09-18），放在i_system_fault_discard_event旁边。此前该端口未连接（xelab VRFC 10-3645），浮空的Z在本TB中的效果只等价于0，REGRESSION_BASELINE_20260930.md第6.6节的tie-0探针已经证明过这一点。本TB没有scheduler，不可能出现截止事件；不加新断言（tick-248截止测试另行安排）。预期并实测：结果不变，48项（AMI-01至AMI-47加N08-01）全部通过。
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -75,6 +77,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 	reg i_control_abort_event;                  // abort撤销单拍
 	reg i_diag_clear_event;                     // sticky清除单拍
 	reg i_system_fault_discard_event;           // supervisor系统故障丢弃选择器，本TB无supervisor场景，恒为0
+	reg i_cal_owner_deadline_event;             // V1.9:SID-05新增scheduler校准owner截止事件，本TB无scheduler，恒为0
 	reg [7:0]i_config_epoch;                    // 当前ACTIVE版本
 	reg [7:0]i_stage1_coef_epoch;               // 当前Stage1版本
 	reg [7:0]i_stage2_coef_epoch;               // 当前Stage2版本
@@ -334,6 +337,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 		.i_control_abort_event(i_control_abort_event),
 		.i_diag_clear_event(i_diag_clear_event),
 		.i_system_fault_discard_event(i_system_fault_discard_event),
+		.i_cal_owner_deadline_event(i_cal_owner_deadline_event),
 		.i_config_epoch(i_config_epoch),
 		.i_stage1_coef_epoch(i_stage1_coef_epoch),
 		.i_stage2_coef_epoch(i_stage2_coef_epoch),
@@ -959,6 +963,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 		i_active_config_valid = 1'b1;
 		i_run_generation = 8'h01;
 		i_system_fault_discard_event = 1'b0;
+		i_cal_owner_deadline_event = 1'b0;
 		i_run_enable = 1'b0;
 		i_allow_new_transaction = 1'b1;
 		i_start_ack_event = 1'b0;

@@ -10,9 +10,23 @@
 // Simulations:         Vivado xsim 2022.2
 // Referrences:         PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 // Dependencies:        ppg_precision_window_integration.v and five real submodules
-// Version:             V1.0
-// Revision Date:       2026-08-12
+// Version:             V1.1
+// Revision Date:       2026-09-30
 // History:             V1.0 - Create file
+//                      V1.1 (2026-09-30) - TB maintenance, no RTL change. This TB (V1.0, 2026-08-12) predated
+//                      wrapper RTL V1.1 (2026-08-22: removed i_stop_ack_event/i_control_abort_event, added
+//                      i_run_generation, the AMI-broadcast i_detection_discard_* group and the independent
+//                      i_sample_valid qualifier) and V1.3 (2026-08-23: pure rename i_adc_idle ->
+//                      i_precision_takeover_safe), so it no longer elaborated (REGRESSION_BASELINE_20260930.md
+//                      section 6.3). Removed the two dead connections, renamed the third, tied i_sample_valid to
+//                      1 (every NORMAL transaction this TB drives is a qualified sample, i.e. the behaviour that
+//                      existed before the qualifier was added; with 0 no sample ever enters the algorithm
+//                      history), and tied i_run_generation, the whole discard group and the two test-injection
+//                      inputs to explicit inactive constants (this TB does not exercise generation discard).
+//                      The TB-side i_stop_ack_event/i_control_abort_event regs are left in place, now unused.
+//                      Result: ALL PWI-01 THROUGH PWI-05 PASS count=5 (xsim and iverilog). Negative control:
+//                      the same TB with i_sample_valid tied to 0 fails all five checks (fine/cross/peak/valley
+//                      counters stay 0), so the five checks are live, not vacuous.
 //////////////////////////////////////////////////////////////////////////////////
 // 版权所有:           Erie
 // 开发人员:           Erie
@@ -25,9 +39,20 @@
 // 仿真工程:           Vivado xsim 2022.2
 // 参考资料:           PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 // 依赖文件:           ppg_precision_window_integration.v及五个真实子模块
-// 当前版本:           V1.0
-// 修订日期:           2026-08-12
+// 当前版本:           V1.1
+// 修订日期:           2026-09-30
 // 修订历史:           V1.0 - 创建文件
+//                      V1.1（2026-09-30）- TB维护，不改RTL。本TB（V1.0，2026-08-12）早于wrapper RTL V1.1
+//                      （2026-08-22：删除i_stop_ack_event/i_control_abort_event，新增i_run_generation、AMI广播的
+//                      i_detection_discard_*组和独立样本资格i_sample_valid）与V1.3（2026-08-23：i_adc_idle纯改名为
+//                      i_precision_takeover_safe），因此无法elaborate（REGRESSION_BASELINE_20260930.md第6.3节）。
+//                      删除两处已不存在的端口连接，改名第三处；i_sample_valid恒接1（本TB驱动的每笔NORMAL事务都是
+//                      合格样本，即该资格端口加入之前的行为；接0则没有任何样本进入算法历史）；i_run_generation、
+//                      整个discard组和两个测试注入输入显式接非活动常量（本TB不测代际清空）。TB侧的
+//                      i_stop_ack_event/i_control_abort_event寄存器保留但已不再使用。
+//                      结果：ALL PWI-01 THROUGH PWI-05 PASS count=5（xsim与iverilog一致）。负向对照：同一TB把
+//                      i_sample_valid接0时5条检查全部FAIL（fine/cross/peak/valley计数均为0），说明这5条检查是真实
+//                      执行的，不是空过。
 //////////////////////////////////////////////////////////////////////////////////
 
 module tb_ppg_precision_window_integration;
@@ -553,8 +578,26 @@ ppg_precision_window_integration dut(
 	.i_rstn(i_rstn),                            // 连接低有效异步复位
 	.i_run_enable(i_run_enable),                // 连接RUN生命周期状态
 	.i_start_ack_event(i_start_ack_event),      // 连接新RUN开始事件
-	.i_stop_ack_event(i_stop_ack_event),        // 连接STOP确认事件
-	.i_control_abort_event(i_control_abort_event), // 连接阻断撤销事件
+	// V1.1：RTL V1.1已删除wrapper的i_stop_ack_event/i_control_abort_event，改由AMI代际discard广播清空；
+	// 本TB不测清空路径，以下新增端口全部显式接非活动常量，避免悬空X
+	.i_run_generation(8'd0),                    // V1.1:固定RUN代际
+	.i_detection_discard_event(1'b0),           // V1.1:无代际清空事件
+	.i_detection_discard_identity_valid(1'b0),  // V1.1:清空身份不可信(无清空)
+	.i_detection_discard_reason(2'b00),         // V1.1:清空原因占位
+	.i_detection_discard_run_generation(8'd0),  // V1.1:清空目标代际占位
+	.i_detection_discard_frame_id(16'd0),       // V1.1:清空帧号占位
+	.i_detection_discard_sample_index(16'd0),   // V1.1:清空序号占位
+	.i_detection_discard_color_ir(1'b0),        // V1.1:清空颜色占位
+	.i_detection_discard_frame_type(2'b00),     // V1.1:清空帧类型占位
+	.i_detection_discard_precision(1'b0),       // V1.1:清空精度占位
+	.i_detection_discard_sample_valid(1'b0),    // V1.1:清空样本资格占位
+	.i_detection_discard_config_epoch(8'd0),    // V1.1:清空ACTIVE版本占位
+	.i_detection_discard_coef_epoch(8'd0),      // V1.1:清空Stage1版本占位
+	.i_detection_discard_dc_recovery_epoch(8'd0), // V1.1:清空DC恢复版本占位
+	.i_detection_discard_amb_code_epoch(4'd0),  // V1.1:清空AMB码版本占位
+	.i_detection_discard_dc_code_epoch(4'd0),   // V1.1:清空DC码版本占位
+	.i_test_inject_enable(1'b0),                // V1.1:生产配置关闭验证注入
+	.i_test_calibration_loss_inject_valid(1'b0), // V1.1:无calibration-loss注入
 	.i_diag_clear_event(i_diag_clear_event),    // 连接诊断清除事件
 	.i_active_config_valid(i_active_config_valid), // 连接ACTIVE整体资格
 	.i_run_profile(i_run_profile),              // 连接RUN profile
@@ -587,6 +630,7 @@ ppg_precision_window_integration dut(
 	.i_dcs_enable(i_dcs_enable),                // 连接DC重验证使能
 	.i_amb_recheck_interval_frames(i_amb_recheck_interval_frames), // 连接重检帧间隔
 	.i_normal_result_valid(i_normal_result_valid), // 连接NORMAL事务valid
+	.i_sample_valid(1'b1),                      // V1.1:每笔事务都是合格样本，等价于该端口加入前的语义
 	.o_normal_result_ready(o_normal_result_ready), // 观察FIR真实输入ready
 	.i_coarse_ppg_value(i_coarse_ppg_value),    // 连接统一粗PPG数据
 	.i_coarse_valid(i_coarse_valid),            // 连接粗结果有效资格
@@ -609,7 +653,7 @@ ppg_precision_window_integration dut(
 	.i_dc_code_epoch(i_dc_code_epoch),          // 连接DC码版本
 	.i_frame_safe_boundary(i_frame_safe_boundary), // 连接安全帧边界
 	.i_safe_frame_id(i_safe_frame_id),          // 连接下一真实帧号
-	.i_adc_idle(i_adc_idle),                    // 连接ADC排空资格
+	.i_precision_takeover_safe(i_adc_idle),     // V1.1:RTL V1.3把i_adc_idle纯改名，TB激励名不变
 	.i_analog_safe(i_analog_safe),              // 连接模拟安全资格
 	.i_normal_fork_idle(i_normal_fork_idle),    // 连接上游fork排空资格
 	.i_idac_idle(i_idac_idle),                  // 连接IDAC排空资格
