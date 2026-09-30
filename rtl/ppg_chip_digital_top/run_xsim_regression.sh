@@ -5,7 +5,7 @@
 # trusted-tool (xsim) confirmation for ppg_chip_digital_top -- it has so far only ever
 # been run through iverilog.
 set -u
-export PATH="/c/Xilinx/Vivado/2022.2/bin:$PATH"
+export PATH="${VIVADO_BIN:-/c/Xilinx/Vivado/2022.2/bin}:$PATH"
 cd "$(dirname "$0")"
 
 OUTDIR="xsim_regression_$(date +%Y%m%d)"
@@ -44,9 +44,9 @@ t1=$(date +%s)
 dur=$((t1 - t0))
 
 if [ -f "$logdir/xsim.log" ]; then
-  pass_count=$(grep -c -E "^PASS " "$logdir/xsim.log" 2>/dev/null || echo 0)
-  fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR" "$logdir/xsim.log" 2>/dev/null || echo 0)
-  finished=$(grep -c 'finish called' "$logdir/xsim.log" 2>/dev/null || echo 0)
+  pass_count=$(grep -c -E "^PASS " "$logdir/xsim.log" 2>/dev/null); pass_count=${pass_count:-0}
+  fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR" "$logdir/xsim.log" 2>/dev/null); fail_count=${fail_count:-0}
+  finished=$(grep -c 'finish called' "$logdir/xsim.log" 2>/dev/null); finished=${finished:-0}
 else
   pass_count=0
   fail_count=0

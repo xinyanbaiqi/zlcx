@@ -2,7 +2,7 @@
 # Phase 6 regression driver: runs each of the 19 standalone ppg_control_top TB files
 # through xvlog+xelab+xsim (Vivado 2022.2) individually and produces one summary.
 set -u
-export PATH="/c/Xilinx/Vivado/2022.2/bin:$PATH"
+export PATH="${VIVADO_BIN:-/c/Xilinx/Vivado/2022.2/bin}:$PATH"
 cd "$(dirname "$0")"
 
 OUTDIR="xsim_regression_20260906"
@@ -86,9 +86,9 @@ for tb in "${ORDER[@]}"; do
   dur=$((t1 - t0))
 
   if [ -f "$logdir/xsim.log" ]; then
-    pass_count=$(grep -c -E "^PASS " "$logdir/xsim.log" 2>/dev/null || echo 0)
-    fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR" "$logdir/xsim.log" 2>/dev/null || echo 0)
-    finished=$(grep -c 'finish called' "$logdir/xsim.log" 2>/dev/null || echo 0)
+    pass_count=$(grep -c -E "^PASS " "$logdir/xsim.log" 2>/dev/null); pass_count=${pass_count:-0}
+    fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR" "$logdir/xsim.log" 2>/dev/null); fail_count=${fail_count:-0}
+    finished=$(grep -c 'finish called' "$logdir/xsim.log" 2>/dev/null); finished=${finished:-0}
   else
     pass_count=0
     fail_count=0
