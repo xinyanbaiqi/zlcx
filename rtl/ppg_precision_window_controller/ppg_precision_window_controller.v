@@ -19,14 +19,15 @@
 // Referrences:		PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.3
-// Revision Date:	2026/08/23
+// Version:			V1.4
+// Revision Date:	2026/09/17
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/12            V1.0          Erie                  Create file.
 // 2026/08/22            V1.1          Erie                  Remove i_stop_ack_event/i_control_abort_event direct-clear ports; add PWI-broadcast i_detection_discard group, i_run_generation and o_local_empty per PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md section 18.1a.
 // 2026/08/22            V1.2          Erie                  Add i_peak_valley_config_valid (V5 formal-detection gate, PWC-40) and the registered o_mode_fault_active/identity_valid/<FAULT_ID> group for the AMI cause 8'h04 fault dispatcher, per PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 15.3/18.2/18.6.
 // 2026/08/23            V1.3          Erie                  Rename i_adc_idle to i_precision_takeover_safe (pure port rename, no logic change) to match PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 18.5/19 literal naming; the connected value was already the AMI composite predicate, never physical ADC idle.
+// 2026/09/17            V1.4          Erie                  Fix a real defect: a new legal START (i_start_ack_event) silently cleared the two history stickies switch_timeout_sticky_o and protocol_error_sticky_o, violating contract section 6.2 (:205, a new RUN does not clear history diagnostics) and section 17.1 (:731, a new legal START or STOP by itself does not clear stickies). Both now clear only on i_diag_clear_event; a protocol error raised in the same cycle as a new START is still latched. Covered by PWC-41 (tags at the two clear branches); see PWC_STICKY_CLEAR_RTL_FIX_20260917.md. This changelog entry was recorded on 2026/10/01 (task C) because the header had not been updated with the 09/17 code change; no code changed when it was added.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -46,14 +47,15 @@
 // 参考资料:		PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.3
-// 修订日期:		2026年08月23日
+// 当前版本:		V1.4
+// 修订日期:		2026年09月17日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月12日        V1.0          Erie                  创建文件。
 // 2026年08月22日        V1.1          Erie                  删除i_stop_ack_event/i_control_abort_event直接清除端口，按合同18.1a节新增PWI广播的i_detection_discard组、i_run_generation和o_local_empty
 // 2026年08月22日        V1.2          Erie                  按合同15.3/18.2/18.6节新增i_peak_valley_config_valid（V5正式检测门控，PWC-40）和注册式o_mode_fault_active/identity_valid/<FAULT_ID>组，供AMI cause 8'h04故障分发器观测
 // 2026年08月23日        V1.3          Erie                  按合同18.5/19节把i_adc_idle改名为i_precision_takeover_safe（纯端口改名，不改逻辑）——该端口连接的值本来就是AMI导出的复合资格，从未是物理ADC空闲
+// 2026年09月17日        V1.4          Erie                  修复一个真实缺陷：新的合法START（i_start_ack_event）会悄悄清掉switch_timeout_sticky_o和protocol_error_sticky_o两个历史sticky，违反合同6.2节（:205，新RUN不清除历史诊断）与17.1节（:731，新的合法START和STOP本身不清sticky）。两者现在只在i_diag_clear_event时清除；与新START同拍出现的协议异常仍会被锁存。由PWC-41覆盖（两个清除分支处已打标签），详见PWC_STICKY_CLEAR_RTL_FIX_20260917.md。本条于2026年10月01日（任务C）补记，因为09月17日改代码时没有同步文件头；补记本身不改任何代码。
 // 在下一安全400 Hz帧原子提交9-bit或15-bit模式，并协调异常重新获取和重检事件
 module ppg_precision_window_controller
 #(
