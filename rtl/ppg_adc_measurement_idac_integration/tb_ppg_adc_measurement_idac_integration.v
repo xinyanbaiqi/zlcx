@@ -7,7 +7,7 @@
 // Create Date:     2026-08-12
 // Design Name:     PPG ADC Measurement and IDAC Integration Verification
 // Module Name:     tb_ppg_adc_measurement_idac_integration
-// Description:     Self-checking AMI-01 through AMI-47 plus N08-01 integration regression.
+// Description:     Self-checking AMI-01 through AMI-49 plus N08-01 integration regression.
 // Simulations:     Vivado xsim 2022.2
 //
 // Referrences:     PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.9
-// Revision Date:   2026-09-30
+// Version:         V1.10
+// Revision Date:   2026-10-01
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -28,6 +28,7 @@
 // 2026-08-23           V1.7       Erie        Fix a stale AMI-40 assertion found while re-running this regression against the DUT's V1.11 fix (flag_stop_result_draining now also arms when STOP catches a real owner still in flight, per contract section 13's frozen late-DONE rule 1). AMI-40 previously asserted adc_complete_success_snapshot==1 for exactly this STOP-with-owner-inflight case; the contract requires success=0 (a single original-identity discard release that must never enter the formal result or detection chain), matching how AMI-22/32/39 already test the equivalent abort case. Corrected the assertion and strengthened it with !o_measurement_result_valid && o_measurement_output_idle. All 47 cases (AMI-01 through AMI-47) still pass with a clean $finish.
 // 2026-09-08           V1.8       Erie        Add N08-01: wire the remaining section 6.10 o_detection_discard_identity_valid/frame_id/sample_index/color_ir ports into the DUT instance (previously entirely unconnected). N08-01 drives two back-to-back RED NORMAL transactions with the new send_normal_sample_tight task (same code-to-raw math as send_normal_sample minus the 20-cycle settle); the second transaction latches AMI's own flag_detection_pending while FIR is still mid-MAC on the first one's already-warm 21-tap window, then abort proves o_detection_discard_identity_valid/frame_id/sample_index/color_ir are bound to that still-resident second transaction's real identity before hand-off to PWI. This closes the pre-handoff half of N08 that a prior full-chip-level attempt (tb_ppg_control_top_baseline_cross.v) could not reach because its background stimulus generator's physical pacing was wider than the window; this module-level unit TB drives transactions directly and is not bound by that pacing floor. 48 cases (AMI-01 through AMI-47 plus N08-01) pass with a clean $finish.
 // 2026-09-30           V1.9       Erie        TB maintenance (no RTL change): explicitly drive the SID-05 input i_cal_owner_deadline_event (added 2026-09-18) from a reg initialised to 0, next to i_system_fault_discard_event. It had been left unconnected (xelab VRFC 10-3645); a floating Z only ever acted like 0 here, as REGRESSION_BASELINE_20260930.md section 6.6 already showed with a tie-0 probe. This TB has no scheduler, so no deadline event can occur; no new assertion is added (the tick-248 deadline test is a separate task). Expected and observed: identical result, 48 cases (AMI-01 through AMI-47 plus N08-01) pass.
+// 2026-10-01           V1.10      Erie        Task C (TASKC_TICK248_P2S_20261001.md): add the SID-05 unit assertions AMI-48/AMI-49 as a final independent phase after N08-01, so the earlier 48 checks are untouched. A fresh SEARCH_TRACK RUN is started, the first calibration request is handshaken with i_calibration_sample_ready but no transaction is started (the scheduler-accepted, owner-not-yet-committed in-flight state), then i_cal_owner_deadline_event is pulsed directly (this TB has no scheduler). AMI-48: in flight, the event must clear flag_calibration_request_inflight and re-raise o_calibration_sample_valid with the same frame type/color, with no transaction start fire. AMI-49: while that re-raised request is pending but not yet accepted (not in flight), a second event must have no side effect (in-flight stays 0, valid and payload unchanged, integration protocol sticky and wrapper fault unchanged, no fire). Pass criterion raised from 48 to 50. Negative control: with the V1.15 SID-05 clearing term removed from AMI line ~1797, AMI-48 fails (and AMI-49, whose precondition is the re-raised request, fails with it).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -35,7 +36,7 @@
 // 创建日期:        2026年08月12日
 // 设计名称:        PPG ADC测量与IDAC集成验证
 // 模块名称:        tb_ppg_adc_measurement_idac_integration
-// 模块说明:        使用真实子模块验证AMI-01至AMI-47及N08-01，不使用force或行为替身
+// 模块说明:        使用真实子模块验证AMI-01至AMI-49及N08-01，不使用force或行为替身
 // 仿真工程:        Vivado xsim 2022.2
 //
 // 参考资料:        PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
@@ -43,8 +44,8 @@
 // 依赖文件:
 //      DUT及全部真实集成子模块
 //
-// 当前版本:        V1.9
-// 修订日期:        2026年09月30日
+// 当前版本:        V1.10
+// 修订日期:        2026年10月01日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -56,6 +57,7 @@
 // 2026-08-23           V1.7       Erie        拿DUT V1.11修复（flag_stop_result_draining现在也在STOP恰好命中真实owner在途时置位，对应合同13节冻结的迟到DONE规则第1条）重跑这份回归时发现并修复AMI-40一条过时断言：原来对"STOP恰好命中owner在途"这个场景断言adc_complete_success_snapshot==1，但合同要求的是success=0（以原始身份释放一次discard，绝不进入正式结果或检测链），和AMI-22/32/39已经在测的abort等价场景应该一致。订正断言并加强为!o_measurement_result_valid && o_measurement_output_idle。AMI-01至AMI-47全部47项仍然通过，仿真正常$finish
 // 2026-09-08           V1.8       Erie        新增N08-01：把6.10节剩余的o_detection_discard_identity_valid/frame_id/sample_index/color_ir端口接入DUT例化（此前完全未连接）。N08-01用新增的send_normal_sample_tight任务（与send_normal_sample共用码转换算法，只是不等20拍settle）背靠背驱动两笔RED NORMAL事务，第二笔完成让AMI自身flag_detection_pending武装到1时，FIR恰好还在处理第一笔样本已经预热到21点满窗后触发的MAC计算，借此天然卡住多拍窗口，随后abort验证o_detection_discard_identity_valid/frame_id/sample_index/color_ir真实绑定这笔仍在AMI侧、尚未交接给PWI的事务身份。此前在ppg_control_top整机级TB（tb_ppg_control_top_baseline_cross.v）尝试过这个场景但因bg_responder背景激励的真实物理节拍比这个窗口更宽而够不到；这份AMI自身module-level unit TB直接驱动事务，不受该节拍下限约束。48项（AMI-01至AMI-47加N08-01）全部通过，仿真正常$finish
 // 2026-09-30           V1.9       Erie        TB维护（不改RTL）：用初值为0的寄存器显式驱动SID-05新增输入i_cal_owner_deadline_event（2026-09-18），放在i_system_fault_discard_event旁边。此前该端口未连接（xelab VRFC 10-3645），浮空的Z在本TB中的效果只等价于0，REGRESSION_BASELINE_20260930.md第6.6节的tie-0探针已经证明过这一点。本TB没有scheduler，不可能出现截止事件；不加新断言（tick-248截止测试另行安排）。预期并实测：结果不变，48项（AMI-01至AMI-47加N08-01）全部通过。
+// 2026-10-01           V1.10      Erie        任务C（TASKC_TICK248_P2S_20261001.md）：新增SID-05单元断言AMI-48/AMI-49，作为N08-01之后的独立末段，不触动前面48项检查。重开一次SEARCH_TRACK RUN，第一笔校准请求只用i_calibration_sample_ready握手、不启动事务（即调度器已接受请求、owner尚未提交的在途状态），然后由TB直接驱动i_cal_owner_deadline_event（本TB没有调度器）。AMI-48：在途时收到事件，必须清除flag_calibration_request_inflight，并以相同帧类型/颜色重新拉高o_calibration_sample_valid，不产生事务start fire。AMI-49：重新拉高的请求尚未被接受（不在途）时再来一次事件，必须无副作用（在途仍为0，valid与载荷不变，集成协议sticky与wrapper阻断不变，无fire）。通过判据由48项提高到50项。负对照：把AMI约1797行V1.15的SID-05清零条件去掉后，AMI-48失败（AMI-49以重新拉高的请求为前提，随之失败）。
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -322,6 +324,12 @@ module tb_ppg_adc_measurement_idac_integration ();
 	reg flag_n08_fir_busy_observed;             // N08场景abort触发瞬间FIR确实仍处于忙碌状态的诊断观测
 	reg [15:0]n08_expect_frame_id;              // N08场景真实驱动的第二笔样本物理帧号，仅取自TB自身激励
 	reg [15:0]n08_expect_sample_index;          // N08场景真实驱动的第二笔样本全局序号，仅取自TB自身激励
+	reg [1:0]sid05_req_type;                    // V1.10 AMI-48/49：被截止事件打断前的校准请求类型 @satisfies: SID-05
+	reg sid05_req_color;                        // V1.10 AMI-48/49：被截止事件打断前的校准请求颜色
+	reg flag_sid05_inflight_before;             // V1.10 AMI-48：握手后、截止事件前在途标志为1且valid已撤下的前提
+	reg flag_sid05_sticky_before;               // V1.10 AMI-49：不在途截止事件前的集成协议sticky快照
+	reg flag_sid05_fault_before;                // V1.10 AMI-49：不在途截止事件前的wrapper阻断快照
+	integer cnt_fire_before_sid05;              // V1.10 AMI-48/49：截止事件前的事务start fire计数基准
 
 	//===================<DUT实例化>===================//
 	// 全部配置和事务输入均由本TB真实驱动，未观察诊断输出允许保持开放。
@@ -1624,8 +1632,56 @@ module tb_ppg_adc_measurement_idac_integration ();
 		end
 		@(negedge i_clk); i_control_abort_event = 1'b0;
 
-		if(cnt_fail == 0 && cnt_pass == 48)begin
-			$display("AMI-01 through AMI-47 plus N08-01 PASS: %0d real comparisons", cnt_pass);
+		// AMI-48/49（V1.10，SID-05截止事件单元断言）：重开一次自动搜索RUN，拿到第一笔校准请求后只握手、
+		// 不启动事务，模拟调度器已接受请求而owner尚未提交的在途状态；本TB没有调度器，截止事件由TB直接驱动。
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(3) @(negedge i_clk);
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		cnt_watchdog = 0;
+		while((o_calibration_sample_valid !== 1'b1) && (cnt_watchdog < 100))begin
+			pulse_safe_boundary;
+			repeat(2) @(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		sid05_req_type = o_calibration_frame_type;
+		sid05_req_color = o_calibration_color_ir;
+		@(negedge i_clk); i_calibration_sample_ready = 1'b1;
+		@(negedge i_clk); i_calibration_sample_ready = 1'b0;
+		repeat(2) @(negedge i_clk);
+		flag_sid05_inflight_before = (o_calibration_sample_valid === 1'b1) ? 1'b0 : (dut.flag_calibration_request_inflight === 1'b1);
+		cnt_fire_before_sid05 = cnt_fire;
+		// AMI-48：在途时收到截止事件，必须释放在途标志并重新发起同一个候选的请求，且不产生事务fire @satisfies: SID-05
+		@(negedge i_clk); i_cal_owner_deadline_event = 1'b1;
+		@(negedge i_clk); i_cal_owner_deadline_event = 1'b0;
+		cnt_watchdog = 0;
+		while((o_calibration_sample_valid !== 1'b1) && (cnt_watchdog < 10))begin
+			@(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		check_case("AMI-48", flag_sid05_inflight_before &&
+			(dut.flag_calibration_request_inflight === 1'b0) &&
+			(o_calibration_sample_valid === 1'b1) &&
+			(o_calibration_frame_type == sid05_req_type) &&
+			(o_calibration_color_ir == sid05_req_color) &&
+			(cnt_fire == cnt_fire_before_sid05));
+		// AMI-49：请求已重新拉高但尚未被接受（不在途）时收到截止事件，必须无副作用 @satisfies: SID-05
+		flag_sid05_sticky_before = o_integration_protocol_error_sticky;
+		flag_sid05_fault_before = o_wrapper_fault_blocking;
+		@(negedge i_clk); i_cal_owner_deadline_event = 1'b1;
+		@(negedge i_clk); i_cal_owner_deadline_event = 1'b0;
+		repeat(3) @(negedge i_clk);
+		check_case("AMI-49", (dut.flag_calibration_request_inflight === 1'b0) &&
+			(o_calibration_sample_valid === 1'b1) &&
+			(o_calibration_frame_type == sid05_req_type) &&
+			(o_calibration_color_ir == sid05_req_color) &&
+			(o_integration_protocol_error_sticky === flag_sid05_sticky_before) &&
+			(o_wrapper_fault_blocking === flag_sid05_fault_before) &&
+			(cnt_fire == cnt_fire_before_sid05));
+
+		if(cnt_fail == 0 && cnt_pass == 50)begin
+			$display("AMI-01 through AMI-49 plus N08-01 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("AMI REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
 		end

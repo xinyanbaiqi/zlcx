@@ -7,20 +7,21 @@
 // Create Date:        2026-08-16
 // Design Name:        PPG 400 Hz Frame Calibration Scheduler Testbench
 // Module Name:        tb_ppg_400hz_frame_calibration_scheduler
-// Description:        Self-checking scheduler V1.7 verification for FSC-01 through FSC-59.
+// Description:        Self-checking scheduler V1.9 verification for FSC-01 through FSC-62.
 // Simulations:        ppg_400hz_frame_calibration_scheduler_sim
 //
 // Referrences:        PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md
 //
 // Dependencies:       ppg_400hz_frame_calibration_scheduler.v
 //
-// Version:            V1.6
-// Revision Date:      2026-09-30
+// Version:            V1.7
+// Revision Date:      2026-10-01
 // History:
 // 2026-08-16          V1.3        Erie          Add independent-context FSC-01 through FSC-57 checks.
 // 2026-08-24          V1.4        Erie          Fix three issues found while re-running this self-check against the current (V1.6) scheduler RTL after the STOP-drain deadlock fix. (1) This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated as X at the DUT instantiation, making i_run_generation==state_current[B_INFLIGHT_GENERATION] compare X and fail every case depending on completion matching (17 of 57 cases); fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation and driving it at a fixed constant in drive_defaults (none of FSC-01 through FSC-57 exercise cross-generation rejection; that remains a coverage gap, not newly added here). (2) FSC-33's manual late-DONE drive raced against the still-active background auto-done generator: flag_auto_done_enable was left on, so its every-cycle non-blocking i_adc_transaction_complete_event<=1'b0 default silently overwrote the test's own blocking drive of the same signal at the same edge, so the DUT never actually sampled the manual completion pulse as 1; fixed by disabling flag_auto_done_enable before the manual drive. (3) FSC-44 asserted the pre-V1.6 behavior that a plain i_run_enable==0 (no STOP/abort) immediately clears B_FRAME_ACTIVE; V1.6 intentionally changed this so only abort clears it immediately, letting an already-open macro frame drain via natural tick advance per contract section 16.3 — fixed by asserting the still-valid immediate property (no new owner commit, frame legitimately stays active) and then waiting for the frame to reach MACRO_LAST_TICK to confirm it actually does drain and clear on its own, rather than weakening the check.
 // 2026-08-24          V1.5        Erie          Add FSC-58/59, the first real coverage for scheduler RTL V1.7's newly-implemented receiver-side calibration eligibility check (section 9.1). Each drives an otherwise-legal AMB_CAL or DCS_CAL payload (correct frame_type/color/precision) but with an illegal i_run_profile (CHARACTERIZATION) or i_input_source (EXTERNAL_TEST_CURRENT) respectively, watches o_calibration_sample_ready continuously for 700 cycles (past local tick 0 and the retry window) to confirm it never asserts even once, and confirms zero owner commits, zero waveform fires, and o_protocol_error_sticky asserted. The contract's own self-check table has listed a "FSC-17 | calibration request eligibility and buffering" case since this file's creation, but no such case has ever actually existed here (the real FSC-17 checks an unrelated RED-only owner-commit count); FSC-58/59 are new cases, not a restoration of a regressed one.
 // 2026-09-30          V1.6        Erie          TB maintenance (no RTL change). Found by the 2026-09-30 regression baseline (REGRESSION_BASELINE_20260930.md section 6.1): FSC-15 failed because this TB never connected the i_owner_q3_window_closed input added by scheduler contract V1.8 (2026-08-30, LFA-06 fix); the floating Z kept flag_completion_success from ever being 1, so no NORMAL frame ever completed. Tied it to constant 1'b1: this restores the pre-V1.8 behaviour in which the owner's Q3 window always counts as already closed, which is exactly the environment every FSC case was written against; the Q3 gating itself is covered at system level by the 19-TB LFA-06 evidence and is intentionally not re-tested here. With the port floating, FSC-34 (cnt_normal_complete==0) also passed vacuously; it is now a real check. Also connected the SID-05 output o_cal_owner_deadline_event (2026-09-18) to an observation-only wire; no new assertion (the tick-248 deadline test is a separate task). Result: FSC-01 through FSC-59 pass=59 fail=0 (xsim and iverilog).
+// 2026-10-01          V1.7        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add FSC-60..62, the SID-05 unit assertions for o_cal_owner_deadline_event, matching scheduler RTL V1.9 (event masked by a same-cycle owner commit). In the first calibration subframe the owner is held off with i_adc_owner_ready=0 and released at a negedge so the commit lands exactly on a chosen local tick. FSC-60: commit at tick 248 (legal on-time commit) -> one commit at local tick 248, zero deadline events, no owner-deadline sticky. FSC-61: commit at tick 247 -> same, commit at 247. FSC-62: never released -> exactly one deadline-event cycle, at tick 248, not coincident with a commit, zero commits, o_owner_deadline_timeout_sticky set (the pre-existing SID-05 behaviour). The event is counted by a new always block sampling at posedge, i.e. the value AMI actually samples (stimulus only changes at negedge, registers update in NBA, so the read is race-free). Pass criterion and banner raised from 59 to 62. Negative control: on the pre-fix RTL V1.8 FSC-60 fails (one event coincident with the commit) while FSC-61/62 pass.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -35,13 +36,14 @@
 //
 // 依赖文件:           ppg_400hz_frame_calibration_scheduler.v
 //
-// 当前版本:           V1.6
-// 修订日期:           2026-09-30
+// 当前版本:           V1.7
+// 修订日期:           2026-10-01
 // 修订历史:
 // 2026-08-16          V1.3        Erie          覆盖FSC-01至FSC-57及真实事务完成释放。
 // 2026-08-24          V1.4        Erie          拿V1.6 scheduler（STOP排空死锁修复后）重跑这份自检时发现并修复三个问题。(1)这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接，导致它在DUT里浮空为X，使i_run_generation==在途owner锁存代际这条比较恒为假，凡是依赖DONE完成匹配的用例全部假失败（57个里17个）；修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在drive_defaults里给它一个全程固定常量——FSC-01至FSC-57本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。(2)FSC-33手动驱动迟到DONE时，后台自动DONE生成器flag_auto_done_enable还开着，它每拍非阻塞写回的i_adc_transaction_complete_event<=1'b0默认值在同一个时钟沿悄悄覆盖了测试自己的阻塞驱动，DUT从未真正采样到手动置的1；修复：手动驱动前先关掉flag_auto_done_enable。(3)FSC-44断言的是V1.6修复前的行为——纯i_run_enable掉底（无STOP/abort）立即清B_FRAME_ACTIVE；V1.6按合同16.3节故意改成只有abort才立即清，纯run_enable掉底要靠tick自然推进把已经打开的宏帧走完；修复为断言仍然成立的即时性质（没有新owner提交、宏帧合法地保持活动）之后再等到MACRO_LAST_TICK验证它确实会自己走完释放，而不是简单削弱断言
 // 2026-08-24          V1.5        Erie          新增FSC-58/59，为scheduler RTL V1.7刚实现的接收端校准资格复核（合同9.1节）拿到第一份真实测试覆盖。两条分别构造一笔payload本身合法的AMB_CAL/DCS_CAL请求（frame_type/颜色/精度都对），但run_profile非法（CHARACTERIZATION）或input_source非法（EXTERNAL_TEST_CURRENT），连续监视o_calibration_sample_ready 700拍（跨过local tick 0和重试窗口）确认它一次都没有出现过，同时确认owner提交次数为0、波形fire次数为0、o_protocol_error_sticky置位。合同自己的自检用例表从这份文件创建起就写着"FSC-17｜校准请求资格与缓冲"，但这条用例从未在这里真正存在过（真实的FSC-17测的是纯RED场景一个无关的owner commit计数）；FSC-58/59是全新用例，不是恢复一条退化的旧用例。
 // 2026-09-30          V1.6        Erie          TB维护（不改RTL）。2026-09-30回归基线（REGRESSION_BASELINE_20260930.md第6.1节）发现：FSC-15失败，原因是本TB一直没有连接scheduler合同V1.8（2026-08-30，LFA-06修复）新增的输入i_owner_q3_window_closed；端口浮空为Z，flag_completion_success永远不为1，NORMAL帧永远无法完成。改为恒接1'b1：等于恢复V1.8之前"在途owner的Q3窗口随时算已关闭"的语义，而全部FSC用例正是按这个环境写的；Q3门控本身的覆盖在系统级19-TB的LFA-06证据里，本单元TB有意不重复测试。端口浮空时FSC-34（cnt_normal_complete==0）也属于空过，现在是真实检查。另把SID-05新增输出o_cal_owner_deadline_event（2026-09-18）接到一根仅供观察的wire，不加新断言（tick-248截止测试另行安排）。结果：FSC-01至FSC-59 pass=59 fail=0（xsim与iverilog一致）。
+// 2026-10-01          V1.7        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增FSC-60~62，即o_cal_owner_deadline_event的SID-05单元断言，对应scheduler RTL V1.9（截止事件被同拍owner提交屏蔽）。在第一个校准子帧内用i_adc_owner_ready=0推迟owner，在下降沿放开，使提交精确落在指定local tick。FSC-60：tick 248提交（合法按时提交）→ 恰好一次提交且在local tick 248，截止事件0次，不置owner截止sticky。FSC-61：tick 247提交 → 同上，提交在247。FSC-62：始终不放开 → 截止事件恰好一个周期、在tick 248、不与提交同拍，提交0次，o_owner_deadline_timeout_sticky置位（SID-05既有行为）。事件由新增的上升沿采样always块计数，即AMI实际采样到的值（激励只在下降沿变化、寄存器在NBA阶段更新，读数无竞争）。通过判据与横幅由59提高到62。负对照：在修复前的RTL V1.8上FSC-60失败（有一次与提交同拍的截止事件），FSC-61/62通过。
 module tb_ppg_400hz_frame_calibration_scheduler ();
 
 	parameter C_FRAME_ID_WIDTH = 16;
@@ -161,7 +163,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 	wire o_completion_mismatch_sticky;
 	wire o_protocol_error_sticky;
 	wire o_scheduler_local_fault_blocking;
-	wire o_cal_owner_deadline_event; // V1.6: SID-05新增校准owner截止事件，仅观察
+	wire o_cal_owner_deadline_event; // SID-05新增校准owner截止事件，V1.7起由FSC-60~62断言
 
 	integer cnt_pass;
 	integer cnt_fail;
@@ -180,6 +182,9 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 	integer flag_case_ok;
 	reg flag_ready_ever_seen; // FSC-58/59：非法run_profile/input_source窗口内o_calibration_sample_ready是否曾经出现过
 	integer idx_ready_watch;
+	integer cnt_cal_deadline_event; // V1.7：o_cal_owner_deadline_event为1的周期数（上升沿采样） @satisfies: SID-05
+	integer cnt_cal_deadline_with_commit; // V1.7：截止事件与owner提交同拍出现的周期数
+	reg [C_CAL_TICK_WIDTH - 1:0]reg_last_deadline_local_tick; // V1.7：最近一次截止事件所在的local tick
 	reg [C_MACRO_TICK_WIDTH - 1:0]reg_last_wave_tick;
 	reg [C_CAL_TICK_WIDTH - 1:0]reg_last_wave_local_tick;
 	reg reg_last_wave_color;
@@ -298,7 +303,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		.o_completion_mismatch_sticky(o_completion_mismatch_sticky),
 		.o_protocol_error_sticky(o_protocol_error_sticky),
 		.o_scheduler_local_fault_blocking(o_scheduler_local_fault_blocking),
-		.o_cal_owner_deadline_event(o_cal_owner_deadline_event) // V1.6: SID-05端口显式接观察wire，本TB不断言
+		.o_cal_owner_deadline_event(o_cal_owner_deadline_event) // V1.6接线；V1.7起由FSC-60~62断言
 	);
 
 	// AMI returned fire must exactly equal the scheduler owner commit.
@@ -411,6 +416,21 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 			end
 			if(o_calibration_frame_complete_event)begin
 				cnt_cal_complete <= cnt_cal_complete + 1;
+			end
+		end
+	end
+
+	// V1.7：SID-05截止事件逐拍观测。在上升沿读取组合输出，即AMI实际采样到的值；激励只在下降沿变化、寄存器在NBA阶段才更新，读数无竞争；复位清零 @satisfies: SID-05
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_cal_deadline_event <= 0;
+			cnt_cal_deadline_with_commit <= 0;
+			reg_last_deadline_local_tick <= {C_CAL_TICK_WIDTH{1'b0}};
+		end else if(o_cal_owner_deadline_event)begin
+			cnt_cal_deadline_event <= cnt_cal_deadline_event + 1;
+			reg_last_deadline_local_tick <= o_calibration_local_tick;
+			if(o_adc_owner_commit_event)begin
+				cnt_cal_deadline_with_commit <= cnt_cal_deadline_with_commit + 1;
 			end
 		end
 	end
@@ -547,7 +567,24 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		end
 	endtask
 
-	// 顺序执行FSC-01至FSC-59场景，检查启动、波形、owner、故障恢复和校准接收端资格语义。
+	// V1.7：有上界地在下降沿等待第一个校准子帧的指定local tick，用于把owner提交精确放在该拍 @satisfies: SID-05
+	task wait_cal_local_tick_negedge;
+		input [C_CAL_TICK_WIDTH - 1:0]i_tick;
+		input integer i_limit;
+		integer idx;
+		begin
+			flag_wait_ok = 0;
+			for(idx = 0; idx < i_limit; idx = idx + 1)begin
+				@(negedge i_clk);
+				if(o_calibration_frame_active && (o_calibration_subframe_index == 3'd0) && (o_calibration_local_tick == i_tick))begin
+					flag_wait_ok = 1;
+					idx = i_limit;
+				end
+			end
+		end
+	endtask
+
+	// 顺序执行FSC-01至FSC-62场景，检查启动、波形、owner、故障恢复、校准接收端资格和SID-05截止事件语义。
 	initial begin
 		i_clk = 1'b0;
 		i_rstn = 1'b0;
@@ -926,9 +963,50 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		i_calibration_sample_valid = 1'b0;
 		check_fsc(59, !flag_ready_ever_seen && (cnt_owner_commit == 0) && (cnt_wave_fire == 0) && o_protocol_error_sticky);
 
-		$display("FSC-01 through FSC-59: pass=%0d fail=%0d", cnt_pass, cnt_fail);
-		if(cnt_fail == 0 && cnt_pass == 59)begin
-			$display("ALL FSC-01 THROUGH FSC-59 PASSED");
+		// FSC-60~62（V1.7，SID-05截止事件单元断言）：第一个校准子帧内用i_adc_owner_ready
+		// 推迟owner，在下降沿放开，使提交精确落在指定local tick。合同4.5/10.3节：owner不得
+		// 晚于tick 248提交，截止事件只在截止点到达仍未提交时回报。
+		// FSC-60：owner恰在local tick 248提交属合法按时提交，不得产生截止事件或超时诊断 @satisfies: SID-05
+		drive_defaults;
+		i_calibration_sample_valid = 1'b1;
+		i_normal_measurement_eligible = 1'b0;
+		i_adc_owner_ready = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_cal_local_tick_negedge(10'd248, 400);
+		flag_case_ok = flag_wait_ok;
+		i_adc_owner_ready = 1'b1;
+		wait_macro_tick(13'd260, 40);
+		check_fsc(60, flag_case_ok && flag_wait_ok && (cnt_owner_commit == 1) && (reg_last_owner_local_tick == 10'd248) && (reg_last_owner_type == FRAME_TYPE_AMB) && (cnt_cal_deadline_event == 0) && !o_owner_deadline_timeout_sticky);
+
+		// FSC-61：owner在local tick 247提交，截止之前的正常提交，同样不得产生截止事件 @satisfies: SID-05
+		drive_defaults;
+		i_calibration_sample_valid = 1'b1;
+		i_normal_measurement_eligible = 1'b0;
+		i_adc_owner_ready = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_cal_local_tick_negedge(10'd247, 400);
+		flag_case_ok = flag_wait_ok;
+		i_adc_owner_ready = 1'b1;
+		wait_macro_tick(13'd260, 40);
+		check_fsc(61, flag_case_ok && flag_wait_ok && (cnt_owner_commit == 1) && (reg_last_owner_local_tick == 10'd247) && (cnt_cal_deadline_event == 0) && !o_owner_deadline_timeout_sticky);
+
+		// FSC-62：owner过tick 248仍未提交，截止事件恰好一个周期、落在tick 248且不与提交同拍，超时诊断照旧置位 @satisfies: SID-05
+		drive_defaults;
+		i_calibration_sample_valid = 1'b1;
+		i_normal_measurement_eligible = 1'b0;
+		i_adc_owner_ready = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_cal_local_tick_negedge(10'd248, 400);
+		flag_case_ok = flag_wait_ok;
+		wait_macro_tick(13'd260, 40);
+		check_fsc(62, flag_case_ok && flag_wait_ok && (cnt_owner_commit == 0) && (cnt_cal_deadline_event == 1) && (cnt_cal_deadline_with_commit == 0) && (reg_last_deadline_local_tick == 10'd248) && o_owner_deadline_timeout_sticky);
+
+		$display("FSC-01 through FSC-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
+		if(cnt_fail == 0 && cnt_pass == 62)begin
+			$display("ALL FSC-01 THROUGH FSC-62 PASSED");
 		end
 		$finish;
 	end
