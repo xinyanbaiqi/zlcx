@@ -14,12 +14,13 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.1
-// Revision Date:      2026/09/06
+// Version:            V1.2
+// Revision Date:      2026/10/01
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/24            V1.0          Erie                  Create file, separate from tb_ppg_control_top.v because C_ENABLE_TEST_INJECTION is a compile-time parameter (default 0 in production and in the main smoke TB) that must be overridden to 1 to exercise the injection port group at all. Covers C01 TOP-21~24 with real simulation evidence: INJ-01 is a within-this-build slice of TOP-21 (C_ENABLE_TEST_INJECTION=1 but i_test_inject_enable=0, confirming both injection ready outputs stay 0 and one real transaction completes identically to the non-injection baseline); TOP-21's other half (parameter default 0 in production) is already evidenced by all 22 scenarios in tb_ppg_control_top.v, which never overrides this parameter. INJ-02 is LFA-08, INJ-03 is PRC-08, INJ-04 is the TOP-24 double-request mutex. Getting these three real took four rounds of real bugs, all found by actually running this against real RTL rather than assuming the contract text described the implementation: (1) i_test_inject_enable is a CONFIG/READY-only configuration request that Top latches into flag_test_inject_mode_latched exactly once at START and holds immutable through RUN (AMI contract 6.5b); this TB's first attempt raised the enable mid-RUN inside INJ-01's already-started RUN, so flag_test_inject_effective stayed 0 for the rest of that RUN -- fixed by adding an explicit STOP+drain+re-commit+START cycle between INJ-01 and INJ-02 with the enable set beforehand. (2) o_test_identity_inject_ready/o_test_invalid_sample_ready are one-shot pulses that fire and clear again within the few cycles it takes drive_real_adc_done's blocking physical drive to run, so polling for ready in a while loop AFTER that task returns always saw it already gone; fixed by checking AMI's own flag_test_identity_hold (a level that stays 1 once the mismatch is latched) for identity injection, and by running the invalid-sample arm/drive/ready-detect/result-detect as one continuous fork so no observation gap exists. (3) The genuinely important discovery: LFA-08's STOP-triggered owner recovery was actually undeliverable in the RTL as found -- flag_adc_completion_abort_release additionally required the redundancy corrector's own transient flag_s1_detect_valid, which clears one to two cycles after the original real DONE and never returns, so any STOP/abort arriving later (the entire point of the feature) could never satisfy the release condition and the RUN deadlocked permanently in STOPPING. This TB is what first exercised that exact timing window with injection actually enabled; the real fix landed in ppg_adc_measurement_idac_integration.v V1.12 (dropped the flag_s1_detect_valid term). (4) This TB's own discard-event check then assumed the STOP recovery would surface through o_measurement_result_discard_event, which is scoped to the measurement-fork's own pending state; an LFA-08-mismatched transaction never enters that fork at all (blocked at flag_test_identity_hold before the fork), so that event correctly never fires here -- fixed the check to watch the scheduler's own B_INFLIGHT bit clearing instead, which is what the recovery actually manifests as. Scope note: this file does not attempt every negative rule in AMI contract section 6.5b (e.g. STOP/abort/reset cancellation of an unbound invalid request, a second independent injection attempt while one is already latched) -- only the core LFA-08/PRC-08/TOP-24 flows above are covered; the remaining rules are a known coverage gap, not silently assumed to pass.
 // 2026/09/06            V1.1          Erie                  Add a P06 sub-check inside INJ-02, right after flag_test_identity_hold is confirmed latched: deassert i_test_inject_enable for a real-verified-safe 2-cycle window and confirm flag_test_identity_hold stays 1, then restore the enable and continue INJ-02's original STOP-recovery flow unchanged. Closes matrix item P06 ("AMI request slots | Enable deassertion cannot revoke an accepted request") with real evidence -- flag_test_identity_hold's own always block (ppg_adc_measurement_idac_integration.v) never lists i_test_inject_enable in its clear conditions; only reset, i_start_ack_event and i_control_abort_event clear it, so this was a real untested-but-correct RTL behavior, not a bug. (2026-09-28 workline D independent recheck: corrected this line's own "20 cycles" to the actual implemented and matrix-documented "2-cycle" window -- the code itself and the matrix narrative always agreed on 2 cycles; only this changelog line's number was wrong.)
+// 2026/10/01            V1.2          Erie                  Task C (TASKC_TICK248_P2S_20261001.md): connect i_test_calibration_loss_inject_valid to a reg initialised to 0 and never driven, the same pattern tb_ppg_control_top_robustness_corner_waveforms.v uses. This TB instantiates ppg_control_top with C_ENABLE_TEST_INJECTION=1, so the injection structure is generated, yet this input had been left unconnected (floating Z; REGRESSION_BASELINE_20260930.md section 6.6). All seven control_top verification-injection inputs were checked; this was the only unconnected one, and iverilog -Wall now reports no dangling input. Sorted PASS lines, $finish time and final banner are identical before and after the change (run on the same RTL).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -34,12 +35,13 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年09月06日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月01日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月24日        V1.0          Erie                  创建文件，与tb_ppg_control_top.v分开是因为C_ENABLE_TEST_INJECTION是编译期参数（生产默认0，主烟雾TB也从未覆盖过），要真正驱动注入端口组必须单独实例化并覆盖成1。覆盖C01 TOP-21~24并拿到真实仿真证据：INJ-01是TOP-21切片，INJ-02是LFA-08，INJ-03是PRC-08，INJ-04是TOP-24双请求互斥。把这三条真正跑通，一共经历了四轮真实bug——全部是靠真跑RTL发现的，不是靠读合同文字假设实现就是这样。（1）i_test_inject_enable只是CONFIG/READY期间的配置请求，顶层在START那一刻原子锁存进flag_test_inject_mode_latched后RUN期间不可变（AMI合同6.5b节）；本TB第一次尝试在INJ-01已经START的RUN中途拉高enable，导致flag_test_inject_effective那整个RUN都恒为0——修复：在INJ-01和INJ-02之间插入一次显式STOP+排空+重新COMMIT+START，把enable提前设置好。（2）o_test_identity_inject_ready/o_test_invalid_sample_ready都是一次性脉冲，在drive_real_adc_done这个阻塞任务执行期间的几拍内就握手完毕并回落，任务返回后再poll永远只会看到它已经消失；修复：身份注入改查AMI自己的flag_test_identity_hold（错配锁存后保持为1的电平），invalid-sample注入改成把武装/投递/ready检测/结果检测全部放进同一个fork里连续监视，不留观察空档。（3）真正重要的发现：LFA-08 STOP触发的owner恢复在原RTL里实际上不可达——flag_adc_completion_abort_release还额外要求S1冗余校正器自己的瞬态flag_s1_detect_valid，这个信号在原始真实DONE到达后一两拍内就回落且再也不会回来，而STOP/abort按设计恰恰是在那之后任意时刻才会真正发出（这正是这个功能存在的意义），导致释放条件事实上永远等不到，一旦LFA-08错配触发RUN就永久卡死在STOPPING。本TB是第一次真正在打开注入的条件下跑到这个精确时序窗口；真正的修复落在ppg_adc_measurement_idac_integration.v V1.12（去掉flag_s1_detect_valid这一项）。（4）本TB自己的STOP恢复检查最初还假设会经o_measurement_result_discard_event体现——那个信号专属测量结果fork自己pending态的受控丢弃，而LFA-08错配的事务从一开始就被flag_test_identity_hold挡在fork之外，根本不会进入，自然不会触发这个事件；修复为改查scheduler自己的B_INFLIGHT位是否清0，这才是恢复真正体现的地方。范围说明：本文件不追求覆盖AMI合同6.5b节的每一条负向规则（比如STOP/abort/reset对未绑定invalid请求的撤销、同一owner上第二次独立注入尝试），只覆盖上述LFA-08/PRC-08/TOP-24核心流程；其余规则是已知覆盖缺口，不是默默假设通过。
 // 2026年09月06日        V1.1          Erie                  在INJ-02内flag_test_identity_hold确认置位之后新增P06子检查：把i_test_inject_enable拉低20拍，确认flag_test_identity_hold依然为1，再恢复enable并继续原有INJ-02的STOP恢复流程不变。关闭矩阵P06项（"AMI request slots | Enable deassertion cannot revoke an accepted request"），真实证据：flag_test_identity_hold自己的always块（ppg_adc_measurement_idac_integration.v）从未把i_test_inject_enable列入清零条件，只有复位、i_start_ack_event、i_control_abort_event三种，这是此前真实存在但从未被测过的正确行为，不是bug。
+// 2026年10月01日        V1.2          Erie                  任务C（TASKC_TICK248_P2S_20261001.md）：把i_test_calibration_loss_inject_valid接到初值为0、全程不驱动的寄存器，写法与tb_ppg_control_top_robustness_corner_waveforms.v相同。本TB例化ppg_control_top时C_ENABLE_TEST_INJECTION=1，注入结构会被生成，但这个输入此前一直未连接（浮空Z，见REGRESSION_BASELINE_20260930.md第6.6节）。已逐个核对control_top全部7个验证注入输入，只有这一个悬空，补接后iverilog -Wall不再报任何悬空输入。补接前后（同一套RTL）排序后的PASS行、$finish时刻和最终横幅完全相同。
 //
 // 复位后原子提交一组合法NORMAL单光MANUAL IDAC配置并启动RUN，用C_ENABLE_TEST_INJECTION=1
 // 编译，依次验证注入端口生产旁路、LFA-08身份错配、PRC-08 invalid-sample资格和
@@ -124,6 +126,7 @@ module tb_ppg_control_top_injection();
 	reg [C_SAMPLE_INDEX_WIDTH - 1:0] i_test_identity_inject_sample_index; // LFA-08显式错误sample_index
 	reg i_test_invalid_sample_valid; // PRC-08 invalid-sample资格请求
 	reg i_test_saturation_inject_valid = 1'b0; // 本文件不覆盖SID-11场景，恒0安全占位
+	reg i_test_calibration_loss_inject_valid = 1'b0; // 任务C补接：本文件不做calibration-loss注入，恒0；C_ENABLE_TEST_INJECTION=1时必须真实驱动0，不能悬空
 	reg i_context_handover_stall_request = 1'b0; // 本文件不覆盖OIB-01场景，恒0安全占位
 
 	//---------------SSW模拟控制原样输出---------------//
@@ -259,6 +262,7 @@ module tb_ppg_control_top_injection();
 			.i_test_identity_inject_sample_index(i_test_identity_inject_sample_index),
 			.i_test_invalid_sample_valid(i_test_invalid_sample_valid),
 			.i_test_saturation_inject_valid(i_test_saturation_inject_valid),
+			.i_test_calibration_loss_inject_valid(i_test_calibration_loss_inject_valid),
 			.i_context_handover_stall_request(i_context_handover_stall_request),
 			.o_en_tia_low(o_en_tia_low),
 			.o_leddac(o_leddac),
