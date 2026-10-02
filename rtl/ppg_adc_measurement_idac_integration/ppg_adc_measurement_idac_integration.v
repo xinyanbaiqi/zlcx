@@ -1026,7 +1026,7 @@ module ppg_adc_measurement_idac_integration
 	// 正式测量输出逐位译码自保持载荷，任一分支反压不会改变数据。
 	assign o_measurement_result_valid = flag_measurement_pending && !flag_result_abort_discard; // 已装入正式分支的结果保持至真实消费；与discard共用同一abort_discard项，二者结构性互斥，同拍不会既报成功又报丢弃；OIB-03要求的held结果稳定持有直到valid&&ready，或STOP/abort走discard分支产生唯一DISCARD_STOP，或复位无discard地清空 @satisfies: P01, OIB-03
 	assign o_result_sample_valid = result_sample_valid_o; // 独立资格与正式结果载荷一起保持到正式消费
-	assign o_s1_calibration_applied = flag_dc_s1_calibration_applied; // 导出Stage1校准资格，与frame_id/sample_index/coarse/fine结果同一原子载荷锁存
+	assign o_s1_calibration_applied = flag_dc_s1_calibration_applied; // 导出Stage1校准资格：直连DC恢复缓冲输出而非结果fork寄存器，正式结果遭反压滞留期间若后续事务已被DC恢复接纳则与o_result_*错位一笔，芯片顶层依靠P2S两级队列规避
 	assign o_s1_raw = dec_dc_stage1_raw;        // 导出Stage1物理判决位，取自DC恢复自己重新导出的atomic payload_o
 	assign o_s2_raw = dec_dc_stage2_raw;        // 导出第二级冗余物理判决位，与o_s1_raw同一原子载荷锁存，同样取自DC恢复自己重新导出的atomic payload_o
 	assign o_coarse_ppg_value = coarse_ppg_value_o; // 导出粗PPG码
