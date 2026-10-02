@@ -14,10 +14,11 @@
 //
 // Dependencies:    ppg_chip_digital_top
 //
-// Version:         V1.1
-// Revision Date:   2026/09/07
+// Version:         V1.2
+// Revision Date:   2026/10/01
 // History:
 //     Time          Version     Revised by     Contents
+// 2026/10/01        V1.2        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add TC7, a permanent whole-run assertion that whenever the AMI formal result valid (P2S i_result_valid) is 1, P2S o_result_ready is also 1, i.e. the formal result is never held. AMI's P2S telemetry ports o_s1_raw/o_s2_raw/o_s1_calibration_applied come from the DC-recovery payload_o, not from the result fork, so they belong to a different transaction once a held result lets the next transaction into DC recovery (reproduced at AMI and ppg_control_top level); at chip level the depth-2 P2S queue with at most two NORMAL results per 5000-cycle macro frame keeps the result from ever being held, which is what TC7 now guards. Checked every rising edge (stimulus changes only on falling edges, so the read is race-free); each violation prints a FAIL line and the final TC7 verdict feeds cnt_error. 7 PASS. Negative control: with a temporary P2S copy whose queue depth is 1, TC7 fails (3 held cycles during TC3's back-to-back RED/IR pair) while TC3 itself still passes, which shows TC7 catches the precondition earlier than any field comparison.
 // 2026/09/07        V1.1        Erie          Align TC6's conclusion wording with contract V1.12 errata: the "STOP hits the ADC strobe pulse exactly" sub-scenario is an architecturally narrow window (flag_stopping_complete's i_adc_idle leg alone, not the i_datapath_empty leg that actually guards in-flight pipeline data) that is now formally closed as expected/non-bug, not an open item pending user judgement -- no dedicated fast-discard trigger channel or new QFN pin will be added. TC6's construction attempt is unchanged (still a real STOP+concurrent-DONE stimulus, still exercises the real hardware paths), but its outcome is no longer scored as a failure: "both discard latches unchanged" is now the documented, expected, PASS-worthy result for this specific sub-scenario, consistent with the discard-latch mechanism itself already being independently confirmed via a wider real trigger path (spurious no-owner DONE through the fault supervisor cascade). All 6 required verification areas now report PASS; TB_CHIP_DIGITAL_TOP_PASS. No RTL touched by this revision.
 // 2026/09/06        V1.0        Erie          Create file. Self-checking Mode 0 SPI-master testbench for ppg_chip_digital_top covering the six areas required before this task can be considered verified: (1) SPI basic read/write -- write the 1024-bit ACTIVE shadow byte-by-byte through the write burst protocol, read it back before COMMIT and confirm bit-exact echo, then poll 0x0100's lifecycle field across CONFIG->READY->RUN. (2) P2S fixed-packet field/byte-position correctness -- capture a real single-result P2S serial stream after a genuine drive_real_adc_done-equivalent physical stimulus, decode all 12 fields per contract section 8.4.2's bit layout, and cross-check every field against a hierarchical whitebox reference into the DUT's own top_result_*_o internal wires (same technique tb_ppg_control_top.v already uses throughout). (3) Depth-2 buffer no-loss under a real dual-optical back-to-back RED/IR pair, where the timing analysis in section 8.4.3 (161-bit packet takes as long to send as the RED-to-IR gap) means genuine buffering pressure occurs without any artificial timing compression. (4) flag_adc_physical_idle mux correctness -- commit SAR9 and confirm only Stage1's DONE pulse affects the synchronized idle level (Stage2 toggling alone must not), then commit SAR15 and confirm the opposite, observed via a hierarchical reference to the synthesizer's own reg_idle_sync_stable. (5) All 6 DBG_OUT candidates, selected through the SPI-writable 0x0081 register, each driven by triggering its real underlying event and observing the pin transition. (6) Both discard-latch toggle bits, forced by a real STOP-with-owner-inflight scenario (same proven timing window as tb_ppg_control_top.v's SMOKE-06), read back twice via SPI to confirm the toggle bit flips exactly once per real event and the latched identity fields match the discarded transaction. Reuses task_build_normal_manual_config/task_build_normal_manual_dual_config's exact field layout and make_fixed_raw's RAW encoding from tb_ppg_control_top.v (same DUT-adjacent contract, same proven-correct values), driven through the SPI/pad boundary instead of ppg_control_top's direct ports.
 ///////////////////////////////////Chinese////////////////////////////////////////
@@ -34,10 +35,11 @@
 //
 // 依赖文件:        ppg_chip_digital_top
 //
-// 当前版本:        V1.1
-// 修订日期:        2026年09月07日
+// 当前版本:        V1.2
+// 修订日期:        2026年10月01日
 // 修订历史:
 //     时间          版本        修订人        修订内容
+// 2026年10月01日   V1.2        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增TC7，全程永久断言——AMI正式结果valid（P2S i_result_valid）为1的每一拍，P2S o_result_ready也必须为1，即正式结果从不被持住。AMI的P2S遥测端口o_s1_raw/o_s2_raw/o_s1_calibration_applied取自DC恢复payload_o而非结果fork，正式结果一旦被持住、下一事务进入DC恢复，两者就不再属于同一笔（已在AMI级和ppg_control_top级复现）；芯片顶层靠深度2的P2S队列加每5000拍宏帧最多两笔NORMAL结果保证结果从不被持住，TC7守护的正是这一前提。每个上升沿检查（激励只在下降沿变化，读数无竞争），每次违例打印FAIL，最终结论计入cnt_error。7条PASS。负对照：把P2S队列深度临时改为1的副本上TC7失败（TC3双光背靠背期间持住3拍），而TC3本身仍通过，说明TC7比任何字段比对都更早抓到这一前提被破坏。
 // 2026年09月07日   V1.1        Erie          按合同V1.12勘误对齐TC6结论措辞：STOP精确命中ADC选通脉冲这一子场景是架构级窄窗口（flag_stopping_complete里真正把关在途流水线数据的是i_datapath_empty这一路，不是i_adc_idle这一路），现已正式结案为预期内、非bug，不用再等用户判断，也不新增专用快速丢弃触发通道或QFN引脚。TC6的构造激励本身不变（仍是真实STOP+并发DONE，仍走真实硬件路径），但结果不再判为失败——"两组discard锁存均未变化"现在是本子场景文档化的预期PASS结果，与discard锁存机制本身已经用更宽的真实触发路径（无owner在途的spurious DONE经fault supervisor级联）独立验证过一致。六个要求的验证方面现在全部报PASS；TB_CHIP_DIGITAL_TOP_PASS。本次修订未改动任何RTL。
 // 2026年09月06日   V1.0        Erie          创建文件。自建Mode 0 SPI主机自检测试平台，覆盖本任务要求的六个方面：（1）SPI基本读写——按写突发协议逐字节写入1024-bit ACTIVE影子区，COMMIT前原样读回确认逐位一致，再轮询0x0100生命周期字段从CONFIG到READY到RUN。（2）P2S定长包字段与字节位置正确性——用真实等效drive_real_adc_done物理激励触发一笔真实结果后捕获P2S串行流，按合同8.4.2节位布局解出全部12字段，逐项与DUT自己top_result_*_o内部wire的层次化白盒引用比对（与tb_ppg_control_top.v全篇已用的同一手法）。（3）真实双光RED/IR背靠背场景下深度2缓冲不丢数据——8.4.3节时序分析本身（161-bit包发送耗时与RED到IR间隔相当）就会产生真实排队压力，不需要人为压缩时序。（4）flag_adc_physical_idle合成器二选一正确性——committed SAR9后确认只有Stage1 DONE脉冲影响同步后空闲电平（单独翻动Stage2不得影响），再committed SAR15确认相反情形，通过对合成器自己reg_idle_sync_stable的层次化引用观测。（5）DBG_OUT全部6个候选，经可SPI写入的0x0081寄存器逐一选中，各自触发其真实底层事件并观测引脚翻转。（6）两组discard锁存翻转位，用与tb_ppg_control_top.v SMOKE-06同一已验证时序窗口构造一次真实STOP-owner在途场景，SPI两次读回确认翻转位随真实事件恰好翻转一次、锁存身份字段与被丢弃事务一致。复用tb_ppg_control_top.v里task_build_normal_manual_config/task_build_normal_manual_dual_config的逐字段布局与make_fixed_raw的RAW编码（同一DUT关联合同、同一组已验证取值），改为经SPI/物理引脚边界驱动，不再直连ppg_control_top端口。
 
@@ -626,6 +628,26 @@ module tb_ppg_chip_digital_top;
 		end
 	end
 
+	//---------------TC7：AMI正式结果valid期间P2S必须ready（V1.2）---------------//
+	// AMI的P2S遥测端口(o_s1_raw/o_s2_raw/o_s1_calibration_applied)取自DC恢复payload_o而非结果fork，
+	// 正式结果一旦被反压持住、下一事务又进了DC恢复就会错拍；芯片顶层靠P2S深度2队列让AMI结果从不被持住。
+	// 上升沿读组合握手信号，激励只在下降沿变化，读数无竞争
+	integer cnt_p2s_valid_cycles;           // TC7：AMI正式结果valid为1的周期总数
+	integer cnt_p2s_ready_violation;        // TC7：valid为1而P2S ready不为1的周期数
+	initial begin
+		cnt_p2s_valid_cycles = 0;
+		cnt_p2s_ready_violation = 0;
+	end
+	always @(posedge CLK_2M_PAD)begin
+		if(dut.ppg_p2s_packer_Inst.i_result_valid === 1'b1)begin
+			cnt_p2s_valid_cycles = cnt_p2s_valid_cycles + 1;
+			if(dut.ppg_p2s_packer_Inst.o_result_ready !== 1'b1)begin
+				cnt_p2s_ready_violation = cnt_p2s_ready_violation + 1;
+				$display("FAIL TC7 AMI正式结果valid=1时P2S o_result_ready=%b，结果被持住 t=%0t queue_depth=%0d", dut.ppg_p2s_packer_Inst.o_result_ready, $time, dut.ppg_p2s_packer_Inst.cnt_queue_depth);
+			end
+		end
+	end
+
 	//---------------DBG_OUT脉冲候选粘滞监测---------------//
 	always @(posedge CLK_2M_PAD)begin
 		if(DBG_OUT === 1'b1)begin
@@ -882,6 +904,13 @@ module tb_ppg_chip_digital_top;
 
 		//-----------收尾-----------//
 		repeat(32) @(posedge CLK_2M_PAD);
+		//-----------TC7：全程AMI正式结果valid期间P2S ready恒为1-----------//
+		if((cnt_p2s_ready_violation == 0) && (cnt_p2s_valid_cycles > 0))begin
+			$display("PASS TC7 全程每一拍AMI正式结果valid为1时P2S o_result_ready均为1，正式结果从未被持住（valid_cycles=%0d），P2S遥测与正式结果同属一笔的前提成立", cnt_p2s_valid_cycles);
+		end else begin
+			$display("FAIL TC7 AMI正式结果valid期间P2S未ready：violations=%0d valid_cycles=%0d", cnt_p2s_ready_violation, cnt_p2s_valid_cycles);
+			cnt_error = cnt_error + 1;
+		end
 		if(cnt_error == 0)begin
 			$display("TB_CHIP_DIGITAL_TOP_PASS all scenarios passed");
 		end else begin

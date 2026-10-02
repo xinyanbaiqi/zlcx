@@ -400,7 +400,7 @@ module ppg_adc_measurement_idac_integration
 	output o_result_sample_valid,               // 独立样本资格，invalid事务仍保留数值与身份
 
 	//-------------P2S遥测边界透传-------------//
-	output o_s1_calibration_applied,           // Stage1校准资格，与frame_id/sample_index/coarse/fine结果同一原子载荷锁存
+	output o_s1_calibration_applied,           // Stage1校准资格，与两路RAW同取自DC恢复payload_o而非结果fork；正式结果被反压持住且下一事务已进DC恢复时与o_result_*不属同一笔，芯片顶层由P2S深度2队列避开
 	output [9:0]o_s1_raw,                      // Stage1物理判决位，取自DC恢复自己重新导出的atomic payload_o，非重构器早期dec_reconstructor_stage1_raw
 	output [9:0]o_s2_raw                       // 第二级冗余物理判决位，取自DC恢复自己重新导出的atomic payload_o，非重构器早期dec_reconstructor_stage2_raw
 );
