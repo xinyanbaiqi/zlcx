@@ -1,0 +1,26 @@
+[
+  [
+    "good",
+    "name_direction_match",
+    "name_direction_match"
+  ],
+  [
+    "missing",
+    "missing_name_candidate",
+    "missing_name_candidate"
+  ],
+  [
+    "direction",
+    "direction_candidate",
+    "direction_candidate"
+  ],
+  [
+    "removed_group_member",
+    [
+      "i_weight_1"
+    ],
+    [
+      "i_weight_1"
+    ]
+  ]
+]

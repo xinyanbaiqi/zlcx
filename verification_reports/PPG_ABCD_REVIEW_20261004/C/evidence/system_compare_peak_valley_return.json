@@ -1,0 +1,1055 @@
+{
+  "base": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_baseline_cross.v",
+  "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_peak_valley_return.v",
+  "base_sha256": "897e844723008687ded8b78284b5464348b0d979b717c807cd8374ba56390efa",
+  "candidate_sha256": "0c242a3ee32be82f19ecabb6a756d1beac7ae1ee07f612ea92a8f433eba26b0a",
+  "opcodes": [
+    {
+      "kind": "equal",
+      "base_start": 1,
+      "base_end": 7,
+      "candidate_start": 1,
+      "candidate_end": 7,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 8,
+      "base_end": 9,
+      "candidate_start": 8,
+      "candidate_end": 9,
+      "candidate_lines": [
+        "// Design Name:        PPG SAR15 Peak-Valley-Return Testbench\n",
+        "// Module Name:        tb_ppg_control_top_peak_valley_return\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 10,
+      "base_end": 20,
+      "candidate_start": 10,
+      "candidate_end": 20,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 21,
+      "base_end": 22,
+      "candidate_start": 21,
+      "candidate_end": 22,
+      "candidate_lines": [
+        "// Version:            V1.2\n",
+        "// Revision Date:      2026/08/25\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 23,
+      "base_end": 24,
+      "candidate_start": 23,
+      "candidate_end": 24,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 25,
+      "base_end": 85,
+      "candidate_start": 25,
+      "candidate_end": 43,
+      "candidate_lines": [
+        "// 2026/08/24            V1.0          Erie                  Create file. Phase 3 Stage 4 group 3 (PPG-PEAK-VALLEY-RETURN) per C25 section 9.2: \"Starting from a committed SAR15 measurement, continue the same physical sequence through a qualified peak and valley. Check peak-before-valley ordering, bound center-sample identity, the contractual return request, and safe SAR15-to-SAR9 commit.\" Section 9's own entry rule forbids inheriting state from a previous group, so this file cannot literally continue tb_ppg_control_top_baseline_cross.v's running instance -- it independently re-drives its own reset/config/START/warmup/cross/SAR15-entry sequence to reach the \"committed SAR15 measurement\" starting point group 3 is defined from. Built as a direct copy-and-extend of tb_ppg_control_top_baseline_cross.v (the proven Group 1/2 delivery): identical real-2MHz-clock NORMAL dual-optical MANUAL config with C11 nominal Stage1 weights and peak_valley_config_valid=1, START/STOP, wait_q3_release/drive_real_adc_done/make_fixed_raw, bg_responder Stage 2 generator wiring, the full PEAK/VALLEY/CROSS/RETURN_9BIT capture-register infrastructure, every Group 1/2 assertion (kept running as cheap regression insurance that this independently-reset run's shared warmup/cross/SAR15-entry path still matches the proven baseline), and the protocol-error sticky-flag audit added to Group 1/2 in the same session. C_TARGET_RED_SAMPLES stays at 700, matching the already-observed real event timeline (PEAK@63/225/464/625, VALLEY@201/395/601, CROSS@411, RETURN_9BIT@605), which already carries a real SAR15-phase PEAK@464 and VALLEY@601 followed by RETURN@605 -- exactly the sequence group 3 needs, no generator/config change required.\n",
+        "//                                                             Four new checks layer on top, scoped to the SAR15 phase (after Group 2's already-proven real o_fine_window_start_event capture): (1) peak-before-valley ordering -- the first PEAK captured strictly after SAR15 entry must have a smaller frame_id than the first VALLEY captured strictly after SAR15 entry; (2) bound center-sample identity -- each event's reported frame_id is bounded against a live-tracked \"most recent real RED+SAR15 FIR handshake frame_id\" observed directly at the peak/valley detector's own i_result_valid&&o_result_ready&&i_precision_mode&&!i_color_ir port (mirroring Group 2's real-data-path tracing for CROSS), and against o_fine_window_start_frame_id as a lower bound; (3) the contractual return request -- o_return_reason checked against the frozen 2'b00=VALLEY_CONFIRMED encoding from PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md section 11.4, and o_return_frame_id checked to be at or after the confirmed valley's own frame_id (the 3-sample confirm delay PVW-10 documents, not equality); (4) safe SAR15-to-SAR9 commit -- mirrors Group 2's entry-side safe-boundary check, watching a falling edge on the AMI-forwarded o_active_precision_mode level signal against one-cycle-previous shadow copies of i_frame_safe_boundary/i_precision_takeover_safe/i_analog_safe at ppg_precision_window_controller_Inst (the flag_return_commit gating wire, confirmed symmetric to flag_enter_commit by reading the RTL directly), applying from the start the same one-cycle-late timing lesson Group 2's own verification already had to learn the hard way.\n",
+        "// 2026/08/24            V1.1          Erie                  Verified for real, staged exactly like Group 1/2: iverilog 90-sample quick check first (clean compile, Check A/B fire correctly, existence checks correctly FAIL at this reduced scale since SAR15 is not reached yet), then 650 samples to reach the full cycle. Two real bugs were found and fixed along the way, neither in the RTL. (1) The user asked to retrofit a protocol-error sticky-flag audit into this file from the start (mirroring the same request applied to Group 1/2): the very first real run of that audit -- in this file, before Group 1/2's own retrofit had even been re-verified -- caught o_ssw_owner_deadline_timeout_sticky asserted at the end of a run. Investigated via PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md sections 597/614 and PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md section 981, which classify owner-deadline and launch timeouts (both scheduler and SSW sides) plus SSW's calibration timeout as non-blocking historical diagnostics, distinct from the genuinely blocking protocol-error/mismatch class. A temporary edge-detect diagnostic probe (since removed) pinned the trigger to a single edge at o_lifecycle_state==ST_STOPPING -- the tail of the STOP/drain sequence, not a recurring defect during normal operation -- confirming the contract's own non-blocking classification with a real timestamped root cause rather than just citing the spec. Fixed by splitting the sticky audit into eight genuinely-blocking stickies (still hard-FAIL) and four non-blocking historical-diagnostic stickies (now INFO-only, not counted toward cnt_error) -- the same split applied to tb_ppg_control_top_baseline_cross.v V1.2 in the same session. (2) The 650-sample run then caught a second bug, this one specific to group 3's own new check 3: VALLEY CAPTURE and RETURN_9BIT CAPTURE fired at the exact same simulation timestamp (t=1537980250000, frame_id 601 and 605 respectively) -- expected per PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md section 11.4's \"the valley and the return-9bit request belong to the same detection conclusion but complete separate handshakes,\" which naturally land on the same cycle with no backpressure. The GROUP3_RETURN_REQUEST check read flag_first_valley_in_sar15_captured, a flag the sibling VALLEY-capture always block sets with a nonblocking assignment that is not yet visible on that same cycle, so the check misread a same-cycle valley confirmation as \"no valley confirmed yet.\" Fixed by adding a same-cycle live fallback: check the peak/valley detector's own o_valley_valid&&i_valley_ready handshake directly as an OR condition alongside the registered flag, and use the live o_valley_frame_id as the comparison basis on that same cycle instead of the not-yet-updated register. After both fixes, iverilog 650 samples passed clean with zero FAILs (GROUP3_RETURN_REQUEST now correctly reports same_cycle=1), reproducing the exact same event sequence as tb_ppg_control_top_baseline_cross.v with all four new group-3 checks firing and passing on real, non-trivial values (e.g. GROUP3_CENTER_SAMPLE_IDENTITY: first SAR15 PEAK frame_id=464 bounded within [sar15_entry=424, last_real_red_sar15=467]; GROUP3_PEAK_BEFORE_VALLEY_ORDER: PEAK frame_id=464 strictly before VALLEY frame_id=601; GROUP3_SAFE_RETURN_COMMIT: PASS at the actual flag_return_commit cycle). C_TARGET_RED_SAMPLES was then restored to 700 and the full local Vivado 2022.2 xsim flow (xvlog/xelab/xsim) ran clean end to end in 4m30s wall-clock: PEAK_VALLEY_RETURN_TB_PASS real_red=700 real_ir=699 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601 -- identical to the iverilog run in every observed value. This is real, staged simulation evidence for group 3 of Stage 4, not a placeholder.\n",
+        "// 2026/08/25            V1.2          Erie                  Added the shared JNT-01~09 baseline prefix (C25 sections 9.1/10.1 +\n",
+        "//                                                             PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md section 11) via\n",
+        "//                                                             `include \"tb_ppg_jnt_baseline_prefix.vh\"` (Architecture A) plus one\n",
+        "//                                                             bg_responder gate line and one call site, identically to\n",
+        "//                                                             tb_ppg_control_top_baseline_cross.v V1.3 -- see that file's V1.3 entry and\n",
+        "//                                                             the .vh file's own V1.0/V1.1 changelog for the full feasibility research\n",
+        "//                                                             and the four real bugs found and fixed while bringing the prefix up.\n",
+        "//                                                             JNT_BASELINE checked=53 pass=53 required=53 status=PASS confirmed clean.\n",
+        "//                                                             Also applied the same bg_responder owner-identity-snapshot fix as that\n",
+        "//                                                             file's V1.3 (latch frame_type/color_ir/frame_id/precision_mode on\n",
+        "//                                                             sched_adc_owner_commit_event_o instead of live-sampling state_current at\n",
+        "//                                                             wait_q3_release-return time) -- this file shares byte-identical\n",
+        "//                                                             bg_responder logic and had the exact same pre-existing, previously-invisible\n",
+        "//                                                             classification race, surfaced by the same real_cal=1 anomaly while\n",
+        "//                                                             confirming this file's own group-3 evidence still matched after the JNT\n",
+        "//                                                             prefix's extra reset cycles.\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 86,
+      "base_end": 90,
+      "candidate_start": 44,
+      "candidate_end": 48,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 91,
+      "base_end": 92,
+      "candidate_start": 49,
+      "candidate_end": 50,
+      "candidate_lines": [
+        "// 设计名称:           PPG SAR15波峰波谷返回测试平台\n",
+        "// 模块名称:           tb_ppg_control_top_peak_valley_return\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 93,
+      "base_end": 103,
+      "candidate_start": 51,
+      "candidate_end": 61,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 104,
+      "base_end": 105,
+      "candidate_start": 62,
+      "candidate_end": 63,
+      "candidate_lines": [
+        "// 当前版本:           V1.2\n",
+        "// 修订日期:           2026年08月25日\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 106,
+      "base_end": 107,
+      "candidate_start": 64,
+      "candidate_end": 65,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 108,
+      "base_end": 158,
+      "candidate_start": 66,
+      "candidate_end": 82,
+      "candidate_lines": [
+        "// 2026年08月24日        V1.0          Erie                  创建文件。Phase 3 Stage 4第3组（PPG-PEAK-VALLEY-RETURN），照C25合同9.2节原文：\"从一次已提交的SAR15测量开始，让同一段物理序列继续走完一个合格的波峰和波谷。检查波峰先于波谷的顺序、中心样本身份的绑定、合同规定的RETURN请求、以及SAR15→SAR9的安全提交\"。合同第9节自己的组入场规则禁止继承上一组状态，所以本文件不能字面上\"接着\"`tb_ppg_control_top_baseline_cross.v`已经在跑的那次仿真实例——必须独立重新走一遍自己的复位/配置/START/预热/穿越/SAR15提交序列，才能到达Group3定义里\"已提交的SAR15测量\"这个起点。本文件是`tb_ppg_control_top_baseline_cross.v`（已交付的Group1/2真实证据版本）的直接复制+扩展：原样保留真实2MHz时钟、C11标称Stage1权重+peak_valley_config_valid=1的NORMAL双光MANUAL配置、START/STOP、wait_q3_release/drive_real_adc_done/make_fixed_raw、bg_responder的Stage2生成器接线，以及完整的PEAK/VALLEY/CROSS/RETURN_9BIT捕获寄存器基础设施和全部Group1/2断言（保留不删——这些断言现在是低成本的回归保险，证明这次独立复位的跑法在Group3自己的新检查开始之前，共享的预热/穿越/SAR15提交路径依然和已验证的基线行为一致），以及同一会话里回头给Group1/2补上的协议错误sticky审计。`C_TARGET_RED_SAMPLES`维持700不变，和已经观察到的真实事件时间线（PEAK@63/225/464/625、VALLEY@201/395/601、CROSS@411、RETURN_9BIT@605）对齐，这个时间线本来就已经带着一次真实的SAR15期PEAK@464和VALLEY@601、随后是真实的RETURN@605——正是Group3需要的物理序列，不需要改动生成器或配置。\n",
+        "//                                                             在此基础上叠加四条新检查，全部限定在SAR15阶段内（在Group2已经证明是真实安全边界提交的那次`o_fine_window_start_event`捕获之后）：（1）波峰先于波谷的顺序——SAR15提交后首个捕获的PEAK，其frame_id必须小于SAR15提交后首个捕获的VALLEY；（2）中心样本身份的绑定——这两个事件各自上报的frame_id，独立核对是否落在\"直接在峰谷检测器自己`i_result_valid&&o_result_ready&&i_precision_mode&&!i_color_ir`端口上实时追踪到的最近一笔真实RED+SAR15 FIR握手frame_id\"范围内（沿用Group2给CROSS的`candidate_start`做真实数据路径回溯时同款的手法），并以`o_fine_window_start_frame_id`作为下界；（3）合同规定的RETURN请求——`o_return_reason`核对是否等于`PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md`第11.4节冻结的`2'b00=VALLEY_CONFIRMED`编码，`o_return_frame_id`核对是否不早于确认谷值自己的frame_id（PVW-10记录的3点确认延迟，不是要求逐帧相等）；（4）SAR15→SAR9的安全提交——完全照搬Group2入场侧安全边界检查的做法，监视AMI层转发出来的`o_active_precision_mode`电平信号下降沿，和`ppg_precision_window_controller_Inst`里`i_frame_safe_boundary`/`i_precision_takeover_safe`/`i_analog_safe`的\"上一拍\"影子寄存器做核对（直接读RTL确认过，这正是该模块自己用来门控`flag_return_commit`的信号，和入场侧的`flag_enter_commit`结构完全对称），从一开始就用上Group2自己验证过程里已经踩过的\"延迟事件端口对同拍门控值\"这个时序对齐教训，不用重新踩一遍。\n",
+        "// 2026年08月24日        V1.1          Erie                  和Group1/2一样严格分阶段真实验证：先iverilog 90样本快速跑（编译干净，检查A/B正确触发，存在性检查在这个缩小规模下正确FAIL，因为还没到SAR15阶段），再放大到650样本跑完整一轮周期。过程中发现并修复了两个真实bug，都不在RTL里。（1）用户要求从一开始就在本文件里建协议错误sticky审计（和同一会话里给Group1/2补的要求一样）：这批断言在本文件的第一次真实跑（比Group1/2自己补的审计重新验证还早）就抓到`o_ssw_owner_deadline_timeout_sticky`在跑完时置位。查证过程读了`PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md`第597/614节和`PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md`第981节，把owner deadline和launch timeout（scheduler和SSW两侧）以及SSW的calibration timeout定义成非阻断历史诊断，和真正阻断的protocol-error/mismatch类不是一类。一个临时的边沿探测诊断探针（已删除）把触发点精确定位到`o_lifecycle_state==ST_STOPPING`的单次边沿——STOP排空阶段的尾声，不是运行期间反复出现的缺陷——用真实带时间戳的根因而不是只引用合同条文确认了这个非阻断分类。修复方式是把sticky审计拆成八个真正阻断（继续`FAIL`）和四个非阻断历史诊断（改成`INFO`，不计入`cnt_error`）——和同一会话里`tb_ppg_control_top_baseline_cross.v`V1.2用的是同一套拆分。（2）650样本跑接着抓到第二个bug，这次是Group3自己新增检查3特有的：VALLEY CAPTURE和RETURN_9BIT CAPTURE在完全相同的仿真时刻触发（`t=1537980250000`，frame_id分别是601和605）——这本身符合`PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md`第11.4节\"波谷和返回9-bit请求属于同一检测结论，但分别完成各自握手\"的设计，无反压时天然会落在同一拍。`GROUP3_RETURN_REQUEST`检查读的是`flag_first_valley_in_sar15_captured`，这个标志由VALLEY捕获块用nonblocking赋值设置、本拍还看不到，所以把同拍发生的谷值确认误判成\"还没确认\"。修复方式是加一个同拍实时回退条件：直接核对峰谷检测器自己的`o_valley_valid&&i_valley_ready`握手作为标志的OR补充，同拍比较基准也改用实时的`o_valley_frame_id`而不是还没更新的寄存器。两处修复完成后，iverilog 650样本干净通过、零FAIL（`GROUP3_RETURN_REQUEST`现在正确报告`same_cycle=1`），复现了和`tb_ppg_control_top_baseline_cross.v`完全相同的事件序列，Group3新增的四条检查全部用真实、非平凡的数值触发并通过（例如`GROUP3_CENTER_SAMPLE_IDENTITY`：首个SAR15 PEAK frame_id=464落在[sar15_entry=424, last_real_red_sar15=467]区间内；`GROUP3_PEAK_BEFORE_VALLEY_ORDER`：PEAK frame_id=464严格早于VALLEY frame_id=601；`GROUP3_SAFE_RETURN_COMMIT`：在真正的`flag_return_commit`拍PASS）。随后把`C_TARGET_RED_SAMPLES`改回700，走本机Vivado 2022.2完整xsim流程（xvlog/xelab/xsim）干净跑通，挂钟耗时4分30秒：`PEAK_VALLEY_RETURN_TB_PASS real_red=700 real_ir=699 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601`——每一个观测值都和iverilog跑完全一致。这是Stage 4第3组真实、分阶段的仿真证据，不是占位文字。\n",
+        "// 2026年08月25日        V1.2          Erie                  接入共享JNT-01~09基线前缀（C25第9.1/10.1节+\n",
+        "//                                                             PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md第11节），做法和\n",
+        "//                                                             `tb_ppg_control_top_baseline_cross.v`V1.3完全一致：`` `include\n",
+        "//                                                             \"tb_ppg_jnt_baseline_prefix.vh\" ``（架构方案A）加一行bg_responder让路\n",
+        "//                                                             语句加一处调用点——完整可行性研究和接入过程中发现并修复的四个真实bug\n",
+        "//                                                             记在那份文件自己的V1.3条目和`.vh`文件自己的V1.0/V1.1\n",
+        "//                                                             changelog里。真实跑确认`JNT_BASELINE checked=53 pass=53 required=53\n",
+        "//                                                             status=PASS`。同时应用了和那份文件V1.3同款的`bg_responder`\n",
+        "//                                                             owner身份快照修复（在`sched_adc_owner_commit_event_o`那一拍锁存\n",
+        "//                                                             frame_type/color_ir/frame_id/precision_mode，不再在`wait_q3_release`\n",
+        "//                                                             返回那一拍live采样`state_current`）——本文件和那份文件共用逐字节\n",
+        "//                                                             相同的`bg_responder`代码，同样一直存在这个此前从未被观察到的分类\n",
+        "//                                                             竞争，是在核对本文件自己的Group3证据在JNT前缀多次复位之后是否依然\n",
+        "//                                                             一致时，被同一个`real_cal=1`异常牵出来的。\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 159,
+      "base_end": 161,
+      "candidate_start": 83,
+      "candidate_end": 85,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 162,
+      "base_end": 164,
+      "candidate_start": 86,
+      "candidate_end": 88,
+      "candidate_lines": [
+        "// 等待第一次真实PEAK/CROSS/SAR15提交/RETURN_9BIT完整序列出现，先核对Group 1/2\n",
+        "// 已验证的断言仍然成立，再核对Group 3合同要求的四条新增断言，STOP后确认干净排空\n",
+        "module tb_ppg_control_top_peak_valley_return();\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 165,
+      "base_end": 420,
+      "candidate_start": 89,
+      "candidate_end": 344,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 421,
+      "base_end": 420,
+      "candidate_start": 345,
+      "candidate_end": 365,
+      "candidate_lines": [
+        "\n",
+        "\t//---------------Group 3事件捕获与断言状态---------------//\n",
+        "\t// SAR15阶段身份追踪：只对\"SAR15提交后第一次出现\"的PEAK/VALLEY取证，避免SAR9阶段\n",
+        "\t// 已经统计过的旧事件（如PEAK@225）被误当成Group3自己的证据\n",
+        "\treg flag_sar15_active; // 当前是否已经真实提交SAR15（对应o_active_precision_mode==1）\n",
+        "\treg flag_first_peak_in_sar15_captured; // SAR15提交后首个PEAK是否已经取证\n",
+        "\treg flag_first_valley_in_sar15_captured; // SAR15提交后首个VALLEY是否已经取证\n",
+        "\treg [C_FRAME_ID_WIDTH - 1:0] reg_first_peak_in_sar15_frame_id; // SAR15提交后首个PEAK的frame_id\n",
+        "\treg [C_FRAME_ID_WIDTH - 1:0] reg_first_valley_in_sar15_frame_id; // SAR15提交后首个VALLEY的frame_id\n",
+        "\t// 检查2\"中心样本身份的绑定\"用：直接在峰谷检测器自己的FIR输入端口上实时追踪最近一笔\n",
+        "\t// 真实RED+SAR15握手的frame_id，作为PEAK/VALLEY上报frame_id的独立上界证据来源\n",
+        "\treg [C_FRAME_ID_WIDTH - 1:0] reg_last_real_red_sar15_frame_id; // 峰谷检测器输入端口最近一笔真实RED+SAR15 FIR握手frame_id\n",
+        "\treg flag_last_real_red_sar15_frame_id_valid; // 上述追踪值是否已经出现过至少一次\n",
+        "\t// 检查3\"合同规定的RETURN请求\"用：SAR15提交后首个确认VALLEY的frame_id，供核对\n",
+        "\t// o_return_frame_id不早于它\n",
+        "\treg [C_FRAME_ID_WIDTH - 1:0] reg_confirmed_valley_frame_id_for_return; // 供RETURN请求核对用的确认谷值frame_id\n",
+        "\treg [C_FRAME_ID_WIDTH - 1:0] reg_sar15_entry_frame_id; // SAR15_TRANSITION捕获拍锁存的o_fine_window_start_frame_id，供检查2下界使用\n",
+        "\t// 检查4\"SAR15→SAR9的安全提交\"用：镜像Group2入场侧的做法，监视o_active_precision_mode\n",
+        "\t// 下降沿，核对\"上一拍\"锁存的门控快照而不是当拍瞬时值\n",
+        "\treg reg_prev_active_precision_mode; // 上一拍采样到的o_active_precision_mode，用于检测下降沿\n",
+        "\treg flag_group3_return_commit_checked; // 只对第一次SAR15->SAR9返回取证，避免后续切换稀释首次证据\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 421,
+      "base_end": 428,
+      "candidate_start": 366,
+      "candidate_end": 373,
+      "candidate_lines": null
+    },
+    {
+      "kind": "delete",
+      "base_start": 429,
+      "base_end": 432,
+      "candidate_start": 374,
+      "candidate_end": 373,
+      "candidate_lines": []
+    },
+    {
+      "kind": "equal",
+      "base_start": 433,
+      "base_end": 682,
+      "candidate_start": 374,
+      "candidate_end": 623,
+      "candidate_lines": null
+    },
+    {
+      "kind": "delete",
+      "base_start": 683,
+      "base_end": 693,
+      "candidate_start": 624,
+      "candidate_end": 623,
+      "candidate_lines": []
+    },
+    {
+      "kind": "equal",
+      "base_start": 694,
+      "base_end": 898,
+      "candidate_start": 624,
+      "candidate_end": 828,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 899,
+      "base_end": 911,
+      "candidate_start": 829,
+      "candidate_end": 832,
+      "candidate_lines": [
+        "\t//---------------Group 3：SAR15阶段身份追踪进程---------------//\n",
+        "\t// 每拍无条件采样o_active_precision_mode供检查4边沿检测；同时直接在峰谷检测器自己的\n",
+        "\t// FIR输入端口上实时追踪最近一笔真实RED+SAR15握手frame_id，供检查2给PEAK/VALLEY\n",
+        "\t// 上报frame_id提供独立的可信上界（不依赖PEAK/VALLEY自己上报的值，避免自证）\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 912,
+      "base_end": 912,
+      "candidate_start": 833,
+      "candidate_end": 833,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 913,
+      "base_end": 917,
+      "candidate_start": 834,
+      "candidate_end": 840,
+      "candidate_lines": [
+        "\t\treg_prev_active_precision_mode <= ppg_control_top_Inst.ami_active_precision_mode_o;\n",
+        "\t\tif(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_result_valid &&\n",
+        "\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_result_ready &&\n",
+        "\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_precision_mode &&\n",
+        "\t\t\t!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_color_ir) begin\n",
+        "\t\t\treg_last_real_red_sar15_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_frame_id;\n",
+        "\t\t\tflag_last_real_red_sar15_frame_id_valid <= 1'b1;\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 918,
+      "base_end": 919,
+      "candidate_start": 841,
+      "candidate_end": 842,
+      "candidate_lines": null
+    },
+    {
+      "kind": "delete",
+      "base_start": 920,
+      "base_end": 1009,
+      "candidate_start": 843,
+      "candidate_end": 842,
+      "candidate_lines": []
+    },
+    {
+      "kind": "equal",
+      "base_start": 1010,
+      "base_end": 1057,
+      "candidate_start": 843,
+      "candidate_end": 890,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1058,
+      "base_end": 1057,
+      "candidate_start": 891,
+      "candidate_end": 916,
+      "candidate_lines": [
+        "\t\t\t// Group3检查1/2（PEAK侧）：SAR15提交后首个PEAK的顺序取证与中心样本身份绑定核对，\n",
+        "\t\t\t// 只在o_fine_window_start_event真实握手之后才取证，避免SAR9阶段旧PEAK（如PEAK@225）\n",
+        "\t\t\t// 被误算成Group3自己的证据\n",
+        "\t\t\tif(flag_group2_transition_checked && !flag_first_peak_in_sar15_captured) begin\n",
+        "\t\t\t\tflag_first_peak_in_sar15_captured <= 1'b1;\n",
+        "\t\t\t\treg_first_peak_in_sar15_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id;\n",
+        "\t\t\t\tif(!flag_last_real_red_sar15_frame_id_valid ||\n",
+        "\t\t\t\t\t(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id < reg_sar15_entry_frame_id) ||\n",
+        "\t\t\t\t\t(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id > reg_last_real_red_sar15_frame_id)) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 PEAK frame_id out of bound peak_frame_id=%0d sar15_entry_frame_id=%0d last_real_red_sar15_frame_id=%0d valid=%0d\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id,\n",
+        "\t\t\t\t\t\treg_sar15_entry_frame_id, reg_last_real_red_sar15_frame_id, flag_last_real_red_sar15_frame_id_valid);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else begin\n",
+        "\t\t\t\t\t$display(\"PASS GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 PEAK frame_id=%0d bounded within [sar15_entry=%0d, last_real_red_sar15=%0d]\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id,\n",
+        "\t\t\t\t\t\treg_sar15_entry_frame_id, reg_last_real_red_sar15_frame_id);\n",
+        "\t\t\t\tend\n",
+        "\t\t\t\t// Group3检查1：波峰先于波谷的顺序——若VALLEY已经先取证，说明顺序违反合同要求\n",
+        "\t\t\t\tif(flag_first_valley_in_sar15_captured) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_PEAK_BEFORE_VALLEY_ORDER first SAR15 VALLEY frame_id=%0d already captured before first SAR15 PEAK frame_id=%0d\",\n",
+        "\t\t\t\t\t\treg_first_valley_in_sar15_frame_id,\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_peak_frame_id);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend\n",
+        "\t\t\tend\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1058,
+      "base_end": 1061,
+      "candidate_start": 917,
+      "candidate_end": 920,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1062,
+      "base_end": 1062,
+      "candidate_start": 921,
+      "candidate_end": 921,
+      "candidate_lines": [
+        "\talways @(posedge i_clk) begin : valley_capture_block\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1063,
+      "base_end": 1072,
+      "candidate_start": 922,
+      "candidate_end": 931,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1073,
+      "base_end": 1072,
+      "candidate_start": 932,
+      "candidate_end": 964,
+      "candidate_lines": [
+        "\t\t\t// Group3检查1/2（VALLEY侧）：SAR15提交后首个VALLEY的顺序取证与中心样本身份绑定核对\n",
+        "\t\t\tif(flag_group2_transition_checked && !flag_first_valley_in_sar15_captured) begin\n",
+        "\t\t\t\tflag_first_valley_in_sar15_captured <= 1'b1;\n",
+        "\t\t\t\treg_first_valley_in_sar15_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id;\n",
+        "\t\t\t\treg_confirmed_valley_frame_id_for_return <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id;\n",
+        "\t\t\t\tif(!flag_last_real_red_sar15_frame_id_valid ||\n",
+        "\t\t\t\t\t(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id < reg_sar15_entry_frame_id) ||\n",
+        "\t\t\t\t\t(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id > reg_last_real_red_sar15_frame_id)) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 VALLEY frame_id out of bound valley_frame_id=%0d sar15_entry_frame_id=%0d last_real_red_sar15_frame_id=%0d valid=%0d\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id,\n",
+        "\t\t\t\t\t\treg_sar15_entry_frame_id, reg_last_real_red_sar15_frame_id, flag_last_real_red_sar15_frame_id_valid);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else begin\n",
+        "\t\t\t\t\t$display(\"PASS GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 VALLEY frame_id=%0d bounded within [sar15_entry=%0d, last_real_red_sar15=%0d]\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id,\n",
+        "\t\t\t\t\t\treg_sar15_entry_frame_id, reg_last_real_red_sar15_frame_id);\n",
+        "\t\t\t\tend\n",
+        "\t\t\t\t// Group3检查1：波峰先于波谷的顺序——正式核验点，此时首个PEAK必须已经先取证\n",
+        "\t\t\t\tif(!flag_first_peak_in_sar15_captured) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_PEAK_BEFORE_VALLEY_ORDER first SAR15 VALLEY frame_id=%0d captured before any SAR15 PEAK\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else if(reg_first_peak_in_sar15_frame_id >= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_PEAK_BEFORE_VALLEY_ORDER first SAR15 PEAK frame_id=%0d not strictly before first SAR15 VALLEY frame_id=%0d\",\n",
+        "\t\t\t\t\t\treg_first_peak_in_sar15_frame_id,\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else begin\n",
+        "\t\t\t\t\t$display(\"PASS GROUP3_PEAK_BEFORE_VALLEY_ORDER first SAR15 PEAK frame_id=%0d strictly before first SAR15 VALLEY frame_id=%0d\",\n",
+        "\t\t\t\t\t\treg_first_peak_in_sar15_frame_id,\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id);\n",
+        "\t\t\t\tend\n",
+        "\t\t\tend\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1073,
+      "base_end": 1076,
+      "candidate_start": 965,
+      "candidate_end": 968,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1077,
+      "base_end": 1077,
+      "candidate_start": 969,
+      "candidate_end": 971,
+      "candidate_lines": [
+        "\talways @(posedge i_clk) begin : return_capture_block\n",
+        "\t\treg valley_confirmed_same_cycle;\n",
+        "\t\treg [C_FRAME_ID_WIDTH - 1:0] effective_valley_frame_id;\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1078,
+      "base_end": 1087,
+      "candidate_start": 972,
+      "candidate_end": 981,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1088,
+      "base_end": 1087,
+      "candidate_start": 982,
+      "candidate_end": 1012,
+      "candidate_lines": [
+        "\t\t\t// Group3检查3：合同规定的RETURN请求——只对第一次RETURN取证（reg_return_count此刻\n",
+        "\t\t\t// 仍是nonblocking更新前的旧值，==0即代表这是首次捕获）。原因必须是C22第11.4节冻结的\n",
+        "\t\t\t// VALLEY_CONFIRMED(2'b00)，frame_id不早于本组已确认的SAR15谷值frame_id（PVW-10记录的\n",
+        "\t\t\t// 3点确认延迟，不要求逐帧相等）。真实跑发现VALLEY和RETURN_9BIT经常是同一检测结论的\n",
+        "\t\t\t// 两个独立握手通道、在同一拍完成握手（C22第11.4节\"波谷和返回9-bit请求属于同一检测\n",
+        "\t\t\t// 结论，但分别完成各自握手\"），此时VALLEY捕获块的flag_first_valley_in_sar15_captured\n",
+        "\t\t\t// 还是nonblocking更新前的旧值（本拍看不到），必须额外核对峰谷检测器自己VALLEY端口\n",
+        "\t\t\t// 在同一拍是否也正在握手，不能只看上一拍锁存的寄存器\n",
+        "\t\t\tif(reg_return_count == 0) begin\n",
+        "\t\t\t\tvalley_confirmed_same_cycle = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_valid &&\n",
+        "\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.i_valley_ready;\n",
+        "\t\t\t\teffective_valley_frame_id = flag_first_valley_in_sar15_captured ? reg_confirmed_valley_frame_id_for_return :\n",
+        "\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_valley_frame_id;\n",
+        "\t\t\t\tif(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_reason != 2'b00) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_RETURN_REQUEST first RETURN_9BIT reason is not VALLEY_CONFIRMED reason=%0d\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_reason);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else if(!flag_first_valley_in_sar15_captured && !valley_confirmed_same_cycle) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_RETURN_REQUEST first RETURN_9BIT observed before any confirmed SAR15 VALLEY was captured\");\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_frame_id < effective_valley_frame_id) begin\n",
+        "\t\t\t\t\t$display(\"FAIL GROUP3_RETURN_REQUEST first RETURN_9BIT frame_id=%0d earlier than confirmed SAR15 valley frame_id=%0d\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_frame_id,\n",
+        "\t\t\t\t\t\teffective_valley_frame_id);\n",
+        "\t\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\t\tend else begin\n",
+        "\t\t\t\t\t$display(\"PASS GROUP3_RETURN_REQUEST first RETURN_9BIT reason=VALLEY_CONFIRMED frame_id=%0d >= confirmed_valley_frame_id=%0d same_cycle=%0d\",\n",
+        "\t\t\t\t\t\tppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_peak_valley_window_detector_Inst.o_return_frame_id,\n",
+        "\t\t\t\t\t\teffective_valley_frame_id, valley_confirmed_same_cycle);\n",
+        "\t\t\t\tend\n",
+        "\t\t\tend\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1088,
+      "base_end": 1305,
+      "candidate_start": 1013,
+      "candidate_end": 1230,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1306,
+      "base_end": 1305,
+      "candidate_start": 1231,
+      "candidate_end": 1231,
+      "candidate_lines": [
+        "\t\t\treg_sar15_entry_frame_id <= ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_fine_window_start_frame_id; // Group3检查2下界证据，锁存避免后续依赖易变的活值线\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1306,
+      "base_end": 1340,
+      "candidate_start": 1232,
+      "candidate_end": 1266,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1341,
+      "base_end": 1340,
+      "candidate_start": 1267,
+      "candidate_end": 1293,
+      "candidate_lines": [
+        "\t//---------------Group3检查4：SAR15->SAR9安全返回取证进程---------------//\n",
+        "\t// 完全镜像Group2检查2入场侧的做法：AMI层转发的o_active_precision_mode是电平信号，\n",
+        "\t// 真正做返回判决的flag_return_commit和入场侧flag_enter_commit结构对称（同样门控\n",
+        "\t// i_frame_safe_boundary&&i_precision_takeover_safe&&i_analog_safe），但\n",
+        "\t// ami_active_precision_mode_o寄存器输出比判决拍晚一拍，所以核对上一拍锁存的门控\n",
+        "\t// 快照，不是下降沿这一拍的瞬时值——直接复用Group2已经验证过的这个时序对齐结论，\n",
+        "\t// 不重新踩坑。只对第一次SAR15->SAR9返回取证，与C_TARGET_RED_SAMPLES=700覆盖的\n",
+        "\t// 单轮周期对齐\n",
+        "\talways @(posedge i_clk) begin\n",
+        "\t\tif(!i_rstn) begin\n",
+        "\t\t\tflag_group3_return_commit_checked <= 1'b0;\n",
+        "\t\tend else if(!flag_group3_return_commit_checked && flag_group2_transition_checked &&\n",
+        "\t\t\t(reg_prev_active_precision_mode == 1'b1) && (ppg_control_top_Inst.ami_active_precision_mode_o == 1'b0)) begin\n",
+        "\t\t\tflag_group3_return_commit_checked <= 1'b1;\n",
+        "\t\t\t$display(\"SAR9_RETURN_TRANSITION CAPTURE t=%0t\", $time);\n",
+        "\t\t\tif(!(reg_prev_frame_safe_boundary && reg_prev_precision_takeover_safe && reg_prev_analog_safe)) begin\n",
+        "\t\t\t\t$display(\"FAIL GROUP3_SAFE_RETURN_COMMIT SAR15->SAR9 return committed without all three safe-boundary gates asserted at the actual commit cycle t=%0t\", $time);\n",
+        "\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\tend else if(reg_prev_adc_physical_idle !== 1'b1) begin\n",
+        "\t\t\t\t$display(\"FAIL GROUP3_SAFE_RETURN_COMMIT SAR15->SAR9 return committed while TB-driven physical ADC bus mid-transaction at the actual commit cycle t=%0t\", $time);\n",
+        "\t\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\t\tend else begin\n",
+        "\t\t\t\t$display(\"PASS GROUP3_SAFE_RETURN_COMMIT SAR15->SAR9 return committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle\");\n",
+        "\t\t\tend\n",
+        "\t\tend\n",
+        "\tend\n",
+        "\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1341,
+      "base_end": 1347,
+      "candidate_start": 1294,
+      "candidate_end": 1300,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1348,
+      "base_end": 1348,
+      "candidate_start": 1301,
+      "candidate_end": 1301,
+      "candidate_lines": [
+        "\t\t$display(\"FAIL PEAK_VALLEY_RETURN global watchdog timeout at t=%0t, forcing finish\", $time);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1349,
+      "base_end": 1379,
+      "candidate_start": 1302,
+      "candidate_end": 1332,
+      "candidate_lines": null
+    },
+    {
+      "kind": "insert",
+      "base_start": 1380,
+      "base_end": 1379,
+      "candidate_start": 1333,
+      "candidate_end": 1338,
+      "candidate_lines": [
+        "\t\tflag_sar15_active = 1'b0;\n",
+        "\t\tflag_first_peak_in_sar15_captured = 1'b0;\n",
+        "\t\tflag_first_valley_in_sar15_captured = 1'b0;\n",
+        "\t\tflag_last_real_red_sar15_frame_id_valid = 1'b0;\n",
+        "\t\tflag_group3_return_commit_checked = 1'b0;\n",
+        "\t\treg_prev_active_precision_mode = 1'b0;\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1380,
+      "base_end": 1457,
+      "candidate_start": 1339,
+      "candidate_end": 1416,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1458,
+      "base_end": 1458,
+      "candidate_start": 1417,
+      "candidate_end": 1417,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL PEAK_VALLEY_RETURN global watchdog fired before target red sample count reached red=%0d\", cnt_red_response);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1459,
+      "base_end": 1460,
+      "candidate_start": 1418,
+      "candidate_end": 1419,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1461,
+      "base_end": 1461,
+      "candidate_start": 1420,
+      "candidate_end": 1420,
+      "candidate_lines": [
+        "\t\t\t$display(\"PASS PEAK_VALLEY_RETURN main sequence reached target red=%0d within watchdog budget\", cnt_red_response);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1462,
+      "base_end": 1497,
+      "candidate_start": 1421,
+      "candidate_end": 1456,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1498,
+      "base_end": 1798,
+      "candidate_start": 1457,
+      "candidate_end": 1470,
+      "candidate_lines": [
+        "\t\t// Group3存在性断言：确认四条新增检查确实都真实执行过，不是因为SAR15阶段没有\n",
+        "\t\t// 真实PEAK/VALLEY/RETURN事件而全程静默跳过\n",
+        "\t\tif(!flag_first_peak_in_sar15_captured) begin\n",
+        "\t\t\t$display(\"FAIL GROUP3_EXISTENCE no real PEAK captured after SAR15 entry, group3 peak-side checks are vacuous\");\n",
+        "\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\tend else if(!flag_first_valley_in_sar15_captured) begin\n",
+        "\t\t\t$display(\"FAIL GROUP3_EXISTENCE no real VALLEY captured after SAR15 entry, group3 valley-side/return checks are vacuous\");\n",
+        "\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\tend else if(!flag_group3_return_commit_checked) begin\n",
+        "\t\t\t$display(\"FAIL GROUP3_EXISTENCE no real SAR15->SAR9 return transition observed, safe-return-commit check is vacuous\");\n",
+        "\t\t\tcnt_error = cnt_error + 1;\n",
+        "\t\tend else begin\n",
+        "\t\t\t$display(\"PASS GROUP3_EXISTENCE real SAR15-phase PEAK(frame_id=%0d)/VALLEY(frame_id=%0d)/safe-return cycle observed\",\n",
+        "\t\t\t\treg_first_peak_in_sar15_frame_id, reg_first_valley_in_sar15_frame_id);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1799,
+      "base_end": 1812,
+      "candidate_start": 1471,
+      "candidate_end": 1484,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1813,
+      "base_end": 1813,
+      "candidate_start": 1485,
+      "candidate_end": 1485,
+      "candidate_lines": [
+        "\t\t\t\t\t$display(\"FAIL PEAK_VALLEY_RETURN stop ack timeout\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1814,
+      "base_end": 1827,
+      "candidate_start": 1486,
+      "candidate_end": 1499,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1828,
+      "base_end": 1828,
+      "candidate_start": 1500,
+      "candidate_end": 1500,
+      "candidate_lines": [
+        "\t\t\t\t\t$display(\"FAIL PEAK_VALLEY_RETURN drain back to CONFIG timeout\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1829,
+      "base_end": 1833,
+      "candidate_start": 1501,
+      "candidate_end": 1505,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1834,
+      "base_end": 1834,
+      "candidate_start": 1506,
+      "candidate_end": 1506,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL PEAK_VALLEY_RETURN unexpected system fault blocking after STOP\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1835,
+      "base_end": 1836,
+      "candidate_start": 1507,
+      "candidate_end": 1508,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1837,
+      "base_end": 1837,
+      "candidate_start": 1509,
+      "candidate_end": 1509,
+      "candidate_lines": [
+        "\t\t\t$display(\"PASS PEAK_VALLEY_RETURN STOP drained back to CONFIG without fault\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1838,
+      "base_end": 1840,
+      "candidate_start": 1510,
+      "candidate_end": 1512,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1841,
+      "base_end": 1853,
+      "candidate_start": 1513,
+      "candidate_end": 1526,
+      "candidate_lines": [
+        "\t\t// 一直只是接了线，从未被真正断言过——本轮真实生成器驱动的事务是迄今唯一一次在\n",
+        "\t\t// 真实连续算法层激励下核对这批sticky的机会。sticky语义是\"一旦置位保持到诊断\n",
+        "\t\t// 清除或复位\"，所以在STOP排空之后读一次末值，等价于核实了整个测量窗口内的历史，\n",
+        "\t\t// 不需要逐拍监视。\n",
+        "\t\t// 第一次真实跑就在这里抓到`o_ssw_owner_deadline_timeout_sticky`真实置位过——\n",
+        "\t\t// 查证后确认这不是缺陷：PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_\n",
+        "\t\t// CONTRACT.md第597/614节和PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_\n",
+        "\t\t// CONTRACT.md第981节都明文把launch_timeout_sticky/owner_deadline_timeout_sticky\n",
+        "\t\t// （scheduler和SSW两侧）以及SSW的calibration_timeout_sticky定义成\"历史诊断，\n",
+        "\t\t// 不单独永久拉高fault_blocking、不产生supervisor fault record\"——它们和真正的\n",
+        "\t\t// protocol_error_sticky/completion_mismatch_sticky/transaction_mismatch_sticky\n",
+        "\t\t// 不是同一类信号，后者才是合同定义的阻断项，必须全程保持0；前者只做观测记录，\n",
+        "\t\t// 不计入cnt_error（这个分类是从Group1/2那份文件里同一次真实发现后确认的结论，\n",
+        "\t\t// 本文件直接复用，不重新推导）\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1854,
+      "base_end": 1854,
+      "candidate_start": 1527,
+      "candidate_end": 1527,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1855,
+      "base_end": 1855,
+      "candidate_start": 1528,
+      "candidate_end": 1528,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_error_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1856,
+      "base_end": 1857,
+      "candidate_start": 1529,
+      "candidate_end": 1530,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1858,
+      "base_end": 1858,
+      "candidate_start": 1531,
+      "candidate_end": 1531,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_scheduler_completion_mismatch_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1859,
+      "base_end": 1860,
+      "candidate_start": 1532,
+      "candidate_end": 1533,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1861,
+      "base_end": 1861,
+      "candidate_start": 1534,
+      "candidate_end": 1534,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_scheduler_protocol_error_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1862,
+      "base_end": 1863,
+      "candidate_start": 1535,
+      "candidate_end": 1536,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1864,
+      "base_end": 1864,
+      "candidate_start": 1537,
+      "candidate_end": 1537,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_ami_integration_protocol_error_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1865,
+      "base_end": 1866,
+      "candidate_start": 1538,
+      "candidate_end": 1539,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1867,
+      "base_end": 1867,
+      "candidate_start": 1540,
+      "candidate_end": 1540,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_ssw_switch_protocol_error_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1868,
+      "base_end": 1869,
+      "candidate_start": 1541,
+      "candidate_end": 1542,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1870,
+      "base_end": 1870,
+      "candidate_start": 1543,
+      "candidate_end": 1543,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_ssw_transaction_mismatch_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1871,
+      "base_end": 1872,
+      "candidate_start": 1544,
+      "candidate_end": 1545,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1873,
+      "base_end": 1873,
+      "candidate_start": 1546,
+      "candidate_end": 1546,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_characterization_protocol_error_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1874,
+      "base_end": 1875,
+      "candidate_start": 1547,
+      "candidate_end": 1548,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1876,
+      "base_end": 1876,
+      "candidate_start": 1549,
+      "candidate_end": 1549,
+      "candidate_lines": [
+        "\t\t\t$display(\"FAIL GROUP3_PROTOCOL_STICKY o_result_discard_summary_sticky asserted during the run\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1877,
+      "base_end": 1878,
+      "candidate_start": 1550,
+      "candidate_end": 1551,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1879,
+      "base_end": 1879,
+      "candidate_start": 1552,
+      "candidate_end": 1552,
+      "candidate_lines": [
+        "\t\t\t$display(\"PASS GROUP3_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across real_red=%0d real_ir=%0d transactions\",\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1880,
+      "base_end": 1883,
+      "candidate_start": 1553,
+      "candidate_end": 1556,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1884,
+      "base_end": 1884,
+      "candidate_start": 1557,
+      "candidate_end": 1557,
+      "candidate_lines": [
+        "\t\t\t$display(\"INFO GROUP3_HISTORICAL_DIAG o_scheduler_launch_timeout_sticky asserted during the run (non-blocking per contract)\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1885,
+      "base_end": 1886,
+      "candidate_start": 1558,
+      "candidate_end": 1559,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1887,
+      "base_end": 1887,
+      "candidate_start": 1560,
+      "candidate_end": 1560,
+      "candidate_lines": [
+        "\t\t\t$display(\"INFO GROUP3_HISTORICAL_DIAG o_scheduler_owner_deadline_timeout_sticky asserted during the run (non-blocking per contract)\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1888,
+      "base_end": 1889,
+      "candidate_start": 1561,
+      "candidate_end": 1562,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1890,
+      "base_end": 1890,
+      "candidate_start": 1563,
+      "candidate_end": 1563,
+      "candidate_lines": [
+        "\t\t\t$display(\"INFO GROUP3_HISTORICAL_DIAG o_ssw_owner_deadline_timeout_sticky asserted during the run (non-blocking per contract)\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1891,
+      "base_end": 1892,
+      "candidate_start": 1564,
+      "candidate_end": 1565,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1893,
+      "base_end": 1893,
+      "candidate_start": 1566,
+      "candidate_end": 1566,
+      "candidate_lines": [
+        "\t\t\t$display(\"INFO GROUP3_HISTORICAL_DIAG o_ssw_calibration_timeout_sticky asserted during the run (non-blocking per contract)\");\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1894,
+      "base_end": 1897,
+      "candidate_start": 1567,
+      "candidate_end": 1570,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1898,
+      "base_end": 1898,
+      "candidate_start": 1571,
+      "candidate_end": 1571,
+      "candidate_lines": [
+        "\t\t\t$display(\"PEAK_VALLEY_RETURN_TB_PASS real_red=%0d real_ir=%0d real_cal=%0d measurement_result_valid=%0d peak_count=%0d valley_count=%0d cross_count=%0d return_count=%0d first_sar15_peak_frame=%0d first_sar15_valley_frame=%0d\",\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1899,
+      "base_end": 1899,
+      "candidate_start": 1572,
+      "candidate_end": 1572,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1900,
+      "base_end": 1900,
+      "candidate_start": 1573,
+      "candidate_end": 1574,
+      "candidate_lines": [
+        "\t\t\t\treg_peak_count, reg_valley_count, reg_cross_count, reg_return_count,\n",
+        "\t\t\t\treg_first_peak_in_sar15_frame_id, reg_first_valley_in_sar15_frame_id);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1901,
+      "base_end": 1901,
+      "candidate_start": 1575,
+      "candidate_end": 1575,
+      "candidate_lines": null
+    },
+    {
+      "kind": "replace",
+      "base_start": 1902,
+      "base_end": 1902,
+      "candidate_start": 1576,
+      "candidate_end": 1576,
+      "candidate_lines": [
+        "\t\t\t$display(\"PEAK_VALLEY_RETURN_TB_FAIL error_count=%0d\", cnt_error);\n"
+      ]
+    },
+    {
+      "kind": "equal",
+      "base_start": 1903,
+      "base_end": 1907,
+      "candidate_start": 1577,
+      "candidate_end": 1581,
+      "candidate_lines": null
+    }
+  ],
+  "equal_lines": 1322
+}

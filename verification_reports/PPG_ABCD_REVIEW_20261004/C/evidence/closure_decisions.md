@@ -1,0 +1,12 @@
+# C最终候选裁定
+
+固定d18c6954621e53e5a6505dd3a6c688c266d23839，审阅完成不等于完整验证。
+
+1. C11/C14/C15 discard条件免除：当前manager START与AMI三leaf valid/empty链已逐跳核对，符合修订明确前提；generation随合法START变化，旧held不得跨代。RTL live generation与事件target在AMI生产调用相等，terminal mask阻止同拍新NORMAL。因此不采用leaf任意错target为Top反例。
+2. 当前fixed8bit IDAC/4bit epoch与C_RESET_CODE0、signed32 DC gain是合同冻结数值域。超出此域的参数化实现能力未签核，不能根据更宽端口表达式推定任意宽乘法安全。
+3. C15 coarse/fine_valid视为result有效窗口内的载荷资格；消费后payload保留而result_valid0，AMI/PWI消费者均以result/pending门控。字面公式有效窗口澄清建议保留，不据残留payload报集成功能错误。
+4. 峰谷第N确认沿epoch漂移候选：当前NORMAL ACTIVE/系数组由COMMIT冻结，生产不存在运行中直接改ACTIVE的合法刺激；所有该项错误epoch/资格分支已读，但无新的合法生产公开反例，未编号或宣称不存在所有leaf恶意输入故障。PVW31及所有资格/跳帧分支按实际范围记录。
+5. 基线资格/recheck adaptive撤销的状态优先级与PWI合法门控已读；invalid crossing配置允许诊断历史并禁止正式输出，系统D01配置valid0合法驱动。N08 scope-only不可直接构造完整交接例外按已知说明保留。BSL40系统完整运行仍待A，未用静态证据充当动态PASS。
+6. TRK06 pending抑制使后续同色证据不进评价块；Unit同方向继续消费+结构能补保持。TRK07/08单拍/端点由Unit真实比较补证；TRK09逐项AND为静态证据，未称所有epoch动态已逐一隔离；TRK05 precision无状态作用。
+7. ADCN06跨DC unit资格/半值+本次公开可达coarse双端向量支持；fine冻结域极值不越24bit，force非物理越界。ADCN08只支持formal measurement载荷，F021独立detection资格错误必须保留。
+8. 四份系统完成源码语义读取，实际长回归仍由A运行。其它C25系统家族只核对涉及本数值链条款和依赖，不以单一寄存器正确代替Top端口映射或完整验收。ID表100部分项保留。

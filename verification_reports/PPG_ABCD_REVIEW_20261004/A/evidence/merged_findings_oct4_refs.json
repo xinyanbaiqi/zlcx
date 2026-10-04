@@ -1,0 +1,107 @@
+[
+  {
+    "finding": "F-009",
+    "file": "contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+    "line": 142,
+    "text": "宏帧计数范围为`0..4999`，在`4999 -> 0`时进入下一宏帧。",
+    "sha256": "daeb3696c5cd79c33777e81baaea7a54e245ce65dc84f7a6eec7339da64bf675"
+  },
+  {
+    "finding": "F-009",
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "line": 825,
+    "text": "\t\t\t\t\tstate_next[B_FRAME_ACTIVE] = 1'b0; // 当前宏帧结束",
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+  },
+  {
+    "finding": "F-010",
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "line": 602,
+    "text": "\t\t\t\t\tstate_next[B_FRAME_ACTIVE] = 1'b0; // abort立即撤销未完成宏帧上下文，与SSW侧i_control_abort_event立即失效旧波形同拍",
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+  },
+  {
+    "finding": "F-010",
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "line": 855,
+    "text": "\t\tif(flag_calibration_rollover)begin",
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+  },
+  {
+    "finding": "F-010",
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "line": 857,
+    "text": "\t\t\tstate_rollover_next[B_FRAME_ACTIVE] = 1'b1; // 不经过IDLE直接进入下一校准子帧",
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+  },
+  {
+    "finding": "F-011",
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+    "line": 581,
+    "text": "\t\tcheck_fsc(14, flag_wait_ok && ((reg_frame_period == 5000) || (reg_frame_period == 5001)));",
+    "sha256": "69c1b54b8025a4de908c76781afc5a9c449409268d0c8e3310db58f8bf71b423"
+  },
+  {
+    "finding": "F-012",
+    "file": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+    "line": 459,
+    "text": "\t\ti_diag_clear_event = 1'b1;",
+    "sha256": "e3652cafe38f1c320972ce3ef41e432b4ae95a3efc92a03ca7d832ed317b47f0"
+  },
+  {
+    "finding": "F-012",
+    "file": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+    "line": 475,
+    "text": "\t\t// SUP-10：验证第二个独立episode（此前episode均已完整关闭+诊断清除，非同一episode延续）依然",
+    "sha256": "e3652cafe38f1c320972ce3ef41e432b4ae95a3efc92a03ca7d832ed317b47f0"
+  },
+  {
+    "finding": "F-012",
+    "file": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+    "line": 480,
+    "text": "\t\tcheck_case(\"SUP10A\", (o_system_fault_blocking === 1'b1) &&",
+    "sha256": "e3652cafe38f1c320972ce3ef41e432b4ae95a3efc92a03ca7d832ed317b47f0"
+  },
+  {
+    "finding": "F-013",
+    "file": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "line": 431,
+    "text": "\t\ti_diag_clear_event = 1'b1;",
+    "sha256": "68d3a1441a4637451a3c90381b6da60e89eb41f0b71b20936b027b793599a1b3"
+  },
+  {
+    "finding": "F-013",
+    "file": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "line": 437,
+    "text": "\t\tlaunch_control_inflight(1'b0, 5'b11110);",
+    "sha256": "68d3a1441a4637451a3c90381b6da60e89eb41f0b71b20936b027b793599a1b3"
+  },
+  {
+    "finding": "F-013",
+    "file": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "line": 442,
+    "text": "\t\tcheck_case(8'd22, (flag_reject === 1'b1) && (o_protocol_error_sticky === 1'b1) &&",
+    "sha256": "68d3a1441a4637451a3c90381b6da60e89eb41f0b71b20936b027b793599a1b3"
+  },
+  {
+    "finding": "F-014",
+    "file": "contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+    "line": 41,
+    "text": "Elaboration shall reject `C_ADC_DRAIN_WATCHDOG_CYCLES < 1` or `C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH < $clog2(C_ADC_DRAIN_WATCHDOG_CYCLES + 1)`. `5000` cycles is a provisional one-400-Hz-frame system policy (`2.5 ms` at 2 MHz), not ADC/analog macro timing signoff.",
+    "sha256": "736a478550fc3cc79579485e3c59a79f6f70464c1894c3be4f293751754b845e"
+  },
+  {
+    "finding": "F-014",
+    "file": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+    "line": 192,
+    "text": "\tassign flag_watchdog_timeout_fire = flag_watchdog_window_active && (cnt_adc_drain_watchdog == (C_ADC_DRAIN_WATCHDOG_CYCLES - 1)); // 第C_ADC_DRAIN_WATCHDOG_CYCLES个连续非idle采样触发一次；SUP06A/B/C+SUP09A实测确认边界与恢复 @satisfies: P05, N06",
+    "sha256": "c725a8a1e9ee779fba14601d1da6c8a8efbff2fea6ec6cb7d7fe2143d88a14d3"
+  },
+  {
+    "finding": "F-015",
+    "file": "contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+    "line": 686,
+    "text": "当前RTL/TB只具备V2的FIR-01至FIR-30历史证据。~~新增`i_sample_valid`端口及FIR-31至FIR-33尚未实现和运行~~ **2026-09-13勘误（Stage 3 Item 3 合同文字滞后扫描发现）：`i_sample_valid`端口本身早已实现（`ppg_coarse_detection_fir.v` V2.1新增端口、V2.2补齐`flag_sample_qualified`显式引用，2026-08-22/23），并非\"尚未实现\"；真正仍然缺失的是FIR-31至FIR-36专属验收TB证据——直接检查`tb_ppg_coarse_detection_fir.v`（970行）确认其中不含任何`i_sample_valid`引用，未见针对该端口的定向回归**，因此实现证据为`EVIDENCE_PENDING`，不得宣称PASS，也不得用层次化force、特殊RAW、`i_coarse_valid`或`i_coarse_recovery_calibrated`替代该公开资格接口。",
+    "sha256": "eb2c15a5f4a4a291c7fc4a86ca4d8baa26c59c41c78cb4e24a0adbc6ab71647e"
+  }
+]

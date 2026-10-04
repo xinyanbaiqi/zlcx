@@ -1,0 +1,408 @@
+# Design Explanation: ppg_adc_measurement_idac_integration
+
+## Project Topology
+- Selected top module: `ppg_adc_measurement_idac_integration`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_active_config_valid` width=1 role=status
+- `input i_run_enable` width=1 role=control
+- `input i_allow_new_transaction` width=1 role=signal
+- `input i_start_ack_event` width=1 role=signal
+- `input i_stop_ack_event` width=1 role=signal
+- `input i_control_abort_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `input i_system_fault_discard_event` width=1 role=signal
+- `input i_config_epoch` width=1 role=signal
+- `input i_stage1_coef_epoch` width=1 role=signal
+- `input i_stage2_coef_epoch` width=1 role=signal
+- `input i_dc_recovery_coef_epoch` width=1 role=signal
+- `input i_transaction_start_valid` width=1 role=status
+- `output o_transaction_start_ready` width=1 role=status
+- `output o_transaction_start_fire` width=1 role=signal
+- `output o_adc_transaction_complete_event` width=1 role=signal
+- `output o_adc_transaction_success` width=1 role=signal
+- `output o_adc_complete_sample_index` width=1 role=signal
+- `input i_transaction_precision_mode` width=1 role=control
+- `input i_transaction_frame_id` width=1 role=signal
+- `input i_transaction_sample_index` width=1 role=signal
+- `input i_transaction_color_ir` width=1 role=signal
+- `input i_transaction_frame_type` width=2 role=signal
+- `input i_transaction_amb_code_snapshot` width=1 role=signal
+- `input i_transaction_dc_code_snapshot` width=1 role=signal
+- `input i_transaction_amb_code_epoch` width=1 role=signal
+- `input i_transaction_dc_code_epoch` width=1 role=signal
+- `input i_dout_stage1_low` width=10 role=signal
+- `input i_clk_stage1_dout_low_async` width=1 role=clock
+- `input i_dout_stage2_low` width=10 role=signal
+- `input i_clk_stage2_dout_low_async` width=1 role=clock
+- `input i_adc_idle` width=1 role=signal
+- `input i_analog_safe` width=1 role=signal
+- `input i_macro_frame_safe_boundary` width=1 role=signal
+- `input i_idac_code_safe_boundary` width=1 role=signal
+- `input i_safe_frame_id` width=1 role=signal
+- `input i_normal_frame_complete_event` width=1 role=signal
+- `input i_calibration_frame_complete_event` width=1 role=signal
+- `input i_calibration_sample_ready` width=1 role=status
+- `input i_cal_owner_deadline_event` width=1 role=signal
+- `output o_calibration_sample_valid` width=1 role=status
+- `output o_calibration_frame_type` width=2 role=signal
+- `output o_calibration_color_ir` width=1 role=signal
+- `output o_calibration_precision_mode` width=1 role=control
+- `output o_calibration_request_reason` width=2 role=control
+- `output o_calibration_request_fire` width=1 role=control
+- `input i_measurement_result_ready` width=1 role=status
+- `output o_measurement_result_valid` width=1 role=status
+- `output o_coarse_ppg_value` width=1 role=signal
+- `output o_coarse_valid` width=1 role=status
+- `output o_coarse_recovery_calibrated` width=1 role=signal
+- `output o_coarse_saturation_low` width=1 role=signal
+- `output o_coarse_saturation_high` width=1 role=signal
+- `output o_fine_ppg_value` width=1 role=signal
+- `output o_fine_valid` width=1 role=status
+- `output o_fine_recovery_calibrated` width=1 role=signal
+- `output o_fine_saturation_low` width=1 role=signal
+- `output o_fine_saturation_high` width=1 role=signal
+- `output o_calibrated_s1_value` width=1 role=signal
+- `output o_programmable_15_code` width=1 role=signal
+- `output o_programmable_15_valid` width=1 role=status
+- `output o_config_epoch` width=1 role=signal
+- `output o_coef_epoch` width=1 role=signal
+- `output o_stage2_result_coef_epoch` width=1 role=signal
+- `output o_dc_result_coef_epoch` width=1 role=signal
+- `output o_result_precision_mode` width=1 role=control
+- `output o_result_frame_id` width=1 role=signal
+- `output o_result_sample_index` width=1 role=signal
+- `output o_result_color_ir` width=1 role=signal
+- `output o_result_frame_type` width=2 role=signal
+- `output o_result_amb_code_snapshot` width=1 role=signal
+- `output o_result_dc_code_snapshot` width=1 role=signal
+- `output o_result_amb_code_epoch` width=1 role=signal
+- `output o_result_dc_code_epoch` width=1 role=signal
+- `output o_measurement_result_discard_event` width=1 role=signal
+- `output o_measurement_result_discard_reason` width=2 role=signal
+- `output o_measurement_result_discard_identity_valid` width=1 role=status
+- `output o_measurement_result_discard_sample_valid` width=1 role=status
+- `output o_measurement_result_discard_frame_id` width=1 role=signal
+- `output o_measurement_result_discard_sample_index` width=1 role=signal
+- `output o_measurement_result_discard_color_ir` width=1 role=signal
+- `output o_measurement_result_discard_frame_type` width=2 role=signal
+- `output o_measurement_result_discard_precision` width=1 role=signal
+- `output o_measurement_result_discard_run_generation` width=1 role=signal
+- `input i_idac_mode` width=2 role=control
+- `input i_amb_enable` width=1 role=control
+- `input i_dcs_enable` width=1 role=control
+- `input i_amb_polarity` width=1 role=signal
+- `input i_dcs_polarity` width=1 role=signal
+- `input i_amb_manual_code` width=1 role=signal
+- `input i_amb_code_min` width=1 role=signal
+- `input i_amb_code_max` width=1 role=signal
+- `input i_dcs_r_manual_code` width=1 role=signal
+- `input i_dcs_r_code_min` width=1 role=signal
+- `input i_dcs_r_code_max` width=1 role=signal
+- `input i_dcs_ir_manual_code` width=1 role=signal
+- `input i_dcs_ir_code_min` width=1 role=signal
+- `input i_dcs_ir_code_max` width=1 role=signal
+- `input i_amb_threshold_low` width=1 role=signal
+- `input i_amb_threshold_high` width=1 role=signal
+- `input i_dcs_threshold_low` width=1 role=signal
+- `input i_dcs_threshold_high` width=1 role=signal
+- `input i_amb_confirm_count` width=8 role=signal
+- `input i_dcs_confirm_count` width=8 role=signal
+- `input i_stage1_calibration_valid` width=1 role=status
+- `input i_stage1_weight_q16_0` width=1 role=signal
+- `input i_stage1_weight_q16_1` width=1 role=signal
+- `input i_stage1_weight_q16_2` width=1 role=signal
+- `input i_stage1_weight_q16_3` width=1 role=signal
+- `input i_stage1_weight_q16_4` width=1 role=signal
+- `input i_stage1_weight_q16_5` width=1 role=signal
+- `input i_stage1_weight_q16_6` width=1 role=signal
+- `input i_stage1_weight_q16_7` width=1 role=signal
+- `input i_stage1_weight_q16_8` width=1 role=signal
+- `input i_stage1_weight_q16_9` width=1 role=signal
+- `input i_stage1_offset_q16` width=1 role=signal
+- `input i_stage2_calibration_valid` width=1 role=status
+- `input i_stage2_gain_q16` width=1 role=signal
+- `input i_stage2_offset_q16` width=1 role=signal
+- `input i_dc9_recovery_valid` width=1 role=status
+- `input i_dc15_recovery_valid` width=1 role=status
+- `input i_dc9_recovery_gain_q16` width=1 role=signal
+- `input i_dc15_recovery_gain_q16` width=1 role=signal
+- `input i_run_profile` width=1 role=signal
+- `input i_initial_precision` width=1 role=signal
+- `input i_slope_mode` width=1 role=control
+- `input i_fixed_slope_q16` width=1 role=signal
+- `input i_alpha_q15` width=1 role=signal
+- `input i_beta_q15` width=1 role=signal
+- `input i_timing_adjust_ratio_q15` width=1 role=signal
+- `input i_slope_min_q16` width=1 role=signal
+- `input i_slope_max_q16` width=1 role=signal
+- `input i_baseline_delta_q16` width=1 role=control
+- `input i_cross_hysteresis_q16` width=1 role=signal
+- `input i_lead_min_frames` width=1 role=signal
+- `input i_lead_max_frames` width=1 role=signal
+- `input i_cross_confirm_count` width=1 role=signal
+- `input i_no_cross_limit` width=1 role=signal
+- `input i_peak_confirm_count` width=1 role=signal
+- `input i_valley_confirm_count` width=1 role=signal
+- `input i_direction_deadband` width=1 role=signal
+- `input i_min_peak_valley_amplitude` width=1 role=signal
+- `input i_min_peak_to_valley_frames` width=1 role=signal
+- `input i_min_peak_to_peak_frames` width=1 role=signal
+- `input i_max_fine_window_frames` width=1 role=signal
+- `input i_max_reacquire_frames` width=1 role=signal
+- `input i_peak_valley_config_valid` width=1 role=status
+- `input i_amb_recheck_interval_frames` width=16 role=signal
+- `output o_amb_code` width=1 role=signal
+- `output o_dcs_r_code` width=1 role=signal
+- `output o_dcs_ir_code` width=1 role=signal
+- `output o_amb_code_epoch` width=1 role=signal
+- `output o_dcs_r_code_epoch` width=1 role=signal
+- `output o_dcs_ir_code_epoch` width=1 role=signal
+- `output o_amb_code_update` width=1 role=signal
+- `output o_dcs_r_code_update` width=1 role=signal
+- `output o_dcs_ir_code_update` width=1 role=signal
+- `output o_dcs_r_track_adjust` width=1 role=signal
+- `output o_dcs_ir_track_adjust` width=1 role=signal
+- `output o_amb_search_done` width=1 role=status
+- `output o_dcs_r_search_done` width=1 role=status
+- `output o_dcs_ir_search_done` width=1 role=status
+- `output o_amb_search_exhausted` width=1 role=signal
+- `output o_dcs_r_search_exhausted` width=1 role=signal
+- `output o_dcs_ir_search_exhausted` width=1 role=signal
+- `output o_amb_pending_valid` width=1 role=status
+- `output o_dcs_r_pending_valid` width=1 role=status
+- `output o_dcs_ir_pending_valid` width=1 role=status
+- `output o_amb_code_at_min` width=1 role=signal
+- `output o_amb_code_at_max` width=1 role=signal
+- `output o_dcs_r_code_at_min` width=1 role=signal
+- `output o_dcs_r_code_at_max` width=1 role=signal
+- `output o_dcs_ir_code_at_min` width=1 role=signal
+- `output o_dcs_ir_code_at_max` width=1 role=signal
+- `output o_amb_fault` width=1 role=signal
+- `output o_dcs_r_fault` width=1 role=signal
+- `output o_dcs_ir_fault` width=1 role=signal
+- `output o_idac_fault_blocking` width=1 role=signal
+- `output o_idac_protocol_error_sticky` width=1 role=signal
+- `output o_startup_search_complete` width=1 role=signal
+- `output o_idac_idle` width=1 role=signal
+- `output o_active_precision_mode` width=1 role=control
+- `output o_fine_window_active` width=1 role=signal
+- `output o_fine_window_start_event` width=1 role=signal
+- `output o_fine_window_start_frame_id` width=1 role=signal
+- `output o_precision_15_to_9_event` width=1 role=signal
+- `output o_precision_15_to_9_frame_id` width=1 role=signal
+- `output o_reacquire_request_event` width=1 role=control
+- `output o_switch_hold_new_transaction` width=1 role=signal
+- `output o_mode_fault_event` width=1 role=control
+- `output o_normal_frame_count` width=16 role=signal
+- `output o_amb_recheck_pending` width=1 role=signal
+- `output o_amb_recheck_accept` width=1 role=signal
+- `output o_amb_recheck_busy` width=1 role=signal
+- `output o_normal_output_inhibit` width=1 role=signal
+- `output o_recheck_sequence_done` width=1 role=status
+- `output o_recheck_sequence_failed` width=1 role=signal
+- `output o_fir_history_full_r` width=1 role=signal
+- `output o_fir_history_full_ir` width=1 role=signal
+- `output o_fir_idle` width=1 role=signal
+- `output o_detection_fork_idle` width=1 role=signal
+- `output o_detector_idle` width=1 role=signal
+- `output o_controller_idle` width=1 role=signal
+- `output o_scheduler_idle` width=1 role=signal
+- `output o_cross_pending` width=1 role=signal
+- `output o_peak_pending` width=1 role=signal
+- `output o_valley_pending` width=1 role=signal
+- `output o_return_pending` width=1 role=signal
+- `output o_baseline_valid` width=1 role=status
+- `output o_reacquire_active` width=1 role=signal
+- `output o_detector_fine_window_active` width=1 role=signal
+- `output o_switch_pending` width=1 role=signal
+- `output o_switch_target_precision` width=1 role=signal
+- `output o_slope_current_q16` width=1 role=signal
+- `output o_baseline_protocol_error_sticky` width=1 role=control
+- `output o_fine_window_timeout_sticky` width=1 role=signal
+- `output o_reacquire_timeout_sticky` width=1 role=signal
+- `output o_peak_valley_protocol_error_sticky` width=1 role=signal
+- `output o_switch_timeout_sticky` width=1 role=signal
+- `output o_precision_protocol_error_sticky` width=1 role=signal
+- `output o_integration_protocol_error_sticky` width=1 role=signal
+- `output o_wrapper_fault_blocking` width=1 role=signal
+- `output o_normal_measurement_eligible` width=1 role=signal
+- `output o_adc_chain_idle` width=1 role=signal
+- `output o_normal_fork_idle` width=1 role=signal
+- `output o_measurement_output_idle` width=1 role=signal
+- `output o_datapath_empty` width=1 role=data
+- `output o_ami_fault_valid` width=1 role=status
+- `output o_ami_fault_active` width=1 role=signal
+- `output o_ami_fault_cause` width=8 role=signal
+- `output o_ami_fault_identity_valid` width=1 role=status
+- `output o_ami_fault_frame_id` width=1 role=signal
+- `output o_ami_fault_sample_index` width=1 role=signal
+- `output o_ami_fault_color_ir` width=1 role=signal
+- `output o_ami_fault_frame_type` width=2 role=signal
+- `output o_ami_fault_precision` width=1 role=signal
+- `output o_ami_fault_run_generation` width=1 role=signal
+- `output o_detection_discard_event` width=1 role=signal
+- `output o_detection_discard_reason` width=2 role=signal
+- `output o_detection_discard_identity_valid` width=1 role=status
+- `output o_detection_discard_sample_valid` width=1 role=status
+- `output o_detection_discard_frame_id` width=1 role=signal
+- `output o_detection_discard_sample_index` width=1 role=signal
+- `output o_detection_discard_color_ir` width=1 role=signal
+- `output o_detection_discard_frame_type` width=2 role=signal
+- `output o_detection_discard_precision` width=1 role=signal
+- `output o_detection_discard_config_epoch` width=1 role=signal
+- `output o_detection_discard_coef_epoch` width=1 role=signal
+- `output o_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `output o_detection_discard_amb_code_epoch` width=1 role=signal
+- `output o_detection_discard_dc_code_epoch` width=1 role=signal
+- `output o_detection_discard_run_generation` width=1 role=signal
+- `input i_test_inject_enable` width=1 role=control
+- `input i_test_identity_inject_valid` width=1 role=status
+- `output o_test_identity_inject_ready` width=1 role=status
+- `input i_test_identity_inject_sample_index` width=1 role=signal
+- `input i_test_invalid_sample_valid` width=1 role=status
+- `output o_test_invalid_sample_ready` width=1 role=status
+- `input i_test_saturation_inject_valid` width=1 role=status
+- `output o_test_saturation_inject_ready` width=1 role=status
+- `input i_test_calibration_loss_inject_valid` width=1 role=status
+- `output o_test_calibration_loss_inject_ready` width=1 role=status
+- `output o_result_sample_valid` width=1 role=status
+- `output o_s1_calibration_applied` width=1 role=signal
+- `output o_s1_raw` width=10 role=signal
+- `output o_s2_raw` width=10 role=signal
+
+## Feature Mapping
+- `ppg_adc_measurement_idac_integration reset behavior`: derived from ports, state, and always blocks.
+- `logic partition block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `output update block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `logic partition block 7`: derived from ports, state, and always blocks.
+- `output update block 8`: derived from ports, state, and always blocks.
+- `output update block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `logic partition block 11`: derived from ports, state, and always blocks.
+- `logic partition block 12`: derived from ports, state, and always blocks.
+- `logic partition block 13`: derived from ports, state, and always blocks.
+- `logic partition block 14`: derived from ports, state, and always blocks.
+- `logic partition block 15`: derived from ports, state, and always blocks.
+- `output update block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `logic partition block 18`: derived from ports, state, and always blocks.
+- `logic partition block 19`: derived from ports, state, and always blocks.
+- `logic partition block 20`: derived from ports, state, and always blocks.
+- `logic partition block 21`: derived from ports, state, and always blocks.
+- `logic partition block 22`: derived from ports, state, and always blocks.
+- `logic partition block 23`: derived from ports, state, and always blocks.
+- `logic partition block 24`: derived from ports, state, and always blocks.
+- `logic partition block 25`: derived from ports, state, and always blocks.
+- `logic partition block 26`: derived from ports, state, and always blocks.
+- `logic partition block 27`: derived from ports, state, and always blocks.
+- `logic partition block 28`: derived from ports, state, and always blocks.
+- `logic partition block 29`: derived from ports, state, and always blocks.
+- `logic partition block 30`: derived from ports, state, and always blocks.
+- `logic partition block 31`: derived from ports, state, and always blocks.
+- `logic partition block 32`: derived from ports, state, and always blocks.
+- `logic partition block 33`: derived from ports, state, and always blocks.
+- `logic partition block 34`: derived from ports, state, and always blocks.
+- `logic partition block 35`: derived from ports, state, and always blocks.
+- `logic partition block 36`: derived from ports, state, and always blocks.
+- `logic partition block 37`: derived from ports, state, and always blocks.
+- `logic partition block 38`: derived from ports, state, and always blocks.
+- `logic partition block 39`: derived from ports, state, and always blocks.
+- `logic partition block 40`: derived from ports, state, and always blocks.
+- `logic partition block 41`: derived from ports, state, and always blocks.
+- `output update block 42`: derived from ports, state, and always blocks.
+- `logic partition block 43`: derived from ports, state, and always blocks.
+- `logic partition block 44`: derived from ports, state, and always blocks.
+- `logic partition block 45`: derived from ports, state, and always blocks.
+- `logic partition block 46`: derived from ports, state, and always blocks.
+- `logic partition block 47`: derived from ports, state, and always blocks.
+- `logic partition block 48`: derived from ports, state, and always blocks.
+- `logic partition block 49`: derived from ports, state, and always blocks.
+- `logic partition block 50`: derived from ports, state, and always blocks.
+- `logic partition block 51`: derived from ports, state, and always blocks.
+- `logic partition block 52`: derived from ports, state, and always blocks.
+- `logic partition block 53`: derived from ports, state, and always blocks.
+- `logic partition block 54`: derived from ports, state, and always blocks.
+- `logic partition block 55`: derived from ports, state, and always blocks.
+- `logic partition block 56`: derived from ports, state, and always blocks.
+- `logic partition block 57`: derived from ports, state, and always blocks.
+- `logic partition block 58`: derived from ports, state, and always blocks.
+- `logic partition block 59`: derived from ports, state, and always blocks.
+- `logic partition block 60`: derived from ports, state, and always blocks.
+- `logic partition block 61`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_adc_measurement_idac_integration` drives known output values after reset release.
+- `fc001`: ppg_adc_measurement_idac_integration reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 1183-1194: logic_partition
+- `u_block_2` lines 1194-1207: logic_partition
+- `u_block_3` lines 1207-1220: logic_partition
+- `u_block_4` lines 1220-1231: logic_partition
+- `u_block_5` lines 1231-1244: output_update
+- `u_block_6` lines 1244-1257: logic_partition
+- `u_block_7` lines 1257-1268: logic_partition
+- `u_block_8` lines 1268-1279: output_update
+- `u_block_9` lines 1279-1290: output_update
+- `u_block_10` lines 1290-1301: logic_partition
+- `u_block_11` lines 1301-1312: logic_partition
+- `u_block_12` lines 1312-1323: logic_partition
+- `u_block_13` lines 1323-1334: logic_partition
+- `u_block_14` lines 1334-1345: logic_partition
+- `u_block_15` lines 1345-1357: logic_partition
+- `u_block_16` lines 1357-1374: output_update
+- `u_block_17` lines 1374-1387: logic_partition
+- `u_block_18` lines 1387-1400: logic_partition
+- `u_block_19` lines 1400-1415: logic_partition
+- `u_block_20` lines 1415-1426: logic_partition
+- `u_block_21` lines 1426-1437: logic_partition
+- `u_block_22` lines 1437-1448: logic_partition
+- `u_block_23` lines 1448-1459: logic_partition
+- `u_block_24` lines 1459-1470: logic_partition
+- `u_block_25` lines 1470-1481: logic_partition
+- `u_block_26` lines 1481-1492: logic_partition
+- `u_block_27` lines 1492-1501: logic_partition
+- `u_block_28` lines 1501-1510: logic_partition
+- `u_block_29` lines 1510-1519: logic_partition
+- `u_block_30` lines 1519-1528: logic_partition
+- `u_block_31` lines 1528-1537: logic_partition
+- `u_block_32` lines 1537-1546: logic_partition
+- `u_block_33` lines 1546-1555: logic_partition
+- `u_block_34` lines 1555-1564: logic_partition
+- `u_block_35` lines 1564-1573: logic_partition
+- `u_block_36` lines 1573-1584: logic_partition
+- `u_block_37` lines 1584-1595: logic_partition
+- `u_block_38` lines 1595-1606: logic_partition
+- `u_block_39` lines 1606-1617: logic_partition
+- `u_block_40` lines 1617-1628: logic_partition
+- `u_block_41` lines 1628-1639: logic_partition
+- `u_block_42` lines 1639-1650: output_update
+- `u_block_43` lines 1650-1659: logic_partition
+- `u_block_44` lines 1659-1668: logic_partition
+- `u_block_45` lines 1668-1677: logic_partition
+- `u_block_46` lines 1677-1686: logic_partition
+- `u_block_47` lines 1686-1695: logic_partition
+- `u_block_48` lines 1695-1704: logic_partition
+- `u_block_49` lines 1704-1713: logic_partition
+- `u_block_50` lines 1713-1722: logic_partition
+- `u_block_51` lines 1722-1731: logic_partition
+- `u_block_52` lines 1731-1742: logic_partition
+- `u_block_53` lines 1742-1753: logic_partition
+- `u_block_54` lines 1753-1766: logic_partition
+- `u_block_55` lines 1766-1779: logic_partition
+- `u_block_56` lines 1779-1792: logic_partition
+- `u_block_57` lines 1792-1805: logic_partition
+- `u_block_58` lines 1805-1814: logic_partition
+- `u_block_59` lines 1814-1823: logic_partition
+- `u_block_60` lines 1823-1834: logic_partition
+- `u_block_61` lines 1834-2681: logic_partition
+

@@ -1,0 +1,4496 @@
+{
+  "version": 1,
+  "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_controller\\ppg_precision_window_controller.v",
+  "profile": "formatter-normalize",
+  "ok": true,
+  "score": {
+    "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_controller\\ppg_precision_window_controller.v",
+    "syntax_confidence": 100,
+    "format_score": 88,
+    "rewrite_need_score": 20,
+    "rewrite_risk_score": 5,
+    "decision": "preserve_micro_format",
+    "allowed_transforms": [
+      "indent",
+      "spacing",
+      "blank_lines",
+      "trailing_whitespace",
+      "comment_alignment",
+      "ordered_header_layout"
+    ],
+    "blocked_transforms": [
+      "port_sort",
+      "param_sort",
+      "signal_rename",
+      "region_reorder",
+      "always_split",
+      "output_bridge",
+      "inline_wire_rewrite",
+      "header_rebuild",
+      "reset_synthesis"
+    ],
+    "hard_fail": false,
+    "hard_gates": [],
+    "diagnostics": [],
+    "metrics": {
+      "line_count": 889,
+      "module_count": 1,
+      "module_names": [
+        "ppg_precision_window_controller"
+      ],
+      "endmodule_count": 1,
+      "begin_count": 208,
+      "end_count": 208,
+      "case_count": 1,
+      "endcase_count": 1,
+      "generate_count": 0,
+      "endgenerate_count": 0,
+      "preprocessor_open_count": 0,
+      "preprocessor_close_count": 0,
+      "port_names": [
+        "i_clk",
+        "i_rstn",
+        "i_run_enable",
+        "i_start_ack_event",
+        "i_diag_clear_event",
+        "i_detection_discard_event",
+        "i_detection_discard_reason",
+        "i_detection_discard_identity_valid",
+        "i_detection_discard_sample_valid",
+        "i_detection_discard_frame_id",
+        "i_detection_discard_sample_index",
+        "i_detection_discard_color_ir",
+        "i_detection_discard_frame_type",
+        "i_detection_discard_precision",
+        "i_detection_discard_config_epoch",
+        "i_detection_discard_coef_epoch",
+        "i_detection_discard_dc_recovery_epoch",
+        "i_detection_discard_amb_code_epoch",
+        "i_detection_discard_dc_code_epoch",
+        "i_detection_discard_run_generation",
+        "i_run_generation",
+        "o_local_empty",
+        "i_active_config_valid",
+        "i_run_profile",
+        "i_initial_precision",
+        "i_normal_measurement_active",
+        "i_peak_valley_config_valid",
+        "i_cross_valid",
+        "o_cross_ready",
+        "i_cross_frame_id",
+        "i_cross_sample_index",
+        "i_cross_time_unknown",
+        "i_cross_config_epoch",
+        "i_cross_coef_epoch",
+        "i_cross_dc_recovery_coef_epoch",
+        "i_return_9bit_valid",
+        "o_return_9bit_ready",
+        "i_return_reason",
+        "i_return_frame_id",
+        "i_frame_safe_boundary",
+        "i_safe_frame_id",
+        "i_precision_takeover_safe",
+        "i_analog_safe",
+        "i_recheck_busy",
+        "o_active_precision_mode",
+        "o_fine_window_active",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "o_reacquire_request_event",
+        "o_mode_fault_event",
+        "o_mode_fault_active",
+        "o_mode_fault_identity_valid",
+        "o_mode_fault_frame_id",
+        "o_mode_fault_sample_index",
+        "o_mode_fault_color_ir",
+        "o_mode_fault_frame_type",
+        "o_mode_fault_precision",
+        "o_mode_fault_run_generation",
+        "o_switch_pending",
+        "o_switch_target_precision",
+        "o_switch_hold_new_transaction",
+        "o_controller_idle",
+        "o_last_cross_time_unknown",
+        "o_last_return_reason",
+        "o_switch_timeout_sticky",
+        "o_protocol_error_sticky"
+      ],
+      "unprefixed_port_count": 0,
+      "always_count": 48,
+      "multi_target_always_count": 0,
+      "case_always_multi_target_count": 0,
+      "inline_wire_assign_count": 0,
+      "complex_lvalue_count": 0,
+      "function_task_initial_count": 0,
+      "generate_or_preprocessor_count": 0,
+      "vendor_instance_count": 0,
+      "comment_line_count": 144,
+      "trailing_whitespace_count": 0,
+      "dense_statement_lines": 32,
+      "missing_reset_always_count": 0,
+      "output_redecl_count": 0,
+      "risk_flags": [
+        "rich_human_comments"
+      ]
+    }
+  },
+  "header": {
+    "company": "Erie",
+    "engineer": "Erie",
+    "create_date": "2026/08/12 00:00:00",
+    "revision_date": "2026/08/23",
+    "design_name": "PPG Precision Window Controller",
+    "module_name": "ppg_precision_window_controller",
+    "description": "Description/ppg_precision_window_controller_Design.pdf",
+    "simulations": "TestBench/Vivado/2022.2/ppg_precision_window_controller",
+    "references": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+    "version": "V1.3",
+    "dependency_lines": [
+      "ppg_dynamic_baseline_cross_detector.v,",
+      "ppg_peak_valley_window_detector.v,",
+      "ppg_amb_recheck_scheduler.v",
+      "ppg_dynamic_baseline_cross_detector.v、",
+      "ppg_peak_valley_window_detector.v、"
+    ],
+    "history_lines": [],
+    "history_lines_en": [
+      "2026/08/12            V1.0          Erie                  Create file.",
+      "2026/08/22            V1.1          Erie                  Remove i_stop_ack_event/i_control_abort_event direct-clear ports; add PWI-broadcast i_detection_discard group, i_run_generation and o_local_empty per PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md section 18.1a.",
+      "2026/08/22            V1.2          Erie                  Add i_peak_valley_config_valid (V5 formal-detection gate, PWC-40) and the registered o_mode_fault_active/identity_valid/<FAULT_ID> group for the AMI cause 8'h04 fault dispatcher, per PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 15.3/18.2/18.6.",
+      "2026/08/23            V1.3          Erie                  Rename i_adc_idle to i_precision_takeover_safe (pure port rename, no logic change) to match PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 18.5/19 literal naming; the connected value was already the AMI composite predicate, never physical ADC idle."
+    ],
+    "history_lines_cn": [
+      "2026年08月12日        V1.0          Erie                  创建文件。",
+      "2026年08月22日        V1.1          Erie                  删除i_stop_ack_event/i_control_abort_event直接清除端口，按合同18.1a节新增PWI广播的i_detection_discard组、i_run_generation和o_local_empty",
+      "2026年08月22日        V1.2          Erie                  按合同15.3/18.2/18.6节新增i_peak_valley_config_valid（V5正式检测门控，PWC-40）和注册式o_mode_fault_active/identity_valid/<FAULT_ID>组，供AMI cause 8'h04故障分发器观测",
+      "2026年08月23日        V1.3          Erie                  按合同18.5/19节把i_adc_idle改名为i_precision_takeover_safe（纯端口改名，不改逻辑）——该端口连接的值本来就是AMI导出的复合资格，从未是物理ADC空闲",
+      "在下一安全400 Hz帧原子提交9-bit或15-bit模式，并协调异常重新获取和重检事件"
+    ],
+    "extra_lines": []
+  },
+  "formatter_violations": [
+    "Source does not match the enforced formatter template."
+  ],
+  "diagnostics": [],
+  "modules": [
+    {
+      "index": 0,
+      "name": "ppg_precision_window_controller",
+      "params": [
+        {
+          "keyword": "parameter",
+          "name": "C_FRAME_ID_WIDTH",
+          "value": "16",
+          "decl_spec": "",
+          "comment": "统一400 Hz物理帧号宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 60,
+          "line_end": 60
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_SAMPLE_INDEX_WIDTH",
+          "value": "16",
+          "decl_spec": "",
+          "comment": "相交事务序号字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 61,
+          "line_end": 61
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_CONFIG_EPOCH_WIDTH",
+          "value": "8",
+          "decl_spec": "",
+          "comment": "ACTIVE配置版本字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 62,
+          "line_end": 62
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_COEF_EPOCH_WIDTH",
+          "value": "8",
+          "decl_spec": "",
+          "comment": "Stage1校准系数版本字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 63,
+          "line_end": 63
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_DC_RECOVERY_EPOCH_WIDTH",
+          "value": "8",
+          "decl_spec": "",
+          "comment": "DC恢复系数版本字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 64,
+          "line_end": 64
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_SWITCH_TIMEOUT_CYCLES",
+          "value": "10000",
+          "decl_spec": "",
+          "comment": "模拟精度安全提交的最大等待周期",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 65,
+          "line_end": 65
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_SWITCH_TIMEOUT_COUNTER_WIDTH",
+          "value": "14",
+          "decl_spec": "",
+          "comment": "覆盖两帧保护阈值的计数宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 66,
+          "line_end": 66
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_CODE_EPOCH_WIDTH",
+          "value": "4",
+          "decl_spec": "",
+          "comment": "discard组诊断用AMB/DC码版本字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 67,
+          "line_end": 67
+        },
+        {
+          "keyword": "parameter",
+          "name": "C_RUN_GENERATION_WIDTH",
+          "value": "8",
+          "decl_spec": "",
+          "comment": "manager唯一生产、由PWI逐层广播的RUN代际字段宽度",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 68,
+          "line_end": 68
+        }
+      ],
+      "ports": [
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_clk",
+          "comment": "2 MHz数字处理时钟",
+          "group": "全局信号",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 72,
+          "line_end": 72
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_rstn",
+          "comment": "低有效异步复位输入",
+          "group": "全局信号",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 73,
+          "line_end": 73
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_run_enable",
+          "comment": "生命周期管理器声明当前处于RUN",
+          "group": "生命周期接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 76,
+          "line_end": 76
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_start_ack_event",
+          "comment": "新RUN被正式接受的初始化单拍",
+          "group": "生命周期接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 77,
+          "line_end": 77
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_diag_clear_event",
+          "comment": "软件清除历史sticky的单拍",
+          "group": "生命周期接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 78,
+          "line_end": 78
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_detection_discard_event",
+          "comment": "PWI原样广播的AMI注册式代际清空事件，无ready/ack",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 81,
+          "line_end": 81
+        },
+        {
+          "direction": "input",
+          "width": "[1:0]",
+          "name": "i_detection_discard_reason",
+          "comment": "清空原因分类，取值含STOP排空、abort撤销、系统故障三类",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 82,
+          "line_end": 82
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_detection_discard_identity_valid",
+          "comment": "触发事务身份是否可信，为0时是合法scope-only清空",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 83,
+          "line_end": 83
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_detection_discard_sample_valid",
+          "comment": "触发事务的独立样本资格快照",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 84,
+          "line_end": 84
+        },
+        {
+          "direction": "input",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "i_detection_discard_frame_id",
+          "comment": "触发事务帧号，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 85,
+          "line_end": 85
+        },
+        {
+          "direction": "input",
+          "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+          "name": "i_detection_discard_sample_index",
+          "comment": "触发事务序号，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 86,
+          "line_end": 86
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_detection_discard_color_ir",
+          "comment": "触发事务颜色，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 87,
+          "line_end": 87
+        },
+        {
+          "direction": "input",
+          "width": "[1:0]",
+          "name": "i_detection_discard_frame_type",
+          "comment": "触发事务类型，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 88,
+          "line_end": 88
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_detection_discard_precision",
+          "comment": "触发事务精度，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 89,
+          "line_end": 89
+        },
+        {
+          "direction": "input",
+          "width": "[C_CONFIG_EPOCH_WIDTH - 1:0]",
+          "name": "i_detection_discard_config_epoch",
+          "comment": "触发事务ACTIVE版本，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 90,
+          "line_end": 90
+        },
+        {
+          "direction": "input",
+          "width": "[C_COEF_EPOCH_WIDTH - 1:0]",
+          "name": "i_detection_discard_coef_epoch",
+          "comment": "触发事务Stage1系数版本，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 91,
+          "line_end": 91
+        },
+        {
+          "direction": "input",
+          "width": "[C_DC_RECOVERY_EPOCH_WIDTH - 1:0]",
+          "name": "i_detection_discard_dc_recovery_epoch",
+          "comment": "触发事务DC恢复版本，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 92,
+          "line_end": 92
+        },
+        {
+          "direction": "input",
+          "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+          "name": "i_detection_discard_amb_code_epoch",
+          "comment": "触发事务环境光抵消码提交版本，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 93,
+          "line_end": 93
+        },
+        {
+          "direction": "input",
+          "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+          "name": "i_detection_discard_dc_code_epoch",
+          "comment": "触发事务颜色DC码提交版本，仅诊断用途",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 94,
+          "line_end": 94
+        },
+        {
+          "direction": "input",
+          "width": "[C_RUN_GENERATION_WIDTH - 1:0]",
+          "name": "i_detection_discard_run_generation",
+          "comment": "本次清空目标RUN代际",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 95,
+          "line_end": 95
+        },
+        {
+          "direction": "input",
+          "width": "[C_RUN_GENERATION_WIDTH - 1:0]",
+          "name": "i_run_generation",
+          "comment": "PWI层级扇出的当前RUN代际实时快照",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 96,
+          "line_end": 96
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_local_empty",
+          "comment": "本模块无pending、无延迟动作且无故障保持时为高，唯一消费者PWI",
+          "group": "AMI/PWI检测代际清空接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 97,
+          "line_end": 97
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_active_config_valid",
+          "comment": "已提交ACTIVE配置通过合法性检查",
+          "group": "ACTIVE配置接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 100,
+          "line_end": 100
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_run_profile",
+          "comment": "低为NORMAL_PPG且高为CHARACTERIZATION",
+          "group": "ACTIVE配置接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 101,
+          "line_end": 101
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_initial_precision",
+          "comment": "CHARACTERIZATION启动时采用的固定精度",
+          "group": "ACTIVE配置接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 102,
+          "line_end": 102
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_normal_measurement_active",
+          "comment": "启动校准完成且允许正式NORMAL事务",
+          "group": "ACTIVE配置接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 103,
+          "line_end": 103
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_peak_valley_config_valid",
+          "comment": "PWI经AMI注册转发的V5正式检测资格，为0禁止新cross消费",
+          "group": "ACTIVE配置接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 104,
+          "line_end": 104
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_cross_valid",
+          "comment": "动态基线保持的进入15-bit请求",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 107,
+          "line_end": 107
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_cross_ready",
+          "comment": "控制器允许消费当前相交载荷",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 108,
+          "line_end": 108
+        },
+        {
+          "direction": "input",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "i_cross_frame_id",
+          "comment": "相交中心对应的真实物理帧号",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 109,
+          "line_end": 109
+        },
+        {
+          "direction": "input",
+          "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+          "name": "i_cross_sample_index",
+          "comment": "相交中心对应的ADC事务号",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 110,
+          "line_end": 110
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_cross_time_unknown",
+          "comment": "相交发生时间缺少正式中心样本证明",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 111,
+          "line_end": 111
+        },
+        {
+          "direction": "input",
+          "width": "[C_CONFIG_EPOCH_WIDTH - 1:0]",
+          "name": "i_cross_config_epoch",
+          "comment": "相交事务绑定的ACTIVE版本",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 112,
+          "line_end": 112
+        },
+        {
+          "direction": "input",
+          "width": "[C_COEF_EPOCH_WIDTH - 1:0]",
+          "name": "i_cross_coef_epoch",
+          "comment": "相交事务绑定的Stage1系数版本",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 113,
+          "line_end": 113
+        },
+        {
+          "direction": "input",
+          "width": "[C_DC_RECOVERY_EPOCH_WIDTH - 1:0]",
+          "name": "i_cross_dc_recovery_coef_epoch",
+          "comment": "相交事务绑定的DC恢复版本",
+          "group": "相交请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 114,
+          "line_end": 114
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_return_9bit_valid",
+          "comment": "峰谷检测器保持的返回9-bit请求",
+          "group": "返回请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 117,
+          "line_end": 117
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_return_9bit_ready",
+          "comment": "控制器允许消费当前返回载荷",
+          "group": "返回请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 118,
+          "line_end": 118
+        },
+        {
+          "direction": "input",
+          "width": "[1:0]",
+          "name": "i_return_reason",
+          "comment": "波谷成功、窗口超时或协议回退原因",
+          "group": "返回请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 119,
+          "line_end": 119
+        },
+        {
+          "direction": "input",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "i_return_frame_id",
+          "comment": "返回结论绑定的真实检测帧号",
+          "group": "返回请求接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 120,
+          "line_end": 120
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_frame_safe_boundary",
+          "comment": "下一物理帧开始前的安全边界单拍",
+          "group": "安全提交接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 123,
+          "line_end": 123
+        },
+        {
+          "direction": "input",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "i_safe_frame_id",
+          "comment": "即将采用新精度的物理帧号",
+          "group": "安全提交接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 124,
+          "line_end": 124
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_precision_takeover_safe",
+          "comment": "PWI原样转发AMI复合资格：物理ADC/DONE已空闲，且ADC事务、异步capture和结果所有权已排空；不是物理idle事实",
+          "group": "安全提交接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 125,
+          "line_end": 125
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_analog_safe",
+          "comment": "模拟相位允许修改下一帧精度",
+          "group": "安全提交接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 126,
+          "line_end": 126
+        },
+        {
+          "direction": "input",
+          "width": "",
+          "name": "i_recheck_busy",
+          "comment": "AMB/DC重检及FIR恢复占用测量调度",
+          "group": "安全提交接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 127,
+          "line_end": 127
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_active_precision_mode",
+          "comment": "当前唯一已提交的采集精度",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 130,
+          "line_end": 130
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_fine_window_active",
+          "comment": "正式相交建立的15-bit窗口资格",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 131,
+          "line_end": 131
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_fine_window_start_event",
+          "comment": "真实进入正式15-bit窗口的单拍",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 132,
+          "line_end": 132
+        },
+        {
+          "direction": "output",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "o_fine_window_start_frame_id",
+          "comment": "第一笔正式15-bit帧号",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 133,
+          "line_end": 133
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_precision_15_to_9_event",
+          "comment": "正式窗口真实返回9-bit的单拍",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 134,
+          "line_end": 134
+        },
+        {
+          "direction": "output",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "o_precision_15_to_9_frame_id",
+          "comment": "第一笔恢复9-bit帧号",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 135,
+          "line_end": 135
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_reacquire_request_event",
+          "comment": "异常返回后废止旧基线的单拍",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 136,
+          "line_end": 136
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_mode_fault_event",
+          "comment": "切换超时或阻断协议故障单拍",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 137,
+          "line_end": 137
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_mode_fault_active",
+          "comment": "当前RUN代际的精度阻断故障保持电平，仅discard/reset解除；本模块唯一故障出口，无直连manager/supervisor路径，是cause 8'h04分发链起点 @satisfies: K01, K05, G-FP-03",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 138,
+          "line_end": 138
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_mode_fault_identity_valid",
+          "comment": "故障是否绑定真实事务身份",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 139,
+          "line_end": 139
+        },
+        {
+          "direction": "output",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "o_mode_fault_frame_id",
+          "comment": "故障绑定事务的真实物理帧号",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 140,
+          "line_end": 140
+        },
+        {
+          "direction": "output",
+          "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+          "name": "o_mode_fault_sample_index",
+          "comment": "故障绑定事务的全局事务号",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 141,
+          "line_end": 141
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_mode_fault_color_ir",
+          "comment": "精度控制器只处理RED来源事务，恒为0",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 142,
+          "line_end": 142
+        },
+        {
+          "direction": "output",
+          "width": "[1:0]",
+          "name": "o_mode_fault_frame_type",
+          "comment": "触发事务类别，有效时恒为NORMAL编码",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 143,
+          "line_end": 143
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_mode_fault_precision",
+          "comment": "故障绑定事务建立时所属的精度模式",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 144,
+          "line_end": 144
+        },
+        {
+          "direction": "output",
+          "width": "[C_RUN_GENERATION_WIDTH - 1:0]",
+          "name": "o_mode_fault_run_generation",
+          "comment": "故障绑定的RUN代际",
+          "group": "精度与控制事件输出",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 145,
+          "line_end": 145
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_switch_pending",
+          "comment": "已接受请求且等待安全边界提交",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 148,
+          "line_end": 148
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_switch_target_precision",
+          "comment": "当前pending要求的目标精度",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 149,
+          "line_end": 149
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_switch_hold_new_transaction",
+          "comment": "顶层必须阻止新ADC事务",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 150,
+          "line_end": 150
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_controller_idle",
+          "comment": "当前没有控制事务或故障保持",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 151,
+          "line_end": 151
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_last_cross_time_unknown",
+          "comment": "最近接受相交请求的时间诊断",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 152,
+          "line_end": 152
+        },
+        {
+          "direction": "output",
+          "width": "[1:0]",
+          "name": "o_last_return_reason",
+          "comment": "最近接受返回请求的原因",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 153,
+          "line_end": 153
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_switch_timeout_sticky",
+          "comment": "至少一次模式安全提交超时历史",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 154,
+          "line_end": 154
+        },
+        {
+          "direction": "output",
+          "width": "",
+          "name": "o_protocol_error_sticky",
+          "comment": "至少一次精度控制协议异常历史",
+          "group": "状态诊断接口",
+          "section": "",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "subgroup": "",
+          "synthetic": false,
+          "line_start": 155,
+          "line_end": 155
+        }
+      ],
+      "body_preamble_blocks": [],
+      "localparams": [
+        {
+          "keyword": "localparam",
+          "name": "PRECISION_9BIT",
+          "value": "1'b0",
+          "decl_spec": "",
+          "comment": "粗采样模式编码",
+          "leading_comments": [
+            "// 精度和返回原因编码由冻结合同统一定义"
+          ],
+          "synthetic": false,
+          "line_start": 160,
+          "line_end": 160
+        },
+        {
+          "keyword": "localparam",
+          "name": "PRECISION_15BIT",
+          "value": "1'b1",
+          "decl_spec": "",
+          "comment": "高精度采样模式编码",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 161,
+          "line_end": 161
+        },
+        {
+          "keyword": "localparam",
+          "name": "RUN_PROFILE_NORMAL",
+          "value": "1'b0",
+          "decl_spec": "",
+          "comment": "自动PPG精度窗口运行配置",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 162,
+          "line_end": 162
+        },
+        {
+          "keyword": "localparam",
+          "name": "RUN_PROFILE_CHARACTERIZATION",
+          "value": "1'b1",
+          "decl_spec": "",
+          "comment": "固定精度片外表征配置",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 163,
+          "line_end": 163
+        },
+        {
+          "keyword": "localparam",
+          "name": "RETURN_VALLEY_CONFIRMED",
+          "value": "2'b00",
+          "decl_spec": "[1:0]",
+          "comment": "正常波谷经过后的返回原因",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 164,
+          "line_end": 164
+        },
+        {
+          "keyword": "localparam",
+          "name": "RETURN_FINE_TIMEOUT",
+          "value": "2'b01",
+          "decl_spec": "[1:0]",
+          "comment": "精细窗口未闭合的超时原因",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 165,
+          "line_end": 165
+        },
+        {
+          "keyword": "localparam",
+          "name": "RETURN_PROTOCOL_FALLBACK",
+          "value": "2'b10",
+          "decl_spec": "[1:0]",
+          "comment": "峰谷协议异常的回退原因",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 166,
+          "line_end": 166
+        },
+        {
+          "keyword": "localparam",
+          "name": "RETURN_RESERVED",
+          "value": "2'b11",
+          "decl_spec": "[1:0]",
+          "comment": "非法保留原因需要归一化回退",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 167,
+          "line_end": 167
+        },
+        {
+          "keyword": "localparam",
+          "name": "TIMEOUT_LIMIT_MINUS_ONE",
+          "value": "(C_SWITCH_TIMEOUT_CYCLES <= 1) ? {C_SWITCH_TIMEOUT_COUNTER_WIDTH{1'b0}} : C_SWITCH_TIMEOUT_CYCLES - 1",
+          "decl_spec": "[C_SWITCH_TIMEOUT_COUNTER_WIDTH - 1:0]",
+          "comment": "超时关系比较使用固定目标位宽",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 168,
+          "line_end": 168
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_IDLE",
+          "value": "3'd0",
+          "decl_spec": "[2:0]",
+          "comment": "当前没有待提交精度请求",
+          "leading_comments": [
+            "// 状态机分离空闲、两种提交等待、异常事件交付和故障保持"
+          ],
+          "synthetic": false,
+          "line_start": 172,
+          "line_end": 172
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_WAIT_ENTER",
+          "value": "3'd1",
+          "decl_spec": "[2:0]",
+          "comment": "已接受相交并等待15-bit安全提交",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 173,
+          "line_end": 173
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_FINE",
+          "value": "3'd2",
+          "decl_spec": "[2:0]",
+          "comment": "正式15-bit窗口正在运行",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 174,
+          "line_end": 174
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_WAIT_RETURN",
+          "value": "3'd3",
+          "decl_spec": "[2:0]",
+          "comment": "已接受返回并等待9-bit安全提交",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 175,
+          "line_end": 175
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_REACQUIRE",
+          "value": "3'd4",
+          "decl_spec": "[2:0]",
+          "comment": "异常返回提交后交付重新获取事件",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 176,
+          "line_end": 176
+        },
+        {
+          "keyword": "localparam",
+          "name": "ST_FAULT",
+          "value": "3'd5",
+          "decl_spec": "[2:0]",
+          "comment": "超时后保持原精度并阻断新事务",
+          "leading_comments": [],
+          "synthetic": false,
+          "line_start": 177,
+          "line_end": 177
+        }
+      ],
+      "decls": [
+        {
+          "kind": "reg",
+          "width": "[C_SWITCH_TIMEOUT_COUNTER_WIDTH - 1:0]",
+          "name": "cnt_switch_timeout",
+          "init": "",
+          "comment": "已等待安全提交的2 MHz周期数",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 180,
+          "line_end": 180
+        },
+        {
+          "kind": "reg",
+          "width": "[2:0]",
+          "name": "state_current",
+          "init": "",
+          "comment": "当前精度控制阶段",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 183,
+          "line_end": 183
+        },
+        {
+          "kind": "reg",
+          "width": "[2:0]",
+          "name": "state_next",
+          "init": "",
+          "comment": "下一拍精度控制阶段",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 184,
+          "line_end": 184
+        },
+        {
+          "kind": "reg",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "reg_cross_frame_snapshot",
+          "init": "",
+          "comment": "相交请求中心帧原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 187,
+          "line_end": 187
+        },
+        {
+          "kind": "reg",
+          "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+          "name": "reg_cross_sample_snapshot",
+          "init": "",
+          "comment": "相交请求事务号原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 188,
+          "line_end": 188
+        },
+        {
+          "kind": "reg",
+          "width": "[C_CONFIG_EPOCH_WIDTH - 1:0]",
+          "name": "reg_cross_config_snapshot",
+          "init": "",
+          "comment": "相交请求ACTIVE版本原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 189,
+          "line_end": 189
+        },
+        {
+          "kind": "reg",
+          "width": "[C_COEF_EPOCH_WIDTH - 1:0]",
+          "name": "reg_cross_coef_snapshot",
+          "init": "",
+          "comment": "相交沿采用的Stage1校准代次",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 190,
+          "line_end": 190
+        },
+        {
+          "kind": "reg",
+          "width": "[C_DC_RECOVERY_EPOCH_WIDTH - 1:0]",
+          "name": "reg_cross_dc_snapshot",
+          "init": "",
+          "comment": "相交请求DC恢复版本原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 191,
+          "line_end": 191
+        },
+        {
+          "kind": "reg",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "reg_return_frame_snapshot",
+          "init": "",
+          "comment": "返回结论真实帧原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 192,
+          "line_end": 192
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_pending_return_reacquire",
+          "init": "",
+          "comment": "当前返回提交后需要重新获取",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 195,
+          "line_end": 195
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_fault_hold",
+          "init": "",
+          "comment": "超时后持续阻止新事务的活动故障",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 196,
+          "line_end": 196
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_pending_cross_time_unknown",
+          "init": "",
+          "comment": "pending进入请求的时间未知快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 197,
+          "line_end": 197
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_pending_cross",
+          "init": "",
+          "comment": "当前pending来自相交请求",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 198,
+          "line_end": 198
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_pending_return",
+          "init": "",
+          "comment": "当前pending来自返回请求",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 199,
+          "line_end": 199
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_return_reserved",
+          "init": "",
+          "comment": "当前返回原因原始值为保留编码",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 200,
+          "line_end": 200
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_return_protocol_fallback",
+          "init": "",
+          "comment": "峰谷协议回退原因需要锁存诊断",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 201,
+          "line_end": 201
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_protocol_fault_pulse",
+          "init": "",
+          "comment": "当前拍需要报告阻断协议故障",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 202,
+          "line_end": 202
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_normal_start_illegal",
+          "init": "",
+          "comment": "NORMAL使用15-bit初始精度的非法组合",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 203,
+          "line_end": 203
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_characterization_request",
+          "init": "",
+          "comment": "表征模式收到自动精度请求",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 204,
+          "line_end": 204
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_duplicate_cross",
+          "init": "",
+          "comment": "等待期间出现第二笔相交请求",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 205,
+          "line_end": 205
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_duplicate_return",
+          "init": "",
+          "comment": "等待期间出现第二笔返回请求",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 206,
+          "line_end": 206
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_cross_return_collision",
+          "init": "",
+          "comment": "相交和返回在同拍同时有效",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 207,
+          "line_end": 207
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_recheck_in_fine",
+          "init": "",
+          "comment": "正式窗口观察到重检busy异常",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 208,
+          "line_end": 208
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_invalid_direction_request",
+          "init": "",
+          "comment": "当前精度不允许对应请求方向",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 209,
+          "line_end": 209
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_active_config_fault",
+          "init": "",
+          "comment": "START时ACTIVE配置无效",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 210,
+          "line_end": 210
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "flag_leave_run_cancel",
+          "init": "",
+          "comment": "生命周期离开RUN时撤销控制上下文",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 211,
+          "line_end": 211
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_cross_transfer",
+          "init": "",
+          "comment": "相交ready和valid真实传输事件",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 212,
+          "line_end": 212
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_return_transfer",
+          "init": "",
+          "comment": "返回ready和valid真实传输事件",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 213,
+          "line_end": 213
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_normal_cross_transfer",
+          "init": "",
+          "comment": "NORMAL模式取得正式相交请求所有权",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 214,
+          "line_end": 214
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_normal_return_transfer",
+          "init": "",
+          "comment": "NORMAL模式取得正式返回请求所有权",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 215,
+          "line_end": 215
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_enter_commit",
+          "init": "",
+          "comment": "等待进入状态满足安全提交条件",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 216,
+          "line_end": 216
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_return_commit",
+          "init": "",
+          "comment": "等待返回状态满足安全提交条件",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 217,
+          "line_end": 217
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_switch_timeout_event",
+          "init": "",
+          "comment": "当前拍达到有界等待上限",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 218,
+          "line_end": 218
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_lifecycle_cancel",
+          "init": "",
+          "comment": "STOP、abort或离开RUN撤销控制",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 219,
+          "line_end": 219
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_protocol_error_event",
+          "init": "",
+          "comment": "当前拍任一协议异常汇总",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 220,
+          "line_end": 220
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_blocking_protocol_fault",
+          "init": "",
+          "comment": "当前拍需要进入故障保持的协议异常",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 221,
+          "line_end": 221
+        },
+        {
+          "kind": "wire",
+          "width": "",
+          "name": "flag_pending_state",
+          "init": "",
+          "comment": "当前处于任一安全提交等待状态",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 222,
+          "line_end": 222
+        },
+        {
+          "kind": "reg",
+          "width": "[1:0]",
+          "name": "enc_return_reason_snapshot",
+          "init": "",
+          "comment": "归一化返回原因原子快照",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 225,
+          "line_end": 225
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "active_precision_mode_o",
+          "init": "",
+          "comment": "唯一已提交精度输出桥接寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [
+            "//精度与控制事件输出"
+          ],
+          "line_start": 232,
+          "line_end": 232
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "fine_window_active_o",
+          "init": "",
+          "comment": "正式fine窗口输出桥接寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 233,
+          "line_end": 233
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "fine_window_start_event_o",
+          "init": "",
+          "comment": "进入15-bit提交事件寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 234,
+          "line_end": 234
+        },
+        {
+          "kind": "reg",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "fine_window_start_frame_id_o",
+          "init": "",
+          "comment": "第一笔正式15-bit帧号寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 235,
+          "line_end": 235
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "precision_15_to_9_event_o",
+          "init": "",
+          "comment": "返回9-bit提交事件寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 236,
+          "line_end": 236
+        },
+        {
+          "kind": "reg",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "precision_15_to_9_frame_id_o",
+          "init": "",
+          "comment": "第一笔恢复9-bit帧号寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 237,
+          "line_end": 237
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "reacquire_request_event_o",
+          "init": "",
+          "comment": "异常重新获取事件寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 238,
+          "line_end": 238
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "mode_fault_event_o",
+          "init": "",
+          "comment": "控制故障单拍寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 239,
+          "line_end": 239
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "fault_identity_valid_o",
+          "init": "",
+          "comment": "故障是否绑定真实事务身份寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 240,
+          "line_end": 240
+        },
+        {
+          "kind": "reg",
+          "width": "[C_FRAME_ID_WIDTH - 1:0]",
+          "name": "fault_frame_id_o",
+          "init": "",
+          "comment": "故障绑定事务真实物理帧号寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 241,
+          "line_end": 241
+        },
+        {
+          "kind": "reg",
+          "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+          "name": "fault_sample_index_o",
+          "init": "",
+          "comment": "故障绑定事务全局事务号寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 242,
+          "line_end": 242
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "fault_precision_o",
+          "init": "",
+          "comment": "故障绑定事务建立时活动精度寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 243,
+          "line_end": 243
+        },
+        {
+          "kind": "reg",
+          "width": "[C_RUN_GENERATION_WIDTH - 1:0]",
+          "name": "fault_run_generation_o",
+          "init": "",
+          "comment": "故障绑定RUN代际寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 244,
+          "line_end": 244
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "switch_pending_o",
+          "init": "",
+          "comment": "pending占用输出桥接",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [
+            "//状态诊断接口"
+          ],
+          "line_start": 247,
+          "line_end": 247
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "switch_target_precision_o",
+          "init": "",
+          "comment": "pending目标精度输出桥接",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 248,
+          "line_end": 248
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "switch_hold_new_transaction_o",
+          "init": "",
+          "comment": "新事务阻断输出桥接",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 249,
+          "line_end": 249
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "controller_idle_o",
+          "init": "",
+          "comment": "控制事务排空输出桥接",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 250,
+          "line_end": 250
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "last_cross_time_unknown_o",
+          "init": "",
+          "comment": "最近相交时间诊断输出桥接",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 251,
+          "line_end": 251
+        },
+        {
+          "kind": "reg",
+          "width": "[1:0]",
+          "name": "last_return_reason_o",
+          "init": "",
+          "comment": "最近返回原因输出桥接寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 252,
+          "line_end": 252
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "switch_timeout_sticky_o",
+          "init": "",
+          "comment": "切换超时sticky寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 253,
+          "line_end": 253
+        },
+        {
+          "kind": "reg",
+          "width": "",
+          "name": "protocol_error_sticky_o",
+          "init": "",
+          "comment": "协议异常sticky寄存器",
+          "signed": false,
+          "unpacked": "",
+          "attributes": "",
+          "suffix": "",
+          "leading_comments": [],
+          "line_start": 254,
+          "line_end": 254
+        }
+      ],
+      "assigns": [
+        {
+          "lhs": "flag_cross_transfer",
+          "rhs": "i_cross_valid && o_cross_ready",
+          "comment": "相交载荷只在真实握手沿取得所有权; @satisfies: PWC-07",
+          "leading_comments": [
+            "// ready只在当前运行语义允许的唯一请求方向上开放"
+          ],
+          "delay": "",
+          "line_start": 258,
+          "line_end": 258
+        },
+        {
+          "lhs": "flag_return_transfer",
+          "rhs": "i_return_9bit_valid && o_return_9bit_ready",
+          "comment": "返回载荷只在真实握手沿取得所有权; @satisfies: PWC-14",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 259,
+          "line_end": 259
+        },
+        {
+          "lhs": "flag_normal_cross_transfer",
+          "rhs": "flag_cross_transfer && (i_run_profile == RUN_PROFILE_NORMAL)",
+          "comment": "表征模式请求只消费不建立窗口",
+          "leading_comments": [
+            "//其他信号连线"
+          ],
+          "delay": "",
+          "line_start": 262,
+          "line_end": 262
+        },
+        {
+          "lhs": "flag_normal_return_transfer",
+          "rhs": "flag_return_transfer && (i_run_profile == RUN_PROFILE_NORMAL)",
+          "comment": "表征模式返回只消费不改变精度",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 263,
+          "line_end": 263
+        },
+        {
+          "lhs": "flag_enter_commit",
+          "rhs": "(state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0)",
+          "comment": "下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 264,
+          "line_end": 264
+        },
+        {
+          "lhs": "flag_return_commit",
+          "rhs": "(state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe",
+          "comment": "下一安全帧原子返回9-bit; @satisfies: PWC-32, PWC-38",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 265,
+          "line_end": 265
+        },
+        {
+          "lhs": "flag_pending_state",
+          "rhs": "(state_current == ST_WAIT_ENTER) || (state_current == ST_WAIT_RETURN)",
+          "comment": "两种pending状态共享超时保护; @satisfies: PWC-39",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 266,
+          "line_end": 266
+        },
+        {
+          "lhs": "flag_lifecycle_cancel",
+          "rhs": "(i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel",
+          "comment": "PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 267,
+          "line_end": 267
+        },
+        {
+          "lhs": "flag_switch_timeout_event",
+          "rhs": "flag_pending_state && (flag_enter_commit == 1'b0) && (flag_return_commit == 1'b0) && (cnt_switch_timeout >= TIMEOUT_LIMIT_MINUS_ONE)",
+          "comment": "安全提交与阈值同拍时提交优先; @satisfies: PWC-25",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 268,
+          "line_end": 268
+        },
+        {
+          "lhs": "flag_protocol_error_event",
+          "rhs": "flag_normal_start_illegal || flag_characterization_request || flag_duplicate_cross || flag_duplicate_return || flag_cross_return_collision || flag_recheck_in_fine || flag_invalid_direction_request || flag_return_reserved || flag_return_protocol_fallback || flag_active_config_fault",
+          "comment": "汇总所有合同定义的协议异常",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 269,
+          "line_end": 269
+        },
+        {
+          "lhs": "flag_blocking_protocol_fault",
+          "rhs": "flag_normal_start_illegal || flag_active_config_fault",
+          "comment": "START配置故障需要阻断当前RUN",
+          "leading_comments": [
+            "//其他信号连线"
+          ],
+          "delay": "",
+          "line_start": 272,
+          "line_end": 272
+        },
+        {
+          "lhs": "o_cross_ready",
+          "rhs": "i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION))",
+          "comment": "NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40",
+          "leading_comments": [
+            "//相交请求接口",
+            "// 请求ready不会因对方未握手载荷而组合采样上下文"
+          ],
+          "delay": "",
+          "line_start": 277,
+          "line_end": 277
+        },
+        {
+          "lhs": "o_return_9bit_ready",
+          "rhs": "i_run_enable && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && (state_current == ST_FINE) && (active_precision_mode_o == PRECISION_15BIT) && fine_window_active_o) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION))",
+          "comment": "正式fine接受返回且表征模式仅诊断消费",
+          "leading_comments": [
+            "//返回请求接口"
+          ],
+          "delay": "",
+          "line_start": 280,
+          "line_end": 280
+        },
+        {
+          "lhs": "o_active_precision_mode",
+          "rhs": "active_precision_mode_o",
+          "comment": "导出当前唯一committed精度; @satisfies: PWC-36",
+          "leading_comments": [
+            "//精度与控制事件输出",
+            "// 精度、事件和诊断均通过内部桥接信号导出"
+          ],
+          "delay": "",
+          "line_start": 284,
+          "line_end": 284
+        },
+        {
+          "lhs": "o_fine_window_active",
+          "rhs": "fine_window_active_o",
+          "comment": "导出正式15-bit窗口资格",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 285,
+          "line_end": 285
+        },
+        {
+          "lhs": "o_fine_window_start_event",
+          "rhs": "fine_window_start_event_o",
+          "comment": "导出进入提交单拍",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 286,
+          "line_end": 286
+        },
+        {
+          "lhs": "o_fine_window_start_frame_id",
+          "rhs": "fine_window_start_frame_id_o",
+          "comment": "导出首个正式15-bit帧号",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 287,
+          "line_end": 287
+        },
+        {
+          "lhs": "o_precision_15_to_9_event",
+          "rhs": "precision_15_to_9_event_o",
+          "comment": "导出实际返回9-bit单拍",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 288,
+          "line_end": 288
+        },
+        {
+          "lhs": "o_precision_15_to_9_frame_id",
+          "rhs": "precision_15_to_9_frame_id_o",
+          "comment": "导出首个恢复9-bit帧号",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 289,
+          "line_end": 289
+        },
+        {
+          "lhs": "o_reacquire_request_event",
+          "rhs": "reacquire_request_event_o",
+          "comment": "导出异常返回重新获取单拍",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 290,
+          "line_end": 290
+        },
+        {
+          "lhs": "o_mode_fault_event",
+          "rhs": "mode_fault_event_o",
+          "comment": "导出阻断故障报告单拍",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 291,
+          "line_end": 291
+        },
+        {
+          "lhs": "o_mode_fault_active",
+          "rhs": "flag_fault_hold",
+          "comment": "导出当前代际故障保持电平",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 292,
+          "line_end": 292
+        },
+        {
+          "lhs": "o_mode_fault_identity_valid",
+          "rhs": "fault_identity_valid_o",
+          "comment": "导出故障身份是否可信",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 293,
+          "line_end": 293
+        },
+        {
+          "lhs": "o_mode_fault_frame_id",
+          "rhs": "fault_frame_id_o",
+          "comment": "导出故障绑定事务帧号，捕获时已按有效性清零",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 294,
+          "line_end": 294
+        },
+        {
+          "lhs": "o_mode_fault_sample_index",
+          "rhs": "fault_sample_index_o",
+          "comment": "导出故障绑定事务全局序号，捕获时已按有效性清零",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 295,
+          "line_end": 295
+        },
+        {
+          "lhs": "o_mode_fault_color_ir",
+          "rhs": "1'b0",
+          "comment": "本模块只处理RED来源事务，颜色恒为0",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 296,
+          "line_end": 296
+        },
+        {
+          "lhs": "o_mode_fault_frame_type",
+          "rhs": "fault_identity_valid_o ? 2'b10 : 2'b00",
+          "comment": "有效时固定输出NORMAL类别",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 297,
+          "line_end": 297
+        },
+        {
+          "lhs": "o_mode_fault_precision",
+          "rhs": "fault_precision_o",
+          "comment": "导出故障绑定事务建立时的精度模式",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 298,
+          "line_end": 298
+        },
+        {
+          "lhs": "o_mode_fault_run_generation",
+          "rhs": "fault_run_generation_o",
+          "comment": "导出故障绑定的RUN代际",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 299,
+          "line_end": 299
+        },
+        {
+          "lhs": "o_switch_pending",
+          "rhs": "switch_pending_o",
+          "comment": "导出请求所有权占用状态",
+          "leading_comments": [
+            "//状态诊断接口",
+            "// pending和历史诊断不承担FIR精度尾部计数责任"
+          ],
+          "delay": "",
+          "line_start": 303,
+          "line_end": 303
+        },
+        {
+          "lhs": "o_switch_target_precision",
+          "rhs": "switch_target_precision_o",
+          "comment": "导出当前pending目标精度",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 304,
+          "line_end": 304
+        },
+        {
+          "lhs": "o_switch_hold_new_transaction",
+          "rhs": "switch_hold_new_transaction_o",
+          "comment": "导出事务启动阻断条件",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 305,
+          "line_end": 305
+        },
+        {
+          "lhs": "o_controller_idle",
+          "rhs": "controller_idle_o",
+          "comment": "导出控制事务排空状态",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 306,
+          "line_end": 306
+        },
+        {
+          "lhs": "o_local_empty",
+          "rhs": "controller_idle_o",
+          "comment": "控制事务排空状态同时满足本地排空定义",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 307,
+          "line_end": 307
+        },
+        {
+          "lhs": "o_last_cross_time_unknown",
+          "rhs": "last_cross_time_unknown_o",
+          "comment": "导出最近相交时间属性",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 308,
+          "line_end": 308
+        },
+        {
+          "lhs": "o_last_return_reason",
+          "rhs": "last_return_reason_o",
+          "comment": "导出最近返回原因",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 309,
+          "line_end": 309
+        },
+        {
+          "lhs": "o_switch_timeout_sticky",
+          "rhs": "switch_timeout_sticky_o",
+          "comment": "导出切换超时历史",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 310,
+          "line_end": 310
+        },
+        {
+          "lhs": "o_protocol_error_sticky",
+          "rhs": "protocol_error_sticky_o",
+          "comment": "导出协议异常历史",
+          "leading_comments": [],
+          "delay": "",
+          "line_start": 311,
+          "line_end": 311
+        }
+      ],
+      "always": [
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "active_precision_mode_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "active_precision_mode_o",
+            "active_precision_mode_o",
+            "active_precision_mode_o",
+            "active_precision_mode_o",
+            "active_precision_mode_o",
+            "active_precision_mode_o",
+            "active_precision_mode_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 17,
+          "leading_comments": [
+            "//精度与控制事件输出",
+            "// 活动精度只在复位、合法START和真实安全提交沿修改"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "active_precision_mode_o <= PRECISION_9BIT; // 复位固定安全9-bit; @satisfies: PWC-01",
+            "end else if(i_start_ack_event == 1'b1)begin",
+            "if(i_active_config_valid == 1'b0 || ((i_run_profile == RUN_PROFILE_NORMAL) && i_initial_precision == 1'b1))begin",
+            "active_precision_mode_o <= PRECISION_9BIT; // 非法NORMAL配置强制安全精度",
+            "end else if(i_run_profile == RUN_PROFILE_CHARACTERIZATION)begin",
+            "active_precision_mode_o <= i_initial_precision; // 表征RUN固定采用配置精度; @satisfies: PWC-04, PWC-05",
+            "end else begin",
+            "active_precision_mode_o <= PRECISION_9BIT; // 合法NORMAL固定粗精度启动; @satisfies: PWC-02",
+            "end",
+            "end else if(flag_enter_commit == 1'b1)begin",
+            "active_precision_mode_o <= PRECISION_15BIT; // 安全边界提交高精度",
+            "end else if(flag_return_commit == 1'b1)begin",
+            "active_precision_mode_o <= PRECISION_9BIT; // 安全边界恢复粗精度",
+            "end else begin",
+            "active_precision_mode_o <= active_precision_mode_o; // STOP和abort不在转换中途改精度",
+            "end"
+          ],
+          "line_start": 316,
+          "line_end": 332
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fine_window_active_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fine_window_active_o",
+            "fine_window_active_o",
+            "fine_window_active_o",
+            "fine_window_active_o",
+            "fine_window_active_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 正式fine资格只由NORMAL相交提交建立并由返回或生命周期清除"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fine_window_active_o <= 1'b0;       // 复位不存在正式fine窗口",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "fine_window_active_o <= 1'b0;       // 生命周期边界废止旧窗口资格",
+            "end else if(flag_enter_commit == 1'b1)begin",
+            "fine_window_active_o <= 1'b1;       // 进入提交后开启正式fine资格",
+            "end else if(flag_return_commit == 1'b1)begin",
+            "fine_window_active_o <= 1'b0;       // 真实9-bit提交立即结束窗口",
+            "end else begin",
+            "fine_window_active_o <= fine_window_active_o; // 其他拍保持窗口身份",
+            "end"
+          ],
+          "line_start": 337,
+          "line_end": 347
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fine_window_start_event_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fine_window_start_event_o",
+            "fine_window_start_event_o",
+            "fine_window_start_event_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 进入15-bit事件固定在安全提交沿保持一个2 MHz周期"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fine_window_start_event_o <= 1'b0;  // 复位清除提交单拍",
+            "end else if(flag_enter_commit == 1'b1)begin",
+            "fine_window_start_event_o <= 1'b1;  // 真实进入提交产生事件",
+            "end else begin",
+            "fine_window_start_event_o <= 1'b0;  // 非提交拍自动撤销",
+            "end"
+          ],
+          "line_start": 352,
+          "line_end": 358
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fine_window_start_frame_id_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fine_window_start_frame_id_o",
+            "fine_window_start_frame_id_o",
+            "fine_window_start_frame_id_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 第一笔正式15-bit帧号只在进入提交沿更新"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fine_window_start_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // 复位清除历史帧号",
+            "end else if(flag_enter_commit == 1'b1)begin",
+            "fine_window_start_frame_id_o <= i_safe_frame_id; // 记录真实安全边界帧号; @satisfies: PWC-10",
+            "end else begin",
+            "fine_window_start_frame_id_o <= fine_window_start_frame_id_o; // 其他拍保持最近提交",
+            "end"
+          ],
+          "line_start": 363,
+          "line_end": 369
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "precision_15_to_9_event_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "precision_15_to_9_event_o",
+            "precision_15_to_9_event_o",
+            "precision_15_to_9_event_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 返回9-bit事件固定在安全提交沿保持一个2 MHz周期"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "precision_15_to_9_event_o <= 1'b0;  // 复位清除返回单拍",
+            "end else if(flag_return_commit == 1'b1)begin",
+            "precision_15_to_9_event_o <= 1'b1;  // 正式窗口真实恢复9-bit; @satisfies: PWC-20",
+            "end else begin",
+            "precision_15_to_9_event_o <= 1'b0;  // 其他拍不伪造切换事件",
+            "end"
+          ],
+          "line_start": 374,
+          "line_end": 380
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "precision_15_to_9_frame_id_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "precision_15_to_9_frame_id_o",
+            "precision_15_to_9_frame_id_o",
+            "precision_15_to_9_frame_id_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 第一笔恢复9-bit帧号只在返回提交沿更新"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "precision_15_to_9_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // 复位清除返回帧历史",
+            "end else if(flag_return_commit == 1'b1)begin",
+            "precision_15_to_9_frame_id_o <= i_safe_frame_id; // 锁存真实粗精度首帧; @satisfies: PWC-19",
+            "end else begin",
+            "precision_15_to_9_frame_id_o <= precision_15_to_9_frame_id_o; // 非提交拍保持",
+            "end"
+          ],
+          "line_start": 385,
+          "line_end": 391
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reacquire_request_event_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reacquire_request_event_o",
+            "reacquire_request_event_o",
+            "reacquire_request_event_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 异常返回在9-bit提交后的下一拍交付一次重新获取请求"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reacquire_request_event_o <= 1'b0;  // 复位清除重获单拍",
+            "end else if(state_current == ST_REACQUIRE)begin",
+            "reacquire_request_event_o <= 1'b1;  // 下游此时已观察稳定9-bit精度; @satisfies: PWC-16",
+            "end else begin",
+            "reacquire_request_event_o <= 1'b0;  // 其他拍不重复请求",
+            "end"
+          ],
+          "line_start": 396,
+          "line_end": 402
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "mode_fault_event_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "mode_fault_event_o",
+            "mode_fault_event_o",
+            "mode_fault_event_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 模式故障事件覆盖切换超时和START阻断配置错误"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "mode_fault_event_o <= 1'b0;         // 复位清除故障报告单拍",
+            "end else if(flag_switch_timeout_event == 1'b1 || flag_protocol_fault_pulse == 1'b1 || (flag_return_commit == 1'b1 && i_recheck_busy == 1'b1))begin",
+            "mode_fault_event_o <= 1'b1;         // 当前拍向生命周期管理器报告阻断故障",
+            "end else begin",
+            "mode_fault_event_o <= 1'b0;         // 非故障拍自动清零",
+            "end"
+          ],
+          "line_start": 407,
+          "line_end": 413
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fault_identity_valid_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fault_identity_valid_o",
+            "fault_identity_valid_o",
+            "fault_identity_valid_o",
+            "fault_identity_valid_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 故障身份有效性与三个触发源共享同一拍：切换超时和return期间recheck busy绑定真实事务，START阻断无身份"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fault_identity_valid_o <= 1'b0;     // 复位清除历史身份有效位",
+            "end else if(flag_switch_timeout_event == 1'b1 || (flag_return_commit == 1'b1 && i_recheck_busy == 1'b1))begin",
+            "fault_identity_valid_o <= 1'b1;     // 绑定真实pending事务身份",
+            "end else if(flag_protocol_fault_pulse == 1'b1)begin",
+            "fault_identity_valid_o <= 1'b0;     // START阻断异常没有具体事务可绑定",
+            "end else begin",
+            "fault_identity_valid_o <= fault_identity_valid_o; // 非故障拍保持历史身份有效性",
+            "end"
+          ],
+          "line_start": 418,
+          "line_end": 426
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fault_frame_id_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fault_frame_id_o",
+            "fault_frame_id_o",
+            "fault_frame_id_o",
+            "fault_frame_id_o",
+            "fault_frame_id_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 故障帧号在超时或return提交故障沿从对应pending快照原子锁存，非法START清零"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fault_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // 复位撤销上一次故障绑定的帧号快照",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "fault_frame_id_o <= flag_pending_cross ? reg_cross_frame_snapshot : reg_return_frame_snapshot; // 按pending类型选择快照来源",
+            "end else if(flag_return_commit == 1'b1 && i_recheck_busy == 1'b1)begin",
+            "fault_frame_id_o <= reg_return_frame_snapshot; // return提交沿使用返回快照",
+            "end else if(flag_protocol_fault_pulse == 1'b1)begin",
+            "fault_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // START阻断异常没有具体帧号",
+            "end else begin",
+            "fault_frame_id_o <= fault_frame_id_o; // 非故障拍保持历史帧号",
+            "end"
+          ],
+          "line_start": 431,
+          "line_end": 441
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fault_sample_index_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fault_sample_index_o",
+            "fault_sample_index_o",
+            "fault_sample_index_o",
+            "fault_sample_index_o",
+            "fault_sample_index_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 故障事务号只有相交请求携带，return类触发恒为0"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fault_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 复位清除历史事务号",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "fault_sample_index_o <= flag_pending_cross ? reg_cross_sample_snapshot : {C_SAMPLE_INDEX_WIDTH{1'b0}}; // return类pending没有事务号字段",
+            "end else if(flag_return_commit == 1'b1 && i_recheck_busy == 1'b1)begin",
+            "fault_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // return提交沿本身不携带事务号",
+            "end else if(flag_protocol_fault_pulse == 1'b1)begin",
+            "fault_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // START阻断异常没有具体事务号",
+            "end else begin",
+            "fault_sample_index_o <= fault_sample_index_o; // 非故障拍保持历史事务号",
+            "end"
+          ],
+          "line_start": 446,
+          "line_end": 456
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fault_precision_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fault_precision_o",
+            "fault_precision_o",
+            "fault_precision_o",
+            "fault_precision_o",
+            "fault_precision_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 故障精度按触发来源固定：相交源自9-bit，return源自15-bit"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fault_precision_o <= 1'b0;          // 复位清除历史精度快照",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "fault_precision_o <= flag_pending_cross ? PRECISION_9BIT : PRECISION_15BIT; // 按pending方向确定原精度",
+            "end else if(flag_return_commit == 1'b1 && i_recheck_busy == 1'b1)begin",
+            "fault_precision_o <= PRECISION_15BIT; // return提交沿必然源自正式15-bit窗口",
+            "end else if(flag_protocol_fault_pulse == 1'b1)begin",
+            "fault_precision_o <= 1'b0;          // START阻断异常没有具体精度身份",
+            "end else begin",
+            "fault_precision_o <= fault_precision_o; // 非故障拍保持历史精度快照",
+            "end"
+          ],
+          "line_start": 461,
+          "line_end": 471
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "fault_run_generation_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "fault_run_generation_o",
+            "fault_run_generation_o",
+            "fault_run_generation_o",
+            "fault_run_generation_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 故障代际固定锁存当前RUN代际，供AMI/supervisor核对是否跨代际"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "fault_run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}}; // 复位清除历史代际快照",
+            "end else if(flag_switch_timeout_event == 1'b1 || (flag_return_commit == 1'b1 && i_recheck_busy == 1'b1))begin",
+            "fault_run_generation_o <= i_run_generation; // 绑定触发沿的当前RUN代际",
+            "end else if(flag_protocol_fault_pulse == 1'b1)begin",
+            "fault_run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}}; // START阻断异常没有具体代际身份",
+            "end else begin",
+            "fault_run_generation_o <= fault_run_generation_o; // 非故障拍保持历史代际快照",
+            "end"
+          ],
+          "line_start": 476,
+          "line_end": 484
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "switch_timeout_sticky_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "switch_timeout_sticky_o",
+            "switch_timeout_sticky_o",
+            "switch_timeout_sticky_o",
+            "switch_timeout_sticky_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "//状态诊断接口",
+            "// 超时sticky独立记录历史且诊断清除不解除活动故障"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "switch_timeout_sticky_o <= 1'b0;    // 复位清除超时历史",
+            "end else if(i_diag_clear_event == 1'b1)begin",
+            "switch_timeout_sticky_o <= 1'b0;    // 仅软件诊断清除可清历史，新START/STOP不清（合同:205/:731）; @satisfies: PWC-41",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "switch_timeout_sticky_o <= 1'b1;    // 达到两帧保护阈值锁存历史",
+            "end else begin",
+            "switch_timeout_sticky_o <= switch_timeout_sticky_o; // 未触发时保持",
+            "end"
+          ],
+          "line_start": 490,
+          "line_end": 498
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "protocol_error_sticky_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "protocol_error_sticky_o",
+            "protocol_error_sticky_o",
+            "protocol_error_sticky_o",
+            "protocol_error_sticky_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 协议sticky覆盖非法配置、方向、重复请求和状态关系异常"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "protocol_error_sticky_o <= 1'b0;    // 复位清除协议历史",
+            "end else if(i_diag_clear_event == 1'b1)begin",
+            "protocol_error_sticky_o <= 1'b0;    // 软件只清除历史标志，新START/STOP不清（合同:205/:731）",
+            "end else if(flag_protocol_error_event == 1'b1)begin",
+            "protocol_error_sticky_o <= 1'b1;    // 任一协议异常锁存历史（含新START同拍触发的协议异常）",
+            "end else begin",
+            "protocol_error_sticky_o <= protocol_error_sticky_o; // 无新异常时保持，新START本身不清; @satisfies: PWC-33, PWC-41",
+            "end"
+          ],
+          "line_start": 503,
+          "line_end": 511
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "switch_pending_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "switch_pending_o",
+            "switch_pending_o",
+            "switch_pending_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// pending占用状态由状态机直接编码并在提交沿保持阻断"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "switch_pending_o <= 1'b0;           // 复位不存在待提交请求",
+            "end else if(state_next == ST_WAIT_ENTER || state_next == ST_WAIT_RETURN)begin",
+            "switch_pending_o <= 1'b1;           // 下一状态拥有模式请求; @satisfies: PWC-23",
+            "end else begin",
+            "switch_pending_o <= 1'b0;           // 提交、取消或故障释放pending",
+            "end"
+          ],
+          "line_start": 516,
+          "line_end": 522
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "switch_target_precision_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "switch_target_precision_o",
+            "switch_target_precision_o",
+            "switch_target_precision_o",
+            "switch_target_precision_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending目标精度在请求握手时确定且不被重复请求覆盖"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "switch_target_precision_o <= PRECISION_9BIT; // 复位诊断目标为安全粗精度",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "switch_target_precision_o <= PRECISION_15BIT; // 相交请求目标固定高精度",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "switch_target_precision_o <= PRECISION_9BIT; // 返回请求目标固定粗精度",
+            "end else begin",
+            "switch_target_precision_o <= switch_target_precision_o; // 无新握手时保持诊断值",
+            "end"
+          ],
+          "line_start": 527,
+          "line_end": 535
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "switch_hold_new_transaction_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "switch_hold_new_transaction_o",
+            "switch_hold_new_transaction_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 5,
+          "leading_comments": [
+            "// 阻断输出覆盖pending、提交沿、重新获取、故障和生命周期取消"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "switch_hold_new_transaction_o <= 1'b0; // 复位不保留旧事务阻断",
+            "end else begin",
+            "switch_hold_new_transaction_o <= (state_next == ST_WAIT_ENTER) || (state_next == ST_WAIT_RETURN) || (state_next == ST_REACQUIRE) || (state_next == ST_FAULT) || flag_enter_commit || flag_return_commit || flag_lifecycle_cancel; // 下一拍事务只能看到稳定新精度; @satisfies: PWC-11",
+            "end"
+          ],
+          "line_start": 540,
+          "line_end": 544
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "controller_idle_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "controller_idle_o",
+            "controller_idle_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 5,
+          "leading_comments": [
+            "// idle仅描述控制事务排空且不表示当前必须处于9-bit"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "controller_idle_o <= 1'b1;          // 复位后没有控制事务",
+            "end else begin",
+            "controller_idle_o <= (state_next == ST_IDLE || state_next == ST_FINE) && (state_current != ST_REACQUIRE) && (flag_fault_hold == 1'b0) && (flag_enter_commit == 1'b0) && (flag_return_commit == 1'b0) && (reacquire_request_event_o == 1'b0) && (mode_fault_event_o == 1'b0); // 排除pending、延迟动作和当拍事件; @satisfies: PWC-35",
+            "end"
+          ],
+          "line_start": 549,
+          "line_end": 553
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "last_cross_time_unknown_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "last_cross_time_unknown_o",
+            "last_cross_time_unknown_o",
+            "last_cross_time_unknown_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 7,
+          "leading_comments": [
+            "// 最近相交未知时间属性只在合法相交握手沿更新"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "last_cross_time_unknown_o <= 1'b0;  // 复位清除诊断历史",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "last_cross_time_unknown_o <= i_cross_time_unknown; // 保存真实握手载荷属性; @satisfies: PWC-12",
+            "end else begin",
+            "last_cross_time_unknown_o <= last_cross_time_unknown_o; // 反压与重复请求不覆盖",
+            "end"
+          ],
+          "line_start": 558,
+          "line_end": 564
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "last_return_reason_o"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "last_return_reason_o",
+            "last_return_reason_o",
+            "last_return_reason_o",
+            "last_return_reason_o"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 最近返回原因记录归一化后的安全控制原因"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "last_return_reason_o <= RETURN_VALLEY_CONFIRMED; // 复位诊断值采用正常返回编码",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "if(i_return_reason == RETURN_RESERVED)begin",
+            "last_return_reason_o <= RETURN_PROTOCOL_FALLBACK; // 保留编码统一安全回退; @satisfies: PWC-18",
+            "end else begin",
+            "last_return_reason_o <= i_return_reason; // 保存合法返回原因",
+            "end",
+            "end else begin",
+            "last_return_reason_o <= last_return_reason_o; // 其他拍保持历史",
+            "end"
+          ],
+          "line_start": 569,
+          "line_end": 579
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "state_current"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "state_transition_always",
+          "target_count": 1,
+          "lvalues": [
+            "state_current",
+            "state_current"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 5,
+          "leading_comments": [
+            "// 当前状态寄存器只在生命周期取消、提交、超时和请求握手边界切换"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "state_current <= ST_IDLE;           // 复位回到无窗口9-bit控制状态",
+            "end else begin",
+            "state_current <= state_next;        // 同步提交下一控制阶段",
+            "end"
+          ],
+          "line_start": 585,
+          "line_end": 589
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "state_next"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": true,
+          "contains_if": true,
+          "references_state": true,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next",
+            "state_next"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 50,
+          "leading_comments": [
+            "// 下一状态逻辑保持请求所有权直到安全提交或明确取消"
+          ],
+          "lines": [
+            "state_next = state_current;             // 默认维持当前控制阶段",
+            "if(i_start_ack_event == 1'b1)begin",
+            "if(flag_blocking_protocol_fault == 1'b1)begin",
+            "state_next = ST_FAULT;          // 非法START进入阻断故障保持",
+            "end else begin",
+            "state_next = ST_IDLE;           // 合法新RUN重新建立精度所有权",
+            "end",
+            "end else if(flag_lifecycle_cancel == 1'b1)begin",
+            "state_next = ST_IDLE;               // STOP、abort或离开RUN撤销在途控制",
+            "end else begin",
+            "case(state_current)",
+            "ST_IDLE:begin",
+            "if(flag_normal_cross_transfer == 1'b1)begin",
+            "state_next = ST_WAIT_ENTER; // 取得相交请求后等待安全帧",
+            "end",
+            "end",
+            "ST_WAIT_ENTER:begin",
+            "if(flag_enter_commit == 1'b1)begin",
+            "state_next = ST_FINE;   // 真实15-bit提交建立正式窗口",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "state_next = ST_FAULT;  // 两帧内无法安全提交进入故障保持; @satisfies: PWC-26",
+            "end",
+            "end",
+            "ST_FINE:begin",
+            "if(flag_normal_return_transfer == 1'b1)begin",
+            "state_next = ST_WAIT_RETURN; // 取得返回请求后等待安全帧",
+            "end",
+            "end",
+            "ST_WAIT_RETURN:begin",
+            "if(flag_return_commit == 1'b1)begin",
+            "if(flag_pending_return_reacquire == 1'b1)begin",
+            "state_next = ST_REACQUIRE; // 异常返回下一拍交付重获事件",
+            "end else begin",
+            "state_next = ST_IDLE; // 正常波谷返回直接恢复9-bit; @satisfies: PWC-15",
+            "end",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "state_next = ST_FAULT;  // 返回安全边界异常触发保护",
+            "end",
+            "end",
+            "ST_REACQUIRE:begin",
+            "state_next = ST_IDLE;       // 单拍交付后允许9-bit重新获取调度",
+            "end",
+            "ST_FAULT:begin",
+            "state_next = ST_FAULT;      // 仅生命周期取消或新START解除保持",
+            "end",
+            "default:begin",
+            "state_next = ST_FAULT;      // 非法状态安全进入阻断故障",
+            "end",
+            "endcase",
+            "end"
+          ],
+          "line_start": 594,
+          "line_end": 643
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_duplicate_cross"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_duplicate_cross"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 重复相交只在进入请求已经取得所有权时判定"
+          ],
+          "lines": [
+            "flag_duplicate_cross = (state_current == ST_WAIT_ENTER) && i_cross_valid; // pending期间第二相交请求不得覆盖快照; @satisfies: PWC-31"
+          ],
+          "line_start": 649,
+          "line_end": 649
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_duplicate_return"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_duplicate_return"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 重复返回只在返回请求等待安全提交期间判定"
+          ],
+          "lines": [
+            "flag_duplicate_return = (state_current == ST_WAIT_RETURN) && i_return_9bit_valid; // pending期间第二返回请求不得覆盖快照"
+          ],
+          "line_start": 654,
+          "line_end": 654
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_invalid_direction_request"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_invalid_direction_request"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 活动精度与请求方向不一致时产生协议诊断"
+          ],
+          "lines": [
+            "flag_invalid_direction_request = i_run_enable && (((state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && i_return_9bit_valid) || ((state_current == ST_FINE) && i_cross_valid)); // 当前活动精度拒绝反方向请求; @satisfies: PWC-13"
+          ],
+          "line_start": 659,
+          "line_end": 659
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_leave_run_cancel"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": true,
+          "block_kind": "state_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_leave_run_cancel"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// RUN资格撤销为在途控制建立统一取消条件"
+          ],
+          "lines": [
+            "flag_leave_run_cancel = (i_run_enable == 1'b0) && (state_current != ST_IDLE); // RUN资格撤销时清理在途控制"
+          ],
+          "line_start": 664,
+          "line_end": 664
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "flag_fault_hold"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_fault_hold",
+            "flag_fault_hold",
+            "flag_fault_hold",
+            "flag_fault_hold",
+            "flag_fault_hold"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 11,
+          "leading_comments": [
+            "// 活动故障在超时或阻断START错误后保持至生命周期取消或复位"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "flag_fault_hold <= 1'b0;            // 复位解除活动故障",
+            "end else if(flag_lifecycle_cancel == 1'b1)begin",
+            "flag_fault_hold <= 1'b0;            // 代际清空命中或离开RUN结束保持",
+            "end else if(i_start_ack_event == 1'b1)begin",
+            "flag_fault_hold <= flag_blocking_protocol_fault; // 新RUN重新评估启动合法性",
+            "end else if(flag_switch_timeout_event == 1'b1)begin",
+            "flag_fault_hold <= 1'b1;            // 模式提交超时阻止新事务",
+            "end else begin",
+            "flag_fault_hold <= flag_fault_hold; // 诊断清除不得解除活动保持; @satisfies: PWC-34",
+            "end"
+          ],
+          "line_start": 670,
+          "line_end": 680
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "cnt_switch_timeout"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "cnt_switch_timeout",
+            "cnt_switch_timeout",
+            "cnt_switch_timeout",
+            "cnt_switch_timeout",
+            "cnt_switch_timeout"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 13,
+          "leading_comments": [
+            "// 超时计数从请求握手后的下一周期开始且安全提交优先清零"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "cnt_switch_timeout <= {C_SWITCH_TIMEOUT_COUNTER_WIDTH{1'b0}}; // 复位清除等待周期",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1 || flag_enter_commit == 1'b1 || flag_return_commit == 1'b1 || flag_switch_timeout_event == 1'b1)begin",
+            "cnt_switch_timeout <= {C_SWITCH_TIMEOUT_COUNTER_WIDTH{1'b0}}; // 生命周期、提交和超时边界清零",
+            "end else if(flag_pending_state == 1'b1)begin",
+            "if(cnt_switch_timeout < TIMEOUT_LIMIT_MINUS_ONE)begin",
+            "cnt_switch_timeout <= cnt_switch_timeout + {{(C_SWITCH_TIMEOUT_COUNTER_WIDTH - 1){1'b0}}, 1'b1}; // 每个未提交周期递增; @satisfies: PWC-24",
+            "end else begin",
+            "cnt_switch_timeout <= cnt_switch_timeout; // 阈值边界冻结供超时组合判断",
+            "end",
+            "end else begin",
+            "cnt_switch_timeout <= {C_SWITCH_TIMEOUT_COUNTER_WIDTH{1'b0}}; // 无pending时保持确定零值",
+            "end"
+          ],
+          "line_start": 685,
+          "line_end": 697
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_cross_frame_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_cross_frame_snapshot",
+            "reg_cross_frame_snapshot",
+            "reg_cross_frame_snapshot",
+            "reg_cross_frame_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending相交上下文在握手沿原子锁存并在生命周期边界清除"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_cross_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}; // 复位清除相交帧快照; @satisfies: PWC-29",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_cross_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}; // 新RUN或取消删除旧上下文",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "reg_cross_frame_snapshot <= i_cross_frame_id; // 握手沿锁存真实中心帧; @satisfies: PWC-08",
+            "end else begin",
+            "reg_cross_frame_snapshot <= reg_cross_frame_snapshot; // 等待期间保持载荷",
+            "end"
+          ],
+          "line_start": 702,
+          "line_end": 710
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_cross_sample_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_cross_sample_snapshot",
+            "reg_cross_sample_snapshot",
+            "reg_cross_sample_snapshot",
+            "reg_cross_sample_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending相交事务号独立保持防止反压载荷变化影响所有权"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_cross_sample_snapshot <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 复位清除事务号快照",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_cross_sample_snapshot <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 生命周期边界删除旧事务",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "reg_cross_sample_snapshot <= i_cross_sample_index; // 握手沿锁存相交事务号",
+            "end else begin",
+            "reg_cross_sample_snapshot <= reg_cross_sample_snapshot; // pending期间保持",
+            "end"
+          ],
+          "line_start": 715,
+          "line_end": 723
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_cross_config_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_cross_config_snapshot",
+            "reg_cross_config_snapshot",
+            "reg_cross_config_snapshot",
+            "reg_cross_config_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 相交ACTIVE版本在请求取得所有权时冻结"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_cross_config_snapshot <= {C_CONFIG_EPOCH_WIDTH{1'b0}}; // 复位清除ACTIVE版本",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_cross_config_snapshot <= {C_CONFIG_EPOCH_WIDTH{1'b0}}; // 生命周期清理旧版本",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "reg_cross_config_snapshot <= i_cross_config_epoch; // 原子保存相交ACTIVE版本",
+            "end else begin",
+            "reg_cross_config_snapshot <= reg_cross_config_snapshot; // 等待期间保持",
+            "end"
+          ],
+          "line_start": 728,
+          "line_end": 736
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_cross_coef_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_cross_coef_snapshot",
+            "reg_cross_coef_snapshot",
+            "reg_cross_coef_snapshot",
+            "reg_cross_coef_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 相交Stage1系数版本独立冻结供后续顶层诊断"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_cross_coef_snapshot <= {C_COEF_EPOCH_WIDTH{1'b0}}; // 复位清除系数版本",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_cross_coef_snapshot <= {C_COEF_EPOCH_WIDTH{1'b0}}; // 新生命周期废止旧Stage1代次",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "reg_cross_coef_snapshot <= i_cross_coef_epoch; // 锁存Stage1版本快照",
+            "end else begin",
+            "reg_cross_coef_snapshot <= reg_cross_coef_snapshot; // 等待期间维持系数版本一致",
+            "end"
+          ],
+          "line_start": 741,
+          "line_end": 749
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_cross_dc_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_cross_dc_snapshot",
+            "reg_cross_dc_snapshot",
+            "reg_cross_dc_snapshot",
+            "reg_cross_dc_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 相交DC恢复版本在请求握手时保持到提交或取消"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_cross_dc_snapshot <= {C_DC_RECOVERY_EPOCH_WIDTH{1'b0}}; // 复位清除DC恢复身份",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_cross_dc_snapshot <= {C_DC_RECOVERY_EPOCH_WIDTH{1'b0}}; // 生命周期删除旧快照",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "reg_cross_dc_snapshot <= i_cross_dc_recovery_coef_epoch; // 锁存DC恢复版本",
+            "end else begin",
+            "reg_cross_dc_snapshot <= reg_cross_dc_snapshot; // 安全提交前维持DC身份稳定",
+            "end"
+          ],
+          "line_start": 754,
+          "line_end": 762
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "flag_pending_cross_time_unknown"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_pending_cross_time_unknown",
+            "flag_pending_cross_time_unknown",
+            "flag_pending_cross_time_unknown",
+            "flag_pending_cross_time_unknown"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending相交时间属性在握手沿原子锁存"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "flag_pending_cross_time_unknown <= 1'b0; // 复位清除时间属性",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "flag_pending_cross_time_unknown <= 1'b0; // 生命周期边界删除旧属性",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "flag_pending_cross_time_unknown <= i_cross_time_unknown; // 锁存握手载荷",
+            "end else begin",
+            "flag_pending_cross_time_unknown <= flag_pending_cross_time_unknown; // 提交前保持时间诊断属性",
+            "end"
+          ],
+          "line_start": 767,
+          "line_end": 775
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "reg_return_frame_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "reg_return_frame_snapshot",
+            "reg_return_frame_snapshot",
+            "reg_return_frame_snapshot",
+            "reg_return_frame_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 返回帧号在返回请求真实握手沿锁存"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "reg_return_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}; // 复位清除返回帧快照",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "reg_return_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}; // 生命周期删除旧返回上下文",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "reg_return_frame_snapshot <= i_return_frame_id; // 锁存返回结论帧号",
+            "end else begin",
+            "reg_return_frame_snapshot <= reg_return_frame_snapshot; // 返回提交前保持结论时间",
+            "end"
+          ],
+          "line_start": 780,
+          "line_end": 788
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "enc_return_reason_snapshot"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "enc_return_reason_snapshot",
+            "enc_return_reason_snapshot",
+            "enc_return_reason_snapshot",
+            "enc_return_reason_snapshot",
+            "enc_return_reason_snapshot"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 13,
+          "leading_comments": [
+            "// 返回原因在握手沿归一化并保持至9-bit安全提交"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "enc_return_reason_snapshot <= RETURN_VALLEY_CONFIRMED; // 复位采用正常原因编码",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1)begin",
+            "enc_return_reason_snapshot <= RETURN_VALLEY_CONFIRMED; // 生命周期清理旧原因",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "if(i_return_reason == RETURN_RESERVED)begin",
+            "enc_return_reason_snapshot <= RETURN_PROTOCOL_FALLBACK; // 保留值归一化为安全回退",
+            "end else begin",
+            "enc_return_reason_snapshot <= i_return_reason; // 保存合法原因",
+            "end",
+            "end else begin",
+            "enc_return_reason_snapshot <= enc_return_reason_snapshot; // 9-bit提交前保持归一化结果",
+            "end"
+          ],
+          "line_start": 793,
+          "line_end": 805
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "flag_pending_return_reacquire"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_pending_return_reacquire",
+            "flag_pending_return_reacquire",
+            "flag_pending_return_reacquire",
+            "flag_pending_return_reacquire"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// 返回是否需要重新获取由归一化原因在握手沿确定"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "flag_pending_return_reacquire <= 1'b0; // 复位不需要重获",
+            "end else if(i_start_ack_event == 1'b1 || flag_lifecycle_cancel == 1'b1 || flag_return_commit == 1'b1)begin",
+            "flag_pending_return_reacquire <= 1'b0; // 生命周期或提交后清除pending属性",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "flag_pending_return_reacquire <= (i_return_reason != RETURN_VALLEY_CONFIRMED); // 超时、回退和保留原因需要重获",
+            "end else begin",
+            "flag_pending_return_reacquire <= flag_pending_return_reacquire; // 等待提交期间保持",
+            "end"
+          ],
+          "line_start": 810,
+          "line_end": 818
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "flag_pending_cross"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_pending_cross",
+            "flag_pending_cross",
+            "flag_pending_cross",
+            "flag_pending_cross"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending来源标志辅助诊断且不影响FIR精度尾部"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "flag_pending_cross <= 1'b0;         // 复位不存在进入请求",
+            "end else if(flag_cross_transfer == 1'b1)begin",
+            "flag_pending_cross <= 1'b1;         // 记录进入请求所有权",
+            "end else if(flag_lifecycle_cancel == 1'b1 || flag_enter_commit == 1'b1 || flag_switch_timeout_event == 1'b1)begin",
+            "flag_pending_cross <= 1'b0;         // 提交、取消或超时释放标志",
+            "end else begin",
+            "flag_pending_cross <= flag_pending_cross; // 15-bit提交前保留进入方向",
+            "end"
+          ],
+          "line_start": 823,
+          "line_end": 831
+        },
+        {
+          "header": "always@(posedge i_clk or negedge i_rstn)",
+          "targets": [
+            "flag_pending_return"
+          ],
+          "clock": "i_clk",
+          "reset": "i_rstn",
+          "trigger_kind": "seq",
+          "is_combinational": false,
+          "contains_case": false,
+          "contains_if": true,
+          "references_state": false,
+          "block_kind": "main_task_always",
+          "target_count": 1,
+          "lvalues": [
+            "flag_pending_return",
+            "flag_pending_return",
+            "flag_pending_return",
+            "flag_pending_return"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 9,
+          "leading_comments": [
+            "// pending返回标志记录当前请求方向"
+          ],
+          "lines": [
+            "if(i_rstn == 1'b0)begin",
+            "flag_pending_return <= 1'b0;        // 复位不存在返回请求",
+            "end else if(flag_return_transfer == 1'b1)begin",
+            "flag_pending_return <= 1'b1;        // 记录返回请求所有权",
+            "end else if(flag_lifecycle_cancel == 1'b1 || flag_return_commit == 1'b1 || flag_switch_timeout_event == 1'b1)begin",
+            "flag_pending_return <= 1'b0;        // 返回所有权在终止边界释放",
+            "end else begin",
+            "flag_pending_return <= flag_pending_return; // 9-bit提交前保留返回方向",
+            "end"
+          ],
+          "line_start": 836,
+          "line_end": 844
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_active_config_fault"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_active_config_fault"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// START边界检查ACTIVE配置是否具备正式运行资格"
+          ],
+          "lines": [
+            "flag_active_config_fault = i_start_ack_event && (i_active_config_valid == 1'b0); // 无合法ACTIVE不得开始正式RUN"
+          ],
+          "line_start": 849,
+          "line_end": 849
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_characterization_request"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_characterization_request"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 固定精度表征模式收到自动窗口请求时记录诊断"
+          ],
+          "lines": [
+            "flag_characterization_request = i_run_enable && (i_run_profile == RUN_PROFILE_CHARACTERIZATION) && (i_cross_valid || i_return_9bit_valid); // 表征模式自动请求必须安全消费并诊断"
+          ],
+          "line_start": 854,
+          "line_end": 854
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_cross_return_collision"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_cross_return_collision"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 两个相反方向的请求同拍有效时标记载荷冲突"
+          ],
+          "lines": [
+            "flag_cross_return_collision = i_run_enable && i_cross_valid && i_return_9bit_valid; // 同拍双方向请求属于协议异常; @satisfies: PWC-30"
+          ],
+          "line_start": 859,
+          "line_end": 859
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_normal_start_illegal"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_normal_start_illegal"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// NORMAL启动配置强制检查粗精度初始条件"
+          ],
+          "lines": [
+            "flag_normal_start_illegal = i_start_ack_event && (i_run_profile == RUN_PROFILE_NORMAL) && i_initial_precision; // NORMAL禁止以15-bit启动; @satisfies: PWC-03"
+          ],
+          "line_start": 864,
+          "line_end": 864
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_protocol_fault_pulse"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_protocol_fault_pulse"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 阻断型START错误转换为生命周期可见的故障单拍"
+          ],
+          "lines": [
+            "flag_protocol_fault_pulse = i_start_ack_event && flag_blocking_protocol_fault; // START阻断异常产生一次故障报告"
+          ],
+          "line_start": 869,
+          "line_end": 869
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_recheck_in_fine"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_recheck_in_fine"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 正式fine窗口与AMB重检必须保持调度互斥"
+          ],
+          "lines": [
+            "flag_recheck_in_fine = i_run_enable && fine_window_active_o && i_recheck_busy; // 正式fine期间重检占用违反调度关系"
+          ],
+          "line_start": 874,
+          "line_end": 874
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_return_protocol_fallback"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_return_protocol_fallback"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 回退类返回原因汇总为需要保留的协议历史"
+          ],
+          "lines": [
+            "flag_return_protocol_fallback = flag_return_transfer && ((i_return_reason == RETURN_PROTOCOL_FALLBACK) || (i_return_reason == RETURN_RESERVED)); // 协议回退原因必须留下诊断历史; @satisfies: PWC-17"
+          ],
+          "line_start": 879,
+          "line_end": 879
+        },
+        {
+          "header": "always@(*)",
+          "targets": [
+            "flag_return_reserved"
+          ],
+          "clock": "",
+          "reset": "",
+          "trigger_kind": "comb",
+          "is_combinational": true,
+          "contains_case": false,
+          "contains_if": false,
+          "references_state": false,
+          "block_kind": "always_comb",
+          "target_count": 1,
+          "lvalues": [
+            "flag_return_reserved"
+          ],
+          "has_complex_lvalues": false,
+          "line_count": 1,
+          "leading_comments": [
+            "// 保留返回原因单独触发归一化和错误诊断"
+          ],
+          "lines": [
+            "flag_return_reserved = flag_return_transfer && (i_return_reason == RETURN_RESERVED); // 保留返回原因需要诊断并回退"
+          ],
+          "line_start": 884,
+          "line_end": 884
+        }
+      ],
+      "instances": [],
+      "generates": [],
+      "initials": [],
+      "functions": [],
+      "tasks": [],
+      "raw_blocks": [],
+      "conditionals": [],
+      "counts": {
+        "functions": 0,
+        "tasks": 0,
+        "localparams": 15,
+        "decls": 59,
+        "assigns": 38,
+        "always": 48,
+        "initials": 0,
+        "instances": 0,
+        "raw_blocks": 0,
+        "preprocessor_prologue": 0,
+        "conditionals": 0,
+        "generates": 0
+      },
+      "line_start": 58,
+      "line_end": 888
+    }
+  ],
+  "source_metrics": {
+    "lines": 889,
+    "nonempty_lines": 813,
+    "line_comments": 495,
+    "block_comment_markers": 0,
+    "tab_indented_lines": 751,
+    "space_indented_lines": 0,
+    "has_timescale": true,
+    "has_bilingual_header": true
+  },
+  "encoding": "utf-8"
+}

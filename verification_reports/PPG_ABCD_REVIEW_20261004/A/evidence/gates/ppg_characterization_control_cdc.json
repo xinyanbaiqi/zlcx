@@ -1,0 +1,1155 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 222,
+      "code_lines": 127,
+      "line_comments": 149,
+      "commented_code_lines": 77,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 222,
+              "module_count": 1,
+              "module_names": [
+                "ppg_characterization_control_cdc"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 30,
+              "end_count": 30,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_source_clk",
+                "i_source_rstn",
+                "i_clk",
+                "i_rstn",
+                "i_source_update_valid",
+                "i_source_static_characterization_enable",
+                "i_source_test_mux_ctrl",
+                "i_run_enable",
+                "i_diag_clear_event",
+                "o_source_update_ready",
+                "o_static_characterization_enable",
+                "o_test_mux_ctrl",
+                "o_control_valid",
+                "o_control_update_event",
+                "o_control_reject_event",
+                "o_protocol_error_sticky"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 7,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 72,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/08/14 00:00:00",
+            "revision_date": "2026/08/14 00:00:00",
+            "design_name": "PPG Characterization Control CDC",
+            "module_name": "ppg_characterization_control_cdc",
+            "description": "Description/ppg_characterization_control_cdc_Design.pdf",
+            "simulations": "ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+            "references": "PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+            "version": "V1.0",
+            "dependency_lines": [
+              "ppg_config_cdc_bridge.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/08/14          V1.0        Erie           Create file."
+            ],
+            "history_lines_cn": [
+              "2026年08月14日      V1.0        Erie           创建文件"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_characterization_control_cdc",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_clk",
+                  "comment": "SPI配置源时钟，仅驱动source握手状态",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_rstn",
+                  "comment": "SPI源域低有效复位，和系统复位共同断言",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "2 MHz目标域时钟，提交表征控制快照",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 48,
+                  "line_end": 48
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "2 MHz目标域低有效复位，清除已提交控制",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_update_valid",
+                  "comment": "保持型source更新请求，直到握手接受",
+                  "group": "SPI源域控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_static_characterization_enable",
+                  "comment": "待传输的STATIC_BIAS模式使能bit",
+                  "group": "SPI源域控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "[4:0]",
+                  "name": "i_source_test_mux_ctrl",
+                  "comment": "待传输的五位模拟测试MUX选择码",
+                  "group": "SPI源域控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_run_enable",
+                  "comment": "V4控制平面RUN资格，用于冻结模式使能",
+                  "group": "2 MHz目标域控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_diag_clear_event",
+                  "comment": "系统域诊断清除脉冲，只影响sticky状态",
+                  "group": "2 MHz目标域控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_source_update_ready",
+                  "comment": "CDC邮箱可接收下一笔source快照的资格",
+                  "group": "SPI源域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_static_characterization_enable",
+                  "comment": "已提交的STATIC_BIAS模式控制值",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "output",
+                  "width": "[4:0]",
+                  "name": "o_test_mux_ctrl",
+                  "comment": "已提交的测试MUX控制值",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_control_valid",
+                  "comment": "复位后已经存在一笔合法提交控制",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_control_update_event",
+                  "comment": "完整控制快照被目标域接受的单拍事件",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_control_reject_event",
+                  "comment": "运行期非法快照被整体拒绝的单拍事件",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_protocol_error_sticky",
+                  "comment": "记录运行期模式变更违反合同的sticky诊断",
+                  "group": "2 MHz目标域状态接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "CONTROL_WIDTH",
+                  "value": "3'd6",
+                  "decl_spec": "[2:0]",
+                  "comment": "原子传输总位宽，禁止拆分为单bit同步器",
+                  "leading_comments": [
+                    "//表征控制快照采用固定的使能位加五位MUX码布局"
+                  ],
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "wire",
+                  "width": "[CONTROL_WIDTH - 1:0]",
+                  "name": "wire_bridge_destination_config",
+                  "init": "",
+                  "comment": "请求稳定后被bridge原子捕获的配置快照",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "//ppg_config_cdc_bridge--用户接口"
+                  ],
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_source_update_armed",
+                  "init": "",
+                  "comment": "只有valid撤销后才允许发起下一次source事务",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_bridge_destination_update",
+                  "init": "",
+                  "comment": "bridge报告一笔source快照已到达的目标域脉冲",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_source_bridge_busy",
+                  "init": "",
+                  "comment": "应答返回前阻止覆盖source锁存快照的占用标志",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_source_fire",
+                  "init": "",
+                  "comment": "source valid与CDC就绪同时成立时的唯一接受条件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_destination_static_enable_match",
+                  "init": "",
+                  "comment": "RUN中传入使能位与已提交模式是否一致",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 87,
+                  "line_end": 87
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_destination_control_accept",
+                  "init": "",
+                  "comment": "目标域允许整笔提交当前bridge快照的判断结果",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_destination_control_reject",
+                  "init": "",
+                  "comment": "目标域必须保持旧控制并上报错误的判断结果",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "kind": "wire",
+                  "width": "[CONTROL_WIDTH - 1:0]",
+                  "name": "wire_source_control_snapshot",
+                  "init": "",
+                  "comment": "固定bit顺序的source原子控制载荷",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "//由source待提交字段拼接而成，并在整个CDC握手期间保持稳定的六位控制快照"
+                  ],
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "static_characterization_enable_o",
+                  "init": "",
+                  "comment": "为SSW提供的已提交静态表征使能缓存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "//2 MHz目标域状态接口"
+                  ],
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "kind": "reg",
+                  "width": "[4:0]",
+                  "name": "test_mux_ctrl_o",
+                  "init": "",
+                  "comment": "为STATIC_BIAS S[4:0]提供的同步MUX缓存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "control_valid_o",
+                  "init": "",
+                  "comment": "表示目标域已经接受过至少一笔完整配置",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "control_update_event_o",
+                  "init": "",
+                  "comment": "记录合法配置提交边沿的目标域脉冲寄存器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "control_reject_event_o",
+                  "init": "",
+                  "comment": "记录非法运行期配置被丢弃的目标域脉冲寄存器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 101,
+                  "line_end": 101
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "protocol_error_sticky_o",
+                  "init": "",
+                  "comment": "持续保存模式切换违规诊断直到软件清除",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 102,
+                  "line_end": 102
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_source_fire",
+                  "rhs": "i_source_update_valid && o_source_update_ready",
+                  "comment": "仅在可用邮箱上锁存一笔source快照",
+                  "leading_comments": [
+                    "//其他信号连线"
+                  ],
+                  "delay": "",
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "lhs": "flag_destination_static_enable_match",
+                  "rhs": "wire_bridge_destination_config[5] == static_characterization_enable_o",
+                  "comment": "比较运行中模式使能，防止动态切换STATIC_BIAS",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 107,
+                  "line_end": 107
+                },
+                {
+                  "lhs": "wire_source_control_snapshot",
+                  "rhs": "{i_source_static_characterization_enable, i_source_test_mux_ctrl}",
+                  "comment": "将使能固定在bit5并保持MUX位序",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "lhs": "flag_destination_control_accept",
+                  "rhs": "flag_bridge_destination_update && ((i_run_enable == 1'b0) || ((control_valid_o == 1'b1) && (flag_destination_static_enable_match == 1'b1)))",
+                  "comment": "同时限定传输到达和运行期配置资格",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 109,
+                  "line_end": 109
+                },
+                {
+                  "lhs": "flag_destination_control_reject",
+                  "rhs": "flag_bridge_destination_update && (flag_destination_control_accept == 1'b0)",
+                  "comment": "任何到达但未获准的完整快照整体拒绝",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 110,
+                  "line_end": 110
+                },
+                {
+                  "lhs": "o_source_update_ready",
+                  "rhs": "!flag_source_bridge_busy && (reg_source_update_armed == 1'b1)",
+                  "comment": "仅在bridge空闲且valid已重新武装时接收新事务",
+                  "leading_comments": [
+                    "//SPI源域状态接口"
+                  ],
+                  "delay": "",
+                  "line_start": 114,
+                  "line_end": 114
+                },
+                {
+                  "lhs": "o_static_characterization_enable",
+                  "rhs": "static_characterization_enable_o",
+                  "comment": "以目标域寄存器隔离异步source模式位",
+                  "leading_comments": [
+                    "//2 MHz目标域状态接口"
+                  ],
+                  "delay": "",
+                  "line_start": 117,
+                  "line_end": 117
+                },
+                {
+                  "lhs": "o_test_mux_ctrl",
+                  "rhs": "test_mux_ctrl_o",
+                  "comment": "以完整提交快照驱动STATIC_BIAS测试MUX；S[4:0]只在CDC提交后原子更新；ILM-14 i_clk是2MHz目标域时钟(48行)，142行five位一次性整体替换wire_bridge_destination_config[4:0]，同一2MHz边沿原子生效，非提交周期(144行)维持旧值不受扰动 @satisfies: TOP-08, ILM-14",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 118,
+                  "line_end": 118
+                },
+                {
+                  "lhs": "o_control_valid",
+                  "rhs": "control_valid_o",
+                  "comment": "向顶层公开已完成首次合法提交的状态",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 119,
+                  "line_end": 119
+                },
+                {
+                  "lhs": "o_control_update_event",
+                  "rhs": "control_update_event_o",
+                  "comment": "输出合法快照实际应用的单周期确认",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 120,
+                  "line_end": 120
+                },
+                {
+                  "lhs": "o_control_reject_event",
+                  "rhs": "control_reject_event_o",
+                  "comment": "输出整笔拒绝事件供系统诊断汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 121,
+                  "line_end": 121
+                },
+                {
+                  "lhs": "o_protocol_error_sticky",
+                  "rhs": "protocol_error_sticky_o",
+                  "comment": "输出可读且可清除的协议错误保持位",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 122,
+                  "line_end": 122
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "static_characterization_enable_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "static_characterization_enable_o",
+                    "static_characterization_enable_o",
+                    "static_characterization_enable_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "//2 MHz目标域状态接口",
+                    "//目标域只在合法整笔快照到达时改写STATIC_BIAS模式寄存器"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "static_characterization_enable_o <= 1'b0; // 复位后保证不意外进入纯静态模拟向量",
+                    "end else if(flag_destination_control_accept == 1'b1)begin",
+                    "static_characterization_enable_o <= wire_bridge_destination_config[5]; // 合法提交时原子取用固定bit5模式位",
+                    "end else begin",
+                    "static_characterization_enable_o <= static_characterization_enable_o; // 拒绝、停止和shadow变化均保持旧模式值",
+                    "end"
+                  ],
+                  "line_start": 127,
+                  "line_end": 133
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "test_mux_ctrl_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "test_mux_ctrl_o",
+                    "test_mux_ctrl_o",
+                    "test_mux_ctrl_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "//目标域在与模式位相同的时钟沿更新完整五位测试MUX码"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "test_mux_ctrl_o <= 5'b00000;        // 复位后将模拟MUX选择恢复为安全零码",
+                    "end else if(flag_destination_control_accept == 1'b1)begin",
+                    "test_mux_ctrl_o <= wire_bridge_destination_config[4:0]; // 接受快照时五位同时替换，禁止逐bit跨域变化",
+                    "end else begin",
+                    "test_mux_ctrl_o <= test_mux_ctrl_o; // 非提交周期维持已观测节点的稳定选择",
+                    "end"
+                  ],
+                  "line_start": 138,
+                  "line_end": 144
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "control_valid_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "control_valid_o",
+                    "control_valid_o",
+                    "control_valid_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "//首次或后续合法提交均建立可供STATIC_BIAS启动资格检查的valid状态"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "control_valid_o <= 1'b0;            // 复位后没有任何测试控制可作为静态启动依据",
+                    "end else if(flag_destination_control_accept == 1'b1)begin",
+                    "control_valid_o <= 1'b1;            // 完整快照通过运行规则后永久建立目标域有效性",
+                    "end else begin",
+                    "control_valid_o <= control_valid_o; // STOP、abort与诊断清除不擦除已提交配置状态",
+                    "end"
+                  ],
+                  "line_start": 149,
+                  "line_end": 155
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "control_update_event_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "control_update_event_o",
+                    "control_update_event_o",
+                    "control_update_event_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "//合法提交只以一个目标域时钟周期通知上层，不能代替START或SAR fire"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "control_update_event_o <= 1'b0;     // 复位释放前禁止产生伪提交事件",
+                    "end else if(flag_destination_control_accept == 1'b1)begin",
+                    "control_update_event_o <= 1'b1;     // 每笔通过检查的桥接快照报告一次应用事件",
+                    "end else begin",
+                    "control_update_event_o <= 1'b0;     // 其余目标域周期保持事件输出为低",
+                    "end"
+                  ],
+                  "line_start": 160,
+                  "line_end": 166
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "control_reject_event_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "control_reject_event_o",
+                    "control_reject_event_o",
+                    "control_reject_event_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "//非法模式切换使用独立单拍事件，不得与合法提交事件同时出现"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "control_reject_event_o <= 1'b0;     // 复位清除历史拒绝脉冲，避免误诊断",
+                    "end else if(flag_destination_control_reject == 1'b1)begin",
+                    "control_reject_event_o <= 1'b1;     // RUN中使能位变化或无首笔配置时报告拒绝",
+                    "end else begin",
+                    "control_reject_event_o <= 1'b0;     // 正常空闲和合法提交周期不保留拒绝脉冲",
+                    "end"
+                  ],
+                  "line_start": 171,
+                  "line_end": 177
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "protocol_error_sticky_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "protocol_error_sticky_o",
+                    "protocol_error_sticky_o",
+                    "protocol_error_sticky_o",
+                    "protocol_error_sticky_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "//sticky错误以拒绝优先于软件清除，保留最近一次违反模式冻结规则的信息"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "protocol_error_sticky_o <= 1'b0;    // 复位后清空表征CDC协议错误历史",
+                    "end else if(flag_destination_control_reject == 1'b1)begin",
+                    "protocol_error_sticky_o <= 1'b1;    // 非法整笔快照到达时立即锁存违规状态",
+                    "end else if(i_diag_clear_event == 1'b1)begin",
+                    "protocol_error_sticky_o <= 1'b0;    // 仅软件明确清除事件可以撤销已记录诊断",
+                    "end else begin",
+                    "protocol_error_sticky_o <= protocol_error_sticky_o; // 无新错误或清除请求时保持诊断可读",
+                    "end"
+                  ],
+                  "line_start": 182,
+                  "line_end": 190
+                },
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "reg_source_update_armed"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_source_update_armed",
+                    "reg_source_update_armed",
+                    "reg_source_update_armed",
+                    "reg_source_update_armed"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "//source侧等待valid撤销后重新武装，避免持续valid在ready恢复时重复发送"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "reg_source_update_armed <= 1'b1;    // source复位后允许第一笔表征控制快照进入邮箱",
+                    "end else if(i_source_update_valid == 1'b0)begin",
+                    "reg_source_update_armed <= 1'b1;    // 上层撤销valid后明确允许下一次独立提交",
+                    "end else if(flag_source_fire == 1'b1)begin",
+                    "reg_source_update_armed <= 1'b0;    // 当前valid已经被接受，禁止等待应答期间重复消费",
+                    "end else begin",
+                    "reg_source_update_armed <= reg_source_update_armed; // 保持当前武装状态直到valid或握手发生变化",
+                    "end"
+                  ],
+                  "line_start": 196,
+                  "line_end": 204
+                }
+              ],
+              "instances": [
+                {
+                  "module_name": "ppg_config_cdc_bridge",
+                  "instance_name": "ppg_config_cdc_bridge_Inst_characterization",
+                  "has_params": true,
+                  "leading_comments": [
+                    "//通用请求应答桥负责稳定6-bit数据跨域与返回应答，不承担运行期合法性判断"
+                  ],
+                  "text": "ppg_config_cdc_bridge #(.C_CONFIG_WIDTH(CONTROL_WIDTH))ppg_config_cdc_bridge_Inst_characterization( // 绑定合同规定的六位原子控制载荷宽度\n\t\t.i_source_clk(i_source_clk),            // 使用SPI域时钟锁存source配置快照\n\t\t.i_source_rstn(i_source_rstn),          // 使用source域复位复原请求代际\n\t\t.i_source_config(wire_source_control_snapshot), // 传输固定bit序的使能与MUX组合快照\n\t\t.i_source_update(flag_source_fire),     // 仅source握手沿触发bridge请求翻转\n\t\t.o_source_busy(flag_source_bridge_busy), // 应答返回前向ready逻辑报告邮箱占用\n\t\t.i_destination_clk(i_clk),              // 在2 MHz域同步请求并采样稳定多bit数据\n\t\t.i_destination_rstn(i_rstn),            // 使用目标域复位清空bridge接收状态\n\t\t.o_destination_config(wire_bridge_destination_config), // 提供完整到达快照给目标域资格检查\n\t\t.o_destination_update(flag_bridge_destination_update) // 指示bridge已经完成一次目标域数据捕获\n\t);",
+                  "line_start": 210,
+                  "line_end": 220
+                }
+              ],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 1,
+                "decls": 15,
+                "assigns": 12,
+                "always": 7,
+                "initials": 0,
+                "instances": 1,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 222
+            }
+          ],
+          "source_metrics": {
+            "lines": 222,
+            "nonempty_lines": 199,
+            "line_comments": 149,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 154,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_characterization_control_cdc.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

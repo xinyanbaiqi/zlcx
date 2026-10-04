@@ -1,0 +1,515 @@
+[
+  {
+    "tb": "tb_diag_algo_probe",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 5,
+    "baseline": 5,
+    "fail_lines": [],
+    "banner": [
+      "LONGRUN_TB_PASS real_red=1200 real_ir=1200 real_cal=0 elapsed_ns=2998332499 measurement_result_valid=2399"
+    ]
+  },
+  {
+    "tb": "tb_ppg_400hz_frame_calibration_scheduler",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 59,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL FSC-01 THROUGH FSC-59 PASSED"
+    ]
+  },
+  {
+    "tb": "tb_ppg_active_v4_control_plane_integration",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 22,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL AV4C-01 THROUGH AV4C-22 PASSED"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_async_stage_capture",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_async_stage_capture explicit-frame checks"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_dc_recovery",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 2,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_dc_recovery DCR-01..DCR-22"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_measurement_idac_integration",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 48,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "AMI-01 through AMI-47 plus N08-01 PASS: 48 real comparisons"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_pipeline_overlap_corrector",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_pipeline_overlap_corrector OVL-01..OVL-17 and 1024-code sweep"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_programmable_reconstructor",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_programmable_reconstructor PR-01..PR-14 and 1024-code sweep"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_result_router",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_result_router RTR-01..RTR-13"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_s1_programmable_calibrator",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_s1_programmable_calibrator CAL-01..CAL-17"
+    ]
+  },
+  {
+    "tb": "tb_ppg_adc_s1_redundancy_corrector",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS ppg_adc_s1_redundancy_corrector integrated exhaustive checks"
+    ]
+  },
+  {
+    "tb": "tb_ppg_amb_recheck_scheduler",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 35,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_amb_recheck_scheduler completed scheduler regression"
+    ]
+  },
+  {
+    "tb": "tb_ppg_characterization_control_cdc",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 26,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL CCC-01 TO CCC-26 PASS (26 checks)"
+    ]
+  },
+  {
+    "tb": "tb_ppg_chip_digital_top",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 6,
+    "baseline": 6,
+    "fail_lines": [],
+    "banner": [
+      "TB_CHIP_DIGITAL_TOP_PASS all scenarios passed"
+    ]
+  },
+  {
+    "tb": "tb_ppg_coarse_detection_fir",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 103,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PPG_COARSE_DETECTION_FIR_V2_TB_PASS pass=103"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 71,
+    "baseline": 71,
+    "fail_lines": [],
+    "banner": [
+      "SMOKE_TB_PASS real_adc_responses=49 measurement_result_valid=33"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_adc_numeric_scoreboard",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 69,
+    "baseline": 69,
+    "fail_lines": [],
+    "banner": [
+      "ADC_NUMERIC_SCOREBOARD_TB_PASS result_captures=16 track_branch_fires=16"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_baseline_cross",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 75,
+    "baseline": 75,
+    "fail_lines": [],
+    "banner": [
+      "BASELINE_CROSS_TB_PASS real_red=1106 real_ir=1104 real_cal=0 measurement_result_valid=2207 peak_count=6 valley_count=3 cross_count=1 return_count=1"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_fir_tail_isolation",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 80,
+    "baseline": 80,
+    "fail_lines": [],
+    "banner": [
+      "FIR_TAIL_ISOLATION_TB_PASS real_red=900 real_ir=898 real_cal=0 measurement_result_valid=1798 peak_count=5 valley_count=4 cross_count=2 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_idac_bus_isolation",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 70,
+    "baseline": 70,
+    "fail_lines": [],
+    "banner": [
+      "IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_injection",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 15,
+    "baseline": 15,
+    "fail_lines": [],
+    "banner": [
+      "INJ_TB_PASS"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_input_light_static_matrix",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 73,
+    "baseline": 73,
+    "fail_lines": [],
+    "banner": [
+      "INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=69 static_vector_checks=3000"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_lifecycle_fault_adc_anomaly",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 80,
+    "baseline": 80,
+    "fail_lines": [],
+    "banner": [
+      "LIFECYCLE_FAULT_ADC_ANOMALY_TB_PASS result_captures=8 owner_commit_total=244 measurement_discard_events=3 detection_discard_events=0"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_long_10_cycles",
+    "state": "running",
+    "baseline": 129,
+    "raw_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_long_10_cycles\\run.log"
+  },
+  {
+    "tb": "tb_ppg_control_top_longrun",
+    "state": "running",
+    "baseline": 5,
+    "raw_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_longrun\\run.log"
+  },
+  {
+    "tb": "tb_ppg_control_top_no_recheck_control",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 61,
+    "baseline": 61,
+    "fail_lines": [],
+    "banner": [
+      "NO_RECHECK_CONTROL_TB_PASS result_captures=1627 owner_commit_total=1655"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_normal_slow_tracking",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 72,
+    "baseline": 72,
+    "fail_lines": [],
+    "banner": [
+      "NORMAL_SLOW_TRACKING_TB_PASS result_captures=1406 owner_commit_total=1477"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_owner_identity_backpressure",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 68,
+    "baseline": 68,
+    "fail_lines": [],
+    "banner": [
+      "OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=35 owner_commit_total=224 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_peak_valley_return",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 75,
+    "baseline": 75,
+    "fail_lines": [],
+    "banner": [
+      "PEAK_VALLEY_RETURN_TB_PASS real_red=700 real_ir=698 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_periodic_recheck_recovery",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 70,
+    "baseline": 70,
+    "fail_lines": [],
+    "banner": [
+      "PERIODIC_RECHECK_RECOVERY_TB_PASS result_captures=2821 owner_commit_total=2906"
+    ]
+  },
+  {
+    "tb": "tb_ppg_control_top_robustness_corner_waveforms",
+    "state": "running",
+    "baseline": 67,
+    "raw_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_robustness_corner_waveforms\\run.log"
+  },
+  {
+    "tb": "tb_ppg_control_top_startup_idac_calibration",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 83,
+    "baseline": 83,
+    "fail_lines": [],
+    "banner": [
+      "STARTUP_IDAC_CALIBRATION_TB_PASS result_captures=2"
+    ]
+  },
+  {
+    "tb": "tb_ppg_dual_precision_top",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_dual_precision_top CDC and frame-safe timing contract verified"
+    ]
+  },
+  {
+    "tb": "tb_ppg_dynamic_baseline_cross_detector",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 65,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL BSL-01 THROUGH BSL-39, OPT-01 THROUGH OPT-24 AND OPTC-01 THROUGH OPTC-02 PASS count=65"
+    ]
+  },
+  {
+    "tb": "tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PHASE_A_ARITH_EQV PASS vectors=20005"
+    ]
+  },
+  {
+    "tb": "tb_ppg_idac_code_controller",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 148,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed"
+    ]
+  },
+  {
+    "tb": "tb_ppg_normal_transaction_fork",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 50,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09"
+    ]
+  },
+  {
+    "tb": "tb_ppg_peak_valley_window_detector",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 54,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PVW-01 through PVW-48 ALL PASS: 54 checks"
+    ]
+  },
+  {
+    "tb": "tb_ppg_precision_window_controller",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 48,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PWC-01 through PWC-41 ALL PASS pass=48 fail=0"
+    ]
+  },
+  {
+    "tb": "tb_ppg_precision_window_integration",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 5,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL PWI-01 THROUGH PWI-05 PASS count=5"
+    ]
+  },
+  {
+    "tb": "tb_ppg_real_raw_generator_selfcheck",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 40,
+    "baseline": 40,
+    "fail_lines": [],
+    "banner": [
+      "RAWGEN_SELFCHECK_PASS"
+    ]
+  },
+  {
+    "tb": "tb_ppg_sar9_sar15_safe_selection_wrapper",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 52,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "ALL SSW-01 THROUGH SSW-52 PASS"
+    ]
+  },
+  {
+    "tb": "tb_ppg_system_active_config_unpack",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_system_active_config_unpack all checks passed"
+    ]
+  },
+  {
+    "tb": "tb_ppg_system_config_manager",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed"
+    ]
+  },
+  {
+    "tb": "tb_ppg_system_fault_abort_supervisor",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 14,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "SUP-01 through SUP-10 PASS: 14 real comparisons"
+    ]
+  },
+  {
+    "tb": "tb_ppg_timing_3200hz",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: 3200 Hz frame, 80 us R/IR offsets, and Q3-center alignment verified."
+    ]
+  },
+  {
+    "tb": "tb_ppg_timing_sar15",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_timing_sar15 optical, test-MUX, and static characterization modes matched."
+    ]
+  },
+  {
+    "tb": "tb_ppg_timing_sar9",
+    "state": "finished",
+    "rc": 0,
+    "pass_lines": 1,
+    "baseline": null,
+    "fail_lines": [],
+    "banner": [
+      "PASS: ppg_timing_sar9 optical, test-MUX, and static characterization modes matched."
+    ]
+  }
+]

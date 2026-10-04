@@ -1,0 +1,42 @@
+{
+  "updated_at": "2026-10-04T20:00:58",
+  "completed": {
+    "module_and_contract_semantics": "B/C/D detailed file evidence and A independent rebuttals are incorporated; findings derive from current source and actual probes.",
+    "source_rows": 1860,
+    "source_pending": 0,
+    "source_scope_ambiguities": 0,
+    "explicit_width_checks": 799,
+    "explicit_sign_checks": 41,
+    "grouped_width_manual_rulings": 4,
+    "missing_file_candidates": 6,
+    "id_candidate_four_links": 838,
+    "id_families_with_semantic_sample": 46,
+    "top_ports": 165,
+    "explicit_decl_anchors": 516,
+    "dependency_rows": 141,
+    "manifest_digests": 26,
+    "alias_tag_associations": 367,
+    "canonical_instances": 39,
+    "canonical_associations": 2168,
+    "plain_net_default_width_matches": 2024,
+    "canonical_clock_reset_associations": 106
+  },
+  "audit_limits": [
+    "9247 references mechanically checked; bounds-only/non-Source implicit-file notes are not all independently assigned an expected token. Do not claim every reference is semantically valid.",
+    "Three historical external handoff references unavailable; current mechanisms are checked directly.",
+    "Project G-FP reset/CDC/priority signoff of every clustered ledger row is not recreated; detailed module-port semantic review and explicit cross-layer samples are performed. This is distinct from source-index pending work.",
+    "No Vivado/xsim, Verilator, synthesis or ASIC CDC/signoff tool; cannot run those checks.",
+    "F044 remains suspected pending definition of acceptable P06 entry-layer coverage; do not force an impossible RUN leaf input change.",
+    "Four isolated timing instances lack usable canonical aggregate leaf-port metadata; original sources exist and real Icarus compile/full original timing TB passed. Not classified as missing modules or new defects."
+  ],
+  "active_work": [
+    "Full original regression and raw final-log/baseline comparison: tb_ppg_control_top_long_10_cycles",
+    "Full original regression and raw final-log/baseline comparison: tb_ppg_control_top_longrun",
+    "Full original regression and raw final-log/baseline comparison: tb_ppg_control_top_robustness_corner_waveforms"
+  ],
+  "no_pending_source_ruling": true,
+  "actual_regression_states": {
+    "finished": 45,
+    "running": 3
+  }
+}

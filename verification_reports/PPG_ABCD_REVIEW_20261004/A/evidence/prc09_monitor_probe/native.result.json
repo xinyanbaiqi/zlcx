@@ -1,0 +1,34 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "audit_prc09",
+    "-o",
+    "/tmp/ppg_audit_probes/prc09_monitor_probe_16c925c2/sim.vvp",
+    "/tmp/ppg_audit_probes/prc09_monitor_probe_16c925c2/files/0/ppg_coarse_detection_fir.v",
+    "/tmp/ppg_audit_probes/prc09_monitor_probe_16c925c2/files/1/audit_prc09.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/prc09_monitor_probe_16c925c2",
+  "compile_rc": 0,
+  "run_rc": 1,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_coarse_detection_fir\\ppg_coarse_detection_fir.v",
+      "sha256": "23bb5745e5f4b22077d841e00690bc0401672232822c8f638ead3d568705a011"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\prc09_monitor_probe\\audit_prc09.v",
+      "sha256": "c5fdfa4599458bb08809110772fbfabe054bd02e8f12f755a4d525c064199614"
+    }
+  ]
+}

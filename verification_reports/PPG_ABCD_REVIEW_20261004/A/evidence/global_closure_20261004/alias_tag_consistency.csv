@@ -1,0 +1,823 @@
+﻿alias_line,ids,file,line,actual_tags,state,source_text
+28,TOP-01,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,602,,symbol_anchor_without_tag,602: 	always@(posedge i_clk or negedge i_rstn)begin
+28,TOP-01,rtl/ppg_system_config_manager/ppg_system_config_manager.v,556,,symbol_anchor_without_tag,556: 			active_valid_o <= 1'b0;         // 复位后必须重新完整COMMIT
+29,TOP-02,rtl/ppg_system_config_manager/ppg_system_config_manager.v,394-448,,symbol_anchor_without_tag,"394: 	assign dec_dc15_recovery_gain_q16 = $signed(i_config_snapshot[575:544]); // 将精细精度DC每码恢复量解释为signed Q16
+395: 	assign flag_snapshot_threshold_valid =
+396: 		(dec_amb_threshold_low < dec_amb_threshold_high) &&
+397: 		(dec_dcs_threshold_low < dec_dcs_threshold_high); // 两组迟滞窗口都要求严格低于关系
+398: 	assign flag_snapshot_confirm_valid =
+399: 		(i_config_snapshot[159:152] != 8'd0) &&
+400: 		(i_config_snapshot[167:160] != 8'd0); // 禁止零次确认导致无定义的立即调码
+401: 	assign flag_snapshot_nominal_coef_valid =
+402: 		($signed(i_config_snapshot[193:168]) == NOMINAL_WEIGHT_0) &&
+403: 		($signed(i_config_snapshot[219:194]) == NOMINAL_WEIGHT_1) &&
+404: 		($signed(i_config_snapshot[245:220]) == NOMINAL_WEIGHT_2) &&
+405: 		($signed(i_config_snapshot[271:246]) == NOMINAL_WEIGHT_3) &&
+406: 		($signed(i_config_snapshot[297:272]) == NOMINAL_WEIGHT_4) &&
+407: 		($signed(i_config_snapshot[323:298]) == NOMINAL_WEIGHT_5) &&
+408: 		($signed(i_config_snapshot[349:324]) == NOMINAL_WEIGHT_6) &&
+409: 		($signed(i_config_snapshot[375:350]) == NOMINAL_WEIGHT_7) &&
+410: 		($signed(i_config_snapshot[401:376]) == NOMINAL_WEIGHT_8) &&
+411: 		($signed(i_config_snapshot[427:402]) == NOMINAL_WEIGHT_9) &&
+412: 		($signed(i_config_snapshot[459:428]) == NOMINAL_OFFSET); // 未校准表征必须逐位复现固定黄金公式
+413: 	assign flag_snapshot_coef_qualification_valid =
+414: 		i_config_snapshot[19] ||
+415: 		(i_config_snapshot[8] && flag_snapshot_nominal_coef_valid); // NORMAL必须校准，表征可使用完整标称权重
+416: 	assign flag_snapshot_stage2_value_valid =
+417: 		(i_config_snapshot[20] == 1'b0) ||
+418: 		(dec_stage2_gain_q16 > 20'sd0);     // 声明有效时拒绝零值或反向Stage2增益
+419: 	assign flag_snapshot_stage2_qualification_valid =
+420: 		(i_config_snapshot[8] || i_config_snapshot[20]) &&
+421: 		flag_snapshot_stage2_value_valid;   // NORMAL要求正式Stage2系数，表征允许临时系数
+422: 	assign flag_snapshot_dc_value_valid =
+423: 		((i_config_snapshot[21] == 1'b0) ||
+424: 			(dec_dc9_recovery_gain_q16 > 32'sd0)) &&
+425: 		((i_config_snapshot[22] == 1'b0) ||
+426: 			(dec_dc15_recovery_gain_q16 > 32'sd0)); // 有效DC恢复系数必须符合加回正极性
+427: 	assign flag_snapshot_dc_qualification_valid =
+428: 		(i_config_snapshot[8] ||
+429: 			(i_config_snapshot[21] && i_config_snapshot[22])) &&
+430: 		flag_snapshot_dc_value_valid;       // NORMAL要求粗精度与精细精度恢复资格完整
+431: 	assign flag_snapshot_valid =
+432: 		flag_snapshot_schema_valid &&
+433: 		flag_snapshot_reserved_valid &&
+434: 		flag_snapshot_v5_reserved_valid &&
+435: 		flag_snapshot_v5_range_valid &&
+436: 		flag_snapshot_enum_valid &&
+437: 		flag_snapshot_profile_precision_valid &&
+438: 		flag_snapshot_normal_current_valid &&
+439: 		flag_snapshot_char_photodiode_optical_valid &&
+440: 		flag_snapshot_char_current_optical_valid &&
+441: 		flag_snapshot_char_idac_valid &&
+442: 		flag_snapshot_static_bias_valid &&
+443: 		flag_snapshot_idac_range_valid &&
+444: 		flag_snapshot_threshold_valid &&
+445: 		flag_snapshot_confirm_valid &&
+446: 		flag_snapshot_coef_qualification_valid &&
+447: 		flag_snapshot_stage2_qualification_valid &&
+448: 		flag_snapshot_dc_qualification_valid; // 任一字段失败都会拒绝整组快照"
+30,TOP-03,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,456,,symbol_anchor_without_tag,456: 	assign adc_owner_commit_event_o = transaction_start_valid_o && i_transaction_start_ready; // AMI ready形成正式fire
+31,TOP-04,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,207,,symbol_anchor_without_tag,207: 	localparam [C_MACRO_TICK_WIDTH - 1:0]RED_Q3_TICK = 13'd300; // 局部常量红光第三相位节拍红光专属可见光路
+31,TOP-04,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,222,,symbol_anchor_without_tag,222: 	localparam integer MACRO_SAFE_TICK = C_MACRO_FRAME_TICKS - 240; // 留出240 tick的宏帧末尾IDAC安全提交区
+32,TOP-05,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,220-221,,symbol_anchor_without_tag,"220: 	localparam INPUT_SOURCE_PHOTODIODE = 1'b0;  // i_input_source低电平为光电二极管来源，与V4配置bit9编码一致
+221: 	localparam integer MACRO_LAST_TICK = C_MACRO_FRAME_TICKS - 1; // 400 Hz宏帧终止的最后一个2 MHz相位"
+33,TOP-06,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,446,TOP-06,same_id_tag,"446: 	assign flag_cross_eligible_red_result = flag_formal_red_result && (i_fine_window_active == 1'b0) && (i_precision_mode == 1'b0); // 当前窗口和中心历史精度均为9-bit才允许形成相交证据；旧15-bit尾部(precision_mode=1)期间恒为0,不启动新候选 @satisfies: TOP-06"
+34,TOP-07,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,379,,symbol_anchor_without_tag,379: 	//---------------其他信号连线---------------//
+35,TOP-08,rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v,118,"ILM-14,TOP-08",same_id_tag,"118: 	assign o_test_mux_ctrl = test_mux_ctrl_o;   // 以完整提交快照驱动STATIC_BIAS测试MUX；S[4:0]只在CDC提交后原子更新；ILM-14 i_clk是2MHz目标域时钟(48行)，142行five位一次性整体替换wire_bridge_destination_config[4:0]，同一2MHz边沿原子生效，非提交周期(144行)维持旧值不受扰动 @satisfies: TOP-08, ILM-14"
+36,TOP-09,rtl/ppg_system_config_manager/ppg_system_config_manager.v,460-462,TOP-09,same_id_tag,"460: 	assign flag_stop_accept =
+461: 		i_stop_event && (flag_command_conflict == 1'b0) &&
+462: 		((state_current == ST_RUN) || (state_current == ST_STOPPING)); // STOPPING重复STOP按幂等命令接受；STOP立即禁止新事务的接受判据 @satisfies: TOP-09"
+37,TOP-10,,,,explicit_NA,"N/A — 静态elaboration证据,非RTL锚点;`ppg_control_top.v`6个直连子例化不含`ppg_dual_precision_top`/`ppg_timing_sar9`/`ppg_timing_sar15`"
+38,TOP-11,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,547,,symbol_anchor_without_tag,547: 	assign o_macro_frame_start_event = state_current[B_MACRO_START]; // 输出宏帧起点单拍
+38,TOP-11,rtl/ppg_control_top/ppg_control_top.v,945,,symbol_anchor_without_tag,"945: 			.o_macro_frame_start_event(),                         // 接帧调度器.o_macro_frame_start_event：400 Hz宏帧起点单拍"
+39,TOP-12,rtl/ppg_control_top/ppg_control_top.v,409,,symbol_anchor_without_tag,409: 
+40,"TOP-13,TOP-14,TOP-15",rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,752,,symbol_anchor_without_tag,752: 			if(flag_frame_start_eligible == 1'b1)begin
+41,TOP-16,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1197,,symbol_anchor_without_tag,1197: 		end else if(i_start_ack_event == 1'b1)begin
+42,TOP-17,rtl/ppg_control_top/ppg_control_top.v,414,,symbol_anchor_without_tag,414: 	assign flag_measurement_start_ack_event = wrapper_start_ack_event_o && !flag_static_characterization_enable; // STATIC_BIAS下不得观察测量START
+43,TOP-18,rtl/ppg_control_top/ppg_control_top.v,408-409,,symbol_anchor_without_tag,"408: 	wire wrapper_start_ack_event_o;                               // manager START合法接受应答，向前引用，wrapper例化在本节之后
+409: "
+44,TOP-19,rtl/ppg_control_top/ppg_control_top.v,848,,symbol_anchor_without_tag,"848: 		.i_run_enable(wrapper_run_enable_o),                      // 接表征CDC.i_run_enable：V4控制平面RUN资格，用于冻结模式使能"
+45,TOP-20,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,423,,symbol_anchor_without_tag,423: 
+45,TOP-20,rtl/ppg_system_config_manager/ppg_system_config_manager.v,394-448,,symbol_anchor_without_tag,"394: 	assign dec_dc15_recovery_gain_q16 = $signed(i_config_snapshot[575:544]); // 将精细精度DC每码恢复量解释为signed Q16
+395: 	assign flag_snapshot_threshold_valid =
+396: 		(dec_amb_threshold_low < dec_amb_threshold_high) &&
+397: 		(dec_dcs_threshold_low < dec_dcs_threshold_high); // 两组迟滞窗口都要求严格低于关系
+398: 	assign flag_snapshot_confirm_valid =
+399: 		(i_config_snapshot[159:152] != 8'd0) &&
+400: 		(i_config_snapshot[167:160] != 8'd0); // 禁止零次确认导致无定义的立即调码
+401: 	assign flag_snapshot_nominal_coef_valid =
+402: 		($signed(i_config_snapshot[193:168]) == NOMINAL_WEIGHT_0) &&
+403: 		($signed(i_config_snapshot[219:194]) == NOMINAL_WEIGHT_1) &&
+404: 		($signed(i_config_snapshot[245:220]) == NOMINAL_WEIGHT_2) &&
+405: 		($signed(i_config_snapshot[271:246]) == NOMINAL_WEIGHT_3) &&
+406: 		($signed(i_config_snapshot[297:272]) == NOMINAL_WEIGHT_4) &&
+407: 		($signed(i_config_snapshot[323:298]) == NOMINAL_WEIGHT_5) &&
+408: 		($signed(i_config_snapshot[349:324]) == NOMINAL_WEIGHT_6) &&
+409: 		($signed(i_config_snapshot[375:350]) == NOMINAL_WEIGHT_7) &&
+410: 		($signed(i_config_snapshot[401:376]) == NOMINAL_WEIGHT_8) &&
+411: 		($signed(i_config_snapshot[427:402]) == NOMINAL_WEIGHT_9) &&
+412: 		($signed(i_config_snapshot[459:428]) == NOMINAL_OFFSET); // 未校准表征必须逐位复现固定黄金公式
+413: 	assign flag_snapshot_coef_qualification_valid =
+414: 		i_config_snapshot[19] ||
+415: 		(i_config_snapshot[8] && flag_snapshot_nominal_coef_valid); // NORMAL必须校准，表征可使用完整标称权重
+416: 	assign flag_snapshot_stage2_value_valid =
+417: 		(i_config_snapshot[20] == 1'b0) ||
+418: 		(dec_stage2_gain_q16 > 20'sd0);     // 声明有效时拒绝零值或反向Stage2增益
+419: 	assign flag_snapshot_stage2_qualification_valid =
+420: 		(i_config_snapshot[8] || i_config_snapshot[20]) &&
+421: 		flag_snapshot_stage2_value_valid;   // NORMAL要求正式Stage2系数，表征允许临时系数
+422: 	assign flag_snapshot_dc_value_valid =
+423: 		((i_config_snapshot[21] == 1'b0) ||
+424: 			(dec_dc9_recovery_gain_q16 > 32'sd0)) &&
+425: 		((i_config_snapshot[22] == 1'b0) ||
+426: 			(dec_dc15_recovery_gain_q16 > 32'sd0)); // 有效DC恢复系数必须符合加回正极性
+427: 	assign flag_snapshot_dc_qualification_valid =
+428: 		(i_config_snapshot[8] ||
+429: 			(i_config_snapshot[21] && i_config_snapshot[22])) &&
+430: 		flag_snapshot_dc_value_valid;       // NORMAL要求粗精度与精细精度恢复资格完整
+431: 	assign flag_snapshot_valid =
+432: 		flag_snapshot_schema_valid &&
+433: 		flag_snapshot_reserved_valid &&
+434: 		flag_snapshot_v5_reserved_valid &&
+435: 		flag_snapshot_v5_range_valid &&
+436: 		flag_snapshot_enum_valid &&
+437: 		flag_snapshot_profile_precision_valid &&
+438: 		flag_snapshot_normal_current_valid &&
+439: 		flag_snapshot_char_photodiode_optical_valid &&
+440: 		flag_snapshot_char_current_optical_valid &&
+441: 		flag_snapshot_char_idac_valid &&
+442: 		flag_snapshot_static_bias_valid &&
+443: 		flag_snapshot_idac_range_valid &&
+444: 		flag_snapshot_threshold_valid &&
+445: 		flag_snapshot_confirm_valid &&
+446: 		flag_snapshot_coef_qualification_valid &&
+447: 		flag_snapshot_stage2_qualification_valid &&
+448: 		flag_snapshot_dc_qualification_valid; // 任一字段失败都会拒绝整组快照"
+46,TOP-21,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,905,,symbol_anchor_without_tag,905: 	// 启动搜索请求来自IDAC当前期望样本，周期请求来自精度窗口调度器。
+47,"LFA-08,TOP-22",rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,908,TOP-21,different_id_tag_candidate,908: 	assign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21
+48,"PRC-08,TOP-23",rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1010,,symbol_anchor_without_tag,1010: 
+49,TOP-24,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1009,,symbol_anchor_without_tag,1009: 	assign o_measurement_result_discard_run_generation = measurement_result_discard_run_generation_o; // 桥接导出寄存代际到公开端口
+58,K01,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,292,,symbol_anchor_without_tag,292: 	assign o_mode_fault_active = flag_fault_hold; // 导出当前代际故障保持电平
+59,K01,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,308,,symbol_anchor_without_tag,308: 	wire flag_precision_controller_fault_active; // 精度控制器当前RUN代际故障保持电平，PWI私有登记网
+60,K01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2573,,symbol_anchor_without_tag,"2573: 		.o_reacquire_request_event(reacquire_request_event_o), // 输出 o_reacquire_request_event 到 reacquire_request_event_o"
+61,K01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1150,,symbol_anchor_without_tag,1150: 	assign o_ami_fault_active = flag_test_identity_hold || flag_owner_protocol_fault_hold || flag_recovery_context_fault_hold || flag_precision_fault_active || flag_idac_fault_active; // 五路lane-active按位或，分别镜像各自保持电平
+62,K01,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,638,K01,same_id_tag,"638: 	assign o_controller_fault_blocking = o_amb_fault || o_dcs_r_fault || o_dcs_ir_fault; // 汇总正式运行阻断条件；IDAC child自身私有汇总flag,唯一出口送AMI @satisfies: K01"
+62,K01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2431-2432,K01,same_id_tag,"2431: 		.o_controller_fault_blocking(flag_idac_fault_active), // 汇总三路故障作为cause 8'h05的lane-active保持电平；IDAC child→AMI私有flag,链路终段 @satisfies: K01
+2432: 		.o_controller_fault_event(flag_idac_fault_event), // 接住结果，作为cause 8'h05分发器的置位触发源"
+63,K02,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,198,K02,same_id_tag,198: 	assign flag_episode_open_edge = flag_new_any && !system_fault_blocking_o; // 仅在episode由关闭转为开启的那一拍成立；open/close/rearm独立于首故障快照历史 @satisfies: K02
+64,K03,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,71,"G-FP-05,K03",same_id_tag,"71: 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一生产、由AMI逐层传入的RUN代际字段宽度；本参数原样透传给599/690/804/904行子模块,父子等宽由构造保证 @satisfies: K03, G-FP-05"
+65,K03,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,61,K03,same_id_tag,"61: 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一产生、AMI逐层传入的RUN代际字段宽度；本模块自身声明,与AMI父级等宽由构造保证 @satisfies: K03"
+66,K03,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,92,K03,same_id_tag,"92: 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一产生、经ACTIVE wrapper与Top扇出的RUN代际字段宽度；父级声明并原样透传给PWI(2457行)/IDAC(2313行) @satisfies: K03"
+67,K04,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,267,"G-FP-02,K04,N02,PWC-27,PWC-28",same_id_tag,"267: 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28"
+68,K04,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,443,K04,same_id_tag,"443: 	assign flag_detection_discard_apply = i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation); // AMI广播的代际清空事件命中当前代际时无条件生效；仅generation-scoped discard,复位路径独立不经此线 @satisfies: K04"
+69,K05,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,137-145,"G-FP-03,K01,K05",same_id_tag,"137: 	output o_mode_fault_event,                  // 切换超时或阻断协议故障单拍
+138: 	output o_mode_fault_active,                 // 当前RUN代际的精度阻断故障保持电平，仅discard/reset解除；本模块唯一故障出口，无直连manager/supervisor路径，是cause 8'h04分发链起点 @satisfies: K01, K05, G-FP-03
+139: 	output o_mode_fault_identity_valid,         // 故障是否绑定真实事务身份
+140: 	output [C_FRAME_ID_WIDTH - 1:0]o_mode_fault_frame_id, // 故障绑定事务的真实物理帧号
+141: 	output [C_SAMPLE_INDEX_WIDTH - 1:0]o_mode_fault_sample_index, // 故障绑定事务的全局事务号
+142: 	output o_mode_fault_color_ir,               // 精度控制器只处理RED来源事务，恒为0
+143: 	output [1:0]o_mode_fault_frame_type,        // 触发事务类别，有效时恒为NORMAL编码
+144: 	output o_mode_fault_precision,              // 故障绑定事务建立时所属的精度模式
+145: 	output [C_RUN_GENERATION_WIDTH - 1:0]o_mode_fault_run_generation, // 故障绑定的RUN代际"
+75,G-FP-01-D01-04,rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v,209,G-FP-01-D01-04,same_id_tag,209: 	assign o_peak_valley_config_valid = i_active_config[1009]; // 固定提取正式peak/valley/cross/fine-window资格位；unpacker->AMI->PWI->C20/C22/C23唯一通路起点 @satisfies: G-FP-01-D01-04
+76,G-FP-01-D01-04,rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v,375,G-FP-01-D01-04,same_id_tag,"375: 	assign o_peak_valley_config_valid = peak_valley_config_valid_o; //导出正式peak/valley/cross/fine-window资格位；V4控制平面段直通,链路第二跳 @satisfies: G-FP-01-D01-04"
+77,G-FP-01-D01-04,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2512,G-FP-01-D01-04,same_id_tag,"2512: 		.i_peak_valley_config_valid(i_peak_valley_config_valid), // AMI原样转发V5正式检测资格给PWI，是unpacker->AMI->PWI->C20/C22/C23唯一通路上的中段直通，不产生第二生产者 @satisfies: G-FP-01-D01-04"
+78,G-FP-01-D01-04,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,480,"G-FP-01-D01-04,PRC-01",same_id_tag,"480: 	assign flag_candidate_start = i_peak_valley_config_valid && flag_cross_eligible_red_result && baseline_valid_o && flag_result_frame_legal && (flag_cross_issued == 1'b0) && (flag_candidate_active == 1'b0) && flag_below_seen && flag_previous_valid && (dec_previous_value_q16 <= ($signed(dec_previous_baseline_q16) - $signed({{(C_BASELINE_WIDTH - C_SLOPE_WIDTH){1'b0}}, i_cross_hysteresis_q16}))) && (dec_filtered_value_q16 >= dec_baseline_high_q16); // V5资格无效时不得建立新候选或锁存首次越过身份；平坦/无脉搏输入恒不满足双侧迟滞越过，杜绝虚假CROSS；unpacker->AMI->PWI->C20/C22/C23唯一通路上的C20消费端,真实门控点 @satisfies: PRC-01, G-FP-01-D01-04"
+79,G-FP-01-D01-04,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,111,G-FP-01-D01-04,same_id_tag,"111: 	input i_peak_valley_config_valid,           // 峰谷表征参数已经正式提交；unpacker->AMI->PWI->C20/C22/C23唯一通路上的C22消费端 @satisfies: G-FP-01-D01-04"
+80,G-FP-01-D01-04,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",same_id_tag,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+81,"D01,G-FP-01-D01-01",,,,explicit_NA,"N/A — `PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md:8,185-217`(V4`[639:0]`与V5`[1023:640]`划分;V5字段与精确局部范围;V5保留位`[383:370]`仅零合法)"
+82,"D01,G-FP-01-D01-02",,,,explicit_NA,"N/A — `PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:12,77-129,214-241`(`C_CONFIG_WIDTH=1024`,源快照,manager联合ACTIVE,unpacker具名V4/V5输出)"
+83,"D01,G-FP-01-D01-03",,,,explicit_NA,"N/A — `ppg_system_active_config_unpack_semantic_contract.md:4,47-64`(每个V5输出的精确联合位段范围与唯一解码owner)"
+84,"D01,G-FP-02-D01-01",,,,explicit_NA,"N/A — `ppg_system_config_manager_semantic_contract.md:144-160,216-220`(联合COMMIT原子性,非法V5拒绝,旧V4/V5/epoch保留与复位profile)"
+85,"D01,G-FP-03-D01-01",,,,explicit_NA,"N/A — `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:240-268`(V5字段是AMI输入,只有AMI转发给PWI,无Top直连子模块的旁路)"
+86,"D01,G-FP-06-D01-01",,,,explicit_NA,"N/A — `PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:72-96,129-136`(单一1024-bit CDC payload,稳定valid/payload保持,单一联合COMMIT/ACK路径)"
+87,"D01,G-FP-06-D01-02",,,,explicit_NA,N/A — `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:212-242`(V5字段与config_epoch是稳定2MHz PWI输入;discard/复位生命周期独立维护)
+88,"D01,G-FP-05-D01-01",,,,explicit_NA,"N/A — `PPG_CONTRACT_CLOSURE_MATRIX.md:3,102-107`(Top/manager/wrapper/unpacker/CDC显式`C_CONFIG_WIDTH=1024`,要求elaboration期等值,自引用矩阵自身前置章节非独立合同文件)"
+89,"AMI-54,BSL-40,D01-01b,PWI-08",rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2509,,symbol_anchor_without_tag,"2509: 		.i_min_peak_to_peak_frames(i_min_peak_to_peak_frames), // 输入 i_min_peak_to_peak_frames 用 i_min_peak_to_peak_frames"
+89,"AMI-54,BSL-40,D01-01b,PWI-08",rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,480,"G-FP-01-D01-04,PRC-01",different_id_tag_candidate,"480: 	assign flag_candidate_start = i_peak_valley_config_valid && flag_cross_eligible_red_result && baseline_valid_o && flag_result_frame_legal && (flag_cross_issued == 1'b0) && (flag_candidate_active == 1'b0) && flag_below_seen && flag_previous_valid && (dec_previous_value_q16 <= ($signed(dec_previous_baseline_q16) - $signed({{(C_BASELINE_WIDTH - C_SLOPE_WIDTH){1'b0}}, i_cross_hysteresis_q16}))) && (dec_filtered_value_q16 >= dec_baseline_high_q16); // V5资格无效时不得建立新候选或锁存首次越过身份；平坦/无脉搏输入恒不满足双侧迟滞越过，杜绝虚假CROSS；unpacker->AMI->PWI->C20/C22/C23唯一通路上的C20消费端,真实门控点 @satisfies: PRC-01, G-FP-01-D01-04"
+89,"AMI-54,BSL-40,D01-01b,PWI-08",rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,351,PVW-38,different_id_tag_candidate,351: 	assign flag_active_config_legal = (i_peak_valley_config_valid || i_characterization_mode) && (i_peak_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_valley_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_min_peak_to_valley_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_min_peak_to_peak_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_fine_window_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_reacquire_frames != {C_INTERVAL_WIDTH{1'b0}}); // CHARACTERIZATION只豁免config_valid提交状态，六项数值门限两种模式下均不得为0; @satisfies: PVW-38
+89,"AMI-54,BSL-40,D01-01b,PWI-08",rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",different_id_tag_candidate,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+89,"AMI-54,BSL-40,D01-01b,PWI-08",rtl/ppg_system_config_manager/ppg_system_config_manager.v,457,ILM-10,different_id_tag_candidate,457: 		(state_current == ST_CONFIG) && flag_snapshot_valid; // 仅CONFIG状态可原子接纳合法快照；ILM-10 RUN期间state_current非ST_CONFIG，本条件结构性为假，任何mid-RUN重配置提交都被拒绝；配合522行active_config_o仅在合法COMMIT才替换，当前事务快照的输入源/光学模式/初始精度/MANUAL码在RUN全程保持不变，只有后续合法RUN才会采用新提交值 @satisfies: ILM-10
+90,D01,,,,no_literal_source_anchor,"见上方各行,本行仅做ID层级汇总,不重复登记RTL位置"
+96,D03,rtl/ppg_control_top/ppg_control_top.v,120,,symbol_anchor_without_tag,"120: 		input i_clk_stage1_dout_low_async,                   // Stage1异步完成保持电平，进入AMI"
+96,D03,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,480,,symbol_anchor_without_tag,480: 
+96,D03,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,440,"LFA-10,OIB-01",different_id_tag_candidate,"440: 	assign flag_switch_protocol_error_condition = flag_static_bias_input_source_invalid || flag_owner_commit_error || (i_normal_frame_active && i_calibration_frame_active) || (i_waveform_context_valid && !o_waveform_context_ready && !flag_waveform_context_ready_raw && ((i_macro_tick == 13'd0) || (i_macro_tick == 13'd160) || (i_calibration_local_tick == 10'd0))); // 组合连线切换协议错误的原始判定，供sticky和故障记录共用避免重复表达式；接管反压注入合法压低ready时(flag_waveform_context_ready_raw为真)不构成协议违规，交由Scheduler自身的非阻断launch-timeout诊断独立表态；本表达式是LFA-10(b)与OIB-01共同调查的唯一锚点,第4个OR项经`i_context_handover_stall_request`收窄后关闭OIB-01,LFA-10(b)证明四项皆结构性不可达而延期 @satisfies: LFA-10, OIB-01"
+105,G-FP-07,,,,explicit_NA,"N/A — 纯合同间元数据引用(如C01:96→C08:3),无RTL锚点"
+106,G-FP-01,rtl/ppg_control_top/ppg_control_top.v,316,,symbol_anchor_without_tag,316: 
+107,G-FP-01,rtl/ppg_control_top/ppg_control_top.v,355,,symbol_anchor_without_tag,355: 			flag_owner_abort_event <= 1'b0;                              // 复位期间owner-abort合并结果同步归零
+108,G-FP-01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1605,,symbol_anchor_without_tag,1605: 	// capture与S1的真实交接先建立完成待发布状态，随后等待S1锁存并导出完整元数据。
+109,G-FP-02,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,1089-1097,,symbol_anchor_without_tag,"1089: 	// 时序维护条件红外上下文有效红外专属红外光路低位编码端
+1090: 	always@(posedge i_clk or negedge i_rstn)begin
+1091: 		if(i_rstn == 1'b0)begin
+1092: 			flag_ir_context_valid <= 1'b0;      // 时序写入条件红外上下文有效红外专属红外光路低位编码端异步复位清零
+1093: 		end else if(i_control_abort_event == 1'b1)begin
+1094: 			flag_ir_context_valid <= 1'b0;      // 时序写入条件红外上下文有效红外专属红外光路低位编码端撤销期间保持
+1095: 		end else begin
+1096: 			if(flag_ir_wave_last == 1'b1)begin
+1097: 				flag_ir_context_valid <= 1'b0;  // 时序写入条件红外上下文有效红外专属红外光路低位编码端波形末拍释放"
+110,G-FP-02,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,264-268,"G-FP-02,K04,N02,PWC-09,PWC-22,PWC-25,PWC-27,PWC-28,PWC-32,PWC-37,PWC-38,PWC-39",same_id_tag,"264: 	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0); // 下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37
+265: 	assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe; // 下一安全帧原子返回9-bit; @satisfies: PWC-32, PWC-38
+266: 	assign flag_pending_state = (state_current == ST_WAIT_ENTER) || (state_current == ST_WAIT_RETURN); // 两种pending状态共享超时保护; @satisfies: PWC-39
+267: 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28
+268: 	assign flag_switch_timeout_event = flag_pending_state && (flag_enter_commit == 1'b0) && (flag_return_commit == 1'b0) && (cnt_switch_timeout >= TIMEOUT_LIMIT_MINUS_ONE); // 安全提交与阈值同拍时提交优先; @satisfies: PWC-25"
+111,G-FP-03,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,137,,symbol_anchor_without_tag,"137: 	output o_mode_fault_event,                  // 切换超时或阻断协议故障单拍"
+111,G-FP-03,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,960-961,K01,different_id_tag_candidate,"960: 		.o_mode_fault_event(flag_precision_controller_fault_event), // 接住阻断故障新episode单拍，供PWI登记网转发
+961: 		.o_mode_fault_active(flag_precision_controller_fault_active), // 接住当前代际故障保持电平，直到discard或reset解除；precision controller→PWI私有flag,链路起点 @satisfies: K01"
+111,G-FP-03,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2576-2583,K01,different_id_tag_candidate,"2576: 		.o_mode_fault_active(flag_precision_fault_active), // 当前RUN代际精度阻断故障保持电平，驱动cause 8'h04的lane-active；PWI输出→AMI私有flag,链路终段 @satisfies: K01
+2577: 		.o_mode_fault_identity_valid(flag_precision_fault_identity_valid), // 精度阻断故障是否绑定真实事务身份
+2578: 		.o_mode_fault_frame_id(flag_precision_fault_frame_id), // 接住帧号结果，留给AMI分发器组装cause 8'h04记录
+2579: 		.o_mode_fault_sample_index(flag_precision_fault_sample_index), // 接住序号结果，留给AMI分发器组装cause 8'h04记录
+2580: 		.o_mode_fault_color_ir(flag_precision_fault_color_ir), // 精度阻断故障绑定事务颜色
+2581: 		.o_mode_fault_frame_type(flag_precision_fault_frame_type), // 精度阻断故障绑定事务类别
+2582: 		.o_mode_fault_precision(flag_precision_fault_precision), // 接住精度模式结果，留给AMI分发器组装cause 8'h04记录
+2583: 		.o_mode_fault_run_generation(flag_precision_fault_run_generation), // 接住RUN代际结果，留给AMI分发器组装cause 8'h04记录"
+112,G-FP-03,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,170-172,,symbol_anchor_without_tag,"170: 	output o_dcs_ir_code_update,            // 红外DC码实际提交新值的单拍事件
+171: 	output o_dcs_r_track_adjust,            // 红光NORMAL慢速跟踪移动1 LSB事件
+172: 	output o_dcs_ir_track_adjust,           // 红外NORMAL慢速跟踪移动1 LSB事件"
+113,G-FP-04,,,,explicit_NA,"N/A — 引用均为`.md`合同行号(如C18:366/C23:862),非RTL"
+114,G-FP-05,rtl/ppg_control_top/ppg_control_top.v,1099-1106,,symbol_anchor_without_tag,"1099: 			.C_FRAME_ID_WIDTH(C_FRAME_ID_WIDTH),                  // AMI事务与结果帧号身份锁存共用此位宽
+1100: 			.C_SAMPLE_INDEX_WIDTH(C_SAMPLE_INDEX_WIDTH),          // AMI事务与结果序号身份锁存共用此位宽
+1101: 			.C_CONFIG_EPOCH_WIDTH(C_CONFIG_EPOCH_WIDTH),          // AMI结果携带的完整ACTIVE版本字段位宽
+1102: 			.C_COEF_EPOCH_WIDTH(C_COEF_EPOCH_WIDTH),              // AMI结果携带的Stage1/Stage2系数版本位宽
+1103: 			.C_DC_RECOVERY_EPOCH_WIDTH(C_DC_RECOVERY_EPOCH_WIDTH), // AMI结果携带的DC恢复系数版本位宽
+1104: 			.C_CODE_EPOCH_WIDTH(C_CODE_EPOCH_WIDTH),              // AMI IDAC码安全提交版本比对位宽
+1105: 			.C_RUN_GENERATION_WIDTH(C_RUN_GENERATION_WIDTH),      // AMI owner与结果代际比对共用此位宽
+1106: 			.C_ENABLE_TEST_INJECTION(C_ENABLE_TEST_INJECTION)     // AMI验证注入结构生成开关，生产网表恒为0"
+114,G-FP-05,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,92,K03,different_id_tag_candidate,"92: 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一产生、经ACTIVE wrapper与Top扇出的RUN代际字段宽度；父级声明并原样透传给PWI(2457行)/IDAC(2313行) @satisfies: K03"
+115,G-FP-05,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,2446-2461,,symbol_anchor_without_tag,"2446: 	ppg_precision_window_integration #(
+2447: 		.C_DATA_WIDTH(C_DATA_WIDTH),            // 参数 C_DATA_WIDTH 用 C_DATA_WIDTH
+2448: 		.C_FRAME_ID_WIDTH(C_FRAME_ID_WIDTH),    // 参数 C_FRAME_ID_WIDTH 用 C_FRAME_ID_WIDTH
+2449: 		.C_SAMPLE_INDEX_WIDTH(C_SAMPLE_INDEX_WIDTH), // 参数 C_SAMPLE_INDEX_WIDTH 用 C_SAMPLE_INDEX_WIDTH
+2450: 		.C_IDAC_CODE_WIDTH(C_IDAC_CODE_WIDTH),  // 参数 C_IDAC_CODE_WIDTH 用 C_IDAC_CODE_WIDTH
+2451: 		.C_CODE_EPOCH_WIDTH(C_CODE_EPOCH_WIDTH), // 参数 C_CODE_EPOCH_WIDTH 用 C_CODE_EPOCH_WIDTH
+2452: 		.C_CONFIG_EPOCH_WIDTH(C_CONFIG_EPOCH_WIDTH), // 参数 C_CONFIG_EPOCH_WIDTH 用 C_CONFIG_EPOCH_WIDTH
+2453: 		.C_COEF_EPOCH_WIDTH(C_COEF_EPOCH_WIDTH), // 参数 C_COEF_EPOCH_WIDTH 用 C_COEF_EPOCH_WIDTH
+2454: 		.C_DC_RECOVERY_EPOCH_WIDTH(C_DC_RECOVERY_EPOCH_WIDTH), // 参数 C_DC_RECOVERY_EPOCH_WIDTH 用 C_DC_RECOVERY_EPOCH_WIDTH
+2455: 		.C_SLOPE_WIDTH(C_SLOPE_WIDTH),          // 参数 C_SLOPE_WIDTH 用 C_SLOPE_WIDTH
+2456: 		.C_BASELINE_WIDTH(C_BASELINE_WIDTH),    // 参数 C_BASELINE_WIDTH 用 C_BASELINE_WIDTH
+2457: 		.C_RATIO_WIDTH(C_RATIO_WIDTH),          // 参数 C_RATIO_WIDTH 用 C_RATIO_WIDTH
+2458: 		.C_CONFIRM_COUNT_WIDTH(C_CONFIRM_COUNT_WIDTH), // 参数 C_CONFIRM_COUNT_WIDTH 用 C_CONFIRM_COUNT_WIDTH
+2459: 		.C_INTERVAL_WIDTH(C_INTERVAL_WIDTH),    // 参数 C_INTERVAL_WIDTH 用 C_INTERVAL_WIDTH
+2460: 		.C_RUN_GENERATION_WIDTH(C_RUN_GENERATION_WIDTH), // 参数 C_RUN_GENERATION_WIDTH 用 C_RUN_GENERATION_WIDTH
+2461: 		.C_ENABLE_TEST_INJECTION(C_ENABLE_TEST_INJECTION) // PWI/FIR验证注入结构生成开关，逐层透传自AMI参数，生产网表恒为0"
+115,G-FP-05,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,55-72,"G-FP-05,K03",same_id_tag,"55: 	parameter integer C_DATA_WIDTH = 32'd24,    // 统一signed粗PPG和FIR数据字段宽度
+56: 	parameter integer C_FRAME_ID_WIDTH = 32'd16, // 全局400 Hz物理帧编号字段宽度
+57: 	parameter integer C_SAMPLE_INDEX_WIDTH = 32'd16, // ADC事务全局顺序编号字段宽度
+58: 	parameter integer C_IDAC_CODE_WIDTH = 32'd8, // AMB和颜色DC码快照字段宽度
+59: 	parameter integer C_CODE_EPOCH_WIDTH = 32'd4, // IDAC committed码版本字段宽度
+60: 	parameter integer C_CONFIG_EPOCH_WIDTH = 32'd8, // ACTIVE配置版本字段宽度
+61: 	parameter integer C_COEF_EPOCH_WIDTH = 32'd8, // Stage1校准系数组版本字段宽度
+62: 	parameter integer C_DC_RECOVERY_EPOCH_WIDTH = 32'd8, // DC恢复系数组版本字段宽度
+63: 	parameter integer C_SLOPE_WIDTH = 32'd32,   // signed Q16动态基线斜率字段宽度
+64: 	parameter integer C_BASELINE_WIDTH = 32'd48, // signed Q16动态基线运算字段宽度
+65: 	parameter integer C_RATIO_WIDTH = 32'd16,   // unsigned Q1.15自适应比例字段宽度
+66: 	parameter integer C_CONFIRM_COUNT_WIDTH = 32'd4, // 峰谷连续方向确认计数字段宽度
+67: 	parameter integer C_INTERVAL_WIDTH = 32'd16, // 峰谷时间间隔和超时字段宽度
+68: 	parameter integer C_FIR_GROUP_DELAY_SAMPLES = 32'd10, // 20阶FIR固定同色群延时
+69: 	parameter integer C_SWITCH_TIMEOUT_CYCLES = 32'd10000, // 精度安全提交最大2 MHz等待周期
+70: 	parameter integer C_SWITCH_TIMEOUT_COUNTER_WIDTH = 32'd14, // 精度提交超时计数器字段宽度
+71: 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一生产、由AMI逐层传入的RUN代际字段宽度；本参数原样透传给599/690/804/904行子模块,父子等宽由构造保证 @satisfies: K03, G-FP-05
+72: 	parameter integer C_ENABLE_TEST_INJECTION = 32'd0 // 默认关闭的验证专用异常注入结构生成使能，逐层透传自AMI/顶层，生产网表必须为0"
+116,G-FP-06,rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v,66-190,,symbol_anchor_without_tag,"66: reg [C_CONFIG_WIDTH - 1:0]reg_source_config; // 向目标域提供建立时间的源域快照
+67: 
+68: 	//---------------标志信号---------------//
+69: 	// 源域请求与目标域应答各自只在所属时钟域翻转
+70: reg flag_source_request;                    // 源域发起一次新配置事务的翻转标志
+71: (* ASYNC_REG = ""TRUE"" *)
+72: reg flag_ack_sync_meta;                     // 应答返回源域时的第一级同步状态
+73: (* ASYNC_REG = ""TRUE"" *)
+74: reg flag_ack_sync;                          // 源域可安全比较的应答翻转状态
+75: (* ASYNC_REG = ""TRUE"" *)
+76: reg flag_request_sync_meta;                 // 请求进入目标域时的第一级同步状态
+77: (* ASYNC_REG = ""TRUE"" *)
+78: reg flag_request_sync;                      // 目标域用于检测新事务的请求翻转状态
+79: reg flag_destination_ack;                   // 目标域已接收最近一笔配置的应答状态
+80: wire flag_source_busy;                      // 请求与同步应答不一致时的源域忙标志
+81: 
+82: 	//---------------其他信号---------------//
+83: 
+84: 	//---------------输出信号---------------//
+85: // 目标域只在检测到新请求时改写配置快照
+86: reg [C_CONFIG_WIDTH - 1:0]destination_config_o; // 系统域已确认的原子配置总线
+87: reg destination_update_o;                   // 系统域新配置接收事件的脉冲寄存器
+88: 
+89: 	//-------------其他信号连线-------------//
+90: 	// 忙状态在请求与返回应答一致后立即清除
+91: 	assign flag_source_busy = flag_source_request != flag_ack_sync; // 比较当前请求与已同步应答的事务代际
+92: 
+93: 	//-------------输出信号连线-------------//
+94: 	// 源域与目标域状态通过明确输出桥提供给上层
+95: 	assign o_source_busy = flag_source_busy; // 暴露源域不得覆盖快照的占用状态
+96: 	assign o_destination_config = destination_config_o; // 输出经请求应答保护的多比特数据
+97: 	assign o_destination_update = destination_update_o; // 输出新配置到达 2 MHz 域的事件
+98: 
+99: 	//-----------输出信号处理区域-----------//
+100: 	// 目标域在新请求被确认后产生一拍更新指示
+101: 	always@(posedge i_destination_clk or negedge i_destination_rstn)begin
+102: 		if(i_destination_rstn == 1'b0)begin
+103: 			destination_update_o <= 1'b0;   // 目标域复位期间禁止上报伪更新事件
+104: 		end else if(flag_request_sync != flag_destination_ack)begin
+105: 			destination_update_o <= 1'b1;   // 仅在首次看到新事务时拉高一个目标时钟
+106: 		end else begin
+107: 			destination_update_o <= 1'b0;   // 其余周期保持更新输出为低
+108: 		end
+109: 	end
+110: 
+111: 	// 目标域仅在源数据已稳定两级同步延迟后捕获整条总线
+112: 	always@(posedge i_destination_clk or negedge i_destination_rstn)begin
+113: 		if(i_destination_rstn == 1'b0)begin
+114: 			destination_config_o <= {C_CONFIG_WIDTH{1'b0}}; // 目标域复位时清除已接收配置
+115: 		end else if(flag_request_sync != flag_destination_ack)begin
+116: 			destination_config_o <= reg_source_config; // 在对应请求到达后原子捕获稳定快照
+117: 		end else begin
+118: 			destination_config_o <= destination_config_o; // 无新事务时保持上一笔已确认配置
+119: 		end
+120: 	end
+121: 
+122: 	//-----------主要任务处理区域-----------//
+123: 	// 源域仅在桥空闲时接受一个新的多比特配置快照
+124: 	always@(posedge i_source_clk or negedge i_source_rstn)begin
+125: 		if(i_source_rstn == 1'b0)begin
+126: 			reg_source_config <= {C_CONFIG_WIDTH{1'b0}}; // 源域复位时将稳定配置总线清零
+127: 		end else if((i_source_update == 1'b1) && (flag_source_busy == 1'b0))begin
+128: 			reg_source_config <= i_source_config; // 在翻转请求前锁存完整寄存器组内容
+129: 		end else begin
+130: 			reg_source_config <= reg_source_config; // 直到应答返回前保持总线绝对稳定
+131: 		end
+132: 	end
+133: 
+134: 	// 源域在接受快照的同一时钟边沿翻转请求代际
+135: 	always@(posedge i_source_clk or negedge i_source_rstn)begin
+136: 		if(i_source_rstn == 1'b0)begin
+137: 			flag_source_request <= 1'b0;    // 将握手请求代际恢复到零相位
+138: 		end else if((i_source_update == 1'b1) && (flag_source_busy == 1'b0))begin
+139: 			flag_source_request <= ~flag_source_request; // 每个被接受的更新仅产生一次代际翻转
+140: 		end else begin
+141: 			flag_source_request <= flag_source_request; // 忙期间不重复发起或合并新事务
+142: 		end
+143: 	end
+144: 
+145: 	// 应答信号返回 SPI_SCLK 域的第一级同步处理
+146: 	always@(posedge i_source_clk or negedge i_source_rstn)begin
+147: 		if(i_source_rstn == 1'b0)begin
+148: 			flag_ack_sync_meta <= 1'b0;     // 源域复位时清除应答同步链首级
+149: 		end else begin
+150: 			flag_ack_sync_meta <= flag_destination_ack; // 首级触发器只采样跨域应答电平
+151: 		end
+152: 	end
+153: 
+154: 	// 应答返回链的第二级为忙状态比较提供稳定输入
+155: 	always@(posedge i_source_clk or negedge i_source_rstn)begin
+156: 		if(i_source_rstn == 1'b0)begin
+157: 			flag_ack_sync <= 1'b0;          // 源域复位时使请求和应答保持初始一致
+158: 		end else begin
+159: 			flag_ack_sync <= flag_ack_sync_meta; // 将经一拍稳定的应答传入事务比较器
+160: 		end
+161: 	end
+162: 
+163: 	// 请求信号进入 2 MHz 域的第一级同步处理
+164: 	always@(posedge i_destination_clk or negedge i_destination_rstn)begin
+165: 		if(i_destination_rstn == 1'b0)begin
+166: 			flag_request_sync_meta <= 1'b0; // 目标域复位时清除请求同步链首级
+167: 		end else begin
+168: 			flag_request_sync_meta <= flag_source_request; // 首级触发器隔离异步请求的亚稳态风险
+169: 		end
+170: 	end
+171: 
+172: 	// 请求同步链的第二级为事务检测提供稳定代际
+173: 	always@(posedge i_destination_clk or negedge i_destination_rstn)begin
+174: 		if(i_destination_rstn == 1'b0)begin
+175: 			flag_request_sync <= 1'b0;      // 目标域复位时将请求代际归零
+176: 		end else begin
+177: 			flag_request_sync <= flag_request_sync_meta; // 向事务检测器提供第二级同步结果
+178: 		end
+179: 	end
+180: 
+181: 	// 目标域捕获配置后更新应答代际以允许下一笔事务
+182: 	always@(posedge i_destination_clk or negedge i_destination_rstn)begin
+183: 		if(i_destination_rstn == 1'b0)begin
+184: 			flag_destination_ack <= 1'b0;   // 目标域复位时恢复初始应答相位
+185: 		end else if(flag_request_sync != flag_destination_ack)begin
+186: 			flag_destination_ack <= flag_request_sync; // 用已接收请求代际确认当前配置
+187: 		end else begin
+188: 			flag_destination_ack <= flag_destination_ack; // 没有新事务时保持应答状态不变
+189: 		end
+190: 	end"
+116,G-FP-06,rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v,379,,symbol_anchor_without_tag,379: 	ppg_config_cdc_bridge #(.C_CONFIG_WIDTH(1024))config_cdc_bridge_Inst( //固定1024-bit V4+V5联合快照宽度的CDC实例
+116,G-FP-06,rtl/ppg_dual_precision_top/ppg_dual_precision_top.v,338,,symbol_anchor_without_tag,338: 		.C_CONFIG_WIDTH(CONFIG_WIDTH)                // 将 123 位 PPG 配置视为不可分割的事务载荷
+116,G-FP-06,rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v,210,,symbol_anchor_without_tag,210: 	ppg_config_cdc_bridge #(.C_CONFIG_WIDTH(CONTROL_WIDTH))ppg_config_cdc_bridge_Inst_characterization( // 绑定合同规定的六位原子控制载荷宽度
+116,G-FP-06,rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v,379,,symbol_anchor_without_tag,379: 	ppg_config_cdc_bridge #(.C_CONFIG_WIDTH(1024))config_cdc_bridge_Inst( //固定1024-bit V4+V5联合快照宽度的CDC实例
+116,G-FP-06,rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v,210,,symbol_anchor_without_tag,210: 	ppg_config_cdc_bridge #(.C_CONFIG_WIDTH(CONTROL_WIDTH))ppg_config_cdc_bridge_Inst_characterization( // 绑定合同规定的六位原子控制载荷宽度
+117,"G-FP-03,G-FP-06",rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,580,,symbol_anchor_without_tag,580: 	assign flag_control_cancel = i_stop_ack_event || i_control_abort_event ||
+128,"JNT-01,JNT-02,JNT-03,JNT-04,JNT-05,JNT-06,JNT-07,JNT-08,JNT-09",rtl/ppg_control_top/ppg_control_top.v,344,,symbol_anchor_without_tag,344: 	// 一路abort-drain STOP请求贡献，只参与STOP合并，不直接进入owner-abort扇出。
+135,"JNT-09,LFA-04,OIB-08,PRC-08,SID-10",rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,461-462,,symbol_anchor_without_tag,"461: 	assign startup_idac_safe_boundary_o = state_current[B_STARTUP_PENDING] && flag_lifecycle_active && i_adc_idle && i_analog_safe && i_sar_timing_idle && !state_current[B_FRAME_ACTIVE] && !state_current[B_RED_WAVE_PENDING] && !state_current[B_IR_WAVE_PENDING] && !state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT]; // START一次性边界
+462: 	assign macro_frame_safe_boundary_o = state_current[B_FRAME_ACTIVE] && flag_lifecycle_active && (macro_tick_o == MACRO_SAFE_TICK); // 宏帧唯一边界"
+138,SID-01,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,279,SID-01,same_id_tag,279: 	localparam [4:0]ST_AMB_WAIT = 5'd3;     // 请求并评价当前AMB候选样本；SID系列启动搜索入口 @satisfies: SID-01
+139,SID-02,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,705,SID-02,same_id_tag,705: 				state_next = ST_AMB_APPLY;  // 自动模式首先搜索AMB；SID-02 启动搜索严格先进AMB阶段，不允许跳过或从其它颜色阶段起步 @satisfies: SID-02
+140,SID-03,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,759-760,SID-03,same_id_tag,"759: 					reg_control_next[CTRL_Q3] = (i_calibration_local_tick >= 10'd265) &&
+760: 					(i_calibration_local_tick < 10'd267); // CAL Q3严格围绕中心266；SID-03 该窗口在整个校准波形块内对AMB_CAL/DCS_CAL RED/DCS_CAL IR三种帧类型统一生效，与NORMAL运行波形块(287-306一带)完全独立的代码路径，不做任何NORMAL-Q3替换 @satisfies: SID-03"
+141,SID-04,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,836,,symbol_anchor_without_tag,836: 					state_next[B_CAL_WAVE_PENDING] = 1'b0; // 结束后清除校准 pending
+142,SID-05,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,464,,symbol_anchor_without_tag,464: 	assign idac_code_safe_boundary_o = startup_idac_safe_boundary_o || macro_frame_safe_boundary_o || flag_calibration_boundary_o; // 启动、宏帧和校准边界合并
+143,SID-06,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,460,,symbol_anchor_without_tag,460: 	assign flag_completion_success = flag_completion_match && i_adc_transaction_success && !state_current[B_INFLIGHT_DISCARD] && i_owner_q3_window_closed; // 正式成功结果资格，额外要求在途owner自身选定的Q3窗口已关闭，防止提前的CLK_DOUT冒充成功完成；门控放在success而不是match/release上，避免Q3若因异常提前完成而不再出现时owner永久卡在in-flight的死锁
+144,SID-07,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,745,"ILM-11,ISE-06,SID-07",same_id_tag,"745: 					(i_calibration_local_tick < 10'd276); // DCS_CAL才允许SAR9 DC通路；SID-07 AMB_CAL时frame_type非DCS，本if不执行，DC通路保持复位默认0；ILM-11 AMB_CAL下同一原因DC通路(本行及746行DC码窗)结构性保持复位默认0，无DC码窗口；ISE-06 本if正是AMB_CAL(DC总线归零)与DCS_CAL(允许DC通路)两种帧类型对DC使能位唯一的行为分岔点 @satisfies: SID-07, ILM-11, ISE-06"
+145,SID-08,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,742,"ILM-12,ISE-06,SID-08",same_id_tag,"742: 				(i_calibration_local_tick < 10'd276)) ? reg_cal_amb_code : 8'h00; // CAL AMB逐bit码窗严格为[224,276)；SID-08 该窗口与frame_type/颜色无关，DCS_CAL RED阶段AMB总线持续保持已确认AMB码；ILM-12该窗口AMB_CAL/DCS_CAL统一生效，DCS_CAL RED/IR阶段AMB总线均持有已确认AMB码，与选定颜色DC候选窗口(746行)并存；ISE-06 本行是AMB_CAL/DCS_CAL共同唯一驱动SAR9 AMB候选总线的位置，逐bit透传reg_cal_amb_code，AMB_CAL下DC总线由744/746行结构性保持零，两种校准帧类型对AMB总线的驱动完全相同 @satisfies: SID-08, ILM-12, ISE-06"
+146,SID-09,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,763,"ILM-12,SID-09",same_id_tag,"763: 						reg_control_next[CTRL_LED_IR] = reg_cal_color_ir; // 时序写入寄存控制字下一拍低位编码端红外灯选择位红外灯通路校准波形控制更新校准红外灯选；SID-09 DCS_CAL IR阶段color_ir=1，仅本行置位，红外LED窗口唯一生效，与上一行红光位互斥；ILM-12 DCS_CAL IR阶段仅本行置位，与RED相对色窗口(上一行)互斥不并存 @satisfies: SID-09, ILM-12"
+147,SID-10,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,908,TOP-21,different_id_tag_candidate,908: 	assign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21
+148,SID-11,rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v,232-233,ADCN-03,different_id_tag_candidate,"232: 	assign flag_saturation_low = dec_rounded_value < -20'sd2048; // 检测负向超出校准残差可表示范围 @satisfies: ADCN-03
+233: 	assign flag_saturation_high = dec_rounded_value > 20'sd2047; // 检测正向超出校准残差可表示范围 @satisfies: ADCN-03"
+149,SID-12,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,975,SID-12,same_id_tag,975: 					reg_context_next[CTX_STARTUP_COMPLETE_BIT] = 1'b1; // 红外启动搜索成功完成全部初始化；SID-12 AMB/DC_R/DC_IR三阶段闭合后置位完成资格，先于任何NORMAL owner提交 @satisfies: SID-12
+153,LFA-01,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,450,,symbol_anchor_without_tag,450: 
+153,LFA-01,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,1124,LFA-01,same_id_tag,"1124: 			reg_context_next[CTX_AMB_PENDING_VALID_BIT] = 1'b0; // STOP或abort取消AMB pending；LFA-01""STOP取消未提交候选、已提交码不变""的真实清除点 @satisfies: LFA-01"
+154,LFA-02,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,450,,symbol_anchor_without_tag,450: 
+155,LFA-03,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,247-248,"LFA-03,RRC-12",same_id_tag,"247: 		end else if(i_start_ack_event == 1'b1 || flag_control_cancel == 1'b1 || enc_sequence_done_o == 1'b1 || enc_sequence_failed_o == 1'b1)begin
+248: 			amb_recheck_pending_o <= 1'b0;      // 本轮结束或取消后释放保持请求；LFA-03/RRC-12 STOP/abort在周期重检pending期间取消未提交请求，不改变已提交码/epoch，已排空的在途owner遵循正常受控释放规则 @satisfies: LFA-03, RRC-12"
+156,LFA-05,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,874,,symbol_anchor_without_tag,874: 	//----------------状态机区域----------------//
+156,LFA-05,rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v,107,"LFA-05,LFA-07,OIB-05",same_id_tag,"107: 	assign flag_capture_accept = flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0); // 事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05"
+157,LFA-07,rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v,107,"LFA-05,LFA-07,OIB-05",same_id_tag,"107: 	assign flag_capture_accept = flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0); // 事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05"
+158,LFA-09,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,735,,symbol_anchor_without_tag,735: 			end
+159,LFA-11,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,200,LFA-11,same_id_tag,200: 	assign flag_diag_clear_legal = i_diag_clear_event && !system_fault_blocking_o && !flag_new_any; // 新故障优先于同拍诊断清除；LFA-11诊断清除只在system_fault_blocking_o已经真实关闭后才合法，只能清历史sticky，不能替代195行flag_episode_close_condition的真实恢复判据 @satisfies: LFA-11
+159,LFA-11,rtl/ppg_control_top/ppg_control_top.v,355,,symbol_anchor_without_tag,355: 			flag_owner_abort_event <= 1'b0;                              // 复位期间owner-abort合并结果同步归零
+160,LFA-12,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,1138,LFA-12,same_id_tag,1138: 			reg_context_next[CTX_STARTUP_COMPLETE_BIT] = 1'b0; // 离开RUN撤销启动完成资格；LFA-12下一次合法START必须从这个清零状态真实重新搜索、不带陈旧完成标记 @satisfies: LFA-12
+163,"LFA-06,LFA-10",rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,438,,symbol_anchor_without_tag,438: 	//其他信号连线
+163,"LFA-06,LFA-10",rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v,107,"LFA-05,LFA-07,OIB-05",different_id_tag_candidate,"107: 	assign flag_capture_accept = flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0); // 事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05"
+167,OIB-02,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,735,,symbol_anchor_without_tag,735: 			end
+168,OIB-03,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1024,,symbol_anchor_without_tag,1024: 
+169,OIB-05,rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v,107,"LFA-05,LFA-07,OIB-05",same_id_tag,"107: 	assign flag_capture_accept = flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0); // 事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05"
+170,OIB-07,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1745,,symbol_anchor_without_tag,1745: 		end else if(i_start_ack_event == 1'b1 || (i_control_abort_event == 1'b1 && o_measurement_output_idle == 1'b1))begin
+171,OIB-09,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,773,,symbol_anchor_without_tag,773: 				state_next[B_FRAME_AMB_H:B_FRAME_AMB_L] = i_amb_code; // 锁存AMB committed码
+172,OIB-10,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,446,OIB-10,same_id_tag,446: 	assign o_waveform_context_ready = flag_context_is_red || flag_context_is_ir || flag_context_is_cal; // 组合连线输出波形上下文就绪；OIB-10要求的静态ready/valid环路分析：本表达式不组合依赖i_waveform_context_valid或任何下游valid，不构成组合ready环路 @satisfies: OIB-10
+173,"OIB-04,OIB-06",,,,no_literal_source_anchor,"`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md:662,664`; `PPG_SESSION_HANDOFF_20260826_2.md:1042-1044`"
+175,OIB-04,,,,no_literal_source_anchor,`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md:662`; `PPG_SESSION_HANDOFF_20260826_2.md:1042-1044`
+176,OIB-06,,,,no_literal_source_anchor,`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md:664`; `PPG_SESSION_HANDOFF_20260826_2.md:1042-1044`
+177,OIB-01,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,438,,symbol_anchor_without_tag,438: 	//其他信号连线
+180,PRC-01,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,480,"G-FP-01-D01-04,PRC-01",same_id_tag,"480: 	assign flag_candidate_start = i_peak_valley_config_valid && flag_cross_eligible_red_result && baseline_valid_o && flag_result_frame_legal && (flag_cross_issued == 1'b0) && (flag_candidate_active == 1'b0) && flag_below_seen && flag_previous_valid && (dec_previous_value_q16 <= ($signed(dec_previous_baseline_q16) - $signed({{(C_BASELINE_WIDTH - C_SLOPE_WIDTH){1'b0}}, i_cross_hysteresis_q16}))) && (dec_filtered_value_q16 >= dec_baseline_high_q16); // V5资格无效时不得建立新候选或锁存首次越过身份；平坦/无脉搏输入恒不满足双侧迟滞越过，杜绝虚假CROSS；unpacker->AMI->PWI->C20/C22/C23唯一通路上的C20消费端,真实门控点 @satisfies: PRC-01, G-FP-01-D01-04"
+180,PRC-01,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,381,PRC-01,same_id_tag,381: 	assign flag_direction_rising = flag_frame_contiguous && (dec_direction_delta > enc_deadband_positive); // 超过正死区才是有效上升；平坦/无脉搏输入恒不过死区，杜绝虚假VALLEY方向证据 @satisfies: PRC-01
+181,PRC-02,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",same_id_tag,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+182,PRC-03,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,319,"FIR-18,PRC-03",same_id_tag,"319: 	assign flag_window_saturation_low = |dec_window_saturation_low; // 保留窗口任一点低侧诊断；高幅度/clamp输入正确置位窗口负向饱和诊断 @satisfies: PRC-03, FIR-18"
+182,PRC-03,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,350,PRC-03,same_id_tag,350: 	assign flag_no_saturation = (i_window_saturation_low == 1'b0) && (i_window_saturation_high == 1'b0) && (i_fir_saturation_low == 1'b0) && (i_fir_saturation_high == 1'b0); // 任一端点饱和都取消正式方向资格；饱和样本不得成为PEAK/VALLEY正式证据 @satisfies: PRC-03
+182,PRC-03,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,445,PRC-03,same_id_tag,445: 	assign flag_formal_red_result = flag_result_transfer && i_detection_qualified && (i_color_ir == 1'b0) && (i_frame_type == FRAME_TYPE_NORMAL) && (i_window_saturation_low == 1'b0) && (i_window_saturation_high == 1'b0) && (i_fir_saturation_low == 1'b0) && (i_fir_saturation_high == 1'b0); // 限定RED正式检测证据；饱和样本不得成为CROSS/baseline正式证据 @satisfies: PRC-03
+183,PRC-04,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,473,PRC-04,same_id_tag,"473: 	assign dec_baseline_q16 = (dec_baseline_wide_q16 > $signed({{(64 - C_BASELINE_WIDTH){1'b0}}, {1'b0, {(C_BASELINE_WIDTH - 1){1'b1}}}})) ? {1'b0, {(C_BASELINE_WIDTH - 1){1'b1}}} : ((dec_baseline_wide_q16 < $signed({{(64 - C_BASELINE_WIDTH){1'b1}}, {1'b1, {(C_BASELINE_WIDTH - 1){1'b0}}}})) ? {1'b1, {(C_BASELINE_WIDTH - 1){1'b0}}} : dec_baseline_wide_q16[C_BASELINE_WIDTH - 1:0]); // 防止内部48-bit基线自然回绕；强基线漂移下限幅而非环绕，保证数值不出现算术wrap @satisfies: PRC-04"
+184,PRC-05,,,,no_literal_source_anchor,"无——该文件自身文件头(24/46行)明文写""No RTL is exercised; this is a pure testbench-model check""/""本文件不驱动任何RTL，是纯testbench模型自检""，与N07同证据类别，N/A成立"
+185,PRC-06,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,386,"PRC-06,PVW-03,PVW-08,PVW-09",same_id_tag,"386: 	assign flag_peak_interval_legal = (flag_previous_peak_valid == 1'b0) || ((dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_peak_to_peak_frames >= i_min_peak_to_peak_frames)); // 只有无可靠前一波峰参照时才豁免峰峰时间，reacquire期间若参照仍在则继续检查；快/慢合法心动周期的峰峰间隔核对点 @satisfies: PRC-06, PVW-03, PVW-08, PVW-09"
+186,PRC-07,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,404,"PRC-07,PVW-44",same_id_tag,"404: 	assign flag_valley_accept_event = flag_valley_candidate_event && flag_valley_amplitude_legal && flag_valley_interval_legal && flag_valley_epoch_match && ((fine_window_active_o == 1'b0) || flag_active_peak_fine_qualified); // 正式fine窗口只接受合格15-bit中心波峰配对；弱重搏切迹下仍可产生完整合格VALLEY @satisfies: PRC-07, PVW-44"
+187,PRC-08,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1010,,symbol_anchor_without_tag,1010: 
+188,"PRC-09,PRC-10",rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,120-122,,symbol_anchor_without_tag,"120: 	input i_test_inject_enable,             // 当前验证构建允许接受异常注入，需同时C_ENABLE_TEST_INJECTION非0
+121: 	input i_test_calibration_loss_inject_valid, // 保持型一次性calibration-loss注入请求valid
+122: 	output o_test_calibration_loss_inject_ready, // FIR可把请求原子绑定到下一笔真实被接纳样本"
+191,RRC-01,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,285,RRC-01,same_id_tag,"285: 	localparam [4:0]ST_AMB_RECHECK = 5'd9;  // 周期检查当前AMB码并累计确认；RRC周期重检入口,与ST_AMB_WAIT共用同一AMB搜索逻辑 @satisfies: RRC-01"
+192,RRC-02,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,286,RRC-02,same_id_tag,286: 						state_next = ST_WAIT_DRAIN; // 切到9-bit后停止接收新NORMAL事务；RRC-02 pending悬挂期间码/epoch/busy均不变，只在真实SAR15->9回落事件后才离开本状态 @satisfies: RRC-02
+193,RRC-03,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,179,RRC-03,same_id_tag,179: 	assign flag_takeover_safe = i_precision_takeover_safe && i_normal_fork_idle && i_idac_idle && i_fir_idle && i_peak_valley_idle && i_frame_safe_boundary; // 六项同时成立才允许启动校准；RRC-03 accept在ADC/NORMAL fork/IDAC/FIR/峰谷检测器/帧边界全部排空前保持低电平的真实门禁 @satisfies: RRC-03
+194,RRC-04,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,324,"FIR-13,FIR-26,NRE-02,RRC-04,RRC-09",same_id_tag,"324: 	assign flag_recheck_clear = i_recheck_accept_event && flag_fir_idle; // 危险时刻的重检accept被安全忽略；RRC-04/RRC-09 accept原子清零RED/IR历史深度，成功恢复后必须各自重新累计21笔新样本才能恢复正式检测资格；NRE-02 interval=0时i_recheck_accept_event结构性恒为0，本行永不触发，FIR历史不受重检驱动清零 @satisfies: RRC-04, RRC-09, NRE-02, FIR-13, FIR-26"
+194,RRC-04,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1545,"NRE-02,NRE-05,RRC-04,RRC-10",same_id_tag,"1545: 			reg_candidate_context <= {EVENT_CONTEXT_WIDTH{1'b0}}; // 周期边界或异常返回取消旧相交候选；RRC-04/RRC-10 accept原子作废旧相交候选，新上穿只能由accept之后的全新历史重新形成；NRE-02/NRE-05 interval=0时i_recheck_accept_event结构性恒为0，候选载荷不受隐藏重检清零，真实穿越身份只能绑定累积证据 @satisfies: RRC-04, RRC-10, NRE-02, NRE-05"
+194,RRC-04,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1510,"RRC-04,RRC-09",same_id_tag,"1510: 			reg_peak_context <= reg_peak_context; // 非波峰事件保持当前锚点；RRC-04/RRC-09 accept不在本always块的作废条件里，整个busy窗口原样保持，成功恢复后原样复用为新基线起点 @satisfies: RRC-04, RRC-09"
+194,RRC-04,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,632,"RRC-04,RRC-09",same_id_tag,"632: 			slope_current_q16_o <= slope_current_q16_o; // 当前周期内禁止中途改变斜率；RRC-04/RRC-09 accept同样不在本斜率的作废条件里，busy窗口原样保持并在成功恢复后原样复用 @satisfies: RRC-04, RRC-09"
+195,RRC-05,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,794,RRC-05,same_id_tag,794: 								state_next = ST_DCS_REVALIDATE_WAIT; // 当前AMB合格也必须继续三帧DC重新验证；RRC-05 强制序列严格AMB->DC_R->DC_IR，不允许跳过任一颜色阶段 @satisfies: RRC-05
+196,RRC-06,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,996,RRC-06,same_id_tag,996: 				reg_context_next[CTX_AMB_SEQUENCE_DONE_BIT] = 1'b1; // 无需调码直接完成周期检查；RRC-06 窗口内不变AMB样本保持已提交码/epoch，不触发flag_amb_commit @satisfies: RRC-06
+197,RRC-07,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,859,"NRE-06,RRC-07",same_id_tag,"859: 				reg_context_next[CTX_AMB_EPOCH_LSB +: C_CODE_EPOCH_WIDTH] = amb_epoch_current + {{C_CODE_EPOCH_WIDTH - 1{1'b0}}, 1'b1}; // 实际改码递增AMB版本；RRC-07 确认漂移改码只在flag_amb_commit的安全边界这一拍发生，且只有真实改码才递增epoch；NRE-06 flag_amb_commit要求先进入AMB_RECHECK族状态，interval=0时结构性不可达，长跑期间AMB码与epoch原样保持 @satisfies: RRC-07, NRE-06"
+198,RRC-08,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,221,RRC-08,same_id_tag,221: 	assign o_normal_output_inhibit = amb_recheck_busy_o || flag_switch_takeover; // 精度下降接管当拍起屏蔽正式PPG输出资格；RRC-08 accept至序列终止全程禁止任何正式NORMAL输出 @satisfies: RRC-08
+199,RRC-09,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1510,"RRC-04,RRC-09",same_id_tag,"1510: 			reg_peak_context <= reg_peak_context; // 非波峰事件保持当前锚点；RRC-04/RRC-09 accept不在本always块的作废条件里，整个busy窗口原样保持，成功恢复后原样复用为新基线起点 @satisfies: RRC-04, RRC-09"
+199,RRC-09,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,324,"FIR-13,FIR-26,NRE-02,RRC-04,RRC-09",same_id_tag,"324: 	assign flag_recheck_clear = i_recheck_accept_event && flag_fir_idle; // 危险时刻的重检accept被安全忽略；RRC-04/RRC-09 accept原子清零RED/IR历史深度，成功恢复后必须各自重新累计21笔新样本才能恢复正式检测资格；NRE-02 interval=0时i_recheck_accept_event结构性恒为0，本行永不触发，FIR历史不受重检驱动清零 @satisfies: RRC-04, RRC-09, NRE-02, FIR-13, FIR-26"
+200,RRC-10,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1545,"NRE-02,NRE-05,RRC-04,RRC-10",same_id_tag,"1545: 			reg_candidate_context <= {EVENT_CONTEXT_WIDTH{1'b0}}; // 周期边界或异常返回取消旧相交候选；RRC-04/RRC-10 accept原子作废旧相交候选，新上穿只能由accept之后的全新历史重新形成；NRE-02/NRE-05 interval=0时i_recheck_accept_event结构性恒为0，候选载荷不受隐藏重检清零，真实穿越身份只能绑定累积证据 @satisfies: RRC-04, RRC-10, NRE-02, NRE-05"
+201,RRC-11,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,628,RRC-11,same_id_tag,628: 			slope_current_q16_o <= i_fixed_slope_q16; // 重检失败退回固定斜率等待新锚点；RRC-11 真实重检失败把活动斜率重装为ACTIVE配置的固定负斜率 @satisfies: RRC-11
+202,RRC-12,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,248,"LFA-03,RRC-12",same_id_tag,"248: 			amb_recheck_pending_o <= 1'b0;      // 本轮结束或取消后释放保持请求；LFA-03/RRC-12 STOP/abort在周期重检pending期间取消未提交请求，不改变已提交码/epoch，已排空的在途owner遵循正常受控释放规则 @satisfies: LFA-03, RRC-12"
+212,TRK-01,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,498,"TRK-01,TRK-09",same_id_tag,"498: 		((i_track_saturation_low && i_track_saturation_high) == 1'b0); // 仅当前码快照的正式NORMAL事务参与跟踪；TRK-01 未真实transfer(flag_track_transfer=0,含i_track_valid=0)时整条assign为0,下方1067行判定块不执行,evidence/pending/committed码/epoch零变化;TRK-09 calibration_applied缺失或AMB/DC码快照及epoch任一不匹配同样使本条件为0,样本被真实消费(flag_track_transfer=1)但不改变跟踪状态 @satisfies: TRK-01, TRK-09"
+213,TRK-02,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,547,TRK-02,same_id_tag,"547: 		(cnt_dcs_r_low >= (i_dcs_confirm_count - 8'd1)); // 红光当前样本是否形成调码证据；TRK-02 同向计数未达i_dcs_confirm_count-1时该条件为0,样本只累计计数(1067行同向分支)不形成pending,达到阈值当拍才真正触发1072行清零+形成候选 @satisfies: TRK-02"
+214,TRK-03,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,1084,TRK-03,same_id_tag,"1084: 					reg_context_next[CTX_DCS_R_LOW_COUNT_LSB +: 8] = 8'd0; // 高侧样本清除红光低侧序列；TRK-03 方向反转即时清空另一侧计数,新方向从零起步 @satisfies: TRK-03"
+215,TRK-04,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,1070,"TRK-02,TRK-04",same_id_tag,"1070: 					reg_context_next[CTX_DCS_R_HIGH_COUNT_LSB +: 8] = 8'd0; // 红光窗口内样本清除高侧证据；TRK-02 窗口内证据清零本方向计数;TRK-04 分支仅触碰CTX_DCS_R_*位,与红外分支结构隔离 @satisfies: TRK-02, TRK-04"
+216,TRK-05,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,137,TRK-05,same_id_tag,"137: 	input i_track_precision_mode,           // 透传精度身份但不分裂IDAC状态；TRK-05 本模块全程不消费该端口,SAR9/SAR15精度切换本身对跟踪evidence/pending/committed码/epoch零耦合 @satisfies: TRK-05"
+217,TRK-06,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,453,TRK-06,same_id_tag,"453: 		reg_context[CTX_DCS_R_PENDING_VALID_BIT]; // 阻止同一颜色pending期间重复累积；TRK-06 pending等待安全边界期间该色新证据被此条件挡在flag_track_sample_qualified外,payload不可被后续证据覆盖 @satisfies: TRK-06"
+218,TRK-07,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,879,"ISE-10,TRK-07,TRK-08",same_id_tag,"879: 				reg_context_next[CTX_DCS_R_EPOCH_LSB +: C_CODE_EPOCH_WIDTH] = dcs_r_epoch_current + {{C_CODE_EPOCH_WIDTH - 1{1'b0}}, 1'b1}; // 红光实际改码递增版本；TRK-07 安全边界仅对真实改变的±1LSB候选原子提交并加一epoch;TRK-08 普通4-bit截断加法,4'hF->4'h0自动回绕,身份随reg_context整体原子更新;ISE-10 同一截断加法逻辑覆盖ISE-10要求的""从4'hF实际提交一次回绕到4'h0""场景,回绕后epoch与878行同一reg_context原子更新的committed码保持绑定,不会出现epoch与码分离 @satisfies: TRK-07, TRK-08, ISE-10"
+219,TRK-08,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,879,"ISE-10,TRK-07,TRK-08",same_id_tag,"879: 				reg_context_next[CTX_DCS_R_EPOCH_LSB +: C_CODE_EPOCH_WIDTH] = dcs_r_epoch_current + {{C_CODE_EPOCH_WIDTH - 1{1'b0}}, 1'b1}; // 红光实际改码递增版本；TRK-07 安全边界仅对真实改变的±1LSB候选原子提交并加一epoch;TRK-08 普通4-bit截断加法,4'hF->4'h0自动回绕,身份随reg_context整体原子更新;ISE-10 同一截断加法逻辑覆盖ISE-10要求的""从4'hF实际提交一次回绕到4'h0""场景,回绕后epoch与878行同一reg_context原子更新的committed码保持绑定,不会出现epoch与码分离 @satisfies: TRK-07, TRK-08, ISE-10"
+220,TRK-09,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,498,"TRK-01,TRK-09",same_id_tag,"498: 		((i_track_saturation_low && i_track_saturation_high) == 1'b0); // 仅当前码快照的正式NORMAL事务参与跟踪；TRK-01 未真实transfer(flag_track_transfer=0,含i_track_valid=0)时整条assign为0,下方1067行判定块不执行,evidence/pending/committed码/epoch零变化;TRK-09 calibration_applied缺失或AMB/DC码快照及epoch任一不匹配同样使本条件为0,样本被真实消费(flag_track_transfer=1)但不改变跟踪状态 @satisfies: TRK-01, TRK-09"
+221,TRK-10,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,440,TRK-10,same_id_tag,"440: 			($signed(i_track_calibrated_s1_value) > i_dcs_threshold_high)); // NORMAL残差高于共用DCS上界；TRK-10 跟踪比较仅使用本signed 12-bit校准Stage1残差,不存在Stage2/15-bit重建/DC恢复/正式输出的替代通路 @satisfies: TRK-10"
+229,NRE-01,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,177,NRE-01,same_id_tag,177: 	assign flag_period_enabled = i_run_enable && (i_idac_mode == IDAC_MODE_TRACK) && i_amb_enable && (i_amb_recheck_interval_frames != 16'd0) && i_startup_search_complete && i_normal_measurement_active; // 限定正式TRACK帧才能累计；NRE-01 interval=0时本条件结构性恒为0，下游pending/accept/busy/done/failed全部保持复位值 @satisfies: NRE-01
+230,NRE-02,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,324,"FIR-13,FIR-26,NRE-02,RRC-04,RRC-09",same_id_tag,"324: 	assign flag_recheck_clear = i_recheck_accept_event && flag_fir_idle; // 危险时刻的重检accept被安全忽略；RRC-04/RRC-09 accept原子清零RED/IR历史深度，成功恢复后必须各自重新累计21笔新样本才能恢复正式检测资格；NRE-02 interval=0时i_recheck_accept_event结构性恒为0，本行永不触发，FIR历史不受重检驱动清零 @satisfies: RRC-04, RRC-09, NRE-02, FIR-13, FIR-26"
+230,NRE-02,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1545,"NRE-02,NRE-05,RRC-04,RRC-10",same_id_tag,"1545: 			reg_candidate_context <= {EVENT_CONTEXT_WIDTH{1'b0}}; // 周期边界或异常返回取消旧相交候选；RRC-04/RRC-10 accept原子作废旧相交候选，新上穿只能由accept之后的全新历史重新形成；NRE-02/NRE-05 interval=0时i_recheck_accept_event结构性恒为0，候选载荷不受隐藏重检清零，真实穿越身份只能绑定累积证据 @satisfies: RRC-04, RRC-10, NRE-02, NRE-05"
+230,NRE-02,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,460,NRE-02,same_id_tag,460: 		(o_dcs_ir_pending_valid == 1'b0);   // 仅空闲NORMAL允许调度器启动AMB检查；NRE-02 i_amb_sequence_start来自调度器o_amb_sequence_start，interval=0时结构性恒为0，本条件永不满足，控制器不产生重检驱动的校准请求 @satisfies: NRE-02
+231,NRE-03,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,696,"FIR-15,NRE-03",same_id_tag,"696: 			cnt_red_sample <= 5'd0;         // 重检或生命周期事件撤销预热资格；NRE-03 flag_history_clear的重检分支interval=0时结构性恒为0，红光预热深度只沿699行单调递增至满窗，中途不下降 @satisfies: NRE-03, FIR-15"
+232,NRE-04,rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v,187,NRE-04,same_id_tag,187: 	assign flag_switch_takeover = ((state_current == ST_MONITOR) && (amb_recheck_pending_o || flag_interval_hit) && i_precision_15_to_9_event) || ((state_current == ST_WAIT_SWITCH) && i_precision_15_to_9_event); // 精度下降沿立即阻止新NORMAL进入；NRE-04 pending/interval_hit结构性恒为0时本条件唯一入口被封死，SAR15->9真实回落事件不受周期重检接管干扰 @satisfies: NRE-04
+233,NRE-05,rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v,1545,"NRE-02,NRE-05,RRC-04,RRC-10",same_id_tag,"1545: 			reg_candidate_context <= {EVENT_CONTEXT_WIDTH{1'b0}}; // 周期边界或异常返回取消旧相交候选；RRC-04/RRC-10 accept原子作废旧相交候选，新上穿只能由accept之后的全新历史重新形成；NRE-02/NRE-05 interval=0时i_recheck_accept_event结构性恒为0，候选载荷不受隐藏重检清零，真实穿越身份只能绑定累积证据 @satisfies: RRC-04, RRC-10, NRE-02, NRE-05"
+234,NRE-06,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,859,"NRE-06,RRC-07",same_id_tag,"859: 				reg_context_next[CTX_AMB_EPOCH_LSB +: C_CODE_EPOCH_WIDTH] = amb_epoch_current + {{C_CODE_EPOCH_WIDTH - 1{1'b0}}, 1'b1}; // 实际改码递增AMB版本；RRC-07 确认漂移改码只在flag_amb_commit的安全边界这一拍发生，且只有真实改码才递增epoch；NRE-06 flag_amb_commit要求先进入AMB_RECHECK族状态，interval=0时结构性不可达，长跑期间AMB码与epoch原样保持 @satisfies: RRC-07, NRE-06"
+235,ILM-01,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,381,"ILM-01,ILM-04,ILM-05,ILM-06,ILM-07,ILM-11,TOP-07",same_id_tag,"381: 	assign flag_fixed_current_active = reg_run_active && (i_run_profile == RUN_PROFILE_CHARACTERIZATION) && !i_static_characterization_enable && (i_input_source == 1'b1); // 组合连线条件固定电流活动低位编码端；EN_TEST=1场景下LEDEN保持默认0，SAR仍按400Hz间歇工作；ILM-01 PHOTODIODE下i_input_source=0，本条件恒为0，630行o_en_test随之保持低电平；ILM-04~07该条件与i_optical_mode无关，BOTH/RED_ONLY/IR_ONLY全部EXTERNAL_TEST_CURRENT变体EN_TEST=1一律成立；ILM-11 AMB_CAL/DCS_CAL期间i_run_profile恒为RUN_PROFILE_NORMAL非CHARACTERIZATION，本条件结构性恒为0，o_en_test同样保持低电平 @satisfies: TOP-07, ILM-01, ILM-04, ILM-05, ILM-06, ILM-07, ILM-11"
+236,ILM-02,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,703,"ILM-02,ILM-03,ILM-09",same_id_tag,"703: 				state_next = ST_MANUAL_APPLY; // MANUAL等待首个安全边界装码；ILM-02/ILM-03 idac_mode=MANUAL时状态机只进本分支，ST_MANUAL_APPLY又只能转向ST_NORMAL(720行)，结构性永不进入AMB/DCS任一搜索态，SPI提交的AMB/DC_R码在整个RUN期间保持不变；ILM-09 同一结构性约束下state_current全程只落在ST_IDLE/ST_MANUAL_APPLY/ST_NORMAL这个MANUAL-only小集合，自动启动搜索/周期重检/自动精度切换全部结构性不可达 @satisfies: ILM-02, ILM-03, ILM-09"
+236,ILM-02,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,433,,symbol_anchor_without_tag,433: 	assign flag_calibration_request_fire = i_calibration_sample_valid && calibration_sample_ready_o; // 请求原子握手
+237,ILM-03,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,703,"ILM-02,ILM-03,ILM-09",same_id_tag,"703: 				state_next = ST_MANUAL_APPLY; // MANUAL等待首个安全边界装码；ILM-02/ILM-03 idac_mode=MANUAL时状态机只进本分支，ST_MANUAL_APPLY又只能转向ST_NORMAL(720行)，结构性永不进入AMB/DCS任一搜索态，SPI提交的AMB/DC_R码在整个RUN期间保持不变；ILM-09 同一结构性约束下state_current全程只落在ST_IDLE/ST_MANUAL_APPLY/ST_NORMAL这个MANUAL-only小集合，自动启动搜索/周期重检/自动精度切换全部结构性不可达 @satisfies: ILM-02, ILM-03, ILM-09"
+237,ILM-03,rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v,433,,symbol_anchor_without_tag,433: 	assign flag_calibration_request_fire = i_calibration_sample_valid && calibration_sample_ready_o; // 请求原子握手
+245,ILM-04,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,381,"ILM-01,ILM-04,ILM-05,ILM-06,ILM-07,ILM-11,TOP-07",same_id_tag,"381: 	assign flag_fixed_current_active = reg_run_active && (i_run_profile == RUN_PROFILE_CHARACTERIZATION) && !i_static_characterization_enable && (i_input_source == 1'b1); // 组合连线条件固定电流活动低位编码端；EN_TEST=1场景下LEDEN保持默认0，SAR仍按400Hz间歇工作；ILM-01 PHOTODIODE下i_input_source=0，本条件恒为0，630行o_en_test随之保持低电平；ILM-04~07该条件与i_optical_mode无关，BOTH/RED_ONLY/IR_ONLY全部EXTERNAL_TEST_CURRENT变体EN_TEST=1一律成立；ILM-11 AMB_CAL/DCS_CAL期间i_run_profile恒为RUN_PROFILE_NORMAL非CHARACTERIZATION，本条件结构性恒为0，o_en_test同样保持低电平 @satisfies: TOP-07, ILM-01, ILM-04, ILM-05, ILM-06, ILM-07, ILM-11"
+246,ILM-05,,,,no_literal_source_anchor,"与ILM-04共用同三处锚点(`:381`/`:673-674`/`:727-728`)——LED封锁逻辑与精度SAR9/SAR15无关,同一机制"
+247,ILM-06,,,,no_literal_source_anchor,"`:381`(EN_TEST,共用)、`:673-674`(RED LED封锁,共用)、`:389`(`flag_ir_context_point`,RED_ONLY下optical_mode检查恒假,IR上下文永不建立,新打标签)"
+248,ILM-07,,,,no_literal_source_anchor,"`:381`(EN_TEST,共用)、`:727-728`(IR LED封锁,共用)、`:388`(`flag_red_context_point`,IR_ONLY下optical_mode检查恒假,RED上下文永不建立,新打标签)"
+249,ILM-08,rtl/ppg_system_config_manager/ppg_system_config_manager.v,369-371,ILM-08,same_id_tag,"369: 	assign flag_snapshot_char_current_optical_valid =
+370: 		!((i_config_snapshot[8] == 1'b1) && (i_static_characterization_enable == 1'b0) && (i_config_snapshot[9] == 1'b1)) ||
+371: 		(i_config_snapshot[13:12] != 2'b11); // 非STATIC_BIAS固定电流表征禁止安全关闭光学模式；ILM-08 optical_mode=2'b11(安全关闭)在此结构性判假，479行ERROR_FIXED_CURRENT_OPTICAL_MODE(0x16)COMMIT阶段直接拒绝，active_config_o从未被这组非法快照污染，RUN/波形/owner阶段永不触发 @satisfies: ILM-08"
+250,ILM-09,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,703,"ILM-02,ILM-03,ILM-09",same_id_tag,"703: 				state_next = ST_MANUAL_APPLY; // MANUAL等待首个安全边界装码；ILM-02/ILM-03 idac_mode=MANUAL时状态机只进本分支，ST_MANUAL_APPLY又只能转向ST_NORMAL(720行)，结构性永不进入AMB/DCS任一搜索态，SPI提交的AMB/DC_R码在整个RUN期间保持不变；ILM-09 同一结构性约束下state_current全程只落在ST_IDLE/ST_MANUAL_APPLY/ST_NORMAL这个MANUAL-only小集合，自动启动搜索/周期重检/自动精度切换全部结构性不可达 @satisfies: ILM-02, ILM-03, ILM-09"
+250,ILM-09,rtl/ppg_system_config_manager/ppg_system_config_manager.v,364-365,,symbol_anchor_without_tag,"364: 	assign flag_snapshot_char_idac_valid =
+365: 		!((i_config_snapshot[8] == 1'b1) && (i_config_snapshot[11:10] != 2'b00)); // CHARACTERIZATION只允许MANUAL IDAC模式"
+251,ILM-10,rtl/ppg_system_config_manager/ppg_system_config_manager.v,455-457,ILM-10,same_id_tag,"455: 	assign flag_commit_accept =
+456: 		i_config_update_event && (flag_command_conflict == 1'b0) &&
+457: 		(state_current == ST_CONFIG) && flag_snapshot_valid; // 仅CONFIG状态可原子接纳合法快照；ILM-10 RUN期间state_current非ST_CONFIG，本条件结构性为假，任何mid-RUN重配置提交都被拒绝；配合522行active_config_o仅在合法COMMIT才替换，当前事务快照的输入源/光学模式/初始精度/MANUAL码在RUN全程保持不变，只有后续合法RUN才会采用新提交值 @satisfies: ILM-10"
+252,ILM-11,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,387,"ILM-11,ILM-12",same_id_tag,"387: 	assign flag_calibration_mode_legal = reg_run_active && !flag_static_active && !flag_stop_pending && !flag_blocking_fault && i_calibration_frame_active && !i_normal_frame_active && (i_run_profile == RUN_PROFILE_NORMAL) && (i_input_source == 1'b0); // 组合连线条件校准模式专用字段低位编码端；ILM-11/12该条件结构性要求i_input_source==1'b0(PHOTODIODE)，AMB_CAL/DCS_CAL只能在PHOTODIODE输入语义下合法建立校准上下文，非本条件独立观察结果 @satisfies: ILM-11, ILM-12"
+253,ILM-12,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,387,"ILM-11,ILM-12",same_id_tag,"387: 	assign flag_calibration_mode_legal = reg_run_active && !flag_static_active && !flag_stop_pending && !flag_blocking_fault && i_calibration_frame_active && !i_normal_frame_active && (i_run_profile == RUN_PROFILE_NORMAL) && (i_input_source == 1'b0); // 组合连线条件校准模式专用字段低位编码端；ILM-11/12该条件结构性要求i_input_source==1'b0(PHOTODIODE)，AMB_CAL/DCS_CAL只能在PHOTODIODE输入语义下合法建立校准上下文，非本条件独立观察结果 @satisfies: ILM-11, ILM-12"
+254,ILM-13,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,380,ILM-13,same_id_tag,380: 	assign flag_static_active = reg_run_active && (i_run_profile == RUN_PROFILE_CHARACTERIZATION) && i_static_characterization_enable && (i_input_source == 1'b1); // 组合连线条件静态偏置活动低位编码端；ILM-13该条件为真时616-628行是reg_control_next唯一活动分支，纯组合逻辑不含macro_tick/宏帧/样本计数任何递增，分支内从不触碰CTRL_Q1/Q2/Q3/LED任一比特（615行统一清零默认保持0），结构性不产生Q1/Q2/Q3窗口、LED波形或ADC转换窗 @satisfies: ILM-13
+255,ILM-14,rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v,118,"ILM-14,TOP-08",same_id_tag,"118: 	assign o_test_mux_ctrl = test_mux_ctrl_o;   // 以完整提交快照驱动STATIC_BIAS测试MUX；S[4:0]只在CDC提交后原子更新；ILM-14 i_clk是2MHz目标域时钟(48行)，142行five位一次性整体替换wire_bridge_destination_config[4:0]，同一2MHz边沿原子生效，非提交周期(144行)维持旧值不受扰动 @satisfies: TOP-08, ILM-14"
+256,ILM-15,rtl/ppg_system_config_manager/ppg_system_config_manager.v,372-374,ILM-15,same_id_tag,"372: 	assign flag_snapshot_static_bias_valid =
+373: 		!i_static_characterization_enable ||
+374: 		((i_config_snapshot[8] == 1'b1) && (i_config_snapshot[9] == 1'b1)); // 已提交STATIC_BIAS资格时候选必须为CHARACTERIZATION加外部固定电流；ILM-15 static_characterization_enable=1但input_source快照仍为PHOTODIODE(bit9=0)时本条件结构性为假，481行ERROR_STATIC_BIAS_INPUT_SOURCE(0x14)COMMIT阶段拒绝，停留ST_CONFIG，静态向量/波形/owner/码/计数器零侧效应 @satisfies: ILM-15"
+264,ADCN-01,rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v,213,,symbol_anchor_without_tag,213: 	assign dec_accumulator_q16 = dec_offset_q16_ext +
+265,ADCN-02,rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v,224,,symbol_anchor_without_tag,224: 	assign dec_rounding_magnitude_biased =
+266,ADCN-03,rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v,232,ADCN-03,same_id_tag,232: 	assign flag_saturation_low = dec_rounded_value < -20'sd2048; // 检测负向超出校准残差可表示范围 @satisfies: ADCN-03
+267,ADCN-04,rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v,290,"ADCN-04,ADCN-06",same_id_tag,"290: 	assign dec_fine_value = (i_precision_mode == 1'b0) ? 24'sd0 : flag_fine_overflow_low ? -24'sd8388608 : flag_fine_overflow_high ? 24'sd8388607 : dec_fine_rounded_code[23:0]; // 9-bit事务精细结果固定清零，15-bit事务按舍入饱和模型输出 @satisfies: ADCN-04, ADCN-06"
+268,ADCN-05,rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v,241,ADCN-05,same_id_tag,241: 	assign dec_accumulator_q17 = dec_stage1_product_ext + dec_stage2_product_ext + dec_stage2_offset_ext; // 汇总完整Q17结果，使用本事务绑定的Stage1/Stage2值，非标称或原始替代值 @satisfies: ADCN-05
+269,ADCN-06,rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v,290,"ADCN-04,ADCN-06",same_id_tag,"290: 	assign dec_fine_value = (i_precision_mode == 1'b0) ? 24'sd0 : flag_fine_overflow_low ? -24'sd8388608 : flag_fine_overflow_high ? 24'sd8388607 : dec_fine_rounded_code[23:0]; // 9-bit事务精细结果固定清零，15-bit事务按舍入饱和模型输出 @satisfies: ADCN-04, ADCN-06"
+270,ADCN-07,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1745,,symbol_anchor_without_tag,1745: 		end else if(i_start_ack_event == 1'b1 || (i_control_abort_event == 1'b1 && o_measurement_output_idle == 1'b1))begin
+271,ADCN-08,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1745,,symbol_anchor_without_tag,1745: 		end else if(i_start_ack_event == 1'b1 || (i_control_abort_event == 1'b1 && o_measurement_output_idle == 1'b1))begin
+272,ADCN-09,rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v,250,ADCN-09,same_id_tag,"250: 	assign dec_s1_ext = {{2{i_calibrated_s1_value[11]}}, i_calibrated_s1_value}; // Stage1显式符号扩展，完整12-bit参与粗恢复运算，不截断为9-bit @satisfies: ADCN-09"
+273,ADCN-10,rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v,255,ADCN-10,same_id_tag,255: 	assign o_track_calibrated_s1_value = payload_o[C_CALIBRATED_S1_VALUE_LSB +: 12]; // 提供IDAC主比较残差，与measurement分支233行共用同一payload_o切片，结构上不存在Stage2/重建/正式输出替代通路 @satisfies: ADCN-10
+273,ADCN-10,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,440,TRK-10,different_id_tag_candidate,"440: 			($signed(i_track_calibrated_s1_value) > i_dcs_threshold_high)); // NORMAL残差高于共用DCS上界；TRK-10 跟踪比较仅使用本signed 12-bit校准Stage1残差,不存在Stage2/15-bit重建/DC恢复/正式输出的替代通路 @satisfies: TRK-10"
+281,ISE-01,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,808,"ISE-01,ISE-02,ISE-03",same_id_tag,"808: 				reg_cal_amb_code <= i_waveform_amb_code_snapshot; // 时序写入寄存校准环境数字码环境码通路低位编码端波形上下文锁存；ISE-01/02/03 本行仅在flag_context_fire && flag_context_is_cal的一拍锁存新候选码，两次真实fire之间(含i_control_abort_event期间的804-805行保持)总线值恒定，实时改变i_waveform_amb_code_snapshot不会影响当前已在途波形的741行AMB总线，下一波形只在自身flag_context_fire再次为真时才采用新码 @satisfies: ISE-01, ISE-02, ISE-03"
+282,ISE-02,,,,no_literal_source_anchor,"同ISE-01锚点(`:808`,`:847`)——两次真实fire之间总线值恒定,实时改变`i_waveform_amb_code_snapshot`不影响在途波形"
+283,ISE-03,,,,no_literal_source_anchor,"同ISE-01锚点(`:808`,`:847`)——下一波形只在自身`flag_context_fire`再次为真时才采用新码"
+284,ISE-04,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,652,"ISE-04,ISE-07",same_id_tag,"652: 					reg_red_amb_code : 8'h00);  // SAR9 RED AMB窗口与IR路径的未激活零值隔离；ISE-04 本行仅在645行reg_red_precision==1'b0分支内执行，与636-644行SAR15分支互斥，该tick内SAR15 AMB/DC总线不会被RED写入，逐位透传reg_red_amb_code而非整线使能;ISE-07 本行逐位透传8位码值，Phase A驱动的8'hA5非对称模式(与3C组合)直接证明按位门控而非窗口/总线级使能捷径 @satisfies: ISE-04, ISE-07"
+285,ISE-05,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,642,"ISE-05,ISE-07",same_id_tag,"642: 					(reg_red_frame_type == FRAME_TYPE_NORMAL)) ? reg_red_amb_code : 8'h00); // SAR15 RED AMB窗口与后续IR窗口按位合并；ISE-05 本行仅在636行reg_red_precision==1'b1分支内执行，与645-655行SAR9分支互斥，该tick内SAR9 AMB/DC总线不会被RED写入，逐位透传reg_red_amb_code而非整线使能;ISE-07 Phase B驱动的8'h5A非对称模式(与C3组合)是与Phase A不同的第二组非对称码值，直接证明按位门控而非窗口/总线级使能捷径 @satisfies: ISE-05, ISE-07"
+286,ISE-06,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,615,ISE-06,same_id_tag,615: 		reg_control_next = {CONTROL_WIDTH{1'b0}}; // 时序写入寄存控制字下一拍低位编码端正常时钟更新；ISE-06 STATIC_BIAS分支(616-628行)只置位EN_9_AMB/EN_9_DC/EN_15_AMB/EN_15_DC等通道使能位与测试多路选择总线，从不写CTRL_AMB9/DC9/AMB15/DC15任何一条码总线，四条总线在STATIC_BIAS期间全程保持本行的无条件清零值 @satisfies: ISE-06
+287,ISE-07,rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v,642,"ISE-05,ISE-07",same_id_tag,"642: 					(reg_red_frame_type == FRAME_TYPE_NORMAL)) ? reg_red_amb_code : 8'h00); // SAR15 RED AMB窗口与后续IR窗口按位合并；ISE-05 本行仅在636行reg_red_precision==1'b1分支内执行，与645-655行SAR9分支互斥，该tick内SAR9 AMB/DC总线不会被RED写入，逐位透传reg_red_amb_code而非整线使能;ISE-07 Phase B驱动的8'h5A非对称模式(与C3组合)是与Phase A不同的第二组非对称码值，直接证明按位门控而非窗口/总线级使能捷径 @satisfies: ISE-05, ISE-07"
+288,ISE-08,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,878,ISE-08,same_id_tag,878: 				reg_context_next[CTX_DCS_R_CODE_LSB +: C_IDAC_CODE_WIDTH] = candidate_dcs_r_code; // 更新红光DC committed码；ISE-08 本if由flag_dcs_r_commit独立门控，与下方888行flag_dcs_ir_commit分属两套互不相关的pending/committed/epoch字段，交错事务下红光提交不触碰红外的任何寄存位 @satisfies: ISE-08
+289,ISE-09,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,597,ISE-09,same_id_tag,597: 		(candidate_dcs_r_code != dcs_r_code_current); // 识别红光DC真实码值变化；ISE-09 该条件为0时877行整个if分支不执行，本次安全边界不产生update/track-adjust/epoch递增中的任何一项，仅数值真实变化才会门控877-883行 @satisfies: ISE-09
+290,ISE-10,rtl/ppg_idac_code_controller/ppg_idac_code_controller.v,879,"ISE-10,TRK-07,TRK-08",same_id_tag,"879: 				reg_context_next[CTX_DCS_R_EPOCH_LSB +: C_CODE_EPOCH_WIDTH] = dcs_r_epoch_current + {{C_CODE_EPOCH_WIDTH - 1{1'b0}}, 1'b1}; // 红光实际改码递增版本；TRK-07 安全边界仅对真实改变的±1LSB候选原子提交并加一epoch;TRK-08 普通4-bit截断加法,4'hF->4'h0自动回绕,身份随reg_context整体原子更新;ISE-10 同一截断加法逻辑覆盖ISE-10要求的""从4'hF实际提交一次回绕到4'h0""场景,回绕后epoch与878行同一reg_context原子更新的committed码保持绑定,不会出现epoch与码分离 @satisfies: TRK-07, TRK-08, ISE-10"
+309,PVW-01,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,477,PVW-01,same_id_tag,477: 			peak_valid_o <= 1'b0;               // 复位禁止伪波峰事件; @satisfies: PVW-01
+310,PVW-02,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,589,PVW-02,same_id_tag,589: 			reacquire_search_active_o <= 1'b1;  // 启动、恢复或不完整周期进入9-bit重新获取; @satisfies: PVW-02
+311,PVW-03,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,386,"PRC-06,PVW-03,PVW-08,PVW-09",same_id_tag,"386: 	assign flag_peak_interval_legal = (flag_previous_peak_valid == 1'b0) || ((dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_peak_to_peak_frames >= i_min_peak_to_peak_frames)); // 只有无可靠前一波峰参照时才豁免峰峰时间，reacquire期间若参照仍在则继续检查；快/慢合法心动周期的峰峰间隔核对点 @satisfies: PRC-06, PVW-03, PVW-08, PVW-09"
+312,PVW-04,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,390,PVW-04,same_id_tag,"390: 	assign flag_peak_candidate_event = flag_formal_sample && (state_current == ST_SEARCH_PEAK) && flag_running_valid && (i_filtered_ppg_value < dec_running_value) && flag_direction_falling && (cnt_direction_confirm_next >= {1'b0, i_peak_confirm_count}); // 当前下降样本达到配置确认次数; @satisfies: PVW-04"
+313,PVW-05,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,672,PVW-05,same_id_tag,672: 					reg_running_context <= enc_input_context; // 更新最大值平台或初始化下一阶段最小值; @satisfies: PVW-05
+314,PVW-06,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,731,PVW-06,same_id_tag,731: 				cnt_direction_confirm <= cnt_direction_confirm; // 死区平坦样本既不增加也不清零; @satisfies: PVW-06
+315,PVW-07,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,723,PVW-07,same_id_tag,723: 				cnt_direction_confirm <= {C_CONFIRM_COUNT_WIDTH{1'b0}}; // 新最大值或反向上升取消下降候选; @satisfies: PVW-07
+316,PVW-08,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,386,"PRC-06,PVW-03,PVW-08,PVW-09",same_id_tag,"386: 	assign flag_peak_interval_legal = (flag_previous_peak_valid == 1'b0) || ((dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_peak_to_peak_frames >= i_min_peak_to_peak_frames)); // 只有无可靠前一波峰参照时才豁免峰峰时间，reacquire期间若参照仍在则继续检查；快/慢合法心动周期的峰峰间隔核对点 @satisfies: PRC-06, PVW-03, PVW-08, PVW-09"
+317,PVW-09,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,386,"PRC-06,PVW-03,PVW-08,PVW-09",same_id_tag,"386: 	assign flag_peak_interval_legal = (flag_previous_peak_valid == 1'b0) || ((dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_peak_to_peak_frames >= i_min_peak_to_peak_frames)); // 只有无可靠前一波峰参照时才豁免峰峰时间，reacquire期间若参照仍在则继续检查；快/慢合法心动周期的峰峰间隔核对点 @satisfies: PRC-06, PVW-03, PVW-08, PVW-09"
+318,PVW-10,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,403,PVW-10,same_id_tag,"403: 	assign flag_valley_candidate_event = flag_formal_sample && (state_current == ST_SEARCH_VALLEY) && flag_running_valid && flag_active_peak_valid && (i_filtered_ppg_value > dec_running_value) && flag_direction_rising && (cnt_direction_confirm_next >= {1'b0, i_valley_confirm_count}); // 当前上升样本达到配置确认次数; @satisfies: PVW-10"
+319,PVW-11,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,678,PVW-11,same_id_tag,678: 					reg_running_context <= enc_input_context; // 更新最小值平台或初始化下一周期最大值; @satisfies: PVW-11
+320,PVW-12,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,743,PVW-12,same_id_tag,743: 				cnt_direction_confirm <= cnt_direction_confirm; // 死区平坦样本保持既有上升证据; @satisfies: PVW-12
+321,PVW-13,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,735,PVW-13,same_id_tag,735: 				cnt_direction_confirm <= {C_CONFIRM_COUNT_WIDTH{1'b0}}; // 新最小值或反向下降取消上升候选; @satisfies: PVW-13
+322,PVW-14,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,398,PVW-14,same_id_tag,"398: 	assign flag_valley_amplitude_legal = (dec_peak_valley_amplitude > 0) && ($unsigned(dec_peak_valley_amplitude) >= {1'b0, i_min_peak_valley_amplitude}); // 正幅度达到SPI最小门限; @satisfies: PVW-14"
+323,PVW-15,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,399,"PRC-06,PVW-15",same_id_tag,"399: 	assign flag_valley_interval_legal = (dec_peak_to_valley_frames[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_peak_to_valley_frames >= i_min_peak_to_valley_frames); // 峰谷时间必须小于半回绕且达到下界；快/慢合法心动周期的峰谷间隔核对点 @satisfies: PRC-06, PVW-15"
+324,PVW-16,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,525,PVW-16,same_id_tag,525: 			valley_payload_o <= reg_running_context; // 冻结运行最小值的实际中心上下文; @satisfies: PVW-16
+325,PVW-17,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,496,PVW-17,same_id_tag,496: 			peak_payload_o <= reg_running_context; // 冻结运行最大值的实际中心上下文; @satisfies: PVW-17
+326,PVW-18,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,349,PVW-18,same_id_tag,349: 	assign flag_red_time_transfer = flag_input_transfer && (i_color_ir == 1'b0) && (i_frame_type == FRAME_TYPE_NORMAL); // RED NORMAL事务推进真实帧时间; @satisfies: PVW-18
+327,PVW-19,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,354,PVW-19,same_id_tag,354: 	assign flag_formal_sample = flag_red_time_transfer && i_detection_qualified && flag_no_saturation && flag_active_config_legal && (flag_recovery_return_pending == 1'b0); // 只有完整RED事务更新峰谷状态; @satisfies: PVW-19
+328,PVW-20,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,427,"PVW-20,PVW-39",same_id_tag,"427: 	assign flag_frame_protocol_error_event = (flag_formal_sample && flag_previous_valid && (flag_frame_contiguous == 1'b0)) || (flag_peak_candidate_event && flag_previous_peak_valid && dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1]) || (flag_valley_candidate_event && dec_peak_to_valley_frames[C_FRAME_ID_WIDTH-1]) || (fine_window_active_o && flag_red_time_transfer && i_precision_mode && dec_fine_window_age[C_FRAME_ID_WIDTH-1]) || (reacquire_search_active_o && flag_red_time_transfer && flag_reacquire_timer_valid && dec_reacquire_age[C_FRAME_ID_WIDTH-1]); // 入口旧9-bit负帧龄合法而其他半回绕时间均非法; @satisfies: PVW-20, PVW-39"
+329,PVW-21,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,417,PVW-21,same_id_tag,417: 	assign flag_unauthorized_precision_event = i_run_enable && (i_characterization_mode == 1'b0) && flag_red_time_transfer && (fine_window_active_o == 1'b0) && i_precision_mode && (flag_exit_precision_tail_active == 1'b0); // 非正式窗口不得静默接收15-bit中心样本; @satisfies: PVW-21
+330,PVW-22,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,576,"PVW-22,PVW-23",same_id_tag,"576: 			fine_window_active_o <= 1'b1;       // 模式控制器commit事件建立正式窗口; @satisfies: PVW-22, PVW-23"
+331,PVW-23,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,576,"PVW-22,PVW-23",same_id_tag,"576: 			fine_window_active_o <= 1'b1;       // 模式控制器commit事件建立正式窗口; @satisfies: PVW-22, PVW-23"
+332,PVW-24,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,541,PVW-24,same_id_tag,541: 			return_9bit_valid_o <= 1'b1;        // 正式窗口合格谷值请求返回9-bit; @satisfies: PVW-24
+332,PVW-24,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,574,PVW-24,same_id_tag,574: 			fine_window_active_o <= 1'b0;       // 正常请求完成后结束窗口资格; @satisfies: PVW-24
+333,PVW-25,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,420,PVW-25,same_id_tag,420: 	assign flag_fine_window_timeout_event = flag_red_time_transfer && flag_fine_center_qualified && (flag_recovery_return_pending == 1'b0) && (return_9bit_valid_o == 1'b0) && (flag_return_accepted == 1'b0) && (dec_fine_window_age >= i_max_fine_window_frames) && (flag_valley_accept_event == 1'b0); // 仅从首笔正式15-bit中心样本计算窗口超时; @satisfies: PVW-25
+334,PVW-26,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,421,"PRC-06,PVW-26",same_id_tag,"421: 	assign flag_reacquire_timeout_event = flag_red_time_transfer && reacquire_search_active_o && flag_reacquire_timer_valid && (state_current == ST_SEARCH_PEAK) && (dec_reacquire_age[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_reacquire_age >= i_max_reacquire_frames) && (flag_peak_accept_event == 1'b0); // 重新获取失败后自动开始下一轮；越界心动周期不落入假接受而走超时/重新获取 @satisfies: PRC-06, PVW-26"
+335,PVW-27,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,591,PVW-27,same_id_tag,591: 			reacquire_search_active_o <= 1'b0;  // 新锚点被动态基线消费后完成重新获取; @satisfies: PVW-27
+336,PVW-28,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,485,PVW-28,same_id_tag,485: 			peak_valid_o <= peak_valid_o;       // 反压和空拍期间保持valid; @satisfies: PVW-28
+337,PVW-29,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,514,PVW-29,same_id_tag,514: 			valley_valid_o <= valley_valid_o;   // 未消费谷值继续保持通知电平; @satisfies: PVW-29
+338,PVW-30,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,545,PVW-30,same_id_tag,545: 			return_9bit_valid_o <= return_9bit_valid_o; // 反压期间保持请求; @satisfies: PVW-30
+339,PVW-31,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,426,PVW-31,same_id_tag,426: 	assign flag_epoch_drift_event = flag_formal_sample && flag_running_valid && ((i_config_epoch != dec_running_config_epoch) || (i_coef_epoch != dec_running_coef_epoch) || (i_dc_recovery_coef_epoch != dec_running_dc_epoch)); // 活动候选期间任一配置语义版本发生漂移; @satisfies: PVW-31
+340,PVW-32,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,346,"PVW-32,PVW-35,PVW-36",same_id_tag,"346: 	assign flag_runtime_clear = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || i_recheck_accept_event || (i_run_enable == 1'b0); // PWI广播的代际清空事件命中当前代际时清理运行状态; @satisfies: PVW-32, PVW-35, PVW-36"
+341,PVW-33,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,464,"PVW-33,PVW-46",same_id_tag,"464: 	assign o_detector_idle = (peak_valid_o == 1'b0) && (valley_valid_o == 1'b0) && (return_9bit_valid_o == 1'b0) && (flag_return_accepted == 1'b0) && (flag_recovery_return_pending == 1'b0) && (flag_entry_precision_tail_active == 1'b0); // 真实事务与入口尾部排空后允许接管，被动退出尾部不阻挡; @satisfies: PVW-33, PVW-46"
+342,PVW-34,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,438,PVW-34,same_id_tag,438: 	assign o_result_ready = i_rstn && i_run_enable && (i_recheck_busy == 1'b0) && (peak_valid_o == 1'b0) && (valley_valid_o == 1'b0); // 峰谷事件反压时冻结唯一缓冲所有权; @satisfies: PVW-34
+343,PVW-35,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,346,"PVW-32,PVW-35,PVW-36",same_id_tag,"346: 	assign flag_runtime_clear = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || i_recheck_accept_event || (i_run_enable == 1'b0); // PWI广播的代际清空事件命中当前代际时清理运行状态; @satisfies: PVW-32, PVW-35, PVW-36"
+343,PVW-35,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,632,"PVW-35,PVW-37",same_id_tag,"632: 			protocol_error_sticky_o <= protocol_error_sticky_o; // 新START与无清除授权时均保留协议违例证据; @satisfies: PVW-35, PVW-37"
+344,PVW-36,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,346,"PVW-32,PVW-35,PVW-36",same_id_tag,"346: 	assign flag_runtime_clear = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || i_recheck_accept_event || (i_run_enable == 1'b0); // PWI广播的代际清空事件命中当前代际时清理运行状态; @satisfies: PVW-32, PVW-35, PVW-36"
+344,PVW-36,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,465,PVW-36,same_id_tag,465: 	assign o_local_empty = (o_detector_idle == 1'b1) && (flag_entry_precision_tail_active == 1'b0); // 比重检idle更严格，连入口尾部占用也视为pending; @satisfies: PVW-36
+345,PVW-37,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,628,PVW-37,same_id_tag,628: 			protocol_error_sticky_o <= 1'b1;    // 新协议违例覆盖同拍软件清除; @satisfies: PVW-37
+345,PVW-37,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,632,"PVW-35,PVW-37",same_id_tag,"632: 			protocol_error_sticky_o <= protocol_error_sticky_o; // 新START与无清除授权时均保留协议违例证据; @satisfies: PVW-35, PVW-37"
+346,PVW-38,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,351,PVW-38,same_id_tag,351: 	assign flag_active_config_legal = (i_peak_valley_config_valid || i_characterization_mode) && (i_peak_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_valley_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_min_peak_to_valley_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_min_peak_to_peak_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_fine_window_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_reacquire_frames != {C_INTERVAL_WIDTH{1'b0}}); // CHARACTERIZATION只豁免config_valid提交状态，六项数值门限两种模式下均不得为0; @satisfies: PVW-38
+347,PVW-39,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,427,"PVW-20,PVW-39",same_id_tag,"427: 	assign flag_frame_protocol_error_event = (flag_formal_sample && flag_previous_valid && (flag_frame_contiguous == 1'b0)) || (flag_peak_candidate_event && flag_previous_peak_valid && dec_peak_to_peak_frames[C_FRAME_ID_WIDTH-1]) || (flag_valley_candidate_event && dec_peak_to_valley_frames[C_FRAME_ID_WIDTH-1]) || (fine_window_active_o && flag_red_time_transfer && i_precision_mode && dec_fine_window_age[C_FRAME_ID_WIDTH-1]) || (reacquire_search_active_o && flag_red_time_transfer && flag_reacquire_timer_valid && dec_reacquire_age[C_FRAME_ID_WIDTH-1]); // 入口旧9-bit负帧龄合法而其他半回绕时间均非法; @satisfies: PVW-20, PVW-39"
+348,PVW-40,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,374,PVW-40,same_id_tag,"374: 	assign dec_direction_delta = $signed({i_filtered_ppg_value[C_DATA_WIDTH-1], i_filtered_ppg_value}) - $signed({dec_previous_value[C_DATA_WIDTH-1], dec_previous_value}); // 当前值减上一合格值; @satisfies: PVW-40"
+349,PVW-41,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,422,"PRC-06,PRC-07,PVW-41",same_id_tag,"422: 	assign flag_nonfine_valley_timeout_event = flag_red_time_transfer && (fine_window_active_o == 1'b0) && (state_current == ST_SEARCH_VALLEY) && flag_active_peak_valid && (dec_active_peak_age[C_FRAME_ID_WIDTH-1] == 1'b0) && (dec_active_peak_age >= i_max_fine_window_frames) && (flag_valley_accept_event == 1'b0); // 9-bit不完整周期不得永久阻塞峰值搜索；弱重搏切迹无法确认VALLEY时走超时/重新获取而非停在未资格SAR9 @satisfies: PRC-06, PRC-07, PVW-41"
+350,PVW-42,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,414,PVW-42,same_id_tag,414: 	assign flag_entry_tail_overflow_event = fine_window_active_o && flag_entry_precision_tail_active && flag_red_time_transfer && (i_precision_mode == 1'b0) && (cnt_entry_precision_tail >= FIR_GROUP_DELAY_LIMIT); // 第11笔旧9-bit中心样本违反有界尾部; @satisfies: PVW-42
+351,PVW-43,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,413,PVW-43,same_id_tag,413: 	assign flag_fine_center_qualified = fine_window_active_o && i_precision_mode && (dec_fine_window_age[C_FRAME_ID_WIDTH-1] == 1'b0); // 中心精度和帧龄同时证明正式fine资格; @satisfies: PVW-43
+352,PVW-44,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,404,"PRC-07,PVW-44",same_id_tag,"404: 	assign flag_valley_accept_event = flag_valley_candidate_event && flag_valley_amplitude_legal && flag_valley_interval_legal && flag_valley_epoch_match && ((fine_window_active_o == 1'b0) || flag_active_peak_fine_qualified); // 正式fine窗口只接受合格15-bit中心波峰配对；弱重搏切迹下仍可产生完整合格VALLEY @satisfies: PRC-07, PVW-44"
+352,PVW-44,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,405,PVW-44,same_id_tag,405: 	assign flag_valley_restart_event = flag_valley_candidate_event && flag_valley_amplitude_legal && flag_valley_interval_legal && flag_valley_epoch_match && fine_window_active_o && (flag_active_peak_fine_qualified == 1'b0); // 旧9-bit波峰完成粗谷后继续寻找正式fine波峰; @satisfies: PVW-44
+353,PVW-45,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,416,PVW-45,same_id_tag,416: 	assign flag_exit_tail_overflow_event = flag_exit_precision_tail_active && flag_red_time_transfer && i_precision_mode && (cnt_exit_precision_tail >= FIR_GROUP_DELAY_LIMIT); // 第11笔旧15-bit中心样本违反退出尾部; @satisfies: PVW-45
+354,PVW-46,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,464,"PVW-33,PVW-46",same_id_tag,"464: 	assign o_detector_idle = (peak_valid_o == 1'b0) && (valley_valid_o == 1'b0) && (return_9bit_valid_o == 1'b0) && (flag_return_accepted == 1'b0) && (flag_recovery_return_pending == 1'b0) && (flag_entry_precision_tail_active == 1'b0); // 真实事务与入口尾部排空后允许接管，被动退出尾部不阻挡; @satisfies: PVW-33, PVW-46"
+355,PVW-47,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,424,,symbol_anchor_without_tag,424: 	assign flag_precision_drop_event = fine_window_active_o && (i_active_precision_mode == 1'b0) && (flag_return_accepted == 1'b0); // 未完成返回握手却提前切到9-bit
+356,PVW-48,rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v,423,,symbol_anchor_without_tag,423: 	assign flag_fine_protocol_fallback_event = fine_window_active_o && flag_red_time_transfer && (flag_active_config_legal == 1'b0) && (return_9bit_valid_o == 1'b0) && (flag_return_accepted == 1'b0); // 正式窗口配置失效时请求安全回退
+366,PWC-01,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,318,PWC-01,same_id_tag,318: 			active_precision_mode_o <= PRECISION_9BIT; // 复位固定安全9-bit; @satisfies: PWC-01
+367,PWC-02,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,325,PWC-02,same_id_tag,325: 				active_precision_mode_o <= PRECISION_9BIT; // 合法NORMAL固定粗精度启动; @satisfies: PWC-02
+368,PWC-03,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,867,,symbol_anchor_without_tag,867: 
+369,PWC-04,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,323,"PWC-04,PWC-05",same_id_tag,"323: 				active_precision_mode_o <= i_initial_precision; // 表征RUN固定采用配置精度; @satisfies: PWC-04, PWC-05"
+370,PWC-05,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,323,"PWC-04,PWC-05",same_id_tag,"323: 				active_precision_mode_o <= i_initial_precision; // 表征RUN固定采用配置精度; @satisfies: PWC-04, PWC-05"
+371,PWC-06,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",same_id_tag,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+372,PWC-07,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,258,PWC-07,same_id_tag,258: 	assign flag_cross_transfer = i_cross_valid && o_cross_ready; // 相交载荷只在真实握手沿取得所有权; @satisfies: PWC-07
+373,PWC-08,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,710,,symbol_anchor_without_tag,710: 			reg_cross_frame_snapshot <= reg_cross_frame_snapshot; // 等待期间保持载荷
+374,PWC-09,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,264,"PWC-09,PWC-22,PWC-37",same_id_tag,"264: 	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0); // 下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37"
+375,PWC-10,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,367,PWC-10,same_id_tag,367: 			fine_window_start_frame_id_o <= i_safe_frame_id; // 记录真实安全边界帧号; @satisfies: PWC-10
+376,PWC-11,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,546,,symbol_anchor_without_tag,546: 	end
+377,PWC-12,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,564,,symbol_anchor_without_tag,564: 			last_cross_time_unknown_o <= last_cross_time_unknown_o; // 反压与重复请求不覆盖
+378,PWC-13,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,662,,symbol_anchor_without_tag,662: 
+379,PWC-14,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,259,PWC-14,same_id_tag,259: 	assign flag_return_transfer = i_return_9bit_valid && o_return_9bit_ready; // 返回载荷只在真实握手沿取得所有权; @satisfies: PWC-14
+380,PWC-15,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,630,,symbol_anchor_without_tag,630: 					end else if(flag_switch_timeout_event == 1'b1)begin
+381,PWC-16,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,400,PWC-16,same_id_tag,400: 			reacquire_request_event_o <= 1'b1;  // 下游此时已观察稳定9-bit精度; @satisfies: PWC-16
+382,PWC-17,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,882,,symbol_anchor_without_tag,882: 
+383,PWC-18,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,576,,symbol_anchor_without_tag,576: 				last_return_reason_o <= i_return_reason; // 保存合法返回原因
+384,PWC-19,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,389,PWC-19,same_id_tag,389: 			precision_15_to_9_frame_id_o <= i_safe_frame_id; // 锁存真实粗精度首帧; @satisfies: PWC-19
+385,PWC-20,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,378,PWC-20,same_id_tag,378: 			precision_15_to_9_event_o <= 1'b1;  // 正式窗口真实恢复9-bit; @satisfies: PWC-20
+386,PWC-21,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",same_id_tag,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+387,PWC-22,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,264,"PWC-09,PWC-22,PWC-37",same_id_tag,"264: 	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0); // 下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37"
+388,PWC-23,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,522,,symbol_anchor_without_tag,522: 			switch_pending_o <= 1'b0;           // 提交、取消或故障释放pending
+389,PWC-24,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,694,,symbol_anchor_without_tag,694: 				cnt_switch_timeout <= cnt_switch_timeout; // 阈值边界冻结供超时组合判断
+390,PWC-25,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,268,PWC-25,same_id_tag,268: 	assign flag_switch_timeout_event = flag_pending_state && (flag_enter_commit == 1'b0) && (flag_return_commit == 1'b0) && (cnt_switch_timeout >= TIMEOUT_LIMIT_MINUS_ONE); // 安全提交与阈值同拍时提交优先; @satisfies: PWC-25
+391,PWC-26,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,617,,symbol_anchor_without_tag,617: 				end
+392,PWC-27,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,267,"G-FP-02,K04,N02,PWC-27,PWC-28",same_id_tag,"267: 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28"
+393,PWC-28,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,267,"G-FP-02,K04,N02,PWC-27,PWC-28",same_id_tag,"267: 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28"
+394,PWC-29,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,706,,symbol_anchor_without_tag,706: 			reg_cross_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}; // 新RUN或取消删除旧上下文
+395,PWC-30,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,862,,symbol_anchor_without_tag,862: 
+396,PWC-31,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,652,,symbol_anchor_without_tag,652: 
+397,PWC-32,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,265,"PWC-32,PWC-38",same_id_tag,"265: 	assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe; // 下一安全帧原子返回9-bit; @satisfies: PWC-32, PWC-38"
+398,PWC-33,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,513,,symbol_anchor_without_tag,513: 	end
+399,PWC-34,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,682,,symbol_anchor_without_tag,682: 	end
+400,PWC-35,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,555,,symbol_anchor_without_tag,555: 	end
+401,PWC-36,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,284,PWC-36,same_id_tag,284: 	assign o_active_precision_mode = active_precision_mode_o; // 导出当前唯一committed精度; @satisfies: PWC-36
+402,PWC-37,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,264,"PWC-09,PWC-22,PWC-37",same_id_tag,"264: 	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0); // 下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37"
+403,PWC-38,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,265,"PWC-32,PWC-38",same_id_tag,"265: 	assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe; // 下一安全帧原子返回9-bit; @satisfies: PWC-32, PWC-38"
+404,PWC-39,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,266,PWC-39,same_id_tag,266: 	assign flag_pending_state = (state_current == ST_WAIT_ENTER) || (state_current == ST_WAIT_RETURN); // 两种pending状态共享超时保护; @satisfies: PWC-39
+405,PWC-40,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,277,"G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",same_id_tag,"277: 	assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40"
+406,PWC-41,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,494,PWC-41,same_id_tag,494: 			switch_timeout_sticky_o <= 1'b0;    // 仅软件诊断清除可清历史，新START/STOP不清（合同:205/:731）; @satisfies: PWC-41
+416,FIR-01,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,451,FIR-01,same_id_tag,451: 			result_valid_o <= 1'b0;         // 复位后禁止伪输出事务; @satisfies: FIR-01
+417,FIR-02,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,311,"FIR-02,FIR-03",same_id_tag,"311: 	assign flag_compute_start = flag_history_transfer && (cnt_selected_sample >= 5'd20); // 当前样本补齐21点窗口; @satisfies: FIR-02, FIR-03"
+418,FIR-03,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,311,"FIR-02,FIR-03",same_id_tag,"311: 	assign flag_compute_start = flag_history_transfer && (cnt_selected_sample >= 5'd20); // 当前样本补齐21点窗口; @satisfies: FIR-02, FIR-03"
+419,FIR-04,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,389,FIR-04,same_id_tag,389: 	assign dec_rounded_magnitude = dec_round_work >>> 15; // Q15幅值换算回统一整数码; @satisfies: FIR-04
+420,FIR-05,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,619,"FIR-05,FIR-28",same_id_tag,"619: 				dec_mac_coefficient = 16'sd164; // 选择最外层Q15系数; @satisfies: FIR-05, FIR-28"
+421,FIR-06,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,388,FIR-06,same_id_tag,388: 	assign dec_round_work = dec_accumulator_magnitude + ROUND_HALF; // 加入16384实现半LSB远离零; @satisfies: FIR-06
+422,FIR-07,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,386,FIR-07,same_id_tag,"386: 	assign dec_accumulator_ext = {reg_accumulator[41], reg_accumulator}; // 增加最负数绝对值保护位; @satisfies: FIR-07"
+423,FIR-08,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,329,FIR-08,same_id_tag,329: 	assign dec_selected_history = i_color_ir ? reg_ir_history : reg_red_history; // 读取本笔颜色的旧窗口; @satisfies: FIR-08
+424,FIR-09,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,737,FIR-09,same_id_tag,737: 			reg_context_snapshot <= enc_center_context; // 保存x[n-10]完整身份; @satisfies: FIR-09
+425,FIR-10,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,359,"FIR-10,FIR-29",same_id_tag,"359: 	assign dec_center_precision_mode = dec_selected_history[(SAMPLE_WIDTH * 32'd9) + PRECISION_MODE_LSB]; // 读取中心精度身份; @satisfies: FIR-10, FIR-29"
+426,FIR-11,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,325,"FIR-11,FIR-12,FIR-16,FIR-25",same_id_tag,"325: 	assign flag_history_clear = i_start_ack_event || (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_recheck_clear; // 汇总两色历史重建来源; @satisfies: FIR-11, FIR-12, FIR-16, FIR-25"
+427,FIR-12,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,325,"FIR-11,FIR-12,FIR-16,FIR-25",same_id_tag,"325: 	assign flag_history_clear = i_start_ack_event || (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_recheck_clear; // 汇总两色历史重建来源; @satisfies: FIR-11, FIR-12, FIR-16, FIR-25"
+428,FIR-13,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,324,"FIR-13,FIR-26,NRE-02,RRC-04,RRC-09",same_id_tag,"324: 	assign flag_recheck_clear = i_recheck_accept_event && flag_fir_idle; // 危险时刻的重检accept被安全忽略；RRC-04/RRC-09 accept原子清零RED/IR历史深度，成功恢复后必须各自重新累计21笔新样本才能恢复正式检测资格；NRE-02 interval=0时i_recheck_accept_event结构性恒为0，本行永不触发，FIR历史不受重检驱动清零 @satisfies: RRC-04, RRC-09, NRE-02, FIR-13, FIR-26"
+429,FIR-14,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,406,"FIR-14,FIR-21",same_id_tag,"406: 	assign o_result_ready = i_rstn && i_run_enable && (i_recheck_busy == 1'b0) && (state_current == ST_IDLE) && flag_buffer_available; // 仅空闲时接纳输入; @satisfies: FIR-14, FIR-21"
+430,FIR-15,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,696,"FIR-15,NRE-03",same_id_tag,"696: 			cnt_red_sample <= 5'd0;         // 重检或生命周期事件撤销预热资格；NRE-03 flag_history_clear的重检分支interval=0时结构性恒为0，红光预热深度只沿699行单调递增至满窗，中途不下降 @satisfies: NRE-03, FIR-15"
+431,FIR-16,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,325,"FIR-11,FIR-12,FIR-16,FIR-25",same_id_tag,"325: 	assign flag_history_clear = i_start_ack_event || (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_recheck_clear; // 汇总两色历史重建来源; @satisfies: FIR-11, FIR-12, FIR-16, FIR-25"
+432,FIR-17,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,315,"FIR-17,FIR-32",same_id_tag,"315: 	assign flag_sample_qualified = i_sample_valid && (i_coarse_recovery_calibrated && !flag_test_calibration_loss_active) && (i_stage1_saturation_low == 1'b0) && (i_stage1_saturation_high == 1'b0) && (i_coarse_saturation_low == 1'b0) && (i_coarse_saturation_high == 1'b0); // 汇总单点正式资格，字面对齐合同7.3公式顺序，验证注入生效时强制本笔calibration资格为0; @satisfies: FIR-17, FIR-32"
+433,FIR-18,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,319,"FIR-18,PRC-03",same_id_tag,"319: 	assign flag_window_saturation_low = |dec_window_saturation_low; // 保留窗口任一点低侧诊断；高幅度/clamp输入正确置位窗口负向饱和诊断 @satisfies: PRC-03, FIR-18"
+434,FIR-19,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,309,"FIR-19,FIR-31,FIR-32,FIR-33",same_id_tag,"309: 	assign flag_history_transfer = flag_input_transfer && i_sample_valid && i_coarse_valid && (i_frame_type == 2'b10); // invalid事务仍握手但不得进入两色历史; @satisfies: FIR-19, FIR-31, FIR-32, FIR-33"
+435,FIR-20,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,444,FIR-20,same_id_tag,444: 			payload_o <= payload_o;         // 下游反压期间保持全部字段; @satisfies: FIR-20
+436,FIR-21,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,406,"FIR-14,FIR-21",same_id_tag,"406: 	assign o_result_ready = i_rstn && i_run_enable && (i_recheck_busy == 1'b0) && (state_current == ST_IDLE) && flag_buffer_available; // 仅空闲时接纳输入; @satisfies: FIR-14, FIR-21"
+437,FIR-22,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,547,FIR-22,same_id_tag,547: 			cnt_mac_index <= cnt_mac_index + 4'd1; // 每个MAC周期推进一个固定项; @satisfies: FIR-22
+438,FIR-23,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,494,FIR-23,same_id_tag,494: 						state_next = ST_COMMIT; // 中心项完成后进入提交阶段; @satisfies: FIR-23
+439,FIR-24,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,323,FIR-24,same_id_tag,323: 	assign flag_fir_idle = (state_current == ST_IDLE) && (result_valid_o == 1'b0) && (flag_input_transfer == 1'b0); // 当前输入沿也必须排空; @satisfies: FIR-24
+440,FIR-25,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,325,"FIR-11,FIR-12,FIR-16,FIR-25",same_id_tag,"325: 	assign flag_history_clear = i_start_ack_event || (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_recheck_clear; // 汇总两色历史重建来源; @satisfies: FIR-11, FIR-12, FIR-16, FIR-25"
+441,FIR-26,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,324,"FIR-13,FIR-26,NRE-02,RRC-04,RRC-09",same_id_tag,"324: 	assign flag_recheck_clear = i_recheck_accept_event && flag_fir_idle; // 危险时刻的重检accept被安全忽略；RRC-04/RRC-09 accept原子清零RED/IR历史深度，成功恢复后必须各自重新累计21笔新样本才能恢复正式检测资格；NRE-02 interval=0时i_recheck_accept_event结构性恒为0，本行永不触发，FIR历史不受重检驱动清零 @satisfies: RRC-04, RRC-09, NRE-02, FIR-13, FIR-26"
+442,FIR-27,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,385,FIR-27,same_id_tag,"385: 	assign dec_mac_product_ext = {dec_mac_product[40], dec_mac_product}; // 乘积扩展到42-bit累加域; @satisfies: FIR-27"
+443,FIR-28,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,619,"FIR-05,FIR-28",same_id_tag,"619: 				dec_mac_coefficient = 16'sd164; // 选择最外层Q15系数; @satisfies: FIR-05, FIR-28"
+444,FIR-29,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,359,"FIR-10,FIR-29",same_id_tag,"359: 	assign dec_center_precision_mode = dec_selected_history[(SAMPLE_WIDTH * 32'd9) + PRECISION_MODE_LSB]; // 读取中心精度身份; @satisfies: FIR-10, FIR-29"
+445,FIR-30,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,326,FIR-30,same_id_tag,326: 	assign flag_transaction_clear = flag_history_clear || flag_process_timeout; // 超时只撤销计算而不清历史; @satisfies: FIR-30
+446,FIR-31,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,309,"FIR-19,FIR-31,FIR-32,FIR-33",same_id_tag,"309: 	assign flag_history_transfer = flag_input_transfer && i_sample_valid && i_coarse_valid && (i_frame_type == 2'b10); // invalid事务仍握手但不得进入两色历史; @satisfies: FIR-19, FIR-31, FIR-32, FIR-33"
+447,FIR-32,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,309,"FIR-19,FIR-31,FIR-32,FIR-33",same_id_tag,"309: 	assign flag_history_transfer = flag_input_transfer && i_sample_valid && i_coarse_valid && (i_frame_type == 2'b10); // invalid事务仍握手但不得进入两色历史; @satisfies: FIR-19, FIR-31, FIR-32, FIR-33"
+447,FIR-32,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,315,"FIR-17,FIR-32",same_id_tag,"315: 	assign flag_sample_qualified = i_sample_valid && (i_coarse_recovery_calibrated && !flag_test_calibration_loss_active) && (i_stage1_saturation_low == 1'b0) && (i_stage1_saturation_high == 1'b0) && (i_coarse_saturation_low == 1'b0) && (i_coarse_saturation_high == 1'b0); // 汇总单点正式资格，字面对齐合同7.3公式顺序，验证注入生效时强制本笔calibration资格为0; @satisfies: FIR-17, FIR-32"
+448,FIR-33,rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v,309,"FIR-19,FIR-31,FIR-32,FIR-33",same_id_tag,"309: 	assign flag_history_transfer = flag_input_transfer && i_sample_valid && i_coarse_valid && (i_frame_type == 2'b10); // invalid事务仍握手但不得进入两色历史; @satisfies: FIR-19, FIR-31, FIR-32, FIR-33"
+454,L01,,,,explicit_NA,"N/A — 其""all-file legacy audit""阻塞项就是G-FP-04,已于2026-09-02 Batch 0关闭"
+455,"LFA-08,P07,TOP-22",rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,908,TOP-21,different_id_tag_candidate,908: 	assign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21
+456,"P17,TOP-17",rtl/ppg_control_top/ppg_control_top.v,414,,symbol_anchor_without_tag,414: 	assign flag_measurement_start_ack_event = wrapper_start_ack_event_o && !flag_static_characterization_enable; // STATIC_BIAS下不得观察测量START
+457,N02,rtl/ppg_system_config_manager/ppg_system_config_manager.v,528-538,N02,same_id_tag,"528: 	// flag_start_accept本身已经把i_system_fault_blocking和STATIC_BIAS组合门控在内，这里只需在该拍原子加一
+529: 	always@(posedge i_clk or negedge i_rstn)begin
+530: 		if(i_rstn == 1'b0)begin
+531: 			run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}}; // 复位代际归零
+532: 		end else if(flag_start_accept == 1'b1)begin
+533: 			run_generation_o <= run_generation_o + 1'b1; // 合法START时递增，i_system_fault_blocking为高时flag_start_accept恒为0不会误增；manager唯一generation生产者 @satisfies: N02
+534: 		end else begin
+535: 			run_generation_o <= run_generation_o; // 非START拍保持当前代际
+536: 		end
+537: 	end
+538: "
+458,N02,rtl/ppg_precision_window_controller/ppg_precision_window_controller.v,267,"G-FP-02,K04,N02,PWC-27,PWC-28",same_id_tag,"267: 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28"
+458,N02,rtl/ppg_precision_window_integration/ppg_precision_window_integration.v,443,K04,different_id_tag_candidate,"443: 	assign flag_detection_discard_apply = i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation); // AMI广播的代际清空事件命中当前代际时无条件生效；仅generation-scoped discard,复位路径独立不经此线 @satisfies: K04"
+459,P16,,,,explicit_NA,"N/A — `PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§7.1,§9.3-9.5(非RTL锚点)"
+460,N07,,,,explicit_NA,N/A — `PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§7.1(非RTL锚点)
+462,P01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1024,,symbol_anchor_without_tag,1024: 
+462,P01,rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v,194-309,"ADCN-10,P13",different_id_tag_candidate,"194: 	assign flag_buffer_occupied = measurement_valid_o || track_valid_o; // 汇总两个独立分支所有权
+195: 	assign flag_measurement_transfer = measurement_valid_o && i_measurement_ready; // 定义测量分支唯一消费事件
+196: 	assign flag_track_transfer = track_valid_o && i_track_ready; // 定义跟踪分支唯一消费事件
+197: 	assign flag_transaction_releasing = flag_buffer_occupied &&
+198: 		((measurement_valid_o == 1'b0) || flag_measurement_transfer) &&
+199: 		((track_valid_o == 1'b0) || flag_track_transfer); // 判断旧事务在当前沿后不再被任何分支持有
+200: 	assign flag_input_transfer = i_normal_valid && o_normal_ready; // 定义新事务进入单元素缓存的唯一条件
+201: 	assign flag_discard_apply = i_datapath_discard_event && (run_generation_o == i_run_generation); // AMI清空事件命中当前持有代际时无条件清除两个分支
+202: 
+203: 	// 全部字段采用一次拼接写入，禁止数值、物理码和元数据跨事务混合
+204: 	assign payload_input = {
+205: 		i_calibrated_s1_value,
+206: 		i_calibration_applied,
+207: 		i_saturation_low,
+208: 		i_saturation_high,
+209: 		i_config_epoch,
+210: 		i_coef_epoch,
+211: 		i_detect_code,
+212: 		i_stage1_raw,
+213: 		i_stage1_code_ext,
+214: 		i_stage2_raw,
+215: 		i_precision_mode,
+216: 		i_frame_id,
+217: 		i_sample_index,
+218: 		i_color_ir,
+219: 		i_frame_type,
+220: 		i_amb_code_snapshot,
+221: 		i_dc_code_snapshot,
+222: 		i_amb_code_epoch,
+223: 		i_dc_code_epoch
+224: 	};                                      // 形成131-bit默认参数下的原子NORMAL载荷
+225: 
+226: 	//-------------输出信号连线-------------//
+227: 	// 输入ready允许空缓存装入，也允许旧事务释放与下一笔事务在同一上升沿替换
+228: 	assign o_normal_ready = i_rstn && ((flag_buffer_occupied == 1'b0) || flag_transaction_releasing); // 返回router的弹性反压许可
+229: 	assign o_measurement_valid = measurement_valid_o; // 桥接测量分支pending状态
+230: 	assign o_track_valid = track_valid_o;   // 桥接IDAC跟踪分支pending状态
+231: 
+232: 	// measurement分支逐位解包全部输入字段，直接匹配overlap corrector现有NORMAL接口
+233: 	assign o_measurement_calibrated_s1_value = payload_o[C_CALIBRATED_S1_VALUE_LSB +: 12]; // 解包正式Stage1残差
+234: 	assign o_measurement_calibration_applied = payload_o[C_CALIBRATION_APPLIED_LSB]; // 解包测量链校准资格
+235: 	assign o_measurement_saturation_low = payload_o[C_SATURATION_LOW_LSB]; // 解包负向端点诊断
+236: 	assign o_measurement_saturation_high = payload_o[C_SATURATION_HIGH_LSB]; // 解包正向端点诊断
+237: 	assign o_measurement_config_epoch = payload_o[C_CONFIG_EPOCH_LSB +: C_CONFIG_EPOCH_WIDTH]; // 解包ACTIVE版本标签
+238: 	assign o_measurement_coef_epoch = payload_o[C_COEF_EPOCH_LSB +: C_COEF_EPOCH_WIDTH]; // 解包Stage1系数版本
+239: 	assign o_measurement_detect_code = payload_o[C_DETECT_CODE_LSB +: 9]; // 解包固定9-bit黄金码
+240: 	assign o_measurement_stage1_raw = payload_o[C_STAGE1_RAW_LSB +: 10]; // 解包Stage1物理判决位
+241: 	assign o_measurement_stage1_code_ext = payload_o[C_STAGE1_CODE_EXT_LSB +: 11]; // 解包带符号D1_EXT
+242: 	assign o_measurement_stage2_raw = payload_o[C_STAGE2_RAW_LSB +: 10]; // 解包仅15-bit路径解释的尾级物理判决位
+243: 	assign o_measurement_precision_mode = payload_o[C_PRECISION_MODE_LSB]; // 解包事务精度快照
+244: 	assign o_measurement_frame_id = payload_o[C_FRAME_ID_LSB +: C_FRAME_ID_WIDTH]; // 解包R/IR共享帧号
+245: 	assign o_measurement_sample_index = payload_o[C_SAMPLE_INDEX_LSB +: C_SAMPLE_INDEX_WIDTH]; // 解包全局样本号
+246: 	assign o_measurement_color_ir = payload_o[C_COLOR_IR_LSB]; // 解包红光或红外身份
+247: 	assign o_measurement_frame_type = payload_o[C_FRAME_TYPE_LSB +: 2]; // 解包NORMAL类别编码
+248: 	assign o_measurement_amb_code_snapshot = payload_o[C_AMB_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 解包AMB实际码
+249: 	assign o_measurement_dc_code_snapshot = payload_o[C_DC_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 解包当前颜色DC码
+250: 	assign o_measurement_amb_code_epoch = payload_o[C_AMB_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 解包AMB版本
+251: 	assign o_measurement_dc_code_epoch = payload_o[C_DC_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 解包所选颜色DC控制状态的提交版本
+252: 	assign o_measurement_run_generation = measurement_valid_o ? run_generation_o : {C_RUN_GENERATION_WIDTH{1'b0}}; // 无pending时强制归零
+253: 
+254: 	// tracking分支只暴露IDAC慢速跟踪资格、比较值和事务身份，不传递Stage2或重构结果
+255: 	assign o_track_calibrated_s1_value = payload_o[C_CALIBRATED_S1_VALUE_LSB +: 12]; // 提供IDAC主比较残差，与measurement分支233行共用同一payload_o切片，结构上不存在Stage2/重建/正式输出替代通路 @satisfies: ADCN-10
+256: 	assign o_track_calibration_applied = payload_o[C_CALIBRATION_APPLIED_LSB]; // 提供正式跟踪资格
+257: 	assign o_track_saturation_low = payload_o[C_SATURATION_LOW_LSB]; // 提供明确低侧越界证据
+258: 	assign o_track_saturation_high = payload_o[C_SATURATION_HIGH_LSB]; // 提供明确高侧越界证据
+259: 	assign o_track_config_epoch = payload_o[C_CONFIG_EPOCH_LSB +: C_CONFIG_EPOCH_WIDTH]; // 提供ACTIVE一致性版本
+260: 	assign o_track_coef_epoch = payload_o[C_COEF_EPOCH_LSB +: C_COEF_EPOCH_WIDTH]; // 提供Stage1校准诊断版本
+261: 	assign o_track_precision_mode = payload_o[C_PRECISION_MODE_LSB]; // 提供精度追踪属性
+262: 	assign o_track_frame_id = payload_o[C_FRAME_ID_LSB +: C_FRAME_ID_WIDTH]; // 提供PPG帧身份
+263: 	assign o_track_sample_index = payload_o[C_SAMPLE_INDEX_LSB +: C_SAMPLE_INDEX_WIDTH]; // 提供事务顺序身份
+264: 	assign o_track_color_ir = payload_o[C_COLOR_IR_LSB]; // 选择红光或红外DC状态
+265: 	assign o_track_frame_type = payload_o[C_FRAME_TYPE_LSB +: 2]; // 验证跟踪入口只接收NORMAL
+266: 	assign o_track_amb_code_snapshot = payload_o[C_AMB_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 提供AMB码一致性快照
+267: 	assign o_track_dc_code_snapshot = payload_o[C_DC_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 提供选中颜色DC快照
+268: 	assign o_track_amb_code_epoch = payload_o[C_AMB_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 提供AMB提交版本
+269: 	assign o_track_dc_code_epoch = payload_o[C_DC_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 提供拒绝旧样本的DC版本
+270: 	assign o_tracking_run_generation = track_valid_o ? run_generation_o : {C_RUN_GENERATION_WIDTH{1'b0}}; // 跟踪分支释放后不得继续暴露旧代际
+271: 	assign o_local_empty = !measurement_valid_o && !track_valid_o; // 两个分支均已释放时报告本地排空
+272: 
+273: 	//-----------输出信号处理区域-----------//
+274: 	// 唯一输入握手沿原子锁存全部字段，两个消费者反压时禁止重新观察上游组合总线
+275: 	always@(posedge i_clk or negedge i_rstn)begin
+276: 		if(i_rstn == 1'b0)begin
+277: 			payload_o <= {C_PAYLOAD_WIDTH{1'b0}}; // 复位清除可能被旧valid解释的历史载荷
+278: 		end else if(flag_input_transfer == 1'b1)begin
+279: 			payload_o <= payload_input;     // 装入下一笔完整NORMAL事务
+280: 		end else begin
+281: 			payload_o <= payload_o;         // 无输入接纳时逐位保持当前缓存
+282: 		end
+283: 	end
+284: 
+285: 	// 新输入优先建立measurement所有权，否则仅在该分支握手或代际清空时清除pending，不受tracking分支释放与否影响 @satisfies: P13
+286: 	always@(posedge i_clk or negedge i_rstn)begin
+287: 		if(i_rstn == 1'b0)begin
+288: 			measurement_valid_o <= 1'b0;    // 复位禁止测量分支产生伪事务
+289: 		end else if(flag_input_transfer == 1'b1)begin
+290: 			measurement_valid_o <= 1'b1;    // 每笔新事务都必须由测量链消费一次
+291: 		end else if(flag_measurement_transfer == 1'b1 || flag_discard_apply == 1'b1)begin
+292: 			measurement_valid_o <= 1'b0;    // 当前测量副本完成或被AMI代际清空后撤销该分支valid
+293: 		end else begin
+294: 			measurement_valid_o <= measurement_valid_o; // 反压期间保持测量所有权
+295: 		end
+296: 	end
+297: 
+298: 	// 新输入同步建立tracking所有权，已消费的旧副本不会因另一分支等待而再次出现，不受measurement分支释放与否影响 @satisfies: P13
+299: 	always@(posedge i_clk or negedge i_rstn)begin
+300: 		if(i_rstn == 1'b0)begin
+301: 			track_valid_o <= 1'b0;          // 复位禁止IDAC入口观察到虚假样本
+302: 		end else if(flag_input_transfer == 1'b1)begin
+303: 			track_valid_o <= 1'b1;          // 每笔新事务都向跟踪链提供一次副本
+304: 		end else if(flag_track_transfer == 1'b1 || flag_discard_apply == 1'b1)begin
+305: 			track_valid_o <= 1'b0;          // IDAC握手完成或被AMI代际清空后清除独立tracking pending
+306: 		end else begin
+307: 			track_valid_o <= track_valid_o; // IDAC有限反压期间维持valid不变
+308: 		end
+309: 	end"
+463,P02,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,967,,symbol_anchor_without_tag,967: 	assign flag_ami_fault_dispatch_03 = flag_ami_fault_pending_03 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02; // 01和02本拍都未占用分发槽位时才轮到03出槽
+464,P03,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,279,P03,same_id_tag,"279: 			system_stop_request_event_o <= 1'b1; // episode由关闭转为开启的那一拍产生一次STOP请求；SUP01A/SUP06B实测确认,与Top侧abort合并成独立STOP合并路径 @satisfies: P03"
+464,P03,rtl/ppg_control_top/ppg_control_top.v,350-357,G-FP-01,different_id_tag_candidate,"350: 	wire supervisor_system_stop_request_event_o;                         // 内部转发：supervisor原始STOP请求事件，先入合并再消失
+351: 
+352: 	// owner-abort合并单一目标寄存器：外部abort与supervisor abort在此汇合成唯一扇出
+353: 	always @(posedge i_clk or negedge i_rstn) begin
+354: 		if(!i_rstn) begin
+355: 			flag_owner_abort_event <= 1'b0;                              // 复位期间owner-abort合并结果同步归零
+356: 		end else begin
+357: 			flag_owner_abort_event <= i_control_abort_event || supervisor_system_abort_event_o; // 外部abort与supervisor abort唯一合并；G-FP-01端口台账代表行(i_control_abort_event登记) @satisfies: G-FP-01"
+465,P04,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,302,P04,same_id_tag,"302: 			system_fault_cause_valid_o <= 1'b1; // 四路里恰好一路占用本拍捕获仲裁即锁存快照；首故障原子快照,SUP01A/SUP01B实测确认 @satisfies: P04"
+466,P05,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,192,"N06,P05",same_id_tag,"192: 	assign flag_watchdog_timeout_fire = flag_watchdog_window_active && (cnt_adc_drain_watchdog == (C_ADC_DRAIN_WATCHDOG_CYCLES - 1)); // 第C_ADC_DRAIN_WATCHDOG_CYCLES个连续非idle采样触发一次；SUP06A/B/C+SUP09A实测确认边界与恢复 @satisfies: P05, N06"
+467,P06,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1569,,symbol_anchor_without_tag,1569: 		end
+468,P08,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1493,,symbol_anchor_without_tag,1493: 		if(i_rstn == 1'b0)begin
+469,P09,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,413,P09,same_id_tag,"413: 			system_fault_summary_o <= system_fault_summary_o | flag_new_summary_bits; // 按位并入本拍新命中的汇总位；历史汇总独立于活动/首故障诊断,SUP02A/SUP03A实测确认 @satisfies: P09"
+470,P10,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,207,"N03,P10",same_id_tag,"207: 	assign dec_selected_cause = flag_capture_watchdog ? CAUSE_WATCHDOG_TIMEOUT : (flag_capture_ami ? i_ami_fault_cause : (flag_capture_scheduler ? i_scheduler_fault_cause : (flag_capture_ssw ? i_ssw_fault_cause : {C_FAULT_CAUSE_WIDTH{1'b0}}))); // 四路占用互斥，直接选出对应cause；固定优先级watchdog>AMI>Scheduler>SSW,SUP02B实测同拍三路到达确认 @satisfies: N03, P10"
+471,P11,rtl/ppg_control_top/ppg_control_top.v,391,,symbol_anchor_without_tag,391: 			flag_test_inject_mode_latched <= 1'b0;          // abort或STOP接受时清除锁存
+472,P12,rtl/ppg_control_top/ppg_control_top.v,295-299,,symbol_anchor_without_tag,"295: 	);
+296: 
+297: 	//---------------参数化位宽约束（架构不变量，非运行时检查）---------------//
+298: 	// Top是唯一宽度权威；ACTIVE wrapper内部固定使用1024-bit联合快照，故C_CONFIG_WIDTH
+299: 	// 恒为1024；看门狗计数器位宽必须能够容纳C_ADC_DRAIN_WATCHDOG_CYCLES个计数值。"
+473,P13,rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v,285,P13,same_id_tag,285: 	// 新输入优先建立measurement所有权，否则仅在该分支握手或代际清空时清除pending，不受tracking分支释放与否影响 @satisfies: P13
+474,P14,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1223,,symbol_anchor_without_tag,1223: 		end else if(i_start_ack_event == 1'b1)begin
+475,LFA-04,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1223,,symbol_anchor_without_tag,1223: 		end else if(i_start_ack_event == 1'b1)begin
+476,OIB-08,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,1223,,symbol_anchor_without_tag,1223: 		end else if(i_start_ack_event == 1'b1)begin
+477,P15,rtl/ppg_control_top/ppg_control_top.v,1387,,symbol_anchor_without_tag,"1387: 			.C_RUN_GENERATION_WIDTH(C_RUN_GENERATION_WIDTH),      // supervisor首故障快照绑定RUN代际位宽"
+478,N01,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,967,,symbol_anchor_without_tag,967: 	assign flag_ami_fault_dispatch_03 = flag_ami_fault_pending_03 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02; // 01和02本拍都未占用分发槽位时才轮到03出槽
+479,N03,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,207,"N03,P10",same_id_tag,"207: 	assign dec_selected_cause = flag_capture_watchdog ? CAUSE_WATCHDOG_TIMEOUT : (flag_capture_ami ? i_ami_fault_cause : (flag_capture_scheduler ? i_scheduler_fault_cause : (flag_capture_ssw ? i_ssw_fault_cause : {C_FAULT_CAUSE_WIDTH{1'b0}}))); // 四路占用互斥，直接选出对应cause；固定优先级watchdog>AMI>Scheduler>SSW,SUP02B实测同拍三路到达确认 @satisfies: N03, P10"
+480,N04,rtl/ppg_control_top/ppg_control_top.v,327,,symbol_anchor_without_tag,327: 			flag_diag_clear_event <= 1'b0;                  // 复位归零，不产生迟到clear
+481,N05,rtl/ppg_control_top/ppg_control_top.v,391,,symbol_anchor_without_tag,391: 			flag_test_inject_mode_latched <= 1'b0;          // abort或STOP接受时清除锁存
+481,N05,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,905,,symbol_anchor_without_tag,905: 	// 启动搜索请求来自IDAC当前期望样本，周期请求来自精度窗口调度器。
+482,N06,rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v,192,"N06,P05",same_id_tag,"192: 	assign flag_watchdog_timeout_fire = flag_watchdog_window_active && (cnt_adc_drain_watchdog == (C_ADC_DRAIN_WATCHDOG_CYCLES - 1)); // 第C_ADC_DRAIN_WATCHDOG_CYCLES个连续非idle采样触发一次；SUP06A/B/C+SUP09A实测确认边界与恢复 @satisfies: P05, N06"
+483,N08,rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v,978,,symbol_anchor_without_tag,978: 	assign flag_datapath_discard_precision = flag_adc_transaction_inflight && reg_adc_inflight_precision_mode; // 借用owner锁存的SAR9或SAR15精度快照

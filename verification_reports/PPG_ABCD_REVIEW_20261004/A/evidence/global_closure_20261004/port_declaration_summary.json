@@ -1,0 +1,18 @@
+{
+  "canonical_ast_modules": 35,
+  "checked": 516,
+  "counts": {
+    "confirmed_literal_mismatch": 229,
+    "literal_match": 287
+  },
+  "skipped": {
+    "no_explicit_declaration_anchor": 1365,
+    "grouped_or_nonliteral_port": 1
+  },
+  "by_contract": {
+    "C01": 272,
+    "C17": 122,
+    "C16": 122
+  },
+  "limits": "Only explicit declaration anchors with one literal port name; grouped, inherited or absent references require independent semantic review. Wrong direction/mapping are candidates, not confirmed functional findings."
+}

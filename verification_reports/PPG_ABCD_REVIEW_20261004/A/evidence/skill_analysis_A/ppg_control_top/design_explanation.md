@@ -1,0 +1,194 @@
+# Design Explanation: ppg_control_top
+
+## Project Topology
+- Selected top module: `ppg_control_top`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_source_clk` width=1 role=clock
+- `input i_source_rstn` width=1 role=reset
+- `input i_source_config_snapshot` width=1 role=signal
+- `input i_source_config_update_event` width=1 role=signal
+- `input i_source_characterization_update_valid` width=1 role=status
+- `input i_source_static_characterization_enable` width=1 role=control
+- `input i_source_test_mux_ctrl` width=5 role=signal
+- `input i_start_event` width=1 role=signal
+- `input i_stop_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_control_abort_event` width=1 role=signal
+- `input i_dout_stage1_low` width=10 role=signal
+- `input i_clk_stage1_dout_low_async` width=1 role=clock
+- `input i_dout_stage2_low` width=10 role=signal
+- `input i_clk_stage2_dout_low_async` width=1 role=clock
+- `input i_adc_physical_idle` width=1 role=signal
+- `input i_analog_ready` width=1 role=status
+- `input i_measurement_result_ready` width=1 role=status
+- `input i_test_inject_enable` width=1 role=control
+- `input i_test_identity_inject_valid` width=1 role=status
+- `input i_test_identity_inject_sample_index` width=1 role=signal
+- `input i_test_invalid_sample_valid` width=1 role=status
+- `input i_test_saturation_inject_valid` width=1 role=status
+- `input i_test_calibration_loss_inject_valid` width=1 role=status
+- `input i_context_handover_stall_request` width=1 role=control
+- `output o_en_tia_low` width=1 role=signal
+- `output o_leddac` width=8 role=signal
+- `output o_leden1_low` width=1 role=signal
+- `output o_leden2_low` width=1 role=signal
+- `output o_en_test` width=1 role=signal
+- `output o_clk_buf_low` width=1 role=clock
+- `output o_clk_iref_idac_low` width=1 role=clock
+- `output o_clk_9q1_low` width=1 role=clock
+- `output o_clk_15q1_low` width=1 role=clock
+- `output o_clk_aferst_low` width=1 role=clock
+- `output o_clk_iref_idac_sar9_low` width=1 role=clock
+- `output o_clk_iref_idac_sar15_low` width=1 role=clock
+- `output o_clk_q2_low` width=1 role=clock
+- `output o_clk_q3_low` width=1 role=clock
+- `output o_clk_tiaen_low` width=1 role=clock
+- `output o_en_15sar_low` width=1 role=signal
+- `output o_en_sar9_amb_low` width=1 role=signal
+- `output o_en_sar9_dc_low` width=1 role=signal
+- `output o_en_sar9_iref` width=1 role=signal
+- `output o_en_sar15_amb_low` width=1 role=signal
+- `output o_en_sar15_dc_low` width=1 role=signal
+- `output o_en_sar15_iref` width=1 role=signal
+- `output o_idac_sar9ambn_low` width=8 role=signal
+- `output o_idac_sar9dcn_low` width=8 role=signal
+- `output o_idac_sar15ambn_low` width=8 role=signal
+- `output o_idac_sar15dcn_low` width=8 role=signal
+- `output o_s_in` width=5 role=signal
+- `output o_clk_2m` width=1 role=clock
+- `output o_measurement_result_valid` width=1 role=status
+- `output o_coarse_ppg_value` width=1 role=signal
+- `output o_coarse_valid` width=1 role=status
+- `output o_coarse_recovery_calibrated` width=1 role=signal
+- `output o_coarse_saturation_low` width=1 role=signal
+- `output o_coarse_saturation_high` width=1 role=signal
+- `output o_fine_ppg_value` width=1 role=signal
+- `output o_fine_valid` width=1 role=status
+- `output o_fine_recovery_calibrated` width=1 role=signal
+- `output o_fine_saturation_low` width=1 role=signal
+- `output o_fine_saturation_high` width=1 role=signal
+- `output o_calibrated_s1_value` width=1 role=signal
+- `output o_programmable_15_code` width=1 role=signal
+- `output o_programmable_15_valid` width=1 role=status
+- `output o_result_config_epoch` width=1 role=signal
+- `output o_result_coef_epoch` width=1 role=signal
+- `output o_result_stage2_coef_epoch` width=1 role=signal
+- `output o_result_dc_coef_epoch` width=1 role=signal
+- `output o_result_precision_mode` width=1 role=control
+- `output o_result_frame_id` width=1 role=signal
+- `output o_result_sample_index` width=1 role=signal
+- `output o_result_color_ir` width=1 role=signal
+- `output o_result_frame_type` width=2 role=signal
+- `output o_result_amb_code_snapshot` width=8 role=signal
+- `output o_result_dc_code_snapshot` width=8 role=signal
+- `output o_result_amb_code_epoch` width=1 role=signal
+- `output o_result_dc_code_epoch` width=1 role=signal
+- `output o_result_sample_valid` width=1 role=status
+- `output o_lifecycle_state` width=2 role=signal
+- `output o_start_ready` width=1 role=status
+- `output o_commit_ack_event` width=1 role=signal
+- `output o_start_ack_event` width=1 role=signal
+- `output o_stop_ack_event` width=1 role=signal
+- `output o_error_event` width=1 role=signal
+- `output o_commit_ack_sticky` width=1 role=signal
+- `output o_error_sticky` width=1 role=signal
+- `output o_last_error_code` width=8 role=signal
+- `output o_schema_version` width=8 role=signal
+- `output o_config_epoch` width=8 role=signal
+- `output o_coef_epoch` width=8 role=signal
+- `output o_stage2_coef_epoch` width=8 role=signal
+- `output o_dc_recovery_coef_epoch` width=8 role=signal
+- `output o_scheduler_idle` width=1 role=signal
+- `output o_scheduler_launch_timeout_sticky` width=1 role=signal
+- `output o_scheduler_owner_deadline_timeout_sticky` width=1 role=signal
+- `output o_scheduler_completion_mismatch_sticky` width=1 role=signal
+- `output o_scheduler_protocol_error_sticky` width=1 role=signal
+- `output o_ami_datapath_empty` width=1 role=data
+- `output o_ami_idac_idle` width=1 role=signal
+- `output o_active_precision_mode` width=1 role=control
+- `output o_ami_integration_protocol_error_sticky` width=1 role=signal
+- `output o_ssw_wrapper_idle` width=1 role=signal
+- `output o_ssw_switch_protocol_error_sticky` width=1 role=signal
+- `output o_ssw_transaction_mismatch_sticky` width=1 role=signal
+- `output o_ssw_owner_deadline_timeout_sticky` width=1 role=signal
+- `output o_ssw_calibration_timeout_sticky` width=1 role=signal
+- `output o_source_config_update_ready` width=1 role=status
+- `output o_source_characterization_update_ready` width=1 role=status
+- `output o_characterization_control_valid` width=1 role=status
+- `output o_characterization_control_update_event` width=1 role=signal
+- `output o_characterization_control_reject_event` width=1 role=signal
+- `output o_characterization_protocol_error_sticky` width=1 role=signal
+- `output o_test_identity_inject_ready` width=1 role=status
+- `output o_test_invalid_sample_ready` width=1 role=status
+- `output o_test_saturation_inject_ready` width=1 role=status
+- `output o_test_calibration_loss_inject_ready` width=1 role=status
+- `output o_system_fault_blocking` width=1 role=signal
+- `output o_system_abort_event` width=1 role=signal
+- `output o_system_stop_request_event` width=1 role=control
+- `output o_system_fault_discard_event` width=1 role=signal
+- `output o_system_fault_cause_valid` width=1 role=status
+- `output o_system_fault_cause` width=8 role=signal
+- `output o_system_fault_source` width=4 role=signal
+- `output o_system_fault_identity_valid` width=1 role=status
+- `output o_system_fault_frame_id` width=1 role=signal
+- `output o_system_fault_sample_index` width=1 role=signal
+- `output o_system_fault_color_ir` width=1 role=signal
+- `output o_system_fault_frame_type` width=2 role=signal
+- `output o_system_fault_precision` width=1 role=signal
+- `output o_system_fault_run_generation` width=1 role=signal
+- `output o_system_fault_summary` width=16 role=signal
+- `output o_result_discard_summary_sticky` width=1 role=signal
+- `output o_measurement_result_discard_event` width=1 role=signal
+- `output o_measurement_result_discard_reason` width=2 role=signal
+- `output o_measurement_result_discard_identity_valid` width=1 role=status
+- `output o_measurement_result_discard_sample_valid` width=1 role=status
+- `output o_measurement_result_discard_frame_id` width=1 role=signal
+- `output o_measurement_result_discard_sample_index` width=1 role=signal
+- `output o_measurement_result_discard_color_ir` width=1 role=signal
+- `output o_measurement_result_discard_frame_type` width=2 role=signal
+- `output o_measurement_result_discard_precision` width=1 role=signal
+- `output o_measurement_result_discard_run_generation` width=1 role=signal
+- `output o_detection_discard_event` width=1 role=signal
+- `output o_detection_discard_reason` width=2 role=signal
+- `output o_detection_discard_identity_valid` width=1 role=status
+- `output o_detection_discard_sample_valid` width=1 role=status
+- `output o_detection_discard_frame_id` width=1 role=signal
+- `output o_detection_discard_sample_index` width=1 role=signal
+- `output o_detection_discard_color_ir` width=1 role=signal
+- `output o_detection_discard_frame_type` width=2 role=signal
+- `output o_detection_discard_precision` width=1 role=signal
+- `output o_detection_discard_config_epoch` width=1 role=signal
+- `output o_detection_discard_coef_epoch` width=1 role=signal
+- `output o_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `output o_detection_discard_amb_code_epoch` width=1 role=signal
+- `output o_detection_discard_dc_code_epoch` width=1 role=signal
+- `output o_detection_discard_run_generation` width=1 role=signal
+- `output o_s1_calibration_applied` width=1 role=signal
+- `output o_s1_raw` width=10 role=signal
+- `output o_s2_raw` width=10 role=signal
+
+## Feature Mapping
+- `ppg_control_top reset behavior`: derived from ports, state, and always blocks.
+- `logic partition block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `logic partition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_control_top` drives known output values after reset release.
+- `fc001`: ppg_control_top reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 325-334: logic_partition
+- `u_block_2` lines 334-353: logic_partition
+- `u_block_3` lines 353-362: logic_partition
+- `u_block_4` lines 362-371: logic_partition
+- `u_block_5` lines 371-387: logic_partition
+- `u_block_6` lines 387-1605: logic_partition
+

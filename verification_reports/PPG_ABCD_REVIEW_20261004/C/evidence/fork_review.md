@@ -1,0 +1,11 @@
+# NORMAL fork审阅
+
+全文实读RTL323、TB590行，累计35/44；C16关联正文5.1/5.2及FFK/IDT矩阵已核对，C16非本组独占文件未因此计全文完成。
+
+131bit measurement和91bit tracking按同一载荷原子锁存，tracking裁剪40bit物理诊断字段，不涉及数学重建；动态LSB串联与默认宽度相符。二独立valid记录所有权，old releasing条件要求所有未消费分支本沿握手；支持无气泡同沿替换，新输入写payload/代际并建立两个新valid优先于旧valid消费。任一分支holding，无法接受替换。reset异步清payload/2valid/gen；released分支gen输出0，另分支保留heldgen，empty组合二valid0。
+
+普通FFK01..09实际50 PASS可复用A真实日志。三个完整不同packet固定期望全部字段，FFK03/04真实对称单分支消费与另一分支保持，FFK05/07真实同沿替换+独立计数。FFK06每拍held向量有比较，初始内容在前case有独立packet比较，但当前caseholding时上游总线未改变，不能自动证明反向总线攻击。FFK08仅模拟消费者ready，无IDAC实例/模式输入，因此证明fork消费分支独立，不能证明MANUAL/HOLD控制器自身忽略比较。FFK09只驱动reset未驱动STOP/discard。watchdog500us，错误finish退出0需外层解析。
+
+TB525..587漏接10个现有输入：i_run_generation及9项i_datapath_discard_*；真实A -Wall逐项dangling，输出generation/local-empty也未观测。C-002扩展包含此同类事实，总29输入/4TB。所有V2代际cancel分支不能从50 PASS推定覆盖；已知TRK01结构耦合资格豁免与新增代际接口测试不同。
+
+RTL201清空判据比较heldgen与实时i_run_generation，未用事件target generation，输入替换优先于clear。生产AMI1998将事件target硬接同一实时gen，1999 abort mask新输入，故当前正式层次下两个generation相等构成结构反驳；不把任意leaf非匹配事件输入扩大为Top功能故障。C16“匹配ID”文字与generation scope广播的精确定义、同时系统fault首拍/下一拍pending抑制仍留B/A生命周期所有权联合裁定，不擅自改叶子。

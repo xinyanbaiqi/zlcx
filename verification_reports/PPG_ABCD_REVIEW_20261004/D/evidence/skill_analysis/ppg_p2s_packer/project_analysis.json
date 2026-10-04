@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_p2s_packer",
+  "top_candidates": [
+    "ppg_p2s_packer"
+  ],
+  "modules": [
+    {
+      "name": "ppg_p2s_packer",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+      "port_count": 27
+    }
+  ],
+  "instantiation_edges": []
+}

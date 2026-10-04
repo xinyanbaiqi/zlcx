@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_chip_digital_top",
+  "top_candidates": [
+    "ppg_chip_digital_top"
+  ],
+  "modules": [
+    {
+      "name": "ppg_chip_digital_top",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_chip_digital_top\\ppg_chip_digital_top.v",
+      "port_count": 46
+    }
+  ],
+  "instantiation_edges": []
+}

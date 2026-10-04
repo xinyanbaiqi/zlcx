@@ -1,0 +1,22 @@
+{
+  "tb": "tb_ppg_control_top_peak_valley_return",
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "timeout",
+    "21600",
+    "/tmp/ppg_audit_iverilog_20261004/bin/vvp",
+    "-M",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-i",
+    "/tmp/ppg_native_regressions_d18c6954_20261004/tb_ppg_control_top_peak_valley_return/sim.vvp"
+  ],
+  "vvp_sha256": "57930d3c1826cf526c76921eed6d2bba714d8e6cb9e0ed761ba4106a558f37bd",
+  "run_rc": 95,
+  "prior_attempt": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\resume_attempts\\tb_ppg_control_top_peak_valley_return\\drvfs_failure_20261004",
+  "note": "Reuse unchanged original elaborated image; only source of runtime file loading changed."
+}

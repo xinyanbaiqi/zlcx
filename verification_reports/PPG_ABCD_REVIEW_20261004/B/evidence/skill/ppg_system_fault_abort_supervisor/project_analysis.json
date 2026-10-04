@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_system_fault_abort_supervisor",
+  "top_candidates": [
+    "ppg_system_fault_abort_supervisor"
+  ],
+  "modules": [
+    {
+      "name": "ppg_system_fault_abort_supervisor",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_system_fault_abort_supervisor\\ppg_system_fault_abort_supervisor.v",
+      "port_count": 52
+    }
+  ],
+  "instantiation_edges": []
+}

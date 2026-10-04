@@ -1,0 +1,2412 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG060": 130,
+    "VG025": 2,
+    "VG042": 1
+  },
+  "errors": 134,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 134,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] only single module sources are currently supported.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 50,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 51,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 52,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 53,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 54,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 56,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 59,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 62,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 64,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 65,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 160,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 51; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 164,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 173,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 174,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 175,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 176,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 177,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 178,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 179,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 180,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 181,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 182,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 183,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 184,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 185,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 186,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 187,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 188,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 189,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 190,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 191,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 192,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 193,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 194,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 195,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 199,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 200,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 201,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 36.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 294,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 36.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 295,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 296,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 297,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 298,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 299,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 300,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 301,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 302,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 303,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 304,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 305,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 306,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 307,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 40.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 308,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 309,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 310,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 311,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 312,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 313,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 314,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 43.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 315,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 316,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 317,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 318,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 319,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 320,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 321,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 322,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 323,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 324,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 325,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 326,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 327,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 328,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 329,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 330,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 331,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 332,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 333,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 334,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 335,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 336,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 337,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 70, aligned from region anchor column 70; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 345,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 412,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 587,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 592,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 593,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 594,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 595,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 596,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 597,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 598,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 599,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 600,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 601,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 65, aligned from region anchor column 65; got 50.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 619,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 65, aligned from region anchor column 65; got 50.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 622,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 59, aligned from region anchor column 59; got 41.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 632,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 643,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 649,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 651,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 666,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 668,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 34.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 710,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 55.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 712,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 32.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 713,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 723,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 727,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 729,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 47.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 739,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 55.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 740,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 51.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 749,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 67.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 756,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 783,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 32.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 786,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 37.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 787,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 33.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 788,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 790,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 30.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 792,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 794,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 823,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 827,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 829,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 34.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 838,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 36.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 853,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 59.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 854,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 358,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": 359,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG042",
+      "severity": "error",
+      "message": "Comment coverage is too low for generated RTL (18.63%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+      "path": "tb_ppg_chip_digital_top.v",
+      "line": null,
+      "rule": "comments.coverage"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+    "ok": false,
+    "strict": true,
+    "errors": 134,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] only single module sources are currently supported.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 50,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 51,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 52,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 53,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 54,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 56,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 58; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 59,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 62,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 64,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 63; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 65,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 160,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 51; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 164,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 173,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 174,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 175,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 176,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 177,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 178,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 179,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 180,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 181,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 182,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 183,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 184,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 185,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 186,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 187,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 188,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 189,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 190,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 191,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 192,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 193,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 194,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 195,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 199,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 200,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 67; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 201,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 36.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 294,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 36.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 295,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 296,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 297,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 298,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 299,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 300,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 301,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 302,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 303,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 304,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 305,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 306,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 307,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 40.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 308,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 309,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 310,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 311,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 312,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 313,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 314,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 43.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 315,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 316,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 317,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 318,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 319,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 320,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 42.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 321,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 322,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 323,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 324,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 325,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 326,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 327,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 328,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 329,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 330,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 45.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 331,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 332,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 333,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 334,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 335,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 48.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 336,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 68; got 46.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 337,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 70, aligned from region anchor column 70; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 345,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 412,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 587,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 592,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 593,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 594,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 595,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 596,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 597,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 598,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 599,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 600,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 44.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 601,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 65, aligned from region anchor column 65; got 50.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 619,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 65, aligned from region anchor column 65; got 50.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 622,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 59, aligned from region anchor column 59; got 41.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 632,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 643,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 649,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 651,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 30.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 666,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 61; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 668,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 34.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 710,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 55.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 712,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 32.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 713,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 723,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 727,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 729,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 47.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 739,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 55.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 740,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 51.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 749,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 80, aligned from region anchor column 80; got 67.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 756,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 783,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 32.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 786,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 37.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 787,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 33.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 788,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 790,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 30.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 792,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 90, aligned from region anchor column 90; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 794,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 823,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 827,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 28.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 829,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 34.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 838,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 36.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 853,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 94, aligned from region anchor column 94; got 59.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 854,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 358,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": 359,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG042",
+        "severity": "error",
+        "message": "Comment coverage is too low for generated RTL (18.63%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": null,
+        "rule": "comments.coverage"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 893,
+      "code_lines": 730,
+      "line_comments": 258,
+      "commented_code_lines": 136,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_with_warnings": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+            "syntax_confidence": 90,
+            "format_score": 80,
+            "rewrite_need_score": 40,
+            "rewrite_risk_score": 70,
+            "decision": "preserve_with_warnings",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 893,
+              "module_count": 1,
+              "module_names": [
+                "tb_ppg_chip_digital_top"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 100,
+              "end_count": 100,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 3,
+              "multi_target_always_count": 3,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 56,
+              "function_task_initial_count": 18,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 122,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 6,
+              "missing_reset_always_count": 3,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "complex_lvalue",
+                "function_task_initial",
+                "rich_human_comments",
+                "unsafe_always_split"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/09/06",
+            "revision_date": "2026/09/07",
+            "design_name": "PPG Chip Digital Top Testbench",
+            "module_name": "tb_ppg_chip_digital_top",
+            "description": "Description/tb_ppg_chip_digital_top_Design.pdf",
+            "simulations": "tb_ppg_chip_digital_top",
+            "references": "PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md",
+            "version": "V1.1",
+            "dependency_lines": [
+              "ppg_chip_digital_top"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年09月07日   V1.1        Erie          按合同V1.12勘误对齐TC6结论措辞：STOP精确命中ADC选通脉冲这一子场景是架构级窄窗口（flag_stopping_complete里真正把关在途流水线数据的是i_datapath_empty这一路，不是i_adc_idle这一路），现已正式结案为预期内、非bug，不用再等用户判断，也不新增专用快速丢弃触发通道或QFN引脚。TC6的构造激励本身不变（仍是真实STOP+并发DONE，仍走真实硬件路径），但结果不再判为失败——\"两组discard锁存均未变化\"现在是本子场景文档化的预期PASS结果，与discard锁存机制本身已经用更宽的真实触发路径（无owner在途的spurious DONE经fault supervisor级联）独立验证过一致。六个要求的验证方面现在全部报PASS；TB_CHIP_DIGITAL_TOP_PASS。本次修订未改动任何RTL。",
+              "2026年09月06日   V1.0        Erie          创建文件。自建Mode 0 SPI主机自检测试平台，覆盖本任务要求的六个方面：（1）SPI基本读写——按写突发协议逐字节写入1024-bit ACTIVE影子区，COMMIT前原样读回确认逐位一致，再轮询0x0100生命周期字段从CONFIG到READY到RUN。（2）P2S定长包字段与字节位置正确性——用真实等效drive_real_adc_done物理激励触发一笔真实结果后捕获P2S串行流，按合同8.4.2节位布局解出全部12字段，逐项与DUT自己top_result_*_o内部wire的层次化白盒引用比对（与tb_ppg_control_top.v全篇已用的同一手法）。（3）真实双光RED/IR背靠背场景下深度2缓冲不丢数据——8.4.3节时序分析本身（161-bit包发送耗时与RED到IR间隔相当）就会产生真实排队压力，不需要人为压缩时序。（4）flag_adc_physical_idle合成器二选一正确性——committed SAR9后确认只有Stage1 DONE脉冲影响同步后空闲电平（单独翻动Stage2不得影响），再committed SAR15确认相反情形，通过对合成器自己reg_idle_sync_stable的层次化引用观测。（5）DBG_OUT全部6个候选，经可SPI写入的0x0081寄存器逐一选中，各自触发其真实底层事件并观测引脚翻转。（6）两组discard锁存翻转位，用与tb_ppg_control_top.v SMOKE-06同一已验证时序窗口构造一次真实STOP-owner在途场景，SPI两次读回确认翻转位随真实事件恰好翻转一次、锁存身份字段与被丢弃事务一致。复用tb_ppg_control_top.v里task_build_normal_manual_config/task_build_normal_manual_dual_config的逐字段布局与make_fixed_raw的RAW编码（同一DUT关联合同、同一组已验证取值），改为经SPI/物理引脚边界驱动，不再直连ppg_control_top端口。",
+              "glue顶层自检测试平台：SPI主机驱动ACTIVE配置与命令，解码P2S串行输出并交叉核对内部真值"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] only single module sources are currently supported."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] only single module sources are currently supported.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 893,
+            "nonempty_lines": 852,
+            "line_comments": 258,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 806,
+            "space_indented_lines": 1,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_ppg_chip_digital_top.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

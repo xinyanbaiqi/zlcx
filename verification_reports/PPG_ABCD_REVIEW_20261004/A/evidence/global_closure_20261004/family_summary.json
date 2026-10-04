@@ -1,0 +1,737 @@
+[
+  {
+    "family": "ADCN",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "ADCN-01",
+      "ADCN-02",
+      "ADCN-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "AMI",
+    "candidates": 54,
+    "with_contract": 54,
+    "with_semantic_record": 54,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "AMI-01",
+      "AMI-02",
+      "AMI-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "AMR",
+    "candidates": 14,
+    "with_contract": 14,
+    "with_semantic_record": 14,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "AMR-01",
+      "AMR-02",
+      "AMR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "AV4",
+    "candidates": 19,
+    "with_contract": 19,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "AV4-01",
+      "AV4-02",
+      "AV4-03",
+      "AV4-04",
+      "AV4-05",
+      "AV4-06",
+      "AV4-07",
+      "AV4-08",
+      "AV4-09",
+      "AV4-10",
+      "AV4-11",
+      "AV4-12",
+      "AV4-13",
+      "AV4-14",
+      "AV4-15",
+      "AV4-16",
+      "AV4-17",
+      "AV4-18",
+      "AV4-19"
+    ]
+  },
+  {
+    "family": "AV4C",
+    "candidates": 22,
+    "with_contract": 22,
+    "with_semantic_record": 22,
+    "owners": [
+      "D"
+    ],
+    "sample_ids": [
+      "AV4C-01",
+      "AV4C-02",
+      "AV4C-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "BSL",
+    "candidates": 40,
+    "with_contract": 40,
+    "with_semantic_record": 40,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "BSL-01",
+      "BSL-02",
+      "BSL-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "CAL",
+    "candidates": 17,
+    "with_contract": 17,
+    "with_semantic_record": 17,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "CAL-01",
+      "CAL-02",
+      "CAL-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "CCC",
+    "candidates": 26,
+    "with_contract": 26,
+    "with_semantic_record": 26,
+    "owners": [
+      "D"
+    ],
+    "sample_ids": [
+      "CCC-01",
+      "CCC-02",
+      "CCC-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "CF4",
+    "candidates": 5,
+    "with_contract": 5,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "CF4-01",
+      "CF4-02",
+      "CF4-03",
+      "CF4-04",
+      "CF4-05"
+    ]
+  },
+  {
+    "family": "CIS",
+    "candidates": 30,
+    "with_contract": 30,
+    "with_semantic_record": 30,
+    "owners": [
+      "D"
+    ],
+    "sample_ids": [
+      "CIS-01",
+      "CIS-02",
+      "CIS-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "D",
+    "candidates": 3,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "D01",
+      "D02",
+      "D03"
+    ]
+  },
+  {
+    "family": "D01",
+    "candidates": 1,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "D01-01b"
+    ]
+  },
+  {
+    "family": "DCR",
+    "candidates": 22,
+    "with_contract": 22,
+    "with_semantic_record": 22,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "DCR-01",
+      "DCR-02",
+      "DCR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "FFK",
+    "candidates": 9,
+    "with_contract": 9,
+    "with_semantic_record": 9,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "FFK-01",
+      "FFK-02",
+      "FFK-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "FIR",
+    "candidates": 33,
+    "with_contract": 33,
+    "with_semantic_record": 33,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "FIR-01",
+      "FIR-02",
+      "FIR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "FSC",
+    "candidates": 57,
+    "with_contract": 57,
+    "with_semantic_record": 57,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "FSC-01",
+      "FSC-02",
+      "FSC-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "G-FP",
+    "candidates": 16,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "G-FP-01",
+      "G-FP-01-D01-01",
+      "G-FP-01-D01-02",
+      "G-FP-01-D01-03",
+      "G-FP-01-D01-04",
+      "G-FP-02",
+      "G-FP-02-D01-01",
+      "G-FP-03",
+      "G-FP-03-D01-01",
+      "G-FP-04",
+      "G-FP-05",
+      "G-FP-05-D01-01",
+      "G-FP-06",
+      "G-FP-06-D01-01",
+      "G-FP-06-D01-02",
+      "G-FP-07"
+    ]
+  },
+  {
+    "family": "IDC2",
+    "candidates": 24,
+    "with_contract": 24,
+    "with_semantic_record": 24,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "IDC2-01",
+      "IDC2-02",
+      "IDC2-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "IDT",
+    "candidates": 15,
+    "with_contract": 15,
+    "with_semantic_record": 15,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "IDT-01",
+      "IDT-02",
+      "IDT-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "ILM",
+    "candidates": 15,
+    "with_contract": 15,
+    "with_semantic_record": 15,
+    "owners": [
+      "C",
+      "D"
+    ],
+    "sample_ids": [
+      "ILM-01",
+      "ILM-02",
+      "ILM-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "ISE",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "C",
+      "D"
+    ],
+    "sample_ids": [
+      "ISE-01",
+      "ISE-02",
+      "ISE-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "JNT",
+    "candidates": 9,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "JNT-01",
+      "JNT-02",
+      "JNT-03",
+      "JNT-04",
+      "JNT-05",
+      "JNT-06",
+      "JNT-07",
+      "JNT-08",
+      "JNT-09"
+    ]
+  },
+  {
+    "family": "K",
+    "candidates": 5,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "K01",
+      "K02",
+      "K03",
+      "K04",
+      "K05"
+    ]
+  },
+  {
+    "family": "L",
+    "candidates": 1,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "L01"
+    ]
+  },
+  {
+    "family": "LFA",
+    "candidates": 12,
+    "with_contract": 12,
+    "with_semantic_record": 12,
+    "owners": [
+      "B",
+      "C"
+    ],
+    "sample_ids": [
+      "LFA-01",
+      "LFA-02",
+      "LFA-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "MGR",
+    "candidates": 24,
+    "with_contract": 24,
+    "with_semantic_record": 24,
+    "owners": [
+      "D"
+    ],
+    "sample_ids": [
+      "MGR-01",
+      "MGR-02",
+      "MGR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "N",
+    "candidates": 8,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N06",
+      "N07",
+      "N08"
+    ]
+  },
+  {
+    "family": "NRE",
+    "candidates": 6,
+    "with_contract": 6,
+    "with_semantic_record": 6,
+    "owners": [
+      "B",
+      "C"
+    ],
+    "sample_ids": [
+      "NRE-01",
+      "NRE-02",
+      "NRE-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "OIB",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "B",
+      "C"
+    ],
+    "sample_ids": [
+      "OIB-01",
+      "OIB-02",
+      "OIB-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "OPT",
+    "candidates": 24,
+    "with_contract": 24,
+    "with_semantic_record": 24,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "OPT-01",
+      "OPT-02",
+      "OPT-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "P",
+    "candidates": 17,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P17"
+    ]
+  },
+  {
+    "family": "PR",
+    "candidates": 14,
+    "with_contract": 14,
+    "with_semantic_record": 14,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "PR-01",
+      "PR-02",
+      "PR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "PRC",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "PRC-01",
+      "PRC-02",
+      "PRC-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "PVW",
+    "candidates": 48,
+    "with_contract": 48,
+    "with_semantic_record": 48,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "PVW-01",
+      "PVW-02",
+      "PVW-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "PWC",
+    "candidates": 41,
+    "with_contract": 41,
+    "with_semantic_record": 41,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "PWC-01",
+      "PWC-02",
+      "PWC-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "PWI",
+    "candidates": 8,
+    "with_contract": 8,
+    "with_semantic_record": 8,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "PWI-01",
+      "PWI-02",
+      "PWI-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "R",
+    "candidates": 9,
+    "with_contract": 0,
+    "with_semantic_record": 0,
+    "owners": [],
+    "sample_ids": [],
+    "unreviewed_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06",
+      "R07",
+      "R08",
+      "R09"
+    ]
+  },
+  {
+    "family": "RAW",
+    "candidates": 13,
+    "with_contract": 13,
+    "with_semantic_record": 13,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "RAW-01",
+      "RAW-02",
+      "RAW-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "RRC",
+    "candidates": 12,
+    "with_contract": 12,
+    "with_semantic_record": 12,
+    "owners": [
+      "B",
+      "C"
+    ],
+    "sample_ids": [
+      "RRC-01",
+      "RRC-02",
+      "RRC-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "RTR",
+    "candidates": 13,
+    "with_contract": 13,
+    "with_semantic_record": 13,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "RTR-01",
+      "RTR-02",
+      "RTR-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "SID",
+    "candidates": 12,
+    "with_contract": 12,
+    "with_semantic_record": 12,
+    "owners": [
+      "B",
+      "C"
+    ],
+    "sample_ids": [
+      "SID-01",
+      "SID-02",
+      "SID-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "SSW",
+    "candidates": 52,
+    "with_contract": 52,
+    "with_semantic_record": 52,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "SSW-01",
+      "SSW-02",
+      "SSW-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "SUP",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "B"
+    ],
+    "sample_ids": [
+      "SUP-01",
+      "SUP-02",
+      "SUP-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "TOP",
+    "candidates": 24,
+    "with_contract": 24,
+    "with_semantic_record": 24,
+    "owners": [
+      "A"
+    ],
+    "sample_ids": [
+      "TOP-01",
+      "TOP-02",
+      "TOP-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "TRK",
+    "candidates": 10,
+    "with_contract": 10,
+    "with_semantic_record": 10,
+    "owners": [
+      "C"
+    ],
+    "sample_ids": [
+      "TRK-01",
+      "TRK-02",
+      "TRK-03"
+    ],
+    "unreviewed_ids": []
+  },
+  {
+    "family": "UNPACK",
+    "candidates": 4,
+    "with_contract": 4,
+    "with_semantic_record": 4,
+    "owners": [
+      "D"
+    ],
+    "sample_ids": [
+      "UNPACK-01",
+      "UNPACK-02",
+      "UNPACK-03"
+    ],
+    "unreviewed_ids": []
+  }
+]

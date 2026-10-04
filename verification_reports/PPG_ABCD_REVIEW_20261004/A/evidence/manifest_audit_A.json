@@ -1,0 +1,214 @@
+{
+  "commit": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "method": "Full raw UTF8/CRLF bytes; M01 only its own digest field normalized per matrix 1226-1232. Negative controls executed before audit.",
+  "rows": [
+    {
+      "id": "C01",
+      "file": "PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+      "manifest_line": 1236,
+      "declared": "620b671493546aa45b86354d09703f4141c325940b5e7a2cf84b3c832e14f395",
+      "actual": "39c747617ff7da2997c1bfc1e14aaf5c41d38056fba2eb662d4ef13d2ddd299e",
+      "status": "mismatch"
+    },
+    {
+      "id": "C02",
+      "file": "ppg_system_config_manager_semantic_contract.md",
+      "manifest_line": 1237,
+      "declared": "126351296051c314d3ce9386d51aea2403a5ff3bb347adb86d303c70b12b907f",
+      "actual": "c17a8d3f174f63ea0bf7ced2affabccd98093776767ee39d1866025e42852d87",
+      "status": "mismatch"
+    },
+    {
+      "id": "C03",
+      "file": "PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1238,
+      "declared": "d6c85f66ded3059a83f365592b7a25f220802a52566db3a2387791c2257499cc",
+      "actual": "da8ee0946b0b6ef12e2f06d430a0641d5090556ed25c6c9d3f28f00badfbf8d2",
+      "status": "mismatch"
+    },
+    {
+      "id": "C04",
+      "file": "PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+      "manifest_line": 1239,
+      "declared": "9f3fd54c51b2971c9664c4b070547b3b4b52a2fe3506c118b8f72737fe4a9e82",
+      "actual": "9f3fd54c51b2971c9664c4b070547b3b4b52a2fe3506c118b8f72737fe4a9e82",
+      "status": "match"
+    },
+    {
+      "id": "C05",
+      "file": "ppg_system_active_config_unpack_semantic_contract.md",
+      "manifest_line": 1240,
+      "declared": "68b34e9a85cbc7511b4c11c53f294b6538edcc0998018ccba31fd1662d982765",
+      "actual": "68b34e9a85cbc7511b4c11c53f294b6538edcc0998018ccba31fd1662d982765",
+      "status": "match"
+    },
+    {
+      "id": "C06",
+      "file": "PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+      "manifest_line": 1241,
+      "declared": "7d7b420f428ee19750aea848f31975b387a161bdaa38c61fee26d6cd6fb45615",
+      "actual": "4e06c15f90596b54e4adff739fa1d811012f1748e2e07a2e6da6033446350451",
+      "status": "mismatch"
+    },
+    {
+      "id": "C07",
+      "file": "PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+      "manifest_line": 1242,
+      "declared": "3a713de898ceaac5c53457fc8c9743b8767ef4f76ca6a396400469070ebaaefd",
+      "actual": "92334fb64484ca4224939559f5f65b437086051036a8ba980cf771410a58a8f4",
+      "status": "mismatch"
+    },
+    {
+      "id": "C08",
+      "file": "PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1243,
+      "declared": "a47360ca9d633edd7a5f7d5a98e6ccf0841f4613fbb2bb8d1fd6830e32debd95",
+      "actual": "daeb3696c5cd79c33777e81baaea7a54e245ce65dc84f7a6eec7339da64bf675",
+      "status": "mismatch"
+    },
+    {
+      "id": "C09",
+      "file": "PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1244,
+      "declared": "425b896e22b87f84f748829b5d4ac483a50b755668958e12f13610a1c0e973ee",
+      "actual": "658fc3c56721a27db369a93057317fd44ebbd4b6bcef6da807dade6a9451451d",
+      "status": "mismatch"
+    },
+    {
+      "id": "C10",
+      "file": "PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1245,
+      "declared": "0f7bcd097448c6e18b167fcbc756f7b62a3bb1bf370730776857eb451645cbd7",
+      "actual": "1746f38958f088676b771c0d00c9d88f80c8313f058db5cca1c70afcdfe048ee",
+      "status": "mismatch"
+    },
+    {
+      "id": "C11",
+      "file": "PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+      "manifest_line": 1246,
+      "declared": "1d5291735204fb568e232e83b2b3cbe44cf8a18157b6e3916d38ba64c36b8113",
+      "actual": "ae0c81c737556ae3181c13f0c424d5688638a864d191db15bf24ae5a538998de",
+      "status": "mismatch"
+    },
+    {
+      "id": "C12",
+      "file": "PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1247,
+      "declared": "fa52a9d81c5c542db289bd6985ebe3d0e580245a3170d66a48aa5c9bde002af4",
+      "actual": "ab331621683f218728f4397b54a00038f536e837506c495a67dcd232e36b5d2b",
+      "status": "mismatch"
+    },
+    {
+      "id": "C13",
+      "file": "PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+      "manifest_line": 1248,
+      "declared": "5f7c7c6e669f673b2e0d9a073b67c2a0ef05e07a8259635017efb733da1df349",
+      "actual": "17309fac6918d258d149294dc6bd89ef224ee29705c39921ac1c0d976580ca85",
+      "status": "mismatch"
+    },
+    {
+      "id": "C14",
+      "file": "PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+      "manifest_line": 1249,
+      "declared": "c55e8caec5fd4c67856625e8835e8c822cdeb56c298329e086849a43807a16f2",
+      "actual": "3686a5ee136e4915a41a387475443b151207d0591bca4ae980b597acf8634ce8",
+      "status": "mismatch"
+    },
+    {
+      "id": "C15",
+      "file": "PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+      "manifest_line": 1250,
+      "declared": "e76b95a6b71276b8bcde411c7bec488ca29d6b34da6d5c8d96ecb34f8738af82",
+      "actual": "8c2ab1b3600b276e97e2d3b915f1686d61cd155eac8b0d0bdcf3abca67616537",
+      "status": "mismatch"
+    },
+    {
+      "id": "C16",
+      "file": "PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+      "manifest_line": 1251,
+      "declared": "78f43a5fb498f7dbb1be9dcd6db87ea0237eb3ae90b30c5e5959fc6b6b4cada0",
+      "actual": "e32e7300f5519d6f64f04d752e365400c940c3a9858ad28419f71c6c63497c97",
+      "status": "mismatch"
+    },
+    {
+      "id": "C17",
+      "file": "PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+      "manifest_line": 1252,
+      "declared": "0e50d1f2141e52ce45cecde08bc246c7b8b5126760f4f938fcb04a4377da276e",
+      "actual": "bd4334631a8e2358066fb6c1cbfe84bd5ee9d35ed4bc14ef75f4a7d19f6fc194",
+      "status": "mismatch"
+    },
+    {
+      "id": "C18",
+      "file": "PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1253,
+      "declared": "3a59aa4fca7adbc5f2e0072d835a9490074caf7169ad22d975776bbdf47fa6ef",
+      "actual": "91ec74aa47cc35c3fd57114cb2ed2ab18a8895801ef5649ef1dbe9df5adb6adf",
+      "status": "mismatch"
+    },
+    {
+      "id": "C19",
+      "file": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+      "manifest_line": 1254,
+      "declared": "424121029d6f2a19070d371bcd4566eff8b3ed78892883fc10fd8e85f2c9bcee",
+      "actual": "eb2c15a5f4a4a291c7fc4a86ca4d8baa26c59c41c78cb4e24a0adbc6ab71647e",
+      "status": "mismatch"
+    },
+    {
+      "id": "C20",
+      "file": "PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+      "manifest_line": 1255,
+      "declared": "37c9ce70f97b320b0b835b6c2746858c1e3f5e569597b5970dfa3d000a01616f",
+      "actual": "194705c0cef31aa0f501d7978ae53d72aef490a57d82511899588e4d007ef1a0",
+      "status": "mismatch"
+    },
+    {
+      "id": "C21",
+      "file": "PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+      "manifest_line": 1256,
+      "declared": "c34e80b1119df4268f50a2e0c9fc37a1b7dc00ddde2977d11033b1332c824edd",
+      "actual": "c34e80b1119df4268f50a2e0c9fc37a1b7dc00ddde2977d11033b1332c824edd",
+      "status": "match"
+    },
+    {
+      "id": "C22",
+      "file": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+      "manifest_line": 1257,
+      "declared": "148384449f815bbe9302df72e206c449f3c5d5401484dee7d951aace22db6b6c",
+      "actual": "141d74d392d015abf8a0b58d20967805f2c5cd4734dcc640710cbfcee17c15f3",
+      "status": "mismatch"
+    },
+    {
+      "id": "C23",
+      "file": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+      "manifest_line": 1258,
+      "declared": "b40ad894850122db572ee0623dc5b4c6d3de3fd9d917b282086093c16a5a1885",
+      "actual": "31acf05e1799dea0adb833bb91a8564fb538bab809d6a05de29b209b122330a0",
+      "status": "mismatch"
+    },
+    {
+      "id": "C24",
+      "file": "PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+      "manifest_line": 1259,
+      "declared": "e5bb4455928b8da7731f83a43006b29bfe6661dc3cfd037510888ae6bd00c6f1",
+      "actual": "736a478550fc3cc79579485e3c59a79f6f70464c1894c3be4f293751754b845e",
+      "status": "mismatch"
+    },
+    {
+      "id": "C25",
+      "file": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+      "manifest_line": 1260,
+      "declared": "4a9b0ed84ff993235fcb13984a68d77e617799728b8982b19224e8b67f0be720",
+      "actual": "54c4fa13d9a21f3ea4af2d5cbe6402f591547253545012d593d78ca8758583d4",
+      "status": "mismatch"
+    },
+    {
+      "id": "M01",
+      "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+      "manifest_line": 1261,
+      "declared": "0071d107a83c393b0f965fed7b5f2dcb0091e0ae2380d1d559a5eb162f4540b8",
+      "actual": "309eecf3e36e2c06435676cb0f9513671d6320265ffe8cd8f724947cf80bac04",
+      "status": "mismatch"
+    }
+  ]
+}

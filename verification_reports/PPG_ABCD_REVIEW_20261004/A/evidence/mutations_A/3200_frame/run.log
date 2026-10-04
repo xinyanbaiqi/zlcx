@@ -1,0 +1,3 @@
+ERROR: SAR9 frame period is not 312.5 us
+ERROR: SAR9 and SAR15 second frame boundaries differ
+FAIL: 3200 Hz timing regression detected 2 errors.

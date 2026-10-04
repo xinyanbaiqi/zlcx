@@ -1,0 +1,3392 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG007": 2,
+    "VG060": 189,
+    "VG040": 1
+  },
+  "errors": 193,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 193,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "ppg_timing_sar15.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Standard bilingual header with English/Chinese sections is required.",
+      "path": "ppg_timing_sar15.v",
+      "line": 1,
+      "rule": "header.bilingual"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+      "path": "ppg_timing_sar15.v",
+      "line": 1,
+      "rule": "header.chinese_fields"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 51,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 52,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 56,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 59,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar15.v",
+      "line": 62,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar15.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar15.v",
+      "line": 64,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar15.v",
+      "line": 65,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 68,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 69,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 72,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 73,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 74,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 75,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 78,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 81,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 82,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 83,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 84,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 85,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 86,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 87,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 88,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 89,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 90,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 91,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 92,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 93,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 94,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 95,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 96,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 99,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 100,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 101,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 102,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 103,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 104,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 105,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 108,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 109,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 110,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 111,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 114,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 69.",
+      "path": "ppg_timing_sar15.v",
+      "line": 119,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 69.",
+      "path": "ppg_timing_sar15.v",
+      "line": 120,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 121,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 123,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 124,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 125,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 126,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 129,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 130,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 131,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 132,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 133,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 134,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 135,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 136,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 137,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 138,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 69.",
+      "path": "ppg_timing_sar15.v",
+      "line": 139,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 140,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 69.",
+      "path": "ppg_timing_sar15.v",
+      "line": 141,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 69.",
+      "path": "ppg_timing_sar15.v",
+      "line": 142,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+      "path": "ppg_timing_sar15.v",
+      "line": 143,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 146,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 147,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 148,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 149,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 150,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 151,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 61, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 152,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 153,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 154,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 155,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 156,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 60, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 157,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 158,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 159,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 160,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 161,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 66, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 162,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 165,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 166,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 167,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 168,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 169,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 170,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 171,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 172,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 175,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 176,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 177,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 178,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 179,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 180,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 181,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 182,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 183,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 184,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 185,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 186,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 187,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 60, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 190,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 191,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 192,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 193,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 194,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 195,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 196,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 197,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 198,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 201,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 202,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 203,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 204,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 205,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 206,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 207,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 208,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 209,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 210,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 211,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 212,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 213,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 214,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 215,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 216,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 217,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 218,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 219,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 220,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 221,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 222,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 223,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 224,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 228,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 232,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 233,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 234,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 74.",
+      "path": "ppg_timing_sar15.v",
+      "line": 235,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 236,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 237,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 238,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 241,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 242,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 246,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 255,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+      "path": "ppg_timing_sar15.v",
+      "line": 257,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+      "path": "ppg_timing_sar15.v",
+      "line": 259,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+      "path": "ppg_timing_sar15.v",
+      "line": 272,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+      "path": "ppg_timing_sar15.v",
+      "line": 280,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 282,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 73.",
+      "path": "ppg_timing_sar15.v",
+      "line": 284,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 290,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 292,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 299,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 301,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 78.",
+      "path": "ppg_timing_sar15.v",
+      "line": 308,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 45; got 80.",
+      "path": "ppg_timing_sar15.v",
+      "line": 322,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 66, aligned from region anchor column 45; got 78.",
+      "path": "ppg_timing_sar15.v",
+      "line": 324,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 331,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+      "path": "ppg_timing_sar15.v",
+      "line": 333,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 77.",
+      "path": "ppg_timing_sar15.v",
+      "line": 335,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+      "path": "ppg_timing_sar15.v",
+      "line": 343,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 345,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 347,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 354,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 80.",
+      "path": "ppg_timing_sar15.v",
+      "line": 358,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 80.",
+      "path": "ppg_timing_sar15.v",
+      "line": 361,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 80.",
+      "path": "ppg_timing_sar15.v",
+      "line": 364,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 80.",
+      "path": "ppg_timing_sar15.v",
+      "line": 367,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+      "path": "ppg_timing_sar15.v",
+      "line": 371,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 378,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 78.",
+      "path": "ppg_timing_sar15.v",
+      "line": 382,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 75.",
+      "path": "ppg_timing_sar15.v",
+      "line": 384,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 74.",
+      "path": "ppg_timing_sar15.v",
+      "line": 390,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 392,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 393,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 58, aligned from region anchor column 45; got 76.",
+      "path": "ppg_timing_sar15.v",
+      "line": 394,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 436,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 439,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 449,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 452,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 457,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+      "path": "ppg_timing_sar15.v",
+      "line": 460,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Generated explanatory comments should be Chinese-first.",
+      "path": "ppg_timing_sar15.v",
+      "line": null,
+      "rule": "comments.language"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+    "ok": false,
+    "strict": true,
+    "errors": 193,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "ppg_timing_sar15.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Standard bilingual header with English/Chinese sections is required.",
+        "path": "ppg_timing_sar15.v",
+        "line": 1,
+        "rule": "header.bilingual"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+        "path": "ppg_timing_sar15.v",
+        "line": 1,
+        "rule": "header.chinese_fields"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 51,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 52,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 56,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 59,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar15.v",
+        "line": 62,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar15.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar15.v",
+        "line": 64,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar15.v",
+        "line": 65,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 68,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 69,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 72,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 73,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 74,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 75,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 78,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 81,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 82,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 83,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 84,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 85,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 86,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 87,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 88,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 89,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 90,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 91,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 92,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 93,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 94,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 95,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 96,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 99,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 100,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 101,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 102,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 103,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 104,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 105,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 108,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 109,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 110,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 111,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 114,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 69.",
+        "path": "ppg_timing_sar15.v",
+        "line": 119,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 69.",
+        "path": "ppg_timing_sar15.v",
+        "line": 120,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 121,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 123,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 124,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 125,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 126,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 129,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 130,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 131,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 132,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 133,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 134,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 135,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 136,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 137,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 138,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 69.",
+        "path": "ppg_timing_sar15.v",
+        "line": 139,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 140,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 69.",
+        "path": "ppg_timing_sar15.v",
+        "line": 141,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 69.",
+        "path": "ppg_timing_sar15.v",
+        "line": 142,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 54.",
+        "path": "ppg_timing_sar15.v",
+        "line": 143,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 146,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 147,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 148,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 149,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 150,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 151,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 61, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 152,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 153,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 154,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 65, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 155,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 156,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 60, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 157,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 158,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 159,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 160,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 67, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 161,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 66, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 162,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 165,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 166,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 167,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 168,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 69, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 169,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 170,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 171,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 172,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 175,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 176,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 177,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 178,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 179,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 180,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 181,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 182,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 183,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 184,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 185,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 186,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 187,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 60, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 190,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 191,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 192,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 193,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 194,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 195,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 196,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 197,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 198,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 201,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 202,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 203,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 204,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 205,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 206,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 207,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 208,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 209,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 210,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 211,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 212,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 213,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 214,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 215,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 216,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 217,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 218,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 219,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 220,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 221,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 222,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 223,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 224,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 228,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 232,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 233,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 234,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 74.",
+        "path": "ppg_timing_sar15.v",
+        "line": 235,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 236,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 237,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 238,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 241,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 242,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 246,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 255,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+        "path": "ppg_timing_sar15.v",
+        "line": 257,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+        "path": "ppg_timing_sar15.v",
+        "line": 259,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 71.",
+        "path": "ppg_timing_sar15.v",
+        "line": 272,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 72.",
+        "path": "ppg_timing_sar15.v",
+        "line": 280,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 282,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 73.",
+        "path": "ppg_timing_sar15.v",
+        "line": 284,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 290,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 292,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 299,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 301,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 56, aligned from region anchor column 45; got 78.",
+        "path": "ppg_timing_sar15.v",
+        "line": 308,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 45; got 80.",
+        "path": "ppg_timing_sar15.v",
+        "line": 322,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 66, aligned from region anchor column 45; got 78.",
+        "path": "ppg_timing_sar15.v",
+        "line": 324,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 331,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+        "path": "ppg_timing_sar15.v",
+        "line": 333,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 77.",
+        "path": "ppg_timing_sar15.v",
+        "line": 335,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+        "path": "ppg_timing_sar15.v",
+        "line": 343,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 345,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 347,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 354,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 59, aligned from region anchor column 45; got 80.",
+        "path": "ppg_timing_sar15.v",
+        "line": 358,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 80.",
+        "path": "ppg_timing_sar15.v",
+        "line": 361,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 80.",
+        "path": "ppg_timing_sar15.v",
+        "line": 364,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 63, aligned from region anchor column 45; got 80.",
+        "path": "ppg_timing_sar15.v",
+        "line": 367,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 77.",
+        "path": "ppg_timing_sar15.v",
+        "line": 371,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 62, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 378,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 78.",
+        "path": "ppg_timing_sar15.v",
+        "line": 382,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 75.",
+        "path": "ppg_timing_sar15.v",
+        "line": 384,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 45; got 74.",
+        "path": "ppg_timing_sar15.v",
+        "line": 390,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 392,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 393,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 58, aligned from region anchor column 45; got 76.",
+        "path": "ppg_timing_sar15.v",
+        "line": 394,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 436,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 439,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 449,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 452,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 68, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 457,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 70, aligned from region anchor column 45; got 82.",
+        "path": "ppg_timing_sar15.v",
+        "line": 460,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Generated explanatory comments should be Chinese-first.",
+        "path": "ppg_timing_sar15.v",
+        "line": null,
+        "rule": "comments.language"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 465,
+      "code_lines": 345,
+      "line_comments": 312,
+      "commented_code_lines": 232,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+            "syntax_confidence": 100,
+            "format_score": 92,
+            "rewrite_need_score": 10,
+            "rewrite_risk_score": 20,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 465,
+              "module_count": 1,
+              "module_names": [
+                "ppg_timing_sar15"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 42,
+              "end_count": 42,
+              "case_count": 1,
+              "endcase_count": 1,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_enable",
+                "i_test_mode",
+                "i_optical_mode",
+                "i_static_characterization_enable",
+                "i_test_mux_ctrl",
+                "i_static_sar9_amb_code",
+                "i_static_sar9_dc_code",
+                "i_static_sar15_amb_code",
+                "i_static_sar15_dc_code",
+                "i_leddac_r_code",
+                "i_leddac_ir_code",
+                "i_idac_sar15_amb_r_code",
+                "i_idac_sar15_amb_ir_code",
+                "i_idac_sar15_dc_r_code",
+                "i_idac_sar15_dc_ir_code",
+                "o_frame_start_400hz",
+                "o_en_tia_low",
+                "o_leddac",
+                "o_leden1_low",
+                "o_leden2_low",
+                "o_en_test",
+                "o_clk_buf_low",
+                "o_clk_2m",
+                "o_clk_iref_idac_low",
+                "o_clk_9q1_low",
+                "o_clk_15q1_low",
+                "o_clk_aferst_low",
+                "o_clk_iref_idac_sar9_low",
+                "o_clk_iref_idac_sar15_low",
+                "o_clk_q2_low",
+                "o_clk_q3_low",
+                "o_clk_tiaen_low",
+                "o_en_15sar_low",
+                "o_en_sar9_amb_low",
+                "o_en_sar9_dc_low",
+                "o_en_sar9_iref",
+                "o_en_sar15_amb_low",
+                "o_en_sar15_dc_low",
+                "o_en_sar15_iref",
+                "o_idac_sar9ambn_low",
+                "o_idac_sar9dcn_low",
+                "o_idac_sar15ambn_low",
+                "o_idac_sar15dcn_low",
+                "o_s_in"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 9,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 23,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 80,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 1,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "complex_lvalue",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/16",
+            "revision_date": "2026/07/18",
+            "design_name": "PPG SAR15 Timing Controller",
+            "module_name": "ppg_timing_sar15",
+            "description": "Synthesizable 15-bit R/IR sampling timing controller",
+            "simulations": "tb_ppg_timing_sar15.v",
+            "references": "../ppg_system_integration/PPG_NEW_CHAT_CONTEXT.md",
+            "version": "V1.0",
+            "dependency_lines": [],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/16        V1.0        Erie          Create file.",
+              "2026/07/18        V1.0        Erie          Add static characterization and test-MUX control."
+            ],
+            "history_lines_cn": [],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 465,
+            "nonempty_lines": 425,
+            "line_comments": 312,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 377,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": false
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_timing_sar15.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

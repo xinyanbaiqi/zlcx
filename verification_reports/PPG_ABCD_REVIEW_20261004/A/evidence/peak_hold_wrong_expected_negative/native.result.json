@@ -1,0 +1,34 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_peak_valley_window_detector",
+    "-o",
+    "/tmp/ppg_audit_probes/peak_hold_wrong_expected_negative_1e8d3c59/sim.vvp",
+    "/tmp/ppg_audit_probes/peak_hold_wrong_expected_negative_1e8d3c59/files/0/ppg_peak_valley_window_detector.v",
+    "/tmp/ppg_audit_probes/peak_hold_wrong_expected_negative_1e8d3c59/files/1/audit_peak_wrong_initial.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/peak_hold_wrong_expected_negative_1e8d3c59",
+  "compile_rc": 0,
+  "run_rc": 1,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_peak_valley_window_detector\\ppg_peak_valley_window_detector.v",
+      "sha256": "d84353d813b6f51722301f3d6893a428f4ddb88df8bd0f0713ead199632cce5c"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\peak_hold_A\\audit_peak_wrong_initial.v",
+      "sha256": "2af16ca1eba444e4ed794e7f256ca768df4dbbc995e61880b68c425b5e8d5ce8"
+    }
+  ]
+}

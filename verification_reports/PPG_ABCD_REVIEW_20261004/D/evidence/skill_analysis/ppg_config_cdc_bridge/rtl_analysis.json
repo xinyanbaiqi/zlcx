@@ -1,0 +1,768 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_config_cdc_bridge",
+    "parameter_count": 1,
+    "port_count": 9
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_source_clk",
+      "i_destination_clk"
+    ],
+    "reset_signals": [
+      "i_source_rstn",
+      "i_destination_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_source_config",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_source_update",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_source_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_destination_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_destination_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "o_destination_config",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_destination_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "reg_source_config",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "flag_source_request",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_ack_sync_meta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_ack_sync",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_request_sync_meta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_request_sync",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_destination_ack",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "destination_config_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "destination_update_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_destination_clk or negedge i_destination_rstn",
+      "line_range": [
+        101,
+        112
+      ],
+      "assigned_signals": [
+        "destination_update_o"
+      ],
+      "referenced_signals": [
+        "i_destination_clk",
+        "i_destination_rstn",
+        "b0",
+        "flag_request_sync",
+        "flag_destination_ack",
+        "b1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_destination_clk or negedge i_destination_rstn",
+      "line_range": [
+        112,
+        124
+      ],
+      "assigned_signals": [
+        "destination_config_o"
+      ],
+      "referenced_signals": [
+        "i_destination_clk",
+        "i_destination_rstn",
+        "b0",
+        "C_CONFIG_WIDTH",
+        "flag_request_sync",
+        "flag_destination_ack",
+        "reg_source_config"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        124,
+        135
+      ],
+      "assigned_signals": [
+        "reg_source_config"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "C_CONFIG_WIDTH",
+        "i_source_update",
+        "b1",
+        "flag_source_busy",
+        "i_source_config"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        135,
+        146
+      ],
+      "assigned_signals": [
+        "flag_source_request"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "i_source_update",
+        "b1",
+        "flag_source_busy",
+        "SPI_SCLK"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        146,
+        155
+      ],
+      "assigned_signals": [
+        "flag_ack_sync_meta"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "flag_destination_ack"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        155,
+        164
+      ],
+      "assigned_signals": [
+        "flag_ack_sync"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "flag_ack_sync_meta",
+        "MHz"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_destination_clk or negedge i_destination_rstn",
+      "line_range": [
+        164,
+        173
+      ],
+      "assigned_signals": [
+        "flag_request_sync_meta"
+      ],
+      "referenced_signals": [
+        "i_destination_clk",
+        "i_destination_rstn",
+        "b0",
+        "flag_source_request"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_destination_clk or negedge i_destination_rstn",
+      "line_range": [
+        173,
+        182
+      ],
+      "assigned_signals": [
+        "flag_request_sync"
+      ],
+      "referenced_signals": [
+        "i_destination_clk",
+        "i_destination_rstn",
+        "b0",
+        "flag_request_sync_meta"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_destination_clk or negedge i_destination_rstn",
+      "line_range": [
+        182,
+        192
+      ],
+      "assigned_signals": [
+        "flag_destination_ack"
+      ],
+      "referenced_signals": [
+        "i_destination_clk",
+        "i_destination_rstn",
+        "b0",
+        "flag_request_sync"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_config_cdc_bridge reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_source_rstn",
+        "i_destination_rstn",
+        "o_source_busy",
+        "o_destination_config",
+        "o_destination_update"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "description": "sequential logic covering destination_update_o.",
+      "signals": [
+        "destination_update_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering destination_config_o.",
+      "signals": [
+        "destination_config_o"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering reg_source_config.",
+      "signals": [
+        "reg_source_config"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering flag_source_request.",
+      "signals": [
+        "flag_source_request"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering flag_ack_sync_meta.",
+      "signals": [
+        "flag_ack_sync_meta"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering flag_ack_sync.",
+      "signals": [
+        "flag_ack_sync"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "description": "sequential logic covering flag_request_sync_meta.",
+      "signals": [
+        "flag_request_sync_meta"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "description": "sequential logic covering flag_request_sync.",
+      "signals": [
+        "flag_request_sync"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "description": "sequential logic covering flag_destination_ack.",
+      "signals": [
+        "flag_destination_ack"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_config_cdc_bridge reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_source_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "i_destination_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_busy",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_destination_config",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_destination_update",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_source_busy",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_destination_config",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_destination_update",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "destination_update_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "destination_config_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_source_config",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_source_request",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_ack_sync_meta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_ack_sync",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_request_sync_meta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_request_sync",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_destination_ack",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_source_rstn",
+        "i_destination_rstn",
+        "o_source_busy",
+        "o_destination_config",
+        "o_destination_update"
+      ],
+      "description": "Verify `ppg_config_cdc_bridge` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_source_rstn",
+        "i_destination_rstn",
+        "o_source_busy",
+        "o_destination_config",
+        "o_destination_update"
+      ],
+      "description": "ppg_config_cdc_bridge reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        101,
+        112
+      ],
+      "boundary_signals": [
+        "destination_update_o",
+        "flag_destination_ack",
+        "flag_request_sync",
+        "i_destination_clk",
+        "i_destination_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        112,
+        124
+      ],
+      "boundary_signals": [
+        "destination_config_o",
+        "flag_destination_ack",
+        "flag_request_sync",
+        "i_destination_clk",
+        "i_destination_rstn",
+        "reg_source_config"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        124,
+        135
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_config",
+        "i_source_rstn",
+        "i_source_update",
+        "reg_source_config"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        135,
+        146
+      ],
+      "boundary_signals": [
+        "flag_source_request",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_source_update"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        146,
+        155
+      ],
+      "boundary_signals": [
+        "flag_ack_sync_meta",
+        "flag_destination_ack",
+        "i_source_clk",
+        "i_source_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        155,
+        164
+      ],
+      "boundary_signals": [
+        "flag_ack_sync",
+        "flag_ack_sync_meta",
+        "i_source_clk",
+        "i_source_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        164,
+        173
+      ],
+      "boundary_signals": [
+        "flag_request_sync_meta",
+        "flag_source_request",
+        "i_destination_clk",
+        "i_destination_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        173,
+        182
+      ],
+      "boundary_signals": [
+        "flag_request_sync",
+        "flag_request_sync_meta",
+        "i_destination_clk",
+        "i_destination_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        182,
+        192
+      ],
+      "boundary_signals": [
+        "flag_destination_ack",
+        "flag_request_sync",
+        "i_destination_clk",
+        "i_destination_rstn"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

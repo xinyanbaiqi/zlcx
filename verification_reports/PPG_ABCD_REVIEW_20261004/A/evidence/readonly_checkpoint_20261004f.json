@@ -1,0 +1,14 @@
+{
+  "time": "2026-10-04T20:18:12+08:00",
+  "origin_main": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "git_status": "",
+  "scope_hashes_unchanged": 119,
+  "regression_states": {
+    "finished": 45,
+    "running": 3
+  },
+  "coverage_states": {
+    "完成": 95,
+    "部分": 24
+  }
+}

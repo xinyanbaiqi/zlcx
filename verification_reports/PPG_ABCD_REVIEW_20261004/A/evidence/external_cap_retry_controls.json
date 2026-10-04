@@ -1,0 +1,27 @@
+[
+  [
+    "completed",
+    false,
+    false
+  ],
+  [
+    "running",
+    false,
+    false
+  ],
+  [
+    "incomplete_terminal_write",
+    false,
+    false
+  ],
+  [
+    "external_cap",
+    true,
+    true
+  ],
+  [
+    "design_error",
+    false,
+    false
+  ]
+]

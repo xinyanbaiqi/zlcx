@@ -1,0 +1,1 @@
+{"linux_root": "/tmp/ppg_audit_iverilog_20261004", "transfer_rc": 0, "version_rc": 0, "archive_sha256": "9b4de75d5e9ddbd12b39b7cfe1619040bfb58e934a51dac1cf353f1b0a95227a", "reason": "DrvFS returns EIO for new access; active preloaded regressions preserved"}

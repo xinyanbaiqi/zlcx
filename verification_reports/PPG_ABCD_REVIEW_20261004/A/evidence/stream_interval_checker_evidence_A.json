@@ -1,0 +1,88 @@
+[
+  {
+    "case": "OIB06",
+    "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_owner_identity_backpressure.v",
+    "source_sha256": "87c33b5f0c14968732624023986f0443df624a9c84b35412fb40a3c0c6b3f70e",
+    "ranges": [
+      [
+        942,
+        967
+      ],
+      [
+        1868,
+        1876
+      ]
+    ],
+    "limitation": "Exact monitor/gate fragments; synthetic public result stream, not full DUT mutant",
+    "result": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+        "-B",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb_A_checker",
+        "-o",
+        "/tmp/ppg_audit_probes/A_oib06_checker_2a03cfa2/sim.vvp",
+        "/tmp/ppg_audit_probes/A_oib06_checker_2a03cfa2/files/0/tb_A_checker.v"
+      ],
+      "linux_root": "/tmp/ppg_audit_probes/A_oib06_checker_2a03cfa2",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "inputs": [
+        {
+          "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_oib06_checker\\tb_A_checker.v",
+          "sha256": "647d72b9979e61e31f2f45a3adad7c8b129e332c702829f1aa276af81b341857"
+        }
+      ]
+    }
+  },
+  {
+    "case": "RRC01",
+    "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_periodic_recheck_recovery.v",
+    "source_sha256": "b8b80d0341f1fc7417becf7168785ca23d07a0927bd5693c03940806b7afd9ca",
+    "ranges": [
+      [
+        1067,
+        1072
+      ]
+    ],
+    "limitation": "Exact final checker only; no claim altered interval RTL passes full RRC",
+    "result": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+        "-B",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb_A_checker",
+        "-o",
+        "/tmp/ppg_audit_probes/A_rrc01_checker_2811ff58/sim.vvp",
+        "/tmp/ppg_audit_probes/A_rrc01_checker_2811ff58/files/0/tb_A_checker.v"
+      ],
+      "linux_root": "/tmp/ppg_audit_probes/A_rrc01_checker_2811ff58",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "inputs": [
+        {
+          "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_rrc01_checker\\tb_A_checker.v",
+          "sha256": "5e84357e0526c8de1a3f78360c8e73f2e1c70c378fae97d0ef291b7a6969e263"
+        }
+      ]
+    }
+  }
+]

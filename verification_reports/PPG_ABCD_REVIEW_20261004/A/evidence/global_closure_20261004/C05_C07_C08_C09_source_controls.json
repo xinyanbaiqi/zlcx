@@ -1,0 +1,7 @@
+{
+  "changed_identifier_rejected": true,
+  "blank_rejected": true,
+  "wrong_parameter_row_rejected_with_current_literal_definition": true,
+  "wrong_clock_domain_section_rejected": true,
+  "complete_identity_group_without_literal_field_not_auto_error": true
+}

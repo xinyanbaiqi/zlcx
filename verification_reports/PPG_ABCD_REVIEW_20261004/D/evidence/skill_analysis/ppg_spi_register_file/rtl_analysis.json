@@ -1,0 +1,2255 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_spi_register_file",
+    "parameter_count": 0,
+    "port_count": 84
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk",
+      "i_source_clk"
+    ],
+    "reset_signals": [
+      "i_rstn",
+      "i_source_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_spi_cs_n",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_spi_sdi",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_spi_sdo",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_source_config_snapshot",
+      "direction": "output",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "name": "o_source_config_update_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_source_characterization_update_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_source_static_characterization_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_source_test_mux_ctrl",
+      "direction": "output",
+      "width": 5,
+      "role": "signal"
+    },
+    {
+      "name": "i_source_config_update_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_source_characterization_update_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_start_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stop_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_diag_clear_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_control_abort_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dbg_out_select",
+      "direction": "output",
+      "width": 3,
+      "role": "control"
+    },
+    {
+      "name": "o_dbg_out_select_update_event",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_lifecycle_state",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_start_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_commit_ack_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_last_error_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_schema_version",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_config_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_stage2_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_launch_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_owner_deadline_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_completion_mismatch_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_datapath_empty",
+      "direction": "input",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "i_ami_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_active_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_ami_integration_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_wrapper_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_switch_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_transaction_mismatch_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_owner_deadline_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_calibration_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_characterization_control_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_characterization_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_blocking",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_cause_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_system_fault_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_system_fault_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_result_discard_summary_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_cause",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_source",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_summary",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_measurement_result_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_measurement_result_discard_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_config_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_recovery_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_amb_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "cnt_bit_in_byte",
+      "kind": "reg",
+      "width": 3,
+      "role": "counter"
+    },
+    {
+      "name": "cnt_field_byte",
+      "kind": "reg",
+      "width": 1,
+      "role": "counter"
+    },
+    {
+      "name": "state_current",
+      "kind": "reg",
+      "width": 3,
+      "role": "fsm_state"
+    },
+    {
+      "name": "reg_shift_in",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "reg_byte_addr",
+      "kind": "reg",
+      "width": 16,
+      "role": "register"
+    },
+    {
+      "name": "reg_active_shadow",
+      "kind": "reg",
+      "width": 1024,
+      "role": "register"
+    },
+    {
+      "name": "reg_characterization",
+      "kind": "reg",
+      "width": 6,
+      "role": "register"
+    },
+    {
+      "name": "reg_dbg_out_select",
+      "kind": "reg",
+      "width": 3,
+      "role": "register"
+    },
+    {
+      "name": "reg_read_byte",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "reg_diag_snapshot",
+      "kind": "reg",
+      "width": 304,
+      "role": "register"
+    },
+    {
+      "name": "reg_diag_snapshot_gated",
+      "kind": "reg",
+      "width": 304,
+      "role": "register"
+    },
+    {
+      "name": "reg_diag_sync_stable",
+      "kind": "reg",
+      "width": 304,
+      "role": "register"
+    },
+    {
+      "name": "reg_mr_latch",
+      "kind": "reg",
+      "width": 49,
+      "role": "register"
+    },
+    {
+      "name": "reg_dd_latch",
+      "kind": "reg",
+      "width": 81,
+      "role": "register"
+    },
+    {
+      "name": "flag_char_request_held",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_cmd_is_read",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        372,
+        381
+      ],
+      "assigned_signals": [
+        "state_current"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "ST_IDLE",
+        "state_next"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        381,
+        413
+      ],
+      "assigned_signals": [
+        "state_next"
+      ],
+      "referenced_signals": [
+        "state_current",
+        "ST_IDLE",
+        "ST_CMD",
+        "flag_byte_boundary",
+        "ST_ADDR",
+        "cnt_field_byte",
+        "b1",
+        "flag_cmd_is_read",
+        "ST_DUMMY",
+        "ST_DATA",
+        "default",
+        "ADDR"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        413,
+        432
+      ],
+      "assigned_signals": [
+        "cnt_field_byte"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "flag_byte_boundary",
+        "state_current",
+        "ST_CMD",
+        "ST_ADDR",
+        "ST_DUMMY"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        432,
+        447
+      ],
+      "assigned_signals": [
+        "reg_byte_addr"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "d0",
+        "flag_byte_boundary",
+        "state_current",
+        "ST_ADDR",
+        "cnt_field_byte",
+        "shift_in_next",
+        "ST_DATA",
+        "d1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        447,
+        458
+      ],
+      "assigned_signals": [
+        "flag_cmd_is_read"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "flag_byte_boundary",
+        "state_current",
+        "ST_CMD",
+        "shift_in_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "negedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        458,
+        472
+      ],
+      "assigned_signals": [
+        "reg_read_byte"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "h00",
+        "flag_load_read_byte",
+        "dec_read_byte",
+        "flag_cmd_is_read",
+        "state_current",
+        "ST_DATA"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        472,
+        481
+      ],
+      "assigned_signals": [
+        "cnt_bit_in_byte"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "d0",
+        "d1"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn or posedge i_spi_cs_n",
+      "line_range": [
+        481,
+        490
+      ],
+      "assigned_signals": [
+        "reg_shift_in"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "b0",
+        "b1",
+        "h00",
+        "shift_in_next",
+        "V4"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        490,
+        501
+      ],
+      "assigned_signals": [
+        "reg_active_shadow"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "flag_write_commit",
+        "reg_byte_addr",
+        "d0",
+        "b000",
+        "shift_in_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_10",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        501,
+        512
+      ],
+      "assigned_signals": [
+        "reg_characterization"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "d0",
+        "flag_write_commit",
+        "reg_byte_addr",
+        "d128",
+        "shift_in_next",
+        "bits"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_11",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        512,
+        523
+      ],
+      "assigned_signals": [
+        "reg_dbg_out_select"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "d0",
+        "flag_write_commit",
+        "reg_byte_addr",
+        "d129",
+        "shift_in_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_12",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        523,
+        536
+      ],
+      "assigned_signals": [
+        "flag_char_request_held"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "flag_trigger_char_update",
+        "b1",
+        "i_source_characterization_update_ready"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_13",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        536,
+        548
+      ],
+      "assigned_signals": [
+        "reg_diag_snapshot"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "w_capture_trigger",
+        "diag_snapshot_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_14",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        548,
+        559
+      ],
+      "assigned_signals": [
+        "reg_diag_snapshot_gated"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "w_diag_snapshot_gate_event",
+        "reg_diag_snapshot"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_15",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        559,
+        568
+      ],
+      "assigned_signals": [
+        "reg_diag_sync_stable"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "reg_diag_snapshot_gated"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_16",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        568,
+        579
+      ],
+      "assigned_signals": [
+        "reg_mr_latch"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "i_measurement_result_discard_event",
+        "i_measurement_result_discard_precision",
+        "i_measurement_result_discard_run_generation",
+        "i_measurement_result_discard_sample_index",
+        "i_measurement_result_discard_frame_id",
+        "i_measurement_result_discard_frame_type",
+        "i_measurement_result_discard_color_ir",
+        "i_measurement_result_discard_sample_valid",
+        "i_measurement_result_discard_identity_valid",
+        "i_measurement_result_discard_reason"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_17",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        579,
+        590
+      ],
+      "assigned_signals": [
+        "reg_dd_latch"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "i_detection_discard_event",
+        "i_detection_discard_precision",
+        "i_detection_discard_run_generation",
+        "i_detection_discard_dc_code_epoch",
+        "i_detection_discard_amb_code_epoch",
+        "i_detection_discard_dc_recovery_epoch",
+        "i_detection_discard_coef_epoch",
+        "i_detection_discard_config_epoch",
+        "i_detection_discard_sample_index",
+        "i_detection_discard_frame_id",
+        "i_detection_discard_frame_type",
+        "i_detection_discard_color_ir",
+        "i_detection_discard_sample_valid",
+        "i_detection_discard_identity_valid",
+        "i_detection_discard_reason"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_18",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        590,
+        681
+      ],
+      "assigned_signals": [
+        "dec_read_byte"
+      ],
+      "referenced_signals": [
+        "dec_read_load_addr",
+        "d0",
+        "reg_active_shadow",
+        "b000",
+        "d128",
+        "b00",
+        "reg_characterization",
+        "bits",
+        "d129",
+        "b00000",
+        "reg_dbg_out_select",
+        "d144",
+        "h00",
+        "d256",
+        "d294",
+        "reg_diag_sync_stable",
+        "diag_byte_offset",
+        "ppg_pulse_cdc_sync",
+        "ppg_pulse_cdc_sync_start_Inst",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_source_pulse",
+        "flag_trigger_start",
+        "i_dest_clk",
+        "i_clk",
+        "i_dest_rstn",
+        "i_rstn",
+        "o_dest_pulse",
+        "w_start_event",
+        "ppg_pulse_cdc_sync_stop_Inst",
+        "flag_trigger_stop",
+        "w_stop_event",
+        "ppg_pulse_cdc_sync_diag_clear_Inst",
+        "flag_trigger_diag_clear",
+        "w_diag_clear_event",
+        "ppg_pulse_cdc_sync_abort_Inst",
+        "flag_trigger_abort",
+        "w_abort_event",
+        "ppg_pulse_cdc_sync_capture_Inst",
+        "flag_read_start",
+        "w_capture_trigger",
+        "ppg_pulse_cdc_sync_dbg_select_Inst",
+        "flag_dbg_select_write",
+        "w_dbg_select_update_event",
+        "project",
+        "ppg",
+        "stage3",
+        "item4a",
+        "extension",
+        "spi",
+        "diag",
+        "tearing",
+        "confirmed",
+        "ppg_pulse_cdc_sync_diag_ready_Inst",
+        "w_diag_snapshot_gate_event"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_spi_register_file reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "i_source_rstn",
+        "o_spi_sdo",
+        "o_source_config_snapshot",
+        "o_source_config_update_event",
+        "o_source_characterization_update_valid",
+        "o_source_static_characterization_enable",
+        "o_source_test_mux_ctrl",
+        "o_start_event",
+        "o_stop_event",
+        "o_diag_clear_event",
+        "o_control_abort_event",
+        "o_dbg_out_select",
+        "o_dbg_out_select_update_event"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "description": "sequential logic covering state_current.",
+      "signals": [
+        "state_current"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "description": "combinational logic covering state_next.",
+      "signals": [
+        "state_next"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "counter update block 3",
+      "description": "sequential logic covering cnt_field_byte.",
+      "signals": [
+        "cnt_field_byte"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering reg_byte_addr.",
+      "signals": [
+        "reg_byte_addr"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering flag_cmd_is_read.",
+      "signals": [
+        "flag_cmd_is_read"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering reg_read_byte.",
+      "signals": [
+        "reg_read_byte"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "counter update block 7",
+      "description": "sequential logic covering cnt_bit_in_byte.",
+      "signals": [
+        "cnt_bit_in_byte"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "description": "sequential logic covering reg_shift_in.",
+      "signals": [
+        "reg_shift_in"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "description": "sequential logic covering reg_active_shadow.",
+      "signals": [
+        "reg_active_shadow"
+      ]
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "description": "sequential logic covering reg_characterization.",
+      "signals": [
+        "reg_characterization"
+      ]
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "description": "sequential logic covering reg_dbg_out_select.",
+      "signals": [
+        "reg_dbg_out_select"
+      ]
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "description": "sequential logic covering flag_char_request_held.",
+      "signals": [
+        "flag_char_request_held"
+      ]
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "description": "sequential logic covering reg_diag_snapshot.",
+      "signals": [
+        "reg_diag_snapshot"
+      ]
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "description": "sequential logic covering reg_diag_snapshot_gated.",
+      "signals": [
+        "reg_diag_snapshot_gated"
+      ]
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "description": "sequential logic covering reg_diag_sync_stable.",
+      "signals": [
+        "reg_diag_sync_stable"
+      ]
+    },
+    {
+      "feature_id": "FC017",
+      "name": "logic partition block 16",
+      "description": "sequential logic covering reg_mr_latch.",
+      "signals": [
+        "reg_mr_latch"
+      ]
+    },
+    {
+      "feature_id": "FC018",
+      "name": "logic partition block 17",
+      "description": "sequential logic covering reg_dd_latch.",
+      "signals": [
+        "reg_dd_latch"
+      ]
+    },
+    {
+      "feature_id": "FC019",
+      "name": "logic partition block 18",
+      "description": "combinational logic covering dec_read_byte.",
+      "signals": [
+        "dec_read_byte"
+      ]
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "description": "Counter/state timing progression remains observable through public outputs.",
+      "signals": [
+        "cnt_bit_in_byte",
+        "cnt_field_byte",
+        "o_spi_sdo",
+        "o_source_config_snapshot",
+        "o_source_config_update_event",
+        "o_source_characterization_update_valid",
+        "o_source_static_characterization_enable",
+        "o_source_test_mux_ctrl",
+        "o_start_event",
+        "o_stop_event",
+        "o_diag_clear_event",
+        "o_control_abort_event",
+        "o_dbg_out_select",
+        "o_dbg_out_select_update_event"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_spi_register_file reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "i_source_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_spi_sdo",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_config_snapshot",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_config_update_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_characterization_update_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_static_characterization_enable",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_test_mux_ctrl",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_start_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stop_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_diag_clear_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_control_abort_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dbg_out_select",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dbg_out_select_update_event",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_spi_sdo",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_config_snapshot",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_config_update_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_characterization_update_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_static_characterization_enable",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_test_mux_ctrl",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_start_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stop_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_diag_clear_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_control_abort_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dbg_out_select",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dbg_out_select_update_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "state_current",
+          "role": "fsm_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "state_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "counter update block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_field_byte",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_byte_addr",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_cmd_is_read",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_read_byte",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "counter update block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_bit_in_byte",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_shift_in",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_active_shadow",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_characterization",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_dbg_out_select",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_char_request_held",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_diag_snapshot",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_diag_snapshot_gated",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_diag_sync_stable",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC017",
+      "name": "logic partition block 16",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_mr_latch",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC018",
+      "name": "logic partition block 17",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_dd_latch",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC019",
+      "name": "logic partition block 18",
+      "pin_assignments": [
+        {
+          "pin_name": "dec_read_byte",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_bit_in_byte",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_field_byte",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_spi_sdo",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_config_snapshot",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_config_update_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_characterization_update_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_static_characterization_enable",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_source_test_mux_ctrl",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_start_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stop_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_diag_clear_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_control_abort_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dbg_out_select",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dbg_out_select_update_event",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_spi_sdo",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_config_snapshot",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_config_update_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_characterization_update_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_static_characterization_enable",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_source_test_mux_ctrl",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_start_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stop_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_diag_clear_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_control_abort_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dbg_out_select",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dbg_out_select_update_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "i_source_rstn",
+        "o_spi_sdo",
+        "o_source_config_snapshot",
+        "o_source_config_update_event",
+        "o_source_characterization_update_valid",
+        "o_source_static_characterization_enable",
+        "o_source_test_mux_ctrl",
+        "o_start_event",
+        "o_stop_event",
+        "o_diag_clear_event",
+        "o_control_abort_event",
+        "o_dbg_out_select",
+        "o_dbg_out_select_update_event"
+      ],
+      "description": "Verify `ppg_spi_register_file` drives known output values after reset release."
+    },
+    {
+      "check_id": "counter_progression",
+      "category": "checkpoint",
+      "signals": [
+        "cnt_bit_in_byte",
+        "cnt_field_byte"
+      ],
+      "description": "Verify timer/counter progression across phase transitions."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "i_source_rstn",
+        "o_spi_sdo",
+        "o_source_config_snapshot",
+        "o_source_config_update_event",
+        "o_source_characterization_update_valid",
+        "o_source_static_characterization_enable",
+        "o_source_test_mux_ctrl",
+        "o_start_event",
+        "o_stop_event",
+        "o_diag_clear_event",
+        "o_control_abort_event",
+        "o_dbg_out_select",
+        "o_dbg_out_select_update_event"
+      ],
+      "description": "ppg_spi_register_file reset behavior"
+    },
+    {
+      "check_id": "fc900",
+      "category": "feature_mapping",
+      "signals": [
+        "cnt_bit_in_byte",
+        "cnt_field_byte",
+        "o_spi_sdo",
+        "o_source_config_snapshot",
+        "o_source_config_update_event",
+        "o_source_characterization_update_valid",
+        "o_source_static_characterization_enable",
+        "o_source_test_mux_ctrl",
+        "o_start_event",
+        "o_stop_event",
+        "o_diag_clear_event",
+        "o_control_abort_event",
+        "o_dbg_out_select",
+        "o_dbg_out_select_update_event"
+      ],
+      "description": "counter progression"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "state_transition",
+      "kind": "sequential",
+      "line_range": [
+        372,
+        381
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "state_transition",
+      "kind": "combinational",
+      "line_range": [
+        381,
+        413
+      ],
+      "boundary_signals": [
+        "cnt_field_byte",
+        "flag_cmd_is_read",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        413,
+        432
+      ],
+      "boundary_signals": [
+        "cnt_field_byte",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        432,
+        447
+      ],
+      "boundary_signals": [
+        "cnt_field_byte",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "reg_byte_addr",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        447,
+        458
+      ],
+      "boundary_signals": [
+        "flag_cmd_is_read",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        458,
+        472
+      ],
+      "boundary_signals": [
+        "flag_cmd_is_read",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "reg_read_byte",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        472,
+        481
+      ],
+      "boundary_signals": [
+        "cnt_bit_in_byte",
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        481,
+        490
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "i_spi_cs_n",
+        "reg_shift_in"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        490,
+        501
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_active_shadow",
+        "reg_byte_addr"
+      ]
+    },
+    {
+      "candidate_id": "DC010",
+      "module_name": "u_block_10",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        501,
+        512
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_byte_addr",
+        "reg_characterization"
+      ]
+    },
+    {
+      "candidate_id": "DC011",
+      "module_name": "u_block_11",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        512,
+        523
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_byte_addr",
+        "reg_dbg_out_select"
+      ]
+    },
+    {
+      "candidate_id": "DC012",
+      "module_name": "u_block_12",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        523,
+        536
+      ],
+      "boundary_signals": [
+        "flag_char_request_held",
+        "i_source_characterization_update_ready",
+        "i_source_clk",
+        "i_source_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC013",
+      "module_name": "u_block_13",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        536,
+        548
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_diag_snapshot"
+      ]
+    },
+    {
+      "candidate_id": "DC014",
+      "module_name": "u_block_14",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        548,
+        559
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_diag_snapshot",
+        "reg_diag_snapshot_gated"
+      ]
+    },
+    {
+      "candidate_id": "DC015",
+      "module_name": "u_block_15",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        559,
+        568
+      ],
+      "boundary_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_diag_snapshot_gated",
+        "reg_diag_sync_stable"
+      ]
+    },
+    {
+      "candidate_id": "DC016",
+      "module_name": "u_block_16",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        568,
+        579
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_measurement_result_discard_color_ir",
+        "i_measurement_result_discard_event",
+        "i_measurement_result_discard_frame_id",
+        "i_measurement_result_discard_frame_type",
+        "i_measurement_result_discard_identity_valid",
+        "i_measurement_result_discard_precision",
+        "i_measurement_result_discard_reason",
+        "i_measurement_result_discard_run_generation",
+        "i_measurement_result_discard_sample_index",
+        "i_measurement_result_discard_sample_valid",
+        "i_rstn",
+        "reg_mr_latch"
+      ]
+    },
+    {
+      "candidate_id": "DC017",
+      "module_name": "u_block_17",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        579,
+        590
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_detection_discard_amb_code_epoch",
+        "i_detection_discard_coef_epoch",
+        "i_detection_discard_color_ir",
+        "i_detection_discard_config_epoch",
+        "i_detection_discard_dc_code_epoch",
+        "i_detection_discard_dc_recovery_epoch",
+        "i_detection_discard_event",
+        "i_detection_discard_frame_id",
+        "i_detection_discard_frame_type",
+        "i_detection_discard_identity_valid",
+        "i_detection_discard_precision",
+        "i_detection_discard_reason",
+        "i_detection_discard_run_generation",
+        "i_detection_discard_sample_index",
+        "i_detection_discard_sample_valid",
+        "i_rstn",
+        "reg_dd_latch"
+      ]
+    },
+    {
+      "candidate_id": "DC018",
+      "module_name": "u_block_18",
+      "role": "logic_partition",
+      "kind": "combinational",
+      "line_range": [
+        590,
+        681
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_source_clk",
+        "i_source_rstn",
+        "reg_active_shadow",
+        "reg_characterization",
+        "reg_dbg_out_select",
+        "reg_diag_sync_stable"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_spi_register_file\\ppg_spi_register_file.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

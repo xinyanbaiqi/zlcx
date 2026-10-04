@@ -1,0 +1,4137 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG001": 1,
+    "VG007": 4,
+    "VG041": 41,
+    "VG004": 42,
+    "VG040": 3,
+    "VG009": 1,
+    "VG010": 40,
+    "VG011": 40,
+    "VG012": 2,
+    "VG014": 25,
+    "VG042": 1
+  },
+  "errors": 135,
+  "strict_warnings": 65,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 135,
+      "warnings": 65,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 87,
+      "warnings": 65,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 40,
+      "warnings": 40,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG001",
+      "severity": "error",
+      "message": "File must start with `timescale 1ns / 1ps`.",
+      "path": "ppg_digital_shell.v",
+      "line": 1,
+      "rule": "file.preamble"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Standard bilingual header with English/Chinese sections is required.",
+      "path": "ppg_digital_shell.v",
+      "line": 1,
+      "rule": "header.bilingual"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "English header is missing required field(s): Company, Engineer, Create Date, Design Name, Module Name, Description, Simulations, Referrences, Dependencies, Version, Revision Date, History",
+      "path": "ppg_digital_shell.v",
+      "line": 1,
+      "rule": "header.english_fields"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+      "path": "ppg_digital_shell.v",
+      "line": 1,
+      "rule": "header.chinese_fields"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Header history must contain at least one dated record with a Vx.y version.",
+      "path": "ppg_digital_shell.v",
+      "line": 1,
+      "rule": "header.history_records"
+    },
+    {
+      "code": "VG041",
+      "severity": "error",
+      "message": "Comments must describe real RTL intent, not template or placeholder text.",
+      "path": "ppg_digital_shell.v",
+      "line": 18,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 22,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 23,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 29,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 30,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 31,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 32,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 33,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 34,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 39,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 40,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 42,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 43,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 44,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 45,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 47,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 48,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 49,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 50,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 56,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 57,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 59,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 60,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 65,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 66,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 67,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 68,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 70,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 71,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 72,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 73,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 74,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 75,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 81,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 82,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 83,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 89,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 90,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 91,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 92,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 93,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 99,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG004",
+      "severity": "error",
+      "message": "RTL indentation must use Tab characters, not space indentation.",
+      "path": "ppg_digital_shell.v",
+      "line": 100,
+      "rule": "format.tab_indent"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Generated explanatory comments should be Chinese-first.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "comments.language"
+    },
+    {
+      "code": "VG009",
+      "severity": "error",
+      "message": "Module `ppg_digital_shell` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "ports.group_comments"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DVDD12` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DGND12` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DVDD33` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DGND33` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DVDD33_AUX` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "inout port `DGND33_AUX` must use `io_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `CLK_2M` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `RESET_N` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `SPI_CS_N` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `SPI_SCLK` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `SPI_SDI` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `SPI_SDO` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `P2S_CLK` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `P2S_DATA` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `P2S_FRAME` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `DBG_OUT` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `DOUT_STAGE1_LOW` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `CLK_STAGE1_DOUT_LOW` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `DOUT_STAGE2_LOW` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "input port `CLK_STAGE2_DOUT_LOW` must use `i_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ANA_CLK_2M` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ANA_RST_N` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_RST_N` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `FRAME_START_400HZ` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ANA_BIAS_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_REF_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_S1_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_S2_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_FINE_MODE` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `ADC_START` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `LED_DRV_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `LED1_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `LED2_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `AMB_IDAC_CODE` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `AMB_IDAC_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `DCS_IDAC_CODE` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `DCS_IDAC_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `IDAC_UPDATE` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `TEST_MODE` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG010",
+      "severity": "error",
+      "message": "output port `VOUT_TEST_EN` must use `o_` prefix.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.port_prefix"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 29,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 30,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 31,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 32,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 33,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 34,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 39,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 40,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 42,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 43,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 44,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 45,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 47,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 48,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 49,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 50,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 56,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 57,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 59,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 60,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 65,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 66,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 67,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 68,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 70,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 71,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 72,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 73,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 74,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 75,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 81,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 82,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 83,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 89,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 90,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 91,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 92,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 93,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 99,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "ppg_digital_shell.v",
+      "line": 100,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG012",
+      "severity": "error",
+      "message": "Module parameter `AMB_IDAC_WIDTH` must use `C_` + uppercase naming.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.parameter"
+    },
+    {
+      "code": "VG012",
+      "severity": "error",
+      "message": "Module parameter `DCS_IDAC_WIDTH` must use `C_` + uppercase naming.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "naming.parameter"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_FINE_MODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_REF_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_RST_N` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_S1_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_S2_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ADC_START` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `AMB_IDAC_CODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `AMB_IDAC_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ANA_BIAS_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ANA_CLK_2M` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `ANA_RST_N` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `DBG_OUT` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `DCS_IDAC_CODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `DCS_IDAC_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `FRAME_START_400HZ` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `IDAC_UPDATE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `LED1_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `LED2_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `LED_DRV_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `P2S_CLK` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `P2S_DATA` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `P2S_FRAME` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `SPI_SDO` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `TEST_MODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `VOUT_TEST_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "parameter `AMB_IDAC_WIDTH` should have a same-line semantic comment.",
+      "path": "ppg_digital_shell.v",
+      "line": 22,
+      "rule": "comments.coverage"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "parameter `DCS_IDAC_WIDTH` should have a same-line semantic comment.",
+      "path": "ppg_digital_shell.v",
+      "line": 23,
+      "rule": "comments.coverage"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DVDD12` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 29,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DGND12` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 30,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DVDD33` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 31,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DGND33` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 32,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DVDD33_AUX` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 33,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DGND33_AUX` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 34,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `CLK_2M` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 39,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `RESET_N` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 40,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `SPI_CS_N` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 42,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `SPI_SCLK` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 43,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `SPI_SDI` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 44,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `SPI_SDO` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 45,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `P2S_CLK` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 47,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `P2S_DATA` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 48,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `P2S_FRAME` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 49,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DBG_OUT` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 50,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DOUT_STAGE1_LOW` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 56,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `CLK_STAGE1_DOUT_LOW` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 57,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DOUT_STAGE2_LOW` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 59,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `CLK_STAGE2_DOUT_LOW` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 60,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ANA_CLK_2M` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 65,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ANA_RST_N` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 66,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_RST_N` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 67,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `FRAME_START_400HZ` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 68,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ANA_BIAS_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 70,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_REF_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 71,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_S1_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 72,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_S2_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 73,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_FINE_MODE` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 74,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `ADC_START` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 75,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `LED_DRV_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 81,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `LED1_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 82,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `LED2_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 83,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `AMB_IDAC_CODE` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 89,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `AMB_IDAC_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 90,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DCS_IDAC_CODE` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 91,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `DCS_IDAC_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 92,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `IDAC_UPDATE` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 93,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `TEST_MODE` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 99,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `VOUT_TEST_EN` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_digital_shell.v",
+      "line": 100,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG042",
+      "severity": "error",
+      "message": "Comment coverage is too low for generated RTL (0.00%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+      "path": "ppg_digital_shell.v",
+      "line": null,
+      "rule": "comments.coverage"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+    "ok": false,
+    "strict": true,
+    "errors": 135,
+    "warnings": 65,
+    "issues": [
+      {
+        "code": "VG001",
+        "severity": "error",
+        "message": "File must start with `timescale 1ns / 1ps`.",
+        "path": "ppg_digital_shell.v",
+        "line": 1,
+        "rule": "file.preamble"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Standard bilingual header with English/Chinese sections is required.",
+        "path": "ppg_digital_shell.v",
+        "line": 1,
+        "rule": "header.bilingual"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "English header is missing required field(s): Company, Engineer, Create Date, Design Name, Module Name, Description, Simulations, Referrences, Dependencies, Version, Revision Date, History",
+        "path": "ppg_digital_shell.v",
+        "line": 1,
+        "rule": "header.english_fields"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+        "path": "ppg_digital_shell.v",
+        "line": 1,
+        "rule": "header.chinese_fields"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Header history must contain at least one dated record with a Vx.y version.",
+        "path": "ppg_digital_shell.v",
+        "line": 1,
+        "rule": "header.history_records"
+      },
+      {
+        "code": "VG041",
+        "severity": "error",
+        "message": "Comments must describe real RTL intent, not template or placeholder text.",
+        "path": "ppg_digital_shell.v",
+        "line": 18,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 22,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 23,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 29,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 30,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 31,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 32,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 33,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 34,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 39,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 40,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 42,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 43,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 44,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 45,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 47,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 48,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 49,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 50,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 56,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 57,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 59,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 60,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 65,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 66,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 67,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 68,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 70,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 71,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 72,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 73,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 74,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 75,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 81,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 82,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 83,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 89,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 90,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 91,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 92,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 93,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 99,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG004",
+        "severity": "error",
+        "message": "RTL indentation must use Tab characters, not space indentation.",
+        "path": "ppg_digital_shell.v",
+        "line": 100,
+        "rule": "format.tab_indent"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Generated explanatory comments should be Chinese-first.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "comments.language"
+      },
+      {
+        "code": "VG009",
+        "severity": "error",
+        "message": "Module `ppg_digital_shell` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "ports.group_comments"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DVDD12` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DGND12` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DVDD33` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DGND33` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DVDD33_AUX` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "inout port `DGND33_AUX` must use `io_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `CLK_2M` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `RESET_N` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `SPI_CS_N` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `SPI_SCLK` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `SPI_SDI` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `SPI_SDO` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `P2S_CLK` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `P2S_DATA` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `P2S_FRAME` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `DBG_OUT` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `DOUT_STAGE1_LOW` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `CLK_STAGE1_DOUT_LOW` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `DOUT_STAGE2_LOW` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "input port `CLK_STAGE2_DOUT_LOW` must use `i_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ANA_CLK_2M` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ANA_RST_N` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_RST_N` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `FRAME_START_400HZ` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ANA_BIAS_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_REF_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_S1_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_S2_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_FINE_MODE` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `ADC_START` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `LED_DRV_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `LED1_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `LED2_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `AMB_IDAC_CODE` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `AMB_IDAC_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `DCS_IDAC_CODE` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `DCS_IDAC_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `IDAC_UPDATE` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `TEST_MODE` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG010",
+        "severity": "error",
+        "message": "output port `VOUT_TEST_EN` must use `o_` prefix.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.port_prefix"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 29,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 30,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 31,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 32,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 33,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 34,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 39,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 40,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 42,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 43,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 44,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 45,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 47,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 48,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 49,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 50,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 56,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 57,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 59,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 60,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 65,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 66,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 67,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 68,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 70,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 71,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 72,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 73,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 74,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 75,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 81,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 82,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 83,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 89,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 90,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 91,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 92,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 93,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 99,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "ppg_digital_shell.v",
+        "line": 100,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG012",
+        "severity": "error",
+        "message": "Module parameter `AMB_IDAC_WIDTH` must use `C_` + uppercase naming.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.parameter"
+      },
+      {
+        "code": "VG012",
+        "severity": "error",
+        "message": "Module parameter `DCS_IDAC_WIDTH` must use `C_` + uppercase naming.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "naming.parameter"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_FINE_MODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_REF_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_RST_N` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_S1_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_S2_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ADC_START` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `AMB_IDAC_CODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `AMB_IDAC_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ANA_BIAS_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ANA_CLK_2M` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `ANA_RST_N` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `DBG_OUT` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `DCS_IDAC_CODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `DCS_IDAC_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `FRAME_START_400HZ` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `IDAC_UPDATE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `LED1_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `LED2_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `LED_DRV_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `P2S_CLK` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `P2S_DATA` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `P2S_FRAME` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `SPI_SDO` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `TEST_MODE` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `VOUT_TEST_EN` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "parameter `AMB_IDAC_WIDTH` should have a same-line semantic comment.",
+        "path": "ppg_digital_shell.v",
+        "line": 22,
+        "rule": "comments.coverage"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "parameter `DCS_IDAC_WIDTH` should have a same-line semantic comment.",
+        "path": "ppg_digital_shell.v",
+        "line": 23,
+        "rule": "comments.coverage"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DVDD12` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 29,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DGND12` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 30,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DVDD33` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 31,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DGND33` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 32,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DVDD33_AUX` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 33,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DGND33_AUX` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 34,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `CLK_2M` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 39,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `RESET_N` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 40,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `SPI_CS_N` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 42,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `SPI_SCLK` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 43,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `SPI_SDI` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 44,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `SPI_SDO` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 45,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `P2S_CLK` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 47,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `P2S_DATA` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 48,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `P2S_FRAME` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 49,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DBG_OUT` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 50,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DOUT_STAGE1_LOW` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 56,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `CLK_STAGE1_DOUT_LOW` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 57,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DOUT_STAGE2_LOW` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 59,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `CLK_STAGE2_DOUT_LOW` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 60,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ANA_CLK_2M` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 65,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ANA_RST_N` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 66,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_RST_N` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 67,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `FRAME_START_400HZ` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 68,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ANA_BIAS_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 70,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_REF_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 71,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_S1_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 72,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_S2_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 73,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_FINE_MODE` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 74,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `ADC_START` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 75,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `LED_DRV_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 81,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `LED1_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 82,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `LED2_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 83,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `AMB_IDAC_CODE` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 89,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `AMB_IDAC_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 90,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DCS_IDAC_CODE` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 91,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `DCS_IDAC_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 92,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `IDAC_UPDATE` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 93,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `TEST_MODE` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 99,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `VOUT_TEST_EN` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_digital_shell.v",
+        "line": 100,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG042",
+        "severity": "error",
+        "message": "Comment coverage is too low for generated RTL (0.00%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+        "path": "ppg_digital_shell.v",
+        "line": null,
+        "rule": "comments.coverage"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 107,
+      "code_lines": 50,
+      "line_comments": 43,
+      "commented_code_lines": 0,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+            "syntax_confidence": 100,
+            "format_score": 80,
+            "rewrite_need_score": 30,
+            "rewrite_risk_score": 5,
+            "decision": "preserve_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 107,
+              "module_count": 1,
+              "module_names": [
+                "ppg_digital_shell"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 0,
+              "end_count": 0,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "DVDD12",
+                "DGND12",
+                "DVDD33",
+                "DGND33",
+                "DVDD33_AUX",
+                "DGND33_AUX",
+                "CLK_2M",
+                "RESET_N",
+                "SPI_CS_N",
+                "SPI_SCLK",
+                "SPI_SDI",
+                "SPI_SDO",
+                "P2S_CLK",
+                "P2S_DATA",
+                "P2S_FRAME",
+                "DBG_OUT",
+                "DOUT_STAGE1_LOW",
+                "CLK_STAGE1_DOUT_LOW",
+                "DOUT_STAGE2_LOW",
+                "CLK_STAGE2_DOUT_LOW",
+                "ANA_CLK_2M",
+                "ANA_RST_N",
+                "ADC_RST_N",
+                "FRAME_START_400HZ",
+                "ANA_BIAS_EN",
+                "ADC_REF_EN",
+                "ADC_S1_EN",
+                "ADC_S2_EN",
+                "ADC_FINE_MODE",
+                "ADC_START",
+                "LED_DRV_EN",
+                "LED1_EN",
+                "LED2_EN",
+                "AMB_IDAC_CODE",
+                "AMB_IDAC_EN",
+                "DCS_IDAC_CODE",
+                "DCS_IDAC_EN",
+                "IDAC_UPDATE",
+                "TEST_MODE",
+                "VOUT_TEST_EN"
+              ],
+              "unprefixed_port_count": 40,
+              "always_count": 0,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 43,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 25,
+              "risk_flags": [
+                "output_bridge_candidate",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": null,
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_digital_shell",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "AMB_IDAC_WIDTH",
+                  "value": "8",
+                  "decl_spec": "integer",
+                  "comment": "",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 22,
+                  "line_end": 22
+                },
+                {
+                  "keyword": "parameter",
+                  "name": "DCS_IDAC_WIDTH",
+                  "value": "8",
+                  "decl_spec": "integer",
+                  "comment": "",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 23,
+                  "line_end": 23
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DVDD12",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 29,
+                  "line_end": 29
+                },
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DGND12",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 30,
+                  "line_end": 30
+                },
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DVDD33",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 31,
+                  "line_end": 31
+                },
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DGND33",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 32,
+                  "line_end": 32
+                },
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DVDD33_AUX",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 33,
+                  "line_end": 33
+                },
+                {
+                  "direction": "inout",
+                  "width": "",
+                  "name": "DGND33_AUX",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 34,
+                  "line_end": 34
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "CLK_2M",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 39,
+                  "line_end": 39
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "RESET_N",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 40,
+                  "line_end": 40
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "SPI_CS_N",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 42,
+                  "line_end": 42
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "SPI_SCLK",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 43,
+                  "line_end": 43
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "SPI_SDI",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 44,
+                  "line_end": 44
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "SPI_SDO",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 45,
+                  "line_end": 45
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "P2S_CLK",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "P2S_DATA",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 48,
+                  "line_end": 48
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "P2S_FRAME",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "DBG_OUT",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "DOUT_STAGE1_LOW",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "CLK_STAGE1_DOUT_LOW",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "DOUT_STAGE2_LOW",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "CLK_STAGE2_DOUT_LOW",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ANA_CLK_2M",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ANA_RST_N",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_RST_N",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "FRAME_START_400HZ",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ANA_BIAS_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_REF_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_S1_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_S2_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_FINE_MODE",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "ADC_START",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "LED_DRV_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "LED1_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "LED2_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "direction": "output",
+                  "width": "[AMB_IDAC_WIDTH-1:0]",
+                  "name": "AMB_IDAC_CODE",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "AMB_IDAC_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "direction": "output",
+                  "width": "[DCS_IDAC_WIDTH-1:0]",
+                  "name": "DCS_IDAC_CODE",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "DCS_IDAC_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 92,
+                  "line_end": 92
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "IDAC_UPDATE",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "TEST_MODE",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "VOUT_TEST_EN",
+                  "comment": "-------------------------------------------------------------------------",
+                  "group": "",
+                  "section": "-------------------------------------------------------------------------",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 100,
+                  "line_end": 100
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [],
+              "assigns": [],
+              "always": [],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 0,
+                "assigns": 0,
+                "always": 0,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 21,
+              "line_end": 105
+            }
+          ],
+          "source_metrics": {
+            "lines": 107,
+            "nonempty_lines": 93,
+            "line_comments": 43,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 0,
+            "space_indented_lines": 69,
+            "has_timescale": true,
+            "has_bilingual_header": false
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_digital_shell.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

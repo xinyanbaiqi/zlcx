@@ -1,0 +1,4 @@
+INPUT qualified A(open,enabled)=x B(tie0,enabled)=1 C(open,disabled)=1
+OUTPUT valid A=1 B=1 C=1 qualified A=x B=1 C=1 guard=33
+FATAL: /mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/evidence/fir_floating_ab/audit_fir_ab_negative.v:160: AUDIT_AB_FAIL
+       Time: 356000 Scope: audit_fir_ab

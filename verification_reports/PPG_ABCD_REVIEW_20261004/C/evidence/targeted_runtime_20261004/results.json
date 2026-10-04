@@ -1,0 +1,182 @@
+[
+  {
+    "name": "baseline_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/baseline_contract_vectors/tb_C_baseline.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/baseline_original_22cec85e",
+    "input_sha256": [
+      "2c0fa949bd3c9e98ab8a64a66ec7f8cf8b1c22badd744ed0d0c66b3871b9629a",
+      "d06f329e21b1a6438da7c45edd33e9c554af3eaf5bc9e09abb79b9270f3c1c6f"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_original_22cec85e/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_original_22cec85e/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_original_22cec85e/tb.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 1.7279818058013916
+  },
+  {
+    "name": "baseline_round_mutant",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/baseline_round_mutation/ppg_dynamic_baseline_cross_detector.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/baseline_contract_vectors/tb_C_baseline.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/baseline_round_mutant_aee4c70b",
+    "input_sha256": [
+      "d434ea382ee8f62a2bb7ff52f1d224f5bc9f5f2cee1cc81f05035651291f808e",
+      "d06f329e21b1a6438da7c45edd33e9c554af3eaf5bc9e09abb79b9270f3c1c6f"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_round_mutant_aee4c70b/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_round_mutant_aee4c70b/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/baseline_round_mutant_aee4c70b/tb.v"
+    ],
+    "run_rc": 1,
+    "elapsed_seconds": 1.380246639251709
+  },
+  {
+    "name": "reconstructor_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/tb_C_reconstructor_half.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/reconstructor_original_eb92b84c",
+    "input_sha256": [
+      "73ad711d4bfdeac7ac125ab4f62ce10152a5956df9ac1410e2d20cca34ad8d70",
+      "9f8e1239099c85db8f48afa71d7392d69b368902b8ac2cdc86b53e609c706d6c"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_original_eb92b84c/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_original_eb92b84c/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_original_eb92b84c/tb.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 1.357513189315796
+  },
+  {
+    "name": "reconstructor_round_mutant",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/ppg_adc_programmable_reconstructor_round_mutant.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/tb_C_reconstructor_half.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/reconstructor_round_mutant_3b61f0f3",
+    "input_sha256": [
+      "2c3e3053bff5fa9ca5ca32f18971a47f4424c08d22220260313c45beab37fb29",
+      "9f8e1239099c85db8f48afa71d7392d69b368902b8ac2cdc86b53e609c706d6c"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_round_mutant_3b61f0f3/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_round_mutant_3b61f0f3/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_round_mutant_3b61f0f3/tb.v"
+    ],
+    "run_rc": 1,
+    "elapsed_seconds": 1.3244068622589111
+  },
+  {
+    "name": "reconstructor_legacy_mutant",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/ppg_adc_programmable_reconstructor_round_mutant.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/reconstructor_legacy_mutant_e463887b",
+    "input_sha256": [
+      "2c3e3053bff5fa9ca5ca32f18971a47f4424c08d22220260313c45beab37fb29",
+      "edbf1bc94b01aeb89274cf39b5506c376faaa0612841447c69e3c43875d6210d"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_legacy_mutant_e463887b/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_legacy_mutant_e463887b/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/reconstructor_legacy_mutant_e463887b/tb.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 1.241483211517334
+  },
+  {
+    "name": "peak_return_hold",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/peak_public_vectors/tb_C_peak_return_hold.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/peak_return_hold_4353ae6b",
+    "input_sha256": [
+      "d84353d813b6f51722301f3d6893a428f4ddb88df8bd0f0713ead199632cce5c",
+      "7b48b893d0e69f7ca9511a0e5064954bd5b607c51b4593ba94e109d36ab68684"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/peak_return_hold_4353ae6b/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/peak_return_hold_4353ae6b/dut.v",
+      "/tmp/ppg_review_C_targeted_20261004/peak_return_hold_4353ae6b/tb.v"
+    ],
+    "run_rc": 1,
+    "elapsed_seconds": 1.4994611740112305
+  }
+]

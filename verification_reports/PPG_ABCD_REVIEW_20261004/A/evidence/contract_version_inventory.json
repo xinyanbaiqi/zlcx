@@ -1,0 +1,426 @@
+{
+  "C01": {
+    "file": "PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C02": {
+    "file": "ppg_system_config_manager_semantic_contract.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C03": {
+    "file": "PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C04": {
+    "file": "PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C05": {
+    "file": "ppg_system_active_config_unpack_semantic_contract.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V5, 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is owned only by `PPG_CONTRACT_CLOSURE_MATRIX.md` and remains `NOT_CLOSED` until its final audit has zero defects. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 11,
+        "text": "| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Sole committed `i_active_config[1023:0]` producer, atomic ACTIVE stability and lifecycle owner. |"
+      },
+      {
+        "line": 12,
+        "text": "| C03 | `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | Sole manager parent and unchanged wrapper forwarding boundary. |"
+      }
+    ]
+  },
+  "C06": {
+    "file": "PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.3. Substantive interface-freeze date: 2026-08-16; metadata baseline date: 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ],
+      [
+        30,
+        "**当前规范依赖（可决定本合同语义）**"
+      ],
+      [
+        50,
+        "    > 当前规范依赖中的配置字段、输入源、静态向量、事务和CDC语义"
+      ]
+    ],
+    "dependency_rows": []
+  },
+  "C07": {
+    "file": "PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.1. Substantive interface-freeze date: 2026-08-14; metadata baseline date: 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ],
+      [
+        35,
+        "**当前规范依赖（可决定CDC语义）**"
+      ]
+    ],
+    "dependency_rows": []
+  },
+  "C08": {
+    "file": "PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C09": {
+    "file": "PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C10": {
+    "file": "PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  },
+  "C11": {
+    "file": "PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1, 2026-08-20. Status: `ACTIVE_NORMATIVE`; this module contract is active while system closure remains `NOT_CLOSED` and implementation evidence remains `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 14,
+        "text": "| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Committed ACTIVE, config/epoch ownership and RUN lifecycle. |"
+      },
+      {
+        "line": 15,
+        "text": "| C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded Stage1 calibration-field interpretation. |"
+      },
+      {
+        "line": 16,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and data-chain integration ownership. |"
+      },
+      {
+        "line": 17,
+        "text": "| C12 | `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` | V1.3 | Formal retained-output router boundary. |"
+      }
+    ]
+  },
+  "C12": {
+    "file": "PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.3, 2026-08-20. Status: `ACTIVE_NORMATIVE`; manager-owned generation, AMI-private generation-scoped discard and the single NORMAL-to-tracking source semantics remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 14,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and router integration ownership. |"
+      },
+      {
+        "line": 15,
+        "text": "| C11 | `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` | V1 | Sole upstream calibrated retained transaction. |"
+      },
+      {
+        "line": 16,
+        "text": "| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.2 | Sole NORMAL downstream overlap boundary. |"
+      }
+    ]
+  },
+  "C13": {
+    "file": "PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; ID/generation pass-through and local-drain ownership remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 13,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and NORMAL routing ownership. |"
+      },
+      {
+        "line": 14,
+        "text": "| C11 | `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` | V1 | Calibrated source payload and metadata semantics. |"
+      },
+      {
+        "line": 15,
+        "text": "| C12 | `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` | V1.3 | Router NORMAL branch handshake and payload mapping. |"
+      },
+      {
+        "line": 16,
+        "text": "| C14 | `ppg_system_integration/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md` | V1.2 | Sole downstream reconstructor boundary. |"
+      }
+    ]
+  },
+  "C14": {
+    "file": "PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; ID/generation pass-through and local-drain ownership remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 14,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and data-chain integration ownership. |"
+      },
+      {
+        "line": 15,
+        "text": "| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.2 | Sole upstream overlap-corrected NORMAL transaction boundary. |"
+      },
+      {
+        "line": 16,
+        "text": "| C15 | `ppg_system_integration/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md` | V1 | Sole downstream DC-recovery boundary. |"
+      }
+    ]
+  },
+  "C15": {
+    "file": "PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the DC-recovery interface, scaling, fixed-point arithmetic and transaction behavior are normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 13,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and recovery integration ownership. |"
+      },
+      {
+        "line": 14,
+        "text": "| C14 | `ppg_system_integration/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md` | V1.2 | Sole upstream reconstructed NORMAL transaction boundary. |"
+      },
+      {
+        "line": 15,
+        "text": "| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole downstream detection-chain integration boundary. |"
+      }
+    ]
+  },
+  "C16": {
+    "file": "PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        4,
+        "> Current normative version: V2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the NORMAL fork, IDAC tracking and AMB recheck lifecycle rules are normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 14,
+        "text": "| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | RUN lifecycle and committed ACTIVE ownership. |"
+      },
+      {
+        "line": 15,
+        "text": "| C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded V4 IDAC-field interpretation. |"
+      },
+      {
+        "line": 16,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Frame scheduling and AMB-recheck transaction insertion. |"
+      },
+      {
+        "line": 17,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, transaction fork and generation/discard ownership. |"
+      },
+      {
+        "line": 18,
+        "text": "| C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3 | Sole IDAC pending/code/epoch and local fault owner. |"
+      }
+    ]
+  },
+  "C17": {
+    "file": "PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V2.3, 2026-08-30. Bucket-1 RTL session (dedicated SID-11+LFA-06+OIB-01+LFA-10(b) session): adds module parameter `C_ENABLE_TEST_INJECTION`（默认0，生产网表必须为0）and a verification-only injection pair `i_test_saturation_inject_valid`/`o_test_saturation_inject_ready`，与AMI已有的`i_test_identity_inject_*`同一约定：只在`C_ENABLE_TEST_INJECTION!=0`且`i_test_inject_enable=1`时可用，`o_test_saturation_inject_ready`只在真实AMB/DCS样本本拍参与`flag_amb_sample_qualified`/`flag_dcs_sample_qualified`判定时可以接纳，直接覆盖判据里的双向饱和判据项，不touch共享的`i_search_saturation_low`/`i_search_saturation_high`输入线（第一版曾尝试force这两根共享网线导致污染其它真实消费者，见SID-11原始调查记录）。用于真实构造SID-11（此前记录为结构性不可达的双向饱和拒绝路径，因为真实RAW值无法让两个饱和标志同时为真）。真实证据：`tb_ppg_control_top_startup_idac_calibration.v` SID-11（V1.1，iverilog+Vivado 2022.2 xsim双工具confirmed）。不改变本合同任何既有IDC2-XX编号条款的行为，不touch任何既有生产信号路径。"
+      ],
+      [
+        4,
+        "> Current normative version: V2.2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the V2 interface remains normative, but the system closure verdict is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 15,
+        "text": "| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | RUN lifecycle and committed ACTIVE ownership. |"
+      },
+      {
+        "line": 16,
+        "text": "| C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded V4 IDAC-field interpretation. |"
+      },
+      {
+        "line": 17,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, transaction context and AMI-only blocking-fault record promotion. |"
+      },
+      {
+        "line": 18,
+        "text": "| C16 | `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` | V2.1 | Sole NORMAL tracking and AMB-recheck transaction source. |"
+      },
+      {
+        "line": 19,
+        "text": "| C24 | `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.5 | System blocking-fault consumption after the required AMI record-promotion boundary. |"
+      }
+    ]
+  },
+  "C18": {
+    "file": "PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        4,
+        "> Current normative version: V2.0, 2026-08-20. Status: `ACTIVE_NORMATIVE`; this module consumes only the AMI-forwarded V5 named detection fields, `peak_valley_config_valid` safety gate and config_epoch. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects; RTL/TB evidence remains `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": []
+  },
+  "C19": {
+    "file": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": [
+      {
+        "line": 21,
+        "text": "| C15 | `ppg_system_integration/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md` | V1 | Sole recovered-NORMAL coarse-sample source. |"
+      },
+      {
+        "line": 22,
+        "text": "| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole detection parent, V5 forwarding and discard broadcast owner. |"
+      },
+      {
+        "line": 23,
+        "text": "| C20 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` | V2.6 | One direct detection-fork consumer of FIR output. |"
+      },
+      {
+        "line": 24,
+        "text": "| C22 | `ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md` | V2.6 | One direct detection-fork consumer of FIR output. |"
+      },
+      {
+        "line": 25,
+        "text": "| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.6 | Consumes FIR local-empty/qualification and cannot redefine FIR ownership. |"
+      }
+    ]
+  },
+  "C20": {
+    "file": "PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": [
+      {
+        "line": 16,
+        "text": "| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |"
+      },
+      {
+        "line": 17,
+        "text": "| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.5 | Sole qualified FIR transaction source. |"
+      },
+      {
+        "line": 18,
+        "text": "| C21 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md` | V1.2 | Normative arithmetic sub-rule for this module only. |"
+      }
+    ]
+  },
+  "C21": {
+    "file": "PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V1.2, 2026-08-20. Status: `ACTIVE_NORMATIVE` arithmetic sub-rule; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 15,
+        "text": "| C20 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` | V2.6 | Parent interface, lifecycle and external arithmetic semantics. |"
+      }
+    ]
+  },
+  "C22": {
+    "file": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V2.6, 2026-08-20. Status: `ACTIVE_NORMATIVE`; generation-scoped detection-discard, generation, local-empty and diagnostic-clear semantics remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": [
+      {
+        "line": 16,
+        "text": "| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |"
+      },
+      {
+        "line": 17,
+        "text": "| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.5 | Sole qualified FIR transaction source. |"
+      },
+      {
+        "line": 18,
+        "text": "| C20 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` | V2.6 | Cross-event collaborator; no shared owner transfer. |"
+      },
+      {
+        "line": 19,
+        "text": "| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.6 | Sole precision request/commit consumer. |"
+      }
+    ]
+  },
+  "C23": {
+    "file": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+    "version_header": [
+      [
+        3,
+        "> Current normative version: V2.6, 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. `i_precision_takeover_safe` is an AMI/PWI forwarded composite switch predicate, not physical idle; `i_peak_valley_config_valid` is the registered V5 formal-detection gate. RTL/TB evidence is `EVIDENCE_PENDING`."
+      ]
+    ],
+    "dependency_rows": []
+  },
+  "C24": {
+    "file": "PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": [
+      {
+        "line": 13,
+        "text": "| C01 | `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` | V1.10 | Sole direct Top parent, external-abort registration and registered-event fanout boundary. |"
+      },
+      {
+        "line": 14,
+        "text": "| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Sole manager STOPPING lifecycle consumer via Top/wrapper forwarding. |"
+      },
+      {
+        "line": 15,
+        "text": "| C03 | `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | Sole manager parent and `i_system_fault_blocking`/stop-episode forwarding boundary. |"
+      },
+      {
+        "line": 16,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Scheduler registered fault-record source and stop-drain consumer. |"
+      },
+      {
+        "line": 17,
+        "text": "| C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | SSW registered fault-record source and stop-drain consumer. |"
+      },
+      {
+        "line": 18,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI registered fault-record source, discard owner and drain predicate source. |"
+      },
+      {
+        "line": 19,
+        "text": "| C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3 | IDAC blocking fault is promoted only through AMI's record path. |"
+      },
+      {
+        "line": 20,
+        "text": "| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | PWI/precision blocking fault is promoted only through AMI's record path. |"
+      }
+    ]
+  },
+  "C25": {
+    "file": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+    "version_header": [],
+    "dependency_rows": []
+  }
+}

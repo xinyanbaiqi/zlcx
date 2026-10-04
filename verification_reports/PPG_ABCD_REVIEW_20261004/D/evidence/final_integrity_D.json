@@ -1,0 +1,119 @@
+{
+  "findings": [
+    "D-001",
+    "D-003",
+    "D-002",
+    "D-004",
+    "D-005",
+    "D-006",
+    "D-007",
+    "D-008"
+  ],
+  "file_count": 24,
+  "coverage_rows": 65,
+  "row_counts": {
+    "完成": 60,
+    "部分": 5
+  },
+  "ports": 396,
+  "local_ids": 131,
+  "verified_raw_logs": [
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_characterization_control_cdc\\clear_mutant.run.log",
+      "checked_marker": "ALL CCC-01 TO CCC-26 PASS",
+      "sha256": "9cbde14bcf165ca4ab856e8c4c3a96dd00bf6d6e3c4ae36810365bf87d15e53b"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_characterization_control_cdc\\negative.run.log",
+      "checked_marker": "FAIL CCC-4",
+      "sha256": "9d7291c60a94000bde19a2fc7559b2af0a8e2ace989a7f810298ff145db6c8c9"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_active_v4_control_plane_integration\\alpha_mutant.run.log",
+      "checked_marker": "ALL AV4C-01 THROUGH AV4C-22 PASSED",
+      "sha256": "e5253321e85166b2a648c3aed412ec0128149ac91b2edf0133ad5694c3080fbb"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_system_config_manager\\stop_only.run.log",
+      "checked_marker": "D_STOP_PASS",
+      "sha256": "af1f4e2aaa9a9936a261afffd992dd7d82740ac1d6e5b73baa386347baff4b70"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_system_config_manager\\stop_start.run.log",
+      "checked_marker": "D_STOP_FAIL",
+      "sha256": "ce5ef67f56ef29ef1d2c9a14f4648cbaafc7d592846a567b8c1491e3be0d7a27"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_system_config_manager\\stop_commit.run.log",
+      "checked_marker": "D_STOP_FAIL",
+      "sha256": "ce5ef67f56ef29ef1d2c9a14f4648cbaafc7d592846a567b8c1491e3be0d7a27"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_system_config_manager\\stop_clear.run.log",
+      "checked_marker": "D_STOP_FAIL",
+      "sha256": "ce5ef67f56ef29ef1d2c9a14f4648cbaafc7d592846a567b8c1491e3be0d7a27"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_chip_digital_top\\chip_stop_only.run.log",
+      "checked_marker": "D_CHIP_STOP_PASS",
+      "sha256": "434212d23c0b06dcf9f92a396973acf399b57c2773b91d8b9eaa289af99c9264"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_chip_digital_top\\chip_stop_commit.run.log",
+      "checked_marker": "D_CHIP_STOP_FAIL",
+      "sha256": "57e24704353658d3b571b2b9810aa0a3048867b3b403947a5ee76af86cf9dd8c"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_input_light_static_matrix\\fragment_positive.run.log",
+      "checked_marker": "errors=0 observed_led_violation=0",
+      "sha256": "c413aa0ade1265af1807cbd2e27ea612f953f7f55fa45480edf351e23f6ca636"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_input_light_static_matrix\\fragment_q3_mutant.run.log",
+      "checked_marker": "errors=0 observed_led_violation=12",
+      "sha256": "82277efa89e580825ec160de70a366728046cc0c778cad3350ba193b4e4448b4"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_input_light_static_matrix\\fragment_negative.run.log",
+      "checked_marker": "errors=1",
+      "sha256": "96f454775c2d43cce3b978e5dd7224b4d1cd17aec3068ee83d681a229215e5c8"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_idac_bus_isolation\\fragment_positive.run.log",
+      "checked_marker": "errors=0 observed_active_bus_violation=0",
+      "sha256": "9b547d531bff49948c849ef7a8e5004bb2b025afc51f1fb37411d6d6f9a7e0e3"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_idac_bus_isolation\\fragment_onecycle_mutant.run.log",
+      "checked_marker": "errors=0 observed_active_bus_violation=2",
+      "sha256": "c0dee6e96048ef39b2096c3e5f416dea08ad274556ca1b00d1b64fb4d081600d"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_ppg_control_top_idac_bus_isolation\\fragment_negative.run.log",
+      "checked_marker": "errors=2",
+      "sha256": "a73969dbfe081efd320d4bfb3134ed2b27c730ffd99a586911a0f117ce1820e0"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\d_p2s_probe\\positive.run.log",
+      "checked_marker": "complete_packets=7 backpressure_cycles=639",
+      "sha256": "b4a776ef07bb2715c78c1885036befb5bf3752da7bd69734c1a860e806d562bd"
+    },
+    {
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\d_p2s_probe\\negative.run.log",
+      "checked_marker": "P2S_BIT_FAIL packet=0 bit=160",
+      "sha256": "2f6f5995583a0ea100e65d0a0c442ee0856f9e23a49d2c8814e149f98b70fae5"
+    }
+  ],
+  "merged_mappings": {
+    "D-001": "F-013",
+    "D-002": "F-024",
+    "D-003": "F-023",
+    "D-004": "F-025",
+    "D-005": "F-028",
+    "D-006": "F-029",
+    "D-007": "F-030"
+  },
+  "A_report_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\PPG_FULL_REVIEW_20261002.md",
+  "A_report_sha256": "361e68c3497c2624d0db6ca2d134a8c5e98843e68ce8a61ce7dc8f3d4edbafe4",
+  "limitations": "日志标记核验仅验证报告取证位置/数值，不替代已完成的源码语义审查；失败门禁保持部分"
+}

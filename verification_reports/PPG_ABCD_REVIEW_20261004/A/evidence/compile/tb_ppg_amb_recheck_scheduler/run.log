@@ -1,0 +1,35 @@
+PASS: AMR reset clears pending, busy and inhibit
+PASS: AMR-01 interval zero disables periodic counting
+PASS: AMR-02 MANUAL ignores interval field
+PASS: AMR-02 HOLD ignores interval field
+PASS: interval 65535 remains inactive through frame 65534
+PASS: interval 65535 includes terminal frame before pending
+PASS: AMR-03 N minus one frames do not request recheck
+PASS: AMR-04 Nth frame latches persistent pending
+PASS: AMR-05 pending waits switch without blocking NORMAL output
+PASS: precision switch cycle immediately inhibits new NORMAL launch
+PASS: AMR-06 switch waits until ADC and fork are drained
+PASS: takeover waits while FIR output is held
+PASS: FIR-held recheck remains pending after frame boundary is safe
+PASS: peak-valley held event blocks recheck after FIR drains
+PASS: FIR and peak-valley idle permit AMB takeover
+PASS: safe takeover starts AMB frame with AMB metadata
+PASS: AMB sample valid holds through downstream backpressure
+PASS: one accepted AMB request creates one inflight sample
+PASS: held IDAC request cannot duplicate an inflight conversion
+PASS: matching AMB result releases inflight ownership for next evidence
+PASS: AMB frame completion waits for digital sequence result
+PASS: AMR-07 and AMR-10 always continue with DC_R frame
+PASS: DC_R digital completion cannot start IR before frame boundary
+PASS: DC_IR frame start carries IR color on the transition cycle
+PASS: third frame serves pending IR calibration request
+PASS: DC result completion waits for final physical frame boundary
+PASS: AMR-11 fixed AMB DC_R DC_IR frame order and metadata
+PASS: successful sequence clears pending and restarts interval count
+PASS: same-cycle interval hit and switch asserts takeover inhibit
+PASS: same-cycle interval hit and switch enters drain wait
+PASS: AMR-12 search exhausted terminates and releases scheduler
+PASS: DCS disabled closes periodic sequence after AMB stage
+PASS: AMR-14 STOP clears pending while waiting for switch
+PASS: STOP clears active takeover without false completion
+PASS: ppg_amb_recheck_scheduler completed scheduler regression

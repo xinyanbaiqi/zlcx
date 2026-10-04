@@ -1,0 +1,129 @@
+[
+  {
+    "case": "A_monitor_tb_diag_algo_probe",
+    "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_diag_algo_probe.v",
+    "source_sha256": "e31cf4e9bf2c408024fba6919dfa73e2a014645ced1a93eee37bff134a018c6b",
+    "copied_ranges": [
+      [
+        798,
+        816
+      ]
+    ],
+    "limitation": "Exact checker fragments only; synthetic observed counts; no full DUT runtime/mutation PASS claim",
+    "result": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+        "-B",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb_A_monitor",
+        "-o",
+        "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe/sim.vvp",
+        "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe/files/0/tb_A_monitor.v"
+      ],
+      "linux_root": "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "inputs": [
+        {
+          "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_monitor_tb_diag_algo_probe\\tb_A_monitor.v",
+          "sha256": "7feaa31abb253e26ba21802ffbe0af80a9fda9fb3762e3e5e27852fb86536fbf"
+        }
+      ]
+    }
+  },
+  {
+    "case": "A_monitor_tb_ppg_control_top_longrun",
+    "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_longrun.v",
+    "source_sha256": "b9cbceea7d041d5b13d352d76e4d5656073f454bdd5b88ccc2836ea8fc64553e",
+    "copied_ranges": [
+      [
+        784,
+        802
+      ]
+    ],
+    "limitation": "Exact checker fragments only; synthetic observed counts; no full DUT runtime/mutation PASS claim",
+    "result": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+        "-B",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb_A_monitor",
+        "-o",
+        "/tmp/ppg_audit_probes/A_monitor_tb_ppg_control_top_longrun_2a7fa122/sim.vvp",
+        "/tmp/ppg_audit_probes/A_monitor_tb_ppg_control_top_longrun_2a7fa122/files/0/tb_A_monitor.v"
+      ],
+      "linux_root": "/tmp/ppg_audit_probes/A_monitor_tb_ppg_control_top_longrun_2a7fa122",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "inputs": [
+        {
+          "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_monitor_tb_ppg_control_top_longrun\\tb_A_monitor.v",
+          "sha256": "2ff3b8c83625099d3ce3eb596a0be9cf77fd7ec04907b12327cb8d15b7316007"
+        }
+      ]
+    }
+  },
+  {
+    "case": "A_monitor_long10",
+    "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_long_10_cycles.v",
+    "source_sha256": "22f2b50ba80ba0d2c3babe8c847fe7df806a9745031a83a20f7a6df30ffe9e6d",
+    "copied_ranges": [
+      [
+        1902,
+        1917
+      ],
+      [
+        1933,
+        1960
+      ]
+    ],
+    "limitation": "Exact checker fragments only; synthetic observed counts; no full DUT runtime/mutation PASS claim",
+    "result": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+        "-B",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-g2012",
+        "-Wall",
+        "-s",
+        "tb_A_monitor",
+        "-o",
+        "/tmp/ppg_audit_probes/A_monitor_long10_5181bafb/sim.vvp",
+        "/tmp/ppg_audit_probes/A_monitor_long10_5181bafb/files/0/tb_A_monitor.v"
+      ],
+      "linux_root": "/tmp/ppg_audit_probes/A_monitor_long10_5181bafb",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "inputs": [
+        {
+          "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_monitor_long10\\tb_A_monitor.v",
+          "sha256": "890520aa4e22681831f4be77e72aee42c1a92842ff33cff63a589ce67bda745a"
+        }
+      ]
+    }
+  }
+]

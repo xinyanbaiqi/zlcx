@@ -1,0 +1,27 @@
+{
+  "compile_command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/",
+    "--",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/tc/usr/bin/iverilog",
+    "-B",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/tc/usr/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_precision_window_controller",
+    "-o",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/sim.vvp",
+    "-I",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/inputs",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/inputs/ppg_precision_window_controller.v",
+    "/tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit_counterfactual/inputs/tb_ppg_precision_window_controller.v"
+  ],
+  "compile_rc": 0,
+  "run_rc": 0,
+  "fail_mentions": 0,
+  "pass_mentions": 14
+}

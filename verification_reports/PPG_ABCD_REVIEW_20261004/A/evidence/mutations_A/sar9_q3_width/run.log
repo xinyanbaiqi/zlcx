@@ -1,0 +1,12 @@
+ERROR tick=35 o_clk_q3_low actual=1 expected=0
+ERROR tick=35 o_leden1_low actual=1 expected=0
+ERROR: Q3 falling-edge offset is 159 cycles
+ERROR tick=35 o_clk_q3_low actual=1 expected=0
+ERROR tick=35 o_leden1_low actual=1 expected=0
+ERROR tick=35 o_clk_q3_low actual=1 expected=0
+ERROR tick=35 o_leden1_low actual=1 expected=0
+ERROR tick=35 o_clk_q3_low actual=1 expected=0
+ERROR tick=35 o_leden1_low actual=1 expected=0
+ERROR tick=35 o_clk_q3_low actual=1 expected=0
+ERROR tick=35 o_leden1_low actual=1 expected=0
+FAIL: ppg_timing_sar9 optical-mode test detected 11 mismatches.

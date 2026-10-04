@@ -1,0 +1,664 @@
+[
+  {
+    "path": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+    "checks": {
+      "compile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 589,
+        "warnings": 1,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 238,
+        "warnings": 1,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 3,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [],
+    "delivery_ready": false,
+    "rules": {
+      "VG060": 24,
+      "VG013": 109,
+      "VG023": 3,
+      "VG054": 1,
+      "VG061": 133,
+      "VG063": 4,
+      "VG062": 186,
+      "VG064": 104,
+      "VG066": 26
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] only single module sources are currently supported.",
+        "path": "tb_ppg_characterization_control_cdc.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      }
+    ],
+    "delivery_ready": false,
+    "rules": {
+      "VG000": 1,
+      "VG042": 1
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 109,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_ppg_control_top_input_light_static_matrix.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "unclosed_block_comment",
+        "path": "tb_ppg_control_top_input_light_static_matrix.v",
+        "line": null,
+        "rule": "FORMATTER_HARD_GATE"
+      }
+    ],
+    "delivery_ready": false,
+    "rules": {
+      "VG000": 2,
+      "VG002": 1,
+      "VG060": 80,
+      "VG025": 25,
+      "VG042": 1
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 124,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      }
+    ],
+    "delivery_ready": false,
+    "rules": {
+      "VG000": 1,
+      "VG060": 90,
+      "VG025": 32,
+      "VG042": 1
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 24,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      }
+    ],
+    "delivery_ready": false,
+    "rules": {
+      "VG000": 1,
+      "VG060": 23
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 134,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] only single module sources are currently supported.",
+        "path": "tb_ppg_chip_digital_top.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      }
+    ],
+    "delivery_ready": false,
+    "rules": {
+      "VG000": 1,
+      "VG060": 130,
+      "VG025": 2,
+      "VG042": 1
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  },
+  {
+    "path": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+    "checks": {
+      "compile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 4,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 3,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "parser_diagnostics": [],
+    "delivery_ready": false,
+    "rules": {
+      "VG050": 1,
+      "VG013": 3
+    },
+    "limitation": "TB风格按用户原任务豁免；formatter静态compile/AST与真实Icarus编译分开，not_requested不能记通过"
+  }
+]

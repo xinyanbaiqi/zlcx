@@ -1,0 +1,2250 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG060": 90,
+    "VG025": 32,
+    "VG042": 1
+  },
+  "errors": 124,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 124,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 47.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 40.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 60,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 39.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 61,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 37.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 62,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 42.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 47.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 65,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 66,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 44.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 71,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 430,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 431,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 432,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 433,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 434,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 435,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 436,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 437,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 438,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 439,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 440,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 441,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 442,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 443,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 52.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 444,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 445,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 446,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 447,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 448,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 449,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 450,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 55.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 451,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 452,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 57.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 453,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 454,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 57.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 455,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 456,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 457,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 458,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 459,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 460,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 461,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 462,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 463,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 464,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 465,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 466,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 63.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 467,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 468,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 469,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 470,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 471,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 472,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 473,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 51.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 474,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 481,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 489,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 490,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 491,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 48.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 502,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 503,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 49.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 504,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 505,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 506,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 74, aligned from region anchor column 74; got 48.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 515,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 74, aligned from region anchor column 74; got 48.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 516,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 549,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 550,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 551,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 552,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 553,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 575,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 62.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 586,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 65.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 587,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 36.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 588,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 601,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 67.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 602,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 36.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 603,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 93, aligned from region anchor column 93; got 30.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 843,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 39.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1112,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 56.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1126,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 53.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1129,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1132,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 71.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1202,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 70.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1203,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1206,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 57.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1207,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 116, aligned from region anchor column 116; got 60.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1282,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 116, aligned from region anchor column 116; got 57.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1283,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 93, aligned from region anchor column 93; got 86.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1485,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 586,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 587,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 588,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 601,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 602,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 603,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 733,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 734,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 780,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 781,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 789,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 790,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 812,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 813,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 815,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 816,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1049,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1115,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1157,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1196,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1230,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1272,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1374,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1381,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1383,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1391,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1398,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1400,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1408,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1415,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1447,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": 1485,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG042",
+      "severity": "error",
+      "message": "Comment coverage is too low for generated RTL (9.87%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+      "path": "tb_ppg_control_top_idac_bus_isolation.v",
+      "line": null,
+      "rule": "comments.coverage"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+    "ok": false,
+    "strict": true,
+    "errors": 124,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 47.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 40.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 60,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 39.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 61,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 37.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 62,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 42.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 47.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 65,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 46.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 66,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 44.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 71,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 430,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 431,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 432,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 433,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 434,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 435,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 436,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 437,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 438,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 439,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 440,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 441,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 442,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 443,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 52.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 444,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 445,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 446,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 447,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 448,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 449,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 450,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 55.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 451,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 452,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 57.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 453,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 454,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 57.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 455,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 456,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 457,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 458,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 459,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 460,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 461,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 462,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 463,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 464,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 465,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 466,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 63.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 467,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 468,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 469,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 470,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 471,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 472,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 473,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 51.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 474,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 481,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 489,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 490,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 71, aligned from region anchor column 71; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 491,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 48.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 502,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 503,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 49.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 504,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 505,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 72, aligned from region anchor column 72; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 506,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 74, aligned from region anchor column 74; got 48.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 515,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 74, aligned from region anchor column 74; got 48.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 516,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 549,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 550,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 551,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 552,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 83, aligned from region anchor column 83; got 58.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 553,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 575,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 62.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 586,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 65.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 587,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 78, aligned from region anchor column 78; got 36.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 588,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 601,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 67.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 602,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 89, aligned from region anchor column 89; got 36.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 603,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 93, aligned from region anchor column 93; got 30.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 843,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 39.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1112,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 56.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1126,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 53.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1129,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 98, aligned from region anchor column 98; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1132,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 71.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1202,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 70.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1203,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1206,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 110, aligned from region anchor column 110; got 57.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1207,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 116, aligned from region anchor column 116; got 60.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1282,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 116, aligned from region anchor column 116; got 57.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1283,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 93, aligned from region anchor column 93; got 86.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1485,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 586,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 587,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 588,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 601,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 602,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 603,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 733,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 734,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 780,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 781,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 789,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 790,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 812,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 813,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 815,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 816,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1049,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1115,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1157,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1196,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1230,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1272,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1374,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1381,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1383,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1391,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1398,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1400,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1408,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1415,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1447,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": 1485,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG042",
+        "severity": "error",
+        "message": "Comment coverage is too low for generated RTL (9.87%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+        "path": "tb_ppg_control_top_idac_bus_isolation.v",
+        "line": null,
+        "rule": "comments.coverage"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 1532,
+      "code_lines": 1236,
+      "line_comments": 344,
+      "commented_code_lines": 122,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_with_warnings": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+            "syntax_confidence": 90,
+            "format_score": 72,
+            "rewrite_need_score": 55,
+            "rewrite_risk_score": 70,
+            "decision": "preserve_with_warnings",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 1532,
+              "module_count": 1,
+              "module_names": [
+                "tb_ppg_control_top_idac_bus_isolation"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 144,
+              "end_count": 144,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 4,
+              "multi_target_always_count": 2,
+              "case_always_multi_target_count": 1,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 64,
+              "function_task_initial_count": 23,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 222,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 14,
+              "missing_reset_always_count": 4,
+              "output_redecl_count": 1,
+              "risk_flags": [
+                "complex_lvalue",
+                "function_task_initial",
+                "output_bridge_candidate",
+                "rich_human_comments",
+                "unsafe_always_split"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/08/26",
+            "revision_date": "2026/09/18",
+            "design_name": "PPG IDAC Snapshot Epoch Bus Isolation Testbench",
+            "module_name": "tb_ppg_control_top_idac_bus_isolation",
+            "description": "Description/ppg_control_top_Design.pdf",
+            "simulations": "TestBench/Vivado/2022.2/ppg_control_top",
+            "references": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+            "version": "V1.2",
+            "dependency_lines": [
+              "ppg_control_top and its full real hierarchy",
+              "ppg_control_top及其完整真实层次"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 1532,
+            "nonempty_lines": 1458,
+            "line_comments": 344,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 1406,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_ppg_control_top_idac_bus_isolation.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

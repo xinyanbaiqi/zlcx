@@ -1,0 +1,1650 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_system_config_manager",
+    "parameter_count": 4,
+    "port_count": 33
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_config_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_config_update_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_start_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_stop_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_status_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_analog_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_adc_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_datapath_empty",
+      "direction": "input",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "i_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_analog_safe",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_system_fault_blocking",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_static_characterization_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_active_config",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_active_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_config_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage2_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dc_recovery_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_lifecycle_state",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "o_start_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_run_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_allow_new_transaction",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_run_generation",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_stop_episode_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_commit_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_start_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stop_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_error_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_commit_ack_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_last_error_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "state_current",
+      "kind": "reg",
+      "width": 3,
+      "role": "fsm_state"
+    },
+    {
+      "name": "active_config_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "active_valid_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "config_epoch_o",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "coef_epoch_o",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "stage2_coef_epoch_o",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "dc_recovery_coef_epoch_o",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    },
+    {
+      "name": "run_generation_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "stop_episode_active_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "commit_ack_event_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "start_ack_event_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "stop_ack_event_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "error_event_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "commit_ack_sticky_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "error_sticky_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "last_error_code_o",
+      "kind": "reg",
+      "width": 8,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        518,
+        529
+      ],
+      "assigned_signals": [
+        "active_config_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "V5_RESET_PROFILE",
+        "d0",
+        "flag_commit_accept",
+        "b1",
+        "i_config_snapshot",
+        "ILM",
+        "satisfies",
+        "TOP"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        529,
+        540
+      ],
+      "assigned_signals": [
+        "run_generation_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RUN_GENERATION_WIDTH",
+        "flag_start_accept",
+        "b1",
+        "satisfies",
+        "N02"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        540,
+        554
+      ],
+      "assigned_signals": [
+        "stop_episode_active_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_stop_accept",
+        "b1",
+        "state_current",
+        "ST_STOPPING",
+        "flag_stopping_complete"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        554,
+        570
+      ],
+      "assigned_signals": [
+        "active_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_state_invalid",
+        "b1",
+        "flag_commit_accept",
+        "state_current",
+        "ST_STOPPING",
+        "flag_stopping_complete",
+        "READY"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        570,
+        582
+      ],
+      "assigned_signals": [
+        "stage2_coef_epoch_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_commit_accept",
+        "b1",
+        "i_config_snapshot",
+        "d1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        582,
+        593
+      ],
+      "assigned_signals": [
+        "dc_recovery_coef_epoch_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_commit_accept",
+        "b1",
+        "d1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        593,
+        604
+      ],
+      "assigned_signals": [
+        "config_epoch_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_commit_accept",
+        "b1",
+        "d1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        604,
+        616
+      ],
+      "assigned_signals": [
+        "coef_epoch_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_commit_accept",
+        "b1",
+        "i_config_snapshot",
+        "d1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        616,
+        625
+      ],
+      "assigned_signals": [
+        "commit_ack_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_commit_accept",
+        "transport"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_10",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        625,
+        634
+      ],
+      "assigned_signals": [
+        "start_ack_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_start_accept"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_11",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        634,
+        643
+      ],
+      "assigned_signals": [
+        "stop_ack_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_stop_accept"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_12",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        643,
+        652
+      ],
+      "assigned_signals": [
+        "error_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "dec_error_present"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_13",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        652,
+        666
+      ],
+      "assigned_signals": [
+        "commit_ack_sticky_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_commit_accept",
+        "b1",
+        "i_status_clear_event",
+        "flag_command_conflict"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_14",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        666,
+        680
+      ],
+      "assigned_signals": [
+        "error_sticky_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "dec_error_present",
+        "b1",
+        "i_status_clear_event",
+        "flag_command_conflict"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_15",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        680,
+        695
+      ],
+      "assigned_signals": [
+        "last_error_code_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "ERROR_NONE",
+        "dec_error_present",
+        "b1",
+        "dec_error_code",
+        "i_status_clear_event",
+        "flag_command_conflict"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_16",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        695,
+        704
+      ],
+      "assigned_signals": [
+        "state_current"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "ST_CONFIG",
+        "state_next"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_17",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        704,
+        733
+      ],
+      "assigned_signals": [
+        "state_next"
+      ],
+      "referenced_signals": [
+        "state_current",
+        "ST_CONFIG",
+        "flag_commit_accept",
+        "b1",
+        "ST_READY",
+        "flag_start_accept",
+        "ST_RUN",
+        "flag_stop_accept",
+        "ST_STOPPING",
+        "flag_stopping_complete",
+        "default"
+      ],
+      "role": "state_transition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_config_manager reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_active_config",
+        "o_active_valid",
+        "o_config_epoch",
+        "o_coef_epoch",
+        "o_stage2_coef_epoch",
+        "o_dc_recovery_coef_epoch",
+        "o_lifecycle_state",
+        "o_start_ready",
+        "o_run_enable",
+        "o_allow_new_transaction",
+        "o_run_generation",
+        "o_stop_episode_active",
+        "o_commit_ack_event",
+        "o_start_ack_event",
+        "o_stop_ack_event",
+        "o_error_event",
+        "o_commit_ack_sticky",
+        "o_error_sticky",
+        "o_last_error_code"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "description": "sequential logic covering active_config_o.",
+      "signals": [
+        "active_config_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering run_generation_o.",
+      "signals": [
+        "run_generation_o"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering stop_episode_active_o.",
+      "signals": [
+        "stop_episode_active_o"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "output update block 4",
+      "description": "sequential logic covering active_valid_o.",
+      "signals": [
+        "active_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering stage2_coef_epoch_o.",
+      "signals": [
+        "stage2_coef_epoch_o"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering dc_recovery_coef_epoch_o.",
+      "signals": [
+        "dc_recovery_coef_epoch_o"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "description": "sequential logic covering config_epoch_o.",
+      "signals": [
+        "config_epoch_o"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "description": "sequential logic covering coef_epoch_o.",
+      "signals": [
+        "coef_epoch_o"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "description": "sequential logic covering commit_ack_event_o.",
+      "signals": [
+        "commit_ack_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "description": "sequential logic covering start_ack_event_o.",
+      "signals": [
+        "start_ack_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "description": "sequential logic covering stop_ack_event_o.",
+      "signals": [
+        "stop_ack_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "description": "sequential logic covering error_event_o.",
+      "signals": [
+        "error_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "description": "sequential logic covering commit_ack_sticky_o.",
+      "signals": [
+        "commit_ack_sticky_o"
+      ]
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "description": "sequential logic covering error_sticky_o.",
+      "signals": [
+        "error_sticky_o"
+      ]
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "description": "sequential logic covering last_error_code_o.",
+      "signals": [
+        "last_error_code_o"
+      ]
+    },
+    {
+      "feature_id": "FC017",
+      "name": "state transition block 16",
+      "description": "sequential logic covering state_current.",
+      "signals": [
+        "state_current"
+      ]
+    },
+    {
+      "feature_id": "FC018",
+      "name": "state transition block 17",
+      "description": "combinational logic covering state_next.",
+      "signals": [
+        "state_next"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_config_manager reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_active_config",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_active_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_config_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage2_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dc_recovery_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_lifecycle_state",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_start_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_run_enable",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_allow_new_transaction",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_run_generation",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stop_episode_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_commit_ack_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_start_ack_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stop_ack_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_error_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_commit_ack_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_last_error_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_active_config",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_active_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_config_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage2_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dc_recovery_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_lifecycle_state",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_start_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_run_enable",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_allow_new_transaction",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_run_generation",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stop_episode_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_commit_ack_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_start_ack_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stop_ack_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_error_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_commit_ack_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_last_error_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "active_config_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "run_generation_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "stop_episode_active_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "output update block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "active_valid_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "stage2_coef_epoch_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "dc_recovery_coef_epoch_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "config_epoch_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "coef_epoch_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "commit_ack_event_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "pin_assignments": [
+        {
+          "pin_name": "start_ack_event_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "pin_assignments": [
+        {
+          "pin_name": "stop_ack_event_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "pin_assignments": [
+        {
+          "pin_name": "error_event_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "pin_assignments": [
+        {
+          "pin_name": "commit_ack_sticky_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "pin_assignments": [
+        {
+          "pin_name": "error_sticky_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "pin_assignments": [
+        {
+          "pin_name": "last_error_code_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC017",
+      "name": "state transition block 16",
+      "pin_assignments": [
+        {
+          "pin_name": "state_current",
+          "role": "fsm_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC018",
+      "name": "state transition block 17",
+      "pin_assignments": [
+        {
+          "pin_name": "state_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_active_config",
+        "o_active_valid",
+        "o_config_epoch",
+        "o_coef_epoch",
+        "o_stage2_coef_epoch",
+        "o_dc_recovery_coef_epoch",
+        "o_lifecycle_state",
+        "o_start_ready",
+        "o_run_enable",
+        "o_allow_new_transaction",
+        "o_run_generation",
+        "o_stop_episode_active",
+        "o_commit_ack_event",
+        "o_start_ack_event",
+        "o_stop_ack_event",
+        "o_error_event",
+        "o_commit_ack_sticky",
+        "o_error_sticky",
+        "o_last_error_code"
+      ],
+      "description": "Verify `ppg_system_config_manager` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_active_config",
+        "o_active_valid",
+        "o_config_epoch",
+        "o_coef_epoch",
+        "o_stage2_coef_epoch",
+        "o_dc_recovery_coef_epoch",
+        "o_lifecycle_state",
+        "o_start_ready",
+        "o_run_enable",
+        "o_allow_new_transaction",
+        "o_run_generation",
+        "o_stop_episode_active",
+        "o_commit_ack_event",
+        "o_start_ack_event",
+        "o_stop_ack_event",
+        "o_error_event",
+        "o_commit_ack_sticky",
+        "o_error_sticky",
+        "o_last_error_code"
+      ],
+      "description": "ppg_system_config_manager reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        518,
+        529
+      ],
+      "boundary_signals": [
+        "active_config_o",
+        "i_clk",
+        "i_config_snapshot",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        529,
+        540
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "run_generation_o"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        540,
+        554
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "state_current",
+        "stop_episode_active_o"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        554,
+        570
+      ],
+      "boundary_signals": [
+        "active_valid_o",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        570,
+        582
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_config_snapshot",
+        "i_rstn",
+        "stage2_coef_epoch_o"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        582,
+        593
+      ],
+      "boundary_signals": [
+        "dc_recovery_coef_epoch_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        593,
+        604
+      ],
+      "boundary_signals": [
+        "config_epoch_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        604,
+        616
+      ],
+      "boundary_signals": [
+        "coef_epoch_o",
+        "i_clk",
+        "i_config_snapshot",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        616,
+        625
+      ],
+      "boundary_signals": [
+        "commit_ack_event_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC010",
+      "module_name": "u_block_10",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        625,
+        634
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "start_ack_event_o"
+      ]
+    },
+    {
+      "candidate_id": "DC011",
+      "module_name": "u_block_11",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        634,
+        643
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "stop_ack_event_o"
+      ]
+    },
+    {
+      "candidate_id": "DC012",
+      "module_name": "u_block_12",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        643,
+        652
+      ],
+      "boundary_signals": [
+        "error_event_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC013",
+      "module_name": "u_block_13",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        652,
+        666
+      ],
+      "boundary_signals": [
+        "commit_ack_sticky_o",
+        "i_clk",
+        "i_rstn",
+        "i_status_clear_event"
+      ]
+    },
+    {
+      "candidate_id": "DC014",
+      "module_name": "u_block_14",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        666,
+        680
+      ],
+      "boundary_signals": [
+        "error_sticky_o",
+        "i_clk",
+        "i_rstn",
+        "i_status_clear_event"
+      ]
+    },
+    {
+      "candidate_id": "DC015",
+      "module_name": "u_block_15",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        680,
+        695
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_status_clear_event",
+        "last_error_code_o"
+      ]
+    },
+    {
+      "candidate_id": "DC016",
+      "module_name": "u_block_16",
+      "role": "state_transition",
+      "kind": "sequential",
+      "line_range": [
+        695,
+        704
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC017",
+      "module_name": "u_block_17",
+      "role": "state_transition",
+      "kind": "combinational",
+      "line_range": [
+        704,
+        733
+      ],
+      "boundary_signals": [
+        "state_current"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_system_config_manager\\ppg_system_config_manager.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

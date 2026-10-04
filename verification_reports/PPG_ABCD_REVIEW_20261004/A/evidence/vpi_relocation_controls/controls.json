@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "case": "relocated_good",
+      "run_rc": 0,
+      "pass_banner": true,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "timeout",
+        "60",
+        "/tmp/ppg_audit_iverilog_20261004/bin/vvp",
+        "-M",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-i",
+        "/tmp/ppg_native_regressions_vpi_20261004/relocated_good/sim.vvp"
+      ]
+    },
+    {
+      "case": "missing_system_vpi",
+      "run_rc": 22,
+      "pass_banner": false,
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Debian",
+        "--cd",
+        "/tmp",
+        "--exec",
+        "timeout",
+        "60",
+        "/tmp/ppg_audit_iverilog_20261004/bin/vvp",
+        "-M",
+        "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+        "-i",
+        "/tmp/ppg_native_regressions_vpi_20261004/missing_system_vpi/sim.vvp"
+      ]
+    }
+  ],
+  "changed_lines": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "native_vpi_hashes": {
+    "system.vpi": "0671e3da9fda97aa61842eb27abaf1dec9d545a6a0d5edbec35971df6a898cd8",
+    "v2005_math.vpi": "5b72ebfb70025a1a1df5d6a28831e8b434fc59028e6ff5fea5c7bacb36b3d29b",
+    "v2009.vpi": "9a50929e91973ab1efe0302084a3fcd38bb28db6b66137f29c81f3da5a9fb9df",
+    "va_math.vpi": "a09f149d822d152aa6b327f1cfb37fc4e34c23a24970aa07db31492d4dfdb2f3",
+    "vhdl_sys.vpi": "ed027d9014089212b006df9657aed85dba9e957669ff0b211f0a8c5cae01b4a1",
+    "vhdl_textio.vpi": "a98d8d21d3764d1898a0e2370cdc3fe30f68a7bf405ac2affc5da7191f5fe001",
+    "vpi_debug.vpi": "ba84b5045e4c688c29de5a5e36e4d055cc11562d5940c2c12a1753a8a800fd44"
+  },
+  "inverse_identical": true
+}

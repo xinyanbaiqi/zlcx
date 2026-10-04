@@ -1,0 +1,1823 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 314,
+      "code_lines": 201,
+      "line_comments": 204,
+      "commented_code_lines": 121,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 314,
+              "module_count": 1,
+              "module_names": [
+                "ppg_adc_s1_redundancy_corrector"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 42,
+              "end_count": 42,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_adc_transaction_start",
+                "i_frame_id",
+                "i_sample_index",
+                "i_color_ir",
+                "i_frame_type",
+                "i_amb_code_snapshot",
+                "i_dc_code_snapshot",
+                "i_amb_code_epoch",
+                "i_dc_code_epoch",
+                "i_capture_stage1_raw",
+                "i_capture_stage2_raw",
+                "i_capture_precision_mode",
+                "i_capture_valid",
+                "i_detect_ready",
+                "o_transaction_ready",
+                "o_capture_ready",
+                "o_detect_code",
+                "o_stage1_raw",
+                "o_stage1_code_ext",
+                "o_stage2_raw",
+                "o_precision_mode",
+                "o_detect_valid",
+                "o_frame_id",
+                "o_sample_index",
+                "o_color_ir",
+                "o_frame_type",
+                "o_amb_code_snapshot",
+                "o_dc_code_snapshot",
+                "o_amb_code_epoch",
+                "o_dc_code_epoch"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 10,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 83,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/25",
+            "revision_date": "2026/07/30",
+            "design_name": "PPG S1 Redundancy Corrector",
+            "module_name": "ppg_adc_s1_redundancy_corrector",
+            "description": "Description/ppg_adc_s1_redundancy_corrector_Design.pdf",
+            "simulations": "TestBench/Vivado/2021.1/ppg_adc_s1_redundancy_corrector",
+            "references": "sar_stage1_vout_test Verilog-A monitor,",
+            "version": "V1.0",
+            "dependency_lines": [
+              "ppg_adc_async_stage_capture"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/25            V1.0          Erie                  Create file.",
+              "2026/07/30            V1.0          Erie                  Align context with the explicit ADC transaction.",
+              "2026/07/30            V1.0          Erie                  Clarify the shared R/IR frame and global precision snapshot contract."
+            ],
+            "history_lines_cn": [
+              "2026年07月25日        V1.0          Erie                  创建文件",
+              "2026年07月30日        V1.0          Erie                  按显式ADC事务边界对齐上下文",
+              "2026年07月30日        V1.0          Erie                  明确R/IR共享帧号和全局精度快照合同",
+              "2026年08月05日        V1.0          Erie                  保留完整S1物理决策位供片外拟合与后续校准",
+              "保存顶层已提交的R/IR事务属性并重构S1码，不在本模块产生精度模式切换请求"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_adc_s1_redundancy_corrector",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "C_FRAME_ID_WIDTH",
+                  "value": "16",
+                  "decl_spec": "integer",
+                  "comment": "R/IR共享PPG周期标识的字段位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "keyword": "parameter",
+                  "name": "C_SAMPLE_INDEX_WIDTH",
+                  "value": "16",
+                  "decl_spec": "integer",
+                  "comment": "各颜色结果排序所需的样本序号位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "keyword": "parameter",
+                  "name": "C_IDAC_CODE_WIDTH",
+                  "value": "8",
+                  "decl_spec": "integer",
+                  "comment": "实际施加AMB/DC码值的快照位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "keyword": "parameter",
+                  "name": "C_CODE_EPOCH_WIDTH",
+                  "value": "4",
+                  "decl_spec": "integer",
+                  "comment": "安全提交代号用于识别调码前后样本",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "2 MHz数字处理域工作时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效异步复位，释放由系统顶层同步",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_adc_transaction_start",
+                  "comment": "与捕获模块共用的单周期ADC事务开始脉冲",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_FRAME_ID_WIDTH - 1:0]",
+                  "name": "i_frame_id",
+                  "comment": "同一PPG周期的红光与红外事务使用相同标识",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+                  "name": "i_sample_index",
+                  "comment": "当前颜色结果在输出数据流中的顺序编号",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_color_ir",
+                  "comment": "低为红光、高为红外，只标记颜色而不决定精度",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_frame_type",
+                  "comment": "当前事务属于AMB_CAL、DCS_CAL或NORMAL",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_IDAC_CODE_WIDTH - 1:0]",
+                  "name": "i_amb_code_snapshot",
+                  "comment": "ADC积分期间实际施加的AMB抵消码",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_IDAC_CODE_WIDTH - 1:0]",
+                  "name": "i_dc_code_snapshot",
+                  "comment": "结合颜色解释的本帧DC抵消码快照",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+                  "name": "i_amb_code_epoch",
+                  "comment": "AMB码安全提交后递增的版本标识",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+                  "name": "i_dc_code_epoch",
+                  "comment": "当前R或IR DC码对应的版本标识",
+                  "group": "ADC事务上下文输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "i_capture_stage1_raw",
+                  "comment": "位序固定为vd8至vd3、vdred、vd2至vd0",
+                  "group": "ADC捕获结果输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "i_capture_stage2_raw",
+                  "comment": "与S1同一ADC事务的第二级物理码",
+                  "group": "ADC捕获结果输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_capture_precision_mode",
+                  "comment": "捕获模块锁存的全局已提交9/15-bit模式快照",
+                  "group": "ADC捕获结果输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_capture_valid",
+                  "comment": "捕获载荷保持有效直到本模块拉高ready",
+                  "group": "ADC捕获结果输入接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_detect_ready",
+                  "comment": "下游允许在当前上升沿接收完整重构事务",
+                  "group": "重构结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_transaction_ready",
+                  "comment": "高电平允许顶层启动并锁存下一笔ADC事务",
+                  "group": "ADC事务控制输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_capture_ready",
+                  "comment": "高电平允许捕获模块交付当前RAW载荷",
+                  "group": "ADC捕获握手输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "direction": "output",
+                  "width": "[8:0]",
+                  "name": "o_detect_code",
+                  "comment": "饱和到0至511的S1稳定检测码",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "direction": "output",
+                  "width": "[9:0]",
+                  "name": "o_stage1_raw",
+                  "comment": "与重构结果同事务的完整S1物理决策位",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "direction": "output",
+                  "width": "[10:0]",
+                  "name": "o_stage1_code_ext",
+                  "comment": "Verilog-A公式得到的未饱和D1_EXT，范围-4至515",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "direction": "output",
+                  "width": "[9:0]",
+                  "name": "o_stage2_raw",
+                  "comment": "为后续15-bit链保存的同事务S2物理码",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_precision_mode",
+                  "comment": "与结果对齐的全局PPG周期精度模式快照",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 92,
+                  "line_end": 92
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_detect_valid",
+                  "comment": "全部重构结果及元数据有效并保持至ready",
+                  "group": "重构结果输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_FRAME_ID_WIDTH - 1:0]",
+                  "name": "o_frame_id",
+                  "comment": "用于配对同一PPG周期R/IR结果的共享标识",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_SAMPLE_INDEX_WIDTH - 1:0]",
+                  "name": "o_sample_index",
+                  "comment": "随结果返回的样本顺序编号",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_color_ir",
+                  "comment": "指明当前载荷属于红光还是红外光",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "direction": "output",
+                  "width": "[1:0]",
+                  "name": "o_frame_type",
+                  "comment": "将校准或正常采样类别送往结果路由器",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_IDAC_CODE_WIDTH - 1:0]",
+                  "name": "o_amb_code_snapshot",
+                  "comment": "追踪当前ADC结果所使用的AMB码",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_IDAC_CODE_WIDTH - 1:0]",
+                  "name": "o_dc_code_snapshot",
+                  "comment": "追踪本次颜色通道所使用的DC码",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 101,
+                  "line_end": 101
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+                  "name": "o_amb_code_epoch",
+                  "comment": "输出与AMB快照匹配的提交代号",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 102,
+                  "line_end": 102
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_CODE_EPOCH_WIDTH - 1:0]",
+                  "name": "o_dc_code_epoch",
+                  "comment": "标识红光或红外直流抵消码的提交版本",
+                  "group": "重构事务元数据输出接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 103,
+                  "line_end": 103
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "C_DETECT_CODE_WIDTH",
+                  "value": "32'd9",
+                  "decl_spec": "integer",
+                  "comment": "黄金比较、范围观察和标称表征使用的固定9-bit码",
+                  "leading_comments": [
+                    "// 元数据采用固定字段位置打包，减少多组上下文寄存器的控制分叉"
+                  ],
+                  "synthetic": false,
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "DETECT_CODE_MAX",
+                  "value": "9'h1ff",
+                  "decl_spec": "[C_DETECT_CODE_WIDTH - 1:0]",
+                  "comment": "饱和检测码的正向端点511",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 109,
+                  "line_end": 109
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_DC_EPOCH_LSB",
+                  "value": "32'd0",
+                  "decl_spec": "integer",
+                  "comment": "打包上下文中DC代号的起始位置",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 110,
+                  "line_end": 110
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_AMB_EPOCH_LSB",
+                  "value": "C_DC_EPOCH_LSB + C_CODE_EPOCH_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "AMB代号位于DC代号之后",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_DC_CODE_LSB",
+                  "value": "C_AMB_EPOCH_LSB + C_CODE_EPOCH_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "DC码快照紧邻两组epoch",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 112,
+                  "line_end": 112
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_AMB_CODE_LSB",
+                  "value": "C_DC_CODE_LSB + C_IDAC_CODE_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "AMB码快照位于DC码之上",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 113,
+                  "line_end": 113
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_FRAME_TYPE_LSB",
+                  "value": "C_AMB_CODE_LSB + C_IDAC_CODE_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "帧类别占据码值字段之后两位",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 114,
+                  "line_end": 114
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_COLOR_LSB",
+                  "value": "C_FRAME_TYPE_LSB + 32'd2",
+                  "decl_spec": "integer",
+                  "comment": "颜色标识跟随帧类别字段",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 115,
+                  "line_end": 115
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_SAMPLE_INDEX_LSB",
+                  "value": "C_COLOR_LSB + 32'd1",
+                  "decl_spec": "integer",
+                  "comment": "样本编号放在颜色标识之上",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 116,
+                  "line_end": 116
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_FRAME_ID_LSB",
+                  "value": "C_SAMPLE_INDEX_LSB + C_SAMPLE_INDEX_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "帧号占据打包上下文最高段",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 117,
+                  "line_end": 117
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "C_METADATA_WIDTH",
+                  "value": "C_FRAME_ID_LSB + C_FRAME_ID_WIDTH",
+                  "decl_spec": "integer",
+                  "comment": "上下文保持寄存器的完整位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 118,
+                  "line_end": 118
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[C_METADATA_WIDTH - 1:0]",
+                  "name": "reg_context",
+                  "init": "",
+                  "comment": "等待与捕获RAW配对的事务上下文",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 单笔上下文缓冲器在ADC转换开始前固定颜色、帧类别和IDAC快照"
+                  ],
+                  "line_start": 122,
+                  "line_end": 122
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_context_valid",
+                  "init": "",
+                  "comment": "指示上下文缓冲器包含尚未配对的事务",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 两组ready/valid事件分别管理事务上下文、捕获RAW和下游重构结果"
+                  ],
+                  "line_start": 126,
+                  "line_end": 126
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_context_ready",
+                  "init": "",
+                  "comment": "当前拍允许锁存新ADC事务上下文",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 127,
+                  "line_end": 127
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_context_transfer",
+                  "init": "",
+                  "comment": "顶层在允许条件下真正启动一笔事务",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 128,
+                  "line_end": 128
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_output_buffer_available",
+                  "init": "",
+                  "comment": "输出为空或旧结果将在本拍被消费",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 129,
+                  "line_end": 129
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_capture_transfer",
+                  "init": "",
+                  "comment": "捕获RAW与旧上下文在本拍完成配对",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 130,
+                  "line_end": 130
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_detect_transfer",
+                  "init": "",
+                  "comment": "下游接收当前完整重构事务的事件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 131,
+                  "line_end": 131
+                },
+                {
+                  "kind": "wire",
+                  "width": "[9:0]",
+                  "name": "dec_base_code",
+                  "init": "",
+                  "comment": "vd8至vd3和vd2至vd0形成的0至511基准码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 黄金模型先形成无冗余偏置的基本码，再加入vdred的正负4 LSB贡献"
+                  ],
+                  "line_start": 135,
+                  "line_end": 135
+                },
+                {
+                  "kind": "wire",
+                  "width": "[10:0]",
+                  "name": "dec_stage1_code_ext",
+                  "init": "",
+                  "comment": "加入冗余项后的D1_EXT扩展结果",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 136,
+                  "line_end": 136
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_DETECT_CODE_WIDTH - 1:0]",
+                  "name": "dec_detect_code",
+                  "init": "",
+                  "comment": "对扩展结果执行边界钳位后的9-bit码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 137,
+                  "line_end": 137
+                },
+                {
+                  "kind": "wire",
+                  "width": "[C_METADATA_WIDTH - 1:0]",
+                  "name": "metadata_input",
+                  "init": "",
+                  "comment": "当前待启动ADC事务的数字上下文集合",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 实时上下文只在事务握手沿进入保持寄存器，ADC完成时不再读取顶层配置"
+                  ],
+                  "line_start": 141,
+                  "line_end": 141
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_DETECT_CODE_WIDTH - 1:0]",
+                  "name": "detect_code_o",
+                  "init": "",
+                  "comment": "反压期间保持稳定的固定黄金饱和码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 单元素弹性输出缓存把数据、模式和元数据作为不可拆分的载荷保持"
+                  ],
+                  "line_start": 145,
+                  "line_end": 145
+                },
+                {
+                  "kind": "reg",
+                  "width": "[9:0]",
+                  "name": "stage1_raw_o",
+                  "init": "",
+                  "comment": "供逐物理位校准和测试导出的S1原始决策位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 146,
+                  "line_end": 146
+                },
+                {
+                  "kind": "reg",
+                  "width": "[10:0]",
+                  "name": "stage1_code_ext_o",
+                  "init": "",
+                  "comment": "供量程诊断和15-bit链使用的D1_EXT",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 147,
+                  "line_end": 147
+                },
+                {
+                  "kind": "reg",
+                  "width": "[9:0]",
+                  "name": "stage2_raw_o",
+                  "init": "",
+                  "comment": "与S1重构结果保持一致事务归属的S2码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 148,
+                  "line_end": 148
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "precision_mode_o",
+                  "init": "",
+                  "comment": "保存顶层全局模式在当前颜色事务中的快照",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 149,
+                  "line_end": 149
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_METADATA_WIDTH - 1:0]",
+                  "name": "metadata_o",
+                  "init": "",
+                  "comment": "与重构结果同拍保存的完整数字上下文",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 150,
+                  "line_end": 150
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "detect_valid_o",
+                  "init": "",
+                  "comment": "声明输出缓存拥有一笔未消费重构事务",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 151,
+                  "line_end": 151
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_detect_transfer",
+                  "rhs": "detect_valid_o && i_detect_ready",
+                  "comment": "定义输出ready/valid的唯一消费事件",
+                  "leading_comments": [
+                    "// 下游消费允许在同一拍接纳新捕获载荷，不为连续ADC结果引入空拍"
+                  ],
+                  "delay": "",
+                  "line_start": 155,
+                  "line_end": 155
+                },
+                {
+                  "lhs": "flag_output_buffer_available",
+                  "rhs": "(detect_valid_o == 1'b0) || i_detect_ready",
+                  "comment": "判断重构输出缓存是否可写",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 156,
+                  "line_end": 156
+                },
+                {
+                  "lhs": "flag_capture_transfer",
+                  "rhs": "i_rstn && i_capture_valid && flag_context_valid && flag_output_buffer_available",
+                  "comment": "只接收拥有对应上下文的RAW",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 157,
+                  "line_end": 157
+                },
+                {
+                  "lhs": "flag_context_ready",
+                  "rhs": "(flag_context_valid == 1'b0) || flag_capture_transfer",
+                  "comment": "允许空闲锁存或同拍替换上下文",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 158,
+                  "line_end": 158
+                },
+                {
+                  "lhs": "flag_context_transfer",
+                  "rhs": "i_rstn && i_adc_transaction_start && flag_context_ready",
+                  "comment": "接纳由顶层正式启动的新事务",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 159,
+                  "line_end": 159
+                },
+                {
+                  "lhs": "dec_base_code",
+                  "rhs": "{1'b0, i_capture_stage1_raw[9:4], 3'b000} + {7'b0000000, i_capture_stage1_raw[2:0]}",
+                  "comment": "重建不含冗余偏置的基础S1码",
+                  "leading_comments": [
+                    "// 高六个常规位提供8 LSB步进，低三位补充1 LSB分辨率，vdred单独校正"
+                  ],
+                  "delay": "",
+                  "line_start": 162,
+                  "line_end": 162
+                },
+                {
+                  "lhs": "dec_stage1_code_ext",
+                  "rhs": "$signed({1'b0, dec_base_code}) + (i_capture_stage1_raw[3] ? 11'sd4 : -11'sd4)",
+                  "comment": "精确实现bred乘8后减4的黄金公式",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 164,
+                  "line_end": 164
+                },
+                {
+                  "lhs": "metadata_input",
+                  "rhs": "{ i_frame_id, i_sample_index, i_color_ir, i_frame_type, i_amb_code_snapshot, i_dc_code_snapshot, i_amb_code_epoch, i_dc_code_epoch }",
+                  "comment": "组合出下一笔ADC事务的待锁存上下文",
+                  "leading_comments": [
+                    "// 帧号位于最高段，epoch位于最低段，打包顺序与字段位置常量严格对应"
+                  ],
+                  "delay": "",
+                  "line_start": 168,
+                  "line_end": 168
+                },
+                {
+                  "lhs": "o_transaction_ready",
+                  "rhs": "i_rstn && flag_context_ready",
+                  "comment": "告知帧控制器当前允许发起ADC事务",
+                  "leading_comments": [
+                    "// 握手控制输出直接反映内部单元素上下文和结果缓存的可用状态"
+                  ],
+                  "delay": "",
+                  "line_start": 181,
+                  "line_end": 181
+                },
+                {
+                  "lhs": "o_capture_ready",
+                  "rhs": "i_rstn && flag_context_valid && flag_output_buffer_available",
+                  "comment": "仅在上下文已准备好时接收捕获结果",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 182,
+                  "line_end": 182
+                },
+                {
+                  "lhs": "o_detect_code",
+                  "rhs": "detect_code_o",
+                  "comment": "输出已稳定保存的9-bit检测值",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 183,
+                  "line_end": 183
+                },
+                {
+                  "lhs": "o_stage1_raw",
+                  "rhs": "stage1_raw_o",
+                  "comment": "输出与检测码同拍锁存的S1物理位",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 184,
+                  "line_end": 184
+                },
+                {
+                  "lhs": "o_stage1_code_ext",
+                  "rhs": "stage1_code_ext_o",
+                  "comment": "输出未饱和的第一级冗余重构码",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 185,
+                  "line_end": 185
+                },
+                {
+                  "lhs": "o_stage2_raw",
+                  "rhs": "stage2_raw_o",
+                  "comment": "将同事务第二级物理码传向精细链路",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 186,
+                  "line_end": 186
+                },
+                {
+                  "lhs": "o_precision_mode",
+                  "rhs": "precision_mode_o",
+                  "comment": "传递本PPG周期已提交的全局精度快照",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 187,
+                  "line_end": 187
+                },
+                {
+                  "lhs": "o_detect_valid",
+                  "rhs": "detect_valid_o",
+                  "comment": "声明全部输出字段构成一笔有效载荷",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 188,
+                  "line_end": 188
+                },
+                {
+                  "lhs": "o_dc_code_epoch",
+                  "rhs": "metadata_o[C_DC_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]",
+                  "comment": "解析最低段DC提交代号",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 189,
+                  "line_end": 189
+                },
+                {
+                  "lhs": "o_amb_code_epoch",
+                  "rhs": "metadata_o[C_AMB_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]",
+                  "comment": "解析AMB码版本字段",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 190,
+                  "line_end": 190
+                },
+                {
+                  "lhs": "o_dc_code_snapshot",
+                  "rhs": "metadata_o[C_DC_CODE_LSB +: C_IDAC_CODE_WIDTH]",
+                  "comment": "还原当前颜色使用的DC码",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 191,
+                  "line_end": 191
+                },
+                {
+                  "lhs": "o_amb_code_snapshot",
+                  "rhs": "metadata_o[C_AMB_CODE_LSB +: C_IDAC_CODE_WIDTH]",
+                  "comment": "还原环境光抵消码快照",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 192,
+                  "line_end": 192
+                },
+                {
+                  "lhs": "o_frame_type",
+                  "rhs": "metadata_o[C_FRAME_TYPE_LSB +: 2]",
+                  "comment": "解包AMB/DCS/NORMAL类别",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 193,
+                  "line_end": 193
+                },
+                {
+                  "lhs": "o_color_ir",
+                  "rhs": "metadata_o[C_COLOR_LSB]",
+                  "comment": "解包红光或红外通道标识",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 194,
+                  "line_end": 194
+                },
+                {
+                  "lhs": "o_sample_index",
+                  "rhs": "metadata_o[C_SAMPLE_INDEX_LSB +: C_SAMPLE_INDEX_WIDTH]",
+                  "comment": "解包ADC样本编号",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 195,
+                  "line_end": 195
+                },
+                {
+                  "lhs": "o_frame_id",
+                  "rhs": "metadata_o[C_FRAME_ID_LSB +: C_FRAME_ID_WIDTH]",
+                  "comment": "解包帧调度器事务编号",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 196,
+                  "line_end": 196
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "detect_code_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "detect_code_o",
+                    "detect_code_o",
+                    "detect_code_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 输入握手沿保存饱和检测码，反压期间不重新观察捕获总线"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "detect_code_o <= {C_DETECT_CODE_WIDTH{1'b0}}; // 数字复位清除不可用检测值",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "detect_code_o <= dec_detect_code; // 锁存本笔S1的稳定9-bit等效码",
+                    "end else begin",
+                    "detect_code_o <= detect_code_o; // 无新载荷时维持输出缓存内容",
+                    "end"
+                  ],
+                  "line_start": 200,
+                  "line_end": 206
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "stage1_raw_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "stage1_raw_o",
+                    "stage1_raw_o",
+                    "stage1_raw_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 完整S1物理决策位与固定重构结果在同一输入握手沿进入缓存"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "stage1_raw_o <= 10'b0000000000; // 复位清除不可用的S1物理决策历史",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "stage1_raw_o <= i_capture_stage1_raw; // 保存后续逐物理位校准所需的原子RAW",
+                    "end else begin",
+                    "stage1_raw_o <= stage1_raw_o;   // 反压期间保持RAW与其余字段严格一致",
+                    "end"
+                  ],
+                  "line_start": 211,
+                  "line_end": 217
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "stage1_code_ext_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "stage1_code_ext_o",
+                    "stage1_code_ext_o",
+                    "stage1_code_ext_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 未饱和D1_EXT与检测码在同一输入握手沿进入结果缓存"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "stage1_code_ext_o <= 11'sd0;    // 复位时扩展码回到确定零值",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "stage1_code_ext_o <= dec_stage1_code_ext; // 完整保存-4至515冗余重构结果",
+                    "end else begin",
+                    "stage1_code_ext_o <= stage1_code_ext_o; // 结果未消费时禁止扩展码变化",
+                    "end"
+                  ],
+                  "line_start": 222,
+                  "line_end": 228
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "stage2_raw_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "stage2_raw_o",
+                    "stage2_raw_o",
+                    "stage2_raw_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 透传S2使后续精细链与已经重构的S1继续共享同一事务"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "stage2_raw_o <= 10'b0000000000; // 复位移除历史第二级物理码",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "stage2_raw_o <= i_capture_stage2_raw; // 保存捕获器已经对齐的S2载荷",
+                    "end else begin",
+                    "stage2_raw_o <= stage2_raw_o;   // 下游阻塞期间保持精细链输入",
+                    "end"
+                  ],
+                  "line_start": 233,
+                  "line_end": 239
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "precision_mode_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "precision_mode_o",
+                    "precision_mode_o",
+                    "precision_mode_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 捕获模块提供的全局模式快照决定当前颜色事务是否携带有效S2"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "precision_mode_o <= 1'b0;       // 复位默认采用9-bit载荷解释",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "precision_mode_o <= i_capture_precision_mode; // 原子保存R/IR共同使用的已提交精度",
+                    "end else begin",
+                    "precision_mode_o <= precision_mode_o; // 防止顶层下次模式变化污染旧结果",
+                    "end"
+                  ],
+                  "line_start": 244,
+                  "line_end": 250
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "metadata_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "metadata_o",
+                    "metadata_o",
+                    "metadata_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 捕获RAW只能读取此前已经冻结的上下文，不在ADC完成时采样实时控制总线"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "metadata_o <= {C_METADATA_WIDTH{1'b0}}; // 复位清空输出事务身份信息",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "metadata_o <= reg_context;      // 把待配对上下文绑定到当前RAW",
+                    "end else begin",
+                    "metadata_o <= metadata_o;       // 反压期间维持所有元数据字段",
+                    "end"
+                  ],
+                  "line_start": 255,
+                  "line_end": 261
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "detect_valid_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "detect_valid_o",
+                    "detect_valid_o",
+                    "detect_valid_o",
+                    "detect_valid_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 新捕获结果优先于同拍旧结果消费，允许连续事务无气泡替换"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "detect_valid_o <= 1'b0;         // 复位后不得报告虚假重构结果",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "detect_valid_o <= 1'b1;         // 数据、模式和元数据已经同步写入",
+                    "end else if(flag_detect_transfer == 1'b1)begin",
+                    "detect_valid_o <= 1'b0;         // 下游消费且无替换输入时释放缓存",
+                    "end else begin",
+                    "detect_valid_o <= detect_valid_o; // 空闲或阻塞期间保持事务所有权",
+                    "end"
+                  ],
+                  "line_start": 266,
+                  "line_end": 274
+                },
+                {
+                  "header": "always@(*)",
+                  "targets": [
+                    "dec_detect_code"
+                  ],
+                  "clock": "",
+                  "reset": "",
+                  "trigger_kind": "comb",
+                  "is_combinational": true,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "always_comb",
+                  "target_count": 1,
+                  "lvalues": [
+                    "dec_detect_code",
+                    "dec_detect_code",
+                    "dec_detect_code"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 把Verilog-A允许的-4至515扩展区间钳位到控制链可使用的0至511范围"
+                  ],
+                  "lines": [
+                    "if(dec_stage1_code_ext < 11'sd0)begin",
+                    "dec_detect_code = {C_DETECT_CODE_WIDTH{1'b0}}; // 负扩展码统一压到9-bit零端点",
+                    "end else if(dec_stage1_code_ext > 11'sd511)begin",
+                    "dec_detect_code = DETECT_CODE_MAX; // 正过量程码统一限制为511",
+                    "end else begin",
+                    "dec_detect_code = dec_stage1_code_ext[C_DETECT_CODE_WIDTH - 1:0]; // 正常区间保持黄金模型整数结果",
+                    "end"
+                  ],
+                  "line_start": 280,
+                  "line_end": 286
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_context"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_context",
+                    "reg_context",
+                    "reg_context"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 事务握手沿锁存上下文，保证R/IR和IDAC码在ADC完成前切换也不会错配"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_context <= {C_METADATA_WIDTH{1'b0}}; // 复位移除未启动事务的历史上下文",
+                    "end else if(flag_context_transfer == 1'b1)begin",
+                    "reg_context <= metadata_input;  // 在ADC转换开始边界保存全部数字属性",
+                    "end else begin",
+                    "reg_context <= reg_context;     // 等待RAW期间禁止上下文漂移",
+                    "end"
+                  ],
+                  "line_start": 291,
+                  "line_end": 297
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_context_valid"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_context_valid",
+                    "flag_context_valid",
+                    "flag_context_valid",
+                    "flag_context_valid"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 上下文被RAW消费后释放；若同拍启动下一事务则直接装入新上下文"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_context_valid <= 1'b0;     // 复位期间没有等待配对的ADC事务",
+                    "end else if(flag_context_transfer == 1'b1)begin",
+                    "flag_context_valid <= 1'b1;     // 新上下文已经获得单元素缓冲器所有权",
+                    "end else if(flag_capture_transfer == 1'b1)begin",
+                    "flag_context_valid <= 1'b0;     // 当前上下文已与捕获RAW成功绑定",
+                    "end else begin",
+                    "flag_context_valid <= flag_context_valid; // 未发生握手时保持等待状态",
+                    "end"
+                  ],
+                  "line_start": 302,
+                  "line_end": 310
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 11,
+                "decls": 18,
+                "assigns": 24,
+                "always": 10,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 49,
+              "line_end": 314
+            }
+          ],
+          "source_metrics": {
+            "lines": 314,
+            "nonempty_lines": 284,
+            "line_comments": 204,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 232,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_adc_s1_redundancy_corrector.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

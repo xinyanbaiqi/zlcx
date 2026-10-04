@@ -1,0 +1,184 @@
+# Design Explanation: ppg_precision_window_controller
+
+## Project Topology
+- Selected top module: `ppg_precision_window_controller`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_detection_discard_event` width=1 role=signal
+- `input i_detection_discard_reason` width=2 role=signal
+- `input i_detection_discard_identity_valid` width=1 role=status
+- `input i_detection_discard_sample_valid` width=1 role=status
+- `input i_detection_discard_frame_id` width=1 role=signal
+- `input i_detection_discard_sample_index` width=1 role=signal
+- `input i_detection_discard_color_ir` width=1 role=signal
+- `input i_detection_discard_frame_type` width=2 role=signal
+- `input i_detection_discard_precision` width=1 role=signal
+- `input i_detection_discard_config_epoch` width=1 role=signal
+- `input i_detection_discard_coef_epoch` width=1 role=signal
+- `input i_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `input i_detection_discard_amb_code_epoch` width=1 role=signal
+- `input i_detection_discard_dc_code_epoch` width=1 role=signal
+- `input i_detection_discard_run_generation` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `output o_local_empty` width=1 role=signal
+- `input i_active_config_valid` width=1 role=status
+- `input i_run_profile` width=1 role=signal
+- `input i_initial_precision` width=1 role=signal
+- `input i_normal_measurement_active` width=1 role=signal
+- `input i_peak_valley_config_valid` width=1 role=status
+- `input i_cross_valid` width=1 role=status
+- `output o_cross_ready` width=1 role=status
+- `input i_cross_frame_id` width=1 role=signal
+- `input i_cross_sample_index` width=1 role=signal
+- `input i_cross_time_unknown` width=1 role=signal
+- `input i_cross_config_epoch` width=1 role=signal
+- `input i_cross_coef_epoch` width=1 role=signal
+- `input i_cross_dc_recovery_coef_epoch` width=1 role=signal
+- `input i_return_9bit_valid` width=1 role=status
+- `output o_return_9bit_ready` width=1 role=status
+- `input i_return_reason` width=2 role=signal
+- `input i_return_frame_id` width=1 role=signal
+- `input i_frame_safe_boundary` width=1 role=signal
+- `input i_safe_frame_id` width=1 role=signal
+- `input i_precision_takeover_safe` width=1 role=signal
+- `input i_analog_safe` width=1 role=signal
+- `input i_recheck_busy` width=1 role=signal
+- `output o_active_precision_mode` width=1 role=control
+- `output o_fine_window_active` width=1 role=signal
+- `output o_fine_window_start_event` width=1 role=signal
+- `output o_fine_window_start_frame_id` width=1 role=signal
+- `output o_precision_15_to_9_event` width=1 role=signal
+- `output o_precision_15_to_9_frame_id` width=1 role=signal
+- `output o_reacquire_request_event` width=1 role=control
+- `output o_mode_fault_event` width=1 role=control
+- `output o_mode_fault_active` width=1 role=control
+- `output o_mode_fault_identity_valid` width=1 role=status
+- `output o_mode_fault_frame_id` width=1 role=control
+- `output o_mode_fault_sample_index` width=1 role=control
+- `output o_mode_fault_color_ir` width=1 role=control
+- `output o_mode_fault_frame_type` width=2 role=control
+- `output o_mode_fault_precision` width=1 role=control
+- `output o_mode_fault_run_generation` width=1 role=control
+- `output o_switch_pending` width=1 role=signal
+- `output o_switch_target_precision` width=1 role=signal
+- `output o_switch_hold_new_transaction` width=1 role=signal
+- `output o_controller_idle` width=1 role=signal
+- `output o_last_cross_time_unknown` width=1 role=signal
+- `output o_last_return_reason` width=2 role=signal
+- `output o_switch_timeout_sticky` width=1 role=signal
+- `output o_protocol_error_sticky` width=1 role=signal
+
+## Feature Mapping
+- `ppg_precision_window_controller reset behavior`: derived from ports, state, and always blocks.
+- `logic partition block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `logic partition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `logic partition block 7`: derived from ports, state, and always blocks.
+- `logic partition block 8`: derived from ports, state, and always blocks.
+- `output update block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `logic partition block 11`: derived from ports, state, and always blocks.
+- `logic partition block 12`: derived from ports, state, and always blocks.
+- `logic partition block 13`: derived from ports, state, and always blocks.
+- `logic partition block 14`: derived from ports, state, and always blocks.
+- `logic partition block 15`: derived from ports, state, and always blocks.
+- `logic partition block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `logic partition block 18`: derived from ports, state, and always blocks.
+- `logic partition block 19`: derived from ports, state, and always blocks.
+- `logic partition block 20`: derived from ports, state, and always blocks.
+- `logic partition block 21`: derived from ports, state, and always blocks.
+- `state transition block 22`: derived from ports, state, and always blocks.
+- `state transition block 23`: derived from ports, state, and always blocks.
+- `logic partition block 24`: derived from ports, state, and always blocks.
+- `logic partition block 25`: derived from ports, state, and always blocks.
+- `output update block 26`: derived from ports, state, and always blocks.
+- `logic partition block 27`: derived from ports, state, and always blocks.
+- `logic partition block 28`: derived from ports, state, and always blocks.
+- `counter update block 29`: derived from ports, state, and always blocks.
+- `logic partition block 30`: derived from ports, state, and always blocks.
+- `logic partition block 31`: derived from ports, state, and always blocks.
+- `logic partition block 32`: derived from ports, state, and always blocks.
+- `logic partition block 33`: derived from ports, state, and always blocks.
+- `logic partition block 34`: derived from ports, state, and always blocks.
+- `logic partition block 35`: derived from ports, state, and always blocks.
+- `logic partition block 36`: derived from ports, state, and always blocks.
+- `logic partition block 37`: derived from ports, state, and always blocks.
+- `logic partition block 38`: derived from ports, state, and always blocks.
+- `logic partition block 39`: derived from ports, state, and always blocks.
+- `logic partition block 40`: derived from ports, state, and always blocks.
+- `logic partition block 41`: derived from ports, state, and always blocks.
+- `logic partition block 42`: derived from ports, state, and always blocks.
+- `logic partition block 43`: derived from ports, state, and always blocks.
+- `logic partition block 44`: derived from ports, state, and always blocks.
+- `logic partition block 45`: derived from ports, state, and always blocks.
+- `logic partition block 46`: derived from ports, state, and always blocks.
+- `logic partition block 47`: derived from ports, state, and always blocks.
+- `logic partition block 48`: derived from ports, state, and always blocks.
+- `counter progression`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_precision_window_controller` drives known output values after reset release.
+- `counter_progression`: Verify timer/counter progression across phase transitions.
+- `fc001`: ppg_precision_window_controller reset behavior
+- `fc900`: counter progression
+
+## Decomposition Candidates
+- `u_block_1` lines 316-337: logic_partition
+- `u_block_2` lines 337-352: logic_partition
+- `u_block_3` lines 352-363: logic_partition
+- `u_block_4` lines 363-374: logic_partition
+- `u_block_5` lines 374-385: logic_partition
+- `u_block_6` lines 385-396: logic_partition
+- `u_block_7` lines 396-407: logic_partition
+- `u_block_8` lines 407-418: logic_partition
+- `u_block_9` lines 418-431: output_update
+- `u_block_10` lines 431-446: logic_partition
+- `u_block_11` lines 446-461: logic_partition
+- `u_block_12` lines 461-476: logic_partition
+- `u_block_13` lines 476-490: logic_partition
+- `u_block_14` lines 490-503: logic_partition
+- `u_block_15` lines 503-516: logic_partition
+- `u_block_16` lines 516-527: logic_partition
+- `u_block_17` lines 527-540: logic_partition
+- `u_block_18` lines 540-549: logic_partition
+- `u_block_19` lines 549-558: logic_partition
+- `u_block_20` lines 558-569: logic_partition
+- `u_block_21` lines 569-585: logic_partition
+- `u_block_22` lines 585-594: state_transition
+- `u_block_23` lines 594-649: state_transition
+- `u_block_24` lines 649-654: logic_partition
+- `u_block_25` lines 654-659: logic_partition
+- `u_block_26` lines 659-664: output_update
+- `u_block_27` lines 664-670: logic_partition
+- `u_block_28` lines 670-685: logic_partition
+- `u_block_29` lines 685-702: counter_update
+- `u_block_30` lines 702-715: logic_partition
+- `u_block_31` lines 715-728: logic_partition
+- `u_block_32` lines 728-741: logic_partition
+- `u_block_33` lines 741-754: logic_partition
+- `u_block_34` lines 754-767: logic_partition
+- `u_block_35` lines 767-780: logic_partition
+- `u_block_36` lines 780-793: logic_partition
+- `u_block_37` lines 793-810: logic_partition
+- `u_block_38` lines 810-823: logic_partition
+- `u_block_39` lines 823-836: logic_partition
+- `u_block_40` lines 836-849: logic_partition
+- `u_block_41` lines 849-854: logic_partition
+- `u_block_42` lines 854-859: logic_partition
+- `u_block_43` lines 859-864: logic_partition
+- `u_block_44` lines 864-869: logic_partition
+- `u_block_45` lines 869-874: logic_partition
+- `u_block_46` lines 874-879: logic_partition
+- `u_block_47` lines 879-884: logic_partition
+- `u_block_48` lines 884-888: logic_partition
+

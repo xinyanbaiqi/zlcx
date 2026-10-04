@@ -1,0 +1,29 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "audit_pr06_formula",
+    "-o",
+    "/tmp/ppg_audit_probes/pr06_formula_actual_05dcdc60/sim.vvp",
+    "/tmp/ppg_audit_probes/pr06_formula_actual_05dcdc60/files/0/audit_pr06_formula.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/pr06_formula_actual_05dcdc60",
+  "compile_rc": 0,
+  "run_rc": 0,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\pr06_formula_A\\audit_pr06_formula.v",
+      "sha256": "b717dfc3cc3ec74bb8842a50aea401ea1bddde4b95b872849f16cf1fc53d2ee2"
+    }
+  ]
+}

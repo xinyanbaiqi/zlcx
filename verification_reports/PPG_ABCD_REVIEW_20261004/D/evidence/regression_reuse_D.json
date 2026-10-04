@@ -1,0 +1,82 @@
+[
+  {
+    "tb": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_active_v4_control_plane_integration\\run.log",
+    "sha256": "26c027e38abf50f5c0da24b0b7f65398f9a2900fe131ffe2042faae94a7e76a7",
+    "pass_lines": 22,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T15:25:49Z",
+    "conclusion_lines": [
+      "ALL AV4C-01 THROUGH AV4C-22 PASSED"
+    ]
+  },
+  {
+    "tb": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_characterization_control_cdc\\run.log",
+    "sha256": "1088ad699583129a63951a97d279210558fd8035acd9ec9167187600c12fbc38",
+    "pass_lines": 26,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T15:26:07Z",
+    "conclusion_lines": [
+      "ALL CCC-01 TO CCC-26 PASS (26 checks)"
+    ]
+  },
+  {
+    "tb": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_input_light_static_matrix\\run.log",
+    "sha256": "4be4ce4c7a55eb89ebd6847ab0bae0b4f23d663ff88eca16a3381c017e500e9f",
+    "pass_lines": 73,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T16:11:13Z",
+    "conclusion_lines": [
+      "JNT_BASELINE checked=54 pass=54 required=54 status=PASS",
+      "INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=69 static_vector_checks=3000"
+    ]
+  },
+  {
+    "tb": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_idac_bus_isolation\\run.log",
+    "sha256": "0119f39996bee697df3dc1b515e76062d1b9b4f09a2bcb294461ef8be2a4e45a",
+    "pass_lines": 70,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T16:19:37Z",
+    "conclusion_lines": [
+      "JNT_BASELINE checked=54 pass=54 required=54 status=PASS",
+      "IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155"
+    ]
+  },
+  {
+    "tb": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_system_config_manager\\run.log",
+    "sha256": "0269dd14f73a0dd018ed8c42bd210b5ad3c6a9e570fc6a70e864fd5d7807b893",
+    "pass_lines": 1,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T15:26:37Z",
+    "conclusion_lines": []
+  },
+  {
+    "tb": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_chip_digital_top\\run.log",
+    "sha256": "6e71bbbb686483432506a6c927dfa7fb558e82da061e3aa9319021e4583b64a4",
+    "pass_lines": 6,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T15:25:48Z",
+    "conclusion_lines": []
+  },
+  {
+    "tb": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+    "source_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_system_active_config_unpack\\run.log",
+    "sha256": "7777bb4645a68dbd843e19f4f65ff281b02b6fa64b87b625116408220f692f84",
+    "pass_lines": 1,
+    "fail_lines": 0,
+    "run_rc": "0",
+    "end_record": "2026-10-02T15:26:35Z",
+    "conclusion_lines": []
+  }
+]

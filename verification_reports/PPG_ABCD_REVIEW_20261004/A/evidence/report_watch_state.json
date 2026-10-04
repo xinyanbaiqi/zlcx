@@ -1,0 +1,7 @@
+{
+  "updated_utc": "2026-10-04T12:52:21.581331+00:00",
+  "state": "watching_actual_logs",
+  "completed_refreshes": 6,
+  "last_fingerprint": "e11a37c034018f06c47bf0eba07f0e6e5d873ea82dce7a670e8ca96e929f5189",
+  "limits": "Refreshes factual logs, baseline comparisons, coverage runtime state and repository hash check. Does not claim full semantic or ASIC signoff, repair findings, or adjudicate new anomalies."
+}

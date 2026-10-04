@@ -1,0 +1,52 @@
+{
+  "updated_at": "2026-10-04T20:31:46",
+  "eligible": false,
+  "regression_states": {
+    "finished": 45,
+    "running": 3
+  },
+  "unfinished": [
+    "tb_ppg_control_top_long_10_cycles",
+    "tb_ppg_control_top_longrun",
+    "tb_ppg_control_top_robustness_corner_waveforms"
+  ],
+  "unexpected_terminal": [],
+  "manual_closure": {
+    "updated_at": "2026-10-04T20:31:45",
+    "complete": false,
+    "source_pending": 0,
+    "source_reviewed": 1860,
+    "work_items": [
+      {
+        "name": "Non-Source inherited-file reference semantic adjudication",
+        "state": "active",
+        "candidate_occurrences": 1656,
+        "note": "Candidate count is a mechanical workload, not a defect count. Earlier Source and declaration proofs are not reset."
+      },
+      {
+        "name": "Other bounds-only reference expected-text adjudication",
+        "state": "active",
+        "mechanical_occurrences": 5144,
+        "note": "Overlaps completed Source/dependency/decl/tag checks; not a remaining-work total."
+      },
+      {
+        "name": "G-FP cluster producer/consumer/reset/CDC/priority independent review",
+        "state": "active",
+        "note": "Detailed module reviews are complete; independent row-level semantic completion is not exhaustive yet."
+      },
+      {
+        "name": "Three full original long regressions and raw final-log checks",
+        "state": "running"
+      }
+    ],
+    "known_status_errors": [
+      "K-001"
+    ],
+    "limits": [
+      "No xsim/Vivado/Verilator/ASIC CDC tools available",
+      "Three external historical handoff references not in snapshot",
+      "F044 suspected; acceptable entry-layer coverage scope not decided"
+    ]
+  },
+  "limits": "Only closes the report when all48 actual original logs have normal terminal banners, no FAIL and baseline PASS counts match, and required independent manual closure is complete. Regression completion cannot hide unfinished manual work. Any unexpected terminal remains pending manual adjudication. Explicit unavailable-tool ranges and F044 stay in the report; no source fixes or product signoff."
+}

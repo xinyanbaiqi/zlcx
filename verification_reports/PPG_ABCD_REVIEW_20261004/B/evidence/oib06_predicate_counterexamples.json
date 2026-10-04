@@ -1,0 +1,280 @@
+{
+  "method": "binary-value replay of the exact static OIB06 predicates, not a RTL/system simulation",
+  "source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_control_top\\tb_ppg_control_top_owner_identity_backpressure.v",
+  "source_sha256": "87c33b5f0c14968732624023986f0443df624a9c84b35412fb40a3c0c6b3f70e",
+  "lines": [
+    946,
+    947,
+    951,
+    1868,
+    1871
+  ],
+  "results": {
+    "good": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": true
+      }
+    },
+    "loss": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": true
+      }
+    },
+    "recolor": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": true
+      }
+    },
+    "retype": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 2,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 2,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 2,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 2,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": true
+      }
+    },
+    "precision_relabel": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 1
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 0,
+          "precision": 1
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 0,
+          "precision": 1
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 0,
+          "precision": 1
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": true
+      }
+    },
+    "duplicate_control": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 0,
+        "duplicate_or_relabel_violations": 1,
+        "OIB06_gate_pass": false
+      }
+    },
+    "decreasing_control": {
+      "trace": [
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 11,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 10,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 12,
+          "color": 0,
+          "type": 0,
+          "precision": 0
+        },
+        {
+          "frame": 7,
+          "sample": 13,
+          "color": 1,
+          "type": 0,
+          "precision": 0
+        }
+      ],
+      "verdict": {
+        "order_violations": 1,
+        "duplicate_or_relabel_violations": 0,
+        "OIB06_gate_pass": false
+      }
+    }
+  }
+}

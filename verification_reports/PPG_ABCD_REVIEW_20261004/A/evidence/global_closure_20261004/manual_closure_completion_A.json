@@ -1,0 +1,42 @@
+{
+  "updated_at": "2026-10-04T20:31:45",
+  "complete": false,
+  "source_pending": 0,
+  "source_reviewed": 1860,
+  "work_items": [
+    {
+      "name": "Non-Source inherited-file reference semantic adjudication",
+      "state": "paused_per_user",
+      "candidate_occurrences": 1656,
+      "note": "Candidate count is a mechanical workload, not a defect count. Earlier Source and declaration proofs are not reset."
+    },
+    {
+      "name": "Other bounds-only reference expected-text adjudication",
+      "state": "paused_per_user",
+      "mechanical_occurrences": 5144,
+      "note": "Overlaps completed Source/dependency/decl/tag checks; not a remaining-work total."
+    },
+    {
+      "name": "G-FP cluster producer/consumer/reset/CDC/priority independent review",
+      "state": "paused_per_user",
+      "note": "Detailed module reviews are complete; independent row-level semantic completion is not exhaustive yet."
+    },
+    {
+      "name": "Three full original long regressions and raw final-log checks",
+      "state": "running"
+    }
+  ],
+  "known_status_errors": [
+    "K-001"
+  ],
+  "limits": [
+    "No xsim/Vivado/Verilator/ASIC CDC tools available",
+    "Three external historical handoff references not in snapshot",
+    "F044 suspected; acceptable entry-layer coverage scope not decided"
+  ],
+  "user_steering": {
+    "instruction": "暂停省略文件名引用核对；优先等待全部回归结果",
+    "current_deliverable": "48 original full regression results",
+    "manual_pause_is_not_completion": true
+  }
+}

@@ -1,0 +1,1286 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 218,
+      "code_lines": 116,
+      "line_comments": 149,
+      "commented_code_lines": 70,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 218,
+              "module_count": 1,
+              "module_names": [
+                "ppg_p2s_packer"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 23,
+              "end_count": 23,
+              "case_count": 1,
+              "endcase_count": 1,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_result_valid",
+                "o_result_ready",
+                "i_frame_id",
+                "i_sample_index",
+                "i_color_ir",
+                "i_frame_type",
+                "i_result_precision_mode",
+                "i_coarse_ppg_value",
+                "i_coarse_valid",
+                "i_coarse_recovery_calibrated",
+                "i_fine_ppg_value",
+                "i_fine_valid",
+                "i_fine_recovery_calibrated",
+                "i_amb_code_snapshot",
+                "i_dc_code_snapshot",
+                "i_amb_code_epoch",
+                "i_dc_code_epoch",
+                "i_calibrated_s1_value",
+                "i_programmable_15_code",
+                "i_programmable_15_valid",
+                "i_s1_calibration_applied",
+                "i_stage1_raw",
+                "i_stage2_raw",
+                "o_p2s_data",
+                "o_p2s_frame"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 6,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 79,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/09/06",
+            "revision_date": "2026/09/06",
+            "design_name": "PPG P2S Fixed-Packet Telemetry Packer",
+            "module_name": "ppg_p2s_packer",
+            "description": "Description/ppg_p2s_packer_Design.pdf",
+            "simulations": "../ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+            "references": "../ppg_system_integration/PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md section 8.4",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/09/06        V1.0        Erie          Create file. Fixed 161-bit, 12-field P2S packet packer with a depth-2 result queue, per PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md V1.9 section 8.4. Queue holds the front entry non-destructively in reg_queue_front and reads it out through a variable bit-select index (cnt_tx_bit), avoiding a separate transmit shift register so the design stays at exactly 2x161=322 flip-flops of queue storage, matching section 8.4.4's stated budget. P2S_CLK itself is not generated here -- the parent glue top drives it as a pure CLK_2M passthrough per section 8.4.1, so this module only needs i_clk for its own sequencing."
+            ],
+            "history_lines_cn": [
+              "2026年09月06日   V1.0        Erie          创建文件。按PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md V1.9第8.4节实现固定161-bit、12字段P2S包打包器，内含深度2结果排队。排队队首条目非破坏性保存在reg_queue_front里，用可变位选下标（cnt_tx_bit）直接读出，不额外建立发送移位寄存器，队列存储正好维持2x161=322个触发器，和第8.4.4节给出的预算逐位吻合。P2S_CLK本身不在本模块产生——父级glue顶层按第8.4.1节把它做成CLK_2M纯直连，本模块只需要i_clk驱动自己的时序。",
+              "12字段固定161-bit结果排入深度2队列，按到达顺序串行外发"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_p2s_packer",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "2 MHz数字系统域工作时钟，P2S_CLK由父级直接同源驱动",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "2 MHz域低有效复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_result_valid",
+                  "comment": "保持型正式结果有效，直到本模块回应ready",
+                  "group": "AMI正式结果消费接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_result_ready",
+                  "comment": "队列未满时接受新结果",
+                  "group": "AMI正式结果消费接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_frame_id",
+                  "comment": "字段1：本笔结果物理帧号",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_sample_index",
+                  "comment": "字段2：本笔结果全局序号",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_color_ir",
+                  "comment": "字段3：本笔结果颜色身份",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_frame_type",
+                  "comment": "字段4：本笔结果帧类型编码",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_result_precision_mode",
+                  "comment": "字段5：本笔结果精度快照",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "input",
+                  "width": "[23:0]",
+                  "name": "i_coarse_ppg_value",
+                  "comment": "字段6：DC恢复后粗PPG值",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_coarse_valid",
+                  "comment": "字段6：粗结果有效资格",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_coarse_recovery_calibrated",
+                  "comment": "字段6：粗结果正式恢复资格",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "direction": "input",
+                  "width": "[23:0]",
+                  "name": "i_fine_ppg_value",
+                  "comment": "字段7：DC恢复后精细PPG值",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_fine_valid",
+                  "comment": "字段7：精细结果有效资格",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_fine_recovery_calibrated",
+                  "comment": "字段7：精细结果正式恢复资格",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_amb_code_snapshot",
+                  "comment": "字段8：本笔结果AMB码快照",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_dc_code_snapshot",
+                  "comment": "字段8：本笔结果颜色DC码快照",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "input",
+                  "width": "[3:0]",
+                  "name": "i_amb_code_epoch",
+                  "comment": "字段9：本笔结果AMB码版本",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "input",
+                  "width": "[3:0]",
+                  "name": "i_dc_code_epoch",
+                  "comment": "字段9：本笔结果颜色DC码版本",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "input",
+                  "width": "[11:0]",
+                  "name": "i_calibrated_s1_value",
+                  "comment": "字段10：正式Stage1校准残差",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "direction": "input",
+                  "width": "[14:0]",
+                  "name": "i_programmable_15_code",
+                  "comment": "字段11：正式可编程15-bit残差",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_programmable_15_valid",
+                  "comment": "字段11：可编程精细结果资格",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_s1_calibration_applied",
+                  "comment": "字段12：Stage1校准资格，DC恢复原子载荷重新导出版本",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "i_stage1_raw",
+                  "comment": "字段12：Stage1物理判决位，DC恢复原子载荷重新导出版本",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "direction": "input",
+                  "width": "[9:0]",
+                  "name": "i_stage2_raw",
+                  "comment": "字段12：第二级冗余物理判决位，DC恢复原子载荷重新导出版本",
+                  "group": "12字段payload输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_p2s_data",
+                  "comment": "161拍串行数据，MSB-first",
+                  "group": "P2S物理引脚接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 77,
+                  "line_end": 77
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_p2s_frame",
+                  "comment": "覆盖整个161拍数据包的帧指示，背靠背包间至少落低1拍",
+                  "group": "P2S物理引脚接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 78,
+                  "line_end": 78
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "ST_IDLE",
+                  "value": "1'b0",
+                  "decl_spec": "",
+                  "comment": "等待队列出现新条目",
+                  "leading_comments": [
+                    "// 打包器只有排空等待和串行发送两个真实状态"
+                  ],
+                  "synthetic": false,
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "ST_SEND",
+                  "value": "1'b1",
+                  "decl_spec": "",
+                  "comment": "正在串行输出队首161-bit条目",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 84,
+                  "line_end": 84
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[1:0]",
+                  "name": "cnt_queue_depth",
+                  "init": "",
+                  "comment": "当前排队条目数，取值0/1/2",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 排队深度与队首发送进度各自独立计数"
+                  ],
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "kind": "reg",
+                  "width": "[7:0]",
+                  "name": "cnt_tx_bit",
+                  "init": "",
+                  "comment": "队首条目已发送的比特下标，0~160",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "kind": "wire",
+                  "width": "[1:0]",
+                  "name": "cnt_after_pop",
+                  "init": "",
+                  "comment": "扣除本拍出队后的排队条目数，供入队目标槽位判定",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "state_current",
+                  "init": "",
+                  "comment": "当前拍打包器真实状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 三段式FSM的当前态与次态"
+                  ],
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "state_next",
+                  "init": "",
+                  "comment": "下一拍打包器目标状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 95,
+                  "line_end": 95
+                },
+                {
+                  "kind": "reg",
+                  "width": "[160:0]",
+                  "name": "reg_queue_front",
+                  "init": "",
+                  "comment": "队首条目，当前正在发送或即将发送",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 深度2队列固定占用2x161=322个触发器，不额外建立发送移位寄存器"
+                  ],
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "kind": "reg",
+                  "width": "[160:0]",
+                  "name": "reg_queue_tail",
+                  "init": "",
+                  "comment": "队尾条目，等待队首发送完成后前移",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_push",
+                  "init": "",
+                  "comment": "本拍存在被接受的新结果",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 入队与出队各自独立判定，同一拍可以同时发生"
+                  ],
+                  "line_start": 104,
+                  "line_end": 104
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_pop",
+                  "init": "",
+                  "comment": "本拍队首条目发送完最后一比特",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 105,
+                  "line_end": 105
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_load",
+                  "init": "",
+                  "comment": "本拍从IDLE进入SEND，需要复位比特计数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_queue_not_full",
+                  "init": "",
+                  "comment": "队列未满，允许接受下一笔结果",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 107,
+                  "line_end": 107
+                },
+                {
+                  "kind": "wire",
+                  "width": "[160:0]",
+                  "name": "payload_next",
+                  "init": "",
+                  "comment": "本拍若发生入队，即将写入队列的完整条目，字段顺序即合同8.4.2节表格序号顺序，MSB-first",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 组合拼装的161-bit新条目及两个队列槽位各自的下一拍目标值"
+                  ],
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "kind": "wire",
+                  "width": "[160:0]",
+                  "name": "front_next",
+                  "init": "",
+                  "comment": "队首槽位下一拍目标值：二条目出队前移、队首直接补位或保持不变",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 112,
+                  "line_end": 112
+                },
+                {
+                  "kind": "wire",
+                  "width": "[160:0]",
+                  "name": "tail_next",
+                  "init": "",
+                  "comment": "队尾槽位下一拍目标值：新条目排到队尾或保持不变",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 113,
+                  "line_end": 113
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "payload_next",
+                  "rhs": "{i_frame_id, i_sample_index, i_color_ir, i_frame_type, i_result_precision_mode, i_coarse_ppg_value, i_coarse_valid, i_coarse_recovery_calibrated, i_fine_ppg_value, i_fine_valid, i_fine_recovery_calibrated, i_amb_code_snapshot, i_dc_code_snapshot, i_amb_code_epoch, i_dc_code_epoch, i_calibrated_s1_value, i_programmable_15_code, i_programmable_15_valid, i_s1_calibration_applied, i_stage1_raw, i_stage2_raw}",
+                  "comment": "12字段固定拼装，字段12含P2S §8.4.5新增的DC恢复原子载荷透传值",
+                  "leading_comments": [
+                    "// 12个字段按合同顺序从高位到低位拼接成完整161-bit条目"
+                  ],
+                  "delay": "",
+                  "line_start": 120,
+                  "line_end": 120
+                },
+                {
+                  "lhs": "flag_push",
+                  "rhs": "i_result_valid && flag_queue_not_full",
+                  "comment": "握手成立即视为本拍接受一笔新结果",
+                  "leading_comments": [
+                    "// 入队仅在队列未满且上游保持有效时发生"
+                  ],
+                  "delay": "",
+                  "line_start": 123,
+                  "line_end": 123
+                },
+                {
+                  "lhs": "flag_pop",
+                  "rhs": "(state_current == ST_SEND) && (cnt_tx_bit == 8'd160)",
+                  "comment": "第161拍（下标160）为条目最后一比特",
+                  "leading_comments": [
+                    "// 出队发生在队首条目正在发送且已到达最后一比特的那一拍"
+                  ],
+                  "delay": "",
+                  "line_start": 125,
+                  "line_end": 125
+                },
+                {
+                  "lhs": "flag_load",
+                  "rhs": "(state_current == ST_IDLE) && (cnt_queue_depth != 2'd0)",
+                  "comment": "队列非空才发起新的串行发送",
+                  "leading_comments": [
+                    "// 从IDLE进入SEND当且仅当当前已存在排队条目"
+                  ],
+                  "delay": "",
+                  "line_start": 127,
+                  "line_end": 127
+                },
+                {
+                  "lhs": "flag_queue_not_full",
+                  "rhs": "(cnt_queue_depth != 2'd2)",
+                  "comment": "深度2队列的唯一满员条件",
+                  "leading_comments": [
+                    "// 队列未满的判据是排队数不等于2"
+                  ],
+                  "delay": "",
+                  "line_start": 129,
+                  "line_end": 129
+                },
+                {
+                  "lhs": "cnt_after_pop",
+                  "rhs": "flag_pop ? (cnt_queue_depth - 2'd1) : cnt_queue_depth",
+                  "comment": "出队与入队可能同拍发生，先扣减出队再判定入队目标",
+                  "leading_comments": [
+                    "// 出队后的等效条目数，用于判定新入队条目应落入哪个槽位"
+                  ],
+                  "delay": "",
+                  "line_start": 132,
+                  "line_end": 132
+                },
+                {
+                  "lhs": "front_next",
+                  "rhs": "(flag_pop && (cnt_after_pop != 2'd0)) ? reg_queue_tail : ((flag_push && (cnt_after_pop == 2'd0)) ? payload_next : reg_queue_front)",
+                  "comment": "覆盖二条目出队前移、队首直接补位、无变化三种情形",
+                  "leading_comments": [
+                    "// 队首在真实二条目出队时接住原队尾，否则在队首因出队或原本为空而空出时直接接住新条目"
+                  ],
+                  "delay": "",
+                  "line_start": 134,
+                  "line_end": 134
+                },
+                {
+                  "lhs": "tail_next",
+                  "rhs": "(flag_push && (cnt_after_pop == 2'd1)) ? payload_next : reg_queue_tail",
+                  "comment": "队首已占用时新条目落入队尾槽位，其余情形保持不变",
+                  "leading_comments": [
+                    "// 队尾只在新条目需要排到最后（出队后仍剩一个有效条目）时更新"
+                  ],
+                  "delay": "",
+                  "line_start": 136,
+                  "line_end": 136
+                },
+                {
+                  "lhs": "o_p2s_data",
+                  "rhs": "reg_queue_front[9'd160 - {1'b0, cnt_tx_bit}]",
+                  "comment": "下标160为MSB，随cnt_tx_bit递增依次输出到LSB",
+                  "leading_comments": [
+                    "// 队首条目按当前比特下标做可变位选，非破坏性读出，不需要额外移位寄存器"
+                  ],
+                  "delay": "",
+                  "line_start": 140,
+                  "line_end": 140
+                },
+                {
+                  "lhs": "o_p2s_frame",
+                  "rhs": "(state_current == ST_SEND) ? 1'b1 : 1'b0",
+                  "comment": "ST_SEND覆盖全部161拍，退出后至少一拍落低",
+                  "leading_comments": [
+                    "// 帧指示只在真实发送期间为高，IDLE态天然提供背靠背包间的低电平间隙"
+                  ],
+                  "delay": "",
+                  "line_start": 142,
+                  "line_end": 142
+                },
+                {
+                  "lhs": "o_result_ready",
+                  "rhs": "flag_queue_not_full",
+                  "comment": "直接暴露队列占用资格，供AMI结果fork的valid/ready握手",
+                  "leading_comments": [
+                    "// 队列未满即可对上游承诺ready"
+                  ],
+                  "delay": "",
+                  "line_start": 144,
+                  "line_end": 144
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "state_current"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": true,
+                  "block_kind": "state_transition_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "state_current",
+                    "state_current"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 当前态寄存器只在时钟沿更新为上一拍算好的次态"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "state_current <= ST_IDLE; // 复位回到排空等待态",
+                    "end else begin",
+                    "state_current <= state_next; // 每拍无条件锁存组合次态",
+                    "end"
+                  ],
+                  "line_start": 148,
+                  "line_end": 152
+                },
+                {
+                  "header": "always@(*)",
+                  "targets": [
+                    "state_next"
+                  ],
+                  "clock": "",
+                  "reset": "",
+                  "trigger_kind": "comb",
+                  "is_combinational": true,
+                  "contains_case": true,
+                  "contains_if": true,
+                  "references_state": true,
+                  "block_kind": "always_comb",
+                  "target_count": 1,
+                  "lvalues": [
+                    "state_next",
+                    "state_next",
+                    "state_next",
+                    "state_next"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 16,
+                  "leading_comments": [
+                    "// 次态组合逻辑先默认维持当前态，再按状态覆盖真实跳转条件"
+                  ],
+                  "lines": [
+                    "state_next = state_current;   // 默认维持当前态，避免遗漏分支产生锁存",
+                    "case(state_current)",
+                    "ST_IDLE:begin",
+                    "if(flag_load)begin",
+                    "state_next = ST_SEND; // 队列非空，进入串行发送",
+                    "end",
+                    "end",
+                    "ST_SEND:begin",
+                    "if(flag_pop)begin",
+                    "state_next = ST_IDLE; // 已发完最后一比特，让出至少一拍间隙",
+                    "end",
+                    "end",
+                    "default:begin",
+                    "state_next = ST_IDLE; // 非法态兜底回到安全等待态",
+                    "end",
+                    "endcase"
+                  ],
+                  "line_start": 157,
+                  "line_end": 172
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_tx_bit"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": true,
+                  "block_kind": "state_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_tx_bit",
+                    "cnt_tx_bit",
+                    "cnt_tx_bit",
+                    "cnt_tx_bit"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 已发送比特下标只在真实发送期间递增，是唯一直接依据state_current取值分支的时序逻辑"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_tx_bit <= 8'd0;             // 复位清零比特下标",
+                    "end else if(flag_load)begin",
+                    "cnt_tx_bit <= 8'd0;             // 新条目从第0比特（MSB）开始输出",
+                    "end else if(state_current == ST_SEND)begin",
+                    "cnt_tx_bit <= cnt_tx_bit + 8'd1; // 每拍推进到下一比特下标",
+                    "end else begin",
+                    "cnt_tx_bit <= cnt_tx_bit;       // IDLE态无条目在发，保持不变",
+                    "end"
+                  ],
+                  "line_start": 178,
+                  "line_end": 186
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_queue_front"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_queue_front",
+                    "reg_queue_front"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 队首槽位按front_next覆盖出队前移、队首补位与保持三种情形"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_queue_front <= {161{1'b0}}; // 上电复位归零，等待第一笔真实结果入队占用",
+                    "end else begin",
+                    "reg_queue_front <= front_next;  // 按组合逻辑统一覆盖",
+                    "end"
+                  ],
+                  "line_start": 192,
+                  "line_end": 196
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_queue_tail"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_queue_tail",
+                    "reg_queue_tail"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 队尾槽位只在新条目需要排队等待时更新"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_queue_tail <= {161{1'b0}};  // 深度2队列第二槽位随同归零，尚无第二笔待发送条目",
+                    "end else begin",
+                    "reg_queue_tail <= tail_next;    // 接住组合逻辑算好的队尾下一拍取值",
+                    "end"
+                  ],
+                  "line_start": 201,
+                  "line_end": 205
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_queue_depth"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_queue_depth",
+                    "cnt_queue_depth"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 排队条目数在出队与入队各自独立计入后合并更新"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_queue_depth <= 2'd0;        // 复位清空队列计数",
+                    "end else begin",
+                    "cnt_queue_depth <= cnt_after_pop + (flag_push ? 2'd1 : 2'd0); // 先扣出队再加入队，覆盖同拍并发情形",
+                    "end"
+                  ],
+                  "line_start": 210,
+                  "line_end": 214
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 2,
+                "decls": 14,
+                "assigns": 11,
+                "always": 6,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 218
+            }
+          ],
+          "source_metrics": {
+            "lines": 218,
+            "nonempty_lines": 195,
+            "line_comments": 149,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 151,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_p2s_packer.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

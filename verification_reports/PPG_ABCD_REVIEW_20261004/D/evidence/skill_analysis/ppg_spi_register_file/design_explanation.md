@@ -1,0 +1,140 @@
+# Design Explanation: ppg_spi_register_file
+
+## Project Topology
+- Selected top module: `ppg_spi_register_file`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_source_clk` width=1 role=clock
+- `input i_source_rstn` width=1 role=reset
+- `input i_spi_cs_n` width=1 role=signal
+- `input i_spi_sdi` width=1 role=signal
+- `output o_spi_sdo` width=1 role=signal
+- `output o_source_config_snapshot` width=1024 role=signal
+- `output o_source_config_update_event` width=1 role=signal
+- `output o_source_characterization_update_valid` width=1 role=status
+- `output o_source_static_characterization_enable` width=1 role=control
+- `output o_source_test_mux_ctrl` width=5 role=signal
+- `input i_source_config_update_ready` width=1 role=status
+- `input i_source_characterization_update_ready` width=1 role=status
+- `output o_start_event` width=1 role=signal
+- `output o_stop_event` width=1 role=signal
+- `output o_diag_clear_event` width=1 role=signal
+- `output o_control_abort_event` width=1 role=signal
+- `output o_dbg_out_select` width=3 role=control
+- `output o_dbg_out_select_update_event` width=1 role=control
+- `input i_lifecycle_state` width=2 role=signal
+- `input i_start_ready` width=1 role=status
+- `input i_commit_ack_sticky` width=1 role=signal
+- `input i_error_sticky` width=1 role=signal
+- `input i_last_error_code` width=8 role=signal
+- `input i_schema_version` width=8 role=signal
+- `input i_config_epoch` width=8 role=signal
+- `input i_coef_epoch` width=8 role=signal
+- `input i_stage2_coef_epoch` width=8 role=signal
+- `input i_dc_recovery_coef_epoch` width=8 role=signal
+- `input i_scheduler_idle` width=1 role=signal
+- `input i_scheduler_launch_timeout_sticky` width=1 role=signal
+- `input i_scheduler_owner_deadline_timeout_sticky` width=1 role=signal
+- `input i_scheduler_completion_mismatch_sticky` width=1 role=signal
+- `input i_scheduler_protocol_error_sticky` width=1 role=signal
+- `input i_ami_datapath_empty` width=1 role=data
+- `input i_ami_idac_idle` width=1 role=signal
+- `input i_active_precision_mode` width=1 role=control
+- `input i_ami_integration_protocol_error_sticky` width=1 role=signal
+- `input i_ssw_wrapper_idle` width=1 role=signal
+- `input i_ssw_switch_protocol_error_sticky` width=1 role=signal
+- `input i_ssw_transaction_mismatch_sticky` width=1 role=signal
+- `input i_ssw_owner_deadline_timeout_sticky` width=1 role=signal
+- `input i_ssw_calibration_timeout_sticky` width=1 role=signal
+- `input i_characterization_control_valid` width=1 role=status
+- `input i_characterization_protocol_error_sticky` width=1 role=signal
+- `input i_system_fault_blocking` width=1 role=signal
+- `input i_system_fault_cause_valid` width=1 role=status
+- `input i_system_fault_identity_valid` width=1 role=status
+- `input i_system_fault_color_ir` width=1 role=signal
+- `input i_system_fault_frame_type` width=2 role=signal
+- `input i_system_fault_precision` width=1 role=signal
+- `input i_result_discard_summary_sticky` width=1 role=signal
+- `input i_system_fault_cause` width=8 role=signal
+- `input i_system_fault_source` width=4 role=signal
+- `input i_system_fault_frame_id` width=16 role=signal
+- `input i_system_fault_sample_index` width=16 role=signal
+- `input i_system_fault_run_generation` width=8 role=signal
+- `input i_system_fault_summary` width=16 role=signal
+- `input i_measurement_result_discard_event` width=1 role=signal
+- `input i_measurement_result_discard_reason` width=2 role=signal
+- `input i_measurement_result_discard_identity_valid` width=1 role=status
+- `input i_measurement_result_discard_sample_valid` width=1 role=status
+- `input i_measurement_result_discard_frame_id` width=16 role=signal
+- `input i_measurement_result_discard_sample_index` width=16 role=signal
+- `input i_measurement_result_discard_color_ir` width=1 role=signal
+- `input i_measurement_result_discard_frame_type` width=2 role=signal
+- `input i_measurement_result_discard_precision` width=1 role=signal
+- `input i_measurement_result_discard_run_generation` width=8 role=signal
+- `input i_detection_discard_event` width=1 role=signal
+- `input i_detection_discard_reason` width=2 role=signal
+- `input i_detection_discard_identity_valid` width=1 role=status
+- `input i_detection_discard_sample_valid` width=1 role=status
+- `input i_detection_discard_frame_id` width=16 role=signal
+- `input i_detection_discard_sample_index` width=16 role=signal
+- `input i_detection_discard_color_ir` width=1 role=signal
+- `input i_detection_discard_frame_type` width=2 role=signal
+- `input i_detection_discard_precision` width=1 role=signal
+- `input i_detection_discard_config_epoch` width=8 role=signal
+- `input i_detection_discard_coef_epoch` width=8 role=signal
+- `input i_detection_discard_dc_recovery_epoch` width=8 role=signal
+- `input i_detection_discard_amb_code_epoch` width=4 role=signal
+- `input i_detection_discard_dc_code_epoch` width=4 role=signal
+- `input i_detection_discard_run_generation` width=8 role=signal
+
+## Feature Mapping
+- `ppg_spi_register_file reset behavior`: derived from ports, state, and always blocks.
+- `state transition block 1`: derived from ports, state, and always blocks.
+- `state transition block 2`: derived from ports, state, and always blocks.
+- `counter update block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `logic partition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `counter update block 7`: derived from ports, state, and always blocks.
+- `logic partition block 8`: derived from ports, state, and always blocks.
+- `logic partition block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `logic partition block 11`: derived from ports, state, and always blocks.
+- `logic partition block 12`: derived from ports, state, and always blocks.
+- `logic partition block 13`: derived from ports, state, and always blocks.
+- `logic partition block 14`: derived from ports, state, and always blocks.
+- `logic partition block 15`: derived from ports, state, and always blocks.
+- `logic partition block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `logic partition block 18`: derived from ports, state, and always blocks.
+- `counter progression`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_spi_register_file` drives known output values after reset release.
+- `counter_progression`: Verify timer/counter progression across phase transitions.
+- `fc001`: ppg_spi_register_file reset behavior
+- `fc900`: counter progression
+
+## Decomposition Candidates
+- `u_block_1` lines 372-381: state_transition
+- `u_block_2` lines 381-413: state_transition
+- `u_block_3` lines 413-432: counter_update
+- `u_block_4` lines 432-447: logic_partition
+- `u_block_5` lines 447-458: logic_partition
+- `u_block_6` lines 458-472: logic_partition
+- `u_block_7` lines 472-481: counter_update
+- `u_block_8` lines 481-490: logic_partition
+- `u_block_9` lines 490-501: logic_partition
+- `u_block_10` lines 501-512: logic_partition
+- `u_block_11` lines 512-523: logic_partition
+- `u_block_12` lines 523-536: logic_partition
+- `u_block_13` lines 536-548: logic_partition
+- `u_block_14` lines 548-559: logic_partition
+- `u_block_15` lines 559-568: logic_partition
+- `u_block_16` lines 568-579: logic_partition
+- `u_block_17` lines 579-590: logic_partition
+- `u_block_18` lines 590-681: logic_partition
+

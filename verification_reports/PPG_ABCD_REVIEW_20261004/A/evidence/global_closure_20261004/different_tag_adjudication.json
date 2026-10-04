@@ -1,0 +1,172 @@
+[
+  {
+    "alias_line": "47",
+    "ids": "LFA-08,TOP-22",
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "line": "908",
+    "actual_tags": "TOP-21",
+    "state": "different_id_tag_candidate",
+    "source_text": "908: \tassign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21",
+    "adjudication": "确认失效锚点；源908是TOP21生产门控，当前身份替换911带TOP22/P07/SID10；并入F003"
+  },
+  {
+    "alias_line": "89",
+    "ids": "AMI-54,BSL-40,D01-01b,PWI-08",
+    "file": "rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+    "line": "480",
+    "actual_tags": "G-FP-01-D01-04,PRC-01",
+    "state": "different_id_tag_candidate",
+    "source_text": "480: \tassign flag_candidate_start = i_peak_valley_config_valid && flag_cross_eligible_red_result && baseline_valid_o && flag_result_frame_legal && (flag_cross_issued == 1'b0) && (flag_candidate_active == 1'b0) && flag_below_seen && flag_previous_valid && (dec_previous_value_q16 <= ($signed(dec_previous_baseline_q16) - $signed({{(C_BASELINE_WIDTH - C_SLOPE_WIDTH){1'b0}}, i_cross_hysteresis_q16}))) && (dec_filtered_value_q16 >= dec_baseline_high_q16); // V5资格无效时不得建立新候选或锁存首次越过身份；平坦/无脉搏输入恒不满足双侧迟滞越过，杜绝虚假CROSS；unpacker->AMI->PWI->C20/C22/C23唯一通路上的C20消费端,真实门控点 @satisfies: PRC-01, G-FP-01-D01-04",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "89",
+    "ids": "AMI-54,BSL-40,D01-01b,PWI-08",
+    "file": "rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+    "line": "351",
+    "actual_tags": "PVW-38",
+    "state": "different_id_tag_candidate",
+    "source_text": "351: \tassign flag_active_config_legal = (i_peak_valley_config_valid || i_characterization_mode) && (i_peak_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_valley_confirm_count != {C_CONFIRM_COUNT_WIDTH{1'b0}}) && (i_min_peak_to_valley_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_min_peak_to_peak_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_fine_window_frames != {C_INTERVAL_WIDTH{1'b0}}) && (i_max_reacquire_frames != {C_INTERVAL_WIDTH{1'b0}}); // CHARACTERIZATION只豁免config_valid提交状态，六项数值门限两种模式下均不得为0; @satisfies: PVW-38",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "89",
+    "ids": "AMI-54,BSL-40,D01-01b,PWI-08",
+    "file": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+    "line": "277",
+    "actual_tags": "G-FP-01-D01-04,PRC-02,PWC-06,PWC-21,PWC-40",
+    "state": "different_id_tag_candidate",
+    "source_text": "277: \tassign o_cross_ready = i_run_enable && i_active_config_valid && i_peak_valley_config_valid && (flag_fault_hold == 1'b0) && (((i_run_profile == RUN_PROFILE_NORMAL) && i_normal_measurement_active && (state_current == ST_IDLE) && (active_precision_mode_o == PRECISION_9BIT) && (fine_window_active_o == 1'b0) && (i_recheck_busy == 1'b0)) || (i_run_profile == RUN_PROFILE_CHARACTERIZATION)); // NORMAL建立窗口而表征模式只安全消费，V5无效时禁止接纳新cross；peak_valley_config_valid链末端消费点；低幅度输入没有真实CROSS就不接纳进入15-bit请求，杜绝伪造fine窗口 @satisfies: G-FP-01-D01-04, PRC-02, PWC-06, PWC-21, PWC-40",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "89",
+    "ids": "AMI-54,BSL-40,D01-01b,PWI-08",
+    "file": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+    "line": "457",
+    "actual_tags": "ILM-10",
+    "state": "different_id_tag_candidate",
+    "source_text": "457: \t\t(state_current == ST_CONFIG) && flag_snapshot_valid; // 仅CONFIG状态可原子接纳合法快照；ILM-10 RUN期间state_current非ST_CONFIG，本条件结构性为假，任何mid-RUN重配置提交都被拒绝；配合522行active_config_o仅在合法COMMIT才替换，当前事务快照的输入源/光学模式/初始精度/MANUAL码在RUN全程保持不变，只有后续合法RUN才会采用新提交值 @satisfies: ILM-10",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "96",
+    "ids": "D03",
+    "file": "rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "line": "440",
+    "actual_tags": "LFA-10,OIB-01",
+    "state": "different_id_tag_candidate",
+    "source_text": "440: \tassign flag_switch_protocol_error_condition = flag_static_bias_input_source_invalid || flag_owner_commit_error || (i_normal_frame_active && i_calibration_frame_active) || (i_waveform_context_valid && !o_waveform_context_ready && !flag_waveform_context_ready_raw && ((i_macro_tick == 13'd0) || (i_macro_tick == 13'd160) || (i_calibration_local_tick == 10'd0))); // 组合连线切换协议错误的原始判定，供sticky和故障记录共用避免重复表达式；接管反压注入合法压低ready时(flag_waveform_context_ready_raw为真)不构成协议违规，交由Scheduler自身的非阻断launch-timeout诊断独立表态；本表达式是LFA-10(b)与OIB-01共同调查的唯一锚点,第4个OR项经`i_context_handover_stall_request`收窄后关闭OIB-01,LFA-10(b)证明四项皆结构性不可达而延期 @satisfies: LFA-10, OIB-01",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "111",
+    "ids": "G-FP-03",
+    "file": "rtl/ppg_precision_window_integration/ppg_precision_window_integration.v",
+    "line": "960-961",
+    "actual_tags": "K01",
+    "state": "different_id_tag_candidate",
+    "source_text": "960: \t\t.o_mode_fault_event(flag_precision_controller_fault_event), // 接住阻断故障新episode单拍，供PWI登记网转发961: \t\t.o_mode_fault_active(flag_precision_controller_fault_active), // 接住当前代际故障保持电平，直到discard或reset解除；precision controller→PWI私有flag,链路起点 @satisfies: K01",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "111",
+    "ids": "G-FP-03",
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "line": "2576-2583",
+    "actual_tags": "K01",
+    "state": "different_id_tag_candidate",
+    "source_text": "2576: \t\t.o_mode_fault_active(flag_precision_fault_active), // 当前RUN代际精度阻断故障保持电平，驱动cause 8'h04的lane-active；PWI输出→AMI私有flag,链路终段 @satisfies: K012577: \t\t.o_mode_fault_identity_valid(flag_precision_fault_identity_valid), // 精度阻断故障是否绑定真实事务身份2578: \t\t.o_mode_fault_frame_id(flag_precision_fault_frame_id), // 接住帧号结果，留给AMI分发器组装cause 8'h04记录2579: \t\t.o_mode_fault_sample_index(flag_precision_fault_sample_index), // 接住序号结果，留给AMI分发器组装cause 8'h04记录2580: \t\t.o_mode_fault_color_ir(flag_precision_fault_color_ir), // 精度阻断故障绑定事务颜色2581: \t\t.o_mode_fault_frame_type(flag_precision_fault_frame_type), // 精度阻断故障绑定事务类别2582: \t\t.o_mode_fault_precision(flag_precision_fault_precision), // 接住精度模式结果，留给AMI分发器组装cause 8'h04记录2583: \t\t.o_mode_fault_run_generation(flag_precision_fault_run_generation), // 接住RUN代际结果，留给AMI分发器组装cause 8'h04记录",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "114",
+    "ids": "G-FP-05",
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "line": "92",
+    "actual_tags": "K03",
+    "state": "different_id_tag_candidate",
+    "source_text": "92: \tparameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一产生、经ACTIVE wrapper与Top扇出的RUN代际字段宽度；父级声明并原样透传给PWI(2457行)/IDAC(2313行) @satisfies: K03",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "147",
+    "ids": "SID-10",
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "line": "908",
+    "actual_tags": "TOP-21",
+    "state": "different_id_tag_candidate",
+    "source_text": "908: \tassign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21",
+    "adjudication": "确认失效锚点；源908是TOP21生产门控，当前身份替换911带TOP22/P07/SID10；并入F003"
+  },
+  {
+    "alias_line": "148",
+    "ids": "SID-11",
+    "file": "rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v",
+    "line": "232-233",
+    "actual_tags": "ADCN-03",
+    "state": "different_id_tag_candidate",
+    "source_text": "232: \tassign flag_saturation_low = dec_rounded_value < -20'sd2048; // 检测负向超出校准残差可表示范围 @satisfies: ADCN-03233: \tassign flag_saturation_high = dec_rounded_value > 20'sd2047; // 检测正向超出校准残差可表示范围 @satisfies: ADCN-03",
+    "adjudication": "数值互斥锚点文字本身真，但SID11现行公开注入边界解除旧不可达理由；F050"
+  },
+  {
+    "alias_line": "163",
+    "ids": "LFA-06,LFA-10",
+    "file": "rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v",
+    "line": "107",
+    "actual_tags": "LFA-05,LFA-07,OIB-05",
+    "state": "different_id_tag_candidate",
+    "source_text": "107: \tassign flag_capture_accept = flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0); // 事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "273",
+    "ids": "ADCN-10",
+    "file": "rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+    "line": "440",
+    "actual_tags": "TRK-10",
+    "state": "different_id_tag_candidate",
+    "source_text": "440: \t\t\t($signed(i_track_calibrated_s1_value) > i_dcs_threshold_high)); // NORMAL残差高于共用DCS上界；TRK-10 跟踪比较仅使用本signed 12-bit校准Stage1残差,不存在Stage2/15-bit重建/DC恢复/正式输出的替代通路 @satisfies: TRK-10",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "455",
+    "ids": "LFA-08,P07,TOP-22",
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "line": "908",
+    "actual_tags": "TOP-21",
+    "state": "different_id_tag_candidate",
+    "source_text": "908: \tassign flag_test_inject_effective = (C_ENABLE_TEST_INJECTION != 32'd0) && i_test_inject_enable; // 生产构建固定旁路全部验证请求；默认参数0+生产enable 0双重旁路 @satisfies: TOP-21",
+    "adjudication": "确认失效锚点；源908是TOP21生产门控，当前身份替换911带TOP22/P07/SID10；并入F003"
+  },
+  {
+    "alias_line": "458",
+    "ids": "N02",
+    "file": "rtl/ppg_precision_window_integration/ppg_precision_window_integration.v",
+    "line": "443",
+    "actual_tags": "K04",
+    "state": "different_id_tag_candidate",
+    "source_text": "443: \tassign flag_detection_discard_apply = i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation); // AMI广播的代际清空事件命中当前代际时无条件生效；仅generation-scoped discard,复位路径独立不经此线 @satisfies: K04",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "462",
+    "ids": "P01",
+    "file": "rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v",
+    "line": "194-309",
+    "actual_tags": "ADCN-10,P13",
+    "state": "different_id_tag_candidate",
+    "source_text": "194: \tassign flag_buffer_occupied = measurement_valid_o || track_valid_o; // 汇总两个独立分支所有权195: \tassign flag_measurement_transfer = measurement_valid_o && i_measurement_ready; // 定义测量分支唯一消费事件196: \tassign flag_track_transfer = track_valid_o && i_track_ready; // 定义跟踪分支唯一消费事件197: \tassign flag_transaction_releasing = flag_buffer_occupied &&198: \t\t((measurement_valid_o == 1'b0) || flag_measurement_transfer) &&199: \t\t((track_valid_o == 1'b0) || flag_track_transfer); // 判断旧事务在当前沿后不再被任何分支持有200: \tassign flag_input_transfer = i_normal_valid && o_normal_ready; // 定义新事务进入单元素缓存的唯一条件201: \tassign flag_discard_apply = i_datapath_discard_event && (run_generation_o == i_run_generation); // AMI清空事件命中当前持有代际时无条件清除两个分支202: 203: \t// 全部字段采用一次拼接写入，禁止数值、物理码和元数据跨事务混合204: \tassign payload_input = {205: \t\ti_calibrated_s1_value,206: \t\ti_calibration_applied,207: \t\ti_saturation_low,208: \t\ti_saturation_high,209: \t\ti_config_epoch,210: \t\ti_coef_epoch,211: \t\ti_detect_code,212: \t\ti_stage1_raw,213: \t\ti_stage1_code_ext,214: \t\ti_stage2_raw,215: \t\ti_precision_mode,216: \t\ti_frame_id,217: \t\ti_sample_index,218: \t\ti_color_ir,219: \t\ti_frame_type,220: \t\ti_amb_code_snapshot,221: \t\ti_dc_code_snapshot,222: \t\ti_amb_code_epoch,223: \t\ti_dc_code_epoch224: \t};                                      // 形成131-bit默认参数下的原子NORMAL载荷225: 226: \t//-------------输出信号连线-------------//227: \t// 输入ready允许空缓存装入，也允许旧事务释放与下一笔事务在同一上升沿替换228: \tassign o_normal_ready = i_rstn && ((flag_buffer_occupied == 1'b0) || flag_transaction_releasing); // 返回router的弹性反压许可229: \tassign o_measurement_valid = measurement_valid_o; // 桥接测量分支pending状态230: \tassign o_track_valid = track_valid_o;   // 桥接IDAC跟踪分支pending状态231: 232: \t// measurement分支逐位解包全部输入字段，直接匹配overlap corrector现有NORMAL接口233: \tassign o_measurement_calibrated_s1_value = payload_o[C_CALIBRATED_S1_VALUE_LSB +: 12]; // 解包正式Stage1残差234: \tassign o_measurement_calibration_applied = payload_o[C_CALIBRATION_APPLIED_LSB]; // 解包测量链校准资格235: \tassign o_measurement_saturation_low = payload_o[C_SATURATION_LOW_LSB]; // 解包负向端点诊断236: \tassign o_measurement_saturation_high = payload_o[C_SATURATION_HIGH_LSB]; // 解包正向端点诊断237: \tassign o_measurement_config_epoch = payload_o[C_CONFIG_EPOCH_LSB +: C_CONFIG_EPOCH_WIDTH]; // 解包ACTIVE版本标签238: \tassign o_measurement_coef_epoch = payload_o[C_COEF_EPOCH_LSB +: C_COEF_EPOCH_WIDTH]; // 解包Stage1系数版本239: \tassign o_measurement_detect_code = payload_o[C_DETECT_CODE_LSB +: 9]; // 解包固定9-bit黄金码240: \tassign o_measurement_stage1_raw = payload_o[C_STAGE1_RAW_LSB +: 10]; // 解包Stage1物理判决位241: \tassign o_measurement_stage1_code_ext = payload_o[C_STAGE1_CODE_EXT_LSB +: 11]; // 解包带符号D1_EXT242: \tassign o_measurement_stage2_raw = payload_o[C_STAGE2_RAW_LSB +: 10]; // 解包仅15-bit路径解释的尾级物理判决位243: \tassign o_measurement_precision_mode = payload_o[C_PRECISION_MODE_LSB]; // 解包事务精度快照244: \tassign o_measurement_frame_id = payload_o[C_FRAME_ID_LSB +: C_FRAME_ID_WIDTH]; // 解包R/IR共享帧号245: \tassign o_measurement_sample_index = payload_o[C_SAMPLE_INDEX_LSB +: C_SAMPLE_INDEX_WIDTH]; // 解包全局样本号246: \tassign o_measurement_color_ir = payload_o[C_COLOR_IR_LSB]; // 解包红光或红外身份247: \tassign o_measurement_frame_type = payload_o[C_FRAME_TYPE_LSB +: 2]; // 解包NORMAL类别编码248: \tassign o_measurement_amb_code_snapshot = payload_o[C_AMB_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 解包AMB实际码249: \tassign o_measurement_dc_code_snapshot = payload_o[C_DC_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 解包当前颜色DC码250: \tassign o_measurement_amb_code_epoch = payload_o[C_AMB_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 解包AMB版本251: \tassign o_measurement_dc_code_epoch = payload_o[C_DC_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 解包所选颜色DC控制状态的提交版本252: \tassign o_measurement_run_generation = measurement_valid_o ? run_generation_o : {C_RUN_GENERATION_WIDTH{1'b0}}; // 无pending时强制归零253: 254: \t// tracking分支只暴露IDAC慢速跟踪资格、比较值和事务身份，不传递Stage2或重构结果255: \tassign o_track_calibrated_s1_value = payload_o[C_CALIBRATED_S1_VALUE_LSB +: 12]; // 提供IDAC主比较残差，与measurement分支233行共用同一payload_o切片，结构上不存在Stage2/重建/正式输出替代通路 @satisfies: ADCN-10256: \tassign o_track_calibration_applied = payload_o[C_CALIBRATION_APPLIED_LSB]; // 提供正式跟踪资格257: \tassign o_track_saturation_low = payload_o[C_SATURATION_LOW_LSB]; // 提供明确低侧越界证据258: \tassign o_track_saturation_high = payload_o[C_SATURATION_HIGH_LSB]; // 提供明确高侧越界证据259: \tassign o_track_config_epoch = payload_o[C_CONFIG_EPOCH_LSB +: C_CONFIG_EPOCH_WIDTH]; // 提供ACTIVE一致性版本260: \tassign o_track_coef_epoch = payload_o[C_COEF_EPOCH_LSB +: C_COEF_EPOCH_WIDTH]; // 提供Stage1校准诊断版本261: \tassign o_track_precision_mode = payload_o[C_PRECISION_MODE_LSB]; // 提供精度追踪属性262: \tassign o_track_frame_id = payload_o[C_FRAME_ID_LSB +: C_FRAME_ID_WIDTH]; // 提供PPG帧身份263: \tassign o_track_sample_index = payload_o[C_SAMPLE_INDEX_LSB +: C_SAMPLE_INDEX_WIDTH]; // 提供事务顺序身份264: \tassign o_track_color_ir = payload_o[C_COLOR_IR_LSB]; // 选择红光或红外DC状态265: \tassign o_track_frame_type = payload_o[C_FRAME_TYPE_LSB +: 2]; // 验证跟踪入口只接收NORMAL266: \tassign o_track_amb_code_snapshot = payload_o[C_AMB_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 提供AMB码一致性快照267: \tassign o_track_dc_code_snapshot = payload_o[C_DC_CODE_SNAPSHOT_LSB +: C_IDAC_CODE_WIDTH]; // 提供选中颜色DC快照268: \tassign o_track_amb_code_epoch = payload_o[C_AMB_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 提供AMB提交版本269: \tassign o_track_dc_code_epoch = payload_o[C_DC_CODE_EPOCH_LSB +: C_CODE_EPOCH_WIDTH]; // 提供拒绝旧样本的DC版本270: \tassign o_tracking_run_generation = track_valid_o ? run_generation_o : {C_RUN_GENERATION_WIDTH{1'b0}}; // 跟踪分支释放后不得继续暴露旧代际271: \tassign o_local_empty = !measurement_valid_o && !track_valid_o; // 两个分支均已释放时报告本地排空272: 273: \t//-----------输出信号处理区域-----------//274: \t// 唯一输入握手沿原子锁存全部字段，两个消费者反压时禁止重新观察上游组合总线275: \talways@(posedge i_clk or negedge i_rstn)begin276: \t\tif(i_rstn == 1'b0)begin277: \t\t\tpayload_o <= {C_PAYLOAD_WIDTH{1'b0}}; // 复位清除可能被旧valid解释的历史载荷278: \t\tend else if(flag_input_transfer == 1'b1)begin279: \t\t\tpayload_o <= payload_input;     // 装入下一笔完整NORMAL事务280: \t\tend else begin281: \t\t\tpayload_o <= payload_o;         // 无输入接纳时逐位保持当前缓存282: \t\tend283: \tend284: 285: \t// 新输入优先建立measurement所有权，否则仅在该分支握手或代际清空时清除pending，不受tracking分支释放与否影响 @satisfies: P13286: \talways@(posedge i_clk or negedge i_rstn)begin287: \t\tif(i_rstn == 1'b0)begin288: \t\t\tmeasurement_valid_o <= 1'b0;    // 复位禁止测量分支产生伪事务289: \t\tend else if(flag_input_transfer == 1'b1)begin290: \t\t\tmeasurement_valid_o <= 1'b1;    // 每笔新事务都必须由测量链消费一次291: \t\tend else if(flag_measurement_transfer == 1'b1 || flag_discard_apply == 1'b1)begin292: \t\t\tmeasurement_valid_o <= 1'b0;    // 当前测量副本完成或被AMI代际清空后撤销该分支valid293: \t\tend else begin294: \t\t\tmeasurement_valid_o <= measurement_valid_o; // 反压期间保持测量所有权295: \t\tend296: \tend297: 298: \t// 新输入同步建立tracking所有权，已消费的旧副本不会因另一分支等待而再次出现，不受measurement分支释放与否影响 @satisfies: P13299: \talways@(posedge i_clk or negedge i_rstn)begin300: \t\tif(i_rstn == 1'b0)begin301: \t\t\ttrack_valid_o <= 1'b0;          // 复位禁止IDAC入口观察到虚假样本302: \t\tend else if(flag_input_transfer == 1'b1)begin303: \t\t\ttrack_valid_o <= 1'b1;          // 每笔新事务都向跟踪链提供一次副本304: \t\tend else if(flag_track_transfer == 1'b1 || flag_discard_apply == 1'b1)begin305: \t\t\ttrack_valid_o <= 1'b0;          // IDAC握手完成或被AMI代际清空后清除独立tracking pending306: \t\tend else begin307: \t\t\ttrack_valid_o <= track_valid_o; // IDAC有限反压期间维持valid不变308: \t\tend309: \tend",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  },
+  {
+    "alias_line": "464",
+    "ids": "P03",
+    "file": "rtl/ppg_control_top/ppg_control_top.v",
+    "line": "350-357",
+    "actual_tags": "G-FP-01",
+    "state": "different_id_tag_candidate",
+    "source_text": "350: \twire supervisor_system_stop_request_event_o;                         // 内部转发：supervisor原始STOP请求事件，先入合并再消失351: 352: \t// owner-abort合并单一目标寄存器：外部abort与supervisor abort在此汇合成唯一扇出353: \talways @(posedge i_clk or negedge i_rstn) begin354: \t\tif(!i_rstn) begin355: \t\t\tflag_owner_abort_event <= 1'b0;                              // 复位期间owner-abort合并结果同步归零356: \t\tend else begin357: \t\t\tflag_owner_abort_event <= i_control_abort_event || supervisor_system_abort_event_o; // 外部abort与supervisor abort唯一合并；G-FP-01端口台账代表行(i_control_abort_event登记) @satisfies: G-FP-01",
+    "adjudication": "共享实现/静态门禁代表锚点；实际tag为相关交叉验收，源行机制与本表描述已跨文件核对，不自动报漏实现或新错误"
+  }
+]

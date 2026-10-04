@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_pulse_cdc_sync",
+    "parameter_count": 0,
+    "port_count": 6
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_source_clk",
+      "i_dest_clk"
+    ],
+    "reset_signals": [
+      "i_source_rstn",
+      "i_dest_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_source_pulse",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dest_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_dest_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "o_dest_pulse",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "flag_source_toggle",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_dest_sync_meta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_dest_sync_stable",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_dest_sync_prev",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_source_clk or negedge i_source_rstn",
+      "line_range": [
+        73,
+        84
+      ],
+      "assigned_signals": [
+        "flag_source_toggle"
+      ],
+      "referenced_signals": [
+        "i_source_clk",
+        "i_source_rstn",
+        "b0",
+        "i_source_pulse",
+        "b1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_dest_clk or negedge i_dest_rstn",
+      "line_range": [
+        84,
+        93
+      ],
+      "assigned_signals": [
+        "flag_dest_sync_meta"
+      ],
+      "referenced_signals": [
+        "i_dest_clk",
+        "i_dest_rstn",
+        "b0",
+        "flag_source_toggle"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_dest_clk or negedge i_dest_rstn",
+      "line_range": [
+        93,
+        102
+      ],
+      "assigned_signals": [
+        "flag_dest_sync_stable"
+      ],
+      "referenced_signals": [
+        "i_dest_clk",
+        "i_dest_rstn",
+        "b0",
+        "flag_dest_sync_meta"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_dest_clk or negedge i_dest_rstn",
+      "line_range": [
+        102,
+        110
+      ],
+      "assigned_signals": [
+        "flag_dest_sync_prev"
+      ],
+      "referenced_signals": [
+        "i_dest_clk",
+        "i_dest_rstn",
+        "b0",
+        "flag_dest_sync_stable"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_pulse_cdc_sync reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_source_rstn",
+        "i_dest_rstn",
+        "o_dest_pulse"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "description": "sequential logic covering flag_source_toggle.",
+      "signals": [
+        "flag_source_toggle"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering flag_dest_sync_meta.",
+      "signals": [
+        "flag_dest_sync_meta"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering flag_dest_sync_stable.",
+      "signals": [
+        "flag_dest_sync_stable"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering flag_dest_sync_prev.",
+      "signals": [
+        "flag_dest_sync_prev"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_pulse_cdc_sync reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_source_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "i_dest_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dest_pulse",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_dest_pulse",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_source_toggle",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_dest_sync_meta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_dest_sync_stable",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_dest_sync_prev",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_source_rstn",
+        "i_dest_rstn",
+        "o_dest_pulse"
+      ],
+      "description": "Verify `ppg_pulse_cdc_sync` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_source_rstn",
+        "i_dest_rstn",
+        "o_dest_pulse"
+      ],
+      "description": "ppg_pulse_cdc_sync reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        73,
+        84
+      ],
+      "boundary_signals": [
+        "flag_source_toggle",
+        "i_source_clk",
+        "i_source_pulse",
+        "i_source_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        84,
+        93
+      ],
+      "boundary_signals": [
+        "flag_dest_sync_meta",
+        "flag_source_toggle",
+        "i_dest_clk",
+        "i_dest_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        93,
+        102
+      ],
+      "boundary_signals": [
+        "flag_dest_sync_meta",
+        "flag_dest_sync_stable",
+        "i_dest_clk",
+        "i_dest_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        102,
+        110
+      ],
+      "boundary_signals": [
+        "flag_dest_sync_prev",
+        "flag_dest_sync_stable",
+        "i_dest_clk",
+        "i_dest_rstn"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

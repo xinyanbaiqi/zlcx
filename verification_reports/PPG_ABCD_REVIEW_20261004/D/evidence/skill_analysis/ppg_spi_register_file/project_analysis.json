@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_spi_register_file",
+  "top_candidates": [
+    "ppg_spi_register_file"
+  ],
+  "modules": [
+    {
+      "name": "ppg_spi_register_file",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_spi_register_file\\ppg_spi_register_file.v",
+      "port_count": 84
+    }
+  ],
+  "instantiation_edges": []
+}

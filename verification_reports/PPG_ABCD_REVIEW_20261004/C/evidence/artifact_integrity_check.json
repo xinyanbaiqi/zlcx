@@ -1,0 +1,154 @@
+{
+  "commit": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "checked_at_utc": "2026-10-04T06:53:40.635Z",
+  "owned_files": 44,
+  "coverage_rows": 170,
+  "coverage_status_counts": {
+    "完成": 140,
+    "部分": 30
+  },
+  "coverage_status_vocabulary_ok": true,
+  "coverage_owned_path_set_ok": true,
+  "semantic_rows_complete": true,
+  "findings_count": 9,
+  "report_first_line_ok": true,
+  "all_source_blobs_unchanged": true,
+  "all_rtl_copies_identical": true,
+  "actual_comment_scanned_files": 12,
+  "id_rows": 355,
+  "id_status_counts": {
+    "完成": 255,
+    "部分": 100
+  },
+  "runtime_cases": [
+    {
+      "file": "results.json",
+      "name": "baseline_original",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results.json",
+      "name": "baseline_round_mutant",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results.json",
+      "name": "reconstructor_original",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results.json",
+      "name": "reconstructor_round_mutant",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results.json",
+      "name": "reconstructor_legacy_mutant",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results.json",
+      "name": "peak_return_hold",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results_peak_control.json",
+      "name": "peak_return_hold_with_protocol_check",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results_peak_control.json",
+      "name": "peak_return_guard_countercontrol",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_idac.json",
+      "name": "idac_midpoints_original",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_idac.json",
+      "name": "idac_midpoints_sum8_mutant",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results_idac.json",
+      "name": "idac_legacy_sum8_mutant",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_jnt.json",
+      "name": "jnt_count54_original",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_jnt.json",
+      "name": "jnt_count51_original",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    },
+    {
+      "file": "results_jnt.json",
+      "name": "jnt_count51_error_countercontrol",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_dc.json",
+      "name": "dc_public_saturation_original",
+      "compile_rc": 0,
+      "run_rc": 0,
+      "expected_run_rc": 0,
+      "matched": true
+    },
+    {
+      "file": "results_dc.json",
+      "name": "dc_public_saturation_wrong_expected",
+      "compile_rc": 0,
+      "run_rc": 1,
+      "expected_run_rc": 1,
+      "matched": true
+    }
+  ],
+  "all_expected_runtime_results_match": true
+}

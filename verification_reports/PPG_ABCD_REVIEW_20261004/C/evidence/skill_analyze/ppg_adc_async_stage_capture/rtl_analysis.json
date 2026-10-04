@@ -1,0 +1,871 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_adc_async_stage_capture",
+    "parameter_count": 2,
+    "port_count": 13
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk",
+      "i_clk_stage1_dout_low_async",
+      "i_clk_stage2_dout_low_async"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_adc_transaction_start",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_precision_mode_committed",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_dout_stage1_low",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_clk_stage1_dout_low_async",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_dout_stage2_low",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_clk_stage2_dout_low_async",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_capture_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_capture_stage1_raw",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_capture_stage2_raw",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_capture_precision_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_capture_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "reg_capture_mode",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_stage1_done_meta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_stage1_done_sync",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_stage2_done_meta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_stage2_done_sync",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_capture_pending",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "capture_stage1_raw_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "capture_stage2_raw_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "capture_precision_mode_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "capture_valid_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        118,
+        129
+      ],
+      "assigned_signals": [
+        "capture_stage1_raw_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RAW_WIDTH",
+        "flag_capture_accept",
+        "b1",
+        "i_dout_stage1_low"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        129,
+        144
+      ],
+      "assigned_signals": [
+        "capture_stage2_raw_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RAW_WIDTH",
+        "flag_capture_accept",
+        "b1",
+        "reg_capture_mode",
+        "i_dout_stage2_low"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        144,
+        155
+      ],
+      "assigned_signals": [
+        "capture_precision_mode_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_accept",
+        "b1",
+        "reg_capture_mode"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        155,
+        169
+      ],
+      "assigned_signals": [
+        "capture_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_accept",
+        "b1",
+        "flag_output_transfer"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        169,
+        180
+      ],
+      "assigned_signals": [
+        "reg_capture_mode"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "i_precision_mode_committed"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        180,
+        191
+      ],
+      "assigned_signals": [
+        "flag_stage1_done_meta"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "i_clk_stage1_dout_low_async"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        191,
+        202
+      ],
+      "assigned_signals": [
+        "flag_stage1_done_sync"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "flag_stage1_done_meta"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        202,
+        213
+      ],
+      "assigned_signals": [
+        "flag_stage2_done_meta"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "i_clk_stage2_dout_low_async"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        213,
+        224
+      ],
+      "assigned_signals": [
+        "flag_stage2_done_sync"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "flag_stage2_done_meta"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_10",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        224,
+        236
+      ],
+      "assigned_signals": [
+        "flag_capture_pending"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_transaction_start",
+        "b1",
+        "flag_capture_accept"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_adc_async_stage_capture reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_capture_stage1_raw",
+        "o_capture_stage2_raw",
+        "o_capture_precision_mode",
+        "o_capture_valid"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "description": "sequential logic covering capture_stage1_raw_o.",
+      "signals": [
+        "capture_stage1_raw_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering capture_stage2_raw_o.",
+      "signals": [
+        "capture_stage2_raw_o"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering capture_precision_mode_o.",
+      "signals": [
+        "capture_precision_mode_o"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "output update block 4",
+      "description": "sequential logic covering capture_valid_o.",
+      "signals": [
+        "capture_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering reg_capture_mode.",
+      "signals": [
+        "reg_capture_mode"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering flag_stage1_done_meta.",
+      "signals": [
+        "flag_stage1_done_meta"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "description": "sequential logic covering flag_stage1_done_sync.",
+      "signals": [
+        "flag_stage1_done_sync"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "description": "sequential logic covering flag_stage2_done_meta.",
+      "signals": [
+        "flag_stage2_done_meta"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "description": "sequential logic covering flag_stage2_done_sync.",
+      "signals": [
+        "flag_stage2_done_sync"
+      ]
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "description": "sequential logic covering flag_capture_pending.",
+      "signals": [
+        "flag_capture_pending"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_adc_async_stage_capture reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_capture_stage1_raw",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_capture_stage2_raw",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_capture_precision_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_capture_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_capture_stage1_raw",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_capture_stage2_raw",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_capture_precision_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_capture_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "capture_stage1_raw_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "capture_stage2_raw_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "capture_precision_mode_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "output update block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "capture_valid_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_capture_mode",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_stage1_done_meta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_stage1_done_sync",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_stage2_done_meta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_stage2_done_sync",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_capture_pending",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_capture_stage1_raw",
+        "o_capture_stage2_raw",
+        "o_capture_precision_mode",
+        "o_capture_valid"
+      ],
+      "description": "Verify `ppg_adc_async_stage_capture` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_capture_stage1_raw",
+        "o_capture_stage2_raw",
+        "o_capture_precision_mode",
+        "o_capture_valid"
+      ],
+      "description": "ppg_adc_async_stage_capture reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        118,
+        129
+      ],
+      "boundary_signals": [
+        "capture_stage1_raw_o",
+        "i_clk",
+        "i_dout_stage1_low",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        129,
+        144
+      ],
+      "boundary_signals": [
+        "capture_stage2_raw_o",
+        "i_clk",
+        "i_dout_stage2_low",
+        "i_rstn",
+        "reg_capture_mode"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        144,
+        155
+      ],
+      "boundary_signals": [
+        "capture_precision_mode_o",
+        "i_clk",
+        "i_rstn",
+        "reg_capture_mode"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        155,
+        169
+      ],
+      "boundary_signals": [
+        "capture_valid_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        169,
+        180
+      ],
+      "boundary_signals": [
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_precision_mode_committed",
+        "i_rstn",
+        "reg_capture_mode"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        180,
+        191
+      ],
+      "boundary_signals": [
+        "flag_stage1_done_meta",
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_clk_stage1_dout_low_async",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        191,
+        202
+      ],
+      "boundary_signals": [
+        "flag_stage1_done_meta",
+        "flag_stage1_done_sync",
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        202,
+        213
+      ],
+      "boundary_signals": [
+        "flag_stage2_done_meta",
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_clk_stage2_dout_low_async",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        213,
+        224
+      ],
+      "boundary_signals": [
+        "flag_stage2_done_meta",
+        "flag_stage2_done_sync",
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC010",
+      "module_name": "u_block_10",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        224,
+        236
+      ],
+      "boundary_signals": [
+        "flag_capture_pending",
+        "i_adc_transaction_start",
+        "i_clk",
+        "i_rstn"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_adc_async_stage_capture.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

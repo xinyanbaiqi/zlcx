@@ -1,0 +1,2722 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_precision_window_integration",
+    "parameter_count": 54,
+    "port_count": 152
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_run_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_start_ack_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_diag_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_recovery_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_amb_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_detection_datapath_empty",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "i_active_config_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_run_profile",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_initial_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_normal_measurement_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_fixed_slope_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_alpha_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_beta_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_timing_adjust_ratio_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_min_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_max_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_baseline_delta_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_cross_hysteresis_q16",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_lead_min_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_lead_max_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_cross_confirm_count",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_no_cross_limit",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_confirm_count",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_confirm_count",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_direction_deadband",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_min_peak_valley_amplitude",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_min_peak_to_valley_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_min_peak_to_peak_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_max_fine_window_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_max_reacquire_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_valley_config_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_idac_mode",
+      "direction": "input",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "i_amb_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_dcs_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_amb_recheck_interval_frames",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_normal_result_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_normal_result_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_coarse_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_coarse_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_coarse_recovery_calibrated",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_stage1_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_stage1_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_coarse_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_coarse_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_frame_safe_boundary",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_safe_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_precision_takeover_safe",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_analog_safe",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_normal_fork_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_startup_search_complete",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_normal_frame_complete_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_calibration_frame_complete_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_sample_request",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_amb_sequence_done",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_amb_sequence_failed",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_revalidate_request",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_dcs_sample_request",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_dcs_sample_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_revalidate_done",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_dcs_revalidate_failed",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_amb_sample_accepted_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_sample_accepted_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_sequence_start",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_revalidate_accept",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_calibration_sample_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_calibration_sample_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_calibration_frame_type",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "o_calibration_color_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_calibration_precision_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_calibration_frame_start",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_calibration_stage",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "o_active_precision_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_fine_window_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_fine_window_start_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_fine_window_start_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_precision_15_to_9_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_precision_15_to_9_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_reacquire_request_event",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_switch_hold_new_transaction",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_mode_fault_event",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_active",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_identity_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_mode_fault_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_sample_index",
+      "direction": "output",
+      "width": null,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_color_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_frame_type",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_mode_fault_run_generation",
+      "direction": "output",
+      "width": null,
+      "role": "control"
+    },
+    {
+      "name": "o_normal_frame_count",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_recheck_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_recheck_accept",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_recheck_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_normal_output_inhibit",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_recheck_sequence_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_recheck_sequence_failed",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_fir_history_full_r",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_fir_history_full_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_fir_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_detection_fork_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_detector_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_scheduler_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_peak_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_valley_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_return_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_baseline_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_reacquire_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_detector_fine_window_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_switch_pending",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_switch_target_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_current_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_baseline_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_fine_window_timeout_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_reacquire_timeout_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_peak_valley_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_switch_timeout_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_precision_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_test_inject_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_test_calibration_loss_inject_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_test_calibration_loss_inject_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "detection_datapath_empty_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        518,
+        528
+      ],
+      "assigned_signals": [
+        "detection_datapath_empty_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "detection_fork_idle_o",
+        "fir_local_empty_o",
+        "baseline_local_empty_o",
+        "peak_valley_local_empty_o",
+        "precision_local_empty_o"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        528,
+        539
+      ],
+      "assigned_signals": [
+        "reg_fork_payload"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "FORK_PAYLOAD_WIDTH",
+        "flag_fork_clear",
+        "b1",
+        "flag_fir_output_transfer",
+        "enc_fir_payload"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        539,
+        552
+      ],
+      "assigned_signals": [
+        "flag_baseline_pending"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_fork_clear",
+        "b1",
+        "flag_fir_output_transfer",
+        "flag_baseline_transfer"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        552,
+        565
+      ],
+      "assigned_signals": [
+        "flag_peak_valley_pending"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_fork_clear",
+        "b1",
+        "flag_fir_output_transfer",
+        "flag_peak_valley_transfer"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        565,
+        576
+      ],
+      "assigned_signals": [
+        "flag_recheck_detector_busy"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_detection_discard_apply",
+        "flag_recheck_done_event",
+        "i_run_enable",
+        "amb_recheck_accept_o"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        576,
+        1032
+      ],
+      "assigned_signals": [
+        "flag_fir_idle_to_scheduler"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_detection_discard_apply",
+        "precision_15_to_9_event_o",
+        "amb_recheck_accept_o",
+        "i_run_enable",
+        "fir_idle_o",
+        "detection_fork_idle_o",
+        "ppg_coarse_detection_fir",
+        "C_FRAME_ID_WIDTH",
+        "C_SAMPLE_INDEX_WIDTH",
+        "C_IDAC_CODE_WIDTH",
+        "C_CODE_EPOCH_WIDTH",
+        "C_CONFIG_EPOCH_WIDTH",
+        "C_COEF_EPOCH_WIDTH",
+        "C_DC_RECOVERY_EPOCH_WIDTH",
+        "C_RUN_GENERATION_WIDTH",
+        "C_ENABLE_TEST_INJECTION",
+        "ppg_coarse_detection_fir_Inst",
+        "i_detection_discard_event",
+        "i_detection_discard_reason",
+        "STOP",
+        "abort",
+        "i_detection_discard_identity_valid",
+        "only",
+        "i_detection_discard_sample_valid",
+        "i_detection_discard_frame_id",
+        "i_detection_discard_sample_index",
+        "i_detection_discard_color_ir",
+        "i_detection_discard_frame_type",
+        "i_detection_discard_precision",
+        "i_detection_discard_config_epoch",
+        "i_detection_discard_coef_epoch",
+        "i_detection_discard_dc_recovery_epoch",
+        "i_detection_discard_amb_code_epoch",
+        "i_detection_discard_dc_code_epoch",
+        "i_detection_discard_run_generation",
+        "i_run_generation",
+        "o_local_empty",
+        "fir_local_empty_o",
+        "i_recheck_accept_event",
+        "i_recheck_busy",
+        "amb_recheck_busy_o",
+        "i_result_valid",
+        "i_normal_result_valid",
+        "o_result_ready",
+        "normal_result_ready_o",
+        "i_sample_valid",
+        "ready",
+        "i_coarse_ppg_value",
+        "i_coarse_valid",
+        "i_coarse_recovery_calibrated",
+        "i_stage1_saturation_low",
+        "i_stage1_saturation_high",
+        "i_coarse_saturation_low",
+        "i_coarse_saturation_high",
+        "i_config_epoch",
+        "i_coef_epoch",
+        "i_dc_recovery_coef_epoch",
+        "i_precision_mode",
+        "i_frame_id",
+        "i_sample_index",
+        "i_color_ir",
+        "i_frame_type",
+        "i_amb_code_snapshot",
+        "i_dc_code_snapshot",
+        "i_amb_code_epoch",
+        "i_dc_code_epoch",
+        "i_test_inject_enable",
+        "i_test_calibration_loss_inject_valid",
+        "o_test_calibration_loss_inject_ready",
+        "i_result_ready",
+        "flag_fir_result_ready",
+        "o_result_valid",
+        "flag_fir_result_valid",
+        "o_filtered_ppg_value",
+        "dec_fir_filtered_ppg_value",
+        "o_detection_qualified",
+        "flag_fir_detection_qualified",
+        "o_window_saturation_low",
+        "flag_fir_window_saturation_low",
+        "o_window_saturation_high",
+        "flag_fir_window_saturation_high",
+        "o_fir_saturation_low",
+        "flag_fir_saturation_low",
+        "o_fir_saturation_high",
+        "flag_fir_saturation_high",
+        "o_history_full_r",
+        "fir_history_full_r_o",
+        "o_history_full_ir",
+        "fir_history_full_ir_o",
+        "o_fir_idle",
+        "o_config_epoch",
+        "dec_fir_config_epoch",
+        "o_coef_epoch",
+        "dec_fir_coef_epoch",
+        "o_dc_recovery_coef_epoch",
+        "dec_fir_dc_recovery_coef_epoch",
+        "o_precision_mode",
+        "flag_fir_precision_mode",
+        "o_frame_id",
+        "dec_fir_frame_id",
+        "o_sample_index",
+        "dec_fir_sample_index",
+        "o_color_ir",
+        "flag_fir_color_ir",
+        "o_frame_type",
+        "dec_fir_frame_type",
+        "o_amb_code_snapshot",
+        "dec_fir_amb_code_snapshot",
+        "o_dc_code_snapshot",
+        "dec_fir_dc_code_snapshot",
+        "o_amb_code_epoch",
+        "dec_fir_amb_code_epoch",
+        "o_dc_code_epoch",
+        "dec_fir_dc_code_epoch",
+        "ppg_dynamic_baseline_cross_detector",
+        "C_SLOPE_WIDTH",
+        "C_BASELINE_WIDTH",
+        "C_RATIO_WIDTH",
+        "ppg_dynamic_baseline_cross_detector_Inst",
+        "baseline_local_empty_o",
+        "i_fine_window_active",
+        "fine_window_active_o",
+        "i_reacquire_request_event",
+        "reacquire_request_event_o",
+        "flag_recheck_detector_busy",
+        "i_recheck_done_event",
+        "flag_recheck_done_event",
+        "i_recheck_success",
+        "flag_recheck_success",
+        "flag_baseline_pending",
+        "flag_baseline_result_ready",
+        "i_filtered_ppg_value",
+        "dec_fork_filtered_ppg_value",
+        "i_detection_qualified",
+        "flag_fork_detection_qualified",
+        "i_window_saturation_low",
+        "flag_fork_window_saturation_low",
+        "i_window_saturation_high",
+        "flag_fork_window_saturation_high",
+        "i_fir_saturation_low",
+        "flag_fork_fir_saturation_low",
+        "i_fir_saturation_high",
+        "flag_fork_fir_saturation_high",
+        "dec_fork_config_epoch",
+        "dec_fork_coef_epoch",
+        "dec_fork_dc_recovery_coef_epoch",
+        "flag_fork_precision_mode",
+        "dec_fork_frame_id",
+        "dec_fork_sample_index",
+        "flag_fork_color_ir",
+        "dec_fork_frame_type",
+        "i_peak_valid",
+        "peak_pending_o",
+        "o_peak_ready",
+        "flag_peak_ready",
+        "i_peak_value",
+        "dec_peak_value",
+        "i_peak_frame_id",
+        "dec_peak_frame_id",
+        "i_peak_sample_index",
+        "dec_peak_sample_index",
+        "i_peak_config_epoch",
+        "dec_peak_config_epoch",
+        "i_peak_coef_epoch",
+        "dec_peak_coef_epoch",
+        "i_peak_dc_recovery_coef_epoch",
+        "dec_peak_dc_recovery_coef_epoch",
+        "i_valley_valid",
+        "valley_pending_o",
+        "o_valley_ready",
+        "flag_valley_ready",
+        "i_valley_value",
+        "dec_valley_value",
+        "i_valley_frame_id",
+        "dec_valley_frame_id",
+        "i_valley_sample_index",
+        "dec_valley_sample_index",
+        "i_valley_config_epoch",
+        "dec_valley_config_epoch",
+        "i_valley_coef_epoch",
+        "dec_valley_coef_epoch",
+        "i_valley_dc_recovery_coef_epoch",
+        "dec_valley_dc_recovery_coef_epoch",
+        "i_slope_mode",
+        "i_fixed_slope_q16",
+        "i_alpha_q15",
+        "i_beta_q15",
+        "i_timing_adjust_ratio_q15",
+        "i_slope_min_q16",
+        "i_slope_max_q16",
+        "i_baseline_delta_q16",
+        "i_cross_hysteresis_q16",
+        "i_lead_min_frames",
+        "i_lead_max_frames",
+        "i_cross_confirm_count",
+        "i_no_cross_limit",
+        "i_peak_valley_config_valid",
+        "i_cross_ready",
+        "flag_cross_ready",
+        "o_cross_valid",
+        "cross_pending_o",
+        "o_cross_frame_id",
+        "dec_cross_frame_id",
+        "o_cross_sample_index",
+        "dec_cross_sample_index",
+        "o_cross_time_unknown",
+        "flag_cross_time_unknown",
+        "o_cross_config_epoch",
+        "dec_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "dec_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "dec_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "baseline_valid_o",
+        "o_adaptive_slope_valid",
+        "flag_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "slope_current_q16_o",
+        "o_slope_base_q16",
+        "dec_slope_base_q16",
+        "o_last_lead_frames",
+        "dec_last_lead_frames",
+        "o_no_cross_count",
+        "cnt_no_cross",
+        "o_reacquire_active",
+        "reacquire_active_o",
+        "o_slope_saturation_min",
+        "flag_slope_saturation_min",
+        "o_slope_saturation_max",
+        "flag_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "flag_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "flag_baseline_saturation_high",
+        "o_protocol_error_sticky",
+        "baseline_protocol_error_sticky_o",
+        "ppg_peak_valley_window_detector",
+        "C_DATA_WIDTH",
+        "C_CONFIRM_COUNT_WIDTH",
+        "C_INTERVAL_WIDTH",
+        "C_FIR_GROUP_DELAY_SAMPLES",
+        "ppg_peak_valley_window_detector_Inst",
+        "scope",
+        "peak_valley_local_empty_o",
+        "i_diag_clear_event",
+        "i_reacquire_active",
+        "i_peak_confirm_count",
+        "i_valley_confirm_count",
+        "i_direction_deadband",
+        "i_min_peak_valley_amplitude",
+        "i_min_peak_to_valley_frames",
+        "i_min_peak_to_peak_frames",
+        "i_max_fine_window_frames",
+        "i_max_reacquire_frames",
+        "i_characterization_mode",
+        "i_run_profile",
+        "flag_peak_valley_pending",
+        "flag_peak_valley_result_ready",
+        "i_fine_window_start_event",
+        "fine_window_start_event_o",
+        "i_fine_window_start_frame_id",
+        "fine_window_start_frame_id_o",
+        "i_active_precision_mode",
+        "active_precision_mode_o",
+        "o_return_9bit_valid",
+        "return_pending_o",
+        "i_return_9bit_ready",
+        "flag_return_9bit_ready",
+        "o_return_reason",
+        "dec_return_reason",
+        "o_return_frame_id",
+        "dec_return_frame_id",
+        "o_peak_valid",
+        "i_peak_ready",
+        "o_peak_value",
+        "o_peak_frame_id",
+        "o_peak_sample_index",
+        "o_peak_config_epoch",
+        "o_peak_coef_epoch",
+        "o_peak_dc_recovery_coef_epoch",
+        "o_valley_valid",
+        "i_valley_ready",
+        "o_valley_value",
+        "o_valley_frame_id",
+        "o_valley_sample_index",
+        "o_valley_config_epoch",
+        "o_valley_coef_epoch",
+        "o_valley_dc_recovery_coef_epoch",
+        "o_detector_idle",
+        "detector_idle_o",
+        "o_fine_window_active",
+        "detector_fine_window_active_o",
+        "o_reacquire_search_active",
+        "flag_reacquire_search_active",
+        "o_fine_window_timeout_sticky",
+        "fine_window_timeout_sticky_o",
+        "o_reacquire_timeout_sticky",
+        "reacquire_timeout_sticky_o",
+        "peak_valley_protocol_error_sticky_o",
+        "ppg_precision_window_controller",
+        "C_SWITCH_TIMEOUT_CYCLES",
+        "C_SWITCH_TIMEOUT_COUNTER_WIDTH",
+        "ppg_precision_window_controller_Inst",
+        "precision_local_empty_o",
+        "i_active_config_valid",
+        "i_initial_precision",
+        "i_normal_measurement_active",
+        "i_cross_valid",
+        "o_cross_ready",
+        "i_cross_frame_id",
+        "i_cross_sample_index",
+        "i_cross_time_unknown",
+        "i_cross_config_epoch",
+        "i_cross_coef_epoch",
+        "i_cross_dc_recovery_coef_epoch",
+        "i_return_9bit_valid",
+        "o_return_9bit_ready",
+        "i_return_reason",
+        "i_return_frame_id",
+        "i_frame_safe_boundary",
+        "i_safe_frame_id",
+        "i_precision_takeover_safe",
+        "i_analog_safe",
+        "o_active_precision_mode",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "precision_15_to_9_frame_id_o",
+        "o_reacquire_request_event",
+        "o_mode_fault_event",
+        "flag_precision_controller_fault_event",
+        "o_mode_fault_active",
+        "flag_precision_controller_fault_active",
+        "precision",
+        "controller",
+        "satisfies",
+        "K01",
+        "o_mode_fault_identity_valid",
+        "flag_precision_controller_fault_identity_valid",
+        "o_mode_fault_frame_id",
+        "flag_precision_controller_fault_frame_id",
+        "o_mode_fault_sample_index",
+        "flag_precision_controller_fault_sample_index",
+        "o_mode_fault_color_ir",
+        "flag_precision_controller_fault_color_ir",
+        "o_mode_fault_frame_type",
+        "flag_precision_controller_fault_frame_type",
+        "o_mode_fault_precision",
+        "flag_precision_controller_fault_precision",
+        "o_mode_fault_run_generation",
+        "flag_precision_controller_fault_run_generation",
+        "o_switch_pending",
+        "switch_pending_o",
+        "o_switch_target_precision",
+        "switch_target_precision_o",
+        "o_switch_hold_new_transaction",
+        "switch_hold_new_transaction_o",
+        "o_controller_idle",
+        "controller_idle_o",
+        "o_last_cross_time_unknown",
+        "flag_last_cross_time_unknown",
+        "o_last_return_reason",
+        "dec_last_return_reason",
+        "o_switch_timeout_sticky",
+        "switch_timeout_sticky_o",
+        "precision_protocol_error_sticky_o",
+        "ppg_amb_recheck_scheduler",
+        "ppg_amb_recheck_scheduler_Inst",
+        "i_stop_ack_event",
+        "i_control_abort_event",
+        "i_idac_mode",
+        "i_amb_enable",
+        "i_dcs_enable",
+        "i_amb_recheck_interval_frames",
+        "i_startup_search_complete",
+        "i_normal_frame_complete_event",
+        "i_precision_15_to_9_event",
+        "i_normal_fork_idle",
+        "i_idac_idle",
+        "i_fir_idle",
+        "i_peak_valley_idle",
+        "i_calibration_frame_complete_event",
+        "i_amb_sample_request",
+        "i_amb_sequence_done",
+        "i_amb_sequence_failed",
+        "i_dcs_revalidate_request",
+        "i_dcs_sample_request",
+        "i_dcs_sample_color_ir",
+        "i_dcs_revalidate_done",
+        "i_dcs_revalidate_failed",
+        "i_amb_sample_accepted_event",
+        "i_dcs_sample_accepted_event",
+        "o_amb_sequence_start",
+        "enc_amb_sequence_start_o",
+        "o_dcs_revalidate_accept",
+        "dcs_revalidate_accept_o",
+        "i_calibration_sample_ready",
+        "o_calibration_sample_valid",
+        "calibration_sample_valid_o",
+        "o_calibration_frame_type",
+        "calibration_frame_type_o",
+        "o_calibration_color_ir",
+        "calibration_color_ir_o",
+        "o_calibration_precision_mode",
+        "calibration_precision_mode_o",
+        "o_calibration_frame_start",
+        "calibration_frame_start_o",
+        "o_calibration_stage",
+        "calibration_stage_o",
+        "o_normal_frame_count",
+        "cnt_normal_frame_o",
+        "o_amb_recheck_pending",
+        "amb_recheck_pending_o",
+        "o_amb_recheck_accept",
+        "o_amb_recheck_busy",
+        "o_normal_output_inhibit",
+        "normal_output_inhibit_o",
+        "o_sequence_done",
+        "enc_recheck_sequence_done_o",
+        "o_sequence_failed",
+        "enc_recheck_sequence_failed_o",
+        "o_scheduler_idle",
+        "scheduler_idle_o"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_precision_window_integration reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_detection_datapath_empty",
+        "o_normal_result_ready",
+        "o_amb_sequence_start",
+        "o_dcs_revalidate_accept",
+        "o_calibration_sample_valid",
+        "o_calibration_frame_type",
+        "o_calibration_color_ir",
+        "o_calibration_precision_mode",
+        "o_calibration_frame_start",
+        "o_calibration_stage",
+        "o_active_precision_mode",
+        "o_fine_window_active",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "o_reacquire_request_event",
+        "o_switch_hold_new_transaction",
+        "o_mode_fault_event",
+        "o_mode_fault_active",
+        "o_mode_fault_identity_valid",
+        "o_mode_fault_frame_id",
+        "o_mode_fault_sample_index",
+        "o_mode_fault_color_ir",
+        "o_mode_fault_frame_type",
+        "o_mode_fault_precision",
+        "o_mode_fault_run_generation",
+        "o_normal_frame_count",
+        "o_amb_recheck_pending",
+        "o_amb_recheck_accept",
+        "o_amb_recheck_busy",
+        "o_normal_output_inhibit",
+        "o_recheck_sequence_done",
+        "o_recheck_sequence_failed",
+        "o_fir_history_full_r",
+        "o_fir_history_full_ir",
+        "o_fir_idle",
+        "o_detection_fork_idle",
+        "o_detector_idle",
+        "o_controller_idle",
+        "o_scheduler_idle",
+        "o_cross_pending",
+        "o_peak_pending",
+        "o_valley_pending",
+        "o_return_pending",
+        "o_baseline_valid",
+        "o_reacquire_active",
+        "o_detector_fine_window_active",
+        "o_switch_pending",
+        "o_switch_target_precision",
+        "o_slope_current_q16",
+        "o_baseline_protocol_error_sticky",
+        "o_fine_window_timeout_sticky",
+        "o_reacquire_timeout_sticky",
+        "o_peak_valley_protocol_error_sticky",
+        "o_switch_timeout_sticky",
+        "o_precision_protocol_error_sticky",
+        "o_test_calibration_loss_inject_ready"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "output update block 1",
+      "description": "sequential logic covering detection_datapath_empty_o.",
+      "signals": [
+        "detection_datapath_empty_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering reg_fork_payload.",
+      "signals": [
+        "reg_fork_payload"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering flag_baseline_pending.",
+      "signals": [
+        "flag_baseline_pending"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering flag_peak_valley_pending.",
+      "signals": [
+        "flag_peak_valley_pending"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering flag_recheck_detector_busy.",
+      "signals": [
+        "flag_recheck_detector_busy"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering flag_fir_idle_to_scheduler.",
+      "signals": [
+        "flag_fir_idle_to_scheduler"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_precision_window_integration reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_detection_datapath_empty",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_normal_result_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_sequence_start",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_revalidate_accept",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_sample_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_frame_type",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_color_ir",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_precision_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_frame_start",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_calibration_stage",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_active_precision_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fine_window_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fine_window_start_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fine_window_start_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_precision_15_to_9_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_precision_15_to_9_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_reacquire_request_event",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_switch_hold_new_transaction",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_event",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_active",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_identity_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_frame_id",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_sample_index",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_color_ir",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_frame_type",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_precision",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_mode_fault_run_generation",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_normal_frame_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_recheck_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_recheck_accept",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_recheck_busy",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_normal_output_inhibit",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_recheck_sequence_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_recheck_sequence_failed",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fir_history_full_r",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fir_history_full_ir",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fir_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_detection_fork_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_detector_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_scheduler_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_valley_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_return_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_detector_fine_window_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_switch_pending",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_switch_target_precision",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_protocol_error_sticky",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fine_window_timeout_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_reacquire_timeout_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_valley_protocol_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_switch_timeout_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_precision_protocol_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_test_calibration_loss_inject_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_detection_datapath_empty",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_normal_result_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_sequence_start",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_revalidate_accept",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_sample_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_frame_type",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_color_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_precision_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_frame_start",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_calibration_stage",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_active_precision_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fine_window_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fine_window_start_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fine_window_start_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_precision_15_to_9_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_precision_15_to_9_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_reacquire_request_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_switch_hold_new_transaction",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_identity_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_sample_index",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_color_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_frame_type",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_precision",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_mode_fault_run_generation",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_normal_frame_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_recheck_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_recheck_accept",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_recheck_busy",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_normal_output_inhibit",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_recheck_sequence_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_recheck_sequence_failed",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fir_history_full_r",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fir_history_full_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fir_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_detection_fork_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_detector_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_scheduler_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_valley_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_return_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_detector_fine_window_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_switch_pending",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_switch_target_precision",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fine_window_timeout_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_reacquire_timeout_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_valley_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_switch_timeout_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_precision_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_test_calibration_loss_inject_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "output update block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "detection_datapath_empty_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_fork_payload",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_baseline_pending",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_peak_valley_pending",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_recheck_detector_busy",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_fir_idle_to_scheduler",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_detection_datapath_empty",
+        "o_normal_result_ready",
+        "o_amb_sequence_start",
+        "o_dcs_revalidate_accept",
+        "o_calibration_sample_valid",
+        "o_calibration_frame_type",
+        "o_calibration_color_ir",
+        "o_calibration_precision_mode",
+        "o_calibration_frame_start",
+        "o_calibration_stage",
+        "o_active_precision_mode",
+        "o_fine_window_active",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "o_reacquire_request_event",
+        "o_switch_hold_new_transaction",
+        "o_mode_fault_event",
+        "o_mode_fault_active",
+        "o_mode_fault_identity_valid",
+        "o_mode_fault_frame_id",
+        "o_mode_fault_sample_index",
+        "o_mode_fault_color_ir",
+        "o_mode_fault_frame_type",
+        "o_mode_fault_precision",
+        "o_mode_fault_run_generation",
+        "o_normal_frame_count",
+        "o_amb_recheck_pending",
+        "o_amb_recheck_accept",
+        "o_amb_recheck_busy",
+        "o_normal_output_inhibit",
+        "o_recheck_sequence_done",
+        "o_recheck_sequence_failed",
+        "o_fir_history_full_r",
+        "o_fir_history_full_ir",
+        "o_fir_idle",
+        "o_detection_fork_idle",
+        "o_detector_idle",
+        "o_controller_idle",
+        "o_scheduler_idle",
+        "o_cross_pending",
+        "o_peak_pending",
+        "o_valley_pending",
+        "o_return_pending",
+        "o_baseline_valid",
+        "o_reacquire_active",
+        "o_detector_fine_window_active",
+        "o_switch_pending",
+        "o_switch_target_precision",
+        "o_slope_current_q16",
+        "o_baseline_protocol_error_sticky",
+        "o_fine_window_timeout_sticky",
+        "o_reacquire_timeout_sticky",
+        "o_peak_valley_protocol_error_sticky",
+        "o_switch_timeout_sticky",
+        "o_precision_protocol_error_sticky",
+        "o_test_calibration_loss_inject_ready"
+      ],
+      "description": "Verify `ppg_precision_window_integration` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_detection_datapath_empty",
+        "o_normal_result_ready",
+        "o_amb_sequence_start",
+        "o_dcs_revalidate_accept",
+        "o_calibration_sample_valid",
+        "o_calibration_frame_type",
+        "o_calibration_color_ir",
+        "o_calibration_precision_mode",
+        "o_calibration_frame_start",
+        "o_calibration_stage",
+        "o_active_precision_mode",
+        "o_fine_window_active",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "o_reacquire_request_event",
+        "o_switch_hold_new_transaction",
+        "o_mode_fault_event",
+        "o_mode_fault_active",
+        "o_mode_fault_identity_valid",
+        "o_mode_fault_frame_id",
+        "o_mode_fault_sample_index",
+        "o_mode_fault_color_ir",
+        "o_mode_fault_frame_type",
+        "o_mode_fault_precision",
+        "o_mode_fault_run_generation",
+        "o_normal_frame_count",
+        "o_amb_recheck_pending",
+        "o_amb_recheck_accept",
+        "o_amb_recheck_busy",
+        "o_normal_output_inhibit",
+        "o_recheck_sequence_done",
+        "o_recheck_sequence_failed",
+        "o_fir_history_full_r",
+        "o_fir_history_full_ir",
+        "o_fir_idle",
+        "o_detection_fork_idle",
+        "o_detector_idle",
+        "o_controller_idle",
+        "o_scheduler_idle",
+        "o_cross_pending",
+        "o_peak_pending",
+        "o_valley_pending",
+        "o_return_pending",
+        "o_baseline_valid",
+        "o_reacquire_active",
+        "o_detector_fine_window_active",
+        "o_switch_pending",
+        "o_switch_target_precision",
+        "o_slope_current_q16",
+        "o_baseline_protocol_error_sticky",
+        "o_fine_window_timeout_sticky",
+        "o_reacquire_timeout_sticky",
+        "o_peak_valley_protocol_error_sticky",
+        "o_switch_timeout_sticky",
+        "o_precision_protocol_error_sticky",
+        "o_test_calibration_loss_inject_ready"
+      ],
+      "description": "ppg_precision_window_integration reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        518,
+        528
+      ],
+      "boundary_signals": [
+        "detection_datapath_empty_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        528,
+        539
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        539,
+        552
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        552,
+        565
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        565,
+        576
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_run_enable",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        576,
+        1032
+      ],
+      "boundary_signals": [
+        "i_active_config_valid",
+        "i_alpha_q15",
+        "i_amb_code_epoch",
+        "i_amb_code_snapshot",
+        "i_amb_enable",
+        "i_amb_recheck_interval_frames",
+        "i_amb_sample_accepted_event",
+        "i_amb_sample_request",
+        "i_amb_sequence_done",
+        "i_amb_sequence_failed",
+        "i_analog_safe",
+        "i_baseline_delta_q16",
+        "i_beta_q15",
+        "i_calibration_frame_complete_event",
+        "i_calibration_sample_ready",
+        "i_clk",
+        "i_coarse_ppg_value",
+        "i_coarse_recovery_calibrated",
+        "i_coarse_saturation_high",
+        "i_coarse_saturation_low",
+        "i_coarse_valid",
+        "i_coef_epoch",
+        "i_color_ir",
+        "i_config_epoch",
+        "i_cross_confirm_count",
+        "i_cross_hysteresis_q16",
+        "i_dc_code_epoch",
+        "i_dc_code_snapshot",
+        "i_dc_recovery_coef_epoch",
+        "i_dcs_enable",
+        "i_dcs_revalidate_done",
+        "i_dcs_revalidate_failed",
+        "i_dcs_revalidate_request",
+        "i_dcs_sample_accepted_event",
+        "i_dcs_sample_color_ir",
+        "i_dcs_sample_request",
+        "i_detection_discard_amb_code_epoch",
+        "i_detection_discard_coef_epoch",
+        "i_detection_discard_color_ir",
+        "i_detection_discard_config_epoch",
+        "i_detection_discard_dc_code_epoch",
+        "i_detection_discard_dc_recovery_epoch",
+        "i_detection_discard_event",
+        "i_detection_discard_frame_id",
+        "i_detection_discard_frame_type",
+        "i_detection_discard_identity_valid",
+        "i_detection_discard_precision",
+        "i_detection_discard_reason",
+        "i_detection_discard_run_generation",
+        "i_detection_discard_sample_index",
+        "i_detection_discard_sample_valid",
+        "i_diag_clear_event",
+        "i_direction_deadband",
+        "i_fixed_slope_q16",
+        "i_frame_id",
+        "i_frame_safe_boundary",
+        "i_frame_type",
+        "i_idac_idle",
+        "i_idac_mode",
+        "i_initial_precision",
+        "i_lead_max_frames",
+        "i_lead_min_frames",
+        "i_max_fine_window_frames",
+        "i_max_reacquire_frames",
+        "i_min_peak_to_peak_frames",
+        "i_min_peak_to_valley_frames",
+        "i_min_peak_valley_amplitude",
+        "i_no_cross_limit",
+        "i_normal_fork_idle",
+        "i_normal_frame_complete_event",
+        "i_normal_measurement_active",
+        "i_normal_result_valid",
+        "i_peak_confirm_count",
+        "i_peak_valley_config_valid",
+        "i_precision_mode",
+        "i_precision_takeover_safe",
+        "i_rstn",
+        "i_run_enable",
+        "i_run_generation",
+        "i_run_profile",
+        "i_safe_frame_id",
+        "i_sample_index",
+        "i_sample_valid",
+        "i_slope_max_q16",
+        "i_slope_min_q16",
+        "i_slope_mode",
+        "i_stage1_saturation_high",
+        "i_stage1_saturation_low",
+        "i_start_ack_event",
+        "i_startup_search_complete",
+        "i_test_calibration_loss_inject_valid",
+        "i_test_inject_enable",
+        "i_timing_adjust_ratio_q15",
+        "i_valley_confirm_count",
+        "o_active_precision_mode",
+        "o_amb_recheck_accept",
+        "o_amb_recheck_busy",
+        "o_amb_recheck_pending",
+        "o_amb_sequence_start",
+        "o_baseline_valid",
+        "o_calibration_color_ir",
+        "o_calibration_frame_start",
+        "o_calibration_frame_type",
+        "o_calibration_precision_mode",
+        "o_calibration_sample_valid",
+        "o_calibration_stage",
+        "o_controller_idle",
+        "o_dcs_revalidate_accept",
+        "o_detector_idle",
+        "o_fine_window_active",
+        "o_fine_window_start_event",
+        "o_fine_window_start_frame_id",
+        "o_fine_window_timeout_sticky",
+        "o_fir_idle",
+        "o_mode_fault_active",
+        "o_mode_fault_color_ir",
+        "o_mode_fault_event",
+        "o_mode_fault_frame_id",
+        "o_mode_fault_frame_type",
+        "o_mode_fault_identity_valid",
+        "o_mode_fault_precision",
+        "o_mode_fault_run_generation",
+        "o_mode_fault_sample_index",
+        "o_normal_frame_count",
+        "o_normal_output_inhibit",
+        "o_precision_15_to_9_event",
+        "o_precision_15_to_9_frame_id",
+        "o_reacquire_active",
+        "o_reacquire_request_event",
+        "o_reacquire_timeout_sticky",
+        "o_scheduler_idle",
+        "o_slope_current_q16",
+        "o_switch_hold_new_transaction",
+        "o_switch_pending",
+        "o_switch_target_precision",
+        "o_switch_timeout_sticky",
+        "o_test_calibration_loss_inject_ready"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_integration\\ppg_precision_window_integration.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

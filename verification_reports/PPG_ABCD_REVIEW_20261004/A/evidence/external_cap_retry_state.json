@@ -1,0 +1,15 @@
+{
+  "updated_utc": "2026-10-04T12:51:54.332615+00:00",
+  "running_retry": [
+    "tb_ppg_control_top_long_10_cycles"
+  ],
+  "pending_external_cap": [],
+  "handled": [],
+  "active_simulations": 3,
+  "waiting_original": [
+    "tb_ppg_control_top_longrun",
+    "tb_ppg_control_top_long_10_cycles",
+    "tb_ppg_control_top_robustness_corner_waveforms"
+  ],
+  "original_queue": []
+}

@@ -1,0 +1,45 @@
+{
+  "commit": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "owned_files": 44,
+  "semantic_read_complete": 44,
+  "semantic_read_incomplete": 0,
+  "total_physical_lines": 33092,
+  "rtl_modules": 12,
+  "ast_ports": 796,
+  "contracts": 11,
+  "normative_table_ids": 355,
+  "id_review_complete": 255,
+  "id_dynamic_or_cross_owner_partial": 100,
+  "coverage_rows": 170,
+  "coverage_status_counts": {
+    "完成": 140,
+    "部分": 30
+  },
+  "findings": {
+    "S1": 1,
+    "S2": 5,
+    "S3": 3,
+    "S4": 0
+  },
+  "raw_strict_gate": {
+    "errors": 92,
+    "strict_warnings": 0,
+    "delivery_ready": false,
+    "rule_counts": {
+      "VG052": 2,
+      "VG061": 3,
+      "VG066": 1,
+      "COMMENT_COMMENT_PLACEMENT": 86
+    }
+  },
+  "A_C_scope_runtime": {
+    "finished": 15,
+    "incomplete": [
+      "tb_ppg_control_top_baseline_cross",
+      "tb_ppg_control_top_fir_tail_isolation",
+      "tb_ppg_control_top_normal_slow_tracking",
+      "tb_ppg_control_top_peak_valley_return"
+    ]
+  },
+  "definition": "完成是审阅/执行完成，非功能通过。源码修复、完整动态ID验收及外部工具验证未完成项独立保留部分。"
+}

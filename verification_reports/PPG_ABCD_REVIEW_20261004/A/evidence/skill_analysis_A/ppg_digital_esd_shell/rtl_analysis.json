@@ -1,0 +1,919 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_digital_esd_shell",
+    "parameter_count": 0,
+    "port_count": 52
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "SPI_SCLK",
+      "P2S_CLK",
+      "CLK_2M_PAD",
+      "CLK_STAGE1_DOUT_LOW",
+      "CLK_STAGE2_DOUT_LOW",
+      "CLK_BUF_LOW",
+      "CLK_2M",
+      "CLK_IREF_IDAC_LOW",
+      "CLK_9Q1_LOW",
+      "CLK_15Q1_LOW",
+      "CLK_AFERST_LOW",
+      "CLK_IREF_IDAC_SAR9_LOW",
+      "CLK_IREF_IDAC_SAR15_LOW",
+      "CLK_Q2_LOW",
+      "CLK_Q3_LOW",
+      "CLK_TIAEN_LOW"
+    ],
+    "reset_signals": [
+      "RESET_N"
+    ]
+  },
+  "ports": [
+    {
+      "name": "DVDD12",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DGND12",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DVDD33",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DGND33",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DVDD33_AUX",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "RESET_N",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "SPI_CS_N",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "SPI_SCLK",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "SPI_SDI",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "SPI_SDO",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "P2S_CLK",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "P2S_DATA",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "P2S_FRAME",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DBG_OUT",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_2M_PAD",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "DGND33_AUX",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DOUT_STAGE1_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_STAGE1_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "DOUT_STAGE2_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_STAGE2_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "EN_TIA_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "LEDDAC",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "LEDEN1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "LEDEN2_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_TEST",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_BUF_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_2M",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_IREF_IDAC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_9Q1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_15Q1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_AFERST_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_IREF_IDAC_SAR9_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_IREF_IDAC_SAR15_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_Q2_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_Q3_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "CLK_TIAEN_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "EN_15SAR_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR9_AMB_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR9_DC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR9_IREF",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR15_AMB_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR15_DC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "EN_SAR15_IREF",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "IDAC_SAR9AMBN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "IDAC_SAR9DCN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "IDAC_SAR15AMBN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "IDAC_SAR15DCN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "S0_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "S1_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "S2_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "S3_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "S4_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [],
+  "always_blocks": [],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_digital_esd_shell reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "RESET_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "EN_TIA_LOW",
+        "LEDDAC",
+        "LEDEN1_LOW",
+        "LEDEN2_LOW",
+        "EN_TEST",
+        "CLK_BUF_LOW",
+        "CLK_2M",
+        "CLK_IREF_IDAC_LOW",
+        "CLK_9Q1_LOW",
+        "CLK_15Q1_LOW",
+        "CLK_AFERST_LOW",
+        "CLK_IREF_IDAC_SAR9_LOW",
+        "CLK_IREF_IDAC_SAR15_LOW",
+        "CLK_Q2_LOW",
+        "CLK_Q3_LOW",
+        "CLK_TIAEN_LOW",
+        "EN_15SAR_LOW",
+        "EN_SAR9_AMB_LOW",
+        "EN_SAR9_DC_LOW",
+        "EN_SAR9_IREF",
+        "EN_SAR15_AMB_LOW",
+        "EN_SAR15_DC_LOW",
+        "EN_SAR15_IREF",
+        "IDAC_SAR9AMBN_LOW",
+        "IDAC_SAR9DCN_LOW",
+        "IDAC_SAR15AMBN_LOW",
+        "IDAC_SAR15DCN_LOW",
+        "S0_IN",
+        "S1_IN",
+        "S2_IN",
+        "S3_IN",
+        "S4_IN"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_digital_esd_shell reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "RESET_N",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "SPI_SDO",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_CLK",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_DATA",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_FRAME",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "DBG_OUT",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_TIA_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LEDDAC",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LEDEN1_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LEDEN2_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_TEST",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_BUF_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_2M",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_9Q1_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_15Q1_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_AFERST_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_SAR9_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_SAR15_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_Q2_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_Q3_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "CLK_TIAEN_LOW",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_15SAR_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR9_AMB_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR9_DC_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR9_IREF",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR15_AMB_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR15_DC_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "EN_SAR15_IREF",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "IDAC_SAR9AMBN_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "IDAC_SAR9DCN_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "IDAC_SAR15AMBN_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "IDAC_SAR15DCN_LOW",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "S0_IN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "S1_IN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "S2_IN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "S3_IN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "S4_IN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "SPI_SDO",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_CLK",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_DATA",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_FRAME",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "DBG_OUT",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_TIA_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LEDDAC",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LEDEN1_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LEDEN2_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_TEST",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_BUF_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_2M",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_9Q1_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_15Q1_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_AFERST_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_SAR9_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_IREF_IDAC_SAR15_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_Q2_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_Q3_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "CLK_TIAEN_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_15SAR_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR9_AMB_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR9_DC_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR9_IREF",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR15_AMB_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR15_DC_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "EN_SAR15_IREF",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "IDAC_SAR9AMBN_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "IDAC_SAR9DCN_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "IDAC_SAR15AMBN_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "IDAC_SAR15DCN_LOW",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "S0_IN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "S1_IN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "S2_IN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "S3_IN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "S4_IN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "RESET_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "EN_TIA_LOW",
+        "LEDDAC",
+        "LEDEN1_LOW",
+        "LEDEN2_LOW",
+        "EN_TEST",
+        "CLK_BUF_LOW",
+        "CLK_2M",
+        "CLK_IREF_IDAC_LOW",
+        "CLK_9Q1_LOW",
+        "CLK_15Q1_LOW",
+        "CLK_AFERST_LOW",
+        "CLK_IREF_IDAC_SAR9_LOW",
+        "CLK_IREF_IDAC_SAR15_LOW",
+        "CLK_Q2_LOW",
+        "CLK_Q3_LOW",
+        "CLK_TIAEN_LOW",
+        "EN_15SAR_LOW",
+        "EN_SAR9_AMB_LOW",
+        "EN_SAR9_DC_LOW",
+        "EN_SAR9_IREF",
+        "EN_SAR15_AMB_LOW",
+        "EN_SAR15_DC_LOW",
+        "EN_SAR15_IREF",
+        "IDAC_SAR9AMBN_LOW",
+        "IDAC_SAR9DCN_LOW",
+        "IDAC_SAR15AMBN_LOW",
+        "IDAC_SAR15DCN_LOW",
+        "S0_IN",
+        "S1_IN",
+        "S2_IN",
+        "S3_IN",
+        "S4_IN"
+      ],
+      "description": "Verify `ppg_digital_esd_shell` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "RESET_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "EN_TIA_LOW",
+        "LEDDAC",
+        "LEDEN1_LOW",
+        "LEDEN2_LOW",
+        "EN_TEST",
+        "CLK_BUF_LOW",
+        "CLK_2M",
+        "CLK_IREF_IDAC_LOW",
+        "CLK_9Q1_LOW",
+        "CLK_15Q1_LOW",
+        "CLK_AFERST_LOW",
+        "CLK_IREF_IDAC_SAR9_LOW",
+        "CLK_IREF_IDAC_SAR15_LOW",
+        "CLK_Q2_LOW",
+        "CLK_Q3_LOW",
+        "CLK_TIAEN_LOW",
+        "EN_15SAR_LOW",
+        "EN_SAR9_AMB_LOW",
+        "EN_SAR9_DC_LOW",
+        "EN_SAR9_IREF",
+        "EN_SAR15_AMB_LOW",
+        "EN_SAR15_DC_LOW",
+        "EN_SAR15_IREF",
+        "IDAC_SAR9AMBN_LOW",
+        "IDAC_SAR9DCN_LOW",
+        "IDAC_SAR15AMBN_LOW",
+        "IDAC_SAR15DCN_LOW",
+        "S0_IN",
+        "S1_IN",
+        "S2_IN",
+        "S3_IN",
+        "S4_IN"
+      ],
+      "description": "ppg_digital_esd_shell reset behavior"
+    }
+  ],
+  "decomposition_candidates": [],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\skill_inputs_A\\rtl\\ppg_digital_esd_shell\\ppg_digital_esd_shell.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

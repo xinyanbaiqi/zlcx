@@ -1,0 +1,9 @@
+{
+  "source_sha256": "d1adbd14d19c993385cbad8dcb8ce4135eadcd1a9cf25156bb1c7244e9a58737",
+  "mutation": "invert STATIC_BIAS measurement permit expectation only",
+  "expected_fail_observed": true,
+  "key_output": [
+    "FAIL SMOKE-19 TOP-18 STATIC_BIAS did not hold measurement_run_enable at 0 for all 4000 steady-state cycles",
+    "SMOKE_TB_FAIL error_count=1"
+  ]
+}

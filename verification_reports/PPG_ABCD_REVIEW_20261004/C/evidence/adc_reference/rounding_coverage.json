@@ -1,0 +1,70 @@
+{
+  "prSweepNearest": [
+    {
+      "raw": 1006,
+      "acc": "30605337",
+      "value": "234",
+      "distanceToHalf": 25
+    },
+    {
+      "raw": 1014,
+      "acc": "30605337",
+      "value": "234",
+      "distanceToHalf": 25
+    },
+    {
+      "raw": 959,
+      "acc": "28114759",
+      "value": "214",
+      "distanceToHalf": 185
+    },
+    {
+      "raw": 967,
+      "acc": "28114759",
+      "value": "214",
+      "distanceToHalf": 185
+    },
+    {
+      "raw": 920,
+      "acc": "25624181",
+      "value": "195",
+      "distanceToHalf": 395
+    },
+    {
+      "raw": 928,
+      "acc": "25624181",
+      "value": "195",
+      "distanceToHalf": 395
+    }
+  ],
+  "ov09": [
+    {
+      "s1": 370,
+      "raw": 157,
+      "acc": "790298623",
+      "value": "6029",
+      "distanceToHalf": 1
+    },
+    {
+      "s1": 277,
+      "raw": 554,
+      "acc": "154337283",
+      "value": "1178",
+      "distanceToHalf": 3
+    },
+    {
+      "s1": 27,
+      "raw": 457,
+      "acc": "-1617887231",
+      "value": "-12343",
+      "distanceToHalf": 1
+    },
+    {
+      "s1": 120,
+      "raw": 60,
+      "acc": "-981925891",
+      "value": "-7492",
+      "distanceToHalf": 3
+    }
+  ]
+}

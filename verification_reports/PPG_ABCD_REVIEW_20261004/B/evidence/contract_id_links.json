@@ -1,0 +1,3817 @@
+[
+  {
+    "id": "AMI-01",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 947,
+        "text": "| N08 | AMI / PWI | A generation-scoped detection flush clears downstream state even after AMI detection-fork handoff; trigger identity may be invalid only for a scope-only event. | ~~`EVIDENCE_PENDING`~~ ~~`PARTIAL`~~ **`CLOSED` 2026-09-08 (N08交接前半收尾): the \"scope-only\" half's evidence is unchanged from 2026-09-07 -- `tb_ppg_control_top_baseline_cross.v` V1.4 confirms `flag_detection_pending`=0 and `o_detection_discard_identity_valid`=0 at discard time (`ppg_adc_measurement_idac_integration.v:978`, `@satisfies: N08`). The complementary \"pre-handoff, identity_valid=1\" half is now also real, dual-tool-independent evidence: `ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v` V1.8 adds case N08-01, which does not need the force-based construction the 2026-09-07 attempt correctly rejected -- this AMI-level module unit-TB instantiates the DUT directly (PWI, including FIR, is AMI's own real sub-instance, not a Top-level sibling), so `flag_detection_pending`/`flag_precision_normal_result_ready` can be observed hierarchically without forcing any net. A new `send_normal_sample_tight` task (same code-to-raw math as the existing `send_normal_sample`, minus its 20-cycle settle) drives two back-to-back RED SAR9 NORMAL transactions; after a 24-sample warm-up rebuilds FIR's 21-tap history window (the prior AMI-47 case's own closing abort had cleared it via `flag_history_clear`), the second transaction latches `flag_detection_pending` while FIR is still genuinely mid-MAC on the first transaction's already-warm window, and an abort during that real busy window confirms `o_detection_discard_identity_valid`=1 with `o_detection_discard_frame_id`/`sample_index`/`color_ir` bound to that still-resident second transaction's real identity. Two real TB-construction bugs were found and fixed en route, not RTL defects: (1) the first attempt found FIR cold (idle, ready) because AMI-47's own closing abort had reset FIR's RED history count via `flag_history_clear`, requiring the added warm-up loop; (2) `o_detection_discard_event`/`identity_valid`/`frame_id` etc. are pure combinational signals tied directly to `i_control_abort_event`'s live level, so sampling them after the abort pulse's trailing edge (as the file's existing AMI-46/47 idiom does for its own *registered* discard fields) reads already-cleared values -- fixed by sampling mid-pulse instead. Confirmed with both iverilog and real Vivado 2022.2 xsim: 48/48 PASS (AMI-01 through AMI-47 plus N08-01), clean `$finish`. N08 is now fully `CLOSED`; this closes the last open item in the entire 25-item P/N + D01 + N08 open-item series.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3736,
+        "text": "> PASS (AMI-01 through AMI-47 plus N08-01), clean `$finish`. **N08 is now"
+      },
+      {
+        "source": "alias",
+        "line": 483,
+        "text": "| N08 (CLOSED 2026-09-08) | scope-only半:`tb_ppg_control_top_baseline_cross.v` V1.4场景,discard触发时`flag_detection_pending`已为0,`o_detection_discard_identity_valid`真实观测为0。交接前半(N08-01,2026-09-08新关闭):`ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v` V1.8新增N08-01——用新增`send_normal_sample_tight`任务背靠背驱动两笔RED SAR9 NORMAL事务,第二笔完成使`flag_detection_pending`武装到1时FIR恰好仍在处理第一笔样本触发的21点MAC计算(真实忙碌,非force),随后abort真实验证`o_detection_discard_identity_valid=1`且frame_id/sample_index/color_ir绑定这笔仍在AMI侧的事务身份;此前`tb_ppg_control_top_baseline_cross.v`层级因bg_responder背景激励物理节拍宽于窗口而够不到,改用AMI自身module-level unit TB直接驱动事务后命中。iverilog+Vivado 2022.2 xsim双工具real重跑`ppg_adc_measurement_idac_integration`回归,48/48 PASS(AMI-01~47+N08-01),干净`$finish`**2026-09-28工作线D独立复核观察(未修复,记录留待用户判断)：`flag_n08_fir_busy_observed`(FIR真实忙碌)只做`$display`诊断打印，未编入`check_case`硬性PASS/FAIL条件，真正硬性门控只有`flag_n08_window_hit`；当前构造确实命中FIR忙碌态、非vacuous，但若未来pipeline时序变化导致命中窗口消失，本测试不会FAIL、只会静默打印一行未被检查的DIAG——是否加固为硬性检查有让测试变脆弱的风险，留给用户判断** | `ppg_adc_measurement_idac_integration.v:978`(已打标签`@satisfies: N08`,注释追加交接前半覆盖说明) | `PPG_CONTRACT_CLOSURE_MATRIX.md:832` |"
+      },
+      {
+        "source": "alias",
+        "line": 552,
+        "text": "> (AMI-01~47+新增N08-01),干净`$finish`。**至此N08交接前半正式关闭,25项P/N + D01 + N08交接"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          10,
+          26,
+          28,
+          29,
+          30,
+          38,
+          54,
+          56,
+          57,
+          58,
+          959,
+          1122,
+          1628
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-02",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1145,
+          1149
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-03",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1168,
+          1171
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-04",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1157
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-05",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1215
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-06",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1145,
+          1158
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-07",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1242
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-08",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1247
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-09",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1145,
+          1159
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-10",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1160
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-11",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1145,
+          1216
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-12",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1230
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-13",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1232
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-14",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1140
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-15",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1141
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-16",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1258
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-17",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          25,
+          53,
+          1306
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-18",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1308
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-19",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1287
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-20",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1292
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-21",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1377
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-22",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          28,
+          56,
+          1408
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-23",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1145,
+          1161
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-24",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1534
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-25",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1367
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-26",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1344
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-27",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1328
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-28",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1350
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-29",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1389
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-30",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1155
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-31",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1165
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-32",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          959,
+          1409
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-33",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1179
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-34",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1197
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-35",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1133
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-36",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1135
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-37",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1151
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          28,
+          31,
+          61,
+          62,
+          2116,
+          2117,
+          2121,
+          2156
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-38",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1199
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-39",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1412
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-40",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          28,
+          56,
+          1433
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-41",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1451
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-42",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1279
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-43",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1516
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-44",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          1494
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-45",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          26,
+          54,
+          1523
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-46",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 947,
+        "text": "| N08 | AMI / PWI | A generation-scoped detection flush clears downstream state even after AMI detection-fork handoff; trigger identity may be invalid only for a scope-only event. | ~~`EVIDENCE_PENDING`~~ ~~`PARTIAL`~~ **`CLOSED` 2026-09-08 (N08交接前半收尾): the \"scope-only\" half's evidence is unchanged from 2026-09-07 -- `tb_ppg_control_top_baseline_cross.v` V1.4 confirms `flag_detection_pending`=0 and `o_detection_discard_identity_valid`=0 at discard time (`ppg_adc_measurement_idac_integration.v:978`, `@satisfies: N08`). The complementary \"pre-handoff, identity_valid=1\" half is now also real, dual-tool-independent evidence: `ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v` V1.8 adds case N08-01, which does not need the force-based construction the 2026-09-07 attempt correctly rejected -- this AMI-level module unit-TB instantiates the DUT directly (PWI, including FIR, is AMI's own real sub-instance, not a Top-level sibling), so `flag_detection_pending`/`flag_precision_normal_result_ready` can be observed hierarchically without forcing any net. A new `send_normal_sample_tight` task (same code-to-raw math as the existing `send_normal_sample`, minus its 20-cycle settle) drives two back-to-back RED SAR9 NORMAL transactions; after a 24-sample warm-up rebuilds FIR's 21-tap history window (the prior AMI-47 case's own closing abort had cleared it via `flag_history_clear`), the second transaction latches `flag_detection_pending` while FIR is still genuinely mid-MAC on the first transaction's already-warm window, and an abort during that real busy window confirms `o_detection_discard_identity_valid`=1 with `o_detection_discard_frame_id`/`sample_index`/`color_ir` bound to that still-resident second transaction's real identity. Two real TB-construction bugs were found and fixed en route, not RTL defects: (1) the first attempt found FIR cold (idle, ready) because AMI-47's own closing abort had reset FIR's RED history count via `flag_history_clear`, requiring the added warm-up loop; (2) `o_detection_discard_event`/`identity_valid`/`frame_id` etc. are pure combinational signals tied directly to `i_control_abort_event`'s live level, so sampling them after the abort pulse's trailing edge (as the file's existing AMI-46/47 idiom does for its own *registered* discard fields) reads already-cleared values -- fixed by sampling mid-pulse instead. Confirmed with both iverilog and real Vivado 2022.2 xsim: 48/48 PASS (AMI-01 through AMI-47 plus N08-01), clean `$finish`. N08 is now fully `CLOSED`; this closes the last open item in the entire 25-item P/N + D01 + N08 open-item series.** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          27,
+          55,
+          1555
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-47",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 947,
+        "text": "| N08 | AMI / PWI | A generation-scoped detection flush clears downstream state even after AMI detection-fork handoff; trigger identity may be invalid only for a scope-only event. | ~~`EVIDENCE_PENDING`~~ ~~`PARTIAL`~~ **`CLOSED` 2026-09-08 (N08交接前半收尾): the \"scope-only\" half's evidence is unchanged from 2026-09-07 -- `tb_ppg_control_top_baseline_cross.v` V1.4 confirms `flag_detection_pending`=0 and `o_detection_discard_identity_valid`=0 at discard time (`ppg_adc_measurement_idac_integration.v:978`, `@satisfies: N08`). The complementary \"pre-handoff, identity_valid=1\" half is now also real, dual-tool-independent evidence: `ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v` V1.8 adds case N08-01, which does not need the force-based construction the 2026-09-07 attempt correctly rejected -- this AMI-level module unit-TB instantiates the DUT directly (PWI, including FIR, is AMI's own real sub-instance, not a Top-level sibling), so `flag_detection_pending`/`flag_precision_normal_result_ready` can be observed hierarchically without forcing any net. A new `send_normal_sample_tight` task (same code-to-raw math as the existing `send_normal_sample`, minus its 20-cycle settle) drives two back-to-back RED SAR9 NORMAL transactions; after a 24-sample warm-up rebuilds FIR's 21-tap history window (the prior AMI-47 case's own closing abort had cleared it via `flag_history_clear`), the second transaction latches `flag_detection_pending` while FIR is still genuinely mid-MAC on the first transaction's already-warm window, and an abort during that real busy window confirms `o_detection_discard_identity_valid`=1 with `o_detection_discard_frame_id`/`sample_index`/`color_ir` bound to that still-resident second transaction's real identity. Two real TB-construction bugs were found and fixed en route, not RTL defects: (1) the first attempt found FIR cold (idle, ready) because AMI-47's own closing abort had reset FIR's RED history count via `flag_history_clear`, requiring the added warm-up loop; (2) `o_detection_discard_event`/`identity_valid`/`frame_id` etc. are pure combinational signals tied directly to `i_control_abort_event`'s live level, so sampling them after the abort pulse's trailing edge (as the file's existing AMI-46/47 idiom does for its own *registered* discard fields) reads already-cleared values -- fixed by sampling mid-pulse instead. Confirmed with both iverilog and real Vivado 2022.2 xsim: 48/48 PASS (AMI-01 through AMI-47 plus N08-01), clean `$finish`. N08 is now fully `CLOSED`; this closes the last open item in the entire 25-item P/N + D01 + N08 open-item series.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3724,
+        "text": "> RED history window (AMI-47's own closing abort had cleared it via"
+      },
+      {
+        "source": "matrix",
+        "line": 3731,
+        "text": "> found cold on the first attempt (traced to AMI-47's own abort resetting its"
+      },
+      {
+        "source": "matrix",
+        "line": 3736,
+        "text": "> PASS (AMI-01 through AMI-47 plus N08-01), clean `$finish`. **N08 is now"
+      },
+      {
+        "source": "alias",
+        "line": 545,
+        "text": "> ——发现AMI-47自身收尾abort已经通过`flag_history_clear`把FIR的21点RED历史窗口清零,第二笔样本"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          10,
+          27,
+          28,
+          29,
+          30,
+          38,
+          55,
+          56,
+          57,
+          58,
+          1579,
+          1595,
+          1628
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMI-48",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-49",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-50",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-51",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-52",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-53",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMI-54",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 3603,
+        "text": "| Acceptance-D01-01 | `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:1265`; `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:647`; `PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md:927`; `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:930` | AMI-54, PWI-08, BSL-40 and PWC-40 require a real port-level check of the low gate's safe-drain/no-formal-event behavior and the single AMI->PWI->C20/C22/C23 fanout. These are contract acceptance obligations; ~~implementation proof remains `EVIDENCE_PENDING`.~~ **`CLOSED` 2026-09-07 (开放项批次4, see Section 12.14's own dated note below): real dynamic dual-scenario TB proof (`D01-01a`/`D01-01b` in `tb_ppg_control_top_baseline_cross.v` V1.5) now covers safe-drain, zero-new-formal-events and reversibility across all named consumers plus the real fifth consumer (C22, see 12.14's own contract-text-gap note). This row is this section's own *target definition* (kept for historical reference per this section's own framing); 12.14 tracks current status and is the authoritative place to check it, not this row.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3627,
+        "text": "> requirement (a real port-level check of AMI-54/PWI-08/BSL-40/PWC-40's"
+      },
+      {
+        "source": "matrix",
+        "line": 3656,
+        "text": ">    named requirement IDs (AMI-54/PWI-08/BSL-40/PWC-40) name four consumers,"
+      },
+      {
+        "source": "alias",
+        "line": 89,
+        "text": "| Acceptance-D01-01 (AMI-54/PWI-08/BSL-40/精度窗口控制器验收表第40条 + C22无对应ID的第五消费者 动态安全排空;2026-09-15改写本单元格措辞:ID正则加入PWC前缀后,此处若裸写该编号,脚本会把本行当成它的真实映射,而本行D01-01b证据并未隔离C23自身门控,见PWC节) | `tb_ppg_control_top_baseline_cross.v` V1.5 场景D01-01a(真实候选在途STOP安全drain)+D01-01b(peak_valley_config_valid=0持续运行零新事件+可逆性)，紧接既有N01/N08场景之后 | AMI转发`ppg_adc_measurement_idac_integration.v:2509`；C20门控`ppg_dynamic_baseline_cross_detector.v:480/488/1557`；C22门控`ppg_peak_valley_window_detector.v:351/354/465`(**无对应验收ID，合同文字缺口**)；C23门控`ppg_precision_window_controller.v:277`；COMMIT-only-in-CONFIG架构边界见`ppg_system_config_manager.v:457` | ~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3352-3365,12.14批次4新增记录`~~ **`PPG_CONTRACT_CLOSURE_MATRIX.md:3463-3524`(2026-09-10 Stage2 B_TAG_MISSING批次1订正:原3352-3365现已漂移进12.12b节SSW D03内容,与本ID无关——本节之后的§13.1/13.2新增内容把行号整体下移;真实批次4记录段落现在是3463-3524。同批次核实：§12.13(3401-3417行)的Acceptance-D01-01目标定义行本身也发现一处真实过期文字,已一并修复,见12.13行3417末尾\"implementation proof remains EVIDENCE_PENDING\"的删除线更正)** — 批次4(2026-09-07)真实xsim通过，见`ppg_control_top/d01_xsim_final_pass.log`；\"字面mid-flight toggle场景不可无force构造\"是真实架构发现，非未尝试。**C22合同文字缺口独立复核(2026-09-10)：`PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md`§16自检验收矩阵(`PVW-01`~`PVW-28`)确认逐条核对，没有一条覆盖`i_peak_valley_config_valid`门控/安全排空行为，矩阵12.14节的\"real contract text gap\"记录截至今天仍然准确，不是脚本误报也不是已被静默解决——本次未修改该合同正文，维持\"记录但不动\"的既有处置** |"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMR-01",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          346
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-02",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          355,
+          361
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-03",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          384
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-04",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          387
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-05",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          391
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-06",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          403
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-07",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          467
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-08",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMR-09",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMR-10",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          467
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-11",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          512
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-12",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          545
+        ]
+      }
+    ]
+  },
+  {
+    "id": "AMR-13",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "AMR-14",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+        "lines": [
+          575
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FFK-01",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 935,
+        "text": "| P13 | AMI fork | Separate qualification storage and release are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (开放项批次1): a fourth \"hidden evidence\" pattern found -- `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v`, a pre-existing module-level unit TB (FFK-01~09, created 2026/08/07), already proves exactly this: FFK-02 proves independent per-branch storage, FFK-03/04 prove the symmetric single-branch-backpressure/independent-release behavior this item asks for, and FFK-06 repeats it under sustained 5-cycle backpressure. It was simply never cross-referenced from the 18 `ppg_control_top` TBs or the alias mapping table (same un-cross-referenced-standalone-unit-TB pattern as P03-P05/P09/P10/N03/N06's supervisor TB, but this time the fork's own). Re-ran fresh via iverilog: 50/50 PASS, 0 FAIL, clean `$finish`; tagged the four directly-relevant PASS messages with \"(P13)\". RTL tags: `ppg_normal_transaction_fork.v:285,298` (`@satisfies: P13`).** |"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-02",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 935,
+        "text": "| P13 | AMI fork | Separate qualification storage and release are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (开放项批次1): a fourth \"hidden evidence\" pattern found -- `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v`, a pre-existing module-level unit TB (FFK-01~09, created 2026/08/07), already proves exactly this: FFK-02 proves independent per-branch storage, FFK-03/04 prove the symmetric single-branch-backpressure/independent-release behavior this item asks for, and FFK-06 repeats it under sustained 5-cycle backpressure. It was simply never cross-referenced from the 18 `ppg_control_top` TBs or the alias mapping table (same un-cross-referenced-standalone-unit-TB pattern as P03-P05/P09/P10/N03/N06's supervisor TB, but this time the fork's own). Re-ran fresh via iverilog: 50/50 PASS, 0 FAIL, clean `$finish`; tagged the four directly-relevant PASS messages with \"(P13)\". RTL tags: `ppg_normal_transaction_fork.v:285,298` (`@satisfies: P13`).** |"
+      },
+      {
+        "source": "matrix",
+        "line": 1041,
+        "text": "> form: `ppg_normal_transaction_fork`'s own pre-existing, never-cross-referenced module-level unit TB, FFK-02/03/04/06). See the P06/P13"
+      },
+      {
+        "source": "alias",
+        "line": 473,
+        "text": "| P13 (CLOSED 2026-09-06) | `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v` FFK-02(独立存储)+FFK-03/04(对称单分支反压独立释放)+FFK-06(5拍持续反压重复验证)——**第四种隐藏证据形态**:模块自己已存在但从未被交叉引用的unit TB(同P03-P10的supervisor模式,但这次是fork自己的),本次iverilog重跑50/50 PASS并追加`(P13)`标签 | `ppg_normal_transaction_fork.v:285,298`(已打标签`@satisfies: P13`) | `PPG_CONTRACT_CLOSURE_MATRIX.md:820` |"
+      },
+      {
+        "source": "alias",
+        "line": 493,
+        "text": "> (`ppg_normal_transaction_fork`自己已存在但从未交叉引用过的module-level unit TB,FFK-02/03/04/06)。"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-03",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 935,
+        "text": "| P13 | AMI fork | Separate qualification storage and release are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (开放项批次1): a fourth \"hidden evidence\" pattern found -- `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v`, a pre-existing module-level unit TB (FFK-01~09, created 2026/08/07), already proves exactly this: FFK-02 proves independent per-branch storage, FFK-03/04 prove the symmetric single-branch-backpressure/independent-release behavior this item asks for, and FFK-06 repeats it under sustained 5-cycle backpressure. It was simply never cross-referenced from the 18 `ppg_control_top` TBs or the alias mapping table (same un-cross-referenced-standalone-unit-TB pattern as P03-P05/P09/P10/N03/N06's supervisor TB, but this time the fork's own). Re-ran fresh via iverilog: 50/50 PASS, 0 FAIL, clean `$finish`; tagged the four directly-relevant PASS messages with \"(P13)\". RTL tags: `ppg_normal_transaction_fork.v:285,298` (`@satisfies: P13`).** |"
+      },
+      {
+        "source": "alias",
+        "line": 473,
+        "text": "| P13 (CLOSED 2026-09-06) | `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v` FFK-02(独立存储)+FFK-03/04(对称单分支反压独立释放)+FFK-06(5拍持续反压重复验证)——**第四种隐藏证据形态**:模块自己已存在但从未被交叉引用的unit TB(同P03-P10的supervisor模式,但这次是fork自己的),本次iverilog重跑50/50 PASS并追加`(P13)`标签 | `ppg_normal_transaction_fork.v:285,298`(已打标签`@satisfies: P13`) | `PPG_CONTRACT_CLOSURE_MATRIX.md:820` |"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-04",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-05",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-06",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 935,
+        "text": "| P13 | AMI fork | Separate qualification storage and release are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (开放项批次1): a fourth \"hidden evidence\" pattern found -- `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v`, a pre-existing module-level unit TB (FFK-01~09, created 2026/08/07), already proves exactly this: FFK-02 proves independent per-branch storage, FFK-03/04 prove the symmetric single-branch-backpressure/independent-release behavior this item asks for, and FFK-06 repeats it under sustained 5-cycle backpressure. It was simply never cross-referenced from the 18 `ppg_control_top` TBs or the alias mapping table (same un-cross-referenced-standalone-unit-TB pattern as P03-P05/P09/P10/N03/N06's supervisor TB, but this time the fork's own). Re-ran fresh via iverilog: 50/50 PASS, 0 FAIL, clean `$finish`; tagged the four directly-relevant PASS messages with \"(P13)\". RTL tags: `ppg_normal_transaction_fork.v:285,298` (`@satisfies: P13`).** |"
+      },
+      {
+        "source": "alias",
+        "line": 473,
+        "text": "| P13 (CLOSED 2026-09-06) | `ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v` FFK-02(独立存储)+FFK-03/04(对称单分支反压独立释放)+FFK-06(5拍持续反压重复验证)——**第四种隐藏证据形态**:模块自己已存在但从未被交叉引用的unit TB(同P03-P10的supervisor模式,但这次是fork自己的),本次iverilog重跑50/50 PASS并追加`(P13)`标签 | `ppg_normal_transaction_fork.v:285,298`(已打标签`@satisfies: P13`) | `PPG_CONTRACT_CLOSURE_MATRIX.md:820` |"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-07",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-08",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FFK-09",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-01",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          10,
+          20,
+          21,
+          23,
+          41,
+          42,
+          44,
+          550,
+          929,
+          931
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-02",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-03",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-04",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-05",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-06",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-07",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-08",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-09",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-10",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-11",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-12",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-13",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-14",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-15",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          23,
+          44
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-16",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-17",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          22,
+          43
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-18",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-19",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-20",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-21",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-22",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-23",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-24",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-25",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-26",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-27",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-28",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-29",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-30",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-31",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-32",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-33",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          21,
+          42
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-34",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          23,
+          44
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-35",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-36",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-37",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-38",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-39",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-40",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-41",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-42",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-43",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-44",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          21,
+          42
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FSC-45",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-46",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-47",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-48",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-49",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-50",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-51",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-52",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-53",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-54",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-55",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-56",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "FSC-57",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          20,
+          21,
+          41,
+          42
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IDT-01",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-02",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-03",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-04",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-05",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-06",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-07",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-08",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-09",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-10",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-11",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-12",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-13",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-14",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "IDT-15",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "LFA-06",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1205,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11; Scheduler | 9 individual rows | C08:3, C08:56-C08:64 (version bumped V1.7->V1.8 and dependency table shifted +1 by the 2026-08-30 Bucket-1 RTL session (LFA-06); re-verified 2026-09-02; version bumped V1.8->V1.9 and dependency table shifted +1 again by the 2026-09-30 SID-05 contract sync; version bumped V1.9->V1.10 and dependency table shifted +1 once more by 2026-09-30 contract sync batch 2; version bumped V1.10->V1.11 and dependency table shifted +1 again by 2026-10-01 contract sync batch 3) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1206,
+        "text": "| C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9; SSW | 6 individual rows | C09:3, C09:62-C09:67 (version bumped V1.8->V1.9 and dependency table shifted +1 by the 2026-08-30 Bucket-1 RTL session (OIB-01/LFA-06); re-verified 2026-09-02) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1243,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | `PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | Scheduler | V1.11 (bumped from V1.10 by contract sync batch 3; V1.10 from V1.9 by batch 2; V1.9 from V1.8 by the SID-05 sync; V1.8 from V1.7) | 2026-10-01 (batch 3: §10.4 `owner_release` formula gains the run-generation term); 2026-09-30 (batch 2: `i_owner_q3_window_closed` added to the port table; SID-05 sync same day, new port `o_cal_owner_deadline_event`); V1.8 2026-08-30 (Bucket-1 RTL session, LFA-06) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `a47360ca9d633edd7a5f7d5a98e6ccf0841f4613fbb2bb8d1fd6830e32debd95` (re-hashed 2026-09-02; supersedes the 2026-08-20 V1.7 digest) | Yes: `ppg_system_integration/baselines/20260820_pre_oib_lfa_prc_architecture_change/contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md`; classified baseline (now a superseded pre-V1.8 snapshot). |"
+      },
+      {
+        "source": "matrix",
+        "line": 1244,
+        "text": "| C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | `PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | SSW | V1.9 (bumped from V1.8) | 2026-08-30 (Bucket-1 RTL session, OIB-01/LFA-06) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `425b896e22b87f84f748829b5d4ac483a50b755668958e12f13610a1c0e973ee` (re-hashed 2026-09-02; supersedes the 2026-08-20 V1.8 digest) | No. |"
+      },
+      {
+        "source": "matrix",
+        "line": 3832,
+        "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **CLOSED**`删除线写法的已关闭行(脚本按行扫到删除线内关键字会误标,已知局限非新问题);本次N08自己的矩阵行文字已同步更新为CLOSED,不再落入本类。**Stage 2批次1(2026-09-10)逐项核对了原15项里的前8项:2项(`G-FP-02`/`G-FP-06`)是真实过期文字,已修复(分别转入`B_TAG_MISSING`/`A_CONSISTENT`);6项(`JNT-01`/`K02`/`LFA-04`/`LFA-06`/`LFA-08`/`OIB-01`)确认脚本误报,见§13.2新增(d)/(e)/(f)三条局限。批次2(2026-09-10)核对完剩余7项(`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/`TOP-23`)——全部同样确认是脚本误报,命中同一套(d)/(e)/(f)局限(无新增第4种根因),矩阵文字本身没有一处需要编辑。至此15项全部有真实处置(2修复+13确认误报),批次2完成后脚本报告的数字仍是13(不会降到0)——这13项是脚本regex局限的永久产物,不是待修复缺陷;真正衡量Stage 2这条优先级是否收尾的标准是\"15项是否都有真实处置\",而不是这个数字本身。** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3847,
+        "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
+      },
+      {
+        "source": "matrix",
+        "line": 3866,
+        "text": ">     变更原因栏裸写了某个验收ID(如C08行1119\"2026-08-30 (Bucket-1 RTL session, LFA-06)\"、C09行"
+      },
+      {
+        "source": "matrix",
+        "line": 3867,
+        "text": ">     1120\"...OIB-01/LFA-06)\")时,脚本会把这一整行的系统级`NOT_CLOSED`误记成该ID自己的状态断言。"
+      },
+      {
+        "source": "matrix",
+        "line": 3868,
+        "text": ">     LFA-06、OIB-01均属此类。"
+      },
+      {
+        "source": "alias",
+        "line": 163,
+        "text": "| LFA-06, LFA-10 (延期,真实RTL/合同缺口,非本对话调查范围) | 无PASS(标记SKIP) | `ppg_sar9_sar15_safe_selection_wrapper.v:438`(`flag_switch_protocol_error_condition`,已打LFA-10/OIB-01标签,与OIB-01共用) + `ppg_adc_async_stage_capture.v:107`(`flag_capture_accept`) | [[project-ppg-stage5-deferred-rtl-interface-work]] |"
+      },
+      {
+        "source": "alias",
+        "line": 564,
+        "text": "- **Stage4/5 65项**:仅JNT系列的`ppg_control_top.v`锚点(已含TOP-06/09标签,未新增JNT专属标签)、SID-01/RRC-01(经`ppg_idac_code_controller.v`两个state parameter)、LFA-10/OIB-01(经SSW一处表达式)、PRC-09/10(经FIR一处assign)插入了标签;其余ID(LFA-01~05/07~09/11/12单项、OIB-02/03/05/07/08/09单项、~~PRC-01~08单项~~、RRC-02~12单项、SID-02~10/12单项)**只在本表按范围/共享锚点登记,未逐个单独插入RTL标签**——这些ID共享同一RTL锚点时,已在锚点处的`@satisfies`里用代表性ID(如SID-01、RRC-01)标注,未把family内每个ID都罗列进同一行注释(避免注释过长、避免机械重复),Phase 2脚本核对时应视为\"锚点级\"而非\"ID级\"标签,按代表ID去关联同锚点的其余同family ID,不要逐个报\"缺失\"。**2026-09-11订正：这条note本身已随B_TAG_MISSING批次2-6的真实个体化打标签工作逐步过时——本note写于更早的对话(A1),当时LFA/OIB/RRC/SID/PRC五个family都还只是\"仅建表\"状态;批次2(LFA)、批次3(OIB)、批次4(RRC)、批次5(SID)、批次6(PRC,本批次)先后把这五个family的绝大多数ID改成了逐个真实RTL标签(仅OIB-04/OIB-06/PRC-05三项因确认无RTL锚点仍保持N/A、SID-11/LFA-06/OIB-01/PRC-09/10等少数因真实RTL/合同缺口仍走deferred路径)。此处只订正PRC-01~08这一项(本批次直接产出),不逐一重写LFA/OIB/RRC/SID的表述——那三个family各自的完整最新状态见下方对应行与`sprightly-wobbling-wadler.md`计划文件的Status记录,不在本note重复维护。**"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          23,
+          44,
+          276
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+        "lines": [
+          26,
+          28,
+          30,
+          57,
+          59,
+          61
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          28,
+          29,
+          31,
+          34,
+          35,
+          61,
+          62,
+          66,
+          67,
+          2101,
+          2133,
+          2143,
+          2147,
+          2150,
+          2153,
+          2156
+        ]
+      }
+    ]
+  },
+  {
+    "id": "LFA-10",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1051,
+        "text": "> honestly rather than force-closed, same precedent as LFA-10(b). Only **P01's open half** (branch-ID/transfer-priority, batch 3),"
+      },
+      {
+        "source": "matrix",
+        "line": 3681,
+        "text": ">    boundary as N08's pre-handoff facet and LFA-10(b)."
+      },
+      {
+        "source": "alias",
+        "line": 163,
+        "text": "| LFA-06, LFA-10 (延期,真实RTL/合同缺口,非本对话调查范围) | 无PASS(标记SKIP) | `ppg_sar9_sar15_safe_selection_wrapper.v:438`(`flag_switch_protocol_error_condition`,已打LFA-10/OIB-01标签,与OIB-01共用) + `ppg_adc_async_stage_capture.v:107`(`flag_capture_accept`) | [[project-ppg-stage5-deferred-rtl-interface-work]] |"
+      },
+      {
+        "source": "alias",
+        "line": 166,
+        "text": "**2026-09-10/11 B_TAG_MISSING批次3订正：上面两行的共享锚点(`ppg_sar9_sar15_safe_selection_wrapper.v:93,390,438`)本身就是错的——同批次2的LFA家族一样，逐条核对`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§9.4.8真实定义+`tb_ppg_control_top_owner_identity_backpressure.v`真实PASS消息后发现，438行(`flag_switch_protocol_error_condition`)其实是OIB-01自己的锚点(已打`@satisfies: LFA-10, OIB-01`)，93/390行是不相关的端口声明/波形接管点条件；OIB-02/03/05/07/09真实证据分散在4个不同位置，拆成以下独立行：**"
+      },
+      {
+        "source": "alias",
+        "line": 177,
+        "text": "| OIB-01 (延期,真实RTL/合同缺口) | 无PASS(标记SKIP) | `ppg_sar9_sar15_safe_selection_wrapper.v:438`(已打标签,与LFA-10共用表达式) | [[project-ppg-stage5-deferred-rtl-interface-work]] |"
+      },
+      {
+        "source": "alias",
+        "line": 526,
+        "text": "> 交接前半、LFA-10(b)同类。因此拆成D01-01a(真实候选在途时STOP,零新正式事件)+D01-01b"
+      },
+      {
+        "source": "alias",
+        "line": 564,
+        "text": "- **Stage4/5 65项**:仅JNT系列的`ppg_control_top.v`锚点(已含TOP-06/09标签,未新增JNT专属标签)、SID-01/RRC-01(经`ppg_idac_code_controller.v`两个state parameter)、LFA-10/OIB-01(经SSW一处表达式)、PRC-09/10(经FIR一处assign)插入了标签;其余ID(LFA-01~05/07~09/11/12单项、OIB-02/03/05/07/08/09单项、~~PRC-01~08单项~~、RRC-02~12单项、SID-02~10/12单项)**只在本表按范围/共享锚点登记,未逐个单独插入RTL标签**——这些ID共享同一RTL锚点时,已在锚点处的`@satisfies`里用代表性ID(如SID-01、RRC-01)标注,未把family内每个ID都罗列进同一行注释(避免注释过长、避免机械重复),Phase 2脚本核对时应视为\"锚点级\"而非\"ID级\"标签,按代表ID去关联同锚点的其余同family ID,不要逐个报\"缺失\"。**2026-09-11订正：这条note本身已随B_TAG_MISSING批次2-6的真实个体化打标签工作逐步过时——本note写于更早的对话(A1),当时LFA/OIB/RRC/SID/PRC五个family都还只是\"仅建表\"状态;批次2(LFA)、批次3(OIB)、批次4(RRC)、批次5(SID)、批次6(PRC,本批次)先后把这五个family的绝大多数ID改成了逐个真实RTL标签(仅OIB-04/OIB-06/PRC-05三项因确认无RTL锚点仍保持N/A、SID-11/LFA-06/OIB-01/PRC-09/10等少数因真实RTL/合同缺口仍走deferred路径)。此处只订正PRC-01~08这一项(本批次直接产出),不逐一重写LFA/OIB/RRC/SID的表述——那三个family各自的完整最新状态见下方对应行与`sprightly-wobbling-wadler.md`计划文件的Status记录,不在本note重复维护。**"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+        "lines": [
+          26,
+          27,
+          57,
+          58
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          32,
+          33,
+          34,
+          35,
+          63,
+          64,
+          66,
+          67,
+          161,
+          1700,
+          1705,
+          1766,
+          1859,
+          1873,
+          1902,
+          1905,
+          1908
+        ]
+      }
+    ]
+  },
+  {
+    "id": "OIB-01",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1206,
+        "text": "| C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9; SSW | 6 individual rows | C09:3, C09:62-C09:67 (version bumped V1.8->V1.9 and dependency table shifted +1 by the 2026-08-30 Bucket-1 RTL session (OIB-01/LFA-06); re-verified 2026-09-02) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1244,
+        "text": "| C09 | `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | `PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | SSW | V1.9 (bumped from V1.8) | 2026-08-30 (Bucket-1 RTL session, OIB-01/LFA-06) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `425b896e22b87f84f748829b5d4ac483a50b755668958e12f13610a1c0e973ee` (re-hashed 2026-09-02; supersedes the 2026-08-20 V1.8 digest) | No. |"
+      },
+      {
+        "source": "matrix",
+        "line": 3832,
+        "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **CLOSED**`删除线写法的已关闭行(脚本按行扫到删除线内关键字会误标,已知局限非新问题);本次N08自己的矩阵行文字已同步更新为CLOSED,不再落入本类。**Stage 2批次1(2026-09-10)逐项核对了原15项里的前8项:2项(`G-FP-02`/`G-FP-06`)是真实过期文字,已修复(分别转入`B_TAG_MISSING`/`A_CONSISTENT`);6项(`JNT-01`/`K02`/`LFA-04`/`LFA-06`/`LFA-08`/`OIB-01`)确认脚本误报,见§13.2新增(d)/(e)/(f)三条局限。批次2(2026-09-10)核对完剩余7项(`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/`TOP-23`)——全部同样确认是脚本误报,命中同一套(d)/(e)/(f)局限(无新增第4种根因),矩阵文字本身没有一处需要编辑。至此15项全部有真实处置(2修复+13确认误报),批次2完成后脚本报告的数字仍是13(不会降到0)——这13项是脚本regex局限的永久产物,不是待修复缺陷;真正衡量Stage 2这条优先级是否收尾的标准是\"15项是否都有真实处置\",而不是这个数字本身。** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3847,
+        "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
+      },
+      {
+        "source": "matrix",
+        "line": 3867,
+        "text": ">     1120\"...OIB-01/LFA-06)\")时,脚本会把这一整行的系统级`NOT_CLOSED`误记成该ID自己的状态断言。"
+      },
+      {
+        "source": "matrix",
+        "line": 3868,
+        "text": ">     LFA-06、OIB-01均属此类。"
+      },
+      {
+        "source": "alias",
+        "line": 163,
+        "text": "| LFA-06, LFA-10 (延期,真实RTL/合同缺口,非本对话调查范围) | 无PASS(标记SKIP) | `ppg_sar9_sar15_safe_selection_wrapper.v:438`(`flag_switch_protocol_error_condition`,已打LFA-10/OIB-01标签,与OIB-01共用) + `ppg_adc_async_stage_capture.v:107`(`flag_capture_accept`) | [[project-ppg-stage5-deferred-rtl-interface-work]] |"
+      },
+      {
+        "source": "alias",
+        "line": 166,
+        "text": "**2026-09-10/11 B_TAG_MISSING批次3订正：上面两行的共享锚点(`ppg_sar9_sar15_safe_selection_wrapper.v:93,390,438`)本身就是错的——同批次2的LFA家族一样，逐条核对`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§9.4.8真实定义+`tb_ppg_control_top_owner_identity_backpressure.v`真实PASS消息后发现，438行(`flag_switch_protocol_error_condition`)其实是OIB-01自己的锚点(已打`@satisfies: LFA-10, OIB-01`)，93/390行是不相关的端口声明/波形接管点条件；OIB-02/03/05/07/09真实证据分散在4个不同位置，拆成以下独立行：**"
+      },
+      {
+        "source": "alias",
+        "line": 177,
+        "text": "| OIB-01 (延期,真实RTL/合同缺口) | 无PASS(标记SKIP) | `ppg_sar9_sar15_safe_selection_wrapper.v:438`(已打标签,与LFA-10共用表达式) | [[project-ppg-stage5-deferred-rtl-interface-work]] |"
+      },
+      {
+        "source": "alias",
+        "line": 564,
+        "text": "- **Stage4/5 65项**:仅JNT系列的`ppg_control_top.v`锚点(已含TOP-06/09标签,未新增JNT专属标签)、SID-01/RRC-01(经`ppg_idac_code_controller.v`两个state parameter)、LFA-10/OIB-01(经SSW一处表达式)、PRC-09/10(经FIR一处assign)插入了标签;其余ID(LFA-01~05/07~09/11/12单项、OIB-02/03/05/07/08/09单项、~~PRC-01~08单项~~、RRC-02~12单项、SID-02~10/12单项)**只在本表按范围/共享锚点登记,未逐个单独插入RTL标签**——这些ID共享同一RTL锚点时,已在锚点处的`@satisfies`里用代表性ID(如SID-01、RRC-01)标注,未把family内每个ID都罗列进同一行注释(避免注释过长、避免机械重复),Phase 2脚本核对时应视为\"锚点级\"而非\"ID级\"标签,按代表ID去关联同锚点的其余同family ID,不要逐个报\"缺失\"。**2026-09-11订正：这条note本身已随B_TAG_MISSING批次2-6的真实个体化打标签工作逐步过时——本note写于更早的对话(A1),当时LFA/OIB/RRC/SID/PRC五个family都还只是\"仅建表\"状态;批次2(LFA)、批次3(OIB)、批次4(RRC)、批次5(SID)、批次6(PRC,本批次)先后把这五个family的绝大多数ID改成了逐个真实RTL标签(仅OIB-04/OIB-06/PRC-05三项因确认无RTL锚点仍保持N/A、SID-11/LFA-06/OIB-01/PRC-09/10等少数因真实RTL/合同缺口仍走deferred路径)。此处只订正PRC-01~08这一项(本批次直接产出),不逐一重写LFA/OIB/RRC/SID的表述——那三个family各自的完整最新状态见下方对应行与`sprightly-wobbling-wadler.md`计划文件的Status记录,不在本note重复维护。**"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+        "lines": [
+          150
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+        "lines": [
+          26,
+          27,
+          28,
+          30,
+          31,
+          57,
+          58,
+          59,
+          61,
+          62,
+          160,
+          1704,
+          1720,
+          1739,
+          1742,
+          1745,
+          1749,
+          1752,
+          1776,
+          1790,
+          1793,
+          1796
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          35,
+          67,
+          161,
+          1875,
+          1899,
+          1906,
+          1908
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "lines": [
+          127
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PRC-08",
+    "references": [
+      {
+        "source": "alias",
+        "line": 48,
+        "text": "| TOP-23 (=PRC-08) | `tb_ppg_control_top_injection.v` INJ-03 | `ppg_adc_measurement_idac_integration.v:1010` | `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:946` |"
+      },
+      {
+        "source": "alias",
+        "line": 135,
+        "text": "| JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状) | `tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**) | N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v:461-462`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`ppg_control_top/tb_ppg_jnt_baseline_prefix.vh:706,722` | `PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md:433`(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh:41-156`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉 |"
+      },
+      {
+        "source": "alias",
+        "line": 178,
+        "text": "~~PRC-01, PRC-02, PRC-03, PRC-04, PRC-05, PRC-06, PRC-07, PRC-08 (8项) | `tb_ppg_control_top_robustness_corner_waveforms.v` (各PASS行如1071/1106/1136/1151); PRC-05交叉RGC-06,PRC-08交叉INJ-03(=TOP-23) | 各自母模块(无本次新增RTL) | [[project-ppg-stage5-group15-prc-status]]~~"
+      },
+      {
+        "source": "alias",
+        "line": 179,
+        "text": "**2026-09-11 B_TAG_MISSING批次6(最后一批)订正：这一行和LFA/OIB/RRC/SID四个家族性质不同——那四个家族的旧行给的是一个具体但错误的共享锚点(逐条核对后4/4家族全部证伪)，这一行给的从来不是一个具体锚点，只是\"各自母模块(无本次新增RTL)\"这句含糊话，本批次的工作是从零判定每条ID真正对应哪个母模块、哪一行，不是推翻一个具体说法。逐条读`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§9.4.10真实定义文字(687-698行)+`tb_ppg_control_top_robustness_corner_waveforms.v`真实PASS消息与其内部hierarchical路径读取(774-846行的PEAK/VALLEY/CROSS通用事件计数进程、PRC-03专用饱和资格核对进程)后，真实证据分散在4个RTL文件：`ppg_peak_valley_window_detector.v`(PRC-01/03/06/07)、`ppg_dynamic_baseline_cross_detector.v`(PRC-01/03/04)、`ppg_coarse_detection_fir.v`(PRC-03)、`ppg_precision_window_controller.v`(PRC-02，本cluster在B_TAG_MISSING工作中首次触及的新文件)。PRC-05经确认该TB文件自身文件头明文写\"No RTL is exercised; this is a pure testbench-model check\"，真实为纯生成器自检性质，无RTL锚点，N/A成立，不强行安一个推论性锚点。PRC-08拆分后暴露出与LFA-04/OIB-08/SID-10同形状的登记缺口：真实证据早已存在且已打`@satisfies: TOP-23, TOP-24`(`ppg_adc_measurement_idac_integration.v:1010`)，只是从未把`PRC-08`本身追加进同一标签列表——这是5批里第4次出现这个缺口模式。已按真实映射拆成下面8行，除PRC-05外逐行都已在对应RTL位置插入`@satisfies`标签：**"
+      },
+      {
+        "source": "alias",
+        "line": 187,
+        "text": "| PRC-08 | `tb_ppg_control_top_injection.v` INJ-03(=TOP-23)真实confirmed证据 | `ppg_adc_measurement_idac_integration.v:1010`(`o_test_invalid_sample_ready`，已有`@satisfies: TOP-23, TOP-24`标签，本批次追加`PRC-08`——真实证据早已存在，只是从未登记进标签列表，同`LFA-04`/`OIB-08`/`SID-10`的登记缺口模式) | 本行(2026-09-11 B_TAG_MISSING批次6，订正原`TOP-23 (=PRC-08)`行只标注PRC-08为交叉引用、未给PRC-08自己独立行的缺口) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          30,
+          62
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "lines": [
+          21,
+          41,
+          45,
+          125,
+          909,
+          982
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PRC-09",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1216,
+        "text": "| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.5; FIR | 5 individual rows | C19:3, C19:21-C19:25 (version bumped V2.4->V2.5 and dependency table shifted +2 by the 2026-08-31 PRC-09/10 verification-injection addendum; re-verified 2026-09-02) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1254,
+        "text": "| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | `PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | FIR | V2.5 (bumped from V2.4) | 2026-08-31 (PRC-09/10 verification-injection addendum) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `424121029d6f2a19070d371bcd4566eff8b3ed78892883fc10fd8e85f2c9bcee` (re-hashed 2026-09-02; supersedes the 2026-08-20 V2.4 digest) | Yes: `ppg_system_integration/baselines/20260820_pre_oib_lfa_prc_architecture_change/contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md`; classified baseline (now a superseded pre-V2.5 snapshot). |"
+      },
+      {
+        "source": "matrix",
+        "line": 1273,
+        "text": "C08/C09/C17; the 2026-08-31 PRC-09/10 addendum for C19, see 12.4a), and no"
+      },
+      {
+        "source": "matrix",
+        "line": 3832,
+        "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **CLOSED**`删除线写法的已关闭行(脚本按行扫到删除线内关键字会误标,已知局限非新问题);本次N08自己的矩阵行文字已同步更新为CLOSED,不再落入本类。**Stage 2批次1(2026-09-10)逐项核对了原15项里的前8项:2项(`G-FP-02`/`G-FP-06`)是真实过期文字,已修复(分别转入`B_TAG_MISSING`/`A_CONSISTENT`);6项(`JNT-01`/`K02`/`LFA-04`/`LFA-06`/`LFA-08`/`OIB-01`)确认脚本误报,见§13.2新增(d)/(e)/(f)三条局限。批次2(2026-09-10)核对完剩余7项(`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/`TOP-23`)——全部同样确认是脚本误报,命中同一套(d)/(e)/(f)局限(无新增第4种根因),矩阵文字本身没有一处需要编辑。至此15项全部有真实处置(2修复+13确认误报),批次2完成后脚本报告的数字仍是13(不会降到0)——这13项是脚本regex局限的永久产物,不是待修复缺陷;真正衡量Stage 2这条优先级是否收尾的标准是\"15项是否都有真实处置\",而不是这个数字本身。** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3870,
+        "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
+      },
+      {
+        "source": "matrix",
+        "line": 3886,
+        "text": "> - **(f)§12.4a裸写ID**:`PRC-09`(矩阵1139行,C19行版本变更原因栏裸写\"2026-08-31 (PRC-09/10"
+      },
+      {
+        "source": "alias",
+        "line": 188,
+        "text": "| PRC-09, PRC-10 (2项,曾是真实RTL缺口,已修复关闭) | `tb_ppg_control_top_robustness_corner_waveforms.v` (PASS行1245/1251) | `ppg_coarse_detection_fir.v:120-122,309,312-313,315`(已打标签) (新注入端口组,经`ppg_precision_window_integration.v`V1.4/`ppg_adc_measurement_idac_integration.v`V1.13/`ppg_control_top.v`V1.2逐层上传) | [[project-ppg-stage5-group15-prc-status]] |"
+      },
+      {
+        "source": "alias",
+        "line": 564,
+        "text": "- **Stage4/5 65项**:仅JNT系列的`ppg_control_top.v`锚点(已含TOP-06/09标签,未新增JNT专属标签)、SID-01/RRC-01(经`ppg_idac_code_controller.v`两个state parameter)、LFA-10/OIB-01(经SSW一处表达式)、PRC-09/10(经FIR一处assign)插入了标签;其余ID(LFA-01~05/07~09/11/12单项、OIB-02/03/05/07/08/09单项、~~PRC-01~08单项~~、RRC-02~12单项、SID-02~10/12单项)**只在本表按范围/共享锚点登记,未逐个单独插入RTL标签**——这些ID共享同一RTL锚点时,已在锚点处的`@satisfies`里用代表性ID(如SID-01、RRC-01)标注,未把family内每个ID都罗列进同一行注释(避免注释过长、避免机械重复),Phase 2脚本核对时应视为\"锚点级\"而非\"ID级\"标签,按代表ID去关联同锚点的其余同family ID,不要逐个报\"缺失\"。**2026-09-11订正：这条note本身已随B_TAG_MISSING批次2-6的真实个体化打标签工作逐步过时——本note写于更早的对话(A1),当时LFA/OIB/RRC/SID/PRC五个family都还只是\"仅建表\"状态;批次2(LFA)、批次3(OIB)、批次4(RRC)、批次5(SID)、批次6(PRC,本批次)先后把这五个family的绝大多数ID改成了逐个真实RTL标签(仅OIB-04/OIB-06/PRC-05三项因确认无RTL锚点仍保持N/A、SID-11/LFA-06/OIB-01/PRC-09/10等少数因真实RTL/合同缺口仍走deferred路径)。此处只订正PRC-01~08这一项(本批次直接产出),不逐一重写LFA/OIB/RRC/SID的表述——那三个family各自的完整最新状态见下方对应行与`sprightly-wobbling-wadler.md`计划文件的Status记录,不在本note重复维护。**"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+        "lines": [
+          26,
+          28,
+          29,
+          31,
+          57,
+          59,
+          60,
+          62
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-01",
+    "references": [
+      {
+        "source": "alias",
+        "line": 358,
+        "text": "## PWC-01~41 (来源: `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md`验收表`:913-953`, 2026-09-15并入ID体系, 2026-09-16 TB适配+真实回归+打标签; PWC-41于2026-09-17新增, 见该行说明)"
+      },
+      {
+        "source": "alias",
+        "line": 366,
+        "text": "| PWC-01 | `tb_ppg_precision_window_controller.v:408` 用例名\"PWC-01 async reset\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (o_switch_pending == 1'b0…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:17` | `ppg_precision_window_controller.v:318`(`active_precision_mode_o <= PRECISION_9BIT`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:914`(异步复位);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          47,
+          404,
+          413,
+          761
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-02",
+    "references": [
+      {
+        "source": "alias",
+        "line": 367,
+        "text": "| PWC-02 | `tb_ppg_precision_window_controller.v:412` 用例名\"PWC-02 normal legal start\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (o_fine_window_start_even…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:18` | `ppg_precision_window_controller.v:325`(`active_precision_mode_o <= PRECISION_9BIT`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:915`(NORMAL合法START);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          417
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-03",
+    "references": [
+      {
+        "source": "alias",
+        "line": 368,
+        "text": "| PWC-03 | `tb_ppg_precision_window_controller.v:420` 用例名\"PWC-03 illegal normal initial 15bit\";条件`(o_active_precision_mode == 1'b0) && o_protocol_error_sticky && o_mode_fault_event && o_switch_h…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:19` | `ppg_precision_window_controller.v:867`(`flag_normal_start_illegal = i_start_ack_event && (i_run_profile == RUN…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:916`(NORMAL非法初始15-bit);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          425
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-04",
+    "references": [
+      {
+        "source": "alias",
+        "line": 369,
+        "text": "| PWC-04 | `tb_ppg_precision_window_controller.v:425` 用例名\"PWC-04 characterization fixed 9bit\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (o_fine_window_start_even…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:20` | `ppg_precision_window_controller.v:323`(`active_precision_mode_o <= i_initial_precision`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:917`(CHARACTERIZATION 9-bit);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言从未在表征profile下真实驱动cross/return（46变异体零抓获），已补两条`tb_ppg_precision_window_controller.v:435`\"characterization safely consumes cross without formal window\"+`:439`\"...return...\"（真实驱动`i_cross_valid`/`i_return_9bit_valid`并核对`o_cross_ready`/`o_return_9bit_ready`/`o_switch_pending`/`o_protocol_error_sticky`），RTL锚点`ppg_precision_window_controller.v:277`(`o_cross_ready`表征分支)+`:280`(`o_return_9bit_ready`表征分支)+`:855`(`flag_characterization_request`)；变异测试确认移除表征分支后两条新断言均FAIL；2026-09-17回归PASS（48/48）`xsim.log:21-22`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          430,
+          435,
+          439
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-05",
+    "references": [
+      {
+        "source": "alias",
+        "line": 370,
+        "text": "| PWC-05 | `tb_ppg_precision_window_controller.v:429` 用例名\"PWC-05 characterization fixed 15bit\";条件`o_active_precision_mode && (o_fine_window_active == 1'b0) && (o_fine_window_start_event == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:21` | `ppg_precision_window_controller.v:323`(`active_precision_mode_o <= i_initial_precision`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:918`(CHARACTERIZATION 15-bit);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          444
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-06",
+    "references": [
+      {
+        "source": "alias",
+        "line": 371,
+        "text": "| PWC-06 | `tb_ppg_precision_window_controller.v:436` 用例名\"PWC-06 cross during startup calibration\";条件`(o_cross_ready == 1'b0) && (o_switch_pending == 1'b0) && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:22` | `ppg_precision_window_controller.v:277`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:919`(启动校准期间cross);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      },
+      {
+        "source": "alias",
+        "line": 386,
+        "text": "| PWC-21 | `tb_ppg_precision_window_controller.v:529` 用例名\"PWC-21 recheck busy keeps 9bit\";条件`(o_cross_ready == 1'b0) && (o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:37` | `ppg_precision_window_controller.v:277`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:934`(recheck busy);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_cross_ready==0`被握手后状态跳转顶替、对`i_recheck_busy`门控本身零判别力（只有PWC-07顺带抓到）；已按PWC-06的模式补上`o_switch_pending==0`子句（现`tb_ppg_precision_window_controller.v:546`）；变异测试确认移除`o_cross_ready`里的`i_recheck_busy`门控后本断言FAIL（同时PWC-07依旧FAIL，交叉一致）；2026-09-17回归PASS（48/48）`xsim.log:40`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          451
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-07",
+    "references": [
+      {
+        "source": "alias",
+        "line": 372,
+        "text": "| PWC-07 | `tb_ppg_precision_window_controller.v:448` 用例名\"PWC-07 cross backpressure does not sample\";条件`(o_cross_ready == 1'b0) && (dut.reg_cross_frame_snapshot == reg_saved_cross_frame) && (o_switch_…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:23` | `ppg_precision_window_controller.v:258`(`assign flag_cross_transfer = i_cross_valid && o_cross_ready`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:920`(cross反压);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      },
+      {
+        "source": "alias",
+        "line": 386,
+        "text": "| PWC-21 | `tb_ppg_precision_window_controller.v:529` 用例名\"PWC-21 recheck busy keeps 9bit\";条件`(o_cross_ready == 1'b0) && (o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:37` | `ppg_precision_window_controller.v:277`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:934`(recheck busy);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_cross_ready==0`被握手后状态跳转顶替、对`i_recheck_busy`门控本身零判别力（只有PWC-07顺带抓到）；已按PWC-06的模式补上`o_switch_pending==0`子句（现`tb_ppg_precision_window_controller.v:546`）；变异测试确认移除`o_cross_ready`里的`i_recheck_busy`门控后本断言FAIL（同时PWC-07依旧FAIL，交叉一致）；2026-09-17回归PASS（48/48）`xsim.log:40`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          463
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-08",
+    "references": [
+      {
+        "source": "alias",
+        "line": 373,
+        "text": "| PWC-08 | `tb_ppg_precision_window_controller.v:455` 用例名\"PWC-08 atomic cross context\";条件`o_switch_pending && o_switch_target_precision && (dut.reg_cross_frame_snapshot == 16'h1234) && (…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:24` | `ppg_precision_window_controller.v:710`(`reg_cross_frame_snapshot <= i_cross_frame_id`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:921`(cross握手);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          470
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-09",
+    "references": [
+      {
+        "source": "alias",
+        "line": 374,
+        "text": "| PWC-09 | `tb_ppg_precision_window_controller.v:458` 用例名\"PWC-09 enter at next safe frame\";条件`o_active_precision_mode && o_fine_window_active && o_fine_window_start_event && (o_switch_pendin…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:25` | `ppg_precision_window_controller.v:264`(`assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:922`(下一安全帧进入);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          473
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-10",
+    "references": [
+      {
+        "source": "alias",
+        "line": 375,
+        "text": "| PWC-10 | `tb_ppg_precision_window_controller.v:460` 用例名\"PWC-10 start frame uses safe frame id\";条件`(o_fine_window_start_frame_id == 16'h2001) && (o_fine_window_start_frame_id != 16'h1234)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:26` | `ppg_precision_window_controller.v:367`(`fine_window_start_frame_id_o <= i_safe_frame_id`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:923`(进入frame_id);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          475
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-11",
+    "references": [
+      {
+        "source": "alias",
+        "line": 376,
+        "text": "| PWC-11 | `tb_ppg_precision_window_controller.v:462` 用例名\"PWC-11 atomic mode commit hold\";条件`o_switch_hold_new_transaction && o_active_precision_mode && o_fine_window_active`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:27` | `ppg_precision_window_controller.v:546`(`switch_hold_new_transaction_o <= (state_next == ST_WAIT_ENTER) || (sta…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:924`(模式提交原子性);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          477
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-12",
+    "references": [
+      {
+        "source": "alias",
+        "line": 377,
+        "text": "| PWC-12 | `tb_ppg_precision_window_controller.v:468` 用例名\"PWC-12 unknown crossing accepted\";条件`o_switch_pending && o_last_cross_time_unknown && dut.flag_pending_cross_time_unknown`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:28` | `ppg_precision_window_controller.v:564`(`last_cross_time_unknown_o <= i_cross_time_unknown`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:925`(unknown相交);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          483
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-13",
+    "references": [
+      {
+        "source": "alias",
+        "line": 378,
+        "text": "| PWC-13 | `tb_ppg_precision_window_controller.v:474` 用例名\"PWC-13 second cross during fine\";条件`(o_cross_ready == 1'b0) && (o_switch_pending == 1'b0) && o_fine_window_active && o_protocol_erro…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:29` | `ppg_precision_window_controller.v:662`(`flag_invalid_direction_request = i_run_enable && (((state_current == S…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:926`(fine期间第二cross);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          489
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-14",
+    "references": [
+      {
+        "source": "alias",
+        "line": 379,
+        "text": "| PWC-14 | `tb_ppg_precision_window_controller.v:486` 用例名\"PWC-14 return payload held under backpressure\";条件`(o_return_9bit_ready == 1'b0) && (dut.enc_return_reason_snapshot == enc_saved_return_reason) && …`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:30` | `ppg_precision_window_controller.v:259`(`assign flag_return_transfer = i_return_9bit_valid && o_return_9bit_rea…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:927`(return反压);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          501
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-15",
+    "references": [
+      {
+        "source": "alias",
+        "line": 380,
+        "text": "| PWC-15 | `tb_ppg_precision_window_controller.v:490` 用例名\"PWC-15 valley normal return\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && o_precision_15_to_9_event…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:31` | `ppg_precision_window_controller.v:630`(`state_next = ST_IDLE`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:928`(VALLEY正常返回);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_reacquire_request_event==0`子句采样点比PWC-16的真正交付拍早一拍，把返回原因换成异常仍PASS（零判别力）；已补第二条`tb_ppg_precision_window_controller.v:507`\"valley normal return still no reacquire one cycle later\"，在多等一拍的正确交付拍单独核对该信号；探针确认把返回原因换成`RETURN_FINE_TIMEOUT`后新断言FAIL（原断言仍PASS，符合预期，因为原断言其余子句依然真实有效）；2026-09-17回归PASS（48/48）`xsim.log:34`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          505,
+          507
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-16",
+    "references": [
+      {
+        "source": "alias",
+        "line": 380,
+        "text": "| PWC-15 | `tb_ppg_precision_window_controller.v:490` 用例名\"PWC-15 valley normal return\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && o_precision_15_to_9_event…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:31` | `ppg_precision_window_controller.v:630`(`state_next = ST_IDLE`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:928`(VALLEY正常返回);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_reacquire_request_event==0`子句采样点比PWC-16的真正交付拍早一拍，把返回原因换成异常仍PASS（零判别力）；已补第二条`tb_ppg_precision_window_controller.v:507`\"valley normal return still no reacquire one cycle later\"，在多等一拍的正确交付拍单独核对该信号；探针确认把返回原因换成`RETURN_FINE_TIMEOUT`后新断言FAIL（原断言仍PASS，符合预期，因为原断言其余子句依然真实有效）；2026-09-17回归PASS（48/48）`xsim.log:34`** |"
+      },
+      {
+        "source": "alias",
+        "line": 381,
+        "text": "| PWC-16 | `tb_ppg_precision_window_controller.v:498` 用例名\"PWC-16 fine timeout reacquire\";条件`(o_active_precision_mode == 1'b0) && o_reacquire_request_event && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:32` | `ppg_precision_window_controller.v:400`(`reacquire_request_event_o <= 1'b1`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:929`(FINE timeout返回);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          506,
+          515
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-17",
+    "references": [
+      {
+        "source": "alias",
+        "line": 382,
+        "text": "| PWC-17 | `tb_ppg_precision_window_controller.v:506` 用例名\"PWC-17 protocol fallback return\";条件`o_reacquire_request_event && o_protocol_error_sticky && (o_active_precision_mode == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:33` | `ppg_precision_window_controller.v:882`(`flag_return_protocol_fallback = flag_return_transfer && ((i_return_rea…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:930`(protocol fallback返回);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          523
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-18",
+    "references": [
+      {
+        "source": "alias",
+        "line": 383,
+        "text": "| PWC-18 | `tb_ppg_precision_window_controller.v:512` 用例名\"PWC-18 reserved reason normalized\";条件`(o_last_return_reason == RETURN_PROTOCOL_FALLBACK) && o_protocol_error_sticky && dut.flag_pendin…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:34` | `ppg_precision_window_controller.v:576`(`last_return_reason_o <= RETURN_PROTOCOL_FALLBACK`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:931`(RESERVED返回原因);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          529
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-19",
+    "references": [
+      {
+        "source": "alias",
+        "line": 384,
+        "text": "| PWC-19 | `tb_ppg_precision_window_controller.v:515` 用例名\"PWC-19 return frame uses safe frame id\";条件`o_precision_15_to_9_event && (o_precision_15_to_9_frame_id == 16'h6103) && (o_precision_15_to_9_…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:35` | `ppg_precision_window_controller.v:389`(`precision_15_to_9_frame_id_o <= i_safe_frame_id`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:932`(返回frame_id);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          532
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-20",
+    "references": [
+      {
+        "source": "alias",
+        "line": 385,
+        "text": "| PWC-20 | `tb_ppg_precision_window_controller.v:522` 用例名\"PWC-20 actual return event remains visible\";条件`o_precision_15_to_9_event && (o_precision_15_to_9_frame_id == 16'h7003)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:36` | `ppg_precision_window_controller.v:378`(`precision_15_to_9_event_o <= 1'b1`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:933`(AMB pending);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          539
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-21",
+    "references": [
+      {
+        "source": "alias",
+        "line": 386,
+        "text": "| PWC-21 | `tb_ppg_precision_window_controller.v:529` 用例名\"PWC-21 recheck busy keeps 9bit\";条件`(o_cross_ready == 1'b0) && (o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:37` | `ppg_precision_window_controller.v:277`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:934`(recheck busy);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_cross_ready==0`被握手后状态跳转顶替、对`i_recheck_busy`门控本身零判别力（只有PWC-07顺带抓到）；已按PWC-06的模式补上`o_switch_pending==0`子句（现`tb_ppg_precision_window_controller.v:546`）；变异测试确认移除`o_cross_ready`里的`i_recheck_busy`门控后本断言FAIL（同时PWC-07依旧FAIL，交叉一致）；2026-09-17回归PASS（48/48）`xsim.log:40`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          546
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-22",
+    "references": [
+      {
+        "source": "alias",
+        "line": 387,
+        "text": "| PWC-22 | `tb_ppg_precision_window_controller.v:535` 用例名\"PWC-22 ordinary switch needs only safety inputs\";条件`o_active_precision_mode && o_fine_window_active && o_fine_window_start_event`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:38` | `ppg_precision_window_controller.v:264`(`assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:935`(普通切换连续性);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          552
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-23",
+    "references": [
+      {
+        "source": "alias",
+        "line": 388,
+        "text": "| PWC-23 | `tb_ppg_precision_window_controller.v:543` 用例名\"PWC-23 pending waits for safe conditions\";条件`o_switch_pending && o_switch_target_precision && o_switch_hold_new_transaction && (o_active_prec…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:39` | `ppg_precision_window_controller.v:522`(`switch_pending_o <= 1'b1`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:936`(等待安全边界);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          560
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-24",
+    "references": [
+      {
+        "source": "alias",
+        "line": 389,
+        "text": "| PWC-24 | `tb_ppg_precision_window_controller.v:549` 用例名\"PWC-24 no timeout before threshold\";条件`(o_switch_timeout_sticky == 1'b0) && o_switch_pending`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:40` | `ppg_precision_window_controller.v:694`(`cnt_switch_timeout <= cnt_switch_timeout + {{(C_SWITCH_TIMEOUT_COUNTER…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:937`(10000周期前提交);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          566
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-25",
+    "references": [
+      {
+        "source": "alias",
+        "line": 390,
+        "text": "| PWC-25 | `tb_ppg_precision_window_controller.v:555` 用例名\"PWC-25 safe commit wins at threshold\";条件`o_active_precision_mode && o_fine_window_start_event && (o_switch_timeout_sticky == 1'b0) && (o_…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:41` | `ppg_precision_window_controller.v:268`(`assign flag_switch_timeout_event = flag_pending_state && (flag_enter_c…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:938`(安全与阈值同拍);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          572
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-26",
+    "references": [
+      {
+        "source": "alias",
+        "line": 391,
+        "text": "| PWC-26 | `tb_ppg_precision_window_controller.v:565` 用例名\"PWC-26 switch timeout fault\";条件`o_switch_timeout_sticky && (o_active_precision_mode == 1'b0) && (o_switch_pending == 1'b0) && o_…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:42` | `ppg_precision_window_controller.v:617`(`state_next = ST_FAULT`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:939`(切换超时);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言未覆盖要求原文\"报告fault\"+\"无假事件\"两个子句；已改为逐拍统计`o_mode_fault_event`真实出现次数（新增`cnt_fault_pulse`，`tb_ppg_precision_window_controller.v:114`附近声明），补第二条`:587`\"switch timeout reports exactly one fault pulse\"断言`cnt_fault_pulse==1`且循环结束后已回到0（不依赖假设具体的周期偏移）；变异测试确认移除`mode_fault_event_o`里的切换超时触发源后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:46`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          121,
+          586,
+          587
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-27",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 994,
+        "text": "| K04 | PWI and precision controller use only AMI generation-scoped detection-discard for STOP/abort/system-fault running-state release; reset remains independent and emits no discard. | C18 5.10; C23 detection-discard and PWC-27/PWC-28; C19-C22 discard sections. | ~~Semantics reconciled; G-FP-04 lacks a complete per-hit source ledger.~~ **`CLOSED` 2026-09-05: G-FP-04 closed by Batch 0 (all 10 search-class + 12 exact-hit rows independently re-confirmed against current source text, zero dispositions reversed).** |"
+      },
+      {
+        "source": "alias",
+        "line": 298,
+        "text": "3. **语义已变的检查**:PVW-37按合同`:837`与RTL V1.2改为断言\"新START**不**清历史sticky\"(旧TB断言相反,是这次唯一一处翻转结论的检查);PWC-27/28/33改为等待generation-scoped discard;FIR-25与TB内64-bit记分板的清队列条件同样改为代际discard。PVW-35/36、PWC-27、FIR-25另加\"陈旧代际discard不得清理\"的反例激励,PWC-40加\"恢复资格后同一笔cross被接纳\"的正向对照。"
+      },
+      {
+        "source": "alias",
+        "line": 301,
+        "text": "6. **断言不是空跑的证明**:用9个单点RTL变异体(只在scratchpad临时副本上改,真实RTL未动)复核——去掉代际比较→PVW-35/36、PWC-27、FIR-25(陈旧代际)失败;整体忽略discard→PVW-35/36、PWC-27/28失败;让新START清protocol sticky→PVW-37失败;去掉`o_cross_ready`里的V5门控项→PWC-40失败;`flag_history_transfer`去掉`i_sample_valid`→FIR-31/33失败;把calibration并进历史门控→FIR-32失败。"
+      },
+      {
+        "source": "alias",
+        "line": 392,
+        "text": "| PWC-27 | `tb_ppg_precision_window_controller.v:577` 用例名\"PWC-27 generation-scoped STOP discard cancels pending\";条件`flag_case_ok && (o_switch_pending == 1'b0) && (dut.reg_cross_frame_snapshot == 16'd0) && (o_acti…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:43` | `ppg_precision_window_controller.v:267`(`assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detect…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:940`(pending期间STOP);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          22,
+          44,
+          599
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-28",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 994,
+        "text": "| K04 | PWI and precision controller use only AMI generation-scoped detection-discard for STOP/abort/system-fault running-state release; reset remains independent and emits no discard. | C18 5.10; C23 detection-discard and PWC-27/PWC-28; C19-C22 discard sections. | ~~Semantics reconciled; G-FP-04 lacks a complete per-hit source ledger.~~ **`CLOSED` 2026-09-05: G-FP-04 closed by Batch 0 (all 10 search-class + 12 exact-hit rows independently re-confirmed against current source text, zero dispositions reversed).** |"
+      },
+      {
+        "source": "alias",
+        "line": 393,
+        "text": "| PWC-28 | `tb_ppg_precision_window_controller.v:596` 用例名\"PWC-28 generation-scoped abort and system-fault discard cancel pending\";条件`flag_case_ok && (o_switch_pending == 1'b0) && o_switch_hold_new_transaction && (o_fine_window_st…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:44` | `ppg_precision_window_controller.v:267`(`assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detect…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:941`(pending期间abort);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          618
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-29",
+    "references": [
+      {
+        "source": "alias",
+        "line": 394,
+        "text": "| PWC-29 | `tb_ppg_precision_window_controller.v:606` 用例名\"PWC-29 reset clears pending context\";条件`(o_switch_pending == 1'b0) && (dut.reg_cross_frame_snapshot == 16'd0) && (dut.reg_cross_sample_s…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:45` | `ppg_precision_window_controller.v:706`(`reg_cross_frame_snapshot <= {C_FRAME_ID_WIDTH{1'b0}}`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:942`(pending期间复位);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          628
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-30",
+    "references": [
+      {
+        "source": "alias",
+        "line": 395,
+        "text": "| PWC-30 | `tb_ppg_precision_window_controller.v:616` 用例名\"PWC-30 cross return collision\";条件`o_switch_pending && o_switch_target_precision && o_protocol_error_sticky && (dut.reg_cross_frame…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:46` | `ppg_precision_window_controller.v:862`(`flag_cross_return_collision = i_run_enable && i_cross_valid && i_retur…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:943`(cross和return同拍);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          638
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-31",
+    "references": [
+      {
+        "source": "alias",
+        "line": 396,
+        "text": "| PWC-31 | `tb_ppg_precision_window_controller.v:624` 用例名\"PWC-31 duplicate request preserves context\";条件`(o_cross_ready == 1'b0) && (dut.reg_cross_frame_snapshot == reg_saved_cross_frame) && o_protocol…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:47` | `ppg_precision_window_controller.v:652`(`flag_duplicate_cross = (state_current == ST_WAIT_ENTER) && i_cross_val…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:944`(重复同向请求);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          646
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-32",
+    "references": [
+      {
+        "source": "alias",
+        "line": 397,
+        "text": "| PWC-32 | `tb_ppg_precision_window_controller.v:634` 用例名\"PWC-32 abnormal return before recheck takeover\";条件`(o_active_precision_mode == 1'b0) && o_reacquire_request_event && o_protocol_error_sticky`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:48` | `ppg_precision_window_controller.v:265`(`assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_fra…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:945`(异常返回加重检pending);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          656
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-33",
+    "references": [
+      {
+        "source": "alias",
+        "line": 398,
+        "text": "| PWC-33 | `tb_ppg_precision_window_controller.v:650` 用例名\"PWC-33 STOP discard preserves sticky\";条件`flag_case_ok && o_protocol_error_sticky`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:49` | `ppg_precision_window_controller.v:513`(`protocol_error_sticky_o <= protocol_error_sticky_o`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:946`(STOP不清sticky);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      },
+      {
+        "source": "alias",
+        "line": 406,
+        "text": "| PWC-41 | `tb_ppg_precision_window_controller.v:713-734`（2026-09-17新增，工作线D独立复核RTL缺陷修复）两个用例\"PWC-41 new legal START preserves protocol sticky\"（`:722`）+\"PWC-41 new legal START preserves switch-timeout sticky\"（`:734`）；条件均为`flag_case_ok && o_*_sticky`（先真实建立sticky再不经复位发第二次合法START）；变异测试确认：改回旧RTL后两条均FAIL（`switch_timeout_sticky_o`/`protocol_error_sticky_o`把`i_start_ack_event`当清除条件）；2026-09-17回归PASS（42/42）`ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:57-58` | `ppg_precision_window_controller.v:494`(`switch_timeout_sticky_o`清除条件，`@satisfies: PWC-41`)+`:511`(`protocol_error_sticky_o`保持分支，`@satisfies: PWC-33, PWC-41`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:954`(START不清sticky，2026-09-17新增行);同日`PWC_01_40_WORKLINE_D_INDEPENDENT_RECHECK_20260916.md`\"RTL发现\"一节+`PWC_STICKY_CLEAR_RTL_FIX_20260917.md` |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          672,
+          741
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-34",
+    "references": [
+      {
+        "source": "alias",
+        "line": 399,
+        "text": "| PWC-34 | `tb_ppg_precision_window_controller.v:661` 用例名\"PWC-34 diagnostic clear keeps active fault\";条件`(o_switch_timeout_sticky == 1'b0) && o_switch_hold_new_transaction && (o_cross_ready == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:50` | `ppg_precision_window_controller.v:682`(`flag_fault_hold <= flag_fault_hold`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:947`(diagnostic clear);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言完全被`state_current==ST_FAULT`顶替，\"不解除活动故障保持\"这半句零判别力（已连出的`o_mode_fault_active`此前40条断言从未用过）；已补第二条`tb_ppg_precision_window_controller.v:685`\"diagnostic clear does not release active fault hold\"直接核对`o_mode_fault_active`（`ppg_precision_window_controller.v:292`）；变异测试确认给`flag_fault_hold`加一条`i_diag_clear_event`释放分支后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:55`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          684,
+          685,
+          753
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-35",
+    "references": [
+      {
+        "source": "alias",
+        "line": 400,
+        "text": "| PWC-35 | `tb_ppg_precision_window_controller.v:667` 用例名\"PWC-35 controller idle definition\";条件`o_controller_idle && (o_switch_pending == 1'b0) && (o_switch_hold_new_transaction == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:51` | `ppg_precision_window_controller.v:555`(`controller_idle_o <= (state_next == ST_IDLE || state_next == ST_FINE) …`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:948`(controller idle);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言只测过idle=1这一侧，且该取值恰好等于复位默认值，\"**仅**…时为1\"排除半句零覆盖；已补第二条`tb_ppg_precision_window_controller.v:693`\"controller idle excludes pending switch\"（`request_cross`建立真实pending后核对`o_controller_idle==0`）；变异测试确认把`controller_idle_o`硬连高后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:57`** |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          24,
+          46,
+          691,
+          693
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-36",
+    "references": [
+      {
+        "source": "alias",
+        "line": 401,
+        "text": "| PWC-36 | `tb_ppg_precision_window_controller.v:674` 用例名\"PWC-36 red infrared share committed precision\";条件`(o_active_precision_mode == flag_saved_mode) && (o_fine_window_active == flag_saved_window)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:52` | `ppg_precision_window_controller.v:284`(`assign o_active_precision_mode = active_precision_mode_o`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:949`(R/IR同帧);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          700
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-37",
+    "references": [
+      {
+        "source": "alias",
+        "line": 402,
+        "text": "| PWC-37 | `tb_ppg_precision_window_controller.v:678` 用例名\"PWC-37 enter ignores FIR history tail\";条件`o_active_precision_mode && o_fine_window_active && o_fine_window_start_event && (o_switch_pendin…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:53` | `ppg_precision_window_controller.v:264`(`assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:950`(进入15-bit历史尾部);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          704
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-38",
+    "references": [
+      {
+        "source": "alias",
+        "line": 403,
+        "text": "| PWC-38 | `tb_ppg_precision_window_controller.v:683` 用例名\"PWC-38 return ignores FIR history tail\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && o_precision_15_to_9_event…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:54` | `ppg_precision_window_controller.v:265`(`assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_fra…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:951`(返回9-bit历史尾部);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          709
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-39",
+    "references": [
+      {
+        "source": "alias",
+        "line": 404,
+        "text": "| PWC-39 | `tb_ppg_precision_window_controller.v:688` 用例名\"PWC-39 FIR tail excluded from switch timeout\";条件`(o_switch_timeout_sticky == 1'b0) && (o_switch_pending == 1'b0) && (o_active_precision_mode == 1…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:55` | `ppg_precision_window_controller.v:266`(`assign flag_pending_state = (state_current == ST_WAIT_ENTER) || (state…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:952`(尾部不计切换超时);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          714
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-40",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 3603,
+        "text": "| Acceptance-D01-01 | `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:1265`; `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:647`; `PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md:927`; `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:930` | AMI-54, PWI-08, BSL-40 and PWC-40 require a real port-level check of the low gate's safe-drain/no-formal-event behavior and the single AMI->PWI->C20/C22/C23 fanout. These are contract acceptance obligations; ~~implementation proof remains `EVIDENCE_PENDING`.~~ **`CLOSED` 2026-09-07 (开放项批次4, see Section 12.14's own dated note below): real dynamic dual-scenario TB proof (`D01-01a`/`D01-01b` in `tb_ppg_control_top_baseline_cross.v` V1.5) now covers safe-drain, zero-new-formal-events and reversibility across all named consumers plus the real fifth consumer (C22, see 12.14's own contract-text-gap note). This row is this section's own *target definition* (kept for historical reference per this section's own framing); 12.14 tracks current status and is the authoritative place to check it, not this row.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3627,
+        "text": "> requirement (a real port-level check of AMI-54/PWI-08/BSL-40/PWC-40's"
+      },
+      {
+        "source": "matrix",
+        "line": 3632,
+        "text": "> comment in `ppg_precision_window_controller.v` (line 28/55) naming PWC-40 as"
+      },
+      {
+        "source": "matrix",
+        "line": 3656,
+        "text": ">    named requirement IDs (AMI-54/PWI-08/BSL-40/PWC-40) name four consumers,"
+      },
+      {
+        "source": "alias",
+        "line": 298,
+        "text": "3. **语义已变的检查**:PVW-37按合同`:837`与RTL V1.2改为断言\"新START**不**清历史sticky\"(旧TB断言相反,是这次唯一一处翻转结论的检查);PWC-27/28/33改为等待generation-scoped discard;FIR-25与TB内64-bit记分板的清队列条件同样改为代际discard。PVW-35/36、PWC-27、FIR-25另加\"陈旧代际discard不得清理\"的反例激励,PWC-40加\"恢复资格后同一笔cross被接纳\"的正向对照。"
+      },
+      {
+        "source": "alias",
+        "line": 299,
+        "text": "4. **本次新建的断言**:PWC-40(隔离激励:`i_peak_valley_config_valid=0`且`i_cross_valid=1`时`o_cross_ready=0`、无pending、无fine窗口)与FIR-31/32/33(`i_sample_valid`三条)此前是零断言,本次从零写成;PWC总PASS门限39→40;FIR结尾由\"只判断`cnt_error==0`\"改为同时核对PASS条数(98),补上此前比PVW/PWC弱的那一环。"
+      },
+      {
+        "source": "alias",
+        "line": 301,
+        "text": "6. **断言不是空跑的证明**:用9个单点RTL变异体(只在scratchpad临时副本上改,真实RTL未动)复核——去掉代际比较→PVW-35/36、PWC-27、FIR-25(陈旧代际)失败;整体忽略discard→PVW-35/36、PWC-27/28失败;让新START清protocol sticky→PVW-37失败;去掉`o_cross_ready`里的V5门控项→PWC-40失败;`flag_history_transfer`去掉`i_sample_valid`→FIR-31/33失败;把calibration并进历史门控→FIR-32失败。"
+      },
+      {
+        "source": "alias",
+        "line": 303,
+        "text": "8. **仍然保留的已知问题**:(a) PWC-40现在有真实映射,但矩阵`:3532`那一行的第一个状态词是被删除线划掉的旧`EVIDENCE_PENDING`,核对脚本只取第一个匹配,于是PWC-40被判成`E_STALE_MATRIX_TEXT`——这是Phase2已记录的脚本局限重现,不是矩阵文字真的过期,本次未改矩阵。(b) FIR合同`:10`/`:686`散文仍写\"FIR-31至FIR-36\",验收表只有FIR-31~33三行,未改合同。(c) 本次给三份RTL打标签(纯注释)使19-TB回归与chip_digital_top的20份日志在mtime口径下变为STALE,看门狗如实报告,本次未重跑那20份。"
+      },
+      {
+        "source": "alias",
+        "line": 362,
+        "text": "**本组情况**:合同验收表`:913-952`共40行。PWC-40此前是唯一缺口——TB V1.0早于该端口存在,实例化从未连接`.i_peak_valley_config_valid`;控制顶层D01-01b也替代不了(它的CROSS计数取自C20输出,config_valid=0时C20已先行封锁cross,C23自身门控从未被隔离激励)。本次新写的隔离断言直接向C23保持cross请求,绕开C20这一层。"
+      },
+      {
+        "source": "alias",
+        "line": 405,
+        "text": "| PWC-40 | `tb_ppg_precision_window_controller.v:708` 用例名\"PWC-40 peak valley config gate blocks formal cross\";条件`flag_case_ok && o_switch_pending && o_switch_target_precision && (dut.reg_cross_frame_snapshot =…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:56` | `ppg_precision_window_controller.v:277`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:953`(V5正式检测门控);本行(2026-09-16 TB适配+真实回归+打标签) |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          22,
+          44,
+          734
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWC-41",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1220,
+        "text": "| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.6; precision controller | 5 individual rows | C23:3, C23:35-C23:39 (dependency table shifted +1 by the 2026-10-01 batch-3 header record for the 2026-09-17 PWC-41 content update; normative label unchanged) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1258,
+        "text": "| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | precision controller | V2.6 (normative label unchanged) | 2026-08-20 base; content updated by 2026-09-17 (PWC-41; header record added 2026-10-01) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `b40ad894850122db572ee0623dc5b4c6d3de3fd9d917b282086093c16a5a1885` (re-hashed 2026-09-02; supersedes the 2026-08-20 digest) | No. |"
+      },
+      {
+        "source": "alias",
+        "line": 358,
+        "text": "## PWC-01~41 (来源: `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md`验收表`:913-953`, 2026-09-15并入ID体系, 2026-09-16 TB适配+真实回归+打标签; PWC-41于2026-09-17新增, 见该行说明)"
+      },
+      {
+        "source": "alias",
+        "line": 406,
+        "text": "| PWC-41 | `tb_ppg_precision_window_controller.v:713-734`（2026-09-17新增，工作线D独立复核RTL缺陷修复）两个用例\"PWC-41 new legal START preserves protocol sticky\"（`:722`）+\"PWC-41 new legal START preserves switch-timeout sticky\"（`:734`）；条件均为`flag_case_ok && o_*_sticky`（先真实建立sticky再不经复位发第二次合法START）；变异测试确认：改回旧RTL后两条均FAIL（`switch_timeout_sticky_o`/`protocol_error_sticky_o`把`i_start_ack_event`当清除条件）；2026-09-17回归PASS（42/42）`ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:57-58` | `ppg_precision_window_controller.v:494`(`switch_timeout_sticky_o`清除条件，`@satisfies: PWC-41`)+`:511`(`protocol_error_sticky_o`保持分支，`@satisfies: PWC-33, PWC-41`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:954`(START不清sticky，2026-09-17新增行);同日`PWC_01_40_WORKLINE_D_INDEPENDENT_RECHECK_20260916.md`\"RTL发现\"一节+`PWC_STICKY_CLEAR_RTL_FIX_20260917.md` |"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+        "lines": [
+          23,
+          45,
+          47,
+          404,
+          737,
+          746,
+          758,
+          761
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-01",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+        "lines": [
+          9,
+          27,
+          38,
+          53,
+          732,
+          746,
+          750,
+          840
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-02",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+        "lines": [
+          748,
+          769
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-03",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+        "lines": [
+          771,
+          811,
+          816
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-04",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+        "lines": [
+          801,
+          809
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-05",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+        "lines": [
+          9,
+          27,
+          38,
+          53,
+          771,
+          818,
+          837,
+          840
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PWI-06",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "PWI-07",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "PWI-08",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 3603,
+        "text": "| Acceptance-D01-01 | `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:1265`; `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:647`; `PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md:927`; `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:930` | AMI-54, PWI-08, BSL-40 and PWC-40 require a real port-level check of the low gate's safe-drain/no-formal-event behavior and the single AMI->PWI->C20/C22/C23 fanout. These are contract acceptance obligations; ~~implementation proof remains `EVIDENCE_PENDING`.~~ **`CLOSED` 2026-09-07 (开放项批次4, see Section 12.14's own dated note below): real dynamic dual-scenario TB proof (`D01-01a`/`D01-01b` in `tb_ppg_control_top_baseline_cross.v` V1.5) now covers safe-drain, zero-new-formal-events and reversibility across all named consumers plus the real fifth consumer (C22, see 12.14's own contract-text-gap note). This row is this section's own *target definition* (kept for historical reference per this section's own framing); 12.14 tracks current status and is the authoritative place to check it, not this row.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3627,
+        "text": "> requirement (a real port-level check of AMI-54/PWI-08/BSL-40/PWC-40's"
+      },
+      {
+        "source": "matrix",
+        "line": 3638,
+        "text": "> 20260902]]) for PWI-08 specifically -- confirmed still open, not"
+      },
+      {
+        "source": "matrix",
+        "line": 3656,
+        "text": ">    named requirement IDs (AMI-54/PWI-08/BSL-40/PWC-40) name four consumers,"
+      },
+      {
+        "source": "alias",
+        "line": 89,
+        "text": "| Acceptance-D01-01 (AMI-54/PWI-08/BSL-40/精度窗口控制器验收表第40条 + C22无对应ID的第五消费者 动态安全排空;2026-09-15改写本单元格措辞:ID正则加入PWC前缀后,此处若裸写该编号,脚本会把本行当成它的真实映射,而本行D01-01b证据并未隔离C23自身门控,见PWC节) | `tb_ppg_control_top_baseline_cross.v` V1.5 场景D01-01a(真实候选在途STOP安全drain)+D01-01b(peak_valley_config_valid=0持续运行零新事件+可逆性)，紧接既有N01/N08场景之后 | AMI转发`ppg_adc_measurement_idac_integration.v:2509`；C20门控`ppg_dynamic_baseline_cross_detector.v:480/488/1557`；C22门控`ppg_peak_valley_window_detector.v:351/354/465`(**无对应验收ID，合同文字缺口**)；C23门控`ppg_precision_window_controller.v:277`；COMMIT-only-in-CONFIG架构边界见`ppg_system_config_manager.v:457` | ~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3352-3365,12.14批次4新增记录`~~ **`PPG_CONTRACT_CLOSURE_MATRIX.md:3463-3524`(2026-09-10 Stage2 B_TAG_MISSING批次1订正:原3352-3365现已漂移进12.12b节SSW D03内容,与本ID无关——本节之后的§13.1/13.2新增内容把行号整体下移;真实批次4记录段落现在是3463-3524。同批次核实：§12.13(3401-3417行)的Acceptance-D01-01目标定义行本身也发现一处真实过期文字,已一并修复,见12.13行3417末尾\"implementation proof remains EVIDENCE_PENDING\"的删除线更正)** — 批次4(2026-09-07)真实xsim通过，见`ppg_control_top/d01_xsim_final_pass.log`；\"字面mid-flight toggle场景不可无force构造\"是真实架构发现，非未尝试。**C22合同文字缺口独立复核(2026-09-10)：`PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md`§16自检验收矩阵(`PVW-01`~`PVW-28`)确认逐条核对，没有一条覆盖`i_peak_valley_config_valid`门控/安全排空行为，矩阵12.14节的\"real contract text gap\"记录截至今天仍然准确，不是脚本误报也不是已被静默解决——本次未修改该合同正文，维持\"记录但不动\"的既有处置** |"
+      }
+    ],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "SID-05",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 1205,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11; Scheduler | 9 individual rows | C08:3, C08:56-C08:64 (version bumped V1.7->V1.8 and dependency table shifted +1 by the 2026-08-30 Bucket-1 RTL session (LFA-06); re-verified 2026-09-02; version bumped V1.8->V1.9 and dependency table shifted +1 again by the 2026-09-30 SID-05 contract sync; version bumped V1.9->V1.10 and dependency table shifted +1 once more by 2026-09-30 contract sync batch 2; version bumped V1.10->V1.11 and dependency table shifted +1 again by 2026-10-01 contract sync batch 3) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1207,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3; AMI | 14 individual rows | C10:3, C10:60-C10:73 (version bumped V2.1->V2.2 and dependency table shifted +1 by the 2026-09-30 SID-05 contract sync; version bumped V2.2->V2.3 and dependency table shifted +1 again by 2026-09-30 contract sync batch 2) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1236,
+        "text": "| C01 | `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` | `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` | `ppg_control_top` | V1.10 (normative label unchanged; V1.11-V1.17 are non-normative errata per the file's own supersession clause; V1.15 = 2026-09-30 SID-05 internal-wire erratum; V1.16 = 2026-09-30 batch-2 port erratum; V1.17 = 2026-10-01 batch-3 internal-wire erratum) | 2026-08-20 base; errata through 2026-10-01 | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `620b671493546aa45b86354d09703f4141c325940b5e7a2cf84b3c832e14f395` (re-hashed 2026-09-02; supersedes the 2026-08-20 digest, which the errata insertions invalidated) | Yes: `ppg_system_integration/baselines/20260820_pre_oib_lfa_prc_architecture_change/contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md`; classified baseline. |"
+      },
+      {
+        "source": "matrix",
+        "line": 1243,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | `PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | Scheduler | V1.11 (bumped from V1.10 by contract sync batch 3; V1.10 from V1.9 by batch 2; V1.9 from V1.8 by the SID-05 sync; V1.8 from V1.7) | 2026-10-01 (batch 3: §10.4 `owner_release` formula gains the run-generation term); 2026-09-30 (batch 2: `i_owner_q3_window_closed` added to the port table; SID-05 sync same day, new port `o_cal_owner_deadline_event`); V1.8 2026-08-30 (Bucket-1 RTL session, LFA-06) | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `a47360ca9d633edd7a5f7d5a98e6ccf0841f4613fbb2bb8d1fd6830e32debd95` (re-hashed 2026-09-02; supersedes the 2026-08-20 V1.7 digest) | Yes: `ppg_system_integration/baselines/20260820_pre_oib_lfa_prc_architecture_change/contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md`; classified baseline (now a superseded pre-V1.8 snapshot). |"
+      },
+      {
+        "source": "matrix",
+        "line": 1245,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | AMI | V2.3 (bumped from V2.2 by contract sync batch 2; V2.2 from V2.1 by the SID-05 sync) | 2026-09-30 (batch 2: calibration-loss injection pair and P2S telemetry outputs; SID-05 sync same day, new port `i_cal_owner_deadline_event`); V2.1 base 2026-08-20 | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `0f7bcd097448c6e18b167fcbc756f7b62a3bb1bf370730776857eb451645cbd7` | Yes: `ppg_system_integration/baselines/20260820_pre_oib_lfa_prc_architecture_change/contracts/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md`; classified baseline. |"
+      },
+      {
+        "source": "matrix",
+        "line": 1280,
+        "text": "version-only repair. On 2026-09-30 the SID-05 contract sync bumped C08 V1.8->V1.9 (8 citers) and C10 V2.1->V2.2 (16 citers) and re-edited every citing declaration in the same change, so all 141 bindings still match; C01 gained only erratum V1.15 and keeps its normative label V1.10. Contract sync batch 2 (same day) bumped C08 V1.9->V1.10 (8 citers) and C10 V2.2->V2.3 (16 citers) the same way, C01 gained erratum V1.16, and the long-standing +2 drift of the C01 source-declaration lines was corrected (see the C01 row; details in `verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`). Contract sync batch 3 (2026-10-01) bumped C08 V1.10->V1.11 (8 citers), C16 V2->V2.1 (6 citers) and C18 V2.0->V2.1 (10 citers) the same way; C01 gained erratum V1.17 and C23 only a header record, both keeping their labels (`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`)."
+      },
+      {
+        "source": "matrix",
+        "line": 1571,
+        "text": "| C01 | C01无覆盖；依据`ppg_control_top.v:68`（V1.5，2026-09-05）与P2S集成合同§8.4.5 | output | `o_s2_raw` | `ppg_control_top.v:292` `output [9:0] o_s2_raw` | **2026-09-16新增行（批次1查出的65个从未入账的真实Top端口之一；C01缺口：V1.5新增端口，C01至今未收录；C01合同字面命中0次）**：Top自身边界端口。Top边界输出（`ppg_control_top.v:292`，[9:0]）← Top `:1598` `o_s2_raw = ami_s2_raw_o`←AMI.o_s2_raw（`ppg_control_top.v:1372`；声明`ppg_adc_measurement_idac_integration.v:402`）。位宽10-bit，与子模块声明数值一致 **2026-09-30 SID-05合同同步补记（C01块末尾说明）**：SID-05没有新增Top端口，只新增Top内部网`sched_cal_owner_deadline_event_o`（`ppg_control_top.v:553`，调度器侧连接`:963`、AMI侧连接`:1151`；C01 V1.15勘误已在第6.3节记录）。本台账按端口入账，该内部网不单独成行；若后续G-FP-01复核决定为内部网建条目，届时统一补行，不在此插行以免矩阵行号漂移。记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。 **2026-09-30合同补记批次2（C01块末尾说明）**：C01 V1.16勘误已把`o_s1_calibration_applied`、`o_s1_raw`、`o_s2_raw`写进第4.2节，把calibration-loss注入端口对写进第4.1、4.2、4.3、6.7节，因此本块中这三行的Source列“C01无覆盖”已不再成立，以及注入端口对各行锚点所指的§4.1那一行，留待后续G-FP-01复核时统一改锚，本次不插行也不改那几行。记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`。 |"
+      },
+      {
+        "source": "matrix",
+        "line": 1924,
+        "text": "| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md:1026` | output | `o_scheduler_fault_run_generation` |  | Producer: `ppg_400hz_frame_calibration_scheduler.v:201`. Consumer: `ppg_control_top.v:962` -> supervisor (cluster ⑥), cross-cluster row. C08 now 106/106 (30 in + 76 out, matching the grep count exactly); cluster ② complete for this contract, with 6 dangling-output findings flagged inline (`o_macro_frame_start_event`, `o_startup_idac_safe_boundary`, `o_transaction_inflight`, `o_current_frame_id`, `o_next_sample_index`, `o_scheduler_local_fault_blocking`) -- **all 6 confirmed permanently dangling 2026-09-05**, not a TBD pending DBG_OUT/glue-top design (see `o_macro_frame_start_event`'s row above for the full citation). **2026-09-30 SID-05合同同步补记（C08块末尾说明）**：SID-05新增端口`o_cal_owner_deadline_event`（调度器RTL V1.8，声明`ppg_400hz_frame_calibration_scheduler.v:189`；C08 V1.9已在第13.9节端口表补入）尚未入账；为避免插行导致矩阵行号漂移，留待G-FP-01批次4（C08）审计时统一补行。记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。 |"
+      },
+      {
+        "source": "matrix",
+        "line": 3189,
+        "text": "| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:215` | note |  |  | **Final disposition of AMI's remaining genuinely-unclaimable ports** (no further punting -- this is the last cluster): `i_active_config_valid`, `i_run_enable`, `i_start_ack_event`, `i_stop_ack_event`, `i_control_abort_event`, `i_diag_clear_event`, `i_run_generation` (7 ports) are confirmed generic 2 MHz lifecycle broadcasts fanning to essentially every child across every cluster (each already cited dozens of times across all 6 clusters' own rows as a shared upstream source, never as a single exclusive consumer) -- these do not have one true \"owner\" cluster and are recorded here as **not assignable to any single cluster; left for the final §12.1/§12.12 unification pass to decide how (or whether) to represent a fan-out-to-everyone port in a per-cluster ledger.** `o_datapath_empty` and `o_wrapper_fault_blocking` and `o_normal_measurement_eligible` are confirmed **genuine multi-cluster combinational aggregates** (verified via their own `assign` statements: `o_datapath_empty` mixes cluster ③④⑤⑥ idle terms, `o_wrapper_fault_blocking` mixes cluster③/⑤/AMI-own fault terms, `o_normal_measurement_eligible` mixes cluster③/⑤/AMI-own terms) -- **not assignable to a single cluster**, matching the precedent already established for `o_datapath_empty` by clusters ③/④/⑤; recorded as a permanent multi-cluster note, not a TBD-for-later. `i_idac_code_safe_boundary` is confirmed exclusively cluster ③'s (feeds `ppg_idac_code_controller.v:2314` only) -- belongs to cluster ③'s existing C10 share, cluster ⑥ does not claim it (cluster ③ already closed; noted here only so it is not mistaken for unclaimed). `i_normal_frame_complete_event`/`i_calibration_frame_complete_event` are confirmed exclusively cluster ③'s (feed `ppg_amb_recheck_scheduler`'s instantiation inside PWI, `ppg_precision_window_integration.v:994,1002`) -- same disposition. `i_test_inject_enable` is confirmed shared between cluster ③'s IDAC controller and cluster ⑥'s own FIR-adjacent/identity-injection paths via the single `flag_test_inject_effective` gate -- genuinely shared, not exclusively claimable. **With this sweep, C10's 265 ports are now fully accounted for**: 71 (cluster ③) + 36 (cluster ④) + 17 (cluster ⑤) + 104 (cluster ⑥, this batch: 6+38+15+1+5+1+13+4+5+10+3, i.e. every group enumerated above plus the earlier calibrator/reconstructor/dc_recovery/fault-record/idle-diagnostic claims) = 228 claimed across all 4 AMI-internal clusters, plus 3 confirmed cluster-③-exclusive (already in their 71) minus double-count, plus 10 confirmed generic-broadcast/multi-cluster-aggregate (not assignable to any single cluster) = 265 - 10 = 255 assignable, 228 assigned; the residual gap is `i_active_config_valid` (already separately tracked as a C04 TBD row below, not double-counted here) plus minor arithmetic slack from ports cited only by reference in this note rather than a fresh standalone row (e.g. those already covered under another module's \"already cited\" cross-reference) -- exact reconciliation left to the final §12.1 gate-count pass, which is explicitly out of scope for this batch per the file-safety rule. **2026-09-30 SID-05合同同步补记（C10台账末尾汇总说明）**：SID-05新增端口`i_cal_owner_deadline_event`（AMI RTL V1.15，声明`ppg_adc_measurement_idac_integration.v:153`；C10 V2.2已在第6.6节端口表补入）尚未入账；为避免插行导致矩阵行号漂移，留待G-FP-01批次2（C10）审计时统一补行。记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。 **2026-09-30合同补记批次2（C10台账末尾汇总说明）**：C10 V2.3第6.7节新补的P2S遥测输出`o_s1_calibration_applied`、`o_s1_raw[9:0]`、`o_s2_raw[9:0]`（AMI RTL V1.14，声明`ppg_adc_measurement_idac_integration.v:403-405`）尚未入账，为避免插行导致矩阵行号漂移，留待G-FP-01批次2（C10）审计时统一补行；同批补进第6.5b节的calibration-loss注入端口对在本块已有行。记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`。 |"
+      },
+      {
+        "source": "alias",
+        "line": 136,
+        "text": "~~SID-01, SID-02, SID-03, SID-04, SID-05, SID-06, SID-07, SID-08, SID-09, SID-10, SID-12 (11项, SID-11延期见下) | `tb_ppg_control_top_startup_idac_calibration.v` (各PASS行如860/1045/1156/1190/1235/1321) | `ppg_idac_code_controller.v`: `ST_AMB_WAIT`(279行,5'd3,已打SID-01标签), `ST_MANUAL_APPLY`(277行,5'd1) | [[project-ppg-stage5-batching-plan]]~~"
+      },
+      {
+        "source": "alias",
+        "line": 142,
+        "text": "| SID-05 | `tb_ppg_control_top_startup_idac_calibration.v` PASS行1099(AMB部分,历史证据) | `ppg_400hz_frame_calibration_scheduler.v:464`(`flag_cal_owner_deadline`=本地tick≥248且owner未提交,已打标签);`:744`(截止后清除`B_CAL_WAVE_PENDING`,不产生owner提交,不消费样本序号,已打标签) | 本行(2026-09-11 B_TAG_MISSING批次5) |**2026-09-18工作线D待查清单调查确认:仅DC_R/DC_IR部分(AMB部分本身不是缺口)此前是真实空白——2026-09-17曾尝试延伸AMB阶段逻辑到DC_R/DC_IR但发现会导致Q3窗口永久卡死,转入待查清单。真实iverilog A/B trace确认根因是AMI(`ppg_adc_measurement_idac_integration.v`)`flag_calibration_request_inflight`缺少deadline超时清零路径的真实RTL死锁,不是TB构造问题。已修复:新增`o_cal_owner_deadline_event`(`ppg_400hz_frame_calibration_scheduler.v` V1.8)+AMI V1.15新增`i_cal_owner_deadline_event`接成额外inflight清零条件+`ppg_control_top.v` V1.6纯接线。真实TB新断言:`tb_ppg_control_top_startup_idac_calibration.v:1214`(DC_R)+`:1358`(DC_IR)调用`task_verify_deadline_suppression`。回归证据:iverilog与真实Vivado 2022.2 xsim双工具均`83 PASS/0 FAIL`,`STARTUP_IDAC_CALIBRATION_TB_PASS result_captures=2`。完整过程见`ppg_system_integration/WORKLINE_D_SID05_SID06_20260918.md`。**|"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "lines": [
+          30,
+          58,
+          80
+        ]
+      },
+      {
+        "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+        "lines": [
+          23,
+          44,
+          164,
+          301
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+        "lines": [
+          23,
+          29,
+          51,
+          57,
+          771,
+          1117
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SID-11",
+    "references": [
+      {
+        "source": "matrix",
+        "line": 944,
+        "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v:377-396` `flag_test_inject_mode_latched` only follows request during CONFIG/READY, holds immutable through RUN, clears on abort/STOP-ack; real evidence in `tb_ppg_control_top_injection.v`'s own changelog (mid-RUN enable-raise has zero effect that RUN, requires explicit STOP+drain+re-commit+START, exactly the INJ-02 setup). AMI half -- `ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611` reuses Top's already-locked signal, re-gated by AMI's own `C_ENABLE_TEST_INJECTION`; real dual-tool evidence in `tb_ppg_control_top_startup_idac_calibration.v` SID-10/SID-11. Both halves hiding under INJ-01/02 and SID-10/11, never cross-referenced back to N05.** |"
+      },
+      {
+        "source": "matrix",
+        "line": 1214,
+        "text": "| C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3; IDAC controller | 5 individual rows | C17:3, C17:15-C17:19 (version bumped V2.2->V2.3 and dependency table shifted +1 by the 2026-08-30 Bucket-1 RTL session (SID-11); re-verified 2026-09-02) |"
+      },
+      {
+        "source": "matrix",
+        "line": 1252,
+        "text": "| C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | `PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | IDAC controller | V2.3 (bumped from V2.2) | 2026-08-30 (Bucket-1 RTL session, SID-11); file re-saved 2026-09-02 with no further version-banner change detected | `ACTIVE_NORMATIVE`; system `NOT_CLOSED` | `0e50d1f2141e52ce45cecde08bc246c7b8b5126760f4f938fcb04a4377da276e` (re-hashed 2026-09-02; supersedes the 2026-08-20 V2.2 digest) | No. |"
+      },
+      {
+        "source": "matrix",
+        "line": 3832,
+        "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **CLOSED**`删除线写法的已关闭行(脚本按行扫到删除线内关键字会误标,已知局限非新问题);本次N08自己的矩阵行文字已同步更新为CLOSED,不再落入本类。**Stage 2批次1(2026-09-10)逐项核对了原15项里的前8项:2项(`G-FP-02`/`G-FP-06`)是真实过期文字,已修复(分别转入`B_TAG_MISSING`/`A_CONSISTENT`);6项(`JNT-01`/`K02`/`LFA-04`/`LFA-06`/`LFA-08`/`OIB-01`)确认脚本误报,见§13.2新增(d)/(e)/(f)三条局限。批次2(2026-09-10)核对完剩余7项(`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/`TOP-23`)——全部同样确认是脚本误报,命中同一套(d)/(e)/(f)局限(无新增第4种根因),矩阵文字本身没有一处需要编辑。至此15项全部有真实处置(2修复+13确认误报),批次2完成后脚本报告的数字仍是13(不会降到0)——这13项是脚本regex局限的永久产物,不是待修复缺陷;真正衡量Stage 2这条优先级是否收尾的标准是\"15项是否都有真实处置\",而不是这个数字本身。** |"
+      },
+      {
+        "source": "matrix",
+        "line": 3870,
+        "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
+      },
+      {
+        "source": "matrix",
+        "line": 3877,
+        "text": ">   SID-10/SID-11\"已关闭段落里)、`SID-11`(同一829行,与SID-10共用)、`TOP-17`(矩阵822行裸写"
+      },
+      {
+        "source": "matrix",
+        "line": 3887,
+        "text": ">   verification-injection addendum)\")、`SID-11`(矩阵1137行,C17行版本变更原因栏裸写"
+      },
+      {
+        "source": "matrix",
+        "line": 3888,
+        "text": ">   \"2026-08-30 (Bucket-1 RTL session, SID-11)\")均属此类;`SID-11`因此同时命中(d)和(f)两条,"
+      },
+      {
+        "source": "matrix",
+        "line": 3890,
+        "text": "> `SID-11`额外有一条早已记录、与脚本误报无关的真实既定处置:别名表自身把它标为\"延期,结构性不"
+      },
+      {
+        "source": "alias",
+        "line": 136,
+        "text": "~~SID-01, SID-02, SID-03, SID-04, SID-05, SID-06, SID-07, SID-08, SID-09, SID-10, SID-12 (11项, SID-11延期见下) | `tb_ppg_control_top_startup_idac_calibration.v` (各PASS行如860/1045/1156/1190/1235/1321) | `ppg_idac_code_controller.v`: `ST_AMB_WAIT`(279行,5'd3,已打SID-01标签), `ST_MANUAL_APPLY`(277行,5'd1) | [[project-ppg-stage5-batching-plan]]~~"
+      },
+      {
+        "source": "alias",
+        "line": 137,
+        "text": "**2026-09-11 B_TAG_MISSING批次5订正：与批次2(LFA)/批次3(OIB)/批次4(RRC)同一失败模式，第4个family重现——上面这一行把SID-01之外的10个ID(SID-02~09/SID-12)全部堆到`ppg_idac_code_controller.v:279`(`ST_AMB_WAIT`状态声明本身，即SID-01自己的真实锚点)。逐条读`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`§9.4.1真实定义文字(549-560行)确认这11条验收文字描述的是11个明显不同的具体机制角度，再逐条核对`tb_ppg_control_top_startup_idac_calibration.v`真实PASS消息(860-1321行，本文件自己V1.0/V1.1版本changelog已按阶段A/B/B2/C/D详细narrate每个ID对应哪段真实RTL机制，省了重新摸索)反推真正断言的信号，发现真实证据分散在3个文件：`ppg_idac_code_controller.v`(SID-02入口顺序守卫,705行；SID-12启动完成/耗尽,931/932/975行)、`ppg_400hz_frame_calibration_scheduler.v`(SID-04/05/06的625-tick子帧相位/owner截止/tick385提交边界,464/744/460/836行)、`ppg_sar9_sar15_safe_selection_wrapper.v`(SID-03/07/08/09的校准专属Q3窗口/LED-DC总线隔离,741/742/745/759/760/762/763行)。SID-01本身的`:279`锚点经核对仍然真实准确，本批次不重复处理，保留独立一行。**拆分过程中意外暴露一处与批次2`LFA-04`/批次3`OIB-08`同形状的登记缺口**：`SID-10`(已在`E_STALE_MATRIX_TEXT`批次2确认为脚本误报，见下方独立一行)在旧的合并行里只是被顺带列了名字，从未真正打过`@satisfies`标签——真实证据是`ppg_adc_measurement_idac_integration.v:908`(`dec_completion_sample_index`身份替换,与`TOP-22`/`P07`共用同一注入通道)和`:1569`(`flag_test_identity_hold`保持sticky,与`P06`共用同一寄存器,TB直接轮询该信号名)，本批次已补打标签(追加到既有tag列表)并给`SID-10`单独一行，近零额外成本(RTL位置本就已经打开、已经识别)。已按真实映射拆成下面13行(含SID-01/SID-10/SID-11三个未改动或独立处理的行)，逐行都已在对应RTL位置插入`@satisfies`标签："
+      },
+      {
+        "source": "alias",
+        "line": 148,
+        "text": "| SID-11 (延期,结构性不可达) | `tb_ppg_control_top_startup_idac_calibration.v` (标记SKIP非PASS) | `ppg_adc_s1_programmable_calibrator.v:232-233` (`flag_saturation_low`/`flag_saturation_high`互斥,双饱和数学不可达) | [[project-ppg-stage5-batching-plan]] |"
+      },
+      {
+        "source": "alias",
+        "line": 266,
+        "text": "| ADCN-03 | 数值钳位半句：`tb_ppg_control_top_adc_numeric_scoreboard.v` PASS行\"PASS ADCN-3 target_code=256 s1=2047/-2048\"(阶段C1/C2,offset饱和)。**诊断位半句(互斥的exclusive saturation diagnostic)本TB未检查，2026-09-13独立重跑`tb_ppg_adc_s1_programmable_calibrator.v`真实xsim确认**：\"PASS ppg_adc_s1_programmable_calibrator CAL-01..CAL-17\"，其中CAL-06/CAL-07(362-387行)逐项核对`o_saturation_low`/`o_saturation_high`在合法端点(±2047/-2048)保持0、在越界(±2048/-2049)分别单独置1且互斥 | `ppg_adc_s1_programmable_calibrator.v:232`(`flag_saturation_low`,新打标签)、`:233`(`flag_saturation_high`,新打标签)、`:234-235`(`dec_calibrated_value`显式饱和钳位,新打标签)。**注**：这3行也是`SID-11`已记录的\"结构性互斥\"锚点(未打标签,仅alias table N/A记录)，本次是这3行第一次真正获得`@satisfies`标签 | 本行(2026-09-13 D2_NO_STATUS_FOUND批次5) |**2026-09-28工作线D独立复核确认:本行既有的CAL-06/CAL-07跨文件引用真实、准确(独立打开该文件357-389行核实,确认直接检查`o_saturation_low/high`且互斥),此前的独立复核一度误判为\"从未验证\"，是复核本身没做跨文件核实所致，不是这行台账有问题。已顺手在`tb_ppg_control_top_adc_numeric_scoreboard.v`自己的文件里用层次引用(`ppg_adc_s1_programmable_calibrator_Inst.o_saturation_low/high`)新增直接检查(3条:低饱和匹配/高饱和匹配/互斥)，让ADCN scoreboard自己也能独立证明这一半句，不再仅依赖跨文件引用——是既有证据之外的强化，不是替代。回归:iverilog+真实Vivado 2022.2 xsim均`result_captures=16 track_branch_fires=16`,0 FAIL,两工具逐位一致。完整过程见`ppg_system_integration/NRE_ADCN_WORKLINE_D_INDEPENDENT_RECHECK_20260928.md`。**|"
+      },
+      {
+        "source": "alias",
+        "line": 481,
+        "text": "| N05 | `tb_ppg_control_top_injection.v` INJ-01/02 changelog + `tb_ppg_control_top_startup_idac_calibration.v` SID-10/SID-11 | `ppg_control_top.v:391`(已打标签,同P11);AMI半`ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611`(未单独打标签,复用既有TOP-21/23/24标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:829` |"
+      },
+      {
+        "source": "alias",
+        "line": 564,
+        "text": "- **Stage4/5 65项**:仅JNT系列的`ppg_control_top.v`锚点(已含TOP-06/09标签,未新增JNT专属标签)、SID-01/RRC-01(经`ppg_idac_code_controller.v`两个state parameter)、LFA-10/OIB-01(经SSW一处表达式)、PRC-09/10(经FIR一处assign)插入了标签;其余ID(LFA-01~05/07~09/11/12单项、OIB-02/03/05/07/08/09单项、~~PRC-01~08单项~~、RRC-02~12单项、SID-02~10/12单项)**只在本表按范围/共享锚点登记,未逐个单独插入RTL标签**——这些ID共享同一RTL锚点时,已在锚点处的`@satisfies`里用代表性ID(如SID-01、RRC-01)标注,未把family内每个ID都罗列进同一行注释(避免注释过长、避免机械重复),Phase 2脚本核对时应视为\"锚点级\"而非\"ID级\"标签,按代表ID去关联同锚点的其余同family ID,不要逐个报\"缺失\"。**2026-09-11订正：这条note本身已随B_TAG_MISSING批次2-6的真实个体化打标签工作逐步过时——本note写于更早的对话(A1),当时LFA/OIB/RRC/SID/PRC五个family都还只是\"仅建表\"状态;批次2(LFA)、批次3(OIB)、批次4(RRC)、批次5(SID)、批次6(PRC,本批次)先后把这五个family的绝大多数ID改成了逐个真实RTL标签(仅OIB-04/OIB-06/PRC-05三项因确认无RTL锚点仍保持N/A、SID-11/LFA-06/OIB-01/PRC-09/10等少数因真实RTL/合同缺口仍走deferred路径)。此处只订正PRC-01~08这一项(本批次直接产出),不逐一重写LFA/OIB/RRC/SID的表述——那三个family各自的完整最新状态见下方对应行与`sprightly-wobbling-wadler.md`计划文件的Status记录,不在本note重复维护。**"
+      }
+    ],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+        "lines": [
+          24,
+          26,
+          28,
+          30,
+          52,
+          54,
+          56,
+          58,
+          149,
+          919,
+          928,
+          999,
+          1023,
+          1029,
+          1045,
+          1048,
+          1051,
+          1055
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+        "lines": [
+          26,
+          28,
+          30,
+          57,
+          59,
+          61,
+          159
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "lines": [
+          31,
+          34,
+          35,
+          62,
+          66,
+          67,
+          160
+        ]
+      },
+      {
+        "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "lines": [
+          126
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-01",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          9,
+          17,
+          32,
+          33,
+          465,
+          478,
+          1103
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-02",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          480,
+          491
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-03",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          493,
+          504
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-04",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          506,
+          517
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-05",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          519,
+          534
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-06",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          536,
+          553
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-07",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          555,
+          572
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-08",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          18,
+          34,
+          574,
+          588
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-09",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          18,
+          34,
+          590,
+          602
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-10",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          18,
+          34,
+          604,
+          616
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-11",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          18,
+          34,
+          618,
+          635
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-12",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          637,
+          646
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-13",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          648,
+          658
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-14",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          660,
+          667
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-15",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          669,
+          678
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-16",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          680,
+          693
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-17",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          695,
+          703
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-18",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          705,
+          711
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-19",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          713,
+          723
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-20",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          725,
+          735
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-21",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          737,
+          747
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-22",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          749,
+          759
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-23",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          761,
+          768
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-24",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          770,
+          778
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-25",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          780,
+          783
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-26",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          785,
+          798
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-27",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          800,
+          807
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-28",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          809,
+          816
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-29",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          818,
+          826
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-30",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          828,
+          836
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-31",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          838,
+          846
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-32",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          848,
+          855
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-33",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          857,
+          865
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-34",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          867,
+          877
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-35",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          879,
+          884
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-36",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          886,
+          892
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-37",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          894,
+          899
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-38",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          901,
+          908
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-39",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          910,
+          919
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-40",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          921,
+          930
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-41",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          932,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-42",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          943,
+          951
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-43",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          953,
+          963
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-44",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          965,
+          974
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-45",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          976,
+          984
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-46",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          986,
+          994
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-47",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          996,
+          1010
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-48",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          32,
+          1012,
+          1033
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-49",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          1035,
+          1050
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-50",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          1052,
+          1064
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-51",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          1066,
+          1091
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SSW-52",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+        "lines": [
+          9,
+          17,
+          33,
+          1093,
+          1100,
+          1103
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-01",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          10,
+          30,
+          312,
+          497
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-02",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          333
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-03",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          346
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-04",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          419
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-05",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "SUP-06",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          434
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-07",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          364
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-08",
+    "references": [],
+    "primary_tb_mentions": []
+  },
+  {
+    "id": "SUP-09",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          464
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SUP-10",
+    "references": [],
+    "primary_tb_mentions": [
+      {
+        "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "lines": [
+          475,
+          497
+        ]
+      }
+    ]
+  }
+]

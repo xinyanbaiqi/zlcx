@@ -1,0 +1,2829 @@
+{
+  "source": "本组技能formatter-AST产物；signed和复位语义由实际声明/合同人工核对",
+  "modules": [
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "ports": 104,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "ports": 84,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "ports": 9,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "ports": 27,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "ports": 16,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "ports": 3,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "ports": 6,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "ports": 33,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "ports": 46,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "ports": 68,
+      "formal_parameter_note": "AST的parameter_count包含部分localparam，D-002以源码formal parameter声明为准"
+    }
+  ],
+  "ports": [
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_source_config_snapshot",
+      "direction": "input",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_source_config_update_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_start_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_stop_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_status_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_analog_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_adc_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_datapath_empty",
+      "direction": "input",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_analog_safe",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_system_fault_blocking",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "i_static_characterization_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_config_transport_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_config_transport_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_active_config",
+      "direction": "output",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_active_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_config_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage2_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dc_recovery_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_lifecycle_state",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_start_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_run_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_allow_new_transaction",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_run_generation",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stop_episode_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_commit_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_start_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stop_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_error_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_commit_ack_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_last_error_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_schema_version",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_run_profile",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_input_source",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_idac_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_optical_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_initial_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage2_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dc9_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dc15_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_r_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_r_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_r_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_ir_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_ir_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_ir_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dcs_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_0",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_1",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_2",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_3",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_4",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_5",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_6",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_7",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_8",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_weight_q16_9",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage1_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage2_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_stage2_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dc9_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_dc15_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_amb_recheck_interval_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_slope_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_fixed_slope_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_alpha_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_beta_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_timing_adjust_ratio_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_slope_min_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_slope_max_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_baseline_delta_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_cross_hysteresis_q16",
+      "direction": "output",
+      "width": 32,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_lead_min_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_lead_max_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_cross_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_no_cross_limit",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_peak_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_valley_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_direction_deadband",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_min_peak_valley_amplitude",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_min_peak_to_valley_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_min_peak_to_peak_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_max_fine_window_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_max_reacquire_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "name": "o_peak_valley_config_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_spi_cs_n",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_spi_sdi",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_spi_sdo",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_source_config_snapshot",
+      "direction": "output",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_source_config_update_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_source_characterization_update_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_source_static_characterization_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_source_test_mux_ctrl",
+      "direction": "output",
+      "width": 5,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_source_config_update_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_source_characterization_update_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_start_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_stop_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_diag_clear_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_control_abort_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_dbg_out_select",
+      "direction": "output",
+      "width": 3,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "o_dbg_out_select_update_event",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_lifecycle_state",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_start_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_commit_ack_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_last_error_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_schema_version",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_config_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_stage2_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_scheduler_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_scheduler_launch_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_scheduler_owner_deadline_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_scheduler_completion_mismatch_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_scheduler_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ami_datapath_empty",
+      "direction": "input",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ami_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_active_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ami_integration_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ssw_wrapper_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ssw_switch_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ssw_transaction_mismatch_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ssw_owner_deadline_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_ssw_calibration_timeout_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_characterization_control_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_characterization_protocol_error_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_blocking",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_cause_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_result_discard_summary_sticky",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_cause",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_source",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_system_fault_summary",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_measurement_result_discard_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_config_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_coef_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_dc_recovery_epoch",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_amb_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_dc_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "name": "i_detection_discard_run_generation",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_source_config",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_source_update",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "o_source_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_destination_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "i_destination_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "o_destination_config",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "name": "o_destination_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_result_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "o_result_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_result_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_coarse_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_coarse_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_coarse_recovery_calibrated",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_fine_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_fine_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_fine_recovery_calibrated",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_amb_code_snapshot",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_dc_code_snapshot",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_amb_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_dc_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_calibrated_s1_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_programmable_15_code",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_programmable_15_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_s1_calibration_applied",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_stage1_raw",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "i_stage2_raw",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "o_p2s_data",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "name": "o_p2s_frame",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_source_update_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_source_static_characterization_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_source_test_mux_ctrl",
+      "direction": "input",
+      "width": 5,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_run_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "i_diag_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_source_update_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_static_characterization_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_test_mux_ctrl",
+      "direction": "output",
+      "width": 5,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_control_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_control_update_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_control_reject_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "name": "o_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "name": "i_async_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "name": "o_rstn",
+      "direction": "output",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "i_source_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "i_source_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "i_source_pulse",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "i_dest_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "i_dest_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "name": "o_dest_pulse",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_config_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_config_update_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_start_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_stop_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_status_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_analog_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_adc_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_datapath_empty",
+      "direction": "input",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_idac_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_analog_safe",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_system_fault_blocking",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "i_static_characterization_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_active_config",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_active_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_config_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_stage2_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_dc_recovery_coef_epoch",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_lifecycle_state",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_start_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_run_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_allow_new_transaction",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_run_generation",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_stop_episode_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_commit_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_start_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_stop_ack_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_error_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_commit_ack_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "name": "o_last_error_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_2M_PAD",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "RESET_N",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "SPI_CS_N",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "SPI_SCLK",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "SPI_SDI",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "SPI_SDO",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "P2S_CLK",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "P2S_DATA",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "P2S_FRAME",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "DBG_OUT",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "DOUT_STAGE1_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_STAGE1_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "DOUT_STAGE2_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_STAGE2_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_TIA_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "LEDDAC",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "LEDEN1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "LEDEN2_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_TEST",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_BUF_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_2M",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_IREF_IDAC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_9Q1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_15Q1_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_AFERST_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_IREF_IDAC_SAR9_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_IREF_IDAC_SAR15_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_Q2_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_Q3_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "CLK_TIAEN_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_15SAR_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR9_AMB_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR9_DC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR9_IREF",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR15_AMB_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR15_DC_LOW",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "EN_SAR15_IREF",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "IDAC_SAR9AMBN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "IDAC_SAR9DCN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "IDAC_SAR15AMBN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "IDAC_SAR15DCN_LOW",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "S0_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "S1_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "S2_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "S3_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "name": "S4_IN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "i_active_config",
+      "direction": "input",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_schema_version",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_run_profile",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_input_source",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_idac_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_optical_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_initial_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage2_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dc9_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dc15_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_r_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_r_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_r_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_ir_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_ir_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_ir_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dcs_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_0",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_1",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_2",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_3",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_4",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_5",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_6",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_7",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_8",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_weight_q16_9",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage1_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage2_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_stage2_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dc9_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_dc15_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_amb_recheck_interval_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_slope_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_fixed_slope_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_alpha_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_beta_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_timing_adjust_ratio_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_slope_min_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_slope_max_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_baseline_delta_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_cross_hysteresis_q16",
+      "direction": "output",
+      "width": 32,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_lead_min_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_lead_max_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_cross_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_no_cross_limit",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_peak_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_valley_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_direction_deadband",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_min_peak_valley_amplitude",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_min_peak_to_valley_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_min_peak_to_peak_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_max_fine_window_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_max_reacquire_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "name": "o_peak_valley_config_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    }
+  ]
+}

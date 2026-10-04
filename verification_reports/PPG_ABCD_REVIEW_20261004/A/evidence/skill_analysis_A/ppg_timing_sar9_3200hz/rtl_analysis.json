@@ -1,0 +1,767 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_timing_sar9_3200hz",
+    "parameter_count": 0,
+    "port_count": 46
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk",
+      "o_clk_buf_low",
+      "o_clk_2m",
+      "o_clk_iref_idac_low",
+      "o_clk_9q1_low",
+      "o_clk_15q1_low",
+      "o_clk_aferst_low",
+      "o_clk_iref_idac_sar9_low",
+      "o_clk_iref_idac_sar15_low",
+      "o_clk_q2_low",
+      "o_clk_q3_low",
+      "o_clk_tiaen_low"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_test_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_optical_mode",
+      "direction": "input",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "i_static_characterization_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_test_mux_ctrl",
+      "direction": "input",
+      "width": 5,
+      "role": "signal"
+    },
+    {
+      "name": "i_static_sar9_amb_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_static_sar9_dc_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_static_sar15_amb_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_static_sar15_dc_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_leddac_r_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_leddac_ir_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_sar9_amb_r_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_sar9_amb_ir_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_sar9_dc_r_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_sar9_dc_ir_code",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_frame_start_3200hz",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_tia_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_leddac",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_leden1_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_leden2_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_test",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_clk_buf_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_2m",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_iref_idac_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_9q1_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_15q1_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_aferst_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_iref_idac_sar9_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_iref_idac_sar15_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_q2_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_q3_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_clk_tiaen_low",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "o_en_15sar_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar9_amb_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar9_dc_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar9_iref",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar15_amb_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar15_dc_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_en_sar15_iref",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_sar9ambn_low",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_sar9dcn_low",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_sar15ambn_low",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_sar15dcn_low",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_s_in",
+      "direction": "output",
+      "width": 5,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [],
+  "always_blocks": [],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_timing_sar9_3200hz reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_frame_start_3200hz",
+        "o_en_tia_low",
+        "o_leddac",
+        "o_leden1_low",
+        "o_leden2_low",
+        "o_en_test",
+        "o_clk_buf_low",
+        "o_clk_2m",
+        "o_clk_iref_idac_low",
+        "o_clk_9q1_low",
+        "o_clk_15q1_low",
+        "o_clk_aferst_low",
+        "o_clk_iref_idac_sar9_low",
+        "o_clk_iref_idac_sar15_low",
+        "o_clk_q2_low",
+        "o_clk_q3_low",
+        "o_clk_tiaen_low",
+        "o_en_15sar_low",
+        "o_en_sar9_amb_low",
+        "o_en_sar9_dc_low",
+        "o_en_sar9_iref",
+        "o_en_sar15_amb_low",
+        "o_en_sar15_dc_low",
+        "o_en_sar15_iref",
+        "o_idac_sar9ambn_low",
+        "o_idac_sar9dcn_low",
+        "o_idac_sar15ambn_low",
+        "o_idac_sar15dcn_low",
+        "o_s_in"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_timing_sar9_3200hz reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_frame_start_3200hz",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_tia_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_leddac",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_leden1_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_leden2_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_test",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_buf_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_2m",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_iref_idac_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_9q1_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_15q1_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_aferst_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_iref_idac_sar9_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_iref_idac_sar15_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_q2_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_q3_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_clk_tiaen_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_15sar_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar9_amb_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar9_dc_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar9_iref",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar15_amb_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar15_dc_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_en_sar15_iref",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_sar9ambn_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_sar9dcn_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_sar15ambn_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_sar15dcn_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_s_in",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_frame_start_3200hz",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_tia_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_leddac",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_leden1_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_leden2_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_test",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_buf_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_2m",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_iref_idac_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_9q1_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_15q1_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_aferst_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_iref_idac_sar9_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_iref_idac_sar15_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_q2_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_q3_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_clk_tiaen_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_15sar_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar9_amb_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar9_dc_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar9_iref",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar15_amb_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar15_dc_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_en_sar15_iref",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_sar9ambn_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_sar9dcn_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_sar15ambn_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_sar15dcn_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_s_in",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_frame_start_3200hz",
+        "o_en_tia_low",
+        "o_leddac",
+        "o_leden1_low",
+        "o_leden2_low",
+        "o_en_test",
+        "o_clk_buf_low",
+        "o_clk_2m",
+        "o_clk_iref_idac_low",
+        "o_clk_9q1_low",
+        "o_clk_15q1_low",
+        "o_clk_aferst_low",
+        "o_clk_iref_idac_sar9_low",
+        "o_clk_iref_idac_sar15_low",
+        "o_clk_q2_low",
+        "o_clk_q3_low",
+        "o_clk_tiaen_low",
+        "o_en_15sar_low",
+        "o_en_sar9_amb_low",
+        "o_en_sar9_dc_low",
+        "o_en_sar9_iref",
+        "o_en_sar15_amb_low",
+        "o_en_sar15_dc_low",
+        "o_en_sar15_iref",
+        "o_idac_sar9ambn_low",
+        "o_idac_sar9dcn_low",
+        "o_idac_sar15ambn_low",
+        "o_idac_sar15dcn_low",
+        "o_s_in"
+      ],
+      "description": "Verify `ppg_timing_sar9_3200hz` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_frame_start_3200hz",
+        "o_en_tia_low",
+        "o_leddac",
+        "o_leden1_low",
+        "o_leden2_low",
+        "o_en_test",
+        "o_clk_buf_low",
+        "o_clk_2m",
+        "o_clk_iref_idac_low",
+        "o_clk_9q1_low",
+        "o_clk_15q1_low",
+        "o_clk_aferst_low",
+        "o_clk_iref_idac_sar9_low",
+        "o_clk_iref_idac_sar15_low",
+        "o_clk_q2_low",
+        "o_clk_q3_low",
+        "o_clk_tiaen_low",
+        "o_en_15sar_low",
+        "o_en_sar9_amb_low",
+        "o_en_sar9_dc_low",
+        "o_en_sar9_iref",
+        "o_en_sar15_amb_low",
+        "o_en_sar15_dc_low",
+        "o_en_sar15_iref",
+        "o_idac_sar9ambn_low",
+        "o_idac_sar9dcn_low",
+        "o_idac_sar15ambn_low",
+        "o_idac_sar15dcn_low",
+        "o_s_in"
+      ],
+      "description": "ppg_timing_sar9_3200hz reset behavior"
+    }
+  ],
+  "decomposition_candidates": [],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\skill_inputs_A\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

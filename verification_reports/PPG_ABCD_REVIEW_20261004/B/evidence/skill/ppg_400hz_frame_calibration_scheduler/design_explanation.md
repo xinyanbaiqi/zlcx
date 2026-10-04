@@ -1,0 +1,128 @@
+# Design Explanation: ppg_400hz_frame_calibration_scheduler
+
+## Project Topology
+- Selected top module: `ppg_400hz_frame_calibration_scheduler`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_active_config_valid` width=1 role=status
+- `input i_run_enable` width=1 role=control
+- `input i_allow_new_transaction` width=1 role=signal
+- `input i_start_ack_event` width=1 role=signal
+- `input i_stop_ack_event` width=1 role=signal
+- `input i_control_abort_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `input i_run_profile` width=1 role=signal
+- `input i_input_source` width=1 role=signal
+- `input i_optical_mode` width=2 role=control
+- `input i_active_precision_mode` width=1 role=control
+- `input i_normal_measurement_eligible` width=1 role=signal
+- `input i_switch_hold_new_transaction` width=1 role=signal
+- `input i_ami_fault_blocking` width=1 role=signal
+- `input i_ssw_fault_blocking` width=1 role=signal
+- `input i_amb_code` width=1 role=signal
+- `input i_dcs_r_code` width=1 role=signal
+- `input i_dcs_ir_code` width=1 role=signal
+- `input i_amb_code_epoch` width=1 role=signal
+- `input i_dcs_r_code_epoch` width=1 role=signal
+- `input i_dcs_ir_code_epoch` width=1 role=signal
+- `input i_leddac_r_code` width=8 role=signal
+- `input i_leddac_ir_code` width=8 role=signal
+- `input i_calibration_sample_valid` width=1 role=status
+- `output o_calibration_sample_ready` width=1 role=status
+- `input i_calibration_frame_type` width=2 role=signal
+- `input i_calibration_color_ir` width=1 role=signal
+- `input i_calibration_precision_mode` width=1 role=control
+- `input i_calibration_request_reason` width=2 role=control
+- `output o_waveform_context_valid` width=1 role=status
+- `input i_waveform_context_ready` width=1 role=status
+- `output o_waveform_precision_mode` width=1 role=control
+- `output o_waveform_frame_id` width=1 role=signal
+- `output o_waveform_color_ir` width=1 role=signal
+- `output o_waveform_frame_type` width=2 role=signal
+- `output o_waveform_amb_code_snapshot` width=1 role=signal
+- `output o_waveform_dc_code_snapshot` width=1 role=signal
+- `output o_waveform_amb_code_epoch` width=1 role=signal
+- `output o_waveform_dc_code_epoch` width=1 role=signal
+- `output o_waveform_input_source` width=1 role=signal
+- `output o_waveform_optical_mode` width=2 role=control
+- `output o_waveform_leddac_code_snapshot` width=8 role=signal
+- `output o_transaction_start_valid` width=1 role=status
+- `input i_transaction_start_ready` width=1 role=status
+- `input i_transaction_start_fire` width=1 role=signal
+- `output o_transaction_precision_mode` width=1 role=control
+- `output o_transaction_frame_id` width=1 role=signal
+- `output o_transaction_sample_index` width=1 role=signal
+- `output o_transaction_color_ir` width=1 role=signal
+- `output o_transaction_frame_type` width=2 role=signal
+- `output o_transaction_amb_code_snapshot` width=1 role=signal
+- `output o_transaction_dc_code_snapshot` width=1 role=signal
+- `output o_transaction_amb_code_epoch` width=1 role=signal
+- `output o_transaction_dc_code_epoch` width=1 role=signal
+- `input i_adc_owner_ready` width=1 role=status
+- `output o_adc_owner_commit_event` width=1 role=signal
+- `output o_adc_owner_precision_mode` width=1 role=control
+- `output o_adc_owner_frame_id` width=1 role=signal
+- `output o_adc_owner_color_ir` width=1 role=signal
+- `output o_adc_owner_frame_type` width=2 role=signal
+- `output o_adc_owner_amb_code_snapshot` width=1 role=signal
+- `output o_adc_owner_dc_code_snapshot` width=1 role=signal
+- `output o_adc_owner_amb_code_epoch` width=1 role=signal
+- `output o_adc_owner_dc_code_epoch` width=1 role=signal
+- `output o_adc_owner_sample_index` width=1 role=signal
+- `input i_adc_transaction_complete_event` width=1 role=signal
+- `input i_adc_transaction_success` width=1 role=signal
+- `input i_adc_complete_sample_index` width=1 role=signal
+- `input i_owner_q3_window_closed` width=1 role=signal
+- `input i_adc_idle` width=1 role=signal
+- `input i_analog_safe` width=1 role=signal
+- `input i_sar_timing_idle` width=1 role=signal
+- `output o_macro_frame_start_event` width=1 role=signal
+- `output o_macro_frame_safe_boundary` width=1 role=signal
+- `output o_idac_code_safe_boundary` width=1 role=signal
+- `output o_startup_idac_safe_boundary` width=1 role=signal
+- `output o_safe_frame_id` width=1 role=signal
+- `output o_macro_tick` width=1 role=signal
+- `output o_calibration_subframe_index` width=3 role=signal
+- `output o_calibration_local_tick` width=1 role=signal
+- `output o_normal_frame_complete_event` width=1 role=signal
+- `output o_calibration_frame_complete_event` width=1 role=signal
+- `output o_scheduler_idle` width=1 role=signal
+- `output o_normal_frame_active` width=1 role=signal
+- `output o_calibration_frame_active` width=1 role=signal
+- `output o_transaction_inflight` width=1 role=signal
+- `output o_current_frame_id` width=1 role=signal
+- `output o_next_sample_index` width=1 role=signal
+- `output o_launch_timeout_sticky` width=1 role=signal
+- `output o_owner_deadline_timeout_sticky` width=1 role=signal
+- `output o_cal_owner_deadline_event` width=1 role=signal
+- `output o_completion_mismatch_sticky` width=1 role=signal
+- `output o_protocol_error_sticky` width=1 role=signal
+- `output o_scheduler_local_fault_blocking` width=1 role=signal
+- `output o_scheduler_fault_valid` width=1 role=status
+- `output o_scheduler_fault_active` width=1 role=signal
+- `output o_scheduler_fault_cause` width=8 role=signal
+- `output o_scheduler_fault_identity_valid` width=1 role=status
+- `output o_scheduler_fault_frame_id` width=1 role=signal
+- `output o_scheduler_fault_sample_index` width=1 role=signal
+- `output o_scheduler_fault_color_ir` width=1 role=signal
+- `output o_scheduler_fault_frame_type` width=2 role=signal
+- `output o_scheduler_fault_precision_mode` width=1 role=control
+- `output o_scheduler_fault_run_generation` width=1 role=signal
+
+## Feature Mapping
+- `ppg_400hz_frame_calibration_scheduler reset behavior`: derived from ports, state, and always blocks.
+- `state transition block 1`: derived from ports, state, and always blocks.
+- `state transition block 2`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_400hz_frame_calibration_scheduler` drives known output values after reset release.
+- `fc001`: ppg_400hz_frame_calibration_scheduler reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 586-876: state_transition
+- `u_block_2` lines 876-884: state_transition
+

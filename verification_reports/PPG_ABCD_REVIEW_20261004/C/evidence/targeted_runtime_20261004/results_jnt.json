@@ -1,0 +1,86 @@
+[
+  {
+    "name": "jnt_count54_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count54_original.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/jnt_count54_original_16f64cd1",
+    "input_sha256": [
+      "2899ce8ab7eb729a2b5856a073195d6f92a655ebeb08c3cfacd16cd8eca315b0"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count54_original_16f64cd1/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count54_original_16f64cd1/jnt_count54_original.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 1.9320228099822998
+  },
+  {
+    "name": "jnt_count51_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count51_original.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/jnt_count51_original_27d1cdb7",
+    "input_sha256": [
+      "e6ad4ccaadba2fdbb2de38cd5251fdfbf5facb5ad1499065d3fcb74999deedf0"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count51_original_27d1cdb7/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count51_original_27d1cdb7/jnt_count51_original.v"
+    ],
+    "run_rc": 1,
+    "elapsed_seconds": 2.7645280361175537
+  },
+  {
+    "name": "jnt_count51_error_countercontrol",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count51_error_countercontrol.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/jnt_count51_error_countercontrol_b4b32916",
+    "input_sha256": [
+      "8287c4e8ed2bf3ee05f0528ecb25e178154ce4818b400f02b966ab9e2edfeb0c"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count51_error_countercontrol_b4b32916/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/jnt_count51_error_countercontrol_b4b32916/jnt_count51_error_countercontrol.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 2.863642454147339
+  }
+]

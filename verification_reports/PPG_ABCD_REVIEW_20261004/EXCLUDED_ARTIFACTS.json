@@ -1,0 +1,697 @@
+[
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_abort_tick4998\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_abort_tick4999\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_cadence\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_cadence_counterfactual\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_early_q3\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_early_q3_mutant\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\scheduler_original_q3_gate_mutant\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_extended\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_extended_rearm_mutant\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_invalid_width\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_original\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_original_rearm_mutant\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "B",
+    "path": "evidence\\supervisor_wrong_expected_negative\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "C",
+    "path": "evidence\\baseline_contract_vectors\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "C",
+    "path": "evidence\\fir_coefficient_mutation\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "C",
+    "path": "evidence\\fir_contract_vectors\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\d_cdc_probe\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\d_p2s_probe\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_active_v4_control_plane_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_characterization_control_cdc\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_chip_digital_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_control_top_idac_bus_isolation\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_control_top_input_light_static_matrix\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_system_active_config_unpack\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "D",
+    "path": "evidence\\tb_ppg_system_config_manager\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\chip_spi_ab\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\negative\\good.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_400hz_frame_calibration_scheduler\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_active_v4_control_plane_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_async_stage_capture\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_dc_recovery\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_measurement_idac_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_pipeline_overlap_corrector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_programmable_reconstructor\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_result_router\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_s1_programmable_calibrator\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_adc_s1_redundancy_corrector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_amb_recheck_scheduler\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_characterization_control_cdc\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_chip_digital_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_coarse_detection_fir\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_config_cdc_bridge\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_control_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_digital_esd_shell\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_digital_shell\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_dual_precision_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_dynamic_baseline_cross_detector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_idac_code_controller\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_normal_transaction_fork\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_p2s_packer\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_peak_valley_window_detector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_precision_window_controller\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_precision_window_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_pulse_cdc_sync\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_reset_sync\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_sar9_sar15_safe_selection_wrapper\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_spi_register_file\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_system_active_config_unpack\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_system_config_manager\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_system_fault_abort_supervisor\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_timing_sar15\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_timing_sar15_3200hz\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_timing_sar9\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\ppg_timing_sar9_3200hz\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_diag_algo_probe\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_400hz_frame_calibration_scheduler\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_active_v4_control_plane_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_async_stage_capture\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_dc_recovery\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_measurement_idac_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_pipeline_overlap_corrector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_programmable_reconstructor\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_result_router\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_s1_programmable_calibrator\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_adc_s1_redundancy_corrector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_amb_recheck_scheduler\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_characterization_control_cdc\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_chip_digital_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_coarse_detection_fir\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_adc_numeric_scoreboard\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_baseline_cross\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_fir_tail_isolation\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_idac_bus_isolation\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_injection\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_input_light_static_matrix\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_lifecycle_fault_adc_anomaly\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_long_10_cycles\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_longrun\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_no_recheck_control\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_normal_slow_tracking\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_owner_identity_backpressure\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_peak_valley_return\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_periodic_recheck_recovery\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_robustness_corner_waveforms\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_control_top_startup_idac_calibration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_dual_precision_top\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_dynamic_baseline_cross_detector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_idac_code_controller\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_normal_transaction_fork\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_peak_valley_window_detector\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_precision_window_controller\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_precision_window_integration\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_real_raw_generator_selfcheck\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_sar9_sar15_safe_selection_wrapper\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_system_active_config_unpack\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_system_config_manager\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_system_fault_abort_supervisor\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_timing_3200hz\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_timing_sar15\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\compile\\tb_ppg_timing_sar9\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\fir_floating_ab\\audit_fir_ab.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\fir_floating_ab\\audit_fir_ab_negative.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\fsc_identity_match\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\pwc_start_clears_sticky\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\reconstructor_center\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\router_reset_valid\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\s1_offset_removed\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations\\s1_redundancy_sign\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations_A\\3200_frame\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations_A\\dual_static_pack\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations_A\\sar15_q2_start\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\mutations_A\\sar9_q3_width\\sim.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_longrun\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_no_recheck_control\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_normal_slow_tracking\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_owner_identity_backpressure\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_peak_valley_return\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_periodic_recheck_recovery\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_robustness_corner_waveforms\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\resume_attempts\\tb_ppg_control_top_startup_idac_calibration\\vpi_path_failure_20261004\\sim.relocated.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\audit_spi_map.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\audit_spi_map_negative.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\hypothesis.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\hypothesis_negative.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\legacy.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "evidence\\spi_map_probe\\physical.vvp",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  },
+  {
+    "owner": "A",
+    "path": "snapshot.tar",
+    "reason": "compiled/runtime artifact or unsupported extension"
+  }
+]

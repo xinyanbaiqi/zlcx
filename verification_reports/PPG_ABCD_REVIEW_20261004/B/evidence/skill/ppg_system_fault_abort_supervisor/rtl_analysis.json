@@ -1,0 +1,1758 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_system_fault_abort_supervisor",
+    "parameter_count": 36,
+    "port_count": 52
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_ami_fault_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_ami_fault_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_cause",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_ami_fault_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ami_fault_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_scheduler_fault_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_cause",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_scheduler_fault_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_scheduler_fault_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_ssw_fault_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_cause",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_ssw_fault_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_ssw_fault_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_stop_episode_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_adc_physical_idle",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_diag_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_measurement_result_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_blocking",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_abort_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_stop_request_event",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_system_fault_discard_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_cause_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_system_fault_cause",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_source",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_identity_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_system_fault_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_sample_index",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_color_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_frame_type",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_run_generation",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_system_fault_summary",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_result_discard_summary_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        253,
+        264
+      ],
+      "assigned_signals": [
+        "system_fault_blocking_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_new_any",
+        "b1",
+        "flag_episode_close_condition"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        264,
+        275
+      ],
+      "assigned_signals": [
+        "system_abort_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_episode_open_edge",
+        "b1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        275,
+        286
+      ],
+      "assigned_signals": [
+        "system_stop_request_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_episode_open_edge",
+        "b1",
+        "SUP01A",
+        "satisfies",
+        "P03"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        286,
+        298
+      ],
+      "assigned_signals": [
+        "system_fault_discard_event_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_episode_open_edge",
+        "b1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        298,
+        309
+      ],
+      "assigned_signals": [
+        "system_fault_cause_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "SUP01A",
+        "satisfies",
+        "P04",
+        "flag_diag_clear_legal"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        309,
+        320
+      ],
+      "assigned_signals": [
+        "system_fault_cause_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FAULT_CAUSE_WIDTH",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_cause",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        320,
+        331
+      ],
+      "assigned_signals": [
+        "system_fault_source_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FAULT_SOURCE_WIDTH",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_source",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        331,
+        342
+      ],
+      "assigned_signals": [
+        "system_fault_identity_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "flag_selected_identity_valid",
+        "flag_diag_clear_legal"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        342,
+        353
+      ],
+      "assigned_signals": [
+        "system_fault_frame_id_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_frame_id",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_10",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        353,
+        364
+      ],
+      "assigned_signals": [
+        "system_fault_sample_index_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SAMPLE_INDEX_WIDTH",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_sample_index",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_11",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        364,
+        375
+      ],
+      "assigned_signals": [
+        "system_fault_color_ir_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "flag_selected_color_ir",
+        "flag_diag_clear_legal",
+        "DCS"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_12",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        375,
+        386
+      ],
+      "assigned_signals": [
+        "system_fault_frame_type_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "b00",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_frame_type",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_13",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        386,
+        397
+      ],
+      "assigned_signals": [
+        "system_fault_precision_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "flag_selected_precision",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_14",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        397,
+        409
+      ],
+      "assigned_signals": [
+        "system_fault_run_generation_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RUN_GENERATION_WIDTH",
+        "flag_capture_watchdog",
+        "b1",
+        "flag_capture_ami",
+        "flag_capture_scheduler",
+        "flag_capture_ssw",
+        "dec_selected_run_generation",
+        "flag_diag_clear_legal",
+        "OR"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_15",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        409,
+        420
+      ],
+      "assigned_signals": [
+        "system_fault_summary_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FAULT_SUMMARY_WIDTH",
+        "flag_new_summary_bits",
+        "SUP02A",
+        "satisfies",
+        "P09",
+        "flag_diag_clear_legal",
+        "b1"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_16",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        420,
+        433
+      ],
+      "assigned_signals": [
+        "result_discard_summary_sticky_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_measurement_result_discard_event",
+        "b1",
+        "flag_diag_clear_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_17",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        433,
+        444
+      ],
+      "assigned_signals": [
+        "cnt_adc_drain_watchdog"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH",
+        "i_adc_physical_idle",
+        "b1",
+        "i_stop_episode_active",
+        "flag_watchdog_window_active"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_18",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        444,
+        455
+      ],
+      "assigned_signals": [
+        "flag_watchdog_timeout_latch"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_physical_idle",
+        "b1",
+        "i_stop_episode_active",
+        "flag_watchdog_timeout_fire"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_19",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        455,
+        465
+      ],
+      "assigned_signals": [
+        "flag_watchdog_recovery_pending"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_adc_physical_idle",
+        "b1",
+        "flag_watchdog_timeout_fire"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_fault_abort_supervisor reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_system_fault_blocking",
+        "o_system_abort_event",
+        "o_system_stop_request_event",
+        "o_system_fault_discard_event",
+        "o_system_fault_cause_valid",
+        "o_system_fault_cause",
+        "o_system_fault_source",
+        "o_system_fault_identity_valid",
+        "o_system_fault_frame_id",
+        "o_system_fault_sample_index",
+        "o_system_fault_color_ir",
+        "o_system_fault_frame_type",
+        "o_system_fault_precision",
+        "o_system_fault_run_generation",
+        "o_system_fault_summary",
+        "o_result_discard_summary_sticky"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "description": "sequential logic covering system_fault_blocking_o.",
+      "signals": [
+        "system_fault_blocking_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering system_abort_event_o.",
+      "signals": [
+        "system_abort_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering system_stop_request_event_o.",
+      "signals": [
+        "system_stop_request_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering system_fault_discard_event_o.",
+      "signals": [
+        "system_fault_discard_event_o"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "output update block 5",
+      "description": "sequential logic covering system_fault_cause_valid_o.",
+      "signals": [
+        "system_fault_cause_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "description": "sequential logic covering system_fault_cause_o.",
+      "signals": [
+        "system_fault_cause_o"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "description": "sequential logic covering system_fault_source_o.",
+      "signals": [
+        "system_fault_source_o"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "output update block 8",
+      "description": "sequential logic covering system_fault_identity_valid_o.",
+      "signals": [
+        "system_fault_identity_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "description": "sequential logic covering system_fault_frame_id_o.",
+      "signals": [
+        "system_fault_frame_id_o"
+      ]
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "description": "sequential logic covering system_fault_sample_index_o.",
+      "signals": [
+        "system_fault_sample_index_o"
+      ]
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "description": "sequential logic covering system_fault_color_ir_o.",
+      "signals": [
+        "system_fault_color_ir_o"
+      ]
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "description": "sequential logic covering system_fault_frame_type_o.",
+      "signals": [
+        "system_fault_frame_type_o"
+      ]
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "description": "sequential logic covering system_fault_precision_o.",
+      "signals": [
+        "system_fault_precision_o"
+      ]
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "description": "sequential logic covering system_fault_run_generation_o.",
+      "signals": [
+        "system_fault_run_generation_o"
+      ]
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "description": "sequential logic covering system_fault_summary_o.",
+      "signals": [
+        "system_fault_summary_o"
+      ]
+    },
+    {
+      "feature_id": "FC017",
+      "name": "logic partition block 16",
+      "description": "sequential logic covering result_discard_summary_sticky_o.",
+      "signals": [
+        "result_discard_summary_sticky_o"
+      ]
+    },
+    {
+      "feature_id": "FC018",
+      "name": "counter update block 17",
+      "description": "sequential logic covering cnt_adc_drain_watchdog.",
+      "signals": [
+        "cnt_adc_drain_watchdog"
+      ]
+    },
+    {
+      "feature_id": "FC019",
+      "name": "logic partition block 18",
+      "description": "sequential logic covering flag_watchdog_timeout_latch.",
+      "signals": [
+        "flag_watchdog_timeout_latch"
+      ]
+    },
+    {
+      "feature_id": "FC020",
+      "name": "logic partition block 19",
+      "description": "sequential logic covering flag_watchdog_recovery_pending.",
+      "signals": [
+        "flag_watchdog_recovery_pending"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_fault_abort_supervisor reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_blocking",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_abort_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_stop_request_event",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_discard_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_cause_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_cause",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_source",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_identity_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_sample_index",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_color_ir",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_frame_type",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_precision",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_run_generation",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_system_fault_summary",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_result_discard_summary_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_system_fault_blocking",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_abort_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_stop_request_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_discard_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_cause_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_cause",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_source",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_identity_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_sample_index",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_color_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_frame_type",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_precision",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_run_generation",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_system_fault_summary",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_result_discard_summary_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "logic partition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_blocking_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "system_abort_event_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "system_stop_request_event_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_discard_event_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "output update block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_cause_valid_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "logic partition block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_cause_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "logic partition block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_source_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "output update block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_identity_valid_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "logic partition block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_frame_id_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_sample_index_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_color_ir_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_frame_type_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_precision_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_run_generation_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "pin_assignments": [
+        {
+          "pin_name": "system_fault_summary_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC017",
+      "name": "logic partition block 16",
+      "pin_assignments": [
+        {
+          "pin_name": "result_discard_summary_sticky_o",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC018",
+      "name": "counter update block 17",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_adc_drain_watchdog",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC019",
+      "name": "logic partition block 18",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_watchdog_timeout_latch",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC020",
+      "name": "logic partition block 19",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_watchdog_recovery_pending",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_system_fault_blocking",
+        "o_system_abort_event",
+        "o_system_stop_request_event",
+        "o_system_fault_discard_event",
+        "o_system_fault_cause_valid",
+        "o_system_fault_cause",
+        "o_system_fault_source",
+        "o_system_fault_identity_valid",
+        "o_system_fault_frame_id",
+        "o_system_fault_sample_index",
+        "o_system_fault_color_ir",
+        "o_system_fault_frame_type",
+        "o_system_fault_precision",
+        "o_system_fault_run_generation",
+        "o_system_fault_summary",
+        "o_result_discard_summary_sticky"
+      ],
+      "description": "Verify `ppg_system_fault_abort_supervisor` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_system_fault_blocking",
+        "o_system_abort_event",
+        "o_system_stop_request_event",
+        "o_system_fault_discard_event",
+        "o_system_fault_cause_valid",
+        "o_system_fault_cause",
+        "o_system_fault_source",
+        "o_system_fault_identity_valid",
+        "o_system_fault_frame_id",
+        "o_system_fault_sample_index",
+        "o_system_fault_color_ir",
+        "o_system_fault_frame_type",
+        "o_system_fault_precision",
+        "o_system_fault_run_generation",
+        "o_system_fault_summary",
+        "o_result_discard_summary_sticky"
+      ],
+      "description": "ppg_system_fault_abort_supervisor reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        253,
+        264
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        264,
+        275
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        275,
+        286
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        286,
+        298
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        298,
+        309
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        309,
+        320
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        320,
+        331
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        331,
+        342
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        342,
+        353
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC010",
+      "module_name": "u_block_10",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        353,
+        364
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC011",
+      "module_name": "u_block_11",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        364,
+        375
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC012",
+      "module_name": "u_block_12",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        375,
+        386
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC013",
+      "module_name": "u_block_13",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        386,
+        397
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC014",
+      "module_name": "u_block_14",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        397,
+        409
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC015",
+      "module_name": "u_block_15",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        409,
+        420
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC016",
+      "module_name": "u_block_16",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        420,
+        433
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_measurement_result_discard_event",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC017",
+      "module_name": "u_block_17",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        433,
+        444
+      ],
+      "boundary_signals": [
+        "i_adc_physical_idle",
+        "i_clk",
+        "i_rstn",
+        "i_stop_episode_active"
+      ]
+    },
+    {
+      "candidate_id": "DC018",
+      "module_name": "u_block_18",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        444,
+        455
+      ],
+      "boundary_signals": [
+        "i_adc_physical_idle",
+        "i_clk",
+        "i_rstn",
+        "i_stop_episode_active"
+      ]
+    },
+    {
+      "candidate_id": "DC019",
+      "module_name": "u_block_19",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        455,
+        465
+      ],
+      "boundary_signals": [
+        "i_adc_physical_idle",
+        "i_clk",
+        "i_rstn"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_system_fault_abort_supervisor\\ppg_system_fault_abort_supervisor.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

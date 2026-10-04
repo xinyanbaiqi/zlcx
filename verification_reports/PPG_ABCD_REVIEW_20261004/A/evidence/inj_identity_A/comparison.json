@@ -1,0 +1,37 @@
+[
+  {
+    "name": "positive",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "key_lines": [
+      "AUDIT_IDENTITY expected_frame=1 observed_frame=1 sample_valid=0",
+      "PASS INJ-03 invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact",
+      "PASS INJ-03 later legal sample recovered sample_valid=1 after the PRC-08 injection",
+      "INJ_TB_PASS"
+    ]
+  },
+  {
+    "name": "finite_frame_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "key_lines": [
+      "AUDIT_IDENTITY expected_frame=1 observed_frame=0 sample_valid=0",
+      "AUDIT_IDENTITY_FAIL invalid result frame differs from the real accepted owner",
+      "PASS INJ-03 invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact",
+      "PASS INJ-03 later legal sample recovered sample_valid=1 after the PRC-08 injection",
+      "INJ_TB_PASS"
+    ]
+  },
+  {
+    "name": "negative_expected_comparison",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "key_lines": [
+      "AUDIT_IDENTITY expected_frame=1 observed_frame=0 sample_valid=0",
+      "AUDIT_IDENTITY_FAIL invalid result frame differs from the real accepted owner",
+      "PASS INJ-03 invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact",
+      "PASS INJ-03 later legal sample recovered sample_valid=1 after the PRC-08 injection",
+      "INJ_TB_FAIL error_count=1"
+    ]
+  }
+]

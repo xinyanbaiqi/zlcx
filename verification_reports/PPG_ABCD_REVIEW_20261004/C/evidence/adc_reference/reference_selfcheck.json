@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "decode raw0",
+    "decode raw8",
+    "decode raw1023",
+    "round +half",
+    "round -half",
+    "nearHalf 65535",
+    "nearHalf 65537",
+    "nearHalf -65535",
+    "nearHalf -65537"
+  ],
+  "deliberateWrongExpectationRejected": true,
+  "scope": "Reference arithmetic and assertion self-check only; no RTL simulation"
+}

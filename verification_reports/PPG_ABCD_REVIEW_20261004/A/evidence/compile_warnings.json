@@ -1,0 +1,330 @@
+[
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 33 (i_detect_code) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 34 (i_stage1_raw) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 35 (i_stage1_code_ext) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 36 (i_stage2_raw) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 37 (i_stage2_code_ext) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 38 (i_nominal_15_code) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 39 (i_nominal_15_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v:444: warning: Instantiating module ppg_adc_dc_recovery with dangling input port 40 (i_nominal_saturated) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 256 (i_test_inject_enable) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 257 (i_test_identity_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 259 (i_test_identity_inject_sample_index) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 260 (i_test_invalid_sample_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 262 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v:328: warning: Instantiating module ppg_adc_measurement_idac_integration with dangling input port 264 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 3 (i_datapath_discard_event) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 4 (i_datapath_discard_reason) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 5 (i_datapath_discard_identity_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 6 (i_datapath_discard_frame_id) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 7 (i_datapath_discard_sample_index) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 8 (i_datapath_discard_color_ir) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 9 (i_datapath_discard_frame_type) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 10 (i_datapath_discard_precision) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 11 (i_datapath_discard_run_generation) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v:753: warning: Instantiating module ppg_adc_pipeline_overlap_corrector with dangling input port 32 (i_run_generation) floating."
+  },
+  {
+    "file": "rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v:465: warning: Instantiating module ppg_adc_result_router with dangling input port 22 (i_run_generation) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_diag_algo_probe.v:274: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_diag_algo_probe.v:274: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_diag_algo_probe.v:274: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top.v:283: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top.v:283: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top.v:283: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v:244: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v:244: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v:244: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v:444: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v:444: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v:444: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v:401: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v:401: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v:401: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v:252: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v:252: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v:252: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_injection.v:236: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v:536: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v:536: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v:536: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v:266: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v:509: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v:509: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v:509: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_longrun.v:274: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_longrun.v:274: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_longrun.v:274: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v:249: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v:249: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v:249: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v:247: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v:247: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v:247: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v:264: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v:385: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v:385: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v:385: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v:254: warning: Instantiating module ppg_control_top with dangling input port 25 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v:254: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v:254: warning: Instantiating module ppg_control_top with dangling input port 27 (i_context_handover_stall_request) floating."
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v:255: warning: Instantiating module ppg_control_top with dangling input port 26 (i_test_calibration_loss_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v:778: warning: Instantiating module ppg_idac_code_controller with dangling input port 50 (i_test_inject_enable) floating."
+  },
+  {
+    "file": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v:778: warning: Instantiating module ppg_idac_code_controller with dangling input port 51 (i_test_saturation_inject_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 3 (i_run_generation) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 4 (i_datapath_discard_event) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 5 (i_datapath_discard_reason) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 6 (i_datapath_discard_identity_valid) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 7 (i_datapath_discard_frame_id) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 8 (i_datapath_discard_sample_index) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 9 (i_datapath_discard_color_ir) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 10 (i_datapath_discard_frame_type) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 11 (i_datapath_discard_precision) floating."
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v:525: warning: Instantiating module ppg_normal_transaction_fork with dangling input port 12 (i_datapath_discard_run_generation) floating."
+  },
+  {
+    "file": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v:144: warning: Instantiating module ppg_sar9_sar15_safe_selection_wrapper with dangling input port 22 (i_test_inject_enable) floating."
+  },
+  {
+    "file": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+    "warning": "/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v:144: warning: Instantiating module ppg_sar9_sar15_safe_selection_wrapper with dangling input port 23 (i_context_handover_stall_request) floating."
+  }
+]

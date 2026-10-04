@@ -1,0 +1,943 @@
+[
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 430,
+        "end": 488,
+        "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_config",
+          "start": 439,
+          "end": 493,
+          "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a"
+        }
+      },
+      {
+        "name": "task_build_normal_manual_dual_config",
+        "start": 490,
+        "end": 495,
+        "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_dual_config",
+          "start": 495,
+          "end": 500,
+          "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b"
+        }
+      },
+      {
+        "name": "task_build_search_track_config",
+        "start": 499,
+        "end": 504,
+        "code_sha256": "d8d91c87fc32763fc812a3e42413a84d1e59962cb4bd7cb78365e2aea54305e7",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_build_search_track_unreachable_config",
+        "start": 517,
+        "end": 521,
+        "code_sha256": "d5b8e4881c5cc87b4f5f1b06e9e83bcd89c92b3bd7b33bd51dcebe82d7e9d945",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 524,
+        "end": 531,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 534,
+        "end": 541,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 543,
+        "end": 550,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 553,
+        "end": 567,
+        "code_sha256": "2f0ccf8a307245af03e3248aa57c971833c8e31653fea53f4de74d73c2696154",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_stop_and_drain",
+        "start": 570,
+        "end": 592,
+        "code_sha256": "e0a1c7958077c071473332d36ad1c1ba1d8e6b8c352c00056052325747fe2b11",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 595,
+        "end": 611,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 614,
+        "end": 637,
+        "code_sha256": "b17b609d2fe3d9ff9e318a0d127431a9e233119741eeba4e07c517a8bd0d8189",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "wait_q3_release_and_sample",
+        "start": 647,
+        "end": 685,
+        "code_sha256": "e8f9ac3933c5cf85ea9038a8a17c05a637f2aaef062e7b16c2aae701b50a37af",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 688,
+        "end": 700,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      },
+      {
+        "name": "task_drive_amb_toward_target",
+        "start": 742,
+        "end": 754,
+        "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b",
+        "same_as_lifecycle": {
+          "name": "task_drive_amb_toward_target",
+          "start": 686,
+          "end": 698,
+          "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b"
+        }
+      },
+      {
+        "name": "task_drive_dcs_toward_target",
+        "start": 757,
+        "end": 769,
+        "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6",
+        "same_as_lifecycle": {
+          "name": "task_drive_dcs_toward_target",
+          "start": 701,
+          "end": 713,
+          "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6"
+        }
+      },
+      {
+        "name": "task_verify_deadline_suppression",
+        "start": 777,
+        "end": 805,
+        "code_sha256": "257a23a5bf3516db0cb8c341535325b09f1ded8f7cd4826ae3fda5c67d9d912f",
+        "same_as_lifecycle": null
+      }
+    ]
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 425,
+        "end": 479,
+        "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_config",
+          "start": 439,
+          "end": 493,
+          "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a"
+        }
+      },
+      {
+        "name": "task_build_normal_manual_dual_config",
+        "start": 481,
+        "end": 486,
+        "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_dual_config",
+          "start": 495,
+          "end": 500,
+          "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b"
+        }
+      },
+      {
+        "name": "task_build_recheck_generator_config",
+        "start": 492,
+        "end": 500,
+        "code_sha256": "3e210ffc418ec450890c8289a9884aa0d10809023f1b185fa4694bda3d9c36ed",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_build_recheck_fixed_config",
+        "start": 505,
+        "end": 512,
+        "code_sha256": "5de6107d36c16287e882a380f3f6861b15280c20a74f7bf4f34b28ff75543834",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 515,
+        "end": 522,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 525,
+        "end": 532,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 534,
+        "end": 541,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 544,
+        "end": 558,
+        "code_sha256": "85bd6d1de595d180f82201b3b786a285f0718811149ffe7decb355f9a9e231db",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_stop_and_drain",
+        "start": 563,
+        "end": 601,
+        "code_sha256": "5c092fadc686b324ef67c59ce5d53016e1ee4b0a15df904a35a4cb479388657d",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 604,
+        "end": 620,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 623,
+        "end": 646,
+        "code_sha256": "e5e9f5fefc6921c261eb7e56f37617da3881854abb321bed26011583b0bb4f80",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 649,
+        "end": 661,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      },
+      {
+        "name": "task_drive_amb_toward_target",
+        "start": 685,
+        "end": 697,
+        "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b",
+        "same_as_lifecycle": {
+          "name": "task_drive_amb_toward_target",
+          "start": 686,
+          "end": 698,
+          "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b"
+        }
+      },
+      {
+        "name": "task_drive_dcs_toward_target",
+        "start": 700,
+        "end": 712,
+        "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6",
+        "same_as_lifecycle": {
+          "name": "task_drive_dcs_toward_target",
+          "start": 701,
+          "end": 713,
+          "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6"
+        }
+      },
+      {
+        "name": "task_run_startup_search",
+        "start": 717,
+        "end": 811,
+        "code_sha256": "6ab403cb5e0974f00f0a8bc2df70a8ccff93842a061cb45c46b5b471ea9157fa",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_drive_color_value",
+        "start": 816,
+        "end": 846,
+        "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521",
+        "same_as_lifecycle": {
+          "name": "task_drive_color_value",
+          "start": 838,
+          "end": 868,
+          "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521"
+        }
+      }
+    ]
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 437,
+        "end": 491,
+        "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_config",
+          "start": 439,
+          "end": 493,
+          "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a"
+        }
+      },
+      {
+        "name": "task_build_normal_manual_dual_config",
+        "start": 493,
+        "end": 498,
+        "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_dual_config",
+          "start": 495,
+          "end": 500,
+          "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b"
+        }
+      },
+      {
+        "name": "task_build_oib_config",
+        "start": 503,
+        "end": 510,
+        "code_sha256": "808627f7e40a9911eaeaadf79509cb99efa981edb7dd4ab7464ee5f0ce8ca6f9",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 513,
+        "end": 520,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 523,
+        "end": 530,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 532,
+        "end": 539,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 542,
+        "end": 556,
+        "code_sha256": "087b450d13a4c77e8d2cd5d6b1234bbd87e65cedc09b28af8d209c5e9852b970",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 559,
+        "end": 575,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 578,
+        "end": 601,
+        "code_sha256": "6079a8ffbb7184144cbe7a42862364ed4e341c892195fb5b6b53c1af9d5ccf90",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 604,
+        "end": 616,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      },
+      {
+        "name": "task_stop_and_drain",
+        "start": 619,
+        "end": 656,
+        "code_sha256": "c82822918c1374f260010f042b4cbf1f5183461b34e162446f0ab10943765a05",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_drive_amb_toward_target",
+        "start": 692,
+        "end": 704,
+        "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b",
+        "same_as_lifecycle": {
+          "name": "task_drive_amb_toward_target",
+          "start": 686,
+          "end": 698,
+          "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b"
+        }
+      },
+      {
+        "name": "task_drive_dcs_toward_target",
+        "start": 707,
+        "end": 719,
+        "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6",
+        "same_as_lifecycle": {
+          "name": "task_drive_dcs_toward_target",
+          "start": 701,
+          "end": 713,
+          "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6"
+        }
+      },
+      {
+        "name": "task_run_startup_search",
+        "start": 723,
+        "end": 817,
+        "code_sha256": "e13aae0b1fa00196adca8021409b72c9e539fd8336592276a57ebe79a6e35efb",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_settle_after_search",
+        "start": 820,
+        "end": 834,
+        "code_sha256": "d378ffb6242828a76483adaa99f639e6e273688170cfd03cf3738af4174f7024",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_drive_color_value",
+        "start": 839,
+        "end": 869,
+        "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521",
+        "same_as_lifecycle": {
+          "name": "task_drive_color_value",
+          "start": 838,
+          "end": 868,
+          "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521"
+        }
+      },
+      {
+        "name": "task_drive_any_neutral",
+        "start": 873,
+        "end": 883,
+        "code_sha256": "194cecfca43880324fdb4ce56ba950802cf3ef33b309337a454b2a5afb157a78",
+        "same_as_lifecycle": null
+      }
+    ]
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 420,
+        "end": 474,
+        "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_config",
+          "start": 439,
+          "end": 493,
+          "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a"
+        }
+      },
+      {
+        "name": "task_build_normal_manual_dual_config",
+        "start": 476,
+        "end": 481,
+        "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_dual_config",
+          "start": 495,
+          "end": 500,
+          "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b"
+        }
+      },
+      {
+        "name": "task_build_no_recheck_generator_config",
+        "start": 489,
+        "end": 497,
+        "code_sha256": "52914eefc12d23584288dfa35005bc6876489b156df7251f4ecbdda421b68801",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 500,
+        "end": 507,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 510,
+        "end": 517,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 519,
+        "end": 526,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 529,
+        "end": 543,
+        "code_sha256": "89c22d94c341380ac9c78e44b5987a258637791245b750b7790ee3cabbb988cb",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_stop_and_drain",
+        "start": 546,
+        "end": 585,
+        "code_sha256": "bddb41ce53d2d953ee0eeb17b07cc1430715455d1cb2e1d1a47c608b3b7ca551",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 588,
+        "end": 604,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 607,
+        "end": 630,
+        "code_sha256": "f5e5506e2cb1610f941919e0ed97825a4addaefda46dadb42c3f7305065da45c",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 633,
+        "end": 645,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      },
+      {
+        "name": "task_drive_amb_toward_target",
+        "start": 668,
+        "end": 680,
+        "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b",
+        "same_as_lifecycle": {
+          "name": "task_drive_amb_toward_target",
+          "start": 686,
+          "end": 698,
+          "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b"
+        }
+      },
+      {
+        "name": "task_drive_dcs_toward_target",
+        "start": 683,
+        "end": 695,
+        "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6",
+        "same_as_lifecycle": {
+          "name": "task_drive_dcs_toward_target",
+          "start": 701,
+          "end": 713,
+          "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6"
+        }
+      },
+      {
+        "name": "task_run_startup_search",
+        "start": 699,
+        "end": 793,
+        "code_sha256": "83122bc13d5dcdb9b22ce23a4bf329cc8b0ce05900de44938adbbdd5e8910ae7",
+        "same_as_lifecycle": null
+      }
+    ]
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 439,
+        "end": 493,
+        "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_config",
+          "start": 439,
+          "end": 493,
+          "code_sha256": "cb90ccfd1ddb20960acb42f44255166cb4032a5ba61247f300fa19c8f1f21b7a"
+        }
+      },
+      {
+        "name": "task_build_normal_manual_dual_config",
+        "start": 495,
+        "end": 500,
+        "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b",
+        "same_as_lifecycle": {
+          "name": "task_build_normal_manual_dual_config",
+          "start": 495,
+          "end": 500,
+          "code_sha256": "d3b1a80705090c0e6052a6b2231e128c4898447a329e806297ed7a9a545df43b"
+        }
+      },
+      {
+        "name": "task_build_lfa_config",
+        "start": 505,
+        "end": 512,
+        "code_sha256": "17e6daa57ca75f48a3db2b8f6e45ff69f014e6d7e31236ce1196e3bf775d8c6a",
+        "same_as_lifecycle": {
+          "name": "task_build_lfa_config",
+          "start": 505,
+          "end": 512,
+          "code_sha256": "17e6daa57ca75f48a3db2b8f6e45ff69f014e6d7e31236ce1196e3bf775d8c6a"
+        }
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 515,
+        "end": 522,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 525,
+        "end": 532,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 534,
+        "end": 541,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 544,
+        "end": 558,
+        "code_sha256": "c2bbf7c7a2c71efbf94440de543181f5bc762244f183666e70a0b2fd2710d2aa",
+        "same_as_lifecycle": {
+          "name": "task_wait_config_result",
+          "start": 544,
+          "end": 558,
+          "code_sha256": "c2bbf7c7a2c71efbf94440de543181f5bc762244f183666e70a0b2fd2710d2aa"
+        }
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 561,
+        "end": 577,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 580,
+        "end": 603,
+        "code_sha256": "b821bb989903f163c952143aa93aa443dfb02ecbeffd0d46b842af9e7dc66483",
+        "same_as_lifecycle": {
+          "name": "wait_q3_release",
+          "start": 580,
+          "end": 603,
+          "code_sha256": "b821bb989903f163c952143aa93aa443dfb02ecbeffd0d46b842af9e7dc66483"
+        }
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 606,
+        "end": 618,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      },
+      {
+        "name": "task_stop_and_drain",
+        "start": 624,
+        "end": 661,
+        "code_sha256": "e04a775366fcbbe97a890f041ebd0cc92fb604ed82f89a69578146da3fe81a77",
+        "same_as_lifecycle": {
+          "name": "task_stop_and_drain",
+          "start": 624,
+          "end": 661,
+          "code_sha256": "e04a775366fcbbe97a890f041ebd0cc92fb604ed82f89a69578146da3fe81a77"
+        }
+      },
+      {
+        "name": "task_drive_amb_toward_target",
+        "start": 686,
+        "end": 698,
+        "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b",
+        "same_as_lifecycle": {
+          "name": "task_drive_amb_toward_target",
+          "start": 686,
+          "end": 698,
+          "code_sha256": "2d86d1c203e5270f5d74519415db275519c316248c77f074fcda8e95f0aff25b"
+        }
+      },
+      {
+        "name": "task_drive_dcs_toward_target",
+        "start": 701,
+        "end": 713,
+        "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6",
+        "same_as_lifecycle": {
+          "name": "task_drive_dcs_toward_target",
+          "start": 701,
+          "end": 713,
+          "code_sha256": "41e19047c2ef448055ad061c13fb50a519cf623e6c63099e6616738c9b390eb6"
+        }
+      },
+      {
+        "name": "task_run_startup_search",
+        "start": 717,
+        "end": 811,
+        "code_sha256": "74794ae04f335cf9740647cb58d746065194aca5fcc96583031156c4da7f1886",
+        "same_as_lifecycle": {
+          "name": "task_run_startup_search",
+          "start": 717,
+          "end": 811,
+          "code_sha256": "74794ae04f335cf9740647cb58d746065194aca5fcc96583031156c4da7f1886"
+        }
+      },
+      {
+        "name": "task_settle_after_search",
+        "start": 819,
+        "end": 833,
+        "code_sha256": "5cdcccfdf59837c5b69a42df06c8bc47fbba9d7fc9723d014aa557e8eaf2392f",
+        "same_as_lifecycle": {
+          "name": "task_settle_after_search",
+          "start": 819,
+          "end": 833,
+          "code_sha256": "5cdcccfdf59837c5b69a42df06c8bc47fbba9d7fc9723d014aa557e8eaf2392f"
+        }
+      },
+      {
+        "name": "task_drive_color_value",
+        "start": 838,
+        "end": 868,
+        "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521",
+        "same_as_lifecycle": {
+          "name": "task_drive_color_value",
+          "start": 838,
+          "end": 868,
+          "code_sha256": "68c3ffad5a18df4f7b7bbfd2dea46c9b7a135f226e09f3c68189fb4428bf1521"
+        }
+      }
+    ]
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+    "tasks": [
+      {
+        "name": "task_build_normal_manual_config",
+        "start": 427,
+        "end": 477,
+        "code_sha256": "1b5349387b569784a3425c037aa3b74ed2d96897a86057072cdf077d80436334",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_pulse_source_update",
+        "start": 480,
+        "end": 487,
+        "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d",
+        "same_as_lifecycle": {
+          "name": "task_pulse_source_update",
+          "start": 515,
+          "end": 522,
+          "code_sha256": "562d1307310a305ca6e027ccc76d27bc313b1e7b2d21bcaed003deb2a60f046d"
+        }
+      },
+      {
+        "name": "task_pulse_start",
+        "start": 490,
+        "end": 497,
+        "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_start",
+          "start": 525,
+          "end": 532,
+          "code_sha256": "a3999d9133b5e861487d74358821f53cf3c3a27e9de83d8929dff1c5218b189e"
+        }
+      },
+      {
+        "name": "task_pulse_stop",
+        "start": 500,
+        "end": 507,
+        "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e",
+        "same_as_lifecycle": {
+          "name": "task_pulse_stop",
+          "start": 534,
+          "end": 541,
+          "code_sha256": "dc39417f74489c607813077925e4e3d8a0f2ae17f09f5f6c607a81263674a94e"
+        }
+      },
+      {
+        "name": "task_pulse_abort",
+        "start": 510,
+        "end": 517,
+        "code_sha256": "840dfdcce8a188eb1ab12e153fb609f8cf028d38df751105bdcb93abd366c70c",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "task_wait_config_result",
+        "start": 520,
+        "end": 534,
+        "code_sha256": "10bf5ec8c005172b8b5b6851524f5ce80c7477593d0189e0e2f04ee5450ea7c8",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "drive_real_adc_done",
+        "start": 538,
+        "end": 554,
+        "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03",
+        "same_as_lifecycle": {
+          "name": "drive_real_adc_done",
+          "start": 561,
+          "end": 577,
+          "code_sha256": "3427e538083eb85ee9482c58cda0a667269d2c7f29f0195437c4cc809a848a03"
+        }
+      },
+      {
+        "name": "wait_q3_release",
+        "start": 559,
+        "end": 582,
+        "code_sha256": "5c05acf17acefa78e77e9052459c9774fc68a67160498ad17ba979eb97c57a63",
+        "same_as_lifecycle": null
+      },
+      {
+        "name": "make_fixed_raw",
+        "start": 585,
+        "end": 597,
+        "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2",
+        "same_as_lifecycle": {
+          "name": "make_fixed_raw",
+          "start": 606,
+          "end": 618,
+          "code_sha256": "9c6d73eb6e7b58ad6657d99eb37d773bff0b4a7fa482446a091e120ac37649a2"
+        }
+      }
+    ]
+  }
+]

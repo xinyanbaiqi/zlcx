@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "id": "C01",
+      "file": "good",
+      "declared": "1fbe6ed1a45c1f2aff7a71d912dd39ee7abe24a77aac76bc29f293f3fd7cd2a8",
+      "actual": "1fbe6ed1a45c1f2aff7a71d912dd39ee7abe24a77aac76bc29f293f3fd7cd2a8",
+      "status": "match"
+    },
+    {
+      "id": "C02",
+      "file": "changed",
+      "declared": "1fbe6ed1a45c1f2aff7a71d912dd39ee7abe24a77aac76bc29f293f3fd7cd2a8",
+      "actual": "50a8768317dd39e62b3ddd7c8848f7ce4744f52231dccd02e960dce08af46332",
+      "status": "mismatch"
+    },
+    {
+      "id": "C03",
+      "file": "wrongdigest",
+      "declared": "0000000000000000000000000000000000000000000000000000000000000000",
+      "actual": "1fbe6ed1a45c1f2aff7a71d912dd39ee7abe24a77aac76bc29f293f3fd7cd2a8",
+      "status": "mismatch"
+    },
+    {
+      "id": "C04",
+      "file": "missing",
+      "declared": "1fbe6ed1a45c1f2aff7a71d912dd39ee7abe24a77aac76bc29f293f3fd7cd2a8",
+      "status": "missing"
+    }
+  ],
+  "self_digest_field_ignored": true,
+  "other_text_change_detected": true
+}

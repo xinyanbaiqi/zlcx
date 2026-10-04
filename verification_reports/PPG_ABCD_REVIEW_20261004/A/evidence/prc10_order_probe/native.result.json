@@ -1,0 +1,29 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "audit_prc10",
+    "-o",
+    "/tmp/ppg_audit_probes/prc10_order_probe_7140df3d/sim.vvp",
+    "/tmp/ppg_audit_probes/prc10_order_probe_7140df3d/files/0/audit_prc10.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/prc10_order_probe_7140df3d",
+  "compile_rc": 0,
+  "run_rc": 0,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\prc10_order_probe\\audit_prc10.v",
+      "sha256": "59d95a9db47add9dbfe69343044ad2aae195bef84debab1a5dbd1cd9d82d3d3b"
+    }
+  ]
+}

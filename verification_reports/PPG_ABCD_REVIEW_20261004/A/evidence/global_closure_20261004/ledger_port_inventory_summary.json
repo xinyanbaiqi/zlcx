@@ -1,0 +1,150 @@
+{
+  "rows": 1860,
+  "counts": {
+    "name_direction_match": 1858,
+    "explicitly_documented_phantom_row": 1,
+    "expanded_group_match": 1
+  },
+  "by_contract": {
+    "C01": {
+      "name_direction_match": 250
+    },
+    "C02": {
+      "name_direction_match": 33
+    },
+    "C03": {
+      "name_direction_match": 102,
+      "explicitly_documented_phantom_row": 1
+    },
+    "C04": {
+      "name_direction_match": 25,
+      "expanded_group_match": 1
+    },
+    "C05": {
+      "name_direction_match": 68
+    },
+    "C07": {
+      "name_direction_match": 16
+    },
+    "C08": {
+      "name_direction_match": 106
+    },
+    "C09": {
+      "name_direction_match": 101
+    },
+    "C10": {
+      "name_direction_match": 288
+    },
+    "C11": {
+      "name_direction_match": 53
+    },
+    "C13": {
+      "name_direction_match": 60
+    },
+    "C14": {
+      "name_direction_match": 63
+    },
+    "C15": {
+      "name_direction_match": 81
+    },
+    "C16": {
+      "name_direction_match": 122
+    },
+    "C17": {
+      "name_direction_match": 122
+    },
+    "C19": {
+      "name_direction_match": 71
+    },
+    "C20": {
+      "name_direction_match": 95
+    },
+    "C22": {
+      "name_direction_match": 82
+    },
+    "C23": {
+      "name_direction_match": 68
+    },
+    "C24": {
+      "name_direction_match": 52
+    }
+  },
+  "mapping": {
+    "C01": [
+      "ppg_control_top",
+      "ppg_active_v4_control_plane_integration",
+      "ppg_characterization_control_cdc",
+      "ppg_400hz_frame_calibration_scheduler",
+      "ppg_sar9_sar15_safe_selection_wrapper",
+      "ppg_adc_measurement_idac_integration",
+      "ppg_system_fault_abort_supervisor"
+    ],
+    "C02": [
+      "ppg_system_config_manager"
+    ],
+    "C03": [
+      "ppg_active_v4_control_plane_integration"
+    ],
+    "C04": [
+      "ppg_system_active_config_unpack",
+      "ppg_active_v4_control_plane_integration",
+      "ppg_system_config_manager",
+      "ppg_config_cdc_bridge",
+      "ppg_adc_measurement_idac_integration",
+      "ppg_adc_s1_programmable_calibrator"
+    ],
+    "C05": [
+      "ppg_system_active_config_unpack"
+    ],
+    "C07": [
+      "ppg_characterization_control_cdc"
+    ],
+    "C08": [
+      "ppg_400hz_frame_calibration_scheduler"
+    ],
+    "C09": [
+      "ppg_sar9_sar15_safe_selection_wrapper"
+    ],
+    "C10": [
+      "ppg_adc_measurement_idac_integration",
+      "ppg_adc_async_stage_capture",
+      "ppg_adc_s1_redundancy_corrector",
+      "ppg_adc_result_router"
+    ],
+    "C11": [
+      "ppg_adc_s1_programmable_calibrator"
+    ],
+    "C13": [
+      "ppg_adc_pipeline_overlap_corrector"
+    ],
+    "C14": [
+      "ppg_adc_programmable_reconstructor"
+    ],
+    "C15": [
+      "ppg_adc_dc_recovery"
+    ],
+    "C16": [
+      "ppg_normal_transaction_fork",
+      "ppg_amb_recheck_scheduler"
+    ],
+    "C17": [
+      "ppg_idac_code_controller"
+    ],
+    "C19": [
+      "ppg_coarse_detection_fir"
+    ],
+    "C20": [
+      "ppg_dynamic_baseline_cross_detector"
+    ],
+    "C22": [
+      "ppg_peak_valley_window_detector"
+    ],
+    "C23": [
+      "ppg_precision_window_controller"
+    ],
+    "C24": [
+      "ppg_system_fault_abort_supervisor"
+    ]
+  },
+  "limits": "Name/direction existence using Erie AST; unions are needed for C01/C04/C16 multi-module contracts. This does not independently prove producer/consumer wiring, widths, resets, handshake or CDC semantics. Missing candidates need cross-file rebuttal."
+}

@@ -1,0 +1,260 @@
+[
+  {
+    "family": "AV4",
+    "refs": [
+      {
+        "file": "contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+        "line": 606,
+        "text": "| AV4-01 | 1024-bit逐位连接 | manager联合ACTIVE到unpack无截断、补零或重排；V4/V5边界精确为639/640 |",
+        "token": "AV4-01"
+      },
+      {
+        "file": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+        "line": 649,
+        "text": "\t\tif(!o_commit_ack_event || o_error_event || (o_active_config != reg_snapshot_normal) || (o_config_epoch != 8'd1) || (o_lifecycle_state != ST_READY))begin",
+        "token": "o_active_config"
+      },
+      {
+        "file": "contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+        "line": 621,
+        "text": "| AV4-16 | V5参数隔离 | 检测参数只来自V5具名解包输出；V5保留位非零拒绝，默认profile不形成第二producer |",
+        "token": "AV4-16"
+      },
+      {
+        "file": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+        "line": 815,
+        "text": "\t\tif(!o_error_event || (o_last_error_code != 8'h17) || (o_active_config != reg_snapshot_before_reject) || (o_config_epoch != reg_config_epoch_before_reject) || (o_lifecycle_state != ST_CONFIG))begin",
+        "token": "o_active_config"
+      }
+    ],
+    "decision": "19个C04连接验收条款不是AV4C编号的逐号别名；1024-bit COMMIT直连唯一unpack、具名V5到AMI/PWI、码快照与epoch静态逐跳和AV4C01/21、TOP02、MGR/UNPACK分担验证。F-025的alpha缺比较保留，不能据AV4C22 PASS宣称全部V5字段动态已验证。"
+  },
+  {
+    "family": "CF4",
+    "refs": [
+      {
+        "file": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+        "line": 670,
+        "text": "| CF4-01 | schema为04且保留位为0 | 允许继续其他字段检查 |",
+        "token": "CF4-01"
+      },
+      {
+        "file": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+        "line": 674,
+        "text": "| CF4-05 | RUN期间尝试修改interval | 请求拒绝，ACTIVE计数周期保持 |",
+        "token": "CF4-05"
+      },
+      {
+        "file": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+        "line": 314,
+        "text": "\tassign flag_snapshot_schema_valid = i_config_snapshot[7:0] == 8'h04; // V4只接收冻结的schema编号4",
+        "token": "8'h04"
+      },
+      {
+        "file": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+        "line": 317,
+        "text": "\t\t(i_config_snapshot[639:592] == 48'd0); // V4头部和高位扩展保留区必须全部写零",
+        "token": "639:592"
+      }
+    ],
+    "decision": "schema4和保留位由唯一manager资格门检查，MGR12真实非法schema/bit639比较及MGR03合法提交补样本；16bit interval不存在额外数值拒绝比较，0/1/4096/65535静态均可表示；RUN只允许CONFIG COMMIT，当前规范字段仍保持。五个CF4未形成独立命名TB，不制造全量动态四端点已PASS结论。"
+  },
+  {
+    "family": "D",
+    "refs": [
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 3536,
+        "text": "| D02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:101-105,122-129,233-241`; `PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:281`; `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:209-224` | ~~Exact manager output names for the external 2-bit lifecycle state and detailed error observation; detailed error payload width/fields; wrapper bit-transparent forwarding; Top observation port names and consumers.~~ **Resolved 2026-08-31 -- see frozen-decision note above.** | The contracts define the state/error behavior but not this externally visible interface. Inventing names or collapsing the required detailed error record to an arbitrary width would change product observability; historical RTL names are non-normative by scope. | ~~Freeze a single observation interface...~~ **Done: `o_lifecycle_state`/`o_commit_ack_event`/`o_commit_ack_sticky`/`o_error_event`/`o_error_sticky`/`o_last_error_code`, always-on production top-level ports, per the semantic contract's D02 section.** |",
+        "token": "D02"
+      },
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 3585,
+        "text": "| D03 | `PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` Section 7.9a (new); `ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480`; `ppg_control_top.v:120` | ~~Whether cause `8'h22` (\"independent analog-safe convergence detector\") has an applicable trigger condition on this chip.~~ **Resolved 2026-09-05 -- see frozen-decision note above.** | Only the chip's analog designer could confirm whether the physical phenomenon (analog convergence) exists to detect; RTL/contract text alone could not settle this. | ~~Design and implement a trigger condition for cause `8'h22`...~~ **Done: confirmed not applicable to this chip's analog implementation (lab test chip, hard-wired bias, no convergence dynamics); no RTL change required.** |",
+        "token": "D03"
+      },
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 123,
+        "text": "\t\tinput i_adc_physical_idle,                           // 已同步物理ADC/DONE空闲保持电平，形成唯一flag_adc_physical_idle",
+        "token": "i_adc_physical_idle"
+      }
+    ],
+    "decision": "D01/D02/D03是产品接口决策及关联门禁；D02端口已存在，D03模拟收敛不适用已冻结为用户已知，不要求虚造独立TB/RTL标签。"
+  },
+  {
+    "family": "D01",
+    "refs": [
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 3599,
+        "text": "| G-FP-01-D01-04 | `PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md:206`; `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:255-260`; `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:183,201`; `PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md:323-328,736-737,791-799`; `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:246-258,395-404,765-769,843-844` | `peak_valley_config_valid` is a 1-bit registered V5 input with one named chain: unpacker -> AMI -> PWI -> C20/C22/C23. Low permits consumption/drain but blocks formal cross, peak/valley, 9-to-15 request and fine-window control; no child creates a second producer. |",
+        "token": "peak_valley_config_valid"
+      },
+      {
+        "file": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+        "line": 824,
+        "text": "\t\tif(o_peak_valley_config_valid)begin",
+        "token": "peak_valley_config_valid"
+      }
+    ],
+    "decision": "V5 safety-valid同一unpack->AMI->PWI->三leaf链及reset valid0/合法commit释放真实比较；F-034同拍discard/safe提交优先级反例仍适用。"
+  },
+  {
+    "family": "G-FP",
+    "refs": [
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 3599,
+        "text": "| G-FP-01-D01-04 | `PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md:206`; `PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:255-260`; `PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md:183,201`; `PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md:323-328,736-737,791-799`; `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:246-258,395-404,765-769,843-844` | `peak_valley_config_valid` is a 1-bit registered V5 input with one named chain: unpacker -> AMI -> PWI -> C20/C22/C23. Low permits consumption/drain but blocks formal cross, peak/valley, 9-to-15 request and fine-window control; no child creates a second producer. |",
+        "token": "G-FP-01-D01-04"
+      },
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 3602,
+        "text": "| G-FP-05-D01-01 | `PPG_CONTRACT_CLOSURE_MATRIX.md:3,102-107` | Top/manager/wrapper/unpacker/CDC explicit `C_CONFIG_WIDTH=1024`; elaboration equality required. |",
+        "token": "G-FP-05-D01-01"
+      },
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 104,
+        "text": "\t\tinput [C_CONFIG_WIDTH - 1:0] i_source_config_snapshot, // source域完整V4+V5联合shadow快照",
+        "token": "C_CONFIG_WIDTH"
+      }
+    ],
+    "decision": "G-FP01..07及D01子项是端口、状态、故障、参数、CDC、产品台账门禁，机械ID不等于一个RTL状态机。C01 165边界端口完成独立名称/方向/默认宽度核对；其他cluster按B/C/D端口表实读，用户已知的独立签核不足仍明确保留；参数F014/F024、manifest F045、失效锚点F003不能被旧CLOSED文字覆盖。"
+  },
+  {
+    "family": "JNT",
+    "refs": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+        "line": 638,
+        "text": "\t\tjnt_check_case(\"JNT-02-IR-PREESTABLISH\", flag_jnt02_ir_context_while_red_inflight); // 2026-09-17新增：补回源规格JNT-02B，真实缺口1",
+        "token": "JNT-02-IR-PREESTABLISH"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+        "line": 796,
+        "text": "\t\tflag_jnt_baseline_pass = (cnt_run_jnt_checked == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_pass == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_fail == 0);",
+        "token": "flag_jnt_baseline_pass"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+        "line": 800,
+        "text": "\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d fail=%0d required=%0d first_failure=%0s status=FAIL\", cnt_run_jnt_checked, cnt_run_jnt_pass, cnt_run_jnt_fail, C_JNT_REQUIRED_SUBCHECKS, reg_jnt_first_failure_id);",
+        "token": "status=FAIL"
+      }
+    ],
+    "decision": "9稳定ID由共享prefix54子比较实现，全部14真实include已自包含编译；跨整个Top的验收无需单模块tag（别名表明示N/A）。原19系统已完成者逐log确认JNT54；数量不足终判传递错误F037必须保留；剩余长回归不填PASS。"
+  },
+  {
+    "family": "K",
+    "refs": [
+      {
+        "file": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+        "line": 198,
+        "text": "\tassign flag_episode_open_edge = flag_new_any && !system_fault_blocking_o; // 仅在episode由关闭转为开启的那一拍成立；open/close/rearm独立于首故障快照历史 @satisfies: K02",
+        "token": "flag_episode_open_edge"
+      },
+      {
+        "file": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+        "line": 480,
+        "text": "\t\tcheck_case(\"SUP10A\", (o_system_fault_blocking === 1'b1) &&",
+        "token": "SUP10A"
+      }
+    ],
+    "decision": "K01五路根故障->AMI->supervisor，K02episode与首故障分离，K03generation参数，K04代际discard，K05层级排他逐跳核对。SUP10A缺保留旧首故障刺激F012；PWC sticky START历史F022、clear归因F046、SSW碰撞F035均可反驳局部CLOSED。"
+  },
+  {
+    "family": "L",
+    "refs": [
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 996,
+        "text": "| L01 | Top, manager, ACTIVE wrapper and ACTIVE mapping label replaced V1.x/V4.3 status and historical evidence wording as non-normative; Top V1.10 names current dependencies. | C01 header and 2.1-2.2; C02 header; C03 header and 1; C04 header and 2. | ~~Repaired; all-file legacy audit remains incomplete.~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): same pattern as K04 -- \"all-file legacy audit\" is G-FP-04 (legacy conflicting normative text), independently closed 2026-09-02 by Batch 0 (10 search-class + 12 exact-hit rows re-confirmed against current source, zero dispositions reversed). L01's own semantic repair was already done; the only remaining blocker was this now-closed ledger.** |",
+        "token": "L01"
+      },
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 167,
+        "text": "| active normative | C01-C25 above, plus this matrix | They define an instantiated boundary, an algorithmic rule consumed by an instantiated boundary, or a required public verification interface. |",
+        "token": "active normative"
+      }
+    ],
+    "decision": "L01是版本/规范优先级清理项，别名表明确N/A；全部141依赖及26原Git blob核对，不要求独立硬件tag。F047基础标签与增量版本关系未明示仍保留。"
+  },
+  {
+    "family": "N",
+    "refs": [
+      {
+        "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "line": 1616,
+        "text": "\t\tcheck_case(\"N08-01\", flag_n08_window_hit &&",
+        "token": "N08-01"
+      },
+      {
+        "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+        "line": 1619,
+        "text": "\t\t\t(o_detection_discard_frame_id == n08_expect_frame_id) &&",
+        "token": "o_detection_discard_frame_id"
+      },
+      {
+        "file": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+        "line": 533,
+        "text": "\t\t\trun_generation_o <= run_generation_o + 1'b1; // 合法START时递增，i_system_fault_blocking为高时flag_start_accept恒为0不会误增；manager唯一generation生产者 @satisfies: N02",
+        "token": "run_generation_o"
+      },
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 329,
+        "text": "\t\t\tflag_diag_clear_event <= i_diag_clear_event;    // 单周期注册转发送AMI/Scheduler/SSW/supervisor；单一源双独立扇出,INJ-02/SMOKE-20-21实测确认 @satisfies: N04",
+        "token": "flag_diag_clear_event"
+      }
+    ],
+    "decision": "N08真实pre-handoff判据及系统scope-only flush互补，N01四consumer empty真实比较；N02generation唯一producer静态，N03SUP同拍仲裁，N04两腿未单独隔离为用户已知且F048名单冲突，N05Top锁模式，N06SUPwatchdog/episode但旧first-fault保留验证不足F012，N07是TB方法规范无需RTL锚点。"
+  },
+  {
+    "family": "P",
+    "refs": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "line": 1622,
+        "text": "\t\t\t\t$display(\"FAIL P01 Facet2 o_measurement_result_valid stayed 1 on the cycle AMI's own abort_discard and i_measurement_result_ready were both genuinely true together, despite the held result being simultaneously ready-consumable and abort-discardable; expected discard to pre-empt valid on this cycle\");",
+        "token": "o_measurement_result_valid"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "line": 1639,
+        "text": "\t\t\t\t$display(\"FAIL P01 Facet2 discard identity mismatch: color_ir=%b(expect %b) sample_index=%0d(expect %0d)\",",
+        "token": "discard identity mismatch"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+        "line": 1644,
+        "text": "\t\t\t\t$display(\"FAIL P01 Facet2 cnt_result_capture advanced from %0d to %0d despite the discard path claiming this same transaction -- double-recorded as both a successful transfer and a discard\",",
+        "token": "cnt_result_capture"
+      }
+    ],
+    "decision": "P01真实ready/abort同拍优先与完整identity逐场景核对，P02/N01同源discard，P03注册merge，P04/09/10由SUP模块补证，P05watchdog，P06合法Top RUN去使能不可达而叶子问题F044仅疑似，P07/08/11/14引用INJ/LFA/OIB且有限比较F049保留，P12/15/16/17是静态参数/连线或方法义务，P13 fork原50比较；P10逐hex未测为用户已知。"
+  },
+  {
+    "family": "R",
+    "refs": [
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 997,
+        "text": "| R01 | Top Section 6.2 used nonexistent `i_sar_launch_ready` and `i_wrapper_fault_blocking`. | C01:552-563; C08:860-862; C09:590 | Replaced by only declared AMI `o_wrapper_fault_blocking -> i_ami_fault_blocking` and SSW `o_wrapper_fault_blocking -> i_ssw_fault_blocking` paths. |",
+        "token": "R01"
+      },
+      {
+        "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+        "line": 1005,
+        "text": "| R09 | Current dependency tables retained pre-upgrade C03/C06/C07/C08/C09 versions, and current prose still allowed historical RTL/PASS text to look normative. | C01:87-95; C02:24-27; C04:36-37; C06:32-38; C07:37-41; C08:55-63; C09:61-66; C10:60-73; C18:40-46; C23:35-39; C25:125-140 | Current dependency versions and historical-evidence status were reconciled; only explicitly labelled historical records retain earlier versions or PASS text. |",
+        "token": "R09"
+      }
+    ],
+    "decision": "R01..09是历史冲突修复追溯，不是9个新增运行场景。当前端口/层级与141依赖源已实读；C01 discard/诊断清除文字和C09版本关系仍有F008/F048/F047，未因历史Replaced自动判当前一致。"
+  }
+]

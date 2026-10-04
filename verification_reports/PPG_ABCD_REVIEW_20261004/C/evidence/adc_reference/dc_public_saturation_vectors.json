@@ -1,0 +1,44 @@
+[
+  {
+    "input": {
+      "s1": 2047,
+      "fine": 16383,
+      "dc": 255,
+      "g9": 2147483647,
+      "g15": 2147483647
+    },
+    "expected": {
+      "coarseAcc": "1107878397941",
+      "fineAcc": "1097364012546",
+      "coarseRounded": "8452441",
+      "fineRounded": "8372223",
+      "coarse": "8388607",
+      "fine": "8372223",
+      "coarseLow": false,
+      "coarseHigh": true,
+      "fineLow": false,
+      "fineHigh": false
+    }
+  },
+  {
+    "input": {
+      "s1": -2048,
+      "fine": -16384,
+      "dc": 255,
+      "g9": -2147483648,
+      "g15": -2147483648
+    },
+    "expected": {
+      "coarseAcc": "-1111497047539",
+      "fineAcc": "-1097364144128",
+      "coarseRounded": "-8480049",
+      "fineRounded": "-8372224",
+      "coarse": "-8388608",
+      "fine": "-8372224",
+      "coarseLow": true,
+      "coarseHigh": false,
+      "fineLow": false,
+      "fineHigh": false
+    }
+  }
+]

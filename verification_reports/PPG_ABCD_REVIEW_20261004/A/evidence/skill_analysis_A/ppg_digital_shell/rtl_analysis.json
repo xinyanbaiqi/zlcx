@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_digital_shell",
+    "parameter_count": 4,
+    "port_count": 40
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "CLK_2M",
+      "SPI_SCLK",
+      "P2S_CLK",
+      "CLK_STAGE1_DOUT_LOW",
+      "CLK_STAGE2_DOUT_LOW",
+      "ANA_CLK_2M"
+    ],
+    "reset_signals": [
+      "RESET_N",
+      "ANA_RST_N",
+      "ADC_RST_N"
+    ]
+  },
+  "ports": [
+    {
+      "name": "DVDD12",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DGND12",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DVDD33",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DGND33",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DVDD33_AUX",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DGND33_AUX",
+      "direction": "inout",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_2M",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "RESET_N",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "SPI_CS_N",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "SPI_SCLK",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "SPI_SDI",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "SPI_SDO",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "P2S_CLK",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "P2S_DATA",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "P2S_FRAME",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DBG_OUT",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DOUT_STAGE1_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_STAGE1_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "DOUT_STAGE2_LOW",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "CLK_STAGE2_DOUT_LOW",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "ANA_CLK_2M",
+      "direction": "output",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "ANA_RST_N",
+      "direction": "output",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "ADC_RST_N",
+      "direction": "output",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "FRAME_START_400HZ",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "ANA_BIAS_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "ADC_REF_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "ADC_S1_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "ADC_S2_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "ADC_FINE_MODE",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "ADC_START",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "LED_DRV_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "LED1_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "LED2_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "AMB_IDAC_CODE",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "AMB_IDAC_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "DCS_IDAC_CODE",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "DCS_IDAC_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "IDAC_UPDATE",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "TEST_MODE",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "VOUT_TEST_EN",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [],
+  "always_blocks": [],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_digital_shell reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "RESET_N",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "ANA_CLK_2M",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "FRAME_START_400HZ",
+        "ANA_BIAS_EN",
+        "ADC_REF_EN",
+        "ADC_S1_EN",
+        "ADC_S2_EN",
+        "ADC_FINE_MODE",
+        "ADC_START",
+        "LED_DRV_EN",
+        "LED1_EN",
+        "LED2_EN",
+        "AMB_IDAC_CODE",
+        "AMB_IDAC_EN",
+        "DCS_IDAC_CODE",
+        "DCS_IDAC_EN",
+        "IDAC_UPDATE",
+        "TEST_MODE",
+        "VOUT_TEST_EN"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_digital_shell reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "RESET_N",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ANA_RST_N",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_RST_N",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "SPI_SDO",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_CLK",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_DATA",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "P2S_FRAME",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "DBG_OUT",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ANA_CLK_2M",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ANA_RST_N",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_RST_N",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "FRAME_START_400HZ",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ANA_BIAS_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_REF_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_S1_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_S2_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_FINE_MODE",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "ADC_START",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LED_DRV_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LED1_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "LED2_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "AMB_IDAC_CODE",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "AMB_IDAC_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "DCS_IDAC_CODE",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "DCS_IDAC_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "IDAC_UPDATE",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "TEST_MODE",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "VOUT_TEST_EN",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "ANA_RST_N",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_RST_N",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "SPI_SDO",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_CLK",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_DATA",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "P2S_FRAME",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "DBG_OUT",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ANA_CLK_2M",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ANA_RST_N",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_RST_N",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "FRAME_START_400HZ",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ANA_BIAS_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_REF_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_S1_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_S2_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_FINE_MODE",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "ADC_START",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LED_DRV_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LED1_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "LED2_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "AMB_IDAC_CODE",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "AMB_IDAC_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "DCS_IDAC_CODE",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "DCS_IDAC_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "IDAC_UPDATE",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "TEST_MODE",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "VOUT_TEST_EN",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "RESET_N",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "ANA_CLK_2M",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "FRAME_START_400HZ",
+        "ANA_BIAS_EN",
+        "ADC_REF_EN",
+        "ADC_S1_EN",
+        "ADC_S2_EN",
+        "ADC_FINE_MODE",
+        "ADC_START",
+        "LED_DRV_EN",
+        "LED1_EN",
+        "LED2_EN",
+        "AMB_IDAC_CODE",
+        "AMB_IDAC_EN",
+        "DCS_IDAC_CODE",
+        "DCS_IDAC_EN",
+        "IDAC_UPDATE",
+        "TEST_MODE",
+        "VOUT_TEST_EN"
+      ],
+      "description": "Verify `ppg_digital_shell` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "RESET_N",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "SPI_SDO",
+        "P2S_CLK",
+        "P2S_DATA",
+        "P2S_FRAME",
+        "DBG_OUT",
+        "ANA_CLK_2M",
+        "ANA_RST_N",
+        "ADC_RST_N",
+        "FRAME_START_400HZ",
+        "ANA_BIAS_EN",
+        "ADC_REF_EN",
+        "ADC_S1_EN",
+        "ADC_S2_EN",
+        "ADC_FINE_MODE",
+        "ADC_START",
+        "LED_DRV_EN",
+        "LED1_EN",
+        "LED2_EN",
+        "AMB_IDAC_CODE",
+        "AMB_IDAC_EN",
+        "DCS_IDAC_CODE",
+        "DCS_IDAC_EN",
+        "IDAC_UPDATE",
+        "TEST_MODE",
+        "VOUT_TEST_EN"
+      ],
+      "description": "ppg_digital_shell reset behavior"
+    }
+  ],
+  "decomposition_candidates": [],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\skill_inputs_A\\rtl\\ppg_digital_shell\\ppg_digital_shell.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

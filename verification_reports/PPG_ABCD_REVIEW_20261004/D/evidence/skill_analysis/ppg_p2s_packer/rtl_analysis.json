@@ -1,0 +1,744 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_p2s_packer",
+    "parameter_count": 0,
+    "port_count": 27
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_result_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_result_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_frame_id",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_sample_index",
+      "direction": "input",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "i_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_result_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_coarse_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_coarse_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_coarse_recovery_calibrated",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_fine_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_fine_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_fine_recovery_calibrated",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_snapshot",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_code_snapshot",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_code_epoch",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_calibrated_s1_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_programmable_15_code",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_programmable_15_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_s1_calibration_applied",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_stage1_raw",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "i_stage2_raw",
+      "direction": "input",
+      "width": 10,
+      "role": "signal"
+    },
+    {
+      "name": "o_p2s_data",
+      "direction": "output",
+      "width": 1,
+      "role": "data"
+    },
+    {
+      "name": "o_p2s_frame",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "cnt_queue_depth",
+      "kind": "reg",
+      "width": 2,
+      "role": "counter"
+    },
+    {
+      "name": "cnt_tx_bit",
+      "kind": "reg",
+      "width": 8,
+      "role": "counter"
+    },
+    {
+      "name": "state_current",
+      "kind": "reg",
+      "width": 1,
+      "role": "fsm_state"
+    },
+    {
+      "name": "reg_queue_front",
+      "kind": "reg",
+      "width": 161,
+      "role": "register"
+    },
+    {
+      "name": "reg_queue_tail",
+      "kind": "reg",
+      "width": 161,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        148,
+        157
+      ],
+      "assigned_signals": [
+        "state_current"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "ST_IDLE",
+        "state_next"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        157,
+        178
+      ],
+      "assigned_signals": [
+        "state_next"
+      ],
+      "referenced_signals": [
+        "state_current",
+        "ST_IDLE",
+        "flag_load",
+        "ST_SEND",
+        "flag_pop",
+        "default"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        178,
+        192
+      ],
+      "assigned_signals": [
+        "cnt_tx_bit"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_load",
+        "MSB",
+        "state_current",
+        "ST_SEND",
+        "d1"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        192,
+        201
+      ],
+      "assigned_signals": [
+        "reg_queue_front"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "front_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        201,
+        210
+      ],
+      "assigned_signals": [
+        "reg_queue_tail"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "tail_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        210,
+        218
+      ],
+      "assigned_signals": [
+        "cnt_queue_depth"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "cnt_after_pop",
+        "flag_push",
+        "d1"
+      ],
+      "role": "counter_update"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_p2s_packer reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_result_ready",
+        "o_p2s_data",
+        "o_p2s_frame"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "description": "sequential logic covering state_current.",
+      "signals": [
+        "state_current"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "description": "combinational logic covering state_next.",
+      "signals": [
+        "state_next"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "counter update block 3",
+      "description": "sequential logic covering cnt_tx_bit.",
+      "signals": [
+        "cnt_tx_bit"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering reg_queue_front.",
+      "signals": [
+        "reg_queue_front"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering reg_queue_tail.",
+      "signals": [
+        "reg_queue_tail"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "counter update block 6",
+      "description": "sequential logic covering cnt_queue_depth.",
+      "signals": [
+        "cnt_queue_depth"
+      ]
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "description": "Counter/state timing progression remains observable through public outputs.",
+      "signals": [
+        "cnt_queue_depth",
+        "cnt_tx_bit",
+        "o_result_ready",
+        "o_p2s_data",
+        "o_p2s_frame"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_p2s_packer reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_result_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_p2s_data",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_p2s_frame",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_result_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_p2s_data",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_p2s_frame",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "state_current",
+          "role": "fsm_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "state_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "counter update block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_tx_bit",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_queue_front",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_queue_tail",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "counter update block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_queue_depth",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_queue_depth",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_tx_bit",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_result_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_p2s_data",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_p2s_frame",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_result_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_p2s_data",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_p2s_frame",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_result_ready",
+        "o_p2s_data",
+        "o_p2s_frame"
+      ],
+      "description": "Verify `ppg_p2s_packer` drives known output values after reset release."
+    },
+    {
+      "check_id": "counter_progression",
+      "category": "checkpoint",
+      "signals": [
+        "cnt_queue_depth",
+        "cnt_tx_bit"
+      ],
+      "description": "Verify timer/counter progression across phase transitions."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_result_ready",
+        "o_p2s_data",
+        "o_p2s_frame"
+      ],
+      "description": "ppg_p2s_packer reset behavior"
+    },
+    {
+      "check_id": "fc900",
+      "category": "feature_mapping",
+      "signals": [
+        "cnt_queue_depth",
+        "cnt_tx_bit",
+        "o_result_ready",
+        "o_p2s_data",
+        "o_p2s_frame"
+      ],
+      "description": "counter progression"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "state_transition",
+      "kind": "sequential",
+      "line_range": [
+        148,
+        157
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "state_transition",
+      "kind": "combinational",
+      "line_range": [
+        157,
+        178
+      ],
+      "boundary_signals": [
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        178,
+        192
+      ],
+      "boundary_signals": [
+        "cnt_tx_bit",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        192,
+        201
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_queue_front"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        201,
+        210
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_queue_tail"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        210,
+        218
+      ],
+      "boundary_signals": [
+        "cnt_queue_depth",
+        "i_clk",
+        "i_rstn"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

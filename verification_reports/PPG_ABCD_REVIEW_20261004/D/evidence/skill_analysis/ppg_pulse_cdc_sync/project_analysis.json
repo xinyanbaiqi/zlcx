@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_pulse_cdc_sync",
+  "top_candidates": [
+    "ppg_pulse_cdc_sync"
+  ],
+  "modules": [
+    {
+      "name": "ppg_pulse_cdc_sync",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+      "port_count": 6
+    }
+  ],
+  "instantiation_edges": []
+}

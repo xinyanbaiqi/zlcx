@@ -1,0 +1,2083 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_idac_code_controller",
+    "parameter_count": 28,
+    "port_count": 122
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_run_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_start_ack_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_stop_ack_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_status_clear_event",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_control_abort_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_frame_safe_boundary",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_active_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_idac_mode",
+      "direction": "input",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "i_amb_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_dcs_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_amb_polarity",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_polarity",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_manual_code",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_min",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_code_max",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_r_manual_code",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_r_code_min",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_r_code_max",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_ir_manual_code",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_ir_code_min",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_ir_code_max",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_threshold_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_threshold_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_threshold_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_threshold_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_confirm_count",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_dcs_confirm_count",
+      "direction": "input",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_amb_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_search_amb_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_search_dcs_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_search_dcs_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_search_calibrated_s1_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_calibration_applied",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_search_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_amb_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_dc_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_amb_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_search_dc_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_test_inject_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_test_saturation_inject_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_test_saturation_inject_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_track_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_track_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_track_calibrated_s1_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_calibration_applied",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_track_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_amb_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_dc_code_snapshot",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_amb_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_track_dc_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_amb_sequence_start",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_sample_request",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_amb_sequence_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_sequence_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_amb_sequence_failed",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_sample_request",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_dcs_sample_color_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_revalidate_request",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_dcs_revalidate_accept",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_revalidate_busy",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_revalidate_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_revalidate_failed",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_amb_code",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_code_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_code_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_update",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_track_adjust",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_track_adjust",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_search_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_r_search_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_ir_search_done",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_amb_search_exhausted",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_search_exhausted",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_search_exhausted",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_pending_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_r_pending_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dcs_ir_pending_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_amb_code_at_min",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_code_at_max",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_at_min",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_at_max",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_at_min",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_at_max",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_fault",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_fault",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_fault",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_blocking",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_event",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_identity_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_controller_fault_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_sample_index",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_color_ir",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_frame_type",
+      "direction": "output",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_controller_fault_run_generation",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_startup_search_complete",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_idle",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "state_current",
+      "kind": "reg",
+      "width": 5,
+      "role": "fsm_state"
+    },
+    {
+      "name": "reg_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        686,
+        695
+      ],
+      "assigned_signals": [
+        "state_current"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "ST_IDLE",
+        "state_next"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        695,
+        838
+      ],
+      "assigned_signals": [
+        "state_next"
+      ],
+      "referenced_signals": [
+        "state_current",
+        "i_stop_ack_event",
+        "b1",
+        "i_control_abort_event",
+        "ST_IDLE",
+        "i_start_ack_event",
+        "i_run_enable",
+        "b0",
+        "flag_config_valid",
+        "ST_FAULT",
+        "i_idac_mode",
+        "b00",
+        "ST_MANUAL_APPLY",
+        "ILM",
+        "idac_mode",
+        "satisfies",
+        "i_amb_enable",
+        "ST_AMB_APPLY",
+        "SID",
+        "i_dcs_enable",
+        "ST_DCS_R_APPLY",
+        "i_frame_safe_boundary",
+        "ST_NORMAL",
+        "flag_amb_commit",
+        "ST_AMB_WAIT",
+        "flag_amb_sample_qualified",
+        "flag_search_in_window",
+        "reg_context",
+        "CTX_AMB_RECHECK_ORIGIN_BIT",
+        "ST_DCS_REVALIDATE_WAIT",
+        "flag_amb_search_has_next",
+        "flag_dcs_r_commit",
+        "ST_DCS_R_WAIT",
+        "flag_dcs_sample_qualified",
+        "CTX_DCS_REVALIDATE_ORIGIN_BIT",
+        "ST_DCS_REVALIDATE_IR",
+        "ST_DCS_IR_APPLY",
+        "flag_dcs_r_search_has_next",
+        "flag_dcs_ir_commit",
+        "ST_DCS_IR_WAIT",
+        "flag_dcs_ir_search_has_next",
+        "flag_amb_check_start_allowed",
+        "ST_AMB_RECHECK",
+        "RRC",
+        "DC_R",
+        "DC_IR",
+        "flag_amb_confirm_trigger",
+        "i_dcs_revalidate_accept",
+        "ST_DCS_REVALIDATE_R",
+        "flag_dcs_r_confirm_trigger",
+        "flag_dcs_ir_confirm_trigger",
+        "default"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        838,
+        1258
+      ],
+      "assigned_signals": [
+        "reg_context_next"
+      ],
+      "referenced_signals": [
+        "reg_context",
+        "CTX_AMB_UPDATE_BIT",
+        "b0",
+        "CTX_DCS_R_UPDATE_BIT",
+        "CTX_DCS_IR_UPDATE_BIT",
+        "CTX_DCS_R_TRACK_ADJUST_BIT",
+        "CTX_DCS_IR_TRACK_ADJUST_BIT",
+        "CTX_AMB_SEQUENCE_DONE_BIT",
+        "CTX_AMB_SEQUENCE_FAILED_BIT",
+        "CTX_DCS_REVALIDATE_DONE_BIT",
+        "CTX_DCS_REVALIDATE_FAILED_BIT",
+        "CTX_CTRL_FAULT_EVENT_BIT",
+        "i_status_clear_event",
+        "b1",
+        "CTX_PROTOCOL_ERROR_BIT",
+        "flag_amb_commit",
+        "CTX_AMB_PENDING_VALID_BIT",
+        "flag_amb_commit_changes_code",
+        "CTX_AMB_CODE_LSB",
+        "C_IDAC_CODE_WIDTH",
+        "candidate_amb_code",
+        "CTX_AMB_EPOCH_LSB",
+        "C_CODE_EPOCH_WIDTH",
+        "amb_epoch_current",
+        "RRC",
+        "NRE",
+        "interval",
+        "satisfies",
+        "CTX_AMB_RECHECK_ORIGIN_BIT",
+        "CTX_AMB_CHANGED_BIT",
+        "CTX_DCS_R_PENDING_VALID_BIT",
+        "CTX_DCS_IR_PENDING_VALID_BIT",
+        "CTX_DCS_R_HIGH_COUNT_LSB",
+        "d0",
+        "CTX_DCS_R_LOW_COUNT_LSB",
+        "CTX_DCS_IR_HIGH_COUNT_LSB",
+        "CTX_DCS_IR_LOW_COUNT_LSB",
+        "flag_dcs_r_commit",
+        "pending",
+        "flag_dcs_r_commit_changes_code",
+        "CTX_DCS_R_CODE_LSB",
+        "candidate_dcs_r_code",
+        "ISE",
+        "committed",
+        "CTX_DCS_R_EPOCH_LSB",
+        "dcs_r_epoch_current",
+        "TRK",
+        "hF",
+        "h0",
+        "CTX_DCS_R_PENDING_TRACK_BIT",
+        "adjust",
+        "flag_dcs_ir_commit",
+        "flag_dcs_ir_commit_changes_code",
+        "CTX_DCS_IR_CODE_LSB",
+        "candidate_dcs_ir_code",
+        "CTX_DCS_IR_EPOCH_LSB",
+        "dcs_ir_epoch_current",
+        "CTX_DCS_IR_PENDING_TRACK_BIT",
+        "state_current",
+        "ST_MANUAL_APPLY",
+        "i_frame_safe_boundary",
+        "CTX_STARTUP_COMPLETE_BIT",
+        "ST_AMB_WAIT",
+        "flag_amb_sample_qualified",
+        "flag_search_in_window",
+        "CTX_AMB_SEARCH_DONE_BIT",
+        "CTX_AMB_HIGH_COUNT_LSB",
+        "CTX_AMB_LOW_COUNT_LSB",
+        "i_dcs_enable",
+        "CTX_DCS_R_BOUND_LOW_LSB",
+        "i_dcs_r_code_min",
+        "CTX_DCS_R_BOUND_HIGH_LSB",
+        "i_dcs_r_code_max",
+        "CTX_DCS_R_PENDING_CODE_LSB",
+        "dcs_r_initial_midpoint",
+        "flag_amb_search_has_next",
+        "CTX_AMB_BOUND_LOW_LSB",
+        "amb_next_low",
+        "CTX_AMB_BOUND_HIGH_LSB",
+        "amb_next_high",
+        "CTX_AMB_PENDING_CODE_LSB",
+        "amb_next_midpoint",
+        "CTX_AMB_EXHAUSTED_BIT",
+        "SID",
+        "CTX_AMB_FAULT_BIT",
+        "ST_DCS_R_WAIT",
+        "flag_dcs_sample_qualified",
+        "CTX_DCS_R_SEARCH_DONE_BIT",
+        "CTX_DCS_REVALIDATE_ORIGIN_BIT",
+        "CTX_DCS_IR_BOUND_LOW_LSB",
+        "i_dcs_ir_code_min",
+        "CTX_DCS_IR_BOUND_HIGH_LSB",
+        "i_dcs_ir_code_max",
+        "CTX_DCS_IR_PENDING_CODE_LSB",
+        "dcs_ir_initial_midpoint",
+        "flag_dcs_r_search_has_next",
+        "dcs_r_next_low",
+        "dcs_r_next_high",
+        "dcs_r_next_midpoint",
+        "CTX_DCS_R_EXHAUSTED_BIT",
+        "CTX_DCS_R_FAULT_BIT",
+        "ST_DCS_IR_WAIT",
+        "CTX_DCS_IR_SEARCH_DONE_BIT",
+        "AMB",
+        "DC_R",
+        "flag_dcs_ir_search_has_next",
+        "dcs_ir_next_low",
+        "dcs_ir_next_high",
+        "dcs_ir_next_midpoint",
+        "CTX_DCS_IR_EXHAUSTED_BIT",
+        "CTX_DCS_IR_FAULT_BIT",
+        "ST_AMB_RECHECK",
+        "epoch",
+        "flag_amb_confirm_trigger",
+        "i_amb_code_min",
+        "i_amb_code_max",
+        "amb_initial_midpoint",
+        "flag_search_above_high",
+        "cnt_amb_high",
+        "d1",
+        "cnt_amb_low",
+        "ST_DCS_REVALIDATE_WAIT",
+        "i_dcs_revalidate_accept",
+        "ST_DCS_REVALIDATE_R",
+        "flag_dcs_r_confirm_trigger",
+        "cnt_dcs_r_high",
+        "cnt_dcs_r_low",
+        "ST_DCS_REVALIDATE_IR",
+        "flag_dcs_ir_confirm_trigger",
+        "cnt_dcs_ir_high",
+        "cnt_dcs_ir_low",
+        "flag_track_sample_qualified",
+        "i_track_color_ir",
+        "flag_track_in_window",
+        "flag_dcs_r_adjust_allowed",
+        "flag_dcs_code_increase",
+        "dcs_r_code_current",
+        "flag_track_above_high",
+        "flag_dcs_ir_adjust_allowed",
+        "dcs_ir_code_current",
+        "flag_amb_check_start_allowed",
+        "flag_protocol_event",
+        "flag_control_cancel",
+        "LFA",
+        "md",
+        "o_amb_fault",
+        "o_dcs_r_fault",
+        "o_idac_idle",
+        "STOP",
+        "abort",
+        "idle",
+        "Group",
+        "COMMIT",
+        "START",
+        "diag_clear",
+        "i_stop_ack_event",
+        "i_run_enable",
+        "i_start_ack_event",
+        "Stage",
+        "flag_config_valid",
+        "i_idac_mode",
+        "b00",
+        "i_amb_enable",
+        "i_amb_manual_code",
+        "C_RESET_CODE",
+        "i_dcs_r_manual_code",
+        "i_dcs_ir_manual_code",
+        "CTX_AMB_PENDING_GENERATION_LSB",
+        "C_RUN_GENERATION_WIDTH",
+        "i_run_generation",
+        "CTX_DCS_R_PENDING_GENERATION_LSB",
+        "CTX_DCS_IR_PENDING_GENERATION_LSB",
+        "CTX_CTRL_FAULT_IDENTITY_VALID_BIT",
+        "CTX_CTRL_FAULT_FRAME_ID_LSB",
+        "C_FRAME_ID_WIDTH",
+        "i_search_frame_id",
+        "CTX_CTRL_FAULT_SAMPLE_INDEX_LSB",
+        "C_SAMPLE_INDEX_WIDTH",
+        "i_search_sample_index",
+        "CTX_CTRL_FAULT_COLOR_BIT",
+        "i_search_color_ir",
+        "CTX_CTRL_FAULT_FRAME_TYPE_LSB",
+        "i_search_frame_type",
+        "CTX_CTRL_FAULT_PRECISION_BIT",
+        "i_search_precision_mode",
+        "CTX_CTRL_FAULT_GENERATION_LSB"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1258,
+        1266
+      ],
+      "assigned_signals": [
+        "reg_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "CONTEXT_WIDTH",
+        "epoch",
+        "reg_context_next"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_idac_code_controller reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_search_amb_ready",
+        "o_search_dcs_ready",
+        "o_test_saturation_inject_ready",
+        "o_track_ready",
+        "o_amb_sample_request",
+        "o_amb_sequence_busy",
+        "o_amb_sequence_done",
+        "o_amb_sequence_failed",
+        "o_dcs_sample_request",
+        "o_dcs_sample_color_ir",
+        "o_dcs_revalidate_request",
+        "o_dcs_revalidate_busy",
+        "o_dcs_revalidate_done",
+        "o_dcs_revalidate_failed",
+        "o_amb_code",
+        "o_dcs_r_code",
+        "o_dcs_ir_code",
+        "o_amb_code_epoch",
+        "o_dcs_r_code_epoch",
+        "o_dcs_ir_code_epoch",
+        "o_amb_code_update",
+        "o_dcs_r_code_update",
+        "o_dcs_ir_code_update",
+        "o_dcs_r_track_adjust",
+        "o_dcs_ir_track_adjust",
+        "o_amb_search_done",
+        "o_dcs_r_search_done",
+        "o_dcs_ir_search_done",
+        "o_amb_search_exhausted",
+        "o_dcs_r_search_exhausted",
+        "o_dcs_ir_search_exhausted",
+        "o_amb_pending_valid",
+        "o_dcs_r_pending_valid",
+        "o_dcs_ir_pending_valid",
+        "o_amb_code_at_min",
+        "o_amb_code_at_max",
+        "o_dcs_r_code_at_min",
+        "o_dcs_r_code_at_max",
+        "o_dcs_ir_code_at_min",
+        "o_dcs_ir_code_at_max",
+        "o_amb_fault",
+        "o_dcs_r_fault",
+        "o_dcs_ir_fault",
+        "o_controller_fault_blocking",
+        "o_controller_fault_event",
+        "o_controller_fault_identity_valid",
+        "o_controller_fault_frame_id",
+        "o_controller_fault_sample_index",
+        "o_controller_fault_color_ir",
+        "o_controller_fault_frame_type",
+        "o_controller_fault_precision",
+        "o_controller_fault_run_generation",
+        "o_protocol_error_sticky",
+        "o_startup_search_complete",
+        "o_idac_idle"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "description": "sequential logic covering state_current.",
+      "signals": [
+        "state_current"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "description": "combinational logic covering state_next.",
+      "signals": [
+        "state_next"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "combinational logic covering reg_context_next.",
+      "signals": [
+        "reg_context_next"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering reg_context.",
+      "signals": [
+        "reg_context"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_idac_code_controller reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_search_amb_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_search_dcs_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_test_saturation_inject_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_track_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_sample_request",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_sequence_busy",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_sequence_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_sequence_failed",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_sample_request",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_sample_color_ir",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_revalidate_request",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_revalidate_busy",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_revalidate_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_revalidate_failed",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_update",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_update",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_update",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_track_adjust",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_track_adjust",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_search_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_search_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_search_done",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_search_exhausted",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_search_exhausted",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_search_exhausted",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_pending_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_pending_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_pending_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_at_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_at_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_at_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_at_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_at_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_at_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_fault",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_fault",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_fault",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_blocking",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_event",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_identity_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_sample_index",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_color_ir",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_frame_type",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_precision",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_controller_fault_run_generation",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_startup_search_complete",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_idle",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_search_amb_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_search_dcs_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_test_saturation_inject_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_track_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_sample_request",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_sequence_busy",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_sequence_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_sequence_failed",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_sample_request",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_sample_color_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_revalidate_request",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_revalidate_busy",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_revalidate_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_revalidate_failed",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_update",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_update",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_update",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_track_adjust",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_track_adjust",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_search_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_search_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_search_done",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_search_exhausted",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_search_exhausted",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_search_exhausted",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_pending_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_pending_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_pending_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_at_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_at_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_at_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_at_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_at_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_at_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_fault",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_fault",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_fault",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_blocking",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_event",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_identity_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_sample_index",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_color_ir",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_frame_type",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_precision",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_controller_fault_run_generation",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_startup_search_complete",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_idle",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "state transition block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "state_current",
+          "role": "fsm_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "state transition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "state_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_context_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_search_amb_ready",
+        "o_search_dcs_ready",
+        "o_test_saturation_inject_ready",
+        "o_track_ready",
+        "o_amb_sample_request",
+        "o_amb_sequence_busy",
+        "o_amb_sequence_done",
+        "o_amb_sequence_failed",
+        "o_dcs_sample_request",
+        "o_dcs_sample_color_ir",
+        "o_dcs_revalidate_request",
+        "o_dcs_revalidate_busy",
+        "o_dcs_revalidate_done",
+        "o_dcs_revalidate_failed",
+        "o_amb_code",
+        "o_dcs_r_code",
+        "o_dcs_ir_code",
+        "o_amb_code_epoch",
+        "o_dcs_r_code_epoch",
+        "o_dcs_ir_code_epoch",
+        "o_amb_code_update",
+        "o_dcs_r_code_update",
+        "o_dcs_ir_code_update",
+        "o_dcs_r_track_adjust",
+        "o_dcs_ir_track_adjust",
+        "o_amb_search_done",
+        "o_dcs_r_search_done",
+        "o_dcs_ir_search_done",
+        "o_amb_search_exhausted",
+        "o_dcs_r_search_exhausted",
+        "o_dcs_ir_search_exhausted",
+        "o_amb_pending_valid",
+        "o_dcs_r_pending_valid",
+        "o_dcs_ir_pending_valid",
+        "o_amb_code_at_min",
+        "o_amb_code_at_max",
+        "o_dcs_r_code_at_min",
+        "o_dcs_r_code_at_max",
+        "o_dcs_ir_code_at_min",
+        "o_dcs_ir_code_at_max",
+        "o_amb_fault",
+        "o_dcs_r_fault",
+        "o_dcs_ir_fault",
+        "o_controller_fault_blocking",
+        "o_controller_fault_event",
+        "o_controller_fault_identity_valid",
+        "o_controller_fault_frame_id",
+        "o_controller_fault_sample_index",
+        "o_controller_fault_color_ir",
+        "o_controller_fault_frame_type",
+        "o_controller_fault_precision",
+        "o_controller_fault_run_generation",
+        "o_protocol_error_sticky",
+        "o_startup_search_complete",
+        "o_idac_idle"
+      ],
+      "description": "Verify `ppg_idac_code_controller` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_search_amb_ready",
+        "o_search_dcs_ready",
+        "o_test_saturation_inject_ready",
+        "o_track_ready",
+        "o_amb_sample_request",
+        "o_amb_sequence_busy",
+        "o_amb_sequence_done",
+        "o_amb_sequence_failed",
+        "o_dcs_sample_request",
+        "o_dcs_sample_color_ir",
+        "o_dcs_revalidate_request",
+        "o_dcs_revalidate_busy",
+        "o_dcs_revalidate_done",
+        "o_dcs_revalidate_failed",
+        "o_amb_code",
+        "o_dcs_r_code",
+        "o_dcs_ir_code",
+        "o_amb_code_epoch",
+        "o_dcs_r_code_epoch",
+        "o_dcs_ir_code_epoch",
+        "o_amb_code_update",
+        "o_dcs_r_code_update",
+        "o_dcs_ir_code_update",
+        "o_dcs_r_track_adjust",
+        "o_dcs_ir_track_adjust",
+        "o_amb_search_done",
+        "o_dcs_r_search_done",
+        "o_dcs_ir_search_done",
+        "o_amb_search_exhausted",
+        "o_dcs_r_search_exhausted",
+        "o_dcs_ir_search_exhausted",
+        "o_amb_pending_valid",
+        "o_dcs_r_pending_valid",
+        "o_dcs_ir_pending_valid",
+        "o_amb_code_at_min",
+        "o_amb_code_at_max",
+        "o_dcs_r_code_at_min",
+        "o_dcs_r_code_at_max",
+        "o_dcs_ir_code_at_min",
+        "o_dcs_ir_code_at_max",
+        "o_amb_fault",
+        "o_dcs_r_fault",
+        "o_dcs_ir_fault",
+        "o_controller_fault_blocking",
+        "o_controller_fault_event",
+        "o_controller_fault_identity_valid",
+        "o_controller_fault_frame_id",
+        "o_controller_fault_sample_index",
+        "o_controller_fault_color_ir",
+        "o_controller_fault_frame_type",
+        "o_controller_fault_precision",
+        "o_controller_fault_run_generation",
+        "o_protocol_error_sticky",
+        "o_startup_search_complete",
+        "o_idac_idle"
+      ],
+      "description": "ppg_idac_code_controller reset behavior"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "state_transition",
+      "kind": "sequential",
+      "line_range": [
+        686,
+        695
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "state_transition",
+      "kind": "combinational",
+      "line_range": [
+        695,
+        838
+      ],
+      "boundary_signals": [
+        "i_amb_enable",
+        "i_control_abort_event",
+        "i_dcs_enable",
+        "i_dcs_revalidate_accept",
+        "i_frame_safe_boundary",
+        "i_idac_mode",
+        "i_run_enable",
+        "i_start_ack_event",
+        "i_stop_ack_event",
+        "reg_context",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "combinational",
+      "line_range": [
+        838,
+        1258
+      ],
+      "boundary_signals": [
+        "i_amb_code_max",
+        "i_amb_code_min",
+        "i_amb_enable",
+        "i_amb_manual_code",
+        "i_dcs_enable",
+        "i_dcs_ir_code_max",
+        "i_dcs_ir_code_min",
+        "i_dcs_ir_manual_code",
+        "i_dcs_r_code_max",
+        "i_dcs_r_code_min",
+        "i_dcs_r_manual_code",
+        "i_dcs_revalidate_accept",
+        "i_frame_safe_boundary",
+        "i_idac_mode",
+        "i_run_enable",
+        "i_run_generation",
+        "i_search_color_ir",
+        "i_search_frame_id",
+        "i_search_frame_type",
+        "i_search_precision_mode",
+        "i_search_sample_index",
+        "i_start_ack_event",
+        "i_status_clear_event",
+        "i_stop_ack_event",
+        "i_track_color_ir",
+        "o_amb_fault",
+        "o_dcs_r_fault",
+        "o_idac_idle",
+        "reg_context",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1258,
+        1266
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_context"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_idac_code_controller.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

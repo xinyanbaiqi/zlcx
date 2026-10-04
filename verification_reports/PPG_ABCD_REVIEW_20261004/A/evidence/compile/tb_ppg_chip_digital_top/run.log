@@ -1,0 +1,7 @@
+PASS TC1 SPI基本读写、生命周期CONFIG->READY->RUN轮询与DBG_OUT候选0/2脉冲核对
+PASS TC4a SAR9下空闲合成器只跟随Stage1
+PASS TC2 真实单笔结果P2S字段与字节位置核对、DBG_OUT候选4脉冲核对（帧号=0）
+PASS TC3 真实双光背靠背深度2队列两笔结果均未丢失且顺序正确
+PASS TC4b SAR15下空闲合成器改跟随Stage2，DBG_OUT候选5正确反映精度切换
+PASS TC6 架构级窄窗口结论确认：主动STOP精确命中ADC选通脉冲这一子场景下两组discard锁存翻转位均未变化，符合合同§11.3/V1.12勘误的预期结论（mr_discard_seen=0 dd_discard_seen=0，机制本身已通过替代真实触发路径独立验证）
+TB_CHIP_DIGITAL_TOP_PASS all scenarios passed

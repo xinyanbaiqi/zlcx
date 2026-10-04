@@ -1,0 +1,270 @@
+{
+  "reviewed_utc": "2026-10-04T10:33:45.041434+00:00",
+  "rows": [
+    {
+      "matrix_line": 1572,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:88",
+      "port": "i_clk",
+      "contract_line": 88,
+      "actual": "| input | `i_clk`, `i_rstn` | 1 / 1 | Top/ACTIVE wrapper clock-reset boundary | `i_rstn=0` resets all manager state and produces no discard event. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1573,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:88",
+      "port": "i_rstn",
+      "contract_line": 88,
+      "actual": "| input | `i_clk`, `i_rstn` | 1 / 1 | Top/ACTIVE wrapper clock-reset boundary | `i_rstn=0` resets all manager state and produces no discard event. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1574,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:89",
+      "port": "i_config_snapshot",
+      "contract_line": 89,
+      "actual": "| input | `i_config_snapshot` | `C_CONFIG_WIDTH` | Wrapper CDC destination / manager | Held complete 1024-bit V4/V5 candidate when `i_config_update_event=1`; sampled once at the registered commit decision. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1575,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:90",
+      "port": "i_config_update_event",
+      "contract_line": 90,
+      "actual": "| input | `i_config_update_event` | 1 | Wrapper CDC destination / manager | One 2 MHz cycle; legal only outside RUN; rejected commit preserves both ACTIVE halves and epochs. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1576,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:91",
+      "port": "i_start_event",
+      "contract_line": 91,
+      "actual": "| input | `i_start_event`, `i_stop_event`, `i_status_clear_event` | 1 each | Wrapper/Top registered event paths / manager | One cycle. Priority is Section 3.1; Top-merged STOP is the sole terminal control. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1577,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:91",
+      "port": "i_stop_event",
+      "contract_line": 91,
+      "actual": "| input | `i_start_event`, `i_stop_event`, `i_status_clear_event` | 1 each | Wrapper/Top registered event paths / manager | One cycle. Priority is Section 3.1; Top-merged STOP is the sole terminal control. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1578,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:91",
+      "port": "i_status_clear_event",
+      "contract_line": 91,
+      "actual": "| input | `i_start_event`, `i_stop_event`, `i_status_clear_event` | 1 each | Wrapper/Top registered event paths / manager | One cycle. Priority is Section 3.1; Top-merged STOP is the sole terminal control. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1579,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:94",
+      "port": "i_analog_ready",
+      "contract_line": 94,
+      "actual": "| input | `i_analog_ready`, `i_adc_idle`, `i_datapath_empty`, `i_idac_idle`, `i_analog_safe` | 1 each | wrapper inputs from their named physical/AMI/SSW sources / manager | Registered qualification levels. `i_adc_idle` is physical idle only; `i_datapath_empty` is the sole AMI aggregate. All five are required for the stated start/drain condition, with `i_analog_safe` used only for STOPPING completion. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1580,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:94",
+      "port": "i_adc_idle",
+      "contract_line": 94,
+      "actual": "| input | `i_analog_ready`, `i_adc_idle`, `i_datapath_empty`, `i_idac_idle`, `i_analog_safe` | 1 each | wrapper inputs from their named physical/AMI/SSW sources / manager | Registered qualification levels. `i_adc_idle` is physical idle only; `i_datapath_empty` is the sole AMI aggregate. All five are required for the stated start/drain condition, with `i_analog_safe` used only for STOPPING completion. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1581,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:94",
+      "port": "i_datapath_empty",
+      "contract_line": 94,
+      "actual": "| input | `i_analog_ready`, `i_adc_idle`, `i_datapath_empty`, `i_idac_idle`, `i_analog_safe` | 1 each | wrapper inputs from their named physical/AMI/SSW sources / manager | Registered qualification levels. `i_adc_idle` is physical idle only; `i_datapath_empty` is the sole AMI aggregate. All five are required for the stated start/drain condition, with `i_analog_safe` used only for STOPPING completion. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1582,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:94",
+      "port": "i_idac_idle",
+      "contract_line": 94,
+      "actual": "| input | `i_analog_ready`, `i_adc_idle`, `i_datapath_empty`, `i_idac_idle`, `i_analog_safe` | 1 each | wrapper inputs from their named physical/AMI/SSW sources / manager | Registered qualification levels. `i_adc_idle` is physical idle only; `i_datapath_empty` is the sole AMI aggregate. All five are required for the stated start/drain condition, with `i_analog_safe` used only for STOPPING completion. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1583,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:94",
+      "port": "i_analog_safe",
+      "contract_line": 94,
+      "actual": "| input | `i_analog_ready`, `i_adc_idle`, `i_datapath_empty`, `i_idac_idle`, `i_analog_safe` | 1 each | wrapper inputs from their named physical/AMI/SSW sources / manager | Registered qualification levels. `i_adc_idle` is physical idle only; `i_datapath_empty` is the sole AMI aggregate. All five are required for the stated start/drain condition, with `i_analog_safe` used only for STOPPING completion. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1584,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:92",
+      "port": "i_system_fault_blocking",
+      "contract_line": 92,
+      "actual": "| input | `i_system_fault_blocking` | 1 | Supervisor -> Top -> wrapper / manager | Registered level; blocks START and is never released by local clear, START or COMMIT. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1585,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:93",
+      "port": "i_static_characterization_enable",
+      "contract_line": 93,
+      "actual": "| input | `i_static_characterization_enable` | 1 | characterization CDC -> Top -> wrapper / manager | Registered level, stable through RUN; participates in COMMIT/START legality only. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1586,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:95",
+      "port": "o_active_config",
+      "contract_line": 95,
+      "actual": "| output | `o_active_config` | `C_CONFIG_WIDTH` | manager / wrapper -> unpacker | Sole committed joint V4/V5 ACTIVE. Atomically changes only on legal joint COMMIT; stable in RUN/STOPPING. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1587,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:96",
+      "port": "o_active_valid",
+      "contract_line": 96,
+      "actual": "| output | `o_active_valid`, `o_run_enable`, `o_allow_new_transaction` | 1 each | manager / wrapper -> AMI/Scheduler/Top consumers | Registered levels. New transactions stop immediately on accepted STOP; only the manager owns their lifecycle values. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1588,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:100",
+      "port": "o_config_epoch",
+      "contract_line": 100,
+      "actual": "| output | `o_config_epoch`, `o_coef_epoch`, `o_stage2_coef_epoch`, `o_dc_recovery_coef_epoch` | `C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH` | manager / wrapper -> named AMI/unpacker consumers | Registered epoch fields. Only legal COMMIT changes them according to Section 6. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1589,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:100",
+      "port": "o_coef_epoch",
+      "contract_line": 100,
+      "actual": "| output | `o_config_epoch`, `o_coef_epoch`, `o_stage2_coef_epoch`, `o_dc_recovery_coef_epoch` | `C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH` | manager / wrapper -> named AMI/unpacker consumers | Registered epoch fields. Only legal COMMIT changes them according to Section 6. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1590,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:100",
+      "port": "o_stage2_coef_epoch",
+      "contract_line": 100,
+      "actual": "| output | `o_config_epoch`, `o_coef_epoch`, `o_stage2_coef_epoch`, `o_dc_recovery_coef_epoch` | `C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH` | manager / wrapper -> named AMI/unpacker consumers | Registered epoch fields. Only legal COMMIT changes them according to Section 6. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1591,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:100",
+      "port": "o_dc_recovery_coef_epoch",
+      "contract_line": 100,
+      "actual": "| output | `o_config_epoch`, `o_coef_epoch`, `o_stage2_coef_epoch`, `o_dc_recovery_coef_epoch` | `C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH` | manager / wrapper -> named AMI/unpacker consumers | Registered epoch fields. Only legal COMMIT changes them according to Section 6. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1592,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:109",
+      "port": "o_lifecycle_state",
+      "contract_line": 109,
+      "actual": "| `o_lifecycle_state` | `[1:0]` | `dec_lifecycle_state` (Section 3, line ~466-467: `flag_state_invalid ? 2'b00 : state_current[1:0]`) | `ppg_active_v4_control_plane_integration.v:296`, bit-identical passthrough (`assign o_lifecycle_state = lifecycle_state_o;`) | `ppg_control_top.v:1490`, bit-identical passthrough (`assign o_lifecycle_state = wrapper_lifecycle_state_o;`) |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1593,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:297",
+      "port": "o_start_ready",
+      "contract_line": 297,
+      "actual": "",
+      "literal_match": false
+    },
+    {
+      "matrix_line": 1594,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:96",
+      "port": "o_run_enable",
+      "contract_line": 96,
+      "actual": "| output | `o_active_valid`, `o_run_enable`, `o_allow_new_transaction` | 1 each | manager / wrapper -> AMI/Scheduler/Top consumers | Registered levels. New transactions stop immediately on accepted STOP; only the manager owns their lifecycle values. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1595,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:96",
+      "port": "o_allow_new_transaction",
+      "contract_line": 96,
+      "actual": "| output | `o_active_valid`, `o_run_enable`, `o_allow_new_transaction` | 1 each | manager / wrapper -> AMI/Scheduler/Top consumers | Registered levels. New transactions stop immediately on accepted STOP; only the manager owns their lifecycle values. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1596,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:99",
+      "port": "o_run_generation",
+      "contract_line": 99,
+      "actual": "| output | `o_run_generation` | `C_RUN_GENERATION_WIDTH` | manager / wrapper -> Top -> Scheduler/AMI/SSW | Sole generation producer; increments exactly once on accepted START and remains stable through RUN/STOPPING. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1597,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:98",
+      "port": "o_stop_episode_active",
+      "contract_line": 98,
+      "actual": "| output | `o_stop_episode_active` | 1 | manager / wrapper -> Top -> supervisor | Registered level, set by accepted Top-merged STOP, idempotent during STOPPING, reset low after drain/reset. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1598,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:97",
+      "port": "o_commit_ack_event",
+      "contract_line": 97,
+      "actual": "| output | `o_start_ack_event`, `o_stop_ack_event`, `o_commit_ack_event`, `o_error_event` | 1 each | manager / wrapper -> declared status/event observers | Registered one-cycle events; reset low. `o_stop_ack_event` establishes `o_stop_episode_active`. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1599,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:97",
+      "port": "o_start_ack_event",
+      "contract_line": 97,
+      "actual": "| output | `o_start_ack_event`, `o_stop_ack_event`, `o_commit_ack_event`, `o_error_event` | 1 each | manager / wrapper -> declared status/event observers | Registered one-cycle events; reset low. `o_stop_ack_event` establishes `o_stop_episode_active`. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1600,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:97",
+      "port": "o_stop_ack_event",
+      "contract_line": 97,
+      "actual": "| output | `o_start_ack_event`, `o_stop_ack_event`, `o_commit_ack_event`, `o_error_event` | 1 each | manager / wrapper -> declared status/event observers | Registered one-cycle events; reset low. `o_stop_ack_event` establishes `o_stop_episode_active`. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1601,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:97",
+      "port": "o_error_event",
+      "contract_line": 97,
+      "actual": "| output | `o_start_ack_event`, `o_stop_ack_event`, `o_commit_ack_event`, `o_error_event` | 1 each | manager / wrapper -> declared status/event observers | Registered one-cycle events; reset low. `o_stop_ack_event` establishes `o_stop_episode_active`. |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1602,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:111",
+      "port": "o_commit_ack_sticky",
+      "contract_line": 111,
+      "actual": "| `o_commit_ack_sticky` | `1` | registered sticky companion of the above | same passthrough pattern | production top-level output port |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1603,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:113",
+      "port": "o_error_sticky",
+      "contract_line": 113,
+      "actual": "| `o_error_sticky` | `1` | registered sticky companion of the above | same passthrough pattern | production top-level output port |",
+      "literal_match": true
+    },
+    {
+      "matrix_line": 1604,
+      "reference": "ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md:114",
+      "port": "o_last_error_code",
+      "contract_line": 114,
+      "actual": "| `o_last_error_code` | `[7:0]` | `dec_error_code` (Section 3, `ERROR_*` classification table, currently 25 named causes `8'h00`-`8'h18`) | same passthrough pattern | production top-level output port |",
+      "literal_match": true
+    }
+  ],
+  "rebuttal": "Formula is in current contract311 and manager has output90/assign503. Matrix1593 itself discloses omitted formal port table; this is not missing RTL or a new claim of previously unknown functional gap. Only its literal formula/source297 is stale."
+}

@@ -1,0 +1,6 @@
+{
+  "changed_identifier_rejected": true,
+  "blank_rejected": true,
+  "ten_weight_group_without_literal_member_not_auto_error": true,
+  "group_member_expansion_checked_separately": true
+}

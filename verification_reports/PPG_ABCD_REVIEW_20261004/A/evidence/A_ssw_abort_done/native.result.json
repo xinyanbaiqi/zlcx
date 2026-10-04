@@ -1,0 +1,34 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_sar9_sar15_safe_selection_wrapper",
+    "-o",
+    "/tmp/ppg_audit_probes/A_ssw_abort_done_02849b8d/sim.vvp",
+    "/tmp/ppg_audit_probes/A_ssw_abort_done_02849b8d/files/0/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "/tmp/ppg_audit_probes/A_ssw_abort_done_02849b8d/files/1/tb_ppg_sar9_sar15_safe_selection_wrapper.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/A_ssw_abort_done_02849b8d",
+  "compile_rc": 0,
+  "run_rc": 1,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_sar9_sar15_safe_selection_wrapper\\ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "57200e064fac1664595b4f847e49d41af616ec51dd13d9c15b67f8712f8277c2"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\evidence\\ssw_abort_done\\tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "c04c2241c8ae1789906572ef7c63e2760dc21d286ea28281cb74b2e1cf4a4deb"
+    }
+  ]
+}

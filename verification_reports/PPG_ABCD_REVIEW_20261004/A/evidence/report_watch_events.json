@@ -1,0 +1,91 @@
+[
+  {
+    "utc": "2026-10-04T10:38:11.266047+00:00",
+    "states": {
+      "finished": 43,
+      "running": 3,
+      "pending": 2
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_peak_valley_return"
+    ],
+    "anomalies": []
+  },
+  {
+    "utc": "2026-10-04T10:38:32.530896+00:00",
+    "states": {
+      "finished": 43,
+      "running": 4,
+      "pending": 1
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_robustness_corner_waveforms"
+    ],
+    "anomalies": []
+  },
+  {
+    "utc": "2026-10-04T11:54:46.484534+00:00",
+    "states": {
+      "finished": 43,
+      "external_interrupted": 1,
+      "running": 4
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_long_10_cycles",
+      "tb_ppg_control_top_startup_idac_calibration"
+    ],
+    "anomalies": [
+      {
+        "tb": "tb_ppg_control_top_long_10_cycles",
+        "state": "external_interrupted",
+        "rc": 124,
+        "baseline": 129,
+        "raw_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_long_10_cycles\\run.log",
+        "reason": "GNU timeout external wall-clock cap; original TB did not reach its final result. Preserved log; complete native retry queued if capacity permits."
+      }
+    ]
+  },
+  {
+    "utc": "2026-10-04T11:55:28.525843+00:00",
+    "states": {
+      "finished": 44,
+      "external_interrupted": 1,
+      "running": 3
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_startup_idac_calibration"
+    ],
+    "anomalies": [
+      {
+        "tb": "tb_ppg_control_top_long_10_cycles",
+        "state": "external_interrupted",
+        "rc": 124,
+        "baseline": 129,
+        "raw_log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_control_top_long_10_cycles\\run.log",
+        "reason": "GNU timeout external wall-clock cap; original TB did not reach its final result. Preserved log; complete native retry queued if capacity permits."
+      }
+    ]
+  },
+  {
+    "utc": "2026-10-04T11:55:50.043420+00:00",
+    "states": {
+      "finished": 44,
+      "running": 4
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_long_10_cycles"
+    ],
+    "anomalies": []
+  },
+  {
+    "utc": "2026-10-04T12:06:32.922228+00:00",
+    "states": {
+      "finished": 45,
+      "running": 3
+    },
+    "changed_tbs": [
+      "tb_ppg_control_top_periodic_recheck_recovery"
+    ],
+    "anomalies": []
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "id": "K-001",
+  "severity": "S3",
+  "layer": "矩阵·台账",
+  "confidence": "静态确认；原模块级仿真旁证",
+  "location": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md:3408",
+  "quote": "| C23 protocol-sticky clear-on-START (priority nuance, asymmetry vs. C20/C22's diag-clear-only pattern) | `i_start_ack_event` -> `protocol_error_sticky_o <= flag_protocol_error_event` (re-evaluate, not just clear); else `i_diag_clear_event` -> unconditional clear; else `flag_protocol_error_event` -> set | one combinational if/else-if priority chain per 2MHz cycle | `ppg_precision_window_controller.v:503-514`: unlike C20/C22's sticky (cleared only by `i_diag_clear_event` or reset, per the row above), C23's own `protocol_error_sticky_o` treats `i_start_ack_event` as a *first-priority* re-evaluation trigger (`:506-507`, \"新RUN先清旧历史再记录当前配置错误\" -- a new RUN first clears the old history, then immediately re-records if the new RUN's own config is itself illegal at that same edge), before falling through to the ordinary `i_diag_clear_event` W1C (`:508-509`) and then the ordinary set condition (`:510-511`). Consistent with the same fault-hold re-evaluation philosophy in the row above -- both of C23's own diagnostics treat START as a legitimate re-arm point, distinct from C20/C22's detectors which only ever clear their stickies via explicit diagnostic command. | `i_rstn=0` clears (`:505`) | `ppg_precision_window_controller.v:503-514`. Cluster ⑤ finding. |",
+  "description": "G-FP-03仍把PWC protocol sticky描述为START优先重评并清历史，与09-17修复后的当前RTL、C23/PWC-41以及同矩阵的验收状态不一致。属于用户第4节已知PWC修复的台账状态有误，不重复报告RTL错误。",
+  "rebuttal_a": "flag_fault_hold确实在START重评（RTL675-676），但它与protocol_error_sticky_o是两个不同寄存器；不能用fault_hold机制为sticky行辩护。",
+  "rebuttal_b": "PWC 09-17修复已列为已知；故单独列已知事项状态有误。",
+  "rebuttal_c": "C23:954/PWC-41明确新START不清sticky，只允许diag-clear或复位清；不允许矩阵所述行为。",
+  "related": [
+    {
+      "path": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+      "line": 506,
+      "quote": "\t\tend else if(i_diag_clear_event == 1'b1)begin\n\t\t\tprotocol_error_sticky_o <= 1'b0;    // 软件只清除历史标志，新START/STOP不清（合同:205/:731）\n\t\tend else if(flag_protocol_error_event == 1'b1)begin"
+    },
+    {
+      "path": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+      "line": 511,
+      "quote": "\t\t\tprotocol_error_sticky_o <= protocol_error_sticky_o; // 无新异常时保持，新START本身不清; @satisfies: PWC-33, PWC-41"
+    },
+    {
+      "path": "contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+      "line": 954,
+      "quote": "| PWC-41 | START不清sticky（2026-09-17新增） | 新合法START本身不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清（PWC-33的START对应半句；§6.2`:205`/§17.1`:731`早已如此规定，本条补齐验收覆盖，同时修复了RTL此前把`i_start_ack_event`当清除条件这一处真实违反合同的实现缺陷） |"
+    },
+    {
+      "path": "contracts/PPG_ALIAS_MAPPING_TABLE.md",
+      "line": 406,
+      "quote": "| PWC-41 | `tb_ppg_precision_window_controller.v:713-734`（2026-09-17新增，工作线D独立复核RTL缺陷修复）两个用例\"PWC-41 new legal START preserves protocol sticky\"（`:722`）+\"PWC-41 new legal START preserves switch-timeout sticky\"（`:734`）；条件均为`flag_case_ok && o_*_sticky`（先真实建立sticky再不经复位发第二次合法START）；变异测试确认：改回旧RTL后两条均FAIL（`switch_timeout_sticky_o`/`protocol_error_sticky_o`把`i_start_ack_event`当清除条件）；2026-09-17回归PASS（42/42）`ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:57-58` | `ppg_precision_window_controller.v:494`(`switch_timeout_sticky_o`清除条件，`@satisfies: PWC-41`)+`:511`(`protocol_error_sticky_o`保持分支，`@satisfies: PWC-33, PWC-41`) | `PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md:954`(START不清sticky，2026-09-17新增行);同日`PWC_01_40_WORKLINE_D_INDEPENDENT_RECHECK_20260916.md`\"RTL发现\"一节+`PWC_STICKY_CLEAR_RTL_FIX_20260917.md` |"
+    }
+  ],
+  "simulation": {
+    "log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\compile\\tb_ppg_precision_window_controller\\run.log",
+    "sha256": "468a19a473dd1d9193ce5465d7a8ae1009dd095679b13a04fa90167c6e642b84",
+    "key_output": [
+      "PASS PWC-41 new legal START preserves protocol sticky",
+      "PASS PWC-41 new legal START preserves switch-timeout sticky",
+      "PWC-01 through PWC-41 ALL PASS pass=48 fail=0"
+    ]
+  },
+  "suggestion": "同步G-FP-03的PWC sticky清除与优先级文字，保留fault_hold的独立语义。"
+}

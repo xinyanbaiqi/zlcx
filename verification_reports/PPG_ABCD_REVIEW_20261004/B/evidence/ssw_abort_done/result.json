@@ -1,0 +1,27 @@
+{
+  "compile_command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/",
+    "--",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/tc/usr/bin/iverilog",
+    "-B",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/tc/usr/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_sar9_sar15_safe_selection_wrapper",
+    "-o",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/sim.vvp",
+    "-I",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/inputs",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/inputs/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "/tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/inputs/tb_ppg_sar9_sar15_safe_selection_wrapper.v"
+  ],
+  "compile_rc": 0,
+  "run_rc": 1,
+  "fail_mentions": 13,
+  "pass_mentions": 2
+}

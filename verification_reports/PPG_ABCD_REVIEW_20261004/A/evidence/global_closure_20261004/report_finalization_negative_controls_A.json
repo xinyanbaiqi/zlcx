@@ -1,0 +1,30 @@
+[
+  {
+    "case": "running",
+    "eligible": false
+  },
+  {
+    "case": "nonzero_rc",
+    "eligible": false
+  },
+  {
+    "case": "fail_marker",
+    "eligible": false
+  },
+  {
+    "case": "missing_banner",
+    "eligible": false
+  },
+  {
+    "case": "count_change",
+    "eligible": false
+  },
+  {
+    "case": "missing_case",
+    "eligible": false
+  },
+  {
+    "case": "duplicate_case",
+    "eligible": false
+  }
+]

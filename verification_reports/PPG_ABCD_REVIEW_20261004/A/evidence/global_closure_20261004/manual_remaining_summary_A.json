@@ -1,0 +1,25 @@
+{
+  "updated_at": "2026-10-04T19:45:55+08:00",
+  "source_inventory_rows": 1860,
+  "source_reviewed_rows": 1860,
+  "source_pending_rows": 0,
+  "source_pending_by_contract": {},
+  "scope_ambiguous_reviewed_rows": 0,
+  "scope_ambiguities": [],
+  "negative_controls": {
+    "duplicate_inventory": "rejected",
+    "duplicate_review": "rejected",
+    "foreign_review": "rejected",
+    "remove_review_marker_restores_exact_item": true
+  },
+  "evidence_files": [
+    "C01_C10_C13_C14_C15_C16_source_rows_864.json",
+    "C02_source_rows_33.json",
+    "C03_C04_source_rows_129.json",
+    "C05_C07_C08_C09_source_rows_291.json",
+    "C11_C17_source_rows_175.json",
+    "C19_C20_C22_C23_C24_source_rows_368.json"
+  ],
+  "other_manual_work": "Other default/inherited reference rulings and per-field producer/consumer, reset, timing, CDC checks are not exhaustively itemized in a unified backlog. Cannot honestly report an exact overall remaining count or percent.",
+  "limits": "Counts are Source work items, not defects, unique ports or all remaining manual work. No inference that B/C/D original module reviews were undone."
+}

@@ -1,0 +1,638 @@
+[
+  {
+    "id": "TOP-01",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 913,
+    "requirement": "无事务valid；SSW为安全向量；无旧事务恢复",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1143,
+        "token": "ST_CONFIG",
+        "text": "\t\tif((o_lifecycle_state != ST_CONFIG) || o_commit_ack_event || o_error_event || o_start_ack_event || o_stop_ack_event) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1153,
+        "token": "o_s_in",
+        "text": "\t\tif(o_s_in !== 5'b00000) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 3018,
+        "token": "B_INFLIGHT",
+        "text": "\t\tif(!ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT]) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 3034,
+        "token": "ST_CONFIG",
+        "text": "\t\tif((o_lifecycle_state != ST_CONFIG) || o_commit_ack_event || o_error_event || o_start_ack_event || o_stop_ack_event ||"
+      }
+    ],
+    "assessment": "复位初值、安全S、真实在途复位及重新产生新结果；71 PASS smoke 已完成",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-02",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 914,
+    "requirement": "1024-bit联合ACTIVE原子生效；V4/V5均合法才替换且`config_epoch`仅递增一次，下游只消费ACK事件",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1189,
+        "token": "o_config_epoch",
+        "text": "\t\tif(!o_commit_ack_event || o_error_event || !o_start_ready || (o_lifecycle_state != ST_READY) || (o_config_epoch != 8'd1)) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1308,
+        "token": "o_config_epoch",
+        "text": "\t\tif(o_commit_ack_event || !o_error_event || (o_config_epoch != cnt_top02_epoch_before)) begin"
+      }
+    ],
+    "assessment": "联合合法提交及破坏V5保留位负向拒绝；下游ACK连接逐跳审过；F-023 STOP同拍优先级另列",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-03",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 915,
+    "requirement": "同一`frame_id`、连续`sample_index`、同一committed精度和固定Q3相位",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2921,
+        "token": "pair1_red_frame_id",
+        "text": "\t\t\tend else if(pair1_red_frame_id != pair1_ir_frame_id) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2924,
+        "token": "pair1_ir_sample",
+        "text": "\t\t\tend else if(pair1_ir_sample != (pair1_red_sample + 1'b1)) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2942,
+        "token": "pair1_red_tick",
+        "text": "\t\t\tend else if((pair1_red_tick != pair2_red_tick) || (pair1_ir_tick != pair2_ir_tick)) begin"
+      }
+    ],
+    "assessment": "两真实双光宏帧的帧号、连续序号、精度及固定Q3相位比较；F-009 宏帧5001拍另列",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-04",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 916,
+    "requirement": "local tick 0快照和`CAL_Q3_TICK=266`正确；不复用旧候选码伪造新样本",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2132,
+        "token": "reg_last_cal_local_tick",
+        "text": "\t\t\tend else if((reg_last_cal_local_tick < 10'd260) || (reg_last_cal_local_tick > 10'd272)) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2135,
+        "token": "reg_last_cal_amb_snapshot",
+        "text": "\t\t\tend else if((reg_last_cal_amb_snapshot < 8'd8) || (reg_last_cal_amb_snapshot > 8'd240)) begin"
+      }
+    ],
+    "assessment": "CAL响应tick允许捕获延迟，不能把260..272响应范围当Q3本身偏移；SSW/Scheduler单位tick0/266比较补证",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-05",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 917,
+    "requirement": "波形上下文只在固定接管点与SSW握手；ADC owner和AMI事务独立反压；两套通道不共用单一fire且未完成ADC事务握手时不消费`sample_index`",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2281,
+        "token": "i_measurement_result_ready",
+        "text": "\t\ti_measurement_result_ready = 1'b0; // 提前拉低，START之前就已经反压"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2312,
+        "token": "cnt_owner_commit_red",
+        "text": "\t\t\tif((cnt_owner_commit_red + cnt_owner_commit_ir) < (cnt_owner_before + 3)) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2316,
+        "token": "cnt_drop_without_consume",
+        "text": "\t\t\tend else if(cnt_drop_without_consume != 0) begin"
+      }
+    ],
+    "assessment": "输出反压期间owner继续、held valid不撤销；独立波形/事务握手另在OIB与Scheduler单位场景。OIB顺序判据缺陷F-042保留；原OIB完整运行待终态",
+    "status": "已审；长回归待终态"
+  },
+  {
+    "id": "TOP-06",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 918,
+    "requirement": "AMI、调度器和SSW使用同一笔事务精度；旧15-bit尾部不启动新事务",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2219,
+        "token": "reg_last_precision_scheduler",
+        "text": "\t\t\tend else if((reg_last_precision_scheduler != 1'b1) || (reg_last_precision_ssw != 1'b1) || (reg_last_precision_ami != 1'b1)) begin"
+      }
+    ],
+    "assessment": "同笔三模块精度对比；FIR-tail GROUP4 真实旧尾部candidate禁止及重新CROSS，原80 PASS已完成",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-07",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 919,
+    "requirement": "`EN_TEST=1`、LEDEN为0、LEDDAC无有效窗口、SAR仍按400 Hz间歇工作",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2405,
+        "token": "SMOKE-18",
+        "text": "\t\t\t$display(\"FAIL SMOKE-18 fixed-current mode boundary wrong, en_test=%b leden1=%b leden2=%b leddac=%0d\","
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2422,
+        "token": "SMOKE-18",
+        "text": "\t\t\t\t\t$display(\"FAIL SMOKE-18 fixed-current mode boundary changed mid-run at t=%0t\", $time);"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2429,
+        "token": "SMOKE-18",
+        "text": "\t\t\t\t$display(\"FAIL SMOKE-18 SAR did not keep producing normal intermittent RED/IR transactions, red=%0d ir=%0d\","
+      }
+    ],
+    "assessment": "固定电流边界逐拍监视并要求真实RED/IR继续响应，不只有静态输出",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-08",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 920,
+    "requirement": "精确静态向量；`S[4:0]`只在CDC提交后更新；无ADC事务",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2521,
+        "token": "o_en_test",
+        "text": "\t\tif(!o_en_test || !o_clk_buf_low || !o_clk_iref_idac_low || !o_clk_iref_idac_sar9_low ||"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2531,
+        "token": "o_s_in",
+        "text": "\t\tend else if(o_s_in != 5'b10101) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2601,
+        "token": "o_s_in",
+        "text": "\t\t\tif(o_s_in != 5'b01010) begin"
+      }
+    ],
+    "assessment": "静态向量逐位比较、CDC提交后S更新、真实owner计数不变；CCC原单位26 PASS补跨域提交原子性",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-09",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 921,
+    "requirement": "STOP立即禁止新事务；正式结果按显式discard事件完成；检测链按discard事件排空；物理ADC继续等待真实idle；abort/reset幂等且迟到DONE不得重启波形",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1285,
+        "token": "ST_CONFIG",
+        "text": "\t\t\t\tif(o_lifecycle_state != ST_CONFIG) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 3133,
+        "token": "o_measurement_result_valid",
+        "text": "\t\tif(!o_measurement_result_valid) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 3160,
+        "token": "cnt_top09_discard_event",
+        "text": "\t\tif(cnt_top09_discard_event < 1) begin"
+      }
+    ],
+    "assessment": "STOP/abort/drain及held正式结果显式discard均有真实比较；F-019身份/F-021资格/F-035完成abort碰撞反例不得被这些PASS掩盖",
+    "status": "已审；发现反例"
+  },
+  {
+    "id": "TOP-10",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 922,
+    "requirement": "综合层次不存在旧dual-precision和旧SAR timing实例",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 730,
+        "token": "ppg_active_v4_control_plane_integration",
+        "text": "\tppg_active_v4_control_plane_integration ppg_active_v4_control_plane_integration_Inst("
+      }
+    ],
+    "assessment": "Erie AST六个直接子模块及全层次iverilog elaborate；旧双精度/旧SAR timing无可达实例。静态验收无需TB标签；无ASIC综合工具",
+    "status": "已审；静态证据"
+  },
+  {
+    "id": "TOP-11",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 923,
+    "requirement": "START后在首帧前仅发布一次IDAC安全边界；无ADC、无宏帧、无索引消费",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+        "line": 889,
+        "token": "cnt_boundary_pulses",
+        "text": "\t\tif(cnt_boundary_pulses != 1) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+        "line": 892,
+        "token": "cnt_owner_commit_total_sid",
+        "text": "\t\tend else if((cnt_owner_commit_total_sid != cnt_owner_before) ||"
+      }
+    ],
+    "assessment": "SID01真实计一次边界及首AMB请求前owner/macro/result不推进；原完整SID回归排队，不能写成已重跑PASS",
+    "status": "已审；长回归待终态"
+  },
+  {
+    "id": "TOP-12",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 924,
+    "requirement": "SSW建立netlist静态向量；AMI和调度器保持空闲且计数不变",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 411,
+        "token": "measurement_run_enable",
+        "text": "\tassign measurement_run_enable = wrapper_run_enable_o && !flag_static_characterization_enable; // STATIC_BIAS下强制0保持测量链空闲；仅接Scheduler/AMI，STATIC_BIAS下测量许可为0 @satisfies: TOP-12, TOP-18"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2556,
+        "token": "o_scheduler_idle",
+        "text": "\t\t\t\tif(!o_scheduler_idle || !o_ami_datapath_empty || !o_ssw_wrapper_idle) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2566,
+        "token": "cnt_owner_commit_total",
+        "text": "\t\t\tif(cnt_owner_commit_total != cnt_owner_before) begin"
+      }
+    ],
+    "assessment": "许可门控、全4000拍idle及owner不变。宏帧/索引无推进由Scheduler static支路和单位场景另核对",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-13",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 925,
+    "requirement": "每帧仅一笔RED SAR9；AMB/DC_R取SPI committed码；无IR事务",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1840,
+        "token": "cnt_ir_delta",
+        "text": "\t\t\tend else if(cnt_ir_delta != 0) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1843,
+        "token": "cnt_red_delta",
+        "text": "\t\t\tend else if(cnt_red_delta != cnt_frame_delta) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1847,
+        "token": "i_dcs_r_code",
+        "text": "\t\t\t\t\t(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_dcs_r_code != 8'd80)) begin"
+      }
+    ],
+    "assessment": "纯RED SAR9按宏帧计一笔、无IR、固定IDAC快照；逐笔owner精度由后台捕获并按配置路径冻结",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-14",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 926,
+    "requirement": "整个RUN固定SAR15且无fine-window切换事件；每帧仅一笔RED事务",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1933,
+        "token": "SMOKE-13",
+        "text": "\t\t\t\t\t$display(\"FAIL SMOKE-13 precision dropped out of SAR15 mid-run at t=%0t\", $time);"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1945,
+        "token": "cnt_ir_delta",
+        "text": "\t\t\tend else if(cnt_ir_delta != 0) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1948,
+        "token": "cnt_red_delta",
+        "text": "\t\t\tend else if(cnt_red_delta != cnt_frame_delta) begin"
+      }
+    ],
+    "assessment": "纯RED SAR15全RUN精度及每帧一笔比较；精度事件直接由fixed模式PWC屏蔽分支补静态证据",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-15",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 927,
+    "requirement": "四个已确认SAR15控制允许跨RED/IR连续保持，同时ADC结果事务仍严格单笔在途",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1031,
+        "token": "o_adc_owner_commit_event",
+        "text": "\t\tif(i_rstn && ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_commit_event) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1033,
+        "token": "B_INFLIGHT",
+        "text": "\t\t\tif(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT]) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 3175,
+        "token": "cnt_top15_commit_checked",
+        "text": "\t\tif(cnt_top15_commit_checked < 1) begin"
+      }
+    ],
+    "assessment": "同拍owner不重入且终判要求监视非空；四SAR15控制共享包络在SSW逐拍及smoke后台监视补证",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-16",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 928,
+    "requirement": "RED/IR所有权只由`CLK_DOUT`同步、RAW捕获和`sample_index`匹配后的AMI旁带释放",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1656,
+        "token": "SMOKE-09",
+        "text": "\t\t\t\t$display(\"FAIL SMOKE-09 owner released without real CLK_DOUT during long hold\");"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1675,
+        "token": "SMOKE-09",
+        "text": "\t\t\t\t$display(\"FAIL SMOKE-09 real CLK_DOUT release timeout after hold released\");"
+      }
+    ],
+    "assessment": "真实Q3后悬置DONE3000拍，owner不释放；释放真实CLK_DOUT后必须完成。错误identity在INJ02/AMI单位真实拒绝",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-17",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 929,
+    "requirement": "唯一`i_adc_physical_idle`形成`flag_adc_physical_idle`并逐位同源扇出到V4、scheduler、AMI、SSW和supervisor；数字流水idle不得替代，supervisor仅将该事实用于watchdog排空/恢复而绝不解释为completion",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 416,
+        "token": "flag_adc_physical_idle",
+        "text": "\tassign flag_adc_physical_idle = i_adc_physical_idle;          // 唯一物理空闲真源，逐字同源扇出五个消费者；supervisor仅用于watchdog排空/恢复，绝不解释为completion @satisfies: TOP-17, P17"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1720,
+        "token": "B_INFLIGHT",
+        "text": "\t\t\tif(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT] != flag_inflight_before_perturb) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 1723,
+        "token": "cnt_measurement_result_valid",
+        "text": "\t\t\tend else if(cnt_measurement_result_valid != cnt_meas_before_perturb) begin"
+      }
+    ],
+    "assessment": "单一网五路同源；扰动物理idle不造completion。芯片只同步一次，CDC signoff不属于现有工具能力",
+    "status": "已审；静态及仿真切片"
+  },
+  {
+    "id": "TOP-18",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 930,
+    "requirement": "`analog_run_enable`仅接SSW且高有效；`measurement_run_enable`仅接Scheduler/AMI且高有效；STATIC_BIAS下测量许可和新事务许可均为0",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 410,
+        "token": "analog_run_enable",
+        "text": "\tassign analog_run_enable = wrapper_run_enable_o;              // STATIC_BIAS下仍跟随RUN，允许建立静态向量；仅接SSW，高有效 @satisfies: TOP-18"
+      },
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 411,
+        "token": "measurement_run_enable",
+        "text": "\tassign measurement_run_enable = wrapper_run_enable_o && !flag_static_characterization_enable; // STATIC_BIAS下强制0保持测量链空闲；仅接Scheduler/AMI，STATIC_BIAS下测量许可为0 @satisfies: TOP-12, TOP-18"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2559,
+        "token": "measurement_run_enable",
+        "text": "\t\t\t\tif(ppg_control_top_Inst.measurement_run_enable) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2562,
+        "token": "analog_run_enable",
+        "text": "\t\t\t\tif(!ppg_control_top_Inst.analog_run_enable) begin"
+      }
+    ],
+    "assessment": "高有效许可分开扇出；STATIC测量0模拟1；真实错误期望变异触发smoke FAIL",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-19",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 931,
+    "requirement": "表征CDC已提交输出形成唯一`flag_static_characterization_enable`，同源扇出到manager wrapper、SSW和许可拆分；`flag=1 && input_source=0`拒绝COMMIT/START且无测量启动",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 851,
+        "token": "flag_static_characterization_enable",
+        "text": "\t\t.o_static_characterization_enable(flag_static_characterization_enable), // 接表征CDC.o_static_characterization_enable：已提交的STATIC_BIAS模式控制值；唯一同源扇出至manager/SSW/许可拆分 @satisfies: TOP-19"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2656,
+        "token": "o_last_error_code",
+        "text": "\t\tif(o_commit_ack_event || !o_error_event || (o_last_error_code != 8'h14)) begin"
+      }
+    ],
+    "assessment": "CDC已提交单一源到manager/SSW/许可；非法PHOTODIODE组合提交真实拒绝",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-20",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 932,
+    "requirement": "manager只检查静态配置且无`calibration_plan`；AMI/Scheduler分别对RUN期实际请求做源端/接收端资格检查，非法CHARACTERIZATION、外部电流或SAR15校准无波形、owner、pending和序号副作用",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2757,
+        "token": "cnt_owner_commit_red",
+        "text": "\t\t\tif(((cnt_owner_commit_red - cnt_red_before) < 2) || ((cnt_owner_commit_ir - cnt_ir_before) < 2)) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2761,
+        "token": "flag_calibration_leaked",
+        "text": "\t\t\tend else if(flag_calibration_leaked) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2764,
+        "token": "flag_scheduler_ready_leaked",
+        "text": "\t\t\tend else if(flag_scheduler_ready_leaked) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+        "line": 2825,
+        "token": "o_last_error_code",
+        "text": "\t\tif(o_commit_ack_event || !o_error_event || (o_last_error_code != 8'h10)) begin"
+      }
+    ],
+    "assessment": "真实固定电流RUN要求有两色事务且源/接收校准门持续禁用；NORMAL SAR15配置先拒绝，不制造不可达非法RUN；F-046 FSC标签语义错位保留",
+    "status": "已审"
+  },
+  {
+    "id": "TOP-21",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 933,
+    "requirement": "默认参数0、生产enable 0及reset期间注入ready为0；正常Q1/Q2/Q3、RAW、owner、sample index、结果和fault与V1.3.4基线逐位一致",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 687,
+        "token": "INJ-01",
+        "text": "\t\t\t\t$display(\"FAIL INJ-01 injection ready asserted while i_test_inject_enable=0\");"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 699,
+        "token": "o_result_sample_valid",
+        "text": "\t\t\t\tend else if(!o_result_sample_valid) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/ppg_control_top.v",
+        "line": 393,
+        "token": "flag_test_inject_mode_latched",
+        "text": "\t\t\tflag_test_inject_mode_latched <= i_test_inject_enable; // CONFIG/READY期间跟随source请求；运行期test-mode锁,INJ-01/02changelog实测确认mid-RUN无效 @satisfies: N05, P11"
+      }
+    ],
+    "assessment": "参数默认0 smoke与编译使能1运行enable0 INJ双切片；未持有历史V1.3.4全波形逐位比较源，不能以一个sample_valid替代逐位等价签核",
+    "status": "已审；历史逐位证据未重建"
+  },
+  {
+    "id": "TOP-22",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 934,
+    "requirement": "合法identity注入只进入AMI production matcher；AMI/Scheduler/SSW owner不错误释放、无正式结果，AMI blocking fault经注册supervisor产生一次可追踪system fault/abort；STOP或该abort以缓存原identity产生且只产生一次`success=0`释放，清理后下一合法事务恢复",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 797,
+        "token": "INJ-02",
+        "text": "\t\t\t\t\t\t$display(\"FAIL INJ-02 owner was released despite mismatched injected identity\");"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 811,
+        "token": "INJ-02",
+        "text": "\t\t\t\t\t\t$display(\"FAIL INJ-02 o_system_fault_blocking never propagated through supervisor\");"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 835,
+        "token": "B_INFLIGHT",
+        "text": "\t\t\t\t\tif(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT]) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 900,
+        "token": "o_result_sample_valid",
+        "text": "\t\t\t\tif(!o_measurement_result_valid || !o_result_sample_valid) begin"
+      }
+    ],
+    "assessment": "真实错identity保持owner、supervisor阻断、STOP清理和下一合法样本恢复；INJ02“恰好一次/原identity”横幅没有独立完整completion计数，AMI单位cache/单脉冲结构补有限证据，非所有collision覆盖",
+    "status": "已审；证据范围有限"
+  },
+  {
+    "id": "TOP-23",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 935,
+    "requirement": "invalid请求绑定一笔真实身份匹配NORMAL事务；正式输出保留identity且sample-valid为0，FIR/基线/峰谷/精度不推进，后续合法样本按合同恢复",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 954,
+        "token": "reg_captured_sample_valid",
+        "text": "\t\t\t\tend else if(reg_captured_sample_valid) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 957,
+        "token": "reg_captured_frame_id",
+        "text": "\t\t\t\tend else if((reg_captured_coarse_value === 24'sbx) || (reg_captured_frame_id === {C_FRAME_ID_WIDTH{1'bx}})) begin"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 978,
+        "token": "o_result_sample_valid",
+        "text": "\t\t\t\tif(!o_measurement_result_valid || !o_result_sample_valid) begin"
+      }
+    ],
+    "assessment": "invalid握手、正式sample_valid0和后续1真实比较；全X判断不能证明身份正确，完整frame变异逃逸F-049；robust直接引用不能补此比较",
+    "status": "已审；发现F-049"
+  },
+  {
+    "id": "TOP-24",
+    "contract_file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "contract_line": 936,
+    "requirement": "双请求、无owner、相等identity、运行中改绑、STOP/abort/reset及输出反压均无半提交、残留pending、重复abort/完成、组合环或正常事务副作用；禁止force和fork-ready改写",
+    "references": [
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 997,
+        "token": "i_test_invalid_sample_valid",
+        "text": "\t\t\t\ti_test_invalid_sample_valid = 1'b1;"
+      },
+      {
+        "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+        "line": 1000,
+        "token": "INJ-04",
+        "text": "\t\t\t\t\t$display(\"FAIL INJ-04 one or both injection ready outputs asserted during simultaneous double request, identity_ready=%b invalid_ready=%b\","
+      }
+    ],
+    "assessment": "双请求ready0场景没有命中实际采样eligible窗口，变异已证实F-040；其他安全负向由模块/结构补有限切片，F-044叶子去使能Top RUN不可达仍疑似",
+    "status": "已审；发现F-040"
+  }
+]

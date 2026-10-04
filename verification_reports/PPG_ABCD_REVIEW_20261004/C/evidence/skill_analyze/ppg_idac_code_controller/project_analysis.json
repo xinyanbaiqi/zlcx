@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_idac_code_controller",
+  "top_candidates": [
+    "ppg_idac_code_controller"
+  ],
+  "modules": [
+    {
+      "name": "ppg_idac_code_controller",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_idac_code_controller.v",
+      "port_count": 122
+    }
+  ],
+  "instantiation_edges": []
+}

@@ -1,0 +1,290 @@
+{
+  "commit": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "git_status_porcelain": "",
+  "records": [
+    {
+      "path": "contracts/ppg_system_config_manager_semantic_contract.md",
+      "sha256": "c17a8d3f174f63ea0bf7ced2affabccd98093776767ee39d1866025e42852d87",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/ppg_system_active_config_unpack_semantic_contract.md",
+      "sha256": "68b34e9a85cbc7511b4c11c53f294b6538edcc0998018ccba31fd1662d982765",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md",
+      "sha256": "50deeefa06e34fbf97bf36fea70347d6527974325753a2b81b231796689981c5",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+      "sha256": "4e06c15f90596b54e4adff739fa1d811012f1748e2e07a2e6da6033446350451",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+      "sha256": "92334fb64484ca4224939559f5f65b437086051036a8ba980cf771410a58a8f4",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "sha256": "da8ee0946b0b6ef12e2f06d430a0641d5090556ed25c6c9d3f28f00badfbf8d2",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+      "sha256": "9f3fd54c51b2971c9664c4b070547b3b4b52a2fe3506c118b8f72737fe4a9e82",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+      "sha256": "78254f0af458f5a629fca47bdddeddc33f64a89c3b223d9f2b9120198f50e8f6",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_active_v4_control_plane_integration\\tb_ppg_active_v4_control_plane_integration.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "sha256": "8ac980d52b4d366f085074a6f7456700ff0754dbbb1235fb8538c2404cc83eb7",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_active_v4_control_plane_integration\\ppg_active_v4_control_plane_integration.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "sha256": "533b979bdf7815c6bf3d0856ea48e7d8a0953a4b41414d5a044fad0d11aebcc0",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_spi_register_file\\ppg_spi_register_file.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "sha256": "2c62b8960f7778ff0618eec95c917eca12acbbfaef420762f5af6ae3fe3d7e30",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "sha256": "8079042c4ed4581bd8c8279e4ad38ece1d665f6a334a8b0b6961edf38b499c35",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_p2s_packer\\ppg_p2s_packer.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+      "sha256": "68d3a1441a4637451a3c90381b6da60e89eb41f0b71b20936b027b793599a1b3",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_characterization_control_cdc\\tb_ppg_characterization_control_cdc.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "sha256": "868a1b4817c0695bb5ba9632877c2bf3d798f4fe6abe430497c059ea64ff1cd4",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "sha256": "7ee1afa9e2cb9e714b1888d64b256a68278befc818207f994cf7a6d7bdc2da2e",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "sha256": "8b7f25669591c59ec2dd1fe0b3c019d1026e85fbdad7f5f3889f48b4921b7d94",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+      "sha256": "6612c017179f8e0339fc801b83b28b0c3efda9f706330ae67b073c9ae09718ab",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_input_light_static_matrix.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+      "sha256": "9bf2b8a17c38e7d9281b7a1ff87fbea3302d6318f5d0f15cd7a1f65757790db6",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "sha256": "0561a86d19b87cbafbbd3d29d02d5afdc22080a4b46b037ef54d91346570d00c",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_system_config_manager\\ppg_system_config_manager.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+      "sha256": "684d3a125800ead9d4fc9caa435a761ffb935b9365c167ab878581f468e27e4b",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+      "sha256": "8995204429dfd2612ee9d05bde6a985706c2a423fc6de4653529523e42cf1f70",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "sha256": "f2b0d7e4091225b860604ba47631305b7674c9662cd3759d3a8f2bef7a4a23d2",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_chip_digital_top\\ppg_chip_digital_top.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+      "sha256": "141dc698c74ceec75c00dd78992b324dbed7b472ac9a3ccd298dfb0c16709d62",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "sha256": "0009d9f5d914f1d0d87aada1e651b743790de1bc4ab738756315a2ec59f7d962",
+      "git_blob_equal": true,
+      "initial_sha_equal": true,
+      "unmodified_gate_copies": [
+        {
+          "copy": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_system_active_config_unpack\\ppg_system_active_config_unpack.v",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/ppg_control_top.v",
+      "sha256": "71e8e06632fe2eee6655373b21567a853abad3c1ad7ba96c9151b37c83b8441e",
+      "git_blob_equal": true,
+      "initial_sha_equal": null,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+      "sha256": "b150c8a4ccc57680b68e83daaa953d299201042fd3bd0b1f3136aa4caf37101b",
+      "git_blob_equal": true,
+      "initial_sha_equal": null,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+      "sha256": "b858316e4d3c0d33156f31d415cead9ff071fb0236a9d1a91081a79246294cc7",
+      "git_blob_equal": true,
+      "initial_sha_equal": null,
+      "unmodified_gate_copies": []
+    },
+    {
+      "path": "contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+      "sha256": "54c4fa13d9a21f3ea4af2d5cbe6402f591547253545012d593d78ca8758583d4",
+      "git_blob_equal": true,
+      "initial_sha_equal": null,
+      "unmodified_gate_copies": []
+    }
+  ],
+  "owned_files": 24,
+  "extra_dependencies": 4,
+  "note": "复核共享快照/克隆只读一致性；本组变异副本另存evidence，不属于这些输入副本"
+}

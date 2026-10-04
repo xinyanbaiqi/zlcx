@@ -1,0 +1,180 @@
+{
+  "source_refs": {
+    "F-031": [
+      {
+        "file": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+        "line": 503,
+        "text": "\t\ti_dcs_r_code_max = 8'd17;           // 第一轮红光搜索上界",
+        "sha256": "607bebeb0bdfa135a9437f0d40c5d76094f2bca4bb86b47e96fb37570ce5add5"
+      },
+      {
+        "file": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+        "line": 506,
+        "text": "\t\ti_dcs_ir_code_max = 8'd27;          // 第一轮红外搜索上界",
+        "sha256": "607bebeb0bdfa135a9437f0d40c5d76094f2bca4bb86b47e96fb37570ce5add5"
+      },
+      {
+        "file": "contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+        "line": 509,
+        "text": "1. 初始候选为`floor((low_bound + high_bound) / 2)`；中间求和至少9 bit；",
+        "sha256": "bd4334631a8e2358066fb6c1cbfe84bd5ee9d35ed4bc14ef75f4a7d19f6fc194"
+      }
+    ],
+    "F-032": [
+      {
+        "file": "contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+        "line": 159,
+        "text": "\tinput i_diag_clear_event,",
+        "sha256": "bd4334631a8e2358066fb6c1cbfe84bd5ee9d35ed4bc14ef75f4a7d19f6fc194"
+      },
+      {
+        "file": "rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+        "line": 75,
+        "text": "\tinput i_status_clear_event,             // 清除非阻断协议诊断的独立状态命令",
+        "sha256": "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef"
+      },
+      {
+        "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+        "line": 2327,
+        "text": "\t\t.i_status_clear_event(i_diag_clear_event), // 输入 i_status_clear_event 用 i_diag_clear_event",
+        "sha256": "f74d1ba9b1110dfcf76297669686b6ac2cb73ed5989e93c616a0e641572dad42"
+      }
+    ],
+    "F-033": [
+      {
+        "file": "contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+        "line": 503,
+        "text": "AMB码未实际改变时不得产生`o_dcs_revalidate_request`。该request为电平握手，不得实现为可能丢失的单拍。",
+        "sha256": "bd4334631a8e2358066fb6c1cbfe84bd5ee9d35ed4bc14ef75f4a7d19f6fc194"
+      },
+      {
+        "file": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+        "line": 487,
+        "text": "周期AMB阶段成功后，只要DCS使能，无论AMB committed码是否实际改变，都必须执行：",
+        "sha256": "e32e7300f5519d6f64f04d752e365400c940c3a9858ad28419f71c6c63497c97"
+      },
+      {
+        "file": "rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+        "line": 794,
+        "text": "\t\t\t\t\t\t\t\tstate_next = ST_DCS_REVALIDATE_WAIT; // 当前AMB合格也必须继续三帧DC重新验证；RRC-05 强制序列严格AMB->DC_R->DC_IR，不允许跳过任一颜色阶段 @satisfies: RRC-05",
+        "sha256": "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef"
+      }
+    ]
+  },
+  "simulations": [
+    {
+      "metadata": {
+        "name": "idac_midpoints_original",
+        "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+        "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/idac_reference/tb_C_idac_midpoints.v",
+        "linux_root": "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_original_adf3950b",
+        "input_sha256": [
+          "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef",
+          "4f97185d3be01b3133fd273fe5185fdf8862f37c4825b53b3ef48a25a7c20404"
+        ],
+        "compile_rc": 0,
+        "compile_command": [
+          "wsl.exe",
+          "--distribution",
+          "Debian",
+          "--cd",
+          "/tmp",
+          "--exec",
+          "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+          "-B",
+          "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+          "-g2012",
+          "-Wall",
+          "-o",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_original_adf3950b/sim.vvp",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_original_adf3950b/dut.v",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_original_adf3950b/tb.v"
+        ],
+        "run_rc": 0,
+        "elapsed_seconds": 1.4526824951171875
+      },
+      "log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\targeted_runtime_20261004\\idac_midpoints_original\\run.log",
+      "log_sha256": "7db418d878bddccc807c3b64d281f55786d85a4d95587b6aaf310193ce8f84a1",
+      "key_lines": [
+        "C_IDAC_MIDPOINT_PASS count=8 target=200"
+      ],
+      "pass_prefix_count": 1
+    },
+    {
+      "metadata": {
+        "name": "idac_midpoints_sum8_mutant",
+        "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/idac_reference/ppg_idac_sum8_mutant.v",
+        "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/idac_reference/tb_C_idac_midpoints.v",
+        "linux_root": "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_sum8_mutant_4762f59c",
+        "input_sha256": [
+          "e132078b1ba467d76f7606bc58886973e4b09f7513e10ca4fc89e129bb58d77a",
+          "4f97185d3be01b3133fd273fe5185fdf8862f37c4825b53b3ef48a25a7c20404"
+        ],
+        "compile_rc": 0,
+        "compile_command": [
+          "wsl.exe",
+          "--distribution",
+          "Debian",
+          "--cd",
+          "/tmp",
+          "--exec",
+          "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+          "-B",
+          "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+          "-g2012",
+          "-Wall",
+          "-o",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_sum8_mutant_4762f59c/sim.vvp",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_sum8_mutant_4762f59c/dut.v",
+          "/tmp/ppg_review_C_targeted_20261004/idac_midpoints_sum8_mutant_4762f59c/tb.v"
+        ],
+        "run_rc": 1,
+        "elapsed_seconds": 1.3124003410339355
+      },
+      "log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\targeted_runtime_20261004\\idac_midpoints_sum8_mutant\\run.log",
+      "log_sha256": "ed28302a9beea6dbf34cec72d79819b391bed96bab3b8379efbc20896d290826",
+      "key_lines": [
+        "FATAL: /tmp/ppg_review_C_targeted_20261004/idac_midpoints_sum8_mutant_4762f59c/tb.v:568: C_IDAC midpoint[1] expected=191 got=63"
+      ],
+      "pass_prefix_count": 1
+    },
+    {
+      "metadata": {
+        "name": "idac_legacy_sum8_mutant",
+        "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/idac_reference/ppg_idac_sum8_mutant.v",
+        "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+        "linux_root": "/tmp/ppg_review_C_targeted_20261004/idac_legacy_sum8_mutant_fd2c2199",
+        "input_sha256": [
+          "e132078b1ba467d76f7606bc58886973e4b09f7513e10ca4fc89e129bb58d77a",
+          "607bebeb0bdfa135a9437f0d40c5d76094f2bca4bb86b47e96fb37570ce5add5"
+        ],
+        "compile_rc": 0,
+        "compile_command": [
+          "wsl.exe",
+          "--distribution",
+          "Debian",
+          "--cd",
+          "/tmp",
+          "--exec",
+          "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+          "-B",
+          "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+          "-g2012",
+          "-Wall",
+          "-o",
+          "/tmp/ppg_review_C_targeted_20261004/idac_legacy_sum8_mutant_fd2c2199/sim.vvp",
+          "/tmp/ppg_review_C_targeted_20261004/idac_legacy_sum8_mutant_fd2c2199/dut.v",
+          "/tmp/ppg_review_C_targeted_20261004/idac_legacy_sum8_mutant_fd2c2199/tb.v"
+        ],
+        "run_rc": 0,
+        "elapsed_seconds": 1.2917592525482178
+      },
+      "log": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\targeted_runtime_20261004\\idac_legacy_sum8_mutant\\run.log",
+      "log_sha256": "ad5eb26e34575e22543b0da234e665653b7107bc9b6abc837dada1cbf6b82317",
+      "key_lines": [
+        "PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed"
+      ],
+      "pass_prefix_count": 148
+    }
+  ]
+}

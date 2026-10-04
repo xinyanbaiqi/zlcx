@@ -1,0 +1,786 @@
+[
+  {
+    "case": "ami_sticky_start",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BKEEPH at 450000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/ami_sticky_start/inputs/tb_ppg_adc_measurement_idac_integration.v:1137: B_AMI_STICKY_START_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "branch_qualification",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 48,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BWINDO at 103400000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/branch_qualification/inputs/tb_ppg_adc_measurement_idac_integration.v:1618: B_BRANCH_QUALIFICATION_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "branch_qualification_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 48,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BWINDO at 103400000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/branch_qualification_counterfactual/inputs/tb_ppg_adc_measurement_idac_integration.v:1618: B_BRANCH_QUALIFICATION_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "branch_qualification_counterfactual_v2",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 49,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "branch_qualification_v2",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 48,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BQUALI at 103410000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/branch_qualification_v2/inputs/tb_ppg_adc_measurement_idac_integration.v:1619: B_BRANCH_QUALIFICATION_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "discard_identity_one",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "discard_identity_two",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BIDISC at 1160000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/discard_identity_two/inputs/tb_ppg_adc_measurement_idac_integration.v:1140: B_DISCARD_IDENTITY_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_eligible",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL INJ-04 real transaction did not complete cleanly after blocked double request, valid=0 sample_valid=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/inj_mutex_eligible/inputs/tb_ppg_control_top_injection.v:717: B_INJ_MUTEX_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_eligible_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL INJ-04 real transaction did not complete cleanly after blocked double request, valid=0 sample_valid=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/inj_mutex_eligible_mutant/inputs/tb_ppg_control_top_injection.v:717: B_INJ_MUTEX_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_eligible_v2",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_eligible_v2_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL INJ-04 real transaction did not complete cleanly after blocked double request, valid=0 sample_valid=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/inj_mutex_eligible_v2_mutant/inputs/tb_ppg_control_top_injection.v:718: B_INJ_MUTEX_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_original",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "inj_mutex_original_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "p06_target_enable",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "p06_target_enable_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 2,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwc_cancel_commit",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 8,
+    "observed_FAIL_lines": 6,
+    "fail_lines": [
+      "FAIL BCANCEL_ENTER time=56000",
+      "FAIL BCANCEL_RETURN time=146000",
+      "FAIL BCANCEL_ENTER time=206000",
+      "FAIL BCANCEL_RETURN time=296000",
+      "FAIL BCANCEL_ENTER time=356000",
+      "FAIL BCANCEL_RETURN time=446000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/pwc_cancel_commit/inputs/tb_ppg_precision_window_controller.v:439: B_PWC_CANCEL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwc_cancel_commit_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 14,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_early_overflow_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 1,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_original_check",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 1,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_sampled_strict",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 1,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_sampled_strict_early_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL PWI-01 time=14780000 mode=1 fine=1 cross=0 peak=0 valley=0 return=0 recheck=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/pwi_tail_sampled_strict_early_mutant/inputs/tb_ppg_precision_window_integration.v:752: B_PWI_TAIL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_strict_check",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL PWI-01 time=14770000 mode=1 fine=1 cross=0 peak=0 valley=0 return=0 recheck=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/pwi_tail_strict_check/inputs/tb_ppg_precision_window_integration.v:749: B_PWI_TAIL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "pwi_tail_strict_early_overflow_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL PWI-01 time=14770000 mode=1 fine=1 cross=0 peak=0 valley=0 return=0 recheck=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/pwi_tail_strict_early_overflow_mutant/inputs/tb_ppg_precision_window_integration.v:749: B_PWI_TAIL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_cancel_abort",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 30,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BCLEAR at 74880000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_cancel_abort/inputs/tb_ppg_adc_measurement_idac_integration.v:1319: B_PERIODIC_CANCEL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_cancel_stop",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 30,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BCLEAR at 74880000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_cancel_stop/inputs/tb_ppg_adc_measurement_idac_integration.v:1319: B_PERIODIC_CANCEL_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_control",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 30,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_deadline",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 28,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BSETUP at 76330000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_deadline/inputs/tb_ppg_adc_measurement_idac_integration.v:1307: B_SETUP_FAILED"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_deadline_gate_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 31,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_deadline_v2",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 28,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BSETUP at 76330000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_deadline_v2/inputs/tb_ppg_adc_measurement_idac_integration.v:1308: B_SETUP_FAILED"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_deadline_v3",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 29,
+    "observed_FAIL_lines": 2,
+    "fail_lines": [
+      "FAIL BRETRY at 76440000",
+      "FAIL BCLEAR at 76560000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_deadline_v3/inputs/tb_ppg_adc_measurement_idac_integration.v:1326: B_PERIODIC_DEADLINE_RETRY_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "recheck_deadline_v4",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 30,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BRETRY at 76440000"
+    ],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/recheck_deadline_v4/inputs/tb_ppg_adc_measurement_idac_integration.v:1325: B_PERIODIC_DEADLINE_RETRY_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_abort_tick4998",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 1,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_abort_tick4999",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL FSC-101 cycle=5005 tick=0"
+    ],
+    "fatal_lines": [
+      "FATAL: /mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-55cb-7173-9e41-1e0b27c41d49/ppg_review_B/evidence/scheduler_abort_tick4999/tb_ppg_400hz_frame_calibration_scheduler.v:561: B_ROLLOVER_ABORT_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_cadence",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 3,
+    "fail_lines": [
+      "FAIL FSC-100 cycle=5007 tick=1",
+      "FAIL FSC-100 cycle=10008 tick=1",
+      "FAIL FSC-100 cycle=15009 tick=1"
+    ],
+    "fatal_lines": [
+      "FATAL: /mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-55cb-7173-9e41-1e0b27c41d49/ppg_review_B/evidence/scheduler_cadence/tb_ppg_400hz_frame_calibration_scheduler.v:562: B_NORMAL_PERIOD_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_cadence_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 3,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_early_q3",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 1,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_early_q3_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL FSC-102 cycle=5007 tick=1"
+    ],
+    "fatal_lines": [
+      "FATAL: /mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-55cb-7173-9e41-1e0b27c41d49/ppg_review_B/evidence/scheduler_early_q3_mutant/tb_ppg_400hz_frame_calibration_scheduler.v:556: B_EARLY_Q3_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "scheduler_original_q3_gate_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 59,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "ssw_abort_done",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/ssw_abort_done/inputs/tb_ppg_sar9_sar15_safe_selection_wrapper.v:495: B_SSW_ABORT_DONE_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "ssw_abort_done_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_extended",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": 0,
+    "observed_PASS_lines": 6,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_extended_rearm_mutant",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": 2,
+    "observed_PASS_lines": 5,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL BREARM at 90000"
+    ],
+    "fatal_lines": [
+      "FATAL: /mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-55cb-7173-9e41-1e0b27c41d49/ppg_review_B/evidence/supervisor_extended_rearm_mutant/tb_ppg_system_fault_abort_supervisor.v:316: B_SUPERVISOR_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_invalid_width",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": 2,
+    "observed_PASS_lines": 13,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL SUP06B at 350000"
+    ],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_original",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": 0,
+    "observed_PASS_lines": 14,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_original_rearm_mutant",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": 0,
+    "observed_PASS_lines": 14,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "supervisor_wrong_expected_negative",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": 2,
+    "observed_PASS_lines": 13,
+    "observed_FAIL_lines": 1,
+    "fail_lines": [
+      "FAIL SUP01A at 60000"
+    ],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/top_abort_done/inputs/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v:995: B_TOP_ABORT_DONE_INTERNAL_DRAIN_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done_v2",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/top_abort_done_v2/inputs/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v:1012: B_TOP_RESTART_FAILED_TO_CLEAR"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done_v2_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done_v3",
+    "compile_rc": 0,
+    "run_rc": 1,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [
+      "FATAL: /tmp/codex-ppg-review-B-d18c6954/top_abort_done_v3/inputs/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v:1017: B_TOP_ABORT_DONE_INTERNAL_DRAIN_FAIL"
+    ],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  },
+  {
+    "case": "top_abort_done_v3_counterfactual",
+    "compile_rc": 0,
+    "run_rc": 0,
+    "runner_fail_count": null,
+    "observed_PASS_lines": 0,
+    "observed_FAIL_lines": 0,
+    "fail_lines": [],
+    "fatal_lines": [],
+    "run_log_exists": true,
+    "compile_log_exists": true,
+    "limits": "Normalized leading NUL from host warning only; raw logs retained. Entire observed comparison-line counts, possibly including setup/shared prefix; final *_PASS markers excluded. Not a per-requirement or full-regression verdict."
+  }
+]

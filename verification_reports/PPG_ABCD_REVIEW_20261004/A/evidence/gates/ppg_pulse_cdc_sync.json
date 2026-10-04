@@ -1,0 +1,583 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 110,
+      "code_lines": 48,
+      "line_comments": 72,
+      "commented_code_lines": 20,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_pulse_cdc_sync\\ppg_pulse_cdc_sync.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 110,
+              "module_count": 1,
+              "module_names": [
+                "ppg_pulse_cdc_sync"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 13,
+              "end_count": 13,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_source_clk",
+                "i_source_rstn",
+                "i_source_pulse",
+                "i_dest_clk",
+                "i_dest_rstn",
+                "o_dest_pulse"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 4,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 52,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/09/06",
+            "revision_date": "2026/09/06",
+            "design_name": "PPG Single-Pulse Toggle CDC Synchronizer",
+            "module_name": "ppg_pulse_cdc_sync",
+            "description": "Description/ppg_pulse_cdc_sync_Design.pdf",
+            "simulations": "../ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+            "references": "../ppg_system_integration/PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md section 3",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年09月06日   V1.0        Erie          创建文件。通用一次性翻转握手脉冲CDC：源域单周期脉冲翻转一个标志触发器，目标域两级同步器观察其电平，边沿检测器在目标域重新生成一个干净的单周期脉冲。供ppg_chip_digital_top复用五次：i_start_event/i_stop_event/i_diag_clear_event/i_control_abort_event（ppg_control_top自己的端口注释标注\"已同步\"，说明这四个端口内部没有现成桥接）各一次，以及SPI读方向捕获触发一次，避免同一文件里出现五组几乎相同的内联always块。",
+              "源域单周期脉冲经翻转标志跨时钟域，目标域重新生成单周期脉冲"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_pulse_cdc_sync",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_clk",
+                  "comment": "发起单周期脉冲的源域时钟",
+                  "group": "源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_rstn",
+                  "comment": "源域低有效复位",
+                  "group": "源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 48,
+                  "line_end": 48
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_pulse",
+                  "comment": "源域单周期触发脉冲",
+                  "group": "源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_dest_clk",
+                  "comment": "接收重生脉冲的目标域时钟",
+                  "group": "目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_dest_rstn",
+                  "comment": "目标域低有效复位",
+                  "group": "目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_dest_pulse",
+                  "comment": "目标域单周期重生脉冲",
+                  "group": "目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_source_toggle",
+                  "init": "",
+                  "comment": "源域每次触发脉冲翻转一次的代际标志",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 源域翻转标志与目标域两级同步及历史比较标志"
+                  ],
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_dest_sync_meta",
+                  "init": "",
+                  "comment": "目标域第一级同步状态，隔离亚稳态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_dest_sync_stable",
+                  "init": "",
+                  "comment": "目标域第二级同步状态，供边沿比较",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_dest_sync_prev",
+                  "init": "",
+                  "comment": "目标域上一拍稳定同步值，用于边沿检测",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 65,
+                  "line_end": 65
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "o_dest_pulse",
+                  "rhs": "flag_dest_sync_stable != flag_dest_sync_prev",
+                  "comment": "电平翻转当拍即为目标域单周期脉冲",
+                  "leading_comments": [
+                    "// 稳定同步值与其上一拍不同即为一次真实翻转事件"
+                  ],
+                  "delay": "",
+                  "line_start": 69,
+                  "line_end": 69
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "flag_source_toggle"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_source_toggle",
+                    "flag_source_toggle",
+                    "flag_source_toggle"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 源域每次触发脉冲翻转代际标志，不做忙碌互斥"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "flag_source_toggle <= 1'b0;     // 源域复位归零代际标志",
+                    "end else if(i_source_pulse == 1'b1)begin",
+                    "flag_source_toggle <= ~flag_source_toggle; // 每次触发脉冲翻转一次",
+                    "end else begin",
+                    "flag_source_toggle <= flag_source_toggle; // 无触发时保持代际不变",
+                    "end"
+                  ],
+                  "line_start": 73,
+                  "line_end": 79
+                },
+                {
+                  "header": "always@(posedge i_dest_clk or negedge i_dest_rstn)",
+                  "targets": [
+                    "flag_dest_sync_meta"
+                  ],
+                  "clock": "i_dest_clk",
+                  "reset": "i_dest_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_dest_sync_meta",
+                    "flag_dest_sync_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 目标域第一级同步只隔离跨域亚稳态风险"
+                  ],
+                  "lines": [
+                    "if(i_dest_rstn == 1'b0)begin",
+                    "flag_dest_sync_meta <= 1'b0;    // 目标域复位清除同步链首级",
+                    "end else begin",
+                    "flag_dest_sync_meta <= flag_source_toggle; // 首级触发器只采样跨域电平",
+                    "end"
+                  ],
+                  "line_start": 84,
+                  "line_end": 88
+                },
+                {
+                  "header": "always@(posedge i_dest_clk or negedge i_dest_rstn)",
+                  "targets": [
+                    "flag_dest_sync_stable"
+                  ],
+                  "clock": "i_dest_clk",
+                  "reset": "i_dest_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_dest_sync_stable",
+                    "flag_dest_sync_stable"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 目标域第二级同步为边沿检测提供稳定输入"
+                  ],
+                  "lines": [
+                    "if(i_dest_rstn == 1'b0)begin",
+                    "flag_dest_sync_stable <= 1'b0;  // 目标域复位使稳定值归零",
+                    "end else begin",
+                    "flag_dest_sync_stable <= flag_dest_sync_meta; // 将经一拍稳定的电平传入边沿比较器",
+                    "end"
+                  ],
+                  "line_start": 93,
+                  "line_end": 97
+                },
+                {
+                  "header": "always@(posedge i_dest_clk or negedge i_dest_rstn)",
+                  "targets": [
+                    "flag_dest_sync_prev"
+                  ],
+                  "clock": "i_dest_clk",
+                  "reset": "i_dest_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_dest_sync_prev",
+                    "flag_dest_sync_prev"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 保存上一拍稳定值，供本拍边沿比较使用"
+                  ],
+                  "lines": [
+                    "if(i_dest_rstn == 1'b0)begin",
+                    "flag_dest_sync_prev <= 1'b0;    // 目标域复位使历史值归零",
+                    "end else begin",
+                    "flag_dest_sync_prev <= flag_dest_sync_stable; // 每拍推进历史值，供下一拍边沿判断",
+                    "end"
+                  ],
+                  "line_start": 102,
+                  "line_end": 106
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 4,
+                "assigns": 1,
+                "always": 4,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 110
+            }
+          ],
+          "source_metrics": {
+            "lines": 110,
+            "nonempty_lines": 100,
+            "line_comments": 72,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 56,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_pulse_cdc_sync.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_control_top_injection",
+    "-o",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/sim.vvp",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/0/ppg_400hz_frame_calibration_scheduler.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/1/ppg_active_v4_control_plane_integration.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/2/ppg_adc_async_stage_capture.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/3/ppg_adc_dc_recovery.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/4/ppg_adc_measurement_idac_integration.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/5/ppg_adc_pipeline_overlap_corrector.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/6/ppg_adc_programmable_reconstructor.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/7/ppg_adc_result_router.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/8/ppg_adc_s1_programmable_calibrator.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/9/ppg_adc_s1_redundancy_corrector.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/10/ppg_amb_recheck_scheduler.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/11/ppg_characterization_control_cdc.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/12/ppg_coarse_detection_fir.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/13/ppg_config_cdc_bridge.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/14/ppg_digital_esd_shell.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/15/ppg_digital_shell.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/16/ppg_dual_precision_top.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/17/ppg_dynamic_baseline_cross_detector.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/18/ppg_idac_code_controller.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/19/ppg_normal_transaction_fork.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/20/ppg_peak_valley_window_detector.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/21/ppg_precision_window_controller.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/22/ppg_precision_window_integration.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/23/ppg_reset_sync.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/24/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/25/ppg_system_active_config_unpack.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/26/ppg_system_config_manager.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/27/ppg_system_fault_abort_supervisor.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/28/ppg_timing_sar15.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/29/ppg_timing_sar9.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/30/ppg_control_top_frame_mutant.v",
+    "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86/files/31/tb_expected_control.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/inj_identity_A_negative_expected_comparison_6e8f4b86",
+  "compile_rc": 0,
+  "run_rc": 0,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_400hz_frame_calibration_scheduler\\ppg_400hz_frame_calibration_scheduler.v",
+      "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_active_v4_control_plane_integration\\ppg_active_v4_control_plane_integration.v",
+      "sha256": "8ac980d52b4d366f085074a6f7456700ff0754dbbb1235fb8538c2404cc83eb7"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+      "sha256": "85deb9a0d009701bee65a0bd50486971c9b4edd9933ca40b1ecd5179e44c2b3a"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_dc_recovery\\ppg_adc_dc_recovery.v",
+      "sha256": "a66ff98db59cea71ad8ffbd2d0c802dbc85938e9bf7dee4293d8a09491aaa262"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_measurement_idac_integration\\ppg_adc_measurement_idac_integration.v",
+      "sha256": "f74d1ba9b1110dfcf76297669686b6ac2cb73ed5989e93c616a0e641572dad42"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_pipeline_overlap_corrector\\ppg_adc_pipeline_overlap_corrector.v",
+      "sha256": "152fdc2c106e2af3a7ed9ea376d1f6e0478737bd2dfc2b1f5ca980b28ec01c02"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_programmable_reconstructor\\ppg_adc_programmable_reconstructor.v",
+      "sha256": "73ad711d4bfdeac7ac125ab4f62ce10152a5956df9ac1410e2d20cca34ad8d70"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_result_router\\ppg_adc_result_router.v",
+      "sha256": "472390c45bb0f342e650cf6e4fec7aa32838e09063b70b7a5bc5ac0a619e869c"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_programmable_calibrator\\ppg_adc_s1_programmable_calibrator.v",
+      "sha256": "7cd14d494a928dc60116fa8dc8c98f9b35cbd48e7a32263fc11d83b924575feb"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_s1_redundancy_corrector\\ppg_adc_s1_redundancy_corrector.v",
+      "sha256": "974c7b44c4619ec06b8bdb15e6b5ac6a0166148098d2384eea1f9833f5882583"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_amb_recheck_scheduler\\ppg_amb_recheck_scheduler.v",
+      "sha256": "f373e942e1da2ee7dcc084c09dbfa018a01f7b63fd0968be20da9ad4d11d2d2b"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_characterization_control_cdc\\ppg_characterization_control_cdc.v",
+      "sha256": "868a1b4817c0695bb5ba9632877c2bf3d798f4fe6abe430497c059ea64ff1cd4"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_coarse_detection_fir\\ppg_coarse_detection_fir.v",
+      "sha256": "23bb5745e5f4b22077d841e00690bc0401672232822c8f638ead3d568705a011"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+      "sha256": "2c62b8960f7778ff0618eec95c917eca12acbbfaef420762f5af6ae3fe3d7e30"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_esd_shell\\ppg_digital_esd_shell.v",
+      "sha256": "500295040cb2422dd71ff9b79e25579c651659e84867634813d14a9fd840bce5"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_digital_shell\\ppg_digital_shell.v",
+      "sha256": "731c73bdd6828b3f18faf8eee1c708da7b0ce9551536a48e3d6e33db31c1539c"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_dual_precision_top\\ppg_dual_precision_top.v",
+      "sha256": "964b8e8d3e45c563694fda4d14dc811db505676fc8a0ab604632eb6de081ddb1"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_dynamic_baseline_cross_detector\\ppg_dynamic_baseline_cross_detector.v",
+      "sha256": "2c0fa949bd3c9e98ab8a64a66ec7f8cf8b1c22badd744ed0d0c66b3871b9629a"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_idac_code_controller\\ppg_idac_code_controller.v",
+      "sha256": "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_normal_transaction_fork\\ppg_normal_transaction_fork.v",
+      "sha256": "ce612e8c00d3d7fa84c3bd66cd9095d593c2cb59006df9dfb8a17814fb802985"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_peak_valley_window_detector\\ppg_peak_valley_window_detector.v",
+      "sha256": "d84353d813b6f51722301f3d6893a428f4ddb88df8bd0f0713ead199632cce5c"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_controller\\ppg_precision_window_controller.v",
+      "sha256": "969c45a2f32b074305ea3c1dc87259584d6cd9027ee38fa310d34d879432227d"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_integration\\ppg_precision_window_integration.v",
+      "sha256": "cbc7ba4aad87648a93f6b81357b81f6f85dd00c71d9670cfc6ef57c041fa2b57"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+      "sha256": "7ee1afa9e2cb9e714b1888d64b256a68278befc818207f994cf7a6d7bdc2da2e"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_sar9_sar15_safe_selection_wrapper\\ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "57200e064fac1664595b4f847e49d41af616ec51dd13d9c15b67f8712f8277c2"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_system_active_config_unpack\\ppg_system_active_config_unpack.v",
+      "sha256": "0009d9f5d914f1d0d87aada1e651b743790de1bc4ab738756315a2ec59f7d962"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_system_config_manager\\ppg_system_config_manager.v",
+      "sha256": "0561a86d19b87cbafbbd3d29d02d5afdc22080a4b46b037ef54d91346570d00c"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_system_fault_abort_supervisor\\ppg_system_fault_abort_supervisor.v",
+      "sha256": "c725a8a1e9ee779fba14601d1da6c8a8efbff2fea6ec6cb7d7fe2143d88a14d3"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+      "sha256": "23406c4eb636468a9cc8d75b6b5219caadb60a3ac2b327a04500d08325cfa467"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9.v",
+      "sha256": "bc21c96137d0ff43b979914bbf5a0836a01e908748d5d1089623259ee938df30"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\inj_identity_A\\ppg_control_top_frame_mutant.v",
+      "sha256": "aba417f523beb8367ef1db94beb8a2a2d730b6b6dc639b2b02638fd412c0e377"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\inj_identity_A\\tb_expected_control.v",
+      "sha256": "cde68943ddf9616bed1ccc959af40ecfbbe242f536859991fd0078de6ef4ff40"
+    }
+  ]
+}

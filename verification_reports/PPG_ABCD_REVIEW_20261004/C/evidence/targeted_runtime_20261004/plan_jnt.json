@@ -1,0 +1,38 @@
+[
+  {
+    "name": "jnt_count54_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count54_original.v",
+    "files": [
+      {
+        "name": "jnt_count54_original.v",
+        "content": "`timescale 1ns/1ps\nmodule tb_C_jnt_count;\nlocalparam integer C_JNT_REQUIRED_SUBCHECKS=54;\ninteger cnt_run_jnt_checked,cnt_run_jnt_pass,cnt_run_jnt_fail,cnt_error;\nreg flag_jnt_baseline_pass,flag_jnt_manual_adc_hold;\nreg [8*32-1:0] reg_jnt_first_failure_id;\ntask jnt_reset_release; begin end endtask\ninitial begin\ncnt_run_jnt_checked=54; cnt_run_jnt_pass=54; cnt_run_jnt_fail=0; cnt_error=0; reg_jnt_first_failure_id=\"NONE\";\n\t\tflag_jnt_baseline_pass = (cnt_run_jnt_checked == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_pass == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_fail == 0);\n\t\tif(flag_jnt_baseline_pass) begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d required=%0d status=PASS\", cnt_run_jnt_checked, cnt_run_jnt_pass, C_JNT_REQUIRED_SUBCHECKS);\n\t\tend else begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d fail=%0d required=%0d first_failure=%0s status=FAIL\", cnt_run_jnt_checked, cnt_run_jnt_pass, cnt_run_jnt_fail, C_JNT_REQUIRED_SUBCHECKS, reg_jnt_first_failure_id);\n\t\t\tcnt_error = cnt_error + cnt_run_jnt_fail;\n\t\tend\n\t\tflag_jnt_manual_adc_hold = 1'b0;\n\t\tjnt_reset_release;\nif(cnt_error==0) $display(\"GROUP_WOULD_PASS error_count=0\");\nif(54<54 && cnt_error==0) $fatal(1,\"C_JNT_COUNT_GUARD_FAIL checked=%0d pass=%0d flag=%b errors=%0d\",cnt_run_jnt_checked,cnt_run_jnt_pass,flag_jnt_baseline_pass,cnt_error);\nif(54==54 && !flag_jnt_baseline_pass) $fatal(1,\"C_JNT_CONTROL_FAIL\");\n$display(\"C_JNT_GUARD_CONTROL_PASS count=%0d errors=%0d\",cnt_run_jnt_checked,cnt_error); $finish;\nend\nendmodule\n"
+      }
+    ],
+    "expected_run_rc": 0
+  },
+  {
+    "name": "jnt_count51_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count51_original.v",
+    "files": [
+      {
+        "name": "jnt_count51_original.v",
+        "content": "`timescale 1ns/1ps\nmodule tb_C_jnt_count;\nlocalparam integer C_JNT_REQUIRED_SUBCHECKS=54;\ninteger cnt_run_jnt_checked,cnt_run_jnt_pass,cnt_run_jnt_fail,cnt_error;\nreg flag_jnt_baseline_pass,flag_jnt_manual_adc_hold;\nreg [8*32-1:0] reg_jnt_first_failure_id;\ntask jnt_reset_release; begin end endtask\ninitial begin\ncnt_run_jnt_checked=51; cnt_run_jnt_pass=51; cnt_run_jnt_fail=0; cnt_error=0; reg_jnt_first_failure_id=\"NONE\";\n\t\tflag_jnt_baseline_pass = (cnt_run_jnt_checked == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_pass == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_fail == 0);\n\t\tif(flag_jnt_baseline_pass) begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d required=%0d status=PASS\", cnt_run_jnt_checked, cnt_run_jnt_pass, C_JNT_REQUIRED_SUBCHECKS);\n\t\tend else begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d fail=%0d required=%0d first_failure=%0s status=FAIL\", cnt_run_jnt_checked, cnt_run_jnt_pass, cnt_run_jnt_fail, C_JNT_REQUIRED_SUBCHECKS, reg_jnt_first_failure_id);\n\t\t\tcnt_error = cnt_error + cnt_run_jnt_fail;\n\t\tend\n\t\tflag_jnt_manual_adc_hold = 1'b0;\n\t\tjnt_reset_release;\nif(cnt_error==0) $display(\"GROUP_WOULD_PASS error_count=0\");\nif(51<54 && cnt_error==0) $fatal(1,\"C_JNT_COUNT_GUARD_FAIL checked=%0d pass=%0d flag=%b errors=%0d\",cnt_run_jnt_checked,cnt_run_jnt_pass,flag_jnt_baseline_pass,cnt_error);\nif(51==54 && !flag_jnt_baseline_pass) $fatal(1,\"C_JNT_CONTROL_FAIL\");\n$display(\"C_JNT_GUARD_CONTROL_PASS count=%0d errors=%0d\",cnt_run_jnt_checked,cnt_error); $finish;\nend\nendmodule\n"
+      }
+    ],
+    "expected_run_rc": 1
+  },
+  {
+    "name": "jnt_count51_error_countercontrol",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/jnt_count_probe/jnt_count51_error_countercontrol.v",
+    "files": [
+      {
+        "name": "jnt_count51_error_countercontrol.v",
+        "content": "`timescale 1ns/1ps\nmodule tb_C_jnt_count;\nlocalparam integer C_JNT_REQUIRED_SUBCHECKS=54;\ninteger cnt_run_jnt_checked,cnt_run_jnt_pass,cnt_run_jnt_fail,cnt_error;\nreg flag_jnt_baseline_pass,flag_jnt_manual_adc_hold;\nreg [8*32-1:0] reg_jnt_first_failure_id;\ntask jnt_reset_release; begin end endtask\ninitial begin\ncnt_run_jnt_checked=51; cnt_run_jnt_pass=51; cnt_run_jnt_fail=0; cnt_error=0; reg_jnt_first_failure_id=\"NONE\";\n\t\tflag_jnt_baseline_pass = (cnt_run_jnt_checked == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_pass == C_JNT_REQUIRED_SUBCHECKS) && (cnt_run_jnt_fail == 0);\n\t\tif(flag_jnt_baseline_pass) begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d required=%0d status=PASS\", cnt_run_jnt_checked, cnt_run_jnt_pass, C_JNT_REQUIRED_SUBCHECKS);\n\t\tend else begin\n\t\t\t$display(\"JNT_BASELINE checked=%0d pass=%0d fail=%0d required=%0d first_failure=%0s status=FAIL\", cnt_run_jnt_checked, cnt_run_jnt_pass, cnt_run_jnt_fail, C_JNT_REQUIRED_SUBCHECKS, reg_jnt_first_failure_id);\n\t\t\tcnt_error = cnt_error + ((cnt_run_jnt_fail > 0) ? cnt_run_jnt_fail : 1);\n\t\tend\n\t\tflag_jnt_manual_adc_hold = 1'b0;\n\t\tjnt_reset_release;\nif(cnt_error==0) $display(\"GROUP_WOULD_PASS error_count=0\");\nif(51<54 && cnt_error==0) $fatal(1,\"C_JNT_COUNT_GUARD_FAIL checked=%0d pass=%0d flag=%b errors=%0d\",cnt_run_jnt_checked,cnt_run_jnt_pass,flag_jnt_baseline_pass,cnt_error);\nif(51==54 && !flag_jnt_baseline_pass) $fatal(1,\"C_JNT_CONTROL_FAIL\");\n$display(\"C_JNT_GUARD_CONTROL_PASS count=%0d errors=%0d\",cnt_run_jnt_checked,cnt_error); $finish;\nend\nendmodule\n"
+      }
+    ],
+    "expected_run_rc": 0
+  }
+]

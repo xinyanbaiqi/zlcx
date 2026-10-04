@@ -1,0 +1,244 @@
+# Design Explanation: ppg_sar9_sar15_safe_selection_wrapper
+
+## Project Topology
+- Selected top module: `ppg_sar9_sar15_safe_selection_wrapper`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_stop_ack_event` width=1 role=signal
+- `input i_control_abort_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `input i_macro_tick` width=1 role=signal
+- `input i_calibration_subframe_index` width=3 role=signal
+- `input i_calibration_local_tick` width=1 role=signal
+- `input i_normal_frame_active` width=1 role=signal
+- `input i_calibration_frame_active` width=1 role=signal
+- `input i_macro_frame_safe_boundary` width=1 role=signal
+- `input i_idac_code_safe_boundary` width=1 role=signal
+- `input i_run_profile` width=1 role=signal
+- `input i_input_source` width=1 role=signal
+- `input i_optical_mode` width=2 role=control
+- `input i_precision_mode_committed` width=1 role=control
+- `input i_static_characterization_enable` width=1 role=control
+- `input i_test_mux_ctrl` width=5 role=signal
+- `input i_test_inject_enable` width=1 role=control
+- `input i_context_handover_stall_request` width=1 role=control
+- `input i_waveform_context_valid` width=1 role=status
+- `output o_waveform_context_ready` width=1 role=status
+- `input i_waveform_precision_mode` width=1 role=control
+- `input i_waveform_frame_id` width=1 role=signal
+- `input i_waveform_color_ir` width=1 role=signal
+- `input i_waveform_frame_type` width=2 role=signal
+- `input i_waveform_amb_code_snapshot` width=1 role=signal
+- `input i_waveform_dc_code_snapshot` width=1 role=signal
+- `input i_waveform_amb_code_epoch` width=1 role=signal
+- `input i_waveform_dc_code_epoch` width=1 role=signal
+- `input i_waveform_input_source` width=1 role=signal
+- `input i_waveform_optical_mode` width=2 role=control
+- `input i_waveform_leddac_code_snapshot` width=8 role=signal
+- `output o_adc_owner_ready` width=1 role=status
+- `input i_adc_owner_commit_event` width=1 role=signal
+- `input i_adc_owner_precision_mode` width=1 role=control
+- `input i_adc_owner_frame_id` width=1 role=signal
+- `input i_adc_owner_color_ir` width=1 role=signal
+- `input i_adc_owner_frame_type` width=2 role=signal
+- `input i_adc_owner_amb_code_snapshot` width=1 role=signal
+- `input i_adc_owner_dc_code_snapshot` width=1 role=signal
+- `input i_adc_owner_amb_code_epoch` width=1 role=signal
+- `input i_adc_owner_dc_code_epoch` width=1 role=signal
+- `input i_adc_owner_sample_index` width=1 role=signal
+- `input i_adc_transaction_complete_event` width=1 role=signal
+- `input i_adc_transaction_success` width=1 role=signal
+- `input i_adc_complete_sample_index` width=1 role=signal
+- `input i_adc_idle` width=1 role=signal
+- `output o_en_tia_low` width=1 role=signal
+- `output o_leddac` width=8 role=signal
+- `output o_leden1_low` width=1 role=signal
+- `output o_leden2_low` width=1 role=signal
+- `output o_en_test` width=1 role=signal
+- `output o_clk_buf_low` width=1 role=clock
+- `output o_clk_iref_idac_low` width=1 role=clock
+- `output o_clk_9q1_low` width=1 role=clock
+- `output o_clk_15q1_low` width=1 role=clock
+- `output o_clk_aferst_low` width=1 role=clock
+- `output o_clk_iref_idac_sar9_low` width=1 role=clock
+- `output o_clk_iref_idac_sar15_low` width=1 role=clock
+- `output o_clk_q2_low` width=1 role=clock
+- `output o_clk_q3_low` width=1 role=clock
+- `output o_clk_tiaen_low` width=1 role=clock
+- `output o_en_15sar_low` width=1 role=signal
+- `output o_en_sar9_amb_low` width=1 role=signal
+- `output o_en_sar9_dc_low` width=1 role=signal
+- `output o_en_sar9_iref` width=1 role=signal
+- `output o_en_sar15_amb_low` width=1 role=signal
+- `output o_en_sar15_dc_low` width=1 role=signal
+- `output o_en_sar15_iref` width=1 role=signal
+- `output o_idac_sar9ambn_low` width=8 role=signal
+- `output o_idac_sar9dcn_low` width=8 role=signal
+- `output o_idac_sar15ambn_low` width=8 role=signal
+- `output o_idac_sar15dcn_low` width=8 role=signal
+- `output o_s_in` width=5 role=signal
+- `output o_clk_2m` width=1 role=clock
+- `output o_analog_safe` width=1 role=signal
+- `output o_sar_timing_idle` width=1 role=signal
+- `output o_wrapper_idle` width=1 role=signal
+- `output o_precision_active` width=1 role=signal
+- `output o_calibration_wave_active` width=1 role=signal
+- `output o_adc_owner_inflight` width=1 role=signal
+- `output o_owner_q3_window_closed` width=1 role=signal
+- `output o_switch_protocol_error_sticky` width=1 role=signal
+- `output o_transaction_mismatch_sticky` width=1 role=signal
+- `output o_owner_deadline_timeout_sticky` width=1 role=signal
+- `output o_calibration_timeout_sticky` width=1 role=signal
+- `output o_wrapper_fault_blocking` width=1 role=signal
+- `output o_ssw_fault_valid` width=1 role=status
+- `output o_ssw_fault_active` width=1 role=signal
+- `output o_ssw_fault_cause` width=8 role=signal
+- `output o_ssw_fault_identity_valid` width=1 role=status
+- `output o_ssw_fault_frame_id` width=1 role=signal
+- `output o_ssw_fault_sample_index` width=1 role=signal
+- `output o_ssw_fault_color_ir` width=1 role=signal
+- `output o_ssw_fault_frame_type` width=2 role=signal
+- `output o_ssw_fault_precision_mode` width=1 role=control
+- `output o_ssw_fault_run_generation` width=1 role=signal
+
+## Feature Mapping
+- `ppg_sar9_sar15_safe_selection_wrapper reset behavior`: derived from ports, state, and always blocks.
+- `logic partition block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `logic partition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `logic partition block 7`: derived from ports, state, and always blocks.
+- `logic partition block 8`: derived from ports, state, and always blocks.
+- `logic partition block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `logic partition block 11`: derived from ports, state, and always blocks.
+- `logic partition block 12`: derived from ports, state, and always blocks.
+- `logic partition block 13`: derived from ports, state, and always blocks.
+- `logic partition block 14`: derived from ports, state, and always blocks.
+- `logic partition block 15`: derived from ports, state, and always blocks.
+- `logic partition block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `logic partition block 18`: derived from ports, state, and always blocks.
+- `logic partition block 19`: derived from ports, state, and always blocks.
+- `logic partition block 20`: derived from ports, state, and always blocks.
+- `logic partition block 21`: derived from ports, state, and always blocks.
+- `output update block 22`: derived from ports, state, and always blocks.
+- `logic partition block 23`: derived from ports, state, and always blocks.
+- `logic partition block 24`: derived from ports, state, and always blocks.
+- `logic partition block 25`: derived from ports, state, and always blocks.
+- `logic partition block 26`: derived from ports, state, and always blocks.
+- `logic partition block 27`: derived from ports, state, and always blocks.
+- `logic partition block 28`: derived from ports, state, and always blocks.
+- `logic partition block 29`: derived from ports, state, and always blocks.
+- `logic partition block 30`: derived from ports, state, and always blocks.
+- `logic partition block 31`: derived from ports, state, and always blocks.
+- `logic partition block 32`: derived from ports, state, and always blocks.
+- `output update block 33`: derived from ports, state, and always blocks.
+- `output update block 34`: derived from ports, state, and always blocks.
+- `output update block 35`: derived from ports, state, and always blocks.
+- `output update block 36`: derived from ports, state, and always blocks.
+- `output update block 37`: derived from ports, state, and always blocks.
+- `output update block 38`: derived from ports, state, and always blocks.
+- `output update block 39`: derived from ports, state, and always blocks.
+- `logic partition block 40`: derived from ports, state, and always blocks.
+- `logic partition block 41`: derived from ports, state, and always blocks.
+- `output update block 42`: derived from ports, state, and always blocks.
+- `output update block 43`: derived from ports, state, and always blocks.
+- `output update block 44`: derived from ports, state, and always blocks.
+- `output update block 45`: derived from ports, state, and always blocks.
+- `output update block 46`: derived from ports, state, and always blocks.
+- `output update block 47`: derived from ports, state, and always blocks.
+- `logic partition block 48`: derived from ports, state, and always blocks.
+- `logic partition block 49`: derived from ports, state, and always blocks.
+- `logic partition block 50`: derived from ports, state, and always blocks.
+- `logic partition block 51`: derived from ports, state, and always blocks.
+- `logic partition block 52`: derived from ports, state, and always blocks.
+- `logic partition block 53`: derived from ports, state, and always blocks.
+- `logic partition block 54`: derived from ports, state, and always blocks.
+- `logic partition block 55`: derived from ports, state, and always blocks.
+- `output update block 56`: derived from ports, state, and always blocks.
+- `output update block 57`: derived from ports, state, and always blocks.
+- `logic partition block 58`: derived from ports, state, and always blocks.
+- `logic partition block 59`: derived from ports, state, and always blocks.
+- `logic partition block 60`: derived from ports, state, and always blocks.
+- `logic partition block 61`: derived from ports, state, and always blocks.
+- `logic partition block 62`: derived from ports, state, and always blocks.
+- `logic partition block 63`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_sar9_sar15_safe_selection_wrapper` drives known output values after reset release.
+- `fc001`: ppg_sar9_sar15_safe_selection_wrapper reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 511-524: logic_partition
+- `u_block_2` lines 524-537: logic_partition
+- `u_block_3` lines 537-553: logic_partition
+- `u_block_4` lines 553-569: logic_partition
+- `u_block_5` lines 569-585: logic_partition
+- `u_block_6` lines 585-602: logic_partition
+- `u_block_7` lines 602-614: logic_partition
+- `u_block_8` lines 614-773: logic_partition
+- `u_block_9` lines 773-786: logic_partition
+- `u_block_10` lines 786-801: logic_partition
+- `u_block_11` lines 801-814: logic_partition
+- `u_block_12` lines 814-827: logic_partition
+- `u_block_13` lines 827-840: logic_partition
+- `u_block_14` lines 840-853: logic_partition
+- `u_block_15` lines 853-866: logic_partition
+- `u_block_16` lines 866-879: logic_partition
+- `u_block_17` lines 879-892: logic_partition
+- `u_block_18` lines 892-905: logic_partition
+- `u_block_19` lines 905-918: logic_partition
+- `u_block_20` lines 918-931: logic_partition
+- `u_block_21` lines 931-944: logic_partition
+- `u_block_22` lines 944-960: output_update
+- `u_block_23` lines 960-973: logic_partition
+- `u_block_24` lines 973-986: logic_partition
+- `u_block_25` lines 986-999: logic_partition
+- `u_block_26` lines 999-1012: logic_partition
+- `u_block_27` lines 1012-1025: logic_partition
+- `u_block_28` lines 1025-1038: logic_partition
+- `u_block_29` lines 1038-1051: logic_partition
+- `u_block_30` lines 1051-1064: logic_partition
+- `u_block_31` lines 1064-1077: logic_partition
+- `u_block_32` lines 1077-1090: logic_partition
+- `u_block_33` lines 1090-1106: output_update
+- `u_block_34` lines 1106-1119: output_update
+- `u_block_35` lines 1119-1132: output_update
+- `u_block_36` lines 1132-1145: output_update
+- `u_block_37` lines 1145-1158: output_update
+- `u_block_38` lines 1158-1171: output_update
+- `u_block_39` lines 1171-1184: output_update
+- `u_block_40` lines 1184-1197: logic_partition
+- `u_block_41` lines 1197-1210: logic_partition
+- `u_block_42` lines 1210-1223: output_update
+- `u_block_43` lines 1223-1236: output_update
+- `u_block_44` lines 1236-1249: output_update
+- `u_block_45` lines 1249-1262: output_update
+- `u_block_46` lines 1262-1275: output_update
+- `u_block_47` lines 1275-1291: output_update
+- `u_block_48` lines 1291-1306: logic_partition
+- `u_block_49` lines 1306-1319: logic_partition
+- `u_block_50` lines 1319-1332: logic_partition
+- `u_block_51` lines 1332-1345: logic_partition
+- `u_block_52` lines 1345-1358: logic_partition
+- `u_block_53` lines 1358-1371: logic_partition
+- `u_block_54` lines 1371-1384: logic_partition
+- `u_block_55` lines 1384-1404: logic_partition
+- `u_block_56` lines 1404-1415: output_update
+- `u_block_57` lines 1415-1437: output_update
+- `u_block_58` lines 1437-1450: logic_partition
+- `u_block_59` lines 1450-1463: logic_partition
+- `u_block_60` lines 1463-1476: logic_partition
+- `u_block_61` lines 1476-1489: logic_partition
+- `u_block_62` lines 1489-1502: logic_partition
+- `u_block_63` lines 1502-1514: logic_partition
+

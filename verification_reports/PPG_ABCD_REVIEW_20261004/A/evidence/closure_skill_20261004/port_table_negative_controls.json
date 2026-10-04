@@ -1,0 +1,38 @@
+{
+  "changed_direction_and_width": [
+    [
+      "i_fixture",
+      "direction",
+      "output",
+      "input"
+    ],
+    [
+      "o_fixture",
+      "width",
+      4,
+      5
+    ]
+  ],
+  "removed_row": [
+    [
+      "o_fixture",
+      "row_count",
+      0
+    ]
+  ],
+  "duplicate_row": [
+    [
+      "i_fixture",
+      "row_count",
+      2
+    ]
+  ],
+  "markdown_fixture": [
+    {
+      "name": "i_fixture",
+      "direction": "input",
+      "width": 1,
+      "line": 1
+    }
+  ]
+}

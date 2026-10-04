@@ -1,0 +1,6 @@
+ERROR tick=21 o_clk_q2_low actual=0 expected=1
+ERROR tick=21 o_clk_q2_low actual=0 expected=1
+ERROR tick=21 o_clk_q2_low actual=0 expected=1
+ERROR tick=21 o_clk_q2_low actual=0 expected=1
+ERROR tick=21 o_clk_q2_low actual=0 expected=1
+FAIL: ppg_timing_sar15 optical-mode test detected 5 mismatches.

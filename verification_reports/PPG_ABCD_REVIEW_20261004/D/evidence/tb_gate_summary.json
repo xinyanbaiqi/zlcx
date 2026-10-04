@@ -1,0 +1,681 @@
+[
+  {
+    "tb": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_active_v4_control_plane_integration\\tb_ppg_active_v4_control_plane_integration.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_active_v4_control_plane_integration\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_active_v4_control_plane_integration\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 589,
+        "warnings": 1,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 238,
+        "warnings": 1,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 3,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG060": 24,
+      "VG013": 109,
+      "VG023": 3,
+      "VG054": 1,
+      "VG061": 133,
+      "VG063": 4,
+      "VG062": 186,
+      "VG064": 104,
+      "VG066": 26
+    }
+  },
+  {
+    "tb": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_characterization_control_cdc\\tb_ppg_characterization_control_cdc.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_characterization_control_cdc\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_characterization_control_cdc\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG000": 1,
+      "VG042": 1
+    }
+  },
+  {
+    "tb": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_input_light_static_matrix.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_control_top_input_light_static_matrix\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_control_top_input_light_static_matrix\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 109,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG000": 2,
+      "VG002": 1,
+      "VG060": 80,
+      "VG025": 25,
+      "VG042": 1
+    }
+  },
+  {
+    "tb": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_control_top\\tb_ppg_control_top_idac_bus_isolation.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_control_top_idac_bus_isolation\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_control_top_idac_bus_isolation\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 124,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG000": 1,
+      "VG060": 90,
+      "VG025": 32,
+      "VG042": 1
+    }
+  },
+  {
+    "tb": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_system_config_manager\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_system_config_manager\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 24,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG000": 1,
+      "VG060": 23
+    }
+  },
+  {
+    "tb": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_chip_digital_top\\tb_ppg_chip_digital_top.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_chip_digital_top\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_chip_digital_top\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 1,
+        "warnings": 0,
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 134,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 2,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG000": 1,
+      "VG060": 130,
+      "VG025": 2,
+      "VG042": 1
+    }
+  },
+  {
+    "tb": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+    "rc": 1,
+    "command": [
+      "C:\\Users\\DAWN\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\scripts\\python\\validation\\verilog_generated_deliverable_gate.py",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+      "--include-testbench",
+      "--json",
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_system_active_config_unpack\\gate.json"
+    ],
+    "report": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gates\\tb_ppg_system_active_config_unpack\\gate.json",
+    "checks": {
+      "compile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast+static_lint"
+      },
+      "ast": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 4,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "issues": 0,
+        "metrics": {
+          "scanned_files": 0,
+          "code_lines": 0,
+          "same_line_comment_lines": 0,
+          "violations": 0,
+          "by_construct": {}
+        },
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 3,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "passed",
+        "errors": 0,
+        "warnings": 0,
+        "source": "testbench_static_gate"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "rules": {
+      "VG050": 1,
+      "VG013": 3
+    }
+  }
+]

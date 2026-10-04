@@ -1,0 +1,176 @@
+[
+  {
+    "path": "contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+    "lines": 161,
+    "same": true,
+    "sha256": "736a478550fc3cc79579485e3c59a79f6f70464c1894c3be4f293751754b845e"
+  },
+  {
+    "path": "contracts/PPG_SCHEDULER_SSW_AMI_PORT_CONNECTION_CHECKLIST.md",
+    "lines": 430,
+    "same": true,
+    "sha256": "ed083489fbbdc64f91794e5f33a7227433370f0577736be7e150e90ef1d497cc"
+  },
+  {
+    "path": "contracts/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+    "lines": 918,
+    "same": true,
+    "sha256": "658fc3c56721a27db369a93057317fd44ebbd4b6bcef6da807dade6a9451451d"
+  },
+  {
+    "path": "contracts/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "lines": 690,
+    "same": true,
+    "sha256": "91ec74aa47cc35c3fd57114cb2ed2ab18a8895801ef5649ef1dbe9df5adb6adf"
+  },
+  {
+    "path": "contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+    "lines": 1029,
+    "same": true,
+    "sha256": "31acf05e1799dea0adb833bb91a8564fb538bab809d6a05de29b209b122330a0"
+  },
+  {
+    "path": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+    "lines": 716,
+    "same": true,
+    "sha256": "e32e7300f5519d6f64f04d752e365400c940c3a9858ad28419f71c6c63497c97"
+  },
+  {
+    "path": "contracts/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "lines": 1337,
+    "same": true,
+    "sha256": "1746f38958f088676b771c0d00c9d88f80c8313f058db5cca1c70afcdfe048ee"
+  },
+  {
+    "path": "contracts/PPG_ADC_IDAC_INTEGRATION_SPEC.md",
+    "lines": 494,
+    "same": true,
+    "sha256": "cb0865fe57aa3b67c9583dcda36f9eb91c63aa9fa94f8582a5aa08f17c235336"
+  },
+  {
+    "path": "contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+    "lines": 1252,
+    "same": true,
+    "sha256": "daeb3696c5cd79c33777e81baaea7a54e245ce65dc84f7a6eec7339da64bf675"
+  },
+  {
+    "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "lines": 1642,
+    "same": true,
+    "sha256": "1d7c1a5e6d0ebaa422c5b0b5d52c38f7fd523b3d3381d800cd4b7ca322e12846"
+  },
+  {
+    "path": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "lines": 2681,
+    "same": true,
+    "sha256": "f74d1ba9b1110dfcf76297669686b6ac2cb73ed5989e93c616a0e641572dad42"
+  },
+  {
+    "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+    "lines": 936,
+    "same": true,
+    "sha256": "69c1b54b8025a4de908c76781afc5a9c449409268d0c8e3310db58f8bf71b423"
+  },
+  {
+    "path": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "lines": 884,
+    "same": true,
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54"
+  },
+  {
+    "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+    "lines": 655,
+    "same": true,
+    "sha256": "00a66a34db92bc26c145fd41fb5ece254d9397246d528a5b6b2bbca862f93caf"
+  },
+  {
+    "path": "rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v",
+    "lines": 374,
+    "same": true,
+    "sha256": "f373e942e1da2ee7dcc084c09dbfa018a01f7b63fd0968be20da9ad4d11d2d2b"
+  },
+  {
+    "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+    "lines": 1116,
+    "same": true,
+    "sha256": "0a69f30cad700489d64a2b0f0008fb0b226a167ccfaee25adc6afe36ed13efeb"
+  },
+  {
+    "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "lines": 1519,
+    "same": true,
+    "sha256": "57200e064fac1664595b4f847e49d41af616ec51dd13d9c15b67f8712f8277c2"
+  },
+  {
+    "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+    "lines": 854,
+    "same": true,
+    "sha256": "d4d7d7e0816b8132cfab17a4155b40f249d811c3cc0bf432aef5b06cc5b105e2"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+    "lines": 1503,
+    "same": true,
+    "sha256": "4dc3b7f6c345636ad9d7be33ef9ee0a27441cfe7334df0375e58378aa4ac6afd"
+  },
+  {
+    "path": "rtl/ppg_precision_window_integration/ppg_precision_window_integration.v",
+    "lines": 1032,
+    "same": true,
+    "sha256": "cbc7ba4aad87648a93f6b81357b81f6f85dd00c71d9670cfc6ef57c041fa2b57"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "lines": 1513,
+    "same": true,
+    "sha256": "b8b80d0341f1fc7417becf7168785ca23d07a0927bd5693c03940806b7afd9ca"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+    "lines": 1887,
+    "same": true,
+    "sha256": "87c33b5f0c14968732624023986f0443df624a9c84b35412fb40a3c0c6b3f70e"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "lines": 1111,
+    "same": true,
+    "sha256": "58f439fdbdf7c26c3595049eefc0ae0099d60815279aa116ad085d40e4502d7e"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+    "lines": 2172,
+    "same": true,
+    "sha256": "bf385b9ac6ed57f18efe2fb51340968226e7f81556c6877e2db23f02eff8edcd"
+  },
+  {
+    "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+    "lines": 1045,
+    "same": true,
+    "sha256": "ef625b97c40ced83a285d4df65769feb6bc2c860bb3a859b3f611b03c5f36e57"
+  },
+  {
+    "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+    "lines": 776,
+    "same": true,
+    "sha256": "9efa7c87eb736ac935690785442648df5030b2cbaeb06d8634eed30b4f283835"
+  },
+  {
+    "path": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+    "lines": 889,
+    "same": true,
+    "sha256": "969c45a2f32b074305ea3c1dc87259584d6cd9027ee38fa310d34d879432227d"
+  },
+  {
+    "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+    "lines": 511,
+    "same": true,
+    "sha256": "e3652cafe38f1c320972ce3ef41e432b4ae95a3efc92a03ca7d832ed317b47f0"
+  },
+  {
+    "path": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+    "lines": 465,
+    "same": true,
+    "sha256": "c725a8a1e9ee779fba14601d1da6c8a8efbff2fea6ec6cb7d7fe2143d88a14d3"
+  }
+]

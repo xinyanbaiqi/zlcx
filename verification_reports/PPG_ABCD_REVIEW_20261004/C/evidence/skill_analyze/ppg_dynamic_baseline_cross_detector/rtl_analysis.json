@@ -1,0 +1,6911 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_dynamic_baseline_cross_detector",
+    "parameter_count": 30,
+    "port_count": 95
+  },
+  "clock_reset_info": {
+    "clock_signals": [
+      "i_clk"
+    ],
+    "reset_signals": [
+      "i_rstn"
+    ]
+  },
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1,
+      "role": "clock"
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1,
+      "role": "reset"
+    },
+    {
+      "name": "i_run_enable",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_start_ack_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_fine_window_active",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_reacquire_request_event",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_recheck_accept_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_recheck_busy",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_recheck_done_event",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_recheck_success",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_event",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_reason",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_identity_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_sample_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_detection_discard_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_precision",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_recovery_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_amb_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_dc_code_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_discard_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_run_generation",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_local_empty",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_result_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_result_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_filtered_ppg_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_detection_qualified",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_window_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_window_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_fir_saturation_low",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_fir_saturation_high",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_precision_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_color_ir",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_frame_type",
+      "direction": "input",
+      "width": 2,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_peak_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_peak_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_valley_ready",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_valley_value",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_frame_id",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_sample_index",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_config_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_valley_dc_recovery_coef_epoch",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_mode",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_fixed_slope_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_alpha_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_beta_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_timing_adjust_ratio_q15",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_min_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_slope_max_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "i_baseline_delta_q16",
+      "direction": "input",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "i_cross_hysteresis_q16",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_lead_min_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_lead_max_frames",
+      "direction": "input",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "i_cross_confirm_count",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_no_cross_limit",
+      "direction": "input",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "i_peak_valley_config_valid",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "i_cross_ready",
+      "direction": "input",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_cross_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_cross_frame_id",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_sample_index",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_time_unknown",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_config_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_coef_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_dc_recovery_coef_epoch",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_slope_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_baseline_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_baseline_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_adaptive_slope_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_slope_current_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_base_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_last_lead_frames",
+      "direction": "output",
+      "width": null,
+      "role": "signal"
+    },
+    {
+      "name": "o_no_cross_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "o_reacquire_active",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_saturation_min",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_saturation_max",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_baseline_saturation_low",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_baseline_saturation_high",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_protocol_error_sticky",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    }
+  ],
+  "state_elements": [
+    {
+      "name": "cnt_cross_confirm",
+      "kind": "reg",
+      "width": 4,
+      "role": "counter"
+    },
+    {
+      "name": "cnt_arithmetic_cycles",
+      "kind": "reg",
+      "width": 7,
+      "role": "counter"
+    },
+    {
+      "name": "cnt_divide_iteration",
+      "kind": "reg",
+      "width": 6,
+      "role": "counter"
+    },
+    {
+      "name": "cnt_arith_no_cross",
+      "kind": "reg",
+      "width": 4,
+      "role": "counter"
+    },
+    {
+      "name": "state_current",
+      "kind": "reg",
+      "width": 4,
+      "role": "fsm_state"
+    },
+    {
+      "name": "reg_peak_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_valley_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_candidate_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_cycle_cross_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_previous_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_old_peak_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_valley_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_new_peak_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_cycle_cross_context",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_slope_current_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_fixed_slope_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_alpha_q15",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_beta_q15",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_adjust_ratio_q15",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_slope_min_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_slope_max_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_lead_min_frames",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_lead_max_frames",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_no_cross_limit",
+      "kind": "reg",
+      "width": 4,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_cycle_amplitude",
+      "kind": "reg",
+      "width": 25,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_period_frames",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_lead_frames",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "reg_base_numerator",
+      "kind": "reg",
+      "width": 42,
+      "role": "register"
+    },
+    {
+      "name": "reg_base_rounded_numerator",
+      "kind": "reg",
+      "width": 42,
+      "role": "register"
+    },
+    {
+      "name": "reg_div_input_data",
+      "kind": "reg",
+      "width": 42,
+      "role": "register"
+    },
+    {
+      "name": "reg_divisor",
+      "kind": "reg",
+      "width": 16,
+      "role": "register"
+    },
+    {
+      "name": "reg_div_remainder",
+      "kind": "reg",
+      "width": 17,
+      "role": "register"
+    },
+    {
+      "name": "reg_div_quotient",
+      "kind": "reg",
+      "width": 42,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_slope_base_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_smooth_product",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_smooth_delta",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_adjust_product",
+      "kind": "reg",
+      "width": 48,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_adjust_step",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_timing_term",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "reg_arith_slope_next_q16",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_valley_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_below_seen",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_candidate_active",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_previous_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_cross_issued",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_cycle_cross_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_cycle_qualified",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_resume_pending",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_adaptive_request",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_adaptive_result_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_fallback",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_baseline_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_period_legal",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_config_legal",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_no_cross",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_no_cross_reacquire",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_clamp_min",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_clamp_max",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "flag_pending_cross_valid",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "cross_payload_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "cross_valid_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "cross_time_unknown_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "baseline_valid_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "adaptive_slope_valid_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "slope_current_q16_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "slope_base_q16_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "last_lead_frames_o",
+      "kind": "reg",
+      "width": null,
+      "role": "register"
+    },
+    {
+      "name": "cnt_no_cross_o",
+      "kind": "reg",
+      "width": 4,
+      "role": "counter"
+    },
+    {
+      "name": "reacquire_active_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "slope_saturation_min_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "slope_saturation_max_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "baseline_saturation_low_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "baseline_saturation_high_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    },
+    {
+      "name": "protocol_error_sticky_o",
+      "kind": "reg",
+      "width": 1,
+      "role": "register"
+    }
+  ],
+  "always_blocks": [
+    {
+      "block_id": "always_1",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        574,
+        589
+      ],
+      "assigned_signals": [
+        "cross_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_cross_emit",
+        "i_cross_ready"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_2",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        589,
+        602
+      ],
+      "assigned_signals": [
+        "cross_time_unknown_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_cross_emit",
+        "flag_unknown_cross_emit"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_3",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        602,
+        620
+      ],
+      "assigned_signals": [
+        "cross_payload_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "EVENT_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_cross_emit",
+        "flag_unknown_cross_emit",
+        "i_frame_id",
+        "i_sample_index",
+        "i_config_epoch",
+        "i_coef_epoch",
+        "i_dc_recovery_coef_epoch",
+        "slope_current_q16_o",
+        "dec_baseline_diagnostic_q16",
+        "reg_candidate_context"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_4",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        620,
+        637
+      ],
+      "assigned_signals": [
+        "slope_current_q16_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "i_fixed_slope_q16",
+        "flag_control_clear",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "RRC",
+        "satisfies",
+        "flag_peak_transfer",
+        "reg_arith_slope_next_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_5",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        637,
+        650
+      ],
+      "assigned_signals": [
+        "slope_base_q16_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_cycle_complete",
+        "dec_slope_base_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_6",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        650,
+        667
+      ],
+      "assigned_signals": [
+        "baseline_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "RRC",
+        "satisfies",
+        "flag_no_cross_reacquire",
+        "flag_peak_transfer",
+        "flag_pending_config_legal",
+        "flag_pending_period_legal",
+        "flag_pending_baseline_valid"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_7",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        667,
+        686
+      ],
+      "assigned_signals": [
+        "adaptive_slope_valid_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "flag_fallback_commit",
+        "flag_no_cross_reacquire",
+        "flag_peak_transfer",
+        "flag_pending_period_legal",
+        "flag_cycle_complete",
+        "i_slope_mode",
+        "SLOPE_MODE_ADAPTIVE"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_8",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        686,
+        707
+      ],
+      "assigned_signals": [
+        "reacquire_active_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_config_legal",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "RRC",
+        "satisfies",
+        "flag_no_cross_reacquire",
+        "flag_peak_transfer",
+        "flag_pending_period_legal",
+        "flag_pending_baseline_valid",
+        "flag_pending_config_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_9",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        707,
+        720
+      ],
+      "assigned_signals": [
+        "cnt_no_cross_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_known_cross_emit",
+        "flag_no_cross_reacquire",
+        "flag_fallback_commit",
+        "flag_cycle_no_cross",
+        "d1"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_10",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        720,
+        733
+      ],
+      "assigned_signals": [
+        "last_lead_frames_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_cycle_complete",
+        "flag_pending_cross_valid",
+        "reg_arith_lead_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_11",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        733,
+        746
+      ],
+      "assigned_signals": [
+        "slope_saturation_min_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_cycle_complete",
+        "i_slope_mode",
+        "SLOPE_MODE_ADAPTIVE",
+        "flag_slope_clamp_min"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_12",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        746,
+        759
+      ],
+      "assigned_signals": [
+        "slope_saturation_max_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_cycle_complete",
+        "i_slope_mode",
+        "SLOPE_MODE_ADAPTIVE",
+        "flag_slope_clamp_max"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_13",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        759,
+        772
+      ],
+      "assigned_signals": [
+        "baseline_saturation_low_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_formal_red_result",
+        "baseline_valid_o",
+        "flag_result_frame_legal",
+        "dec_baseline_q16",
+        "PPG_Q16_MIN"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_14",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        772,
+        785
+      ],
+      "assigned_signals": [
+        "baseline_saturation_high_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_formal_red_result",
+        "baseline_valid_o",
+        "flag_result_frame_legal",
+        "dec_baseline_q16",
+        "PPG_Q16_MAX"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_15",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        785,
+        801
+      ],
+      "assigned_signals": [
+        "protocol_error_sticky_o"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_control_clear",
+        "b1",
+        "i_start_ack_event",
+        "flag_config_legal",
+        "flag_reacquire_clear",
+        "i_fine_window_active",
+        "flag_arithmetic_error_event",
+        "flag_formal_red_result",
+        "baseline_valid_o",
+        "flag_result_frame_legal",
+        "flag_peak_transfer",
+        "flag_pending_baseline_valid",
+        "flag_pending_period_legal",
+        "flag_valley_transfer",
+        "flag_valley_order_legal",
+        "flag_known_cross_emit",
+        "flag_unknown_cross_emit",
+        "cross_valid_o"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_16",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        801,
+        810
+      ],
+      "assigned_signals": [
+        "state_current"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "ST_IDLE",
+        "state_next"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_17",
+      "kind": "combinational",
+      "sensitivity": "*",
+      "line_range": [
+        810,
+        892
+      ],
+      "assigned_signals": [
+        "state_next"
+      ],
+      "referenced_signals": [
+        "state_current",
+        "flag_arithmetic_cancel",
+        "b1",
+        "ST_IDLE",
+        "STOP",
+        "abort",
+        "flag_state_invalid",
+        "flag_peak_hold_violation",
+        "flag_arithmetic_timeout",
+        "ST_TIMEOUT_FALLBACK",
+        "flag_pending_config_violation",
+        "flag_peak_capture_event",
+        "ST_CAPTURE",
+        "flag_pending_adaptive_request",
+        "ST_MUL_ALPHA",
+        "ST_WAIT_PEAK_COMMIT",
+        "ST_PREPARE_DIVIDE",
+        "flag_divide_zero",
+        "ST_DIVIDE",
+        "cnt_divide_iteration",
+        "C_DIVIDE_LAST_ITERATION",
+        "ST_BUILD_SLOPE_BASE",
+        "ST_MUL_BETA",
+        "ST_ROUND_BETA",
+        "ST_MUL_ADJUST",
+        "ST_ROUND_ADJUST",
+        "ST_CLAMP",
+        "flag_peak_commit",
+        "default"
+      ],
+      "role": "state_transition"
+    },
+    {
+      "block_id": "always_18",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        892,
+        907
+      ],
+      "assigned_signals": [
+        "cnt_arithmetic_cycles"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_pending_valid",
+        "state_current",
+        "ST_WAIT_PEAK_COMMIT",
+        "ST_TIMEOUT_FALLBACK",
+        "C_SLOPE_UPDATE_MAX_CYCLES",
+        "d1"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_19",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        907,
+        923
+      ],
+      "assigned_signals": [
+        "cnt_divide_iteration"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "ST_DIVIDE",
+        "C_DIVIDE_LAST_ITERATION",
+        "d1"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_20",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        923,
+        936
+      ],
+      "assigned_signals": [
+        "flag_pending_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_state_invalid",
+        "flag_peak_capture_event"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_21",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        936,
+        950
+      ],
+      "assigned_signals": [
+        "flag_pending_adaptive_request"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_cycle_candidate_complete",
+        "i_slope_mode",
+        "SLOPE_MODE_ADAPTIVE",
+        "flag_candidate_no_cross_reacquire"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_22",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        950,
+        963
+      ],
+      "assigned_signals": [
+        "flag_pending_adaptive_result_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_CLAMP"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_23",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        963,
+        977
+      ],
+      "assigned_signals": [
+        "flag_pending_fallback"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_24",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        977,
+        990
+      ],
+      "assigned_signals": [
+        "flag_pending_baseline_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "baseline_valid_o"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_25",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        990,
+        1003
+      ],
+      "assigned_signals": [
+        "flag_pending_period_legal"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_peak_period_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_26",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1003,
+        1016
+      ],
+      "assigned_signals": [
+        "flag_pending_config_legal"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_config_legal"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_27",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1016,
+        1029
+      ],
+      "assigned_signals": [
+        "flag_pending_no_cross"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_cycle_candidate_no_cross"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_28",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1029,
+        1042
+      ],
+      "assigned_signals": [
+        "flag_pending_no_cross_reacquire"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_candidate_no_cross_reacquire"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_29",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1042,
+        1056
+      ],
+      "assigned_signals": [
+        "flag_pending_cross_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_cycle_cross_valid"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_30",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1056,
+        1069
+      ],
+      "assigned_signals": [
+        "flag_pending_clamp_min"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_CLAMP",
+        "flag_pending_candidate_clamp_min"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_31",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1069,
+        1083
+      ],
+      "assigned_signals": [
+        "flag_pending_clamp_max"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_CLAMP",
+        "flag_pending_candidate_clamp_max"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_32",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1083,
+        1096
+      ],
+      "assigned_signals": [
+        "reg_arith_old_peak_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "PEAK_CONTEXT_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "reg_peak_context"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_33",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1096,
+        1109
+      ],
+      "assigned_signals": [
+        "reg_arith_valley_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "VALLEY_CONTEXT_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "reg_valley_context"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_34",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1109,
+        1122
+      ],
+      "assigned_signals": [
+        "reg_arith_new_peak_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "PEAK_CONTEXT_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_peak_value",
+        "i_peak_frame_id",
+        "i_peak_sample_index",
+        "i_peak_config_epoch",
+        "i_peak_coef_epoch",
+        "i_peak_dc_recovery_coef_epoch"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_35",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1122,
+        1135
+      ],
+      "assigned_signals": [
+        "reg_arith_cycle_cross_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "EVENT_CONTEXT_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "reg_cycle_cross_context"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_36",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1135,
+        1148
+      ],
+      "assigned_signals": [
+        "reg_arith_slope_current_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "slope_current_q16_o"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_37",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1148,
+        1161
+      ],
+      "assigned_signals": [
+        "reg_arith_fixed_slope_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_fixed_slope_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_38",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1161,
+        1174
+      ],
+      "assigned_signals": [
+        "reg_arith_alpha_q15"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RATIO_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_alpha_q15"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_39",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1174,
+        1187
+      ],
+      "assigned_signals": [
+        "reg_arith_beta_q15"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RATIO_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_beta_q15"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_40",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1187,
+        1200
+      ],
+      "assigned_signals": [
+        "reg_arith_adjust_ratio_q15"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_RATIO_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_timing_adjust_ratio_q15"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_41",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1200,
+        1213
+      ],
+      "assigned_signals": [
+        "reg_arith_slope_min_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_slope_min_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_42",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1213,
+        1226
+      ],
+      "assigned_signals": [
+        "reg_arith_slope_max_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_slope_max_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_43",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1226,
+        1239
+      ],
+      "assigned_signals": [
+        "reg_arith_lead_min_frames"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_lead_min_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_44",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1239,
+        1252
+      ],
+      "assigned_signals": [
+        "reg_arith_lead_max_frames"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_lead_max_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_45",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1252,
+        1265
+      ],
+      "assigned_signals": [
+        "reg_arith_no_cross_limit"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "i_no_cross_limit"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_46",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1265,
+        1278
+      ],
+      "assigned_signals": [
+        "cnt_arith_no_cross"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "cnt_no_cross_o"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_47",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1278,
+        1291
+      ],
+      "assigned_signals": [
+        "reg_arith_cycle_amplitude"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "dec_cycle_amplitude"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_48",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1291,
+        1304
+      ],
+      "assigned_signals": [
+        "reg_arith_period_frames"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "dec_peak_period_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_49",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1304,
+        1318
+      ],
+      "assigned_signals": [
+        "reg_arith_lead_frames"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_FRAME_ID_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "dec_lead_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_50",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1318,
+        1331
+      ],
+      "assigned_signals": [
+        "reg_base_numerator"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_MUL_ALPHA",
+        "dec_shared_product"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_51",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1331,
+        1344
+      ],
+      "assigned_signals": [
+        "reg_base_rounded_numerator"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "dec_arith_rounded_numerator"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_52",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1344,
+        1359
+      ],
+      "assigned_signals": [
+        "reg_div_input_data"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "dec_arith_rounded_numerator",
+        "ST_DIVIDE"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_53",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1359,
+        1372
+      ],
+      "assigned_signals": [
+        "reg_divisor"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "reg_arith_period_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_54",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1372,
+        1387
+      ],
+      "assigned_signals": [
+        "reg_div_remainder"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "ST_DIVIDE",
+        "dec_div_remainder_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_55",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1387,
+        1402
+      ],
+      "assigned_signals": [
+        "reg_div_quotient"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_PREPARE_DIVIDE",
+        "ST_DIVIDE",
+        "dec_div_quotient_next"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_56",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1402,
+        1415
+      ],
+      "assigned_signals": [
+        "reg_arith_slope_base_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_BUILD_SLOPE_BASE",
+        "dec_arith_slope_base_wide",
+        "sd2147483647"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_57",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1415,
+        1428
+      ],
+      "assigned_signals": [
+        "reg_smooth_product"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "sd0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_MUL_BETA",
+        "dec_shared_product"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_58",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1428,
+        1441
+      ],
+      "assigned_signals": [
+        "reg_arith_smooth_delta"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "sd0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_ROUND_BETA",
+        "dec_arith_smooth_delta"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_59",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1441,
+        1454
+      ],
+      "assigned_signals": [
+        "reg_adjust_product"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_MUL_ADJUST",
+        "dec_shared_product"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_60",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1454,
+        1467
+      ],
+      "assigned_signals": [
+        "reg_arith_adjust_step"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "sd0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_ROUND_ADJUST",
+        "dec_arith_adjust_step"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_61",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1467,
+        1480
+      ],
+      "assigned_signals": [
+        "reg_arith_timing_term"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "sd0",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "state_current",
+        "ST_TIMEOUT_FALLBACK",
+        "ST_ROUND_ADJUST",
+        "flag_pending_cross_valid",
+        "dec_arith_adjust_step",
+        "reg_arith_lead_frames",
+        "reg_arith_lead_min_frames",
+        "reg_arith_lead_max_frames"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_62",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1480,
+        1502
+      ],
+      "assigned_signals": [
+        "reg_arith_slope_next_q16"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "C_SLOPE_WIDTH",
+        "flag_arithmetic_cancel",
+        "b1",
+        "flag_peak_hold_violation",
+        "flag_peak_commit",
+        "flag_peak_capture_event",
+        "flag_candidate_no_cross_reacquire",
+        "baseline_valid_o",
+        "flag_peak_period_legal",
+        "i_slope_mode",
+        "SLOPE_MODE_FIXED",
+        "flag_current_slope_legal",
+        "i_fixed_slope_q16",
+        "slope_current_q16_o",
+        "state_current",
+        "ST_CLAMP",
+        "dec_arith_clamped_slope_q16",
+        "ST_TIMEOUT_FALLBACK",
+        "reg_arith_fixed_slope_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_63",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1502,
+        1515
+      ],
+      "assigned_signals": [
+        "reg_peak_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "PEAK_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "flag_peak_transfer",
+        "flag_no_cross_reacquire",
+        "flag_pending_period_legal",
+        "flag_pending_baseline_valid",
+        "reg_arith_new_peak_context",
+        "RRC",
+        "satisfies"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_64",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1515,
+        1528
+      ],
+      "assigned_signals": [
+        "reg_valley_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "VALLEY_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_valley_transfer",
+        "baseline_valid_o",
+        "flag_valley_order_legal",
+        "i_valley_config_epoch",
+        "dec_peak_config_epoch",
+        "i_valley_coef_epoch",
+        "dec_peak_coef_epoch",
+        "i_valley_dc_recovery_coef_epoch",
+        "dec_peak_dc_epoch",
+        "i_valley_value",
+        "i_valley_frame_id",
+        "i_valley_sample_index"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_65",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1528,
+        1541
+      ],
+      "assigned_signals": [
+        "flag_valley_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_valley_transfer",
+        "baseline_valid_o",
+        "flag_valley_order_legal",
+        "i_valley_config_epoch",
+        "dec_peak_config_epoch",
+        "i_valley_coef_epoch",
+        "dec_peak_coef_epoch",
+        "i_valley_dc_recovery_coef_epoch",
+        "dec_peak_dc_epoch",
+        "n"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_66",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1541,
+        1554
+      ],
+      "assigned_signals": [
+        "reg_candidate_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "EVENT_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "RRC",
+        "NRE",
+        "interval",
+        "satisfies",
+        "flag_candidate_start",
+        "i_frame_id",
+        "i_sample_index",
+        "i_config_epoch",
+        "i_coef_epoch",
+        "i_dc_recovery_coef_epoch",
+        "slope_current_q16_o",
+        "dec_baseline_diagnostic_q16"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_67",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1554,
+        1569
+      ],
+      "assigned_signals": [
+        "flag_candidate_active"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_candidate_complete",
+        "flag_candidate_break",
+        "flag_result_transfer",
+        "i_color_ir",
+        "flag_cross_eligible_red_result",
+        "flag_candidate_start"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_68",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1569,
+        1584
+      ],
+      "assigned_signals": [
+        "cnt_cross_confirm"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "d0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_candidate_complete",
+        "flag_candidate_break",
+        "flag_result_transfer",
+        "i_color_ir",
+        "flag_cross_eligible_red_result",
+        "flag_candidate_start",
+        "d1",
+        "flag_candidate_continue"
+      ],
+      "role": "counter_update"
+    },
+    {
+      "block_id": "always_69",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1584,
+        1601
+      ],
+      "assigned_signals": [
+        "flag_below_seen"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_known_cross_emit",
+        "flag_unknown_cross_emit",
+        "flag_result_transfer",
+        "i_color_ir",
+        "flag_cross_eligible_red_result",
+        "GROUP4_REBUILD_EVIDENCE",
+        "satisfies",
+        "TOP",
+        "baseline_valid_o",
+        "flag_result_frame_legal",
+        "dec_filtered_value_q16",
+        "dec_baseline_low_q16",
+        "i_peak_valley_config_valid",
+        "flag_candidate_break"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_70",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1601,
+        1614
+      ],
+      "assigned_signals": [
+        "reg_previous_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "PREVIOUS_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_cross_eligible_red_result",
+        "baseline_valid_o",
+        "flag_result_frame_legal",
+        "dec_filtered_value_q16",
+        "dec_baseline_q16",
+        "i_frame_id"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_71",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1614,
+        1629
+      ],
+      "assigned_signals": [
+        "flag_previous_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_result_transfer",
+        "i_color_ir",
+        "flag_cross_eligible_red_result",
+        "baseline_valid_o",
+        "flag_result_frame_legal"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_72",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1629,
+        1642
+      ],
+      "assigned_signals": [
+        "reg_cycle_cross_context"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "EVENT_CONTEXT_WIDTH",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_known_cross_emit",
+        "reg_candidate_context"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_73",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1642,
+        1655
+      ],
+      "assigned_signals": [
+        "flag_cycle_cross_valid"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "i_recheck_accept_event",
+        "flag_known_cross_emit"
+      ],
+      "role": "output_update"
+    },
+    {
+      "block_id": "always_74",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1655,
+        1668
+      ],
+      "assigned_signals": [
+        "flag_cross_issued"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "flag_peak_transfer",
+        "flag_known_cross_emit",
+        "flag_unknown_cross_emit"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_75",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1668,
+        1683
+      ],
+      "assigned_signals": [
+        "flag_cycle_qualified"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_accept_event",
+        "flag_peak_transfer",
+        "flag_no_cross_reacquire"
+      ],
+      "role": "logic_partition"
+    },
+    {
+      "block_id": "always_76",
+      "kind": "sequential",
+      "sensitivity": "posedge i_clk or negedge i_rstn",
+      "line_range": [
+        1683,
+        1697
+      ],
+      "assigned_signals": [
+        "flag_resume_pending"
+      ],
+      "referenced_signals": [
+        "i_clk",
+        "i_rstn",
+        "b0",
+        "i_start_ack_event",
+        "b1",
+        "flag_control_clear",
+        "flag_reacquire_clear",
+        "i_recheck_accept_event",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "baseline_valid_o",
+        "flag_cross_eligible_red_result"
+      ],
+      "role": "logic_partition"
+    }
+  ],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_dynamic_baseline_cross_detector reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "i_rstn",
+        "o_local_empty",
+        "o_result_ready",
+        "o_peak_ready",
+        "o_valley_ready",
+        "o_cross_valid",
+        "o_cross_frame_id",
+        "o_cross_sample_index",
+        "o_cross_time_unknown",
+        "o_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "o_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "o_slope_base_q16",
+        "o_last_lead_frames",
+        "o_no_cross_count",
+        "o_reacquire_active",
+        "o_slope_saturation_min",
+        "o_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "o_protocol_error_sticky"
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "output update block 1",
+      "description": "sequential logic covering cross_valid_o.",
+      "signals": [
+        "cross_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "description": "sequential logic covering cross_time_unknown_o.",
+      "signals": [
+        "cross_time_unknown_o"
+      ]
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "description": "sequential logic covering cross_payload_o.",
+      "signals": [
+        "cross_payload_o"
+      ]
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "description": "sequential logic covering slope_current_q16_o.",
+      "signals": [
+        "slope_current_q16_o"
+      ]
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "description": "sequential logic covering slope_base_q16_o.",
+      "signals": [
+        "slope_base_q16_o"
+      ]
+    },
+    {
+      "feature_id": "FC007",
+      "name": "output update block 6",
+      "description": "sequential logic covering baseline_valid_o.",
+      "signals": [
+        "baseline_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC008",
+      "name": "output update block 7",
+      "description": "sequential logic covering adaptive_slope_valid_o.",
+      "signals": [
+        "adaptive_slope_valid_o"
+      ]
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "description": "sequential logic covering reacquire_active_o.",
+      "signals": [
+        "reacquire_active_o"
+      ]
+    },
+    {
+      "feature_id": "FC010",
+      "name": "counter update block 9",
+      "description": "sequential logic covering cnt_no_cross_o.",
+      "signals": [
+        "cnt_no_cross_o"
+      ]
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "description": "sequential logic covering last_lead_frames_o.",
+      "signals": [
+        "last_lead_frames_o"
+      ]
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "description": "sequential logic covering slope_saturation_min_o.",
+      "signals": [
+        "slope_saturation_min_o"
+      ]
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "description": "sequential logic covering slope_saturation_max_o.",
+      "signals": [
+        "slope_saturation_max_o"
+      ]
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "description": "sequential logic covering baseline_saturation_low_o.",
+      "signals": [
+        "baseline_saturation_low_o"
+      ]
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "description": "sequential logic covering baseline_saturation_high_o.",
+      "signals": [
+        "baseline_saturation_high_o"
+      ]
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "description": "sequential logic covering protocol_error_sticky_o.",
+      "signals": [
+        "protocol_error_sticky_o"
+      ]
+    },
+    {
+      "feature_id": "FC017",
+      "name": "state transition block 16",
+      "description": "sequential logic covering state_current.",
+      "signals": [
+        "state_current"
+      ]
+    },
+    {
+      "feature_id": "FC018",
+      "name": "state transition block 17",
+      "description": "combinational logic covering state_next.",
+      "signals": [
+        "state_next"
+      ]
+    },
+    {
+      "feature_id": "FC019",
+      "name": "counter update block 18",
+      "description": "sequential logic covering cnt_arithmetic_cycles.",
+      "signals": [
+        "cnt_arithmetic_cycles"
+      ]
+    },
+    {
+      "feature_id": "FC020",
+      "name": "counter update block 19",
+      "description": "sequential logic covering cnt_divide_iteration.",
+      "signals": [
+        "cnt_divide_iteration"
+      ]
+    },
+    {
+      "feature_id": "FC021",
+      "name": "output update block 20",
+      "description": "sequential logic covering flag_pending_valid.",
+      "signals": [
+        "flag_pending_valid"
+      ]
+    },
+    {
+      "feature_id": "FC022",
+      "name": "logic partition block 21",
+      "description": "sequential logic covering flag_pending_adaptive_request.",
+      "signals": [
+        "flag_pending_adaptive_request"
+      ]
+    },
+    {
+      "feature_id": "FC023",
+      "name": "output update block 22",
+      "description": "sequential logic covering flag_pending_adaptive_result_valid.",
+      "signals": [
+        "flag_pending_adaptive_result_valid"
+      ]
+    },
+    {
+      "feature_id": "FC024",
+      "name": "logic partition block 23",
+      "description": "sequential logic covering flag_pending_fallback.",
+      "signals": [
+        "flag_pending_fallback"
+      ]
+    },
+    {
+      "feature_id": "FC025",
+      "name": "output update block 24",
+      "description": "sequential logic covering flag_pending_baseline_valid.",
+      "signals": [
+        "flag_pending_baseline_valid"
+      ]
+    },
+    {
+      "feature_id": "FC026",
+      "name": "logic partition block 25",
+      "description": "sequential logic covering flag_pending_period_legal.",
+      "signals": [
+        "flag_pending_period_legal"
+      ]
+    },
+    {
+      "feature_id": "FC027",
+      "name": "logic partition block 26",
+      "description": "sequential logic covering flag_pending_config_legal.",
+      "signals": [
+        "flag_pending_config_legal"
+      ]
+    },
+    {
+      "feature_id": "FC028",
+      "name": "logic partition block 27",
+      "description": "sequential logic covering flag_pending_no_cross.",
+      "signals": [
+        "flag_pending_no_cross"
+      ]
+    },
+    {
+      "feature_id": "FC029",
+      "name": "logic partition block 28",
+      "description": "sequential logic covering flag_pending_no_cross_reacquire.",
+      "signals": [
+        "flag_pending_no_cross_reacquire"
+      ]
+    },
+    {
+      "feature_id": "FC030",
+      "name": "output update block 29",
+      "description": "sequential logic covering flag_pending_cross_valid.",
+      "signals": [
+        "flag_pending_cross_valid"
+      ]
+    },
+    {
+      "feature_id": "FC031",
+      "name": "logic partition block 30",
+      "description": "sequential logic covering flag_pending_clamp_min.",
+      "signals": [
+        "flag_pending_clamp_min"
+      ]
+    },
+    {
+      "feature_id": "FC032",
+      "name": "logic partition block 31",
+      "description": "sequential logic covering flag_pending_clamp_max.",
+      "signals": [
+        "flag_pending_clamp_max"
+      ]
+    },
+    {
+      "feature_id": "FC033",
+      "name": "logic partition block 32",
+      "description": "sequential logic covering reg_arith_old_peak_context.",
+      "signals": [
+        "reg_arith_old_peak_context"
+      ]
+    },
+    {
+      "feature_id": "FC034",
+      "name": "logic partition block 33",
+      "description": "sequential logic covering reg_arith_valley_context.",
+      "signals": [
+        "reg_arith_valley_context"
+      ]
+    },
+    {
+      "feature_id": "FC035",
+      "name": "logic partition block 34",
+      "description": "sequential logic covering reg_arith_new_peak_context.",
+      "signals": [
+        "reg_arith_new_peak_context"
+      ]
+    },
+    {
+      "feature_id": "FC036",
+      "name": "logic partition block 35",
+      "description": "sequential logic covering reg_arith_cycle_cross_context.",
+      "signals": [
+        "reg_arith_cycle_cross_context"
+      ]
+    },
+    {
+      "feature_id": "FC037",
+      "name": "logic partition block 36",
+      "description": "sequential logic covering reg_arith_slope_current_q16.",
+      "signals": [
+        "reg_arith_slope_current_q16"
+      ]
+    },
+    {
+      "feature_id": "FC038",
+      "name": "logic partition block 37",
+      "description": "sequential logic covering reg_arith_fixed_slope_q16.",
+      "signals": [
+        "reg_arith_fixed_slope_q16"
+      ]
+    },
+    {
+      "feature_id": "FC039",
+      "name": "logic partition block 38",
+      "description": "sequential logic covering reg_arith_alpha_q15.",
+      "signals": [
+        "reg_arith_alpha_q15"
+      ]
+    },
+    {
+      "feature_id": "FC040",
+      "name": "logic partition block 39",
+      "description": "sequential logic covering reg_arith_beta_q15.",
+      "signals": [
+        "reg_arith_beta_q15"
+      ]
+    },
+    {
+      "feature_id": "FC041",
+      "name": "logic partition block 40",
+      "description": "sequential logic covering reg_arith_adjust_ratio_q15.",
+      "signals": [
+        "reg_arith_adjust_ratio_q15"
+      ]
+    },
+    {
+      "feature_id": "FC042",
+      "name": "logic partition block 41",
+      "description": "sequential logic covering reg_arith_slope_min_q16.",
+      "signals": [
+        "reg_arith_slope_min_q16"
+      ]
+    },
+    {
+      "feature_id": "FC043",
+      "name": "logic partition block 42",
+      "description": "sequential logic covering reg_arith_slope_max_q16.",
+      "signals": [
+        "reg_arith_slope_max_q16"
+      ]
+    },
+    {
+      "feature_id": "FC044",
+      "name": "logic partition block 43",
+      "description": "sequential logic covering reg_arith_lead_min_frames.",
+      "signals": [
+        "reg_arith_lead_min_frames"
+      ]
+    },
+    {
+      "feature_id": "FC045",
+      "name": "logic partition block 44",
+      "description": "sequential logic covering reg_arith_lead_max_frames.",
+      "signals": [
+        "reg_arith_lead_max_frames"
+      ]
+    },
+    {
+      "feature_id": "FC046",
+      "name": "logic partition block 45",
+      "description": "sequential logic covering reg_arith_no_cross_limit.",
+      "signals": [
+        "reg_arith_no_cross_limit"
+      ]
+    },
+    {
+      "feature_id": "FC047",
+      "name": "counter update block 46",
+      "description": "sequential logic covering cnt_arith_no_cross.",
+      "signals": [
+        "cnt_arith_no_cross"
+      ]
+    },
+    {
+      "feature_id": "FC048",
+      "name": "logic partition block 47",
+      "description": "sequential logic covering reg_arith_cycle_amplitude.",
+      "signals": [
+        "reg_arith_cycle_amplitude"
+      ]
+    },
+    {
+      "feature_id": "FC049",
+      "name": "logic partition block 48",
+      "description": "sequential logic covering reg_arith_period_frames.",
+      "signals": [
+        "reg_arith_period_frames"
+      ]
+    },
+    {
+      "feature_id": "FC050",
+      "name": "logic partition block 49",
+      "description": "sequential logic covering reg_arith_lead_frames.",
+      "signals": [
+        "reg_arith_lead_frames"
+      ]
+    },
+    {
+      "feature_id": "FC051",
+      "name": "logic partition block 50",
+      "description": "sequential logic covering reg_base_numerator.",
+      "signals": [
+        "reg_base_numerator"
+      ]
+    },
+    {
+      "feature_id": "FC052",
+      "name": "logic partition block 51",
+      "description": "sequential logic covering reg_base_rounded_numerator.",
+      "signals": [
+        "reg_base_rounded_numerator"
+      ]
+    },
+    {
+      "feature_id": "FC053",
+      "name": "output update block 52",
+      "description": "sequential logic covering reg_div_input_data.",
+      "signals": [
+        "reg_div_input_data"
+      ]
+    },
+    {
+      "feature_id": "FC054",
+      "name": "logic partition block 53",
+      "description": "sequential logic covering reg_divisor.",
+      "signals": [
+        "reg_divisor"
+      ]
+    },
+    {
+      "feature_id": "FC055",
+      "name": "logic partition block 54",
+      "description": "sequential logic covering reg_div_remainder.",
+      "signals": [
+        "reg_div_remainder"
+      ]
+    },
+    {
+      "feature_id": "FC056",
+      "name": "logic partition block 55",
+      "description": "sequential logic covering reg_div_quotient.",
+      "signals": [
+        "reg_div_quotient"
+      ]
+    },
+    {
+      "feature_id": "FC057",
+      "name": "logic partition block 56",
+      "description": "sequential logic covering reg_arith_slope_base_q16.",
+      "signals": [
+        "reg_arith_slope_base_q16"
+      ]
+    },
+    {
+      "feature_id": "FC058",
+      "name": "logic partition block 57",
+      "description": "sequential logic covering reg_smooth_product.",
+      "signals": [
+        "reg_smooth_product"
+      ]
+    },
+    {
+      "feature_id": "FC059",
+      "name": "logic partition block 58",
+      "description": "sequential logic covering reg_arith_smooth_delta.",
+      "signals": [
+        "reg_arith_smooth_delta"
+      ]
+    },
+    {
+      "feature_id": "FC060",
+      "name": "logic partition block 59",
+      "description": "sequential logic covering reg_adjust_product.",
+      "signals": [
+        "reg_adjust_product"
+      ]
+    },
+    {
+      "feature_id": "FC061",
+      "name": "logic partition block 60",
+      "description": "sequential logic covering reg_arith_adjust_step.",
+      "signals": [
+        "reg_arith_adjust_step"
+      ]
+    },
+    {
+      "feature_id": "FC062",
+      "name": "logic partition block 61",
+      "description": "sequential logic covering reg_arith_timing_term.",
+      "signals": [
+        "reg_arith_timing_term"
+      ]
+    },
+    {
+      "feature_id": "FC063",
+      "name": "logic partition block 62",
+      "description": "sequential logic covering reg_arith_slope_next_q16.",
+      "signals": [
+        "reg_arith_slope_next_q16"
+      ]
+    },
+    {
+      "feature_id": "FC064",
+      "name": "logic partition block 63",
+      "description": "sequential logic covering reg_peak_context.",
+      "signals": [
+        "reg_peak_context"
+      ]
+    },
+    {
+      "feature_id": "FC065",
+      "name": "logic partition block 64",
+      "description": "sequential logic covering reg_valley_context.",
+      "signals": [
+        "reg_valley_context"
+      ]
+    },
+    {
+      "feature_id": "FC066",
+      "name": "output update block 65",
+      "description": "sequential logic covering flag_valley_valid.",
+      "signals": [
+        "flag_valley_valid"
+      ]
+    },
+    {
+      "feature_id": "FC067",
+      "name": "logic partition block 66",
+      "description": "sequential logic covering reg_candidate_context.",
+      "signals": [
+        "reg_candidate_context"
+      ]
+    },
+    {
+      "feature_id": "FC068",
+      "name": "logic partition block 67",
+      "description": "sequential logic covering flag_candidate_active.",
+      "signals": [
+        "flag_candidate_active"
+      ]
+    },
+    {
+      "feature_id": "FC069",
+      "name": "counter update block 68",
+      "description": "sequential logic covering cnt_cross_confirm.",
+      "signals": [
+        "cnt_cross_confirm"
+      ]
+    },
+    {
+      "feature_id": "FC070",
+      "name": "logic partition block 69",
+      "description": "sequential logic covering flag_below_seen.",
+      "signals": [
+        "flag_below_seen"
+      ]
+    },
+    {
+      "feature_id": "FC071",
+      "name": "logic partition block 70",
+      "description": "sequential logic covering reg_previous_context.",
+      "signals": [
+        "reg_previous_context"
+      ]
+    },
+    {
+      "feature_id": "FC072",
+      "name": "output update block 71",
+      "description": "sequential logic covering flag_previous_valid.",
+      "signals": [
+        "flag_previous_valid"
+      ]
+    },
+    {
+      "feature_id": "FC073",
+      "name": "logic partition block 72",
+      "description": "sequential logic covering reg_cycle_cross_context.",
+      "signals": [
+        "reg_cycle_cross_context"
+      ]
+    },
+    {
+      "feature_id": "FC074",
+      "name": "output update block 73",
+      "description": "sequential logic covering flag_cycle_cross_valid.",
+      "signals": [
+        "flag_cycle_cross_valid"
+      ]
+    },
+    {
+      "feature_id": "FC075",
+      "name": "logic partition block 74",
+      "description": "sequential logic covering flag_cross_issued.",
+      "signals": [
+        "flag_cross_issued"
+      ]
+    },
+    {
+      "feature_id": "FC076",
+      "name": "logic partition block 75",
+      "description": "sequential logic covering flag_cycle_qualified.",
+      "signals": [
+        "flag_cycle_qualified"
+      ]
+    },
+    {
+      "feature_id": "FC077",
+      "name": "logic partition block 76",
+      "description": "sequential logic covering flag_resume_pending.",
+      "signals": [
+        "flag_resume_pending"
+      ]
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "description": "Counter/state timing progression remains observable through public outputs.",
+      "signals": [
+        "cnt_cross_confirm",
+        "cnt_arithmetic_cycles",
+        "cnt_divide_iteration",
+        "cnt_arith_no_cross",
+        "cnt_no_cross_o",
+        "o_local_empty",
+        "o_result_ready",
+        "o_peak_ready",
+        "o_valley_ready",
+        "o_cross_valid",
+        "o_cross_frame_id",
+        "o_cross_sample_index",
+        "o_cross_time_unknown",
+        "o_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "o_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "o_slope_base_q16",
+        "o_last_lead_frames",
+        "o_no_cross_count",
+        "o_reacquire_active",
+        "o_slope_saturation_min",
+        "o_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "o_protocol_error_sticky"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_dynamic_baseline_cross_detector reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "i_rstn",
+          "role": "control",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_local_empty",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_result_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_valley_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_sample_index",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_time_unknown",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_config_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_dc_recovery_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_slope_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_baseline_q16",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_adaptive_slope_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_base_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_last_lead_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_no_cross_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_saturation_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_saturation_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_saturation_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_saturation_high",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_local_empty",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_result_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_valley_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_sample_index",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_time_unknown",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_config_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_dc_recovery_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_slope_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_baseline_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_adaptive_slope_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_base_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_last_lead_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_no_cross_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_saturation_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_saturation_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_saturation_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_saturation_high",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    },
+    {
+      "feature_id": "FC002",
+      "name": "output update block 1",
+      "pin_assignments": [
+        {
+          "pin_name": "cross_valid_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC003",
+      "name": "logic partition block 2",
+      "pin_assignments": [
+        {
+          "pin_name": "cross_time_unknown_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC004",
+      "name": "logic partition block 3",
+      "pin_assignments": [
+        {
+          "pin_name": "cross_payload_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC005",
+      "name": "logic partition block 4",
+      "pin_assignments": [
+        {
+          "pin_name": "slope_current_q16_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC006",
+      "name": "logic partition block 5",
+      "pin_assignments": [
+        {
+          "pin_name": "slope_base_q16_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC007",
+      "name": "output update block 6",
+      "pin_assignments": [
+        {
+          "pin_name": "baseline_valid_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC008",
+      "name": "output update block 7",
+      "pin_assignments": [
+        {
+          "pin_name": "adaptive_slope_valid_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC009",
+      "name": "logic partition block 8",
+      "pin_assignments": [
+        {
+          "pin_name": "reacquire_active_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC010",
+      "name": "counter update block 9",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_no_cross_o",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC011",
+      "name": "logic partition block 10",
+      "pin_assignments": [
+        {
+          "pin_name": "last_lead_frames_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC012",
+      "name": "logic partition block 11",
+      "pin_assignments": [
+        {
+          "pin_name": "slope_saturation_min_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC013",
+      "name": "logic partition block 12",
+      "pin_assignments": [
+        {
+          "pin_name": "slope_saturation_max_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC014",
+      "name": "logic partition block 13",
+      "pin_assignments": [
+        {
+          "pin_name": "baseline_saturation_low_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC015",
+      "name": "logic partition block 14",
+      "pin_assignments": [
+        {
+          "pin_name": "baseline_saturation_high_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC016",
+      "name": "logic partition block 15",
+      "pin_assignments": [
+        {
+          "pin_name": "protocol_error_sticky_o",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC017",
+      "name": "state transition block 16",
+      "pin_assignments": [
+        {
+          "pin_name": "state_current",
+          "role": "fsm_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC018",
+      "name": "state transition block 17",
+      "pin_assignments": [
+        {
+          "pin_name": "state_next",
+          "role": "internal_state",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC019",
+      "name": "counter update block 18",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_arithmetic_cycles",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC020",
+      "name": "counter update block 19",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_divide_iteration",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC021",
+      "name": "output update block 20",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC022",
+      "name": "logic partition block 21",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_adaptive_request",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC023",
+      "name": "output update block 22",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_adaptive_result_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC024",
+      "name": "logic partition block 23",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_fallback",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC025",
+      "name": "output update block 24",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_baseline_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC026",
+      "name": "logic partition block 25",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_period_legal",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC027",
+      "name": "logic partition block 26",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_config_legal",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC028",
+      "name": "logic partition block 27",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_no_cross",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC029",
+      "name": "logic partition block 28",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_no_cross_reacquire",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC030",
+      "name": "output update block 29",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_cross_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC031",
+      "name": "logic partition block 30",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_clamp_min",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC032",
+      "name": "logic partition block 31",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_pending_clamp_max",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC033",
+      "name": "logic partition block 32",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_old_peak_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC034",
+      "name": "logic partition block 33",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_valley_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC035",
+      "name": "logic partition block 34",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_new_peak_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC036",
+      "name": "logic partition block 35",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_cycle_cross_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC037",
+      "name": "logic partition block 36",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_slope_current_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC038",
+      "name": "logic partition block 37",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_fixed_slope_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC039",
+      "name": "logic partition block 38",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_alpha_q15",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC040",
+      "name": "logic partition block 39",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_beta_q15",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC041",
+      "name": "logic partition block 40",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_adjust_ratio_q15",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC042",
+      "name": "logic partition block 41",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_slope_min_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC043",
+      "name": "logic partition block 42",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_slope_max_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC044",
+      "name": "logic partition block 43",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_lead_min_frames",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC045",
+      "name": "logic partition block 44",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_lead_max_frames",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC046",
+      "name": "logic partition block 45",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_no_cross_limit",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC047",
+      "name": "counter update block 46",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_arith_no_cross",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC048",
+      "name": "logic partition block 47",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_cycle_amplitude",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC049",
+      "name": "logic partition block 48",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_period_frames",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC050",
+      "name": "logic partition block 49",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_lead_frames",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC051",
+      "name": "logic partition block 50",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_base_numerator",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC052",
+      "name": "logic partition block 51",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_base_rounded_numerator",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC053",
+      "name": "output update block 52",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_div_input_data",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC054",
+      "name": "logic partition block 53",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_divisor",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC055",
+      "name": "logic partition block 54",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_div_remainder",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC056",
+      "name": "logic partition block 55",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_div_quotient",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC057",
+      "name": "logic partition block 56",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_slope_base_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC058",
+      "name": "logic partition block 57",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_smooth_product",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC059",
+      "name": "logic partition block 58",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_smooth_delta",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC060",
+      "name": "logic partition block 59",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_adjust_product",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC061",
+      "name": "logic partition block 60",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_adjust_step",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC062",
+      "name": "logic partition block 61",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_timing_term",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC063",
+      "name": "logic partition block 62",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_arith_slope_next_q16",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC064",
+      "name": "logic partition block 63",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_peak_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC065",
+      "name": "logic partition block 64",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_valley_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC066",
+      "name": "output update block 65",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_valley_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC067",
+      "name": "logic partition block 66",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_candidate_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC068",
+      "name": "logic partition block 67",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_candidate_active",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC069",
+      "name": "counter update block 68",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_cross_confirm",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC070",
+      "name": "logic partition block 69",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_below_seen",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC071",
+      "name": "logic partition block 70",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_previous_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC072",
+      "name": "output update block 71",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_previous_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC073",
+      "name": "logic partition block 72",
+      "pin_assignments": [
+        {
+          "pin_name": "reg_cycle_cross_context",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC074",
+      "name": "output update block 73",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_cycle_cross_valid",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC075",
+      "name": "logic partition block 74",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_cross_issued",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC076",
+      "name": "logic partition block 75",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_cycle_qualified",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC077",
+      "name": "logic partition block 76",
+      "pin_assignments": [
+        {
+          "pin_name": "flag_resume_pending",
+          "role": "register",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": []
+    },
+    {
+      "feature_id": "FC900",
+      "name": "counter progression",
+      "pin_assignments": [
+        {
+          "pin_name": "cnt_cross_confirm",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_arithmetic_cycles",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_divide_iteration",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_arith_no_cross",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "cnt_no_cross_o",
+          "role": "counter",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_local_empty",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_result_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_valley_ready",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_frame_id",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_sample_index",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_time_unknown",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_config_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_dc_recovery_coef_epoch",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_slope_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_baseline_q16",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_adaptive_slope_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_base_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_last_lead_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_no_cross_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_saturation_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_saturation_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_saturation_low",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_saturation_high",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_local_empty",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_result_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_valley_ready",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_frame_id",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_sample_index",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_time_unknown",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_config_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_dc_recovery_coef_epoch",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_slope_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_baseline_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_adaptive_slope_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_current_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_base_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_last_lead_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_no_cross_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_reacquire_active",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_saturation_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_saturation_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_saturation_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_saturation_high",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_protocol_error_sticky",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "i_rstn",
+        "o_local_empty",
+        "o_result_ready",
+        "o_peak_ready",
+        "o_valley_ready",
+        "o_cross_valid",
+        "o_cross_frame_id",
+        "o_cross_sample_index",
+        "o_cross_time_unknown",
+        "o_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "o_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "o_slope_base_q16",
+        "o_last_lead_frames",
+        "o_no_cross_count",
+        "o_reacquire_active",
+        "o_slope_saturation_min",
+        "o_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "o_protocol_error_sticky"
+      ],
+      "description": "Verify `ppg_dynamic_baseline_cross_detector` drives known output values after reset release."
+    },
+    {
+      "check_id": "counter_progression",
+      "category": "checkpoint",
+      "signals": [
+        "cnt_cross_confirm",
+        "cnt_arithmetic_cycles",
+        "cnt_divide_iteration",
+        "cnt_arith_no_cross",
+        "cnt_no_cross_o"
+      ],
+      "description": "Verify timer/counter progression across phase transitions."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "i_rstn",
+        "o_local_empty",
+        "o_result_ready",
+        "o_peak_ready",
+        "o_valley_ready",
+        "o_cross_valid",
+        "o_cross_frame_id",
+        "o_cross_sample_index",
+        "o_cross_time_unknown",
+        "o_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "o_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "o_slope_base_q16",
+        "o_last_lead_frames",
+        "o_no_cross_count",
+        "o_reacquire_active",
+        "o_slope_saturation_min",
+        "o_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "o_protocol_error_sticky"
+      ],
+      "description": "ppg_dynamic_baseline_cross_detector reset behavior"
+    },
+    {
+      "check_id": "fc900",
+      "category": "feature_mapping",
+      "signals": [
+        "cnt_cross_confirm",
+        "cnt_arithmetic_cycles",
+        "cnt_divide_iteration",
+        "cnt_arith_no_cross",
+        "cnt_no_cross_o",
+        "o_local_empty",
+        "o_result_ready",
+        "o_peak_ready",
+        "o_valley_ready",
+        "o_cross_valid",
+        "o_cross_frame_id",
+        "o_cross_sample_index",
+        "o_cross_time_unknown",
+        "o_cross_config_epoch",
+        "o_cross_coef_epoch",
+        "o_cross_dc_recovery_coef_epoch",
+        "o_cross_slope_q16",
+        "o_cross_baseline_q16",
+        "o_baseline_valid",
+        "o_adaptive_slope_valid",
+        "o_slope_current_q16",
+        "o_slope_base_q16",
+        "o_last_lead_frames",
+        "o_no_cross_count",
+        "o_reacquire_active",
+        "o_slope_saturation_min",
+        "o_slope_saturation_max",
+        "o_baseline_saturation_low",
+        "o_baseline_saturation_high",
+        "o_protocol_error_sticky"
+      ],
+      "description": "counter progression"
+    }
+  ],
+  "decomposition_candidates": [
+    {
+      "candidate_id": "DC001",
+      "module_name": "u_block_1",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        574,
+        589
+      ],
+      "boundary_signals": [
+        "cross_valid_o",
+        "i_clk",
+        "i_cross_ready",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC002",
+      "module_name": "u_block_2",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        589,
+        602
+      ],
+      "boundary_signals": [
+        "cross_time_unknown_o",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC003",
+      "module_name": "u_block_3",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        602,
+        620
+      ],
+      "boundary_signals": [
+        "cross_payload_o",
+        "i_clk",
+        "i_coef_epoch",
+        "i_config_epoch",
+        "i_dc_recovery_coef_epoch",
+        "i_frame_id",
+        "i_rstn",
+        "i_sample_index",
+        "i_start_ack_event",
+        "reg_candidate_context",
+        "slope_current_q16_o"
+      ]
+    },
+    {
+      "candidate_id": "DC004",
+      "module_name": "u_block_4",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        620,
+        637
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_fixed_slope_q16",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_start_ack_event",
+        "reg_arith_slope_next_q16",
+        "slope_current_q16_o"
+      ]
+    },
+    {
+      "candidate_id": "DC005",
+      "module_name": "u_block_5",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        637,
+        650
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event",
+        "slope_base_q16_o"
+      ]
+    },
+    {
+      "candidate_id": "DC006",
+      "module_name": "u_block_6",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        650,
+        667
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_pending_baseline_valid",
+        "flag_pending_config_legal",
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC007",
+      "module_name": "u_block_7",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        667,
+        686
+      ],
+      "boundary_signals": [
+        "adaptive_slope_valid_o",
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_slope_mode",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC008",
+      "module_name": "u_block_8",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        686,
+        707
+      ],
+      "boundary_signals": [
+        "flag_pending_baseline_valid",
+        "flag_pending_config_legal",
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_start_ack_event",
+        "reacquire_active_o"
+      ]
+    },
+    {
+      "candidate_id": "DC009",
+      "module_name": "u_block_9",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        707,
+        720
+      ],
+      "boundary_signals": [
+        "cnt_no_cross_o",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC010",
+      "module_name": "u_block_10",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        720,
+        733
+      ],
+      "boundary_signals": [
+        "flag_pending_cross_valid",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event",
+        "last_lead_frames_o",
+        "reg_arith_lead_frames"
+      ]
+    },
+    {
+      "candidate_id": "DC011",
+      "module_name": "u_block_11",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        733,
+        746
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_slope_mode",
+        "i_start_ack_event",
+        "slope_saturation_min_o"
+      ]
+    },
+    {
+      "candidate_id": "DC012",
+      "module_name": "u_block_12",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        746,
+        759
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_slope_mode",
+        "i_start_ack_event",
+        "slope_saturation_max_o"
+      ]
+    },
+    {
+      "candidate_id": "DC013",
+      "module_name": "u_block_13",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        759,
+        772
+      ],
+      "boundary_signals": [
+        "baseline_saturation_low_o",
+        "baseline_valid_o",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC014",
+      "module_name": "u_block_14",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        772,
+        785
+      ],
+      "boundary_signals": [
+        "baseline_saturation_high_o",
+        "baseline_valid_o",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC015",
+      "module_name": "u_block_15",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        785,
+        801
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "cross_valid_o",
+        "flag_pending_baseline_valid",
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_fine_window_active",
+        "i_rstn",
+        "i_start_ack_event",
+        "protocol_error_sticky_o"
+      ]
+    },
+    {
+      "candidate_id": "DC016",
+      "module_name": "u_block_16",
+      "role": "state_transition",
+      "kind": "sequential",
+      "line_range": [
+        801,
+        810
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC017",
+      "module_name": "u_block_17",
+      "role": "state_transition",
+      "kind": "combinational",
+      "line_range": [
+        810,
+        892
+      ],
+      "boundary_signals": [
+        "cnt_divide_iteration",
+        "flag_pending_adaptive_request",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC018",
+      "module_name": "u_block_18",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        892,
+        907
+      ],
+      "boundary_signals": [
+        "cnt_arithmetic_cycles",
+        "flag_pending_valid",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC019",
+      "module_name": "u_block_19",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        907,
+        923
+      ],
+      "boundary_signals": [
+        "cnt_divide_iteration",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC020",
+      "module_name": "u_block_20",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        923,
+        936
+      ],
+      "boundary_signals": [
+        "flag_pending_valid",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC021",
+      "module_name": "u_block_21",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        936,
+        950
+      ],
+      "boundary_signals": [
+        "flag_pending_adaptive_request",
+        "i_clk",
+        "i_rstn",
+        "i_slope_mode"
+      ]
+    },
+    {
+      "candidate_id": "DC022",
+      "module_name": "u_block_22",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        950,
+        963
+      ],
+      "boundary_signals": [
+        "flag_pending_adaptive_result_valid",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC023",
+      "module_name": "u_block_23",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        963,
+        977
+      ],
+      "boundary_signals": [
+        "flag_pending_fallback",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC024",
+      "module_name": "u_block_24",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        977,
+        990
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_pending_baseline_valid",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC025",
+      "module_name": "u_block_25",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        990,
+        1003
+      ],
+      "boundary_signals": [
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC026",
+      "module_name": "u_block_26",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1003,
+        1016
+      ],
+      "boundary_signals": [
+        "flag_pending_config_legal",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC027",
+      "module_name": "u_block_27",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1016,
+        1029
+      ],
+      "boundary_signals": [
+        "flag_pending_no_cross",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC028",
+      "module_name": "u_block_28",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1029,
+        1042
+      ],
+      "boundary_signals": [
+        "flag_pending_no_cross_reacquire",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC029",
+      "module_name": "u_block_29",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        1042,
+        1056
+      ],
+      "boundary_signals": [
+        "flag_cycle_cross_valid",
+        "flag_pending_cross_valid",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC030",
+      "module_name": "u_block_30",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1056,
+        1069
+      ],
+      "boundary_signals": [
+        "flag_pending_clamp_min",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC031",
+      "module_name": "u_block_31",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1069,
+        1083
+      ],
+      "boundary_signals": [
+        "flag_pending_clamp_max",
+        "i_clk",
+        "i_rstn",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC032",
+      "module_name": "u_block_32",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1083,
+        1096
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_old_peak_context",
+        "reg_peak_context"
+      ]
+    },
+    {
+      "candidate_id": "DC033",
+      "module_name": "u_block_33",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1096,
+        1109
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_valley_context",
+        "reg_valley_context"
+      ]
+    },
+    {
+      "candidate_id": "DC034",
+      "module_name": "u_block_34",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1109,
+        1122
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_peak_coef_epoch",
+        "i_peak_config_epoch",
+        "i_peak_dc_recovery_coef_epoch",
+        "i_peak_frame_id",
+        "i_peak_sample_index",
+        "i_peak_value",
+        "i_rstn",
+        "reg_arith_new_peak_context"
+      ]
+    },
+    {
+      "candidate_id": "DC035",
+      "module_name": "u_block_35",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1122,
+        1135
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_cycle_cross_context",
+        "reg_cycle_cross_context"
+      ]
+    },
+    {
+      "candidate_id": "DC036",
+      "module_name": "u_block_36",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1135,
+        1148
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_slope_current_q16",
+        "slope_current_q16_o"
+      ]
+    },
+    {
+      "candidate_id": "DC037",
+      "module_name": "u_block_37",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1148,
+        1161
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_fixed_slope_q16",
+        "i_rstn",
+        "reg_arith_fixed_slope_q16"
+      ]
+    },
+    {
+      "candidate_id": "DC038",
+      "module_name": "u_block_38",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1161,
+        1174
+      ],
+      "boundary_signals": [
+        "i_alpha_q15",
+        "i_clk",
+        "i_rstn",
+        "reg_arith_alpha_q15"
+      ]
+    },
+    {
+      "candidate_id": "DC039",
+      "module_name": "u_block_39",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1174,
+        1187
+      ],
+      "boundary_signals": [
+        "i_beta_q15",
+        "i_clk",
+        "i_rstn",
+        "reg_arith_beta_q15"
+      ]
+    },
+    {
+      "candidate_id": "DC040",
+      "module_name": "u_block_40",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1187,
+        1200
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_timing_adjust_ratio_q15",
+        "reg_arith_adjust_ratio_q15"
+      ]
+    },
+    {
+      "candidate_id": "DC041",
+      "module_name": "u_block_41",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1200,
+        1213
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_slope_min_q16",
+        "reg_arith_slope_min_q16"
+      ]
+    },
+    {
+      "candidate_id": "DC042",
+      "module_name": "u_block_42",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1213,
+        1226
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "i_slope_max_q16",
+        "reg_arith_slope_max_q16"
+      ]
+    },
+    {
+      "candidate_id": "DC043",
+      "module_name": "u_block_43",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1226,
+        1239
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_lead_min_frames",
+        "i_rstn",
+        "reg_arith_lead_min_frames"
+      ]
+    },
+    {
+      "candidate_id": "DC044",
+      "module_name": "u_block_44",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1239,
+        1252
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_lead_max_frames",
+        "i_rstn",
+        "reg_arith_lead_max_frames"
+      ]
+    },
+    {
+      "candidate_id": "DC045",
+      "module_name": "u_block_45",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1252,
+        1265
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_no_cross_limit",
+        "i_rstn",
+        "reg_arith_no_cross_limit"
+      ]
+    },
+    {
+      "candidate_id": "DC046",
+      "module_name": "u_block_46",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        1265,
+        1278
+      ],
+      "boundary_signals": [
+        "cnt_arith_no_cross",
+        "cnt_no_cross_o",
+        "i_clk",
+        "i_rstn"
+      ]
+    },
+    {
+      "candidate_id": "DC047",
+      "module_name": "u_block_47",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1278,
+        1291
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_cycle_amplitude"
+      ]
+    },
+    {
+      "candidate_id": "DC048",
+      "module_name": "u_block_48",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1291,
+        1304
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_period_frames"
+      ]
+    },
+    {
+      "candidate_id": "DC049",
+      "module_name": "u_block_49",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1304,
+        1318
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_lead_frames"
+      ]
+    },
+    {
+      "candidate_id": "DC050",
+      "module_name": "u_block_50",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1318,
+        1331
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_base_numerator",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC051",
+      "module_name": "u_block_51",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1331,
+        1344
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_base_rounded_numerator",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC052",
+      "module_name": "u_block_52",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        1344,
+        1359
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_div_input_data",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC053",
+      "module_name": "u_block_53",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1359,
+        1372
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_period_frames",
+        "reg_divisor",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC054",
+      "module_name": "u_block_54",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1372,
+        1387
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_div_remainder",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC055",
+      "module_name": "u_block_55",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1387,
+        1402
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_div_quotient",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC056",
+      "module_name": "u_block_56",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1402,
+        1415
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_slope_base_q16",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC057",
+      "module_name": "u_block_57",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1415,
+        1428
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_smooth_product",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC058",
+      "module_name": "u_block_58",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1428,
+        1441
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_smooth_delta",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC059",
+      "module_name": "u_block_59",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1441,
+        1454
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_adjust_product",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC060",
+      "module_name": "u_block_60",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1454,
+        1467
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_rstn",
+        "reg_arith_adjust_step",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC061",
+      "module_name": "u_block_61",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1467,
+        1480
+      ],
+      "boundary_signals": [
+        "flag_pending_cross_valid",
+        "i_clk",
+        "i_rstn",
+        "reg_arith_lead_frames",
+        "reg_arith_lead_max_frames",
+        "reg_arith_lead_min_frames",
+        "reg_arith_timing_term",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC062",
+      "module_name": "u_block_62",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1480,
+        1502
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "i_clk",
+        "i_fixed_slope_q16",
+        "i_rstn",
+        "i_slope_mode",
+        "reg_arith_fixed_slope_q16",
+        "reg_arith_slope_next_q16",
+        "slope_current_q16_o",
+        "state_current"
+      ]
+    },
+    {
+      "candidate_id": "DC063",
+      "module_name": "u_block_63",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1502,
+        1515
+      ],
+      "boundary_signals": [
+        "flag_pending_baseline_valid",
+        "flag_pending_period_legal",
+        "i_clk",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_start_ack_event",
+        "reg_arith_new_peak_context",
+        "reg_peak_context"
+      ]
+    },
+    {
+      "candidate_id": "DC064",
+      "module_name": "u_block_64",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1515,
+        1528
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event",
+        "i_valley_coef_epoch",
+        "i_valley_config_epoch",
+        "i_valley_dc_recovery_coef_epoch",
+        "i_valley_frame_id",
+        "i_valley_sample_index",
+        "i_valley_value",
+        "reg_valley_context"
+      ]
+    },
+    {
+      "candidate_id": "DC065",
+      "module_name": "u_block_65",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        1528,
+        1541
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_valley_valid",
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event",
+        "i_valley_coef_epoch",
+        "i_valley_config_epoch",
+        "i_valley_dc_recovery_coef_epoch"
+      ]
+    },
+    {
+      "candidate_id": "DC066",
+      "module_name": "u_block_66",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1541,
+        1554
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_coef_epoch",
+        "i_config_epoch",
+        "i_dc_recovery_coef_epoch",
+        "i_frame_id",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_sample_index",
+        "i_start_ack_event",
+        "reg_candidate_context",
+        "slope_current_q16_o"
+      ]
+    },
+    {
+      "candidate_id": "DC067",
+      "module_name": "u_block_67",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1554,
+        1569
+      ],
+      "boundary_signals": [
+        "flag_candidate_active",
+        "i_clk",
+        "i_color_ir",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC068",
+      "module_name": "u_block_68",
+      "role": "counter_update",
+      "kind": "sequential",
+      "line_range": [
+        1569,
+        1584
+      ],
+      "boundary_signals": [
+        "cnt_cross_confirm",
+        "i_clk",
+        "i_color_ir",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC069",
+      "module_name": "u_block_69",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1584,
+        1601
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_below_seen",
+        "i_clk",
+        "i_color_ir",
+        "i_peak_valley_config_valid",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC070",
+      "module_name": "u_block_70",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1601,
+        1614
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "i_clk",
+        "i_frame_id",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event",
+        "reg_previous_context"
+      ]
+    },
+    {
+      "candidate_id": "DC071",
+      "module_name": "u_block_71",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        1614,
+        1629
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_previous_valid",
+        "i_clk",
+        "i_color_ir",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC072",
+      "module_name": "u_block_72",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1629,
+        1642
+      ],
+      "boundary_signals": [
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event",
+        "reg_candidate_context",
+        "reg_cycle_cross_context"
+      ]
+    },
+    {
+      "candidate_id": "DC073",
+      "module_name": "u_block_73",
+      "role": "output_update",
+      "kind": "sequential",
+      "line_range": [
+        1642,
+        1655
+      ],
+      "boundary_signals": [
+        "flag_cycle_cross_valid",
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC074",
+      "module_name": "u_block_74",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1655,
+        1668
+      ],
+      "boundary_signals": [
+        "flag_cross_issued",
+        "i_clk",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC075",
+      "module_name": "u_block_75",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1668,
+        1683
+      ],
+      "boundary_signals": [
+        "flag_cycle_qualified",
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    },
+    {
+      "candidate_id": "DC076",
+      "module_name": "u_block_76",
+      "role": "logic_partition",
+      "kind": "sequential",
+      "line_range": [
+        1683,
+        1697
+      ],
+      "boundary_signals": [
+        "baseline_valid_o",
+        "flag_resume_pending",
+        "i_clk",
+        "i_recheck_accept_event",
+        "i_recheck_done_event",
+        "i_recheck_success",
+        "i_rstn",
+        "i_start_ack_event"
+      ]
+    }
+  ],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_dynamic_baseline_cross_detector.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

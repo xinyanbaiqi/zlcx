@@ -1,0 +1,148 @@
+{
+  "pr06": [
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": 32768
+      },
+      "result": {
+        "acc": "3599373",
+        "rounded": "27",
+        "value": "27",
+        "low": false,
+        "high": false
+      }
+    },
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": -32768
+      },
+      "result": {
+        "acc": "3468301",
+        "rounded": "26",
+        "value": "26",
+        "low": false,
+        "high": false
+      }
+    }
+  ],
+  "nearHalf": [
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": "-1734151"
+      },
+      "result": {
+        "acc": "65535",
+        "rounded": "0",
+        "value": "0",
+        "low": false,
+        "high": false
+      }
+    },
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": "-1734150"
+      },
+      "result": {
+        "acc": "65537",
+        "rounded": "1",
+        "value": "1",
+        "low": false,
+        "high": false
+      }
+    },
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": "-1799686"
+      },
+      "result": {
+        "acc": "-65535",
+        "rounded": "0",
+        "value": "0",
+        "low": false,
+        "high": false
+      }
+    },
+    {
+      "input": {
+        "s1": 256,
+        "d2": 256,
+        "gain": 0,
+        "offset": "-1799687"
+      },
+      "result": {
+        "acc": "-65537",
+        "rounded": "-1",
+        "value": "-1",
+        "low": false,
+        "high": false
+      }
+    }
+  ],
+  "dcrOriginalEndpoints": [
+    {
+      "coarseAcc": "1095220193807",
+      "fineAcc": "1097364012546",
+      "coarseRounded": "8355867",
+      "fineRounded": "8372223",
+      "coarse": "8355867",
+      "fine": "8372223",
+      "coarseLow": false,
+      "coarseHigh": false,
+      "fineLow": false,
+      "fineHigh": false
+    },
+    {
+      "coarseAcc": "-1095213126643",
+      "fineAcc": "-1097364144128",
+      "coarseRounded": "-8355813",
+      "fineRounded": "-8372224",
+      "coarse": "-8355813",
+      "fine": "-8372224",
+      "coarseLow": false,
+      "coarseHigh": false,
+      "fineLow": false,
+      "fineHigh": false
+    }
+  ],
+  "dcrCoarsePhysicalOverflow": [
+    {
+      "coarseAcc": "1107878397941",
+      "fineAcc": "0",
+      "coarseRounded": "8452441",
+      "fineRounded": "0",
+      "coarse": "8388607",
+      "fine": "0",
+      "coarseLow": false,
+      "coarseHigh": true,
+      "fineLow": false,
+      "fineHigh": false
+    },
+    {
+      "coarseAcc": "-1111497047539",
+      "fineAcc": "0",
+      "coarseRounded": "-8480049",
+      "fineRounded": "0",
+      "coarse": "-8388608",
+      "fine": "0",
+      "coarseLow": true,
+      "coarseHigh": false,
+      "fineLow": false,
+      "fineHigh": false
+    }
+  ]
+}

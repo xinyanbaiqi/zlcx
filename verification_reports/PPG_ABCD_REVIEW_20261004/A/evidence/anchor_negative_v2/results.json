@@ -1,0 +1,111 @@
+[
+  [
+    {
+      "reference": "audit_anchor_v2_fixture.v:99",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "99",
+      "kind": "explicit",
+      "expected": "i_good",
+      "status": "historical_superseded_source",
+      "target": null
+    },
+    {
+      "reference": "`:2`",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "inherited",
+      "expected": "i_good",
+      "status": "semantic_match",
+      "target": "input i_good;"
+    }
+  ],
+  [
+    {
+      "reference": "audit_anchor_v2_fixture.v:2",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "explicit",
+      "expected": "i_good",
+      "status": "historical_superseded_source",
+      "target": null
+    },
+    {
+      "reference": "`:1`",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "1",
+      "kind": "inherited",
+      "expected": "i_good",
+      "status": "text_mismatch",
+      "target": "module fixture;"
+    }
+  ],
+  [
+    {
+      "reference": "audit_anchor_v2_fixture.v:2",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "explicit",
+      "expected": "i_wrong",
+      "status": "historical_superseded_source",
+      "target": null
+    },
+    {
+      "reference": "`:2`",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "inherited",
+      "expected": "i_wrong",
+      "status": "text_mismatch",
+      "target": "input i_good;"
+    }
+  ],
+  [
+    {
+      "reference": "audit_anchor_v2_fixture.v:2",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "explicit",
+      "expected": "i_good",
+      "status": "historical_superseded_source",
+      "target": null
+    },
+    {
+      "reference": "`:99`",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "99",
+      "kind": "inherited",
+      "expected": "i_good",
+      "status": "out_of_bounds",
+      "target": null
+    }
+  ],
+  [
+    {
+      "reference": "owning.v:1",
+      "resolved_file": "owning.v",
+      "line_token": "1",
+      "kind": "explicit",
+      "expected": null,
+      "status": "missing_file",
+      "target": null
+    },
+    {
+      "reference": "audit_anchor_v2_fixture.v:2",
+      "resolved_file": "audit_anchor_v2_fixture.v",
+      "line_token": "2",
+      "kind": "explicit",
+      "expected": null,
+      "status": "bounds_only",
+      "target": "input i_good;"
+    },
+    {
+      "reference": "`:846`",
+      "resolved_file": null,
+      "line_token": "846",
+      "kind": "inherited",
+      "expected": null,
+      "status": "ambiguous_inherited_context",
+      "target": null
+    }
+  ]
+]

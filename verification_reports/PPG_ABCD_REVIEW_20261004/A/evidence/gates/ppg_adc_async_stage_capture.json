@@ -1,0 +1,1160 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 236,
+      "code_lines": 141,
+      "line_comments": 142,
+      "commented_code_lines": 69,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_adc_async_stage_capture\\ppg_adc_async_stage_capture.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 236,
+              "module_count": 1,
+              "module_names": [
+                "ppg_adc_async_stage_capture"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 44,
+              "end_count": 44,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_adc_transaction_start",
+                "i_precision_mode_committed",
+                "i_dout_stage1_low",
+                "i_clk_stage1_dout_low_async",
+                "i_dout_stage2_low",
+                "i_clk_stage2_dout_low_async",
+                "i_capture_ready",
+                "o_capture_stage1_raw",
+                "o_capture_stage2_raw",
+                "o_capture_precision_mode",
+                "o_capture_valid"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 10,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 73,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/24",
+            "revision_date": "2026/07/30",
+            "design_name": "PPG ADC Asynchronous Stage Capture",
+            "module_name": "ppg_adc_async_stage_capture",
+            "description": "Description/ppg_adc_async_stage_capture_Design.pdf",
+            "simulations": "TestBench/Vivado/2021.1/ppg_adc_async_stage_capture",
+            "references": "PPG_NEW_CHAT_CONTEXT.md, PPG_ADC_IDAC_INTEGRATION_SPEC.md",
+            "version": "V1.0",
+            "dependency_lines": [],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/24            V1.0          Erie                  Create file.",
+              "2026/07/25            V1.0          Erie                  Match the real dual-stage ADC result-valid interface.",
+              "2026/07/30            V1.0          Erie                  Latch frame mode only after both DONE levels return low.",
+              "2026/07/30            V1.0          Erie                  Use an explicit ADC transaction-start boundary."
+            ],
+            "history_lines_cn": [
+              "2026年07月24日        V1.0          Erie                  创建文件",
+              "2026年07月25日        V1.0          Erie                  适配真实双级ADC结果有效接口",
+              "2026年07月30日        V1.0          Erie                  仅在两级DONE回低后锁存帧模式",
+              "2026年07月30日        V1.0          Erie                  改用显式ADC事务开始边界",
+              "在显式ADC事务边界锁存精度，并按对应异步完成电平捕获保持稳定的两级物理码"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_adc_async_stage_capture",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "C_RAW_WIDTH",
+                  "value": "10",
+                  "decl_spec": "integer",
+                  "comment": "单级Pipeline-SAR ADC物理输出码位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "数字处理域工作时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效异步复位，释放应由系统上层同步",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_adc_transaction_start",
+                  "comment": "ADC_RST完成且DONE清零后、转换开始前的单周期脉冲",
+                  "group": "事务控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_precision_mode_committed",
+                  "comment": "ADC_RST前已锁定的事务精度，低9-bit、高15-bit",
+                  "group": "事务控制接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "i_dout_stage1_low",
+                  "comment": "第一级末位完成后保持到ADC_RST的物理码",
+                  "group": "异步ADC接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk_stage1_dout_low_async",
+                  "comment": "第一级转换完成后拉高的异步结果有效电平",
+                  "group": "异步ADC接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "i_dout_stage2_low",
+                  "comment": "第二级末位完成后保持到ADC_RST的物理码",
+                  "group": "异步ADC接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk_stage2_dout_low_async",
+                  "comment": "仅高精度事务使用的第二级异步完成电平",
+                  "group": "异步ADC接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_capture_ready",
+                  "comment": "下游允许在当前时钟沿接收已缓存结果",
+                  "group": "结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "o_capture_stage1_raw",
+                  "comment": "两种精度模式均有效的第一级物理码",
+                  "group": "结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "o_capture_stage2_raw",
+                  "comment": "仅15-bit事务有效的第二级物理码",
+                  "group": "结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_capture_precision_mode",
+                  "comment": "与当前缓存载荷原子对齐的精度模式快照",
+                  "group": "结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_capture_valid",
+                  "comment": "缓存结果有效并保持至ready消费完成",
+                  "group": "结果接收接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_capture_mode",
+                  "init": "",
+                  "comment": "当前ADC事务等待S1或S2完成的模式快照",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 事务开始脉冲把顶层已提交模式保存为本次捕获的固定上下文"
+                  ],
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_stage1_done_meta",
+                  "init": "",
+                  "comment": "第一级CLK_DOUT进入数字域的同步首级",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 两套同步链分别隔离两个模拟完成电平的亚稳态传播"
+                  ],
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_stage1_done_sync",
+                  "init": "",
+                  "comment": "第一级结果有效电平的稳定数字域副本",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_stage2_done_meta",
+                  "init": "",
+                  "comment": "高精度S2完成电平的亚稳态隔离采样级",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_stage2_done_sync",
+                  "init": "",
+                  "comment": "决定15-bit载荷接纳时刻的S2稳定副本",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_capture_pending",
+                  "init": "",
+                  "comment": "事务开始后允许对应DONE触发且仅触发一次",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_output_transfer",
+                  "init": "",
+                  "comment": "valid与ready同拍成立的结果消费事件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 捕获控制区分输出消费、缓冲可用、模式选择和新结果接纳"
+                  ],
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_buffer_available",
+                  "init": "",
+                  "comment": "缓存为空或旧结果将在本拍被下游取走",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_selected_done_sync",
+                  "init": "",
+                  "comment": "当前精度模式对应的同步完成电平",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_capture_accept",
+                  "init": "",
+                  "comment": "所选完成电平有效时的唯一载荷锁存使能",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "capture_stage1_raw_o",
+                  "init": "",
+                  "comment": "反压期间保持稳定的第一级物理码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 单元素弹性缓存保存两级RAW、精度属性和下游所有权"
+                  ],
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_RAW_WIDTH - 1:0]",
+                  "name": "capture_stage2_raw_o",
+                  "init": "",
+                  "comment": "高精度事务对应的第二级物理码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "capture_precision_mode_o",
+                  "init": "",
+                  "comment": "防止模式切换改变已缓存结果的解释方式",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "capture_valid_o",
+                  "init": "",
+                  "comment": "指示当前输出寄存器拥有未消费事务",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 100,
+                  "line_end": 100
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_output_transfer",
+                  "rhs": "capture_valid_o && i_capture_ready",
+                  "comment": "标记下游取得当前缓存事务",
+                  "leading_comments": [
+                    "// 接收握手仅在缓存确有有效事务时消费当前结果"
+                  ],
+                  "delay": "",
+                  "line_start": 104,
+                  "line_end": 104
+                },
+                {
+                  "lhs": "flag_buffer_available",
+                  "rhs": "(capture_valid_o == 1'b0) || i_capture_ready",
+                  "comment": "支持消费旧结果时开放写入",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 105,
+                  "line_end": 105
+                },
+                {
+                  "lhs": "flag_selected_done_sync",
+                  "rhs": "reg_capture_mode ? flag_stage2_done_sync : flag_stage1_done_sync",
+                  "comment": "9-bit等待S1，15-bit等待S2",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "lhs": "flag_capture_accept",
+                  "rhs": "flag_selected_done_sync && flag_capture_pending && flag_buffer_available && (i_adc_transaction_start == 1'b0)",
+                  "comment": "事务开始拍禁止旧DONE触发；flag_capture_pending在正式完成后已清零，任何重复或跨代际陈旧DONE都在物理capture层被安全丢弃，不产生第二次完成/结果/owner @satisfies: LFA-05, LFA-07, OIB-05",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 107,
+                  "line_end": 107
+                },
+                {
+                  "lhs": "o_capture_stage1_raw",
+                  "rhs": "capture_stage1_raw_o",
+                  "comment": "输出已跨域保存的第一级物理结果",
+                  "leading_comments": [
+                    "// 输出桥接保持顶层端口与内部时序寄存器职责分离"
+                  ],
+                  "delay": "",
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "lhs": "o_capture_stage2_raw",
+                  "rhs": "capture_stage2_raw_o",
+                  "comment": "输出高精度事务的第二级物理结果",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 112,
+                  "line_end": 112
+                },
+                {
+                  "lhs": "o_capture_precision_mode",
+                  "rhs": "capture_precision_mode_o",
+                  "comment": "传递载荷所属的精度快照",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 113,
+                  "line_end": 113
+                },
+                {
+                  "lhs": "o_capture_valid",
+                  "rhs": "capture_valid_o",
+                  "comment": "声明输出缓存当前包含完整ADC事务",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 114,
+                  "line_end": 114
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "capture_stage1_raw_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "capture_stage1_raw_o",
+                    "capture_stage1_raw_o",
+                    "capture_stage1_raw_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 所选完成电平到达后锁存第一级物理码，两种精度模式均执行该操作"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "capture_stage1_raw_o <= {C_RAW_WIDTH{1'b0}}; // 复位清除不可用的第一级历史码",
+                    "end else if(flag_capture_accept == 1'b1)begin",
+                    "capture_stage1_raw_o <= i_dout_stage1_low; // 延迟同步窗口后采集稳定的S1总线",
+                    "end else begin",
+                    "capture_stage1_raw_o <= capture_stage1_raw_o; // 无新事务时保持当前输出载荷",
+                    "end"
+                  ],
+                  "line_start": 118,
+                  "line_end": 124
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "capture_stage2_raw_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "capture_stage2_raw_o",
+                    "capture_stage2_raw_o",
+                    "capture_stage2_raw_o",
+                    "capture_stage2_raw_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 11,
+                  "leading_comments": [
+                    "// 15-bit事务保存第二级物理码，9-bit事务明确标记该级数据无效"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "capture_stage2_raw_o <= {C_RAW_WIDTH{1'b0}}; // 复位移除第二级历史转换结果",
+                    "end else if(flag_capture_accept == 1'b1)begin",
+                    "if(reg_capture_mode == 1'b1)begin",
+                    "capture_stage2_raw_o <= i_dout_stage2_low; // S2完成时原子锁存两级物理码",
+                    "end else begin",
+                    "capture_stage2_raw_o <= {C_RAW_WIDTH{1'b0}}; // 粗精度事务不携带伪造S2数据",
+                    "end",
+                    "end else begin",
+                    "capture_stage2_raw_o <= capture_stage2_raw_o; // 反压期间维持第二级载荷不变",
+                    "end"
+                  ],
+                  "line_start": 129,
+                  "line_end": 139
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "capture_precision_mode_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "capture_precision_mode_o",
+                    "capture_precision_mode_o",
+                    "capture_precision_mode_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 精度快照与RAW在同一个接纳沿更新，后续帧切换不会重解释旧结果"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "capture_precision_mode_o <= 1'b0; // 复位默认采用9-bit载荷解释",
+                    "end else if(flag_capture_accept == 1'b1)begin",
+                    "capture_precision_mode_o <= reg_capture_mode; // 保存触发当前捕获的事务精度",
+                    "end else begin",
+                    "capture_precision_mode_o <= capture_precision_mode_o; // 缓存占用期间保持属性稳定",
+                    "end"
+                  ],
+                  "line_start": 144,
+                  "line_end": 150
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "capture_valid_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "capture_valid_o",
+                    "capture_valid_o",
+                    "capture_valid_o",
+                    "capture_valid_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 新结果优先于同拍旧结果消费，保证单元素缓存允许无气泡替换"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "capture_valid_o <= 1'b0;        // 复位后禁止报告虚假ADC事务",
+                    "end else if(flag_capture_accept == 1'b1)begin",
+                    "capture_valid_o <= 1'b1;        // 两级RAW与精度属性已经完整写入缓存",
+                    "end else if(flag_output_transfer == 1'b1)begin",
+                    "capture_valid_o <= 1'b0;        // 下游消费后释放单元素缓存所有权",
+                    "end else begin",
+                    "capture_valid_o <= capture_valid_o; // 空闲或反压阶段维持当前有效状态",
+                    "end"
+                  ],
+                  "line_start": 155,
+                  "line_end": 163
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_capture_mode"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_capture_mode",
+                    "reg_capture_mode",
+                    "reg_capture_mode"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 每次ADC事务开始时锁存顶层已在ADC_RST前提交的精度模式"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_capture_mode <= 1'b0;       // 数字复位后默认采用9-bit捕获上下文",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "reg_capture_mode <= i_precision_mode_committed; // 显式事务边界固定本次精度",
+                    "end else begin",
+                    "reg_capture_mode <= reg_capture_mode; // DONE同步和结果保持期间禁止模式漂移",
+                    "end"
+                  ],
+                  "line_start": 169,
+                  "line_end": 175
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_stage1_done_meta"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_stage1_done_meta",
+                    "flag_stage1_done_meta",
+                    "flag_stage1_done_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 第一级同步首级只承担亚稳态隔离，不得直接驱动功能逻辑"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_stage1_done_meta <= 1'b0;  // 复位清除第一级异步采样历史",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "flag_stage1_done_meta <= 1'b0;  // 新事务开始时丢弃上一转换同步历史",
+                    "end else begin",
+                    "flag_stage1_done_meta <= i_clk_stage1_dout_low_async; // 采样模拟S1结果有效电平",
+                    "end"
+                  ],
+                  "line_start": 180,
+                  "line_end": 186
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_stage1_done_sync"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_stage1_done_sync",
+                    "flag_stage1_done_sync",
+                    "flag_stage1_done_sync"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 第一级同步末级为9-bit事务提供稳定完成状态"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_stage1_done_sync <= 1'b0;  // 复位阻止粗精度捕获条件成立",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "flag_stage1_done_sync <= 1'b0;  // 显式边界清除上一笔S1完成状态",
+                    "end else begin",
+                    "flag_stage1_done_sync <= flag_stage1_done_meta; // 输出隔离后的S1完成电平",
+                    "end"
+                  ],
+                  "line_start": 191,
+                  "line_end": 197
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_stage2_done_meta"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_stage2_done_meta",
+                    "flag_stage2_done_meta",
+                    "flag_stage2_done_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 第二级同步首级吸收高精度完成电平可能产生的亚稳态"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_stage2_done_meta <= 1'b0;  // 复位清除第二级异步采样历史",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "flag_stage2_done_meta <= 1'b0;  // 新事务开始时刷新第二级同步入口",
+                    "end else begin",
+                    "flag_stage2_done_meta <= i_clk_stage2_dout_low_async; // 捕获高精度末级转换完成指示",
+                    "end"
+                  ],
+                  "line_start": 202,
+                  "line_end": 208
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_stage2_done_sync"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_stage2_done_sync",
+                    "flag_stage2_done_sync",
+                    "flag_stage2_done_sync"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 第二级同步末级只在15-bit事务中成为最终捕获边界"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_stage2_done_sync <= 1'b0;  // 复位阻止精细结果提前进入缓存",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "flag_stage2_done_sync <= 1'b0;  // 新事务撤销旧高精度捕获资格",
+                    "end else begin",
+                    "flag_stage2_done_sync <= flag_stage2_done_meta; // 建立15-bit结果的最终接纳条件",
+                    "end"
+                  ],
+                  "line_start": 213,
+                  "line_end": 219
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_capture_pending"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_capture_pending",
+                    "flag_capture_pending",
+                    "flag_capture_pending",
+                    "flag_capture_pending"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 事务开始后建立一次捕获所有权，成功锁存结果后等待下一事务脉冲"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_capture_pending <= 1'b0;   // 数字复位期间不存在可接纳事务",
+                    "end else if(i_adc_transaction_start == 1'b1)begin",
+                    "flag_capture_pending <= 1'b1;   // ADC事务开始后等待对应完成电平",
+                    "end else if(flag_capture_accept == 1'b1)begin",
+                    "flag_capture_pending <= 1'b0;   // 完整结果锁存后关闭本次触发权限",
+                    "end else begin",
+                    "flag_capture_pending <= flag_capture_pending; // 反压期间保持等待且不丢失事务",
+                    "end"
+                  ],
+                  "line_start": 224,
+                  "line_end": 232
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 14,
+                "assigns": 8,
+                "always": 10,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 49,
+              "line_end": 236
+            }
+          ],
+          "source_metrics": {
+            "lines": 236,
+            "nonempty_lines": 214,
+            "line_comments": 142,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 162,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_adc_async_stage_capture.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

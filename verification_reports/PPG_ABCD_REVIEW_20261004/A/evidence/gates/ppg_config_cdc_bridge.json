@@ -1,0 +1,939 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 192,
+      "code_lines": 108,
+      "line_comments": 112,
+      "commented_code_lines": 47,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_config_cdc_bridge\\ppg_config_cdc_bridge.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 192,
+              "module_count": 1,
+              "module_names": [
+                "ppg_config_cdc_bridge"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 32,
+              "end_count": 32,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_source_clk",
+                "i_source_rstn",
+                "i_source_config",
+                "i_source_update",
+                "o_source_busy",
+                "i_destination_clk",
+                "i_destination_rstn",
+                "o_destination_config",
+                "o_destination_update"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 9,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 65,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/23",
+            "revision_date": "2026/07/23",
+            "design_name": "PPG Configuration CDC Bridge",
+            "module_name": "ppg_config_cdc_bridge",
+            "description": "Description/ppg_config_cdc_bridge_Design.pdf",
+            "simulations": "../ppg_dual_precision_top/tb_ppg_dual_precision_top.v",
+            "references": "../ppg_system_integration/PPG_NEW_CHAT_CONTEXT.md",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/23        V1.0        Erie          Create file."
+            ],
+            "history_lines_cn": [
+              "2026年07月23日   V1.0        Erie          创建文件",
+              "使用请求应答翻转握手原子传输 SPI 域的多比特 PPG 配置"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_config_cdc_bridge",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "C_CONFIG_WIDTH",
+                  "value": "123",
+                  "decl_spec": "",
+                  "comment": "原子配置快照的总位宽",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 45,
+                  "line_end": 45
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_clk",
+                  "comment": "SPI_SCLK 域内的源时钟",
+                  "group": "SPI 源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_rstn",
+                  "comment": "SPI_SCLK 域内同步释放的低有效复位",
+                  "group": "SPI 源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "[C_CONFIG_WIDTH - 1:0]",
+                  "name": "i_source_config",
+                  "comment": "寄存器组提供的完整配置总线",
+                  "group": "SPI 源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_source_update",
+                  "comment": "请求锁存并发送当前配置的单周期脉冲",
+                  "group": "SPI 源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_source_busy",
+                  "comment": "指示上一个配置事务尚未被系统域确认",
+                  "group": "SPI 源时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_destination_clk",
+                  "comment": "PPG 数字控制使用的 2 MHz 目标时钟",
+                  "group": "2 MHz 目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_destination_rstn",
+                  "comment": "2 MHz 目标域同步释放的低有效复位",
+                  "group": "2 MHz 目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "output",
+                  "width": "[C_CONFIG_WIDTH - 1:0]",
+                  "name": "o_destination_config",
+                  "comment": "在握手完成边沿更新的稳定多比特配置",
+                  "group": "2 MHz 目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_destination_update",
+                  "comment": "通知系统域新配置已原子接收的单周期脉冲",
+                  "group": "2 MHz 目标时钟域",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 61,
+                  "line_end": 61
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[C_CONFIG_WIDTH - 1:0]",
+                  "name": "reg_source_config",
+                  "init": "",
+                  "comment": "向目标域提供建立时间的源域快照",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 源域在整个请求应答期间保持配置总线不变"
+                  ],
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_source_request",
+                  "init": "",
+                  "comment": "源域发起一次新配置事务的翻转标志",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 源域请求与目标域应答各自只在所属时钟域翻转"
+                  ],
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_ack_sync_meta",
+                  "init": "",
+                  "comment": "应答返回源域时的第一级同步状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_ack_sync",
+                  "init": "",
+                  "comment": "源域可安全比较的应答翻转状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_request_sync_meta",
+                  "init": "",
+                  "comment": "请求进入目标域时的第一级同步状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_request_sync",
+                  "init": "",
+                  "comment": "目标域用于检测新事务的请求翻转状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "(* ASYNC_REG = \"TRUE\" *)",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_destination_ack",
+                  "init": "",
+                  "comment": "目标域已接收最近一笔配置的应答状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_source_busy",
+                  "init": "",
+                  "comment": "请求与同步应答不一致时的源域忙标志",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "kind": "reg",
+                  "width": "[C_CONFIG_WIDTH - 1:0]",
+                  "name": "destination_config_o",
+                  "init": "",
+                  "comment": "系统域已确认的原子配置总线",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 目标域只在检测到新请求时改写配置快照"
+                  ],
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "destination_update_o",
+                  "init": "",
+                  "comment": "系统域新配置接收事件的脉冲寄存器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 87,
+                  "line_end": 87
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_source_busy",
+                  "rhs": "flag_source_request != flag_ack_sync",
+                  "comment": "比较当前请求与已同步应答的事务代际",
+                  "leading_comments": [
+                    "// 忙状态在请求与返回应答一致后立即清除"
+                  ],
+                  "delay": "",
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "lhs": "o_source_busy",
+                  "rhs": "flag_source_busy",
+                  "comment": "暴露源域不得覆盖快照的占用状态",
+                  "leading_comments": [
+                    "// 源域与目标域状态通过明确输出桥提供给上层"
+                  ],
+                  "delay": "",
+                  "line_start": 95,
+                  "line_end": 95
+                },
+                {
+                  "lhs": "o_destination_config",
+                  "rhs": "destination_config_o",
+                  "comment": "输出经请求应答保护的多比特数据",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "lhs": "o_destination_update",
+                  "rhs": "destination_update_o",
+                  "comment": "输出新配置到达 2 MHz 域的事件",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 97,
+                  "line_end": 97
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_destination_clk or negedge i_destination_rstn)",
+                  "targets": [
+                    "destination_update_o"
+                  ],
+                  "clock": "i_destination_clk",
+                  "reset": "i_destination_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "destination_update_o",
+                    "destination_update_o",
+                    "destination_update_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 目标域在新请求被确认后产生一拍更新指示"
+                  ],
+                  "lines": [
+                    "if(i_destination_rstn == 1'b0)begin",
+                    "destination_update_o <= 1'b0;   // 目标域复位期间禁止上报伪更新事件",
+                    "end else if(flag_request_sync != flag_destination_ack)begin",
+                    "destination_update_o <= 1'b1;   // 仅在首次看到新事务时拉高一个目标时钟",
+                    "end else begin",
+                    "destination_update_o <= 1'b0;   // 其余周期保持更新输出为低",
+                    "end"
+                  ],
+                  "line_start": 101,
+                  "line_end": 107
+                },
+                {
+                  "header": "always@(posedge i_destination_clk or negedge i_destination_rstn)",
+                  "targets": [
+                    "destination_config_o"
+                  ],
+                  "clock": "i_destination_clk",
+                  "reset": "i_destination_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "destination_config_o",
+                    "destination_config_o",
+                    "destination_config_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 目标域仅在源数据已稳定两级同步延迟后捕获整条总线"
+                  ],
+                  "lines": [
+                    "if(i_destination_rstn == 1'b0)begin",
+                    "destination_config_o <= {C_CONFIG_WIDTH{1'b0}}; // 目标域复位时清除已接收配置",
+                    "end else if(flag_request_sync != flag_destination_ack)begin",
+                    "destination_config_o <= reg_source_config; // 在对应请求到达后原子捕获稳定快照",
+                    "end else begin",
+                    "destination_config_o <= destination_config_o; // 无新事务时保持上一笔已确认配置",
+                    "end"
+                  ],
+                  "line_start": 112,
+                  "line_end": 118
+                },
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "reg_source_config"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_source_config",
+                    "reg_source_config",
+                    "reg_source_config"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 源域仅在桥空闲时接受一个新的多比特配置快照"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "reg_source_config <= {C_CONFIG_WIDTH{1'b0}}; // 源域复位时将稳定配置总线清零",
+                    "end else if((i_source_update == 1'b1) && (flag_source_busy == 1'b0))begin",
+                    "reg_source_config <= i_source_config; // 在翻转请求前锁存完整寄存器组内容",
+                    "end else begin",
+                    "reg_source_config <= reg_source_config; // 直到应答返回前保持总线绝对稳定",
+                    "end"
+                  ],
+                  "line_start": 124,
+                  "line_end": 130
+                },
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "flag_source_request"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_source_request",
+                    "flag_source_request",
+                    "flag_source_request"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 源域在接受快照的同一时钟边沿翻转请求代际"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "flag_source_request <= 1'b0;    // 将握手请求代际恢复到零相位",
+                    "end else if((i_source_update == 1'b1) && (flag_source_busy == 1'b0))begin",
+                    "flag_source_request <= ~flag_source_request; // 每个被接受的更新仅产生一次代际翻转",
+                    "end else begin",
+                    "flag_source_request <= flag_source_request; // 忙期间不重复发起或合并新事务",
+                    "end"
+                  ],
+                  "line_start": 135,
+                  "line_end": 141
+                },
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "flag_ack_sync_meta"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_ack_sync_meta",
+                    "flag_ack_sync_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 应答信号返回 SPI_SCLK 域的第一级同步处理"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "flag_ack_sync_meta <= 1'b0;     // 源域复位时清除应答同步链首级",
+                    "end else begin",
+                    "flag_ack_sync_meta <= flag_destination_ack; // 首级触发器只采样跨域应答电平",
+                    "end"
+                  ],
+                  "line_start": 146,
+                  "line_end": 150
+                },
+                {
+                  "header": "always@(posedge i_source_clk or negedge i_source_rstn)",
+                  "targets": [
+                    "flag_ack_sync"
+                  ],
+                  "clock": "i_source_clk",
+                  "reset": "i_source_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_ack_sync",
+                    "flag_ack_sync"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 应答返回链的第二级为忙状态比较提供稳定输入"
+                  ],
+                  "lines": [
+                    "if(i_source_rstn == 1'b0)begin",
+                    "flag_ack_sync <= 1'b0;          // 源域复位时使请求和应答保持初始一致",
+                    "end else begin",
+                    "flag_ack_sync <= flag_ack_sync_meta; // 将经一拍稳定的应答传入事务比较器",
+                    "end"
+                  ],
+                  "line_start": 155,
+                  "line_end": 159
+                },
+                {
+                  "header": "always@(posedge i_destination_clk or negedge i_destination_rstn)",
+                  "targets": [
+                    "flag_request_sync_meta"
+                  ],
+                  "clock": "i_destination_clk",
+                  "reset": "i_destination_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_request_sync_meta",
+                    "flag_request_sync_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 请求信号进入 2 MHz 域的第一级同步处理"
+                  ],
+                  "lines": [
+                    "if(i_destination_rstn == 1'b0)begin",
+                    "flag_request_sync_meta <= 1'b0; // 目标域复位时清除请求同步链首级",
+                    "end else begin",
+                    "flag_request_sync_meta <= flag_source_request; // 首级触发器隔离异步请求的亚稳态风险",
+                    "end"
+                  ],
+                  "line_start": 164,
+                  "line_end": 168
+                },
+                {
+                  "header": "always@(posedge i_destination_clk or negedge i_destination_rstn)",
+                  "targets": [
+                    "flag_request_sync"
+                  ],
+                  "clock": "i_destination_clk",
+                  "reset": "i_destination_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_request_sync",
+                    "flag_request_sync"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 请求同步链的第二级为事务检测提供稳定代际"
+                  ],
+                  "lines": [
+                    "if(i_destination_rstn == 1'b0)begin",
+                    "flag_request_sync <= 1'b0;      // 目标域复位时将请求代际归零",
+                    "end else begin",
+                    "flag_request_sync <= flag_request_sync_meta; // 向事务检测器提供第二级同步结果",
+                    "end"
+                  ],
+                  "line_start": 173,
+                  "line_end": 177
+                },
+                {
+                  "header": "always@(posedge i_destination_clk or negedge i_destination_rstn)",
+                  "targets": [
+                    "flag_destination_ack"
+                  ],
+                  "clock": "i_destination_clk",
+                  "reset": "i_destination_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_destination_ack",
+                    "flag_destination_ack",
+                    "flag_destination_ack"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 目标域捕获配置后更新应答代际以允许下一笔事务"
+                  ],
+                  "lines": [
+                    "if(i_destination_rstn == 1'b0)begin",
+                    "flag_destination_ack <= 1'b0;   // 目标域复位时恢复初始应答相位",
+                    "end else if(flag_request_sync != flag_destination_ack)begin",
+                    "flag_destination_ack <= flag_request_sync; // 用已接收请求代际确认当前配置",
+                    "end else begin",
+                    "flag_destination_ack <= flag_destination_ack; // 没有新事务时保持应答状态不变",
+                    "end"
+                  ],
+                  "line_start": 182,
+                  "line_end": 188
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 10,
+                "assigns": 4,
+                "always": 9,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 192
+            }
+          ],
+          "source_metrics": {
+            "lines": 192,
+            "nonempty_lines": 173,
+            "line_comments": 112,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 112,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_config_cdc_bridge.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

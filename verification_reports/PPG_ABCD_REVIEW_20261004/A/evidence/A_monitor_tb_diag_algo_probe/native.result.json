@@ -1,0 +1,29 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_A_monitor",
+    "-o",
+    "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe/sim.vvp",
+    "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe/files/0/tb_A_monitor.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/A_monitor_tb_diag_algo_probe_bc7785fe",
+  "compile_rc": 0,
+  "run_rc": 0,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\evidence\\A_monitor_tb_diag_algo_probe\\tb_A_monitor.v",
+      "sha256": "7feaa31abb253e26ba21802ffbe0af80a9fda9fb3762e3e5e27852fb86536fbf"
+    }
+  ]
+}

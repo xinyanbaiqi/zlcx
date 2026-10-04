@@ -1,0 +1,88 @@
+Compiling VVP ...
+ ... VVP file version 11.0 (stable)
+Compile cleanup...
+ ... Linking
+ ... Removing symbol tables
+ ... Compiletf functions
+ ...     6239 functors (net_fun pool=524288 bytes)
+               3435 logic
+                  0 bufif
+                  0 resolv
+                671 signals
+ ...     5988 filters (net_fil pool=786432 bytes)
+ ...    21418 opcodes (516096 bytes)
+ ...     4452 nets
+ ...     6239 vvp_nets (1048544 bytes)
+ ...        0 arrays (0 words)
+ ...        0 memories
+                  0 logic (0 words)
+                  0 real (0 words)
+ ...       90 scopes
+ ... 0.349376 seconds, 21144.0/13936.0/5260.0 KBytes size/rss/shared
+Running ...
+ ...execute EndOfCompile callbacks
+ ...propagate initialization events
+ ...execute StartOfSim callbacks
+ ...run scheduler
+JNT_BASELINE_BEGIN required=54
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-01 (jnt 2/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-09 (jnt 54/54)
+JNT_BASELINE checked=54 pass=54 required=54 status=PASS
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS LONGRUN START accepted into RUN, measurement start latched t=1134751000
+** VVP Stop(0) **
+** Flushing output streams.
+** Current simulation time is 1768101500 ticks.
+> ** Continue **

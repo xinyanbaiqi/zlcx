@@ -1,0 +1,125 @@
+# Design Explanation: ppg_coarse_detection_fir
+
+## Project Topology
+- Selected top module: `ppg_coarse_detection_fir`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_recheck_accept_event` width=1 role=signal
+- `input i_recheck_busy` width=1 role=signal
+- `input i_detection_discard_event` width=1 role=signal
+- `input i_detection_discard_reason` width=2 role=signal
+- `input i_detection_discard_identity_valid` width=1 role=status
+- `input i_detection_discard_sample_valid` width=1 role=status
+- `input i_detection_discard_frame_id` width=1 role=signal
+- `input i_detection_discard_sample_index` width=1 role=signal
+- `input i_detection_discard_color_ir` width=1 role=signal
+- `input i_detection_discard_frame_type` width=2 role=signal
+- `input i_detection_discard_precision` width=1 role=signal
+- `input i_detection_discard_config_epoch` width=1 role=signal
+- `input i_detection_discard_coef_epoch` width=1 role=signal
+- `input i_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `input i_detection_discard_amb_code_epoch` width=1 role=signal
+- `input i_detection_discard_dc_code_epoch` width=1 role=signal
+- `input i_detection_discard_run_generation` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `output o_local_empty` width=1 role=signal
+- `input i_result_valid` width=1 role=status
+- `output o_result_ready` width=1 role=status
+- `input i_sample_valid` width=1 role=status
+- `input i_coarse_ppg_value` width=1 role=signal
+- `input i_coarse_valid` width=1 role=status
+- `input i_coarse_recovery_calibrated` width=1 role=signal
+- `input i_stage1_saturation_low` width=1 role=signal
+- `input i_stage1_saturation_high` width=1 role=signal
+- `input i_coarse_saturation_low` width=1 role=signal
+- `input i_coarse_saturation_high` width=1 role=signal
+- `input i_config_epoch` width=1 role=signal
+- `input i_coef_epoch` width=1 role=signal
+- `input i_dc_recovery_coef_epoch` width=1 role=signal
+- `input i_precision_mode` width=1 role=control
+- `input i_frame_id` width=1 role=signal
+- `input i_sample_index` width=1 role=signal
+- `input i_color_ir` width=1 role=signal
+- `input i_frame_type` width=2 role=signal
+- `input i_amb_code_snapshot` width=1 role=signal
+- `input i_dc_code_snapshot` width=1 role=signal
+- `input i_amb_code_epoch` width=1 role=signal
+- `input i_dc_code_epoch` width=1 role=signal
+- `input i_test_inject_enable` width=1 role=control
+- `input i_test_calibration_loss_inject_valid` width=1 role=status
+- `output o_test_calibration_loss_inject_ready` width=1 role=status
+- `input i_result_ready` width=1 role=status
+- `output o_result_valid` width=1 role=status
+- `output o_filtered_ppg_value` width=1 role=signal
+- `output o_detection_qualified` width=1 role=signal
+- `output o_window_saturation_low` width=1 role=signal
+- `output o_window_saturation_high` width=1 role=signal
+- `output o_fir_saturation_low` width=1 role=signal
+- `output o_fir_saturation_high` width=1 role=signal
+- `output o_history_full_r` width=1 role=signal
+- `output o_history_full_ir` width=1 role=signal
+- `output o_fir_idle` width=1 role=signal
+- `output o_config_epoch` width=1 role=signal
+- `output o_coef_epoch` width=1 role=signal
+- `output o_dc_recovery_coef_epoch` width=1 role=signal
+- `output o_precision_mode` width=1 role=control
+- `output o_frame_id` width=1 role=signal
+- `output o_sample_index` width=1 role=signal
+- `output o_color_ir` width=1 role=signal
+- `output o_frame_type` width=2 role=signal
+- `output o_amb_code_snapshot` width=1 role=signal
+- `output o_dc_code_snapshot` width=1 role=signal
+- `output o_amb_code_epoch` width=1 role=signal
+- `output o_dc_code_epoch` width=1 role=signal
+
+## Feature Mapping
+- `ppg_coarse_detection_fir reset behavior`: derived from ports, state, and always blocks.
+- `logic partition block 1`: derived from ports, state, and always blocks.
+- `output update block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `state transition block 4`: derived from ports, state, and always blocks.
+- `state transition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `counter update block 7`: derived from ports, state, and always blocks.
+- `counter update block 8`: derived from ports, state, and always blocks.
+- `logic partition block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `output update block 11`: derived from ports, state, and always blocks.
+- `logic partition block 12`: derived from ports, state, and always blocks.
+- `counter update block 13`: derived from ports, state, and always blocks.
+- `counter update block 14`: derived from ports, state, and always blocks.
+- `output update block 15`: derived from ports, state, and always blocks.
+- `logic partition block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `counter progression`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_coarse_detection_fir` drives known output values after reset release.
+- `counter_progression`: Verify timer/counter progression across phase transitions.
+- `fc001`: ppg_coarse_detection_fir reset behavior
+- `fc900`: counter progression
+
+## Decomposition Candidates
+- `u_block_1` lines 434-449: logic_partition
+- `u_block_2` lines 449-465: output_update
+- `u_block_3` lines 465-481: logic_partition
+- `u_block_4` lines 481-508: state_transition
+- `u_block_5` lines 508-520: state_transition
+- `u_block_6` lines 520-539: logic_partition
+- `u_block_7` lines 539-556: counter_update
+- `u_block_8` lines 556-572: counter_update
+- `u_block_9` lines 572-615: logic_partition
+- `u_block_10` lines 615-658: logic_partition
+- `u_block_11` lines 658-675: output_update
+- `u_block_12` lines 675-692: logic_partition
+- `u_block_13` lines 692-705: counter_update
+- `u_block_14` lines 705-718: counter_update
+- `u_block_15` lines 718-731: output_update
+- `u_block_16` lines 731-744: logic_partition
+- `u_block_17` lines 744-768: logic_partition
+

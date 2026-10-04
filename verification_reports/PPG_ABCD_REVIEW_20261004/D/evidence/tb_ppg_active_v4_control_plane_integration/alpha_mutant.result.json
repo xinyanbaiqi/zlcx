@@ -1,0 +1,38 @@
+{
+  "compile_rc": 0,
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--",
+    "/tmp/ppg_review_D_01a0fd78_21596/toolchain/usr/bin/iverilog",
+    "-B",
+    "/tmp/ppg_review_D_01a0fd78_21596/toolchain/usr/lib/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_active_v4_control_plane_integration",
+    "-o",
+    "/tmp/ppg_review_D_01a0fd78_21596/sim.vvp",
+    "/tmp/ppg_review_D_01a0fd78_21596/inputs/testbench.v",
+    "/tmp/ppg_review_D_01a0fd78_21596/inputs/rtl0.v",
+    "/tmp/ppg_review_D_01a0fd78_21596/inputs/rtl1.v",
+    "/tmp/ppg_review_D_01a0fd78_21596/inputs/rtl2.v",
+    "/tmp/ppg_review_D_01a0fd78_21596/inputs/rtl3.v"
+  ],
+  "run_rc": 0,
+  "run_command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--",
+    "/tmp/ppg_review_D_01a0fd78_21596/toolchain/usr/bin/vvp",
+    "-M",
+    "/tmp/ppg_review_D_01a0fd78_21596/toolchain/usr/lib/ivl",
+    "/tmp/ppg_review_D_01a0fd78_21596/sim.vvp"
+  ]
+}

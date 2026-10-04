@@ -1,0 +1,1843 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG050": 1,
+    "VG013": 3
+  },
+  "errors": 4,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 4,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 3,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG050",
+      "severity": "error",
+      "message": "initials item `initial begin` is missing trusted formatter AST line span.",
+      "path": "tb_ppg_system_active_config_unpack.v",
+      "line": null,
+      "rule": "formatter_ast.span"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Counter-like signal `cross_confirm_count_o` should use `cnt_` prefix.",
+      "path": "tb_ppg_system_active_config_unpack.v",
+      "line": null,
+      "rule": "naming.counter"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Counter-like signal `peak_confirm_count_o` should use `cnt_` prefix.",
+      "path": "tb_ppg_system_active_config_unpack.v",
+      "line": null,
+      "rule": "naming.counter"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Counter-like signal `valley_confirm_count_o` should use `cnt_` prefix.",
+      "path": "tb_ppg_system_active_config_unpack.v",
+      "line": null,
+      "rule": "naming.counter"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+    "ok": false,
+    "strict": true,
+    "errors": 4,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG050",
+        "severity": "error",
+        "message": "initials item `initial begin` is missing trusted formatter AST line span.",
+        "path": "tb_ppg_system_active_config_unpack.v",
+        "line": null,
+        "rule": "formatter_ast.span"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Counter-like signal `cross_confirm_count_o` should use `cnt_` prefix.",
+        "path": "tb_ppg_system_active_config_unpack.v",
+        "line": null,
+        "rule": "naming.counter"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Counter-like signal `peak_confirm_count_o` should use `cnt_` prefix.",
+        "path": "tb_ppg_system_active_config_unpack.v",
+        "line": null,
+        "rule": "naming.counter"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Counter-like signal `valley_confirm_count_o` should use `cnt_` prefix.",
+        "path": "tb_ppg_system_active_config_unpack.v",
+        "line": null,
+        "rule": "naming.counter"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 340,
+      "code_lines": 269,
+      "line_comments": 232,
+      "commented_code_lines": 177,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_active_config_unpack\\tb_ppg_system_active_config_unpack.v",
+            "syntax_confidence": 90,
+            "format_score": 88,
+            "rewrite_need_score": 20,
+            "rewrite_risk_score": 30,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 340,
+              "module_count": 1,
+              "module_names": [
+                "tb_ppg_system_active_config_unpack"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 8,
+              "end_count": 8,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 0,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 16,
+              "function_task_initial_count": 1,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 55,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 2,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "complex_lvalue",
+                "function_task_initial",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/08/06",
+            "revision_date": "2026/08/23",
+            "design_name": "PPG System ACTIVE Configuration Unpack Testbench",
+            "module_name": "tb_ppg_system_active_config_unpack",
+            "description": "Exhaustive bit mapping and signed interpretation verification",
+            "simulations": "ppg_system_active_config_unpack.v",
+            "references": "ppg_system_active_config_unpack_semantic_contract.md",
+            "version": "V5.0",
+            "dependency_lines": [
+              "ppg_system_active_config_unpack.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/08/06        V1.0        Erie          Create self-checking testbench.",
+              "2026/08/07        V2.0        Erie          Cover every ACTIVE V4 field and reserved bit.",
+              "2026/08/23        V5.0        Erie          Widen the exhaustive bit-mapping check to the full 1024-bit V4+V5 joint payload and add signed-interpretation coverage for the four signed V5 Q16 fields."
+            ],
+            "history_lines_cn": [
+              "2026年8月6日      V1.0        Erie          创建逐bit自检平台",
+              "2026年8月7日      V2.0        Erie          覆盖ACTIVE V4全部字段与保留位",
+              "2026年8月23日     V5.0        Erie          穷举位映射扩展到完整1024-bit V4+V5联合载荷，新增四个signed V5 Q16字段的数值解释覆盖",
+              "穷举确认V4+V5联合ACTIVE快照的唯一解包位图和signed字段数值语义"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "tb_ppg_system_active_config_unpack",
+              "params": [],
+              "ports": [],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "FUNCTIONAL_MASK",
+                  "value": "{{14{1'b0}}, {370{1'b1}}, {48{1'b0}}, {560{1'b1}}, {9{1'b0}}, {23{1'b1}}}",
+                  "decl_spec": "[1023:0]",
+                  "comment": "标记V4+V5定义字段并屏蔽三个保留区域",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "integer",
+                  "width": "",
+                  "name": "cnt_bit_index",
+                  "init": "",
+                  "comment": "遍历完整1024-bit输入空间的位索引",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "kind": "integer",
+                  "width": "",
+                  "name": "cnt_error",
+                  "init": "",
+                  "comment": "累计所有自检失败以保证完整执行",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "kind": "reg",
+                  "width": "[1023:0]",
+                  "name": "reg_active_config",
+                  "init": "",
+                  "comment": "驱动任意V4+V5联合ACTIVE配置位图组合",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "kind": "wire",
+                  "width": "[1023:0]",
+                  "name": "dec_config",
+                  "init": "",
+                  "comment": "把全部功能输出按冻结位图重组供逐bit比对",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "schema_version_o",
+                  "init": "",
+                  "comment": "观察解包后的schema编号",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// DUT组合输出观察线按冻结字段顺序覆盖系统模式、IDAC和Stage1系数"
+                  ],
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "run_profile_o",
+                  "init": "",
+                  "comment": "观察解包后的运行配置类型",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "input_source_o",
+                  "init": "",
+                  "comment": "观察解包后的模拟输入源",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "kind": "wire",
+                  "width": "[1:0]",
+                  "name": "idac_mode_o",
+                  "init": "",
+                  "comment": "观察解包后的IDAC策略编码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "kind": "wire",
+                  "width": "[1:0]",
+                  "name": "optical_mode_o",
+                  "init": "",
+                  "comment": "观察解包后的光学调度编码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "initial_precision_o",
+                  "init": "",
+                  "comment": "观察解包后的初始精度",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "amb_enable_o",
+                  "init": "",
+                  "comment": "观察环境光抵消控制资格",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "dcs_enable_o",
+                  "init": "",
+                  "comment": "观察颜色直流抵消闭环资格",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "amb_polarity_o",
+                  "init": "",
+                  "comment": "观察AMB调码极性",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "dcs_polarity_o",
+                  "init": "",
+                  "comment": "观察颜色直流码修正极性",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "stage1_calibration_valid_o",
+                  "init": "",
+                  "comment": "观察十个物理位权重组的正式资格",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 77,
+                  "line_end": 77
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "stage2_calibration_valid_o",
+                  "init": "",
+                  "comment": "观察精细残差拟合参数是否完成校准",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "dc9_recovery_valid_o",
+                  "init": "",
+                  "comment": "观察粗路径DC加回参数的资格声明",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "dc15_recovery_valid_o",
+                  "init": "",
+                  "comment": "观察15-bit结果能否标记为正式恢复数据",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "amb_manual_code_o",
+                  "init": "",
+                  "comment": "观察AMB初始化或手动码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "amb_code_min_o",
+                  "init": "",
+                  "comment": "观察AMB最小码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "amb_code_max_o",
+                  "init": "",
+                  "comment": "观察AMB最大码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_r_manual_code_o",
+                  "init": "",
+                  "comment": "观察红光DCS初始化或手动码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_r_code_min_o",
+                  "init": "",
+                  "comment": "观察红光DCS最小码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_r_code_max_o",
+                  "init": "",
+                  "comment": "观察红光DCS最大码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_ir_manual_code_o",
+                  "init": "",
+                  "comment": "观察红外通道独立直流起始码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 87,
+                  "line_end": 87
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_ir_code_min_o",
+                  "init": "",
+                  "comment": "观察红外DCS最小码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "dcs_ir_code_max_o",
+                  "init": "",
+                  "comment": "观察红外DCS最大码边界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "kind": "wire",
+                  "width": "[11:0]",
+                  "name": "amb_threshold_low_o",
+                  "init": "",
+                  "comment": "观察AMB低阈值的signed整数",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "kind": "wire",
+                  "width": "[11:0]",
+                  "name": "amb_threshold_high_o",
+                  "init": "",
+                  "comment": "观察AMB高阈值的signed整数",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "kind": "wire",
+                  "width": "[11:0]",
+                  "name": "dcs_threshold_low_o",
+                  "init": "",
+                  "comment": "观察颜色直流负侧迟滞边界",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 92,
+                  "line_end": 92
+                },
+                {
+                  "kind": "wire",
+                  "width": "[11:0]",
+                  "name": "dcs_threshold_high_o",
+                  "init": "",
+                  "comment": "观察颜色直流正侧迟滞边界",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "cnt_amb_confirm_o",
+                  "init": "",
+                  "comment": "观察AMB连续确认长度",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "kind": "wire",
+                  "width": "[7:0]",
+                  "name": "cnt_dcs_confirm_o",
+                  "init": "",
+                  "comment": "观察颜色直流连续确认长度",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 95,
+                  "line_end": 95
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_0_o",
+                  "init": "",
+                  "comment": "观察最低物理位的单位贡献校准值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_1_o",
+                  "init": "",
+                  "comment": "观察第二物理位的二倍贡献校准值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_2_o",
+                  "init": "",
+                  "comment": "观察第三物理位的四倍贡献校准值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_3_o",
+                  "init": "",
+                  "comment": "观察冗余8.0支路的独立拟合结果",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_4_o",
+                  "init": "",
+                  "comment": "观察主8.0支路的独立拟合结果",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_5_o",
+                  "init": "",
+                  "comment": "观察16.0判决级的校准系数",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 101,
+                  "line_end": 101
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_6_o",
+                  "init": "",
+                  "comment": "观察中高32.0判决级的校准量",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 102,
+                  "line_end": 102
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_7_o",
+                  "init": "",
+                  "comment": "观察高64.0判决级的增益量",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 103,
+                  "line_end": 103
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_8_o",
+                  "init": "",
+                  "comment": "观察128.0高位判决校准值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 104,
+                  "line_end": 104
+                },
+                {
+                  "kind": "wire",
+                  "width": "[25:0]",
+                  "name": "stage1_weight_q16_9_o",
+                  "init": "",
+                  "comment": "观察256.0最高判决校准值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 105,
+                  "line_end": 105
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "stage1_offset_q16_o",
+                  "init": "",
+                  "comment": "观察Stage1 Q16整体偏置",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "kind": "wire",
+                  "width": "[19:0]",
+                  "name": "stage2_gain_q16_o",
+                  "init": "",
+                  "comment": "观察Stage2统一Q16增益",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 107,
+                  "line_end": 107
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "stage2_offset_q16_o",
+                  "init": "",
+                  "comment": "观察Stage2加性Q16截距",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "dc9_recovery_gain_q16_o",
+                  "init": "",
+                  "comment": "观察粗精度DC码加回使用的Q16比例",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 109,
+                  "line_end": 109
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "dc15_recovery_gain_q16_o",
+                  "init": "",
+                  "comment": "观察精细路径恢复直流量使用的Q16比例",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 110,
+                  "line_end": 110
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "amb_recheck_interval_frames_o",
+                  "init": "",
+                  "comment": "观察完整NORMAL帧重检间隔",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "slope_mode_o",
+                  "init": "",
+                  "comment": "观察基线斜率固定或自适应模式",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 112,
+                  "line_end": 112
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "fixed_slope_q16_o",
+                  "init": "",
+                  "comment": "观察固定负斜率的signed Q16值",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 113,
+                  "line_end": 113
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "alpha_q15_o",
+                  "init": "",
+                  "comment": "观察基础斜率幅度比例",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 114,
+                  "line_end": 114
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "beta_q15_o",
+                  "init": "",
+                  "comment": "观察活动斜率平滑比例",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 115,
+                  "line_end": 115
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "timing_adjust_ratio_q15_o",
+                  "init": "",
+                  "comment": "观察相交时刻修正比例",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 116,
+                  "line_end": 116
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "slope_min_q16_o",
+                  "init": "",
+                  "comment": "观察最负斜率边界",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 117,
+                  "line_end": 117
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "slope_max_q16_o",
+                  "init": "",
+                  "comment": "观察最接近零斜率边界",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 118,
+                  "line_end": 118
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "baseline_delta_q16_o",
+                  "init": "",
+                  "comment": "观察波峰锚点基线偏置",
+                  "signed": true,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 119,
+                  "line_end": 119
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "cross_hysteresis_q16_o",
+                  "init": "",
+                  "comment": "观察向上相交迟滞量",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 120,
+                  "line_end": 120
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "lead_min_frames_o",
+                  "init": "",
+                  "comment": "观察相交提前量合格下界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 121,
+                  "line_end": 121
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "lead_max_frames_o",
+                  "init": "",
+                  "comment": "观察相交提前量合格上界",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 122,
+                  "line_end": 122
+                },
+                {
+                  "kind": "wire",
+                  "width": "[3:0]",
+                  "name": "cross_confirm_count_o",
+                  "init": "",
+                  "comment": "观察相交连续确认点数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 123,
+                  "line_end": 123
+                },
+                {
+                  "kind": "wire",
+                  "width": "[3:0]",
+                  "name": "no_cross_limit_o",
+                  "init": "",
+                  "comment": "观察连续无相交重新获取阈值",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 124,
+                  "line_end": 124
+                },
+                {
+                  "kind": "wire",
+                  "width": "[3:0]",
+                  "name": "peak_confirm_count_o",
+                  "init": "",
+                  "comment": "观察波峰连续下降确认点数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 125,
+                  "line_end": 125
+                },
+                {
+                  "kind": "wire",
+                  "width": "[3:0]",
+                  "name": "valley_confirm_count_o",
+                  "init": "",
+                  "comment": "观察波谷连续上升确认点数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 126,
+                  "line_end": 126
+                },
+                {
+                  "kind": "wire",
+                  "width": "[23:0]",
+                  "name": "direction_deadband_o",
+                  "init": "",
+                  "comment": "观察相邻FIR方向分类死区",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 127,
+                  "line_end": 127
+                },
+                {
+                  "kind": "wire",
+                  "width": "[23:0]",
+                  "name": "min_peak_valley_amplitude_o",
+                  "init": "",
+                  "comment": "观察合格峰谷最小幅度",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 128,
+                  "line_end": 128
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "min_peak_to_valley_frames_o",
+                  "init": "",
+                  "comment": "观察波峰到波谷最小帧差",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 129,
+                  "line_end": 129
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "min_peak_to_peak_frames_o",
+                  "init": "",
+                  "comment": "观察相邻波峰最小帧差",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 130,
+                  "line_end": 130
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "max_fine_window_frames_o",
+                  "init": "",
+                  "comment": "观察15-bit窗口最大持续帧数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 131,
+                  "line_end": 131
+                },
+                {
+                  "kind": "wire",
+                  "width": "[15:0]",
+                  "name": "max_reacquire_frames_o",
+                  "init": "",
+                  "comment": "观察9-bit重新获取最大帧数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 132,
+                  "line_end": 132
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "peak_valley_config_valid_o",
+                  "init": "",
+                  "comment": "观察正式peak/valley/cross/fine-window资格位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 133,
+                  "line_end": 133
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "dec_config",
+                  "rhs": "{ 14'd0, peak_valley_config_valid_o, max_reacquire_frames_o, max_fine_window_frames_o, min_peak_to_peak_frames_o, min_peak_to_valley_frames_o, min_peak_valley_amplitude_o, direction_deadband_o, valley_confirm_count_o, peak_confirm_count_o, no_cross_limit_o, cross_confirm_count_o, lead_max_frames_o, lead_min_frames_o, cross_hysteresis_q16_o, baseline_delta_q16_o, slope_max_q16_o, slope_min_q16_o, timing_adjust_ratio_q15_o, beta_q15_o, alpha_q15_o, fixed_slope_q16_o, slope_mode_o, 48'd0, amb_recheck_interval_frames_o, dc15_recovery_gain_q16_o, dc9_recovery_gain_q16_o, stage2_offset_q16_o, stage2_gain_q16_o, stage1_offset_q16_o, stage1_weight_q16_9_o, stage1_weight_q16_8_o, stage1_weight_q16_7_o, stage1_weight_q16_6_o, stage1_weight_q16_5_o, stage1_weight_q16_4_o, stage1_weight_q16_3_o, stage1_weight_q16_2_o, stage1_weight_q16_1_o, stage1_weight_q16_0_o, cnt_dcs_confirm_o, cnt_amb_confirm_o, dcs_threshold_high_o, dcs_threshold_low_o, amb_threshold_high_o, amb_threshold_low_o, dcs_ir_code_max_o, dcs_ir_code_min_o, dcs_ir_manual_code_o, dcs_r_code_max_o, dcs_r_code_min_o, dcs_r_manual_code_o, amb_code_max_o, amb_code_min_o, amb_manual_code_o, 9'd0, dc15_recovery_valid_o, dc9_recovery_valid_o, stage2_calibration_valid_o, stage1_calibration_valid_o, dcs_polarity_o, amb_polarity_o, dcs_enable_o, amb_enable_o, initial_precision_o, optical_mode_o, idac_mode_o, input_source_o, run_profile_o, schema_version_o }",
+                  "comment": "重建时强制保留位为0并保持全部功能字段原位置",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 136,
+                  "line_end": 136
+                }
+              ],
+              "always": [],
+              "instances": [
+                {
+                  "module_name": "ppg_system_active_config_unpack",
+                  "instance_name": "ppg_system_active_config_unpack_Inst_dut",
+                  "has_params": false,
+                  "leading_comments": [
+                    "// 将DUT每个具名端口绑定到自检观察信号"
+                  ],
+                  "text": "ppg_system_active_config_unpack ppg_system_active_config_unpack_Inst_dut(\n\t\t.i_active_config(reg_active_config),  // 送入当前自检ACTIVE快照\n\t\t.o_schema_version(schema_version_o),  // 接收快照schema编号\n\t\t.o_run_profile(run_profile_o),        // 接收运行配置类型\n\t\t.o_input_source(input_source_o),      // 接收模拟输入源选择\n\t\t.o_idac_mode(idac_mode_o),            // 接收IDAC控制策略\n\t\t.o_optical_mode(optical_mode_o),      // 接收光学通道模式\n\t\t.o_initial_precision(initial_precision_o), // 接收初始精度选择\n\t\t.o_amb_enable(amb_enable_o),          // 接收AMB控制资格\n\t\t.o_dcs_enable(dcs_enable_o),          // 接收颜色直流闭环资格\n\t\t.o_amb_polarity(amb_polarity_o),      // 接收AMB调码方向\n\t\t.o_dcs_polarity(dcs_polarity_o),      // 接收颜色直流码修正方向\n\t\t.o_stage1_calibration_valid(stage1_calibration_valid_o), // 接收粗级物理位权重校准声明\n\t\t.o_stage2_calibration_valid(stage2_calibration_valid_o), // 接收精细残差拟合参数资格\n\t\t.o_dc9_recovery_valid(dc9_recovery_valid_o), // 接收9-bit路径DC加回校准状态\n\t\t.o_dc15_recovery_valid(dc15_recovery_valid_o), // 接收15-bit恢复结果正式资格\n\t\t.o_amb_manual_code(amb_manual_code_o), // 接收AMB初始化或手动码\n\t\t.o_amb_code_min(amb_code_min_o),      // 接收AMB码值下限\n\t\t.o_amb_code_max(amb_code_max_o),      // 接收AMB码值上限\n\t\t.o_dcs_r_manual_code(dcs_r_manual_code_o), // 接收红光DCS初始化或手动码\n\t\t.o_dcs_r_code_min(dcs_r_code_min_o),  // 接收红光DCS码值下限\n\t\t.o_dcs_r_code_max(dcs_r_code_max_o),  // 接收红光DCS码值上限\n\t\t.o_dcs_ir_manual_code(dcs_ir_manual_code_o), // 接收红外通道独立直流起始码\n\t\t.o_dcs_ir_code_min(dcs_ir_code_min_o), // 接收红外DCS码值下限\n\t\t.o_dcs_ir_code_max(dcs_ir_code_max_o), // 接收红外DCS码值上限\n\t\t.o_amb_threshold_low(amb_threshold_low_o), // 接收AMB signed低阈值\n\t\t.o_amb_threshold_high(amb_threshold_high_o), // 接收AMB signed高阈值\n\t\t.o_dcs_threshold_low(dcs_threshold_low_o), // 接收颜色直流signed低阈值\n\t\t.o_dcs_threshold_high(dcs_threshold_high_o), // 接收颜色直流signed高阈值\n\t\t.o_amb_confirm_count(cnt_amb_confirm_o), // 接收AMB确认样本数\n\t\t.o_dcs_confirm_count(cnt_dcs_confirm_o), // 接收颜色直流确认样本数\n\t\t.o_stage1_weight_q16_0(stage1_weight_q16_0_o), // 接收单位贡献物理位拟合权重\n\t\t.o_stage1_weight_q16_1(stage1_weight_q16_1_o), // 接收二倍贡献物理位拟合权重\n\t\t.o_stage1_weight_q16_2(stage1_weight_q16_2_o), // 接收四倍贡献物理位拟合权重\n\t\t.o_stage1_weight_q16_3(stage1_weight_q16_3_o), // 接收冗余8.0判决支路权重\n\t\t.o_stage1_weight_q16_4(stage1_weight_q16_4_o), // 接收主8.0判决支路权重\n\t\t.o_stage1_weight_q16_5(stage1_weight_q16_5_o), // 接收16.0判决级拟合结果\n\t\t.o_stage1_weight_q16_6(stage1_weight_q16_6_o), // 接收中高32.0判决级校准量\n\t\t.o_stage1_weight_q16_7(stage1_weight_q16_7_o), // 接收高64.0判决级增益量\n\t\t.o_stage1_weight_q16_8(stage1_weight_q16_8_o), // 接收128.0高位校准结果\n\t\t.o_stage1_weight_q16_9(stage1_weight_q16_9_o), // 锁定最高物理位256.0贡献的独立拟合系数\n\t\t.o_stage1_offset_q16(stage1_offset_q16_o), // 接收Stage1整体Q16偏置\n\t\t.o_stage2_gain_q16(stage2_gain_q16_o), // 接收Stage2统一Q16增益\n\t\t.o_stage2_offset_q16(stage2_offset_q16_o), // 接收Stage2加性Q16截距\n\t\t.o_dc9_recovery_gain_q16(dc9_recovery_gain_q16_o), // 接收粗结果按DC码加回的Q16比例\n\t\t.o_dc15_recovery_gain_q16(dc15_recovery_gain_q16_o), // 接收精细结果恢复直流量的Q16比例\n\t\t.o_amb_recheck_interval_frames(amb_recheck_interval_frames_o), // 接收AMB周期重检完整帧间隔\n\t\t.o_slope_mode(slope_mode_o),          // 接收基线斜率固定或自适应模式\n\t\t.o_fixed_slope_q16(fixed_slope_q16_o), // 接收固定负斜率的signed Q16值\n\t\t.o_alpha_q15(alpha_q15_o),            // 接收基础斜率幅度比例\n\t\t.o_beta_q15(beta_q15_o),              // 接收活动斜率平滑比例\n\t\t.o_timing_adjust_ratio_q15(timing_adjust_ratio_q15_o), // 接收相交时刻修正比例\n\t\t.o_slope_min_q16(slope_min_q16_o),    // 接收最负斜率边界\n\t\t.o_slope_max_q16(slope_max_q16_o),    // 接收最接近零斜率边界\n\t\t.o_baseline_delta_q16(baseline_delta_q16_o), // 接收波峰锚点基线偏置\n\t\t.o_cross_hysteresis_q16(cross_hysteresis_q16_o), // 接收向上相交迟滞量\n\t\t.o_lead_min_frames(lead_min_frames_o), // 接收相交提前量合格下界\n\t\t.o_lead_max_frames(lead_max_frames_o), // 接收相交提前量合格上界\n\t\t.o_cross_confirm_count(cross_confirm_count_o), // 接收相交连续确认点数\n\t\t.o_no_cross_limit(no_cross_limit_o),  // 接收连续无相交重新获取阈值\n\t\t.o_peak_confirm_count(peak_confirm_count_o), // 接收波峰连续下降确认点数\n\t\t.o_valley_confirm_count(valley_confirm_count_o), // 接收波谷连续上升确认点数\n\t\t.o_direction_deadband(direction_deadband_o), // 接收相邻FIR方向分类死区\n\t\t.o_min_peak_valley_amplitude(min_peak_valley_amplitude_o), // 接收合格峰谷最小幅度\n\t\t.o_min_peak_to_valley_frames(min_peak_to_valley_frames_o), // 接收波峰到波谷最小帧差\n\t\t.o_min_peak_to_peak_frames(min_peak_to_peak_frames_o), // 接收相邻波峰最小帧差\n\t\t.o_max_fine_window_frames(max_fine_window_frames_o), // 接收15-bit窗口最大持续帧数\n\t\t.o_max_reacquire_frames(max_reacquire_frames_o), // 接收9-bit重新获取最大帧数\n\t\t.o_peak_valley_config_valid(peak_valley_config_valid_o) // 接收正式peak/valley/cross/fine-window资格位\n\t);",
+                  "line_start": 269,
+                  "line_end": 338
+                }
+              ],
+              "generates": [],
+              "initials": [
+                {
+                  "header": "initial begin",
+                  "lines": [
+                    "cnt_error = 0; // 从无失败记录开始执行完整测试集",
+                    "reg_active_config = {1024{1'b0}}; // UNPACK-01驱动全零ACTIVE安全快照",
+                    "#1; // 等待纯组合连续赋值完成传播",
+                    "if(dec_config !== {1024{1'b0}})begin",
+                    "cnt_error = cnt_error + 1; // 记录全零快照未保持安全值",
+                    "$display(\"FAIL UNPACK-01 zero mapping\"); // 报告复位安全值映射异常",
+                    "end",
+                    "for(cnt_bit_index = 0; cnt_bit_index < 1024; cnt_bit_index = cnt_bit_index + 1)begin",
+                    "reg_active_config = {1024{1'b0}}; // UNPACK-02每轮先清除上一输入位",
+                    "reg_active_config[cnt_bit_index] = 1'b1; // 逐一激励全部功能位和保留位",
+                    "#1; // 等待当前one-hot输入传播到所有输出",
+                    "if(dec_config !== (reg_active_config & FUNCTIONAL_MASK))begin",
+                    "cnt_error = cnt_error + 1; // 记录位段错位、重叠或保留位泄漏",
+                    "$display(\"FAIL UNPACK-02 bit=%0d\", cnt_bit_index); // 输出首次级别的实际错误位索引",
+                    "end",
+                    "end",
+                    "reg_active_config = {1024{1'b0}}; // UNPACK-03构造明确的signed边界组合",
+                    "reg_active_config[115:104] = -12'sd321; // 驱动负AMB低阈值验证补码解释",
+                    "reg_active_config[127:116] = 12'sd777; // 驱动正AMB高阈值验证符号保持",
+                    "reg_active_config[139:128] = -12'sd1024; // 驱动负DCS低阈值覆盖较大负数",
+                    "reg_active_config[151:140] = 12'sd1023; // 驱动正DCS高阈值覆盖正端范围",
+                    "reg_active_config[193:168] = -26'sd12345; // 驱动负S1物理位0权重验证signed Q16路径",
+                    "reg_active_config[427:402] = 26'sd16777216; // 驱动标称256.0最高Stage1权重编码",
+                    "reg_active_config[459:428] = -32'sd262144; // 驱动标称负4.0 Stage1 Q16偏置",
+                    "reg_active_config[479:460] = -20'sd12345; // 驱动负Stage2增益验证signed字段不被改写",
+                    "reg_active_config[511:480] = 32'sd7654321; // 驱动正Stage2截距验证32-bit补码解释",
+                    "reg_active_config[543:512] = -32'sd987654; // 驱动负SAR9恢复系数验证原始bit pattern",
+                    "reg_active_config[575:544] = 32'sd1234567; // 驱动正SAR15恢复系数验证扩展字段",
+                    "reg_active_config[672:641] = -32'sd65536; // 驱动负V5固定斜率验证signed Q16路径",
+                    "reg_active_config[752:721] = -32'sd999999; // 驱动负V5最负斜率边界覆盖较大负数",
+                    "reg_active_config[784:753] = -32'sd1; // 驱动负V5最接近零斜率边界",
+                    "reg_active_config[816:785] = 32'sd54321; // 驱动正V5基线偏置验证符号保持",
+                    "#1; // 等待全部signed字段完成组合传播",
+                    "if((amb_threshold_low_o !== -12'sd321) || (amb_threshold_high_o !== 12'sd777) || (dcs_threshold_low_o !== -12'sd1024) || (dcs_threshold_high_o !== 12'sd1023) || (stage1_weight_q16_0_o !== -26'sd12345) || (stage1_weight_q16_9_o !== 26'sd16777216) || (stage1_offset_q16_o !== -32'sd262144) || (stage2_gain_q16_o !== -20'sd12345) || (stage2_offset_q16_o !== 32'sd7654321) || (dc9_recovery_gain_q16_o !== -32'sd987654) || (dc15_recovery_gain_q16_o !== 32'sd1234567) || (fixed_slope_q16_o !== -32'sd65536) || (slope_min_q16_o !== -32'sd999999) || (slope_max_q16_o !== -32'sd1) || (baseline_delta_q16_o !== 32'sd54321))begin",
+                    "cnt_error = cnt_error + 1; // 记录任一signed字段的数值解释失败",
+                    "$display(\"FAIL UNPACK-03 signed interpretation\"); // 报告阈值、权重、offset或V5斜率符号异常",
+                    "end",
+                    "reg_active_config = {8{128'hA5C3_7E19_2468_1357_F0E1_D2C3_B4A5_9687}}; // UNPACK-04驱动跨字段动态图样",
+                    "#1; // 等待复杂图样无寄存延迟地传播",
+                    "if(dec_config !== (reg_active_config & FUNCTIONAL_MASK))begin",
+                    "cnt_error = cnt_error + 1; // 记录多字段同时变化时的组合映射异常",
+                    "$display(\"FAIL UNPACK-04 composite propagation\"); // 报告完整快照动态传播失败",
+                    "end",
+                    "if(cnt_error == 0)begin",
+                    "$display(\"PASS: ppg_system_active_config_unpack all checks passed\"); // 报告全部V4位图和符号测试成功",
+                    "end else begin",
+                    "$display(\"FAIL: ppg_system_active_config_unpack errors=%0d\", cnt_error); // 汇总完整测试集失败数量",
+                    "end",
+                    "$finish; // 结束无时钟纯组合模块自检"
+                  ],
+                  "nodes": [
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "cnt_error = 0; // 从无失败记录开始执行完整测试集",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config = {1024{1'b0}}; // UNPACK-01驱动全零ACTIVE安全快照",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "#1; // 等待纯组合连续赋值完成传播",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "if",
+                      "header": "if(dec_config !== {1024{1'b0}})",
+                      "text": "",
+                      "label": "",
+                      "children": [
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "cnt_error = cnt_error + 1; // 记录全零快照未保持安全值",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "$display(\"FAIL UNPACK-01 zero mapping\"); // 报告复位安全值映射异常",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "loop",
+                      "header": "for(cnt_bit_index = 0; cnt_bit_index < 1024; cnt_bit_index = cnt_bit_index + 1)",
+                      "text": "",
+                      "label": "",
+                      "children": [
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "reg_active_config = {1024{1'b0}}; // UNPACK-02每轮先清除上一输入位",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "reg_active_config[cnt_bit_index] = 1'b1; // 逐一激励全部功能位和保留位",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "#1; // 等待当前one-hot输入传播到所有输出",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "if",
+                          "header": "if(dec_config !== (reg_active_config & FUNCTIONAL_MASK))",
+                          "text": "",
+                          "label": "",
+                          "children": [
+                            {
+                              "kind": "statement",
+                              "header": "",
+                              "text": "cnt_error = cnt_error + 1; // 记录位段错位、重叠或保留位泄漏",
+                              "label": "",
+                              "children": [],
+                              "alternate": [],
+                              "items": []
+                            },
+                            {
+                              "kind": "statement",
+                              "header": "",
+                              "text": "$display(\"FAIL UNPACK-02 bit=%0d\", cnt_bit_index); // 输出首次级别的实际错误位索引",
+                              "label": "",
+                              "children": [],
+                              "alternate": [],
+                              "items": []
+                            }
+                          ],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config = {1024{1'b0}}; // UNPACK-03构造明确的signed边界组合",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[115:104] = -12'sd321; // 驱动负AMB低阈值验证补码解释",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[127:116] = 12'sd777; // 驱动正AMB高阈值验证符号保持",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[139:128] = -12'sd1024; // 驱动负DCS低阈值覆盖较大负数",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[151:140] = 12'sd1023; // 驱动正DCS高阈值覆盖正端范围",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[193:168] = -26'sd12345; // 驱动负S1物理位0权重验证signed Q16路径",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[427:402] = 26'sd16777216; // 驱动标称256.0最高Stage1权重编码",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[459:428] = -32'sd262144; // 驱动标称负4.0 Stage1 Q16偏置",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[479:460] = -20'sd12345; // 驱动负Stage2增益验证signed字段不被改写",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[511:480] = 32'sd7654321; // 驱动正Stage2截距验证32-bit补码解释",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[543:512] = -32'sd987654; // 驱动负SAR9恢复系数验证原始bit pattern",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[575:544] = 32'sd1234567; // 驱动正SAR15恢复系数验证扩展字段",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[672:641] = -32'sd65536; // 驱动负V5固定斜率验证signed Q16路径",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[752:721] = -32'sd999999; // 驱动负V5最负斜率边界覆盖较大负数",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[784:753] = -32'sd1; // 驱动负V5最接近零斜率边界",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config[816:785] = 32'sd54321; // 驱动正V5基线偏置验证符号保持",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "#1; // 等待全部signed字段完成组合传播",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "if",
+                      "header": "if((amb_threshold_low_o !== -12'sd321) || (amb_threshold_high_o !== 12'sd777) || (dcs_threshold_low_o !== -12'sd1024) || (dcs_threshold_high_o !== 12'sd1023) || (stage1_weight_q16_0_o !== -26'sd12345) || (stage1_weight_q16_9_o !== 26'sd16777216) || (stage1_offset_q16_o !== -32'sd262144) || (stage2_gain_q16_o !== -20'sd12345) || (stage2_offset_q16_o !== 32'sd7654321) || (dc9_recovery_gain_q16_o !== -32'sd987654) || (dc15_recovery_gain_q16_o !== 32'sd1234567) || (fixed_slope_q16_o !== -32'sd65536) || (slope_min_q16_o !== -32'sd999999) || (slope_max_q16_o !== -32'sd1) || (baseline_delta_q16_o !== 32'sd54321))",
+                      "text": "",
+                      "label": "",
+                      "children": [
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "cnt_error = cnt_error + 1; // 记录任一signed字段的数值解释失败",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "$display(\"FAIL UNPACK-03 signed interpretation\"); // 报告阈值、权重、offset或V5斜率符号异常",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "reg_active_config = {8{128'hA5C3_7E19_2468_1357_F0E1_D2C3_B4A5_9687}}; // UNPACK-04驱动跨字段动态图样",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "#1; // 等待复杂图样无寄存延迟地传播",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "if",
+                      "header": "if(dec_config !== (reg_active_config & FUNCTIONAL_MASK))",
+                      "text": "",
+                      "label": "",
+                      "children": [
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "cnt_error = cnt_error + 1; // 记录多字段同时变化时的组合映射异常",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        },
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "$display(\"FAIL UNPACK-04 composite propagation\"); // 报告完整快照动态传播失败",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "alternate": [],
+                      "items": []
+                    },
+                    {
+                      "kind": "if",
+                      "header": "if(cnt_error == 0)",
+                      "text": "",
+                      "label": "",
+                      "children": [
+                        {
+                          "kind": "statement",
+                          "header": "",
+                          "text": "$display(\"PASS: ppg_system_active_config_unpack all checks passed\"); // 报告全部V4位图和符号测试成功",
+                          "label": "",
+                          "children": [],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "alternate": [
+                        {
+                          "kind": "else",
+                          "header": "",
+                          "text": "",
+                          "label": "",
+                          "children": [
+                            {
+                              "kind": "statement",
+                              "header": "",
+                              "text": "$display(\"FAIL: ppg_system_active_config_unpack errors=%0d\", cnt_error); // 汇总完整测试集失败数量",
+                              "label": "",
+                              "children": [],
+                              "alternate": [],
+                              "items": []
+                            }
+                          ],
+                          "alternate": [],
+                          "items": []
+                        }
+                      ],
+                      "items": []
+                    },
+                    {
+                      "kind": "statement",
+                      "header": "",
+                      "text": "$finish; // 结束无时钟纯组合模块自检",
+                      "label": "",
+                      "children": [],
+                      "alternate": [],
+                      "items": []
+                    }
+                  ],
+                  "leading_comments": [
+                    "// 完成零值、逐bit、有符号数和动态传播四类自检"
+                  ],
+                  "block_kind": "initial_block",
+                  "line_count": 49
+                }
+              ],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 1,
+                "decls": 71,
+                "assigns": 1,
+                "always": 0,
+                "initials": 1,
+                "instances": 1,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 47,
+              "line_end": 340
+            }
+          ],
+          "source_metrics": {
+            "lines": 340,
+            "nonempty_lines": 324,
+            "line_comments": 232,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 278,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_ppg_system_active_config_unpack.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

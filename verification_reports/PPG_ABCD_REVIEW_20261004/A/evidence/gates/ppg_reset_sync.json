@@ -1,0 +1,606 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG060": 10
+  },
+  "errors": 10,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 10,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "ppg_reset_sync.v",
+      "line": 46,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "ppg_reset_sync.v",
+      "line": 47,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "ppg_reset_sync.v",
+      "line": 50,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 52.",
+      "path": "ppg_reset_sync.v",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "ppg_reset_sync.v",
+      "line": 59,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 52.",
+      "path": "ppg_reset_sync.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 56.",
+      "path": "ppg_reset_sync.v",
+      "line": 69,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 56.",
+      "path": "ppg_reset_sync.v",
+      "line": 71,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 55.",
+      "path": "ppg_reset_sync.v",
+      "line": 79,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 55.",
+      "path": "ppg_reset_sync.v",
+      "line": 81,
+      "rule": "comments.region_anchor"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+    "ok": false,
+    "strict": true,
+    "errors": 10,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "ppg_reset_sync.v",
+        "line": 46,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "ppg_reset_sync.v",
+        "line": 47,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "ppg_reset_sync.v",
+        "line": 50,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 52.",
+        "path": "ppg_reset_sync.v",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "ppg_reset_sync.v",
+        "line": 59,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 52.",
+        "path": "ppg_reset_sync.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 56.",
+        "path": "ppg_reset_sync.v",
+        "line": 69,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 56.",
+        "path": "ppg_reset_sync.v",
+        "line": 71,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 55.",
+        "path": "ppg_reset_sync.v",
+        "line": 79,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 55.",
+        "path": "ppg_reset_sync.v",
+        "line": 81,
+        "rule": "comments.region_anchor"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 85,
+      "code_lines": 25,
+      "line_comments": 61,
+      "commented_code_lines": 10,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_reset_sync\\ppg_reset_sync.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 85,
+              "module_count": 1,
+              "module_names": [
+                "ppg_reset_sync"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 6,
+              "end_count": 6,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_async_rstn",
+                "o_rstn"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 2,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 51,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/23",
+            "revision_date": "2026/07/23",
+            "design_name": "PPG Reset Synchronizer",
+            "module_name": "ppg_reset_sync",
+            "description": "Description/ppg_reset_sync_Design.pdf",
+            "simulations": "../ppg_dual_precision_top/tb_ppg_dual_precision_top.v",
+            "references": "../ppg_system_integration/PPG_NEW_CHAT_CONTEXT.md",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/23        V1.0        Erie          Create file."
+            ],
+            "history_lines_cn": [
+              "2026年07月23日   V1.0        Erie          创建文件",
+              "将全局低有效复位转换为指定时钟域的同步释放复位"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_reset_sync",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "接收域中用于释放复位的工作时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_async_rstn",
+                  "comment": "允许异步拉低的全局位低有效复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_rstn",
+                  "comment": "经两级触发器同步释放的域内复位",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_reset_meta",
+                  "init": "1'b0",
+                  "comment": "第一级采样异步复位的释放状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 复位释放链中的两级状态"
+                  ],
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "rstn_o",
+                  "init": "1'b0",
+                  "comment": "域内低有效复位的输出寄存器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 第二级仅在接收域时钟边沿进入非复位状态"
+                  ],
+                  "line_start": 59,
+                  "line_end": 59
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "o_rstn",
+                  "rhs": "rstn_o",
+                  "comment": "输出异步置低且同步置高的复位",
+                  "leading_comments": [
+                    "// 将同步释放结果连接到模块端口"
+                  ],
+                  "delay": "",
+                  "line_start": 63,
+                  "line_end": 63
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_async_rstn)",
+                  "targets": [
+                    "rstn_o"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_async_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "rstn_o",
+                    "rstn_o"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 第二级触发器在首级稳定后释放域内复位"
+                  ],
+                  "lines": [
+                    "if(i_async_rstn == 1'b0)begin",
+                    "rstn_o <= 1'b0;                             // 全局复位拉低时立即保持域内复位",
+                    "end else begin",
+                    "rstn_o <= reg_reset_meta;                   // 仅传递经首级时钟化的释放电平",
+                    "end"
+                  ],
+                  "line_start": 67,
+                  "line_end": 71
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_async_rstn)",
+                  "targets": [
+                    "reg_reset_meta"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_async_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_reset_meta",
+                    "reg_reset_meta"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 首级触发器为后级提供一个完整时钟周期的稳定时间"
+                  ],
+                  "lines": [
+                    "if(i_async_rstn == 1'b0)begin",
+                    "reg_reset_meta <= 1'b0;                    // 异步复位期间清除同步链首级",
+                    "end else begin",
+                    "reg_reset_meta <= 1'b1;                    // 开始向后级传递复位释放请求",
+                    "end"
+                  ],
+                  "line_start": 77,
+                  "line_end": 81
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 2,
+                "assigns": 1,
+                "always": 2,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 85
+            }
+          ],
+          "source_metrics": {
+            "lines": 85,
+            "nonempty_lines": 76,
+            "line_comments": 61,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 32,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_reset_sync.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

@@ -1,0 +1,1407 @@
+{
+  "version": 1,
+  "mode": "analyze_existing",
+  "module_info": {
+    "name": "ppg_system_active_config_unpack",
+    "parameter_count": 0,
+    "port_count": 68
+  },
+  "clock_reset_info": {
+    "clock_signals": [],
+    "reset_signals": []
+  },
+  "ports": [
+    {
+      "name": "i_active_config",
+      "direction": "input",
+      "width": 1024,
+      "role": "signal"
+    },
+    {
+      "name": "o_schema_version",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_run_profile",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_input_source",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_idac_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "o_optical_mode",
+      "direction": "output",
+      "width": 2,
+      "role": "control"
+    },
+    {
+      "name": "o_initial_precision",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_dcs_enable",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_amb_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_polarity",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_stage2_calibration_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dc9_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_dc15_recovery_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    },
+    {
+      "name": "o_amb_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_r_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_manual_code",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_min",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_ir_code_max",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_threshold_low",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_threshold_high",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_dcs_confirm_count",
+      "direction": "output",
+      "width": 8,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_0",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_1",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_2",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_3",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_4",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_5",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_6",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_7",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_8",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_weight_q16_9",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage1_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage2_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_stage2_offset_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dc9_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_dc15_recovery_gain_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_amb_recheck_interval_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_mode",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_fixed_slope_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_alpha_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_beta_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_timing_adjust_ratio_q15",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_min_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_slope_max_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "signal"
+    },
+    {
+      "name": "o_baseline_delta_q16",
+      "direction": "output",
+      "width": 1,
+      "role": "control"
+    },
+    {
+      "name": "o_cross_hysteresis_q16",
+      "direction": "output",
+      "width": 32,
+      "role": "signal"
+    },
+    {
+      "name": "o_lead_min_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_lead_max_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_cross_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "o_no_cross_limit",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "o_peak_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "o_valley_confirm_count",
+      "direction": "output",
+      "width": 4,
+      "role": "signal"
+    },
+    {
+      "name": "o_direction_deadband",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "name": "o_min_peak_valley_amplitude",
+      "direction": "output",
+      "width": 24,
+      "role": "signal"
+    },
+    {
+      "name": "o_min_peak_to_valley_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_min_peak_to_peak_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_max_fine_window_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_max_reacquire_frames",
+      "direction": "output",
+      "width": 16,
+      "role": "signal"
+    },
+    {
+      "name": "o_peak_valley_config_valid",
+      "direction": "output",
+      "width": 1,
+      "role": "status"
+    }
+  ],
+  "state_elements": [],
+  "always_blocks": [],
+  "feature_candidates": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_active_config_unpack reset behavior",
+      "description": "Reset initializes outputs and sequential state to known values.",
+      "signals": [
+        "o_schema_version",
+        "o_run_profile",
+        "o_input_source",
+        "o_idac_mode",
+        "o_optical_mode",
+        "o_initial_precision",
+        "o_amb_enable",
+        "o_dcs_enable",
+        "o_amb_polarity",
+        "o_dcs_polarity",
+        "o_stage1_calibration_valid",
+        "o_stage2_calibration_valid",
+        "o_dc9_recovery_valid",
+        "o_dc15_recovery_valid",
+        "o_amb_manual_code",
+        "o_amb_code_min",
+        "o_amb_code_max",
+        "o_dcs_r_manual_code",
+        "o_dcs_r_code_min",
+        "o_dcs_r_code_max",
+        "o_dcs_ir_manual_code",
+        "o_dcs_ir_code_min",
+        "o_dcs_ir_code_max",
+        "o_amb_threshold_low",
+        "o_amb_threshold_high",
+        "o_dcs_threshold_low",
+        "o_dcs_threshold_high",
+        "o_amb_confirm_count",
+        "o_dcs_confirm_count",
+        "o_stage1_weight_q16_0",
+        "o_stage1_weight_q16_1",
+        "o_stage1_weight_q16_2",
+        "o_stage1_weight_q16_3",
+        "o_stage1_weight_q16_4",
+        "o_stage1_weight_q16_5",
+        "o_stage1_weight_q16_6",
+        "o_stage1_weight_q16_7",
+        "o_stage1_weight_q16_8",
+        "o_stage1_weight_q16_9",
+        "o_stage1_offset_q16",
+        "o_stage2_gain_q16",
+        "o_stage2_offset_q16",
+        "o_dc9_recovery_gain_q16",
+        "o_dc15_recovery_gain_q16",
+        "o_amb_recheck_interval_frames",
+        "o_slope_mode",
+        "o_fixed_slope_q16",
+        "o_alpha_q15",
+        "o_beta_q15",
+        "o_timing_adjust_ratio_q15",
+        "o_slope_min_q16",
+        "o_slope_max_q16",
+        "o_baseline_delta_q16",
+        "o_cross_hysteresis_q16",
+        "o_lead_min_frames",
+        "o_lead_max_frames",
+        "o_cross_confirm_count",
+        "o_no_cross_limit",
+        "o_peak_confirm_count",
+        "o_valley_confirm_count",
+        "o_direction_deadband",
+        "o_min_peak_valley_amplitude",
+        "o_min_peak_to_valley_frames",
+        "o_min_peak_to_peak_frames",
+        "o_max_fine_window_frames",
+        "o_max_reacquire_frames",
+        "o_peak_valley_config_valid"
+      ]
+    }
+  ],
+  "feature_mappings": [
+    {
+      "feature_id": "FC001",
+      "name": "ppg_system_active_config_unpack reset behavior",
+      "pin_assignments": [
+        {
+          "pin_name": "o_schema_version",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_run_profile",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_input_source",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_idac_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_optical_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_initial_precision",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_enable",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_enable",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_polarity",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_polarity",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_calibration_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage2_calibration_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dc9_recovery_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dc15_recovery_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_manual_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_code_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_manual_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_r_code_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_manual_code",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_min",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_ir_code_max",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_threshold_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_threshold_high",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_threshold_low",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_threshold_high",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_confirm_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dcs_confirm_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_0",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_1",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_2",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_3",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_4",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_5",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_6",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_7",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_8",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_9",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage1_offset_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage2_gain_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_stage2_offset_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dc9_recovery_gain_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_dc15_recovery_gain_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_amb_recheck_interval_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_mode",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_fixed_slope_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_alpha_q15",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_beta_q15",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_timing_adjust_ratio_q15",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_min_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_slope_max_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_baseline_delta_q16",
+          "role": "data_output",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_hysteresis_q16",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_lead_min_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_lead_max_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_cross_confirm_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_no_cross_limit",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_confirm_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_valley_confirm_count",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_direction_deadband",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_min_peak_valley_amplitude",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_min_peak_to_valley_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_min_peak_to_peak_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_max_fine_window_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_max_reacquire_frames",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        },
+        {
+          "pin_name": "o_peak_valley_config_valid",
+          "role": "status",
+          "assignment": "preserve current behavior",
+          "note": "Derived from structural analysis without an external specification."
+        }
+      ],
+      "stimulus_strategy": "Use reset, nominal transitions, and observable outputs to confirm the structural behavior.",
+      "expected_outputs": [
+        {
+          "pin_name": "o_schema_version",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_run_profile",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_input_source",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_idac_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_optical_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_initial_precision",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_enable",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_enable",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_polarity",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_polarity",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_calibration_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage2_calibration_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dc9_recovery_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dc15_recovery_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_manual_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_code_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_manual_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_r_code_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_manual_code",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_min",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_ir_code_max",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_threshold_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_threshold_high",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_threshold_low",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_threshold_high",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_confirm_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dcs_confirm_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_0",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_1",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_2",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_3",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_4",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_5",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_6",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_7",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_8",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_weight_q16_9",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage1_offset_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage2_gain_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_stage2_offset_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dc9_recovery_gain_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_dc15_recovery_gain_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_amb_recheck_interval_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_mode",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_fixed_slope_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_alpha_q15",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_beta_q15",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_timing_adjust_ratio_q15",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_min_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_slope_max_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_baseline_delta_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_hysteresis_q16",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_lead_min_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_lead_max_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_cross_confirm_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_no_cross_limit",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_confirm_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_valley_confirm_count",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_direction_deadband",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_min_peak_valley_amplitude",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_min_peak_to_valley_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_min_peak_to_peak_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_max_fine_window_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_max_reacquire_frames",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        },
+        {
+          "pin_name": "o_peak_valley_config_valid",
+          "expected_value": "observe behavioral change at the public output",
+          "check_timing": "after the next relevant clock or control event"
+        }
+      ]
+    }
+  ],
+  "verification_targets": [
+    {
+      "check_id": "reset_outputs_known",
+      "category": "reset",
+      "signals": [
+        "o_schema_version",
+        "o_run_profile",
+        "o_input_source",
+        "o_idac_mode",
+        "o_optical_mode",
+        "o_initial_precision",
+        "o_amb_enable",
+        "o_dcs_enable",
+        "o_amb_polarity",
+        "o_dcs_polarity",
+        "o_stage1_calibration_valid",
+        "o_stage2_calibration_valid",
+        "o_dc9_recovery_valid",
+        "o_dc15_recovery_valid",
+        "o_amb_manual_code",
+        "o_amb_code_min",
+        "o_amb_code_max",
+        "o_dcs_r_manual_code",
+        "o_dcs_r_code_min",
+        "o_dcs_r_code_max",
+        "o_dcs_ir_manual_code",
+        "o_dcs_ir_code_min",
+        "o_dcs_ir_code_max",
+        "o_amb_threshold_low",
+        "o_amb_threshold_high",
+        "o_dcs_threshold_low",
+        "o_dcs_threshold_high",
+        "o_amb_confirm_count",
+        "o_dcs_confirm_count",
+        "o_stage1_weight_q16_0",
+        "o_stage1_weight_q16_1",
+        "o_stage1_weight_q16_2",
+        "o_stage1_weight_q16_3",
+        "o_stage1_weight_q16_4",
+        "o_stage1_weight_q16_5",
+        "o_stage1_weight_q16_6",
+        "o_stage1_weight_q16_7",
+        "o_stage1_weight_q16_8",
+        "o_stage1_weight_q16_9",
+        "o_stage1_offset_q16",
+        "o_stage2_gain_q16",
+        "o_stage2_offset_q16",
+        "o_dc9_recovery_gain_q16",
+        "o_dc15_recovery_gain_q16",
+        "o_amb_recheck_interval_frames",
+        "o_slope_mode",
+        "o_fixed_slope_q16",
+        "o_alpha_q15",
+        "o_beta_q15",
+        "o_timing_adjust_ratio_q15",
+        "o_slope_min_q16",
+        "o_slope_max_q16",
+        "o_baseline_delta_q16",
+        "o_cross_hysteresis_q16",
+        "o_lead_min_frames",
+        "o_lead_max_frames",
+        "o_cross_confirm_count",
+        "o_no_cross_limit",
+        "o_peak_confirm_count",
+        "o_valley_confirm_count",
+        "o_direction_deadband",
+        "o_min_peak_valley_amplitude",
+        "o_min_peak_to_valley_frames",
+        "o_min_peak_to_peak_frames",
+        "o_max_fine_window_frames",
+        "o_max_reacquire_frames",
+        "o_peak_valley_config_valid"
+      ],
+      "description": "Verify `ppg_system_active_config_unpack` drives known output values after reset release."
+    },
+    {
+      "check_id": "fc001",
+      "category": "feature_mapping",
+      "signals": [
+        "o_schema_version",
+        "o_run_profile",
+        "o_input_source",
+        "o_idac_mode",
+        "o_optical_mode",
+        "o_initial_precision",
+        "o_amb_enable",
+        "o_dcs_enable",
+        "o_amb_polarity",
+        "o_dcs_polarity",
+        "o_stage1_calibration_valid",
+        "o_stage2_calibration_valid",
+        "o_dc9_recovery_valid",
+        "o_dc15_recovery_valid",
+        "o_amb_manual_code",
+        "o_amb_code_min",
+        "o_amb_code_max",
+        "o_dcs_r_manual_code",
+        "o_dcs_r_code_min",
+        "o_dcs_r_code_max",
+        "o_dcs_ir_manual_code",
+        "o_dcs_ir_code_min",
+        "o_dcs_ir_code_max",
+        "o_amb_threshold_low",
+        "o_amb_threshold_high",
+        "o_dcs_threshold_low",
+        "o_dcs_threshold_high",
+        "o_amb_confirm_count",
+        "o_dcs_confirm_count",
+        "o_stage1_weight_q16_0",
+        "o_stage1_weight_q16_1",
+        "o_stage1_weight_q16_2",
+        "o_stage1_weight_q16_3",
+        "o_stage1_weight_q16_4",
+        "o_stage1_weight_q16_5",
+        "o_stage1_weight_q16_6",
+        "o_stage1_weight_q16_7",
+        "o_stage1_weight_q16_8",
+        "o_stage1_weight_q16_9",
+        "o_stage1_offset_q16",
+        "o_stage2_gain_q16",
+        "o_stage2_offset_q16",
+        "o_dc9_recovery_gain_q16",
+        "o_dc15_recovery_gain_q16",
+        "o_amb_recheck_interval_frames",
+        "o_slope_mode",
+        "o_fixed_slope_q16",
+        "o_alpha_q15",
+        "o_beta_q15",
+        "o_timing_adjust_ratio_q15",
+        "o_slope_min_q16",
+        "o_slope_max_q16",
+        "o_baseline_delta_q16",
+        "o_cross_hysteresis_q16",
+        "o_lead_min_frames",
+        "o_lead_max_frames",
+        "o_cross_confirm_count",
+        "o_no_cross_limit",
+        "o_peak_confirm_count",
+        "o_valley_confirm_count",
+        "o_direction_deadband",
+        "o_min_peak_valley_amplitude",
+        "o_min_peak_to_valley_frames",
+        "o_min_peak_to_peak_frames",
+        "o_max_fine_window_frames",
+        "o_max_reacquire_frames",
+        "o_peak_valley_config_valid"
+      ],
+      "description": "ppg_system_active_config_unpack reset behavior"
+    }
+  ],
+  "decomposition_candidates": [],
+  "provenance": {
+    "source_paths": [
+      "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_system_active_config_unpack\\ppg_system_active_config_unpack.v"
+    ],
+    "spec_source_provided": false,
+    "analyzer": "existing_rtl"
+  }
+}

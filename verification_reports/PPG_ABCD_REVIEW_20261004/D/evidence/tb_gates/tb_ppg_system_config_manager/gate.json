@@ -1,0 +1,652 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG060": 23
+  },
+  "errors": 24,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 24,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 58.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 118,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 119,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 120,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 121,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 122,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 55, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 123,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 124,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 125,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 53, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 126,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 127,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 128,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 129,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 130,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 131,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 132,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 133,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 134,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 135,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 136,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 137,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 138,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 139,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+      "path": "tb_ppg_system_config_manager.v",
+      "line": 140,
+      "rule": "comments.region_anchor"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+    "ok": false,
+    "strict": true,
+    "errors": 24,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 58.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 118,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 119,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 120,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 121,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 122,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 55, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 123,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 124,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 125,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 53, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 126,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 127,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 128,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 129,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 130,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 131,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 47, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 132,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 133,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 134,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 49, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 135,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 136,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 137,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 138,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 139,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 59.",
+        "path": "tb_ppg_system_config_manager.v",
+        "line": 140,
+        "rule": "comments.region_anchor"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 980,
+      "code_lines": 845,
+      "line_comments": 633,
+      "commented_code_lines": 543,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\tb_gate_inputs\\rtl\\ppg_system_config_manager\\tb_ppg_system_config_manager.v",
+            "syntax_confidence": 90,
+            "format_score": 88,
+            "rewrite_need_score": 20,
+            "rewrite_risk_score": 30,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 980,
+              "module_count": 1,
+              "module_names": [
+                "tb_ppg_system_config_manager"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 56,
+              "end_count": 56,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 0,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 172,
+              "function_task_initial_count": 4,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 90,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 2,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "complex_lvalue",
+                "function_task_initial",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/08/06",
+            "revision_date": "2026/08/23",
+            "design_name": "PPG System Configuration Manager Testbench",
+            "module_name": "tb_ppg_system_config_manager",
+            "description": "Self-checking lifecycle and configuration verification",
+            "simulations": "ppg_system_config_manager.v",
+            "references": "ppg_system_config_manager_semantic_contract.md",
+            "version": "V4.9",
+            "dependency_lines": [
+              "ppg_system_config_manager.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/08/06        V1.0        Erie          Create file.",
+              "2026/08/06        V1.0        Erie          Extend the frozen V1 manager checks.",
+              "2026/08/07        V2.0        Erie          Verify the 640-bit ACTIVE V4 manager contract.",
+              "2026/08/13        V2.1        Erie          Verify the V4.1 profile and initial precision rule.",
+              "2026/08/23        V4.9        Erie          Widen every snapshot to the 1024-bit V4+V5 joint payload with a legal V5 default block on every full rebuild; add MGR-17 through MGR-24 covering the new STATIC_BIAS/EXTERNAL_TEST_CURRENT/reserved-IDAC combination checks, run_generation and stop_episode_active observation, and the system_fault_blocking START gate; retarget MGR-12's reserved-IDAC-encoding step from 0x05 to 0x15 per the current contract's ERROR_RESERVED_IDAC_MODE reclassification. MGR-21 is intentionally not implemented here per the contract's own note that it requires the joint Scheduler+SSW+AMI testbench, not this standalone one."
+            ],
+            "history_lines_cn": [
+              "2026年08月06日   V1.0        Erie          创建文件",
+              "2026年08月06日   V1.0        Erie          扩展冻结版V1管理器检查",
+              "2026年08月07日   V2.0        Erie          验证640-bit ACTIVE V4管理合同",
+              "2026年08月13日   V2.1        Erie          验证运行类型与初始精度组合规则",
+              "2026年08月23日   V4.9        Erie          全部快照扩展为1024-bit V4+V5联合载荷，每次整体重建都补一份合法V5默认档案；新增MGR-17至MGR-24覆盖STATIC_BIAS/EXTERNAL_TEST_CURRENT/保留IDAC编码组合校验、run_generation与stop_episode_active观测、系统阻断START门；MGR-12保留IDAC枚举步骤按当前合同ERROR_RESERVED_IDAC_MODE重分类从0x05改为0x15。MGR-21按合同注记必须在Scheduler+SSW+AMI联合TB中验证，本TB故意不实现",
+              "对配置原子提交、生命周期命令、错误保持和STOPPING排空执行定向自检"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 980,
+            "nonempty_lines": 935,
+            "line_comments": 633,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 885,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_ppg_system_config_manager.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

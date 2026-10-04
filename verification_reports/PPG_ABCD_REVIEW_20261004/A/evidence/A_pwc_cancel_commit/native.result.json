@@ -1,0 +1,34 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+    "-B",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-g2012",
+    "-Wall",
+    "-s",
+    "tb_ppg_precision_window_controller",
+    "-o",
+    "/tmp/ppg_audit_probes/A_pwc_cancel_commit_cfe8aa5a/sim.vvp",
+    "/tmp/ppg_audit_probes/A_pwc_cancel_commit_cfe8aa5a/files/0/ppg_precision_window_controller.v",
+    "/tmp/ppg_audit_probes/A_pwc_cancel_commit_cfe8aa5a/files/1/tb_ppg_precision_window_controller.v"
+  ],
+  "linux_root": "/tmp/ppg_audit_probes/A_pwc_cancel_commit_cfe8aa5a",
+  "compile_rc": 0,
+  "run_rc": 1,
+  "inputs": [
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_precision_window_controller\\ppg_precision_window_controller.v",
+      "sha256": "969c45a2f32b074305ea3c1dc87259584d6cd9027ee38fa310d34d879432227d"
+    },
+    {
+      "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\evidence\\pwc_cancel_commit\\tb_ppg_precision_window_controller.v",
+      "sha256": "0262b9f6213d4fd25dbb44b507a4a04740f8198b065a0aa1d52092a7d465c89f"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_coarse_detection_fir",
+  "top_candidates": [
+    "ppg_coarse_detection_fir"
+  ],
+  "modules": [
+    {
+      "name": "ppg_coarse_detection_fir",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_coarse_detection_fir.v",
+      "port_count": 71
+    }
+  ],
+  "instantiation_edges": []
+}

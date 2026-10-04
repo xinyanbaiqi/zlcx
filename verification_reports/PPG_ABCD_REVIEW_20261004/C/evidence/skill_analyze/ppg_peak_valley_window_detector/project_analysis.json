@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_peak_valley_window_detector",
+  "top_candidates": [
+    "ppg_peak_valley_window_detector"
+  ],
+  "modules": [
+    {
+      "name": "ppg_peak_valley_window_detector",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\evidence\\rtl_inputs\\ppg_peak_valley_window_detector.v",
+      "port_count": 82
+    }
+  ],
+  "instantiation_edges": []
+}

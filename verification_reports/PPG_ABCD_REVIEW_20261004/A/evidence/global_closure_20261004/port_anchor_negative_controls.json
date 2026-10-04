@@ -1,0 +1,32 @@
+[
+  [
+    "good",
+    "literal_match",
+    "literal_match"
+  ],
+  [
+    "wrong_line",
+    "confirmed_literal_mismatch",
+    "confirmed_literal_mismatch"
+  ],
+  [
+    "wrong_direction",
+    "direction_candidate",
+    "direction_candidate"
+  ],
+  [
+    "missing_port",
+    "unresolved_port_mapping",
+    "unresolved_port_mapping"
+  ],
+  [
+    "out_of_bounds",
+    "out_of_bounds",
+    "out_of_bounds"
+  ],
+  [
+    "comment_only",
+    "contains_name_outside_declaration_candidate",
+    "contains_name_outside_declaration_candidate"
+  ]
+]

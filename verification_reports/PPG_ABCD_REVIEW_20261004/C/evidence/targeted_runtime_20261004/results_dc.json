@@ -1,0 +1,62 @@
+[
+  {
+    "name": "dc_public_saturation_original",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/tb_C_dc_public_saturation.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_original_76d0de18",
+    "input_sha256": [
+      "a66ff98db59cea71ad8ffbd2d0c802dbc85938e9bf7dee4293d8a09491aaa262",
+      "6aee3f97105ebd7b7c5d6e1919447de171f0abc19f2a79f8ba8e0ed6b27517f4"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_original_76d0de18/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_original_76d0de18/dc.v",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_original_76d0de18/tb.v"
+    ],
+    "run_rc": 0,
+    "elapsed_seconds": 1.2712337970733643
+  },
+  {
+    "name": "dc_public_saturation_wrong_expected",
+    "rtl_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+    "tb_path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/adc_reference/tb_C_dc_public_saturation_wrong_expected.v",
+    "linux_root": "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_wrong_expected_e16dd620",
+    "input_sha256": [
+      "a66ff98db59cea71ad8ffbd2d0c802dbc85938e9bf7dee4293d8a09491aaa262",
+      "c01fdc3a96d38aca8befa35ba06645b77853ac50356cf79d4921ab349e569425"
+    ],
+    "compile_rc": 0,
+    "compile_command": [
+      "wsl.exe",
+      "--distribution",
+      "Debian",
+      "--cd",
+      "/tmp",
+      "--exec",
+      "/tmp/ppg_audit_iverilog_20261004/bin/iverilog",
+      "-B",
+      "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+      "-g2012",
+      "-Wall",
+      "-o",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_wrong_expected_e16dd620/sim.vvp",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_wrong_expected_e16dd620/dc.v",
+      "/tmp/ppg_review_C_targeted_20261004/dc_public_saturation_wrong_expected_e16dd620/tb.v"
+    ],
+    "run_rc": 1,
+    "elapsed_seconds": 1.2084858417510986
+  }
+]

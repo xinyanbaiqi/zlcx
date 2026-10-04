@@ -1,0 +1,10 @@
+{
+  "counts": {
+    "symbol_anchor_without_tag": 103,
+    "same_id_tag": 223,
+    "explicit_NA": 14,
+    "different_id_tag_candidate": 17,
+    "no_literal_source_anchor": 10
+  },
+  "limits": "Literal alias line/range comparison; different tags, stale anchors or missing literal tags are candidates, not automatically missing implementation. Shared/N/A anchors require semantic adjudication."
+}

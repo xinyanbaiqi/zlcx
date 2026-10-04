@@ -1,0 +1,50 @@
+[
+  {
+    "contract": "C02",
+    "contract_line": 100,
+    "module": "ppg_system_config_manager",
+    "port": "o_config_epoch",
+    "width_text": "`C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH`",
+    "reason": "All four default eight-bit epochs exist; the named public epoch-width parameters do not. This is existing F024, not another default truncation or an unperformed future check.",
+    "state": "known_existing_F024_public_parameter_absence",
+    "actual_width": 8,
+    "rtl_line": 83,
+    "rtl_text": "\toutput [7:0]o_config_epoch,              // 每次合法完整COMMIT递增的配置版本"
+  },
+  {
+    "contract": "C02",
+    "contract_line": 100,
+    "module": "ppg_system_config_manager",
+    "port": "o_coef_epoch",
+    "width_text": "`C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH`",
+    "reason": "All four default eight-bit epochs exist; the named public epoch-width parameters do not. This is existing F024, not another default truncation or an unperformed future check.",
+    "state": "known_existing_F024_public_parameter_absence",
+    "actual_width": 8,
+    "rtl_line": 84,
+    "rtl_text": "\toutput [7:0]o_coef_epoch,                // 合法校准系数提交时递增的Stage1版本"
+  },
+  {
+    "contract": "C02",
+    "contract_line": 100,
+    "module": "ppg_system_config_manager",
+    "port": "o_stage2_coef_epoch",
+    "width_text": "`C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH`",
+    "reason": "All four default eight-bit epochs exist; the named public epoch-width parameters do not. This is existing F024, not another default truncation or an unperformed future check.",
+    "state": "known_existing_F024_public_parameter_absence",
+    "actual_width": 8,
+    "rtl_line": 85,
+    "rtl_text": "\toutput [7:0]o_stage2_coef_epoch,         // 合法Stage2校准系数提交对应的独立版本"
+  },
+  {
+    "contract": "C02",
+    "contract_line": 100,
+    "module": "ppg_system_config_manager",
+    "port": "o_dc_recovery_coef_epoch",
+    "width_text": "`C_CONFIG_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_COEF_EPOCH_WIDTH` / `C_DC_RECOVERY_EPOCH_WIDTH`",
+    "reason": "All four default eight-bit epochs exist; the named public epoch-width parameters do not. This is existing F024, not another default truncation or an unperformed future check.",
+    "state": "known_existing_F024_public_parameter_absence",
+    "actual_width": 8,
+    "rtl_line": 86,
+    "rtl_text": "\toutput [7:0]o_dc_recovery_coef_epoch,    // 每次合法DC恢复字段组提交对应的版本"
+  }
+]

@@ -1,0 +1,4 @@
+/mnt/c/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/evidence/compile/negative/include_bad.v:2: Include file AUDIT_INTENTIONALLY_MISSING.vh not found
+error: Unable to find the root module "include_bad" in the Verilog source.
+     : Perhaps ``-s include_bad'' is incorrect?
+1 error(s) during elaboration.

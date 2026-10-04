@@ -1,0 +1,394 @@
+{
+  "commit": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "observed_at_utc": "2026-10-04T06:48:54.810Z",
+  "owned_source_count": 44,
+  "all_owned_blobs_match": true,
+  "all_rtl_copies_match": true,
+  "sources": [
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+      "git_blob": "3697fe70a89cdc2311c8d98689b1793c89b622d4",
+      "actual_blob": "3697fe70a89cdc2311c8d98689b1793c89b622d4",
+      "match": true,
+      "physical_lines": 975
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+      "git_blob": "0d7abcc5ab1602cc9f40c11c230cc60d0cd1b8c5",
+      "actual_blob": "0d7abcc5ab1602cc9f40c11c230cc60d0cd1b8c5",
+      "match": true,
+      "physical_lines": 900
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+      "git_blob": "f12d74e32b930830896e99e5dc17b4db551abd9d",
+      "actual_blob": "f12d74e32b930830896e99e5dc17b4db551abd9d",
+      "match": true,
+      "physical_lines": 717
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+      "git_blob": "c5770548e18dfbf9decfd8f72bcbe7ab28832e3e",
+      "actual_blob": "c5770548e18dfbf9decfd8f72bcbe7ab28832e3e",
+      "match": true,
+      "physical_lines": 966
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+      "git_blob": "e1a38f66c323e0ef0ddbdd45b7c24b635ee3b0cd",
+      "actual_blob": "e1a38f66c323e0ef0ddbdd45b7c24b635ee3b0cd",
+      "match": true,
+      "physical_lines": 666
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+      "git_blob": "6cde214a19bbdb939114bed2e8441614e1d290f8",
+      "actual_blob": "6cde214a19bbdb939114bed2e8441614e1d290f8",
+      "match": true,
+      "physical_lines": 686
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+      "git_blob": "5ca5d65c4bf63395e59ebf088354737debdbd6aa",
+      "actual_blob": "5ca5d65c4bf63395e59ebf088354737debdbd6aa",
+      "match": true,
+      "physical_lines": 405
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+      "git_blob": "5f636ac9b7be2b446d232af932e8da12de3da93a",
+      "actual_blob": "5f636ac9b7be2b446d232af932e8da12de3da93a",
+      "match": true,
+      "physical_lines": 205
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+      "git_blob": "addac40012f5a261ef2cf71cbaa42de99f35206d",
+      "actual_blob": "addac40012f5a261ef2cf71cbaa42de99f35206d",
+      "match": true,
+      "physical_lines": 157
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+      "git_blob": "61d8b44cb2bc4b050a88b55406b2393e69bf9c6c",
+      "actual_blob": "61d8b44cb2bc4b050a88b55406b2393e69bf9c6c",
+      "match": true,
+      "physical_lines": 346
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/contracts/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+      "git_blob": "381e7b9dac4abffb29764501dd28e445926abcb8",
+      "actual_blob": "381e7b9dac4abffb29764501dd28e445926abcb8",
+      "match": true,
+      "physical_lines": 623
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+      "git_blob": "6bf4bee38ab895b2b638be0a46a75385b6b2a0f0",
+      "actual_blob": "6bf4bee38ab895b2b638be0a46a75385b6b2a0f0",
+      "match": true,
+      "physical_lines": 804
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v",
+      "git_blob": "3e18353082f394bdf8ec3dfb37c778ebaaf45048",
+      "actual_blob": "3e18353082f394bdf8ec3dfb37c778ebaaf45048",
+      "match": true,
+      "physical_lines": 449
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v",
+      "git_blob": "08229663e1a47f9107b4d76492f967e87be250c5",
+      "actual_blob": "08229663e1a47f9107b4d76492f967e87be250c5",
+      "match": true,
+      "physical_lines": 363
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v",
+      "git_blob": "79d98899a49131fdeb4ebad8b51930a915e53ed5",
+      "actual_blob": "79d98899a49131fdeb4ebad8b51930a915e53ed5",
+      "match": true,
+      "physical_lines": 236
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v",
+      "git_blob": "27b0d0d2192e81a465c1770ee67ab516c9327f2f",
+      "actual_blob": "27b0d0d2192e81a465c1770ee67ab516c9327f2f",
+      "match": true,
+      "physical_lines": 681
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v",
+      "git_blob": "0666c9294bd0f9a693c02e3d7092f42cd4a108f3",
+      "actual_blob": "0666c9294bd0f9a693c02e3d7092f42cd4a108f3",
+      "match": true,
+      "physical_lines": 310
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+      "git_blob": "cc45de0336866470379becc66b6f27abfa11c848",
+      "actual_blob": "cc45de0336866470379becc66b6f27abfa11c848",
+      "match": true,
+      "physical_lines": 475
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+      "git_blob": "ca9c0cdd54b1229cc932744b6485507f2ebb1dab",
+      "actual_blob": "ca9c0cdd54b1229cc932744b6485507f2ebb1dab",
+      "match": true,
+      "physical_lines": 371
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v",
+      "git_blob": "808bd4c7c88a5de3257f02f148f982d939fd6731",
+      "actual_blob": "808bd4c7c88a5de3257f02f148f982d939fd6731",
+      "match": true,
+      "physical_lines": 516
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_result_router/ppg_adc_result_router.v",
+      "git_blob": "62527e7baa1d3b65c502ac2807597464d922aa8b",
+      "actual_blob": "62527e7baa1d3b65c502ac2807597464d922aa8b",
+      "match": true,
+      "physical_lines": 187
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v",
+      "git_blob": "0e73fda94042aff5fec28dcdb25c338f0ac2a81a",
+      "actual_blob": "0e73fda94042aff5fec28dcdb25c338f0ac2a81a",
+      "match": true,
+      "physical_lines": 415
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v",
+      "git_blob": "15f17cdcbb7281c92644b0c65d4b927caf4390b1",
+      "actual_blob": "15f17cdcbb7281c92644b0c65d4b927caf4390b1",
+      "match": true,
+      "physical_lines": 352
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_redundancy_corrector/tb_ppg_adc_s1_redundancy_corrector.v",
+      "git_blob": "5ebbb92701289229c9710d43530a9b1c59c38a7f",
+      "actual_blob": "5ebbb92701289229c9710d43530a9b1c59c38a7f",
+      "match": true,
+      "physical_lines": 577
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v",
+      "git_blob": "c68dab3cbabd8884521edb4a516ad07ed03ef8d7",
+      "actual_blob": "c68dab3cbabd8884521edb4a516ad07ed03ef8d7",
+      "match": true,
+      "physical_lines": 314
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+      "git_blob": "1b058b3744411394634933dc2a116a557895eee8",
+      "actual_blob": "1b058b3744411394634933dc2a116a557895eee8",
+      "match": true,
+      "physical_lines": 1204
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+      "git_blob": "ef1e5631fc447c67508d200075f7fe315b0c601a",
+      "actual_blob": "ef1e5631fc447c67508d200075f7fe315b0c601a",
+      "match": true,
+      "physical_lines": 1003
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v",
+      "git_blob": "b408ff0af16b07b76461eb8b93269d88c47fd5fa",
+      "actual_blob": "b408ff0af16b07b76461eb8b93269d88c47fd5fa",
+      "match": true,
+      "physical_lines": 1191
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v",
+      "git_blob": "e716ab70ed59af3e3f6ed672e23d09f683754e38",
+      "actual_blob": "e716ab70ed59af3e3f6ed672e23d09f683754e38",
+      "match": true,
+      "physical_lines": 768
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence.v",
+      "git_blob": "2a4f143318e452c6914eee87114f29fd624b4c45",
+      "actual_blob": "2a4f143318e452c6914eee87114f29fd624b4c45",
+      "match": true,
+      "physical_lines": 220
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_cross_detector.v",
+      "git_blob": "5e3002317f7be08a5702caff61c1be21cfa34581",
+      "actual_blob": "5e3002317f7be08a5702caff61c1be21cfa34581",
+      "match": true,
+      "physical_lines": 1323
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+      "git_blob": "9468c88a04322142ff7da8ac1866aa2157ae8386",
+      "actual_blob": "9468c88a04322142ff7da8ac1866aa2157ae8386",
+      "match": true,
+      "physical_lines": 1697
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v",
+      "git_blob": "6035186cda68085db406ac4ea0766388e4d6ebe3",
+      "actual_blob": "6035186cda68085db406ac4ea0766388e4d6ebe3",
+      "match": true,
+      "physical_lines": 531
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_real_raw_generator.vh",
+      "git_blob": "6cd33f019fd1e2c59a8ee1e3618e6c9443f8fb56",
+      "actual_blob": "6cd33f019fd1e2c59a8ee1e3618e6c9443f8fb56",
+      "match": true,
+      "physical_lines": 363
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+      "git_blob": "a411db915dedbcddb3f7145f6caaf367e0dca13b",
+      "actual_blob": "a411db915dedbcddb3f7145f6caaf367e0dca13b",
+      "match": true,
+      "physical_lines": 806
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+      "git_blob": "2a90ebc1081960dbe46c86b2282f446cb0e59253",
+      "actual_blob": "2a90ebc1081960dbe46c86b2282f446cb0e59253",
+      "match": true,
+      "physical_lines": 1581
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+      "git_blob": "b30da7edd1ebbcfec85a7f22eca4615e3dab7354",
+      "actual_blob": "b30da7edd1ebbcfec85a7f22eca4615e3dab7354",
+      "match": true,
+      "physical_lines": 1558
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+      "git_blob": "b8b8653f27e9a8e539e14579106f5e6f0ddfacae",
+      "actual_blob": "b8b8653f27e9a8e539e14579106f5e6f0ddfacae",
+      "match": true,
+      "physical_lines": 1712
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+      "git_blob": "4840de1a8f9230aeb26b98b4eb38919b965c3da2",
+      "actual_blob": "4840de1a8f9230aeb26b98b4eb38919b965c3da2",
+      "match": true,
+      "physical_lines": 1907
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+      "git_blob": "68dd4a5c9b14c2d8eeda922b5aba4de5cf376e29",
+      "actual_blob": "68dd4a5c9b14c2d8eeda922b5aba4de5cf376e29",
+      "match": true,
+      "physical_lines": 1462
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+      "git_blob": "cf8d3ae1fe4101256a783ac2e82ae00adc6cbdbe",
+      "actual_blob": "cf8d3ae1fe4101256a783ac2e82ae00adc6cbdbe",
+      "match": true,
+      "physical_lines": 893
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+      "git_blob": "1b45000499112cdbfb6bce5a823f11a501b352bb",
+      "actual_blob": "1b45000499112cdbfb6bce5a823f11a501b352bb",
+      "match": true,
+      "physical_lines": 1266
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+      "git_blob": "baa959639d20afbeb3ddb5287309f69fc292261d",
+      "actual_blob": "baa959639d20afbeb3ddb5287309f69fc292261d",
+      "match": true,
+      "physical_lines": 589
+    },
+    {
+      "path": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v",
+      "git_blob": "221248db7441917bdf7ffab116d4974507d1cf44",
+      "actual_blob": "221248db7441917bdf7ffab116d4974507d1cf44",
+      "match": true,
+      "physical_lines": 322
+    }
+  ],
+  "rtl_copies": [
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_pipeline_overlap_corrector.v",
+      "match": true,
+      "sha256": "152fdc2c106e2af3a7ed9ea376d1f6e0478737bd2dfc2b1f5ca980b28ec01c02"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_async_stage_capture.v",
+      "match": true,
+      "sha256": "85deb9a0d009701bee65a0bd50486971c9b4edd9933ca40b1ecd5179e44c2b3a"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_s1_programmable_calibrator.v",
+      "match": true,
+      "sha256": "7cd14d494a928dc60116fa8dc8c98f9b35cbd48e7a32263fc11d83b924575feb"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_dc_recovery.v",
+      "match": true,
+      "sha256": "a66ff98db59cea71ad8ffbd2d0c802dbc85938e9bf7dee4293d8a09491aaa262"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_result_router/ppg_adc_result_router.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_result_router.v",
+      "match": true,
+      "sha256": "472390c45bb0f342e650cf6e4fec7aa32838e09063b70b7a5bc5ac0a619e869c"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_programmable_reconstructor.v",
+      "match": true,
+      "sha256": "73ad711d4bfdeac7ac125ab4f62ce10152a5956df9ac1410e2d20cca34ad8d70"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_adc_s1_redundancy_corrector.v",
+      "match": true,
+      "sha256": "974c7b44c4619ec06b8bdb15e6b5ac6a0166148098d2384eea1f9833f5882583"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_peak_valley_window_detector.v",
+      "match": true,
+      "sha256": "d84353d813b6f51722301f3d6893a428f4ddb88df8bd0f0713ead199632cce5c"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_coarse_detection_fir.v",
+      "match": true,
+      "sha256": "23bb5745e5f4b22077d841e00690bc0401672232822c8f638ead3d568705a011"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_dynamic_baseline_cross_detector.v",
+      "match": true,
+      "sha256": "2c0fa949bd3c9e98ab8a64a66ec7f8cf8b1c22badd744ed0d0c66b3871b9629a"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_idac_code_controller.v",
+      "match": true,
+      "sha256": "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef"
+    },
+    {
+      "source": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd16-9489-7e50-a7b6-a1178fd92bf1/ppg_audit/snapshot/rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v",
+      "copy": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/rtl_inputs/ppg_normal_transaction_fork.v",
+      "match": true,
+      "sha256": "ce612e8c00d3d7fa84c3bd66cd9095d593c2cb59006df9dfb8a17814fb802985"
+    }
+  ],
+  "git_check": "C:/Users/DAWN/.codex/visualizations/2026/10/02/01a0fd78-b9b8-78f2-8e39-c02cd0049c19/ppg_review_C/evidence/git_readonly_check.json",
+  "clone_head": "d18c6954621e53e5a6505dd3a6c688c266d23839",
+  "clone_status_short": ""
+}

@@ -1,0 +1,3789 @@
+{
+  "version": 1,
+  "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG007": 2,
+    "VG060": 46,
+    "VG040": 1,
+    "VG009": 1,
+    "VG014": 29,
+    "VG041": 46,
+    "VG064": 47
+  },
+  "errors": 97,
+  "strict_warnings": 75,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 97,
+      "warnings": 75,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 48,
+      "warnings": 75,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 0,
+      "warnings": 46,
+      "rulebook_path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Standard bilingual header with English/Chinese sections is required.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 1,
+      "rule": "header.bilingual"
+    },
+    {
+      "code": "VG007",
+      "severity": "error",
+      "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 1,
+      "rule": "header.chinese_fields"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 46,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 47,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 50,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 51,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 52,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 53,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 54,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 59,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 60,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 64,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 67,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 68,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 69,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 70,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 73,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 76,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 77,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 78,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 79,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 80,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 81,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 82,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 83,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 84,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 85,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 86,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 87,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 88,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 89,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 90,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 91,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 94,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 95,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 96,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 97,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 98,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 99,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 100,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 103,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 104,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 105,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 106,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 109,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Generated explanatory comments should be Chinese-first.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "comments.language"
+    },
+    {
+      "code": "VG009",
+      "severity": "error",
+      "message": "Module `ppg_timing_sar9_3200hz` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "ports.group_comments"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_15q1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_2m` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_9q1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_aferst_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_buf_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_iref_idac_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_iref_idac_sar15_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_iref_idac_sar9_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_q2_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_q3_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_clk_tiaen_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_15sar_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar15_amb_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar15_dc_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar15_iref` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar9_amb_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar9_dc_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_sar9_iref` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_test` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_en_tia_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_frame_start_3200hz` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_idac_sar15ambn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_idac_sar15dcn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_idac_sar9ambn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_idac_sar9dcn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_leddac` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_leden1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_leden2_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG014",
+      "severity": "warning",
+      "message": "Output port `o_s_in` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": null,
+      "rule": "output.bridge"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_clk` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 46,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_rstn` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 47,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_enable` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 50,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_test_mode` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 51,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_optical_mode` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 52,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_static_characterization_enable` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 53,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_test_mux_ctrl` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 54,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_static_sar9_amb_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 57,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_static_sar9_dc_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 58,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_static_sar15_amb_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 59,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_static_sar15_dc_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 60,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_leddac_r_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 63,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_leddac_ir_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 64,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_idac_sar9_amb_r_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 67,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_idac_sar9_amb_ir_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 68,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_idac_sar9_dc_r_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 69,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_idac_sar9_dc_ir_code` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 70,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_frame_start_3200hz` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 73,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_tia_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 76,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_leddac` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 77,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_leden1_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 78,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_leden2_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 79,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_test` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 80,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_buf_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 81,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_2m` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 82,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_iref_idac_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 83,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_9q1_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 84,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_15q1_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 85,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_aferst_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 86,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_iref_idac_sar9_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 87,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_iref_idac_sar15_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 88,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_q2_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 89,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_q3_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 90,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_clk_tiaen_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 91,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_15sar_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 94,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar9_amb_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 95,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar9_dc_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 96,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar9_iref` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 97,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar15_amb_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 98,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar15_dc_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 99,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_en_sar15_iref` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 100,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_idac_sar9ambn_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 103,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_idac_sar9dcn_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 104,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_idac_sar15ambn_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 105,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_idac_sar15dcn_low` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 106,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `o_s_in` should be Chinese-first and semantic, not only fallback text.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 109,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.C_FRAME_TICKS` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 115,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_clk` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 117,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_rstn` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 118,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_enable` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 119,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_test_mode` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 120,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_optical_mode` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 121,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_static_characterization_enable` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 122,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_test_mux_ctrl` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 123,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_static_sar9_amb_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 124,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_static_sar9_dc_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 125,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_static_sar15_amb_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 126,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_static_sar15_dc_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 127,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_leddac_r_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 128,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_leddac_ir_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 129,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_idac_sar9_amb_r_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 130,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_idac_sar9_amb_ir_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 131,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_idac_sar9_dc_r_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 132,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_idac_sar9_dc_ir_code` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 133,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_frame_start_400hz` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 134,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_tia_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 135,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_leddac` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 136,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_leden1_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 137,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_leden2_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 138,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_test` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 139,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_buf_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 140,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_2m` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 141,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_iref_idac_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 142,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_9q1_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 143,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_15q1_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 144,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_aferst_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 145,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_iref_idac_sar9_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 146,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_iref_idac_sar15_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 147,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_q2_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 148,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_q3_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 149,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_clk_tiaen_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 150,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_15sar_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 151,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar9_amb_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 152,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar9_dc_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 153,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar9_iref` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 154,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar15_amb_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 155,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar15_dc_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 156,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_en_sar15_iref` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 157,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_idac_sar9ambn_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 158,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_idac_sar9dcn_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 159,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_idac_sar15ambn_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 160,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_idac_sar15dcn_low` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 161,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.o_s_in` should have a same-line semantic comment.",
+      "path": "ppg_timing_sar9_3200hz.v",
+      "line": 162,
+      "rule": "comments.instance_mapping"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v",
+    "ok": false,
+    "strict": true,
+    "errors": 97,
+    "warnings": 75,
+    "issues": [
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Standard bilingual header with English/Chinese sections is required.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 1,
+        "rule": "header.bilingual"
+      },
+      {
+        "code": "VG007",
+        "severity": "error",
+        "message": "Chinese header is missing required field(s): 版权归属, 开发人员, 创建日期, 设计名称, 模块名称, 模块说明, 仿真工程, 参考资料, 依赖文件, 当前版本, 修订日期, 修订历史",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 1,
+        "rule": "header.chinese_fields"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 46,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 47,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 50,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 51,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 52,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 53,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 54,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 59,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 60,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 64,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 67,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 68,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 69,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 70,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 55.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 73,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 76,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 77,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 78,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 79,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 80,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 81,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 82,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 83,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 84,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 85,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 86,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 87,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 88,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 89,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 90,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 91,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 94,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 95,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 96,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 97,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 98,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 99,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 100,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 103,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 104,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 105,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 106,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 54.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 109,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Generated explanatory comments should be Chinese-first.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "comments.language"
+      },
+      {
+        "code": "VG009",
+        "severity": "error",
+        "message": "Module `ppg_timing_sar9_3200hz` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "ports.group_comments"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_15q1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_2m` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_9q1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_aferst_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_buf_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_iref_idac_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_iref_idac_sar15_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_iref_idac_sar9_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_q2_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_q3_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_clk_tiaen_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_15sar_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar15_amb_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar15_dc_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar15_iref` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar9_amb_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar9_dc_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_sar9_iref` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_test` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_en_tia_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_frame_start_3200hz` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_idac_sar15ambn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_idac_sar15dcn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_idac_sar9ambn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_idac_sar9dcn_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_leddac` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_leden1_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_leden2_low` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG014",
+        "severity": "warning",
+        "message": "Output port `o_s_in` has no explicit assign bridge detected; confirm direct output assignment is intentional.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": null,
+        "rule": "output.bridge"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_clk` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 46,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_rstn` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 47,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_enable` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 50,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_test_mode` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 51,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_optical_mode` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 52,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_static_characterization_enable` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 53,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_test_mux_ctrl` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 54,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_static_sar9_amb_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 57,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_static_sar9_dc_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 58,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_static_sar15_amb_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 59,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_static_sar15_dc_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 60,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_leddac_r_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 63,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_leddac_ir_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 64,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_idac_sar9_amb_r_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 67,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_idac_sar9_amb_ir_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 68,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_idac_sar9_dc_r_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 69,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_idac_sar9_dc_ir_code` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 70,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_frame_start_3200hz` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 73,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_tia_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 76,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_leddac` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 77,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_leden1_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 78,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_leden2_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 79,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_test` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 80,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_buf_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 81,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_2m` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 82,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_iref_idac_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 83,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_9q1_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 84,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_15q1_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 85,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_aferst_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 86,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_iref_idac_sar9_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 87,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_iref_idac_sar15_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 88,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_q2_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 89,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_q3_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 90,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_clk_tiaen_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 91,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_15sar_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 94,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar9_amb_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 95,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar9_dc_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 96,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar9_iref` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 97,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar15_amb_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 98,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar15_dc_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 99,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_en_sar15_iref` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 100,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_idac_sar9ambn_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 103,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_idac_sar9dcn_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 104,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_idac_sar15ambn_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 105,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_idac_sar15dcn_low` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 106,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `o_s_in` should be Chinese-first and semantic, not only fallback text.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 109,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.C_FRAME_TICKS` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 115,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_clk` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 117,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_rstn` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 118,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_enable` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 119,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_test_mode` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 120,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_optical_mode` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 121,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_static_characterization_enable` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 122,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_test_mux_ctrl` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 123,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_static_sar9_amb_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 124,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_static_sar9_dc_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 125,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_static_sar15_amb_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 126,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_static_sar15_dc_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 127,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_leddac_r_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 128,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_leddac_ir_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 129,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_idac_sar9_amb_r_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 130,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_idac_sar9_amb_ir_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 131,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_idac_sar9_dc_r_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 132,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_idac_sar9_dc_ir_code` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 133,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_frame_start_400hz` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 134,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_tia_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 135,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_leddac` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 136,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_leden1_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 137,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_leden2_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 138,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_test` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 139,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_buf_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 140,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_2m` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 141,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_iref_idac_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 142,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_9q1_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 143,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_15q1_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 144,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_aferst_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 145,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_iref_idac_sar9_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 146,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_iref_idac_sar15_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 147,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_q2_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 148,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_q3_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 149,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_clk_tiaen_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 150,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_15sar_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 151,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar9_amb_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 152,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar9_dc_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 153,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar9_iref` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 154,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar15_amb_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 155,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar15_dc_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 156,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_en_sar15_iref` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 157,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_idac_sar9ambn_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 158,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_idac_sar9dcn_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 159,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_idac_sar15ambn_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 160,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_idac_sar15dcn_low` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 161,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.o_s_in` should have a same-line semantic comment.",
+        "path": "ppg_timing_sar9_3200hz.v",
+        "line": 162,
+        "rule": "comments.instance_mapping"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 165,
+      "code_lines": 102,
+      "line_comments": 96,
+      "commented_code_lines": 46,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\snapshot\\rtl\\ppg_timing_sar9\\ppg_timing_sar9_3200hz.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 165,
+              "module_count": 1,
+              "module_names": [
+                "ppg_timing_sar9_3200hz"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 0,
+              "end_count": 0,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_enable",
+                "i_test_mode",
+                "i_optical_mode",
+                "i_static_characterization_enable",
+                "i_test_mux_ctrl",
+                "i_static_sar9_amb_code",
+                "i_static_sar9_dc_code",
+                "i_static_sar15_amb_code",
+                "i_static_sar15_dc_code",
+                "i_leddac_r_code",
+                "i_leddac_ir_code",
+                "i_idac_sar9_amb_r_code",
+                "i_idac_sar9_amb_ir_code",
+                "i_idac_sar9_dc_r_code",
+                "i_idac_sar9_dc_ir_code",
+                "o_frame_start_3200hz",
+                "o_en_tia_low",
+                "o_leddac",
+                "o_leden1_low",
+                "o_leden2_low",
+                "o_en_test",
+                "o_clk_buf_low",
+                "o_clk_2m",
+                "o_clk_iref_idac_low",
+                "o_clk_9q1_low",
+                "o_clk_15q1_low",
+                "o_clk_aferst_low",
+                "o_clk_iref_idac_sar9_low",
+                "o_clk_iref_idac_sar15_low",
+                "o_clk_q2_low",
+                "o_clk_q3_low",
+                "o_clk_tiaen_low",
+                "o_en_15sar_low",
+                "o_en_sar9_amb_low",
+                "o_en_sar9_dc_low",
+                "o_en_sar9_iref",
+                "o_en_sar15_amb_low",
+                "o_en_sar15_dc_low",
+                "o_en_sar15_iref",
+                "o_idac_sar9ambn_low",
+                "o_idac_sar9dcn_low",
+                "o_idac_sar15ambn_low",
+                "o_idac_sar15dcn_low",
+                "o_s_in"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 0,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 50,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/07/23",
+            "revision_date": "2026/07/23",
+            "design_name": "PPG SAR9 Fast Simulation Timing Wrapper",
+            "module_name": "ppg_timing_sar9_3200hz",
+            "description": "Synthesizable SAR9 wrapper using a 625-cycle, 3200 Hz frame",
+            "simulations": "Fast simulation testbench or Virtuoso AMS configuration",
+            "references": "ppg_timing_sar9.v and PPG timing contract",
+            "version": "V1.0",
+            "dependency_lines": [
+              "ppg_timing_sar9.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/07/23        V1.0        Erie          Create 3200 Hz simulation wrapper."
+            ],
+            "history_lines_cn": [],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "ppg_timing_sar9_3200hz",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "2 MHz digital master clock",
+                  "group": "Global Signals",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "Active-low asynchronous reset",
+                  "group": "Global Signals",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_enable",
+                  "comment": "Enables SAR9 timing",
+                  "group": "Mode Control",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_test_mode",
+                  "comment": "Selects the analog test source",
+                  "group": "Mode Control",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_optical_mode",
+                  "comment": "Selects red, infrared, or both phases",
+                  "group": "Mode Control",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_static_characterization_enable",
+                  "comment": "Enables static characterization",
+                  "group": "Mode Control",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "[4:0]",
+                  "name": "i_test_mux_ctrl",
+                  "comment": "Selects S0_IN through S4_IN",
+                  "group": "Mode Control",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_static_sar9_amb_code",
+                  "comment": "Static SAR9 AMB code",
+                  "group": "Static IDAC Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_static_sar9_dc_code",
+                  "comment": "Static SAR9 DC code",
+                  "group": "Static IDAC Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_static_sar15_amb_code",
+                  "comment": "Static SAR15 AMB code",
+                  "group": "Static IDAC Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_static_sar15_dc_code",
+                  "comment": "Static SAR15 DC code",
+                  "group": "Static IDAC Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_leddac_r_code",
+                  "comment": "Red LED drive code",
+                  "group": "LED Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_leddac_ir_code",
+                  "comment": "Infrared LED drive code",
+                  "group": "LED Code Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_idac_sar9_amb_r_code",
+                  "comment": "Red SAR9 AMB code",
+                  "group": "SAR9 IDAC Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_idac_sar9_amb_ir_code",
+                  "comment": "Infrared SAR9 AMB code",
+                  "group": "SAR9 IDAC Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_idac_sar9_dc_r_code",
+                  "comment": "Red SAR9 DC code",
+                  "group": "SAR9 IDAC Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "direction": "input",
+                  "width": "[7:0]",
+                  "name": "i_idac_sar9_dc_ir_code",
+                  "comment": "Infrared SAR9 DC code",
+                  "group": "SAR9 IDAC Configuration",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_frame_start_3200hz",
+                  "comment": "One-cycle 3200 Hz frame-start pulse",
+                  "group": "Frame Synchronization Output",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_tia_low",
+                  "comment": "TIA operating window",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "direction": "output",
+                  "width": "[7:0]",
+                  "name": "o_leddac",
+                  "comment": "Active red or infrared LED code",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 77,
+                  "line_end": 77
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_leden1_low",
+                  "comment": "Red LED1 operating window",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_leden2_low",
+                  "comment": "Infrared LED2 operating window",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_test",
+                  "comment": "Registered analog test control",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_buf_low",
+                  "comment": "Static-characterization buffer control",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_2m",
+                  "comment": "Forwarded 2 MHz clock",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_iref_idac_low",
+                  "comment": "Local IDAC reference timing",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_9q1_low",
+                  "comment": "SAR9 Q1 sampling phase",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_15q1_low",
+                  "comment": "Fixed-off SAR15 Q1 phase",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_aferst_low",
+                  "comment": "Analog-front-end reset window",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_iref_idac_sar9_low",
+                  "comment": "SAR9 reference timing",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 87,
+                  "line_end": 87
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_iref_idac_sar15_low",
+                  "comment": "Static SAR15 reference timing",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_q2_low",
+                  "comment": "Ambient-current sampling phase",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_q3_low",
+                  "comment": "Dynamic-current sampling phase",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_clk_tiaen_low",
+                  "comment": "Local TIA-enable timing",
+                  "group": "Common Analog Controls",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_15sar_low",
+                  "comment": "Fixed-low 15-bit selector",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar9_amb_low",
+                  "comment": "SAR9 AMB enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 95,
+                  "line_end": 95
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar9_dc_low",
+                  "comment": "SAR9 DC enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar9_iref",
+                  "comment": "SAR9 reference enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar15_amb_low",
+                  "comment": "Static SAR15 AMB enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar15_dc_low",
+                  "comment": "Static SAR15 DC enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_en_sar15_iref",
+                  "comment": "Fixed-low SAR15 reference enable",
+                  "group": "Precision and IDAC Enables",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "direction": "output",
+                  "width": "[7:0]",
+                  "name": "o_idac_sar9ambn_low",
+                  "comment": "Active SAR9 AMB code",
+                  "group": "IDAC Code Outputs",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 103,
+                  "line_end": 103
+                },
+                {
+                  "direction": "output",
+                  "width": "[7:0]",
+                  "name": "o_idac_sar9dcn_low",
+                  "comment": "Active SAR9 DC code",
+                  "group": "IDAC Code Outputs",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 104,
+                  "line_end": 104
+                },
+                {
+                  "direction": "output",
+                  "width": "[7:0]",
+                  "name": "o_idac_sar15ambn_low",
+                  "comment": "Static SAR15 AMB code",
+                  "group": "IDAC Code Outputs",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 105,
+                  "line_end": 105
+                },
+                {
+                  "direction": "output",
+                  "width": "[7:0]",
+                  "name": "o_idac_sar15dcn_low",
+                  "comment": "Static SAR15 DC code",
+                  "group": "IDAC Code Outputs",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "direction": "output",
+                  "width": "[4:0]",
+                  "name": "o_s_in",
+                  "comment": "Frame-latched test-MUX controls",
+                  "group": "Test Switch Outputs",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 109,
+                  "line_end": 109
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [],
+              "assigns": [],
+              "always": [],
+              "instances": [
+                {
+                  "module_name": "ppg_timing_sar9",
+                  "instance_name": "ppg_timing_sar9_Inst_3200hz",
+                  "has_params": false,
+                  "leading_comments": [
+                    "// The core keeps all production timing windows and changes only the frame modulus."
+                  ],
+                  "text": "ppg_timing_sar9\n\t#(\n\t\t.C_FRAME_TICKS(13'd625)\n\t)ppg_timing_sar9_Inst_3200hz(\n\t\t.i_clk(i_clk),\n\t\t.i_rstn(i_rstn),\n\t\t.i_enable(i_enable),\n\t\t.i_test_mode(i_test_mode),\n\t\t.i_optical_mode(i_optical_mode),\n\t\t.i_static_characterization_enable(i_static_characterization_enable),\n\t\t.i_test_mux_ctrl(i_test_mux_ctrl),\n\t\t.i_static_sar9_amb_code(i_static_sar9_amb_code),\n\t\t.i_static_sar9_dc_code(i_static_sar9_dc_code),\n\t\t.i_static_sar15_amb_code(i_static_sar15_amb_code),\n\t\t.i_static_sar15_dc_code(i_static_sar15_dc_code),\n\t\t.i_leddac_r_code(i_leddac_r_code),\n\t\t.i_leddac_ir_code(i_leddac_ir_code),\n\t\t.i_idac_sar9_amb_r_code(i_idac_sar9_amb_r_code),\n\t\t.i_idac_sar9_amb_ir_code(i_idac_sar9_amb_ir_code),\n\t\t.i_idac_sar9_dc_r_code(i_idac_sar9_dc_r_code),\n\t\t.i_idac_sar9_dc_ir_code(i_idac_sar9_dc_ir_code),\n\t\t.o_frame_start_400hz(o_frame_start_3200hz),\n\t\t.o_en_tia_low(o_en_tia_low),\n\t\t.o_leddac(o_leddac),\n\t\t.o_leden1_low(o_leden1_low),\n\t\t.o_leden2_low(o_leden2_low),\n\t\t.o_en_test(o_en_test),\n\t\t.o_clk_buf_low(o_clk_buf_low),\n\t\t.o_clk_2m(o_clk_2m),\n\t\t.o_clk_iref_idac_low(o_clk_iref_idac_low),\n\t\t.o_clk_9q1_low(o_clk_9q1_low),\n\t\t.o_clk_15q1_low(o_clk_15q1_low),\n\t\t.o_clk_aferst_low(o_clk_aferst_low),\n\t\t.o_clk_iref_idac_sar9_low(o_clk_iref_idac_sar9_low),\n\t\t.o_clk_iref_idac_sar15_low(o_clk_iref_idac_sar15_low),\n\t\t.o_clk_q2_low(o_clk_q2_low),\n\t\t.o_clk_q3_low(o_clk_q3_low),\n\t\t.o_clk_tiaen_low(o_clk_tiaen_low),\n\t\t.o_en_15sar_low(o_en_15sar_low),\n\t\t.o_en_sar9_amb_low(o_en_sar9_amb_low),\n\t\t.o_en_sar9_dc_low(o_en_sar9_dc_low),\n\t\t.o_en_sar9_iref(o_en_sar9_iref),\n\t\t.o_en_sar15_amb_low(o_en_sar15_amb_low),\n\t\t.o_en_sar15_dc_low(o_en_sar15_dc_low),\n\t\t.o_en_sar15_iref(o_en_sar15_iref),\n\t\t.o_idac_sar9ambn_low(o_idac_sar9ambn_low),\n\t\t.o_idac_sar9dcn_low(o_idac_sar9dcn_low),\n\t\t.o_idac_sar15ambn_low(o_idac_sar15ambn_low),\n\t\t.o_idac_sar15dcn_low(o_idac_sar15dcn_low),\n\t\t.o_s_in(o_s_in)\n\t);",
+                  "line_start": 113,
+                  "line_end": 163
+                }
+              ],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 0,
+                "assigns": 0,
+                "always": 0,
+                "initials": 0,
+                "instances": 1,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 165
+            }
+          ],
+          "source_metrics": {
+            "lines": 165,
+            "nonempty_lines": 152,
+            "line_comments": 96,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 108,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": false
+          },
+          "encoding": "utf-8",
+          "relative_path": "ppg_timing_sar9_3200hz.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

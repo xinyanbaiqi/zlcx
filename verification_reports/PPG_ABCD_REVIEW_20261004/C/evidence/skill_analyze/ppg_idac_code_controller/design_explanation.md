@@ -1,0 +1,147 @@
+# Design Explanation: ppg_idac_code_controller
+
+## Project Topology
+- Selected top module: `ppg_idac_code_controller`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_generation` width=1 role=signal
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_stop_ack_event` width=1 role=signal
+- `input i_status_clear_event` width=1 role=status
+- `input i_control_abort_event` width=1 role=signal
+- `input i_frame_safe_boundary` width=1 role=signal
+- `input i_active_config_epoch` width=1 role=signal
+- `input i_idac_mode` width=2 role=control
+- `input i_amb_enable` width=1 role=control
+- `input i_dcs_enable` width=1 role=control
+- `input i_amb_polarity` width=1 role=signal
+- `input i_dcs_polarity` width=1 role=signal
+- `input i_amb_manual_code` width=1 role=signal
+- `input i_amb_code_min` width=1 role=signal
+- `input i_amb_code_max` width=1 role=signal
+- `input i_dcs_r_manual_code` width=1 role=signal
+- `input i_dcs_r_code_min` width=1 role=signal
+- `input i_dcs_r_code_max` width=1 role=signal
+- `input i_dcs_ir_manual_code` width=1 role=signal
+- `input i_dcs_ir_code_min` width=1 role=signal
+- `input i_dcs_ir_code_max` width=1 role=signal
+- `input i_amb_threshold_low` width=1 role=signal
+- `input i_amb_threshold_high` width=1 role=signal
+- `input i_dcs_threshold_low` width=1 role=signal
+- `input i_dcs_threshold_high` width=1 role=signal
+- `input i_amb_confirm_count` width=8 role=signal
+- `input i_dcs_confirm_count` width=8 role=signal
+- `input i_search_amb_valid` width=1 role=status
+- `output o_search_amb_ready` width=1 role=status
+- `input i_search_dcs_valid` width=1 role=status
+- `output o_search_dcs_ready` width=1 role=status
+- `input i_search_calibrated_s1_value` width=1 role=signal
+- `input i_search_calibration_applied` width=1 role=signal
+- `input i_search_saturation_low` width=1 role=signal
+- `input i_search_saturation_high` width=1 role=signal
+- `input i_search_config_epoch` width=1 role=signal
+- `input i_search_coef_epoch` width=1 role=signal
+- `input i_search_precision_mode` width=1 role=control
+- `input i_search_frame_id` width=1 role=signal
+- `input i_search_sample_index` width=1 role=signal
+- `input i_search_color_ir` width=1 role=signal
+- `input i_search_frame_type` width=2 role=signal
+- `input i_search_amb_code_snapshot` width=1 role=signal
+- `input i_search_dc_code_snapshot` width=1 role=signal
+- `input i_search_amb_code_epoch` width=1 role=signal
+- `input i_search_dc_code_epoch` width=1 role=signal
+- `input i_test_inject_enable` width=1 role=control
+- `input i_test_saturation_inject_valid` width=1 role=status
+- `output o_test_saturation_inject_ready` width=1 role=status
+- `input i_track_valid` width=1 role=status
+- `output o_track_ready` width=1 role=status
+- `input i_track_calibrated_s1_value` width=1 role=signal
+- `input i_track_calibration_applied` width=1 role=signal
+- `input i_track_saturation_low` width=1 role=signal
+- `input i_track_saturation_high` width=1 role=signal
+- `input i_track_config_epoch` width=1 role=signal
+- `input i_track_coef_epoch` width=1 role=signal
+- `input i_track_precision_mode` width=1 role=control
+- `input i_track_frame_id` width=1 role=signal
+- `input i_track_sample_index` width=1 role=signal
+- `input i_track_color_ir` width=1 role=signal
+- `input i_track_frame_type` width=2 role=signal
+- `input i_track_amb_code_snapshot` width=1 role=signal
+- `input i_track_dc_code_snapshot` width=1 role=signal
+- `input i_track_amb_code_epoch` width=1 role=signal
+- `input i_track_dc_code_epoch` width=1 role=signal
+- `input i_amb_sequence_start` width=1 role=signal
+- `output o_amb_sample_request` width=1 role=control
+- `output o_amb_sequence_busy` width=1 role=signal
+- `output o_amb_sequence_done` width=1 role=status
+- `output o_amb_sequence_failed` width=1 role=signal
+- `output o_dcs_sample_request` width=1 role=control
+- `output o_dcs_sample_color_ir` width=1 role=signal
+- `output o_dcs_revalidate_request` width=1 role=status
+- `input i_dcs_revalidate_accept` width=1 role=status
+- `output o_dcs_revalidate_busy` width=1 role=status
+- `output o_dcs_revalidate_done` width=1 role=status
+- `output o_dcs_revalidate_failed` width=1 role=status
+- `output o_amb_code` width=1 role=signal
+- `output o_dcs_r_code` width=1 role=signal
+- `output o_dcs_ir_code` width=1 role=signal
+- `output o_amb_code_epoch` width=1 role=signal
+- `output o_dcs_r_code_epoch` width=1 role=signal
+- `output o_dcs_ir_code_epoch` width=1 role=signal
+- `output o_amb_code_update` width=1 role=signal
+- `output o_dcs_r_code_update` width=1 role=signal
+- `output o_dcs_ir_code_update` width=1 role=signal
+- `output o_dcs_r_track_adjust` width=1 role=signal
+- `output o_dcs_ir_track_adjust` width=1 role=signal
+- `output o_amb_search_done` width=1 role=status
+- `output o_dcs_r_search_done` width=1 role=status
+- `output o_dcs_ir_search_done` width=1 role=status
+- `output o_amb_search_exhausted` width=1 role=signal
+- `output o_dcs_r_search_exhausted` width=1 role=signal
+- `output o_dcs_ir_search_exhausted` width=1 role=signal
+- `output o_amb_pending_valid` width=1 role=status
+- `output o_dcs_r_pending_valid` width=1 role=status
+- `output o_dcs_ir_pending_valid` width=1 role=status
+- `output o_amb_code_at_min` width=1 role=signal
+- `output o_amb_code_at_max` width=1 role=signal
+- `output o_dcs_r_code_at_min` width=1 role=signal
+- `output o_dcs_r_code_at_max` width=1 role=signal
+- `output o_dcs_ir_code_at_min` width=1 role=signal
+- `output o_dcs_ir_code_at_max` width=1 role=signal
+- `output o_amb_fault` width=1 role=signal
+- `output o_dcs_r_fault` width=1 role=signal
+- `output o_dcs_ir_fault` width=1 role=signal
+- `output o_controller_fault_blocking` width=1 role=signal
+- `output o_controller_fault_event` width=1 role=signal
+- `output o_controller_fault_identity_valid` width=1 role=status
+- `output o_controller_fault_frame_id` width=1 role=signal
+- `output o_controller_fault_sample_index` width=1 role=signal
+- `output o_controller_fault_color_ir` width=1 role=signal
+- `output o_controller_fault_frame_type` width=2 role=signal
+- `output o_controller_fault_precision` width=1 role=signal
+- `output o_controller_fault_run_generation` width=1 role=signal
+- `output o_protocol_error_sticky` width=1 role=signal
+- `output o_startup_search_complete` width=1 role=signal
+- `output o_idac_idle` width=1 role=signal
+
+## Feature Mapping
+- `ppg_idac_code_controller reset behavior`: derived from ports, state, and always blocks.
+- `state transition block 1`: derived from ports, state, and always blocks.
+- `state transition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_idac_code_controller` drives known output values after reset release.
+- `fc001`: ppg_idac_code_controller reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 686-695: state_transition
+- `u_block_2` lines 695-838: state_transition
+- `u_block_3` lines 838-1258: logic_partition
+- `u_block_4` lines 1258-1266: logic_partition
+

@@ -1,0 +1,35 @@
+{
+  "reviewed_rows": 1860,
+  "states": {
+    "accepted_literal_or_current_section": 577,
+    "accepted_current_group_with_cross_contract_proof": 435,
+    "confirmed_wrong_source_line": 390,
+    "explicit_gap_or_historical_override_already_documented": 4,
+    "literal_source_match": 100,
+    "accepted_current_section_source": 117,
+    "already_explicitly_documented_phantom": 1,
+    "accepted_current_group_source": 70,
+    "accepted_ten_weight_group": 1,
+    "accepted_current_field_group": 25,
+    "accepted_complete_identity_group": 6,
+    "accepted_current_named_lifecycle_rule": 2,
+    "accepted_complete_transaction_group": 39,
+    "accepted_lifecycle_category_with_explicit_addendum": 7,
+    "accepted_expanded_endpoint_pair": 10,
+    "accepted_explicit_valley_epoch_forwarding": 3,
+    "accepted_event_payload_with_named_output_table": 8,
+    "accepted_expanded_slash_identity": 9,
+    "accepted_complete_fault_group": 42,
+    "accepted_center_metadata_prefix_rule": 12,
+    "module_boundary_index_with_reset_name_conflict": 2
+  },
+  "evidence_files": [
+    "C01_C10_C13_C14_C15_C16_source_rows_864.json",
+    "C02_source_rows_33.json",
+    "C03_C04_source_rows_129.json",
+    "C05_C07_C08_C09_source_rows_291.json",
+    "C11_C17_source_rows_175.json",
+    "C19_C20_C22_C23_C24_source_rows_368.json"
+  ],
+  "limits": "Each record is an actual Source ruling with frozen line text. Name/group acceptance does not sign off every reset, width, CDC, priority or TB scenario."
+}

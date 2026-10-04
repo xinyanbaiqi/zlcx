@@ -1,0 +1,181 @@
+# Design Explanation: ppg_precision_window_integration
+
+## Project Topology
+- Selected top module: `ppg_precision_window_integration`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_detection_discard_event` width=1 role=signal
+- `input i_detection_discard_reason` width=2 role=signal
+- `input i_detection_discard_identity_valid` width=1 role=status
+- `input i_detection_discard_sample_valid` width=1 role=status
+- `input i_detection_discard_frame_id` width=1 role=signal
+- `input i_detection_discard_sample_index` width=1 role=signal
+- `input i_detection_discard_color_ir` width=1 role=signal
+- `input i_detection_discard_frame_type` width=2 role=signal
+- `input i_detection_discard_precision` width=1 role=signal
+- `input i_detection_discard_config_epoch` width=1 role=signal
+- `input i_detection_discard_coef_epoch` width=1 role=signal
+- `input i_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `input i_detection_discard_amb_code_epoch` width=1 role=signal
+- `input i_detection_discard_dc_code_epoch` width=1 role=signal
+- `input i_detection_discard_run_generation` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `output o_detection_datapath_empty` width=1 role=data
+- `input i_active_config_valid` width=1 role=status
+- `input i_run_profile` width=1 role=signal
+- `input i_initial_precision` width=1 role=signal
+- `input i_normal_measurement_active` width=1 role=signal
+- `input i_slope_mode` width=1 role=control
+- `input i_fixed_slope_q16` width=1 role=signal
+- `input i_alpha_q15` width=1 role=signal
+- `input i_beta_q15` width=1 role=signal
+- `input i_timing_adjust_ratio_q15` width=1 role=signal
+- `input i_slope_min_q16` width=1 role=signal
+- `input i_slope_max_q16` width=1 role=signal
+- `input i_baseline_delta_q16` width=1 role=control
+- `input i_cross_hysteresis_q16` width=1 role=signal
+- `input i_lead_min_frames` width=1 role=signal
+- `input i_lead_max_frames` width=1 role=signal
+- `input i_cross_confirm_count` width=1 role=signal
+- `input i_no_cross_limit` width=1 role=signal
+- `input i_peak_confirm_count` width=1 role=signal
+- `input i_valley_confirm_count` width=1 role=signal
+- `input i_direction_deadband` width=1 role=signal
+- `input i_min_peak_valley_amplitude` width=1 role=signal
+- `input i_min_peak_to_valley_frames` width=1 role=signal
+- `input i_min_peak_to_peak_frames` width=1 role=signal
+- `input i_max_fine_window_frames` width=1 role=signal
+- `input i_max_reacquire_frames` width=1 role=signal
+- `input i_peak_valley_config_valid` width=1 role=status
+- `input i_idac_mode` width=2 role=control
+- `input i_amb_enable` width=1 role=control
+- `input i_dcs_enable` width=1 role=control
+- `input i_amb_recheck_interval_frames` width=16 role=signal
+- `input i_normal_result_valid` width=1 role=status
+- `output o_normal_result_ready` width=1 role=status
+- `input i_sample_valid` width=1 role=status
+- `input i_coarse_ppg_value` width=1 role=signal
+- `input i_coarse_valid` width=1 role=status
+- `input i_coarse_recovery_calibrated` width=1 role=signal
+- `input i_stage1_saturation_low` width=1 role=signal
+- `input i_stage1_saturation_high` width=1 role=signal
+- `input i_coarse_saturation_low` width=1 role=signal
+- `input i_coarse_saturation_high` width=1 role=signal
+- `input i_config_epoch` width=1 role=signal
+- `input i_coef_epoch` width=1 role=signal
+- `input i_dc_recovery_coef_epoch` width=1 role=signal
+- `input i_precision_mode` width=1 role=control
+- `input i_frame_id` width=1 role=signal
+- `input i_sample_index` width=1 role=signal
+- `input i_color_ir` width=1 role=signal
+- `input i_frame_type` width=2 role=signal
+- `input i_amb_code_snapshot` width=1 role=signal
+- `input i_dc_code_snapshot` width=1 role=signal
+- `input i_amb_code_epoch` width=1 role=signal
+- `input i_dc_code_epoch` width=1 role=signal
+- `input i_frame_safe_boundary` width=1 role=signal
+- `input i_safe_frame_id` width=1 role=signal
+- `input i_precision_takeover_safe` width=1 role=signal
+- `input i_analog_safe` width=1 role=signal
+- `input i_normal_fork_idle` width=1 role=signal
+- `input i_idac_idle` width=1 role=signal
+- `input i_startup_search_complete` width=1 role=signal
+- `input i_normal_frame_complete_event` width=1 role=signal
+- `input i_calibration_frame_complete_event` width=1 role=signal
+- `input i_amb_sample_request` width=1 role=control
+- `input i_amb_sequence_done` width=1 role=status
+- `input i_amb_sequence_failed` width=1 role=signal
+- `input i_dcs_revalidate_request` width=1 role=status
+- `input i_dcs_sample_request` width=1 role=control
+- `input i_dcs_sample_color_ir` width=1 role=signal
+- `input i_dcs_revalidate_done` width=1 role=status
+- `input i_dcs_revalidate_failed` width=1 role=status
+- `input i_amb_sample_accepted_event` width=1 role=signal
+- `input i_dcs_sample_accepted_event` width=1 role=signal
+- `output o_amb_sequence_start` width=1 role=signal
+- `output o_dcs_revalidate_accept` width=1 role=status
+- `input i_calibration_sample_ready` width=1 role=status
+- `output o_calibration_sample_valid` width=1 role=status
+- `output o_calibration_frame_type` width=2 role=signal
+- `output o_calibration_color_ir` width=1 role=signal
+- `output o_calibration_precision_mode` width=1 role=control
+- `output o_calibration_frame_start` width=1 role=signal
+- `output o_calibration_stage` width=2 role=signal
+- `output o_active_precision_mode` width=1 role=control
+- `output o_fine_window_active` width=1 role=signal
+- `output o_fine_window_start_event` width=1 role=signal
+- `output o_fine_window_start_frame_id` width=1 role=signal
+- `output o_precision_15_to_9_event` width=1 role=signal
+- `output o_precision_15_to_9_frame_id` width=1 role=signal
+- `output o_reacquire_request_event` width=1 role=control
+- `output o_switch_hold_new_transaction` width=1 role=signal
+- `output o_mode_fault_event` width=1 role=control
+- `output o_mode_fault_active` width=1 role=control
+- `output o_mode_fault_identity_valid` width=1 role=status
+- `output o_mode_fault_frame_id` width=1 role=control
+- `output o_mode_fault_sample_index` width=1 role=control
+- `output o_mode_fault_color_ir` width=1 role=control
+- `output o_mode_fault_frame_type` width=2 role=control
+- `output o_mode_fault_precision` width=1 role=control
+- `output o_mode_fault_run_generation` width=1 role=control
+- `output o_normal_frame_count` width=16 role=signal
+- `output o_amb_recheck_pending` width=1 role=signal
+- `output o_amb_recheck_accept` width=1 role=signal
+- `output o_amb_recheck_busy` width=1 role=signal
+- `output o_normal_output_inhibit` width=1 role=signal
+- `output o_recheck_sequence_done` width=1 role=status
+- `output o_recheck_sequence_failed` width=1 role=signal
+- `output o_fir_history_full_r` width=1 role=signal
+- `output o_fir_history_full_ir` width=1 role=signal
+- `output o_fir_idle` width=1 role=signal
+- `output o_detection_fork_idle` width=1 role=signal
+- `output o_detector_idle` width=1 role=signal
+- `output o_controller_idle` width=1 role=signal
+- `output o_scheduler_idle` width=1 role=signal
+- `output o_cross_pending` width=1 role=signal
+- `output o_peak_pending` width=1 role=signal
+- `output o_valley_pending` width=1 role=signal
+- `output o_return_pending` width=1 role=signal
+- `output o_baseline_valid` width=1 role=status
+- `output o_reacquire_active` width=1 role=signal
+- `output o_detector_fine_window_active` width=1 role=signal
+- `output o_switch_pending` width=1 role=signal
+- `output o_switch_target_precision` width=1 role=signal
+- `output o_slope_current_q16` width=1 role=signal
+- `output o_baseline_protocol_error_sticky` width=1 role=control
+- `output o_fine_window_timeout_sticky` width=1 role=signal
+- `output o_reacquire_timeout_sticky` width=1 role=signal
+- `output o_peak_valley_protocol_error_sticky` width=1 role=signal
+- `output o_switch_timeout_sticky` width=1 role=signal
+- `output o_precision_protocol_error_sticky` width=1 role=signal
+- `input i_test_inject_enable` width=1 role=control
+- `input i_test_calibration_loss_inject_valid` width=1 role=status
+- `output o_test_calibration_loss_inject_ready` width=1 role=status
+
+## Feature Mapping
+- `ppg_precision_window_integration reset behavior`: derived from ports, state, and always blocks.
+- `output update block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `logic partition block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `logic partition block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_precision_window_integration` drives known output values after reset release.
+- `fc001`: ppg_precision_window_integration reset behavior
+
+## Decomposition Candidates
+- `u_block_1` lines 518-528: output_update
+- `u_block_2` lines 528-539: logic_partition
+- `u_block_3` lines 539-552: logic_partition
+- `u_block_4` lines 552-565: logic_partition
+- `u_block_5` lines 565-576: logic_partition
+- `u_block_6` lines 576-1032: logic_partition
+

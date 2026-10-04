@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "module_count": 1,
+  "selected_top_module": "ppg_active_v4_control_plane_integration",
+  "top_candidates": [
+    "ppg_active_v4_control_plane_integration"
+  ],
+  "modules": [
+    {
+      "name": "ppg_active_v4_control_plane_integration",
+      "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\evidence\\skill_inputs\\rtl\\ppg_active_v4_control_plane_integration\\ppg_active_v4_control_plane_integration.v",
+      "port_count": 104
+    }
+  ],
+  "instantiation_edges": []
+}

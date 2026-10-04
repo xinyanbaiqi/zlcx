@@ -1,0 +1,1938 @@
+[
+  {
+    "file": "contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 1252,
+    "sha256": "daeb3696c5cd79c33777e81baaea7a54e245ce65dc84f7a6eec7339da64bf675",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+    "layer": "合同",
+    "lines": 644,
+    "sha256": "9f3fd54c51b2971c9664c4b070547b3b4b52a2fe3506c118b8f72737fe4a9e82",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 343,
+    "sha256": "da8ee0946b0b6ef12e2f06d430a0641d5090556ed25c6c9d3f28f00badfbf8d2",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 623,
+    "sha256": "8c2ab1b3600b276e97e2d3b915f1686d61cd155eac8b0d0bdcf3abca67616537",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_IDAC_INTEGRATION_SPEC.md",
+    "layer": "合同",
+    "lines": 494,
+    "sha256": "cb0865fe57aa3b67c9583dcda36f9eb91c63aa9fa94f8582a5aa08f17c235336",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 1337,
+    "sha256": "1746f38958f088676b771c0d00c9d88f80c8313f058db5cca1c70afcdfe048ee",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 346,
+    "sha256": "3686a5ee136e4915a41a387475443b151207d0591bca4ae980b597acf8634ce8",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 157,
+    "sha256": "17309fac6918d258d149294dc6bd89ef224ee29705c39921ac1c0d976580ca85",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "全文实读；overlap/Router正式端口矛盾F-002/F-004；生命周期全行为未仿真",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 205,
+    "sha256": "ab331621683f218728f4397b54a00038f536e837506c495a67dcd232e36b5d2b",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "全文实读并对Router及AMI连接；其余upstream完整身份条款仍待核",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+    "layer": "合同",
+    "lines": 405,
+    "sha256": "ae0c81c737556ae3181c13f0c424d5688638a864d191db15bf24ae5a538998de",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_ALIAS_MAPPING_TABLE.md",
+    "layer": "合同",
+    "lines": 570,
+    "sha256": "91b31083d8c6f83ab8fd9c0db163220337c64aaa63c493f9af96c62bf82c6673",
+    "status": "部分",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "关键章节/identity定义/K条目/C01/C13台账抽读；全引用出现性+边界扫描，F-003；未全量语义核实",
+      "A组逐项台账（2026-10-04b读取）：完成2项，部分3项"
+    ],
+    "remaining": "RTL逐条一致性：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。；验收ID闭环：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。；节号/行号引用：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "contracts/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 408,
+    "sha256": "92334fb64484ca4224939559f5f65b437086051036a8ba980cf771410a58a8f4",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+    "layer": "合同",
+    "lines": 466,
+    "sha256": "4e06c15f90596b54e4adff739fa1d811012f1748e2e07a2e6da6033446350451",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md",
+    "layer": "合同",
+    "lines": 309,
+    "sha256": "50deeefa06e34fbf97bf36fea70347d6527974325753a2b81b231796689981c5",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "SPI协议/38读字节+写方向地图逐项静态核对；关键CDC/P2S段实读；历史长段/全合同未审",
+      "复位结构表与本合同V1.11勘误/实际Top矛盾F-007；翻转位偶数事件能力待续核",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 686,
+    "sha256": "eb2c15a5f4a4a291c7fc4a86ca4d8baa26c59c41c78cb4e24a0adbc6ab71647e",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "注入/检测资格相关条款实读，F-001；其余全文未审",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+    "layer": "合同",
+    "lines": 3920,
+    "sha256": "b858316e4d3c0d33156f31d415cead9ff071fb0236a9d1a91081a79246294cc7",
+    "status": "部分",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "关键章节/identity定义/K条目/C01/C13台账抽读；全引用出现性+边界扫描，F-003；未全量语义核实",
+      "A组逐项台账（2026-10-04b读取）：完成2项，部分3项"
+    ],
+    "remaining": "RTL逐条一致性：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。；验收ID闭环：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。；节号/行号引用：838候选四链、46家族语义抽查、1860端口行名称方向（含十权重展开）、516声明锚点、1860个单独Source、141版本绑定/26摘要及367标签关联已核对；Source待办0、C03两处歧义已裁定。799显式默认位宽/41明示符号属性及4个参数组人工核对、6个缺文件候选已裁定。范围限度：非Source缺省文件名/bounds-only引用未全部逐字语义核实，未重建G-FP全部cluster逐字段项目签核或ASIC CDC；这些不能记通过。F044入口范围为疑似，4份原长回归终态未齐。F003/F024/F045/F046/F048/F050/F051保留。",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+    "layer": "合同",
+    "lines": 954,
+    "sha256": "39c747617ff7da2997c1bfc1e14aaf5c41d38056fba2eb662d4ef13d2ddd299e",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "注入/检测资格相关条款实读，F-001；其余全文未审",
+      "A 2026-10-04：6直接子模块、注册STOP/abort/clear、STATIC许可拆分、物理idle同源、owner/deadline/complete扇出、全部结果/模拟输出、注入/遥测边界实读核对；formal measurement discard五epoch缺口F-008",
+      "A组逐项台账（2026-10-04b读取）：完成5项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "contracts/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+    "layer": "合同",
+    "lines": 666,
+    "sha256": "c34e80b1119df4268f50a2e0c9fc37a1b7dc00ddde2977d11033b1332c824edd",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 966,
+    "sha256": "194705c0cef31aa0f501d7978ae53d72aef490a57d82511899588e4d007ef1a0",
+    "status": "部分",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成1项，部分1项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "合同版本/依赖/逐条验收ID裁定：正文与C相关源码已审；同版本完整系统或其它主责家族动态闭环未完成，逐ID保留部分",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 717,
+    "sha256": "bd4334631a8e2358066fb6c1cbfe84bd5ee9d35ed4bc14ef75f4a7d19f6fc194",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md",
+    "layer": "合同",
+    "lines": 382,
+    "sha256": "c306f6e680d5908101b1588674531372ba067a6490260102cfc0fbf043b175db",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "A组逐项台账（2026-10-04b读取）：完成5项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 716,
+    "sha256": "e32e7300f5519d6f64f04d752e365400c940c3a9858ad28419f71c6c63497c97",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 900,
+    "sha256": "141d74d392d015abf8a0b58d20967805f2c5cd4734dcc640710cbfcee17c15f3",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 1029,
+    "sha256": "31acf05e1799dea0adb833bb91a8564fb538bab809d6a05de29b209b122330a0",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 690,
+    "sha256": "91ec74aa47cc35c3fd57114cb2ed2ab18a8895801ef5649ef1dbe9df5adb6adf",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+    "layer": "合同",
+    "lines": 975,
+    "sha256": "54c4fa13d9a21f3ea4af2d5cbe6402f591547253545012d593d78ca8758583d4",
+    "status": "部分",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "C组逐项台账（2026-10-04b读取）：完成1项，部分1项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "合同版本/依赖/逐条验收ID裁定：正文与C相关源码已审；同版本完整系统或其它主责家族动态闭环未完成，逐ID保留部分",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 918,
+    "sha256": "658fc3c56721a27db369a93057317fd44ebbd4b6bcef6da807dade6a9451451d",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_SCHEDULER_SSW_AMI_PORT_CONNECTION_CHECKLIST.md",
+    "layer": "合同",
+    "lines": 430,
+    "sha256": "ed083489fbbdc64f91794e5f33a7227433370f0577736be7e150e90ef1d497cc",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/ppg_system_active_config_unpack_semantic_contract.md",
+    "layer": "合同",
+    "lines": 117,
+    "sha256": "68b34e9a85cbc7511b4c11c53f294b6538edcc0998018ccba31fd1662d982765",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/ppg_system_config_manager_semantic_contract.md",
+    "layer": "合同",
+    "lines": 395,
+    "sha256": "c17a8d3f174f63ea0bf7ced2affabccd98093776767ee39d1866025e42852d87",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "D组逐项台账（2026-10-04b读取）：完成2项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+    "layer": "合同",
+    "lines": 161,
+    "sha256": "736a478550fc3cc79579485e3c59a79f6f70464c1894c3be4f293751754b845e",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "B组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "contracts/TAPEOUT_FINAL_REVIEW_GUIDE.md",
+    "layer": "合同",
+    "lines": 71,
+    "sha256": "d5722c8a70653d41016030026858a47cafff2442e41a4a7d4e532096f0fc989a",
+    "status": "完成",
+    "checks": [
+      "机械扫描验收ID表列及25份Cxx版本/依赖文本；不以出现性证明闭环",
+      "全文实读；外部路径/过时数字按用户已知背景登记，不当权威",
+      "A组逐项台账（2026-10-04b读取）：完成5项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+    "layer": "RTL",
+    "lines": 884,
+    "sha256": "c4d81ee8dbee3c543667f2818f67de7c58ac6091ca8ac05c167612c04b669b54",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "重点读V1.8 deadline/owner/DONE身份比较；sample-index比较变异触发FSC-32 FAIL；全部FSM仍待审",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+    "layer": "TB",
+    "lines": 936,
+    "sha256": "69c1b54b8025a4de908c76781afc5a9c449409268d0c8e3310db58f8bf71b423",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL FSC-01 THROUGH FSC-59 PASSED"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+    "layer": "RTL",
+    "lines": 500,
+    "sha256": "8ac980d52b4d366f085074a6f7456700ff0754dbbb1235fb8538c2404cc83eb7",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+    "layer": "TB",
+    "lines": 889,
+    "sha256": "78254f0af458f5a629fca47bdddeddc33f64a89c3b223d9f2b9120198f50e8f6",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL AV4C-01 THROUGH AV4C-22 PASSED"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v",
+    "layer": "RTL",
+    "lines": 236,
+    "sha256": "85deb9a0d009701bee65a0bd50486971c9b4edd9933ca40b1ecd5179e44c2b3a",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v",
+    "layer": "TB",
+    "lines": 363,
+    "sha256": "191702160ca1e419b039821cba2b6bb64bdd2dfd63bd2e2cba4eb4186cf2a9dd",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_async_stage_capture explicit-frame checks"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+    "layer": "RTL",
+    "lines": 371,
+    "sha256": "a66ff98db59cea71ad8ffbd2d0c802dbc85938e9bf7dee4293d8a09491aaa262",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+    "layer": "TB",
+    "lines": 475,
+    "sha256": "90a4a573b9978fafd8f07ba950d3736f0570cc3acee4c2655d817ab526bf1d0e",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_dc_recovery DCR-01..DCR-22"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+    "layer": "RTL",
+    "lines": 2681,
+    "sha256": "f74d1ba9b1110dfcf76297669686b6ac2cb73ed5989e93c616a0e641572dad42",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "抽读注入透传、Router/overlap实例、private discard、输出资格消费链；owner/截止/完成释放全协议仍待审",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+    "layer": "TB",
+    "lines": 1642,
+    "sha256": "1d7c1a5e6d0ebaa422c5b0b5d52c38f7fd523b3d3381d800cd4b7ca322e12846",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=AMI-01 through AMI-47 plus N08-01 PASS: 48 real comparisons"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v",
+    "layer": "RTL",
+    "lines": 449,
+    "sha256": "152fdc2c106e2af3a7ed9ea376d1f6e0478737bd2dfc2b1f5ca980b28ec01c02",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "主要代码实读：S2冗余/固定Q16/饱和/缓存/复位/generation discard；C13完整身份差异F-002",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+    "layer": "TB",
+    "lines": 804,
+    "sha256": "295d1f40f29712a14e64104e4a32fb715376a2bc2f83c43a831c73c9b0bf37b0",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_pipeline_overlap_corrector OVL-01..OVL-17 and 1024-code sweep"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v",
+    "layer": "RTL",
+    "lines": 352,
+    "sha256": "73ad711d4bfdeac7ac125ab4f62ce10152a5956df9ac1410e2d20cca34ad8d70",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "主要代码实读：signed中心化/增益乘法宽度/Q17对称舍入/15bit饱和/精度资格/缓存复位；中心值变异触发1042条FAIL",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v",
+    "layer": "TB",
+    "lines": 415,
+    "sha256": "edbf1bc94b01aeb89274cf39b5506c376faaa0612841447c69e3c43875d6210d",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_programmable_reconstructor PR-01..PR-14 and 1024-code sweep"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_result_router/ppg_adc_result_router.v",
+    "layer": "RTL",
+    "lines": 187,
+    "sha256": "472390c45bb0f342e650cf6e4fec7aa32838e09063b70b7a5bc5ac0a619e869c",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "全文代码+C12全文/C13主要边界核对：纯组合、one-hot类别、非法类别消费、复位门控；复位变异触发FAIL；F-004",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v",
+    "layer": "TB",
+    "lines": 516,
+    "sha256": "94ad5eca0bddb7fe1473bb7d0118c94c7bdedf9bbd2869ca6433ff7d6bf47f6b",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_result_router RTR-01..RTR-13"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v",
+    "layer": "RTL",
+    "lines": 310,
+    "sha256": "7cd14d494a928dc60116fa8dc8c98f9b35cbd48e7a32263fc11d83b924575feb",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "代码实读：33bit最坏累加范围/Q16对称舍入/12bit饱和/载荷保持/复位；移除offset变异触发1036条FAIL",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v",
+    "layer": "TB",
+    "lines": 681,
+    "sha256": "28c4af5918a28759e7975c43f2ac9d14f8c105308c9d8900cd9ecbf3d9d5ab19",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_s1_programmable_calibrator CAL-01..CAL-17"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v",
+    "layer": "RTL",
+    "lines": 314,
+    "sha256": "974c7b44c4619ec06b8bdb15e6b5ac6a0166148098d2384eea1f9833f5882583",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "代码实读：-4..515 signed11/钳位/上下文握手/保持/复位；符号反转变异触发1031条FAIL",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_adc_s1_redundancy_corrector/tb_ppg_adc_s1_redundancy_corrector.v",
+    "layer": "TB",
+    "lines": 577,
+    "sha256": "fdd3226c3a23a50b684e8d1e108fab9ef5db721bf96c01a305c65a73dadec7c6",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS ppg_adc_s1_redundancy_corrector integrated exhaustive checks"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v",
+    "layer": "RTL",
+    "lines": 374,
+    "sha256": "f373e942e1da2ee7dcc084c09dbfa018a01f7b63fd0968be20da9ad4d11d2d2b",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+    "layer": "TB",
+    "lines": 655,
+    "sha256": "00a66a34db92bc26c145fd41fb5ece254d9397246d528a5b6b2bbca862f93caf",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_amb_recheck_scheduler completed scheduler regression"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+    "layer": "RTL",
+    "lines": 222,
+    "sha256": "868a1b4817c0695bb5ba9632877c2bf3d798f4fe6abe430497c059ea64ff1cd4",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+    "layer": "TB",
+    "lines": 497,
+    "sha256": "68d3a1441a4637451a3c90381b6da60e89eb41f0b71b20936b027b793599a1b3",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成2项，部分1项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL CCC-01 TO CCC-26 PASS (26 checks)"
+    ],
+    "remaining": "技能静态门禁/真实编译：真实Icarus编译/运行见A固定版原始证据；TB风格豁免，不计新S4；toolchain未请求；comment scanned_files=0不作全文扫描通过证据；formatter静态compile/AST失败，未绕过或记通过：['> ERR: [Python] only single module sources are currently supported.']",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+    "layer": "RTL",
+    "lines": 667,
+    "sha256": "f2b0d7e4091225b860604ba47631305b7674c9662cd3759d3a8f2bef7a4a23d2",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "抽读SPI pad直连/源域复位/实际层次；芯片原TB与采样时刻变异A/B；全部顶层端口仍待审",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+    "layer": "TB",
+    "lines": 893,
+    "sha256": "8995204429dfd2612ee9d05bde6a985706c2a423fc6de4653529523e42cf1f70",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "SPI采样任务实读，真实边沿副本3个FAIL，F-006；P2S和其他任务未全文审",
+      "D组逐项台账（2026-10-04b读取）：完成2项，部分1项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=TB_CHIP_DIGITAL_TOP_PASS all scenarios passed"
+    ],
+    "remaining": "技能静态门禁/真实编译：真实Icarus编译/运行见A固定版原始证据；TB风格豁免，不计新S4；toolchain未请求；comment scanned_files=0不作全文扫描通过证据；formatter静态compile/AST失败，未绕过或记通过：['> ERR: [Python] only single module sources are currently supported.']",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v",
+    "layer": "RTL",
+    "lines": 768,
+    "sha256": "23bb5745e5f4b22077d841e00690bc0401672232822c8f638ead3d568705a011",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v",
+    "layer": "TB",
+    "lines": 1191,
+    "sha256": "2cf3f32604bdfb4a3b8698e435fee8edc039595ba56426212bbb9a376acf5bd9",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PPG_COARSE_DETECTION_FIR_V2_TB_PASS pass=103"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+    "layer": "RTL",
+    "lines": 192,
+    "sha256": "2c62b8960f7778ff0618eec95c917eca12acbbfaef420762f5af6ae3fe3d7e30",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "全文代码实读：req/ack toggle、稳定总线邮箱、busy拒绝、两域同步链与复位；ASIC约束/独立复位未签核",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/ppg_control_top.v",
+    "layer": "RTL",
+    "lines": 1606,
+    "sha256": "71e8e06632fe2eee6655373b21567a853abad3c1ad7ba96c9151b37c83b8441e",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "抽读注入参数/端口/AMI连线、SPI telemetry、ADC idle链；全端口/复位/owner协议仍待审",
+      "A 2026-10-04：6直接子模块、注册STOP/abort/clear、STATIC许可拆分、物理idle同源、owner/deadline/complete扇出、全部结果/模拟输出、注入/遥测边界实读核对；formal measurement discard五epoch缺口F-008",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+    "layer": "TB",
+    "lines": 934,
+    "sha256": "e31cf4e9bf2c408024fba6919dfa73e2a014645ced1a93eee37bff134a018c6b",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "外部wall-clock上限截断，rc=124，回归未完成，不能裁定RTL/TB自身超时",
+      "A：全部有效代码实读，真实比较/输入驱动/注入参数/watchdog/结束/容差/硬编码核对；robust监视器最小A/B揭示F-016/017；smoke原71 PASS。其他长TB仍等待完整回归。",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=LONGRUN_TB_PASS real_red=1200 real_ir=1200 real_cal=0 elapsed_ns=2998332499 measurement_result_valid=2399"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top.v",
+    "layer": "TB",
+    "lines": 3194,
+    "sha256": "d1adbd14d19c993385cbad8dcb8ce4135eadcd1a9cf25156bb1c7244e9a58737",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A：全部有效代码实读，真实比较/输入驱动/注入参数/watchdog/结束/容差/硬编码核对；robust监视器最小A/B揭示F-016/017；smoke原71 PASS。其他长TB仍等待完整回归。",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=SMOKE_TB_PASS real_adc_responses=49 measurement_result_valid=33"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+    "layer": "TB",
+    "lines": 1462,
+    "sha256": "8789d9d701980415afb9c52ee936a9a7b073bdfba66635b4bc386ba04f40c9ad",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ADC_NUMERIC_SCOREBOARD_TB_PASS result_captures=16 track_branch_fires=16"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+    "layer": "TB",
+    "lines": 1907,
+    "sha256": "897e844723008687ded8b78284b5464348b0d979b717c807cd8374ba56390efa",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "外部wall-clock上限截断，rc=124，回归未完成，不能裁定RTL/TB自身超时",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=BASELINE_CROSS_TB_PASS real_red=1106 real_ir=1104 real_cal=0 measurement_result_valid=2207 peak_count=6 valley_count=3 cross_count=1 return_count=1"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+    "layer": "TB",
+    "lines": 1712,
+    "sha256": "0b7bbd186721385bbac61d8c52732318b295fb529441d2574b7503d52b267a47",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "外部wall-clock上限截断，rc=124，回归未完成，不能裁定RTL/TB自身超时",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=FIR_TAIL_ISOLATION_TB_PASS real_red=900 real_ir=898 real_cal=0 measurement_result_valid=1798 peak_count=5 valley_count=4 cross_count=2 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+    "layer": "TB",
+    "lines": 1532,
+    "sha256": "9bf2b8a17c38e7d9281b7a1ff87fbea3302d6318f5d0f15cd7a1f65757790db6",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成2项，部分1项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155"
+    ],
+    "remaining": "技能静态门禁/真实编译：真实Icarus编译/运行见A固定版原始证据；TB风格豁免，不计新S4；toolchain未请求；comment scanned_files=0不作全文扫描通过证据；formatter静态compile/AST失败，未绕过或记通过：['> ERR: [Python] control parser strict failure.']",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+    "layer": "TB",
+    "lines": 1045,
+    "sha256": "ef625b97c40ced83a285d4df65769feb6bc2c860bb3a859b3f611b03c5f36e57",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=INJ_TB_PASS"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+    "layer": "TB",
+    "lines": 2216,
+    "sha256": "6612c017179f8e0339fc801b83b28b0c3efda9f706330ae67b073c9ae09718ab",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成2项，部分1项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=69 static_vector_checks=3000"
+    ],
+    "remaining": "技能静态门禁/真实编译：真实Icarus编译/运行见A固定版原始证据；TB风格豁免，不计新S4；toolchain未请求；comment scanned_files=0不作全文扫描通过证据；formatter静态compile/AST失败，未绕过或记通过：['> ERR: [Python] control parser strict failure.', 'unclosed_block_comment']",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+    "layer": "TB",
+    "lines": 2172,
+    "sha256": "bf385b9ac6ed57f18efe2fb51340968226e7f81556c6877e2db23f02eff8edcd",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=LIFECYCLE_FAULT_ADC_ANOMALY_TB_PASS result_captures=8 owner_commit_total=244 measurement_discard_events=3 detection_discard_events=0"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+    "layer": "TB",
+    "lines": 1987,
+    "sha256": "22f2b50ba80ba0d2c3babe8c847fe7df806a9745031a83a20f7a6df30ffe9e6d",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A：全部有效代码实读，真实比较/输入驱动/注入参数/watchdog/结束/容差/硬编码核对；robust监视器最小A/B揭示F-016/017；smoke原71 PASS。其他长TB仍等待完整回归。",
+      "A组逐项台账（2026-10-04b读取）：完成6项，部分1项",
+      "Icarus原TB当前状态：running；未作通过结论"
+    ],
+    "remaining": "运行日志/入口脚本判据：所列静态比较/驱动/时限/终判/路径及各ID语义已审；原最小监视器A/B不冒充完整DUT变异。完整原长回归仍运行或排队，终态未核对。",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+    "layer": "TB",
+    "lines": 862,
+    "sha256": "b9cbceea7d041d5b13d352d76e4d5656073f454bdd5b88ccc2836ea8fc64553e",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A：全部有效代码实读，真实比较/输入驱动/注入参数/watchdog/结束/容差/硬编码核对；robust监视器最小A/B揭示F-016/017；smoke原71 PASS。其他长TB仍等待完整回归。",
+      "A组逐项台账（2026-10-04b读取）：完成6项，部分1项",
+      "Icarus原TB当前状态：running；未作通过结论"
+    ],
+    "remaining": "运行日志/入口脚本判据：所列静态比较/驱动/时限/终判/路径及各ID语义已审；原最小监视器A/B不冒充完整DUT变异。完整原长回归仍运行或排队，终态未核对。",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+    "layer": "TB",
+    "lines": 1111,
+    "sha256": "58f439fdbdf7c26c3595049eefc0ae0099d60815279aa116ad085d40e4502d7e",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=NO_RECHECK_CONTROL_TB_PASS result_captures=1627 owner_commit_total=1655"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+    "layer": "TB",
+    "lines": 1558,
+    "sha256": "b7f43959eb56e35a1d3fcd6b9588308aec55f0864c8f5e5a8b7f5bb1f4308e97",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=NORMAL_SLOW_TRACKING_TB_PASS result_captures=1406 owner_commit_total=1477"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+    "layer": "TB",
+    "lines": 1887,
+    "sha256": "87c33b5f0c14968732624023986f0443df624a9c84b35412fb40a3c0c6b3f70e",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=35 owner_commit_total=224 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+    "layer": "TB",
+    "lines": 1581,
+    "sha256": "0c242a3ee32be82f19ecabb6a756d1beac7ae1ee07f612ea92a8f433eba26b0a",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PEAK_VALLEY_RETURN_TB_PASS real_red=700 real_ir=698 real_cal=0 measurement_result_valid=1398 peak_count=4 valley_count=3 cross_count=1 return_count=1 first_sar15_peak_frame=464 first_sar15_valley_frame=601"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+    "layer": "TB",
+    "lines": 1513,
+    "sha256": "b8b80d0341f1fc7417becf7168785ca23d07a0927bd5693c03940806b7afd9ca",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PERIODIC_RECHECK_RECOVERY_TB_PASS result_captures=2821 owner_commit_total=2906"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_robustness_corner_waveforms.v",
+    "layer": "TB",
+    "lines": 1770,
+    "sha256": "a6da3bcfb73475779ac14224134242d79ccfeb101492f8af2cf3c5360382f0dc",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A：全部有效代码实读，真实比较/输入驱动/注入参数/watchdog/结束/容差/硬编码核对；robust监视器最小A/B揭示F-016/017；smoke原71 PASS。其他长TB仍等待完整回归。",
+      "A组逐项台账（2026-10-04b读取）：完成6项，部分1项",
+      "Icarus原TB当前状态：running；未作通过结论"
+    ],
+    "remaining": "运行日志/入口脚本判据：所列静态比较/驱动/时限/终判/路径及各ID语义已审；原最小监视器A/B不冒充完整DUT变异。完整原长回归仍运行或排队，终态未核对。",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+    "layer": "TB",
+    "lines": 1503,
+    "sha256": "4dc3b7f6c345636ad9d7be33ef9ee0a27441cfe7334df0375e58378aa4ac6afd",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=STARTUP_IDAC_CALIBRATION_TB_PASS result_captures=2"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v",
+    "layer": "TB",
+    "lines": 531,
+    "sha256": "5423995a9a1cb975354bea873be66deb192df64f952d9d3442be605d0d2afd72",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=RAWGEN_SELFCHECK_PASS"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_digital_esd_shell/ppg_digital_esd_shell.v",
+    "layer": "RTL",
+    "lines": 97,
+    "sha256": "500295040cb2422dd71ff9b79e25579c651659e84867634813d14a9fd840bce5",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_digital_shell/ppg_digital_shell.v",
+    "layer": "RTL",
+    "lines": 107,
+    "sha256": "731c73bdd6828b3f18faf8eee1c708da7b0ce9551536a48e3d6e33db31c1539c",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_dual_precision_top/ppg_dual_precision_top.v",
+    "layer": "RTL",
+    "lines": 451,
+    "sha256": "964b8e8d3e45c563694fda4d14dc811db505676fc8a0ab604632eb6de081ddb1",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_dual_precision_top/tb_ppg_dual_precision_top.v",
+    "layer": "TB",
+    "lines": 384,
+    "sha256": "8b7181e40e9f5f3104aa07cfc3f11da048ef5fae655b489a81792a8ef7b197d6",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_dual_precision_top CDC and frame-safe timing contract verified"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+    "layer": "RTL",
+    "lines": 1697,
+    "sha256": "2c0fa949bd3c9e98ab8a64a66ec7f8cf8b1c22badd744ed0d0c66b3871b9629a",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_cross_detector.v",
+    "layer": "TB",
+    "lines": 1323,
+    "sha256": "1332217414708939f917c7d3c7be2285ed3f0d6886de6bdc138c8b812e0f1498",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL BSL-01 THROUGH BSL-39, OPT-01 THROUGH OPT-24 AND OPTC-01 THROUGH OPTC-02 PASS count=65"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence.v",
+    "layer": "TB",
+    "lines": 220,
+    "sha256": "222ab30262ab65948ec887555aac2d0d3fa76904969d541fd5674986ee536238",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PHASE_A_ARITH_EQV PASS vectors=20005"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+    "layer": "RTL",
+    "lines": 1266,
+    "sha256": "aab9725db3bb47815890f0cb4fec507d3ceec5053b55913dcc3e766c17d7c9ef",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+    "layer": "TB",
+    "lines": 893,
+    "sha256": "607bebeb0bdfa135a9437f0d40c5d76094f2bca4bb86b47e96fb37570ce5add5",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v",
+    "layer": "RTL",
+    "lines": 322,
+    "sha256": "ce612e8c00d3d7fa84c3bd66cd9095d593c2cb59006df9dfb8a17814fb802985",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+    "layer": "TB",
+    "lines": 589,
+    "sha256": "1e348815bf517c2ad0532660084e047a62b25f7a989b999ced11364140a24a16",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+    "layer": "RTL",
+    "lines": 218,
+    "sha256": "8079042c4ed4581bd8c8279e4ad38ece1d665f6a334a8b0b6961edf38b499c35",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+    "layer": "RTL",
+    "lines": 1003,
+    "sha256": "d84353d813b6f51722301f3d6893a428f4ddb88df8bd0f0713ead199632cce5c",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "C组逐项台账（2026-10-04b读取）：完成7项，部分2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "八门禁:testbench：目录门禁原始not_requested；完整运行及覆盖义务按TB/ID独立台账，既有缺口未修复；八门禁:toolchain：目录门禁原始not_requested；Icarus实际证据已有；Vivado xsim/综合、ASIC时序/CDC未验证",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+    "layer": "TB",
+    "lines": 1204,
+    "sha256": "fceade05e8029929b7ae694510e0605e5563e503cb0621b387e7483f36215637",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "C组逐项台账（2026-10-04b读取）：完成2项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PVW-01 through PVW-48 ALL PASS: 54 checks"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+    "layer": "RTL",
+    "lines": 889,
+    "sha256": "969c45a2f32b074305ea3c1dc87259584d6cd9027ee38fa310d34d879432227d",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "重点读09-17两类sticky保持、START/diag-clear；START清sticky变异触发PWC-41 FAIL；全模块仍待审",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+    "layer": "TB",
+    "lines": 776,
+    "sha256": "9efa7c87eb736ac935690785442648df5030b2cbaeb06d8634eed30b4f283835",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "关键RTL变异负向抽查触发FAIL；并非全部断言逐项审阅",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PWC-01 through PWC-41 ALL PASS pass=48 fail=0"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_precision_window_integration/ppg_precision_window_integration.v",
+    "layer": "RTL",
+    "lines": 1032,
+    "sha256": "cbc7ba4aad87648a93f6b81357b81f6f85dd00c71d9670cfc6ef57c041fa2b57",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "抽读注入直通FIR链；全部PWI协议和算法连接仍待审",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+    "layer": "TB",
+    "lines": 854,
+    "sha256": "d4d7d7e0816b8132cfab17a4155b40f249d811c3cc0bf432aef5b06cc5b105e2",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL PWI-01 THROUGH PWI-05 PASS count=5"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+    "layer": "RTL",
+    "lines": 110,
+    "sha256": "8b7f25669591c59ec2dd1fe0b3c019d1026e85fbdad7f5f3889f48b4921b7d94",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "全文代码实读：toggle/两级目标同步/差分脉冲；SPI4MHz下命令间隔反驳常规丢脉冲候选；任意使用条件未全量证明",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+    "layer": "RTL",
+    "lines": 85,
+    "sha256": "7ee1afa9e2cb9e714b1888d64b256a68278befc818207f994cf7a6d7bdc2da2e",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "全文代码实读：异步assert/两级同步释放；跨域系统复位政策未全部核对",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v",
+    "layer": "RTL",
+    "lines": 1519,
+    "sha256": "57200e064fac1664595b4f847e49d41af616ec51dd13d9c15b67f8712f8277c2",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+    "layer": "TB",
+    "lines": 1116,
+    "sha256": "0a69f30cad700489d64a2b0f0008fb0b226a167ccfaee25adc6afe36ed13efeb",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=ALL SSW-01 THROUGH SSW-52 PASS"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+    "layer": "RTL",
+    "lines": 681,
+    "sha256": "533b979bdf7815c6bf3d0856ea48e7d8a0953a4b41414d5a044fad0d11aebcc0",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "全文代码+SPI地址/位段/写属性/复位实读；38诊断及128影子字节独立对照；真实Mode0错位F-005",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+    "layer": "RTL",
+    "lines": 211,
+    "sha256": "0009d9f5d914f1d0d87aada1e651b743790de1bc4ab738756315a2ec59f7d962",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+    "layer": "TB",
+    "lines": 340,
+    "sha256": "141dc698c74ceec75c00dd78992b324dbed7b472ac9a3ccd298dfb0c16709d62",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_system_active_config_unpack all checks passed"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+    "layer": "RTL",
+    "lines": 733,
+    "sha256": "0561a86d19b87cbafbbd3d29d02d5afdc22080a4b46b037ef54d91346570d00c",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "D组逐项台账（2026-10-04b读取）：完成3项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+    "layer": "TB",
+    "lines": 980,
+    "sha256": "684d3a125800ead9d4fc9caa435a761ffb935b9365c167ab878581f468e27e4b",
+    "status": "部分",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "D组逐项台账（2026-10-04b读取）：完成2项，部分1项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed"
+    ],
+    "remaining": "技能静态门禁/真实编译：真实Icarus编译/运行见A固定版原始证据；TB风格豁免，不计新S4；toolchain未请求；comment scanned_files=0不作全文扫描通过证据；formatter静态compile/AST失败，未绕过或记通过：['> ERR: [Python] control parser strict failure.']",
+    "owner": "D",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-edf3-7221-9fc4-3dd2391369a9\\ppg_review_D\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+    "layer": "RTL",
+    "lines": 465,
+    "sha256": "c725a8a1e9ee779fba14601d1da6c8a8efbff2fea6ec6cb7d7fe2143d88a14d3",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "B组逐项台账（2026-10-04b读取）：完成4项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+    "layer": "TB",
+    "lines": 511,
+    "sha256": "e3652cafe38f1c320972ce3ef41e432b4ae95a3efc92a03ca7d832ed317b47f0",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "B组逐项台账（2026-10-04b读取）：完成3项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=SUP-01 through SUP-10 PASS: 14 real comparisons"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "B",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-55cb-7173-9e41-1e0b27c41d49\\ppg_review_B\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_3200hz_validation/tb_ppg_timing_3200hz.v",
+    "layer": "TB",
+    "lines": 266,
+    "sha256": "445d3b64aaa130106abbe42e5d09629d6f4b553790c28621f25ee20eb40f635d",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: 3200 Hz frame, 80 us R/IR offsets, and Q3-center alignment verified."
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar15/ppg_timing_sar15.v",
+    "layer": "RTL",
+    "lines": 465,
+    "sha256": "23406c4eb636468a9cc8d75b6b5219caadb60a3ac2b327a04500d08325cfa467",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar15/ppg_timing_sar15_3200hz.v",
+    "layer": "RTL",
+    "lines": 165,
+    "sha256": "b802d1f548bdd5e323cf864b5aed7cf02122387e656414ebc2c4c3b7a1277928",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar15/tb_ppg_timing_sar15.v",
+    "layer": "TB",
+    "lines": 456,
+    "sha256": "248fe9ccc150a035c8ee8d9f3503c2b05c82514b31ba87e6d2b9b3634755446d",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_timing_sar15 optical, test-MUX, and static characterization modes matched."
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar9/ppg_timing_sar9.v",
+    "layer": "RTL",
+    "lines": 474,
+    "sha256": "bc21c96137d0ff43b979914bbf5a0836a01e908748d5d1089623259ee938df30",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar9/ppg_timing_sar9_3200hz.v",
+    "layer": "RTL",
+    "lines": 165,
+    "sha256": "7be12418cf5890bb9840e57db3782a46ab17be27a9a2c77881c283211fe3e699",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "仓库strict deliverable gate已运行，规则计数已记录",
+      "仓库verilog_lint external=none返回0",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成10项"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_timing_sar9/tb_ppg_timing_sar9.v",
+    "layer": "TB",
+    "lines": 548,
+    "sha256": "d4d35f7604c25aa31c5d4f8f3e70a15bf1615906ef343808f0a6c307985a78a3",
+    "status": "完成",
+    "checks": [
+      "Icarus11 -Wall 编译/elaborate通过（RTL为-g2005；TB为-g2012）",
+      "include与精确依赖可解析（来自入库filelist/TB_TABLE）",
+      "A 2026-10-04：全部有效代码全文审阅；复位、无FSM/非法光学安全编码、默认组合赋值、13-bit 5000/625边界、预建立锁存、R/IR窗口、48/32/123-bit拼接和输出选择核对；实际 AST analyze 与原门禁复用；4 TB真实FAIL变异均触发",
+      "A组逐项台账（2026-10-04b读取）：完成7项",
+      "Icarus原TB当前状态：finished; rc=0；最终横幅=PASS: ppg_timing_sar9 optical, test-MUX, and static characterization modes matched."
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "A",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd16-9489-7e50-a7b6-a1178fd92bf1\\ppg_audit\\coverage_A.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+    "layer": "TB支持",
+    "lines": 806,
+    "sha256": "b150c8a4ccc57680b68e83daaa953d299201042fd3bd0b1f3136aa4caf37101b",
+    "status": "完成",
+    "checks": [
+      "include自包含编译可解析",
+      "ID出现性机械扫描",
+      "实际回归使用；未全文语义审阅",
+      "C组逐项台账（2026-10-04b读取）：完成1项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  },
+  {
+    "file": "rtl/ppg_control_top/tb_ppg_real_raw_generator.vh",
+    "layer": "TB支持",
+    "lines": 363,
+    "sha256": "0eb1b5449241a9098212935374149097438a3eeaa6a7c32f58cd1c47ecf01323",
+    "status": "完成",
+    "checks": [
+      "include自包含编译可解析",
+      "ID出现性机械扫描",
+      "实际回归使用；未全文语义审阅",
+      "C组逐项台账（2026-10-04b读取）：完成1项",
+      "当前逐项已审：全文语义、全部端口、复位、状态异常、握手、位宽、注释及TB有效性；具体证据见分组逐项台账"
+    ],
+    "remaining": "所列要求已审；不等于穷尽输入状态空间或ASIC签核",
+    "owner": "C",
+    "coverage_source": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\02\\01a0fd78-b9b8-78f2-8e39-c02cd0049c19\\ppg_review_C\\coverage.csv"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "tb": "tb_ppg_control_top_startup_idac_calibration",
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "timeout",
+    "21600",
+    "/tmp/ppg_audit_iverilog_20261004/bin/vvp",
+    "-M",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-i",
+    "/tmp/ppg_native_regressions_vpi_20261004/tb_ppg_control_top_startup_idac_calibration/sim.vvp"
+  ],
+  "run_rc": 0,
+  "original_sha256": "54561607d9bbbf8c05c13b083921bd82b41ffe29d7799eb5698c56534ceede03",
+  "relocated_sha256": "d5f7d1fc4de2044c9185d650d20d4902a6864cedbcf36641e4f1d6162b579aef",
+  "changed_lines": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "inverse_identical": true,
+  "note": "Only six simulator VPI library path literals relocated; no RTL/TB bytes or simulation instructions changed."
+}

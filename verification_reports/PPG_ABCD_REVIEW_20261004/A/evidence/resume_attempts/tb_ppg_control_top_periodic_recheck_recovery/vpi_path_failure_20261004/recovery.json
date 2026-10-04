@@ -1,0 +1,31 @@
+{
+  "tb": "tb_ppg_control_top_periodic_recheck_recovery",
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Debian",
+    "--cd",
+    "/tmp",
+    "--exec",
+    "timeout",
+    "21600",
+    "/tmp/ppg_audit_iverilog_20261004/bin/vvp",
+    "-M",
+    "/tmp/ppg_audit_iverilog_20261004/lib/x86_64-linux-gnu/ivl",
+    "-i",
+    "/tmp/ppg_native_regressions_vpi_20261004/tb_ppg_control_top_periodic_recheck_recovery/sim.vvp"
+  ],
+  "run_rc": 0,
+  "original_sha256": "b40a0f15a69d0f2af5cf6e0a4a48c2534b0c59918ee61baf425f0cf1ce06daba",
+  "relocated_sha256": "1e06ae5ce44fefc6dbcada1d1d2ee6166f0a28ad040177cb9021b5b90bc33a6d",
+  "changed_lines": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "inverse_identical": true,
+  "note": "Only six simulator VPI library path literals relocated; no RTL/TB bytes or simulation instructions changed."
+}

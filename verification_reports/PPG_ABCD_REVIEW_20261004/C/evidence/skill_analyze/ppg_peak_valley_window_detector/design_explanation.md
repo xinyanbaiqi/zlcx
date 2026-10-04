@@ -1,0 +1,170 @@
+# Design Explanation: ppg_peak_valley_window_detector
+
+## Project Topology
+- Selected top module: `ppg_peak_valley_window_detector`
+- Module count: 1
+
+## Interface Summary
+- `input i_clk` width=1 role=clock
+- `input i_rstn` width=1 role=reset
+- `input i_run_enable` width=1 role=control
+- `input i_start_ack_event` width=1 role=signal
+- `input i_diag_clear_event` width=1 role=signal
+- `input i_recheck_accept_event` width=1 role=signal
+- `input i_recheck_busy` width=1 role=signal
+- `input i_recheck_done_event` width=1 role=status
+- `input i_recheck_success` width=1 role=signal
+- `input i_reacquire_active` width=1 role=signal
+- `input i_detection_discard_event` width=1 role=signal
+- `input i_detection_discard_reason` width=2 role=signal
+- `input i_detection_discard_identity_valid` width=1 role=status
+- `input i_detection_discard_sample_valid` width=1 role=status
+- `input i_detection_discard_frame_id` width=1 role=signal
+- `input i_detection_discard_sample_index` width=1 role=signal
+- `input i_detection_discard_color_ir` width=1 role=signal
+- `input i_detection_discard_frame_type` width=2 role=signal
+- `input i_detection_discard_precision` width=1 role=signal
+- `input i_detection_discard_config_epoch` width=1 role=signal
+- `input i_detection_discard_coef_epoch` width=1 role=signal
+- `input i_detection_discard_dc_recovery_epoch` width=1 role=signal
+- `input i_detection_discard_amb_code_epoch` width=1 role=signal
+- `input i_detection_discard_dc_code_epoch` width=1 role=signal
+- `input i_detection_discard_run_generation` width=1 role=signal
+- `input i_run_generation` width=1 role=signal
+- `output o_local_empty` width=1 role=signal
+- `input i_peak_confirm_count` width=1 role=signal
+- `input i_valley_confirm_count` width=1 role=signal
+- `input i_direction_deadband` width=1 role=signal
+- `input i_min_peak_valley_amplitude` width=1 role=signal
+- `input i_min_peak_to_valley_frames` width=1 role=signal
+- `input i_min_peak_to_peak_frames` width=1 role=signal
+- `input i_max_fine_window_frames` width=1 role=signal
+- `input i_max_reacquire_frames` width=1 role=signal
+- `input i_peak_valley_config_valid` width=1 role=status
+- `input i_characterization_mode` width=1 role=control
+- `input i_result_valid` width=1 role=status
+- `output o_result_ready` width=1 role=status
+- `input i_filtered_ppg_value` width=1 role=signal
+- `input i_detection_qualified` width=1 role=signal
+- `input i_window_saturation_low` width=1 role=signal
+- `input i_window_saturation_high` width=1 role=signal
+- `input i_fir_saturation_low` width=1 role=signal
+- `input i_fir_saturation_high` width=1 role=signal
+- `input i_config_epoch` width=1 role=signal
+- `input i_coef_epoch` width=1 role=signal
+- `input i_dc_recovery_coef_epoch` width=1 role=signal
+- `input i_precision_mode` width=1 role=control
+- `input i_frame_id` width=1 role=signal
+- `input i_sample_index` width=1 role=signal
+- `input i_color_ir` width=1 role=signal
+- `input i_frame_type` width=2 role=signal
+- `input i_fine_window_start_event` width=1 role=signal
+- `input i_fine_window_start_frame_id` width=1 role=signal
+- `input i_active_precision_mode` width=1 role=control
+- `output o_return_9bit_valid` width=1 role=status
+- `input i_return_9bit_ready` width=1 role=status
+- `output o_return_reason` width=2 role=signal
+- `output o_return_frame_id` width=1 role=signal
+- `output o_peak_valid` width=1 role=status
+- `input i_peak_ready` width=1 role=status
+- `output o_peak_value` width=1 role=signal
+- `output o_peak_frame_id` width=1 role=signal
+- `output o_peak_sample_index` width=1 role=signal
+- `output o_peak_config_epoch` width=1 role=signal
+- `output o_peak_coef_epoch` width=1 role=signal
+- `output o_peak_dc_recovery_coef_epoch` width=1 role=signal
+- `output o_valley_valid` width=1 role=status
+- `input i_valley_ready` width=1 role=status
+- `output o_valley_value` width=1 role=signal
+- `output o_valley_frame_id` width=1 role=signal
+- `output o_valley_sample_index` width=1 role=signal
+- `output o_valley_config_epoch` width=1 role=signal
+- `output o_valley_coef_epoch` width=1 role=signal
+- `output o_valley_dc_recovery_coef_epoch` width=1 role=signal
+- `output o_detector_idle` width=1 role=signal
+- `output o_fine_window_active` width=1 role=signal
+- `output o_reacquire_search_active` width=1 role=signal
+- `output o_fine_window_timeout_sticky` width=1 role=signal
+- `output o_reacquire_timeout_sticky` width=1 role=signal
+- `output o_protocol_error_sticky` width=1 role=signal
+
+## Feature Mapping
+- `ppg_peak_valley_window_detector reset behavior`: derived from ports, state, and always blocks.
+- `output update block 1`: derived from ports, state, and always blocks.
+- `logic partition block 2`: derived from ports, state, and always blocks.
+- `output update block 3`: derived from ports, state, and always blocks.
+- `logic partition block 4`: derived from ports, state, and always blocks.
+- `output update block 5`: derived from ports, state, and always blocks.
+- `logic partition block 6`: derived from ports, state, and always blocks.
+- `logic partition block 7`: derived from ports, state, and always blocks.
+- `logic partition block 8`: derived from ports, state, and always blocks.
+- `logic partition block 9`: derived from ports, state, and always blocks.
+- `logic partition block 10`: derived from ports, state, and always blocks.
+- `logic partition block 11`: derived from ports, state, and always blocks.
+- `state transition block 12`: derived from ports, state, and always blocks.
+- `state transition block 13`: derived from ports, state, and always blocks.
+- `logic partition block 14`: derived from ports, state, and always blocks.
+- `logic partition block 15`: derived from ports, state, and always blocks.
+- `counter update block 16`: derived from ports, state, and always blocks.
+- `logic partition block 17`: derived from ports, state, and always blocks.
+- `output update block 18`: derived from ports, state, and always blocks.
+- `output update block 19`: derived from ports, state, and always blocks.
+- `logic partition block 20`: derived from ports, state, and always blocks.
+- `output update block 21`: derived from ports, state, and always blocks.
+- `logic partition block 22`: derived from ports, state, and always blocks.
+- `output update block 23`: derived from ports, state, and always blocks.
+- `logic partition block 24`: derived from ports, state, and always blocks.
+- `logic partition block 25`: derived from ports, state, and always blocks.
+- `logic partition block 26`: derived from ports, state, and always blocks.
+- `logic partition block 27`: derived from ports, state, and always blocks.
+- `counter update block 28`: derived from ports, state, and always blocks.
+- `logic partition block 29`: derived from ports, state, and always blocks.
+- `counter update block 30`: derived from ports, state, and always blocks.
+- `logic partition block 31`: derived from ports, state, and always blocks.
+- `counter update block 32`: derived from ports, state, and always blocks.
+- `logic partition block 33`: derived from ports, state, and always blocks.
+- `logic partition block 34`: derived from ports, state, and always blocks.
+- `counter progression`: derived from ports, state, and always blocks.
+
+## Verification Targets
+- `reset_outputs_known`: Verify `ppg_peak_valley_window_detector` drives known output values after reset release.
+- `counter_progression`: Verify timer/counter progression across phase transitions.
+- `fc001`: ppg_peak_valley_window_detector reset behavior
+- `fc900`: counter progression
+
+## Decomposition Candidates
+- `u_block_1` lines 475-490: output_update
+- `u_block_2` lines 490-504: logic_partition
+- `u_block_3` lines 504-519: output_update
+- `u_block_4` lines 519-533: logic_partition
+- `u_block_5` lines 533-550: output_update
+- `u_block_6` lines 550-568: logic_partition
+- `u_block_7` lines 568-583: logic_partition
+- `u_block_8` lines 583-598: logic_partition
+- `u_block_9` lines 598-611: logic_partition
+- `u_block_10` lines 611-624: logic_partition
+- `u_block_11` lines 624-638: logic_partition
+- `u_block_12` lines 638-654: state_transition
+- `u_block_13` lines 654-664: state_transition
+- `u_block_14` lines 664-689: logic_partition
+- `u_block_15` lines 689-714: logic_partition
+- `u_block_16` lines 714-752: counter_update
+- `u_block_17` lines 752-765: logic_partition
+- `u_block_18` lines 765-778: output_update
+- `u_block_19` lines 778-791: output_update
+- `u_block_20` lines 791-804: logic_partition
+- `u_block_21` lines 804-817: output_update
+- `u_block_22` lines 817-830: logic_partition
+- `u_block_23` lines 830-843: output_update
+- `u_block_24` lines 843-856: logic_partition
+- `u_block_25` lines 856-869: logic_partition
+- `u_block_26` lines 869-884: logic_partition
+- `u_block_27` lines 884-899: logic_partition
+- `u_block_28` lines 899-916: counter_update
+- `u_block_29` lines 916-931: logic_partition
+- `u_block_30` lines 931-948: counter_update
+- `u_block_31` lines 948-961: logic_partition
+- `u_block_32` lines 961-976: counter_update
+- `u_block_33` lines 976-991: logic_partition
+- `u_block_34` lines 991-1003: logic_partition
+
