@@ -13,7 +13,7 @@
 | --- | --- | --- | --- |
 | C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Committed ACTIVE, config/epoch ownership and RUN lifecycle. |
 | C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded Stage1 calibration-field interpretation. |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and data-chain integration ownership. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, generation/discard and data-chain integration ownership. |
 | C12 | `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` | V1.3 | Formal retained-output router boundary. |
 
 ## 1. 模块职责和边界

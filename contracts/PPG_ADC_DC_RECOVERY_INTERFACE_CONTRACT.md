@@ -10,7 +10,7 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, generation/discard and recovery integration ownership. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, generation/discard and recovery integration ownership. |
 | C14 | `ppg_system_integration/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md` | V1.2 | Sole upstream reconstructed NORMAL transaction boundary. |
 | C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole downstream detection-chain integration boundary. |
 

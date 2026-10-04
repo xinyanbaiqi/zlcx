@@ -1,5 +1,6 @@
 # PPG ADC测量、DC恢复、IDAC与精度窗口集成Wrapper接口合同
 
+> V2.4修订日期：2026-10-04。合同补记批次3第二阶段：① 第11.3节原指向C08开放观察项的一句改为“已由scheduler RTL V1.9修复”（保留原文于删除线中）；AMI-14原行补充截止事件释放在途的情形（不新开ID）。② 按用户裁定方案(c)（不改RTL逻辑，只写限制），第6.7节新增“P2S遥测同笔限制”一段，写明三个P2S遥测端口与`o_result_*`同属一笔的条件、芯片级的三条结构保证，以及守护该前提的芯片顶层TB TC7断言；`o_s2_raw`行原指向开放观察项的一句改为指向该段。AMI端口注释（`ppg_adc_measurement_idac_integration.v:403`）和assign注释（`:1029`）已由任务C原行改正，本合同据此表述。证据：`verification_reports/TASKC_TICK248_P2S_20261001.md`第1、4节。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_PHASE2_20261004.md`。
 > V2.3修订日期：2026-09-30。合同补记批次2：补入AMI RTL V1.13（2026-08-31）和V1.14（2026-09-05）新增、但正式端口表一直缺失的5个端口。① 第6.5b节补验证专用注入端口对`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready`（`ppg_adc_measurement_idac_integration.v:398-399`，Stage5 Group15 PRC-09/10），并补写这对端口在AMI内原样直通PWI和粗检测FIR、由FIR绑定到下一笔真实样本的行为；② 第6.7节补P2S遥测输出`o_s1_calibration_applied`、`o_s1_raw[9:0]`、`o_s2_raw[9:0]`（`:403-405`）。这三个字段的定义以芯片顶层合同`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`第8.4.5节为准，本合同只写AMI侧的来源和连接。不改变AMI-01至AMI-54的任何既有条款，也不涉及`i_cal_owner_deadline_event`的相关描述。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`（其中记录了P2S三个端口与正式结果是否同拍对应的开放观察项）。
 > V2.2修订日期：2026-09-30。补记2026-09-18 SID-05修复在AMI RTL V1.15中新增的输入`i_cal_owner_deadline_event`（1 bit；端口声明`ppg_adc_measurement_idac_integration.v:153`；来自调度器`o_cal_owner_deadline_event`，经Top内部网`sched_cal_owner_deadline_event_o`），以及`flag_calibration_request_inflight`因此新增的清零条件（`:1797-1798`）。此前在途标志只在AMB/DCS校准结果被IDAC真实消费（`flag_amb_sample_accepted`/`flag_dcs_sample_accepted`）或STOP/abort/integration阻断时清零；现在调度器报告校准owner截止抑制时也清零，下一拍AMI按仍然有效的请求来源重新拉高`o_calibration_sample_valid`，重新发起同一个尚未得到结果的候选。**为什么**：被截止抑制的请求从未建立ADC owner或事务，不会产生“结果已消费”事件，原逻辑下在途标志永久为1，校准搜索永久卡死（真实RTL缺陷）。**本次改动**：第6.6节端口表新增一行，并补全表后的在途所有权释放说明；第11.3节补清零条件与重新发起行为。不改变AMI-01至AMI-54既有验收编号、结果匹配规则或其它端口。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。AMI模块级`tb_ppg_adc_measurement_idac_integration.v`未连接该输入，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
 > V2.1 fail-closed V5-gate revision, 2026-08-20: AMI remains the sole `o_datapath_empty` aggregate owner and the sole Top-facing parent that forwards V5 named detection configuration and the registered `peak_valley_config_valid` gate into PWI. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects. RTL/TB evidence remains `EVIDENCE_PENDING`.
@@ -59,7 +60,7 @@ AMI只在`i_transaction_start_valid && o_transaction_start_ready`真实握手后
 
 1. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
-3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.11；
+3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.12；
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
 5. C11 — `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` V1；
 6. C12 — `ppg_system_integration/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md` V1.3；
@@ -528,9 +529,11 @@ DC恢复后的完整事务通过第二个无丢失fork送往片内检测和以�
 | `o_result_dc_code_epoch` | 4 | 本笔颜色DC版本 |
 | `o_s1_calibration_applied` | 1 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_calibration_applied`（`:1029`，来源`:2278`），**不是**本表其余“本笔”字段所取自的`reg_result_fork_payload`里的同名字段；字段用途见芯片顶层合同第8.4.5节 |
 | `o_s1_raw` | 10 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_stage1_raw`（`:1030`，来源`:2299`）；正式结果fork载荷里没有这个字段；字段用途见芯片顶层合同第8.4.5节 |
-| `o_s2_raw` | 10 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_stage2_raw`（`:1031`，来源`:2301`），与`o_s1_raw`取自同一DC恢复载荷；这三个P2S端口与本表“本笔”正式输出是否同拍对应，见批次2合同同步报告的开放观察项 |
+| `o_s2_raw` | 10 | P2S遥测（V2.3补记）：直接转发DC恢复实例的`o_stage2_raw`（`:1031`，来源`:2301`），与`o_s1_raw`取自同一DC恢复载荷；~~这三个P2S端口与本表“本笔”正式输出是否同拍对应，见批次2合同同步报告的开放观察项~~ 这三个P2S端口与本表“本笔”字段的同笔条件，见本节表后“P2S遥测同笔限制”一段（V2.4） |
 
 9-bit事务仍产生完整输出事务，但`fine_valid=0`；15-bit事务的粗、精细结果和全部元数据属于同一原子事务。
+
+**P2S遥测同笔限制（V2.4补记；用户裁定方案(c)：不改RTL逻辑，只在合同写明限制）**：`o_s1_calibration_applied`、`o_s1_raw`、`o_s2_raw`取自结果fork之前的DC恢复实例`payload_o`（`ppg_adc_measurement_idac_integration.v:1029-1031` ← `:2278/:2299/:2301`），本表其余“本笔”字段则解包自fork寄存器`reg_result_fork_payload`（`:961`，只在`flag_dc_result_transfer`时装入，`:1744-1748`）。DC恢复是1深缓冲，`payload_o`在每次输入握手时被覆盖（`ppg_adc_dc_recovery.v:355-356`）。因此：(a) 三个遥测端口与`o_result_*`属于同一笔事务，**当且仅当**本笔正式结果被持住（`o_measurement_result_valid=1`而`i_measurement_result_ready=0`）期间，没有下一笔事务进入DC恢复；否则三个端口已是下一笔（任务C在AMI级和`ppg_control_top`级都用仿真复现了这一错拍）。(b) 在芯片级，这一前提由三条结构条件保证：P2S打包器没有外部反压输入（只有`o_p2s_data`/`o_p2s_frame`两个对外输出，`ppg_p2s_packer.v:77-78`）；它的`o_result_ready`就是深度2队列未满（`:129`、`:144`），每包在第161拍出队（`:125`）；每个5000拍宏帧最多2笔NORMAL正式结果、相隔160拍（C08第4、6节）。芯片顶层把P2S的ready直接接到Top的`i_measurement_result_ready`（`ppg_chip_digital_top.v:519`），因此AMI正式结果从不被持住。(c) 该前提由芯片顶层TB的TC7永久断言守护：`tb_ppg_chip_digital_top.v:631-649`在每个上升沿检查P2S的`i_result_valid`为1时`o_result_ready`必须为1，`:907-911`给出最终判定；负对照中把队列改为深度1后TC7报出违例，而原有的字段比对TC3仍会通过。脱离芯片顶层单独使用AMI或`ppg_control_top`、并对正式结果施加反压时，不得假定这三个端口与`o_result_*`同属一笔。字段定义见芯片顶层合同第8.4.5节。
 
 `result_sample_valid`是正式输出和片内检测路径共同来源、但由第10节fork按分支独立拥有的原子sideband；顶层可见的`o_result_sample_valid`来自measurement分支资格快照。`o_measurement_result_valid=1 && i_measurement_result_ready=0`期间，它必须与全部数值和身份逐拍保持；measurement分支完成不得清除仍pending的detection资格，反向亦然。生产旁路模式下每笔成功NORMAL结果均输出1；它不得由RAW为零、低/高数值、饱和状态或Stage1/Stage2/DC calibration-valid推导。invalid事务仍可在正式measurement接口被观察和记录，但片内检测路径不得把它计入FIR历史。
 
@@ -993,7 +996,7 @@ STOP / abort / blocking fault
 - 不匹配结果被消费以避免死锁，但不得更新搜索，并置协议诊断；
 - STOP、abort和复位撤销未启动请求；已经启动的ADC事务按第13节排空或丢弃。
 
-V2.2补记（SID-05，AMI RTL V1.15）：`flag_calibration_request_inflight`的更新优先级为（`ppg_adc_measurement_idac_integration.v:1791-1802`）：①复位清零；②`i_stop_ack_event`、`i_control_abort_event`或`flag_integration_blocking`清零；③`flag_amb_sample_accepted`、`flag_dcs_sample_accepted`或`i_cal_owner_deadline_event`任一为1时清零；④否则`calibration_request_fire_o`为1时置1。③中的`i_cal_owner_deadline_event`是本版新增条件：调度器在local tick 248截止点抑制了尚未取得owner的校准候选时，这笔请求不会有ADC事务，也不会有结果返回，不释放在途标志，AMI就永远不会再发起请求。在途标志清零后的下一拍，`o_calibration_sample_valid`与在途标志同为0，仲裁寄存器按当时有效的请求来源（周期重检优先于启动搜索，第11.2节）重新锁存类型、颜色和reason并拉高`o_calibration_sample_valid`（`:1357-1410`）；由于没有结果被消费，IDAC搜索状态未推进，重新发起的就是同一个候选。`reg_inflight_frame_type`、`reg_inflight_color_ir`和`reg_inflight_reason`不随截止事件清除，只在下一次请求握手时更新。在途标志为1期间`o_calibration_sample_valid`恒为0（握手当拍清valid、置在途），因此截止事件不会与本侧请求握手同拍冲突。调度器侧“截止与owner提交同拍”的开放观察项见C08第10.3节。
+V2.2补记（SID-05，AMI RTL V1.15）：`flag_calibration_request_inflight`的更新优先级为（`ppg_adc_measurement_idac_integration.v:1791-1802`）：①复位清零；②`i_stop_ack_event`、`i_control_abort_event`或`flag_integration_blocking`清零；③`flag_amb_sample_accepted`、`flag_dcs_sample_accepted`或`i_cal_owner_deadline_event`任一为1时清零；④否则`calibration_request_fire_o`为1时置1。③中的`i_cal_owner_deadline_event`是本版新增条件：调度器在local tick 248截止点抑制了尚未取得owner的校准候选时，这笔请求不会有ADC事务，也不会有结果返回，不释放在途标志，AMI就永远不会再发起请求。在途标志清零后的下一拍，`o_calibration_sample_valid`与在途标志同为0，仲裁寄存器按当时有效的请求来源（周期重检优先于启动搜索，第11.2节）重新锁存类型、颜色和reason并拉高`o_calibration_sample_valid`（`:1357-1410`）；由于没有结果被消费，IDAC搜索状态未推进，重新发起的就是同一个候选。`reg_inflight_frame_type`、`reg_inflight_color_ir`和`reg_inflight_reason`不随截止事件清除，只在下一次请求握手时更新。在途标志为1期间`o_calibration_sample_valid`恒为0（握手当拍清valid、置在途），因此截止事件不会与本侧请求握手同拍冲突。~~调度器侧“截止与owner提交同拍”的开放观察项见C08第10.3节。~~ V2.4补记：该开放项已由scheduler RTL V1.9修复（截止事件以`!adc_owner_commit_event_o`屏蔽，owner在local tick 248当拍提交时不再发出），见C08 V1.12第10.3节。
 
 ### 11.4 周期重检闭环
 
@@ -1223,7 +1226,7 @@ blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复�
 | AMI-11 | 15-bit DC恢复 | 粗细结果同事务有效且元数据完全一致 |
 | AMI-12 | DC恢复双fork | 检测和正式输出各消费一次；分别构造measurement先完成、detection反压及detection先完成、measurement反压，两种顺序下仍pending分支的全部payload及其独立sample-valid资格逐拍不变 |
 | AMI-13 | 输出同拍替换 | 旧事务两个分支最后消费与新事务装入同拍，无空泡和覆盖 |
-| AMI-14 | 启动AMB搜索 | 请求只握手一次，匹配结果消费后才允许下一请求 |
+| AMI-14 | 启动AMB搜索 | 请求只握手一次，匹配结果消费后才允许下一请求；V2.4原行补充：或调度器以`i_cal_owner_deadline_event`报告该请求已被owner截止抑制后，释放在途并重新握手同一候选（第11.3节，SID-05） |
 | AMI-15 | 启动DC_R/DC_IR | 颜色、码快照和epoch正确，搜索顺序闭合 |
 | AMI-16 | NORMAL慢速跟踪 | IDAC仅使用未恢复calibrated S1，调码不阻塞正式测量 |
 | AMI-17 | 周期重检闭环 | 固定AMB、DC_R、DC_IR请求与结果逐阶段匹配 |

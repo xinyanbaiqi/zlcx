@@ -14,7 +14,7 @@
 | --- | --- | --- | --- |
 | C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | RUN lifecycle and committed ACTIVE ownership. |
 | C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded V4 IDAC-field interpretation. |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, transaction context and AMI-only blocking-fault record promotion. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, transaction context and AMI-only blocking-fault record promotion. |
 | C16 | `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` | V2.1 | Sole NORMAL tracking and AMB-recheck transaction source. |
 | C24 | `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.5 | System blocking-fault consumption after the required AMI record-promotion boundary. |
 

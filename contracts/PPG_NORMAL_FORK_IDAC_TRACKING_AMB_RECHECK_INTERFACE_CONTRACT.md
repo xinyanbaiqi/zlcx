@@ -13,8 +13,8 @@
 | --- | --- | --- | --- |
 | C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | RUN lifecycle and committed ACTIVE ownership. |
 | C05 | `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` | V5 | Sole decoded V4 IDAC-field interpretation. |
-| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.11 | Frame scheduling and AMB-recheck transaction insertion. |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.3 | AMI parent, transaction fork and generation/discard ownership. |
+| C08 | `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.12 | Frame scheduling and AMB-recheck transaction insertion. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, transaction fork and generation/discard ownership. |
 | C17 | `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` | V2.3 | Sole IDAC pending/code/epoch and local fault owner. |
 
 ## 1. 合同目的

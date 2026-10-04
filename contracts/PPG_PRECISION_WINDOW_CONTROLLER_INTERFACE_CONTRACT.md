@@ -2,7 +2,7 @@
 
 > Current normative version: V2.6, 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. `i_precision_takeover_safe` is an AMI/PWI forwarded composite switch predicate, not physical idle; `i_peak_valley_config_valid` is the registered V5 formal-detection gate. RTL/TB evidence is `EVIDENCE_PENDING`.
 > V2.6 change record: adds the explicit PWI-forwarded `i_peak_valley_config_valid` input and requires it for formal cross consumption, 9-to-15 requests and fine-window control. Safe drain and discard semantics are unchanged.  
-> 2026-09-17内容更新记录（2026-10-01补记；规范标签仍为V2.6，沿用本文件08-20之后“内容更新、标签不变”的惯例）：第21节验收矩阵新增PWC-41“新START不清历史sticky”。第6.2节和第17.1节本来就规定新START不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清；PWC-41补的是验收覆盖，同时对应当天修复的一处RTL实现缺陷：`ppg_precision_window_controller.v`此前把`i_start_ack_event`当成清除条件，修复后见`:494`、`:511`处的`@satisfies: PWC-41`。PWC RTL文件头changelog缺这一条，由任务C处理。依据：`verification_reports/PWC_STICKY_CLEAR_RTL_FIX_20260917.md`。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
+> 2026-09-17内容更新记录（2026-10-01补记；规范标签仍为V2.6，沿用本文件08-20之后“内容更新、标签不变”的惯例）：第21节验收矩阵新增PWC-41“新START不清历史sticky”。第6.2节和第17.1节本来就规定新START不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清；PWC-41补的是验收覆盖，同时对应当天修复的一处RTL实现缺陷：`ppg_precision_window_controller.v`此前把`i_start_ack_event`当成清除条件，修复后见`:496`、`:513`处的`@satisfies: PWC-41`。PWC RTL文件头changelog缺这一条，由任务C处理。依据：`verification_reports/PWC_STICKY_CLEAR_RTL_FIX_20260917.md`。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > 冻结日期：2026-08-20  
 > 目标RTL：`ppg_precision_window_controller.v`  
 > 时钟域：2 MHz数字处理域  
@@ -33,7 +33,7 @@ V2相对V1新增以下冻结内容：
 本文与以下当前活动合同共同组成精度窗口控制闭环：
 
 1. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.1；
-2. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.3；
+2. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.4；
 3. C20 — `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` V2.6；
 4. C22 — `ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md` V2.6；
 5. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2.1。
@@ -951,7 +951,7 @@ fault必须先由AMI形成带触发身份的generation-scoped discard，再由PW
 | PWC-38 | 返回9-bit历史尾部 | commit立即清除fine窗口，不等待最多10笔旧15-bit中心样本 |
 | PWC-39 | 尾部不计切换超时 | 模拟精度提交并清除pending后，不因下游FIR历史尾部置switch timeout sticky |
 | PWC-40 | V5正式检测门控 | `i_peak_valley_config_valid=0`时不接受formal cross、不产生9-to-15请求或fine-window控制；已有安全排空和generation-scoped discard规则不变。 |
-| PWC-41 | START不清sticky（2026-09-17新增） | 新合法START本身不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清（PWC-33的START对应半句；§6.2`:205`/§17.1`:731`早已如此规定，本条补齐验收覆盖，同时修复了RTL此前把`i_start_ack_event`当清除条件这一处真实违反合同的实现缺陷） |
+| PWC-41 | START不清sticky（2026-09-17新增） | 新合法START本身不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清（PWC-33的START对应半句；§6.2`:206`/§17.1`:732`早已如此规定，本条补齐验收覆盖，同时修复了RTL此前把`i_start_ack_event`当清除条件这一处真实违反合同的实现缺陷） |
 
 所有PASS必须来自真实信号、状态和载荷比较，不得使用无条件打印、仅时间等待或未连接的占位检查。任何PASS均为后续实现证据，不能改变本合同或系统的`NOT_CLOSED`状态。
 
