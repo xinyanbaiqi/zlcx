@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.11
-// Revision Date:   2026-10-04
+// Version:         V1.12
+// Revision Date:   2026-10-05
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -30,6 +30,7 @@
 // 2026-09-30           V1.9       Erie        TB maintenance (no RTL change): explicitly drive the SID-05 input i_cal_owner_deadline_event (added 2026-09-18) from a reg initialised to 0, next to i_system_fault_discard_event. It had been left unconnected (xelab VRFC 10-3645); a floating Z only ever acted like 0 here, as REGRESSION_BASELINE_20260930.md section 6.6 already showed with a tie-0 probe. This TB has no scheduler, so no deadline event can occur; no new assertion is added (the tick-248 deadline test is a separate task). Expected and observed: identical result, 48 cases (AMI-01 through AMI-47 plus N08-01) pass.
 // 2026-10-01           V1.10      Erie        Task C (TASKC_TICK248_P2S_20261001.md): add the SID-05 unit assertions AMI-48/AMI-49 as a final independent phase after N08-01, so the earlier 48 checks are untouched. A fresh SEARCH_TRACK RUN is started, the first calibration request is handshaken with i_calibration_sample_ready but no transaction is started (the scheduler-accepted, owner-not-yet-committed in-flight state), then i_cal_owner_deadline_event is pulsed directly (this TB has no scheduler). AMI-48: in flight, the event must clear flag_calibration_request_inflight and re-raise o_calibration_sample_valid with the same frame type/color, with no transaction start fire. AMI-49: while that re-raised request is pending but not yet accepted (not in flight), a second event must have no side effect (in-flight stays 0, valid and payload unchanged, integration protocol sticky and wrapper fault unchanged, no fire). Pass criterion raised from 48 to 50. Negative control: with the V1.15 SID-05 clearing term removed from AMI line ~1797, AMI-48 fails (and AMI-49, whose precondition is the re-raised request, fails with it).
 // 2026-10-04           V1.11      Erie        Rename the four check labels that collided, with a different meaning, with the AMI acceptance table in contract section 17 (labels only; check logic, order and count unchanged; 50 cases). Old -> new: AMI-46 -> AMI-DISC-1 and AMI-47 -> AMI-DISC-2 (the V1.6 public discard-port checks; contract AMI-46/47 are "injection default off" and "identity request binding"); AMI-48 -> AMI-SID05-1 and AMI-49 -> AMI-SID05-2 (the V1.10 SID-05 deadline checks; contract AMI-48/49 are "identity matcher reject" and "identity recovery"). AMI-01 through AMI-45 and N08-01 keep their labels. The check_case label input is widened from 6 to 11 characters (a 6-character input truncated the new labels to "DISC-1"/"ID05-1"), and the new write_case_id task prints the label byte by byte, skipping the zero-byte left padding that xsim would otherwise print as spaces; the PASS/FAIL text of every unchanged label stays byte-identical. Only the printing changes; no check condition is touched. The history entries above keep the labels used at the time. Final banner is now "AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons".
+// 2026-10-05           V1.12      Erie        Simplify the V1.11 label printing: drop the write_case_id byte-by-byte task and print with $display("PASS %0s") / $display("FAIL %0s at %0t"). %0s suppresses the zero-byte left padding of the 11-character label in both xsim 2022.2 and Icarus (plain %s prints it as spaces, which is what V1.11 worked around), so the output is byte-identical to V1.11 and every unchanged label prints exactly as before V1.11. No check condition changes; 50 cases.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -45,8 +46,8 @@
 // 依赖文件:
 //      DUT及全部真实集成子模块
 //
-// 当前版本:        V1.11
-// 修订日期:        2026年10月04日
+// 当前版本:        V1.12
+// 修订日期:        2026年10月05日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -60,6 +61,7 @@
 // 2026-09-30           V1.9       Erie        TB维护（不改RTL）：用初值为0的寄存器显式驱动SID-05新增输入i_cal_owner_deadline_event（2026-09-18），放在i_system_fault_discard_event旁边。此前该端口未连接（xelab VRFC 10-3645），浮空的Z在本TB中的效果只等价于0，REGRESSION_BASELINE_20260930.md第6.6节的tie-0探针已经证明过这一点。本TB没有scheduler，不可能出现截止事件；不加新断言（tick-248截止测试另行安排）。预期并实测：结果不变，48项（AMI-01至AMI-47加N08-01）全部通过。
 // 2026-10-01           V1.10      Erie        任务C（TASKC_TICK248_P2S_20261001.md）：新增SID-05单元断言AMI-48/AMI-49，作为N08-01之后的独立末段，不触动前面48项检查。重开一次SEARCH_TRACK RUN，第一笔校准请求只用i_calibration_sample_ready握手、不启动事务（即调度器已接受请求、owner尚未提交的在途状态），然后由TB直接驱动i_cal_owner_deadline_event（本TB没有调度器）。AMI-48：在途时收到事件，必须清除flag_calibration_request_inflight，并以相同帧类型/颜色重新拉高o_calibration_sample_valid，不产生事务start fire。AMI-49：重新拉高的请求尚未被接受（不在途）时再来一次事件，必须无副作用（在途仍为0，valid与载荷不变，集成协议sticky与wrapper阻断不变，无fire）。通过判据由48项提高到50项。负对照：把AMI约1797行V1.15的SID-05清零条件去掉后，AMI-48失败（AMI-49以重新拉高的请求为前提，随之失败）。
 // 2026-10-04           V1.11      Erie        与合同第17节AMI验收表同名不同义的4个检查改名（只改标签文字；检查逻辑、顺序和总数不变，仍为50项）。旧→新：AMI-46→AMI-DISC-1、AMI-47→AMI-DISC-2（V1.6的公开discard端口检查；合同中AMI-46/47是"注入默认关闭"和"identity请求绑定"）；AMI-48→AMI-SID05-1、AMI-49→AMI-SID05-2（V1.10的SID-05截止检查；合同中AMI-48/49是"identity matcher拒绝"和"identity恢复"）。AMI-01至AMI-45及N08-01不改名。check_case的标签输入由6字符放宽到11字符（6字符会把新标签截成"DISC-1"/"ID05-1"），并新增write_case_id任务逐字节打印标签，跳过左侧补齐的零字节（xsim会把它们打印成空格），未改名标签的PASS/FAIL文字逐字节不变。只改打印方式，不动任何检查条件。以上历史条目保留当时使用的编号。结论横幅改为"AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons"。
+// 2026-10-05           V1.12      Erie        简化V1.11的标签打印：删除逐字节打印任务write_case_id，改用$display("PASS %0s")和$display("FAIL %0s at %0t")。%0s在xsim 2022.2与Icarus中都不输出11字符标签左侧补齐的零字节（普通%s会把它们打成空格，V1.11正是为绕开这一点），输出与V1.11逐字节相同，未改名的标签与V1.11之前完全一致。检查条件不变，仍为50项。
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -594,34 +596,17 @@ module tb_ppg_adc_measurement_idac_integration ();
 	);
 
 	//===================<仿真辅助任务>===================//
-	// 逐字节打印检查编号并跳过定宽输入左侧补齐的零字节，使6字符旧编号与11字符新编号都原样输出。
-	task write_case_id;
-		input [8 * 11 - 1:0]case_id;
-		integer idx_char;
-		begin
-			for(idx_char = 10; idx_char >= 0; idx_char = idx_char - 1)begin
-				if(case_id[idx_char * 8 +: 8] != 8'h00)begin
-					$write("%c", case_id[idx_char * 8 +: 8]);
-				end
-			end
-		end
-	endtask
-
-	// 真实条件比较后才允许打印对应AMI通过信息。
+	// 真实条件比较后才允许打印对应AMI通过信息；%0s不输出定宽编号左侧补齐的零字节。
 	task check_case;
 		input [8 * 11 - 1:0]case_id;
 		input condition;
 		begin
 			if(condition === 1'b1)begin
 				cnt_pass = cnt_pass + 1;
-				$write("PASS ");
-				write_case_id(case_id);
-				$display("");
+				$display("PASS %0s", case_id);
 			end else begin
 				cnt_fail = cnt_fail + 1;
-				$write("FAIL ");
-				write_case_id(case_id);
-				$display(" at %0t", $time);
+				$display("FAIL %0s at %0t", case_id, $time);
 			end
 		end
 	endtask
