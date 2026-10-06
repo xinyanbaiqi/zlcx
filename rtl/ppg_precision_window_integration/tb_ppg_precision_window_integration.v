@@ -734,7 +734,8 @@ initial begin
 	start_run;                               // 建立NORMAL 9-bit重新获取状态
 	build_9bit_cross_request;                // 通过真实FIR峰谷和基线产生cross
 	flag_case_ok = o_switch_pending && o_switch_target_precision && o_baseline_valid; // 确认cross已由控制器接受
-	pulse_safe_boundary(cnt_red_frame[15:0] + 16'd1); // 下一安全帧真实提交15-bit
+	pulse_safe_boundary(cnt_red_frame[15:0]); // 下一安全帧真实提交15-bit；ABCD F-036：安全帧号=下一笔RED样本的真实帧号（send_red_sample先用后加）
+	@(negedge i_clk);                        // ABCD F-036：等fine事件计数沿完成后再读计数，否则读到计数前的旧值
 	flag_case_ok = flag_case_ok && o_active_precision_mode && o_fine_window_active && (cnt_fine_start_event == 1); // 确认真正进入fine
 	for(idx_sample = 0; idx_sample < 10; idx_sample = idx_sample + 1)begin
 		send_red_sample(500, 1'b0);            // 故意保留10笔旧9-bit中心尾部
@@ -743,30 +744,31 @@ initial begin
 	flag_case_ok = flag_case_ok && (o_peak_valley_protocol_error_sticky == 1'b0); // 合法尾部不得报错
 	send_red_sample(500, 1'b0);              // 第11笔旧9-bit中心违反有界尾部
 	wait_detection_idle;                     // 等待违规中心到达峰谷检测器
-	check_case("PWI-01", o_peak_valley_protocol_error_sticky && (cnt_fine_start_event == 1) && o_active_precision_mode && o_fine_window_active); // 检查责任分离和尾部上限
+	check_case("PWI-01", flag_case_ok && o_peak_valley_protocol_error_sticky && (cnt_fine_start_event == 1) && o_active_precision_mode && o_fine_window_active); // ABCD F-036：终判纳入前10笔合法尾部的累计前提 // 检查责任分离和尾部上限
 
 	// PWI-02：正常波谷返回后旧15-bit尾部不能产生新cross，首笔9-bit只重建相邻上下文。
 	initialize_inputs;                       // 恢复定向配置和输入初值
 	reset_dut;                               // 清除PWI-01故意产生的sticky
 	start_run;                               // 重新建立NORMAL 9-bit运行
 	build_9bit_cross_request;                // 产生合法进入15-bit请求
-	pulse_safe_boundary(cnt_red_frame[15:0] + 16'd1); // 提交正式fine窗口
+	pulse_safe_boundary(cnt_red_frame[15:0]); // 提交正式fine窗口；ABCD F-036：安全帧号=下一笔RED样本帧号，原+1使首笔15-bit中心帧龄为负
 	for(idx_sample = 0; idx_sample < 10; idx_sample = idx_sample + 1)begin
 		send_red_sample(300, 1'b1);            // 用真实15-bit输入排出10笔旧9-bit中心
 	end
 	build_fine_peak_valley_return;           // 通过真实fine峰谷形成正常return
 	flag_case_ok = o_switch_pending && (o_switch_target_precision == 1'b0) && (cnt_return_transfer >= 1); // 确认return已被控制器接受
 	pulse_safe_boundary(cnt_red_frame[15:0] + 16'd1); // 下一安全帧真实返回9-bit
+	@(negedge i_clk);                        // ABCD F-036：等返回事件计数沿完成后再读计数
 	flag_case_ok = flag_case_ok && (o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (cnt_return_event == 1) && (o_reacquire_request_event == 1'b0); // 正常波谷返回不触发重获
 	cnt_cross_before_tail = cnt_fine_start_event; // 保存进入事件次数作为禁止新cross基准
 	for(idx_sample = 0; idx_sample < 10; idx_sample = idx_sample + 1)begin
 		send_red_sample(3000, 1'b0);           // 输入新9-bit但输出仍为旧15-bit中心尾部
 	end
 	wait_detection_idle;                     // 等待全部合法退出尾部消费
-	flag_case_ok = flag_case_ok && (o_cross_pending == 1'b0) && (cnt_fine_start_event == cnt_cross_before_tail); // 旧15-bit中心不得建立cross
+	flag_case_ok = flag_case_ok && (o_cross_pending == 1'b0) && (cnt_fine_start_event == cnt_cross_before_tail) && (o_peak_valley_protocol_error_sticky == 1'b0); // 旧15-bit中心不得建立cross，合法退出尾部不得报错
 	send_red_sample(3000, 1'b0);             // 第一笔恢复9-bit中心只重建相邻上下文
 	wait_detection_idle;                     // 等待首个恢复中心被消费
-	check_case("PWI-02", (o_cross_pending == 1'b0) && (cnt_fine_start_event == cnt_cross_before_tail) && (cnt_return_event == 1) && (cnt_return_transfer >= 1)); // 检查退出尾部隔离
+	check_case("PWI-02", flag_case_ok && (o_cross_pending == 1'b0) && (cnt_fine_start_event == cnt_cross_before_tail) && (cnt_return_event == 1) && (cnt_return_transfer >= 1)); // 检查退出尾部隔离
 
 	// PWI-03至PWI-05共用一次真实fine返回和周期AMB三帧重检流程。
 	initialize_inputs;                       // 恢复所有输入和计数初值
@@ -774,7 +776,7 @@ initial begin
 	reset_dut;                               // 清除此前检测和调度状态
 	start_run;                               // 建立新RUN
 	build_9bit_cross_request;                // 产生新的合法进入fine请求
-	pulse_safe_boundary(cnt_red_frame[15:0] + 16'd1); // 提交15-bit模式
+	pulse_safe_boundary(cnt_red_frame[15:0]); // 提交15-bit模式；ABCD F-036：安全帧号=下一笔RED样本帧号
 	for(idx_sample = 0; idx_sample < 10; idx_sample = idx_sample + 1)begin
 		send_red_sample(300, 1'b1);            // 排出入口旧9-bit中心尾部
 	end

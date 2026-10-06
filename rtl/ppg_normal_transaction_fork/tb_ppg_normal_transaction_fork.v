@@ -14,12 +14,13 @@
 //
 // Dependencies:       ppg_normal_transaction_fork.v
 //
-// Version:            V1.1
-// Revision Date:      2026/09/06
+// Version:            V1.2
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/07            V1.0          Erie                  Create file.
 // 2026/09/06            V1.1          Erie                  Cross-referenced this pre-existing FFK-01~09 suite against matrix item P13 ("AMI fork | Separate qualification storage and release are fixed") -- FFK-02 already proves independent per-branch storage and FFK-03/04 already prove the exact symmetric single-branch backpressure/independent-release behavior P13 asks for (FFK-06 repeats it under sustained 5-cycle backpressure), but this file was never cross-referenced from the 18 ppg_control_top-level TBs or the alias mapping table -- same "hidden evidence in a pre-existing module-level unit TB" pattern already found once for ppg_system_fault_abort_supervisor. Re-ran fresh under iverilog (50/50 PASS, 0 FAIL, clean $finish) and tagged the four directly-relevant PASS messages (FFK-02/03/04/06) with "(P13)" so future grep-based reconciliation finds them. No RTL or test logic changed.
+// 2026/10/05            V1.2          Erie                  ABCD review F-026: connect the 10 previously floating inputs (i_run_generation and the nine i_datapath_discard_* fields) plus o_measurement_run_generation/o_tracking_run_generation/o_local_empty, and add two FORK-GEN checks: both pending branches carry the latched RUN generation (3C) with local_empty=0, and a same-generation discard clears both branches with no transfer. PASS lines 50 -> 52. Negative control: discard-apply forced 0 fails FORK-GEN.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -34,12 +35,13 @@
 //
 // 依赖文件:           ppg_normal_transaction_fork.v
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年09月06日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月07日        V1.0          Erie                  创建文件
 // 2026年09月06日        V1.1          Erie                  把这份已存在的FFK-01~09自检套件与矩阵P13项（"AMI fork | Separate qualification storage and release are fixed"）做交叉核对：FFK-02已经证明两分支独立存储，FFK-03/04已经证明P13要求的对称单分支反压/独立释放行为（FFK-06在5拍持续反压下重复验证），但本文件此前从未被18份ppg_control_top级TB或别名映射表交叉引用过——与ppg_system_fault_abort_supervisor那次"隐藏在已存在module-level unit TB里的证据"同一种模式。用iverilog重新真实跑了一遍（50/50 PASS，0 FAIL，正常$finish），并给FFK-02/03/04/06四条直接相关的PASS消息追加了"(P13)"字样，方便后续grep核对脚本找到。RTL和测试逻辑本身未改动。
+// 2026年10月05日        V1.2          Erie                  ABCD复核F-026：接上此前悬空的10个输入（i_run_generation与9个i_datapath_discard_*字段）及o_measurement_run_generation/o_tracking_run_generation/o_local_empty，新增两项FORK-GEN：两个pending分支携带锁存的RUN代际（3C）且local_empty=0；同代际清空事件无消费地清空两个分支。PASS行50→52。负对照：清空命中恒0时FORK-GEN失败。
 
 // 覆盖FFK-01至FFK-09，检查双分支单次消费、独立反压、同拍替换和复位清理行为
 module tb_ppg_normal_transaction_fork;
@@ -82,6 +84,19 @@ module tb_ppg_normal_transaction_fork;
 	reg [C_CODE_EPOCH_WIDTH - 1:0]i_dc_code_epoch; // 驱动当前颜色DC committed版本
 	reg i_measurement_ready;              // 控制测量分支独立反压
 	reg i_track_ready;                    // 控制IDAC跟踪分支独立反压
+	reg [7:0]i_run_generation;            // ABCD F-026：当前RUN代际
+	reg i_datapath_discard_event;         // ABCD F-026：AMI代际清空事件
+	reg [1:0]i_datapath_discard_reason;   // ABCD F-026：清空原因
+	reg i_datapath_discard_identity_valid; // ABCD F-026：清空身份可信位
+	reg [15:0]i_datapath_discard_frame_id; // ABCD F-026：清空帧号诊断
+	reg [15:0]i_datapath_discard_sample_index; // ABCD F-026：清空序号诊断
+	reg i_datapath_discard_color_ir;      // ABCD F-026：清空颜色诊断
+	reg [1:0]i_datapath_discard_frame_type; // ABCD F-026：清空类型诊断
+	reg i_datapath_discard_precision;     // ABCD F-026：清空精度诊断
+	reg [7:0]i_datapath_discard_run_generation; // ABCD F-026：清空目标代际
+	wire [7:0]o_measurement_run_generation; // ABCD F-026：测量分支保持型代际
+	wire o_local_empty;                   // ABCD F-026：两分支本地排空状态
+	wire [7:0]o_tracking_run_generation;  // ABCD F-026：跟踪分支保持型代际
 
 	// 三笔互异事务用于发现丢失、复制和跨事务字段混合
 	reg [C_PAYLOAD_WIDTH - 1:0]packet_a; // 保存粗精度红光基准事务
@@ -297,6 +312,12 @@ module tb_ppg_normal_transaction_fork;
 		i_track_ready = 1'b0;                 // 初始IDAC入口不接收数据
 		cnt_error = 0;                         // 清空跨场景累计错误数
 		drive_packet({C_PAYLOAD_WIDTH{1'b0}}); // 初始化全部DUT数据输入
+		i_run_generation = 8'h01;           // ABCD F-026：初始化当前RUN代际
+		i_datapath_discard_event = 1'b0;    // ABCD F-026：初始无清空事件
+		i_datapath_discard_reason = 2'b00; i_datapath_discard_identity_valid = 1'b0; // 清空字段空闲值
+		i_datapath_discard_frame_id = 16'h0000; i_datapath_discard_sample_index = 16'h0000; // 清空字段空闲值
+		i_datapath_discard_color_ir = 1'b0; i_datapath_discard_frame_type = 2'b00; // 清空字段空闲值
+		i_datapath_discard_precision = 1'b0; i_datapath_discard_run_generation = 8'h00; // 清空字段空闲值
 
 		packet_a = {
 			-12'sd321, 1'b1, 1'b0, 1'b0, 8'h11, 8'h21,
@@ -497,6 +518,24 @@ module tb_ppg_normal_transaction_fork;
 		#1;                                    // 避开组合传播观察竞争
 		check_condition(o_normal_ready == 1'b1, "FFK-09 fork returns empty after reset release");
 
+		// FORK-GEN（ABCD F-026）：两分支共用的RUN代际随事务锁存并保持；同代际清空事件无ready地清掉两个分支
+		apply_reset;                           // 隔离代际场景
+		i_run_generation = 8'h3C;            // 本笔事务所属RUN代际
+		accept_packet(packet_b);               // 两个分支均持有未消费事务
+		check_condition((o_measurement_valid == 1'b1) && (o_track_valid == 1'b1) &&
+			(o_measurement_run_generation == 8'h3C) && (o_tracking_run_generation == 8'h3C) && (o_local_empty == 1'b0), "FORK-GEN pending branches carry their latched RUN generation");
+		@(negedge i_clk);                     // 在采样沿前建立清空事件
+		i_datapath_discard_event = 1'b1;     // 同代际清空单拍
+		i_datapath_discard_reason = 2'b01;  // abort清空原因
+		i_datapath_discard_run_generation = 8'h3C; // 清空目标为本笔事务代际
+		@(posedge i_clk);                     // 采样清空事件
+		#1;                                    // 观察寄存更新
+		@(negedge i_clk);                     // 撤销单拍事件
+		i_datapath_discard_event = 1'b0;     // 清空事件只保持一拍
+		check_condition((o_measurement_valid == 1'b0) && (o_track_valid == 1'b0) && (o_local_empty == 1'b1) &&
+			(cnt_measurement_transfer == 0) && (cnt_track_transfer == 0), "FORK-GEN matching discard clears both branches without transfer");
+		i_run_generation = 8'h01;           // 恢复默认代际
+
 		if(cnt_error == 0)begin
 			$display("PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09"); // 仅全部比较通过时报告总成功
 		end else begin
@@ -545,6 +584,19 @@ module tb_ppg_normal_transaction_fork;
 		.i_dc_code_snapshot(i_dc_code_snapshot),                 // 连接当前颜色DC快照
 		.i_amb_code_epoch(i_amb_code_epoch),                     // 连接AMB committed版本
 		.i_dc_code_epoch(i_dc_code_epoch),                       // 连接当前颜色DC版本
+		.i_run_generation(i_run_generation),                     // ABCD F-026：连接当前RUN代际
+		.i_datapath_discard_event(i_datapath_discard_event),     // ABCD F-026：连接代际清空事件
+		.i_datapath_discard_reason(i_datapath_discard_reason),   // 连接清空原因
+		.i_datapath_discard_identity_valid(i_datapath_discard_identity_valid), // 连接清空身份可信位
+		.i_datapath_discard_frame_id(i_datapath_discard_frame_id), // 连接清空帧号诊断
+		.i_datapath_discard_sample_index(i_datapath_discard_sample_index), // 连接清空序号诊断
+		.i_datapath_discard_color_ir(i_datapath_discard_color_ir), // 连接清空颜色诊断
+		.i_datapath_discard_frame_type(i_datapath_discard_frame_type), // 连接清空类型诊断
+		.i_datapath_discard_precision(i_datapath_discard_precision), // 连接清空精度诊断
+		.i_datapath_discard_run_generation(i_datapath_discard_run_generation), // 连接清空目标代际
+		.o_measurement_run_generation(o_measurement_run_generation), // ABCD F-026：观察测量分支代际
+		.o_local_empty(o_local_empty),                           // ABCD F-026：观察本地排空状态
+		.o_tracking_run_generation(o_tracking_run_generation),   // ABCD F-026：观察跟踪分支代际
 		.o_normal_ready(o_normal_ready),                         // 观察上游接纳许可
 		.i_measurement_ready(i_measurement_ready),               // 驱动测量分支ready
 		.o_measurement_valid(o_measurement_valid),               // 观察测量分支valid

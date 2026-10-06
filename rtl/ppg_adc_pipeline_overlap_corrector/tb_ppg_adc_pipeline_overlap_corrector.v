@@ -16,13 +16,14 @@
 //
 // Dependencies:       ppg_adc_pipeline_overlap_corrector
 //
-// Version:            V1.0
-// Revision Date:      2026/08/06
+// Version:            V1.1
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/04            V1.0          Erie                  Create file.
 // 2026/08/05            V1.0          Erie                  Verify aligned S1/S2 raw-code preservation.
 // 2026/08/06            V1.0          Erie                  Verify calibrated payload and epoch alignment.
+// 2026/10/05            V1.1          Erie                  ABCD review F-026: connect the 10 previously floating inputs (i_run_generation and the nine i_datapath_discard_* fields) and the o_run_generation/o_local_empty outputs, and add OVERLAP-GEN: a transaction held under backpressure must carry its RUN generation (3C) with o_local_empty=0, and a same-generation discard event must clear the buffer with no transfer (valid=0, local_empty=1, normal_ready=1). Errors count into the existing verdict. Negative controls: discard-apply forced 0, and generation capture forced 0, each fail OVERLAP-GEN.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -39,13 +40,14 @@
 //
 // 依赖文件:           ppg_adc_pipeline_overlap_corrector
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月06日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月04日        V1.0          Erie                  创建文件
 // 2026年08月05日        V1.0          Erie                  补充两级物理码对齐与保持检查
 // 2026年08月06日        V1.0          Erie                  验证校准载荷与版本标签原子对齐
+// 2026年10月05日        V1.1          Erie                  ABCD复核F-026：接上此前悬空的10个输入（i_run_generation与9个i_datapath_discard_*字段）及o_run_generation/o_local_empty输出，新增OVERLAP-GEN：反压保持的事务必须携带自己的RUN代际（3C）且o_local_empty=0，同代际清空事件必须无消费地清空缓存（valid=0、local_empty=1、normal_ready=1）。错误计入原有总判据。负对照：清空命中恒0、代际锁存恒0两种变异均使OVERLAP-GEN失败。
 
 // 使用独立64-bit整数黄金模型验证S2逐码译码、Q16重构、事务保持和同拍替换
 module tb_ppg_adc_pipeline_overlap_corrector();
@@ -93,6 +95,18 @@ module tb_ppg_adc_pipeline_overlap_corrector();
 	reg [C_CODE_EPOCH_WIDTH - 1:0]i_amb_code_epoch; // 驱动AMB安全提交版本
 	reg [C_CODE_EPOCH_WIDTH - 1:0]i_dc_code_epoch; // 驱动当前颜色DC版本
 	reg i_result_ready;                     // 控制下游消费或反压统一结果事务
+	reg [7:0]i_run_generation;              // ABCD F-026：router透传的当前RUN代际
+	reg i_datapath_discard_event;           // ABCD F-026：AMI注册式代际清空事件
+	reg [1:0]i_datapath_discard_reason;     // ABCD F-026：清空原因分类
+	reg i_datapath_discard_identity_valid;  // ABCD F-026：触发事务身份可信位
+	reg [15:0]i_datapath_discard_frame_id;  // ABCD F-026：触发事务帧号诊断字段
+	reg [15:0]i_datapath_discard_sample_index; // ABCD F-026：触发事务序号诊断字段
+	reg i_datapath_discard_color_ir;        // ABCD F-026：触发事务颜色诊断字段
+	reg [1:0]i_datapath_discard_frame_type; // ABCD F-026：触发事务类型诊断字段
+	reg i_datapath_discard_precision;       // ABCD F-026：触发事务精度诊断字段
+	reg [7:0]i_datapath_discard_run_generation; // ABCD F-026：本次清空目标RUN代际
+	wire [7:0]o_run_generation;             // ABCD F-026：随缓存事务保持的RUN代际
+	wire o_local_empty;                     // ABCD F-026：输出缓存本地排空状态
 	reg [7:0]reg_test_case_id;              // 在WDB中标识OVL-01至OVL-16阶段
 
 	// 反压和空闲场景保存参考载荷，检查输入变化不会污染输出缓存
@@ -353,6 +367,16 @@ module tb_ppg_adc_pipeline_overlap_corrector();
 		i_amb_code_epoch = 4'd0;            // 清除初始AMB版本
 		i_dc_code_epoch = 4'd0;             // 清除初始DC版本
 		i_result_ready = 1'b0;              // 复位阶段关闭下游消费
+		i_run_generation = 8'h01;           // ABCD F-026：初始化当前RUN代际
+		i_datapath_discard_event = 1'b0;    // ABCD F-026：初始无代际清空事件
+		i_datapath_discard_reason = 2'b00;  // 清空原因空闲值
+		i_datapath_discard_identity_valid = 1'b0; // 清空身份空闲值
+		i_datapath_discard_frame_id = 16'h0000; // 清空帧号空闲值
+		i_datapath_discard_sample_index = 16'h0000; // 清空序号空闲值
+		i_datapath_discard_color_ir = 1'b0; // 清空颜色空闲值
+		i_datapath_discard_frame_type = 2'b00; // 清空类型空闲值
+		i_datapath_discard_precision = 1'b0; // 清空精度空闲值
+		i_datapath_discard_run_generation = 8'h00; // 清空目标代际空闲值
 		reg_test_case_id = 8'd1;            // OVL-01验证数字复位确定状态
 		cnt_error = 0;                      // 开始所有检查前清空失败计数
 		reg_hold_calibrated_s1_value = 12'sd0; // 初始化反压参考校准值
@@ -725,6 +749,44 @@ module tb_ppg_adc_pipeline_overlap_corrector();
 			$display("FAIL OVL-16 reset recovery"); // 报告复位恢复合同错误
 		end
 
+		// OVERLAP-GEN（ABCD F-026）：RUN代际随事务锁存并在反压期间保持；同代际清空事件无ready地清掉缓存，
+		// 下一拍本地排空为1且不产生正式消费
+		reg_test_case_id = 8'd18;           // 标识代际保持与清空场景
+		@(negedge i_clk);
+		i_result_ready = 1'b0;              // 让本笔事务在输出缓存中等待
+		i_run_generation = 8'h3C;           // 本笔事务所属RUN代际
+		drive_payload(1'b0, 11'sd77, 10'h000, 9'd77, 16'hb001, 16'h0401,
+			1'b0, 8'h21, 8'h43, 4'h2, 4'h4); // 装入代际测试载荷
+		i_normal_valid = 1'b1;              // 允许空缓存接收事务
+		@(posedge i_clk);
+		#1;
+		@(negedge i_clk);
+		i_normal_valid = 1'b0;              // 只提交一笔事务
+		repeat(3) @(posedge i_clk);
+		#1;
+		if((o_result_valid !== 1'b1) || (o_run_generation !== 8'h3C) || (o_local_empty !== 1'b0))begin
+			cnt_error = cnt_error + 1;      // 记录代际未随事务锁存或排空状态错误
+			$display("FAIL OVERLAP-GEN held generation valid=%b gen=%h empty=%b", o_result_valid, o_run_generation, o_local_empty); // 报告代际保持错误
+		end
+		@(negedge i_clk);
+		i_datapath_discard_event = 1'b1;    // 同代际清空事件单拍
+		i_datapath_discard_reason = 2'b01; // abort清空原因
+		i_datapath_discard_identity_valid = 1'b1; // 携带真实触发身份
+		i_datapath_discard_frame_id = 16'hb001; // 触发事务帧号
+		i_datapath_discard_sample_index = 16'h0401; // 触发事务序号
+		i_datapath_discard_run_generation = 8'h3C; // 清空目标为本笔事务代际
+		@(posedge i_clk);
+		#1;
+		@(negedge i_clk);
+		i_datapath_discard_event = 1'b0;    // 清空事件只保持一拍
+		i_datapath_discard_identity_valid = 1'b0; // 清空身份回到空闲
+		if((o_result_valid !== 1'b0) || (o_local_empty !== 1'b1) || (o_normal_ready !== 1'b1))begin
+			cnt_error = cnt_error + 1;      // 记录同代际清空未生效
+			$display("FAIL OVERLAP-GEN matching discard valid=%b empty=%b ready=%b", o_result_valid, o_local_empty, o_normal_ready); // 报告清空错误
+		end
+		i_result_ready = 1'b1;              // 恢复下游消费
+		i_run_generation = 8'h01;           // 恢复默认代际
+
 		if(cnt_error == 0)begin
 			$display("PASS ppg_adc_pipeline_overlap_corrector OVL-01..OVL-17 and 1024-code sweep"); // 所有真实比较通过后报告唯一PASS
 		end else begin
@@ -775,6 +837,18 @@ module tb_ppg_adc_pipeline_overlap_corrector();
 		.i_dc_code_epoch(i_dc_code_epoch),  // 驱动当前颜色DC版本
 		.o_normal_ready(o_normal_ready),    // 观察返回router的反压许可
 		.i_result_ready(i_result_ready),    // 驱动统一结果下游ready
+		.i_run_generation(i_run_generation), // ABCD F-026：驱动当前RUN代际
+		.i_datapath_discard_event(i_datapath_discard_event), // ABCD F-026：驱动代际清空事件
+		.i_datapath_discard_reason(i_datapath_discard_reason), // 驱动清空原因
+		.i_datapath_discard_identity_valid(i_datapath_discard_identity_valid), // 驱动清空身份可信位
+		.i_datapath_discard_frame_id(i_datapath_discard_frame_id), // 驱动清空帧号诊断
+		.i_datapath_discard_sample_index(i_datapath_discard_sample_index), // 驱动清空序号诊断
+		.i_datapath_discard_color_ir(i_datapath_discard_color_ir), // 驱动清空颜色诊断
+		.i_datapath_discard_frame_type(i_datapath_discard_frame_type), // 驱动清空类型诊断
+		.i_datapath_discard_precision(i_datapath_discard_precision), // 驱动清空精度诊断
+		.i_datapath_discard_run_generation(i_datapath_discard_run_generation), // 驱动清空目标代际
+		.o_run_generation(o_run_generation), // ABCD F-026：观察保持型RUN代际
+		.o_local_empty(o_local_empty),      // ABCD F-026：观察本地排空状态
 		.o_result_valid(o_result_valid),    // 观察保持型统一事务valid
 		.o_calibrated_s1_value(o_calibrated_s1_value), // 观察保持型Stage1校准值
 		.o_calibration_applied(o_calibration_applied), // 观察校准资格对齐

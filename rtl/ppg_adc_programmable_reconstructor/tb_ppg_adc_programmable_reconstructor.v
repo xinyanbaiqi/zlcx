@@ -14,11 +14,12 @@
 //
 // Dependencies:       ppg_adc_programmable_reconstructor
 //
-// Version:            V1.0
-// Revision Date:      2026/08/07
+// Version:            V1.1
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/07            V1.0          Erie                  Create self-checking testbench.
+// 2026/10/05            V1.1          Erie                  ABCD review F-027: the two original PR-06 vectors (offset +/-32768) never put the total Q17 accumulator on the rounding threshold. Add four reachable threshold neighbours via public inputs (S1=256, D2=256, offset -1734151/-1734150/-1799686/-1799687 giving ACC=+65535/+65537/-65535/-65537), each checked by the golden model and by independent literals 0/1/0/-1. Negative controls: ROUND_HALF_Q17 65534 and 65538 both fail.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -33,11 +34,12 @@
 //
 // 依赖文件:           ppg_adc_programmable_reconstructor
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月07日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月07日        V1.0          Erie                  创建PR-01至PR-14自检平台
+// 2026年10月05日        V1.1          Erie                  ABCD复核F-027：原PR-06两笔（offset ±32768）从未使Q17总累加值落在舍入门限。新增四个经公开输入可达的门限邻点（S1=256、D2=256，offset分别为-1734151/-1734150/-1799686/-1799687，对应ACC=+65535/+65537/-65535/-65537），同时经黄金模型和独立字面量0/1/0/-1比较。负对照：ROUND_HALF_Q17改为65534或65538均失败。
 
 // 独立黄金模型覆盖Q17算术、9/15-bit资格、饱和、epoch和保持型事务行为
 module tb_ppg_adc_programmable_reconstructor();
@@ -338,6 +340,29 @@ module tb_ppg_adc_programmable_reconstructor();
 		// PR-06：正负半LSB边界由黄金模型逐笔比较
 		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, 32'sd32768, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 8);
 		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, -32'sd32768, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 9);
+		// PR-06补强（ABCD F-027）：上面两笔offset=±32768只把总累加值移开半LSB，并未落在舍入门限；
+		// S1=256、D2=256时ACC_Q17=3533837+2*offset恒为奇数，取ACC=±65535/±65537这四个可达门限邻点，
+		// 期望输出独立按合同取整写成字面量0/1/0/-1，并同时经黄金模型逐笔比较
+		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, -32'sd1734151, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 12); // ACC=+65535
+		if(o_programmable_15_code !== 15'sd0)begin
+			cnt_error = cnt_error + 1; // PR-06正侧门限下方邻点取整错误
+			$display("FAIL PR-06 ACC=+65535 expected 0 got %0d", o_programmable_15_code); // 报告正侧门限下方错误
+		end
+		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, -32'sd1734150, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 13); // ACC=+65537
+		if(o_programmable_15_code !== 15'sd1)begin
+			cnt_error = cnt_error + 1; // PR-06正侧门限上方邻点取整错误
+			$display("FAIL PR-06 ACC=+65537 expected 1 got %0d", o_programmable_15_code); // 报告正侧门限上方错误
+		end
+		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, -32'sd1799686, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 14); // ACC=-65535
+		if(o_programmable_15_code !== 15'sd0)begin
+			cnt_error = cnt_error + 1; // PR-06负侧门限内侧邻点取整错误
+			$display("FAIL PR-06 ACC=-65535 expected 0 got %0d", o_programmable_15_code); // 报告负侧门限内侧错误
+		end
+		send_transaction(6, 1'b1, 12'sd256, 11'sd256, 10'h100, 20'sd0, -32'sd1799687, 1'b1, 1'b1, 8'h16, 8'h38, 8'h5b, 15); // ACC=-65537
+		if(o_programmable_15_code !== -15'sd1)begin
+			cnt_error = cnt_error + 1; // PR-06负侧门限外侧邻点取整错误
+			$display("FAIL PR-06 ACC=-65537 expected -1 got %0d", o_programmable_15_code); // 报告负侧门限外侧错误
+		end
 		// PR-07：大幅正负offset触发15-bit饱和
 		send_transaction(7, 1'b1, 12'sd2047, 11'sd515, 10'h3ff, 20'sd524287, 32'sd2147483647, 1'b1, 1'b1, 8'h17, 8'h39, 8'h5c, 10);
 		send_transaction(7, 1'b1, -12'sd2048, -11'sd4, 10'h000, -20'sd524288, -32'sd2147483648, 1'b1, 1'b1, 8'h17, 8'h39, 8'h5c, 11);

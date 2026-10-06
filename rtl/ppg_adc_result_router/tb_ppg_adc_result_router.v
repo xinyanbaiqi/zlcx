@@ -15,12 +15,13 @@
 //
 // Dependencies:       ppg_adc_result_router
 //
-// Version:            V1.0
-// Revision Date:      2026/08/06
+// Version:            V1.1
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/01            V1.0          Erie                  Create file.
 // 2026/08/06            V1.0          Erie                  Check calibrated payload and version tags.
+// 2026/10/05            V1.1          Erie                  ABCD review F-026: connect the previously floating i_run_generation input and the o_run_generation output, and add ROUTER-GEN: two complementary generation values (A5/5A) must pass through unchanged (errors counted into the existing final verdict). Negative control: RTL output with bit0 forced low fails ROUTER-GEN.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -36,12 +37,13 @@
 //
 // 依赖文件:           ppg_adc_result_router
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月06日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月01日        V1.0          Erie                  创建文件
 // 2026年08月06日        V1.0          Erie                  增加校准载荷、饱和状态和版本标签自检
+// 2026年10月05日        V1.1          Erie                  ABCD复核F-026：接上此前悬空的i_run_generation输入与o_run_generation输出，新增ROUTER-GEN：两组互补代际取值（A5/5A）必须原样透传（错误计入原有总判据）。负对照：RTL输出代际最低位恒0时ROUTER-GEN失败。
 
 // 定向验证完整Stage1校准事务的互斥路由、原子透传、反压隔离和错误类别处理
 module tb_ppg_adc_result_router();
@@ -76,6 +78,8 @@ module tb_ppg_adc_result_router();
 	reg signed [10:0]i_stage1_code_ext;     // 输入未钳位D1_EXT测试值
 	reg [9:0]i_stage2_raw;                  // 输入高精度事务第二级物理码
 	reg i_precision_mode;                   // 输入当前结果实际9/15-bit模式
+	reg [7:0]i_run_generation;              // ABCD F-026：输入AMI广播的RUN代际，核对原样透传
+	wire [7:0]o_run_generation;             // ABCD F-026：观察随事务透传的RUN代际
 	reg [C_FRAME_ID_WIDTH - 1:0]i_frame_id; // 输入R/IR共享PPG周期标识
 	reg [C_SAMPLE_INDEX_WIDTH - 1:0]i_sample_index; // 输入当前ADC结果顺序编号
 	reg i_color_ir;                         // 输入红光零或红外一的颜色标签
@@ -135,6 +139,7 @@ module tb_ppg_adc_result_router();
 		i_clk = 1'b0;                       // 从低电平启动2 MHz观察时钟
 		i_rstn = 1'b0;                      // 初始复位禁止任何输入事务被接收
 		i_result_valid = 1'b0;              // 复位期间上游没有有效校准结果
+		i_run_generation = 8'h01;           // ABCD F-026：初始化RUN代际，避免端口悬空
 		i_calibrated_s1_value = 12'sd0;     // 清除初始Stage1校准残差
 		i_calibration_applied = 1'b0;       // 初始事务不声明正式校准资格
 		i_saturation_low = 1'b0;            // 初始负向饱和状态清零
@@ -436,6 +441,19 @@ module tb_ppg_adc_result_router();
 			$display("FAIL router did not recover after reset"); // 报告复位恢复路径异常
 		end
 
+		// ABCD F-026：RUN代际为纯组合原样透传，两组互补取值逐位核对，防止常量或截位实现漏检
+		i_run_generation = 8'hA5;           // 第一组非对称代际取值
+		#1;
+		if(o_run_generation !== 8'hA5)begin
+			cnt_error = cnt_error + 1;      // 记录代际透传第一组取值错误
+			$display("FAIL ROUTER-GEN run_generation passthrough expected=a5 got=%h", o_run_generation); // 报告代际透传错误
+		end
+		i_run_generation = 8'h5A;           // 第二组按位取反的代际取值
+		#1;
+		if(o_run_generation !== 8'h5A)begin
+			cnt_error = cnt_error + 1;      // 记录代际透传第二组取值错误
+			$display("FAIL ROUTER-GEN run_generation passthrough expected=5a got=%h", o_run_generation); // 报告代际透传错误
+		end
 		reg_test_case_id = 4'd9;            // 阶段九表示全部定向用例已经结束
 		if(cnt_error == 0)begin
 			$display("PASS ppg_adc_result_router RTR-01..RTR-13"); // 仅在全部合同用例真实比较通过后报告成功
@@ -476,6 +494,7 @@ module tb_ppg_adc_result_router();
 		.i_stage1_code_ext(i_stage1_code_ext), // 传入未钳位第一级扩展码
 		.i_stage2_raw(i_stage2_raw),        // 传入高精度第二级物理码
 		.i_precision_mode(i_precision_mode), // 传入事务实际精度标签
+		.i_run_generation(i_run_generation), // ABCD F-026：传入当前RUN代际
 		.i_frame_id(i_frame_id),            // 传入R/IR共享PPG帧号
 		.i_sample_index(i_sample_index),    // 传入全局ADC结果序号
 		.i_color_ir(i_color_ir),            // 传入颜色状态库选择标签
@@ -503,6 +522,7 @@ module tb_ppg_adc_result_router();
 		.o_stage1_code_ext(o_stage1_code_ext), // 核对有符号D1_EXT透传
 		.o_stage2_raw(o_stage2_raw),        // 核对同事务S2码透传
 		.o_precision_mode(o_precision_mode), // 核对输出精度元数据
+		.o_run_generation(o_run_generation), // ABCD F-026：核对RUN代际原样透传
 		.o_frame_id(o_frame_id),            // 核对PPG周期身份字段
 		.o_sample_index(o_sample_index),    // 核对ADC结果排序标签
 		.o_color_ir(o_color_ir),            // 核对红光或红外标志

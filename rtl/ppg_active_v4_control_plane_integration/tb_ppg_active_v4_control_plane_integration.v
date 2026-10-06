@@ -17,11 +17,12 @@
 //                     ppg_system_active_config_unpack.v,
 //                     ppg_active_v4_control_plane_integration.v
 //
-// Version:            V1.6
-// Revision Date:      2026/08/23
+// Version:            V1.7
+// Revision Date:      2026/10/05
 // History:
 // 2026/08/14          V1.0        Erie          Create AV4C-01 through AV4C-18 self-check.
 // 2026/08/23          V1.6        Erie          Widen every snapshot to the 1024-bit V4+V5 joint payload with a legal V5 default block on every rebuild; add AV4C-19 through AV4C-22 covering STATIC_BIAS ownership, system_fault_blocking/run_generation/stop_episode_active transparent forwarding, joint COMMIT rejection and V5 qualification gating.
+// 2026/10/05          V1.7        Erie          ABCD review F-025: AV4C-02 now also compares every remaining named output against independent literals of the snapshot this TB builds: the V4 code min/max, high thresholds, confirm counts and Stage1 weights 1-8, and all 22 V5 named fields (slope mode/fixed slope/alpha/beta/timing ratio/slope bounds/baseline delta/cross hysteresis/lead window/confirm counts/deadband/peak-valley limits/window limits/peak_valley_config_valid). Count stays 22. Negative control: wrapper o_alpha_q15 forced to 0 passed the old 22 but fails AV4C-02.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -39,11 +40,12 @@
 //                     ppg_system_active_config_unpack.v、
 //                     ppg_active_v4_control_plane_integration.v
 //
-// 当前版本:           V1.6
-// 修订日期:           2026年08月23日
+// 当前版本:           V1.7
+// 修订日期:           2026年10月05日
 // 修订历史:
 // 2026年08月14日       V1.0        Erie          创建AV4C-01至AV4C-18自检。
 // 2026年08月23日       V1.6        Erie          全部快照扩展为1024-bit V4+V5联合载荷，每次整体重建都补一份合法V5默认档案；新增AV4C-19至AV4C-22覆盖STATIC_BIAS所有权、system_fault_blocking/run_generation/stop_episode_active透明转发、联合COMMIT拒绝和V5资格门控
+// 2026年10月05日       V1.7        Erie          ABCD复核F-025：AV4C-02补比较其余全部具名输出，期望值为本TB构造快照的独立字面量：V4的码上下限、高阈值、确认次数、Stage1权重1~8，以及全部22个V5具名字段（斜率模式/固定斜率/alpha/beta/时刻修正/斜率边界/基线偏置/相交迟滞/提前量窗口/确认次数/死区/峰谷门限/窗口上限/peak_valley_config_valid）。检查数仍为22。负对照：wrapper o_alpha_q15恒为0时旧22项全通过，现AV4C-02失败。
 
 // 本平台在独立source与2 MHz时钟域下，对控制平面进行保持型CDC和逐位字段比较。
 module tb_ppg_active_v4_control_plane_integration();
@@ -672,7 +674,19 @@ module tb_ppg_active_v4_control_plane_integration();
 		end
 
 		//AV4C-02、AV4C-03、AV4C-15、AV4C-17：检查唯一解包器对所有关键signed字段逐位透传。
-		if((o_schema_version != 8'h04) || o_run_profile || o_input_source || (o_idac_mode != 2'b10) || (o_optical_mode != 2'b10) || o_initial_precision || !o_amb_enable || !o_dcs_enable || !o_amb_polarity || o_dcs_polarity || !o_stage1_calibration_valid || !o_stage2_calibration_valid || !o_dc9_recovery_valid || !o_dc15_recovery_valid || (o_amb_manual_code != 8'd64) || (o_dcs_r_manual_code != 8'd80) || (o_dcs_ir_manual_code != 8'd96) || (o_amb_threshold_low != -12'sd64) || (o_dcs_threshold_low != -12'sd48) || (o_stage1_weight_q16_0 != -26'sd17) || (o_stage1_weight_q16_9 != 26'sd26) || (o_stage1_offset_q16 != -32'sd99) || (o_stage2_gain_q16 != 20'sd54143) || (o_stage2_offset_q16 != -32'sd37) || (o_dc9_recovery_gain_q16 != 32'sd65536) || (o_dc15_recovery_gain_q16 != 32'sd32768) || (o_amb_recheck_interval_frames != 16'd4096))begin
+		if((o_schema_version != 8'h04) || o_run_profile || o_input_source || (o_idac_mode != 2'b10) || (o_optical_mode != 2'b10) || o_initial_precision || !o_amb_enable || !o_dcs_enable || !o_amb_polarity || o_dcs_polarity || !o_stage1_calibration_valid || !o_stage2_calibration_valid || !o_dc9_recovery_valid || !o_dc15_recovery_valid || (o_amb_manual_code != 8'd64) || (o_dcs_r_manual_code != 8'd80) || (o_dcs_ir_manual_code != 8'd96) || (o_amb_threshold_low != -12'sd64) || (o_dcs_threshold_low != -12'sd48) || (o_stage1_weight_q16_0 != -26'sd17) || (o_stage1_weight_q16_9 != 26'sd26) || (o_stage1_offset_q16 != -32'sd99) || (o_stage2_gain_q16 != 20'sd54143) || (o_stage2_offset_q16 != -32'sd37) || (o_dc9_recovery_gain_q16 != 32'sd65536) || (o_dc15_recovery_gain_q16 != 32'sd32768) || (o_amb_recheck_interval_frames != 16'd4096) ||
+			// ABCD F-025：以下补齐此前未比较的V4具名字段与全部V5具名字段，期望值为本TB构造快照的独立字面量
+			(o_amb_code_min != 8'd8) || (o_amb_code_max != 8'd240) || (o_dcs_r_code_min != 8'd12) || (o_dcs_r_code_max != 8'd230) ||
+			(o_dcs_ir_code_min != 8'd16) || (o_dcs_ir_code_max != 8'd220) || (o_amb_threshold_high != 12'sd72) || (o_dcs_threshold_high != 12'sd56) ||
+			(o_amb_confirm_count != 8'd8) || (o_dcs_confirm_count != 8'd9) ||
+			(o_stage1_weight_q16_1 != 26'sd18) || (o_stage1_weight_q16_2 != -26'sd19) || (o_stage1_weight_q16_3 != 26'sd20) || (o_stage1_weight_q16_4 != -26'sd21) ||
+			(o_stage1_weight_q16_5 != 26'sd22) || (o_stage1_weight_q16_6 != -26'sd23) || (o_stage1_weight_q16_7 != 26'sd24) || (o_stage1_weight_q16_8 != -26'sd25) ||
+			(o_slope_mode != 1'b1) || (o_fixed_slope_q16 != -32'sd65536) || (o_alpha_q15 != 16'h199A) || (o_beta_q15 != 16'h2000) ||
+			(o_timing_adjust_ratio_q15 != 16'h0800) || (o_slope_min_q16 != -32'sd262144) || (o_slope_max_q16 != -32'sd8192) || (o_baseline_delta_q16 != 32'sd0) ||
+			(o_cross_hysteresis_q16 != 32'd131072) || (o_lead_min_frames != 16'd17) || (o_lead_max_frames != 16'd19) || (o_cross_confirm_count != 4'd3) ||
+			(o_no_cross_limit != 4'd2) || (o_peak_confirm_count != 4'd3) || (o_valley_confirm_count != 4'd3) || (o_direction_deadband != 24'd2) ||
+			(o_min_peak_valley_amplitude != 24'd20) || (o_min_peak_to_valley_frames != 16'd20) || (o_min_peak_to_peak_frames != 16'd100) ||
+			(o_max_fine_window_frames != 16'd600) || (o_max_reacquire_frames != 16'd1000) || (o_peak_valley_config_valid != 1'b0))begin
 			$display("FAIL AV4C-02 unique unpack or signed field mapping");
 			cnt_error = cnt_error + 1;
 		end else begin

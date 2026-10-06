@@ -14,12 +14,13 @@
 //
 // Dependencies:       ppg_dynamic_baseline_cross_detector.v
 //
-// Version:            V1.1
-// Revision Date:      2026/08/27
+// Version:            V1.2
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/10            V1.0          Erie                  Create file.
 // 2026/08/27            V1.1          Erie                  Resync with DUT V1.1~V1.3: remove obsolete i_stop_ack_event/i_control_abort_event ports; wire the new PWI-broadcast i_detection_discard group, i_run_generation and o_local_empty per PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md section 14.1; wire i_peak_valley_config_valid (V5 gate, default driven high to preserve pre-existing BSL/OPT case behavior) per section 14.4. Replaced the two direct-clear event pulses with a shared pulse_detection_discard task carrying DISCARD_STOP/DISCARD_ABORT reason codes. No test case logic, expected value, or case count changed. Verified with real iverilog: compiles -Wall clean and vvp reproduces ALL BSL-01 THROUGH BSL-39, OPT-01 THROUGH OPT-24 AND OPTC-01 THROUGH OPTC-02 PASS count=65.
+// 2026/10/05            V1.2          Erie                  ABCD review F-038: add an independent reference of the final committed slope built only from this TB's configuration and the cycle observables (C21 section 4: S_BASE=-round(A*alpha*2/T) with 32-bit saturation, symmetric-rounded beta smoothing, timing step max(1,round(|S_BASE|*ratio/2^15)) applied as -STEP because these vectors have no formal cross, then clamp); every check_sequential_divider vector (OPT-23 and all 32 OPT-24 random vectors) now also compares o_slope_current_q16 after the anchor commit, and OPT-24 requires all of them to match. OPT-23 additionally runs two complete cycles in one RUN without reset (A1=1000/T1=300 then A2=1500/T2=257, no-cross limit raised to 15 so the second no-cross cycle stays adaptive) and checks both quotients and both final slopes, the second one using the first cycle's committed slope as S_CURRENT. PASS count stays 65. Negative control: Q15_ROUND_HALF_50 set to 0 (truncation instead of symmetric rounding) still passes the original OPT-05/06 but fails OPT-23 and OPT-24 (run on a copy with the per-cycle EQV dump disabled, because a failing run of this TB only stops at its 2 s watchdog).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -34,12 +35,13 @@
 //
 // 依赖文件:           ppg_dynamic_baseline_cross_detector.v
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年08月27日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月10日        V1.0          Erie                  创建文件
 // 2026年08月27日        V1.1          Erie                  与DUT V1.1~V1.3重新同步：删除已废弃的i_stop_ack_event/i_control_abort_event端口；按合同14.1节接入新增的PWI广播i_detection_discard组、i_run_generation和o_local_empty；按合同14.4节接入i_peak_valley_config_valid（V5门控，默认拉高以保持既有BSL/OPT用例行为不变）。原来的两处直接清除事件脉冲统一改为携带DISCARD_STOP/DISCARD_ABORT原因码的pulse_detection_discard任务。未改动任何用例逻辑、预期值或用例总数。真实iverilog核实：-Wall编译干净，vvp仿真复现ALL BSL-01 THROUGH BSL-39, OPT-01 THROUGH OPT-24 AND OPTC-01 THROUGH OPTC-02 PASS count=65。
+// 2026年10月05日        V1.2          Erie                  ABCD复核F-038：新增最终提交斜率的独立参考模型，只用本TB的配置和周期观测量（C21第4节：S_BASE=-round(A*alpha*2/T)并做32位饱和、对称舍入的beta平滑、时刻修正步长max(1,round(|S_BASE|*ratio/2^15))，这些向量没有正式相交，按-STEP计入，最后限幅）；check_sequential_divider的每个向量（OPT-23及OPT-24全部32个随机向量）在锚点提交后都比较o_slope_current_q16，OPT-24要求全部一致。OPT-23另外在同一RUN内不复位连续跑两个完整周期（A1=1000/T1=300，再A2=1500/T2=257；无相交上限调到15，使第二个无相交周期仍走自适应），两次商和两次最终斜率都比较，第二次以第一周期提交的斜率作为S_CURRENT。PASS仍为65项。负对照：Q15_ROUND_HALF_50改为0（截断代替对称舍入），原OPT-05/06仍通过，OPT-23、OPT-24失败（在关闭逐拍EQV输出的副本上运行，因为本TB失败时只能等2秒看门狗结束）。
 
 // 对动态基线数学、相交握手、自适应闭环和故障恢复执行28项定向自检
 module tb_ppg_dynamic_baseline_cross_detector;
@@ -169,6 +171,17 @@ module tb_ppg_dynamic_baseline_cross_detector;
 	reg flag_eqv_started;                                                // 首次完成复位后允许输出等价追踪
 	reg flag_divide_seen;                                                // 即时路径检查是否错误进入顺序除法
 	reg flag_random_divider_ok;                                         // 确定性随机顺序商差分累计结果
+	reg signed [63:0]ref_base_wide;                                     // ABCD F-038：参考模型S_BASE_WIDE
+	reg signed [63:0]ref_base;                                          // ABCD F-038：参考模型饱和后S_BASE
+	reg signed [63:0]ref_smooth_product;                                // ABCD F-038：参考模型平滑乘积
+	reg signed [63:0]ref_smooth_delta;                                  // ABCD F-038：参考模型对称舍入平滑增量
+	reg signed [63:0]ref_adjust_step;                                   // ABCD F-038：参考模型相交时刻修正步长
+	reg signed [63:0]ref_candidate;                                     // ABCD F-038：参考模型限幅前候选
+	reg signed [31:0]reg_ref_slope_next;                                // ABCD F-038：参考模型最终提交斜率
+	reg flag_final_slope_ok;                                            // ABCD F-038：全部最终斜率与参考一致
+	integer cnt_final_slope_checks;                                     // ABCD F-038：已比较的最终斜率笔数
+	reg [63:0]reg_second_golden_quotient;                               // ABCD F-038：连续第二周期黄金商
+	reg flag_continuous_cycle_ok;                                       // ABCD F-038：同一RUN连续两周期逐项一致
 	reg flag_shared_multiplier_ok;                                      // 阶段C三种操作数和乘积路由累计正确性
 	reg flag_shared_idle_zero_ok;                                       // 非乘法状态共享输入及结果保持零值
 	reg flag_shared_alpha_seen;                                         // 仿真已经覆盖alpha共享乘法状态
@@ -400,6 +413,27 @@ module tb_ppg_dynamic_baseline_cross_detector;
 	endtask
 
 	// 通过正式峰谷事务启动顺序除法，并将42-bit商与测试台组合黄金结果逐位比较
+	// ABCD F-038：按C21第4节冻结公式独立计算一个完整周期提交的最终斜率（本TB向量无正式相交，TIMING_TERM=-STEP），
+	// 只使用本TB驱动的配置与周期观测量，不读取DUT中间量
+	task compute_reference_slope;
+		input [24:0]amplitude;
+		input [15:0]period_frames;
+		input [15:0]alpha_q15;
+		input signed [31:0]slope_current;
+	begin
+		ref_base_wide = -$signed(({39'd0, amplitude} * {48'd0, alpha_q15} * 64'd2 + ({48'd0, period_frames} >> 1)) / {48'd0, period_frames}); // S_BASE_WIDE=-round(A*alpha*2/T)
+		ref_base = (ref_base_wide < -64'sd2147483647) ? -64'sd2147483647 : ref_base_wide; // 饱和到支持的signed 32-bit Q16
+		ref_smooth_product = (ref_base - $signed({{32{slope_current[31]}}, slope_current})) * $signed({48'd0, i_beta_q15}); // 平滑差值乘beta
+		ref_smooth_delta = (ref_smooth_product < 0) ? -$signed((-ref_smooth_product + 64'sd16384) >>> 15) : $signed((ref_smooth_product + 64'sd16384) >>> 15); // 对称舍入
+		ref_adjust_step = $signed(((-ref_base) * $signed({48'd0, i_timing_adjust_ratio_q15}) + 64'sd16384) >>> 15); // round(|S_BASE|*ratio/2^15)
+		if(ref_adjust_step < 1) ref_adjust_step = 1; // ADJUST_STEP=max(1, ADJUST_ROUNDED)
+		ref_candidate = $signed({{32{slope_current[31]}}, slope_current}) + ref_smooth_delta - ref_adjust_step; // 无正式相交时TIMING_TERM=-STEP
+		if(ref_candidate < $signed({{32{i_slope_min_q16[31]}}, i_slope_min_q16})) ref_candidate = $signed({{32{i_slope_min_q16[31]}}, i_slope_min_q16}); // 下限限幅
+		if(ref_candidate > $signed({{32{i_slope_max_q16[31]}}, i_slope_max_q16})) ref_candidate = $signed({{32{i_slope_max_q16[31]}}, i_slope_max_q16}); // 上限限幅
+		reg_ref_slope_next = ref_candidate[31:0]; // 最终提交斜率
+	end
+	endtask
+
 	task check_sequential_divider;
 		input signed [23:0]peak_value;
 		input signed [23:0]valley_value;
@@ -428,6 +462,13 @@ module tb_ppg_dynamic_baseline_cross_detector;
 			$fatal(1);                                                       // 商或周期数不精确时立即阻断
 		end
 		finish_peak_hold;                                                  // 允许完整斜率与新锚点正式提交
+		@(negedge i_clk);                                                  // ABCD F-038：等待新锚点同拍提交的最终斜率稳定
+		compute_reference_slope(amplitude, period_frames, alpha_q15, i_fixed_slope_q16); // 新RUN的S_CURRENT为固定斜率种子
+		cnt_final_slope_checks = cnt_final_slope_checks + 1;               // 统计最终结果比较笔数
+		if(o_slope_current_q16 !== reg_ref_slope_next)begin
+			flag_final_slope_ok = 1'b0;                                      // 最终正式斜率与独立参考不一致
+			$display("FAIL PHASE_B_FINAL A=%h T=%h alpha=%h dut=%0d ref=%0d", amplitude, period_frames, alpha_q15, o_slope_current_q16, reg_ref_slope_next);
+		end
 	end
 	endtask
 
@@ -742,6 +783,8 @@ module tb_ppg_dynamic_baseline_cross_detector;
 	initial begin
 		i_clk = 1'b0;                                                     // 初始化时钟低电平
 		i_rstn = 1'b1;                                                    // 初始化复位为非活动态
+		flag_final_slope_ok = 1'b1;                                     // ABCD F-038：最终斜率比较初值
+		cnt_final_slope_checks = 0;                                     // ABCD F-038：最终斜率比较计数初值
 		cnt_pass = 0;                                                     // 清零通过用例统计
 		cnt_fail = 0;                                                     // 清零失败检查统计
 		cnt_eqv_cycle = 0;                                                // 从零开始编号阶段A追踪记录
@@ -1279,7 +1322,37 @@ module tb_ppg_dynamic_baseline_cross_detector;
 		check_sequential_divider(24'sd1000, 24'sd0, 25'd1000, 16'd300, C_ALPHA_Q15); // 连续周期隔离的第一组商
 		reg_first_quotient = reg_golden_quotient[41:0];                    // 保存第一组黄金商
 		check_sequential_divider(24'sd2000, 24'sd0, 25'd2000, 16'd257, C_ALPHA_Q15); // 使用不同操作数执行第二组商
-		check_case("OPT-23", (reg_first_quotient != reg_golden_quotient[41:0]) && (o_slope_base_q16 == -$signed(reg_golden_quotient[31:0]))); // 连续事务不复用旧pending数据
+		// ABCD F-038：OPT-23还要求同一RUN内不复位的连续两个完整周期各自独立：第二周期必须用自己的A/T重新求商，
+		// 且以第一周期提交的斜率作为S_CURRENT求最终结果；两组商与两次最终斜率都按独立参考逐位比较
+		flag_continuous_cycle_ok = (reg_first_quotient != reg_golden_quotient[41:0]) && (o_slope_base_q16 == -$signed(reg_golden_quotient[31:0])); // 保留原OPT-23两次独立调用的判据
+		reset_dut;
+		initialize_inputs;
+		i_alpha_q15 = C_ALPHA_Q15;
+		i_no_cross_limit = 4'd15;                                           // 两个连续无相交周期不得触发重获路径，保持自适应除法
+		start_run;
+		send_peak(24'sd1000, 16'd1, 8'd1);                                 // 第一周期旧波峰
+		send_valley(24'sd0, 16'd2, 8'd1);                                  // 第一周期波谷，A1=1000
+		begin_peak_hold(24'sd1000, 16'd301, 8'd1);                         // 第二个波峰，T1=300
+		wait_arithmetic_state(ST_DIVIDE);
+		while(ppg_dynamic_baseline_cross_detector_Inst_dut.state_current == ST_DIVIDE) @(negedge i_clk);
+		reg_golden_quotient = ({39'd0, 25'd1000} * {48'd0, C_ALPHA_Q15} * 64'd2 + 64'd150) / 64'd300; // 第一周期黄金商
+		flag_continuous_cycle_ok = flag_continuous_cycle_ok && (ppg_dynamic_baseline_cross_detector_Inst_dut.reg_div_quotient === reg_golden_quotient[41:0]);
+		finish_peak_hold;
+		@(negedge i_clk);
+		compute_reference_slope(25'd1000, 16'd300, C_ALPHA_Q15, i_fixed_slope_q16); // 第一周期最终斜率参考
+		flag_continuous_cycle_ok = flag_continuous_cycle_ok && (o_slope_current_q16 === reg_ref_slope_next);
+		send_valley(-24'sd500, 16'd400, 8'd1);                             // 第二周期波谷，A2=1000-(-500)=1500
+		begin_peak_hold(24'sd1000, 16'd558, 8'd1);                         // 第三个波峰，T2=558-301=257
+		wait_arithmetic_state(ST_DIVIDE);
+		while(ppg_dynamic_baseline_cross_detector_Inst_dut.state_current == ST_DIVIDE) @(negedge i_clk);
+		reg_second_golden_quotient = ({39'd0, 25'd1500} * {48'd0, C_ALPHA_Q15} * 64'd2 + 64'd128) / 64'd257; // 第二周期黄金商
+		flag_continuous_cycle_ok = flag_continuous_cycle_ok && (ppg_dynamic_baseline_cross_detector_Inst_dut.reg_div_quotient === reg_second_golden_quotient[41:0]) && (reg_second_golden_quotient[41:0] != reg_golden_quotient[41:0]);
+		finish_peak_hold;
+		@(negedge i_clk);
+		compute_reference_slope(25'd1500, 16'd257, C_ALPHA_Q15, reg_ref_slope_next); // 第二周期以第一周期提交斜率为S_CURRENT
+		flag_continuous_cycle_ok = flag_continuous_cycle_ok && (o_slope_current_q16 === reg_ref_slope_next) && (o_slope_base_q16 == -$signed(reg_second_golden_quotient[31:0]));
+		if(!flag_continuous_cycle_ok) $display("OPT-23 DIAG continuous two-cycle mismatch quotient=%h slope=%0d ref=%0d", ppg_dynamic_baseline_cross_detector_Inst_dut.reg_div_quotient, o_slope_current_q16, reg_ref_slope_next);
+		check_case("OPT-23", flag_continuous_cycle_ok); // 连续事务不复用旧pending：两次独立调用与同一RUN连续两周期均逐位一致
 
 		flag_random_divider_ok = 1'b1;                                   // 开始OPT-24确定性随机顺序商差分
 		reg_random_seed = 32'sh2468ace1;                                 // 固定随机种子保证可复现
@@ -1300,7 +1373,7 @@ module tb_ppg_dynamic_baseline_cross_detector;
 			end
 			check_sequential_divider(reg_hold_frame[23:0], 24'sd0, reg_hold_frame[24:0], reg_hold_sample[15:0], reg_random_word[15:0]); // 逐向量执行真实42周期商比较
 		end
-		check_case("OPT-24", flag_random_divider_ok && (cnt_divide_cycles == 42)); // 全部确定性随机事务逐位一致
+		check_case("OPT-24", flag_random_divider_ok && (cnt_divide_cycles == 42) && flag_final_slope_ok && (cnt_final_slope_checks >= 34)); // 全部确定性随机事务商与最终斜率逐位一致（ABCD F-038）
 		check_case("OPTC-01", flag_shared_multiplier_ok && flag_shared_alpha_seen && flag_shared_beta_seen && flag_shared_adjust_seen); // 三个周期操作均由同一signed乘法路径逐位正确完成
 		check_case("OPTC-02", flag_shared_idle_zero_ok);                   // 共享乘法器在其余状态输入清零以限制无效翻转
 

@@ -15,13 +15,14 @@
 //
 // Dependencies:       ppg_idac_code_controller.v
 //
-// Version:            V2.2
-// Revision Date:      2026/09/30
+// Version:            V2.3
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/07            V2.0          Erie                  Create V2 self-checking regression.
 // 2026/08/08            V2.1          Erie                  Add fixed periodic AMB-R-IR sequence coverage.
 // 2026/09/30            V2.2          Erie                  TB maintenance (no RTL change): connect i_run_generation, added by controller RTL V2.2 (2026/08/22) and left floating here ever since. The X on the floating port corrupted the pending-candidate generation tag/compare and caused the long-standing "V2.1 regression found 33 errors" already recorded in the RTL's own V2.3 changelog (2026/08/29) as a stale-TB issue; REGRESSION_BASELINE_20260930.md section 6.2 pinned it to this single port. Driven by a constant 0 for the whole run (no case here exercises cross-generation rejection) and C_RUN_GENERATION_WIDTH is passed explicitly. The test-injection inputs stay unconnected on purpose (C_ENABLE_TEST_INJECTION defaults to 0 so they are gated off). Result: 148 PASS, 0 FAIL (xsim and iverilog).
+// 2026/10/05            V2.3          Erie                  ABCD review F-031: every earlier search range had max<=30 (endpoint sums <=60), so the 9-bit midpoint sum was never exercised. Add HIGHCODE-SEARCH at the end: AMB range 0..255 with model target 200; the applied AMB candidates must be exactly the independently written floor midpoints 127/191/223/207/199/203/201/200 and the committed code 200. PASS lines 148 -> 150. Negative control: amb_next_midpoint truncated to an 8-bit sum fails both HIGHCODE-SEARCH checks.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -37,13 +38,14 @@
 //
 // 依赖文件:           ppg_idac_code_controller.v
 //
-// 当前版本:           V2.2
-// 修订日期:           2026年09月30日
+// 当前版本:           V2.3
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月07日        V2.0          Erie                  创建V2自检回归。
 // 2026年08月08日        V2.1          Erie                  增加固定AMB、DC_R及DC_IR周期序列覆盖。
 // 2026年09月30日        V2.2          Erie                  TB维护（不改RTL）：连接控制器RTL V2.2（2026/08/22）新增、本TB一直悬空的i_run_generation。悬空的X污染了pending候选的代际锁存与比较，这就是RTL自身V2.3 changelog（2026/08/29）早已记录为"单元TB未同步"的"V2.1 regression found 33 errors"；REGRESSION_BASELINE_20260930.md第6.2节把根因精确到这一个端口。全程驱动常量0（本TB没有用例测跨代际拒绝），并显式传入C_RUN_GENERATION_WIDTH。测试注入输入有意保持不连（C_ENABLE_TEST_INJECTION默认0，已被门控屏蔽）。结果：148 PASS，0 FAIL（xsim与iverilog一致）。
+// 2026年10月05日        V2.3          Erie                  ABCD复核F-031：此前全部搜索范围上界<=30（端点和<=60），九位中点求和从未被检验。末尾新增HIGHCODE-SEARCH：AMB范围0..255、模型目标200，实际施加的AMB候选必须依次等于独立写出的floor中点127/191/223/207/199/203/201/200，最终提交码为200。PASS行148→150。负对照：amb_next_midpoint截成8位和时两项HIGHCODE-SEARCH均失败。
 
 // 覆盖启动搜索、固定周期三路重检以及IDT-01至IDT-15慢速跟踪和取消行为
 module tb_ppg_idac_code_controller
@@ -136,6 +138,10 @@ module tb_ppg_idac_code_controller
 	reg i_dcs_revalidate_accept;            // 驱动DCS重验证accept
 	integer error_count;                    // 汇总所有自检失败数量
 	integer target_amb_code;                // 启动搜索模拟AMB目标码
+	reg [7:0]amb_candidate_seq [0:15];    // ABCD F-031：高码搜索中依次出现的AMB候选码
+	integer amb_candidate_count;            // ABCD F-031：已记录的AMB候选个数
+	integer amb_high_guard;                 // ABCD F-031：高码搜索服务循环上界
+	reg [7:0]amb_last_recorded;             // ABCD F-031：最近一次记录的AMB候选
 	integer target_dcs_r_code;              // 启动搜索模拟红光目标码
 	integer target_dcs_ir_code;             // 启动搜索模拟红外目标码
 	integer startup_stage;                  // 检查AMB到R再到IR的请求顺序
@@ -748,6 +754,53 @@ module tb_ppg_idac_code_controller
 		i_status_clear_event = 1'b0;        // 撤销状态清除单拍
 		check_condition(o_protocol_error_sticky == 1'b0,
 			"IDT-15 status clear removes protocol sticky without restart"); // 检查诊断清除边界
+
+		// HIGHCODE-SEARCH（ABCD F-031）：此前全部搜索范围上界<=30，端点和不超过60，九位中点求和从未被检验。
+		// 用公开端口配置AMB范围0..255、模拟目标200，按合同floor((low+high)/2)独立写出8个字面量候选，
+		// 逐个比较实际施加的AMB候选码，并要求最终提交码为200
+		if(i_run_enable == 1'b1)begin
+			pulse_stop;                     // 停止上一轮并清理pending
+		end
+		i_active_config_epoch = i_active_config_epoch + 8'd1; // 新ACTIVE原子提交版本
+		i_idac_mode = 2'b10;                // 启用搜索
+		i_amb_code_min = 8'd0;              // AMB全码域下界
+		i_amb_code_max = 8'd255;            // AMB全码域上界，端点和需要第9位
+		i_amb_manual_code = 8'd128;         // manual字段保持合法
+		i_dcs_r_code_min = 8'd10; i_dcs_r_code_max = 8'd20; i_dcs_r_manual_code = 8'd15; // 红光DCS小范围
+		i_dcs_ir_code_min = 8'd20; i_dcs_ir_code_max = 8'd30; i_dcs_ir_manual_code = 8'd24; // 红外DCS小范围
+		target_amb_code = 200;              // AMB模拟目标码
+		target_dcs_r_code = 15;             // 红光模拟目标码
+		target_dcs_ir_code = 24;            // 红外模拟目标码
+		pulse_start;                        // 进入新的RUN上下文
+		amb_candidate_count = 0;            // 清空候选记录
+		amb_last_recorded = 8'hxx;          // 首个候选必然被记录
+		amb_high_guard = 0;                 // 循环上界计数清零
+		while((o_startup_search_complete == 1'b0) && (o_controller_fault_blocking == 1'b0) && (amb_high_guard < 300))begin
+			amb_high_guard = amb_high_guard + 1; // 限制循环次数
+			if(o_amb_pending_valid || o_dcs_r_pending_valid || o_dcs_ir_pending_valid)begin
+				pulse_safe_boundary;        // 候选先安全提交
+			end else if(o_amb_sample_request == 1'b1)begin
+				if((o_amb_code !== amb_last_recorded) && (amb_candidate_count < 16))begin
+					amb_candidate_seq[amb_candidate_count] = o_amb_code; // 记录新出现的AMB候选
+					amb_candidate_count = amb_candidate_count + 1; // 候选计数加一
+					amb_last_recorded = o_amb_code; // 更新最近记录值
+				end
+				send_requested_search_sample; // 评价当前AMB候选
+			end else if(o_dcs_sample_request == 1'b1)begin
+				send_requested_search_sample; // 评价当前DCS候选
+			end else begin
+				@(negedge i_clk);           // 等待下一状态
+			end
+		end
+		check_condition((amb_candidate_count == 8) && (amb_candidate_seq[0] == 8'd127) && (amb_candidate_seq[1] == 8'd191) &&
+			(amb_candidate_seq[2] == 8'd223) && (amb_candidate_seq[3] == 8'd207) && (amb_candidate_seq[4] == 8'd199) &&
+			(amb_candidate_seq[5] == 8'd203) && (amb_candidate_seq[6] == 8'd201) && (amb_candidate_seq[7] == 8'd200),
+			"HIGHCODE-SEARCH AMB 0..255 search visits floor midpoints 127/191/223/207/199/203/201/200"); // 逐候选比较九位中点
+		check_condition(o_startup_search_complete && !o_controller_fault_blocking && (o_amb_code == 8'd200),
+			"HIGHCODE-SEARCH AMB high-code search commits target 200"); // 最终提交码
+		if(amb_candidate_count != 8)begin
+			$display("HIGHCODE-SEARCH DIAG candidate_count=%0d first=%0d second=%0d", amb_candidate_count, amb_candidate_seq[0], amb_candidate_seq[1]); // 失败时给出定位信息
+		end
 
 		if(error_count == 0)begin
 			$display("PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed"); // 最终通过仅在全部真实比较成功后输出

@@ -5,11 +5,19 @@
 // Design Name:        PPG ADC DC Recovery Self-Checking Testbench
 // Module Name:        tb_ppg_adc_dc_recovery
 // Description:        Contract-directed checks for arithmetic, saturation and holding protocol.
+// Version:            V1.1
+// Revision Date:      2026-10-05
+// History:
+// 2026-10-05           V1.1       Erie        ABCD review F-026: connect the eight previously floating diagnostic inputs (detect code, Stage1/Stage2 raw and code_ext, nominal 15-bit code/valid/saturated) and their outputs; every drive_and_check transaction now drives test-id-dependent values and compares all eight passthrough outputs. Negative control: RTL payload with inverted stage1_raw fails 21 cases.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 公司:                Erie
 // 设计名称:            PPG ADC DC恢复自检测试平台
 // 模块名称:            tb_ppg_adc_dc_recovery
 // 模块说明:            覆盖DC恢复公式、舍入、饱和、模式切换和反压保持合同。
+// 当前版本:            V1.1
+// 修订日期:            2026年10月05日
+// 修订历史:
+// 2026-10-05           V1.1       Erie        ABCD复核F-026：接上此前悬空的8个诊断输入（检测码、Stage1/Stage2原始码与code_ext、标称15-bit码/资格/饱和）及对应输出；每笔drive_and_check事务驱动与test_id相关的取值并核对8个透传输出。负对照：RTL载荷中stage1_raw取反时21项失败。
 
 module tb_ppg_adc_dc_recovery;
 	localparam integer C_FRAME_ID_WIDTH = 16;
@@ -53,6 +61,22 @@ module tb_ppg_adc_dc_recovery;
 	reg [7:0]i_dc_code_snapshot;
 	reg [3:0]i_amb_code_epoch;
 	reg [3:0]i_dc_code_epoch;
+	reg [8:0]i_detect_code; // ABCD F-026：第一级检测码诊断输入
+	reg [9:0]i_stage1_raw; // ABCD F-026：第一级物理判决位诊断输入
+	reg signed [10:0]i_stage1_code_ext; // ABCD F-026：D1_EXT诊断输入
+	reg [9:0]i_stage2_raw; // ABCD F-026：第二级物理判决位诊断输入
+	reg signed [10:0]i_stage2_code_ext; // ABCD F-026：D2_EXT诊断输入
+	reg signed [14:0]i_nominal_15_code; // ABCD F-026：标称15-bit诊断输入
+	reg i_nominal_15_valid; // ABCD F-026：标称结果资格诊断输入
+	reg i_nominal_saturated; // ABCD F-026：标称结果饱和诊断输入
+	wire [8:0]o_detect_code; // ABCD F-026：第一级检测码诊断透传
+	wire [9:0]o_stage1_raw; // ABCD F-026：第一级物理判决位诊断透传
+	wire signed [10:0]o_stage1_code_ext; // ABCD F-026：D1_EXT诊断透传
+	wire [9:0]o_stage2_raw; // ABCD F-026：第二级物理判决位诊断透传
+	wire signed [10:0]o_stage2_code_ext; // ABCD F-026：D2_EXT诊断透传
+	wire signed [14:0]o_nominal_15_code; // ABCD F-026：标称15-bit诊断透传
+	wire o_nominal_15_valid; // ABCD F-026：标称结果资格诊断透传
+	wire o_nominal_saturated; // ABCD F-026：标称结果饱和诊断透传
 
 	wire o_result_valid;
 	wire signed [23:0]o_coarse_ppg_value;
@@ -167,6 +191,15 @@ module tb_ppg_adc_dc_recovery;
 			i_dc_code_snapshot = dc_code;
 			i_dc9_recovery_gain_q16 = gain9;
 			i_dc15_recovery_gain_q16 = gain15;
+			// ABCD F-026：8个诊断字段每笔取与test_id相关的不同值，核对随事务原样透传
+			i_detect_code = 9'h155 ^ test_id[8:0];
+			i_stage1_raw = 10'h2A5 ^ {test_id[4:0], test_id[4:0]};
+			i_stage1_code_ext = -11'sd300 + test_id[10:0];
+			i_stage2_raw = 10'h15A ^ test_id[9:0];
+			i_stage2_code_ext = 11'sd411 - test_id[10:0];
+			i_nominal_15_code = -15'sd12345 + test_id[14:0];
+			i_nominal_15_valid = test_id[0];
+			i_nominal_saturated = !test_id[0];
 			i_result_valid = 1'b1;
 			i_result_ready = 1'b1;
 			@(posedge i_clk);
@@ -190,7 +223,11 @@ module tb_ppg_adc_dc_recovery;
 				o_stage1_saturation_low !== i_stage1_saturation_low ||
 				o_stage1_saturation_high !== i_stage1_saturation_high ||
 				o_programmable_saturation_low !== i_programmable_saturation_low ||
-				o_programmable_saturation_high !== i_programmable_saturation_high)begin
+				o_programmable_saturation_high !== i_programmable_saturation_high ||
+				o_detect_code !== i_detect_code || o_stage1_raw !== i_stage1_raw ||
+				o_stage1_code_ext !== i_stage1_code_ext || o_stage2_raw !== i_stage2_raw ||
+				o_stage2_code_ext !== i_stage2_code_ext || o_nominal_15_code !== i_nominal_15_code ||
+				o_nominal_15_valid !== i_nominal_15_valid || o_nominal_saturated !== i_nominal_saturated)begin
 				error_count = error_count + 1;
 				$display("FAIL DCR-%0d coarse=%0d fine=%0d", test_id, $signed(o_coarse_ppg_value), $signed(o_fine_ppg_value));
 			end
@@ -215,6 +252,8 @@ module tb_ppg_adc_dc_recovery;
 		i_result_valid = 1'b0;
 		i_result_ready = 1'b0;
 		i_calibrated_s1_value = 12'sd256;
+		i_detect_code = 9'd0; i_stage1_raw = 10'd0; i_stage1_code_ext = 11'sd0; i_stage2_raw = 10'd0; // ABCD F-026：诊断输入初值
+		i_stage2_code_ext = 11'sd0; i_nominal_15_code = 15'sd0; i_nominal_15_valid = 1'b0; i_nominal_saturated = 1'b0; // ABCD F-026：诊断输入初值
 		i_calibration_applied = 1'b1;
 		i_stage1_saturation_low = 1'b0;
 		i_stage1_saturation_high = 1'b0;
@@ -470,6 +509,12 @@ module tb_ppg_adc_dc_recovery;
 		.o_precision_mode(o_precision_mode),
 		.o_frame_id(o_frame_id), .o_sample_index(o_sample_index), .o_color_ir(o_color_ir), .o_frame_type(o_frame_type),
 		.o_amb_code_snapshot(o_amb_code_snapshot), .o_dc_code_snapshot(o_dc_code_snapshot),
-		.o_amb_code_epoch(o_amb_code_epoch), .o_dc_code_epoch(o_dc_code_epoch)
+		.o_amb_code_epoch(o_amb_code_epoch), .o_dc_code_epoch(o_dc_code_epoch),
+		.i_detect_code(i_detect_code), .i_stage1_raw(i_stage1_raw), .i_stage1_code_ext(i_stage1_code_ext),
+		.i_stage2_raw(i_stage2_raw), .i_stage2_code_ext(i_stage2_code_ext), .i_nominal_15_code(i_nominal_15_code),
+		.i_nominal_15_valid(i_nominal_15_valid), .i_nominal_saturated(i_nominal_saturated),
+		.o_detect_code(o_detect_code), .o_stage1_raw(o_stage1_raw), .o_stage1_code_ext(o_stage1_code_ext),
+		.o_stage2_raw(o_stage2_raw), .o_stage2_code_ext(o_stage2_code_ext), .o_nominal_15_code(o_nominal_15_code),
+		.o_nominal_15_valid(o_nominal_15_valid), .o_nominal_saturated(o_nominal_saturated)
 	);
 endmodule

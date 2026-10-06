@@ -87,7 +87,7 @@ for tb in "${ORDER[@]}"; do
 
   if [ -f "$logdir/xsim.log" ]; then
     pass_count=$(grep -c -E "^PASS " "$logdir/xsim.log" 2>/dev/null); pass_count=${pass_count:-0}
-    fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR" "$logdir/xsim.log" 2>/dev/null); fail_count=${fail_count:-0}
+    fail_count=$(grep -c -E "^FAIL |ERROR:|FATAL_ERROR|UVM_ERROR|status=FAIL" "$logdir/xsim.log" 2>/dev/null); fail_count=${fail_count:-0} # ABCD F-037: also count the JNT prefix verdict line "JNT_BASELINE ... status=FAIL"
     finished=$(grep -c 'finish called' "$logdir/xsim.log" 2>/dev/null); finished=${finished:-0}
   else
     pass_count=0

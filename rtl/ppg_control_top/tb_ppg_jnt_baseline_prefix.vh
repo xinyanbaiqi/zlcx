@@ -34,8 +34,8 @@
 //                      tb_ppg_control_top_<group>.v file's own DUT instance
 //                      (must be named ppg_control_top_Inst) and shared tasks.
 //
-// Version:            V1.1
-// Revision Date:      2026/08/25
+// Version:            V1.2
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/25            V1.0          Erie                  Create file. Architecture A (user-confirmed 2026-08-25, see project memory
@@ -154,6 +154,10 @@
 //                                                             Group files while chasing an unexpected real_cal=1 informational-counter
 //                                                             discrepancy -- see each Group file's own changelog for that fix, since it
 //                                                             lives in code this file does not own.
+// 2026/10/05            V1.2          Erie                  ABCD review F-037: when the checked or passed sub-check count falls short of
+//                                                             C_JNT_REQUIRED_SUBCHECKS, the closeout now adds one to the shared cnt_error even if
+//                                                             none of the executed sub-checks failed; previously only cnt_run_jnt_fail was added, so
+//                                                             a short JNT prefix printed status=FAIL but the calling TB could still end in PASS.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -186,8 +190,8 @@
 //                      直接子模块）；调用方tb_ppg_control_top_<group>.v文件自己
 //                      的DUT实例（必须命名为ppg_control_top_Inst）和共享task。
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年08月25日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月25日        V1.0          Erie                  创建文件。架构方案A（用户2026-08-25已确认，见项目记忆
@@ -292,6 +296,9 @@
 //                                                             异常时，另外发现并修复了五个Group文件都有的一个既有
 //                                                             bg_responder分类时序缺陷（不是本文件引入的）——具体修复内容见
 //                                                             各Group文件自己的changelog，因为代码归属在那边，不在本文件。
+// 2026年10月05日        V1.2          Erie                  ABCD复核F-037：已执行或通过的子检查数量不足C_JNT_REQUIRED_SUBCHECKS时，
+//                                                             即使已执行的子检查无一失败也给共享cnt_error加1；此前只加cnt_run_jnt_fail，
+//                                                             前提不足时打印status=FAIL但调用方TB仍可能以PASS结束。
 
 //===================<JNT-01~09基线控制参数>===================//
 localparam integer C_JNT_REQUIRED_SUBCHECKS = 54; // 源TB是52（PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md第11节），52+1（JNT-06独立起手式多产生一次JNT-STARTUP-READY，见下）=53，工作线D 2026-09-17批次1独立复核发现JNT-02原本对应源规格JNT-02B的"IR波形上下文在RED owner未释放时已真实预建立"整段检查在移植时静默丢失，本次补回新增JNT-02-IR-PREESTABLISH一条子检查，53+1=54；JNT-06在ppg_control_top上不能像源TB那样直接续用JNT-05的残留run——ppg_control_top.v第344/353行把外部i_control_abort_event独立注册进STOP合并路径，abort会连带触发真实STOP排空，这是孤立三模块源TB没有的V4级联效应（第一次真实iverilog冒烟跑测出来的），所以JNT-06改成独立复位+配置+START，多出的这一次START多产生一次JNT-STARTUP-READY子检查，子检查的"内容"和源TB定义完全对应，只是JNT-06多了一次独立起手式
@@ -798,7 +805,9 @@ task run_jnt_baseline_01_09;
 			$display("JNT_BASELINE checked=%0d pass=%0d required=%0d status=PASS", cnt_run_jnt_checked, cnt_run_jnt_pass, C_JNT_REQUIRED_SUBCHECKS);
 		end else begin
 			$display("JNT_BASELINE checked=%0d pass=%0d fail=%0d required=%0d first_failure=%0s status=FAIL", cnt_run_jnt_checked, cnt_run_jnt_pass, cnt_run_jnt_fail, C_JNT_REQUIRED_SUBCHECKS, reg_jnt_first_failure_id);
-			cnt_error = cnt_error + cnt_run_jnt_fail;
+			// ABCD F-037：子检查数量或通过数不足时，即使已执行的子检查无一失败也必须计入统一错误数，
+			// 否则调用方只看cnt_error会在JNT前提不成立时继续跑组场景并最终PASS
+			cnt_error = cnt_error + cnt_run_jnt_fail + (((cnt_run_jnt_checked != C_JNT_REQUIRED_SUBCHECKS) || (cnt_run_jnt_pass != C_JNT_REQUIRED_SUBCHECKS)) ? 1 : 0);
 		end
 		flag_jnt_manual_adc_hold = 1'b0;
 		jnt_reset_release;

@@ -15,10 +15,11 @@
 // Dependencies:    ppg_config_cdc_bridge.v,
 //                  ppg_characterization_control_cdc.v
 //
-// Version:         V1.0
-// Revision Date:   2026/08/14
+// Version:         V1.1
+// Revision Date:   2026/10/05
 // History:
 // 2026/08/14       V1.0        Codex          Create real self-checking CDC testbench.
+// 2026/10/05       V1.1        Erie           ABCD review F-013: CCC-22 now also requires that a pure software diag clear (no simultaneous reject) really returns o_protocol_error_sticky from 1 to 0 without changing the committed control, before the existing clear-vs-new-reject priority check; previously only the final sticky=1 was compared. Count stays 26. Negative control: RTL software clear changed to self-hold passed the old 26 but fails CCC-22.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Codex
@@ -34,10 +35,11 @@
 // 依赖文件:        ppg_config_cdc_bridge.v、
 //                  ppg_characterization_control_cdc.v
 //
-// 当前版本:        V1.0
-// 修订日期:        2026年08月14日
+// 当前版本:        V1.1
+// 修订日期:        2026年10月05日
 // 修订历史:
 // 2026年08月14日   V1.0        Codex          创建真实比较CDC自检平台。
+// 2026年10月05日   V1.1        Erie           ABCD复核F-013：CCC-22在原有"清除与新拒绝同拍时拒绝优先"检查之前，新增要求纯软件诊断清除（无同拍拒绝）确实把o_protocol_error_sticky由1清为0且不改已提交控制；此前只比较最终sticky=1。检查数仍为26。负对照：RTL软件清除改为自保持时旧26项全通过，现CCC-22失败。
 
 module tb_ppg_characterization_control_cdc;
 
@@ -235,6 +237,8 @@ module tb_ppg_characterization_control_cdc;
 	reg flag_accept;
 	reg flag_reject;
 	reg reg_static_before;
+	reg flag_ccc22_sticky_before;           // CCC-22纯软件清除前sticky必须已为1，避免空检查
+	reg flag_ccc22_clear_ok;                // CCC-22纯软件清除后sticky归零且配置不变
 	reg [4:0]reg_mux_before;
 	reg reg_valid_before;
 	integer cnt_event_before;
@@ -428,18 +432,21 @@ module tb_ppg_characterization_control_cdc;
 		// CCC-22: 软件清sticky不改配置；若清除与新拒绝同拍，拒绝置位必须优先。
 		reg_static_before = o_static_characterization_enable;
 		reg_mux_before = o_test_mux_ctrl;
+		flag_ccc22_sticky_before = o_protocol_error_sticky; // ABCD F-013：记录清除前sticky，要求清除确有对象
 		i_diag_clear_event = 1'b1;
 		@(posedge i_clk);
 		#1;
 		i_diag_clear_event = 1'b0;
 		wait_system_cycles(8'd1);
+		flag_ccc22_clear_ok = (flag_ccc22_sticky_before === 1'b1) && (o_protocol_error_sticky === 1'b0) &&
+			(o_static_characterization_enable === reg_static_before) && (o_test_mux_ctrl === reg_mux_before); // 纯清除归零且不改配置
 		i_run_enable = 1'b1;
 		launch_control_inflight(1'b0, 5'b11110);
 		i_diag_clear_event = 1'b1;
 		wait_for_result(flag_accept, flag_reject);
 		i_diag_clear_event = 1'b0;
 		wait_system_cycles(8'd2);
-		check_case(8'd22, (flag_reject === 1'b1) && (o_protocol_error_sticky === 1'b1) &&
+		check_case(8'd22, flag_ccc22_clear_ok && (flag_reject === 1'b1) && (o_protocol_error_sticky === 1'b1) &&
 			(o_static_characterization_enable === reg_static_before) && (o_test_mux_ctrl === reg_mux_before));
 
 		// CCC-23: 共同复位在请求同步完成前撤销在途事务，旧请求不得在释放后迟到提交。

@@ -15,14 +15,15 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.2
-// Revision Date:      2026/09/18
+// Version:            V1.3
+// Revision Date:      2026/10/05
 // History:
 // 2026/09/18            V1.2          Erie                  Workline-D pending-item investigation, ISE-01. Contract section 9.4.7 (line 644) requires "code, color, type, precision, and epochs are captured before the first preparation window of each waveform" -- the existing snapshot mechanism (reg_ise_snapshot_expect_ambn/dcn, latch-then-compare against the real Q3 bus) only ever validated the code half; color/type/precision/epoch were never independently checked, same gap shape as batch3's SID-06 finding. Traced the real SSW (ppg_sar9_sar15_safe_selection_wrapper.v) registers backing every one of these fields: reg_cal_color_ir/reg_cal_frame_type/reg_cal_amb_epoch/reg_cal_dc_epoch are latched by the exact same flag_context_fire && flag_context_is_cal condition as the already-confirmed reg_cal_amb_code/reg_cal_dc_code (confirmed by reading lines 808-938, several already carrying @satisfies: ISE-01/02/03 tags), so they are provably subject to the same "locked before preparation" property -- reading and asserting on them directly closes real coverage, not a re-derivation of the same claim. precision is a genuine exception: reg_cal_precision is hardcoded to 0 for every calibration waveform (line 938), not sourced from any per-waveform snapshot input the way the other four fields are -- it is a structural constant for calibration, not a captured value, so there is no meaningful "capture timing" to test for it; recorded as such rather than forcing a vacuous check. Added a new check_ise_color_type_epoch_snapshot task and wired it into all three real search stages (AMB/DC_R/DC_IR) at the same pre-window snapshot point already used for code, checked once per stage (first candidate) since color/type are stage-constant by construction and checking every candidate would add no real coverage. Real iverilog full run: 70 PASS, 0 FAIL, IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155, all three new ISE-01-AMB/DCR/DCIR checks pass with real, non-trivial observed data (frame_type=00/01, color_ir=0/0/1 matching AMB/DCS_CAL-RED/DCS_CAL-IR respectively) and the pre-existing ISE-02~10 unaffected. See WORKLINE_D_TRK01_ISE01_20260918.md for the full investigation.
 //    Time               Version       Revised by            Contents
 // 2026/08/26            V1.0          Erie                  Create file. Stage 5 Group 12 (IDAC-SNAPSHOT-EPOCH-BUS-ISOLATION, C25 contract section 9.4.7), scoped down by user decision to only ISE-04/05/07 plus the STATIC_BIAS half of ISE-06 -- ISE-01/02/03/09/10 and AMB_CAL/DCS_CAL (the other half of ISE-06) all require a real committed-code-changing event at a safe boundary or a real calibration transaction, and both only exist via `idac_mode=SEARCH_TRACK` startup search (Group 6) or periodic recheck (Group 8), neither built yet; `ppg_idac_code_controller.v`'s own FSM confirms this directly -- `ST_MANUAL_APPLY` transitions straight to `ST_NORMAL` on the first safe boundary and never visits `ST_AMB_APPLY`/`ST_AMB_WAIT`/the DCS states at all, so MANUAL mode structurally cannot produce an AMB_CAL/DCS_CAL request. The deferred five-plus-half IDs are left for a follow-up revision once Group 6/7/8 exist. Reuses the real-2MHz-clock/JNT-01~09-prefix/wait_q3_release/drive_real_adc_done/make_fixed_raw infrastructure and the JNT-prefix-required standard config tasks verbatim from tb_ppg_control_top_adc_numeric_scoreboard.v (Group 11), dropping that file's Stage1/DC-recovery/reconstruction golden-model tasks entirely since this group never numerically recomputes a result -- it only watches the four IDAC buses. Three independently-committed phases in one JNT-prefixed run: Phase A (SAR9 NORMAL MANUAL, optical_mode=RED, amb_manual_code=8'hA5, dcs_r_manual_code=8'h3C -- the same non-symmetric bit patterns tb_ppg_sar9_sar15_safe_selection_wrapper.v's own SSW-45/47 already established as proving per-bit gating, not an all-high shortcut) drives two real transactions while a continuous per-cycle monitor asserts o_idac_sar15ambn_low/o_idac_sar15dcn_low stay exactly zero for the entire RUN window (ISE-04's SAR15-bus-zero half) and latches the SAR9 buses' own non-zero values seen during each transaction's Q3 window to confirm they held 8'hA5/8'h3C bit-for-bit (ISE-04's own-bus half, and this phase's contribution to ISE-07's two-non-symmetric-pattern requirement). Phase B (CHARACTERIZATION+optical_mode=RED+initial_precision=SAR15 -- NORMAL_PPG+SAR15 is MGR-16/18's own statically-illegal combination per tb_ppg_control_top.v's SMOKE-22, so a fixed-SAR15 transaction can only be reached this way, same as Group 11's own Phase D -- with amb_manual_code=8'h5A, dcs_r_manual_code=8'hC3, a second, different non-symmetric pattern) mirrors Phase A with the bus roles reversed for ISE-05 and ISE-07's second pattern. Phase C commits STATIC_BIAS (CHARACTERIZATION+EXTERNAL_TEST_CURRENT+static_characterization_enable=1, reusing tb_ppg_control_top.v's task_build_static_bias_v4_config/task_commit_static_bias_characterization tasks verbatim) and confirms all four IDAC buses read zero throughout, closing ISE-06's STATIC_BIAS clause (the AMB_CAL/DCS_CAL clause stays deferred).
 //                                                             One real bug was found and fixed getting the first real run clean, in this file's own design, not RTL: the first draft sampled o_idac_sar9ambn_low/dcn_low (Phase A) and o_idac_sar15ambn_low/dcn_low (Phase B) immediately after `wait_q3_release` returned -- which is *after* that Q3 window has already closed. Phase A passed anyway (NORMAL's continuous back-to-back scheduling means the next transaction's context was typically already active by the time of the check, so the bus never actually idled to zero), but Phase B failed on both transactions, reading back 8'h00/8'h00 instead of 8'h5A/8'hC3 -- CHARACTERIZATION's intermittent one-transaction-per-400Hz-frame cadence leaves a real idle gap after each transaction during which the bus legitimately returns to zero before the next one starts, so sampling after the window closes catches nothing. Fixed by latching each bus's own non-zero value continuously throughout the phase's monitor window and checking the latched "last seen" value instead of a live post-release sample -- decouples the assertion from exactly when within (or after) the Q3 window the check happens. After the fix: real iverilog run, JNT_BASELINE 53/53 PASS, all four transactions across Phase A/B pass, STATIC_BIAS confirmed zero, zero mismatches: `IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=4`.
 // 2026/08/29            V1.1          Erie                  Backfilled the deferred ISE-01/02/03/08/09/10 plus ISE-06's AMB_CAL/DCS_CAL clause, now that Group 6 (startup search) and Group 8 (periodic recheck) exist. Added two new phases (D: dual-optical SEARCH_TRACK real startup search; E: single-optical RED_ONLY narrow-then-wide-range SEARCH_TRACK) reusing Group 6/8/9's proven task library (`task_run_startup_search`, `task_drive_amb_toward_target`/`task_drive_dcs_toward_target`, the 8/503/150 threshold convention) verbatim -- explicitly overrode the amb/dcs threshold fields in the new config tasks rather than inheriting this file's own V1.0 `task_build_normal_manual_config`, which still carries the pre-Group7-fix stale cross-zero threshold window (`amb_threshold=(-64,72)`, `dcs_threshold=(-48,56)`); reusing it as-is would have silently reintroduced the exact `make_fixed_raw` clamp misclassification bug already documented in project memory `feedback-make-fixed-raw-threshold-convention`. Phase D's per-candidate loop snapshots the committed AMB/DC code right before each candidate's own preparation window and checks the corresponding bus against that snapshot (ISE-01/02), checks the next window only ever adopts a code after a real safe-boundary change (ISE-03), checks the DC bus stays zero during AMB_CAL and confirms the AMB bus during DCS_CAL (ISE-06's other half), and cross-checks the opposite color's code/epoch stay frozen during each color's own DC search stage (ISE-08). Phase E adds ISE-09 (a few real in-window transactions after real NORMAL tracking is reached, confirming no numerical change means no update/epoch bump) and ISE-10 (a real DC_R epoch wrap from 4'hF to 4'h0). Getting a real, fully-passing run took seven rounds of real bugs, none in DUT RTL, several directly reusable lessons: (1) a genuine, previously-undiscovered gap: the STATIC_BIAS characterization commitment from Phase C is a persistent CDC-side snapshot that survives STOP/drain -- committing Phase D's non-CHARACTERIZATION config without first explicitly clearing it via `task_clear_static_bias_characterization` (copied from the sibling ILM file, which already has this task) was rejected at COMMIT with `C_ERROR_STATIC_BIAS_INPUT_SOURCE` (8'h14); this file's own V1.0 never hit this because it never committed anything after STATIC_BIAS. (2) The first ISE-01/02 monitor design asserted continuous bit-exact equality from the instant a candidate's sample-request signal first asserted -- real xsim showed this is too strict: the bus genuinely stays at its prior/idle value for a real number of cycles after the request appears, before AMI/SSW actually latches this candidate onto the bus at their own macro-frame-start/waveform-context-accept boundary, so the pre-drive idle period legitimately reads 0. (3) A second, subtler version of the same monitor (armed only once the AMB bus went non-zero) still intermittently failed because the AMB and DC buses don't necessarily become live in lockstep -- replaced the whole approach with this file's own already-proven ISE-04/05 technique verbatim: latch any non-zero value seen during the window and compare the latched value after the window closes, rather than asserting live equality throughout. (4) ISE-10's original narrow-range (78,82) oscillating-direction design, modeled on Group 7 TRK-08, had a real bug: the direction-flip check was nested inside "did epoch actually change this attempt," so once the code got stuck at a boundary (no further same-direction commit possible) the direction flag never flipped and the whole commit budget was wasted stalled at the boundary -- fixed by checking the code's position against the window's own min/max unconditionally every attempt, not only on a successful commit. (5) Even after that fix, epoch still never wrapped: the loop was copying the calibration-search convergence loop's `while(!o_dcs_sample_request) ...` wait pattern, but that signal is calibration-search/revalidate-state-specific and is never asserted once the controller is genuinely in `ST_NORMAL` running the real tracking fork (which consumes the real ADC result stream directly, not this held request signal) -- every attempt spun to its own 5000-cycle guard and produced zero real commits. Fixed by dropping that wait entirely, matching ISE-09's (and Group 7's `task_drive_track_color_value`'s) already-correct pattern of just waiting for the next real Q3 window directly. (6) With commits finally happening for real, the narrow-range oscillation itself turned out not to reverse direction cleanly in this specific scenario (root cause not chased further, not worth the additional investigation cost) -- replaced with a structurally simpler, more robust design: keep the default wide `dcs_r_code_min=12`/`dcs_r_code_max=230` range and drive purely one direction (`below_low`, forced increase) for the whole phase, since epoch increments by exactly 1 on every real commit regardless of the code's own numeric direction or position -- reaching the far-away code_max would take on the order of 150 real transactions, comfortably longer than the ~9-real-transactions-per-commit (matching `dcs_confirm_count=9`) needed for 16+ commits to guarantee a wrap by the pigeonhole principle, so the wrap is reached with real margin to spare (confirmed: wrapped at 145 real driven transactions) without ever needing any boundary-reversal logic at all. Also fixed a real cross-file scope conflict discovered while backfilling the sibling `tb_ppg_control_top_input_light_static_matrix.v` (see that file's own V1.1 changelog) -- unrelated to this file directly, but the same class of "a whole-simulation-lifetime background monitor silently assumes every future phase shares the original phase's mode" issue is worth watching for in any file being backfilled with a new SEARCH_TRACK phase. After all fixes: real Vivado 2022.2 xsim run (~1 minute), `JNT_BASELINE 53/53 PASS`, all ten ISE-01~10 IDs (plus both halves of ISE-06) pass with real evidence, `IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155`.
+// 2026/10/05            V1.3          Erie                  ABCD review F-029: the selected-bus monitors (ISE-04 SAR9 A5/3C, ISE-05 SAR15 5A/C3, ISE-01/02 candidate snapshots) now also check every cycle that any non-zero value on the selected bus equals the expected code, counting violations per transaction/candidate; previously only the last non-zero value was compared, so a wrong value in mid-window was overwritten by a later correct one. Idle zeros remain allowed. PASS lines unchanged (70). Negative control: Top SAR9 AMB output glitched A5->A4 for the first cycle it becomes A5 fails both ISE-04 transactions although the latched last value is still A5.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -38,14 +39,15 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.2
-// 修订日期:           2026年09月18日
+// 当前版本:           V1.3
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年09月18日        V1.2          Erie                  工作线D待查清单调查，ISE-01。合同9.4.7节（644行）要求"code、color、type、precision、epoch均需在每个波形第一次准备窗口之前捕获"——既有快照机制（`reg_ise_snapshot_expect_ambn`/`dcn`，窗口前锁存+真实Q3总线latch后核对）只真实验证过code这一半，color/type/precision/epoch从未独立测过，和批次3 SID-06的缺口是同一种形态。反查SSW（`ppg_sar9_sar15_safe_selection_wrapper.v`）背后支撑这几项的真实寄存器：`reg_cal_color_ir`/`reg_cal_frame_type`/`reg_cal_amb_epoch`/`reg_cal_dc_epoch`和已经确认过的`reg_cal_amb_code`/`reg_cal_dc_code`由完全相同的`flag_context_fire && flag_context_is_cal`条件锁存（读808-938行确认，其中数处已带`@satisfies: ISE-01/02/03`标签）——可证明它们同样满足"准备前锁定"这条性质，直接读取并断言是真实补上覆盖，不是重新推导同一个已知结论。precision是一个真实的例外：`reg_cal_precision`对每一个校准波形都硬编码为0（938行），不像另外四项那样来自逐波形快照输入——对校准而言它是结构性常量，不是"捕获"来的值，没有有意义的"捕获时点"可测；如实记录，不强行构造一个vacuous检查。新增`check_ise_color_type_epoch_snapshot`task，接入AMB/DC_R/DC_IR三个真实搜索阶段各自已有的窗口前快照点，每个阶段只核对一次（第一个候选）——color/type在同一阶段内结构上恒定，逐候选核对不会增加真实覆盖。真实iverilog全量跑：70 PASS、0 FAIL，`IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155`，三条新增ISE-01-AMB/DCR/DCIR检查全部用真实、非平凡的观测数据通过（`frame_type=00/01`、`color_ir=0/0/1`分别对应AMB/DCS_CAL-RED/DCS_CAL-IR），既有ISE-02~10不受影响。完整调查过程见`WORKLINE_D_TRK01_ISE01_20260918.md`。
 // 2026年08月26日        V1.0          Erie                  创建文件。Stage 5第12组（IDAC-SNAPSHOT-EPOCH-BUS-ISOLATION，C25合同9.4.7节），按用户决定本轮只做ISE-04/05/07加ISE-06的STATIC_BIAS半句——ISE-01/02/03/09/10和ISE-06另外那半句（AMB_CAL/DCS_CAL）都需要"已提交的码在安全边界真的发生一次改变"或者一笔真实校准事务，而这两者都只能通过`idac_mode=SEARCH_TRACK`的启动搜索（Group6）或周期复检（Group8）才会发生，都还没做；`ppg_idac_code_controller.v`自己的状态机直接证实了这一点——`ST_MANUAL_APPLY`一遇到首个安全边界就直接跳到`ST_NORMAL`，完全不经过`ST_AMB_APPLY`/`ST_AMB_WAIT`/DCS系列状态，MANUAL模式在结构上就不可能产生一笔AMB_CAL/DCS_CAL请求。剩下这五条半留到Group6/7/8做完之后再回来补一版。原样复用`tb_ppg_control_top_adc_numeric_scoreboard.v`（Group11）已验证过的真实2MHz时钟/JNT-01~09前缀/`wait_q3_release`/`drive_real_adc_done`/`make_fixed_raw`基础设施和JNT前缀内部要求的标准配置task，完全去掉那份文件里Stage1/DC恢复/重建的黄金模型task——本组从不重算数值结果，只看四条IDAC总线。三个独立提交的阶段在同一次JNT前缀运行里：阶段A（SAR9 NORMAL MANUAL，optical_mode=RED，amb_manual_code=8'hA5、dcs_r_manual_code=8'h3C——和`tb_ppg_sar9_sar15_safe_selection_wrapper.v`自己的SSW-45/47已经确立的同一组非对称位模式，证明是逐位门控不是走了个全高电平的总线级捷径）驱动两笔真实事务，同时一个逐拍连续监视进程全程断言`o_idac_sar15ambn_low`/`o_idac_sar15dcn_low`在整个RUN窗口内恒为零（ISE-04的SAR15总线归零那一半），并latch每笔事务Q3窗口内SAR9总线曾经出现过的非零值确认逐位保持8'hA5/8'h3C（ISE-04自己总线的那一半，也是本阶段对ISE-07"至少两个非对称模式"要求的贡献）。阶段B（CHARACTERIZATION+optical_mode=RED+initial_precision=SAR15——NORMAL_PPG+SAR15是MGR-16/18自己的静态非法组合，`tb_ppg_control_top.v`的SMOKE-22已confirmed过，固定SAR15事务只能走这条路，和Group11自己的阶段D一样，amb_manual_code=8'h5A、dcs_r_manual_code=8'hC3，第二个不同的非对称模式）把阶段A的总线角色对调，覆盖ISE-05和ISE-07的第二个模式。阶段C提交STATIC_BIAS（CHARACTERIZATION+EXTERNAL_TEST_CURRENT+static_characterization_enable=1，原样复用`tb_ppg_control_top.v`的`task_build_static_bias_v4_config`/`task_commit_static_bias_characterization`两个task），确认四条IDAC总线全程读零，收尾ISE-06的STATIC_BIAS半句（AMB_CAL/DCS_CAL半句仍然留着）。
 //                                                             为了拿到第一次真实跑通的证据，本轮发现并修复了一个真实问题，是本文件自己的设计问题，不是RTL：第一版在`wait_q3_release`返回后立即采样`o_idac_sar9ambn_low`/`dcn_low`（阶段A）和`o_idac_sar15ambn_low`/`dcn_low`（阶段B）——但这已经是Q3窗口关闭*之后*了。阶段A侥幸通过（NORMAL连续调度下，检查那一刻下一笔事务的上下文往往已经在途，总线还没真的回落到零），阶段B两笔事务都FAIL，读回8'h00/8'h00而不是8'h5A/8'hC3——CHARACTERIZATION每400Hz宏帧一笔的间歇节奏在每笔事务之后有真实的空闲间隔，总线在下一笔开始前会合法回落到零，窗口关闭后再采样什么都抓不到。修复为全程持续latch每条总线自己出现过的非零值，检查latch住的"最近一次非零值"而不是释放后的即时抽样——把断言和"检查发生在Q3窗口内还是窗口外"这个具体时刻解耦。修复后：真实iverilog跑通，`JNT_BASELINE 53/53 PASS`，阶段A/B全部四笔事务通过，STATIC_BIAS确认归零，零失配：`IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=4`。
 // 2026年08月29日        V1.1          Erie                  回补此前延后的ISE-01/02/03/08/09/10加ISE-06的AMB_CAL/DCS_CAL半句——Group6（启动搜索）和Group8（周期复检）都已经完成。新增两个阶段（D：双光SEARCH_TRACK真实启动搜索；E：单光RED_ONLY的SEARCH_TRACK）原样复用Group6/8/9已经验证过的task库（`task_run_startup_search`、`task_drive_amb_toward_target`/`task_drive_dcs_toward_target`、8/503/150阈值驱动惯例）——新增的配置task显式覆盖了amb/dcs阈值字段，没有直接继承本文件V1.0自己的`task_build_normal_manual_config`（那份配置还带着Group7修复之前的旧版跨零阈值窗口`amb_threshold=(-64,72)`、`dcs_threshold=(-48,56)`）——原样复用会悄悄重新引入memory `feedback-make-fixed-raw-threshold-convention`已经记录过的那个`make_fixed_raw`钳位误判bug。阶段D的逐候选循环在每个候选自己的准备窗口开启之前锁存已提交的AMB/DC码，用对应总线核对这个快照（ISE-01/02），核对下一个窗口只会在真实安全边界改变码之后才采用新码（ISE-03），核对AMB_CAL期间DC总线保持零、DCS_CAL期间AMB总线持有确认码（ISE-06另外那半句），并交叉核对每种颜色自己做DC搜索时另一种颜色的码/epoch保持冻结（ISE-08）。阶段E新增ISE-09（真正进入NORMAL跟踪后驱动几笔窗口内真实事务，核对数值不变则不产生update/epoch递增）和ISE-10（一次真实的DC_R epoch从4'hF到4'h0回绕）。拿到一次真正跑通的PASS一共经历了七轮真实bug，全部不在DUT RTL，好几个可以直接复用：（1）一个此前从没被发现过的真实缺口：阶段C提交的STATIC_BIAS表征资格是CDC侧的持久快照，STOP/drain不会自动撤销——阶段D提交非CHARACTERIZATION配置前如果不先显式调用`task_clear_static_bias_characterization`（从同源的ILM文件抄过来，那份文件本来就有这个task）就会在COMMIT被`C_ERROR_STATIC_BIAS_INPUT_SOURCE`（8'h14）拒绝；本文件V1.0自己从没踩到过，因为它从来没在STATIC_BIAS之后再提交过别的场景。（2）第一版ISE-01/02监视进程从候选请求信号刚出现那一刻就要求总线严格相等，真实xsim显示这太严格：请求信号出现后总线会有一段真实的空闲拍数，要等AMI/SSW在自己的宏帧起始/波形上下文接受这个节点才真正把这个候选值送上总线，这段"准备中"的空闲期总线合法读0。（3）第二版稍微放宽（只在AMB总线首次非零后才武装断言）依然间歇性FAIL，因为AMB总线和DC总线不保证同步进入各自的真实live状态——改成完全照抄本文件自己ISE-04/05已经验证过的手法：全程latch窗口内曾经出现过的非零值，窗口关闭后再核对latch住的值，不再做"全程实时相等"的断言。（4）ISE-10第一版沿用Group7 TRK-08的narrow窗口(78,82)振荡方向设计，真实bug是：方向翻转判断嵌套在"这次真的提交成功了吗"里面，一旦码卡在边界（同方向再也凑不成新提交），方向标志永远不会翻转，整个提交预算全部空耗在边界上——修复为每次迭代都无条件核对码相对窗口min/max的位置，不依赖本次是否真的提交成功。（5）修完这条，epoch依然从没回绕过：循环照抄了校准搜索收敛循环的`while(!o_dcs_sample_request)...`等待模式，但这个信号只在校准搜索/重验证状态下才会置位，控制器真正进入`ST_NORMAL`跑真实跟踪fork之后（跟踪fork直接消费真实ADC结果流，不经过这个保持型请求信号）永远不会置位——每次尝试都空转到自己的5000拍上限，真实提交次数为零。修复为完全去掉这个等待，改成和ISE-09（以及Group7`task_drive_track_color_value`）已经正确的手法一致：直接等下一个真实Q3窗口。（6）真实提交终于开始发生之后，narrow窗口振荡本身在这个场景下并没有真正做到干净反向（没有继续深挖具体根因，投入产出比不划算）——改用结构上更简单、更稳健的设计：保留默认宽范围`dcs_r_code_min=12`/`dcs_r_code_max=230`，全程只朝一个方向（`below_low`，强制increase）驱动，因为epoch每次真实提交都精确递增1、和码本身的数值方向/具体位置无关——真走到遥远的code_max大约需要150笔真实事务，比凑够16次提交所需的约9笔真实事务每次提交（对应`dcs_confirm_count=9`）按抽屉原理保证回绕所需的量还要宽裕得多，完全不需要任何边界反向逻辑（真实confirmed：145笔真实驱动事务后回绕）。另外，在回补同源文件`tb_ppg_control_top_input_light_static_matrix.v`（ILM，见该文件自己的V1.1 changelog）时顺手发现了一个真实的跨文件范围冲突——和本文件没有直接关系，但"贯穿整个仿真生命周期的后台监视进程默默假设未来所有阶段都和最初的阶段用同一种模式"这类问题，值得在任何要回补新SEARCH_TRACK阶段的文件里留心。全部修复落地后：真实Vivado 2022.2 xsim跑通（约1分钟），`JNT_BASELINE 53/53 PASS`，全部十条ISE-01~10（含ISE-06两半句）都拿到真实证据通过，`IDAC_BUS_ISOLATION_TB_PASS sar15_zero_checks=5305 sar9_zero_checks=5308 result_captures=155`。
+// 2026年10月05日        V1.3          Erie                  ABCD复核F-029：选中总线监视（ISE-04 SAR9 A5/3C、ISE-05 SAR15 5A/C3、ISE-01/02候选快照）新增逐拍检查：选中总线上任何非零值都必须等于期望码，按事务/候选计数违规；此前只比较最后一个非零值，窗口中途的错误值会被后面的正确值覆盖。空闲零值仍允许。PASS行不变（70）。负对照：Top在SAR9 AMB输出刚变为A5的第一拍翻成A4，虽然锁存的最后值仍是A5，两笔ISE-04均失败。
 //
 // 复位后跑通JNT-01~09基线，依次提交SAR9非对称MANUAL、SAR15非对称MANUAL、
 // STATIC_BIAS三个独立配置阶段，核对四条IDAC总线的精度隔离与非对称逐位门控
@@ -770,6 +772,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 	integer cnt_sar9_zero_checks;
 	reg [7:0] reg_seen_sar9_ambn, reg_seen_sar9_dcn;
 	reg [7:0] reg_seen_sar15_ambn, reg_seen_sar15_dcn;
+	integer cnt_ise_sel_violation = 0; // ABCD F-029：当前检查窗口内选中总线出现非零且不等于期望码的拍数
 	always @(posedge i_clk) begin
 		if(flag_check_sar9_phase) begin
 			cnt_sar15_zero_checks <= cnt_sar15_zero_checks + 1;
@@ -779,6 +782,10 @@ module tb_ppg_control_top_idac_bus_isolation();
 			end
 			if(o_idac_sar9ambn_low !== 8'h00) reg_seen_sar9_ambn <= o_idac_sar9ambn_low;
 			if(o_idac_sar9dcn_low !== 8'h00) reg_seen_sar9_dcn <= o_idac_sar9dcn_low;
+			// ABCD F-029：逐拍检查选中总线：非零即必须等于本阶段期望码，中途一拍错误不能被后面的正确值覆盖
+			if(((o_idac_sar9ambn_low !== 8'h00) && (o_idac_sar9ambn_low !== 8'hA5)) || ((o_idac_sar9dcn_low !== 8'h00) && (o_idac_sar9dcn_low !== 8'h3C))) begin
+				cnt_ise_sel_violation = cnt_ise_sel_violation + 1;
+			end
 		end
 		if(flag_check_sar15_phase) begin
 			cnt_sar9_zero_checks <= cnt_sar9_zero_checks + 1;
@@ -788,6 +795,10 @@ module tb_ppg_control_top_idac_bus_isolation();
 			end
 			if(o_idac_sar15ambn_low !== 8'h00) reg_seen_sar15_ambn <= o_idac_sar15ambn_low;
 			if(o_idac_sar15dcn_low !== 8'h00) reg_seen_sar15_dcn <= o_idac_sar15dcn_low;
+			// ABCD F-029：SAR15阶段选中总线逐拍检查
+			if(((o_idac_sar15ambn_low !== 8'h00) && (o_idac_sar15ambn_low !== 8'h5A)) || ((o_idac_sar15dcn_low !== 8'h00) && (o_idac_sar15dcn_low !== 8'hC3))) begin
+				cnt_ise_sel_violation = cnt_ise_sel_violation + 1;
+			end
 		end
 	end
 
@@ -811,9 +822,15 @@ module tb_ppg_control_top_idac_bus_isolation();
 			if(check_ise_snapshot_is_sar15) begin
 				if(o_idac_sar15ambn_low !== 8'h00) reg_ise_seen_ambn <= o_idac_sar15ambn_low;
 				if(o_idac_sar15dcn_low !== 8'h00) reg_ise_seen_dcn <= o_idac_sar15dcn_low;
+				if(((o_idac_sar15ambn_low !== 8'h00) && (o_idac_sar15ambn_low !== reg_ise_snapshot_expect_ambn)) || ((o_idac_sar15dcn_low !== 8'h00) && (o_idac_sar15dcn_low !== reg_ise_snapshot_expect_dcn))) begin
+					cnt_ise_sel_violation = cnt_ise_sel_violation + 1; // ABCD F-029：候选窗口逐拍检查
+				end
 			end else begin
 				if(o_idac_sar9ambn_low !== 8'h00) reg_ise_seen_ambn <= o_idac_sar9ambn_low;
 				if(o_idac_sar9dcn_low !== 8'h00) reg_ise_seen_dcn <= o_idac_sar9dcn_low;
+				if(((o_idac_sar9ambn_low !== 8'h00) && (o_idac_sar9ambn_low !== reg_ise_snapshot_expect_ambn)) || ((o_idac_sar9dcn_low !== 8'h00) && (o_idac_sar9dcn_low !== reg_ise_snapshot_expect_dcn))) begin
+					cnt_ise_sel_violation = cnt_ise_sel_violation + 1; // ABCD F-029：候选窗口逐拍检查
+				end
 			end
 		end
 	end
@@ -938,6 +955,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 
 		for(cnt_transactions_this_phase = 0; cnt_transactions_this_phase < 2; cnt_transactions_this_phase = cnt_transactions_this_phase + 1) begin
 			reg_seen_sar9_ambn = 8'h00;
+			cnt_ise_sel_violation = 0; // ABCD F-029：每笔事务重新计数
 			reg_seen_sar9_dcn = 8'h00;
 			wait_q3_release(real_release);
 			if(!real_release) begin
@@ -951,7 +969,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 				// 用"本笔Q3窗口内曾经latch到的非零值"而不是Q3释放后立即抽样——
 				// Q3释放意味着窗口已经关闭，CHARACTERIZATION间歇节奏下总线可能已经
 				// 回落，NORMAL连续调度下恰好因为下一笔已经在途才侥幸没暴露这个问题
-				if((reg_seen_sar9_ambn !== 8'hA5) || (reg_seen_sar9_dcn !== 8'h3C)) begin
+				if((reg_seen_sar9_ambn !== 8'hA5) || (reg_seen_sar9_dcn !== 8'h3C) || (cnt_ise_sel_violation != 0)) begin
 					$display("FAIL ISE-04 SAR9 bus mismatch during Q3 window: seen_ambn=%h(expect A5) seen_dcn=%h(expect 3C)", reg_seen_sar9_ambn, reg_seen_sar9_dcn);
 					cnt_error = cnt_error + 1;
 				end else begin
@@ -995,6 +1013,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 
 		for(cnt_transactions_this_phase = 0; cnt_transactions_this_phase < 2; cnt_transactions_this_phase = cnt_transactions_this_phase + 1) begin
 			reg_seen_sar15_ambn = 8'h00;
+			cnt_ise_sel_violation = 0; // ABCD F-029：每笔事务重新计数
 			reg_seen_sar15_dcn = 8'h00;
 			wait_q3_release(real_release);
 			if(!real_release) begin
@@ -1005,7 +1024,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 				drive_real_adc_done(reg_owner_snapshot_precision, raw_code, raw_code);
 				@(posedge i_clk);
 				#1;
-				if((reg_seen_sar15_ambn !== 8'h5A) || (reg_seen_sar15_dcn !== 8'hC3)) begin
+				if((reg_seen_sar15_ambn !== 8'h5A) || (reg_seen_sar15_dcn !== 8'hC3) || (cnt_ise_sel_violation != 0)) begin
 					$display("FAIL ISE-05 SAR15 bus mismatch during Q3 window: seen_ambn=%h(expect 5A) seen_dcn=%h(expect C3)", reg_seen_sar15_ambn, reg_seen_sar15_dcn);
 					cnt_error = cnt_error + 1;
 				end else begin
@@ -1134,6 +1153,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 				reg_ise_snapshot_expect_amb_epoch = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_amb_code_epoch;
 				check_ise_snapshot_is_sar15 = 1'b0;
 				reg_ise_seen_ambn = 8'h00;
+				cnt_ise_sel_violation = 0; // ABCD F-029：每个候选重新计数
 				reg_ise_seen_dcn = 8'h00;
 				flag_check_ise_snapshot_bus = 1'b1;
 				wait_q3_release(real_release);
@@ -1142,7 +1162,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 					$display("FAIL ISE-01/02 AMB candidate %0d real Q3 window never opened", cnt_candidate);
 					cnt_error = cnt_error + 1;
 				end else begin
-					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn)) begin
+					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn) || (cnt_ise_sel_violation != 0)) begin
 						$display("FAIL ISE-01/02 AMB candidate %0d SAR9 bus mismatch: seen_ambn=%h(expect %h) seen_dcn=%h(expect %h)",
 							cnt_candidate, reg_ise_seen_ambn, reg_ise_snapshot_expect_ambn, reg_ise_seen_dcn, reg_ise_snapshot_expect_dcn);
 						cnt_error = cnt_error + 1;
@@ -1208,6 +1228,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 				reg_ise_snapshot_expect_dc_epoch = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_r_code_epoch;
 				check_ise_snapshot_is_sar15 = 1'b0;
 				reg_ise_seen_ambn = 8'h00;
+				cnt_ise_sel_violation = 0; // ABCD F-029：每个候选重新计数
 				reg_ise_seen_dcn = 8'h00;
 				flag_check_ise_snapshot_bus = 1'b1;
 				wait_q3_release(real_release);
@@ -1216,7 +1237,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 					$display("FAIL ISE-01/02 DC_R candidate %0d real Q3 window never opened", cnt_candidate);
 					cnt_error = cnt_error + 1;
 				end else begin
-					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn)) begin
+					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn) || (cnt_ise_sel_violation != 0)) begin
 						$display("FAIL ISE-01/02 DC_R candidate %0d SAR9 bus mismatch: seen_ambn=%h(expect %h) seen_dcn=%h(expect %h)",
 							cnt_candidate, reg_ise_seen_ambn, reg_ise_snapshot_expect_ambn, reg_ise_seen_dcn, reg_ise_snapshot_expect_dcn);
 						cnt_error = cnt_error + 1;
@@ -1284,6 +1305,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 				reg_ise_snapshot_expect_dc_epoch = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_ir_code_epoch;
 				check_ise_snapshot_is_sar15 = 1'b0;
 				reg_ise_seen_ambn = 8'h00;
+				cnt_ise_sel_violation = 0; // ABCD F-029：每个候选重新计数
 				reg_ise_seen_dcn = 8'h00;
 				flag_check_ise_snapshot_bus = 1'b1;
 				wait_q3_release(real_release);
@@ -1292,7 +1314,7 @@ module tb_ppg_control_top_idac_bus_isolation();
 					$display("FAIL ISE-01/02 DC_IR candidate %0d real Q3 window never opened", cnt_candidate);
 					cnt_error = cnt_error + 1;
 				end else begin
-					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn)) begin
+					if((reg_ise_seen_ambn !== reg_ise_snapshot_expect_ambn) || (reg_ise_seen_dcn !== reg_ise_snapshot_expect_dcn) || (cnt_ise_sel_violation != 0)) begin
 						$display("FAIL ISE-01/02 DC_IR candidate %0d SAR9 bus mismatch: seen_ambn=%h(expect %h) seen_dcn=%h(expect %h)",
 							cnt_candidate, reg_ise_seen_ambn, reg_ise_snapshot_expect_ambn, reg_ise_seen_dcn, reg_ise_snapshot_expect_dcn);
 						cnt_error = cnt_error + 1;

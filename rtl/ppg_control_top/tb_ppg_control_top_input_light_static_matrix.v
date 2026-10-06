@@ -16,8 +16,8 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.1
-// Revision Date:      2026/08/29
+// Version:            V1.2
+// Revision Date:      2026/10/05
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/27            V1.0          Erie                  Create file. Stage 5 Group 10 (INPUT-LIGHT-STATIC-MATRIX,
@@ -186,6 +186,7 @@
 //                                                             `INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=47
 //                                                             static_vector_checks=3000`.
 // 2026/08/29            V1.1          Erie                  Backfilled the deferred ILM-11/12 now that Group 6 (startup search) exists. Added the four missing pieces of infrastructure this file never needed before (all copied verbatim from Group 6/8/9's already-proven code, none new): `task_run_startup_search`, `task_drive_amb_toward_target`/`task_drive_dcs_toward_target`, and `wait_q3_release_and_sample` (samples LED/EN_TEST/bus state the instant Q3 first opens, same fix Group 6's own SID-03/04 already needed for the same reason). Added one dedicated `task_build_search_track_dual_config` overriding this file's own V1.0 `task_build_normal_manual_config` threshold fields to the (100,200)/8/503/150 convention explicitly, rather than inheriting the stale pre-Group7-fix cross-zero window it still carries -- same defensive fix as the sibling `tb_ppg_control_top_idac_bus_isolation.v` needed for the same reason, done proactively here before ever hitting the bug. The new phase reruns a real dual-optical SEARCH_TRACK startup search and reuses Group 6's own SID-07/08/09 assertions almost verbatim (PHOTODIODE+EN_TEST-low+both-LEDs-off+no-DC-window during AMB_CAL for ILM-11; dedicated-waveform+confirmed-AMB-code+single-color-LED-window during DCS_CAL RED/IR for ILM-12), producing this file's own real evidence rather than borrowing Group 6's. One real bug found and fixed, not in DUT RTL but a genuine scope conflict between this new phase and an existing V1.0 monitor: ILM-09's own continuous background monitor (`state_current` must stay in the small MANUAL-only state set) was written to span the *entire* simulation lifetime, which was a correct and harmless design when every V1.0 phase used `idac_mode=MANUAL` -- but the new SEARCH_TRACK phase legitimately enters `ST_DCS_IR_WAIT` and other real AMB/DCS states as part of its own valid behavior, and real xsim caught the resulting flood of false ILM-09 failures immediately. Fixed by adding a `flag_ilm09_monitor_active` flag (armed by default, matching the original whole-run intent) that main_sequence explicitly disarms right before committing the new SEARCH_TRACK phase's config, scoping ILM-09's claim back down to what it actually contractually covers (MANUAL mode's own behavior) instead of "state_current for the rest of time no matter what gets configured later." This is a reusable lesson for any future backfill that adds a new operating-mode phase to a file whose existing monitors were written assuming the file's original mode never changes. After the fix: real Vivado 2022.2 xsim run (~10 seconds), `JNT_BASELINE 53/53 PASS`, both ILM-11/12 pass with real evidence alongside all thirteen already-passing IDs, `INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=69 static_vector_checks=3000`.
+// 2026/10/05            V1.2          Erie                  ABCD review F-028: ILM-04/ILM-05 now monitor EN_TEST=1, LEDEN1/2=0 and LEDDAC=0 on every negedge for the whole fixed-current transaction loop (about 10,460 cycles each), instead of one sample per transaction taken before wait_q3_release; any violating cycle fails the case. An ILM_FIXED_CURRENT_MONITOR info line reports cycles/violations; PASS lines unchanged (73). Negative control: Top LEDDAC forced to 1 while EN_TEST and Q3 are active fails ILM-04 and ILM-05 (about 10,450 violating cycles each).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -202,8 +203,8 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年08月29日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月05日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月27日        V1.0          Erie                  创建文件。Stage 5第10组（INPUT-LIGHT-STATIC-MATRIX，C25合同9.4.5节），
@@ -329,6 +330,7 @@
 //                                                             `INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=47
 //                                                             static_vector_checks=3000`。
 // 2026年08月29日        V1.1          Erie                  回补此前延后的ILM-11/12——Group6（启动搜索）已经完成。新增本文件此前从没用过的四个基础设施（全部原样照抄Group6/8/9已验证过的代码，没有新东西）：`task_run_startup_search`、`task_drive_amb_toward_target`/`task_drive_dcs_toward_target`、`wait_q3_release_and_sample`（在Q3刚变高那一拍立即采样LED/EN_TEST/总线状态，和Group6自己的SID-03/04当初需要的是同一个修复）。新增一个专属`task_build_search_track_dual_config`，显式把本文件V1.0自己的`task_build_normal_manual_config`阈值字段覆盖成(100,200)/8/503/150惯例，而不是继承那份还带着Group7修复之前的旧版跨零窗口——和同源的`tb_ppg_control_top_idac_bus_isolation.v`出于同样理由需要的修复一样，这里是提前主动做的，没有真的先踩坑。新阶段重新真实跑一遍双光SEARCH_TRACK启动搜索，几乎原样复用Group6自己的SID-07/08/09断言（AMB_CAL期间PHOTODIODE+EN_TEST低+两个LED都关闭+无DC窗口对应ILM-11；DCS_CAL RED/IR期间专属波形+已确认AMB码+单色LED窗口对应ILM-12），产出本文件自己的真实证据，不借用Group6的。发现并修复了一个真实bug，不在DUT RTL，而是这个新阶段和一个既有V1.0监视进程之间真实的范围冲突：ILM-09自己的连续后台监视进程（`state_current`必须一直落在MANUAL-only这个小状态集合里）写的时候贯穿整个仿真生命周期——V1.0全部阶段都是`idac_mode=MANUAL`时这样写是对的、无害的，但新的SEARCH_TRACK阶段作为自己的合法行为真实进入`ST_DCS_IR_WAIT`等真实AMB/DCS状态，真实xsim立刻抓到了随之而来的大量ILM-09误报。修复为新增一个`flag_ilm09_monitor_active`标志（默认武装，和原意保持一致），main_sequence在提交新SEARCH_TRACK阶段的配置之前显式把它拉低，把ILM-09的断言范围收窄回它真正应该覆盖的东西（MANUAL模式自己的行为），而不是"不管以后配置成什么样，state_current余生都要符合"。这是一条可以复用的教训：给任何文件回补一个新的工作模式阶段时，都要检查它既有的监视进程是不是默默假设了"文件原来的模式永远不会变"。修复后：真实Vivado 2022.2 xsim跑通（约10秒），`JNT_BASELINE 53/53 PASS`，ILM-11/12和此前已经通过的十三条ID一起全部拿到真实证据通过，`INPUT_LIGHT_STATIC_MATRIX_TB_PASS owner_commit_total=69 static_vector_checks=3000`。
+// 2026年10月05日        V1.2          Erie                  ABCD复核F-028：ILM-04/ILM-05改为在整个固定电流事务循环期间（每段约10460拍）逐个下降沿检查EN_TEST=1、LEDEN1/2=0、LEDDAC=0，不再每笔只在wait_q3_release之前采样一次；任一拍违规即判失败。新增ILM_FIXED_CURRENT_MONITOR信息行报告拍数/违规数；PASS行不变（73）。负对照：Top在EN_TEST与Q3同时有效时把LEDDAC强制为1，ILM-04、ILM-05均失败（各约10450个违规拍）。
 //
 // 复位后跑通JNT-01~09基线，依次执行ILM-15负向拒绝、ILM-01双光NORMAL、
 // ILM-02/03纯RED固定SAR9/SAR15表征、ILM-10中途重配置拒绝加下一次合法生效、
@@ -1305,6 +1307,19 @@ module tb_ppg_control_top_input_light_static_matrix();
 	end
 
 	//---------------主序列---------------//
+	reg flag_fixed_current_monitor_on = 1'b0; // ABCD F-028：固定电流RUN逐拍监视使能
+	integer cnt_fixed_current_led_violation = 0; // ABCD F-028：监视窗口内EN_TEST/LEDEN/LEDDAC违规拍数
+	integer cnt_fixed_current_monitor_cycles = 0; // ABCD F-028：监视窗口实际覆盖拍数
+	// ABCD F-028：C25要求外部固定电流转换全程EN_TEST=1、LEDEN1/2=0、LEDDAC=0，原检查每笔只在等待Q3前采样一次
+	always @(negedge i_clk) begin
+		if(flag_fixed_current_monitor_on) begin
+			cnt_fixed_current_monitor_cycles = cnt_fixed_current_monitor_cycles + 1;
+			if((o_en_test !== 1'b1) || (o_leden1_low !== 1'b0) || (o_leden2_low !== 1'b0) || (o_leddac !== 8'h00)) begin
+				cnt_fixed_current_led_violation = cnt_fixed_current_led_violation + 1;
+			end
+		end
+	end
+
 	initial begin : main_sequence
 		reg real_release;
 		reg [9:0] raw_code;
@@ -1673,6 +1688,9 @@ module tb_ppg_control_top_input_light_static_matrix();
 		task_pulse_start;
 		repeat(8) @(posedge i_clk);
 		flag_leden_changed = 1'b0;
+		cnt_fixed_current_led_violation = 0; // ABCD F-028：逐拍监视计数清零
+		cnt_fixed_current_monitor_cycles = 0; // ABCD F-028：有效监视拍数清零
+		flag_fixed_current_monitor_on = 1'b1; // ABCD F-028：整段固定电流事务期间逐拍检查EN_TEST/LEDEN/LEDDAC
 		for(cnt_i = 0; cnt_i < 6; cnt_i = cnt_i + 1) begin
 			if((!o_en_test) || o_leden1_low || o_leden2_low || (o_leddac != 8'h00)) begin
 				flag_leden_changed = 1'b1;
@@ -1683,6 +1701,11 @@ module tb_ppg_control_top_input_light_static_matrix();
 				drive_real_adc_done(reg_owner_snapshot_precision, raw_code, raw_code);
 			end
 		end
+		flag_fixed_current_monitor_on = 1'b0; // ABCD F-028：事务段结束，停止逐拍监视
+		if(cnt_fixed_current_led_violation != 0) begin
+			flag_leden_changed = 1'b1; // 等待Q3释放期间任一拍违规都判失败
+		end
+		$display("ILM_FIXED_CURRENT_MONITOR cycles=%0d violations=%0d", cnt_fixed_current_monitor_cycles, cnt_fixed_current_led_violation); // 监视覆盖量信息行
 		if(((cnt_owner_commit_red - cnt_red_before) < 2) || ((cnt_owner_commit_ir - cnt_ir_before) < 2)) begin
 			$display("FAIL ILM-04 fixed-current BOTH SAR9 did not keep producing intermittent RED/IR transactions, red=%0d ir=%0d",
 				cnt_owner_commit_red - cnt_red_before, cnt_owner_commit_ir - cnt_ir_before);
@@ -1717,6 +1740,9 @@ module tb_ppg_control_top_input_light_static_matrix();
 		task_pulse_start;
 		repeat(8) @(posedge i_clk);
 		flag_leden_changed = 1'b0;
+		cnt_fixed_current_led_violation = 0; // ABCD F-028：逐拍监视计数清零
+		cnt_fixed_current_monitor_cycles = 0; // ABCD F-028：有效监视拍数清零
+		flag_fixed_current_monitor_on = 1'b1; // ABCD F-028：整段固定电流事务期间逐拍检查EN_TEST/LEDEN/LEDDAC
 		for(cnt_i = 0; cnt_i < 6; cnt_i = cnt_i + 1) begin
 			if((!o_en_test) || o_leden1_low || o_leden2_low || (o_leddac != 8'h00)) begin
 				flag_leden_changed = 1'b1;
@@ -1727,6 +1753,11 @@ module tb_ppg_control_top_input_light_static_matrix();
 				drive_real_adc_done(reg_owner_snapshot_precision, raw_code, raw_code);
 			end
 		end
+		flag_fixed_current_monitor_on = 1'b0; // ABCD F-028：事务段结束，停止逐拍监视
+		if(cnt_fixed_current_led_violation != 0) begin
+			flag_leden_changed = 1'b1; // 等待Q3释放期间任一拍违规都判失败
+		end
+		$display("ILM_FIXED_CURRENT_MONITOR cycles=%0d violations=%0d", cnt_fixed_current_monitor_cycles, cnt_fixed_current_led_violation); // 监视覆盖量信息行
 		if(((cnt_owner_commit_red - cnt_red_before) < 2) || ((cnt_owner_commit_ir - cnt_ir_before) < 2)) begin
 			$display("FAIL ILM-05 fixed-current BOTH SAR15 did not keep producing intermittent RED/IR transactions, red=%0d ir=%0d",
 				cnt_owner_commit_red - cnt_red_before, cnt_owner_commit_ir - cnt_ir_before);

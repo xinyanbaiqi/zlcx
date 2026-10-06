@@ -15,11 +15,12 @@
 // Dependencies:
 //      DUT only, no child submodules
 //
-// Version:         V1.1
-// Revision Date:   2026-09-28
+// Version:         V1.2
+// Revision Date:   2026-10-05
 // History:
 // 2026-08-23           V1.0       Erie        Create file.
 // 2026-09-28           V1.1       Erie        Add SUP10A: a second, independently-closed episode after SUP09A, asserting the full abort/STOP/discard trio and a fresh snapshot fire again -- closes a real dynamic-coverage gap for K02/N06's "later episode independent of first-fault history" claim, which previously had only static RTL-reading support and no simulation evidence.
+// 2026-10-05           V1.2       Erie        ABCD review F-012: add the TB-local check RE-ARM (deliberately not a SUP-nn label: contract C24 SUP-10 means something else). After SUP10A the first-fault snapshot is deliberately NOT diag-cleared; once the episode really closes, an independent Scheduler cause 0x11 record must open a new episode with a full abort/STOP/discard trio while cause 0x03/source/identity stay as the retained first fault and only summary bit 0x0008 is added (contract section 4). Pass criterion 14 -> 15. Negative control: RTL episode-open changed from !blocking to !cause_valid passes the old 14 but fails RE-ARM.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -35,11 +36,12 @@
 // 依赖文件:
 //      仅DUT本体
 //
-// 当前版本:        V1.1
-// 修订日期:        2026年09月28日
+// 当前版本:        V1.2
+// 修订日期:        2026年10月05日
 // 修订历史:
 // 2026-08-23           V1.0       Erie        创建文件
 // 2026-09-28           V1.1       Erie        新增SUP10A：在SUP09A之后、独立完整关闭一次episode后，再验证第二个episode依然完整触发abort/STOP/丢弃三事件并锁存全新快照——补齐K02/N06"后续episode独立于首故障历史"这条此前只有RTL静态阅读支持、从未被真实仿真动态验证过的缺口
+// 2026-10-05           V1.2       Erie        ABCD复核F-012：新增TB本地检查RE-ARM（刻意不用SUP族编号：合同C24的SUP-10是另一含义）。SUP10A之后故意不做诊断清除，episode真实关闭后送入独立的Scheduler cause 0x11记录，必须重新开episode并发出完整abort/STOP/丢弃三事件，首故障cause 0x03/来源/身份保持不变，只新增汇总位0x0008（合同第4节）。判据14项改为15项。负对照：RTL把episode开启条件由!blocking改为!cause_valid时，旧14项仍全通过，RE-ARM失败。
 
 module tb_ppg_system_fault_abort_supervisor ();
 
@@ -486,6 +488,27 @@ module tb_ppg_system_fault_abort_supervisor ();
 			(o_system_abort_event === 1'b1) &&
 			(o_system_stop_request_event === 1'b1) &&
 			(o_system_fault_discard_event === 1'b1));
+		// RE-ARM（ABCD F-012，TB本地名，不沿用合同SUP族编号）：合同第4节要求episode关闭不清首故障快照，此后新的独立阻断记录
+		// 即使首故障快照尚未收到诊断清除，也必须重新开一个episode并发出一次完整trio，且只置
+		// 自己的汇总位、不覆盖保留的首故障cause/source/身份。SUP10A在诊断清除之后才重开，构不成
+		// 这个前提；这里在SUP10A之后不清除历史，等episode真实关闭后再送Scheduler cause 0x11。
+		int_wait_index = 0;
+		while((o_system_fault_blocking !== 1'b0) && (int_wait_index < 20))begin
+			@(negedge i_clk);
+			int_wait_index = int_wait_index + 1;
+		end
+		pulse_scheduler_fault(8'h11);
+		check_case("RE-ARM", (int_wait_index < 20) &&
+			(o_system_fault_blocking === 1'b1) &&
+			(o_system_abort_event === 1'b1) &&
+			(o_system_stop_request_event === 1'b1) &&
+			(o_system_fault_discard_event === 1'b1) &&
+			(o_system_fault_cause_valid === 1'b1) &&
+			(o_system_fault_cause === 8'h03) &&
+			(o_system_fault_source === 4'h1) &&
+			(o_system_fault_frame_id === 16'h4321) &&
+			(o_system_fault_sample_index === 16'h8765) &&
+			(o_system_fault_summary === 16'h000C));
 		// 本次未持续拉高active，episode下一拍即满足关闭判据，等其真实关闭后再发诊断清除收尾。
 		@(negedge i_clk);
 		i_diag_clear_event = 1'b1;
@@ -493,7 +516,7 @@ module tb_ppg_system_fault_abort_supervisor ();
 		i_diag_clear_event = 1'b0;
 		@(negedge i_clk);
 
-		if(cnt_fail == 0 && cnt_pass == 14)begin
+		if(cnt_fail == 0 && cnt_pass == 15)begin
 			$display("SUP-01 through SUP-10 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("SUPERVISOR REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
