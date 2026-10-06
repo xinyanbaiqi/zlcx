@@ -15,14 +15,15 @@
 //
 // Dependencies:       ppg_idac_code_controller.v
 //
-// Version:            V2.3
-// Revision Date:      2026/10/05
+// Version:            V2.4
+// Revision Date:      2026/10/06
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/07            V2.0          Erie                  Create V2 self-checking regression.
 // 2026/08/08            V2.1          Erie                  Add fixed periodic AMB-R-IR sequence coverage.
 // 2026/09/30            V2.2          Erie                  TB maintenance (no RTL change): connect i_run_generation, added by controller RTL V2.2 (2026/08/22) and left floating here ever since. The X on the floating port corrupted the pending-candidate generation tag/compare and caused the long-standing "V2.1 regression found 33 errors" already recorded in the RTL's own V2.3 changelog (2026/08/29) as a stale-TB issue; REGRESSION_BASELINE_20260930.md section 6.2 pinned it to this single port. Driven by a constant 0 for the whole run (no case here exercises cross-generation rejection) and C_RUN_GENERATION_WIDTH is passed explicitly. The test-injection inputs stay unconnected on purpose (C_ENABLE_TEST_INJECTION defaults to 0 so they are gated off). Result: 148 PASS, 0 FAIL (xsim and iverilog).
 // 2026/10/05            V2.3          Erie                  ABCD review F-031: every earlier search range had max<=30 (endpoint sums <=60), so the 9-bit midpoint sum was never exercised. Add HIGHCODE-SEARCH at the end: AMB range 0..255 with model target 200; the applied AMB candidates must be exactly the independently written floor midpoints 127/191/223/207/199/203/201/200 and the committed code 200. PASS lines 148 -> 150. Negative control: amb_next_midpoint truncated to an 8-bit sum fails both HIGHCODE-SEARCH checks.
+// 2026/10/06            V2.4          Erie                  ABCD review F-032: follow the IDAC port rename i_status_clear_event -> i_diag_clear_event (declaration, drives and connection, edited in place); no check changed, 150 PASS.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -38,14 +39,15 @@
 //
 // 依赖文件:           ppg_idac_code_controller.v
 //
-// 当前版本:           V2.3
-// 修订日期:           2026年10月05日
+// 当前版本:           V2.4
+// 修订日期:           2026年10月06日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月07日        V2.0          Erie                  创建V2自检回归。
 // 2026年08月08日        V2.1          Erie                  增加固定AMB、DC_R及DC_IR周期序列覆盖。
 // 2026年09月30日        V2.2          Erie                  TB维护（不改RTL）：连接控制器RTL V2.2（2026/08/22）新增、本TB一直悬空的i_run_generation。悬空的X污染了pending候选的代际锁存与比较，这就是RTL自身V2.3 changelog（2026/08/29）早已记录为"单元TB未同步"的"V2.1 regression found 33 errors"；REGRESSION_BASELINE_20260930.md第6.2节把根因精确到这一个端口。全程驱动常量0（本TB没有用例测跨代际拒绝），并显式传入C_RUN_GENERATION_WIDTH。测试注入输入有意保持不连（C_ENABLE_TEST_INJECTION默认0，已被门控屏蔽）。结果：148 PASS，0 FAIL（xsim与iverilog一致）。
 // 2026年10月05日        V2.3          Erie                  ABCD复核F-031：此前全部搜索范围上界<=30（端点和<=60），九位中点求和从未被检验。末尾新增HIGHCODE-SEARCH：AMB范围0..255、模型目标200，实际施加的AMB候选必须依次等于独立写出的floor中点127/191/223/207/199/203/201/200，最终提交码为200。PASS行148→150。负对照：amb_next_midpoint截成8位和时两项HIGHCODE-SEARCH均失败。
+// 2026年10月06日        V2.4          Erie                  ABCD复核F-032：跟随IDAC端口改名i_status_clear_event→i_diag_clear_event（声明、驱动与连接原行修改）；不改任何检查，150项PASS
 
 // 覆盖启动搜索、固定周期三路重检以及IDT-01至IDT-15慢速跟踪和取消行为
 module tb_ppg_idac_code_controller
@@ -71,7 +73,7 @@ module tb_ppg_idac_code_controller
 	reg i_start_ack_event;                  // 产生合法START应答单拍
 	reg [C_RUN_GENERATION_WIDTH - 1:0]i_run_generation; // V2.2:全程固定RUN代际，本TB不测跨代际拒绝
 	reg i_stop_ack_event;                   // 产生STOP排空单拍
-	reg i_status_clear_event;               // 产生协议sticky清除事件
+	reg i_diag_clear_event;               // 产生协议sticky清除事件
 	reg i_control_abort_event;              // 产生阻断错误取消事件
 	reg i_frame_safe_boundary;              // 驱动pending安全提交边界
 	reg [C_CONFIG_EPOCH_WIDTH - 1:0]i_active_config_epoch; // 当前测试ACTIVE版本
@@ -492,7 +494,7 @@ module tb_ppg_idac_code_controller
 		i_start_ack_event = 1'b0;           // 初始无START事件
 		i_run_generation = {C_RUN_GENERATION_WIDTH{1'b0}}; // V2.2:代际全程固定为0
 		i_stop_ack_event = 1'b0;            // 初始无STOP事件
-		i_status_clear_event = 1'b0;        // 初始无状态清除命令
+		i_diag_clear_event = 1'b0;        // 初始无状态清除命令
 		i_control_abort_event = 1'b0;       // 初始无控制中止事件
 		i_frame_safe_boundary = 1'b0;       // 初始不允许pending提交
 		i_active_config_epoch = 8'h20;      // 设置第一轮ACTIVE配置版本
@@ -749,9 +751,9 @@ module tb_ppg_idac_code_controller
 		check_condition(o_protocol_error_sticky == 1'b1,
 			"IDT-15 simultaneous entries set protocol error sticky"); // 检查协议冲突诊断
 		@(negedge i_clk);                   // 准备独立状态清除事件
-		i_status_clear_event = 1'b1;        // 清除非阻断协议诊断
+		i_diag_clear_event = 1'b1;        // 清除非阻断协议诊断
 		@(negedge i_clk);                   // 等待sticky清除生效
-		i_status_clear_event = 1'b0;        // 撤销状态清除单拍
+		i_diag_clear_event = 1'b0;        // 撤销状态清除单拍
 		check_condition(o_protocol_error_sticky == 1'b0,
 			"IDT-15 status clear removes protocol sticky without restart"); // 检查诊断清除边界
 
@@ -836,7 +838,7 @@ module tb_ppg_idac_code_controller
 		.i_start_ack_event(i_start_ack_event), // 连接合法START应答事件
 		.i_run_generation(i_run_generation), // V2.2:连接固定RUN代际，此前悬空致代际比较为X
 		.i_stop_ack_event(i_stop_ack_event), // 连接STOP接受事件
-		.i_status_clear_event(i_status_clear_event), // 连接状态清除命令
+		.i_diag_clear_event(i_diag_clear_event), // 连接状态清除命令
 		.i_control_abort_event(i_control_abort_event), // 连接阻断错误取消事件
 		.i_frame_safe_boundary(i_frame_safe_boundary), // 连接pending安全提交边界
 		.i_active_config_epoch(i_active_config_epoch), // 连接当前ACTIVE版本

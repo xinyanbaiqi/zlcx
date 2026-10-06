@@ -16,8 +16,8 @@
 // Referrences:		PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.4
-// Revision Date:	2026/08/23
+// Version:			V1.5
+// Revision Date:	2026/10/06
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/11            V1.0          Erie                  Create file.
@@ -25,6 +25,7 @@
 // 2026/08/23            V1.2          Erie                  Remove i_start_ack_event from the fine_window_timeout/reacquire_timeout/protocol_error sticky clear conditions; only i_diag_clear_event or reset may clear these histories per PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md section 12.4 and acceptance item PVW-37.
 // 2026/08/23            V1.3          Erie                  Gate only the peak_valley_config_valid term of flag_active_config_legal on i_characterization_mode per section 3.2's CHARACTERIZATION allowance; the other 6 numeric threshold terms remain mandatory nonzero in both run profiles, since section 7.1's fixed-precision RED characterization scenario needs real debounce/plausibility gating to be meaningful.
 // 2026/08/23            V1.4          Erie                  Remove the blanket reacquire_search_active_o term from flag_peak_interval_legal; the min_peak_to_peak_frames plausibility check now only exempts the case with no reliable previous peak reference (flag_previous_peak_valid==0), matching section 7.1's own stated rationale, instead of exempting every reacquire round regardless of whether a real prior peak still exists.
+// 2026/10/06            V1.5          Erie                  ABCD review F-018: the valley-accept branch of return_payload_o now also requires return_9bit_valid_o==0, like the timeout and protocol-fallback branches. Previously, while a return request was held under backpressure (return ready=0, reachable from the PWC fault hold), a second legal peak/valley pair overwrote the pending request's frame id (10 -> 21), violating the C22 Section 11.4 hold-type handshake.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -41,8 +42,8 @@
 // 参考资料:		PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.4
-// 修订日期:		2026年08月23日
+// 当前版本:		V1.5
+// 修订日期:		2026年10月06日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月11日        V1.0          Erie                  创建文件
@@ -50,6 +51,7 @@
 // 2026年08月23日        V1.2          Erie                  按合同12.4节和验收项PVW-37，把fine_window_timeout/reacquire_timeout/protocol_error三个历史sticky的清除条件里的i_start_ack_event去掉，只保留i_diag_clear_event或复位可以清除
 // 2026年08月23日        V1.3          Erie                  按合同3.2节CHARACTERIZATION允许条款，只把flag_active_config_legal里peak_valley_config_valid这一项接上i_characterization_mode豁免，其余6个数值门限两种运行档案下都必须非零——合同7.1节固定精度RED表征场景需要真实的去抖/生理合理性门限才有表征意义
 // 2026年08月23日        V1.4          Erie                  删除flag_peak_interval_legal里整体豁免reacquire_search_active_o的一项，峰峰最小时间检查现在只在真正没有可靠前一波峰参照时（flag_previous_peak_valid==0）才豁免，和合同7.1节"没有前一波峰因此免除"的原文理由对齐，不再对仍有真实参照的reacquire场景整体放行
+// 2026年10月06日        V1.5          Erie                  ABCD复核F-018：return_payload_o的波谷接受分支增加return_9bit_valid_o==0条件，与超时、协议回退两支一致。此前返回请求在反压下保持时（return ready=0，PWC故障保持时可达），第二组合法峰谷会覆盖未握手请求的帧号（10变21），违反C22第11.4节保持型握手
 // 使用连续Stage1粗FIR事务确认原始码值波峰和波谷，并可靠控制15-bit窗口退出
 module ppg_peak_valley_window_detector
 #(
@@ -552,8 +554,8 @@ module ppg_peak_valley_window_detector
 			return_payload_o <= {RETURN_CONTEXT_WIDTH{1'b0}}; // 复位清除模式返回载荷
 		end else if(flag_context_clear == 1'b1)begin
 			return_payload_o <= {RETURN_CONTEXT_WIDTH{1'b0}}; // 生命周期边界删除旧窗口身份
-		end else if(flag_valley_accept_event == 1'b1 && fine_window_active_o == 1'b1)begin
-			return_payload_o <= {RETURN_REASON_VALLEY, i_frame_id}; // 绑定波谷确认样本的真实帧号
+		end else if(flag_valley_accept_event == 1'b1 && fine_window_active_o == 1'b1 && return_9bit_valid_o == 1'b0)begin
+			return_payload_o <= {RETURN_REASON_VALLEY, i_frame_id}; // 绑定波谷确认样本的真实帧号；已有未握手返回请求时不覆盖，与超时/回退两支对称 @satisfies: PVW-30
 		end else if(flag_fine_window_timeout_event == 1'b1)begin
 			return_payload_o <= {RETURN_REASON_TIMEOUT, i_frame_id}; // 绑定达到窗口上限的RED帧号
 		end else if(flag_fine_protocol_fallback_event == 1'b1)begin

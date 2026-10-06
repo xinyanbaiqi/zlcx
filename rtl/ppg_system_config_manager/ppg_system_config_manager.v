@@ -14,8 +14,8 @@
 //
 // Dependencies:    None
 //
-// Version:         V4.9
-// Revision Date:   2026/08/23
+// Version:         V4.10
+// Revision Date:   2026/10/06
 // History:
 //     Time          Version     Revised by     Contents
 // 2026/08/06        V1.0        Erie          Create file.
@@ -24,6 +24,7 @@
 // 2026/08/07        V2.0        Erie          Upgrade ACTIVE storage and checks to 640-bit V4.
 // 2026/08/13        V2.1        Erie          Reject NORMAL configurations that request initial SAR15.
 // 2026/08/23        V4.9        Erie          Bring RTL up to the current ppg_system_config_manager_semantic_contract.md V4.9: widen ACTIVE to the 1024-bit joint V4+V5 payload, add the 20-field V5 detection-config validation and its reset/default profile, add STATIC_BIAS/EXTERNAL_TEST_CURRENT/reserved-IDAC combination checks and error codes 0x11-0x18, add o_run_generation (sole generation producer, increments once per accepted START) and o_stop_episode_active (asserted by accepted STOP, idempotent in STOPPING), and add the i_system_fault_blocking START gate and i_static_characterization_enable STATIC_BIAS qualification input. Existing V4-only validation, FSM and epoch logic is retained unchanged.
+// 2026/10/06        V4.10       Erie          ABCD review F-023: a Top-merged STOP in RUN/STOPPING is now accepted even when START, COMMIT or status-clear arrives in the same cycle (contract Section 3.1 / MGR-11 STOP priority); the other command is still rejected and the 0x01 command-conflict diagnostic is still recorded. Previously the conflict swallowed the STOP and RUN continued (reachable by one SPI write of 0x03 or 0x0A).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -38,8 +39,8 @@
 //
 // 依赖文件:        无
 //
-// 当前版本:        V4.9
-// 修订日期:        2026年08月23日
+// 当前版本:        V4.10
+// 修订日期:        2026年10月06日
 // 修订历史:
 //     时间          版本        修订人        修订内容
 // 2026年08月06日   V1.0        Erie          创建文件
@@ -48,6 +49,7 @@
 // 2026年08月07日   V2.0        Erie          升级为640-bit ACTIVE V4原子配置合同
 // 2026年08月13日   V2.1        Erie          拒绝请求SAR15初始精度的NORMAL配置
 // 2026年08月23日   V4.9        Erie          按当前ppg_system_config_manager_semantic_contract.md V4.9补齐：ACTIVE扩展为1024-bit V4+V5联合载荷，新增V5共20个检测配置字段的校验与复位默认档案，新增STATIC_BIAS/EXTERNAL_TEST_CURRENT/保留IDAC编码组合校验及错误码0x11~0x18，新增o_run_generation（唯一代际生产者，每次合法START递增一次）和o_stop_episode_active（合法STOP置位，STOPPING期间幂等），新增i_system_fault_blocking的START阻断门和i_static_characterization_enable的STATIC_BIAS资格输入。既有V4校验、状态机和epoch逻辑保持不变
+// 2026年10月06日   V4.10       Erie          ABCD复核F-023：RUN/STOPPING中Top合并STOP与START、COMMIT或status-clear同拍时，STOP照常接受（合同第3.1节/MGR-11 STOP优先），另一命令仍拒绝并照常记录0x01命令冲突诊断。此前冲突会吞掉STOP、RUN继续（SPI一次写0x03或0x0A即可触发）
 
 // 在2 MHz系统域原子验证1024-bit V4+V5联合配置快照并管理CONFIG至STOPPING生命周期
 module ppg_system_config_manager
@@ -310,7 +312,7 @@ module ppg_system_config_manager
 		(i_config_update_event && i_status_clear_event) ||
 		(i_start_event && i_stop_event) ||
 		(i_start_event && i_status_clear_event) ||
-		(i_stop_event && i_status_clear_event); // 任意两个事件同时出现都拒绝全部动作
+		(i_stop_event && i_status_clear_event); // 任意两个事件同时出现都拒绝START/COMMIT/clear并报0x01；RUN/STOPPING中的STOP不受冲突影响（第3.1节STOP优先）
 	assign flag_snapshot_schema_valid = i_config_snapshot[7:0] == 8'h04; // V4只接收冻结的schema编号4
 	assign flag_snapshot_reserved_valid =
 		(i_config_snapshot[31:23] == 9'd0) &&
@@ -458,8 +460,8 @@ module ppg_system_config_manager
 	assign flag_start_accept =
 		i_start_event && (flag_command_conflict == 1'b0) && flag_start_ready; // START不允许产生任何部分运行动作
 	assign flag_stop_accept =
-		i_stop_event && (flag_command_conflict == 1'b0) &&
-		((state_current == ST_RUN) || (state_current == ST_STOPPING)); // STOPPING重复STOP按幂等命令接受；STOP立即禁止新事务的接受判据 @satisfies: TOP-09
+		i_stop_event &&
+		((state_current == ST_RUN) || (state_current == ST_STOPPING)); // STOPPING重复STOP按幂等命令接受；STOP立即禁止新事务的接受判据；与START/COMMIT/clear同拍时STOP仍优先进入或保持STOPPING，冲突诊断0x01照常记录 @satisfies: TOP-09, MGR-11
 	assign flag_stopping_complete =
 		i_adc_idle && i_datapath_empty && i_idac_idle && i_analog_safe; // 禁止用固定延时替代显式排空证明
 	assign dec_error_present = dec_error_code != ERROR_NONE; // 非零错误码产生单拍和sticky错误

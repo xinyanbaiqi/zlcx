@@ -14,14 +14,15 @@
 //
 // Dependencies:       ppg_precision_window_controller.v
 //
-// Version:            V1.3
-// Revision Date:      2026/09/17
+// Version:            V1.4
+// Revision Date:      2026/10/06
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/12            V1.0          Erie                  Create file.
 // 2026/09/16            V1.1          Erie                  Adapt to RTL V1.1-V1.3: connect the PWI-broadcast i_detection_discard group, i_run_generation, i_peak_valley_config_valid, o_local_empty and the o_mode_fault_* group; rename i_adc_idle to i_precision_takeover_safe; PWC-27/28/33 now use generation-scoped DISCARD_STOP/DISCARD_ABORT/DISCARD_SYSTEM_FAULT broadcasts instead of direct ports (PWC-27 adds a stale-generation negative control); add isolated PWC-40 V5 formal-detection gate check and raise the pass gate to 40.
 // 2026/09/17            V1.2          Erie                  Add PWC-41: new legal START must not clear switch_timeout_sticky/protocol_error_sticky (contract :205/:731), mirroring PVW-37's fix; raise the pass gate to 42.
 // 2026/09/17            V1.3          Erie                  Work-line-D remediation of 6 confirmed test gaps (independent recheck, no RTL change): PWC-15 adds a correctly-timed second check so it can no longer pass on an abnormal return; PWC-21 adds the missing o_switch_pending==0 clause; PWC-26 adds an exact single-pulse fault-report count instead of relying on sticky/hold alone; PWC-34 adds a direct o_mode_fault_active assertion so diag-clear-releases-fault-hold mutants are caught; PWC-35 adds a real non-idle negative case; PWC-04 drives an actual cross/return request in CHARACTERIZATION profile instead of asserting on an unstimulated reset state. Raise the pass gate to 48.
+// 2026/10/06            V1.4          Erie                  ABCD review F-034: add two TB-local CANCEL-COMMIT checks (no PWC-nn number taken): a current-generation discard in the same cycle as the enter safe boundary must leave 9-bit with no window/start event/pending, and in the same cycle as the return safe boundary must leave precision at 15-bit with no 15->9 event, no window and no pending. Pass gate 48 -> 50; banner unchanged. Negative controls: removing the cancel term from either commit fails exactly the matching check.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -36,14 +37,15 @@
 //
 // 依赖文件:           ppg_precision_window_controller.v
 //
-// 当前版本:           V1.3
-// 修订日期:           2026年09月17日
+// 当前版本:           V1.4
+// 修订日期:           2026年10月06日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月12日        V1.0          Erie                  创建文件。
 // 2026年09月16日        V1.1          Erie                  适配RTL V1.1-V1.3：连接PWI广播的i_detection_discard组、i_run_generation、i_peak_valley_config_valid、o_local_empty和o_mode_fault组；i_adc_idle改名为i_precision_takeover_safe；PWC-27/28/33改用代际DISCARD_STOP/DISCARD_ABORT/DISCARD_SYSTEM_FAULT广播替代直接端口（PWC-27先施加陈旧代际反例）；新增隔离的PWC-40 V5正式检测门控断言，总PASS门限提高到40
 // 2026年09月17日        V1.2          Erie                  新增PWC-41：新合法START不得清除switch_timeout_sticky/protocol_error_sticky（合同:205/:731），修法参照PVW-37；总PASS门限提高到42
 // 2026年09月17日        V1.3          Erie                  工作线D独立复核确认的6处缺测试证据修复（不改RTL）：PWC-15补一个正确采样拍的第二条断言使其不再对异常返回也PASS；PWC-21补上缺失的o_switch_pending==0；PWC-26改用精确单拍故障计数而不是只看sticky/hold；PWC-34直接断言o_mode_fault_active以抓住"诊断清除误解除故障保持"这类变异；PWC-35补一个真实非idle负向用例；PWC-04在表征profile下真实驱动一次cross/return请求而不是只测未激励的复位态。总PASS门限提高到48
+// 2026年10月06日        V1.4          Erie                  ABCD复核F-034：新增两项TB本地CANCEL-COMMIT检查（不占用PWC编号）：当前代际discard与进入安全边界同拍时必须保持9-bit、无窗口/起始事件/pending；与返回安全边界同拍时精度必须保持15-bit、无15->9事件、无窗口、无pending。判据48改为50，横幅不变。负对照：分别去掉两处提交的撤销项，各自恰好使对应检查失败
 // 使用真实ready/valid、提交事件、超时边界和生命周期比较覆盖PWC-01至PWC-41
 module tb_ppg_precision_window_controller
 (
@@ -757,7 +759,36 @@ module tb_ppg_precision_window_controller
 		start_run(1'b0, 1'b0, 1'b1);                // 不经复位，直接提交第二次合法START
 		check_case("PWC-41 new legal START preserves switch-timeout sticky", flag_case_ok && o_switch_timeout_sticky);
 
-		if(cnt_error == 0 && cnt_pass == 48)begin
+		// CANCEL-COMMIT（ABCD F-034，TB本地名，不占用PWC族编号）：合同冻结"当前generation的detection discard > 安全提交"，
+		// 撤销拍不得产生精度切换。安全边界与当前代际discard同拍到达时，进入和返回两个方向都必须由撤销胜出
+		reset_dut;
+		start_run(1'b0, 1'b0, 1'b1);
+		request_cross(16'h7E00, 16'h7E01, 1'b0, 8'h01, 8'h02, 8'h03);
+		i_detection_discard_event = 1'b1;          // 与安全边界同拍的当前代际discard
+		i_detection_discard_reason = DISCARD_REASON_ABORT;
+		i_detection_discard_run_generation = RUN_GENERATION_CURRENT;
+		commit_safe_frame(16'h7E02);
+		i_detection_discard_event = 1'b0;
+		i_detection_discard_run_generation = 8'd0;
+		check_case("CANCEL-COMMIT enter: same-cycle current-generation discard wins over the 15-bit safe commit",
+			(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (o_fine_window_start_event == 1'b0) && (o_switch_pending == 1'b0));
+
+		reset_dut;
+		start_run(1'b0, 1'b0, 1'b1);
+		enter_fine_window(16'h7F00, 16'h7F01);
+		flag_case_ok = (o_active_precision_mode == 1'b1) && (o_fine_window_active == 1'b1); // 前提：已在正式15-bit窗口
+		request_return(RETURN_VALLEY_CONFIRMED, 16'h7F02);
+		flag_case_ok = flag_case_ok && o_switch_pending;     // 前提：返回请求已进入pending
+		i_detection_discard_event = 1'b1;          // 与返回安全边界同拍的当前代际discard
+		i_detection_discard_reason = DISCARD_REASON_ABORT;
+		i_detection_discard_run_generation = RUN_GENERATION_CURRENT;
+		commit_safe_frame(16'h7F03);
+		i_detection_discard_event = 1'b0;
+		i_detection_discard_run_generation = 8'd0;
+		check_case("CANCEL-COMMIT return: same-cycle current-generation discard wins over the 9-bit safe commit",
+			flag_case_ok && (o_active_precision_mode == 1'b1) && (o_precision_15_to_9_event == 1'b0) && (o_fine_window_active == 1'b0) && (o_switch_pending == 1'b0));
+
+		if(cnt_error == 0 && cnt_pass == 50)begin
 			$display("PWC-01 through PWC-41 ALL PASS pass=%0d fail=%0d", cnt_pass, cnt_error); // 仅全部真实比较通过才报告总PASS
 			$finish;
 		end else begin

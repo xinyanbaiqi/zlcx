@@ -15,13 +15,14 @@
 // Referrences:		PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.2
-// Revision Date:	2026/09/17 00:00:00
+// Version:			V1.3
+// Revision Date:	2026/10/06 00:00:00
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/11            V1.0          Erie                  Create file.
 // 2026/09/16            V1.1          Erie                  Adapt to RTL V1.1-V1.4: connect the PWI-broadcast i_detection_discard group, i_run_generation and o_local_empty; replace direct STOP/abort pulses with generation-scoped discard broadcasts (PVW-35/36 first apply a stale-generation discard as a negative control; PVW-36 keeps i_run_enable and committed 15-bit precision so only the discard can clear state, and checks o_local_empty); PVW-37 now asserts a new START keeps the protocol sticky per contract sections 12.4/13.2.
 // 2026/09/17            V1.2          Erie                  Work-line-D remediation of 4 confirmed test gaps plus 2 new acceptance IDs for previously untested contract clauses (no RTL change): PVW-09/PVW-39 add a genuine 16-bit frame-id wraparound (legal delta accepted, illegal half-wrap span rejected via the wraparound-specific term, not the generic discontiguity term); PVW-32 actually drives i_recheck_busy while real running-extremum state exists; PVW-33 adds a real non-idle accept negative case (verified to still clear state per RTL:346's pre-existing flag_runtime_clear design, tagged PVW-32/35/36 -- diagnostic-flag-not-block, not a new defect); PVW-47 exercises section 10.5's precision-drop-before-return-handshake clause (flag_precision_drop_event); PVW-48 exercises section 11.4's RETURN_REASON_PROTOCOL fallback (flag_fine_protocol_fallback_event). Raise the pass gate to 54.
+// 2026/10/06            V1.3          Erie                  ABCD review F-018: add TB-local check RETURN-HOLD (no PVW-nn number taken): with the return request held (ready=0), a second legal peak/valley pair must not change the pending return reason/frame (valley, frame 10). Pass gate 54 -> 55; banner unchanged. Negative control: without the valid gate the frame becomes 21 and RETURN-HOLD fails.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -37,13 +38,14 @@
 // 参考资料:		PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.2
-// 修订日期:		2026年09月17日
+// 当前版本:		V1.3
+// 修订日期:		2026年10月06日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月11日        V1.0          Erie                  创建文件
 // 2026年09月16日        V1.1          Erie                  适配RTL V1.1-V1.4：连接PWI广播的i_detection_discard组、i_run_generation和o_local_empty；直接STOP/abort脉冲改为代际discard广播（PVW-35/36先施加陈旧代际反例；PVW-36保持RUN使能和已提交15-bit精度，只让discard清除状态并核对o_local_empty）；PVW-37按合同12.4/13.2节改为断言新START保留协议sticky
 // 2026年09月17日        V1.2          Erie                  工作线D独立复核修复4处缺测试证据+新增2条验收ID（不改RTL）：PVW-09/PVW-39补真实16-bit帧号回绕（合法帧差被接受，非法半回绕跨度经回绕专属项而非通用不连续项被拒绝）；PVW-32真实驱动i_recheck_busy且运行极值已建立；PVW-33补真实非idle接受负例（核实RTL:346既有flag_runtime_clear设计——早带PVW-32/35/36标签——是诊断标记而非阻止清除，非新缺陷）；PVW-47覆盖§10.5精度提前下降条款（flag_precision_drop_event）；PVW-48覆盖§11.4 RETURN_REASON_PROTOCOL回退（flag_fine_protocol_fallback_event）。总PASS门限提高到54
+// 2026年10月06日        V1.3          Erie                  ABCD复核F-018：新增TB本地检查RETURN-HOLD（不占用PVW编号）：返回请求保持（ready=0）期间，第二组合法峰谷不得改变待握手返回的原因与帧号（波谷、帧10）。判据54改为55，横幅不变。负对照：去掉valid门控时帧号变为21，RETURN-HOLD失败
 // 使用真实输入输出比较验证峰谷检测、窗口控制、超时恢复和保持型事务
 module tb_ppg_peak_valley_window_detector;
 
@@ -510,6 +512,8 @@ module tb_ppg_peak_valley_window_detector;
 	endtask
 
 	// 每个PASS都必须由传入的真实布尔比较结果决定
+	reg flag_return_hold_ok;                // ABCD F-018：RETURN-HOLD前提
+
 	task check_case;
 		input [8 * 16 - 1:0]case_name;
 		input integer condition_value;
@@ -1180,7 +1184,24 @@ module tb_ppg_peak_valley_window_detector;
 		consume_return_request;              // 完成握手，避免残留valid影响后续用例
 		i_peak_valley_config_valid = 1'b1;
 
-		if((cnt_pass == 54) && (cnt_fail == 0))begin
+		// RETURN-HOLD（ABCD F-018，TB本地名，不占用PVW族编号）：返回请求反压（ready=0）期间，即使又确认了一组合法峰谷，
+		// 已发出的返回载荷（原因与帧号）必须保持不变，直到被消费（C22第11.4节保持型握手）
+		reset_dut;
+		start_run;
+		start_fine_window(16'd0);
+		make_basic_peak(16'd0);
+		consume_peak;
+		make_basic_valley(16'd0);
+		consume_valley;
+		flag_return_hold_ok = (o_return_9bit_valid === 1'b1) && (o_return_reason == 2'b00) && (o_return_frame_id == 16'd10); // 第一组谷值的返回请求
+		make_basic_peak(16'd11);
+		consume_peak;
+		make_basic_valley(16'd11);
+		$display("RETURN_HOLD second_valley valid=%0b reason=%0d frame=%0d", o_return_9bit_valid, o_return_reason, o_return_frame_id);
+		check_case("RETURN-HOLD", flag_return_hold_ok && (o_return_9bit_valid === 1'b1) && (o_return_reason == 2'b00) && (o_return_frame_id == 16'd10));
+		consume_return_request;              // 完成握手，避免残留valid影响后续用例
+
+		if((cnt_pass == 55) && (cnt_fail == 0))begin
 			$display("PVW-01 through PVW-48 ALL PASS: %0d checks", cnt_pass);
 		end else begin
 			$display("PVW REGRESSION FAILED: pass=%0d fail=%0d", cnt_pass, cnt_fail);

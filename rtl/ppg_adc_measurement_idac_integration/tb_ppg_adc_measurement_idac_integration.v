@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.12
-// Revision Date:   2026-10-05
+// Version:         V1.13
+// Revision Date:   2026-10-06
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -31,6 +31,7 @@
 // 2026-10-01           V1.10      Erie        Task C (TASKC_TICK248_P2S_20261001.md): add the SID-05 unit assertions AMI-48/AMI-49 as a final independent phase after N08-01, so the earlier 48 checks are untouched. A fresh SEARCH_TRACK RUN is started, the first calibration request is handshaken with i_calibration_sample_ready but no transaction is started (the scheduler-accepted, owner-not-yet-committed in-flight state), then i_cal_owner_deadline_event is pulsed directly (this TB has no scheduler). AMI-48: in flight, the event must clear flag_calibration_request_inflight and re-raise o_calibration_sample_valid with the same frame type/color, with no transaction start fire. AMI-49: while that re-raised request is pending but not yet accepted (not in flight), a second event must have no side effect (in-flight stays 0, valid and payload unchanged, integration protocol sticky and wrapper fault unchanged, no fire). Pass criterion raised from 48 to 50. Negative control: with the V1.15 SID-05 clearing term removed from AMI line ~1797, AMI-48 fails (and AMI-49, whose precondition is the re-raised request, fails with it).
 // 2026-10-04           V1.11      Erie        Rename the four check labels that collided, with a different meaning, with the AMI acceptance table in contract section 17 (labels only; check logic, order and count unchanged; 50 cases). Old -> new: AMI-46 -> AMI-DISC-1 and AMI-47 -> AMI-DISC-2 (the V1.6 public discard-port checks; contract AMI-46/47 are "injection default off" and "identity request binding"); AMI-48 -> AMI-SID05-1 and AMI-49 -> AMI-SID05-2 (the V1.10 SID-05 deadline checks; contract AMI-48/49 are "identity matcher reject" and "identity recovery"). AMI-01 through AMI-45 and N08-01 keep their labels. The check_case label input is widened from 6 to 11 characters (a 6-character input truncated the new labels to "DISC-1"/"ID05-1"), and the new write_case_id task prints the label byte by byte, skipping the zero-byte left padding that xsim would otherwise print as spaces; the PASS/FAIL text of every unchanged label stays byte-identical. Only the printing changes; no check condition is touched. The history entries above keep the labels used at the time. Final banner is now "AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons".
 // 2026-10-05           V1.12      Erie        Simplify the V1.11 label printing: drop the write_case_id byte-by-byte task and print with $display("PASS %0s") / $display("FAIL %0s at %0t"). %0s suppresses the zero-byte left padding of the 11-character label in both xsim 2022.2 and Icarus (plain %s prints it as spaces, which is what V1.11 worked around), so the output is byte-identical to V1.11 and every unchanged label prints exactly as before V1.11. No check condition changes; 50 cases.
+// 2026-10-06           V1.13      Erie        ABCD review RTL round 1: eight TB-local checks appended after AMI-SID05-2 (pass gate 50 -> 58; banner regex unchanged). HIST-KEEP (F-022): a non-blocking protocol sticky survives STOP and a new START and is cleared only by diag_clear. HIST-BLOCK / HIST-ABORT / HIST-STOP / HIST-RERUN (N-1): with an integration-blocking cause (AMB start without an in-flight request) diag_clear is ignored during RUN; after abort releases the blocking, diag_clear clears the sticky; after a STOP-only end and a full drain, diag_clear clears the history although the blocking flag is still 1; in that idle state AMI fault-active also stays 1 (L-5, asserted as-is), and a START then clears the blocking and the lane but not the history. DISC-HELD (F-019): with result 92/920 held under backpressure and 93/930 already in the upstream fork, abort must report the discard identity of 92/920/RED/NORMAL/SAR9; the discard color/frame_type/precision outputs are now wired. DET-QUAL (F-021): the N08 back-to-back window without abort; a passive monitor requires the qualification PWI sees at each detection handshake to equal the value loaded with that transaction, and the formal-branch-first window must occur. LEAF-HOLD (F-044, P06 leaf evidence): the DUT is built with C_ENABLE_TEST_INJECTION=1 and the injection inputs are driven (0 everywhere else, so the effective enable and every earlier result are unchanged); after an identity injection is accepted, i_test_inject_enable is held low for 20 cycles and flag_test_identity_hold must stay 1. Negative controls: each check fails on the corresponding pre-fix or mutated RTL.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -46,8 +47,8 @@
 // 依赖文件:
 //      DUT及全部真实集成子模块
 //
-// 当前版本:        V1.12
-// 修订日期:        2026年10月05日
+// 当前版本:        V1.13
+// 修订日期:        2026年10月06日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -62,6 +63,7 @@
 // 2026-10-01           V1.10      Erie        任务C（TASKC_TICK248_P2S_20261001.md）：新增SID-05单元断言AMI-48/AMI-49，作为N08-01之后的独立末段，不触动前面48项检查。重开一次SEARCH_TRACK RUN，第一笔校准请求只用i_calibration_sample_ready握手、不启动事务（即调度器已接受请求、owner尚未提交的在途状态），然后由TB直接驱动i_cal_owner_deadline_event（本TB没有调度器）。AMI-48：在途时收到事件，必须清除flag_calibration_request_inflight，并以相同帧类型/颜色重新拉高o_calibration_sample_valid，不产生事务start fire。AMI-49：重新拉高的请求尚未被接受（不在途）时再来一次事件，必须无副作用（在途仍为0，valid与载荷不变，集成协议sticky与wrapper阻断不变，无fire）。通过判据由48项提高到50项。负对照：把AMI约1797行V1.15的SID-05清零条件去掉后，AMI-48失败（AMI-49以重新拉高的请求为前提，随之失败）。
 // 2026-10-04           V1.11      Erie        与合同第17节AMI验收表同名不同义的4个检查改名（只改标签文字；检查逻辑、顺序和总数不变，仍为50项）。旧→新：AMI-46→AMI-DISC-1、AMI-47→AMI-DISC-2（V1.6的公开discard端口检查；合同中AMI-46/47是"注入默认关闭"和"identity请求绑定"）；AMI-48→AMI-SID05-1、AMI-49→AMI-SID05-2（V1.10的SID-05截止检查；合同中AMI-48/49是"identity matcher拒绝"和"identity恢复"）。AMI-01至AMI-45及N08-01不改名。check_case的标签输入由6字符放宽到11字符（6字符会把新标签截成"DISC-1"/"ID05-1"），并新增write_case_id任务逐字节打印标签，跳过左侧补齐的零字节（xsim会把它们打印成空格），未改名标签的PASS/FAIL文字逐字节不变。只改打印方式，不动任何检查条件。以上历史条目保留当时使用的编号。结论横幅改为"AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons"。
 // 2026-10-05           V1.12      Erie        简化V1.11的标签打印：删除逐字节打印任务write_case_id，改用$display("PASS %0s")和$display("FAIL %0s at %0t")。%0s在xsim 2022.2与Icarus中都不输出11字符标签左侧补齐的零字节（普通%s会把它们打成空格，V1.11正是为绕开这一点），输出与V1.11逐字节相同，未改名的标签与V1.11之前完全一致。检查条件不变，仍为50项。
+// 2026-10-06           V1.13      Erie        ABCD复核RTL第一轮：在AMI-SID05-2之后追加8项TB本地检查（判据50改为58，横幅正则不变）。HIST-KEEP（F-022）：非阻断协议sticky经STOP和新START仍保持，只由diag_clear清除。HIST-BLOCK/HIST-ABORT/HIST-STOP/HIST-RERUN（N-1）：存在集成阻断成因（无在途请求的AMB start）时RUN中diag_clear被忽略；abort解除阻断后diag_clear清除；只以STOP结束并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；此时空闲期AMI fault-active同样仍为1（L-5，如实断言），随后START清除阻断与lane但不清历史。DISC-HELD（F-019）：92/920被反压持住、93/930已进入上游fork时abort，discard身份必须是92/920/RED/NORMAL/SAR9；接上discard的颜色/类型/精度输出。DET-QUAL（F-021）：N08背靠背窗口不abort，被动监视要求每次检测握手时PWI看到的资格等于该笔装入时的值，且正式分支先消费的窗口确实出现。LEAF-HOLD（F-044，P06叶子证据）：DUT以C_ENABLE_TEST_INJECTION=1构建并驱动注入输入（其余场景恒为0，有效使能与此前全部结果不变）；错误身份注入被接纳后把i_test_inject_enable拉低20拍，flag_test_identity_hold必须保持1。负对照：每项在对应修复前或变异RTL上失败
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -83,6 +85,10 @@ module tb_ppg_adc_measurement_idac_integration ();
 	reg i_control_abort_event;                  // abort撤销单拍
 	reg i_diag_clear_event;                     // sticky清除单拍
 	reg i_system_fault_discard_event;           // supervisor系统故障丢弃选择器，本TB无supervisor场景，恒为0
+	reg i_test_inject_enable;                   // ABCD F-044：AMI叶子层注入使能，除LEAF-HOLD外恒为0
+	reg i_test_identity_inject_valid;           // ABCD F-044：保持型错误完成身份注入请求
+	reg [15:0]i_test_identity_inject_sample_index; // ABCD F-044：注入的错误完成样本序号
+	wire o_test_identity_inject_ready;          // ABCD F-044：AMI可接纳错误身份注入
 	reg i_cal_owner_deadline_event;             // V1.9:SID-05新增scheduler校准owner截止事件，本TB无scheduler，恒为0
 	reg [7:0]i_config_epoch;                    // 当前ACTIVE版本
 	reg [7:0]i_stage1_coef_epoch;               // 当前Stage1版本
@@ -193,6 +199,9 @@ module tb_ppg_adc_measurement_idac_integration ();
 	wire o_measurement_result_discard_identity_valid; // DUT正式结果丢弃身份可信位，事件为高时恒为1
 	wire [15:0]o_measurement_result_discard_frame_id; // DUT正式结果丢弃事务的真实物理帧号
 	wire [15:0]o_measurement_result_discard_sample_index; // DUT正式结果丢弃事务的全局顺序编号
+	wire o_measurement_result_discard_color_ir; // ABCD F-019：DUT正式结果丢弃事务的颜色身份
+	wire [1:0]o_measurement_result_discard_frame_type; // ABCD F-019：DUT正式结果丢弃事务的帧类型
+	wire o_measurement_result_discard_precision; // ABCD F-019：DUT正式结果丢弃事务的精度模式
 	wire signed [23:0]o_coarse_ppg_value;       // DUT粗PPG结果
 	wire o_coarse_valid;                        // DUT粗结果资格
 	wire signed [23:0]o_fine_ppg_value;         // DUT精细PPG结果
@@ -337,7 +346,9 @@ module tb_ppg_adc_measurement_idac_integration ();
 
 	//===================<DUT实例化>===================//
 	// 全部配置和事务输入均由本TB真实驱动，未观察诊断输出允许保持开放。
-	ppg_adc_measurement_idac_integration dut(
+	ppg_adc_measurement_idac_integration #(
+		.C_ENABLE_TEST_INJECTION(32'd1)        // ABCD F-044：生成验证注入结构；除LEAF-HOLD外注入使能恒为0，有效注入使能与默认构建一致为0
+	) dut(
 		.i_clk(i_clk),
 		.i_rstn(i_rstn),
 		.i_active_config_valid(i_active_config_valid),
@@ -350,6 +361,16 @@ module tb_ppg_adc_measurement_idac_integration ();
 		.i_diag_clear_event(i_diag_clear_event),
 		.i_system_fault_discard_event(i_system_fault_discard_event),
 		.i_cal_owner_deadline_event(i_cal_owner_deadline_event),
+		.i_test_inject_enable(i_test_inject_enable),
+		.i_test_identity_inject_valid(i_test_identity_inject_valid),
+		.o_test_identity_inject_ready(o_test_identity_inject_ready),
+		.i_test_identity_inject_sample_index(i_test_identity_inject_sample_index),
+		.i_test_invalid_sample_valid(1'b0),
+		.o_test_invalid_sample_ready(),
+		.i_test_saturation_inject_valid(1'b0),
+		.o_test_saturation_inject_ready(),
+		.i_test_calibration_loss_inject_valid(1'b0),
+		.o_test_calibration_loss_inject_ready(),
 		.i_config_epoch(i_config_epoch),
 		.i_stage1_coef_epoch(i_stage1_coef_epoch),
 		.i_stage2_coef_epoch(i_stage2_coef_epoch),
@@ -421,9 +442,9 @@ module tb_ppg_adc_measurement_idac_integration ();
 		.o_measurement_result_discard_sample_valid(),
 		.o_measurement_result_discard_frame_id(o_measurement_result_discard_frame_id),
 		.o_measurement_result_discard_sample_index(o_measurement_result_discard_sample_index),
-		.o_measurement_result_discard_color_ir(),
-		.o_measurement_result_discard_frame_type(),
-		.o_measurement_result_discard_precision(),
+		.o_measurement_result_discard_color_ir(o_measurement_result_discard_color_ir),
+		.o_measurement_result_discard_frame_type(o_measurement_result_discard_frame_type),
+		.o_measurement_result_discard_precision(o_measurement_result_discard_precision),
 		.o_measurement_result_discard_run_generation(),
 		.i_idac_mode(i_idac_mode),
 		.i_amb_enable(i_amb_enable),
@@ -597,6 +618,48 @@ module tb_ppg_adc_measurement_idac_integration ();
 
 	//===================<仿真辅助任务>===================//
 	// 真实条件比较后才允许打印对应AMI通过信息；%0s不输出定宽编号左侧补齐的零字节。
+	reg flag_hist_keep_ok;                  // ABCD F-022：HIST-KEEP逐步前提累计
+	reg flag_hist_block_ok;                 // ABCD N-1：HIST-BLOCK/HIST-ABORT前提累计
+	reg flag_disc_held_ok;                  // ABCD F-019：DISC-HELD前提
+	integer cnt_detqual_meas_first_before;  // ABCD F-021：DET-QUAL场景前的窗口计数基线
+	reg flag_leaf_hold_ok;                  // ABCD F-044：LEAF-HOLD逐拍累计
+	integer idx_leaf_hold;                  // ABCD F-044：使能撤销观察拍索引
+
+	// ABCD F-021：被动监视检测分支资格——每笔结果装入fork时记下资格，检测链真实握手（非abort）时PWI看到的
+	// i_sample_valid必须等于装入值；同时统计"正式分支先于检测分支消费"的窗口确实出现过
+	reg flag_detqual_loaded = 1'b0;           // 当前fork事务装入时的样本资格
+	reg flag_detqual_meas_done = 1'b0;        // 当前fork事务的正式分支已先被消费
+	integer cnt_detqual_meas_first = 0;       // 正式分支先消费后检测分支才握手的次数
+	integer cnt_detqual_mismatch = 0;         // 检测握手时资格与装入值不一致的次数
+	always@(posedge i_clk)begin
+		if(dut.flag_detection_transfer && !dut.flag_result_abort_discard)begin
+			if(flag_detqual_meas_done) cnt_detqual_meas_first = cnt_detqual_meas_first + 1;
+			if(dut.ppg_precision_window_integration_Inst.i_sample_valid !== flag_detqual_loaded)begin
+				cnt_detqual_mismatch = cnt_detqual_mismatch + 1;
+				if(cnt_detqual_mismatch <= 3) $display("DET_QUAL_MISMATCH t=%0t frame=%0d loaded=%0b presented=%0b meas_first=%0b", $time,
+					dut.result_frame_id_o, flag_detqual_loaded, dut.ppg_precision_window_integration_Inst.i_sample_valid, flag_detqual_meas_done);
+			end
+		end
+		if(dut.flag_dc_result_transfer)begin
+			flag_detqual_loaded <= !dut.flag_test_invalid_sample_fire;
+			flag_detqual_meas_done <= 1'b0;
+		end else if(dut.flag_measurement_transfer && !dut.flag_result_abort_discard && !dut.flag_detection_transfer)begin
+			flag_detqual_meas_done <= 1'b1;
+		end
+	end
+
+	// ABCD N-1：无在途校准请求时发出AMB校准start，制造start上下文不匹配（同时置历史sticky与集成阻断）
+	task inject_amb_start_mismatch;
+		begin
+			i_transaction_frame_type = FRAME_AMB;
+			i_transaction_precision_mode = 1'b0;
+			i_transaction_start_valid = 1'b1;
+			repeat(2) @(negedge i_clk);
+			i_transaction_start_valid = 1'b0;
+			i_transaction_frame_type = FRAME_NORMAL;
+		end
+	endtask
+
 	task check_case;
 		input [8 * 11 - 1:0]case_id;
 		input condition;
@@ -975,6 +1038,9 @@ module tb_ppg_adc_measurement_idac_integration ();
 		i_active_config_valid = 1'b1;
 		i_run_generation = 8'h01;
 		i_system_fault_discard_event = 1'b0;
+		i_test_inject_enable = 1'b0;          // ABCD F-044：默认关闭注入
+		i_test_identity_inject_valid = 1'b0;
+		i_test_identity_inject_sample_index = 16'd0;
 		i_cal_owner_deadline_event = 1'b0;
 		i_run_enable = 1'b0;
 		i_allow_new_transaction = 1'b1;
@@ -1684,7 +1750,164 @@ module tb_ppg_adc_measurement_idac_integration ();
 			(o_wrapper_fault_blocking === flag_sid05_fault_before) &&
 			(cnt_fire == cnt_fire_before_sid05));
 
-		if(cnt_fail == 0 && cnt_pass == 50)begin
+		// HIST-KEEP（ABCD F-022，TB本地名）：合同15.1节规定AMI历史协议sticky只由复位或Top注册式diag_clear清除，
+		// 新合法START和STOP本身不得清除。先清干净，用非法frame_type锁存sticky，再走STOP与新START，sticky必须
+		// 仍为1；随后diag_clear才把它清零
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		flag_hist_keep_ok = (o_integration_protocol_error_sticky === 1'b0); // 前提：清除后为0
+		i_transaction_frame_type = 2'b11;
+		i_transaction_start_valid = 1'b1;
+		repeat(2) @(negedge i_clk);
+		i_transaction_start_valid = 1'b0;
+		i_transaction_frame_type = FRAME_NORMAL;
+		flag_hist_keep_ok = flag_hist_keep_ok && (o_integration_protocol_error_sticky === 1'b1); // 非法类型锁存历史
+		pulse_stop_ack;
+		repeat(5) @(negedge i_clk);
+		flag_hist_keep_ok = flag_hist_keep_ok && (o_integration_protocol_error_sticky === 1'b1); // STOP不清除
+		pulse_start_ack;
+		repeat(3) @(negedge i_clk);
+		$display("HIST_KEEP after_start sticky=%b", o_integration_protocol_error_sticky);
+		flag_hist_keep_ok = flag_hist_keep_ok && (o_integration_protocol_error_sticky === 1'b1); // 新START不清除
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		check_case("HIST-KEEP", flag_hist_keep_ok && (o_integration_protocol_error_sticky === 1'b0)); // 只有diag_clear清除
+
+		// HIST-BLOCK / HIST-ABORT / HIST-STOP / HIST-RERUN（ABCD N-1，TB本地名）：合同15.1节规定历史协议sticky
+		// 只能在本地无活动blocking cause后由diag_clear清除。用无在途请求的AMB校准start制造集成阻断（start上下文
+		// 不匹配，sticky与阻断同时置位）。②RUN中阻断仍活跃时diag_clear必须被忽略；①abort解除阻断、链路空闲后
+		// diag_clear清除；④只有STOP、没有abort结束RUN并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；
+		// ⑤同一场景下空闲期阻断与AMI fault-active仍为1（L-5既有问题：系统级supervisor因此不关episode、manager拒绝
+		// 下一次START，需主机ABORT恢复，见control_top级复现），本TB直接给START时阻断随之清除而历史sticky保留（F-022）
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		flag_hist_block_ok = (o_integration_protocol_error_sticky === 1'b0) && (dut.flag_integration_blocking === 1'b0); // 前提：干净起点
+		inject_amb_start_mismatch;
+		flag_hist_block_ok = flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1); // 历史与阻断同时建立
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		check_case("HIST-BLOCK", flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1)); // ②RUN中阻断期间清除被忽略
+		@(negedge i_clk); i_control_abort_event = 1'b1;    // abort解除集成阻断
+		@(negedge i_clk); i_control_abort_event = 1'b0;
+		repeat(5) @(negedge i_clk);
+		flag_hist_block_ok = (dut.flag_integration_blocking === 1'b0) && (o_integration_protocol_error_sticky === 1'b1); // 阻断已解除、历史仍在
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		check_case("HIST-ABORT", flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b0)); // ①阻断解除后清除生效
+		inject_amb_start_mismatch;                         // 再次建立历史与阻断，随后只用STOP结束本RUN
+		flag_hist_block_ok = (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1);
+		pulse_stop_ack;
+		i_run_enable = 1'b0;                               // manager在STOP后撤销RUN许可
+		cnt_watchdog = 0;
+		while((o_datapath_empty !== 1'b1) && (cnt_watchdog < 400))begin
+			@(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		repeat(5) @(negedge i_clk);
+		flag_hist_block_ok = flag_hist_block_ok && (o_datapath_empty === 1'b1) && (dut.flag_integration_blocking === 1'b1); // 排空完成但阻断标志仍在
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		$display("HIST_STOP_ONLY blocking=%b ami_fault_active=%b sticky_after_diag_clear=%b", dut.flag_integration_blocking, dut.o_ami_fault_active, o_integration_protocol_error_sticky);
+		check_case("HIST-STOP", flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b0) && (dut.flag_integration_blocking === 1'b1)); // ④RUN结束后诊断清除只清历史
+		inject_amb_start_mismatch;                         // 空闲期再建一次历史，用来验证START不清历史
+		flag_hist_block_ok = (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1) &&
+			(dut.o_ami_fault_active === 1'b1);             // L-5既有问题如实断言：空闲期lane 02仍活跃
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		repeat(3) @(negedge i_clk);
+		check_case("HIST-RERUN", flag_hist_block_ok && (dut.flag_integration_blocking === 1'b0) && (dut.o_ami_fault_active === 1'b0) &&
+			(o_integration_protocol_error_sticky === 1'b1)); // ⑤START清阻断与lane，不清历史
+		@(negedge i_clk); i_diag_clear_event = 1'b1;       // 收尾：清掉历史
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+
+		// DISC-HELD（ABCD F-019，TB本地名）：正式结果被反压持住期间，下一笔事务已进入上游fork测量分支；
+		// 此时abort产生的公开正式结果discard身份必须是被持住的那笔（92/920/RED/NORMAL/SAR9），不能报成上游的下一笔
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(3) @(negedge i_clk);
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		complete_wrapper_startup;
+		pulse_safe_boundary();
+		repeat(3) @(negedge i_clk);
+		i_measurement_result_ready = 1'b0;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd92, 16'd920);
+		drive_adc_done(1'b0, 10'b0000100101, 10'd0);
+		wait_measurement_result();
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b1, 16'd93, 16'd930);
+		drive_adc_done(1'b0, 10'b0000100101, 10'd0);
+		repeat(30) @(negedge i_clk);
+		flag_disc_held_ok = o_measurement_result_valid && (o_result_frame_id == 16'd92) && (o_result_sample_index == 16'd920) &&
+			(dut.dec_measurement_sample_index == 16'd930); // 前提：输出持有920，上游测量分支已是930
+		@(negedge i_clk); i_control_abort_event = 1'b1;
+		@(negedge i_clk); i_control_abort_event = 1'b0;
+		$display("DISC_HELD discard frame=%0d sample=%0d color=%0b type=%0d precision=%0b", o_measurement_result_discard_frame_id,
+			o_measurement_result_discard_sample_index, o_measurement_result_discard_color_ir, o_measurement_result_discard_frame_type, o_measurement_result_discard_precision);
+		check_case("DISC-HELD", flag_disc_held_ok && o_measurement_result_discard_event && o_measurement_result_discard_identity_valid &&
+			(o_measurement_result_discard_frame_id == 16'd92) && (o_measurement_result_discard_sample_index == 16'd920) &&
+			(o_measurement_result_discard_color_ir == 1'b0) && (o_measurement_result_discard_frame_type == FRAME_NORMAL) &&
+			(o_measurement_result_discard_precision == 1'b0));
+		i_measurement_result_ready = 1'b1;
+		repeat(3) @(negedge i_clk);
+
+		// DET-QUAL（ABCD F-021，TB本地名）：沿用N08的背靠背窗口但不abort——第二笔装入fork时FIR仍忙，正式分支（ready=1）
+		// 先消费、检测分支后握手。检测握手时PWI看到的样本资格必须等于该笔装入时的资格，且该窗口确实出现过
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(3) @(negedge i_clk);
+		i_allow_new_transaction = 1'b1;
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		complete_wrapper_startup;
+		pulse_safe_boundary();
+		repeat(3) @(negedge i_clk);
+		i_measurement_result_ready = 1'b1;
+		for(idx_sample = 0; idx_sample < 24; idx_sample = idx_sample + 1)begin
+			send_normal_sample(150 + idx_sample * 4, 1'b0, 1'b0); // 重新预热FIR 21点窗口
+		end
+		cnt_detqual_meas_first_before = cnt_detqual_meas_first;
+		send_normal_sample_tight(150, 1'b0, 1'b0);
+		send_normal_sample_tight(170, 1'b0, 1'b0);
+		repeat(400) @(negedge i_clk);
+		$display("DET_QUAL meas_first=%0d mismatch=%0d", cnt_detqual_meas_first - cnt_detqual_meas_first_before, cnt_detqual_mismatch);
+		check_case("DET-QUAL", (cnt_detqual_meas_first > cnt_detqual_meas_first_before) && (cnt_detqual_mismatch == 0));
+
+		// LEAF-HOLD（ABCD F-044，TB本地名）：P06要求注入使能撤销不能收回已接纳的请求。Top在RUN中锁存使能，
+		// 系统级合法RUN里叶子使能不会掉，这里在AMI叶子层直接撤销i_test_inject_enable：错误身份注入被接纳、
+		// flag_test_identity_hold置位后，使能连续20拍为0期间hold必须一直保持（只由START、abort或复位清除）
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(3) @(negedge i_clk);
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		complete_wrapper_startup;
+		pulse_safe_boundary();
+		repeat(3) @(negedge i_clk);
+		i_measurement_result_ready = 1'b1;
+		i_test_inject_enable = 1'b1;
+		i_test_identity_inject_sample_index = 16'hBEEF;    // 与真实owner序号不同的错误完成身份
+		i_test_identity_inject_valid = 1'b1;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd94, 16'd940);
+		drive_adc_done(1'b0, 10'b0000100101, 10'd0);
+		cnt_watchdog = 0;
+		while((dut.flag_test_identity_hold !== 1'b1) && (cnt_watchdog < 200))begin
+			@(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		flag_leaf_hold_ok = (dut.flag_test_identity_hold === 1'b1);  // 前提：注入已被接纳
+		i_test_identity_inject_valid = 1'b0;
+		i_test_inject_enable = 1'b0;                       // 叶子层撤销注入使能
+		for(idx_leaf_hold = 0; idx_leaf_hold < 20; idx_leaf_hold = idx_leaf_hold + 1)begin
+			@(negedge i_clk);
+			flag_leaf_hold_ok = flag_leaf_hold_ok && (dut.flag_test_identity_hold === 1'b1) && (dut.flag_test_inject_effective === 1'b0);
+		end
+		$display("LEAF_HOLD accepted_after=%0d hold=%b effective=%b", cnt_watchdog, dut.flag_test_identity_hold, dut.flag_test_inject_effective);
+		check_case("LEAF-HOLD", flag_leaf_hold_ok);
+		@(negedge i_clk); i_control_abort_event = 1'b1;    // 收尾：abort使测试上下文失效
+		@(negedge i_clk); i_control_abort_event = 1'b0;
+		repeat(10) @(negedge i_clk);
+
+		if(cnt_fail == 0 && cnt_pass == 58)begin
 			$display("AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("AMI REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);

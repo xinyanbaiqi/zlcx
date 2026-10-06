@@ -14,10 +14,11 @@
 //
 // Dependencies:    ppg_chip_digital_top
 //
-// Version:         V1.2
-// Revision Date:   2026/10/01
+// Version:         V1.3
+// Revision Date:   2026/10/06
 // History:
 //     Time          Version     Revised by     Contents
+// 2026/10/06        V1.3        Erie          ABCD review F-006/F-005/F-023/F-024/F-014: (1) spi_send_byte now samples SDO at the SCLK rising edge, half a period after the slave's falling-edge update, as a real Mode 0 master does; the old same-time-slot sampling at the falling edge masked F-005. (2) DIAG-MAP38: two burst reads of all 38 read-only bytes 0x0100-0x0125, each compared with an expected image assembled bit by bit from the control-top output wires per contract section 11.2, with the discard-latch bytes from an independent TB model of the latch-and-toggle rule. (3) CMD-STOP-PRIO: from RUN (optical OFF so the drain is immediate), SPI command 0x0A (STOP+DIAG_CLEAR, both registered once in Top, same cycle at the manager) must leave RUN and record 0x01; 0x03 is kept as a path-timing guard: START reaches the manager one cycle before STOP, is rejected in RUN with 0x0a, then STOP is accepted. (4) PARAM-FIXED / PARAM-WDOG parameter checks at time 1 ns. Negative controls: pre-fix SPI fails TC1 and both DIAG-MAP38 reads; pre-fix manager fails CMD-STOP-PRIO 0x0A; watchdog width 12 fails PARAM-WDOG.
 // 2026/10/01        V1.2        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add TC7, a permanent whole-run assertion that whenever the AMI formal result valid (P2S i_result_valid) is 1, P2S o_result_ready is also 1, i.e. the formal result is never held. AMI's P2S telemetry ports o_s1_raw/o_s2_raw/o_s1_calibration_applied come from the DC-recovery payload_o, not from the result fork, so they belong to a different transaction once a held result lets the next transaction into DC recovery (reproduced at AMI and ppg_control_top level); at chip level the depth-2 P2S queue with at most two NORMAL results per 5000-cycle macro frame keeps the result from ever being held, which is what TC7 now guards. Checked every rising edge (stimulus changes only on falling edges, so the read is race-free); each violation prints a FAIL line and the final TC7 verdict feeds cnt_error. 7 PASS. Negative control: with a temporary P2S copy whose queue depth is 1, TC7 fails (3 held cycles during TC3's back-to-back RED/IR pair) while TC3 itself still passes, which shows TC7 catches the precondition earlier than any field comparison.
 // 2026/09/07        V1.1        Erie          Align TC6's conclusion wording with contract V1.12 errata: the "STOP hits the ADC strobe pulse exactly" sub-scenario is an architecturally narrow window (flag_stopping_complete's i_adc_idle leg alone, not the i_datapath_empty leg that actually guards in-flight pipeline data) that is now formally closed as expected/non-bug, not an open item pending user judgement -- no dedicated fast-discard trigger channel or new QFN pin will be added. TC6's construction attempt is unchanged (still a real STOP+concurrent-DONE stimulus, still exercises the real hardware paths), but its outcome is no longer scored as a failure: "both discard latches unchanged" is now the documented, expected, PASS-worthy result for this specific sub-scenario, consistent with the discard-latch mechanism itself already being independently confirmed via a wider real trigger path (spurious no-owner DONE through the fault supervisor cascade). All 6 required verification areas now report PASS; TB_CHIP_DIGITAL_TOP_PASS. No RTL touched by this revision.
 // 2026/09/06        V1.0        Erie          Create file. Self-checking Mode 0 SPI-master testbench for ppg_chip_digital_top covering the six areas required before this task can be considered verified: (1) SPI basic read/write -- write the 1024-bit ACTIVE shadow byte-by-byte through the write burst protocol, read it back before COMMIT and confirm bit-exact echo, then poll 0x0100's lifecycle field across CONFIG->READY->RUN. (2) P2S fixed-packet field/byte-position correctness -- capture a real single-result P2S serial stream after a genuine drive_real_adc_done-equivalent physical stimulus, decode all 12 fields per contract section 8.4.2's bit layout, and cross-check every field against a hierarchical whitebox reference into the DUT's own top_result_*_o internal wires (same technique tb_ppg_control_top.v already uses throughout). (3) Depth-2 buffer no-loss under a real dual-optical back-to-back RED/IR pair, where the timing analysis in section 8.4.3 (161-bit packet takes as long to send as the RED-to-IR gap) means genuine buffering pressure occurs without any artificial timing compression. (4) flag_adc_physical_idle mux correctness -- commit SAR9 and confirm only Stage1's DONE pulse affects the synchronized idle level (Stage2 toggling alone must not), then commit SAR15 and confirm the opposite, observed via a hierarchical reference to the synthesizer's own reg_idle_sync_stable. (5) All 6 DBG_OUT candidates, selected through the SPI-writable 0x0081 register, each driven by triggering its real underlying event and observing the pin transition. (6) Both discard-latch toggle bits, forced by a real STOP-with-owner-inflight scenario (same proven timing window as tb_ppg_control_top.v's SMOKE-06), read back twice via SPI to confirm the toggle bit flips exactly once per real event and the latched identity fields match the discarded transaction. Reuses task_build_normal_manual_config/task_build_normal_manual_dual_config's exact field layout and make_fixed_raw's RAW encoding from tb_ppg_control_top.v (same DUT-adjacent contract, same proven-correct values), driven through the SPI/pad boundary instead of ppg_control_top's direct ports.
@@ -35,10 +36,11 @@
 //
 // 依赖文件:        ppg_chip_digital_top
 //
-// 当前版本:        V1.2
-// 修订日期:        2026年10月01日
+// 当前版本:        V1.3
+// 修订日期:        2026年10月06日
 // 修订历史:
 //     时间          版本        修订人        修订内容
+// 2026年10月06日   V1.3        Erie          ABCD复核F-006/F-005/F-023/F-024/F-014：（1）spi_send_byte改为在SCLK上升沿采样SDO，即从机下降沿更新后半个周期，与真实Mode 0主机一致；原先在下降沿同一时间槽采样掩盖了F-005。（2）DIAG-MAP38：两次突发读完只读区0x0100-0x0125全部38字节，与按合同第11.2节从控制顶层输出线逐位组装的期望值比较，discard锁存字节取自TB独立的锁存加翻转模型。（3）CMD-STOP-PRIO：在RUN中（光学OFF，排空立即完成）SPI命令0x0A（STOP+DIAG_CLEAR，Top中都打一拍、同拍到达manager）必须离开RUN并记录0x01；0x03保留为路径时序守护：START比STOP早一拍到达manager，在RUN中被拒记0x0a，随后STOP被接受。（4）1 ns时的PARAM-FIXED/PARAM-WDOG参数检查。负对照：修复前SPI使TC1和两次DIAG-MAP38失败；修复前manager使CMD-STOP-PRIO 0x0A失败；看门狗宽度12使PARAM-WDOG失败
 // 2026年10月01日   V1.2        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增TC7，全程永久断言——AMI正式结果valid（P2S i_result_valid）为1的每一拍，P2S o_result_ready也必须为1，即正式结果从不被持住。AMI的P2S遥测端口o_s1_raw/o_s2_raw/o_s1_calibration_applied取自DC恢复payload_o而非结果fork，正式结果一旦被持住、下一事务进入DC恢复，两者就不再属于同一笔（已在AMI级和ppg_control_top级复现）；芯片顶层靠深度2的P2S队列加每5000拍宏帧最多两笔NORMAL结果保证结果从不被持住，TC7守护的正是这一前提。每个上升沿检查（激励只在下降沿变化，读数无竞争），每次违例打印FAIL，最终结论计入cnt_error。7条PASS。负对照：把P2S队列深度临时改为1的副本上TC7失败（TC3双光背靠背期间持住3拍），而TC3本身仍通过，说明TC7比任何字段比对都更早抓到这一前提被破坏。
 // 2026年09月07日   V1.1        Erie          按合同V1.12勘误对齐TC6结论措辞：STOP精确命中ADC选通脉冲这一子场景是架构级窄窗口（flag_stopping_complete里真正把关在途流水线数据的是i_datapath_empty这一路，不是i_adc_idle这一路），现已正式结案为预期内、非bug，不用再等用户判断，也不新增专用快速丢弃触发通道或QFN引脚。TC6的构造激励本身不变（仍是真实STOP+并发DONE，仍走真实硬件路径），但结果不再判为失败——"两组discard锁存均未变化"现在是本子场景文档化的预期PASS结果，与discard锁存机制本身已经用更宽的真实触发路径（无owner在途的spurious DONE经fault supervisor级联）独立验证过一致。六个要求的验证方面现在全部报PASS；TB_CHIP_DIGITAL_TOP_PASS。本次修订未改动任何RTL。
 // 2026年09月06日   V1.0        Erie          创建文件。自建Mode 0 SPI主机自检测试平台，覆盖本任务要求的六个方面：（1）SPI基本读写——按写突发协议逐字节写入1024-bit ACTIVE影子区，COMMIT前原样读回确认逐位一致，再轮询0x0100生命周期字段从CONFIG到READY到RUN。（2）P2S定长包字段与字节位置正确性——用真实等效drive_real_adc_done物理激励触发一笔真实结果后捕获P2S串行流，按合同8.4.2节位布局解出全部12字段，逐项与DUT自己top_result_*_o内部wire的层次化白盒引用比对（与tb_ppg_control_top.v全篇已用的同一手法）。（3）真实双光RED/IR背靠背场景下深度2缓冲不丢数据——8.4.3节时序分析本身（161-bit包发送耗时与RED到IR间隔相当）就会产生真实排队压力，不需要人为压缩时序。（4）flag_adc_physical_idle合成器二选一正确性——committed SAR9后确认只有Stage1 DONE脉冲影响同步后空闲电平（单独翻动Stage2不得影响），再committed SAR15确认相反情形，通过对合成器自己reg_idle_sync_stable的层次化引用观测。（5）DBG_OUT全部6个候选，经可SPI写入的0x0081寄存器逐一选中，各自触发其真实底层事件并观测引脚翻转。（6）两组discard锁存翻转位，用与tb_ppg_control_top.v SMOKE-06同一已验证时序窗口构造一次真实STOP-owner在途场景，SPI两次读回确认翻转位随真实事件恰好翻转一次、锁存身份字段与被丢弃事务一致。复用tb_ppg_control_top.v里task_build_normal_manual_config/task_build_normal_manual_dual_config的逐字段布局与make_fixed_raw的RAW编码（同一DUT关联合同、同一组已验证取值），改为经SPI/物理引脚边界驱动，不再直连ppg_control_top端口。
@@ -161,6 +163,30 @@ module tb_ppg_chip_digital_top;
 	//---------------错误计数与场景统计---------------//
 	integer cnt_error;                      // 累计FAIL计数，收尾据此判定整体PASS/FAIL
 	initial cnt_error = 0;
+	initial begin
+		#1;
+		// ABCD F-024/F-014（TB本地名PARAM-FIXED/PARAM-WDOG）：控制顶层参数为产品固定值，仿真开始即按层次读取实际例化值核对，
+		// 防止有人改了顶层参数后因端口位宽不匹配只告警、被静默截断；看门狗参数另核合法性CYCLES>=1且WIDTH>=$clog2(CYCLES+1)
+		if((dut.ppg_control_top_Inst.C_CONFIG_WIDTH == 1024) && (dut.ppg_control_top_Inst.C_CONFIG_EPOCH_WIDTH == 8) && (dut.ppg_control_top_Inst.C_COEF_EPOCH_WIDTH == 8) &&
+			(dut.ppg_control_top_Inst.C_DC_RECOVERY_EPOCH_WIDTH == 8) && (dut.ppg_control_top_Inst.C_CODE_EPOCH_WIDTH == 4) && (dut.ppg_control_top_Inst.C_RUN_GENERATION_WIDTH == 8) &&
+			(dut.ppg_control_top_Inst.C_FRAME_ID_WIDTH == 16) && (dut.ppg_control_top_Inst.C_SAMPLE_INDEX_WIDTH == 16) &&
+			(dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.C_CONFIG_WIDTH == 1024) && (dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.C_RUN_GENERATION_WIDTH == 8) &&
+			(dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_cdc_bridge_Inst.C_CONFIG_WIDTH == 1024))begin
+			$display("PASS PARAM-FIXED control-top parameters equal the frozen product values (config 1024, epochs 8/8/8, code epoch 4, generation 8, frame/sample 16/16, manager and CDC bridge 1024/8)");
+		end else begin
+			$display("FAIL PARAM-FIXED control-top parameter differs from the frozen product value: config=%0d cfg_ep=%0d coef_ep=%0d dc_ep=%0d code_ep=%0d gen=%0d mgr_cfg=%0d mgr_gen=%0d bridge_cfg=%0d",
+				dut.ppg_control_top_Inst.C_CONFIG_WIDTH, dut.ppg_control_top_Inst.C_CONFIG_EPOCH_WIDTH, dut.ppg_control_top_Inst.C_COEF_EPOCH_WIDTH, dut.ppg_control_top_Inst.C_DC_RECOVERY_EPOCH_WIDTH, dut.ppg_control_top_Inst.C_CODE_EPOCH_WIDTH, dut.ppg_control_top_Inst.C_RUN_GENERATION_WIDTH,
+				dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.C_CONFIG_WIDTH, dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.C_RUN_GENERATION_WIDTH, dut.ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_cdc_bridge_Inst.C_CONFIG_WIDTH);
+			cnt_error = cnt_error + 1;
+		end
+		if((dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_CYCLES == 5000) && (dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH == 13) &&
+			(dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_CYCLES >= 1) && (dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH >= $clog2(dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_CYCLES + 1)))begin
+			$display("PASS PARAM-WDOG supervisor watchdog parameters are the frozen 5000/13 and legal (width >= clog2(cycles+1))");
+		end else begin
+			$display("FAIL PARAM-WDOG supervisor watchdog parameters cycles=%0d width=%0d are not the frozen legal 5000/13", dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_CYCLES, dut.ppg_control_top_Inst.ppg_system_fault_abort_supervisor_Inst.C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH);
+			cnt_error = cnt_error + 1;
+		end
+	end
 
 	//---------------SPI主机时序参数---------------//
 	localparam SPI_HALF_PERIOD = 125;       // 4 MHz上限，与合同8.1节冻结值一致
@@ -203,7 +229,9 @@ module tb_ppg_chip_digital_top;
 	reg [7:0] spi_rd_buf [0:255];           // SPI读突发字节缓冲
 
 	//---------------单字节SPI收发任务---------------//
-	// Mode 0：SDI在上升沿前建立，SDO在上一个下降沿后已经稳定，先采样再翻转时钟
+	// Mode 0真实主机：SDI在下降沿后建立，SDO在SCLK上升沿采样。ABCD F-006：原写法在下降沿同一时间槽读SDO，
+	// 读到的是从机本拍负沿更新之前的值，恰好掩盖了F-005的错位；现在等半个周期、在上升沿那一刻采样，
+	// 与合同第8.1节冻结的Mode 0时序一致（SDO自上一个下降沿起已稳定半个周期）
 	task spi_send_byte;
 		input [7:0] tx_byte;
 		output [7:0] rx_byte;
@@ -211,8 +239,9 @@ module tb_ppg_chip_digital_top;
 		begin
 			for(i = 7; i >= 0; i = i - 1) begin
 				SPI_SDI = tx_byte[i];
-				rx_byte[i] = SPI_SDO;
-				#(SPI_HALF_PERIOD) SPI_SCLK = 1'b1;
+				#(SPI_HALF_PERIOD);
+				rx_byte[i] = SPI_SDO;           // 上升沿采样
+				SPI_SCLK = 1'b1;
 				#(SPI_HALF_PERIOD) SPI_SCLK = 1'b0;
 			end
 		end
@@ -585,6 +614,162 @@ module tb_ppg_chip_digital_top;
 		end
 	endtask
 
+
+	//---------------ABCD F-005/F-006：只读区38字节独立期望模型---------------//
+	// discard锁存按合同第11.2节语义在TB侧独立建模：真实discard事件到来时锁存整套身份字段并翻转bit0
+	reg [7:0] mdl_mr_ctrl;                  // 0x0114期望：bit0翻转位、reason、identity_valid、sample_valid、color、frame_type
+	reg [15:0] mdl_mr_frame;                // 0x0115-0x0116期望
+	reg [15:0] mdl_mr_sample;               // 0x0117-0x0118期望
+	reg [7:0] mdl_mr_gen;                   // 0x0119期望
+	reg mdl_mr_prec;                        // 0x011A期望
+	reg [7:0] mdl_dd_ctrl;                  // 0x011B期望
+	reg [15:0] mdl_dd_frame;                // 0x011C-0x011D期望
+	reg [15:0] mdl_dd_sample;               // 0x011E-0x011F期望
+	reg [7:0] mdl_dd_cfg_ep, mdl_dd_coef_ep, mdl_dd_dc_ep; // 0x0120-0x0122期望
+	reg [7:0] mdl_dd_code_ep;               // 0x0123期望：[3:0]amb、[7:4]dc
+	reg [7:0] mdl_dd_gen;                   // 0x0124期望
+	reg mdl_dd_prec;                        // 0x0125期望
+	always@(posedge CLK_2M_PAD or negedge dut.w_rstn)begin
+		if(!dut.w_rstn)begin
+			mdl_mr_ctrl <= 8'h00; mdl_mr_frame <= 16'h0; mdl_mr_sample <= 16'h0; mdl_mr_gen <= 8'h0; mdl_mr_prec <= 1'b0;
+			mdl_dd_ctrl <= 8'h00; mdl_dd_frame <= 16'h0; mdl_dd_sample <= 16'h0; mdl_dd_cfg_ep <= 8'h0; mdl_dd_coef_ep <= 8'h0;
+			mdl_dd_dc_ep <= 8'h0; mdl_dd_code_ep <= 8'h0; mdl_dd_gen <= 8'h0; mdl_dd_prec <= 1'b0;
+		end else begin
+			if(dut.top_measurement_result_discard_event_o)begin
+				mdl_mr_ctrl <= {dut.top_measurement_result_discard_frame_type_o, dut.top_measurement_result_discard_color_ir_o, dut.top_measurement_result_discard_sample_valid_o,
+					dut.top_measurement_result_discard_identity_valid_o, dut.top_measurement_result_discard_reason_o, ~mdl_mr_ctrl[0]};
+				mdl_mr_frame <= dut.top_measurement_result_discard_frame_id_o;
+				mdl_mr_sample <= dut.top_measurement_result_discard_sample_index_o;
+				mdl_mr_gen <= dut.top_measurement_result_discard_run_generation_o;
+				mdl_mr_prec <= dut.top_measurement_result_discard_precision_o;
+			end
+			if(dut.top_detection_discard_event_o)begin
+				mdl_dd_ctrl <= {dut.top_detection_discard_frame_type_o, dut.top_detection_discard_color_ir_o, dut.top_detection_discard_sample_valid_o,
+					dut.top_detection_discard_identity_valid_o, dut.top_detection_discard_reason_o, ~mdl_dd_ctrl[0]};
+				mdl_dd_frame <= dut.top_detection_discard_frame_id_o;
+				mdl_dd_sample <= dut.top_detection_discard_sample_index_o;
+				mdl_dd_cfg_ep <= dut.top_detection_discard_config_epoch_o;
+				mdl_dd_coef_ep <= dut.top_detection_discard_coef_epoch_o;
+				mdl_dd_dc_ep <= dut.top_detection_discard_dc_recovery_epoch_o;
+				mdl_dd_code_ep <= {dut.top_detection_discard_dc_code_epoch_o, dut.top_detection_discard_amb_code_epoch_o};
+				mdl_dd_gen <= dut.top_detection_discard_run_generation_o;
+				mdl_dd_prec <= dut.top_detection_discard_precision_o;
+			end
+		end
+	end
+	reg [7:0] exp_diag [0:37];              // 按合同第11.2节逐字节组装的期望值
+	integer idx_diag;                       // 38字节比较索引
+	integer cnt_diag_mismatch;              // 38字节比较不一致数
+	// 按合同第11.2节地址表，直接从控制顶层输出线逐位组装期望值（不读SPI内部快照）
+	task build_expected_diag;
+		begin
+			exp_diag[0] = {3'b000, dut.top_error_sticky_o, dut.top_commit_ack_sticky_o, dut.top_start_ready_o, dut.top_lifecycle_state_o};
+			exp_diag[1] = dut.top_last_error_code_o;
+			exp_diag[2] = dut.top_schema_version_o;
+			exp_diag[3] = dut.top_config_epoch_o;
+			exp_diag[4] = dut.top_coef_epoch_o;
+			exp_diag[5] = dut.top_stage2_coef_epoch_o;
+			exp_diag[6] = dut.top_dc_recovery_coef_epoch_o;
+			exp_diag[7] = {dut.top_active_precision_mode_o, dut.top_ami_idac_idle_o, dut.top_ami_datapath_empty_o, dut.top_scheduler_protocol_error_sticky_o,
+				dut.top_scheduler_completion_mismatch_sticky_o, dut.top_scheduler_owner_deadline_timeout_sticky_o, dut.top_scheduler_launch_timeout_sticky_o, dut.top_scheduler_idle_o};
+			exp_diag[8] = {2'b00, dut.top_ssw_calibration_timeout_sticky_o, dut.top_ssw_owner_deadline_timeout_sticky_o, dut.top_ssw_transaction_mismatch_sticky_o,
+				dut.top_ssw_switch_protocol_error_sticky_o, dut.top_ssw_wrapper_idle_o, dut.top_ami_integration_protocol_error_sticky_o};
+			exp_diag[9] = {4'b0000, dut.top_characterization_protocol_error_sticky_o, dut.top_characterization_control_valid_o,
+				dut.top_source_characterization_update_ready_o, dut.top_source_config_update_ready_o};
+			exp_diag[10] = {dut.top_result_discard_summary_sticky_o, dut.top_system_fault_precision_o, dut.top_system_fault_frame_type_o, dut.top_system_fault_color_ir_o,
+				dut.top_system_fault_identity_valid_o, dut.top_system_fault_cause_valid_o, dut.top_system_fault_blocking_o};
+			exp_diag[11] = dut.top_system_fault_cause_o;
+			exp_diag[12] = {4'b0000, dut.top_system_fault_source_o[3:0]};
+			exp_diag[13] = dut.top_system_fault_frame_id_o[7:0];
+			exp_diag[14] = dut.top_system_fault_frame_id_o[15:8];
+			exp_diag[15] = dut.top_system_fault_sample_index_o[7:0];
+			exp_diag[16] = dut.top_system_fault_sample_index_o[15:8];
+			exp_diag[17] = dut.top_system_fault_run_generation_o;
+			exp_diag[18] = dut.top_system_fault_summary_o[7:0];
+			exp_diag[19] = dut.top_system_fault_summary_o[15:8];
+			exp_diag[20] = mdl_mr_ctrl;
+			exp_diag[21] = mdl_mr_frame[7:0];
+			exp_diag[22] = mdl_mr_frame[15:8];
+			exp_diag[23] = mdl_mr_sample[7:0];
+			exp_diag[24] = mdl_mr_sample[15:8];
+			exp_diag[25] = mdl_mr_gen;
+			exp_diag[26] = {7'b0000000, mdl_mr_prec};
+			exp_diag[27] = mdl_dd_ctrl;
+			exp_diag[28] = mdl_dd_frame[7:0];
+			exp_diag[29] = mdl_dd_frame[15:8];
+			exp_diag[30] = mdl_dd_sample[7:0];
+			exp_diag[31] = mdl_dd_sample[15:8];
+			exp_diag[32] = mdl_dd_cfg_ep;
+			exp_diag[33] = mdl_dd_coef_ep;
+			exp_diag[34] = mdl_dd_dc_ep;
+			exp_diag[35] = mdl_dd_code_ep;
+			exp_diag[36] = mdl_dd_gen;
+			exp_diag[37] = {7'b0000000, mdl_dd_prec};
+		end
+	endtask
+
+	// 一次突发读完0x0100-0x0125全部38字节，与期望模型逐字节比较
+	task check_diag_map38;
+		input [8 * 16 - 1:0] phase_name;
+		begin
+			spi_txn(1'b1, 16'h0100, 38);
+			build_expected_diag;
+			cnt_diag_mismatch = 0;
+			for(idx_diag = 0; idx_diag < 38; idx_diag = idx_diag + 1)begin
+				if(spi_rd_buf[idx_diag] !== exp_diag[idx_diag])begin
+					cnt_diag_mismatch = cnt_diag_mismatch + 1;
+					if(cnt_diag_mismatch <= 6) $display("DIAG_MAP38 %0s mismatch addr=0x%04h read=%02h expected=%02h", phase_name, 16'h0100 + idx_diag, spi_rd_buf[idx_diag], exp_diag[idx_diag]);
+				end
+			end
+			if(cnt_diag_mismatch == 0)begin
+				$display("PASS DIAG-MAP38 %0s all 38 read-only bytes 0x0100-0x0125 match the contract section 11.2 map (status 0x%02h err 0x%02h fault 0x%02h mr 0x%02h dd 0x%02h)",
+					phase_name, spi_rd_buf[0], spi_rd_buf[1], spi_rd_buf[10], spi_rd_buf[20], spi_rd_buf[27]);
+			end else begin
+				$display("FAIL DIAG-MAP38 %0s %0d of 38 read-only bytes differ from the contract section 11.2 map", phase_name, cnt_diag_mismatch);
+				cnt_error = cnt_error + 1;
+			end
+		end
+	endtask
+
+	reg flag_cmd_prio_ok;                   // CMD-STOP-PRIO前提：命令前已在RUN
+	// ABCD F-023芯片级：RUN中一次SPI写0x0090同时置STOP与另一命令位，STOP必须生效（离开RUN）。
+	// 0x0A（STOP+DIAG_CLEAR）两路在Top都经一级寄存器，同拍到达manager，另一命令被拒并记0x01；
+	// 0x03（START+STOP）中START在Top不打拍、比STOP早一拍到达，先在RUN中被拒记0x0a，下一拍STOP照常接受。
+	// 配置用光学OFF，RUN中没有ADC事务，排空可立即完成
+	task check_cmd_stop_priority;
+		input [7:0] cmd_bits;
+		input [7:0] expected_error;
+		integer cnt_wd;
+		begin
+			spi_command(8'h08);                 // DIAG_CLEAR：清前序错误，否则error_sticky挡住START
+			repeat(16) @(posedge CLK_2M_PAD);
+			build_normal_manual_config;
+			cfg_snapshot[13:12] = 2'b11;        // optical_mode=OFF：无NORMAL/CAL事务
+			spi_write_config;
+			spi_command(8'h04);                 // COMMIT
+			repeat(16) @(posedge CLK_2M_PAD);
+			spi_command(8'h01);                 // START
+			cnt_wd = 0;
+			while((dut.top_lifecycle_state_o != 2'b10) && (cnt_wd < 200))begin
+				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+			end
+			flag_cmd_prio_ok = (dut.top_lifecycle_state_o == 2'b10); // 前提：已进入RUN
+			spi_command(cmd_bits);              // 同一字节内STOP与另一命令位
+			cnt_wd = 0;
+			while((dut.top_lifecycle_state_o == 2'b10) && (cnt_wd < 200))begin
+				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+			end
+			repeat(64) @(posedge CLK_2M_PAD);
+			$display("CMD_STOP_PRIO cmd=0x%02h lifecycle=%b last_error=0x%02h", cmd_bits, dut.top_lifecycle_state_o, dut.top_last_error_code_o);
+			if(flag_cmd_prio_ok && (dut.top_lifecycle_state_o != 2'b10) && (dut.top_last_error_code_o == expected_error))begin
+				$display("PASS CMD-STOP-PRIO SPI command 0x%02h in RUN: STOP took effect (left RUN) and the rejected command was recorded as 0x%02h", cmd_bits, expected_error);
+			end else begin
+				$display("FAIL CMD-STOP-PRIO SPI command 0x%02h in RUN: prerequisite_run=%b lifecycle=%b last_error=0x%02h", cmd_bits, flag_cmd_prio_ok, dut.top_lifecycle_state_o, dut.top_last_error_code_o);
+				cnt_error = cnt_error + 1;
+			end
+		end
+	endtask
+
 	//---------------主测试序列---------------//
 	reg [7:0] rd_byte;                      // 单字节只读区读取暂存
 	reg [7:0] mr_latch_before, mr_latch_after; // 0x0114正式结果discard控制字节前后快照
@@ -901,6 +1086,12 @@ module tb_ppg_chip_digital_top;
 				$display("PASS TC6 真实STOP触发discard锁存翻转位变化：mr_toggle %b->%b, dd_toggle %b->%b", mr_latch_before[0], mr_latch_after[0], dd_latch_before[0], dd_latch_after[0]);
 			end
 		end
+
+		//-----------ABCD F-023/F-005/F-006：命令冲突STOP优先与只读区38字节全读-----------//
+		check_diag_map38("after-TC6");
+		check_cmd_stop_priority(8'h03, 8'h0a); // START+STOP同字节：START早一拍到达，RUN中被拒
+		check_cmd_stop_priority(8'h0A, 8'h01); // STOP+DIAG_CLEAR同字节：同拍冲突，STOP优先
+		check_diag_map38("after-conflict");
 
 		//-----------收尾-----------//
 		repeat(32) @(posedge CLK_2M_PAD);

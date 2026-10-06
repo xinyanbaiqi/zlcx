@@ -16,14 +16,15 @@
 // Referrences:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.5
-// Revision Date:	2026/09/10 00:00:00
+// Version:			V1.6
+// Revision Date:	2026/10/06 00:00:00
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/14          V1.2          Codex       Single-fire timing selector.
 // 2026/08/15          V1.3        Codex       Split contexts, owner, and IDAC precision isolation.
 // 2026/08/22          V1.4        Erie        Add i_run_generation with atomic waveform/owner-context tagging and stale-generation match/release rejection, and add the registered o_ssw_fault_* record group (cause 8'h21 only, mapped from the existing switch-protocol/transaction-mismatch stickies) for the system fault/abort supervisor, per PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md section 7.9. Cause 8'h22 (independent analog-safe convergence detector) is intentionally not implemented; the contract gives no concrete trigger condition and one was not designed in this pass.
 // 2026/09/10          V1.5        Erie        AMB_CAL local tick [262,264) CTRL_Q2 gated to only pulse when reg_cal_frame_type==FRAME_TYPE_DCS; AMB_CAL no longer drives Q2 at all, per PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md section 6.4. Root cause: AMB code-value calibration judges candidates on the Q2/Q3 chopping-cancelled net value, but that cancellation is structurally insensitive to symmetric ambient residual present in both phases, so it never surfaces how much integrator headroom the candidate actually consumed short of hard saturation. DCS_CAL is unaffected because its LED is Q3-only, so Q2/Q3 are asymmetric there and chopping subtraction fully preserves the LED residual instead of masking it. CTRL_Q3 and all AMB_CAL AFERST/TIAEN/Q1_9 timing windows are unchanged.
+// 2026/10/06          V1.6        Erie        ABCD review F-035: in adc_owner_inflight_o and reg_owner_abort_seen the matching-completion release now has priority over the abort hold. Previously an abort and a matching DONE in the same cycle kept the owner in flight forever (no later DONE can arrive, and a new owner needs !inflight), so measurement stopped until reset. Abort still cancels the waveform context and commit is still blocked during abort; owner identity registers hold in both branches as before.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -40,14 +41,15 @@
 // 参考资料:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.5
-// 修订日期:		2026年09月10日
+// 当前版本:		V1.6
+// 修订日期:		2026年10月06日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月14日     V1.2          Codex       单fire时序选择实现。
 // 2026年08月15日     V1.3        Codex       上下文、owner及IDAC精度隔离重构。
 // 2026年08月22日     V1.4        Erie          按合同7.9节新增i_run_generation，对波形上下文和物理owner原子锁存并在匹配/释放时校验代际；新增注册式o_ssw_fault_*故障记录组（仅实现cause 8'h21，映射自已有的switch_protocol_error/transaction_mismatch两个sticky）。cause 8'h22（独立模拟安全收敛检测器）本次未实现：合同未给出具体触发条件，本次也未设计新的检测逻辑。
 // 2026年09月10日     V1.5        Erie          按合同6.4节：AMB_CAL local tick[262,264)的CTRL_Q2改为仅reg_cal_frame_type==FRAME_TYPE_DCS时才产生脉冲，AMB_CAL全程不再驱动Q2。根因：AMB码值校准依赖Q2/Q3两相chopping抵消后的净值判据，但该抵消机制对两相都存在的对称环境光残余结构性不敏感，只有真正物理clip到轨才能被抓到；DCS_CAL不受影响，因其LED仅Q3导通、Q2/Q3本就不对称，chopping相减恰好完整保留LED残余。CTRL_Q3及AMB_CAL全部AFERST/TIAEN/Q1_9时序窗口不变。
+// 2026年10月06日     V1.6        Erie          ABCD复核F-035：adc_owner_inflight_o与reg_owner_abort_seen中匹配完成的释放改为优先于abort保持。此前abort与匹配DONE同拍时owner永久在途（之后不会再有DONE，新owner又要求!inflight），测量停到复位。abort仍撤销波形上下文、abort期间仍禁止提交；owner身份寄存器在两个分支都保持，与原来一致
 module ppg_sar9_sar15_safe_selection_wrapper
 #(
 	parameter C_FRAME_ID_WIDTH = 16, // 模块参数专用字段帧标识位宽高位编码端
@@ -511,10 +513,10 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			adc_owner_inflight_o <= 1'b0;       // 时序写入模数转换结果所有权在途输出直流码通路高位编码端低位编码端异步复位清零
+		end else if(flag_owner_release == 1'b1)begin
+			adc_owner_inflight_o <= 1'b0;       // 时序写入模数转换结果所有权在途输出直流码通路高位编码端低位编码端结果完成释放；与abort同拍的匹配完成同样释放，否则owner残留到复位 @satisfies: SSW-22
 		end else if(i_control_abort_event == 1'b1)begin
 			adc_owner_inflight_o <= adc_owner_inflight_o; // 时序写入模数转换结果所有权在途输出直流码通路高位编码端低位编码端撤销期间保持
-		end else if(flag_owner_release == 1'b1)begin
-			adc_owner_inflight_o <= 1'b0;       // 时序写入模数转换结果所有权在途输出直流码通路高位编码端低位编码端结果完成释放
 		end else if(flag_owner_commit_fire == 1'b1)begin
 			adc_owner_inflight_o <= 1'b1;       // 时序写入模数转换结果所有权在途输出直流码通路高位编码端低位编码端所有权提交锁存
 		end
@@ -1291,12 +1293,12 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			reg_owner_abort_seen <= 1'b0;       // 时序写入寄存结果所有权撤销专用字段异步复位清零
+		end else if(flag_owner_release == 1'b1)begin
+			reg_owner_abort_seen <= 1'b0;       // 时序写入寄存结果所有权撤销专用字段结果完成释放；与abort同拍时owner已释放，不再保留撤销标记
 		end else if(i_control_abort_event == 1'b1)begin
 			if(adc_owner_inflight_o == 1'b1)begin
 				reg_owner_abort_seen <= 1'b1;   // 时序写入寄存结果所有权撤销专用字段校准波形控制更新
 			end
-		end else if(flag_owner_release == 1'b1)begin
-			reg_owner_abort_seen <= 1'b0;       // 时序写入寄存结果所有权撤销专用字段结果完成释放
 		end else if(flag_owner_commit_fire == 1'b1)begin
 			reg_owner_abort_seen <= 1'b0;       // 时序写入寄存结果所有权撤销专用字段所有权提交锁存
 		end

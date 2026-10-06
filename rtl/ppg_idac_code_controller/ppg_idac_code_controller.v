@@ -15,8 +15,8 @@
 //
 // Dependencies:       None
 //
-// Version:            V2.3
-// Revision Date:      2026/08/29
+// Version:            V2.4
+// Revision Date:      2026/10/06
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/07/23            V1.0          Erie                  Create file.
@@ -24,6 +24,7 @@
 // 2026/08/08            V2.1          Erie                  Fix periodic AMB-R-IR revalidation sequence.
 // 2026/08/22            V2.2          Erie                  Add i_run_generation with atomic pending-candidate tagging and stale-generation commit rejection, and add the registered o_controller_fault_event/identity_valid/<FAULT_ID> group for the AMI fault dispatcher, per PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md V2.2.
 // 2026/08/29            V2.3          Erie                  Fix a real cross-module deadlock discovered while building Stage 5 Group 8 (PERIODIC-RECHECK-RECOVERY, C25 contract section 9.4.3): CTX_AMB_FAULT_BIT/CTX_DCS_R_FAULT_BIT/CTX_DCS_IR_FAULT_BIT (o_amb_fault/o_dcs_r_fault/o_dcs_ir_fault, ORed into o_controller_fault_blocking) were previously cleared only inside the i_start_ack_event block -- but per PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md section 11.3 (line 546) they must instead be revoked once STOP/abort terminates the action and local o_idac_idle=1 with the active root cause gone (or by async reset), and section 11.3 (lines 296-297) / conformance ID IDC2-23 (line 662) explicitly state a fresh START must NOT clear active or historical blocking faults. The RTL had this backwards, which is a real, reproducible deadlock, not just a contract-wording nitpick: o_controller_fault_blocking feeds AMI's o_ami_fault_active (ppg_adc_measurement_idac_integration.v line 1127/2404), which feeds ppg_system_fault_abort_supervisor.v's flag_local_actives_low / flag_episode_close_condition (o_system_fault_blocking only clears once all three lane-actives are low), which feeds ppg_system_config_manager.v's flag_start_ready (i_system_fault_blocking must be 0 for START to be accepted, per that module's own line-77 port comment "拒绝START且不能被本地清除"). So once a real AMB/DC_R/DC_IR search exhaustion sets the fault bit, no fresh i_start_ack_event can ever be generated to clear it -- confirmed by a real xsim run (Group 8's tb_ppg_control_top_periodic_recheck_recovery.v forcing a genuine DC_R search exhaustion via a persistent one-directional excursion) that got stuck with o_start_ready=0/o_system_fault_blocking=1/o_controller_fault_blocking=1 indefinitely after a full STOP+drain+i_diag_clear_event sequence (i_diag_clear_event cannot help either: the supervisor's own flag_diag_clear_legal at line 200 explicitly requires !system_fault_blocking_o already, so it cannot force-close an open episode). Fixed by moving the three FAULT-bit clears from the i_start_ack_event block into the flag_control_cancel block (STOP/abort/leave-RUN, which already atomically clears the corresponding pending/origin context in the same cycle and forces state_next to ST_IDLE unconditionally, so o_idac_idle settles true immediately after -- satisfying the contract's "STOP/abort + idle + root cause gone" condition in one atomic step, consistent with how the sibling EXHAUSTED bits were already being cleared there) and removing the old clear from the START block entirely (leaving intact the separate, legitimate case where an illegal START -- disabled run_enable or invalid config -- newly SETS these bits itself; the contract forbids START from clearing a pre-existing fault, not from raising its own). Verified: (1) the fixed joint TB (tb_ppg_control_top_periodic_recheck_recovery.v) now runs a full RUN2 after the RRC-11 DC_R-exhaustion episode and gets a real, clean COMMIT/START, with all twelve RRC-01~12 IDs passing under real Vivado 2022.2 xsim; (2) a real A/B diff of ppg_idac_code_controller's own unit-level tb_ppg_idac_code_controller.v (iverilog) before and after this fix produced byte-for-byte identical output including its pre-existing 33 failures -- confirming those 33 failures are a pre-existing V2.1-vs-current-RTL staleness in that unit TB (it prints its own "V2.1 regression" label), completely unrelated to and unaffected by this fix, and that this fix introduces zero behavior change in every scenario that unit TB currently exercises; (3) tb_ppg_control_top_startup_idac_calibration.v and tb_ppg_control_top_normal_slow_tracking.v (Stage 5 Group 6/7, whose own already-passing runs never exercise a STOP/re-START after a real controller fault) still compile cleanly against the fixed RTL with zero structural changes.
+// 2026/10/06            V2.4          Erie                  ABCD review F-032: rename input port i_status_clear_event to i_diag_clear_event, matching contract C17 and the actual source (AMI connects the Top registered diag_clear, not the manager-local status_clear, which is a different event). Edited in place on the declaration and the one use; behaviour unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -39,8 +40,8 @@
 //
 // 依赖文件:           无
 //
-// 当前版本:           V2.3
-// 修订日期:           2026年08月29日
+// 当前版本:           V2.4
+// 修订日期:           2026年10月06日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年07月23日        V1.0          Erie                  创建文件。
@@ -48,6 +49,7 @@
 // 2026年08月08日        V2.1          Erie                  固定周期AMB、红光DC及红外DC重验证顺序。
 // 2026年08月22日        V2.2          Erie                  按合同V2.2新增i_run_generation，对pending候选原子锁存并在提交时校验代际；新增注册式o_controller_fault_event/identity_valid/<FAULT_ID>组供AMI故障分发器观测。
 // 2026年08月29日        V2.3          Erie                  修复Stage 5 Group 8（PERIODIC-RECHECK-RECOVERY，C25合同9.4.3节）开工时真实发现的一个跨模块死锁：CTX_AMB_FAULT_BIT/CTX_DCS_R_FAULT_BIT/CTX_DCS_IR_FAULT_BIT（o_amb_fault/o_dcs_r_fault/o_dcs_ir_fault，汇总成o_controller_fault_blocking）此前只在i_start_ack_event那一拍被清零——但PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md 11.3节（546行）明确规定它们只应在STOP/abort终止动作使本地o_idac_idle=1且活动根因消失后撤销（或由异步复位撤销），且11.3节（296-297行）/一致性条款IDC2-23（662行）明确规定新START不得清除活动或历史阻断故障。原实现正好做反了，这不是文字措辞问题，是一个真实、可复现的死锁：o_controller_fault_blocking接入AMI的o_ami_fault_active（ppg_adc_measurement_idac_integration.v 1127/2404行），再接入ppg_system_fault_abort_supervisor.v的flag_local_actives_low/flag_episode_close_condition（o_system_fault_blocking只在三路lane-active全部为低后才清零），再接入ppg_system_config_manager.v的flag_start_ready（该模块自己77行的端口注释就写着i_system_fault_blocking"拒绝START且不能被本地清除"）——一旦真实AMB/DC_R/DC_IR搜索耗尽置位故障，就再也生成不了新的i_start_ack_event去清除它。真实xsim confirmed（Group8的tb_ppg_control_top_periodic_recheck_recovery.v用持续单方向漂移真实逼出一次DC_R搜索耗尽）：完整STOP+drain+i_diag_clear_event之后，o_start_ready=0/o_system_fault_blocking=1/o_controller_fault_blocking=1永久卡住不变——i_diag_clear_event同样救不了，supervisor自己的flag_diag_clear_legal（200行）明确要求episode已经关闭（!system_fault_blocking_o）才算合法，不能强行关闭一个还开着的episode。修复为把三个FAULT位的清零从i_start_ack_event块搬到flag_control_cancel块（STOP/abort/离开RUN，本来就已经在同一拍原子撤销对应pending/origin上下文并无条件把state_next拉回ST_IDLE，下一拍o_idac_idle即可读到真——一步到位满足合同"STOP/abort+idle+根因消失"三个条件，和同一个块里本来就这样处理的EXHAUSTED伴随位手法一致），并把START块里旧的清零整段删除（非法START——run_enable禁用或配置非法——仍然保留原样置1这三个位的独立分支，合同禁止的是START清除既有故障，不是START自己新建故障）。已验证：（1）修复后的联合TB在RRC-11 DC_R耗尽episode之后真实跑通RUN2的COMMIT/START，Group8全部十二条RRC-01~12在真实Vivado 2022.2 xsim下PASS；（2）用iverilog对`tb_ppg_idac_code_controller.v`自己的单元级TB做了修复前后的真实A/B逐字节diff，输出完全一致（含它自己既有的33个失败，结尾自己也报"V2.1 regression"，确认这是该单元TB自身早就没跟V2.2同步的历史遗留问题，和本次修复无关，本次修复对它已覆盖的全部场景零行为变化）；（3）`tb_ppg_control_top_startup_idac_calibration.v`和`tb_ppg_control_top_normal_slow_tracking.v`（Stage5 Group6/7，两者自己已经通过的场景都从未在真实控制器故障后尝试STOP+重新START）对着修复后的RTL依然干净编译，零结构性改动。
+// 2026年10月06日        V2.4          Erie                  ABCD复核F-032：输入端口i_status_clear_event改名为i_diag_clear_event，与合同C17及实际来源一致（AMI接的是Top注册式diag_clear，不是manager本地status_clear，二者是不同事件）。声明与唯一使用处原行修改，行为不变
 
 // 统一管理AMB、红光DCS和红外DCS三组逻辑码，并在安全帧边界提交搜索或慢速跟踪候选
 module ppg_idac_code_controller
@@ -72,7 +74,7 @@ module ppg_idac_code_controller
 	input i_run_enable,                     // 配置管理器仅在RUN状态给出的功能许可
 	input i_start_ack_event,                // 合法START被接受后产生的单周期初始化事件
 	input i_stop_ack_event,                 // STOP进入排空流程时产生的单周期取消事件
-	input i_status_clear_event,             // 清除非阻断协议诊断的独立状态命令
+	input i_diag_clear_event,               // 清除非阻断协议诊断的独立状态命令
 	input i_control_abort_event,            // 配置或调度阻断错误要求取消临时动作
 	input i_frame_safe_boundary,            // 当前时钟沿允许提交一个或多个pending码
 	input [C_CONFIG_EPOCH_WIDTH - 1:0]i_active_config_epoch, // 当前稳定ACTIVE V4快照版本
@@ -848,7 +850,7 @@ module ppg_idac_code_controller
 		reg_context_next[CTX_DCS_REVALIDATE_FAILED_BIT] = 1'b0; // 默认清除DCS重验证失败事件
 		reg_context_next[CTX_CTRL_FAULT_EVENT_BIT] = 1'b0; // 默认清除故障episode单周期脉冲
 
-		if(i_status_clear_event == 1'b1)begin
+		if(i_diag_clear_event == 1'b1)begin
 			reg_context_next[CTX_PROTOCOL_ERROR_BIT] = 1'b0; // 状态清除不解除搜索耗尽阻断故障
 		end
 

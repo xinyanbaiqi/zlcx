@@ -19,10 +19,11 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.3
-// Revision Date:      2026/10/01
+// Version:            V1.4
+// Revision Date:      2026/10/06
 // History:
 //    Time               Version       Revised by            Contents
+// 2026/10/06            V1.4          Erie                  ABCD review F-042/F-019: OIB-06 now also keeps an expected-owner table filled from the scheduler's formal owner commits (frame id, color, frame type, precision per sample index). Every formal transfer must hit a registered, unsettled owner with matching metadata, every public measurement discard must name the owner currently held at the formal output, and every result that reached the formal output must end in a transfer or a discard (results flushed upstream by STOP/abort before reaching the output are exempt per C11/C14/C15). Before the AMI F-019 fix the only failing item was the OIB-03 STOP discard (held sample 24 reported as 25); every other OIB transfer matched.
 // 2026/10/01            V1.3          Erie                  Task C (TASKC_TICK248_P2S_20261001.md): connect i_test_calibration_loss_inject_valid to a reg initialised to 0 and never driven, the same pattern tb_ppg_control_top_robustness_corner_waveforms.v uses. This TB instantiates ppg_control_top with C_ENABLE_TEST_INJECTION=1, so the injection structure is generated, yet this input had been left unconnected (floating Z; REGRESSION_BASELINE_20260930.md section 6.6). All seven control_top verification-injection inputs were checked; this was the only unconnected one, and iverilog -Wall now reports no dangling input. Sorted PASS lines, $finish time and final banner are identical before and after the change (run on the same RTL).
 // 2026/08/31            V1.2          Erie                  Bucket-2 TB-only session: OIB-09 constructed for real, the last remaining out-of-scope ID in this file (Stage 5's TB-construction-only bucket, no production RTL touched -- see project handoff for the SID-11/LFA-06/OIB-01/LFA-10(b) RTL bucket this is deliberately independent of). Replaced the V1.0/V1.1 scope-note comment block with a real frame-scoped before/after construction: drive a real RED `task_drive_color_value` transaction and capture its formal result plus this frame's own live `state_current[B_FRAME_DCR_EPOCH]` snapshot *before* any below_low driving starts (guaranteed pre-update); then repeatedly drive RED below_low samples via the same task to accumulate real `dcs_confirm_count` evidence in `ppg_idac_code_controller.v` until `dcs_r_code_current` genuinely changes; then keep driving neutral transactions and polling the live `B_FRAME_DCR_EPOCH` bit-slice until it is observed to differ from the before-snapshot (not assuming any fixed number of frame-boundary crossings); then drive one more RED transaction to capture the after-snapshot. Both before and after captures read the frame number and the frame's own latched epoch in the exact same clock cycle as the formal result's `o_measurement_result_valid`, eliminating any race against how many real transactions the confirm-drive or the color-matching search internally consumes. Three real construction-only bugs found and fixed this round (no RTL changes, confirmed by iverilog re-runs each time): (1) the first draft captured the "before" frame/epoch snapshot from a pre-loop guess taken *before* the confirm-drive loop started, then asserted the eventual formal result's frame must still equal that guess -- `task_drive_color_value`'s own internal color-matching search consumes a variable, unbounded number of real transactions, so the confirm-drive loop alone was already enough to cross a real frame boundary before the guessed "before" frame was ever validated, producing `FAIL OIB-09 setup invalid: real frame boundary crossed while still driving the confirm sequence`. (2) Removing that guess and instead reading the frame/epoch live at the exact result-valid cycle fixed the race, but exposed a second, more fundamental issue: capturing "before" only *after* confirming the code had changed was already too late -- by the time the confirming below_low drive loop broke out and the subsequent "before" transaction's own search completed, the DUT was already several frames past the actual commit event, so before/after landed on the same already-updated epoch (`FAIL ... expect frame=13 epoch=11 ... after frame=15 epoch=11`, both post-update). Fixed by restructuring so the true "before" snapshot is captured *before* any below_low driving begins at all, when no update has possibly happened yet. (3) Even with "before" captured first, waiting for exactly one `current_frame_id_o` boundary crossing after the confirmed code change was still not sufficient (`FAIL ... before frame=13 epoch=11, after frame=15 epoch=11` even after one real crossing) -- real RTL tracing explains why: the only safe-boundary source active during steady NORMAL RUN is `macro_frame_safe_boundary_o` (`ppg_400hz_frame_calibration_scheduler.v` line 461), which is itself the frame-boundary tick; a confirm-triggered code+epoch commit landing on that exact tick means the *very next* frame's own `flag_frame_start_eligible` latch (line 748-774) reads `i_dcs_r_code_epoch` combinationally during the same cycle the IDAC controller's own registered increment has not yet landed, so that immediately-next frame's own snapshot still shows the pre-increment value -- the real update is not visible until a frame *after* that. Fixed by not assuming a fixed number of boundary crossings at all: poll the live per-frame epoch bit-slice continuously via `task_drive_any_neutral` until it is directly observed to differ from the before-snapshot, then capture whichever frame that turns out to be. Real dual-tool confirmed evidence (iverilog and Vivado 2022.2 xsim, byte-identical): `JNT_BASELINE checked=53 pass=53 required=53 status=PASS`, `PASS OIB-09 frame-scoped DC_R epoch before(frame=3 epoch=10)/after(frame=14 epoch=11) each bound correctly to its own frame's latched snapshot, and the epoch genuinely advanced after a real safe-boundary code update`, `OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=35 owner_commit_total=224 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0` (result_captures/owner_commit_total up from V1.1's 12/202 by exactly this new scenario's own extra RUN activity; every other counter unchanged). This closes OIB-09, the last item of Stage 5's TB-construction-only bucket (alongside PRC-09/PRC-10, tracked separately) -- this file's own OIB-01~10 acceptance list is now fully real-covered.
 // 2026/08/30            V1.1          Erie                  Bucket-1 RTL session: OIB-01 constructed for real, closing this file's last out-of-scope ID (and, as a side effect, LFA-10(b) -- see that file's own V1.3 changelog). `ppg_sar9_sar15_safe_selection_wrapper.v` gained a new `i_context_handover_stall_request` injection port (paired with the module's own new `C_ENABLE_TEST_INJECTION` parameter, now set to `32'd1` in this file's DUT instantiation, up from `32'd0`), and `flag_switch_protocol_error_condition`'s 4th OR-term was narrowed to only fire when the miss would still be a real protocol violation with the stall factor excluded (`flag_waveform_context_ready_raw`) -- a stall-caused miss no longer co-trips SSW's blocking `switch_protocol_error_sticky_o`, leaving the Scheduler's own non-blocking `o_launch_timeout_sticky` as the sole diagnostic. Real construction: hold `i_context_handover_stall_request` from before START through the first RED handover tick (`macro_tick==0`), confirming only the Scheduler's non-blocking launch-timeout sticky asserts while SSW's blocking sticky and every other blocking/supervisor signal stay 0 (`PASS OIB-01 ... asserted only the Scheduler's non-blocking launch-timeout diagnostic, with SSW's blocking switch_protocol_error_sticky correctly staying 0`) -- the exact evidence the original RTL investigation found unreachable. The recovery half (release the stall, confirm a clean handover on the next legal opportunity) first tried a passive same-RUN wait across the frame wraparound (even with `task_drive_any_neutral` actively driving background traffic) and hit an unrelated frame-restart timing quirk unconnected to this fix; switched to the same real STOP+drain+diag_clear+recommit+START recovery pattern OIB-02's own recovery branch already uses, which passed cleanly. Real iverilog + Vivado 2022.2 xsim both confirm: `JNT_BASELINE 53/53 PASS`, `OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=12 owner_commit_total=202 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0` (owner_commit_total up from the V1.0 baseline's 180 by exactly the new scenario's own extra RUN cycles; every other counter unchanged), byte-identical between both tools.
@@ -51,10 +52,11 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.3
-// 修订日期:           2026年10月01日
+// 当前版本:           V1.4
+// 修订日期:           2026年10月06日
 // 修订历史:
 //    时间                版本          修订人                修订内容
+// 2026年10月06日        V1.4          Erie                  ABCD复核F-042/F-019：OIB-06新增期望owner表，按scheduler正式owner提交逐sample_index登记帧号、颜色、类型、精度。每笔正式transfer必须命中已登记且未结清、元数据一致的owner；每次公开measurement discard必须指向正式输出当前持有的owner；到达正式输出的结果必须以transfer或discard结清（到达输出前被STOP/abort在上游清空的按C11/C14/C15豁免）。AMI F-019修复前唯一失败项是OIB-03的STOP discard（持住sample 24却报25），其余OIB传输全部一致
 // 2026年10月01日        V1.3          Erie                  任务C（TASKC_TICK248_P2S_20261001.md）：把i_test_calibration_loss_inject_valid接到初值为0、全程不驱动的寄存器，写法与tb_ppg_control_top_robustness_corner_waveforms.v相同。本TB例化ppg_control_top时C_ENABLE_TEST_INJECTION=1，注入结构会被生成，但这个输入此前一直未连接（浮空Z，见REGRESSION_BASELINE_20260930.md第6.6节）。已逐个核对control_top全部7个验证注入输入，只有这一个悬空，补接后iverilog -Wall不再报任何悬空输入。补接前后（同一套RTL）排序后的PASS行、$finish时刻和最终横幅完全相同。
 // 2026年08月31日        V1.2          Erie                  桶2纯TB会话：OIB-09真实构造完成，本文件最后一条排除在外的ID至此关闭（Stage 5纯TB构造缺口那一桶，不touch生产RTL——和SID-11/LFA-06/OIB-01/LFA-10(b)那一桶RTL会话是刻意独立的两条线）。把V1.0/V1.1里的缺口说明注释块替换成真正的帧身份前后对比构造：在开始任何below_low驱动之前，先驱动一笔真实RED`task_drive_color_value`事务，采集它的formal result和当时这一帧自己活的`state_current[B_FRAME_DCR_EPOCH]`快照作为before（此时确定还没有任何调码发生）；然后连续投递RED below_low样本，复用`ppg_idac_code_controller.v`真实的`dcs_confirm_count`累积机制，直到`dcs_r_code_current`真实变化；然后持续中性放行并轮询这一帧自己活的`B_FRAME_DCR_EPOCH`位段，直到真实观察到它和before不同（不预设固定跨越几帧）；最后再驱动一笔RED事务采集after快照。before/after两次采集都在formal result`o_measurement_result_valid`拉高的同一拍就地读取帧号和这一帧自己锁存的epoch，彻底消除confirm驱动和颜色匹配搜索内部消耗不确定真实事务数带来的race。本轮真实构造一共踩了三个坑（全部TB自己的问题，每次都用iverilog重跑确认没有改RTL）：（1）第一版在confirm驱动循环开始前就预先猜测before帧号，循环结束后才去校验——`task_drive_color_value`内部的颜色匹配搜索会消耗不确定数量的真实事务，光是confirm驱动循环自己就足以真实跨过一次帧边界，猜测的before帧号还没来得及验证就已经过期，报出`FAIL OIB-09 setup invalid: real frame boundary crossed while still driving the confirm sequence`。（2）改成在result valid的同一拍就地读取帧号/epoch后消除了这个race，但暴露出一个更本质的问题：等确认调码真的发生了之后才去采集"before"已经太晚——confirm驱动循环跳出、随后"before"事务自己的搜索完成时，DUT早已经跑过了好几帧，before/after两次读到的其实是同一个已经更新过的epoch（`FAIL ... expect frame=13 epoch=11 ... after frame=15 epoch=11`，两个都是更新后的值）。修复为把真正的before采集挪到below_low驱动开始之前——此时确定还没有任何更新可能发生。（3）即使before先采集了，只等一次`current_frame_id_o`翻页仍然不够（`FAIL ... before frame=13 epoch=11, after frame=15 epoch=11`，即便真实跨过一次边界后依然如此）——真实RTL追查给出了原因：NORMAL稳态运行期间唯一活跃的safe-boundary来源就是`macro_frame_safe_boundary_o`（`ppg_400hz_frame_calibration_scheduler.v`第461行），它本身就是帧边界tick；一次confirm触发的调码+epoch递增如果恰好落在这一拍，紧邻的下一帧自己的`flag_frame_start_eligible`锁存（第748~774行）在同一拍组合读取`i_dcs_r_code_epoch`时，IDAC控制器自己的寄存器递增还没有真正落地，所以这个"紧邻的下一帧"读到的仍然是递增前的旧值——真正的更新要再等一帧才会体现。修复为完全不假设固定跨越几帧：持续用`task_drive_any_neutral`轮询这一帧自己活的epoch位段，直到真实观察到它和before不同，再采集那一帧作为after。真实双工具confirmed证据（iverilog和Vivado 2022.2 xsim，逐字节一致）：`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`，`PASS OIB-09 frame-scoped DC_R epoch before(frame=3 epoch=10)/after(frame=14 epoch=11) each bound correctly to its own frame's latched snapshot, and the epoch genuinely advanced after a real safe-boundary code update`，`OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=35 owner_commit_total=224 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0`（result_captures/owner_commit_total比V1.1基线的12/202多出的部分正好对应本次新场景自己的额外RUN活动，其余计数不变）。至此Stage 5纯TB构造缺口桶只剩PRC-09/PRC-10（另外单独追踪，不和本文件绑在一起），本文件自己的OIB-01~10验收清单已经全部真实覆盖。
 // 2026年08月30日        V1.1          Erie                  桶1 RTL会话：OIB-01真实构造完成，本文件最后一条排除在外的ID至此关闭（连带作为副产品解决了LFA-10(b)，见该文件自己V1.3 changelog）。`ppg_sar9_sar15_safe_selection_wrapper.v`新增专属注入端口`i_context_handover_stall_request`（配合同模块新增的`C_ENABLE_TEST_INJECTION`参数，本文件DUT例化从`32'd0`改成`32'd1`），并收窄了`flag_switch_protocol_error_condition`第4个OR项——只有排除掉stall这个因素后依然会真实违规才算数（`flag_waveform_context_ready_raw`）；stall导致的接管未命中不再连带触发SSW阻断的`switch_protocol_error_sticky_o`，只留下Scheduler自己非阻断的`o_launch_timeout_sticky`独立表态。真实构造：从START之前就持有`i_context_handover_stall_request`，跨越第一个RED接管点（`macro_tick==0`），确认只有Scheduler非阻断launch-timeout sticky置位，SSW阻断sticky和其它全部阻断/supervisor信号都保持0——这正是最初RTL追查断定"不可达"的那条证据。恢复支（释放stall、确认下一次合法机会干净恢复）第一版尝试在同一个RUN内部被动等过宏帧wraparound（即使用`task_drive_any_neutral`持续主动驱动背景流量也一样），撞上一个和这次RTL改动无关的宏帧重启细节；改用和OIB-02自己恢复支完全一致的真实STOP+drain+diag_clear+recommit+START手法，干净通过。真实iverilog+Vivado 2022.2 xsim双工具都confirmed：`JNT_BASELINE 53/53 PASS`，`OWNER_IDENTITY_BACKPRESSURE_TB_PASS result_captures=12 owner_commit_total=202 measurement_discard_events=1 detection_discard_events=0 order_violation_count=0`（owner_commit_total比V1.0基线的180多出的部分正好对应新场景自己的额外RUN周期，其余计数不变），两个工具逐字节一致。
@@ -970,6 +972,90 @@ module tb_ppg_control_top_owner_identity_backpressure();
 		end
 	end
 
+	//---------------ABCD F-042：OIB-06期望owner表（无丢失/换色/换型/精度错标核查）---------------//
+	// 以scheduler正式owner提交为独立期望来源，按sample_index登记帧号/颜色/类型/精度。AMI完成旁带success=1
+	// 的NORMAL owner记为成功；到达正式输出（valid）后必须transfer或产生公开measurement discard。每笔transfer
+	// 与每次discard都必须命中一个已登记且尚未结清的owner，transfer逐字段核对颜色/类型/精度/帧号。尚未到达
+	// 正式输出的成功事务在STOP/abort时按代际清空合法丢弃（C11/C14/C15条件豁免，无公开事件），复位只清表。
+	reg [C_FRAME_ID_WIDTH - 1:0] tbl_oib_frame [0:65535]; // 期望表：owner帧号
+	reg [4:0] tbl_oib_meta [0:65535]; // 期望表：{precision, frame_type[1:0], color_ir, registered}
+	reg [1:0] tbl_oib_state [0:65535]; // 期望表：0=已提交 1=成功完成仍在上游 3=已到达正式输出 2=已结清
+	integer cnt_oib_table_mismatch; // transfer/discard与期望表不一致次数
+	integer cnt_oib_lost; // 到达正式输出（或START前仍在上游未被豁免）却未结清的事务数
+	integer cnt_oib_delivered; // 命中期望表的正式transfer数
+	integer idx_oib_tbl; // 期望表遍历索引
+	// 结算并清空期望表；count_upstream_as_lost=1时连同未被STOP/abort豁免的上游成功事务一起计入丢失
+	task oib_count_lost_and_clear;
+		input count_upstream_as_lost;
+		begin
+			for(idx_oib_tbl = 0; idx_oib_tbl < 65536; idx_oib_tbl = idx_oib_tbl + 1) begin
+				if(tbl_oib_meta[idx_oib_tbl][0] && ((tbl_oib_state[idx_oib_tbl] == 2'd3) || (count_upstream_as_lost && (tbl_oib_state[idx_oib_tbl] == 2'd1)))) begin
+					cnt_oib_lost = cnt_oib_lost + 1;
+					if(cnt_oib_lost <= 3) $display("OIB06_LOST sample=%0d frame=%0d state=%0d", idx_oib_tbl, tbl_oib_frame[idx_oib_tbl], tbl_oib_state[idx_oib_tbl]);
+				end
+				tbl_oib_meta[idx_oib_tbl] = 5'd0;
+				tbl_oib_state[idx_oib_tbl] = 2'd0;
+			end
+		end
+	endtask
+	initial begin
+		cnt_oib_table_mismatch = 0;
+		cnt_oib_lost = 0;
+		cnt_oib_delivered = 0;
+		for(idx_oib_tbl = 0; idx_oib_tbl < 65536; idx_oib_tbl = idx_oib_tbl + 1) begin
+			tbl_oib_meta[idx_oib_tbl] = 5'd0;
+			tbl_oib_state[idx_oib_tbl] = 2'd0;
+		end
+	end
+	always @(posedge i_clk) begin
+		if(!i_rstn) begin
+			for(idx_oib_tbl = 0; idx_oib_tbl < 65536; idx_oib_tbl = idx_oib_tbl + 1) begin
+				tbl_oib_meta[idx_oib_tbl] = 5'd0; // 复位合法丢弃全部在途事务
+				tbl_oib_state[idx_oib_tbl] = 2'd0;
+			end
+		end else if(flag_oib_order_monitor_active) begin
+			if(o_start_ack_event) begin
+				oib_count_lost_and_clear(1'b1); // 新RUN的sample_index从0重编号，先结算上一RUN
+			end
+			if(o_stop_ack_event || ppg_control_top_Inst.flag_owner_abort_event) begin
+				for(idx_oib_tbl = 0; idx_oib_tbl < 65536; idx_oib_tbl = idx_oib_tbl + 1) begin
+					if(tbl_oib_state[idx_oib_tbl] == 2'd1) tbl_oib_state[idx_oib_tbl] = 2'd2; // 尚未到达正式输出的成功事务按代际清空合法丢弃
+				end
+			end
+			if(ppg_control_top_Inst.sched_adc_owner_commit_event_o) begin
+				tbl_oib_frame[ppg_control_top_Inst.sched_adc_owner_sample_index_o] = ppg_control_top_Inst.sched_adc_owner_frame_id_o;
+				tbl_oib_meta[ppg_control_top_Inst.sched_adc_owner_sample_index_o] = {ppg_control_top_Inst.sched_adc_owner_precision_mode_o, ppg_control_top_Inst.sched_adc_owner_frame_type_o, ppg_control_top_Inst.sched_adc_owner_color_ir_o, 1'b1};
+				tbl_oib_state[ppg_control_top_Inst.sched_adc_owner_sample_index_o] = 2'd0;
+			end
+			if(ppg_control_top_Inst.ami_adc_transaction_complete_event_o && ppg_control_top_Inst.ami_adc_transaction_success_o &&
+				tbl_oib_meta[ppg_control_top_Inst.ami_adc_complete_sample_index_o][0] && (tbl_oib_meta[ppg_control_top_Inst.ami_adc_complete_sample_index_o][3:2] == 2'b10) &&
+				(tbl_oib_state[ppg_control_top_Inst.ami_adc_complete_sample_index_o] == 2'd0)) begin
+				tbl_oib_state[ppg_control_top_Inst.ami_adc_complete_sample_index_o] = 2'd1; // 成功完成的NORMAL owner
+			end
+			if(o_measurement_result_valid && tbl_oib_meta[o_result_sample_index][0] && (tbl_oib_state[o_result_sample_index] != 2'd2)) begin
+				tbl_oib_state[o_result_sample_index] = 2'd3; // 已到达正式输出，此后必须transfer或公开discard
+			end
+			if(o_measurement_result_valid && i_measurement_result_ready) begin
+				if(!tbl_oib_meta[o_result_sample_index][0] || (tbl_oib_state[o_result_sample_index] == 2'd2) ||
+					(tbl_oib_frame[o_result_sample_index] !== o_result_frame_id) ||
+					(tbl_oib_meta[o_result_sample_index][4:1] !== {o_result_precision_mode, o_result_frame_type, o_result_color_ir})) begin
+					cnt_oib_table_mismatch = cnt_oib_table_mismatch + 1;
+					if(cnt_oib_table_mismatch <= 3) $display("OIB06_MISMATCH sample=%0d frame=%0d/%0d meta=%b/%b state=%0d", o_result_sample_index, o_result_frame_id, tbl_oib_frame[o_result_sample_index],
+						{o_result_precision_mode, o_result_frame_type, o_result_color_ir, 1'b1}, tbl_oib_meta[o_result_sample_index], tbl_oib_state[o_result_sample_index]);
+				end
+				tbl_oib_state[o_result_sample_index] = 2'd2; // 已交付
+				cnt_oib_delivered = cnt_oib_delivered + 1;
+			end
+			if(o_measurement_result_discard_event) begin
+				if(!tbl_oib_meta[o_measurement_result_discard_sample_index][0] || (tbl_oib_state[o_measurement_result_discard_sample_index] != 2'd3)) begin
+					cnt_oib_table_mismatch = cnt_oib_table_mismatch + 1; // 公开discard必须指向正被正式输出持有的那笔owner
+					if(cnt_oib_table_mismatch <= 3) $display("OIB06_DISCARD_MISMATCH sample=%0d state=%0d", o_measurement_result_discard_sample_index, tbl_oib_state[o_measurement_result_discard_sample_index]);
+				end
+				tbl_oib_state[o_measurement_result_discard_sample_index] = 2'd2; // 显式discard结清
+			end
+		end
+	end
+
 	//---------------全局看门狗---------------//
 	initial begin
 		flag_global_timeout = 1'b0;
@@ -1865,6 +1951,7 @@ module tb_ppg_control_top_owner_identity_backpressure();
 			end
 		end
 
+		oib_count_lost_and_clear(1'b0); // ABCD F-042：终判前结算：已到达正式输出却未交付/未discard即丢失
 		// 2026-09-17新增：真实缺口OIB-06补测的显式gate。原文件里cnt_order_violation
 		// 只是最终摘要行里被打印，从未真正折算进cnt_error——即使递减判据本身命中过
 		// 违规，也不会让整份TB报FAIL。这里把递减判据和新增的重复/换色判据都真正
@@ -1874,6 +1961,10 @@ module tb_ppg_control_top_owner_identity_backpressure();
 			cnt_error = cnt_error + 1;
 		end else if(cnt_duplicate_or_relabel_violation != 0) begin
 			$display("FAIL OIB-06 result stream contained duplicate/recolored/retyped/precision-relabeled entries, count=%0d", cnt_duplicate_or_relabel_violation);
+			cnt_error = cnt_error + 1;
+		end else if((cnt_oib_table_mismatch != 0) || (cnt_oib_lost != 0)) begin
+			// ABCD F-042：逐笔owner身份/元数据核对与正式输出无丢失守恒
+			$display("FAIL OIB-06 result stream identity/metadata or conservation violated: table_mismatch=%0d lost=%0d delivered=%0d", cnt_oib_table_mismatch, cnt_oib_lost, cnt_oib_delivered);
 			cnt_error = cnt_error + 1;
 		end else begin
 			$display("PASS OIB-06 result stream preserved order with no loss/duplication/recoloring/retyping/precision-relabeling across %0d real transfers", cnt_result_capture);

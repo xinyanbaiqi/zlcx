@@ -14,8 +14,8 @@
 //
 // Dependencies:    ppg_system_config_manager.v
 //
-// Version:         V4.9
-// Revision Date:   2026/08/23
+// Version:         V4.10
+// Revision Date:   2026/10/06
 // History:
 //     Time          Version     Revised by     Contents
 // 2026/08/06        V1.0        Erie          Create file.
@@ -23,6 +23,7 @@
 // 2026/08/07        V2.0        Erie          Verify the 640-bit ACTIVE V4 manager contract.
 // 2026/08/13        V2.1        Erie          Verify the V4.1 profile and initial precision rule.
 // 2026/08/23        V4.9        Erie          Widen every snapshot to the 1024-bit V4+V5 joint payload with a legal V5 default block on every full rebuild; add MGR-17 through MGR-24 covering the new STATIC_BIAS/EXTERNAL_TEST_CURRENT/reserved-IDAC combination checks, run_generation and stop_episode_active observation, and the system_fault_blocking START gate; retarget MGR-12's reserved-IDAC-encoding step from 0x05 to 0x15 per the current contract's ERROR_RESERVED_IDAC_MODE reclassification. MGR-21 is intentionally not implemented here per the contract's own note that it requires the joint Scheduler+SSW+AMI testbench, not this standalone one.
+// 2026/10/06        V4.10       Erie          ABCD review F-023: add the RUN/STOPPING half of MGR-11: for STOP+START, STOP+status-clear and STOP+COMMIT, each in its own RUN, the STOP must enter STOPPING (and the repeated conflicting STOP must stay idempotent), close run/new-transaction permission, raise stop_episode_active, report 0x01, and leave generation, ACTIVE and config_epoch unchanged; drain must return to CONFIG. Info line MGR11_STOP_PRIORITY.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -37,8 +38,8 @@
 //
 // 依赖文件:        ppg_system_config_manager.v
 //
-// 当前版本:        V4.9
-// 修订日期:        2026年08月23日
+// 当前版本:        V4.10
+// 修订日期:        2026年10月06日
 // 修订历史:
 //     时间          版本        修订人        修订内容
 // 2026年08月06日   V1.0        Erie          创建文件
@@ -46,6 +47,7 @@
 // 2026年08月07日   V2.0        Erie          验证640-bit ACTIVE V4管理合同
 // 2026年08月13日   V2.1        Erie          验证运行类型与初始精度组合规则
 // 2026年08月23日   V4.9        Erie          全部快照扩展为1024-bit V4+V5联合载荷，每次整体重建都补一份合法V5默认档案；新增MGR-17至MGR-24覆盖STATIC_BIAS/EXTERNAL_TEST_CURRENT/保留IDAC编码组合校验、run_generation与stop_episode_active观测、系统阻断START门；MGR-12保留IDAC枚举步骤按当前合同ERROR_RESERVED_IDAC_MODE重分类从0x05改为0x15。MGR-21按合同注记必须在Scheduler+SSW+AMI联合TB中验证，本TB故意不实现
+// 2026年10月06日   V4.10       Erie          ABCD复核F-023：补MGR-11的RUN/STOPPING部分：STOP+START、STOP+status-clear、STOP+COMMIT各走一次独立RUN，STOP必须进入STOPPING（冲突的重复STOP保持幂等），关闭运行与新事务许可，置stop_episode_active，报0x01，代际、ACTIVE与config_epoch不变；排空后回CONFIG。信息行MGR11_STOP_PRIORITY
 
 // 对配置原子提交、生命周期命令、错误保持和STOPPING排空执行定向自检
 module tb_ppg_system_config_manager();
@@ -74,6 +76,8 @@ module tb_ppg_system_config_manager();
 	reg [EPOCH_WIDTH - 1:0]reg_mgr16_dc_epoch; // 保存MGR-16非法提交前的DC恢复版本
 	reg [CONFIG_WIDTH - 1:0]reg_snapshot_before; // 保存MGR-19起各拒绝场景前的ACTIVE基线
 	reg [EPOCH_WIDTH - 1:0]reg_epoch_before; // 保存MGR-19起各拒绝场景前的配置版本基线
+	integer idx_mgr11_case;                // MGR-11 STOP优先：同拍冲突命令种类索引
+	integer idx_mgr11_step;                // MGR-11 STOP优先：RUN与STOPPING两拍索引
 	reg [RUN_GENERATION_WIDTH - 1:0]reg_generation_before; // 保存MGR-22/24各START拒绝场景前的代际基线
 	integer cnt_error;                      // 累计所有自检比较失败数量
 
@@ -919,6 +923,64 @@ module tb_ppg_system_config_manager();
 		i_stop_event = 1'b0;
 		@(posedge i_clk);
 		#1;
+
+		// MGR-11（RUN/STOPPING部分）：Top合并STOP与START/status-clear/COMMIT同拍时STOP优先进入或保持STOPPING，
+		// 同拍的另一命令被拒绝并记录0x01；三种组合各走一次独立RUN（k=0 START、k=1 status-clear、k=2 COMMIT）
+		for(idx_mgr11_case = 0; idx_mgr11_case < 3; idx_mgr11_case = idx_mgr11_case + 1)begin
+			i_config_update_event = 1'b1;   // CONFIG中重新提交同一份合法NORMAL_PPG快照建立READY
+			@(posedge i_clk);
+			#1;
+			i_config_update_event = 1'b0;
+			i_status_clear_event = 1'b1;    // 清除前序sticky错误，否则error_sticky会挡住合法START
+			@(posedge i_clk);
+			#1;
+			i_status_clear_event = 1'b0;
+			i_start_event = 1'b1;           // 合法START进入RUN
+			@(posedge i_clk);
+			#1;
+			i_start_event = 1'b0;
+			if(o_lifecycle_state != ST_RUN)begin
+				$display("FAIL MGR-11 stop priority case %0d did not reach RUN", idx_mgr11_case); // 前置RUN建立异常
+				cnt_error = cnt_error + 1;
+			end
+			reg_generation_before = o_run_generation; // 记录RUN代际，冲突STOP不得改变
+			reg_snapshot_before = o_active_config;    // 记录ACTIVE，冲突COMMIT不得替换
+			reg_epoch_before = o_config_epoch;        // 记录配置版本，冲突COMMIT不得递增
+			i_adc_idle = 1'b0;              // 保持未排空，使STOPPING可在第二拍继续观察
+			i_datapath_empty = 1'b0;
+			i_idac_idle = 1'b0;
+			i_analog_safe = 1'b0;
+			for(idx_mgr11_step = 0; idx_mgr11_step < 2; idx_mgr11_step = idx_mgr11_step + 1)begin
+				i_stop_event = 1'b1;        // step0：RUN中冲突STOP；step1：STOPPING中冲突的重复STOP
+				i_start_event = (idx_mgr11_case == 0);
+				i_status_clear_event = (idx_mgr11_case == 1);
+				i_config_update_event = (idx_mgr11_case == 2);
+				@(posedge i_clk);
+				#1;
+				i_stop_event = 1'b0;
+				i_start_event = 1'b0;
+				i_status_clear_event = 1'b0;
+				i_config_update_event = 1'b0;
+				if(!o_stop_ack_event || (o_lifecycle_state != ST_STOPPING) || o_run_enable || o_allow_new_transaction || !o_stop_episode_active ||
+					!o_error_event || (o_last_error_code != 8'h01) || !o_error_sticky || o_start_ack_event || o_commit_ack_event ||
+					(o_run_generation != reg_generation_before) || (o_active_config != reg_snapshot_before) || (o_config_epoch != reg_epoch_before))begin
+					$display("FAIL MGR-11 stop priority case %0d step %0d ack=%b state=%0d run=%b allow=%b episode=%b err=%b code=%h", idx_mgr11_case, idx_mgr11_step,
+						o_stop_ack_event, o_lifecycle_state, o_run_enable, o_allow_new_transaction, o_stop_episode_active, o_error_event, o_last_error_code); // STOP被同拍命令吞掉或冲突诊断缺失
+					cnt_error = cnt_error + 1;
+				end
+			end
+			i_adc_idle = 1'b1;              // 排空完成后返回CONFIG
+			i_datapath_empty = 1'b1;
+			i_idac_idle = 1'b1;
+			i_analog_safe = 1'b1;
+			@(posedge i_clk);
+			#1;
+			if((o_lifecycle_state != ST_CONFIG) || o_active_valid || o_stop_episode_active)begin
+				$display("FAIL MGR-11 stop priority case %0d drain did not return CONFIG", idx_mgr11_case); // 冲突STOP后排空未正常完成
+				cnt_error = cnt_error + 1;
+			end
+		end
+		$display("MGR11_STOP_PRIORITY cases=3 steps_per_case=2"); // 信息行：RUN与STOPPING冲突STOP组合已执行
 
 		reg_mgr16_active_snapshot = o_active_config;
 		reg_mgr16_config_epoch = o_config_epoch;

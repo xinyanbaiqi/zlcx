@@ -16,8 +16,8 @@
 // Referrences:		PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.15
-// Revision Date:	2026-09-18
+// Version:			V1.16
+// Revision Date:	2026-10-06
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026-08-12			V1.0		 Erie		Create file.
@@ -37,6 +37,7 @@
 // 2026-08-31			V1.13	 Erie		Stage 5 bucket-2 RTL session, port-threading step: add a new AMI-level `i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready` pair to the existing section 6.5b "验证专用异常注入" port group, threading through into PWI's newly-added same-purpose ports (ppg_precision_window_integration.v V1.4, itself threading into ppg_coarse_detection_fir.v V2.3). No new AMI parameter or enable port -- reuses the existing `C_ENABLE_TEST_INJECTION` parameter and passes AMI's own already-gated `flag_test_inject_effective` down as the child's `i_test_inject_enable`, the exact same composition pattern this file already uses for the IDAC controller's own saturation-injection group (line ~2340). Bit-identical production behavior confirmed by re-running the main smoke TB through the full ppg_control_top hierarchy (SMOKE_TB_PASS, identical counters) and the injection TB with C_ENABLE_TEST_INJECTION=1 actually live (INJ_TB_PASS, all existing INJ-00~04 unaffected).
 // 2026-09-05			V1.14	 Erie		Add the section 8.4.5 P2S telemetry boundary passthrough group: new AMI-level outputs o_s1_calibration_applied (pure re-export of the existing flag_dc_s1_calibration_applied wire, i.e. ppg_adc_dc_recovery_Inst's own o_calibration_applied), o_s1_raw and o_s2_raw (newly wired from that same instance's previously-dangling o_stage1_raw/o_stage2_raw at line ~2284/2286 into two new wires dec_dc_stage1_raw/dec_dc_stage2_raw). Deliberately sources from ppg_adc_dc_recovery's own re-exported atomic payload_o register, not the reconstructor's earlier dec_reconstructor_stage1_raw/dec_reconstructor_stage2_raw (declared line 722/724, wired line 2180/2182) -- the reconstructor pair is not latched into the same atomic transaction as frame_id/sample_index/coarse/fine, so using it would misalign the P2S packet. Per PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md V1.6 section 8.4.5. No logic change to any existing port; bit-identical production behavior confirmed by re-running the main smoke TB through the full ppg_control_top hierarchy (SMOKE_TB_PASS, real_adc_responses=47 measurement_result_valid=32, identical to pre-change).
 // 2026-09-18			V1.15	 Erie		Fix a real permanent calibration-search deadlock found while investigating workline-D's SID-05 pending item, confirmed by a real iverilog A/B trace: flag_calibration_request_inflight previously only cleared on flag_amb_sample_accepted/flag_dcs_sample_accepted (a genuine consumed search result) or STOP/abort. When the scheduler's own flag_cal_owner_deadline (ppg_400hz_frame_calibration_scheduler.v, tick-248 owner-commit deadline, C25 contract section 9.4.1) suppresses a candidate window because the physical ADC owner never committed in time, no ADC owner and no transaction ever existed for that request, so neither accepted-result condition can ever fire -- flag_calibration_request_inflight stayed 1 forever, calibration_sample_valid_o never re-armed, and the scheduler's own B_CAL_CONTEXT_SEEN permanently locked closed since it never saw a fresh pending request at any later subframe boundary, stranding the entire calibration search (AMB or DCS_CAL) with no self-recovery. Trace evidence: forcing i_adc_physical_idle=0 across a genuine mid-search DC_R candidate's deadline correctly suppressed that one candidate (matching design intent) but left all 12/12 subsequent retries permanently failing with no Q3 window ever opening again. Fix: added a new i_cal_owner_deadline_event input, wired to the scheduler's new V1.8 o_cal_owner_deadline_event output (itself a direct passthrough of the pre-existing, already self-clearing flag_cal_owner_deadline pulse), and added it as an additional flag_calibration_request_inflight clear condition alongside the existing accepted-result terms -- letting AMI immediately re-arm calibration_sample_valid_o for the same still-wanted candidate on the very next opportunity instead of stalling forever. No other logic touched; reg_inflight_frame_type/reg_inflight_color_ir are unaffected since they only update on the next calibration_request_fire_o, exactly as before.
+// 2026-10-06			V1.16  Erie  ABCD review RTL round 1 (four fixes plus one port rename). F-022: a new START no longer clears integration_protocol_error_sticky_o (contract section 15.1: only reset or the Top registered diag_clear may clear it). N-1: diag_clear clears that history sticky only when flag_integration_blocking==0, or when the current RUN has ended (new flag_run_context_ended, set by STOP-ack and cleared by START) and o_datapath_empty==1 (section 15.1 'after no local blocking cause is active': once the RUN is over and AMI is drained the cause is no longer active); it clears only the history and never releases the blocking itself (section 6, diag_clear cannot release an owner or an active cause). flag_integration_blocking is the gate rather than o_wrapper_fault_blocking because it is this sticky's own local cause, whereas the wrapper aggregate also carries the IDAC and precision holds that have their own stickies and clear rules; its lifecycle is unchanged (still released only by START or abort), so o_wrapper_fault_blocking stays high in idle after a STOP-only end. Known limitation recorded as L-5, not fixed here: AMI fault lane 02 (flag_owner_protocol_fault_hold) is likewise released only by START or abort, so after a STOP-only end the supervisor episode cannot close and the manager rejects the next START until a host ABORT or reset. F-019: the public measurement-discard identity (frame id, sample index, color, frame type, precision) is taken from the result held at the formal output (result_*_o) instead of the upstream NORMAL-fork measurement branch, which could already hold the next transaction. F-021: the detection branch gets its own sample-qualification register flag_detection_branch_sample_valid (loaded with the fork, cleared by the detection transfer or abort) that feeds PWI i_sample_valid and the detection-discard sample_valid; a formal-branch transfer no longer clears the qualification of the transaction still waiting in the detection branch. F-032: the IDAC instance connection follows the IDAC port rename to i_diag_clear_event. Also recorded here (deferred from earlier rounds, now closed): the in-place comment corrections at the o_s1_calibration_applied port declaration (~line 403, f485cbc) and its assign (~line 1029, c01e8d2), comments only.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -53,8 +54,8 @@
 // 参考资料:		PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.15
-// 修订日期:		2026-09-18
+// 当前版本:		V1.16
+// 修订日期:		2026年10月06日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026-08-12		V1.0		 Erie		创建文件
@@ -74,6 +75,7 @@
 // 2026-08-31		V1.13	 Erie		Stage 5桶2 RTL会话端口透传步骤：在既有6.5b节"验证专用异常注入"端口组里新增AMI层的`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready`一对，透传进PWI新增的同名端口（`ppg_precision_window_integration.v`V1.4，继续透传进`ppg_coarse_detection_fir.v`V2.3）。没有新增AMI参数或enable端口——复用既有的`C_ENABLE_TEST_INJECTION`参数，并把AMI自己已经算好的`flag_test_inject_effective`原样传给子模块的`i_test_inject_enable`，和本文件已经用在IDAC控制器自己那组饱和注入上的组合方式（约2340行）完全一致。真实回归确认逐位不变：主烟雾TB跑通完整`ppg_control_top`层次（`SMOKE_TB_PASS`，计数与改动前逐字节一致）+`C_ENABLE_TEST_INJECTION=1`真实生效状态下的注入TB（`INJ_TB_PASS`，既有INJ-00~04全部不受影响）
 // 2026-09-05		V1.14	 Erie		按合同8.4.5节新增P2S遥测边界透传端口组：新增AMI边界输出`o_s1_calibration_applied`（既有wire`flag_dc_s1_calibration_applied`即`ppg_adc_dc_recovery_Inst`自己`o_calibration_applied`输出的纯转发）、`o_s1_raw`/`o_s2_raw`（把同一例化第2284/2286行原来留空的`o_stage1_raw`/`o_stage2_raw`接进新增内部wire`dec_dc_stage1_raw`/`dec_dc_stage2_raw`后转发）。刻意使用`ppg_adc_dc_recovery`模块自己重新导出、已经跟frame_id/sample_index/coarse/fine结果锁在同一个原子事务`payload_o`寄存器里的版本，不使用重构器更早的`dec_reconstructor_stage1_raw`/`dec_reconstructor_stage2_raw`（第722/724行声明、第2180/2182行接入）——那两个不是同一个原子事务的锁存值，时序上跟frame_id/sample_index对不上号，用错会导致P2S包数据错位。依据`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`V1.6第8.4.5节。不改动任何既有端口逻辑；真实回归确认逐位不变：主烟雾TB跑通完整`ppg_control_top`层次（`SMOKE_TB_PASS`，real_adc_responses=47 measurement_result_valid=32，与改动前逐位一致）
 // 2026-09-18		V1.15	 Erie		修复调查工作线D待查项SID-05时发现、真实iverilog A/B trace确认的一个永久校准搜索死锁：flag_calibration_request_inflight此前只在flag_amb_sample_accepted/flag_dcs_sample_accepted（真实消费到搜索结果）或STOP/abort时清零。当调度器自己的flag_cal_owner_deadline（`ppg_400hz_frame_calibration_scheduler.v`，tick-248 owner提交截止，C25合同9.4.1节）因物理ADC owner未及时提交而抑制某个候选窗口时，这笔请求从未真正建立过ADC owner或事务，两个"结果已消费"条件都不可能触发——flag_calibration_request_inflight从此永远保持1，calibration_sample_valid_o再也不会重新拉高，调度器自己的B_CAL_CONTEXT_SEEN也因为之后任何一次子帧边界都等不到新的pending请求而永久锁闭，整个校准搜索（AMB或DCS_CAL）从此搁浅、无法自行恢复。trace证据：对一笔真实进行中的DC_R候选，在其截止跨越期间强制i_adc_physical_idle=0，能正确抑制这一个候选（符合设计意图），但之后全部12/12次重试永久失败、再也等不到任何Q3窗口。修复：新增`i_cal_owner_deadline_event`输入，接到调度器V1.8新增的`o_cal_owner_deadline_event`输出（本身是对已有、本来就自清零的flag_cal_owner_deadline脉冲的直接转发），并把它加为flag_calibration_request_inflight的额外清零条件，与既有的"结果已消费"两项并列——让AMI能为同一个仍在等待的候选立即重新拉高calibration_sample_valid_o发起重试，而不是永久卡死。未改动其它逻辑；reg_inflight_frame_type/reg_inflight_color_ir不受影响，它们仍然只在下一次calibration_request_fire_o时更新，和改动前一致
+// 2026-10-06		V1.16  Erie  ABCD复核RTL第一轮（四项修复加一处端口改名）。F-022：新START不再清除integration_protocol_error_sticky_o（合同15.1节：只有复位或Top注册式diag_clear可清）。N-1：diag_clear只在flag_integration_blocking==0时，或当前RUN已结束（新增flag_run_context_ended，STOP确认置位、START撤销）且o_datapath_empty==1时清除该历史sticky（15.1节"在本地无活动blocking cause后"：RUN结束且AMI排空后成因已不再活动）；只清历史、不释放阻断本身（第6节：diag_clear不能释放owner或活动原因）。门控选flag_integration_blocking而不是o_wrapper_fault_blocking，因为它是该sticky自身的本地成因，wrapper汇总还含IDAC和精度阻断，它们各有自己的sticky与清除规则；阻断标志生命周期不变（仍只由START或abort解除），STOP-only结束后空闲期o_wrapper_fault_blocking仍为高。已知限制记为L-5、本轮不修：AMI故障lane 02（flag_owner_protocol_fault_hold）同样只由START或abort解除，STOP-only结束后supervisor关不上episode，manager拒绝下一次START，需主机ABORT或复位恢复。F-019：公开正式结果discard的身份（帧号、序号、颜色、类型、精度）改取正式输出当前持有的结果（result_*_o），不再取可能已装入下一笔事务的上游NORMAL fork测量分支。F-021：检测分支新增自有样本资格寄存器flag_detection_branch_sample_valid（随fork装入，由检测握手或abort清除），驱动PWI i_sample_valid和检测discard的sample_valid；正式分支先消费不再清掉仍在检测分支等待的同一笔事务资格。F-032：IDAC例化连接随IDAC端口改名为i_diag_clear_event。另补记此前推迟的两处只改注释的原行改正（本项推迟就此关闭）：o_s1_calibration_applied端口声明注释（约403行，f485cbc）与其assign注释（约1029行，c01e8d2）
 module ppg_adc_measurement_idac_integration
 #(
 	parameter integer C_FRAME_ID_WIDTH = 32'd16, // 真实400 Hz物理帧编号字段宽度
@@ -464,6 +466,8 @@ module ppg_adc_measurement_idac_integration
 	reg flag_owner_protocol_fault_hold = 1'b0;  // cause 8'h02请求/响应对应关系破坏，保持到本RUN结束
 	reg flag_recovery_context_fault_hold = 1'b0; // cause 8'h03无法证明可用原owner恢复，保持到本RUN结束
 	reg flag_detection_pending = 1'b0;          // 片内检测分支所有权
+	reg flag_detection_branch_sample_valid = 1'b0; // 检测分支自有的独立样本资格，正式分支先消费时不受影响
+	reg flag_run_context_ended = 1'b1;          // 当前RUN已被STOP确认结束（复位后尚无RUN也视为结束），START撤销
 	reg flag_measurement_pending = 1'b0;        // 正式测量分支所有权
 	reg flag_adc_completion_pending = 1'b0;     // S1已接纳RAW后等待元数据归属核对
 	wire flag_capture_precision_mode;           // 捕获事务精度快照
@@ -977,7 +981,7 @@ module ppg_adc_measurement_idac_integration
 	assign flag_datapath_discard_frame_type = flag_adc_transaction_inflight ? reg_adc_inflight_frame_type : 2'b00; // 区分当前owner属于AMB_CAL、DCS_CAL还是NORMAL
 	assign flag_datapath_discard_precision = flag_adc_transaction_inflight && reg_adc_inflight_precision_mode; // 借用owner锁存的SAR9或SAR15精度快照
 	// 私有detection_discard组身份：命中当前保留的检测分支事务时绑定真实身份，否则按合同要求全零。
-	assign flag_detection_discard_sample_valid = flag_detection_pending && result_sample_valid_o; // 快照保留分支当前保存事务的独立样本资格
+	assign flag_detection_discard_sample_valid = flag_detection_pending && flag_detection_branch_sample_valid; // 快照保留分支当前保存事务的独立样本资格
 	assign flag_detection_discard_identity_valid = flag_detection_pending; // 命中当前保留检测分支事务时才承认身份可信；交接给PWI后触发的discard属于scope-only，正确置0；交接前AMI自身仍持有身份时discard同样验证过正确置1 @satisfies: N08
 	assign flag_detection_discard_frame_id = flag_detection_pending ? result_frame_id_o : {C_FRAME_ID_WIDTH{1'b0}}; // 取自结果fork保存事务的物理帧号快照
 	assign flag_detection_discard_sample_index = flag_detection_pending ? result_sample_index_o : {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 取自结果fork保存事务的全局序号快照
@@ -1183,8 +1187,8 @@ module ppg_adc_measurement_idac_integration
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			integration_protocol_error_sticky_o <= 1'b0; // 复位清除集成协议历史
-		end else if(i_start_ack_event == 1'b1 || i_diag_clear_event == 1'b1)begin
-			integration_protocol_error_sticky_o <= 1'b0; // 新RUN或软件命令冻结清除历史
+		end else if(i_diag_clear_event == 1'b1 && (flag_integration_blocking == 1'b0 || (flag_run_context_ended == 1'b1 && o_datapath_empty == 1'b1)))begin
+			integration_protocol_error_sticky_o <= 1'b0; // 本地集成阻断已解除，或当前RUN已被STOP结束且AMI全链排空后，Top注册式诊断清除才可撤销历史；只清历史不释放阻断本身，新START与STOP不得清除（合同15.1节） @satisfies: AMI-24
 		end else if(flag_router_frame_type_error == 1'b1 || flag_start_payload_changed == 1'b1 || flag_start_context_mismatch == 1'b1 || flag_calibration_result_mismatch == 1'b1 || flag_late_normal_result == 1'b1 || flag_adc_capture_without_owner == 1'b1 || flag_test_identity_inject_fire == 1'b1 || (flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1) || (i_transaction_start_valid == 1'b1 && (i_transaction_frame_type == 2'b11)))begin
 			integration_protocol_error_sticky_o <= 1'b1; // 任一明确协议异常锁存sticky
 		end
@@ -1293,7 +1297,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // 新RUN清除不可消费的旧丢弃帧号
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_frame_id_o <= dec_measurement_frame_id; // 锁存被丢弃事务的真实物理帧号
+			measurement_result_discard_frame_id_o <= result_frame_id_o; // 锁存被丢弃事务的真实物理帧号，取自正被正式输出持有的结果载荷而非上游fork分支
 		end
 	end
 
@@ -1304,7 +1308,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 新RUN清除不可消费的旧丢弃序号
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_sample_index_o <= dec_measurement_sample_index; // 锁存被丢弃事务的全局顺序编号
+			measurement_result_discard_sample_index_o <= result_sample_index_o; // 锁存被丢弃事务的全局顺序编号，与正式输出持有的结果一致 @satisfies: OIB-06
 		end
 	end
 
@@ -1315,7 +1319,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_color_ir_o <= 1'b0; // 新RUN清除不可消费的旧丢弃颜色
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_color_ir_o <= flag_measurement_color_ir; // 锁存被丢弃事务的颜色身份，与frame_type/sample_index一起构成discard记录的branch ID字段 @satisfies: P01
+			measurement_result_discard_color_ir_o <= result_color_ir_o; // 锁存被丢弃事务的颜色身份，与frame_type/sample_index一起构成discard记录的branch ID字段 @satisfies: P01
 		end
 	end
 
@@ -1326,7 +1330,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_frame_type_o <= 2'b00; // 新RUN清除不可消费的旧丢弃类型
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_frame_type_o <= dec_measurement_frame_type; // 锁存被丢弃事务的帧类型编码
+			measurement_result_discard_frame_type_o <= result_frame_type_o; // 锁存被丢弃事务的帧类型编码
 		end
 	end
 
@@ -1337,7 +1341,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_precision_o <= 1'b0; // 新RUN清除不可消费的旧丢弃精度
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_precision_o <= flag_measurement_precision_mode; // 锁存被丢弃事务建立时所属的精度模式
+			measurement_result_discard_precision_o <= result_precision_mode_o; // 锁存被丢弃事务建立时所属的精度模式
 		end
 	end
 
@@ -1738,6 +1742,17 @@ module ppg_adc_measurement_idac_integration
 		end
 	end
 
+	// RUN上下文结束标志：STOP确认后置位、新START撤销，供诊断清除判断阻断成因是否仍属于正在进行的RUN
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_run_context_ended <= 1'b1;     // 复位后尚未进入任何RUN
+		end else if(i_start_ack_event == 1'b1)begin
+			flag_run_context_ended <= 1'b0;     // 新RUN开始，阻断成因重新属于进行中的RUN
+		end else if(i_stop_ack_event == 1'b1)begin
+			flag_run_context_ended <= 1'b1;     // STOP确认后不再接纳新事务，排空完成即视为本RUN结束
+		end
+	end
+
 	// DC恢复双消费者载荷槽支持两分支同沿释放并装入下一事务。
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
@@ -1759,6 +1774,20 @@ module ppg_adc_measurement_idac_integration
 			flag_detection_pending <= 1'b1;     // 每笔恢复事务必须由检测链消费一次
 		end else if(flag_detection_transfer == 1'b1)begin
 			flag_detection_pending <= 1'b0;     // 检测链握手后释放当前事务
+		end
+	end
+
+	// 检测分支资格与正式分支资格分开保存：同一结果装入时两者同拍锁存，各自只由本分支的消费清除，
+	// 避免正式分支先消费时把仍在检测分支等待的同一笔事务资格清掉（合同第8节分支独立资格）
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_detection_branch_sample_valid <= 1'b0; // 复位时检测分支不存在样本资格
+		end else if(flag_result_abort_discard == 1'b1)begin
+			flag_detection_branch_sample_valid <= 1'b0; // abort或阻断排空撤销检测分支未消费资格
+		end else if(flag_dc_result_transfer == 1'b1)begin
+			flag_detection_branch_sample_valid <= !flag_test_invalid_sample_fire; // 与正式分支同拍装入同一笔资格
+		end else if(flag_detection_transfer == 1'b1)begin
+			flag_detection_branch_sample_valid <= 1'b0; // 检测链真实消费后清除，不随正式分支消费变化 @satisfies: N08
 		end
 	end
 
@@ -2324,7 +2353,7 @@ module ppg_adc_measurement_idac_integration
 		.i_run_enable(i_run_enable),            // 输入 i_run_enable 用 i_run_enable
 		.i_start_ack_event(flag_idac_start_event_qualified), // 仅合法运行档案进入IDAC启动状态机
 		.i_stop_ack_event(i_stop_ack_event),    // 输入 i_stop_ack_event 用 i_stop_ack_event
-		.i_status_clear_event(i_diag_clear_event), // 输入 i_status_clear_event 用 i_diag_clear_event
+		.i_diag_clear_event(i_diag_clear_event), // 输入 i_diag_clear_event 用 i_diag_clear_event
 		.i_control_abort_event(i_control_abort_event), // 输入 i_control_abort_event 用 i_control_abort_event
 		.i_frame_safe_boundary(i_idac_code_safe_boundary), // IDAC候选仅在码安全边界提交
 		.i_active_config_epoch(i_config_epoch), // 输入 i_active_config_epoch 用 i_config_epoch
@@ -2515,7 +2544,7 @@ module ppg_adc_measurement_idac_integration
 		.i_dcs_enable(i_dcs_enable),            // 输入 i_dcs_enable 用 i_dcs_enable
 		.i_amb_recheck_interval_frames(i_amb_recheck_interval_frames), // 输入 i_amb_recheck_interval_frames 用 i_amb_recheck_interval_frames
 		.i_normal_result_valid(flag_detection_pending && !flag_result_abort_discard), // 输入 i_normal_result_valid 用 flag_detection_pending && !flag_result_abort_discard
-		.i_sample_valid(result_sample_valid_o), // 独立资格随检测fork保持，不得改写fork ready
+		.i_sample_valid(flag_detection_branch_sample_valid), // 检测分支自有资格随检测fork保持，不得改写fork ready
 		.o_normal_result_ready(flag_precision_normal_result_ready), // 输出 o_normal_result_ready 到 flag_precision_normal_result_ready
 		.i_coarse_ppg_value(o_coarse_ppg_value), // 输入 i_coarse_ppg_value 用 o_coarse_ppg_value
 		.i_coarse_valid(o_coarse_valid),        // 输入 i_coarse_valid 用 o_coarse_valid

@@ -19,8 +19,8 @@
 // Referrences:		PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.4
-// Revision Date:	2026/09/17
+// Version:			V1.5
+// Revision Date:	2026/10/06
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/12            V1.0          Erie                  Create file.
@@ -28,6 +28,7 @@
 // 2026/08/22            V1.2          Erie                  Add i_peak_valley_config_valid (V5 formal-detection gate, PWC-40) and the registered o_mode_fault_active/identity_valid/<FAULT_ID> group for the AMI cause 8'h04 fault dispatcher, per PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 15.3/18.2/18.6.
 // 2026/08/23            V1.3          Erie                  Rename i_adc_idle to i_precision_takeover_safe (pure port rename, no logic change) to match PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md sections 18.5/19 literal naming; the connected value was already the AMI composite predicate, never physical ADC idle.
 // 2026/09/17            V1.4          Erie                  Fix a real defect: a new legal START (i_start_ack_event) silently cleared the two history stickies switch_timeout_sticky_o and protocol_error_sticky_o, violating contract section 6.2 (:205, a new RUN does not clear history diagnostics) and section 17.1 (:731, a new legal START or STOP by itself does not clear stickies). Both now clear only on i_diag_clear_event; a protocol error raised in the same cycle as a new START is still latched. Covered by PWC-41 (tags at the two clear branches); see PWC_STICKY_CLEAR_RTL_FIX_20260917.md. This changelog entry was recorded on 2026/10/01 (task C) because the header had not been updated with the 09/17 code change; no code changed when it was added.
+// 2026/10/06            V1.5          Erie                  ABCD review F-034: flag_enter_commit and flag_return_commit now also require flag_lifecycle_cancel==0, so a current-generation detection discard (or leaving RUN) in the same cycle as the safe frame boundary wins over the precision commit, as the contract freezes (generation discard > safe commit, no precision switch on cancel). Previously the commit still changed the precision while the cancel cleared the window/FSM, leaving precision, window and FSM inconsistent.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -47,8 +48,8 @@
 // 参考资料:		PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.4
-// 修订日期:		2026年09月17日
+// 当前版本:		V1.5
+// 修订日期:		2026年10月06日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月12日        V1.0          Erie                  创建文件。
@@ -56,6 +57,7 @@
 // 2026年08月22日        V1.2          Erie                  按合同15.3/18.2/18.6节新增i_peak_valley_config_valid（V5正式检测门控，PWC-40）和注册式o_mode_fault_active/identity_valid/<FAULT_ID>组，供AMI cause 8'h04故障分发器观测
 // 2026年08月23日        V1.3          Erie                  按合同18.5/19节把i_adc_idle改名为i_precision_takeover_safe（纯端口改名，不改逻辑）——该端口连接的值本来就是AMI导出的复合资格，从未是物理ADC空闲
 // 2026年09月17日        V1.4          Erie                  修复一个真实缺陷：新的合法START（i_start_ack_event）会悄悄清掉switch_timeout_sticky_o和protocol_error_sticky_o两个历史sticky，违反合同6.2节（:205，新RUN不清除历史诊断）与17.1节（:731，新的合法START和STOP本身不清sticky）。两者现在只在i_diag_clear_event时清除；与新START同拍出现的协议异常仍会被锁存。由PWC-41覆盖（两个清除分支处已打标签），详见PWC_STICKY_CLEAR_RTL_FIX_20260917.md。本条于2026年10月01日（任务C）补记，因为09月17日改代码时没有同步文件头；补记本身不改任何代码。
+// 2026年10月06日        V1.5          Erie                  ABCD复核F-034：flag_enter_commit与flag_return_commit增加flag_lifecycle_cancel==0条件，安全帧边界与当前代际detection discard（或离开RUN）同拍时撤销优先于精度提交，符合合同冻结的"代际discard > 安全提交，撤销不得产生精度切换"。此前提交仍改精度而撤销清窗口和状态机，三者不一致
 // 在下一安全400 Hz帧原子提交9-bit或15-bit模式，并协调异常重新获取和重检事件
 module ppg_precision_window_controller
 #(
@@ -263,8 +265,8 @@ module ppg_precision_window_controller
 	//其他信号连线
 	assign flag_normal_cross_transfer = flag_cross_transfer && (i_run_profile == RUN_PROFILE_NORMAL); // 表征模式请求只消费不建立窗口
 	assign flag_normal_return_transfer = flag_return_transfer && (i_run_profile == RUN_PROFILE_NORMAL); // 表征模式返回只消费不改变精度
-	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0); // 下一安全帧原子进入15-bit; @satisfies: PWC-09, PWC-22, PWC-37
-	assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe; // 下一安全帧原子返回9-bit; @satisfies: PWC-32, PWC-38
+	assign flag_enter_commit = (state_current == ST_WAIT_ENTER) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (i_recheck_busy == 1'b0) && (flag_lifecycle_cancel == 1'b0); // 下一安全帧原子进入15-bit；同拍当前代际discard或离开RUN撤销优先，不提交精度; @satisfies: PWC-09, PWC-22, PWC-37, PWC-27
+	assign flag_return_commit = (state_current == ST_WAIT_RETURN) && i_frame_safe_boundary && i_precision_takeover_safe && i_analog_safe && (flag_lifecycle_cancel == 1'b0); // 下一安全帧原子返回9-bit；同拍撤销优先，不产生精度切换; @satisfies: PWC-32, PWC-38, PWC-27
 	assign flag_pending_state = (state_current == ST_WAIT_ENTER) || (state_current == ST_WAIT_RETURN); // 两种pending状态共享超时保护; @satisfies: PWC-39
 	assign flag_lifecycle_cancel = (i_detection_discard_event && (i_detection_discard_run_generation == i_run_generation)) || flag_leave_run_cancel; // PWI广播的代际清空事件命中当前代际时统一撤销在途请求；仅generation-scoped discard参与，复位分支独立不经此路径；G-FP-02精度切换pending的STOP/abort/system fault释放路径 @satisfies: K04, N02, G-FP-02, PWC-27, PWC-28
 	assign flag_switch_timeout_event = flag_pending_state && (flag_enter_commit == 1'b0) && (flag_return_commit == 1'b0) && (cnt_switch_timeout >= TIMEOUT_LIMIT_MINUS_ONE); // 安全提交与阈值同拍时提交优先; @satisfies: PWC-25

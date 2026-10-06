@@ -10,12 +10,13 @@
 // Simulations:     tb_ppg_sar9_sar15_safe_selection_wrapper
 // Referrences:     PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 // Dependencies:    ppg_sar9_sar15_safe_selection_wrapper.v
-// Version:         V1.5
-// Revision Date:   2026-09-10
+// Version:         V1.6
+// Revision Date:   2026-10-06
 // History:
 // 2026-08-15       V1.3.1      Codex       Add independent waveform and ADC-owner regression.
 // 2026-08-24       V1.4        Erie        Re-run this self-check against the current (V1.4) SSW RTL before depending on it for C01 TOP-20 integration evidence. This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated at the DUT instantiation; unlike the scheduler's equivalent V1.4 gap (17 of 57 cases silently passed with a stale value), here every owner-identity match/release expression that depends on i_run_generation compares against an undriven net, and iverilog leaves an unconnected input floating as an indeterminate value rather than a clean constant, so the regression failed loudly and overtly (pass=12, error=109, FATAL) the first time it was actually run this session rather than passing quietly. Fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation, and driving it at a fixed constant in set_defaults; none of SSW-01 through SSW-52 exercise stale-generation rejection, so that remains a coverage gap, not newly added here. The new o_ssw_fault_* register group added alongside i_run_generation in RTL V1.4 is also not yet connected or asserted on by this TB; that is a separate, still-open coverage gap left for a future pass, not fixed here. All 52/52 pass after the fix.
 // 2026-09-10       V1.5        Erie        DUT V1.5 stopped driving CTRL_Q2 during AMB_CAL (single-phase integration, contract 6.4). Extended SSW-08 with explicit o_clk_q2_low==0 checks at local tick 262/263/266, extended the SSW-11 all-subframe sweep to assert !o_clk_q2_low at every tick from 2 to 283, and extended SSW-09/SSW-10 with o_clk_q2_low==1 checks at 262/263 to prove DCS_CAL keeps driving Q2 unchanged. All 52/52 still pass.
+// 2026-10-06       V1.6        Erie        ABCD review F-035: add TB-local case ABT-DONE (no SSW-nn number taken): abort and a matching DONE in the same cycle must release the owner while the RED waveform is still cancelled, the wrapper must go idle, and after STOP, diag clear and a generation-2 START a new owner must be established and released. Pass criterion 52 -> 53; banner unchanged. Negative control: with abort-hold ahead of release (SSW V1.5 order) ABT-DONE fails 6 checks.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Codex
@@ -26,12 +27,13 @@
 // 仿真工程:        tb_ppg_sar9_sar15_safe_selection_wrapper
 // 参考资料:        PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 // 依赖文件:        ppg_sar9_sar15_safe_selection_wrapper.v
-// 当前版本:        V1.5
-// 修订日期:        2026年09月10日
+// 当前版本:        V1.6
+// 修订日期:        2026年10月06日
 // 修订历史:
 // 2026-08-15       V1.3      Codex       增加SSW-01至SSW-48独立通道回归。
 // 2026-08-24       V1.4      Erie        为准备C01 TOP-20整机验收证据，先拿这份自检TB对当前V1.4 SSW RTL重跑一遍。这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接；和scheduler那次同类缺口不同（scheduler是17/57用旧值静默通过），这里owner身份匹配/释放全部依赖i_run_generation，而iverilog把未连接输入端浮空为不确定值而不是干净常量，导致本轮第一次真正跑这份回归时不是静默通过、而是直接响亮失败（pass=12、error=109、FATAL）。修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在set_defaults里给它一个全程固定常量——SSW-01至SSW-52本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。RTL V1.4同时新增的o_ssw_fault_*故障记录组，这份TB目前也还没有连接或断言，这是另一个仍然待补的覆盖缺口，本次未修复。修复后52/52全过。
 // 2026-09-10       V1.5      Erie        DUT V1.5起AMB_CAL不再驱动CTRL_Q2（单相积分改造，合同6.4节）。扩展SSW-08在local tick 262/263/266三点显式断言o_clk_q2_low为0；扩展SSW-11全子帧遍历循环在tick 2至283每一拍都断言!o_clk_q2_low；扩展SSW-09/SSW-10在262/263两点断言o_clk_q2_low为1，证明DCS_CAL的Q2行为未被改动波及。52/52仍全过。
+// 2026-10-06       V1.6      Erie        ABCD复核F-035：新增TB本地用例ABT-DONE（不占用SSW编号）：abort与匹配DONE同拍时必须释放owner，同时RED波形仍被撤销，wrapper回到idle；随后STOP、诊断清除、第2代START后必须能建立并释放新owner。判据52改为53，横幅不变。负对照：恢复V1.5的abort保持优先顺序时ABT-DONE有6项失败
 module tb_ppg_sar9_sar15_safe_selection_wrapper;
 
 	localparam [1:0] FRAME_TYPE_AMB    = 2'b00;
@@ -1099,7 +1101,40 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
 		expect_true(o_idac_sar9ambn_low == 8'h00 && o_idac_sar9dcn_low == 8'h00 && o_idac_sar15ambn_low == 8'h00 && o_idac_sar15dcn_low == 8'h00, "invalid STATIC_BIAS must hold every IDAC bus at zero");
 		end_case("SSW-52");
 
-		if((cnt_error == 0) && (cnt_pass == 52)) begin
+		// ABT-DONE（ABCD F-035，TB本地名，不占用SSW族编号）：abort与匹配身份的DONE同拍到达时，DONE必须照常释放owner，
+		// abort仍撤销波形；随后STOP、诊断清除、新代际START后必须能建立并释放新owner（缺陷时owner残留到复位）
+		begin_case("ABT-DONE");
+		reset_and_start;
+		send_waveform(1'b0, 1'b0, FRAME_TYPE_NORMAL, 16'd101, 8'h31, 8'h41, 4'h1, 4'h2, 8'hA1);
+		macro_tick(13'd1);
+		send_owner(1'b0, 1'b0, FRAME_TYPE_NORMAL, 16'd101, 16'd1, 8'h31, 8'h41, 4'h1, 4'h2);
+		macro_tick(13'd300);
+		@(negedge i_clk);
+		i_adc_complete_sample_index = 16'd1; i_adc_transaction_success = 1'b1; i_adc_transaction_complete_event = 1'b1;
+		i_control_abort_event = 1'b1;
+		@(posedge i_clk); #1 i_adc_transaction_complete_event = 1'b0; i_control_abort_event = 1'b0;
+		expect_true(!o_adc_owner_inflight, "a matching DONE in the same cycle as abort must still release the owner");
+		macro_tick(13'd301);
+		expect_true(!o_leden1_low && !o_clk_q3_low, "abort must still cancel the RED waveform");
+		repeat(20) @(posedge i_clk); #1;
+		expect_true(!o_adc_owner_inflight && o_wrapper_idle, "owner must stay released and the wrapper must become idle after abort");
+		i_run_enable = 1'b0;
+		@(negedge i_clk); i_stop_ack_event = 1'b1; @(posedge i_clk); #1 i_stop_ack_event = 1'b0;
+		repeat(5) @(posedge i_clk);
+		@(negedge i_clk); i_diag_clear_event = 1'b1; @(posedge i_clk); #1 i_diag_clear_event = 1'b0;
+		i_run_generation = 8'd2; i_run_enable = 1'b1;
+		@(negedge i_clk); i_start_ack_event = 1'b1; @(posedge i_clk); #1 i_start_ack_event = 1'b0;
+		repeat(5) @(posedge i_clk);
+		send_waveform(1'b0, 1'b0, FRAME_TYPE_NORMAL, 16'd102, 8'h31, 8'h41, 4'h1, 4'h2, 8'hA1);
+		macro_tick(13'd1);
+		send_owner(1'b0, 1'b0, FRAME_TYPE_NORMAL, 16'd102, 16'd2, 8'h31, 8'h41, 4'h1, 4'h2);
+		macro_tick(13'd300);
+		complete_owner(16'd2, 1'b1);
+		macro_tick(13'd317);
+		expect_true(!o_adc_owner_inflight, "a new-generation owner must be established and released after recovery");
+		end_case("ABT-DONE");
+
+		if((cnt_error == 0) && (cnt_pass == 53)) begin
 			$display("ALL SSW-01 THROUGH SSW-52 PASS");
 			$finish;
 		end else begin
