@@ -13,6 +13,7 @@
   - 集成层（AMI/control_top）可达，芯片原生节拍不可达：F-019；AMI级可达，control_top原生节拍下1.08万次握手中未触发：F-021；
   - 只在叶子层可达，常规父链被屏蔽：F-018、F-034。
 - 第一阶段没有改任何RTL、TB、合同、矩阵或别名表。修复方案见§10，等待用户选择。
+- 第二阶段（用户已选定方案）：TB轮已完成并推送，记录见§11；之后各轮修复依次追加在§11之后。
 
 ## 1. 输入核对
 
@@ -335,6 +336,89 @@
 **(b) 只改合同/矩阵/台账文字（B会话已推送，可以开工）**
 - F-003（锚点重建，至少按出处列逐条重定位）、F-004、F-007、F-015、F-033、F-039、F-043、F-045（重新生成摘要）、F-046（同号重映射）、F-047、F-048、F-050、F-051；
 - 以及(d)中选择"改合同"的项。
+
+## 11. 第二阶段 TB轮（只改TB与回归脚本，未改RTL）
+
+### 11.1 范围与纪律
+- 用户批准的顺序：先TB轮（F-006、F-011除外，二者与SPI、帧周期的RTL修复同批），再RTL第一轮（除F-009），最后RTL第二轮（只做F-009）。合同、矩阵、别名表交给B会话，在三轮全部推送后做合并批次。
+- 每条修复都做了两件事：
+  - 在当前RTL上通过；
+  - 负对照：人为改错RTL，或在TB副本里改错期望值，新检查必须FAIL。
+- 负对照的运行目录在仓库外：
+  - 模块级：`probes/mut/t0xx_*`；
+  - 19-TB：`phase2/runs/*`。
+- 按编号规则，已有标签本轮一律不改名，改名放到合并批次。新增检查一律用TB本地命名，例如ROUTER-GEN、OVERLAP-GEN、FORK-GEN、HIGHCODE-SEARCH、RE-ARM；若某个合同族编号的合同含义不完全一致，就不使用该编号。
+- 交接备注：F-011收紧FSC-14时，标签仍为FSC-14，它对应的是合同FSC-03。
+
+### 11.2 逐条修复与负对照
+
+| F | 文件（版本） | 修复要点 | 当前RTL | 负对照 |
+|---|---|---|---|---|
+| F-012 | supervisor TB V1.2 | 新增RE-ARM：首故障历史不清除，episode真实关闭后再送独立cause 0x11。要求发出新trio，首故障快照保持不变，只新增汇总位0x0008 | 15 PASS（14→15） | episode开启条件由`!blocking`改为`!cause_valid`：RE-ARM FAIL |
+| F-013 | CCC TB V1.1 | CCC-22增加"纯软件清除后sticky由1变0且配置不变" | 26 PASS | 软件清零改为自保持：CCC-22 FAIL |
+| F-025 | AV4C TB V1.7 | AV4C-02补齐其余V4具名字段和全部22个V5具名字段，期望值为独立字面量 | 22 PASS | wrapper alpha输出恒为0：AV4C-02 FAIL |
+| F-026 | router V1.1、overlap V1.1、DC V1.1、fork V1.2 | 接上29个悬空输入；新增ROUTER-GEN（代际透传）、OVERLAP-GEN与FORK-GEN（代际锁存，同代际清空无消费）、DC的8个诊断字段透传比较 | 各自原判据PASS；fork 50→52；四份TB的iverilog悬空输入均为0 | 代际透传最低位恒0、清空命中恒0、代际锁存恒0、stage1_raw取反：均FAIL |
+| F-027 | reconstructor TB V1.1 | PR-06新增四个经公开输入可达的门限邻点（ACC=±65535/±65537），期望为字面量0/1/0/-1 | PASS | ROUND_HALF改为65534或65538：均FAIL |
+| F-031 | IDAC TB V2.3 | 新增HIGHCODE-SEARCH：AMB 0..255、目标200，逐个比较floor中点127/191/223/207/199/203/201/200，最终码200 | 150 PASS（148→150） | 下一中点截为8位和：两项FAIL |
+| F-036 | PWI TB V1.2 | PWI-01/02终判纳入累计前提；fine/返回事件计数延后半拍读取 | 5 PASS | PVW尾部上限改为0或C-1：PWI-01、PWI-02均FAIL |
+| F-037 | JNT前缀V1.2、run_xsim_regression.sh | 子检查数量或通过数不足时cnt_error加1；脚本的fail_count增计`status=FAIL` | 不影响正常54/54 | ILM副本把required改为55：`status=FAIL`，TB_FAIL，脚本计1 |
+| F-038 | dynamic baseline TB | 新增按C21 §4独立计算的最终斜率参考（基础斜率、对称舍入beta平滑、无相交时序步长、限幅），每个向量比较最终提交斜率；OPT-23改为同一RUN内连续两个完整周期 | （见11.3） | （见11.3） |
+| F-016 | robustness TB V1.10 | PRC-09只统计FIR真实输出握手的资格，恢复必须发生在至少一笔不合格之后 | 67 PASS（"1 real unqualified FIR output handshake"） | FIR去掉注入资格项：PRC-09 FAIL |
+| F-017 | 同上 | PRC-10/PRC_ORDER：16位步长为0或在上半区即违规；每次START重置 | 同上 | 期望改错（步长1算违规）：FAIL |
+| F-028 | ILM TB V1.2 | ILM-04/05在整个固定电流事务段逐拍监视EN_TEST、LEDEN、LEDDAC（每段约10460拍） | 73 PASS，0违规 | Top在EN_TEST与Q3同时有效时把LEDDAC置1：ILM-04/05 FAIL（约10450个违规拍） |
+| F-029 | ISE TB V1.3 | 选中总线逐拍检查"非零即须等于期望码"，覆盖ISE-04/05与ISE-01/02候选快照 | 70 PASS | SAR9 AMB刚变为A5的首拍翻成A4：两笔ISE-04 FAIL（锁存的末值仍是A5） |
+| F-041 | periodic TB V1.2 | RRC-01要求恰好在第30个完成宏帧到期 | 70 PASS | 间隔比较提前一帧：RRC-01 FAIL（29≠30） |
+| F-040 | injection TB V1.3 | INJ-04让两个请求穿过真实DONE、DC恢复和正式结果全程保持，逐拍统计资格窗口与ready；要求资格窗口>0、ready=0，且正式结果带owner身份 | 15 PASS，eligible=2 | 去掉AMI两个互斥项：两项INJ-04 FAIL |
+| F-049 | 同上 | 锁存scheduler owner提交身份；INJ-03比较无效结果的帧号、序号、颜色 | 同上 | Top在sample_valid=0时翻转frame_id最低位：INJ-03 FAIL |
+
+### 11.3 补强过程中查明的两件事
+1. **PWI TB既有的激励差一（TB问题，已修复）**：
+   - 现象：PWI-02加入"合法退出尾部不得报错"的前提后，在当前RTL上FAIL。
+   - 根因：send_red_sample先使用cnt_red_frame再加一，而进入fine窗口的安全边界传的是cnt_red_frame+1。结果第一笔15-bit样本的帧号比fine窗口起点早一帧，PVW按PVW-39正确报帧协议错。
+   - 处理：三处进入fine的安全边界改为cnt_red_frame。RTL行为正确。
+2. **OIB-06补强版触发F-019（RTL问题，按用户裁定移入RTL第一轮）**：
+   - 期望owner表与无丢失守恒检查在当前RTL上唯一的失败点，是OIB-03的STOP discard身份：持住的是sample 24，discard报的是sample 25。其余OIB传输全部一致。
+   - 补强版OIB TB不进TB轮，暂存`phase2/held_for_rtl1/`，在RTL第一轮与F-019修复一起提交，作为F-019的永久断言。
+   - F-019的可达性结论据此更新：现有19-TB的OIB-03场景已经实际触发，只是原检查没有比较discard身份，所以一直没被发现；芯片原生节拍下仍不可达，由TC7守护。
+3. 补强OIB时还发现一种情况：结果在到达正式输出之前就遇到STOP，此时随代际清空被无事件丢弃。这在C11/C14/C15条件豁免范围内，检查对此予以豁免，不算丢失。
+
+### 11.4 TB轮全套回归（导出54a9cdc，与f485cbc基线逐TB比对）
+- 运行位置：`ppg_regression_runs/54a9cdc_20261006`（19-TB、芯片）与`54a9cdc_20261006_unit`（模块级），`git -c core.autocrlf=false archive`导出。推送时变基为4085a02，与54a9cdc只差新增的只读报告SSW18_TICK385_INVESTIGATION_20261006.md，TB与RTL内容一致。
+- 结果：
+  - 19-TB：19/19 PASS，合计1208/0，与基线相同；
+  - 芯片：7/7；
+  - 模块级：28/28。
+- 比对方法：
+  - 每个TB的xsim.log按PASS行多重集排序比对（`compare_runs.py`）；
+  - 另做一次去掉运行元数据后的全日志diff。
+  - 全部差异逐条解释如下：
+  - 19-TB PASS行：只有robustness的PRC-09、PRC-10两行文字改写（F-016/F-017，检查本身已加严），其余18个TB的PASS行逐行相同。
+  - 新增信息行：
+    - injection的`INJ04_WINDOW eligible_cycles=2 ready_cycles=0`；
+    - ILM的两行`ILM_FIXED_CURRENT_MONITOR`（10466/10469拍，0违规）。
+  - 仿真结束时刻：只有injection变化（214337500 ps→223242500 ps），原因是INJ-04改为保持请求直到DONE全程走完。其余TB结束时刻不变，只是`$finish`源码行号随TB编辑移动。
+  - 模块级PASS行：
+    - supervisor +RE-ARM（14→15）；
+    - fork +2 FORK-GEN（50→52）；
+    - IDAC +2 HIGHCODE-SEARCH（148→150）；
+    - AMI的AMI-46~49改名为AMI-DISC-1/2、AMI-SID05-1/2。改名来自3f4673d/2bb6b17，晚于基线，不是本轮改动。
+  - dynamic baseline TB的EQV逐周期追踪：
+    - 新增159条记录，来自新增的稳定等待拍和OPT-23连续两周期序列；
+    - 另有两处不是纯插入：
+      - 第602条只有最低位不同，这一位是TB输入`i_precision_mode`；
+      - 原第1217条（复位前最后一拍）在新日志中消失。
+    - 两处都是监视器与激励同在下降沿时的采样先后竞争，代码重排后先后顺序可能翻转。DUT输出字段完全一致，PASS行多重集不变。
+    - 记为观察项（该追踪本身存在采样竞争，日后做优化前后逐位比对会出现误报），本轮未修改。
+
+### 11.5 轮次调整（用户20261006决定）
+- RTL第一轮：除F-020外的原定各项（F-005/F-006、F-010、F-018、F-019+补强版OIB-06、F-021、F-022、F-023、F-034、F-035）。
+- 新增"ADC异常下的owner生命周期"轮，排在第一轮之后、F-009轮之前，包括：
+  - F-020；
+  - SSW calibration_timeout_sticky死逻辑（S1）；
+  - L-1：调度器宏帧末重挂在途owner请求；
+  - L-2：ADC丢失完成后静默停滞。
+  - 证据见SSW18_TICK385_INVESTIGATION_20261006.md。L-2是新增需求，待用户定阈值和处置方式后再开工。
+- RTL第二轮：F-009（连同F-011，FSC-14收紧为5000）。
 
 ## 附录 探针索引
 
