@@ -23,8 +23,8 @@
 //                      ppg_400hz_frame_calibration_scheduler, ppg_adc_measurement_idac_integration,
 //                      ppg_sar9_sar15_safe_selection_wrapper, ppg_system_fault_abort_supervisor
 //
-// Version:            V1.6
-// Revision Date:      2026/09/18
+// Version:            V1.7
+// Revision Date:      2026/10/07
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/23            V1.0          Erie                  Create file. First RTL implementation of contract C01 (V1.10): direct-child hierarchy, manager-wrapper safety-path table, V4/V5 joint 1024-bit ACTIVE routing, characterization CDC, Scheduler/AMI/SSW closed loop, shared physical-ADC-idle fanout, registered system fault/abort supervisor boundary, verification injection group and production-default gating.
@@ -34,6 +34,7 @@
 // 2026/08/31            V1.4          Erie                  Same integration design session, second port addition: add public output `o_source_config_update_ready`, the ready-polarity complement of the already-existing internal wire `wrapper_config_transport_busy_o` (ACTIVE wrapper's `o_config_transport_busy`, itself a pure forward of `ppg_config_cdc_bridge.o_source_busy`; already captured into a Top-internal wire since V1.0 but never exposed at the Top boundary). Closes the asymmetry the same session identified between the two SPI/glue-top source-domain write channels: the characterization channel already exposes `o_source_characterization_update_ready` so the SPI-side glue logic knows when the CDC mailbox can accept the next 6-bit transaction, but the 1024-bit V4+V5 ACTIVE channel had no equivalent -- the glue-top's SPI slave had no way to know whether it was safe to pulse `i_source_config_update_event` again without guessing a conservative worst-case delay. User confirmed exposing it as `ready` (matching the sibling signal's naming and polarity) rather than as `busy`, so this is the one deliberate inversion in this change: `assign o_source_config_update_ready = !wrapper_config_transport_busy_o;` -- everywhere else in this file `busy` stays `busy`. No existing port, assign, or instance connection touched; `wrapper_config_transport_busy_o` itself is unchanged, only newly read from a second place.
 // 2026/09/05            V1.5          Erie                  Add the section 8.4.5 P2S telemetry boundary passthrough group: three new public outputs `o_s1_calibration_applied`, `o_s1_raw`, `o_s2_raw`, each a pure pass-through of AMI's newly-added same-name outputs (ppg_adc_measurement_idac_integration.v V1.14) via new internal wires `ami_s1_calibration_applied_o`/`ami_s1_raw_o`/`ami_s2_raw_o`. Same internal-wire-then-assign forwarding pattern as `o_active_precision_mode` (V1.3). Per PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md V1.6 section 8.4.5, already fully traced to AMI's own atomic dc-recovery payload re-export (not the reconstructor's earlier raw wires -- see AMI V1.14's own changelog entry for the precision rationale). No existing port, assign, or instance connection touched. Bit-identical production behavior confirmed: full-hierarchy iverilog rebuild plus the main smoke TB re-run identically (SMOKE_TB_PASS, real_adc_responses=47 measurement_result_valid=32, same as before this change).
 // 2026/09/18            V1.6          Erie                  Pure internal wiring change while fixing the real SID-05 calibration-search-deadlock bug (see ppg_400hz_frame_calibration_scheduler.v V1.8 and ppg_adc_measurement_idac_integration.v V1.15 for the actual defect and root cause): connect the scheduler's new single-cycle o_cal_owner_deadline_event output directly to AMI's new i_cal_owner_deadline_event input via a new internal wire sched_cal_owner_deadline_event_o. No new top-level port, no logic at this level -- both endpoints already existed as sibling child instances in this module; this is only the missing point-to-point connection between them. Verified alongside the child-module fixes via a real iverilog rebuild of the startup-IDAC-calibration TB hierarchy.
+// 2026/10/07            V1.7          Erie                  Owner-lifecycle round, wiring only: AMI o_adc_transaction_lost_event to scheduler and SSW; AMI o_amb/dcs_r/dcs_ir_pending_valid (previously unconnected) OR-ed into scheduler i_idac_boundary_request; new output o_ami_owner_lost_sticky.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -57,8 +58,8 @@
 //                      ppg_400hz_frame_calibration_scheduler、ppg_adc_measurement_idac_integration、
 //                      ppg_sar9_sar15_safe_selection_wrapper、ppg_system_fault_abort_supervisor
 //
-// 当前版本:           V1.6
-// 修订日期:           2026年09月18日
+// 当前版本:           V1.7
+// 修订日期:           2026年10月07日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月23日        V1.0          Erie                  创建文件。合同C01（V1.10）首次RTL实现：直接子模块层次、manager-wrapper安全路径表、V4/V5联合1024-bit ACTIVE路由、表征控制CDC、Scheduler/AMI/SSW闭环、共享物理ADC空闲同源扇出、注册式系统故障/abort supervisor边界、验证注入组与生产默认关闭门控
@@ -68,6 +69,7 @@
 // 2026年08月31日        V1.4          Erie                  同一集成设计会话，第二处端口新增：新增公开输出`o_source_config_update_ready`，是已存在内部wire`wrapper_config_transport_busy_o`（ACTIVE平面`o_config_transport_busy`的纯转发，其本身是`ppg_config_cdc_bridge.o_source_busy`的纯转发；这根wire从V1.0起就已经被Top接住，只是从来没有导出到Top边界）的ready极性取反版本。闭合同一会话发现的SPI/glue顶层两条source域写入通道之间的不对称：表征通道已经有`o_source_characterization_update_ready`让SPI侧glue逻辑知道CDC邮箱能不能接收下一笔6-bit事务，但1024-bit V4+V5 ACTIVE通道原来没有对应信号——glue顶层的SPI从机没有办法知道能不能安全地再拉一次`i_source_config_update_event`，只能猜一个保守延时。用户确认按ready极性导出（跟表征通道那个信号的命名和极性对称），而不是按busy导出，所以这是本文件里少有的一处故意取反：`assign o_source_config_update_ready = !wrapper_config_transport_busy_o;`——本文件其余地方busy信号一律保持busy极性不取反。未改动任何既有端口、assign或例化连接；`wrapper_config_transport_busy_o`本身没有变化，只是多了一处读取它的地方。
 // 2026年09月05日        V1.5          Erie                  按合同8.4.5节新增P2S遥测边界透传端口组：新增3个公开输出`o_s1_calibration_applied`、`o_s1_raw`、`o_s2_raw`，各自纯转发AMI新增的同名输出（`ppg_adc_measurement_idac_integration.v`V1.14），经新增内部wire`ami_s1_calibration_applied_o`/`ami_s1_raw_o`/`ami_s2_raw_o`承接。沿用`o_active_precision_mode`（V1.3）已经建立的"内部wire+顶层assign转发"写法。依据`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`V1.6第8.4.5节，已经完整溯源到AMI自己DC恢复原子事务载荷的重新导出版本（不是重构器更早的raw wire——精确性理由见AMI V1.14自己的修订记录）。未改动任何既有端口、assign或例化连接。真实回归确认逐位不变：完整层次iverilog重新编译+主烟雾TB重跑结果一致（`SMOKE_TB_PASS`，real_adc_responses=47 measurement_result_valid=32，与改动前一致）。
 // 2026年09月18日        V1.6          Erie                  纯内部接线改动，配合修复真实SID-05校准搜索死锁bug（真实缺陷与根因见`ppg_400hz_frame_calibration_scheduler.v`V1.8与`ppg_adc_measurement_idac_integration.v`V1.15）：新增内部wire`sched_cal_owner_deadline_event_o`，把调度器新增的单周期`o_cal_owner_deadline_event`输出直接接到AMI新增的`i_cal_owner_deadline_event`输入。不新增顶层端口，本层无逻辑——两端本来就是本模块的子例化，只是缺了这一条点对点连线。与两处子模块修复一起，通过真实iverilog重新编译启动IDAC校准TB层次验证。
+// 2026年10月07日        V1.7          Erie                  owner生命周期轮，仅连线：AMI o_adc_transaction_lost_event接调度器与SSW；AMI三路o_*_pending_valid（原悬空）合并接调度器i_idac_boundary_request；新增输出o_ami_owner_lost_sticky。
 //
 // 已知开放项（不属于本次实现范围，已与用户逐项确认）：
 // 1) i_leddac_r_code/i_leddac_ir_code：LED baseline闭环算法和寄存器位在PPG_NEW_CHAT_CONTEXT.md中
@@ -221,6 +223,7 @@ module ppg_control_top
 		output o_ami_idac_idle,                                   // AMI IDAC控制器真实空闲状态
 		output o_active_precision_mode,                           // 系统唯一committed采集精度实时电平，供片外glue顶层选择物理ADC Stage1/Stage2 DONE并随P2S固定字段外发
 		output o_ami_integration_protocol_error_sticky,           // AMI集成协议异常历史诊断
+		output o_ami_owner_lost_sticky,                           // AMI完成丢失超时作废历史诊断，新START不清
 		output o_ssw_wrapper_idle,                                // SSW封装完整空闲状态
 		output o_ssw_switch_protocol_error_sticky,                // SSW切换协议错误保持
 		output o_ssw_transaction_mismatch_sticky,                 // SSW事务失配保持
@@ -619,7 +622,12 @@ module ppg_control_top
 	wire ami_transaction_start_fire_o;                            // 内部转发：AMI返回的fire一致性旁带
 	wire ami_adc_transaction_complete_event_o;                    // 内部转发：真实ADC完成单拍
 	wire ami_adc_transaction_success_o;                           // 内部转发：完成结果处理资格
-	wire [C_SAMPLE_INDEX_WIDTH - 1:0] ami_adc_complete_sample_index_o; // 内部转发：完成身份序号
+	wire [C_SAMPLE_INDEX_WIDTH - 1:0] ami_adc_complete_sample_index_o; // 内部转发：完成或作废身份序号，只在两种事件拍有效
+	wire ami_adc_transaction_lost_event_o;                        // 内部转发：AMI在途owner完成丢失超时作废单拍
+	wire ami_amb_pending_valid_o;                                 // 内部转发：AMI内IDAC的AMB候选等待安全边界
+	wire ami_dcs_r_pending_valid_o;                               // 内部转发：AMI内IDAC的红光DC候选等待安全边界
+	wire ami_dcs_ir_pending_valid_o;                              // 内部转发：AMI内IDAC的红外DC候选等待安全边界
+	wire flag_idac_boundary_request;                              // 内部转发：IDAC三路任一候选待提交，供调度器启动搜索空闲期补发边界
 	wire ami_calibration_sample_valid_o;                          // 内部转发：保持型SAR9校准请求
 	wire ami_calibration_color_ir_o;                              // 内部转发：DCS颜色，AMB固定为0
 	wire ami_calibration_precision_mode_o;                        // 内部转发：校准精度，必须为SAR9
@@ -675,6 +683,7 @@ module ppg_control_top
 	wire [9:0] ami_s2_raw_o;                                      // 内部转发：第二级冗余物理判决位，与ami_s1_raw_o锁在同一拍，同样供P2S边界透传
 	wire ami_switch_hold_new_transaction_o;                       // 内部转发：精度切换期间暂停新事务
 	wire ami_integration_protocol_error_sticky_o;                 // 内部转发：集成协议异常历史诊断
+	wire ami_owner_lost_sticky_o;                                 // 内部转发：完成丢失超时作废历史诊断
 	wire ami_wrapper_fault_blocking_o;                            // 内部转发：AMI活动阻断故障
 	wire ami_normal_measurement_eligible_o;                       // 内部转发：AMI允许NORMAL测量
 	wire ami_datapath_empty_o;                                    // 内部转发：AMI保持型数据链已经排空
@@ -722,6 +731,7 @@ module ppg_control_top
 	wire [15:0] sup_system_fault_summary_o;                       // 内部转发：按位记录的历史阻断故障来源汇总
 	wire sup_result_discard_summary_sticky_o;                     // 内部转发：正式结果生命周期丢弃历史sticky，非阻断
 
+	assign flag_idac_boundary_request = ami_amb_pending_valid_o || ami_dcs_r_pending_valid_o || ami_dcs_ir_pending_valid_o; // 三路IDAC候选待提交合并为调度器边界请求；L-3启动搜索空闲期边界来源
 
 	//===================<ACTIVE wrapper接口内部网>===================//
 	// wrapper_run_enable_o、wrapper_allow_new_transaction_o、wrapper_start_ack_event_o、wrapper_o_stop_ack_event已在上文提前声明
@@ -885,6 +895,7 @@ module ppg_control_top
 			.i_switch_hold_new_transaction(ami_switch_hold_new_transaction_o), // 接帧调度器.i_switch_hold_new_transaction：精度切换期间暂停新事务
 			.i_ami_fault_blocking(ami_wrapper_fault_blocking_o),  // 接帧调度器.i_ami_fault_blocking：AMI活动阻断故障
 			.i_ssw_fault_blocking(ssw_wrapper_fault_blocking_o),  // 接帧调度器.i_ssw_fault_blocking：SSW波形保持或模拟时序路径报告的阻断故障
+			.i_idac_boundary_request(flag_idac_boundary_request), // 接帧调度器.i_idac_boundary_request：IDAC候选待提交请求，仅启动搜索空闲期补发边界
 			.i_amb_code(ami_amb_code_o),                          // 接帧调度器.i_amb_code：当前AMB committed码
 			.i_dcs_r_code(ami_dcs_r_code_o),                      // 接帧调度器.i_dcs_r_code：当前RED DC committed码（DCS_R）（直流搜索红光通道）
 			.i_dcs_ir_code(ami_dcs_ir_code_o),                    // 接帧调度器.i_dcs_ir_code：当前IR DC committed码（DCS_IR）（直流搜索红外通道）
@@ -938,6 +949,7 @@ module ppg_control_top
 			.i_adc_transaction_complete_event(ami_adc_transaction_complete_event_o), // 接帧调度器.i_adc_transaction_complete_event：真实ADC完成单拍
 			.i_adc_transaction_success(ami_adc_transaction_success_o), // 接帧调度器.i_adc_transaction_success：完成结果处理资格
 			.i_adc_complete_sample_index(ami_adc_complete_sample_index_o), // 接帧调度器.i_adc_complete_sample_index：完成身份序号
+			.i_adc_transaction_lost_event(ami_adc_transaction_lost_event_o), // 接帧调度器.i_adc_transaction_lost_event：AMI超时作废单拍，按序号与代际释放owner
 			.i_owner_q3_window_closed(ssw_owner_q3_window_closed_o), // 接帧调度器.i_owner_q3_window_closed：在途owner自身选定Q3窗口已关闭，早于此的DONE不得构成成功完成
 			.i_adc_idle(flag_adc_physical_idle),                  // 接帧调度器.i_adc_idle：物理ADC和DONE已排空
 			.i_analog_safe(ssw_analog_safe_o),                    // 接帧调度器.i_analog_safe：模拟输出允许停止或切换
@@ -1038,6 +1050,7 @@ module ppg_control_top
 			.i_adc_transaction_complete_event(ami_adc_transaction_complete_event_o), // 接SSW.i_adc_transaction_complete_event：输入端输入模数转换事务完成事件直流码通路低位编码端
 			.i_adc_transaction_success(ami_adc_transaction_success_o), // 接SSW.i_adc_transaction_success：输入端输入模数转换事务成功直流码通路
 			.i_adc_complete_sample_index(ami_adc_complete_sample_index_o), // 接SSW.i_adc_complete_sample_index：输入端输入模数转换完成采样序号直流码通路低位编码端
+			.i_adc_transaction_lost_event(ami_adc_transaction_lost_event_o), // 接SSW.i_adc_transaction_lost_event：AMI超时作废单拍，SSW同步释放owner
 			.i_adc_idle(flag_adc_physical_idle),                  // 接SSW.i_adc_idle：输入端输入模数转换空闲直流码通路低位编码端
 			.o_en_tia_low(ssw_en_tia_low_o),                      // 接SSW.o_en_tia_low：输出端输出使能跨阻放大低有效低位编码端
 			.o_leddac(ssw_leddac_o),                              // 接SSW.o_leddac：输出端输出发光数模低位编码端
@@ -1127,6 +1140,7 @@ module ppg_control_top
 			.o_adc_transaction_complete_event(ami_adc_transaction_complete_event_o), // 接AMI.o_adc_transaction_complete_event：CLK_DOUT同步、RAW锁存和S1归属后的唯一完成脉冲
 			.o_adc_transaction_success(ami_adc_transaction_success_o), // 接AMI.o_adc_transaction_success：与完成脉冲绑定的ADC结果有效资格
 			.o_adc_complete_sample_index(ami_adc_complete_sample_index_o), // 接AMI.o_adc_complete_sample_index：与完成脉冲绑定的启动事务序号
+			.o_adc_transaction_lost_event(ami_adc_transaction_lost_event_o), // 接AMI.o_adc_transaction_lost_event：在途owner完成丢失超时作废单拍，广播给调度器与SSW
 			.i_transaction_precision_mode(sched_transaction_precision_mode_o), // 接AMI.i_transaction_precision_mode：当前事务采用的9-bit或15-bit精度
 			.i_transaction_frame_id(sched_transaction_frame_id_o), // 接AMI.i_transaction_frame_id：当前事务真实物理帧号
 			.i_transaction_sample_index(sched_transaction_sample_index_o), // 接AMI.i_transaction_sample_index：当前事务全局序号
@@ -1274,9 +1288,9 @@ module ppg_control_top
 			.o_amb_search_exhausted(),                            // 接AMI.o_amb_search_exhausted：AMB搜索耗尽状态
 			.o_dcs_r_search_exhausted(),                          // 接AMI.o_dcs_r_search_exhausted：红光DC搜索耗尽状态
 			.o_dcs_ir_search_exhausted(),                         // 接AMI.o_dcs_ir_search_exhausted：红外DC搜索耗尽状态
-			.o_amb_pending_valid(),                               // 接AMI.o_amb_pending_valid：AMB候选等待提交状态
-			.o_dcs_r_pending_valid(),                             // 接AMI.o_dcs_r_pending_valid：红光DC候选等待提交状态
-			.o_dcs_ir_pending_valid(),                            // 接AMI.o_dcs_ir_pending_valid：红外DC候选等待提交状态
+			.o_amb_pending_valid(ami_amb_pending_valid_o),        // 接AMI.o_amb_pending_valid：AMB候选等待提交状态，并入调度器边界请求
+			.o_dcs_r_pending_valid(ami_dcs_r_pending_valid_o),    // 接AMI.o_dcs_r_pending_valid：DC_R搜索阶段候选码待生效，同样可触发空闲边界
+			.o_dcs_ir_pending_valid(ami_dcs_ir_pending_valid_o),  // 接AMI.o_dcs_ir_pending_valid：DC_IR阶段待生效码，三路之一置位即请求边界
 			.o_amb_code_at_min(),                                 // 接AMI.o_amb_code_at_min：AMB committed码位于配置下界
 			.o_amb_code_at_max(),                                 // 接AMI.o_amb_code_at_max：AMB committed码位于配置上界
 			.o_dcs_r_code_at_min(),                               // 接AMI.o_dcs_r_code_at_min：红光DC committed码位于配置下界
@@ -1330,6 +1344,7 @@ module ppg_control_top
 			.o_switch_timeout_sticky(),                           // 接AMI.o_switch_timeout_sticky：精度安全提交超时历史
 			.o_precision_protocol_error_sticky(),                 // 接AMI.o_precision_protocol_error_sticky：精度控制协议异常历史
 			.o_integration_protocol_error_sticky(ami_integration_protocol_error_sticky_o), // 接AMI.o_integration_protocol_error_sticky：集成协议异常历史诊断（）（专属标识一）
+			.o_owner_lost_sticky(ami_owner_lost_sticky_o),        // 接AMI.o_owner_lost_sticky：完成丢失超时作废历史诊断
 			.o_wrapper_fault_blocking(ami_wrapper_fault_blocking_o), // 接AMI.o_wrapper_fault_blocking：Wrapper当前阻断故障汇总
 			.o_normal_measurement_eligible(ami_normal_measurement_eligible_o), // 接AMI.o_normal_measurement_eligible：正式NORMAL测量资格
 			.o_adc_chain_idle(),                                  // 接AMI.o_adc_chain_idle：ADC捕获及Stage1流水空闲
@@ -1530,6 +1545,7 @@ module ppg_control_top
 	assign o_ami_idac_idle = ami_idac_idle_o;                     // 对外输出：内部转发：AMI IDAC搜索和提交已经排空
 	assign o_active_precision_mode = ami_active_precision_mode_o; // 对外输出：内部转发：系统唯一committed采集精度实时电平，非结果快照
 	assign o_ami_integration_protocol_error_sticky = ami_integration_protocol_error_sticky_o; // 对外输出：内部转发：集成协议异常历史诊断
+	assign o_ami_owner_lost_sticky = ami_owner_lost_sticky_o;     // 对外输出：AMI完成丢失超时作废历史，芯片顶层送SPI 0x0108 bit6
 	assign o_ssw_wrapper_idle = ssw_wrapper_idle_o;               // 对外输出：内部转发：输出端输出封装空闲低位编码端
 	assign o_ssw_switch_protocol_error_sticky = ssw_switch_protocol_error_sticky_o; // 对外输出：内部转发：输出端输出切换协议错误保持高位编码端低位编码端
 	assign o_ssw_transaction_mismatch_sticky = ssw_transaction_mismatch_sticky_o; // 对外输出：内部转发：输出端输出事务失配保持高位编码端

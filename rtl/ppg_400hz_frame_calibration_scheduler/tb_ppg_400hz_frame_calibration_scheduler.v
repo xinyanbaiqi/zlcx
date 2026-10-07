@@ -227,6 +227,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		.i_switch_hold_new_transaction(i_switch_hold_new_transaction),
 		.i_ami_fault_blocking(i_ami_fault_blocking),
 		.i_ssw_fault_blocking(i_ssw_fault_blocking),
+		.i_idac_boundary_request(1'b0), // owner生命周期轮新增L-3边界请求，既有场景不请求空闲边界，接地
 		.i_amb_code(i_amb_code),
 		.i_dcs_r_code(i_dcs_r_code),
 		.i_dcs_ir_code(i_dcs_ir_code),
@@ -280,6 +281,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		.i_adc_transaction_complete_event(i_adc_transaction_complete_event),
 		.i_adc_transaction_success(i_adc_transaction_success),
 		.i_adc_complete_sample_index(i_adc_complete_sample_index),
+		.i_adc_transaction_lost_event(1'b0), // owner生命周期轮新增作废输入，既有场景无作废，接地
 		.i_owner_q3_window_closed(1'b1), // V1.6: 恒1=恢复RTL V1.8前"Q3随时算已关闭"语义；Q3门控覆盖在19-TB LFA-06
 		.i_adc_idle(i_adc_idle),
 		.i_analog_safe(i_analog_safe),

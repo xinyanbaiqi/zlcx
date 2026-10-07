@@ -192,6 +192,7 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
 		.i_adc_transaction_complete_event(i_adc_transaction_complete_event),
 		.i_adc_transaction_success(i_adc_transaction_success),
 		.i_adc_complete_sample_index(i_adc_complete_sample_index),
+		.i_adc_transaction_lost_event(1'b0), // owner生命周期轮新增作废输入，既有场景无作废，接地
 		.i_adc_idle(i_adc_idle),
 		.o_en_tia_low(o_en_tia_low),
 		.o_leddac(o_leddac),

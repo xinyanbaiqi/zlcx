@@ -633,6 +633,7 @@ module tb_ppg_amb_recheck_scheduler
 		.i_dcs_revalidate_failed(i_dcs_revalidate_failed),       // 连接DCS失败事件
 		.i_amb_sample_accepted_event(i_amb_sample_accepted_event), // 连接AMB消费事件
 		.i_dcs_sample_accepted_event(i_dcs_sample_accepted_event), // 连接DCS消费事件
+		.i_calibration_request_withdraw_event(1'b0), // owner生命周期轮新增撤销输入，本TB既有场景不产生撤销，接地；F-020检查在第三步补
 		.o_amb_sequence_start(o_amb_sequence_start),             // 观察AMB启动单拍
 		.o_dcs_revalidate_accept(o_dcs_revalidate_accept),       // 观察DCS接纳单拍
 		.i_calibration_sample_ready(i_calibration_sample_ready), // 驱动下游ready

@@ -16,8 +16,8 @@
 // Referrences:		PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.10
-// Revision Date:	2026-10-06
+// Version:			V1.11
+// Revision Date:	2026-10-07
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026-08-13           V1.0       Erie        Create file.
@@ -31,6 +31,7 @@
 // 2026-09-18           V1.8     Erie        Fix a real permanent deadlock discovered while investigating workline-D's SID-05 pending item (C25 contract section 9.4.1, "each calibration ADC owner commits no later than local tick 248"): flag_cal_owner_deadline already correctly suppressed the candidate window and set B_OWNER_DEADLINE_TIMEOUT when a calibration owner missed its tick-248 deadline (this half was already correct, confirmed by real xsim), but that suppression was never reported back to AMI as a distinguishable event. AMI's flag_calibration_request_inflight (ppg_adc_measurement_idac_integration.v) only ever clears on a genuine consumed search result (flag_amb_sample_accepted/flag_dcs_sample_accepted) or on STOP/abort -- a deadline-suppressed request produces neither, since by construction no ADC owner and no transaction ever existed for it. Confirmed via a real iverilog A/B trace (not just static reading, per this project's standing methodology): forcing i_adc_physical_idle=0 across a genuine mid-search DC_R candidate's tick-248 deadline correctly clears B_CAL_WAVE_PENDING at tick 248 (flag_cal_owner_deadline fires exactly once, as designed), but AMI's flag_calibration_request_inflight then stays 1 forever, so AMI never re-arms calibration_sample_valid_o, B_CAL_REQ_PENDING never becomes 1 again at any future tick-624 subframe boundary, and B_CAL_CONTEXT_SEEN permanently locks at 1 -- the whole calibration search (AMB or DCS_CAL, whichever was in progress) stalls forever and never recovers on its own, confirmed by a real trace showing 12/12 subsequent candidates all fail with "real Q3 window never opened". This is a genuine functional gap, not merely a missing test: any real hardware condition that legitimately delays the physical ADC past the 248-tick deadline (not just this synthetic test) would permanently strand the calibration search, since the contract's own graceful-degradation intent (soft, non-blocking B_OWNER_DEADLINE_TIMEOUT diagnostic, no fault escalation, per the existing LFA-09/OIB-02 precedent for the RED/IR owner-deadline siblings) is defeated by AMI silently never retrying. Fix: added a new single-cycle event output o_cal_owner_deadline_event, wired directly to the pre-existing, already self-clearing flag_cal_owner_deadline combinational pulse (confirmed self-clearing after exactly one cycle by the same trace, since B_CAL_WAVE_PENDING -- one of its own AND-terms -- clears on the same edge) -- no new state, no new timing path, purely an existing internal pulse exposed as a port so AMI can react to it. AMI V1.15 (see that file's own changelog) consumes this new event as an additional flag_calibration_request_inflight clear condition, letting it re-arm calibration_sample_valid_o for a fresh retry of the same still-wanted candidate on the very next opportunity. This fix only touches the calibration (AMB/DCS_CAL) owner-deadline path that AMI's calibration_sample_valid_o request/accept handshake depends on; the sibling RED/IR NORMAL-measurement owner-deadline timeouts (flag_red_owner_deadline/flag_ir_owner_deadline, LFA-09/OIB-02) use an entirely different request path (ppg_normal_transaction_fork.v, not AMI's calibration arbitration) and were not touched or re-investigated -- out of scope for this fix.
 // 2026-10-01           V1.9     Erie        Task C (tick-248 A/B, TASKC_TICK248_P2S_20261001.md): mask the V1.8 o_cal_owner_deadline_event with !adc_owner_commit_event_o, the same gate the internal deadline branch already uses. SSW's calibration owner window includes local tick 248 (<= C_CAL_OWNER_DEADLINE) while flag_cal_owner_deadline fires at >= 248, so an owner committing exactly at tick 248 (legal: C25 SID-05 "no later than local tick 248", contract 4.5/10.3 report a deadline only when the owner has not fired) was committed normally here but still reported as a missed deadline to AMI. A real xsim/iverilog A/B on ppg_control_top showed the consequence: AMI released its in-flight request at tick 249 and latched a stale request before IDAC consumed the result; at each search-stage end that stale request was granted, so one extra previous-stage calibration conversion ran (an AMB_CAL inside DC_R, a DCS_IR after startup completed), its result arrived unqualified and set the IDAC protocol-error sticky. With the mask all of this disappears, and commit-at-247 and truly-missed-deadline behaviour are unchanged event for event. One-line RTL change; the event is still a single-cycle pulse on a real miss.
 // 2026-10-06           V1.10    Erie        ABCD review F-010: flag_calibration_rollover now also requires flag_lifecycle_active. Previously a STOP-ack/abort (or fault/run_enable drop) landing on tick 4999 of a CAL macro frame while a calibration request was held let the post-FSM rollover overlay set FRAME_ACTIVE/CAL_REQ_ACTIVE back to 1 after the main FSM had cleared them, so one extra 5000-cycle CAL frame ran after cancellation (frame_id jumped by two, drain delayed ~2.5 ms). Normal rollover in RUN is unchanged.
+// 2026-10-07           V1.11    Erie        Owner-lifecycle round. New input i_adc_transaction_lost_event: a void matching the in-flight owner (sample index and generation) releases B_INFLIGHT without success or color-done and marks the frame failed; an unmatched void is a completion mismatch. L-4: transaction_start_valid_o masked when the earliest candidate is past its owner deadline (RED >283, IR >443, CAL >248); the deadline tick itself still commits on time. L-1: the CAL macro-frame end no longer re-pends a request whose owner is already in flight. L-3: new input i_idac_boundary_request and a one-cycle idle IDAC boundary, only while startup search is incomplete, the scheduler is idle and no frame starts this cycle.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -47,8 +48,8 @@
 // 参考资料:		PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.10
-// 修订日期:		2026年10月06日
+// 当前版本:		V1.11
+// 修订日期:		2026年10月07日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026-09-18           V1.8     Erie        修复调查工作线D待查项SID-05（合同9.4.1节"每个校准ADC owner不得晚于本地tick 248提交"）时发现的一个真实永久死锁：flag_cal_owner_deadline在校准owner错过tick-248截止时本来就正确抑制候选窗口并置位B_OWNER_DEADLINE_TIMEOUT（这一半已确认正确，真实xsim验证过），但这次抑制从未以可区分的事件形式回报给AMI。AMI的flag_calibration_request_inflight（ppg_adc_measurement_idac_integration.v）只在真实消费到搜索结果（flag_amb_sample_accepted/flag_dcs_sample_accepted）或STOP/abort时才清零——被抑制的请求两者都不会产生，因为按设计它从未真正建立过ADC owner或事务。真实iverilog A/B追查确认（不是仅凭静态阅读，遵循本项目一贯方法论）：对一笔真实进行中的DC_R候选，在其tick-248截止跨越期间强制i_adc_physical_idle=0，能正确在tick 248让B_CAL_WAVE_PENDING清零（flag_cal_owner_deadline按设计只脉冲一拍），但AMI的flag_calibration_request_inflight之后永远保持1，导致AMI再也不会重新拉高calibration_sample_valid_o，B_CAL_REQ_PENDING在之后任何一次tick-624子帧边界都不会再变成1，B_CAL_CONTEXT_SEEN永久锁定在1——整个校准搜索（无论当时是AMB还是DCS_CAL）从此卡死不再自行恢复，真实trace显示后续12/12个候选全部"real Q3 window never opened"。这是真实功能性缺口，不只是缺测试：任何让物理ADC真实晚于248拍变idle的硬件场景（不只是这次的合成测试）都会永久搁浅校准搜索，因为合同本身"优雅降级"的设计意图（软性、非阻断的B_OWNER_DEADLINE_TIMEOUT诊断，不升级故障，与既有RED/IR owner-deadline姊妹机制LFA-09/OIB-02同一惯例）被AMI静默不重试这一点架空了。修复：新增一个单周期事件输出o_cal_owner_deadline_event，直接接到原本就存在、本来就自清零的flag_cal_owner_deadline组合脉冲上（同一份trace确认它恰好一拍后自动清零，因为B_CAL_WAVE_PENDING——它自己的与项之一——在同一拍跟着清零）——不新增状态，不新增时序路径，只是把一个已有的内部脉冲暴露成端口供AMI响应。AMI V1.15（见该文件自己的修订记录）把这个新事件接成flag_calibration_request_inflight的额外清零条件，让它能为同一个仍在等待的候选立即重新拉高calibration_sample_valid_o发起重试。本次修复只涉及AMI calibration_sample_valid_o请求/接受握手依赖的校准（AMB/DCS_CAL）owner截止通路；姊妹机制RED/IR NORMAL测量owner截止超时（flag_red_owner_deadline/flag_ir_owner_deadline，LFA-09/OIB-02）走的是完全不同的请求通路（ppg_normal_transaction_fork.v，非AMI的校准仲裁），本次未触碰也未重新调查——不在本次修复范围内。
@@ -62,6 +63,7 @@
 // 2026-08-24           V1.7     Erie        补上合同9.1节一直写着、但从未真正接过线的调度器接收端校准资格复核：i_run_profile此前是声明后从未被引用的死端口，i_input_source只被锁存进B_FRAME_INPUT_SOURCE转发给SSW波形槽做标记——两者都从未参与calibration_sample_ready_o或flag_calibration_request_valid的判断，导致对非法（CHARACTERIZATION、外部电流或其他非NORMAL_PPG+PHOTODIODE）校准请求的唯一真实防线是AMI单边的源端门控，不是合同描述的AMI+Scheduler双边检查。动手前先按PPG_CONTRACT_CLOSURE_MATRIX.md的规矩核对了tb_ppg_control_top.v TOP-20的证据（SMOKE-21/22）并重新对照合同9.1节冻结的calibration_request_qualified公式确认这条确实是MUST，不是描述性文字。修复过程中还发现：calibration_sample_ready_o原来根本没有引用过flag_calibration_request_valid，也就是说即使原来就存在的SAR9精度那一项检查，也只是在事后触发一次B_PROTOCOL_ERROR（约621行的i_calibration_sample_valid&&!flag_calibration_request_valid分支），并没有真正阻止calibration_sample_ready_o/flag_calibration_request_fire让非法请求建立波形上下文、ADC owner或pending状态——与合同9.1节"只有calibration_request_qualified=1...ready才允许为1"的要求矛盾。修复：新增RUN_PROFILE_NORMAL/INPUT_SOURCE_PHOTODIODE两个localparam，把flag_calibration_request_valid扩展成同时要求i_run_profile==RUN_PROFILE_NORMAL && i_input_source==INPUT_SOURCE_PHOTODIODE，并把flag_calibration_request_valid直接与到calibration_sample_ready_o里，让非法请求在ready这一层就被挡住，不是事后才标记；原有621行附近的B_PROTOCOL_ERROR触发本来就是靠同一个flag，不需要再改。这条关闭了closure matrix里P07相邻的scheduler端实现缺口；tb_ppg_400hz_frame_calibration_scheduler.v新增的FSC-58/59是这条路径第一份真实测试覆盖——合同自检表里此前写着的"FSC-17"其实从未在这份TB里真正存在过（真实的FSC-17测的是纯RED场景一个无关的owner commit计数），所以这条不仅没实现，之前也从未被测过。
 // 2026-10-01           V1.9     Erie        任务C（tick-248 A/B，见TASKC_TICK248_P2S_20261001.md）：给V1.8新增的o_cal_owner_deadline_event加上!adc_owner_commit_event_o屏蔽，与内部截止分支原有门控一致。SSW校准owner窗口包含local tick 248（<= C_CAL_OWNER_DEADLINE），而flag_cal_owner_deadline在>= 248时成立，因此owner恰在tick 248提交时（C25 SID-05"不得晚于local tick 248"，合同4.5/10.3节只在owner仍未fire时才回报截止，属合法按时提交）本模块按正常提交处理，却仍向AMI回报一次截止。ppg_control_top真实xsim/iverilog A/B确认后果：AMI在tick 249释放在途请求，并在IDAC消费结果之前锁存一笔陈旧请求；每个搜索阶段末尾这笔陈旧请求都会被接受，从而多做一次上一阶段的校准转换（DC_R阶段插入一次AMB_CAL，启动搜索完成后又插入一次DCS_IR），其结果作为不合格样本到达并置位IDAC协议错误sticky。加屏蔽后上述现象全部消失，tick 247提交与真正错过截止两种情形逐事件不变。RTL只改一行；真正错过截止时事件仍是单周期脉冲。
 // 2026-10-06           V1.10    Erie        ABCD复核F-010：flag_calibration_rollover增加flag_lifecycle_active条件。此前校准请求保持期间，STOP确认/abort（或故障、run_enable撤销）落在CAL宏帧tick 4999时，主FSM之后的滚动叠加会把已清除的FRAME_ACTIVE/CAL_REQ_ACTIVE重新置1，撤销后多跑一个5000拍CAL帧（frame_id跳两号，排空延迟约2.5 ms）。RUN中的正常滚动不变
+// 2026-10-07           V1.11    Erie        owner生命周期轮。新增输入i_adc_transaction_lost_event：与在途owner序号和代际匹配的作废释放B_INFLIGHT，不置success或颜色完成位，并使该帧失败；不匹配的作废按DONE错配处理。L-4：最早候选越过本槽位owner截止（RED>283、IR>443、CAL>248）时屏蔽transaction_start_valid_o，截止相位当拍仍可按时提交。L-1：校准宏帧末不再重挂已成为在途owner的请求。L-3：新增输入i_idac_boundary_request与单拍空闲IDAC边界，只在启动搜索未完成、调度器空闲且本拍不开帧时出现。
 module ppg_400hz_frame_calibration_scheduler
 #(
 	parameter C_FRAME_ID_WIDTH = 16,            // 400 Hz物理帧号宽度
@@ -101,6 +103,7 @@ module ppg_400hz_frame_calibration_scheduler
 	input i_switch_hold_new_transaction,        // 精度切换期间暂停新事务
 	input i_ami_fault_blocking,                 // AMI活动阻断故障
 	input i_ssw_fault_blocking,                 // SSW波形保持或模拟时序路径报告的阻断故障
+	input i_idac_boundary_request,              // AMI内IDAC任一路候选码等待安全边界提交，供启动搜索空闲期补发边界
 	input [C_IDAC_CODE_WIDTH - 1:0]i_amb_code,  // 当前AMB committed码
 	input [C_IDAC_CODE_WIDTH - 1:0]i_dcs_r_code, // 当前RED DC committed码
 	input [C_IDAC_CODE_WIDTH - 1:0]i_dcs_ir_code, // 当前IR DC committed码
@@ -163,7 +166,8 @@ module ppg_400hz_frame_calibration_scheduler
 	output [C_SAMPLE_INDEX_WIDTH - 1:0]o_adc_owner_sample_index, // owner正式序号
 	input i_adc_transaction_complete_event,     // 真实ADC完成单拍
 	input i_adc_transaction_success,            // 完成结果处理资格
-	input [C_SAMPLE_INDEX_WIDTH - 1:0]i_adc_complete_sample_index, // 完成身份序号
+	input [C_SAMPLE_INDEX_WIDTH - 1:0]i_adc_complete_sample_index, // 完成或作废身份序号，只在两种事件拍有效
+	input i_adc_transaction_lost_event,         // AMI在途owner完成丢失超时作废单拍，与完成事件互斥
 	input i_owner_q3_window_closed,             // 在途owner自身选定Q3窗口已关闭，早于此的DONE不得构成成功完成
 	input i_adc_idle,                           // 物理ADC和DONE已排空
 	input i_analog_safe,                        // 模拟输出允许停止或切换
@@ -354,6 +358,9 @@ module ppg_400hz_frame_calibration_scheduler
 	wire flag_transaction_candidate;            // 存在最早owner候选
 	wire flag_completion_match;                 // DONE身份匹配
 	wire flag_completion_success;               // 匹配且成功且非丢弃
+	wire flag_owner_lost_match;                 // AMI作废事件与在途owner序号及代际一致
+	wire flag_candidate_expired;                // 当前最早候选已越过本槽位owner截止相位，不得再提交
+	wire flag_idle_idac_safe_boundary;          // 启动搜索中调度器空闲且本拍不开帧时为IDAC待提交候选补发的单拍边界
 	wire flag_red_owner_deadline;               // RED owner截止到达
 	wire flag_ir_owner_deadline;                // IR波形未提交ADC owner时触发的443 tick超时条件
 	wire flag_cal_owner_deadline;               // 校准owner截止到达
@@ -454,18 +461,21 @@ module ppg_400hz_frame_calibration_scheduler
 
 	//其他信号连线
 	assign flag_transaction_candidate = flag_candidate_calibration || flag_candidate_red || flag_candidate_ir; // 存在最早未提交owner
-	assign transaction_start_valid_o = flag_transaction_candidate && i_adc_owner_ready && i_allow_new_transaction && flag_lifecycle_active; // SSW ready独立门控AMI valid；flag_lifecycle_active在STOP/abort/故障发生的同一拍归零，是LFA-01/LFA-02"STOP期间禁止新owner"要求的直接门控点 @satisfies: LFA-01, LFA-02
+	assign flag_candidate_expired = (flag_candidate_red && (macro_tick_o > C_NORMAL_RED_OWNER_DEADLINE)) || (flag_candidate_ir && (macro_tick_o > C_NORMAL_IR_OWNER_DEADLINE)) || (flag_candidate_calibration && (calibration_local_tick_o > C_CAL_OWNER_DEADLINE)); // 截止相位当拍仍允许按时提交（与SSW窗口<=截止一致），越过截止的候选只走截止收尾，杜绝L-4的同拍截止与提交 @satisfies: FSC-46, FSC-49, FSC-50
+	assign transaction_start_valid_o = flag_transaction_candidate && !flag_candidate_expired && i_adc_owner_ready && i_allow_new_transaction && flag_lifecycle_active; // SSW ready独立门控AMI valid；flag_lifecycle_active在STOP/abort/故障发生的同一拍归零，是LFA-01/LFA-02"STOP期间禁止新owner"要求的直接门控点 @satisfies: LFA-01, LFA-02
 
 	//TRANSACTION_START接口
 	assign adc_owner_commit_event_o = transaction_start_valid_o && i_transaction_start_ready; // AMI ready形成正式fire
 
 	//其他信号连线
 	assign flag_completion_match = i_adc_transaction_complete_event && state_current[B_INFLIGHT] && (i_adc_complete_sample_index == state_current[B_INFLIGHT_SAMPLE_H:B_INFLIGHT_SAMPLE_L]) && (i_run_generation == state_current[B_INFLIGHT_GENERATION_H:B_INFLIGHT_GENERATION_L]); // DONE身份逐位匹配，含RUN代际校验防止跨代际误配；不额外要求Q3已关闭——身份匹配就应该合法释放owner槽位，否则一旦Q3因异常提前完成而不再出现，owner会永久卡在in-flight，见flag_completion_success自己的Q3门控注释；sample_index/generation身份匹配是NORMAL双光owner连续性的支撑机制之一(非唯一锚点,中等置信度) @satisfies: TOP-03
+	assign flag_owner_lost_match = i_adc_transaction_lost_event && state_current[B_INFLIGHT] && (i_adc_complete_sample_index == state_current[B_INFLIGHT_SAMPLE_H:B_INFLIGHT_SAMPLE_L]) && (i_run_generation == state_current[B_INFLIGHT_GENERATION_H:B_INFLIGHT_GENERATION_L]); // 作废以事件限定序号总线，按与完成相同的序号和代际匹配，不置success也不置颜色完成位 @satisfies: FSC-54
 	assign flag_completion_success = flag_completion_match && i_adc_transaction_success && !state_current[B_INFLIGHT_DISCARD] && i_owner_q3_window_closed; // 正式成功结果资格，额外要求在途owner自身选定的Q3窗口已关闭，防止提前的CLK_DOUT冒充成功完成；门控放在success而不是match/release上，避免Q3若因异常提前完成而不再出现时owner永久卡在in-flight的死锁
 	assign startup_idac_safe_boundary_o = state_current[B_STARTUP_PENDING] && flag_lifecycle_active && i_adc_idle && i_analog_safe && i_sar_timing_idle && !state_current[B_FRAME_ACTIVE] && !state_current[B_RED_WAVE_PENDING] && !state_current[B_IR_WAVE_PENDING] && !state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT]; // START一次性边界
 	assign macro_frame_safe_boundary_o = state_current[B_FRAME_ACTIVE] && flag_lifecycle_active && (macro_tick_o == MACRO_SAFE_TICK); // 宏帧唯一边界
 	assign flag_calibration_boundary_o = state_current[B_FRAME_ACTIVE] && (dec_frame_mode == FRAME_MODE_CAL) && flag_lifecycle_active && (calibration_local_tick_o == CAL_IDAC_LOCAL_TICK); // 每625 tick校准边界；SID-06 唯一的本地tick 385安全提交点，早于此点的候选/确认AMB码/颜色/版本更新只在此刻原子提交，之后的更新只影响下一子帧 @satisfies: SID-06
-	assign idac_code_safe_boundary_o = startup_idac_safe_boundary_o || macro_frame_safe_boundary_o || flag_calibration_boundary_o; // 启动、宏帧和校准边界合并
+	assign flag_idle_idac_safe_boundary = i_idac_boundary_request && flag_lifecycle_active && i_active_config_valid && !i_normal_measurement_eligible && !flag_frame_start_eligible && !state_current[B_STARTUP_PENDING] && !state_current[B_FRAME_ACTIVE] && !state_current[B_CAL_REQ_PENDING] && !state_current[B_RED_WAVE_PENDING] && !state_current[B_IR_WAVE_PENDING] && !state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT] && i_adc_idle && i_analog_safe && i_sar_timing_idle; // L-3：校准结果在末子帧tick 385后才被消费时IDAC候选无边界可等、调度器又无请求不开帧；仅启动搜索阶段、本拍不会开帧时补发，IDAC提交后请求即撤销，不影响NORMAL帧码提交时序 @satisfies: FSC-19
+	assign idac_code_safe_boundary_o = startup_idac_safe_boundary_o || macro_frame_safe_boundary_o || flag_calibration_boundary_o || flag_idle_idac_safe_boundary; // 启动、宏帧和校准边界合并
 	assign flag_red_owner_deadline = state_current[B_FRAME_ACTIVE] && (dec_frame_mode == FRAME_MODE_NORMAL) && state_current[B_RED_WAVE_PENDING] && !state_current[B_INFLIGHT] && (macro_tick_o >= C_NORMAL_RED_OWNER_DEADLINE); // RED owner截止
 	assign flag_ir_owner_deadline = state_current[B_FRAME_ACTIVE] && (dec_frame_mode == FRAME_MODE_NORMAL) && state_current[B_IR_WAVE_PENDING] && !state_current[B_INFLIGHT] && (macro_tick_o >= C_NORMAL_IR_OWNER_DEADLINE); // IR owner截止
 	assign flag_cal_owner_deadline = state_current[B_FRAME_ACTIVE] && (dec_frame_mode == FRAME_MODE_CAL) && state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT] && (calibration_local_tick_o >= C_CAL_OWNER_DEADLINE); // 校准owner截止；SID-05 本地tick 248截止相位，越过仍未提交owner即判定错过窗口 @satisfies: SID-05
@@ -724,7 +734,13 @@ module ppg_400hz_frame_calibration_scheduler
 				end else if(i_adc_transaction_success == 1'b0 && !state_current[B_INFLIGHT_DISCARD])begin
 					state_next[B_FRAME_FAILED] = 1'b1; // success=0只做失败收尾
 				end
-			end else if(i_adc_transaction_complete_event == 1'b1)begin
+			end else if(flag_owner_lost_match == 1'b1)begin
+				state_next[B_INFLIGHT] = 1'b0;  // AMI超时作废释放唯一owner，下一拍起可按截止或新候选推进
+				state_next[B_INFLIGHT_DISCARD] = 1'b0; // 作废后不再保留最小身份，STOP或abort排空随之可结束
+				if(!state_current[B_INFLIGHT_DISCARD])begin
+					state_next[B_FRAME_FAILED] = 1'b1; // 作废事务所在帧沿用失败收尾语义，不计NORMAL完成帧
+				end
+			end else if(i_adc_transaction_complete_event == 1'b1 || i_adc_transaction_lost_event == 1'b1)begin
 				state_next[B_COMPLETION_MISMATCH] = 1'b1; // 错配或无owner DONE不得消费新事务
 				if(!scheduler_local_fault_blocking_o)begin
 					state_next[B_SCHED_FAULT_VALID] = 1'b1; // DONE身份或代际错配首次跳变，向supervisor拉出一拍valid
@@ -820,8 +836,8 @@ module ppg_400hz_frame_calibration_scheduler
 					if(dec_frame_mode == FRAME_MODE_CAL)begin
 						state_next[B_CAL_COMPLETE] = 1'b1; // 输出物理校准宏帧完成
 						if(state_current[B_CAL_REQ_ACTIVE])begin
-							if(state_current[B_CAL_REQ_PENDING] || state_current[B_CAL_WAVE_PENDING] || state_current[B_INFLIGHT])begin
-								state_next[B_CAL_REQ_PENDING] = 1'b1; // 未成功提交的请求跨宏帧保留
+							if(state_current[B_CAL_REQ_PENDING] || state_current[B_CAL_WAVE_PENDING])begin
+								state_next[B_CAL_REQ_PENDING] = 1'b1; // 未成功提交的请求跨宏帧保留；已成为在途owner的请求不再重挂，由迟到完成或AMI超时作废后的重发推进，杜绝L-1错绑 @satisfies: FSC-17
 							end
 							state_next[B_CAL_REQ_ACTIVE] = 1'b0; // 重新进入请求等待
 						end

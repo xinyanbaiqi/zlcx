@@ -670,6 +670,7 @@ ppg_precision_window_integration dut(
 	.i_dcs_revalidate_failed(i_dcs_revalidate_failed), // 连接DC失败事件
 	.i_amb_sample_accepted_event(i_amb_sample_accepted_event), // 连接AMB结果消费事件
 	.i_dcs_sample_accepted_event(i_dcs_sample_accepted_event), // 连接DCS结果消费事件
+	.i_calibration_request_withdraw_event(1'b0), // owner生命周期轮新增的重检撤销转送输入，既有场景接地
 	.o_amb_sequence_start(o_amb_sequence_start), // 观察AMB检查启动事件
 	.o_dcs_revalidate_accept(o_dcs_revalidate_accept), // 观察DC重验证接受事件
 	.i_calibration_sample_ready(i_calibration_sample_ready), // 连接校准采样ready

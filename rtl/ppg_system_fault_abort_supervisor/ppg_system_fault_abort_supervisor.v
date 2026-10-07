@@ -14,11 +14,12 @@
 //
 // Dependencies:       None
 //
-// Version:            V1.0
-// Revision Date:      2026/08/23
+// Version:            V1.1
+// Revision Date:      2026/10/07
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/23            V1.0          Erie                  Create file. First RTL implementation of contract C24 (V1.5): blocking-fault aggregation across AMI/Scheduler/SSW, first-fault snapshot, historical summary, ADC physical-drain watchdog, episode-scoped abort/stop-request/fault-discard event generation, and result-discard sticky.
+// 2026/10/07            V1.1          Erie                  Owner-lifecycle round: summary mapping adds AMI cause 8'h06 (consecutive ADC completion loss) to bit 9 and 8'h07 (ADC not returning idle) to bit 10.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -33,11 +34,12 @@
 //
 // 依赖文件:           无
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月23日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月07日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月23日        V1.0          Erie                  创建文件。合同C24（V1.5）首次RTL实现：聚合AMI/Scheduler/SSW三路阻断故障、首故障快照、历史汇总位图、ADC物理排空看门狗、episode范围内的abort/stop请求/故障丢弃事件生成，以及结果丢弃历史sticky
+// 2026年10月07日        V1.1          Erie                  owner生命周期轮：汇总位映射新增AMI cause 8'h06（连续完成丢失）到bit 9、8'h07（ADC长期不回空闲）到bit 10。
 // 聚合AMI、Scheduler、SSW三路注册式阻断故障记录，维护首故障快照与历史汇总，驱动ADC物理排空看门狗，并在每个故障episode开启时各发出一次注册式abort、STOP请求与丢弃事件
 module ppg_system_fault_abort_supervisor
 #(
@@ -220,14 +222,16 @@ module ppg_system_fault_abort_supervisor
 			(i_ami_fault_cause == 8'h02) ? (16'h0002) :
 			(i_ami_fault_cause == 8'h03) ? (16'h0004) :
 			(i_ami_fault_cause == 8'h04) ? (16'h0080) :
-			(i_ami_fault_cause == 8'h05) ? (16'h0100) : (16'h0000)
+			(i_ami_fault_cause == 8'h05) ? (16'h0100) :
+			(i_ami_fault_cause == 8'h06) ? (16'h0200) :
+			(i_ami_fault_cause == 8'h07) ? (16'h0400) : (16'h0000)
 		) : (16'h0000)) |
 		((i_scheduler_fault_valid && (i_scheduler_fault_cause == 8'h11)) ? (16'h0008) : (16'h0000)) |
 		(i_ssw_fault_valid ? (
 			(i_ssw_fault_cause == 8'h21) ? (16'h0010) :
 			(i_ssw_fault_cause == 8'h22) ? (16'h0020) : (16'h0000)
 		) : (16'h0000)) |
-		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开
+		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开；AMI连续完成丢失8'h06占bit 9、ADC长期忙8'h07占bit 10 @satisfies: P09
 
 	//---------------输出信号连线---------------//
 	assign o_system_fault_blocking = system_fault_blocking_o; // 导出 o_system_fault_blocking

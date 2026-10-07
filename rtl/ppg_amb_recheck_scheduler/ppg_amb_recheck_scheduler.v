@@ -17,13 +17,14 @@
 //                     ppg_idac_code_controller.v,
 //                     ppg_peak_valley_window_detector.v
 //
-// Version:            V1.1
-// Revision Date:      2026/08/23
+// Version:            V1.2
+// Revision Date:      2026/10/07
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/08            V1.0          Erie                  Create file.
 // 2026/08/11            V1.0          Erie                  Add peak-valley idle takeover gate.
 // 2026/08/23            V1.1          Erie                  Rename i_adc_idle to i_precision_takeover_safe (pure port rename, no logic change) to match the AMI/PWI composite switch-safety predicate naming used by PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md and PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md; the connected value was already PWI's forwarded AMI composite, never physical ADC idle.
+// 2026/10/07            V1.2          Erie                  Owner-lifecycle round (F-020): new input i_calibration_request_withdraw_event clears flag_sample_inflight when the outer AMI request was withdrawn by the SID-05 deadline or by a calibration-owner void, so the held recheck request is re-issued instead of stalling forever.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -41,13 +42,14 @@
 //                     ppg_idac_code_controller.v、
 //                     ppg_peak_valley_window_detector.v
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年08月23日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月07日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月08日        V1.0          Erie                  创建文件。
 // 2026年08月11日        V1.0          Erie                  增加峰谷检测器空闲接管门禁。
 // 2026年08月23日        V1.1          Erie                  把i_adc_idle改名为i_precision_takeover_safe（纯端口改名，不改逻辑），和PWI/精度控制器合同里的复合切换安全资格命名保持一致——该端口连接的值本来就是PWI转发的AMI复合资格，从未是物理ADC空闲
+// 2026年10月07日        V1.2          Erie                  owner生命周期轮（F-020）：新增输入i_calibration_request_withdraw_event，外层AMI请求因SID-05截止或校准owner作废被撤销时清flag_sample_inflight，保持型重检请求随即重发，不再永久停住。
 // 在完整NORMAL帧间隔到期后等待15-bit到9-bit切换，并调度AMB、DC_R和DC_IR三个校准帧
 module ppg_amb_recheck_scheduler
 (
@@ -91,6 +93,7 @@ module ppg_amb_recheck_scheduler
 	input i_dcs_revalidate_failed,              // 任一DC搜索耗尽的失败单拍
 	input i_amb_sample_accepted_event,          // 匹配AMB_CAL结果完成控制器消费
 	input i_dcs_sample_accepted_event,          // 当前颜色DCS_CAL结果完成控制器消费
+	input i_calibration_request_withdraw_event, // 外层在途请求被截止撤销或owner超时作废的单拍，不会再有对应结果返回
 	output o_amb_sequence_start,                // 安全接管后启动AMB周期检查的单拍
 	output o_dcs_revalidate_accept,             // 第一帧完成后接受两色DC重验证的单拍
 
@@ -364,6 +367,8 @@ module ppg_amb_recheck_scheduler
 			flag_sample_inflight <= 1'b0;       // 阶段边界和取消事件丢弃临时所有权
 		end else if(flag_matching_sample_accepted == 1'b1)begin
 			flag_sample_inflight <= 1'b0;       // IDAC实际消费结果后允许下一笔请求
+		end else if(i_calibration_request_withdraw_event == 1'b1)begin
+			flag_sample_inflight <= 1'b0;       // 外层请求被撤销后同步释放内层在途，保持型IDAC请求随即重发同一候选；F-020 @satisfies: SID-05
 		end else if(flag_calibration_transfer == 1'b1)begin
 			flag_sample_inflight <= 1'b1;       // 模拟调度接受后等待匹配结果返回
 		end else begin

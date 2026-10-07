@@ -16,8 +16,8 @@
 // Referrences:		PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.4
-// Revision Date:	2026-08-31
+// Version:			V1.5
+// Revision Date:	2026-10-07
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026-08-12			V1.0		 Erie		Create file.
@@ -25,6 +25,7 @@
 // 2026-08-22			V1.2		 Erie		Add o_mode_fault_active/identity_valid/<FAULT_ID> wrapper outputs and the named flag_precision_controller_fault_* internal nets that register the precision-controller child's fault group, per PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md section 5.11, so AMI's cause 8'h04 lane has a real source.
 // 2026-08-23			V1.3		 Erie		Rename i_adc_idle to i_precision_takeover_safe (pure port rename, no logic change) and its unchanged forwarding to the precision-controller and AMB-scheduler children, per PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md sections 5.4/5.10/7/9; the connected value was already AMI's composite switch-safety predicate.
 // 2026-08-31			V1.4		 Erie		Stage 5 bucket-2 RTL session, port-threading step: add a new, additive, default-off `C_ENABLE_TEST_INJECTION` parameter (was previously absent on this wrapper) plus a pure pass-through `i_test_inject_enable`/`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready` group, wired straight through to the child FIR's own newly-added injection ports (ppg_coarse_detection_fir.v V2.3). No local gating logic added at this layer -- FIR already does the full gating internally. Bit-identical production behavior confirmed by re-running the main smoke TB through the full ppg_control_top hierarchy (SMOKE_TB_PASS, identical counters) and the injection TB with C_ENABLE_TEST_INJECTION=1 actually live (INJ_TB_PASS, all existing INJ-00~04 unaffected).
+// 2026-10-07			V1.5   Erie  Owner-lifecycle round (F-020): new input i_calibration_request_withdraw_event forwarded unchanged to the AMB recheck scheduler.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -41,8 +42,8 @@
 // 参考资料:		PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.4
-// 修订日期:		2026-08-31
+// 当前版本:		V1.5
+// 修订日期:		2026年10月07日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026-08-12		V1.0		 Erie		创建文件
@@ -50,6 +51,7 @@
 // 2026-08-22		V1.2		 Erie		按合同5.11节新增o_mode_fault_active/identity_valid/<FAULT_ID> wrapper输出，以及登记精度控制器子模块故障组的具名内部网flag_precision_controller_fault_*，使AMI cause 8'h04通道拥有真实来源
 // 2026-08-23		V1.3		 Erie		按合同5.4/5.10/7/9节把i_adc_idle改名为i_precision_takeover_safe（纯端口改名，不改逻辑），对精度控制器和AMB调度器两个子模块的转发保持原样——该端口连接的值本来就是AMI导出的复合切换资格，从未是物理ADC空闲
 // 2026-08-31		V1.4		 Erie		Stage 5桶2 RTL会话端口透传步骤：新增本wrapper此前完全没有的默认关闭`C_ENABLE_TEST_INJECTION`参数，配一组纯直通的`i_test_inject_enable`/`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready`，原样透传给子模块FIR新增的注入端口（`ppg_coarse_detection_fir.v`V2.3）。这一层不加任何本地门控逻辑——FIR内部已经做完整门控。真实回归确认逐位不变：主烟雾TB跑通完整`ppg_control_top`层次（`SMOKE_TB_PASS`，计数与改动前逐字节一致）+`C_ENABLE_TEST_INJECTION=1`真实生效状态下的注入TB（`INJ_TB_PASS`，既有INJ-00~04全部不受影响）
+// 2026-10-07		V1.5   Erie  owner生命周期轮（F-020）：新增输入i_calibration_request_withdraw_event，原样转送AMB重检调度器。
 module ppg_precision_window_integration
 #(
 	parameter integer C_DATA_WIDTH = 32'd24,    // 统一signed粗PPG和FIR数据字段宽度
@@ -178,6 +180,7 @@ module ppg_precision_window_integration
 	input i_dcs_revalidate_failed,              // 任一路DC重验证失败单拍
 	input i_amb_sample_accepted_event,          // 匹配AMB_CAL结果已经被控制器消费
 	input i_dcs_sample_accepted_event,          // 确认当前颜色直流校准结果完成消费
+	input i_calibration_request_withdraw_event, // AMI转送的周期重检在途请求撤销单拍，来源为SID-05截止或校准owner超时作废
 	output o_amb_sequence_start,                // 安全接管后启动AMB检查单拍
 	output o_dcs_revalidate_accept,             // AMB帧后接受两色DC重验证单拍
 
@@ -1010,6 +1013,7 @@ module ppg_precision_window_integration
 		.i_dcs_revalidate_failed(i_dcs_revalidate_failed), // 输入任一路DC失败
 		.i_amb_sample_accepted_event(i_amb_sample_accepted_event), // 输入AMB_CAL结果消费事件
 		.i_dcs_sample_accepted_event(i_dcs_sample_accepted_event), // 确认颜色直流校准样本已消费
+		.i_calibration_request_withdraw_event(i_calibration_request_withdraw_event), // 原样转送重检在途请求撤销，供重检调度器释放内层在途；F-020
 		.o_amb_sequence_start(enc_amb_sequence_start_o), // 导出AMB检查启动事件
 		.o_dcs_revalidate_accept(dcs_revalidate_accept_o), // 导出两色DC重验证接受事件
 		.i_calibration_sample_ready(i_calibration_sample_ready), // 输入模拟调度器采样ready

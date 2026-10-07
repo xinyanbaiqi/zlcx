@@ -16,8 +16,8 @@
 // Referrences:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.6
-// Revision Date:	2026/10/06 00:00:00
+// Version:			V1.7
+// Revision Date:	2026/10/07 00:00:00
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/14          V1.2          Codex       Single-fire timing selector.
@@ -25,6 +25,7 @@
 // 2026/08/22          V1.4        Erie        Add i_run_generation with atomic waveform/owner-context tagging and stale-generation match/release rejection, and add the registered o_ssw_fault_* record group (cause 8'h21 only, mapped from the existing switch-protocol/transaction-mismatch stickies) for the system fault/abort supervisor, per PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md section 7.9. Cause 8'h22 (independent analog-safe convergence detector) is intentionally not implemented; the contract gives no concrete trigger condition and one was not designed in this pass.
 // 2026/09/10          V1.5        Erie        AMB_CAL local tick [262,264) CTRL_Q2 gated to only pulse when reg_cal_frame_type==FRAME_TYPE_DCS; AMB_CAL no longer drives Q2 at all, per PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md section 6.4. Root cause: AMB code-value calibration judges candidates on the Q2/Q3 chopping-cancelled net value, but that cancellation is structurally insensitive to symmetric ambient residual present in both phases, so it never surfaces how much integrator headroom the candidate actually consumed short of hard saturation. DCS_CAL is unaffected because its LED is Q3-only, so Q2/Q3 are asymmetric there and chopping subtraction fully preserves the LED residual instead of masking it. CTRL_Q3 and all AMB_CAL AFERST/TIAEN/Q1_9 timing windows are unchanged.
 // 2026/10/06          V1.6        Erie        ABCD review F-035: in adc_owner_inflight_o and reg_owner_abort_seen the matching-completion release now has priority over the abort hold. Previously an abort and a matching DONE in the same cycle kept the owner in flight forever (no later DONE can arrive, and a new owner needs !inflight), so measurement stopped until reset. Abort still cancels the waveform context and commit is still blocked during abort; owner identity registers hold in both branches as before.
+// 2026/10/07          V1.7        Erie        Owner-lifecycle round. New input i_adc_transaction_lost_event releases the owner by the same index/generation match as a completion (unmatched void counts as transaction mismatch). Owner binding (S1/L-1): flag_red/ir/cal_has_owner now also require the owner to belong to the current context (frame id; for CAL also the new reg_owner_cal_subframe), so a stale owner neither drives the next context's Q3 nor masks its deadline. S1: calibration_timeout_sticky now sets when the owner bound to this subframe is still in flight at local tick 385 (late-read diagnostic, non-blocking).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -41,8 +42,8 @@
 // 参考资料:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.6
-// 修订日期:		2026年10月06日
+// 当前版本:		V1.7
+// 修订日期:		2026年10月07日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月14日     V1.2          Codex       单fire时序选择实现。
@@ -50,6 +51,7 @@
 // 2026年08月22日     V1.4        Erie          按合同7.9节新增i_run_generation，对波形上下文和物理owner原子锁存并在匹配/释放时校验代际；新增注册式o_ssw_fault_*故障记录组（仅实现cause 8'h21，映射自已有的switch_protocol_error/transaction_mismatch两个sticky）。cause 8'h22（独立模拟安全收敛检测器）本次未实现：合同未给出具体触发条件，本次也未设计新的检测逻辑。
 // 2026年09月10日     V1.5        Erie          按合同6.4节：AMB_CAL local tick[262,264)的CTRL_Q2改为仅reg_cal_frame_type==FRAME_TYPE_DCS时才产生脉冲，AMB_CAL全程不再驱动Q2。根因：AMB码值校准依赖Q2/Q3两相chopping抵消后的净值判据，但该抵消机制对两相都存在的对称环境光残余结构性不敏感，只有真正物理clip到轨才能被抓到；DCS_CAL不受影响，因其LED仅Q3导通、Q2/Q3本就不对称，chopping相减恰好完整保留LED残余。CTRL_Q3及AMB_CAL全部AFERST/TIAEN/Q1_9时序窗口不变。
 // 2026年10月06日     V1.6        Erie          ABCD复核F-035：adc_owner_inflight_o与reg_owner_abort_seen中匹配完成的释放改为优先于abort保持。此前abort与匹配DONE同拍时owner永久在途（之后不会再有DONE，新owner又要求!inflight），测量停到复位。abort仍撤销波形上下文、abort期间仍禁止提交；owner身份寄存器在两个分支都保持，与原来一致
+// 2026年10月07日     V1.7        Erie          owner生命周期轮。新增输入i_adc_transaction_lost_event，按与完成相同的序号/代际匹配释放owner（不匹配的作废记事务错配）。owner绑定（S1/L-1）：flag_red/ir/cal_has_owner增加'owner属于当前上下文'条件（帧号，校准另加新寄存器reg_owner_cal_subframe），跨上下文残留的旧owner既不驱动新上下文Q3，也不掩盖其截止。S1：calibration_timeout_sticky改为'绑定本子帧的校准owner在local tick 385仍在途'时置位（读出迟到诊断，非阻断）。
 module ppg_sar9_sar15_safe_selection_wrapper
 #(
 	parameter C_FRAME_ID_WIDTH = 16, // 模块参数专用字段帧标识位宽高位编码端
@@ -128,6 +130,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	input i_adc_transaction_complete_event,     // 输入端输入模数转换事务完成事件直流码通路低位编码端
 	input i_adc_transaction_success,            // 输入端输入模数转换事务成功直流码通路
 	input [C_SAMPLE_INDEX_WIDTH - 1:0]i_adc_complete_sample_index, // 输入端输入模数转换完成采样序号直流码通路低位编码端
+	input i_adc_transaction_lost_event,         // 输入端AMI在途owner完成丢失超时作废单拍，按序号与代际匹配释放owner
 	input i_adc_idle,                           // 输入端输入模数转换空闲直流码通路低位编码端
 
 	//---------------模拟控制输出---------------//
@@ -292,6 +295,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	reg reg_owner_color_ir = 1'b0;              // 时序寄存寄存结果所有权提交时刻锁存的颜色身份
 	reg [1:0]reg_owner_frame_type = 2'b00;      // 时序寄存寄存结果所有权提交时刻锁存的类型身份
 	reg reg_owner_precision_mode = 1'b0;        // 时序寄存寄存结果所有权提交时刻锁存的精度身份
+	reg [2:0]reg_owner_cal_subframe = 3'd0;     // 校准owner提交时所在的3200 Hz子帧序号，与帧号一起把owner绑定到本子帧上下文
 	reg [CONTROL_WIDTH - 1:0]reg_control_next = {CONTROL_WIDTH{1'b0}}; // 时序寄存寄存控制字下一拍低位编码端
 	reg [CONTROL_WIDTH - 1:0]reg_control_vector = {CONTROL_WIDTH{1'b0}}; // 时序寄存寄存控制字向量低位编码端
 
@@ -426,13 +430,13 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	//其他信号连线
 	assign flag_owner_commit_fire = i_adc_owner_commit_event && o_adc_owner_ready && flag_owner_identity_match && !i_control_abort_event; // 组合连线条件结果所有权专用字段提交低位编码端
 	assign flag_owner_commit_error = i_adc_owner_commit_event && !flag_owner_commit_fire; // 组合连线条件结果所有权专用字段错误低位编码端
-	assign flag_owner_release = i_adc_transaction_complete_event && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁
-	assign flag_done_mismatch = i_adc_transaction_complete_event && !flag_owner_release; // 组合连线条件完成失配高位编码端低位编码端，与owner_release互补，代际或序号任一不符均视为失配
+	assign flag_owner_release = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁
+	assign flag_done_mismatch = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && !flag_owner_release; // 组合连线条件完成失配高位编码端低位编码端，与owner_release互补，代际或序号任一不符均视为失配；作废事件与完成事件同样以事件限定序号并按同一规则核对 @satisfies: SSW-42
 
 	//其他信号连线
-	assign flag_red_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_RED); // 组合连线条件红光存在结果所有权红光专属可见光路高位编码端低位编码端
-	assign flag_ir_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_IR); // 组合连线条件红外存在结果所有权红外专属红外光路高位编码端低位编码端
-	assign flag_cal_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_CAL); // 组合连线条件校准存在结果所有权高位编码端低位编码端
+	assign flag_red_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_RED) && (reg_owner_frame_id == reg_red_frame_id); // 组合连线条件红光存在结果所有权：只认绑定到当前RED上下文帧号的owner，跨帧残留旧owner不驱动新帧Q3也不掩盖截止；L-1 @satisfies: SSW-38, SSW-34
+	assign flag_ir_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_IR) && (reg_owner_frame_id == reg_ir_frame_id); // 组合连线条件红外存在结果所有权：IR owner须属于当前IR上下文所在帧，下一帧IR接管后旧owner失效；L-1
+	assign flag_cal_has_owner = adc_owner_inflight_o && !reg_owner_abort_seen && (reg_owner_slot == SLOT_CAL) && (reg_owner_frame_id == reg_cal_frame_id) && (reg_owner_cal_subframe == i_calibration_subframe_index); // 组合连线条件校准存在结果所有权：帧号与子帧序号同时一致才算本子帧owner，S1与L-1共用此绑定
 	assign flag_red_timeout = flag_red_context_valid && (i_macro_tick == C_NORMAL_RED_OWNER_DEADLINE + 1) && !flag_red_has_owner; // 组合连线条件红光超时红光专属可见光路低位编码端
 	assign flag_ir_timeout = flag_ir_context_valid && (i_macro_tick == C_NORMAL_IR_OWNER_DEADLINE + 1) && !flag_ir_has_owner; // 组合连线条件红外超时红外专属红外光路低位编码端
 	assign flag_cal_timeout = flag_cal_context_valid && (i_calibration_local_tick == C_CAL_OWNER_DEADLINE + 1) && !flag_cal_has_owner; // 组合连线条件校准超时低位编码端
@@ -545,8 +549,8 @@ module ppg_sar9_sar15_safe_selection_wrapper
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
 				calibration_timeout_sticky_o <= 1'b0; // 时序写入校准超时保持输出低位编码端诊断确认清除
 			end
-			if(flag_cal_context_valid == 1'b1 && (i_calibration_local_tick == CAL_COMMIT_TICK) && flag_cal_has_owner == 1'b0)begin
-				calibration_timeout_sticky_o <= 1'b1; // 时序写入校准超时保持输出低位编码端红光波形控制更新
+			if(i_calibration_frame_active == 1'b1 && (i_calibration_local_tick == CAL_COMMIT_TICK) && flag_cal_has_owner == 1'b1)begin
+				calibration_timeout_sticky_o <= 1'b1; // 本子帧校准owner到local tick 385仍未完成即记迟到诊断（ADC已在tick 266采样、迟到的只是读出），非阻断；丢失由AMI超时作废另报；S1 @satisfies: SSW-18
 			end
 		end
 	end
@@ -1340,6 +1344,15 @@ module ppg_sar9_sar15_safe_selection_wrapper
 			reg_owner_frame_id <= reg_owner_frame_id; // 时序写入寄存owner帧号身份结果完成释放
 		end else if(flag_owner_commit_fire == 1'b1)begin
 			reg_owner_frame_id <= i_adc_owner_frame_id; // 时序写入寄存owner帧号身份所有权提交锁存
+		end
+	end
+
+	// 校准owner提交沿锁存所在子帧序号，供S1迟到诊断与Q3绑定判定，释放与abort期间保持
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			reg_owner_cal_subframe <= 3'd0;     // 复位清除owner子帧绑定
+		end else if(flag_owner_commit_fire == 1'b1)begin
+			reg_owner_cal_subframe <= i_calibration_subframe_index; // 提交沿记录调度器当前子帧，RED/IR owner同样记录但只在校准槽位使用
 		end
 	end
 

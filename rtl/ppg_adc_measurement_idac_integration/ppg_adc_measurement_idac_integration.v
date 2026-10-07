@@ -16,8 +16,8 @@
 // Referrences:		PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.16
-// Revision Date:	2026-10-06
+// Version:			V1.17
+// Revision Date:	2026-10-07
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026-08-12			V1.0		 Erie		Create file.
@@ -38,6 +38,7 @@
 // 2026-09-05			V1.14	 Erie		Add the section 8.4.5 P2S telemetry boundary passthrough group: new AMI-level outputs o_s1_calibration_applied (pure re-export of the existing flag_dc_s1_calibration_applied wire, i.e. ppg_adc_dc_recovery_Inst's own o_calibration_applied), o_s1_raw and o_s2_raw (newly wired from that same instance's previously-dangling o_stage1_raw/o_stage2_raw at line ~2284/2286 into two new wires dec_dc_stage1_raw/dec_dc_stage2_raw). Deliberately sources from ppg_adc_dc_recovery's own re-exported atomic payload_o register, not the reconstructor's earlier dec_reconstructor_stage1_raw/dec_reconstructor_stage2_raw (declared line 722/724, wired line 2180/2182) -- the reconstructor pair is not latched into the same atomic transaction as frame_id/sample_index/coarse/fine, so using it would misalign the P2S packet. Per PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md V1.6 section 8.4.5. No logic change to any existing port; bit-identical production behavior confirmed by re-running the main smoke TB through the full ppg_control_top hierarchy (SMOKE_TB_PASS, real_adc_responses=47 measurement_result_valid=32, identical to pre-change).
 // 2026-09-18			V1.15	 Erie		Fix a real permanent calibration-search deadlock found while investigating workline-D's SID-05 pending item, confirmed by a real iverilog A/B trace: flag_calibration_request_inflight previously only cleared on flag_amb_sample_accepted/flag_dcs_sample_accepted (a genuine consumed search result) or STOP/abort. When the scheduler's own flag_cal_owner_deadline (ppg_400hz_frame_calibration_scheduler.v, tick-248 owner-commit deadline, C25 contract section 9.4.1) suppresses a candidate window because the physical ADC owner never committed in time, no ADC owner and no transaction ever existed for that request, so neither accepted-result condition can ever fire -- flag_calibration_request_inflight stayed 1 forever, calibration_sample_valid_o never re-armed, and the scheduler's own B_CAL_CONTEXT_SEEN permanently locked closed since it never saw a fresh pending request at any later subframe boundary, stranding the entire calibration search (AMB or DCS_CAL) with no self-recovery. Trace evidence: forcing i_adc_physical_idle=0 across a genuine mid-search DC_R candidate's deadline correctly suppressed that one candidate (matching design intent) but left all 12/12 subsequent retries permanently failing with no Q3 window ever opening again. Fix: added a new i_cal_owner_deadline_event input, wired to the scheduler's new V1.8 o_cal_owner_deadline_event output (itself a direct passthrough of the pre-existing, already self-clearing flag_cal_owner_deadline pulse), and added it as an additional flag_calibration_request_inflight clear condition alongside the existing accepted-result terms -- letting AMI immediately re-arm calibration_sample_valid_o for the same still-wanted candidate on the very next opportunity instead of stalling forever. No other logic touched; reg_inflight_frame_type/reg_inflight_color_ir are unaffected since they only update on the next calibration_request_fire_o, exactly as before.
 // 2026-10-06			V1.16  Erie  ABCD review RTL round 1 (four fixes plus one port rename). F-022: a new START no longer clears integration_protocol_error_sticky_o (contract section 15.1: only reset or the Top registered diag_clear may clear it). N-1: diag_clear clears that history sticky only when flag_integration_blocking==0, or when the current RUN has ended (new flag_run_context_ended, set by STOP-ack and cleared by START) and o_datapath_empty==1 (section 15.1 'after no local blocking cause is active': once the RUN is over and AMI is drained the cause is no longer active); it clears only the history and never releases the blocking itself (section 6, diag_clear cannot release an owner or an active cause). flag_integration_blocking is the gate rather than o_wrapper_fault_blocking because it is this sticky's own local cause, whereas the wrapper aggregate also carries the IDAC and precision holds that have their own stickies and clear rules; its lifecycle is unchanged (still released only by START or abort), so o_wrapper_fault_blocking stays high in idle after a STOP-only end. Known limitation recorded as L-5, not fixed here: AMI fault lane 02 (flag_owner_protocol_fault_hold) is likewise released only by START or abort, so after a STOP-only end the supervisor episode cannot close and the manager rejects the next START until a host ABORT or reset. F-019: the public measurement-discard identity (frame id, sample index, color, frame type, precision) is taken from the result held at the formal output (result_*_o) instead of the upstream NORMAL-fork measurement branch, which could already hold the next transaction. F-021: the detection branch gets its own sample-qualification register flag_detection_branch_sample_valid (loaded with the fork, cleared by the detection transfer or abort) that feeds PWI i_sample_valid and the detection-discard sample_valid; a formal-branch transfer no longer clears the qualification of the transaction still waiting in the detection branch. F-032: the IDAC instance connection follows the IDAC port rename to i_diag_clear_event. Also recorded here (deferred from earlier rounds, now closed): the in-place comment corrections at the o_s1_calibration_applied port declaration (~line 403, f485cbc) and its assign (~line 1029, c01e8d2), comments only.
+// 2026-10-07			V1.17  Erie  Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007). L-2 scheme A: new timeout void of the in-flight ADC owner (age >= C_ADC_COMPLETION_LOST_CYCLES=4500 after start fire, physical ADC idle, no capture/pending completion, judged atomically in one cycle); new output o_adc_transaction_lost_event with the owner's sample index on o_adc_complete_sample_index, never in the same cycle as a completion; measurement discard with new reason 2'b11 COMPLETION_LOST and the owner's identity; new o_owner_lost_sticky (reset/diag-clear rule as N-1, START does not clear). Per-slot (RED/IR/CAL) consecutive-void counters, k=C_ADC_COMPLETION_LOST_LIMIT=2, cleared only by a matching real completion of the same slot; reaching k sets new lane 06 (cause 8'h06). ADC never returning idle: owner age 9000 sets lane 07 (cause 8'h07) without releasing the owner. Lanes 06/07 join o_ami_fault_active and o_wrapper_fault_blocking. SID-05 deadline withdraw and calibration-owner void merged into one withdraw that clears flag_calibration_request_inflight and, for a recheck request, is forwarded to PWI (F-020). L-5: lanes 01/02/03/06/07 also fall when the RUN was ended by STOP and the AMI datapath is empty; new fault set wins over this clear; flag_integration_blocking lifecycle unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -54,8 +55,8 @@
 // 参考资料:		PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.16
-// 修订日期:		2026年10月06日
+// 当前版本:		V1.17
+// 修订日期:		2026年10月07日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026-08-12		V1.0		 Erie		创建文件
@@ -76,6 +77,7 @@
 // 2026-09-05		V1.14	 Erie		按合同8.4.5节新增P2S遥测边界透传端口组：新增AMI边界输出`o_s1_calibration_applied`（既有wire`flag_dc_s1_calibration_applied`即`ppg_adc_dc_recovery_Inst`自己`o_calibration_applied`输出的纯转发）、`o_s1_raw`/`o_s2_raw`（把同一例化第2284/2286行原来留空的`o_stage1_raw`/`o_stage2_raw`接进新增内部wire`dec_dc_stage1_raw`/`dec_dc_stage2_raw`后转发）。刻意使用`ppg_adc_dc_recovery`模块自己重新导出、已经跟frame_id/sample_index/coarse/fine结果锁在同一个原子事务`payload_o`寄存器里的版本，不使用重构器更早的`dec_reconstructor_stage1_raw`/`dec_reconstructor_stage2_raw`（第722/724行声明、第2180/2182行接入）——那两个不是同一个原子事务的锁存值，时序上跟frame_id/sample_index对不上号，用错会导致P2S包数据错位。依据`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`V1.6第8.4.5节。不改动任何既有端口逻辑；真实回归确认逐位不变：主烟雾TB跑通完整`ppg_control_top`层次（`SMOKE_TB_PASS`，real_adc_responses=47 measurement_result_valid=32，与改动前逐位一致）
 // 2026-09-18		V1.15	 Erie		修复调查工作线D待查项SID-05时发现、真实iverilog A/B trace确认的一个永久校准搜索死锁：flag_calibration_request_inflight此前只在flag_amb_sample_accepted/flag_dcs_sample_accepted（真实消费到搜索结果）或STOP/abort时清零。当调度器自己的flag_cal_owner_deadline（`ppg_400hz_frame_calibration_scheduler.v`，tick-248 owner提交截止，C25合同9.4.1节）因物理ADC owner未及时提交而抑制某个候选窗口时，这笔请求从未真正建立过ADC owner或事务，两个"结果已消费"条件都不可能触发——flag_calibration_request_inflight从此永远保持1，calibration_sample_valid_o再也不会重新拉高，调度器自己的B_CAL_CONTEXT_SEEN也因为之后任何一次子帧边界都等不到新的pending请求而永久锁闭，整个校准搜索（AMB或DCS_CAL）从此搁浅、无法自行恢复。trace证据：对一笔真实进行中的DC_R候选，在其截止跨越期间强制i_adc_physical_idle=0，能正确抑制这一个候选（符合设计意图），但之后全部12/12次重试永久失败、再也等不到任何Q3窗口。修复：新增`i_cal_owner_deadline_event`输入，接到调度器V1.8新增的`o_cal_owner_deadline_event`输出（本身是对已有、本来就自清零的flag_cal_owner_deadline脉冲的直接转发），并把它加为flag_calibration_request_inflight的额外清零条件，与既有的"结果已消费"两项并列——让AMI能为同一个仍在等待的候选立即重新拉高calibration_sample_valid_o发起重试，而不是永久卡死。未改动其它逻辑；reg_inflight_frame_type/reg_inflight_color_ir不受影响，它们仍然只在下一次calibration_request_fire_o时更新，和改动前一致
 // 2026-10-06		V1.16  Erie  ABCD复核RTL第一轮（四项修复加一处端口改名）。F-022：新START不再清除integration_protocol_error_sticky_o（合同15.1节：只有复位或Top注册式diag_clear可清）。N-1：diag_clear只在flag_integration_blocking==0时，或当前RUN已结束（新增flag_run_context_ended，STOP确认置位、START撤销）且o_datapath_empty==1时清除该历史sticky（15.1节"在本地无活动blocking cause后"：RUN结束且AMI排空后成因已不再活动）；只清历史、不释放阻断本身（第6节：diag_clear不能释放owner或活动原因）。门控选flag_integration_blocking而不是o_wrapper_fault_blocking，因为它是该sticky自身的本地成因，wrapper汇总还含IDAC和精度阻断，它们各有自己的sticky与清除规则；阻断标志生命周期不变（仍只由START或abort解除），STOP-only结束后空闲期o_wrapper_fault_blocking仍为高。已知限制记为L-5、本轮不修：AMI故障lane 02（flag_owner_protocol_fault_hold）同样只由START或abort解除，STOP-only结束后supervisor关不上episode，manager拒绝下一次START，需主机ABORT或复位恢复。F-019：公开正式结果discard的身份（帧号、序号、颜色、类型、精度）改取正式输出当前持有的结果（result_*_o），不再取可能已装入下一笔事务的上游NORMAL fork测量分支。F-021：检测分支新增自有样本资格寄存器flag_detection_branch_sample_valid（随fork装入，由检测握手或abort清除），驱动PWI i_sample_valid和检测discard的sample_valid；正式分支先消费不再清掉仍在检测分支等待的同一笔事务资格。F-032：IDAC例化连接随IDAC端口改名为i_diag_clear_event。另补记此前推迟的两处只改注释的原行改正（本项推迟就此关闭）：o_s1_calibration_applied端口声明注释（约403行，f485cbc）与其assign注释（约1029行，c01e8d2）
+// 2026-10-07		V1.17  Erie  owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）。L-2方案甲：新增在途ADC owner超时作废（start fire后年龄>=C_ADC_COMPLETION_LOST_CYCLES=4500、物理ADC空闲、捕获缓存与待发布完成均为空，同拍原子判断）；新增输出o_adc_transaction_lost_event，作废拍在o_adc_complete_sample_index给出owner序号，永不与完成同拍；作废发measurement discard，新原因码2'b11 COMPLETION_LOST并带owner身份；新增o_owner_lost_sticky（复位/诊断清除规则同N-1，START不清）。RED/IR/校准按槽位计连续作废，k=C_ADC_COMPLETION_LOST_LIMIT=2，只被同槽位匹配的真实完成清零，达到k置新lane 06（cause 8'h06）；ADC一直不回空闲时owner年龄9000置lane 07（cause 8'h07），不释放owner；lane 06/07并入o_ami_fault_active与o_wrapper_fault_blocking。SID-05截止撤销与校准owner作废合并为同一撤销事件，清flag_calibration_request_inflight，请求来自周期重检时转送PWI（F-020）。L-5：lane 01/02/03/06/07增加'RUN已由STOP结束且AMI排空'清零，新故障置位优先，flag_integration_blocking生命周期不变。
 module ppg_adc_measurement_idac_integration
 #(
 	parameter integer C_FRAME_ID_WIDTH = 32'd16, // 真实400 Hz物理帧编号字段宽度
@@ -92,6 +94,8 @@ module ppg_adc_measurement_idac_integration
 	parameter integer C_CONFIRM_COUNT_WIDTH = 32'd4, // 检测连续确认计数字段宽度
 	parameter integer C_INTERVAL_WIDTH = 32'd16, // 检测时间间隔字段宽度
 	parameter integer C_RUN_GENERATION_WIDTH = 32'd8, // manager唯一产生、经ACTIVE wrapper与Top扇出的RUN代际字段宽度；父级声明并原样透传给PWI(2457行)/IDAC(2313行) @satisfies: K03
+	parameter integer C_ADC_COMPLETION_LOST_CYCLES = 32'd4500, // T-lost：在途owner自start fire起满该拍数、物理ADC空闲且捕获链无完成时作废，须大于实测最晚合法迟到4355拍并小于下一帧同色接管4717拍
+	parameter integer C_ADC_COMPLETION_LOST_LIMIT = 32'd2, // k：同一槽位连续作废达到该次数即经cause 8'h06升级为系统故障
 	parameter integer C_ENABLE_TEST_INJECTION = 32'd0 // 默认关闭的验证专用异常注入结构生成使能
 )
 (
@@ -126,7 +130,8 @@ module ppg_adc_measurement_idac_integration
 	//ADC可靠完成旁带
 	output o_adc_transaction_complete_event,    // CLK_DOUT同步、RAW锁存和S1归属后的唯一完成脉冲
 	output o_adc_transaction_success,           // 与完成脉冲绑定的ADC结果有效资格
-	output [C_SAMPLE_INDEX_WIDTH - 1:0]o_adc_complete_sample_index, // 与完成脉冲绑定的启动事务序号
+	output [C_SAMPLE_INDEX_WIDTH - 1:0]o_adc_complete_sample_index, // 与完成脉冲或作废脉冲绑定的启动事务序号
+	output o_adc_transaction_lost_event,        // 在途owner完成丢失超时作废单拍，与完成脉冲永不同拍，不携带success
 	input i_transaction_precision_mode,         // 当前事务采用的9-bit或15-bit精度
 	input [C_FRAME_ID_WIDTH - 1:0]i_transaction_frame_id, // 当前事务真实物理帧号
 	input [C_SAMPLE_INDEX_WIDTH - 1:0]i_transaction_sample_index, // 当前事务全局序号
@@ -352,6 +357,7 @@ module ppg_adc_measurement_idac_integration
 
 	//-------------Wrapper状态输出--------------//
 	output o_integration_protocol_error_sticky, // 集成协议异常历史诊断
+	output o_owner_lost_sticky,                 // ADC完成丢失超时作废历史诊断，新START不清
 	output o_wrapper_fault_blocking,            // Wrapper当前阻断故障汇总
 	output o_normal_measurement_eligible,       // 正式NORMAL测量资格
 	output o_adc_chain_idle,                    // ADC捕获及Stage1流水空闲
@@ -421,7 +427,15 @@ module ppg_adc_measurement_idac_integration
 	localparam [1:0]DISCARD_REASON_STOP = 2'b00; // 私有discard组STOP排空原因编码
 	localparam [1:0]DISCARD_REASON_ABORT = 2'b01; // 私有discard组abort撤销原因编码
 	localparam [1:0]DISCARD_REASON_SYSTEM_FAULT = 2'b10; // 私有discard组系统故障原因编码
+	localparam [1:0]DISCARD_REASON_COMPLETION_LOST = 2'b11; // 正式结果discard专用：在途owner完成丢失被超时作废，占用2位字段最后一个空位
+	localparam integer ADC_BUSY_FAULT_CYCLES = 2 * C_ADC_COMPLETION_LOST_CYCLES; // owner年龄到达该值时物理ADC仍非空闲即报cause 8'h07，计数器在此饱和
 	localparam integer FORK_PAYLOAD_WIDTH = (2 * C_DATA_WIDTH) + 43 + C_DC_RECOVERY_EPOCH_WIDTH + C_CONFIG_EPOCH_WIDTH + (2 * C_COEF_EPOCH_WIDTH) + C_FRAME_ID_WIDTH + C_SAMPLE_INDEX_WIDTH + (2 * C_IDAC_CODE_WIDTH) + (2 * C_CODE_EPOCH_WIDTH); // DC恢复完整事务保持槽字段总宽度
+
+	//----------------计数信号----------------//
+	reg [15:0]cnt_owner_age = 16'd0;          // 唯一ADC owner自start fire起的在途拍数，饱和于ADC_BUSY_FAULT_CYCLES
+	reg [3:0]cnt_lost_red = 4'd0;             // RED槽位连续超时作废次数，RED真实完成或START清零
+	reg [3:0]cnt_lost_ir = 4'd0;              // IR槽位连续超时作废次数，只被IR自身真实完成清零
+	reg [3:0]cnt_lost_cal = 4'd0;             // 校准槽位连续超时作废次数，截止撤销不计入
 
 	//----------------寄存器信号----------------//
 	reg [1:0]reg_inflight_frame_type = 2'b00;   // 在途校准结果期望类型
@@ -454,6 +468,8 @@ module ppg_adc_measurement_idac_integration
 	reg flag_ami_fault_pending_03 = 1'b0;       // cause 8'h03待分发标记，completion身份无法证明可用原owner恢复时置位
 	reg flag_ami_fault_pending_04 = 1'b0;       // cause 8'h04待分发标记，精度控制新episode到达时置位
 	reg flag_ami_fault_pending_05 = 1'b0;       // cause 8'h05待分发标记，IDAC控制器新episode到达时置位
+	reg flag_ami_fault_pending_06 = 1'b0;       // cause 8'h06待分发标记，某槽位连续作废达到k次时置位
+	reg flag_ami_fault_pending_07 = 1'b0;       // cause 8'h07待分发标记，owner年龄到9000拍物理ADC仍忙时置位
 	reg flag_detection_discard_episode_active = 1'b0; // 检测代际清空episode锁存，抑制同一代际的重复广播
 	reg flag_adc_transaction_inflight = 1'b0;   // 唯一ADC事务在途所有权
 	reg flag_adc_transaction_abort = 1'b0;      // 当前ADC事务曾命中abort的不可成功资格
@@ -465,6 +481,8 @@ module ppg_adc_measurement_idac_integration
 	reg flag_test_identity_hold = 1'b0;         // 测试错配后保留真实DONE和owner，等待受控恢复
 	reg flag_owner_protocol_fault_hold = 1'b0;  // cause 8'h02请求/响应对应关系破坏，保持到本RUN结束
 	reg flag_recovery_context_fault_hold = 1'b0; // cause 8'h03无法证明可用原owner恢复，保持到本RUN结束
+	reg flag_owner_lost_fault_hold = 1'b0;      // cause 8'h06同槽位连续完成丢失，保持到abort、START或本RUN结束排空
+	reg flag_adc_busy_fault_hold = 1'b0;        // cause 8'h07物理ADC长期不回空闲，保持到abort、START或本RUN结束排空
 	reg flag_detection_pending = 1'b0;          // 片内检测分支所有权
 	reg flag_detection_branch_sample_valid = 1'b0; // 检测分支自有的独立样本资格，正式分支先消费时不受影响
 	reg flag_run_context_ended = 1'b1;          // 当前RUN已被STOP确认结束（复位后尚无RUN也视为结束），START撤销
@@ -480,6 +498,16 @@ module ppg_adc_measurement_idac_integration
 	wire flag_adc_completion_abort_release;     // 测试错配后由受控abort发布原身份失败完成
 	wire flag_adc_completion_owner_match;       // capture与S1完整身份同ADC owner逐位一致
 	wire flag_adc_completion_success;           // 非abort且元数据一致的可继续处理资格
+	wire flag_owner_lost_fire;                  // 本拍作废在途owner：年龄满T-lost、物理空闲、捕获与待发布完成均空、无同拍正式discard
+	wire flag_adc_busy_fault_fire;              // owner年龄恰到9000拍且物理ADC仍非空闲、无法作废的单拍
+	wire flag_owner_slot_red;                   // 在途owner属于RED采样槽位
+	wire flag_owner_slot_ir;                    // 红外时隙owner，作废计入IR独立计数器
+	wire flag_owner_slot_cal;                   // 在途owner属于AMB或DCS校准槽位
+	wire flag_owner_alive_completion;           // 与owner逐位匹配的真实完成发布，证明该槽位ADC仍在应答
+	wire flag_owner_lost_limit_reached;         // 本次作废使该槽位连续作废次数达到k
+	wire flag_calibration_request_withdraw;     // 在途校准请求撤销：SID-05截止或校准owner超时作废，二者合并
+	wire flag_recheck_request_withdraw;         // 撤销命中的在途请求来自周期重检时转送PWI释放内层在途
+	wire flag_run_context_drained;              // 当前RUN已由STOP结束且AMI全链排空，故障lane按本RUN结束落下
 	wire flag_test_inject_effective;            // 参数和运行使能共同允许验证注入
 	wire flag_test_identity_inject_fire;        // 错误identity请求唯一接纳事件
 	wire idac_test_saturation_inject_ready_o;   // 内部转发：IDAC控制器当前可原子绑定饱和注入请求
@@ -639,6 +667,8 @@ module ppg_adc_measurement_idac_integration
 	wire flag_ami_fault_dispatch_03;            // 无法证明恢复上下文占用分发槽位的判定，让位给01和02
 	wire flag_ami_fault_dispatch_04;            // 精度阻断故障占用分发槽位的判定，让位给更高优先级的01/02/03
 	wire flag_ami_fault_dispatch_05;            // IDAC阻断故障占用分发槽位的判定，让位给01/02/03/04
+	wire flag_ami_fault_dispatch_06;            // 连续完成丢失故障占用分发槽位的判定，让位给01至05
+	wire flag_ami_fault_dispatch_07;            // ADC长期忙故障占用分发槽位的判定，七路中优先级最低
 	wire flag_ami_terminal_action;              // STOP/abort/系统故障任一到达本拍的合并触发电平
 	wire flag_pwi_detection_datapath_empty;     // PWI o_detection_datapath_empty桥接，判断检测代际是否仍需清空
 	wire flag_detection_discard_trigger;        // 本拍需要新发出一次检测代际清空广播的唯一判定
@@ -777,6 +807,8 @@ module ppg_adc_measurement_idac_integration
 	reg adc_transaction_complete_event_o = 1'b0; // 当前已归属ADC结果的单周期完成通知
 	reg adc_transaction_success_o = 1'b0;       // 当前完成通知关联的有效结果资格
 	reg [C_SAMPLE_INDEX_WIDTH - 1:0]adc_complete_sample_index_o = {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 完成通知绑定的稳定事务序号
+	reg adc_transaction_lost_event_o = 1'b0;    // 超时作废通知寄存，与完成通知分属两条独立事件线
+	reg owner_lost_sticky_o = 1'b0;             // 完成丢失作废历史位寄存，按N-1清除规则保持
 
 	//正式结果生命周期丢弃公开观测
 	reg measurement_result_discard_event_o = 1'b0; // 合同6.10节公开端口的单周期丢弃通知寄存
@@ -917,6 +949,16 @@ module ppg_adc_measurement_idac_integration
 	assign flag_adc_completion_abort_release = flag_test_identity_hold && i_control_abort_event && flag_adc_completion_pending; // 受控abort只能以缓存真实上下文释放旧owner；不得再叠加flag_s1_detect_valid（S1重构器自身输出缓存的瞬态valid，交接给flag_adc_completion_pending后一两拍内即回落，abort/STOP在此之后任意时刻到达都会读到0，导致本条件几乎永远不可达——真正代表"完成仍缓存待核实"的持久状态是flag_adc_completion_pending本身，metadata_o系寄存保持值，不依赖detect_valid_o是否仍为1）
 	assign flag_adc_completion_emit = flag_adc_completion_normal_emit || flag_adc_completion_abort_release; // 正常完成或受控失败释放均只产生一次旁带
 	assign flag_adc_completion_owner_match = (flag_capture_precision_mode == reg_adc_inflight_precision_mode) && (flag_s1_precision_mode == reg_adc_inflight_precision_mode) && (dec_s1_frame_id == reg_adc_inflight_frame_id) && (dec_completion_sample_index == reg_adc_inflight_sample_index) && (flag_s1_color_ir == reg_adc_inflight_color_ir) && (dec_s1_frame_type == reg_adc_inflight_frame_type) && (dec_s1_amb_code_snapshot == reg_adc_inflight_amb_code) && (dec_s1_dc_code_snapshot == reg_adc_inflight_dc_code) && (dec_s1_amb_code_epoch == reg_adc_inflight_amb_epoch) && (dec_s1_dc_code_epoch == reg_adc_inflight_dc_epoch); // capture精度与S1全部返回身份必须命中同一物理ADC owner
+	assign flag_owner_lost_fire = flag_adc_transaction_inflight && (cnt_owner_age >= C_ADC_COMPLETION_LOST_CYCLES) && i_adc_idle && !flag_capture_valid && !flag_adc_completion_pending && !flag_measurement_result_discard_fire && !i_start_ack_event; // AMI是作废与迟到完成的唯一裁决点：物理空闲、捕获缓存和待发布完成三项同拍原子判断，完成一旦进入捕获缓存即优先；同拍正式discard占用公开discard寄存时推迟一拍 @satisfies: AMI-39, LFA-04
+	assign flag_adc_busy_fault_fire = flag_adc_transaction_inflight && (cnt_owner_age == (ADC_BUSY_FAULT_CYCLES - 1)) && !i_adc_idle; // 计数跨入饱和值的那一拍物理ADC仍忙才报一次，饱和后不再重复
+	assign flag_owner_slot_red = (reg_adc_inflight_frame_type == FRAME_TYPE_NORMAL) && !reg_adc_inflight_color_ir; // 由owner启动沿锁存的类型与颜色译出RED槽位
+	assign flag_owner_slot_ir = (reg_adc_inflight_frame_type == FRAME_TYPE_NORMAL) && reg_adc_inflight_color_ir; // NORMAL且颜色位为1即红外事务，单光IR与双光后半帧共用
+	assign flag_owner_slot_cal = (reg_adc_inflight_frame_type != FRAME_TYPE_NORMAL); // AMB_CAL与DCS_CAL共用唯一校准槽位
+	assign flag_owner_alive_completion = flag_adc_completion_normal_emit && flag_adc_completion_owner_match; // success=0的受控释放同样证明物理ADC应答，按槽位清零连续作废计数
+	assign flag_owner_lost_limit_reached = flag_owner_lost_fire && ((flag_owner_slot_red && (cnt_lost_red >= (C_ADC_COMPLETION_LOST_LIMIT - 1))) || (flag_owner_slot_ir && (cnt_lost_ir >= (C_ADC_COMPLETION_LOST_LIMIT - 1))) || (flag_owner_slot_cal && (cnt_lost_cal >= (C_ADC_COMPLETION_LOST_LIMIT - 1)))); // 只看被作废owner自己槽位的计数
+	assign flag_calibration_request_withdraw = i_cal_owner_deadline_event || (flag_owner_lost_fire && flag_owner_slot_cal); // SID-05截止撤销与校准owner超时作废合并为同一撤销事件，二者都意味着在途请求不会再有结果；F-020 @satisfies: SID-05
+	assign flag_recheck_request_withdraw = flag_calibration_request_withdraw && flag_calibration_request_inflight && (reg_inflight_reason == REASON_RECHECK); // 只把命中周期重检在途请求的撤销转送PWI，避免误清重检调度器内层状态
+	assign flag_run_context_drained = flag_run_context_ended && o_datapath_empty; // STOP确认结束本RUN且被作废事务已不计在途，全链排空后无残留阻断原因
 	assign flag_adc_completion_success = flag_adc_completion_normal_emit && flag_adc_completion_owner_match && !flag_adc_transaction_abort && !flag_result_abort_discard; // 测试错配恢复只能输出success=0，绝不形成正式成功
 	assign flag_normal_ppg_profile = (i_run_profile == RUN_PROFILE_NORMAL); // 运行档案低电平明确表示NORMAL_PPG
 	assign flag_normal_start_search_qualified = i_run_enable && flag_normal_ppg_profile && ((i_idac_mode == IDAC_MODE_SEARCH_HOLD) || (i_idac_mode == IDAC_MODE_SEARCH_TRACK)); // 只有NORMAL_PPG正式搜索模式允许建立启动搜索来源
@@ -970,6 +1012,8 @@ module ppg_adc_measurement_idac_integration
 	assign flag_ami_fault_dispatch_02 = flag_ami_fault_pending_02 && !flag_ami_fault_pending_01; // 仅01本拍未占用分发槽位时才轮到02出槽
 	assign flag_ami_fault_dispatch_03 = flag_ami_fault_pending_03 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02; // 01和02本拍都未占用分发槽位时才轮到03出槽
 	assign flag_ami_fault_dispatch_04 = flag_ami_fault_pending_04 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02 && !flag_ami_fault_pending_03; // 更高优先级的01/02/03若本拍都未取得分发槽位，PWI精度阻断记录接手04
+	assign flag_ami_fault_dispatch_06 = flag_ami_fault_pending_06 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02 && !flag_ami_fault_pending_03 && !flag_ami_fault_pending_04 && !flag_ami_fault_pending_05; // 01至05都不占槽时连续丢失记录出槽
+	assign flag_ami_fault_dispatch_07 = flag_ami_fault_pending_07 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02 && !flag_ami_fault_pending_03 && !flag_ami_fault_pending_04 && !flag_ami_fault_pending_05 && !flag_ami_fault_pending_06; // 前六路都空闲时ADC长期忙记录才出槽
 	assign flag_ami_fault_dispatch_05 = flag_ami_fault_pending_05 && !flag_ami_fault_pending_01 && !flag_ami_fault_pending_02 && !flag_ami_fault_pending_03 && !flag_ami_fault_pending_04; // 五路里剩余优先级最低，01至04全部未命中本拍槽位后IDAC阻断记录才能出槽
 	assign flag_detection_discard_trigger = flag_ami_terminal_action && !flag_pwi_detection_datapath_empty && !flag_detection_discard_episode_active; // 检测代际未排空且本episode尚未广播过时才新触发一次；无条件广播,LFA-02a实测确认下一拍empty @satisfies: P02, N01
 	assign flag_terminal_discard_reason = (flag_system_fault_discard_pending || i_system_fault_discard_event) ? DISCARD_REASON_SYSTEM_FAULT : (i_control_abort_event ? DISCARD_REASON_ABORT : DISCARD_REASON_STOP); // 系统故障优先于abort，abort优先于STOP
@@ -1000,7 +1044,8 @@ module ppg_adc_measurement_idac_integration
 	assign o_transaction_start_fire = i_transaction_start_valid && o_transaction_start_ready; // 唯一ADC启动fire
 	assign o_adc_transaction_complete_event = adc_transaction_complete_event_o; // 同一可靠归属点向两个未来消费者广播完成脉冲
 	assign o_adc_transaction_success = adc_transaction_success_o; // 完成脉冲有效时导出不可重新编码的成功资格
-	assign o_adc_complete_sample_index = adc_complete_sample_index_o; // 完成脉冲有效时导出本笔启动事务的稳定索引
+	assign o_adc_complete_sample_index = adc_complete_sample_index_o; // 完成或作废脉冲有效时导出本笔启动事务的稳定索引，接收方须以事件限定取值
+	assign o_adc_transaction_lost_event = adc_transaction_lost_event_o; // 导出超时作废事件，调度器与SSW据此按序号与代际释放owner
 	assign o_measurement_result_discard_event = measurement_result_discard_event_o; // 桥接导出寄存事件到公开端口
 	assign o_measurement_result_discard_reason = measurement_result_discard_reason_o; // 桥接导出寄存归类到公开端口
 	assign o_measurement_result_discard_identity_valid = measurement_result_discard_identity_valid_o; // 桥接导出寄存身份标志到公开端口
@@ -1138,7 +1183,8 @@ module ppg_adc_measurement_idac_integration
 
 	//Wrapper状态输出
 	assign o_integration_protocol_error_sticky = integration_protocol_error_sticky_o; // 导出wrapper协议异常历史
-	assign o_wrapper_fault_blocking = o_idac_fault_blocking || flag_precision_fault_blocking || flag_integration_blocking; // 汇总wrapper阻断资格
+	assign o_owner_lost_sticky = owner_lost_sticky_o; // 导出完成丢失作废历史，经control_top送SPI 0x0108 bit6
+	assign o_wrapper_fault_blocking = o_idac_fault_blocking || flag_precision_fault_blocking || flag_integration_blocking || flag_owner_lost_fault_hold || flag_adc_busy_fault_hold; // 汇总wrapper阻断资格，lane 06/07保持期间同样禁止新事务
 	assign o_normal_measurement_eligible = i_run_enable && i_active_config_valid && startup_search_complete_o && !o_idac_fault_blocking && !flag_precision_fault_blocking && !flag_integration_blocking; // 正式NORMAL必须在启动搜索及控制链均合法后开放
 	// Wrapper idle汇总覆盖物理ADC所有权、所有缓存和精度控制流水。
 	assign o_adc_chain_idle = !flag_adc_transaction_inflight && !flag_capture_valid && !flag_s1_detect_valid && !flag_calibrated_valid; // ADC到Stage1校准流水完全排空
@@ -1151,17 +1197,17 @@ module ppg_adc_measurement_idac_integration
 	// 判据文字比对flag_integration_blocking现有5个协议子条件后拆分：凡破坏请求/响应唯一对应
 	// 关系的协议错误归8'h02，唯一"无法证明可用原owner执行失败释放"语义的completion身份错配
 	// 归8'h03；两路identity均复用物理ADC owner快照，无owner时identity_valid强制为0。
-	assign o_ami_fault_active = flag_test_identity_hold || flag_owner_protocol_fault_hold || flag_recovery_context_fault_hold || flag_precision_fault_active || flag_idac_fault_active; // 五路lane-active按位或，分别镜像各自保持电平
+	assign o_ami_fault_active = flag_test_identity_hold || flag_owner_protocol_fault_hold || flag_recovery_context_fault_hold || flag_precision_fault_active || flag_idac_fault_active || flag_owner_lost_fault_hold || flag_adc_busy_fault_hold; // 七路lane-active按位或，分别镜像各自保持电平
 	// 分发槽位每拍最多命中一路，01固定优先，其锁存的身份字段直接来自对应子模块或本地owner快照的当前保持输出。
-	assign o_ami_fault_valid = flag_ami_fault_dispatch_01 || flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03 || flag_ami_fault_dispatch_04 || flag_ami_fault_dispatch_05; // 本拍恰好命中一路时才产生记录脉冲
-	assign o_ami_fault_cause = flag_ami_fault_dispatch_01 ? 8'h01 : (flag_ami_fault_dispatch_02 ? 8'h02 : (flag_ami_fault_dispatch_03 ? 8'h03 : (flag_ami_fault_dispatch_04 ? 8'h04 : (flag_ami_fault_dispatch_05 ? 8'h05 : 8'h00)))); // 未分发时保持全零，不得被下游误读为有效原因；5车道分发器,8'h04=精度链终点,8'h05=IDAC链终点 @satisfies: K01
-	assign o_ami_fault_identity_valid = flag_ami_fault_dispatch_01 ? 1'b1 : (flag_ami_fault_dispatch_02 ? flag_adc_transaction_inflight : (flag_ami_fault_dispatch_03 ? flag_adc_transaction_inflight : (flag_ami_fault_dispatch_04 ? flag_precision_fault_identity_valid : (flag_ami_fault_dispatch_05 ? flag_idac_fault_identity_valid : 1'b0)))); // 01接纳条件恒为可信身份；02/03借用物理ADC owner的当前所有权状态
-	assign o_ami_fault_frame_id = flag_ami_fault_dispatch_01 ? reg_adc_inflight_frame_id : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_frame_id : {C_FRAME_ID_WIDTH{1'b0}}) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_frame_id : (flag_ami_fault_dispatch_05 ? flag_idac_fault_frame_id : {C_FRAME_ID_WIDTH{1'b0}}))); // 选中路的真实物理帧号，02/03无owner时强制清零
-	assign o_ami_fault_sample_index = flag_ami_fault_dispatch_01 ? reg_adc_inflight_sample_index : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_sample_index : {C_SAMPLE_INDEX_WIDTH{1'b0}}) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_sample_index : (flag_ami_fault_dispatch_05 ? flag_idac_fault_sample_index : {C_SAMPLE_INDEX_WIDTH{1'b0}}))); // 选中路的全局事务顺序编号，02/03无owner时强制清零
-	assign o_ami_fault_color_ir = flag_ami_fault_dispatch_01 ? reg_adc_inflight_color_ir : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight && reg_adc_inflight_color_ir) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_color_ir : (flag_ami_fault_dispatch_05 ? flag_idac_fault_color_ir : 1'b0))); // 选中路绑定事务的颜色身份，02/03与所有权状态共享同一AND门
-	assign o_ami_fault_frame_type = flag_ami_fault_dispatch_01 ? reg_adc_inflight_frame_type : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_frame_type : 2'b00) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_frame_type : (flag_ami_fault_dispatch_05 ? flag_idac_fault_frame_type : 2'b00))); // 选中路绑定事务的帧类型编码，02/03无owner时强制清零
-	assign o_ami_fault_precision = flag_ami_fault_dispatch_01 ? reg_adc_inflight_precision_mode : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight && reg_adc_inflight_precision_mode) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_precision : (flag_ami_fault_dispatch_05 ? flag_idac_fault_precision : 1'b0))); // 选中路绑定事务建立时所属的精度模式，02/03与所有权状态共享同一AND门
-	assign o_ami_fault_run_generation = flag_ami_fault_dispatch_01 ? i_run_generation : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? i_run_generation : (flag_ami_fault_dispatch_04 ? flag_precision_fault_run_generation : (flag_ami_fault_dispatch_05 ? flag_idac_fault_run_generation : {C_RUN_GENERATION_WIDTH{1'b0}}))); // 选中路绑定事务所属的RUN代际，02/03取本地实时代际
+	assign o_ami_fault_valid = flag_ami_fault_dispatch_01 || flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03 || flag_ami_fault_dispatch_04 || flag_ami_fault_dispatch_05 || flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07; // 本拍恰好命中一路时才产生记录脉冲
+	assign o_ami_fault_cause = flag_ami_fault_dispatch_01 ? 8'h01 : (flag_ami_fault_dispatch_02 ? 8'h02 : (flag_ami_fault_dispatch_03 ? 8'h03 : (flag_ami_fault_dispatch_04 ? 8'h04 : (flag_ami_fault_dispatch_05 ? 8'h05 : (flag_ami_fault_dispatch_06 ? 8'h06 : (flag_ami_fault_dispatch_07 ? 8'h07 : 8'h00)))))); // 未分发时保持全零，不得被下游误读为有效原因；5车道分发器,8'h04=精度链终点,8'h05=IDAC链终点 @satisfies: K01
+	assign o_ami_fault_identity_valid = flag_ami_fault_dispatch_01 ? 1'b1 : (flag_ami_fault_dispatch_02 ? flag_adc_transaction_inflight : (flag_ami_fault_dispatch_03 ? flag_adc_transaction_inflight : (flag_ami_fault_dispatch_04 ? flag_precision_fault_identity_valid : (flag_ami_fault_dispatch_05 ? flag_idac_fault_identity_valid : (flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07))))); // 01接纳条件恒为可信身份；02/03借用物理ADC owner的当前所有权状态
+	assign o_ami_fault_frame_id = flag_ami_fault_dispatch_01 ? reg_adc_inflight_frame_id : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_frame_id : {C_FRAME_ID_WIDTH{1'b0}}) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_frame_id : (flag_ami_fault_dispatch_05 ? flag_idac_fault_frame_id : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) ? reg_adc_inflight_frame_id : {C_FRAME_ID_WIDTH{1'b0}})))); // 选中路的真实物理帧号，02/03无owner时强制清零
+	assign o_ami_fault_sample_index = flag_ami_fault_dispatch_01 ? reg_adc_inflight_sample_index : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_sample_index : {C_SAMPLE_INDEX_WIDTH{1'b0}}) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_sample_index : (flag_ami_fault_dispatch_05 ? flag_idac_fault_sample_index : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) ? reg_adc_inflight_sample_index : {C_SAMPLE_INDEX_WIDTH{1'b0}})))); // 选中路的全局事务顺序编号，02/03无owner时强制清零
+	assign o_ami_fault_color_ir = flag_ami_fault_dispatch_01 ? reg_adc_inflight_color_ir : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight && reg_adc_inflight_color_ir) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_color_ir : (flag_ami_fault_dispatch_05 ? flag_idac_fault_color_ir : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) && reg_adc_inflight_color_ir)))); // 选中路绑定事务的颜色身份，02/03与所有权状态共享同一AND门
+	assign o_ami_fault_frame_type = flag_ami_fault_dispatch_01 ? reg_adc_inflight_frame_type : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight ? reg_adc_inflight_frame_type : 2'b00) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_frame_type : (flag_ami_fault_dispatch_05 ? flag_idac_fault_frame_type : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) ? reg_adc_inflight_frame_type : 2'b00)))); // 选中路绑定事务的帧类型编码，02/03无owner时强制清零
+	assign o_ami_fault_precision = flag_ami_fault_dispatch_01 ? reg_adc_inflight_precision_mode : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? (flag_adc_transaction_inflight && reg_adc_inflight_precision_mode) : (flag_ami_fault_dispatch_04 ? flag_precision_fault_precision : (flag_ami_fault_dispatch_05 ? flag_idac_fault_precision : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) && reg_adc_inflight_precision_mode)))); // 选中路绑定事务建立时所属的精度模式，02/03与所有权状态共享同一AND门
+	assign o_ami_fault_run_generation = flag_ami_fault_dispatch_01 ? i_run_generation : ((flag_ami_fault_dispatch_02 || flag_ami_fault_dispatch_03) ? i_run_generation : (flag_ami_fault_dispatch_04 ? flag_precision_fault_run_generation : (flag_ami_fault_dispatch_05 ? flag_idac_fault_run_generation : ((flag_ami_fault_dispatch_06 || flag_ami_fault_dispatch_07) ? i_run_generation : {C_RUN_GENERATION_WIDTH{1'b0}})))); // 选中路绑定事务所属的RUN代际，02/03取本地实时代际
 
 	//检测代际清空公开观测输出
 	// 直接镜像已经喂给PWI私有输入的同一批信号，公开端口与私有广播逐拍同值，不引入额外延迟。
@@ -1226,8 +1272,30 @@ module ppg_adc_measurement_idac_integration
 			adc_complete_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 复位清除无效完成载荷
 		end else if(i_start_ack_event == 1'b1)begin
 			adc_complete_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 新RUN清除不可消费的旧完成索引
-		end else if(flag_adc_completion_emit == 1'b1)begin
+		end else if(flag_adc_completion_emit == 1'b1 || flag_owner_lost_fire == 1'b1)begin
 			adc_complete_sample_index_o <= reg_adc_inflight_sample_index; // 原子发布与capture对应的启动序号快照；exactly-once原identity success=0释放,LFA-04/LFA-02a/OIB-08实测确认 @satisfies: P14, LFA-04, OIB-08
+		end
+	end
+
+	// 超时作废通知只在作废判定拍置一拍，START拍不补发，绝不与完成通知同拍。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			adc_transaction_lost_event_o <= 1'b0; // 复位不产生伪造作废通知
+		end else if(i_start_ack_event == 1'b1)begin
+			adc_transaction_lost_event_o <= 1'b0; // 新RUN边界不发布前一生命周期的作废
+		end else begin
+			adc_transaction_lost_event_o <= flag_owner_lost_fire; // 物理空闲且捕获链无完成时向调度器与SSW发布一次作废 @satisfies: AMI-39, LFA-04
+		end
+	end
+
+	// 完成丢失历史位：新作废优先于同拍诊断清除；清除只在本地连续丢失阻断未保持或本RUN已由STOP结束且排空时生效，START不清。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			owner_lost_sticky_o <= 1'b0;        // 复位清除完成丢失历史
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			owner_lost_sticky_o <= 1'b1;        // 任一槽位超时作废都留下软件可读历史，同拍诊断清除不得吞掉 @satisfies: AMI-24
+		end else if(i_diag_clear_event == 1'b1 && (flag_owner_lost_fault_hold == 1'b0 || flag_run_context_drained == 1'b1))begin
+			owner_lost_sticky_o <= 1'b0;        // 与集成sticky同一清除规则：无活跃连续丢失阻断或本RUN已结束排空时才允许撤销历史
 		end
 	end
 
@@ -1250,8 +1318,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_event_o <= 1'b0; // 复位不产生伪造正式结果丢弃事件
 		end else if(i_start_ack_event == 1'b1)begin
 			measurement_result_discard_event_o <= 1'b0; // 新RUN不得补发前一生命周期的正式结果丢弃事件
-		end else if(flag_measurement_result_discard_fire == 1'b1)begin
-			measurement_result_discard_event_o <= 1'b1; // 已同步在途正式结果与丢弃汇点确认本笔丢弃
+		end else if(flag_measurement_result_discard_fire == 1'b1 || flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_event_o <= 1'b1; // 已同步在途正式结果与丢弃汇点确认本笔丢弃，或在途owner被超时作废
 		end else begin
 			measurement_result_discard_event_o <= 1'b0; // 脉冲以外的周期明确报告无正式结果丢弃事件
 		end
@@ -1265,6 +1333,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_reason_o <= 2'b00; // 新RUN不继承旧丢弃归类
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_reason_o <= flag_measurement_result_discard_reason; // 锁存丢弃汇点当前命中的STOP/abort/系统故障归类
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_reason_o <= DISCARD_REASON_COMPLETION_LOST; // 作废专用原因码，与STOP/abort/系统故障三类区分
 		end
 	end
 
@@ -1276,6 +1346,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_identity_valid_o <= 1'b0; // 新RUN不继承旧丢弃身份
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_identity_valid_o <= 1'b1; // 触发沿本身要求真实在途正式结果存在，恒为可信身份
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_identity_valid_o <= 1'b1; // 被作废owner的启动身份完整可信
 		end
 	end
 
@@ -1287,6 +1359,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_sample_valid_o <= 1'b0; // 新RUN不继承旧样本资格快照
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_sample_valid_o <= result_sample_valid_o; // 锁存丢弃前一拍的独立样本资格
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_sample_valid_o <= 1'b0; // 作废事务从未产生样本，资格恒为0
 		end
 	end
 
@@ -1298,6 +1372,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}}; // 新RUN清除不可消费的旧丢弃帧号
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_frame_id_o <= result_frame_id_o; // 锁存被丢弃事务的真实物理帧号，取自正被正式输出持有的结果载荷而非上游fork分支
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_frame_id_o <= reg_adc_inflight_frame_id; // 取owner启动沿锁存的真实帧号
 		end
 	end
 
@@ -1309,6 +1385,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}}; // 新RUN清除不可消费的旧丢弃序号
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_sample_index_o <= result_sample_index_o; // 锁存被丢弃事务的全局顺序编号，与正式输出持有的结果一致 @satisfies: OIB-06
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_sample_index_o <= reg_adc_inflight_sample_index; // 取owner启动沿锁存的全局序号
 		end
 	end
 
@@ -1320,6 +1398,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_color_ir_o <= 1'b0; // 新RUN清除不可消费的旧丢弃颜色
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_color_ir_o <= result_color_ir_o; // 锁存被丢弃事务的颜色身份，与frame_type/sample_index一起构成discard记录的branch ID字段 @satisfies: P01
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_color_ir_o <= reg_adc_inflight_color_ir; // 取owner启动沿锁存的颜色
 		end
 	end
 
@@ -1331,6 +1411,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_frame_type_o <= 2'b00; // 新RUN清除不可消费的旧丢弃类型
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_frame_type_o <= result_frame_type_o; // 锁存被丢弃事务的帧类型编码
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_frame_type_o <= reg_adc_inflight_frame_type; // 作废类型可为NORMAL或校准，由该字段区分
 		end
 	end
 
@@ -1342,6 +1424,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_precision_o <= 1'b0; // 新RUN清除不可消费的旧丢弃精度
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_precision_o <= result_precision_mode_o; // 锁存被丢弃事务建立时所属的精度模式
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_precision_o <= reg_adc_inflight_precision_mode; // 取owner启动沿锁存的精度
 		end
 	end
 
@@ -1353,6 +1437,8 @@ module ppg_adc_measurement_idac_integration
 			measurement_result_discard_run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}}; // 新RUN清除不可消费的旧丢弃代际
 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
 			measurement_result_discard_run_generation_o <= dec_fork_measurement_run_generation; // 锁存被丢弃事务所属的RUN代际
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			measurement_result_discard_run_generation_o <= i_run_generation; // 作废只在本RUN内发生，代际取实时值
 		end
 	end
 
@@ -1423,6 +1509,104 @@ module ppg_adc_measurement_idac_integration
 			flag_system_fault_discard_pending <= 1'b1; // supervisor到达时置位并保持原因
 		end else if(o_datapath_empty == 1'b1)begin
 			flag_system_fault_discard_pending <= 1'b0; // 已证明全部数字数据与控制事务排空，episode结束
+		end
+	end
+
+	// owner年龄从start fire起计数，饱和于ADC_BUSY_FAULT_CYCLES；完成或作废后保持到下一笔start，不参与其它判定。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_owner_age <= 16'd0;             // 复位时不存在在途owner年龄
+		end else if(o_transaction_start_fire == 1'b1)begin
+			cnt_owner_age <= 16'd0;             // 新owner启动沿重新计龄
+		end else if(flag_adc_transaction_inflight == 1'b1 && cnt_owner_age < ADC_BUSY_FAULT_CYCLES)begin
+			cnt_owner_age <= cnt_owner_age + 16'd1; // 在途期间逐拍累加，STOP、abort与帧停止都不暂停计时
+		end
+	end
+
+	// RED槽位连续作废计数：只有RED owner自身的真实完成或START清零，达到k后饱和。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_lost_red <= 4'd0;               // 复位无RED作废历史
+		end else if(i_start_ack_event == 1'b1)begin
+			cnt_lost_red <= 4'd0;               // 新RUN不继承RED连续作废
+		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_red == 1'b1)begin
+			cnt_lost_red <= 4'd0;               // RED真实完成证明该槽位仍有应答
+		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_red == 1'b1 && cnt_lost_red < C_ADC_COMPLETION_LOST_LIMIT)begin
+			cnt_lost_red <= cnt_lost_red + 4'd1; // RED owner被作废一次
+		end
+	end
+
+	// IR槽位连续作废计数：与RED独立，只被IR真实完成或START清零。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_lost_ir <= 4'd0;                // 上电时红外时隙尚无任何超时作废
+		end else if(i_start_ack_event == 1'b1)begin
+			cnt_lost_ir <= 4'd0;                // START开新RUN时红外计数归零
+		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_ir == 1'b1)begin
+			cnt_lost_ir <= 4'd0;                // 红外owner拿到匹配DONE说明该时隙ADC有应答
+		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_ir == 1'b1 && cnt_lost_ir < C_ADC_COMPLETION_LOST_LIMIT)begin
+			cnt_lost_ir <= cnt_lost_ir + 4'd1;  // 红外时隙又一次无DONE超时，累加到k即升级
+		end
+	end
+
+	// 校准槽位连续作废计数：SID-05截止撤销不经过owner，不计入；只统计真正的超时作废。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_lost_cal <= 4'd0;               // 复位无校准作废历史
+		end else if(i_start_ack_event == 1'b1)begin
+			cnt_lost_cal <= 4'd0;               // 新RUN不继承校准连续作废
+		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_cal == 1'b1)begin
+			cnt_lost_cal <= 4'd0;               // 校准真实完成清零其连续作废
+		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_cal == 1'b1 && cnt_lost_cal < C_ADC_COMPLETION_LOST_LIMIT)begin
+			cnt_lost_cal <= cnt_lost_cal + 4'd1; // 校准owner被作废一次
+		end
+	end
+
+	// cause 8'h06保持电平：某槽位连续作废达到k即置位；abort、START清零，或本RUN已由STOP结束且排空时落下；置位优先于后者。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_owner_lost_fault_hold <= 1'b0; // 复位解除连续丢失阻断
+		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+			flag_owner_lost_fault_hold <= 1'b0; // 新RUN或supervisor abort结束本episode的连续丢失阻断
+		end else if(flag_owner_lost_limit_reached == 1'b1)begin
+			flag_owner_lost_fault_hold <= 1'b1; // T-dead：同槽位连续k次作废，经supervisor升级为系统故障并STOP @satisfies: SUP-08
+		end else if(flag_run_context_drained == 1'b1)begin
+			flag_owner_lost_fault_hold <= 1'b0; // 本RUN已结束且排空，连续丢失不再有在途事务
+		end
+	end
+
+	// cause 8'h07保持电平：owner年龄到9000拍物理ADC仍忙即置位，不释放owner；清零规则与lane 06相同。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_adc_busy_fault_hold <= 1'b0;   // 复位解除ADC长期忙阻断
+		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+			flag_adc_busy_fault_hold <= 1'b0;   // 新RUN或abort后改由看门狗监视排空中的ADC忙
+		end else if(flag_adc_busy_fault_fire == 1'b1)begin
+			flag_adc_busy_fault_hold <= 1'b1;   // RUN中ADC一直不回空闲时不再静默停滞，报故障并STOP
+		end else if(flag_run_context_drained == 1'b1)begin
+			flag_adc_busy_fault_hold <= 1'b0;   // 本RUN结束且排空即无残留ADC忙原因
+		end
+	end
+
+	// cause 8'h06待分发标记，连续丢失达到k的作废拍置位，出槽后清除。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_ami_fault_pending_06 <= 1'b0;  // 复位撤销连续丢失待分发记录
+		end else if(flag_owner_lost_limit_reached == 1'b1)begin
+			flag_ami_fault_pending_06 <= 1'b1;  // 达到k的作废拍排队一条连续丢失故障记录
+		end else if(flag_ami_fault_dispatch_06 == 1'b1)begin
+			flag_ami_fault_pending_06 <= 1'b0;  // 连续丢失记录已出槽
+		end
+	end
+
+	// cause 8'h07待分发标记，ADC长期忙判定拍置位，出槽后清除。
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_ami_fault_pending_07 <= 1'b0;  // 复位撤销ADC长期忙待分发记录
+		end else if(flag_adc_busy_fault_fire == 1'b1)begin
+			flag_ami_fault_pending_07 <= 1'b1;  // 每个owner只在年龄跨入饱和值时排队一次
+		end else if(flag_ami_fault_dispatch_07 == 1'b1)begin
+			flag_ami_fault_pending_07 <= 1'b0;  // ADC长期忙记录已出槽
 		end
 	end
 
@@ -1581,6 +1765,8 @@ module ppg_adc_measurement_idac_integration
 			flag_test_identity_hold <= 1'b0;    // 新RUN或受控abort不得保留旧测试身份
 		end else if(flag_test_identity_inject_fire == 1'b1)begin
 			flag_test_identity_hold <= 1'b1;    // 错配进入原matcher后保留真实完成等待恢复
+		end else if(flag_run_context_drained == 1'b1)begin
+			flag_test_identity_hold <= 1'b0;    // STOP结束本RUN且全链排空后测试身份不再有可恢复的owner，lane 01随RUN结束落下；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1592,6 +1778,8 @@ module ppg_adc_measurement_idac_integration
 			flag_owner_protocol_fault_hold <= 1'b0; // 新RUN或受控abort结束当前RUN上下文
 		end else if(flag_calibration_result_mismatch == 1'b1 || flag_adc_capture_without_owner == 1'b1 || (i_transaction_start_valid == 1'b1 && ((i_transaction_frame_type == FRAME_TYPE_AMB) || (i_transaction_frame_type == FRAME_TYPE_DCS)) && flag_calibration_start_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1))begin
 			flag_owner_protocol_fault_hold <= 1'b1; // 四类协议错误任一到达即置位并保持
+		end else if(flag_run_context_drained == 1'b1)begin
+			flag_owner_protocol_fault_hold <= 1'b0; // 保持到本RUN结束：STOP确认且AMI全链排空即无残留阻断原因，lane 02落下使episode可关闭；置位优先于本清零；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1603,6 +1791,8 @@ module ppg_adc_measurement_idac_integration
 			flag_recovery_context_fault_hold <= 1'b0; // 新RUN重建协议上下文或受控abort清空未决恢复判定
 		end else if(flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0)begin
 			flag_recovery_context_fault_hold <= 1'b1; // 无法证明可用原owner执行失败释放
+		end else if(flag_run_context_drained == 1'b1)begin
+			flag_recovery_context_fault_hold <= 1'b0; // STOP结束本RUN且排空后无可恢复的原owner，lane 03随之落下；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1625,6 +1815,8 @@ module ppg_adc_measurement_idac_integration
 			flag_adc_transaction_inflight <= 1'b1; // 唯一fire建立本笔事务所有权
 		end else if(flag_adc_completion_emit == 1'b1)begin
 			flag_adc_transaction_inflight <= 1'b0; // 成功或失败完成旁带发布后才释放物理ADC owner
+		end else if(flag_owner_lost_fire == 1'b1)begin
+			flag_adc_transaction_inflight <= 1'b0; // 超时作废释放owner，不产生RAW、结果或success；作废不清捕获模块等待权，旧DONE随后按无owner捕获拒绝 @satisfies: AMI-40
 		end
 	end
 
@@ -1632,7 +1824,7 @@ module ppg_adc_measurement_idac_integration
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			flag_adc_transaction_abort <= 1'b0; // 复位后没有需降级的ADC事务
-		end else if(o_transaction_start_fire == 1'b1 || flag_adc_completion_emit == 1'b1)begin
+		end else if(o_transaction_start_fire == 1'b1 || flag_adc_completion_emit == 1'b1 || flag_owner_lost_fire == 1'b1)begin
 			flag_adc_transaction_abort <= 1'b0; // 新事务建立或旧事务发布完成后释放专属abort资格
 		end else if(i_control_abort_event == 1'b1 && (flag_adc_transaction_inflight == 1'b1 || flag_adc_completion_pending == 1'b1))begin
 			flag_adc_transaction_abort <= 1'b1; // 已启动或已捕获但未归属的事务必须以失败完成通知下游
@@ -1823,7 +2015,7 @@ module ppg_adc_measurement_idac_integration
 			flag_calibration_request_inflight <= 1'b0; // 复位不存在校准结果期待
 		end else if(i_stop_ack_event == 1'b1 || i_control_abort_event == 1'b1 || flag_integration_blocking == 1'b1)begin
 			flag_calibration_request_inflight <= 1'b0; // 阻断边界撤销未启动请求上下文
-		end else if(flag_amb_sample_accepted == 1'b1 || flag_dcs_sample_accepted == 1'b1 || i_cal_owner_deadline_event == 1'b1)begin
+		end else if(flag_amb_sample_accepted == 1'b1 || flag_dcs_sample_accepted == 1'b1 || flag_calibration_request_withdraw == 1'b1)begin
 			flag_calibration_request_inflight <= 1'b0; // 匹配结果消费后，或在途请求被owner截止抑制后，均允许下一请求；SID-05 修复此前deadline抑制后永久卡住不重试的真实死锁 @satisfies: SID-05
 		end else if(calibration_request_fire_o == 1'b1)begin
 			flag_calibration_request_inflight <= 1'b1; // 保存调度器已经取得的请求所有权
@@ -2584,6 +2776,7 @@ module ppg_adc_measurement_idac_integration
 		.i_dcs_revalidate_failed(flag_idac_dcs_revalidate_failed), // 输入 i_dcs_revalidate_failed 用 flag_idac_dcs_revalidate_failed
 		.i_amb_sample_accepted_event(flag_amb_sample_accepted), // 输入 i_amb_sample_accepted_event 用 flag_amb_sample_accepted
 		.i_dcs_sample_accepted_event(flag_dcs_sample_accepted), // 输入 i_dcs_sample_accepted_event 用 flag_dcs_sample_accepted
+		.i_calibration_request_withdraw_event(flag_recheck_request_withdraw), // 周期重检在途请求被截止撤销或校准作废时释放重检调度器内层在途；F-020
 		.o_amb_sequence_start(flag_precision_amb_seq_start), // 输出 o_amb_sequence_start 到 flag_precision_amb_seq_start
 		.o_dcs_revalidate_accept(flag_precision_dcs_revalidate_accept), // 输出 o_dcs_revalidate_accept 到 flag_precision_dcs_revalidate_accept
 		.i_calibration_sample_ready(flag_precision_calibration_ready), // 输入 i_calibration_sample_ready 用 flag_precision_calibration_ready

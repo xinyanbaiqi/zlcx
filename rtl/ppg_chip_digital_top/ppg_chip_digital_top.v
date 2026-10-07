@@ -14,10 +14,11 @@
 //
 // Dependencies:    ppg_reset_sync, ppg_spi_register_file, ppg_p2s_packer, ppg_control_top
 //
-// Version:         V1.2
-// Revision Date:   2026/09/07
+// Version:         V1.3
+// Revision Date:   2026/10/07
 // History:
 //     Time          Version     Revised by     Contents
+// 2026/10/07        V1.3        Erie          Owner-lifecycle round, wiring only: Top o_ami_owner_lost_sticky to SPI register file i_ami_owner_lost_sticky.
 // 2026/09/07        V1.2        Erie          Fix a real CDC gap flagged by the user against contract section 8.3 (line 153, frozen at V1.5) and section 9 rule 6 (line 230): dec_dbg_out_mux's selection used spi_dbg_out_select_o directly -- a SPI_SCLK-domain register (ppg_spi_register_file's reg_dbg_out_select) sampled with zero synchronizer stages by this file's CLK_2M-domain combinational mux, exactly the "temporary direct combinational or single-flop crossing" the contract forbids for this signal. Companion fix in ppg_spi_register_file.v V1.2 adds a sixth ppg_pulse_cdc_sync instance producing a new single-cycle CLK_2M-domain event (o_dbg_out_select_update_event) each time 0x0081 is genuinely written. This file adds a new CLK_2M-domain register, reg_dbg_out_select_stable, that only samples spi_dbg_out_select_o when that event pulses (reset to 3'd0, matching the SPI regfile's own reset value); dec_dbg_out_mux now selects off reg_dbg_out_select_stable instead of the raw SPI-domain wire. No metastability risk on the sampled value: by construction it has already been stable in the source domain for several source-domain cycles by the time the crossing event arrives, same reasoning already used for the other 5 pulse crossings. New wire spi_dbg_out_select_update_event_o added; no port list change on this module itself (ppg_spi_register_file's port list gained the one new output, wired here). Gate-clean, still only the 46 documented VG010 pad-naming exceptions. Full-hierarchy regression: tb_ppg_chip_digital_top.v 6/6 PASS, ppg_control_top.v's own SMOKE_TB_PASS unchanged (real_adc_responses=47 measurement_result_valid=32).
 // 2026/09/07        V1.1        Erie          Fix a real reset-CDC race found by tb_ppg_chip_digital_top.v's TC1: the SPI-domain reset synchronizer was clocked by SPI_SCLK itself, which stays idle-low until the host's very first real SPI transaction, so that transaction's own opening clock edges were simultaneously the ones needed to release the synchronizer -- corrupting the first 1-2 bits of the first-ever transaction after power-up (a genuine silicon-level bug, not a testbench artifact). Fixed by dropping the SPI_SCLK-clocked ppg_reset_sync instance and driving w_source_rstn directly from w_rstn (already synchronized in the always-running CLK_2M_PAD domain and long-settled before any real SPI activity begins, so feeding it in asynchronously carries no metastability risk). No port list change.
 // 2026/09/06        V1.0        Erie          Create file. First RTL implementation of PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md (V1.10): the QFN48 package-facing glue layer between the pad ring and ppg_control_top, per contract section 3's frozen hierarchy. Instantiates two ppg_reset_sync (CLK_2M_PAD domain and SPI_SCLK domain), one ppg_spi_register_file (Mode 0 SPI slave register file, byte-level map confirmed with the user across three rounds: write 0x0000-0x007F ACTIVE shadow / 0x0080 characterization / 0x0081 DBG_OUT select / 0x0090 shared command byte, read 0x0100-0x0125 captured diagnostic snapshot plus two independent discard-event latches), one ppg_p2s_packer (161-bit fixed telemetry packet), and one ppg_control_top (C01 target RTL, unmodified except the already-frozen o_active_precision_mode/o_source_config_update_ready/o_s1_calibration_applied/o_s1_raw/o_s2_raw ports). Inline logic covers: the flag_adc_physical_idle synthesizer (mux Stage1/Stage2 DONE by o_active_precision_mode, single 2-stage synchronizer, per C01 V1.11's frozen formula), the 6-candidate DBG_OUT mux (section 8.3), i_analog_ready tied to a fixed 1'b1 per the V1.10 errata (board power-up sequencing guarantees analog is stable before the digital domain starts -- not structurally analogous to i_adc_physical_idle, no synchronizer needed), the 7 verification-injection inputs tied to their production-safe defaults (C_ENABLE_TEST_INJECTION=0, matching the confirmed decision to exclude injection from the SPI map entirely), and the 32-signal SSW plus 4-signal ADC-interface pure rename passthrough (section 5, 36 signals total per the V1.8 errata correction). P2S_CLK is a pure CLK_2M_PAD passthrough per section 8.4.1, not generated inside ppg_p2s_packer. Known, deliberate gate exception: the 46 package/analog-facing ports (all `input`/`output` declarations above, none of the internal signals) do not carry `i_`/`o_` prefixes and so trip the erie_strict VG010 check on every one of them -- this is required, not an oversight: the contract mandates these boundary names match `ppg_digital_esd_shell.v`'s physical pin names exactly (QFN48 pad names cannot carry an internal-signal-style prefix). No other finding remains in this file; VG010 is the only category left unresolved, and resolving it by renaming would violate the contract.
@@ -35,10 +36,11 @@
 //
 // 依赖文件:        ppg_reset_sync、ppg_spi_register_file、ppg_p2s_packer、ppg_control_top
 //
-// 当前版本:        V1.2
-// 修订日期:        2026年09月07日
+// 当前版本:        V1.3
+// 修订日期:        2026年10月07日
 // 修订历史:
 //     时间          版本        修订人        修订内容
+// 2026年10月07日   V1.3        Erie          owner生命周期轮，仅连线：Top o_ami_owner_lost_sticky接SPI寄存器文件i_ami_owner_lost_sticky。
 // 2026年09月07日   V1.2        Erie          修复用户对照合同第8.3节（第153行，V1.5冻结）与第9节第6条（第230行）指出的一个真实CDC缺口：dec_dbg_out_mux的选择依据原先直接用spi_dbg_out_select_o——SPI_SCLK域寄存器（ppg_spi_register_file的reg_dbg_out_select）被本文件CLK_2M域组合mux零同步级直接采样，正是合同禁止的"临时直接组合逻辑或单级触发器跨域"。配套修复ppg_spi_register_file.v V1.2新增第六个ppg_pulse_cdc_sync实例，每次真实写入0x0081时产生一个新的单周期CLK_2M域事件（o_dbg_out_select_update_event）。本文件新增CLK_2M域寄存器reg_dbg_out_select_stable，只在该事件到达时才采样spi_dbg_out_select_o（复位值3'd0，与SPI寄存器文件自身复位值一致）；dec_dbg_out_mux改为按reg_dbg_out_select_stable选择，不再用原始SPI域wire。采样值不存在亚稳态风险：按构造，跨域事件抵达时该值在源域早已稳定多个源域时钟周期，与其余5路脉冲跨域同一道理。新增wire spi_dbg_out_select_update_event_o；本模块自身端口列表无变化（ppg_spi_register_file新增的1个输出端口在此接线）。gate仍只有46个已文档化的VG010封装引脚命名例外，无新发现。全链路回归：tb_ppg_chip_digital_top.v 6/6 PASS，ppg_control_top.v自身SMOKE_TB_PASS不变（real_adc_responses=47 measurement_result_valid=32）。
 // 2026年09月07日   V1.1        Erie          修复tb_ppg_chip_digital_top.v TC1发现的一个真实复位CDC竞争：源域复位同步器原先由SPI_SCLK自身驱动，而SPI_SCLK在主机发起第一笔真实SPI事务前始终空闲拉低，导致该事务自己最开头的时钟沿同时被用来推动同步链释放，使上电后第一笔事务的头1~2个比特被错误复位覆盖（这是真实芯片级缺陷，不是仅存在于测试平台的假象）。修复方式：去掉由SPI_SCLK驱动的ppg_reset_sync实例，改为w_source_rstn直接借用w_rstn（已在始终运行的CLK_2M_PAD域完成同步，且在任何真实SPI活动开始前早已稳定，异步喂入不存在亚稳态风险）。端口列表无变化。
 // 2026年09月06日   V1.0        Erie          创建文件。PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md（V1.10）首次RTL实现：QFN48封装Pad Ring与ppg_control_top之间的glue层，按合同第3节冻结的例化层次搭建。例化两个ppg_reset_sync（CLK_2M_PAD域与SPI_SCLK域各一）、一个ppg_spi_register_file（Mode 0 SPI从机寄存器文件，字节级地图与用户三轮核对确认：写方向0x0000-0x007F ACTIVE影子区/0x0080表征控制/0x0081 DBG_OUT选择/0x0090共享命令字节，读方向0x0100-0x0125整体捕获快照加两组独立discard事件锁存）、一个ppg_p2s_packer（161-bit固定遥测包）、一个ppg_control_top（C01目标RTL，除已冻结的o_active_precision_mode/o_source_config_update_ready/o_s1_calibration_applied/o_s1_raw/o_s2_raw外未做任何改动）。内联逻辑覆盖：flag_adc_physical_idle合成器（按o_active_precision_mode在Stage1/Stage2 DONE间二选一，单个两级同步器，遵循C01 V1.11冻结公式）、DBG_OUT六选一多路选择器（合同第8.3节）、i_analog_ready按V1.10勘误固定接1'b1（板级上电时序保证数字域启动时模拟侧已经稳定，与i_adc_physical_idle结构上并不同构，不需要同步器）、7个验证注入输入接生产安全默认值（C_ENABLE_TEST_INJECTION=0，与验证注入整体排除出SPI地图的已确认决定一致）、32路SSW加4路ADC接口的纯改名直连（第5节，V1.8勘误修正后共36个信号）。P2S_CLK按第8.4.1节直接用CLK_2M_PAD纯直连，不在ppg_p2s_packer内部产生。已知且刻意保留的gate例外：46个封装/模拟侧边界端口（仅module端口声明本身，不含任何内部信号）都不带i_/o_前缀，因而每一个都会命中erie_strict的VG010检查——这是合同硬性要求，不是遗漏：这些边界名称必须与ppg_digital_esd_shell.v的物理引脚名逐字一致（QFN48引脚名本身不可能带内部信号风格前缀）。本文件除VG010外无其余任何发现；如果为了消掉VG010而改名，反而会违反合同。
@@ -219,6 +221,7 @@ module ppg_chip_digital_top
 	wire top_ami_idac_idle_o;               // 接Top.o_ami_idac_idle
 	wire top_active_precision_mode_o;       // 接Top.o_active_precision_mode，供空闲合成器/DBG_OUT/诊断快照三方复用
 	wire top_ami_integration_protocol_error_sticky_o; // 接Top.o_ami_integration_protocol_error_sticky
+	wire top_ami_owner_lost_sticky_o;       // 接Top.o_ami_owner_lost_sticky：完成丢失超时作废历史
 	wire top_ssw_wrapper_idle_o;            // 接Top.o_ssw_wrapper_idle
 	wire top_ssw_switch_protocol_error_sticky_o; // 接Top.o_ssw_switch_protocol_error_sticky
 	wire top_ssw_transaction_mismatch_sticky_o; // 接Top.o_ssw_transaction_mismatch_sticky
@@ -417,6 +420,7 @@ module ppg_chip_digital_top
 		.i_ami_idac_idle(top_ami_idac_idle_o), // 接SPI寄存器文件.i_ami_idac_idle：IDAC空闲
 		.i_active_precision_mode(top_active_precision_mode_o), // 接SPI寄存器文件.i_active_precision_mode：实时committed精度
 		.i_ami_integration_protocol_error_sticky(top_ami_integration_protocol_error_sticky_o), // 接SPI寄存器文件.i_ami_integration_protocol_error_sticky：AMI集成协议诊断
+		.i_ami_owner_lost_sticky(top_ami_owner_lost_sticky_o), // 接SPI寄存器文件.i_ami_owner_lost_sticky：完成丢失超时作废历史，映射0x0108 bit6
 		.i_ssw_wrapper_idle(top_ssw_wrapper_idle_o), // 接SPI寄存器文件.i_ssw_wrapper_idle：SSW封装空闲
 		.i_ssw_switch_protocol_error_sticky(top_ssw_switch_protocol_error_sticky_o), // 接SPI寄存器文件.i_ssw_switch_protocol_error_sticky：SSW切换协议诊断
 		.i_ssw_transaction_mismatch_sticky(top_ssw_transaction_mismatch_sticky_o), // 接SPI寄存器文件.i_ssw_transaction_mismatch_sticky：SSW事务失配诊断
@@ -603,6 +607,7 @@ module ppg_chip_digital_top
 		.o_ami_idac_idle(top_ami_idac_idle_o), // 接Top.o_ami_idac_idle：AMI IDAC控制器真实空闲状态
 		.o_active_precision_mode(top_active_precision_mode_o), // 接Top.o_active_precision_mode：系统唯一committed采集精度实时电平
 		.o_ami_integration_protocol_error_sticky(top_ami_integration_protocol_error_sticky_o), // 接Top.o_ami_integration_protocol_error_sticky：AMI集成协议异常历史诊断
+		.o_ami_owner_lost_sticky(top_ami_owner_lost_sticky_o), // 接Top.o_ami_owner_lost_sticky：AMI完成丢失超时作废历史诊断
 		.o_ssw_wrapper_idle(top_ssw_wrapper_idle_o), // 接Top.o_ssw_wrapper_idle：SSW封装完整空闲状态
 		.o_ssw_switch_protocol_error_sticky(top_ssw_switch_protocol_error_sticky_o), // 接Top.o_ssw_switch_protocol_error_sticky：SSW切换协议错误保持
 		.o_ssw_transaction_mismatch_sticky(top_ssw_transaction_mismatch_sticky_o), // 接Top.o_ssw_transaction_mismatch_sticky：SSW事务失配保持
