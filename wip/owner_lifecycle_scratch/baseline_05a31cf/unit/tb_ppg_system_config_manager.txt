@@ -1,0 +1,2 @@
+PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed
+$finish called at time : 1016 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v" Line 995

@@ -1,0 +1,41 @@
+PASS RGC-01 color=0 monotonic fast rise start=0 mid=40 end=78
+PASS RGC-01 color=1 monotonic fast rise start=0 mid=50 end=98
+PASS RGC-02 color=0 slow decay follows peak peak=78 decay_end=33
+PASS RGC-02 color=1 slow decay follows peak peak=98 decay_end=41
+PASS RGC-03 color=0 dicrotic notch is a bounded-rebound local minimum start=32 mid=12 end=22
+PASS RGC-03 color=1 dicrotic notch is a bounded-rebound local minimum start=40 mid=18 end=28
+PASS RGC-04 color=0 late decay returns near trough notch_end=23 cycle_end=1
+PASS RGC-04 color=1 late decay returns near trough notch_end=29 cycle_end=1
+PASS RGC-05 color=0 baseline drift trends across frames trough=-10 peak=10
+PASS RGC-05 color=1 baseline drift trends across frames trough=-12 peak=12
+PASS RGC-06 color=0 noise bounded to +/-3 and bit-identical across 1000 repeated frame evaluations
+PASS RGC-06 color=1 noise bounded to +/-4 and bit-identical across 1000 repeated frame evaluations
+PASS RGC-07 clamp pins extreme values low=8 high=503 and leaves in-window value unchanged mid=250
+PASS RGC-08 color=0 NORMAL full pipeline stays in [8,503] and is bit-identical across repeated calls over swept frame range
+PASS RGC-08 color=1 NORMAL full pipeline stays in [8,503] and is bit-identical across repeated calls over swept frame range
+PASS RGC-09 color=0 FLAT profile has zero pulse contribution at every sampled phase
+PASS RGC-09 color=1 FLAT profile has zero pulse contribution at every sampled phase
+PASS RGC-10 color=0 amplitude profiles bracket NORMAL low=15 normal=80 high=300
+PASS RGC-10 color=1 amplitude profiles bracket NORMAL low=18 normal=100 high=280
+PASS RGC-11 color=0 HIGH_AMPLITUDE_SATURATED reaches real clamp max during ordinary one-period sweep
+PASS RGC-11 color=1 HIGH_AMPLITUDE_SATURATED reaches real clamp max during ordinary one-period sweep
+PASS RGC-12 color=0 STRONG_DRIFT swing normal=10 strong=60 stays within legal window across sweep
+PASS RGC-12 color=1 STRONG_DRIFT swing normal=12 strong=70 stays within legal window across sweep
+PASS RGC-13 periods bracket NORMAL fast=150(cycles=26) normal=400(cycles=10) slow=700(cycles=5) over 4000 frames
+PASS RGC-14 color=0 WEAK_NOTCH dip is much shallower than NORMAL normal_dip=20 weak_dip=2
+PASS RGC-14 color=1 WEAK_NOTCH dip is much shallower than NORMAL normal_dip=22 weak_dip=3
+PASS RGC-15 color=0 profile=1(FLAT) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=2(LOW_AMPLITUDE) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=3(HIGH_AMPLITUDE_SATURATED) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=4(STRONG_DRIFT) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=5(FAST_PERIOD) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=6(SLOW_PERIOD) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=0 profile=7(WEAK_NOTCH) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=1(FLAT) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=2(LOW_AMPLITUDE) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=3(HIGH_AMPLITUDE_SATURATED) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=4(STRONG_DRIFT) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=5(FAST_PERIOD) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=6(SLOW_PERIOD) stays in [8,503] and is bit-identical across repeated calls
+PASS RGC-15 color=1 profile=7(WEAK_NOTCH) stays in [8,503] and is bit-identical across repeated calls
+FINISH at time : 0 fs : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v" Line 528

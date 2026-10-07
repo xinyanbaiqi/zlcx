@@ -1,0 +1,2 @@
+PASS ppg_adc_s1_programmable_calibrator CAL-01..CAL-17
+$finish called at time : 10706 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v" Line 605

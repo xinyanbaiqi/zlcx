@@ -1,0 +1,7 @@
+ALL PWI-01 THROUGH PWI-05 PASS count=5
+PASS PWI-01
+PASS PWI-02
+PASS PWI-03
+PASS PWI-04
+PASS PWI-05
+$finish called at time : 59970 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v" Line 846

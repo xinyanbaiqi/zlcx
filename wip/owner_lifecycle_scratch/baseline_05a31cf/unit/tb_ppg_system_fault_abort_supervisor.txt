@@ -1,0 +1,18 @@
+PASS RE-ARM
+PASS SUP01A
+PASS SUP01B
+PASS SUP02A
+PASS SUP02B
+PASS SUP03A
+PASS SUP04A
+PASS SUP04B
+PASS SUP06A
+PASS SUP06B
+PASS SUP06C
+PASS SUP07A
+PASS SUP09A
+PASS SUP10A
+PASS SUPRST
+PASS WDPARM
+SUP-01 through SUP-10 PASS: 16 real comparisons
+$finish called at time : 570 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v" Line 529

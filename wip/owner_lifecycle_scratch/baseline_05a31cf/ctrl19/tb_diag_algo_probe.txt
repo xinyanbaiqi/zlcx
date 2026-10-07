@@ -1,0 +1,6 @@
+PASS LONGRUN START accepted into RUN, measurement start latched t=5251000
+PASS LONGRUN STOP drained back to CONFIG without fault
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS RAW-12 post-START run covers real_red=1200 real_ir=1200 elapsed_ns=2998332499 (>=1000) with no 32-bit overflow (time-typed)
+PASS RAW-13 time-typed 12s watchdog (C_SIM_TIMEOUT_NS=6000000000) did not fire and did not substitute for the frame/sample checks above
+FINISH at time : 2998345751 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_control_top/tb_diag_algo_probe.v" Line 873

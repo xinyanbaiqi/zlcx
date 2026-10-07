@@ -1,0 +1,73 @@
+PASS JNT-01 (jnt 2/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-09 (jnt 54/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS TRK startup search completed (amb=64 dcs_r=80 dcs_ir=96), NORMAL tracking now eligible to qualify samples
+PASS TRK-01 no evidence/code/epoch advance observed before the first real tracking transfer
+PASS TRK-02 confirm counter reached 2/3 without prematurely forming pending
+PASS TRK-02 in-window evidence cleared the matching direction count back to 0
+PASS TRK-02 pending formed exactly at the configured confirm count (3)
+PASS TRK-03 direction reversal cleared the old count and started the opposite count at exactly 1, no pending formed
+PASS TRK-04 RED evidence stayed independent of an interleaved IR sample (cnt_dcs_r_high held at 1)
+PASS TRK-05 real SAR15->SAR9 return observed: RED committed code/epoch identical across the full real round trip, no precision-transition-induced update
+PASS TRK-05 real SAR9->SAR15 precision transition observed: RED tracking evidence/committed code/epoch unchanged by the transition itself
+PASS TRK-06 formal PPG measurement consumption continued while the tracking update was pending (delta=1)
+PASS TRK-06 pending payload stayed stable while waiting for the next real safe boundary
+PASS TRK-07 safe boundary committed exactly one signed 1-LSB change (80->81), incremented epoch by exactly one (7->8), and cleared the confirm counters
+PASS TRK-08 epoch wrapped 4'hF->4'h0 naturally across sixteen real commits, each still a correctly-identified real transaction
+PASS TRK-08 sustained above-high evidence at the configured max=82 never wrapped, emitted a false update, or incremented epoch
+PASS TRK-09 tracking resumed normal qualification immediately after both injections were released
+PASS TRK-09a forced calibration_applied=0 sample consumed without altering tracking evidence and without any fault
+PASS TRK-09b forced code-snapshot mismatch consumed without altering tracking evidence and without any fault
+PASS TRK-10 tracking evidence exactly equals the real calibrated Stage1 value for this transaction (target_code identity holds), confirming no other stage substitutes for it
+FINISH at time : 1828110500 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v" Line 1555

@@ -1,0 +1,3 @@
+PASS DCR-22 non-NORMAL protocol error detected by TB
+PASS ppg_adc_dc_recovery DCR-01..DCR-22
+$finish called at time : 571 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v" Line 480

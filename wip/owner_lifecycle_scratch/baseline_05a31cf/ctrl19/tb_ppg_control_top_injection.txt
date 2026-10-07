@@ -1,0 +1,16 @@
+PASS INJ final drain back to CONFIG without fault
+PASS INJ-00 initial commit before injection scenarios
+PASS INJ-01 injection ready stayed 0 with i_test_inject_enable=0; real transaction completed normally with sample_valid=1
+PASS INJ-02 AMI blocking fault propagated to o_system_fault_blocking via supervisor
+PASS INJ-02 diagnostics cleared after i_diag_clear_event
+PASS INJ-02 next legal transaction after LFA-08 recovery completed cleanly with no stale identity
+PASS INJ-02 owner released exactly once by the STOP-triggered original-identity success=0 recovery, original sample_index=0
+PASS INJ-02 owner retained and integration protocol error sticky asserted after mismatched identity injection
+PASS INJ-02 re-commit after LFA-08 recovery
+PASS INJ-02 re-commit before enabling injection
+PASS INJ-03 invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact
+PASS INJ-03 later legal sample recovered sample_valid=1 after the PRC-08 injection
+PASS INJ-04 both injection ready outputs stayed 0 during simultaneous double request on the same owner
+PASS INJ-04 real transaction completed cleanly with no side effect from the blocked double request
+PASS P06 flag_test_identity_hold stayed 1 across 2 cycles of i_test_inject_enable deasserted (the real window before the independent protocol-error/abort path clears it on its own); enable deassertion cannot revoke an accepted request
+FINISH at time : 223242500 ps : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_control_top/tb_ppg_control_top_injection.v" Line 1108

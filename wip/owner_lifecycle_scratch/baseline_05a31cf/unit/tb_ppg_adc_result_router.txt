@@ -1,0 +1,2 @@
+PASS ppg_adc_result_router RTR-01..RTR-13
+$finish called at time : 8253 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v" Line 464

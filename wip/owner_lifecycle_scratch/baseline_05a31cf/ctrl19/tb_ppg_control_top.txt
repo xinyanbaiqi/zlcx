@@ -1,0 +1,74 @@
+PASS NPA-02 busy window confirmed (o_source_config_update_ready=0) before attempting the rejected second pulse
+PASS NPA-02 busy-window second pulse correctly ignored (config_epoch=1) and o_source_config_update_ready polarity confirmed correct on both edges (ready returned after 1 source_clk cycle(s))
+PASS PARAM-FIXED control-top parameters equal the frozen product values (config 1024, epochs 8/8/8, code epoch 4, generation 8, frame/sample 16/16, manager and CDC bridge 1024/8)
+PASS PARAM-WDOG supervisor watchdog parameters are the frozen 5000/13 and legal (width >= clog2(cycles+1))
+PASS SMOKE-01 reset isolation
+PASS SMOKE-02 legal NORMAL MANUAL commit
+PASS SMOKE-03 START accepted into RUN
+PASS SMOKE-04 real ADC responses=6 measurement_result_valid=5
+PASS SMOKE-05 STOP drained back to CONFIG without fault
+PASS SMOKE-06 STOP-with-owner-inflight drained back to CONFIG without fault
+PASS SMOKE-06 confirmed B_INFLIGHT=1 before STOP
+PASS SMOKE-06 re-commit before inflight-stop scenario
+PASS SMOKE-07 abort drained back to CONFIG without fault
+PASS SMOKE-07 re-commit before abort scenario
+PASS SMOKE-08 STOP-during-calibration-window drained back to CONFIG without fault
+PASS SMOKE-08 re-commit before calibration-window-stop scenario
+PASS SMOKE-08 real calibration window opened at t=474417000 after 0 cycles
+PASS SMOKE-09 owner stayed inflight for 3000 cycles with no shortcut release
+PASS SMOKE-09 re-commit before TOP-16 no-shortcut-release scenario
+PASS SMOKE-09 real CLK_DOUT promptly released owner once delivered
+PASS SMOKE-10 physical idle perturbation alone did not fabricate completion
+PASS SMOKE-10 protocol completed normally after idle perturbation test
+PASS SMOKE-11 NORMAL RUN analog_run_enable and measurement_run_enable both 1
+PASS SMOKE-12 pure RED fixed SAR9: 3 frames, exactly one RED transaction each, no IR, committed AMB/DC_R codes held, owner cleanly released
+PASS SMOKE-12 re-commit before TOP-13 RED-SAR9 scenario
+PASS SMOKE-13 pure RED fixed SAR15: 3 frames, exactly one RED transaction each, no IR, precision stayed SAR15 throughout, owner cleanly released
+PASS SMOKE-13 re-commit before TOP-14 RED-SAR15 scenario
+PASS SMOKE-14 dual-optical drained back to CONFIG without fault
+PASS SMOKE-14 dual-optical produced both RED (3) and IR (3) real transactions
+PASS SMOKE-14 re-commit before TOP-15 dual-optical scenario
+PASS SMOKE-15 calibration Q3 centered on local tick 268, AMB snapshot=124 within legal candidate range
+PASS SMOKE-15 calibration scenario drained back to CONFIG without fault
+PASS SMOKE-15 re-commit before TOP-04 calibration scenario
+PASS SMOKE-16 precision-consistency scenario drained back to CONFIG without fault
+PASS SMOKE-16 re-commit before TOP-06 precision-consistency scenario
+PASS SMOKE-16 scheduler/SSW/AMI agree on SAR15 owner precision for the same real transaction
+PASS SMOKE-17 ADC owner activity (3 commits) progressed independently while output backpressured, held result never silently dropped
+PASS SMOKE-17 backpressure scenario drained back to CONFIG without fault
+PASS SMOKE-17 held result consumed promptly once output backpressure released
+PASS SMOKE-17 re-commit before TOP-05 backpressure scenario
+PASS SMOKE-18 SAR kept producing normal NORMAL-style intermittent RED (2) and IR (2) transactions under fixed current
+PASS SMOKE-18 fixed-current mode boundary correct: EN_TEST=1, LEDEN1/2=0, LEDDAC=0
+PASS SMOKE-18 fixed-current scenario drained back to CONFIG without fault
+PASS SMOKE-18 re-commit before TOP-07 fixed-current scenario
+PASS SMOKE-19 STATIC_BIAS netlist static vector and S[4:0]=10101 match contract table
+PASS SMOKE-19 STATIC_BIAS scenario drained back to CONFIG without fault
+PASS SMOKE-19 S[4:0] followed runtime test_mux_ctrl update to 01010 during STATIC_BIAS RUN
+PASS SMOKE-19 TOP-18 STATIC_BIAS correctly kept analog_run_enable at 1 (following RUN) while measurement_run_enable stayed 0
+PASS SMOKE-19 TOP-18 STATIC_BIAS held measurement_run_enable at 0 for 4000 steady-state cycles
+PASS SMOKE-19 V4 re-commit before STATIC_BIAS scenario
+PASS SMOKE-19 characterization CDC accepted static_characterization_enable=1, test_mux=5'b10101
+PASS SMOKE-19 no real ADC owner commit and Scheduler/AMI/SSW stayed idle for 4000 steady-state cycles under STATIC_BIAS
+PASS SMOKE-20 static_characterization_enable=1 + input_source=PHOTODIODE correctly rejected with ERROR_STATIC_BIAS_INPUT_SOURCE
+PASS SMOKE-21 both calibration defenses held for the entire RUN while real RED (2) and IR (2) transactions kept happening: AMI's ami_calibration_sample_valid_o stayed 0 (structural source-side gate) and the scheduler's own o_calibration_sample_ready also stayed 0 throughout (receiver-side run_profile/input_source recheck, scheduler RTL V1.7)
+PASS SMOKE-21 calibration-source-eligibility scenario drained back to CONFIG without fault
+PASS SMOKE-21 re-commit before TOP-20 calibration-source-eligibility scenario
+PASS SMOKE-22 NORMAL_PPG+SAR15 correctly rejected pre-COMMIT with error=8'h10; no legal path exists to reach a real SAR15 calibration request
+PASS SMOKE-23 TOP-03: same frame_id (0/1), consecutive sample_index (RED 0->IR 1, RED 2->IR 3), same committed precision, and fixed Q3 phase (RED tick=1, IR tick=309) confirmed across two real macro frames
+PASS SMOKE-23 dual-optical identity scenario drained back to CONFIG without fault
+PASS SMOKE-23 re-commit before TOP-03 dual-optical identity scenario
+PASS TOP-01 SSW o_s_in is the safe all-zero vector after reset
+PASS TOP-01 confirmed real in-flight owner before reset (frame_id=0)
+PASS TOP-01 re-commit after stale-transaction reset
+PASS TOP-01 re-commit before stale-transaction reset scenario
+PASS TOP-01 reset during real in-flight transaction fully cleared state; stale transaction produced zero results (count stayed at 32)
+PASS TOP-01 stale-transaction scenario drained back to CONFIG without fault
+PASS TOP-01 system produced a genuine new measurement result after reset+restart (count 32 -> 33)
+PASS TOP-02 illegal V5 reserved field correctly rejected atomically, epoch unchanged at 1, ACTIVE config preserved
+PASS TOP-09 confirmed a real held measurement result before STOP (still backpressured)
+PASS TOP-09 discard-event scenario drained back to CONFIG without fault
+PASS TOP-09 drain-to-CONFIG with a genuinely held result completed via 1 real o_measurement_result_discard_event pulse(s)
+PASS TOP-09 re-commit before discard-event scenario
+PASS TOP-15 single-in-flight monitor checked 50 real owner commits across the full suite, zero reentrant
+FINISH at time : 1655973500 ps : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_control_top/tb_ppg_control_top.v" Line 3214

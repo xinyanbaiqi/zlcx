@@ -1,0 +1,53 @@
+PASS: FFK-01 empty fork accepts input after reset release
+PASS: FFK-01 reset clears both output valids
+PASS: FFK-02 measurement receives the complete atomic payload
+PASS: FFK-02 no branch consumes while both ready inputs are low
+PASS: FFK-02 one input creates one pending copy per branch (P13 independent storage)
+PASS: FFK-02 tracking receives only the frozen IDAC fields
+PASS: FFK-03 consumed measurement copy is not repeated
+PASS: FFK-03 final tracking handshake releases the transaction
+PASS: FFK-03 measurement consumes once while tracking remains pending (P13)
+PASS: FFK-03 tracking payload survives earlier measurement consumption
+PASS: FFK-04 complete measurement payload remains stable after tracking
+PASS: FFK-04 consumed tracking copy is not presented twice
+PASS: FFK-04 tracking consumes once while measurement remains pending (P13)
+PASS: FFK-05 both old consumers ready permit same-cycle replacement
+PASS: FFK-05 measurement output switches atomically to packet B
+PASS: FFK-05 packet A is consumed exactly once on both branches
+PASS: FFK-05 packet B releases without an extra duplicate
+PASS: FFK-05 replacement keeps both branch valids asserted
+PASS: FFK-05 tracking output switches atomically to packet B
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-07 two consecutive packets preserve exact branch counts
+PASS: FFK-08 both branches consume once even when IDAC mode ignores content
+PASS: FFK-08 ignored tracking semantics do not discard measurement
+PASS: FFK-08 measurement keeps the full transaction after IDAC ignore
+PASS: FFK-08 tracking fields remain the accepted packet after controller consumption
+PASS: FFK-09 fork returns empty after reset release
+PASS: FFK-09 precondition holds one pending transaction
+PASS: FFK-09 reset blocks new upstream acceptance
+PASS: FFK-09 reset interruption clears both pending valids
+PASS: FFK-09 reset interruption creates no spurious branch transfer
+PASS: FORK-GEN matching discard clears both branches without transfer
+PASS: FORK-GEN pending branches carry their latched RUN generation
+PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09
+$finish called at time : 38 us : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v" Line 544

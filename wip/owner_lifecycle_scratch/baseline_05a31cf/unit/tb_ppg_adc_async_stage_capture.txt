@@ -1,0 +1,2 @@
+PASS ppg_adc_async_stage_capture explicit-frame checks
+$finish called at time : 36288 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v" Line 332
