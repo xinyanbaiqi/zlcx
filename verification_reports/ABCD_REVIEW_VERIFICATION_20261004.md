@@ -13,7 +13,7 @@
   - 集成层（AMI/control_top）可达，芯片原生节拍不可达：F-019；AMI级可达，control_top原生节拍下1.08万次握手中未触发：F-021；
   - 只在叶子层可达，常规父链被屏蔽：F-018、F-034。
 - 第一阶段没有改任何RTL、TB、合同、矩阵或别名表。修复方案见§10，等待用户选择。
-- 第二阶段（用户已选定方案）：TB轮已完成并推送，记录见§11；之后各轮修复依次追加在§11之后。
+- 第二阶段（用户已选定方案）：TB轮已完成并推送，记录见§11；RTL第一轮已完成并推送，记录见§12（含F-023可达性订正、新发现L-5与交给B的交接清单）；之后各轮依次追加。
 
 ## 1. 输入核对
 
@@ -419,6 +419,185 @@
   - L-2：ADC丢失完成后静默停滞。
   - 证据见SSW18_TICK385_INVESTIGATION_20261006.md。L-2是新增需求，待用户定阈值和处置方式后再开工。
 - RTL第二轮：F-009（连同F-011，FSC-14收紧为5000）。
+
+## 12. 第二阶段 RTL第一轮（提交05a31cf）
+
+### 12.1 范围与流程
+- 范围：用户批准的RTL第一轮，加上(d)类裁定后并入本轮的各项。
+  - RTL修复：F-005、F-010、F-018、F-019、F-021、F-022、F-023、F-034、F-035、N-1，以及F-032端口改名。
+  - TB修复：F-006、F-044、F-024/F-014参数检查，以及随F-019提交的补强版OIB-06。
+  - F-020已移出本轮，改入"ADC异常下owner生命周期"轮。
+- 流程：
+  - 全部改动先在仓库外副本`phase2/rtl1`中完成并逐条验证，再整体移植进仓库。19个文件的暂存blob与副本逐字节核对一致。
+  - 每条修复都有一项TB本地名的永久断言，并做负对照：在修复前或人为变异的RTL上，该断言必须FAIL。
+  - 修复点按双锚点约定打`@satisfies`标签。芯片层没有验收ID，只在注释中写明服务的F号。
+
+### 12.2 逐条修复
+
+| F | RTL文件（版本） | 修复 | 合同依据 | 新增检查（TB本地名） | 负对照 |
+|---|---|---|---|---|---|
+| F-023 | manager V4.10 | RUN/STOPPING中STOP不受同拍命令冲突影响，另一命令仍被拒并记0x01 | C02 §3.1、MGR-11 | manager TB MGR-11的RUN/STOPPING部分（STOP+START/clear/COMMIT各走一次RUN）；芯片TB CMD-STOP-PRIO | 旧逻辑：单元TB 10项FAIL；芯片0x0A停在RUN |
+| F-010 | scheduler V1.10 | `flag_calibration_rollover`加`flag_lifecycle_active` | FSC-31/32（合同无滚动条文，需补） | CAL-ROLLOVER-ABORT、CAL-ROLLOVER-STOP | 旧逻辑：5000拍后才idle，frame跳到3 |
+| F-022 | AMI V1.16 | START不清协议sticky | C10 §15.1、AMI-24 | HIST-KEEP | START项恢复后FAIL |
+| N-1 | AMI V1.16 | 见12.3 | C10 §15.1、§6 | HIST-BLOCK/ABORT/STOP/RERUN | 见12.3 |
+| F-019 | AMI V1.16 | 正式结果discard身份取`result_*_o` | C10 §6.10、OIB-06 | DISC-HELD；OIB-06期望owner表（OIB TB V1.4） | 旧逻辑：DISC-HELD报930；OIB-06报sample 25、实际持住24 |
+| F-021 | AMI V1.16 | 检测分支自有资格`flag_detection_branch_sample_valid` | C10 §8、N08 | DET-QUAL（被动监视+N08背靠背窗口） | 旧接法：frame 1157装入时为1、握手时为0 |
+| F-035 | SSW V1.6 | 匹配完成释放优先于abort保持 | C09 SSW-22 | ABT-DONE | 旧顺序：6项FAIL，owner永久在途 |
+| F-034 | PWC V1.5 | enter/return commit加`!flag_lifecycle_cancel` | C23 PWC-27 | CANCEL-COMMIT×2 | 进入、返回两个方向各自FAIL |
+| F-018 | PVW V1.5 | 波谷分支更新返回载荷时加`!return_9bit_valid_o` | C22 §11.4、PVW-30 | RETURN-HOLD | 旧逻辑：帧号10变21 |
+| F-005 | SPI V1.4 | 读字节在ST_DATA且cnt==0的下降沿装载，去掉+1补偿 | 芯片合同§8.1（芯片层无验收ID） | 芯片TB DIAG-MAP38（两次） | 旧SPI：TC1与两次DIAG-MAP38失败 |
+| F-032 | IDAC V2.4 | 端口`i_status_clear_event`改名为`i_diag_clear_event`（原行修改） | C17 | 无（行为不变，IDAC 150项通过） | — |
+| F-006 | 芯片TB V1.3 | SDO改在SCLK上升沿采样；新增38字节全读 | 芯片合同§8.1、§11.2 | DIAG-MAP38 | 同F-005 |
+| F-044 | AMI TB V1.13 | AMI层直接撤销`i_test_inject_enable`，hold须保持 | P06 | LEAF-HOLD | 加入"!effective清hold"后FAIL |
+| F-024/F-014 | smoke TB V1.8、芯片TB、supervisor TB V1.3 | 仿真开始时按层次读取实际参数核对 | C01、C24 | PARAM-FIXED、PARAM-WDOG、WDPARM | 看门狗宽度12、manager代际宽度9、TB宽度3，各自FAIL |
+
+补充说明：
+- F-019的代际字段仍取`dec_fork_measurement_run_generation`。正式结果载荷不含代际字段；同一RUN内正式结果与上游下一笔代际相同，因此不影响身份正确性。
+- AMI TB为F-044改为`C_ENABLE_TEST_INJECTION=1`构建。其余场景注入使能恒为0，有效使能与默认构建一致，日志除新增检查外逐行不变。
+- 本轮补记了此前推迟的AMI两处只改注释的原行改正（`o_s1_calibration_applied`声明约403行f485cbc、assign约1029行c01e8d2），这一推迟项关闭。`ppg_control_top.v`头部缺08-30记录一项，因本轮未改control_top RTL，继续推迟。
+
+### 12.3 N-1与新发现L-5
+- **门控**：diag_clear在以下两种情况之一成立时清除`integration_protocol_error_sticky_o`：
+  - `flag_integration_blocking==0`；
+  - 当前RUN已被STOP确认结束（新增`flag_run_context_ended`：复位为1，START置0，STOP确认置1）且`o_datapath_empty==1`。
+- **只清历史，不释放阻断**：diag_clear只清历史sticky，不释放阻断本身，符合C10 §6"diag_clear不能释放owner或活动原因"。
+- **为什么用`flag_integration_blocking`而不用`o_wrapper_fault_blocking`**：前者是该sticky自身的本地成因；后者还汇总了IDAC和精度阻断，它们各有自己的sticky和清除规则。
+- **为什么用新标志而不用`!i_run_enable`**：AMI的`i_run_enable`是`measurement_run_enable`，在STATIC_BIAS的整个RUN中都为0，用它会在RUN进行中放行清除。
+- 阻断标志本身的生命周期不变：调度器启动门控和AMI多处清零条件仍依赖它，仍只由START或abort解除。
+- **单元断言（AMI TB）**：
+
+  | 场景 | 标签 | 负对照 |
+  |---|---|---|
+  | ① 出错→abort→空闲→diag_clear清掉 | HIST-ABORT | abort不清阻断时FAIL |
+  | ② RUN中阻断活跃时diag_clear被忽略 | HIST-BLOCK | 无门控时FAIL |
+  | ③ START不清历史 | HIST-KEEP | START清sticky时FAIL |
+  | ④ 只以STOP结束、排空后diag_clear能清历史 | HIST-STOP | 去掉RUN结束项时FAIL |
+  | ⑤ 空闲期阻断与AMI fault-active仍为1（L-5，如实断言）；START清阻断与lane、不清历史 | HIST-RERUN | START清sticky时FAIL |
+
+- **L-5单元级实测**：STOP-only结束后，`o_ami_fault_active`由lane 02（`flag_owner_protocol_fault_hold`）保持为1，空闲2000拍后仍为1。lane 02与集成阻断同源，只由START或abort清零。
+  - supervisor要求三路lane-active全低才关闭episode，manager在`i_system_fault_blocking=1`时拒绝START。
+  - 按这条静态链路推断，下一次START会被拒，需要主机ABORT（0x0090 bit4）或复位才能恢复。
+- **L-5系统级复现（control_top，以INJ-02为底；`phase2/l5src_*`、`runs/l5_*`）：未复现。**
+  - episode开启后4拍做第二次身份注入时，episode已经关闭：supervisor的abort清掉AMI lane后，全部lane为低，episode立即关闭。第二次注入没有fire。
+  - 随后START被接受；主机ABORT与复位两条路径也都正常。
+- **单元级与系统级不一致的原因**：
+  - 单元TB没有supervisor。
+  - 系统级每个AMI阻断都会产生fault记录：若当时没有episode，就开新episode并abort，abort立即清掉lane。
+  - lane只有在"abort之后、episode关闭之前"出现新阻断才会残留。这个缝隙约1拍，除非episode被另一路持久lane或排空看门狗撑开。
+  - abort之后的STOPPING期间AMI没有新事务。已找到的唯一晚到阻断源，是测试构建下对保留完成的身份注入。
+  - 结论：生产构建下这种状态看来不可达（未做穷尽证明）。测试构建配合另一路持久lane时可能可达（未构造）。
+- **处置**：按用户裁定，L-5第一轮不修，归入"ADC异常下owner生命周期"轮，与方案甲的owner释放规则一起设计。
+  - 设计依据：C10 §6"owner完成匹配释放或受控success=0释放后fault-active应落下"；C10 §15.2"STOP也结束当前RUN"。
+  - 修复后要求：只以STOP结束的异常，在排空完成、确认没有残留阻断原因之后，START能被正常接受；INJ/LFA中依赖时序的检查逐条重新核对。
+
+### 12.4 订正与补充
+- **F-023芯片可达性订正（更正§5.9）**："SPI一次写0x03或0x0A"不准确。
+  - START在Top不打拍，直接进控制平面；STOP经`flag_stop_request_event`三路合并寄存器，status-clear经`flag_status_clear_event`。
+  - 因此0x03中START比STOP早一拍到达manager：先在RUN中被拒（0x0a），下一拍STOP正常接受，不构成同拍冲突。
+  - 真正同拍冲突的是0x0A（STOP+DIAG_CLEAR）。另外，supervisor STOP请求或abort-drain贡献与主机命令同拍时，也会落在同一拍。
+  - 芯片TB CMD-STOP-PRIO：0x0A期望0x01，旧manager下FAIL；0x03期望0x0a，作为路径时序守护，不构成F-023的负对照。
+- **F-010**：tick 4999是帧1的真实末拍，所以撤销后frame_id按FSC-26自然变为2是正确行为；缺陷的表现是多跑一个CAL帧、跳到3。
+
+### 12.5 F-030：CS_N作异步复位/门控的安全性论证（交B写入芯片合同）
+1. **被CS_N异步清零的寄存器只有7个协议状态寄存器**：`state_current`、`cnt_field_byte`、`reg_byte_addr`、`flag_cmd_is_read`、`reg_read_byte`、`cnt_bit_in_byte`、`reg_shift_in`（逐个always块核对过敏感表）。以下寄存器只受源域或系统复位，不受CS_N影响：
+   - `reg_active_shadow`、`reg_characterization`、`reg_dbg_out_select`、`flag_char_request_held`；
+   - CLK_2M域的`reg_diag_snapshot`、`reg_diag_snapshot_gated`、`reg_diag_sync_stable`、`reg_mr_latch`、`reg_dd_latch`；
+   - 各`ppg_pulse_cdc_sync`的源域翻转寄存器。
+2. **接口时序要求**：Mode 0下CS_N翻转时SCLK为低且静止。应写成接口时序要求：
+   - CS_N下降沿到第一个SCLK上升沿≥t_su(CS)，且满足异步清零释放的recovery；
+   - 最后一个SCLK上升沿到CS_N上升沿≥t_h(CS)；
+   - CS_N高电平宽度≥t_cs_high。
+3. **剩余风险**：传输中途CS_N出现毛刺，会让协议状态回到IDLE，后续比特被当作新命令字节解析，可能误写影子区或0x0090命令寄存器。写成板级信号完整性要求；主机侧可配合写后读回校验。
+4. **命令与写入不会被CS_N截断**：写入影子区、0x0080、0x0081以及0x0090的命令触发（START/STOP/COMMIT/DIAG_CLEAR/ABORT/表征），都在该字节第8个SCLK上升沿由`flag_write_commit`成立时产生，并由源域时钟沿采样进脉冲CDC的源域翻转寄存器（只受源域复位）。读方向快照的触发`flag_read_start`也在上升沿产生。这些都不依赖CS_N上升沿，此后CS_N的异步清零也不会截断已经产生的事件。字节不完整（第8个上升沿之前CS_N就升高）时不提交，这是正确行为。
+
+### 12.6 门禁与-Wall
+- 门禁（8个改动RTL文件）与修复前基线逐项相同，没有新增问题：
+  - manager、scheduler、PWC、PVW、SPI：0/0；
+  - AMI：错误2、strict 1，均为既有项；
+  - IDAC：错误3，既有；
+  - SSW：错误10，既有，只是行号移动。
+- 修复过程中门禁抓到3处新增问题，均已在移植前改正：
+  - F-021新寄存器命名需`flag_`前缀；
+  - 新寄存器的声明和always块放错区域；
+  - IDAC改名后行内注释列偏移2列。
+- iverilog -Wall：
+  - 芯片顶层全层次0→0；
+  - smoke、OIB、芯片TB告警数与旧版相同；
+  - 9个模块级TB没有新增告警；AMI TB 6条悬空输入告警消失。
+
+### 12.7 全套回归（导出05a31cf，与54a9cdc比对）
+- 运行：导出提交05a31cf到`ppg_regression_runs/05a31cf_20261006`（19-TB、芯片）和`05a31cf_20261006_unit`（模块级），`git -c core.autocrlf=false archive`。基准是TB轮回归54a9cdc。
+- 结果：
+  - 19-TB：19/19 PASS，合计1210/0（1208加2条新增参数检查）；
+  - 芯片：13/0（7加6）；
+  - 模块级：28/28。
+- 19-TB：
+  - 除smoke新增PARAM-FIXED、PARAM-WDOG两行外，18个TB的PASS行逐行相同，所有TB的`$finish`仿真时刻完全不变；全日志差异只有运行元数据和`$finish`源码行号。
+  - 也就是说，本轮各项RTL修复在芯片原生节拍的系统场景中没有引起任何PASS行或时刻变化，与可达性结论一致（F-019/F-021在OIB等场景中只影响新增断言所比较的字段）。
+  - OIB TB的PASS行和结束时刻都没有变化：补强版OIB-06在修复后的RTL上通过，沿用原PASS文字。
+- 芯片：新增PARAM-FIXED、PARAM-WDOG、DIAG-MAP38×2、CMD-STOP-PRIO×2；原有7项PASS行不变。新增场景使仿真结束时刻从2558250 ns变为3425250 ns。
+- 模块级（只列有变化的TB）：
+  - scheduler：+CAL-ROLLOVER-ABORT/STOP，62→64；
+  - AMI：+HIST-KEEP/BLOCK/ABORT/STOP/RERUN、DISC-HELD、DET-QUAL、LEAF-HOLD，50→58；
+  - PVW：+RETURN-HOLD，54→55；
+  - PWC：+CANCEL-COMMIT×2，48→50；
+  - SSW：+ABT-DONE，52→53；
+  - supervisor：+WDPARM，15→16；
+  - manager：MGR-11的RUN/STOPPING部分在单一结论行内，新增信息行MGR11_STOP_PRIORITY；
+  - IDAC：随端口改名，只有元数据差异。
+  - 其余模块级TB全日志只差元数据。
+
+### 12.8 交给B的合同/矩阵/别名表交接清单（按符号锚点新规，不再给行号映射）
+**本轮改动文件**：
+- RTL 8个：manager、scheduler、AMI、SSW、PWC、PVW、IDAC、SPI；
+- TB 11个：manager、scheduler、AMI、SSW、PWC、PVW、IDAC、supervisor、control_top smoke、OIB、芯片。
+
+**新增/改名的符号**：
+- 端口改名：IDAC `i_status_clear_event`→`i_diag_clear_event`。矩阵第2032行登记的RTL端口名是文字变化，不只是行号。
+- 新增内部信号：AMI `flag_detection_branch_sample_valid`、`flag_run_context_ended`。
+- 新增TB本地检查标签（均注明服务的F号）：
+  - MGR-11（manager TB，RUN/STOPPING部分，合同同号同义）；
+  - CAL-ROLLOVER-ABORT/STOP；
+  - HIST-KEEP/BLOCK/ABORT/STOP/RERUN；
+  - DISC-HELD、DET-QUAL、LEAF-HOLD；
+  - ABT-DONE、CANCEL-COMMIT、RETURN-HOLD；
+  - WDPARM、PARAM-FIXED、PARAM-WDOG；
+  - DIAG-MAP38、CMD-STOP-PRIO；
+  - OIB-06期望owner表（沿用OIB-06标签）。
+- 新增`@satisfies`锚点：
+  - manager `flag_stop_accept`→TOP-09, MGR-11；
+  - scheduler `flag_calibration_rollover`→FSC-31, FSC-32；
+  - AMI sticky清除→AMI-24；AMI discard序号→OIB-06；AMI检测资格→N08；
+  - SSW `adc_owner_inflight_o`→SSW-22；
+  - PWC两处commit→PWC-27；
+  - PVW返回载荷→PVW-30。
+
+**需要的合同改动**：
+- F-010：C08补"CAL滚动受生命周期撤销（STOP/abort/故障/离开RUN）屏蔽"条文。
+- F-022/N-1：
+  - C10 §15.1写明清除条件为"无活跃集成阻断，或当前RUN已由STOP结束且AMI排空"；
+  - 订正§15.2，与实现一致：`o_wrapper_fault_blocking`要到下一次START或abort才清零，STOP-only结束后空闲期仍为高，但历史诊断可以被diag_clear清除；
+  - 写明当前限制L-5：此情况下lane 02/03保持，需要主机ABORT才能恢复，待owner生命周期轮修复。
+- F-019：C10 §6.10写明discard身份取自正式输出当前持有的结果。
+- F-021：C10 §8补"检测分支自有样本资格"。
+- F-035：C09 SSW-22补"abort与匹配完成同拍时完成优先释放"。
+- F-034：C23补"commit与当前代际撤销同拍时撤销优先"（与既有冻结优先级一致，只需落到实现说明）。
+- F-018：C22 §11.4无需改，实现已对齐。
+- F-023：C02与RTL一致，无需改；第一阶段可达性表述按12.4订正。
+- F-005/F-006：芯片合同§8.1无需改；读路径实现说明更新为"字节边界后下降沿装载"。
+- F-030：按12.5写入芯片合同（CS_N作为协议异步复位/门控，不加同步链）。
+- F-024/F-014：
+  - 合同冻结为产品固定值：C_CONFIG_WIDTH=1024，config/coef/DC-recovery epoch=8，code epoch=4，generation=8，frame/sample=16，看门狗5000/13；
+  - F-014条款改写为"固定值+仿真开始检查合法性"；
+  - 写明检查所在TB：smoke `tb_ppg_control_top.v`、`tb_ppg_chip_digital_top.v`、supervisor单元TB WDPARM。
+- F-044：P06注明系统级合法RUN下不可达（Top RUN锁存），证据范围到AMI叶子级（LEAF-HOLD）。
+- F-002/F-008：B已核查无消费方（bc6c0bb），合并批次收窄，措辞加"在16位计数回绕窗口内"。
+- §10(b)全部条目照旧交B：F-003、F-004、F-007、F-015、F-033、F-039、F-043、F-045、F-046、F-047、F-048、F-050、F-051。
+
+**观察项（不改）**：
+- AMI约2085行注释"overlap只比较该字段"与实现不符（B在bc6c0bb中提出）；
+- dynamic baseline TB的EQV追踪存在下降沿采样竞争（§11.4）；
+- 芯片层没有验收ID（既有缺口）。
 
 ## 附录 探针索引
 
