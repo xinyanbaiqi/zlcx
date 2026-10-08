@@ -15,13 +15,14 @@
 // Dependencies:
 //      DUT only, no child submodules
 //
-// Version:         V1.3
-// Revision Date:   2026-10-06
+// Version:         V1.4
+// Revision Date:   2026-10-08
 // History:
 // 2026-08-23           V1.0       Erie        Create file.
 // 2026-09-28           V1.1       Erie        Add SUP10A: a second, independently-closed episode after SUP09A, asserting the full abort/STOP/discard trio and a fresh snapshot fire again -- closes a real dynamic-coverage gap for K02/N06's "later episode independent of first-fault history" claim, which previously had only static RTL-reading support and no simulation evidence.
 // 2026-10-05           V1.2       Erie        ABCD review F-012: add the TB-local check RE-ARM (deliberately not a SUP-nn label: contract C24 SUP-10 means something else). After SUP10A the first-fault snapshot is deliberately NOT diag-cleared; once the episode really closes, an independent Scheduler cause 0x11 record must open a new episode with a full abort/STOP/discard trio while cause 0x03/source/identity stay as the retained first fault and only summary bit 0x0008 is added (contract section 4). Pass criterion 14 -> 15. Negative control: RTL episode-open changed from !blocking to !cause_valid passes the old 14 but fails RE-ARM.
 // 2026-10-06           V1.3       Erie        ABCD review F-014: add TB-local check WDPARM (6-character label like the others): the instantiated watchdog parameters must be legal, CYCLES>=1 and COUNTER_WIDTH>=$clog2(CYCLES+1). This TB deliberately uses the shortened 8/4; the frozen product values 5000/13 are checked in the control-top and chip-top TBs. Pass criterion 15 -> 16. Negative control: with C_WD_WIDTH=3 only WDPARM fails, while every behavioural check still passes, which is exactly the silent risk the check guards against.
+// 2026-10-08           V1.4       Erie        Owner-lifecycle round step 3: new TB-local checks SUM-06 / SUM-07 (AMI-originated cause 8'h06 sets summary bit 9 = 0x0200, cause 8'h07 sets summary bit 10 = 0x0400, source 4'h1). Pass gate 16 -> 18.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -37,13 +38,14 @@
 // 依赖文件:
 //      仅DUT本体
 //
-// 当前版本:        V1.3
-// 修订日期:        2026年10月06日
+// 当前版本:        V1.4
+// 修订日期:        2026年10月08日
 // 修订历史:
 // 2026-08-23           V1.0       Erie        创建文件
 // 2026-09-28           V1.1       Erie        新增SUP10A：在SUP09A之后、独立完整关闭一次episode后，再验证第二个episode依然完整触发abort/STOP/丢弃三事件并锁存全新快照——补齐K02/N06"后续episode独立于首故障历史"这条此前只有RTL静态阅读支持、从未被真实仿真动态验证过的缺口
 // 2026-10-05           V1.2       Erie        ABCD复核F-012：新增TB本地检查RE-ARM（刻意不用SUP族编号：合同C24的SUP-10是另一含义）。SUP10A之后故意不做诊断清除，episode真实关闭后送入独立的Scheduler cause 0x11记录，必须重新开episode并发出完整abort/STOP/丢弃三事件，首故障cause 0x03/来源/身份保持不变，只新增汇总位0x0008（合同第4节）。判据14项改为15项。负对照：RTL把episode开启条件由!blocking改为!cause_valid时，旧14项仍全通过，RE-ARM失败。
 // 2026-10-06           V1.3       Erie        ABCD复核F-014：新增TB本地检查WDPARM（与其余标签同为6字符）：实际例化的看门狗参数必须合法，CYCLES>=1且COUNTER_WIDTH>=$clog2(CYCLES+1)。本TB故意用缩短的8/4；产品固定值5000/13由控制顶层与芯片顶层TB核对。判据15改为16。负对照：C_WD_WIDTH改为3时只有WDPARM失败，其余行为检查全部仍通过，这正是该检查要防的静默风险
+// 2026-10-08           V1.4       Erie        owner生命周期轮第三步：新增TB本地检查SUM-06/SUM-07（AMI来源cause 8'h06置summary bit 9=0x0200，cause 8'h07置bit 10=0x0400，来源4'h1）。判据16改为18。
 
 module tb_ppg_system_fault_abort_supervisor ();
 
@@ -521,7 +523,34 @@ module tb_ppg_system_fault_abort_supervisor ();
 		i_diag_clear_event = 1'b0;
 		@(negedge i_clk);
 
-		if(cnt_fail == 0 && cnt_pass == 16)begin
+		// SUM-06 / SUM-07（owner生命周期轮，TB本地名，6字符）：AMI新原因码8'h06（同槽位连续完成丢失）与8'h07（ADC长期不回空闲）
+		// 必须分别并入历史汇总bit 9与bit 10，并作为首故障原子快照，来源为AMI
+		pulse_ami_fault(8'h06, 1'b1, 16'h0606, 16'h0660);
+		@(negedge i_clk);
+		check_case("SUM-06", (o_system_fault_cause === 8'h06) && (o_system_fault_source === 4'h1) &&
+			(o_system_fault_sample_index === 16'h0660) && (o_system_fault_summary === 16'h0200));
+		int_wait_index = 0;
+		while((o_system_fault_blocking !== 1'b0) && (int_wait_index < 20))begin
+			@(negedge i_clk);
+			int_wait_index = int_wait_index + 1;
+		end
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		@(negedge i_clk);
+		pulse_ami_fault(8'h07, 1'b1, 16'h0707, 16'h0770);
+		@(negedge i_clk);
+		check_case("SUM-07", (o_system_fault_cause === 8'h07) && (o_system_fault_source === 4'h1) &&
+			(o_system_fault_sample_index === 16'h0770) && (o_system_fault_summary === 16'h0400));
+		int_wait_index = 0;
+		while((o_system_fault_blocking !== 1'b0) && (int_wait_index < 20))begin
+			@(negedge i_clk);
+			int_wait_index = int_wait_index + 1;
+		end
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		@(negedge i_clk);
+
+		if(cnt_fail == 0 && cnt_pass == 18)begin
 			$display("SUP-01 through SUP-10 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("SUPERVISOR REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);

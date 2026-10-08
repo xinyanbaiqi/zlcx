@@ -16,14 +16,15 @@
 // Dependencies:       ppg_adc_async_stage_capture,
 //                     ppg_adc_s1_redundancy_corrector
 //
-// Version:            V1.0
-// Revision Date:      2026/08/05
+// Version:            V1.1
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/07/25            V1.0          Erie                  Create file.
 // 2026/07/30            V1.0          Erie                  Add capture-to-corrector integration verification.
 // 2026/07/30            V1.0          Erie                  Verify paired R/IR precision commits at PPG boundaries.
 // 2026/08/05            V1.0          Erie                  Close complete payload checks under backpressure and replacement.
+// 2026/10/08            V1.1          Erie                  Owner-lifecycle round step 3: new input i_transaction_abandon driven by the TB; new TB-local check S1-ABANDON (abandon releases the context, a late RAW arriving before the next start is dropped without output, the next transaction binds its own RAW) and informational S1-ABANDON-TIMING for late RAW at the same cycle as the next start (case B) and about 2 cycles after it (case C); both are recorded as bound_to_next_context, the contract premise of the ~2-cycle window.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -38,14 +39,15 @@
 //
 // 依赖文件:           ppg_adc_async_stage_capture、ppg_adc_s1_redundancy_corrector
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年08月05日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年07月25日        V1.0          Erie                  创建文件
 // 2026年07月30日        V1.0          Erie                  增加捕获到重构器的联合验证
 // 2026年07月30日        V1.0          Erie                  验证PPG边界提交的R/IR成对精度模式
 // 2026年08月05日        V1.0          Erie                  补齐反压保持与同拍替换的完整载荷检查
+// 2026年10月08日        V1.1          Erie                  owner生命周期轮第三步：TB驱动新输入i_transaction_abandon；新增TB本地检查S1-ABANDON（作废释放上下文，下一次启动前到达的迟到RAW被丢弃且无输出，下一笔事务绑定自己的RAW），以及信息记录S1-ABANDON-TIMING：迟到RAW与下一次启动同拍（情况B）和启动后约2拍（情况C）到达时实际都绑定到下一笔上下文，即约2拍窗口的合同前提。
 
 // 联合验证异步捕获、事务上下文锁存、S1黄金重构、反压保持和全部1024个物理码
 module tb_ppg_adc_s1_redundancy_corrector();
@@ -68,6 +70,8 @@ module tb_ppg_adc_s1_redundancy_corrector();
 	reg i_clk;                              // 捕获与重构模块共用的2 MHz时钟
 	reg i_rstn;                             // 两个DUT共用的低有效数字复位
 	reg i_adc_transaction_start;            // 同时启动上下文锁存和ADC捕获事务
+	reg i_transaction_abandon;              // owner生命周期轮：上层作废在途事务的单拍
+	integer cnt_abandon_detect;             // owner生命周期轮：作废后迟到RAW期间出现的重构输出次数
 	reg i_precision_mode_committed;         // ADC_RST前确定的9/15-bit转换模式
 	reg [9:0]i_dout_stage1_low;             // 模拟S1物理决策位保持总线
 	reg i_clk_stage1_dout_low_async;        // S1最后一位完成后的异步保持电平
@@ -130,6 +134,7 @@ module tb_ppg_adc_s1_redundancy_corrector();
 		i_clk = 1'b0;                       // 从确定低电平启动数字时钟
 		i_rstn = 1'b0;                      // 初始阶段复位捕获和重构模块
 		i_adc_transaction_start = 1'b0;     // 复位期间不允许建立事务上下文
+		i_transaction_abandon = 1'b0;       // 作废输入默认无效
 		i_precision_mode_committed = 1'b0;  // 首笔转换默认选择9-bit模式
 		i_dout_stage1_low = 10'b0000000000; // 模拟ADC_RST清除S1物理输出
 		i_clk_stage1_dout_low_async = 1'b0; // 模拟ADC_RST压低S1完成电平
@@ -476,6 +481,110 @@ module tb_ppg_adc_s1_redundancy_corrector();
 			end
 		end
 
+		// S1-ABANDON（owner生命周期轮方案甲，TB本地名）：在途事务无DONE时上层作废，上下文必须立即释放以允许下一笔事务；
+		// 作废后迟到的RAW只能被接收丢弃、不得产生重构输出；下一笔事务的RAW必须绑定它自己的上下文
+		reg_test_case_id = 4'd6;            // 阶段六验证作废释放与迟到RAW丢弃
+		@(negedge i_clk);
+		i_detect_ready = 1'b1;              // 下游无反压，任何重构输出都会立即可见
+		i_clk_stage1_dout_low_async = 1'b0; // 清除上一阶段的DONE电平
+		i_precision_mode_committed = 1'b0;  // 作废场景使用9-bit事务
+		i_frame_id = 16'h6a6a;              // 将被作废事务的帧号
+		i_sample_index = 16'h0606;          // 将被作废事务的序号
+		i_adc_transaction_start = 1'b1;     // 建立将被作废的事务上下文
+		@(negedge i_clk);
+		i_adc_transaction_start = 1'b0;     // 结束启动脉冲
+		repeat(3) @(negedge i_clk);
+		if(flag_transaction_ready !== 1'b0)begin
+			cnt_error = cnt_error + 1;      // 未配对上下文占用时不应允许新事务
+			$display("FAIL S1-ABANDON context occupied but transaction ready");
+		end
+		i_transaction_abandon = 1'b1;       // 上层作废在途事务
+		@(negedge i_clk);
+		i_transaction_abandon = 1'b0;       // 作废只保持一拍
+		if((flag_transaction_ready !== 1'b1) || (flag_detect_valid !== 1'b0))begin
+			cnt_error = cnt_error + 1;      // 作废后上下文必须释放且无输出
+			$display("FAIL S1-ABANDON context not released ready=%b valid=%b", flag_transaction_ready, flag_detect_valid);
+		end
+		cnt_abandon_detect = 0;
+		i_dout_stage1_low = 10'h2aa;        // 迟到的旧RAW
+		i_clk_stage1_dout_low_async = 1'b1; // 旧DONE迟到
+		repeat(10)begin
+			@(negedge i_clk);
+			if(flag_detect_valid === 1'b1) cnt_abandon_detect = cnt_abandon_detect + 1;
+		end
+		if((cnt_abandon_detect != 0) || (flag_capture_valid !== 1'b0) || (flag_transaction_ready !== 1'b1))begin
+			cnt_error = cnt_error + 1;      // 迟到RAW必须被丢弃且不滞留捕获缓存
+			$display("FAIL S1-ABANDON late raw detect=%0d capture=%b ready=%b", cnt_abandon_detect, flag_capture_valid, flag_transaction_ready);
+		end
+		i_clk_stage1_dout_low_async = 1'b0; // ADC_RST清除迟到DONE
+		@(negedge i_clk);
+		i_frame_id = 16'h7b7b;              // 下一笔真实事务的帧号
+		i_sample_index = 16'h0707;          // 下一笔真实事务的序号
+		i_adc_transaction_start = 1'b1;     // 启动下一笔事务
+		@(negedge i_clk);
+		i_adc_transaction_start = 1'b0;
+		i_detect_ready = 1'b0;              // 保持输出以核对身份
+		#41 i_dout_stage1_low = 10'h155;    // 新事务的RAW
+		#3 i_clk_stage1_dout_low_async = 1'b1;
+		wait(flag_detect_valid === 1'b1);
+		#1;
+		if((frame_id_o !== 16'h7b7b) || (sample_index_o !== 16'h0707) || (stage1_raw_o !== 10'h155))begin
+			cnt_error = cnt_error + 1;      // 新事务RAW必须绑定自己的上下文
+			$display("FAIL S1-ABANDON next transaction frame=%h sample=%h raw=%h", frame_id_o, sample_index_o, stage1_raw_o);
+		end else begin
+			$display("PASS S1-ABANDON");
+		end
+		@(negedge i_clk);
+		i_detect_ready = 1'b1;              // 释放结果
+		@(negedge i_clk);
+
+		// S1-ABANDON-TIMING（owner生命周期轮，信息记录）：作废后迟到RAW相对下一笔事务启动的三种到达时刻。
+		// A=启动之前（已由S1-ABANDON断言为吞掉）；B=与启动同一拍；C=启动之后约2拍。B/C两种情况下迟到电平在启动沿后仍为高，
+		// 捕获器在启动沿清零同步链后会把它当作新事务的完成——物理上与新转换的DONE无法区分，记录实际归属供合同前提引用
+		for(cnt_raw_index = 0; cnt_raw_index < 2; cnt_raw_index = cnt_raw_index + 1)begin
+			@(negedge i_clk);
+			i_detect_ready = 1'b1;
+			i_clk_stage1_dout_low_async = 1'b0;
+			i_frame_id = 16'h8c8c;          // 将被作废的事务
+			i_sample_index = 16'h0808;
+			i_adc_transaction_start = 1'b1;
+			@(negedge i_clk);
+			i_adc_transaction_start = 1'b0;
+			repeat(3) @(negedge i_clk);
+			i_transaction_abandon = 1'b1;   // 上层作废
+			@(negedge i_clk);
+			i_transaction_abandon = 1'b0;
+			repeat(3) @(negedge i_clk);
+			i_frame_id = 16'h9d9d;          // 下一笔事务
+			i_sample_index = 16'h0909;
+			i_detect_ready = 1'b0;
+			if(cnt_raw_index == 0)begin
+				i_dout_stage1_low = 10'h2aa; // B：迟到RAW与启动同一拍到达
+				i_clk_stage1_dout_low_async = 1'b1;
+				i_adc_transaction_start = 1'b1;
+				@(negedge i_clk);
+				i_adc_transaction_start = 1'b0;
+			end else begin
+				i_adc_transaction_start = 1'b1; // C：启动之后约2拍迟到RAW才到达
+				@(negedge i_clk);
+				i_adc_transaction_start = 1'b0;
+				repeat(2) @(negedge i_clk);
+				i_dout_stage1_low = 10'h2aa;
+				i_clk_stage1_dout_low_async = 1'b1;
+			end
+			cnt_abandon_detect = 0;
+			repeat(12)begin
+				@(negedge i_clk);
+				if(flag_detect_valid === 1'b1) cnt_abandon_detect = cnt_abandon_detect + 1;
+			end
+			$display("INFO S1-ABANDON-TIMING case=%0s late_raw_outcome=%0s out_frame=%h out_sample=%h out_raw=%h", (cnt_raw_index == 0) ? "B_same_cycle_as_start" : "C_two_cycles_after_start",
+				(cnt_abandon_detect != 0) ? "bound_to_next_context" : "dropped", frame_id_o, sample_index_o, stage1_raw_o);
+			@(negedge i_clk);
+			i_detect_ready = 1'b1;          // 释放可能的输出
+			i_clk_stage1_dout_low_async = 1'b0;
+			repeat(3) @(negedge i_clk);
+		end
+
 		// 数字复位在有效结果期间必须同时清除捕获、上下文和重构输出所有权
 		reg_test_case_id = 4'd5;            // 阶段五验证流水中断复位行为
 		@(negedge i_clk);
@@ -543,6 +652,7 @@ module tb_ppg_adc_s1_redundancy_corrector();
 		.i_clk(i_clk),                      // 连接与捕获模块一致的数字时钟
 		.i_rstn(i_rstn),                    // 使用同一数字复位清空完整流水
 		.i_adc_transaction_start(i_adc_transaction_start), // 在ADC转换前保存数字上下文
+		.i_transaction_abandon(i_transaction_abandon), // owner生命周期轮作废输入，仅S1-ABANDON阶段驱动
 		.i_frame_id(i_frame_id),            // 提供当前待启动事务的帧号
 		.i_sample_index(i_sample_index),    // 提供当前颜色样本编号
 		.i_color_ir(i_color_ir),            // 指明本次转换属于R或IR

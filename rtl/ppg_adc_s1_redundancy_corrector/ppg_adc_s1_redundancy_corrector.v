@@ -15,13 +15,14 @@
 //
 // Dependencies:       ppg_adc_async_stage_capture
 //
-// Version:            V1.0
-// Revision Date:      2026/07/30
+// Version:            V1.1
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/07/25            V1.0          Erie                  Create file.
 // 2026/07/30            V1.0          Erie                  Align context with the explicit ADC transaction.
 // 2026/07/30            V1.0          Erie                  Clarify the shared R/IR frame and global precision snapshot contract.
+// 2026/10/08            V1.1          Erie                  Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007), defect found in step-3 verification: after an AMI timeout void the pending context was never released, so the next transaction could not start (deadlock). New input i_transaction_abandon releases flag_context_valid and arms new flag_capture_drop_armed; a late RAW arriving while armed and without a context is accepted and dropped (flag_capture_drop) and is never paired with a later context; the arm clears on the next context transfer or after one drop. A late RAW arriving at or after the next start fire belongs to the new transaction by construction (contract premise of the ~2-cycle window).
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -36,14 +37,15 @@
 //
 // 依赖文件:           ppg_adc_async_stage_capture
 //
-// 当前版本:           V1.0
-// 修订日期:           2026年07月30日
+// 当前版本:           V1.1
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年07月25日        V1.0          Erie                  创建文件
 // 2026年07月30日        V1.0          Erie                  按显式ADC事务边界对齐上下文
 // 2026年07月30日        V1.0          Erie                  明确R/IR共享帧号和全局精度快照合同
 // 2026年08月05日        V1.0          Erie                  保留完整S1物理决策位供片外拟合与后续校准
+// 2026年10月08日        V1.1          Erie                  owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步验证发现的缺陷：AMI超时作废后待配对上下文从不释放，下一笔事务无法启动（死锁）。新增输入i_transaction_abandon撤销flag_context_valid并置位新寄存器flag_capture_drop_armed；布防期间且无上下文时到达的迟到RAW被接收并丢弃（flag_capture_drop），绝不与后续上下文配对；下一次上下文接管或吞掉一笔后撤防。下一次start fire当拍及之后到达的迟到RAW按构造归属新事务（约2拍窗口的合同前提）。
 
 // 保存顶层已提交的R/IR事务属性并重构S1码，不在本模块产生精度模式切换请求
 module ppg_adc_s1_redundancy_corrector
@@ -60,6 +62,7 @@ module ppg_adc_s1_redundancy_corrector
 
 	//----------ADC事务上下文输入接口----------//
 	input i_adc_transaction_start,             // 与捕获模块共用的单周期ADC事务开始脉冲
+	input i_transaction_abandon,               // 上层判定在途事务完成丢失并作废的单拍，撤销待配对上下文并布防丢弃迟到RAW
 	input [C_FRAME_ID_WIDTH - 1:0]i_frame_id,  // 同一PPG周期的红光与红外事务使用相同标识
 	input [C_SAMPLE_INDEX_WIDTH - 1:0]i_sample_index, // 当前颜色结果在输出数据流中的顺序编号
 	input i_color_ir,                          // 低为红光、高为红外，只标记颜色而不决定精度
@@ -124,11 +127,13 @@ module ppg_adc_s1_redundancy_corrector
 	//---------------标志信号---------------//
 	// 两组ready/valid事件分别管理事务上下文、捕获RAW和下游重构结果
 	reg flag_context_valid;                 // 指示上下文缓冲器包含尚未配对的事务
+	reg flag_capture_drop_armed;            // 作废后布防：下一次到达的RAW属于已作废事务，只接收丢弃、不配对任何上下文
 	wire flag_context_ready;                // 当前拍允许锁存新ADC事务上下文
 	wire flag_context_transfer;             // 顶层在允许条件下真正启动一笔事务
 	wire flag_output_buffer_available;      // 输出为空或旧结果将在本拍被消费
 	wire flag_capture_transfer;             // 捕获RAW与旧上下文在本拍完成配对
 	wire flag_detect_transfer;              // 下游接收当前完整重构事务的事件
+	wire flag_capture_drop;                 // 布防期间到达的迟到RAW被接收并丢弃
 
 	//---------------译码信号---------------//
 	// 黄金模型先形成无冗余偏置的基本码，再加入vdred的正负4 LSB贡献
@@ -157,6 +162,7 @@ module ppg_adc_s1_redundancy_corrector
 	assign flag_capture_transfer = i_rstn && i_capture_valid && flag_context_valid && flag_output_buffer_available; // 只接收拥有对应上下文的RAW
 	assign flag_context_ready = (flag_context_valid == 1'b0) || flag_capture_transfer; // 允许空闲锁存或同拍替换上下文
 	assign flag_context_transfer = i_rstn && i_adc_transaction_start && flag_context_ready; // 接纳由顶层正式启动的新事务
+	assign flag_capture_drop = i_rstn && i_capture_valid && flag_capture_drop_armed && !flag_context_valid; // 无上下文时只吞掉已作废事务的迟到RAW，绝不绑定到下一笔上下文；owner生命周期轮方案甲
 
 	// 高六个常规位提供8 LSB步进，低三位补充1 LSB分辨率，vdred单独校正
 	assign dec_base_code = {1'b0, i_capture_stage1_raw[9:4], 3'b000} +
@@ -179,7 +185,7 @@ module ppg_adc_s1_redundancy_corrector
 	//-------------输出信号连线-------------//
 	// 握手控制输出直接反映内部单元素上下文和结果缓存的可用状态
 	assign o_transaction_ready = i_rstn && flag_context_ready; // 告知帧控制器当前允许发起ADC事务
-	assign o_capture_ready = i_rstn && flag_context_valid && flag_output_buffer_available; // 仅在上下文已准备好时接收捕获结果
+	assign o_capture_ready = i_rstn && ((flag_context_valid && flag_output_buffer_available) || flag_capture_drop); // 有上下文时正常配对，作废布防且无上下文时接收并丢弃迟到RAW，使捕获缓存不会滞留
 	assign o_detect_code = detect_code_o;   // 输出已稳定保存的9-bit检测值
 	assign o_stage1_raw = stage1_raw_o;     // 输出与检测码同拍锁存的S1物理位
 	assign o_stage1_code_ext = stage1_code_ext_o; // 输出未饱和的第一级冗余重构码
@@ -298,6 +304,17 @@ module ppg_adc_s1_redundancy_corrector
 		end
 	end
 
+	// 作废布防：作废时置位，吞掉一笔迟到RAW或下一笔事务启动时撤销（启动沿捕获器同步链已清零，此后RAW归属新事务）
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_capture_drop_armed <= 1'b0; // 复位时没有已作废事务
+		end else if(flag_context_transfer == 1'b1 || flag_capture_drop == 1'b1)begin
+			flag_capture_drop_armed <= 1'b0; // 新事务接管或迟到RAW已被吞掉后撤防
+		end else if(i_transaction_abandon == 1'b1)begin
+			flag_capture_drop_armed <= 1'b1; // 作废后等待可能的迟到RAW
+		end
+	end
+
 	// 上下文被RAW消费后释放；若同拍启动下一事务则直接装入新上下文
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
@@ -306,6 +323,8 @@ module ppg_adc_s1_redundancy_corrector
 			flag_context_valid <= 1'b1;     // 新上下文已经获得单元素缓冲器所有权
 		end else if(flag_capture_transfer == 1'b1)begin
 			flag_context_valid <= 1'b0;     // 当前上下文已与捕获RAW成功绑定
+		end else if(i_transaction_abandon == 1'b1)begin
+			flag_context_valid <= 1'b0;     // 上层作废在途事务，撤销其上下文，允许下一笔事务启动
 		end else begin
 			flag_context_valid <= flag_context_valid; // 未发生握手时保持等待状态
 		end

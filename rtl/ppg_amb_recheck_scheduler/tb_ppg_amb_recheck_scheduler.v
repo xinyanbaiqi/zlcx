@@ -15,13 +15,14 @@
 //
 // Dependencies:       ppg_amb_recheck_scheduler.v
 //
-// Version:            V1.1
-// Revision Date:      2026/09/30
+// Version:            V1.2
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/08            V1.0          Erie                  Create file.
 // 2026/08/11            V1.0          Erie                  Verify peak-valley idle takeover gate.
 // 2026/09/30            V1.1          Erie                  TB maintenance (no RTL change): RTL V1.1 (2026/08/23) renamed the input i_adc_idle to i_precision_takeover_safe as a pure port rename with no logic change, so this TB stopped elaborating (xelab "cannot find port 'i_adc_idle'", REGRESSION_BASELINE_20260930.md section 6.3). Renamed the one named-port connection; the TB-side stimulus reg keeps its old name. Result: 35 PASS lines (34 checks + final summary), 0 FAIL (xsim and iverilog).
+// 2026/10/08            V1.2          Erie                  Owner-lifecycle round step 3 (F-020): input i_calibration_request_withdraw_event is now a TB reg; new TB-local check F020-WDRAW (two PASS lines): a withdraw of the in-flight outer request releases the inner in-flight state, the held AMB request re-raises valid and is accepted exactly once more.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -37,13 +38,14 @@
 //
 // 依赖文件:           ppg_amb_recheck_scheduler.v
 //
-// 当前版本:           V1.1
-// 修订日期:           2026年09月30日
+// 当前版本:           V1.2
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月08日        V1.0          Erie                  创建文件。
 // 2026年08月11日        V1.0          Erie                  验证峰谷检测器空闲接管门禁。
 // 2026年09月30日        V1.1          Erie                  TB维护（不改RTL）：RTL V1.1（2026/08/23）把输入i_adc_idle纯改名为i_precision_takeover_safe，逻辑不变，本TB因此无法elaborate（xelab报"cannot find port 'i_adc_idle'"，见REGRESSION_BASELINE_20260930.md第6.3节）。只改这一处具名端口连接，TB侧激励reg保持原名。结果：35条PASS（34条检查+1条最终汇总），0 FAIL（xsim与iverilog一致）。
+// 2026年10月08日        V1.2          Erie                  owner生命周期轮第三步（F-020）：输入i_calibration_request_withdraw_event改为TB寄存器驱动；新增TB本地检查F020-WDRAW（两条PASS）：外层在途请求被撤销后内层在途释放，仍保持的AMB请求重新拉高valid并恰好再被接收一次。
 
 // 覆盖周期计数、精度切换等待、固定三帧顺序、反压保持、异常终止和生命周期清理
 module tb_ppg_amb_recheck_scheduler
@@ -100,6 +102,7 @@ module tb_ppg_amb_recheck_scheduler
 	reg i_amb_sample_accepted_event;        // AMB结果被IDAC入口接受事件
 	reg i_dcs_sample_accepted_event;        // DCS结果被IDAC入口接受事件
 	reg i_calibration_sample_ready;         // 模拟采样调度器ready
+	reg i_calibration_request_withdraw_event; // owner生命周期轮F-020：外层请求被截止撤销或作废
 
 	// 自检状态仅在测试平台内部记录观察结果
 	integer cnt_error;                      // 全部断言失败累计数
@@ -332,6 +335,7 @@ module tb_ppg_amb_recheck_scheduler
 		i_amb_sample_accepted_event = 1'b0;  // 清除AMB消费事件
 		i_dcs_sample_accepted_event = 1'b0;  // 清除DCS消费事件
 		i_calibration_sample_ready = 1'b0;   // 默认对样本施加反压
+		i_calibration_request_withdraw_event = 1'b0; // 默认无外层撤销
 		cnt_error = 0;                       // 初始化全局错误累计
 
 		apply_reset;
@@ -443,6 +447,19 @@ module tb_ppg_amb_recheck_scheduler
 		repeat(2)@(negedge i_clk);
 		check_condition((cnt_sample_transfer == 1) && !o_calibration_sample_valid,
 			"held IDAC request cannot duplicate an inflight conversion");
+		// F020-WDRAW（owner生命周期轮F-020，TB本地名）：在途样本的外层请求被SID-05截止撤销或owner超时作废时，内层在途必须释放，
+		// 仍保持的IDAC请求随即重新拉高valid；再握手一次后在途恢复，后续匹配结果照常释放
+		@(negedge i_clk);
+		i_calibration_request_withdraw_event = 1'b1;
+		@(negedge i_clk);
+		i_calibration_request_withdraw_event = 1'b0;
+		check_condition(o_calibration_sample_valid && (cnt_sample_transfer == 1),
+			"F020-WDRAW withdrawn inflight request re-raises the held AMB sample request");
+		i_calibration_sample_ready = 1'b1;
+		@(negedge i_clk);
+		i_calibration_sample_ready = 1'b0;
+		check_condition((cnt_sample_transfer == 2) && !o_calibration_sample_valid,
+			"F020-WDRAW re-issued request is accepted once and holds inflight again");
 		i_amb_sample_accepted_event = 1'b1;
 		@(negedge i_clk);
 		i_amb_sample_accepted_event = 1'b0;
@@ -633,7 +650,7 @@ module tb_ppg_amb_recheck_scheduler
 		.i_dcs_revalidate_failed(i_dcs_revalidate_failed),       // 连接DCS失败事件
 		.i_amb_sample_accepted_event(i_amb_sample_accepted_event), // 连接AMB消费事件
 		.i_dcs_sample_accepted_event(i_dcs_sample_accepted_event), // 连接DCS消费事件
-		.i_calibration_request_withdraw_event(1'b0), // owner生命周期轮新增撤销输入，本TB既有场景不产生撤销，接地；F-020检查在第三步补
+		.i_calibration_request_withdraw_event(i_calibration_request_withdraw_event), // owner生命周期轮F-020撤销输入，仅F020-WDRAW段驱动
 		.o_amb_sequence_start(o_amb_sequence_start),             // 观察AMB启动单拍
 		.o_dcs_revalidate_accept(o_dcs_revalidate_accept),       // 观察DCS接纳单拍
 		.i_calibration_sample_ready(i_calibration_sample_ready), // 驱动下游ready

@@ -62,8 +62,8 @@ module ppg_system_fault_abort_supervisor
 	input i_rstn,                               // 低有效异步复位输入
 
 	//---------------AMI故障记录接口---------------//
-	input i_ami_fault_valid,                       // AMI五路阻断故障分发器本拍产生一条注册记录
-	input i_ami_fault_active,                      // AMI五路lane-active按位或，仍有未解决阻断故障时为高
+	input i_ami_fault_valid,                       // AMI七路阻断故障分发器本拍产生一条注册记录
+	input i_ami_fault_active,                      // AMI七路lane-active按位或，仍有未解决阻断故障时为高
 	input [C_FAULT_CAUSE_WIDTH - 1:0]i_ami_fault_cause, // AMI本条记录锁定的故障来源编码
 	input i_ami_fault_identity_valid,              // AMI本条记录是否绑定真实事务身份
 	input [C_FRAME_ID_WIDTH - 1:0]i_ami_fault_frame_id, // AMI本条记录绑定事务的真实物理帧号
@@ -231,7 +231,7 @@ module ppg_system_fault_abort_supervisor
 			(i_ssw_fault_cause == 8'h21) ? (16'h0010) :
 			(i_ssw_fault_cause == 8'h22) ? (16'h0020) : (16'h0000)
 		) : (16'h0000)) |
-		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开；AMI连续完成丢失8'h06占bit 9、ADC长期忙8'h07占bit 10 @satisfies: P09
+		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开；AMI连续完成丢失8'h06占bit 9、ADC长期忙8'h07占bit 10
 
 	//---------------输出信号连线---------------//
 	assign o_system_fault_blocking = system_fault_blocking_o; // 导出 o_system_fault_blocking

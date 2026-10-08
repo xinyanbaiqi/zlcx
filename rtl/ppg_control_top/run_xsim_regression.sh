@@ -1,5 +1,6 @@
 #!/bin/bash
-# Phase 6 regression driver: runs each of the 19 standalone ppg_control_top TB files
+# Phase 6 regression driver: runs each of the 20 standalone ppg_control_top TB files
+# (20th = tb_ppg_control_top_adc_anomaly, owner-lifecycle round OWNER_LIFECYCLE_ROUND_20261007)
 # through xvlog+xelab+xsim (Vivado 2022.2) individually and produces one summary.
 set -u
 export PATH="${VIVADO_BIN:-/c/Xilinx/Vivado/2022.2/bin}:$PATH"
@@ -31,6 +32,7 @@ declare -A TB_FILELIST=(
   [tb_ppg_control_top_robustness_corner_waveforms]=xsim_robustness_corner_waveforms_filelist.f
   [tb_ppg_control_top_startup_idac_calibration]=xsim_startup_idac_calibration_filelist.f
   [tb_ppg_real_raw_generator_selfcheck]=xsim_raw_generator_selfcheck_filelist.f
+  [tb_ppg_control_top_adc_anomaly]=xsim_adc_anomaly_filelist.f
 )
 
 ORDER=(
@@ -51,6 +53,7 @@ ORDER=(
   tb_ppg_control_top_periodic_recheck_recovery
   tb_ppg_control_top_robustness_corner_waveforms
   tb_ppg_control_top_startup_idac_calibration
+  tb_ppg_control_top_adc_anomaly
   tb_ppg_control_top_long_10_cycles
   tb_ppg_control_top_longrun
 )

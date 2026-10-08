@@ -14,8 +14,8 @@
 //
 // Dependencies:       ppg_400hz_frame_calibration_scheduler.v
 //
-// Version:            V1.8
-// Revision Date:      2026-10-06
+// Version:            V1.9
+// Revision Date:      2026-10-08
 // History:
 // 2026-08-16          V1.3        Erie          Add independent-context FSC-01 through FSC-57 checks.
 // 2026-08-24          V1.4        Erie          Fix three issues found while re-running this self-check against the current (V1.6) scheduler RTL after the STOP-drain deadlock fix. (1) This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated as X at the DUT instantiation, making i_run_generation==state_current[B_INFLIGHT_GENERATION] compare X and fail every case depending on completion matching (17 of 57 cases); fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation and driving it at a fixed constant in drive_defaults (none of FSC-01 through FSC-57 exercise cross-generation rejection; that remains a coverage gap, not newly added here). (2) FSC-33's manual late-DONE drive raced against the still-active background auto-done generator: flag_auto_done_enable was left on, so its every-cycle non-blocking i_adc_transaction_complete_event<=1'b0 default silently overwrote the test's own blocking drive of the same signal at the same edge, so the DUT never actually sampled the manual completion pulse as 1; fixed by disabling flag_auto_done_enable before the manual drive. (3) FSC-44 asserted the pre-V1.6 behavior that a plain i_run_enable==0 (no STOP/abort) immediately clears B_FRAME_ACTIVE; V1.6 intentionally changed this so only abort clears it immediately, letting an already-open macro frame drain via natural tick advance per contract section 16.3 — fixed by asserting the still-valid immediate property (no new owner commit, frame legitimately stays active) and then waiting for the frame to reach MACRO_LAST_TICK to confirm it actually does drain and clear on its own, rather than weakening the check.
@@ -23,6 +23,7 @@
 // 2026-09-30          V1.6        Erie          TB maintenance (no RTL change). Found by the 2026-09-30 regression baseline (REGRESSION_BASELINE_20260930.md section 6.1): FSC-15 failed because this TB never connected the i_owner_q3_window_closed input added by scheduler contract V1.8 (2026-08-30, LFA-06 fix); the floating Z kept flag_completion_success from ever being 1, so no NORMAL frame ever completed. Tied it to constant 1'b1: this restores the pre-V1.8 behaviour in which the owner's Q3 window always counts as already closed, which is exactly the environment every FSC case was written against; the Q3 gating itself is covered at system level by the 19-TB LFA-06 evidence and is intentionally not re-tested here. With the port floating, FSC-34 (cnt_normal_complete==0) also passed vacuously; it is now a real check. Also connected the SID-05 output o_cal_owner_deadline_event (2026-09-18) to an observation-only wire; no new assertion (the tick-248 deadline test is a separate task). Result: FSC-01 through FSC-59 pass=59 fail=0 (xsim and iverilog).
 // 2026-10-01          V1.7        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add FSC-60..62, the SID-05 unit assertions for o_cal_owner_deadline_event, matching scheduler RTL V1.9 (event masked by a same-cycle owner commit). In the first calibration subframe the owner is held off with i_adc_owner_ready=0 and released at a negedge so the commit lands exactly on a chosen local tick. FSC-60: commit at tick 248 (legal on-time commit) -> one commit at local tick 248, zero deadline events, no owner-deadline sticky. FSC-61: commit at tick 247 -> same, commit at 247. FSC-62: never released -> exactly one deadline-event cycle, at tick 248, not coincident with a commit, zero commits, o_owner_deadline_timeout_sticky set (the pre-existing SID-05 behaviour). The event is counted by a new always block sampling at posedge, i.e. the value AMI actually samples (stimulus only changes at negedge, registers update in NBA, so the read is race-free). Pass criterion and banner raised from 59 to 62. Negative control: on the pre-fix RTL V1.8 FSC-60 fails (one event coincident with the commit) while FSC-61/62 pass.
 // 2026-10-06          V1.8        Erie          ABCD review F-010: add TB-local checks CAL-ROLLOVER-ABORT and CAL-ROLLOVER-STOP (task check_local; no FSC-nn number is taken). With a level-held AMB calibration request, abort or STOP-ack is applied on tick 4999 of the second CAL macro frame; the scheduler must be idle within 4 cycles, frame_id must settle at 2 (natural end of frame 1) and stay there, and no new macro frame, owner or waveform may appear for 6000 cycles. Pass criterion 62 -> 64; banner unchanged. Negative control: scheduler V1.9 without the lifecycle term goes idle only after 5000 cycles at frame 3, both checks FAIL.
+// 2026-10-08          V1.9        Erie          Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007) step 3: inputs i_idac_boundary_request and i_adc_transaction_lost_event are now TB regs; new TB-local checks LOST-REL (matching void releases B_INFLIGHT, FRAME_FAILED), LOST-MISM (unmatched void -> COMPLETION_MISMATCH), L1-NOREPEND (no macro-end re-pend while B_INFLIGHT), L4-EXPIRE / L4-ONTIME (candidate expiry after the deadline vs on-time commit), L3-IDLEBND / L3-NOEXTRA (one-shot idle IDAC boundary). Pass gate 64 -> 71.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -37,8 +38,8 @@
 //
 // 依赖文件:           ppg_400hz_frame_calibration_scheduler.v
 //
-// 当前版本:           V1.8
-// 修订日期:           2026年10月06日
+// 当前版本:           V1.9
+// 修订日期:           2026年10月08日
 // 修订历史:
 // 2026-08-16          V1.3        Erie          覆盖FSC-01至FSC-57及真实事务完成释放。
 // 2026-08-24          V1.4        Erie          拿V1.6 scheduler（STOP排空死锁修复后）重跑这份自检时发现并修复三个问题。(1)这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接，导致它在DUT里浮空为X，使i_run_generation==在途owner锁存代际这条比较恒为假，凡是依赖DONE完成匹配的用例全部假失败（57个里17个）；修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在drive_defaults里给它一个全程固定常量——FSC-01至FSC-57本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。(2)FSC-33手动驱动迟到DONE时，后台自动DONE生成器flag_auto_done_enable还开着，它每拍非阻塞写回的i_adc_transaction_complete_event<=1'b0默认值在同一个时钟沿悄悄覆盖了测试自己的阻塞驱动，DUT从未真正采样到手动置的1；修复：手动驱动前先关掉flag_auto_done_enable。(3)FSC-44断言的是V1.6修复前的行为——纯i_run_enable掉底（无STOP/abort）立即清B_FRAME_ACTIVE；V1.6按合同16.3节故意改成只有abort才立即清，纯run_enable掉底要靠tick自然推进把已经打开的宏帧走完；修复为断言仍然成立的即时性质（没有新owner提交、宏帧合法地保持活动）之后再等到MACRO_LAST_TICK验证它确实会自己走完释放，而不是简单削弱断言
@@ -46,6 +47,7 @@
 // 2026-09-30          V1.6        Erie          TB维护（不改RTL）。2026-09-30回归基线（REGRESSION_BASELINE_20260930.md第6.1节）发现：FSC-15失败，原因是本TB一直没有连接scheduler合同V1.8（2026-08-30，LFA-06修复）新增的输入i_owner_q3_window_closed；端口浮空为Z，flag_completion_success永远不为1，NORMAL帧永远无法完成。改为恒接1'b1：等于恢复V1.8之前"在途owner的Q3窗口随时算已关闭"的语义，而全部FSC用例正是按这个环境写的；Q3门控本身的覆盖在系统级19-TB的LFA-06证据里，本单元TB有意不重复测试。端口浮空时FSC-34（cnt_normal_complete==0）也属于空过，现在是真实检查。另把SID-05新增输出o_cal_owner_deadline_event（2026-09-18）接到一根仅供观察的wire，不加新断言（tick-248截止测试另行安排）。结果：FSC-01至FSC-59 pass=59 fail=0（xsim与iverilog一致）。
 // 2026-10-01          V1.7        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增FSC-60~62，即o_cal_owner_deadline_event的SID-05单元断言，对应scheduler RTL V1.9（截止事件被同拍owner提交屏蔽）。在第一个校准子帧内用i_adc_owner_ready=0推迟owner，在下降沿放开，使提交精确落在指定local tick。FSC-60：tick 248提交（合法按时提交）→ 恰好一次提交且在local tick 248，截止事件0次，不置owner截止sticky。FSC-61：tick 247提交 → 同上，提交在247。FSC-62：始终不放开 → 截止事件恰好一个周期、在tick 248、不与提交同拍，提交0次，o_owner_deadline_timeout_sticky置位（SID-05既有行为）。事件由新增的上升沿采样always块计数，即AMI实际采样到的值（激励只在下降沿变化、寄存器在NBA阶段更新，读数无竞争）。通过判据与横幅由59提高到62。负对照：在修复前的RTL V1.8上FSC-60失败（有一次与提交同拍的截止事件），FSC-61/62通过。
 // 2026-10-06          V1.8        Erie          ABCD复核F-010：新增TB本地检查CAL-ROLLOVER-ABORT和CAL-ROLLOVER-STOP（check_local任务，不占用FSC编号）。电平保持AMB校准请求，在第二个CAL宏帧tick 4999施加abort或STOP确认；scheduler须在4拍内idle，frame_id停在2（帧1自然结束）并保持，6000拍内不得出现新宏帧、owner或波形。判据62改为64，横幅不变。负对照：去掉生命周期项的V1.9在5000拍后才idle且frame为3，两项均FAIL
+// 2026-10-08          V1.9        Erie          owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步：输入i_idac_boundary_request与i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-REL（匹配作废释放B_INFLIGHT并FRAME_FAILED）、LOST-MISM（不匹配作废记COMPLETION_MISMATCH）、L1-NOREPEND（B_INFLIGHT时宏帧末不重挂）、L4-EXPIRE/L4-ONTIME（截止后候选过期与按时提交对照）、L3-IDLEBND/L3-NOEXTRA（空闲IDAC边界只发一次）。判据64改为71。
 module tb_ppg_400hz_frame_calibration_scheduler ();
 
 	parameter C_FRAME_ID_WIDTH = 16;
@@ -82,6 +84,8 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 	reg i_switch_hold_new_transaction;
 	reg i_ami_fault_blocking;
 	reg i_ssw_fault_blocking;
+	reg i_idac_boundary_request;   // owner生命周期轮L-3：模拟AMI内IDAC候选待提交请求
+	reg i_adc_transaction_lost_event; // owner生命周期轮方案甲：模拟AMI在途owner超时作废单拍
 	reg [C_IDAC_CODE_WIDTH - 1:0]i_amb_code;
 	reg [C_IDAC_CODE_WIDTH - 1:0]i_dcs_r_code;
 	reg [C_IDAC_CODE_WIDTH - 1:0]i_dcs_ir_code;
@@ -227,7 +231,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		.i_switch_hold_new_transaction(i_switch_hold_new_transaction),
 		.i_ami_fault_blocking(i_ami_fault_blocking),
 		.i_ssw_fault_blocking(i_ssw_fault_blocking),
-		.i_idac_boundary_request(1'b0), // owner生命周期轮新增L-3边界请求，既有场景不请求空闲边界，接地
+		.i_idac_boundary_request(i_idac_boundary_request), // owner生命周期轮L-3边界请求，既有场景恒为0
 		.i_amb_code(i_amb_code),
 		.i_dcs_r_code(i_dcs_r_code),
 		.i_dcs_ir_code(i_dcs_ir_code),
@@ -281,7 +285,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		.i_adc_transaction_complete_event(i_adc_transaction_complete_event),
 		.i_adc_transaction_success(i_adc_transaction_success),
 		.i_adc_complete_sample_index(i_adc_complete_sample_index),
-		.i_adc_transaction_lost_event(1'b0), // owner生命周期轮新增作废输入，既有场景无作废，接地
+		.i_adc_transaction_lost_event(i_adc_transaction_lost_event), // owner生命周期轮作废输入，既有场景恒为0
 		.i_owner_q3_window_closed(1'b1), // V1.6: 恒1=恢复RTL V1.8前"Q3随时算已关闭"语义；Q3门控覆盖在19-TB LFA-06
 		.i_adc_idle(i_adc_idle),
 		.i_analog_safe(i_analog_safe),
@@ -513,6 +517,8 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 			i_sar_timing_idle = 1'b1;
 			flag_auto_done_enable = 1'b1;
 			flag_inject_wrong_done = 1'b0;
+			i_idac_boundary_request = 1'b0;
+			i_adc_transaction_lost_event = 1'b0;
 		end
 	endtask
 
@@ -609,6 +615,15 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 	integer cnt_rollover_owner_base;         // ABCD F-010：撤销时owner提交计数基线
 	integer cnt_rollover_wave_base;          // ABCD F-010：撤销时波形fire计数基线
 	reg flag_rollover_new_frame;             // ABCD F-010：撤销后出现新宏帧或frame_id变化
+	integer idx_olr_wait;                    // owner生命周期轮：有界等待索引
+	integer cnt_olr_owner_base;              // owner生命周期轮：场景开始时owner提交计数
+	integer cnt_olr_wave_base;               // owner生命周期轮：场景开始时波形fire计数
+	integer cnt_olr_frame_base;              // owner生命周期轮：场景开始时宏帧起点计数
+	integer cnt_olr_bnd_base;                // owner生命周期轮：场景开始时IDAC边界计数
+	integer cnt_olr_nc_base;                 // owner生命周期轮：场景开始时NORMAL完成计数
+	reg [C_SAMPLE_INDEX_WIDTH - 1:0]reg_olr_owner_idx; // owner生命周期轮：被作废owner的序号
+	reg flag_olr_ok;                         // owner生命周期轮：场景内中间判据
+	reg flag_olr_red_late;                   // owner生命周期轮L-4：截止后是否出现RED提交
 	// 顺序执行FSC-01至FSC-62场景，检查启动、波形、owner、故障恢复、校准接收端资格和SID-05截止事件语义。
 	initial begin
 		i_clk = 1'b0;
@@ -1074,8 +1089,152 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 			$display("CAL_ROLLOVER_CANCEL case=%0d idle_after=%0d frame=%0d", idx_rollover_case, cnt_rollover_idle_cycle, o_current_frame_id);
 		end
 
+		// ===== owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）调度器单元检查，全部TB本地名 =====
+		// LOST-REL（方案甲作废释放）：双光NORMAL，RED owner提交后不给DONE；tick 100送一拍序号匹配的作废，
+		// 在途必须释放、不置错配、不置RED完成；IR在160接管后照常提交；本帧被判失败，不产生NORMAL完成
+		drive_defaults;
+		flag_auto_done_enable = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_owner_count(1, 6000);
+		flag_olr_ok = flag_wait_ok && o_transaction_inflight && (reg_last_owner_color == 1'b0);
+		reg_olr_owner_idx = reg_last_owner_sample;
+		cnt_olr_nc_base = cnt_normal_complete;
+		wait_macro_tick(13'd100, 400);
+		@(negedge i_clk);
+		i_adc_complete_sample_index = reg_olr_owner_idx;
+		i_adc_transaction_lost_event = 1'b1;
+		@(negedge i_clk);
+		i_adc_transaction_lost_event = 1'b0;
+		flag_olr_ok = flag_olr_ok && !o_transaction_inflight && !o_completion_mismatch_sticky && !o_scheduler_local_fault_blocking &&
+			inst_ppg_400hz_frame_calibration_scheduler.state_current[inst_ppg_400hz_frame_calibration_scheduler.B_FRAME_FAILED];
+		flag_auto_done_enable = 1'b1;
+		wait_owner_count(2, 600);
+		flag_olr_ok = flag_olr_ok && flag_wait_ok && (reg_last_owner_color == 1'b1);
+		wait_macro_tick(13'd4999, 6000);
+		repeat(3) @(posedge i_clk);
+		check_local("LOST-REL", flag_olr_ok && (cnt_normal_complete == cnt_olr_nc_base)); // 服务方案甲：作废只释放、不计成功，帧判失败
+
+		// LOST-MISM：序号不符的作废事件不得释放在途owner，按DONE错配置阻断
+		drive_defaults;
+		flag_auto_done_enable = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_owner_count(1, 6000);
+		flag_olr_ok = flag_wait_ok;
+		@(negedge i_clk);
+		i_adc_complete_sample_index = reg_last_owner_sample + 16'd5;
+		i_adc_transaction_lost_event = 1'b1;
+		@(negedge i_clk);
+		i_adc_transaction_lost_event = 1'b0;
+		check_local("LOST-MISM", flag_olr_ok && o_transaction_inflight && o_completion_mismatch_sticky && o_scheduler_local_fault_blocking); // 服务方案甲：身份不符的作废按错配处理
+
+		// L1-NOREPEND（L-1）：一笔校准请求握手后其owner在sf0提交且始终无DONE，宏帧末不得把这笔已成owner的请求
+		// 重新挂起，因此此后没有新的宏帧、波形或owner（旧逻辑会在下一宏帧sf0再发一个注定错绑的校准波形）
+		drive_defaults;
+		flag_auto_done_enable = 1'b0;
+		i_normal_measurement_eligible = 1'b0;
+		reset_dut;
+		pulse_start;
+		@(negedge i_clk);
+		i_calibration_sample_valid = 1'b1;
+		flag_olr_ok = 1'b0;
+		for(idx_olr_wait = 0; idx_olr_wait < 400; idx_olr_wait = idx_olr_wait + 1)begin
+			if(o_calibration_sample_ready)begin
+				flag_olr_ok = 1'b1;
+				idx_olr_wait = 400;
+			end
+			@(negedge i_clk);
+		end
+		i_calibration_sample_valid = 1'b0; // AMI握手后撤销valid，在途期间不再发新请求
+		wait_owner_count(1, 1000);
+		flag_olr_ok = flag_olr_ok && flag_wait_ok;
+		cnt_olr_frame_base = cnt_frame_start;
+		cnt_olr_wave_base = cnt_wave_fire;
+		wait_macro_tick(13'd4999, 6000);
+		repeat(3000) @(posedge i_clk);
+		check_local("L1-NOREPEND", flag_olr_ok && o_transaction_inflight && (cnt_frame_start == cnt_olr_frame_base) && (cnt_wave_fire == cnt_olr_wave_base) && (cnt_owner_commit == 1) &&
+			!inst_ppg_400hz_frame_calibration_scheduler.state_current[inst_ppg_400hz_frame_calibration_scheduler.B_CAL_REQ_PENDING]); // L-1 @satisfies: FSC-17
+
+		// L4-EXPIRE（L-4）：帧0的IR owner跨入帧1无DONE，帧1的RED在tick 0接管后因在途被挡；帧1 tick 300才送旧IR的
+		// 匹配DONE，此后RED候选已过截止283，不得再提交RED，只能截止收尾；随后的提交只能是本帧IR
+		drive_defaults;
+		reset_dut;
+		pulse_start;
+		wait_owner_count(1, 6000); // 帧0 RED
+		wait_owner_count(2, 6000); // 帧0 IR
+		flag_auto_done_enable = 1'b0;
+		reg_olr_owner_idx = reg_last_owner_sample;
+		flag_olr_ok = flag_wait_ok && (reg_last_owner_color == 1'b1);
+		wait_frame_start(6000);
+		flag_olr_ok = flag_olr_ok && flag_wait_ok && o_transaction_inflight;
+		wait_macro_tick(13'd300, 400);
+		cnt_olr_owner_base = cnt_owner_commit;
+		@(negedge i_clk);
+		i_adc_complete_sample_index = reg_olr_owner_idx;
+		i_adc_transaction_complete_event = 1'b1;
+		@(negedge i_clk);
+		i_adc_transaction_complete_event = 1'b0;
+		flag_olr_red_late = 1'b0;
+		for(idx_olr_wait = 0; idx_olr_wait < 200; idx_olr_wait = idx_olr_wait + 1)begin
+			@(posedge i_clk);
+			if(o_adc_owner_commit_event && !o_adc_owner_color_ir) flag_olr_red_late = 1'b1;
+		end
+		check_local("L4-EXPIRE", flag_olr_ok && !flag_olr_red_late && (cnt_owner_commit == cnt_olr_owner_base + 1) && (reg_last_owner_color == 1'b1) && o_owner_deadline_timeout_sticky); // L-4 @satisfies: FSC-46, FSC-49
+
+		// L4-ONTIME（L-4对照）：RED owner恰在截止相位tick 283提交仍属按时，不报截止
+		drive_defaults;
+		i_adc_owner_ready = 1'b0;
+		reset_dut;
+		pulse_start;
+		wait_frame_start(6000);
+		flag_olr_ok = flag_wait_ok;
+		for(idx_olr_wait = 0; idx_olr_wait < 400; idx_olr_wait = idx_olr_wait + 1)begin
+			@(negedge i_clk);
+			if(o_macro_tick == 13'd283) idx_olr_wait = 400;
+		end
+		i_adc_owner_ready = 1'b1;
+		wait_owner_count(1, 4);
+		check_local("L4-ONTIME", flag_olr_ok && flag_wait_ok && (reg_last_owner_tick == 13'd283) && (reg_last_owner_color == 1'b0) && !o_owner_deadline_timeout_sticky); // L-4按时提交对照 @satisfies: FSC-46
+
+		// L3-IDLEBND（L-3）：启动搜索中（NORMAL资格为0）、调度器空闲且没有校准请求时，IDAC候选待提交请求须在数拍内
+		// 得到一个IDAC安全边界；TB见到边界即撤销请求（模拟IDAC提交后pending清零），边界只出现一拍
+		drive_defaults;
+		i_normal_measurement_eligible = 1'b0;
+		reset_dut;
+		pulse_start;
+		repeat(50) @(negedge i_clk);   // START一次性边界已经发布
+		cnt_olr_bnd_base = cnt_idac_boundary;
+		flag_olr_ok = o_scheduler_idle;
+		i_idac_boundary_request = 1'b1;
+		flag_wait_ok = 0;
+		for(idx_olr_wait = 0; idx_olr_wait < 8; idx_olr_wait = idx_olr_wait + 1)begin
+			@(posedge i_clk);
+			if(o_idac_code_safe_boundary)begin
+				flag_wait_ok = 1;
+				idx_olr_wait = 8;
+			end
+		end
+		@(negedge i_clk);
+		i_idac_boundary_request = 1'b0;
+		repeat(20) @(posedge i_clk);
+		check_local("L3-IDLEBND", flag_olr_ok && flag_wait_ok && (cnt_idac_boundary == cnt_olr_bnd_base + 1) && (cnt_frame_start == 0)); // L-3
+
+		// L3-NOEXTRA（L-3对照）：NORMAL资格成立时即使请求一直为1也不得出现空闲边界，一帧内只有宏帧边界一次
+		drive_defaults;
+		reset_dut;
+		pulse_start;
+		wait_frame_start(6000);
+		i_idac_boundary_request = 1'b1;
+		cnt_olr_bnd_base = cnt_idac_boundary;
+		wait_frame_start(6000);
+		flag_olr_ok = flag_wait_ok;
+		wait_frame_start(6000);
+		i_idac_boundary_request = 1'b0;
+		check_local("L3-NOEXTRA", flag_olr_ok && flag_wait_ok && (cnt_idac_boundary == cnt_olr_bnd_base + 2)); // L-3只在启动搜索空闲期补边界 @satisfies: FSC-38
+
 		$display("FSC-01 through FSC-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
-		if(cnt_fail == 0 && cnt_pass == 64)begin
+		if(cnt_fail == 0 && cnt_pass == 71)begin
 			$display("ALL FSC-01 THROUGH FSC-62 PASSED");
 		end
 		$finish;

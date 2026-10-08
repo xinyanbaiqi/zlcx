@@ -14,10 +14,11 @@
 //
 // Dependencies:    ppg_chip_digital_top
 //
-// Version:         V1.3
-// Revision Date:   2026/10/06
+// Version:         V1.4
+// Revision Date:   2026/10/08
 // History:
 //     Time          Version     Revised by     Contents
+// 2026/10/08        V1.4        Erie          Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007) step 3: DIAG-MAP38 expectation of 0x0108 now carries bit6 = top_ami_owner_lost_sticky_o (bit7 stays reserved 0). New chip scenario with TB-local checks LOST-SPI-VOID / LOST-SPI-K2 / LOST-SPI-CLR / LOST-SPI-RESTART / LOST-SPI-STKSTART: IR single-light NORMAL with no ADC answer, everything read back over SPI. Checks: first void sets 0x0108 bit6 and latches discard reason 2'b11 without blocking; the second consecutive void gives cause 8'h06, source 4'h1 and summary bit 9, all still present after STOP; DIAG_CLEAR clears them; STOP -> DIAG_CLEAR -> COMMIT -> START restarts without reset; START does not clear bit6. Two more DIAG-MAP38 reads (after-owner-lost, after-lost-clear). Negative controls: SPI bit6 tied to 0 fails 4 checks; the old 2'b00 expectation fails DIAG-MAP38 after-owner-lost.
 // 2026/10/06        V1.3        Erie          ABCD review F-006/F-005/F-023/F-024/F-014: (1) spi_send_byte now samples SDO at the SCLK rising edge, half a period after the slave's falling-edge update, as a real Mode 0 master does; the old same-time-slot sampling at the falling edge masked F-005. (2) DIAG-MAP38: two burst reads of all 38 read-only bytes 0x0100-0x0125, each compared with an expected image assembled bit by bit from the control-top output wires per contract section 11.2, with the discard-latch bytes from an independent TB model of the latch-and-toggle rule. (3) CMD-STOP-PRIO: from RUN (optical OFF so the drain is immediate), SPI command 0x0A (STOP+DIAG_CLEAR, both registered once in Top, same cycle at the manager) must leave RUN and record 0x01; 0x03 is kept as a path-timing guard: START reaches the manager one cycle before STOP, is rejected in RUN with 0x0a, then STOP is accepted. (4) PARAM-FIXED / PARAM-WDOG parameter checks at time 1 ns. Negative controls: pre-fix SPI fails TC1 and both DIAG-MAP38 reads; pre-fix manager fails CMD-STOP-PRIO 0x0A; watchdog width 12 fails PARAM-WDOG.
 // 2026/10/01        V1.2        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add TC7, a permanent whole-run assertion that whenever the AMI formal result valid (P2S i_result_valid) is 1, P2S o_result_ready is also 1, i.e. the formal result is never held. AMI's P2S telemetry ports o_s1_raw/o_s2_raw/o_s1_calibration_applied come from the DC-recovery payload_o, not from the result fork, so they belong to a different transaction once a held result lets the next transaction into DC recovery (reproduced at AMI and ppg_control_top level); at chip level the depth-2 P2S queue with at most two NORMAL results per 5000-cycle macro frame keeps the result from ever being held, which is what TC7 now guards. Checked every rising edge (stimulus changes only on falling edges, so the read is race-free); each violation prints a FAIL line and the final TC7 verdict feeds cnt_error. 7 PASS. Negative control: with a temporary P2S copy whose queue depth is 1, TC7 fails (3 held cycles during TC3's back-to-back RED/IR pair) while TC3 itself still passes, which shows TC7 catches the precondition earlier than any field comparison.
 // 2026/09/07        V1.1        Erie          Align TC6's conclusion wording with contract V1.12 errata: the "STOP hits the ADC strobe pulse exactly" sub-scenario is an architecturally narrow window (flag_stopping_complete's i_adc_idle leg alone, not the i_datapath_empty leg that actually guards in-flight pipeline data) that is now formally closed as expected/non-bug, not an open item pending user judgement -- no dedicated fast-discard trigger channel or new QFN pin will be added. TC6's construction attempt is unchanged (still a real STOP+concurrent-DONE stimulus, still exercises the real hardware paths), but its outcome is no longer scored as a failure: "both discard latches unchanged" is now the documented, expected, PASS-worthy result for this specific sub-scenario, consistent with the discard-latch mechanism itself already being independently confirmed via a wider real trigger path (spurious no-owner DONE through the fault supervisor cascade). All 6 required verification areas now report PASS; TB_CHIP_DIGITAL_TOP_PASS. No RTL touched by this revision.
@@ -36,10 +37,11 @@
 //
 // 依赖文件:        ppg_chip_digital_top
 //
-// 当前版本:        V1.3
-// 修订日期:        2026年10月06日
+// 当前版本:        V1.4
+// 修订日期:        2026年10月08日
 // 修订历史:
 //     时间          版本        修订人        修订内容
+// 2026年10月08日   V1.4        Erie          owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步：DIAG-MAP38对0x0108的期望加入bit6=top_ami_owner_lost_sticky_o（bit7仍为保留0）。新增芯片级场景及TB本地检查LOST-SPI-VOID/LOST-SPI-K2/LOST-SPI-CLR/LOST-SPI-RESTART/LOST-SPI-STKSTART：IR单光NORMAL，ADC一律不应答，全部经SPI读回。检查内容：首次作废置0x0108 bit6并锁存discard原因2'b11，不阻断；同槽位第2次连续作废得cause 8'h06、来源4'h1、summary bit 9，STOP后仍在；DIAG_CLEAR清除；STOP→DIAG_CLEAR→COMMIT→START不复位重启；START不清bit6。另增两次DIAG-MAP38（after-owner-lost、after-lost-clear）。负对照：SPI bit6接0使4项FAIL；期望退回2'b00使DIAG-MAP38 after-owner-lost FAIL。
 // 2026年10月06日   V1.3        Erie          ABCD复核F-006/F-005/F-023/F-024/F-014：（1）spi_send_byte改为在SCLK上升沿采样SDO，即从机下降沿更新后半个周期，与真实Mode 0主机一致；原先在下降沿同一时间槽采样掩盖了F-005。（2）DIAG-MAP38：两次突发读完只读区0x0100-0x0125全部38字节，与按合同第11.2节从控制顶层输出线逐位组装的期望值比较，discard锁存字节取自TB独立的锁存加翻转模型。（3）CMD-STOP-PRIO：在RUN中（光学OFF，排空立即完成）SPI命令0x0A（STOP+DIAG_CLEAR，Top中都打一拍、同拍到达manager）必须离开RUN并记录0x01；0x03保留为路径时序守护：START比STOP早一拍到达manager，在RUN中被拒记0x0a，随后STOP被接受。（4）1 ns时的PARAM-FIXED/PARAM-WDOG参数检查。负对照：修复前SPI使TC1和两次DIAG-MAP38失败；修复前manager使CMD-STOP-PRIO 0x0A失败；看门狗宽度12使PARAM-WDOG失败
 // 2026年10月01日   V1.2        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增TC7，全程永久断言——AMI正式结果valid（P2S i_result_valid）为1的每一拍，P2S o_result_ready也必须为1，即正式结果从不被持住。AMI的P2S遥测端口o_s1_raw/o_s2_raw/o_s1_calibration_applied取自DC恢复payload_o而非结果fork，正式结果一旦被持住、下一事务进入DC恢复，两者就不再属于同一笔（已在AMI级和ppg_control_top级复现）；芯片顶层靠深度2的P2S队列加每5000拍宏帧最多两笔NORMAL结果保证结果从不被持住，TC7守护的正是这一前提。每个上升沿检查（激励只在下降沿变化，读数无竞争），每次违例打印FAIL，最终结论计入cnt_error。7条PASS。负对照：把P2S队列深度临时改为1的副本上TC7失败（TC3双光背靠背期间持住3拍），而TC3本身仍通过，说明TC7比任何字段比对都更早抓到这一前提被破坏。
 // 2026年09月07日   V1.1        Erie          按合同V1.12勘误对齐TC6结论措辞：STOP精确命中ADC选通脉冲这一子场景是架构级窄窗口（flag_stopping_complete里真正把关在途流水线数据的是i_datapath_empty这一路，不是i_adc_idle这一路），现已正式结案为预期内、非bug，不用再等用户判断，也不新增专用快速丢弃触发通道或QFN引脚。TC6的构造激励本身不变（仍是真实STOP+并发DONE，仍走真实硬件路径），但结果不再判为失败——"两组discard锁存均未变化"现在是本子场景文档化的预期PASS结果，与discard锁存机制本身已经用更宽的真实触发路径（无owner在途的spurious DONE经fault supervisor级联）独立验证过一致。六个要求的验证方面现在全部报PASS；TB_CHIP_DIGITAL_TOP_PASS。本次修订未改动任何RTL。
@@ -672,7 +674,7 @@ module tb_ppg_chip_digital_top;
 			exp_diag[6] = dut.top_dc_recovery_coef_epoch_o;
 			exp_diag[7] = {dut.top_active_precision_mode_o, dut.top_ami_idac_idle_o, dut.top_ami_datapath_empty_o, dut.top_scheduler_protocol_error_sticky_o,
 				dut.top_scheduler_completion_mismatch_sticky_o, dut.top_scheduler_owner_deadline_timeout_sticky_o, dut.top_scheduler_launch_timeout_sticky_o, dut.top_scheduler_idle_o};
-			exp_diag[8] = {2'b00, dut.top_ssw_calibration_timeout_sticky_o, dut.top_ssw_owner_deadline_timeout_sticky_o, dut.top_ssw_transaction_mismatch_sticky_o,
+			exp_diag[8] = {1'b0, dut.top_ami_owner_lost_sticky_o, dut.top_ssw_calibration_timeout_sticky_o, dut.top_ssw_owner_deadline_timeout_sticky_o, dut.top_ssw_transaction_mismatch_sticky_o,
 				dut.top_ssw_switch_protocol_error_sticky_o, dut.top_ssw_wrapper_idle_o, dut.top_ami_integration_protocol_error_sticky_o};
 			exp_diag[9] = {4'b0000, dut.top_characterization_protocol_error_sticky_o, dut.top_characterization_control_valid_o,
 				dut.top_source_characterization_update_ready_o, dut.top_source_config_update_ready_o};
@@ -765,6 +767,53 @@ module tb_ppg_chip_digital_top;
 				$display("PASS CMD-STOP-PRIO SPI command 0x%02h in RUN: STOP took effect (left RUN) and the rejected command was recorded as 0x%02h", cmd_bits, expected_error);
 			end else begin
 				$display("FAIL CMD-STOP-PRIO SPI command 0x%02h in RUN: prerequisite_run=%b lifecycle=%b last_error=0x%02h", cmd_bits, flag_cmd_prio_ok, dut.top_lifecycle_state_o, dut.top_last_error_code_o);
+				cnt_error = cnt_error + 1;
+			end
+		end
+	endtask
+
+	//---------------owner生命周期轮：AMI完成丢失作废事件计数---------------//
+	integer cnt_chip_lost;                  // 芯片级场景观测到的AMI超时作废单拍次数
+	initial cnt_chip_lost = 0;
+	always @(posedge CLK_2M_PAD)begin
+		if(dut.ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_adc_transaction_lost_event === 1'b1)begin
+			cnt_chip_lost = cnt_chip_lost + 1; // 作废是单拍事件，按上升沿计数
+		end
+	end
+
+	// 有界等待作废计数达到目标值
+	task wait_chip_lost;
+		input integer target;
+		integer cnt_wd;
+		begin
+			cnt_wd = 0;
+			while((cnt_chip_lost < target) && (cnt_wd < 30000))begin
+				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+			end
+		end
+	endtask
+
+	// 有界等待生命周期离开RUN与STOPPING
+	task wait_chip_stopped;
+		integer cnt_wd;
+		begin
+			cnt_wd = 0;
+			while(((dut.top_lifecycle_state_o == 2'b10) || (dut.top_lifecycle_state_o == 2'b11)) && (cnt_wd < 30000))begin
+				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+			end
+			repeat(16) @(posedge CLK_2M_PAD);
+		end
+	endtask
+
+	// TB本地检查：PASS/FAIL行
+	task chip_check;
+		input [8 * 24 - 1:0] label;
+		input cond;
+		begin
+			if(cond === 1'b1)begin
+				$display("PASS %0s", label);
+			end else begin
+				$display("FAIL %0s t=%0t lifecycle=%b lost=%0d", label, $time, dut.top_lifecycle_state_o, cnt_chip_lost);
 				cnt_error = cnt_error + 1;
 			end
 		end
@@ -1092,6 +1141,63 @@ module tb_ppg_chip_digital_top;
 		check_cmd_stop_priority(8'h03, 8'h0a); // START+STOP同字节：START早一拍到达，RUN中被拒
 		check_cmd_stop_priority(8'h0A, 8'h01); // STOP+DIAG_CLEAR同字节：同拍冲突，STOP优先
 		check_diag_map38("after-conflict");
+
+		//-----------owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）：完成丢失作废与连续丢失故障的SPI读回-----------//
+		// IR单光NORMAL，物理ADC对Q3一律不应答：每笔IR owner在年龄4500时被AMI作废（discard原因2'b11，0x0108 bit6置位）；
+		// 同槽位连续2次作废置cause 8'h06（来源4'h1，summary bit9即0x0113 bit1）。STOP不清、START不清，DIAG_CLEAR清；
+		// STOP→DIAG_CLEAR→COMMIT→START不复位即可重启。全部检查经SPI读回，TB本地名
+		spi_command(8'h08);                     // DIAG_CLEAR：清前序场景的错误与诊断
+		repeat(16) @(posedge CLK_2M_PAD);
+		build_normal_manual_config;
+		spi_write_config;
+		spi_command(8'h04);                     // COMMIT
+		repeat(16) @(posedge CLK_2M_PAD);
+		spi_read_byte_at(16'h0114, mr_latch_before);
+		spi_command(8'h01);                     // START
+		cnt_chip_lost = 0;
+		wait_chip_lost(1);
+		repeat(8) @(posedge CLK_2M_PAD);
+		spi_read_byte_at(16'h0108, rd_byte);
+		spi_read_byte_at(16'h0114, mr_latch_after);
+		$display("CHIP_LOST first void: 0x0108=%02h 0x0114 %02h->%02h fault_blocking=%b", rd_byte, mr_latch_before, mr_latch_after, dut.top_system_fault_blocking_o);
+		chip_check("LOST-SPI-VOID", (cnt_chip_lost == 1) && (rd_byte[6] == 1'b1) && (rd_byte[7] == 1'b0) && (mr_latch_after[2:1] == 2'b11) &&
+			(mr_latch_after[0] != mr_latch_before[0]) && (mr_latch_after[3] == 1'b1) && (mr_latch_after[5] == 1'b1) && !dut.top_system_fault_blocking_o); // 方案甲作废经SPI读回：discard原因2'b11、0x0108 bit6、未达k不阻断
+		wait_chip_lost(2);
+		repeat(64) @(posedge CLK_2M_PAD);
+		spi_command(8'h02);                     // STOP
+		wait_chip_stopped;
+		spi_txn(1'b1, 16'h0108, 12);            // 0x0108-0x0113突发读
+		$display("CHIP_LOST k=2: lifecycle=%b 0x0108=%02h 0x010A=%02h cause=%02h source=%02h summary=%02h%02h", dut.top_lifecycle_state_o, spi_rd_buf[0], spi_rd_buf[2],
+			spi_rd_buf[3], spi_rd_buf[4], spi_rd_buf[11], spi_rd_buf[10]);
+		chip_check("LOST-SPI-K2", (cnt_chip_lost == 2) && (spi_rd_buf[0][6] == 1'b1) && (spi_rd_buf[2][1] == 1'b1) && (spi_rd_buf[3] == 8'h06) &&
+			(spi_rd_buf[4] == 8'h01) && (spi_rd_buf[11][1] == 1'b1)); // cause 06/来源1/summary bit9，STOP不清
+		check_diag_map38("after-owner-lost");
+		spi_command(8'h08);                     // DIAG_CLEAR
+		repeat(16) @(posedge CLK_2M_PAD);
+		spi_txn(1'b1, 16'h0108, 12);
+		$display("CHIP_LOST after diag clear: 0x0108=%02h 0x010A=%02h summary=%02h%02h", spi_rd_buf[0], spi_rd_buf[2], spi_rd_buf[11], spi_rd_buf[10]);
+		chip_check("LOST-SPI-CLR", (spi_rd_buf[0][6] == 1'b0) && (spi_rd_buf[11][1] == 1'b0) && (spi_rd_buf[2][1] == 1'b0));
+		spi_command(8'h04);                     // COMMIT：STOP后生命周期回CONFIG，沿用已写入的配置
+		repeat(16) @(posedge CLK_2M_PAD);
+		spi_command(8'h01);                     // START：不复位重启
+		cnt_chip_lost = 0;
+		repeat(64) @(posedge CLK_2M_PAD);
+		chip_check("LOST-SPI-RESTART", dut.top_lifecycle_state_o == 2'b10);
+		wait_chip_lost(1);
+		spi_command(8'h02);                     // 单次作废后立即STOP，未达k不报故障
+		wait_chip_stopped;
+		spi_command(8'h04);                     // COMMIT
+		repeat(16) @(posedge CLK_2M_PAD);
+		spi_command(8'h01);                     // START不清作废历史
+		repeat(64) @(posedge CLK_2M_PAD);
+		spi_read_byte_at(16'h0108, rd_byte);
+		$display("CHIP_LOST start keeps sticky: lifecycle=%b 0x0108=%02h", dut.top_lifecycle_state_o, rd_byte);
+		chip_check("LOST-SPI-STKSTART", (dut.top_lifecycle_state_o == 2'b10) && (rd_byte[6] == 1'b1));
+		spi_command(8'h02);                     // STOP
+		wait_chip_stopped;
+		spi_command(8'h08);                     // DIAG_CLEAR收尾
+		repeat(16) @(posedge CLK_2M_PAD);
+		check_diag_map38("after-lost-clear");
 
 		//-----------收尾-----------//
 		repeat(32) @(posedge CLK_2M_PAD);

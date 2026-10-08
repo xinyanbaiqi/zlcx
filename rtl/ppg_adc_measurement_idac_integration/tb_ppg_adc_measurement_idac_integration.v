@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.13
-// Revision Date:   2026-10-06
+// Version:         V1.14
+// Revision Date:   2026-10-08
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -32,6 +32,7 @@
 // 2026-10-04           V1.11      Erie        Rename the four check labels that collided, with a different meaning, with the AMI acceptance table in contract section 17 (labels only; check logic, order and count unchanged; 50 cases). Old -> new: AMI-46 -> AMI-DISC-1 and AMI-47 -> AMI-DISC-2 (the V1.6 public discard-port checks; contract AMI-46/47 are "injection default off" and "identity request binding"); AMI-48 -> AMI-SID05-1 and AMI-49 -> AMI-SID05-2 (the V1.10 SID-05 deadline checks; contract AMI-48/49 are "identity matcher reject" and "identity recovery"). AMI-01 through AMI-45 and N08-01 keep their labels. The check_case label input is widened from 6 to 11 characters (a 6-character input truncated the new labels to "DISC-1"/"ID05-1"), and the new write_case_id task prints the label byte by byte, skipping the zero-byte left padding that xsim would otherwise print as spaces; the PASS/FAIL text of every unchanged label stays byte-identical. Only the printing changes; no check condition is touched. The history entries above keep the labels used at the time. Final banner is now "AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons".
 // 2026-10-05           V1.12      Erie        Simplify the V1.11 label printing: drop the write_case_id byte-by-byte task and print with $display("PASS %0s") / $display("FAIL %0s at %0t"). %0s suppresses the zero-byte left padding of the 11-character label in both xsim 2022.2 and Icarus (plain %s prints it as spaces, which is what V1.11 worked around), so the output is byte-identical to V1.11 and every unchanged label prints exactly as before V1.11. No check condition changes; 50 cases.
 // 2026-10-06           V1.13      Erie        ABCD review RTL round 1: eight TB-local checks appended after AMI-SID05-2 (pass gate 50 -> 58; banner regex unchanged). HIST-KEEP (F-022): a non-blocking protocol sticky survives STOP and a new START and is cleared only by diag_clear. HIST-BLOCK / HIST-ABORT / HIST-STOP / HIST-RERUN (N-1): with an integration-blocking cause (AMB start without an in-flight request) diag_clear is ignored during RUN; after abort releases the blocking, diag_clear clears the sticky; after a STOP-only end and a full drain, diag_clear clears the history although the blocking flag is still 1; in that idle state AMI fault-active also stays 1 (L-5, asserted as-is), and a START then clears the blocking and the lane but not the history. DISC-HELD (F-019): with result 92/920 held under backpressure and 93/930 already in the upstream fork, abort must report the discard identity of 92/920/RED/NORMAL/SAR9; the discard color/frame_type/precision outputs are now wired. DET-QUAL (F-021): the N08 back-to-back window without abort; a passive monitor requires the qualification PWI sees at each detection handshake to equal the value loaded with that transaction, and the formal-branch-first window must occur. LEAF-HOLD (F-044, P06 leaf evidence): the DUT is built with C_ENABLE_TEST_INJECTION=1 and the injection inputs are driven (0 everywhere else, so the effective enable and every earlier result are unchanged); after an identity injection is accepted, i_test_inject_enable is held low for 20 cycles and flag_test_identity_hold must stay 1. Negative controls: each check fails on the corresponding pre-fix or mutated RTL.
+// 2026-10-08           V1.14      Erie        Owner-lifecycle round step 3: new owner-age monitor and helper tasks olr_fresh_run / olr_wait_age / olr_wait_lost / olr_done_keep_idle / olr_abort_recover; 20 TB-local checks LOST-FIRE, LOST-RECOV, LSTK-START, LOST-IDLE, WIN-BEFORE (age 4497), WIN-IN (4499), WIN-RECOV, WIN-AFTER, K-RED2, LSTK-BLOCK, K-ABORT, LSTK-CLR, K-CLEAR, K-SLOT, LSTK-PRIO, K-IR2, BUSY-07, BUSY-VOID, WDRAW-LOST, LOST-EXCL; HIST-RERUN rewritten for L-5 (lane falls only after RUN-ended-and-drained, the late DONE still records cause 02); watchdog raised to 4 ms. Pass gate 58 -> 78.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -47,8 +48,8 @@
 // 依赖文件:
 //      DUT及全部真实集成子模块
 //
-// 当前版本:        V1.13
-// 修订日期:        2026年10月06日
+// 当前版本:        V1.14
+// 修订日期:        2026年10月08日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -64,6 +65,7 @@
 // 2026-10-04           V1.11      Erie        与合同第17节AMI验收表同名不同义的4个检查改名（只改标签文字；检查逻辑、顺序和总数不变，仍为50项）。旧→新：AMI-46→AMI-DISC-1、AMI-47→AMI-DISC-2（V1.6的公开discard端口检查；合同中AMI-46/47是"注入默认关闭"和"identity请求绑定"）；AMI-48→AMI-SID05-1、AMI-49→AMI-SID05-2（V1.10的SID-05截止检查；合同中AMI-48/49是"identity matcher拒绝"和"identity恢复"）。AMI-01至AMI-45及N08-01不改名。check_case的标签输入由6字符放宽到11字符（6字符会把新标签截成"DISC-1"/"ID05-1"），并新增write_case_id任务逐字节打印标签，跳过左侧补齐的零字节（xsim会把它们打印成空格），未改名标签的PASS/FAIL文字逐字节不变。只改打印方式，不动任何检查条件。以上历史条目保留当时使用的编号。结论横幅改为"AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 50 real comparisons"。
 // 2026-10-05           V1.12      Erie        简化V1.11的标签打印：删除逐字节打印任务write_case_id，改用$display("PASS %0s")和$display("FAIL %0s at %0t")。%0s在xsim 2022.2与Icarus中都不输出11字符标签左侧补齐的零字节（普通%s会把它们打成空格，V1.11正是为绕开这一点），输出与V1.11逐字节相同，未改名的标签与V1.11之前完全一致。检查条件不变，仍为50项。
 // 2026-10-06           V1.13      Erie        ABCD复核RTL第一轮：在AMI-SID05-2之后追加8项TB本地检查（判据50改为58，横幅正则不变）。HIST-KEEP（F-022）：非阻断协议sticky经STOP和新START仍保持，只由diag_clear清除。HIST-BLOCK/HIST-ABORT/HIST-STOP/HIST-RERUN（N-1）：存在集成阻断成因（无在途请求的AMB start）时RUN中diag_clear被忽略；abort解除阻断后diag_clear清除；只以STOP结束并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；此时空闲期AMI fault-active同样仍为1（L-5，如实断言），随后START清除阻断与lane但不清历史。DISC-HELD（F-019）：92/920被反压持住、93/930已进入上游fork时abort，discard身份必须是92/920/RED/NORMAL/SAR9；接上discard的颜色/类型/精度输出。DET-QUAL（F-021）：N08背靠背窗口不abort，被动监视要求每次检测握手时PWI看到的资格等于该笔装入时的值，且正式分支先消费的窗口确实出现。LEAF-HOLD（F-044，P06叶子证据）：DUT以C_ENABLE_TEST_INJECTION=1构建并驱动注入输入（其余场景恒为0，有效使能与此前全部结果不变）；错误身份注入被接纳后把i_test_inject_enable拉低20拍，flag_test_identity_hold必须保持1。负对照：每项在对应修复前或变异RTL上失败
+// 2026-10-08           V1.14      Erie        owner生命周期轮第三步：新增owner年龄监视与辅助任务olr_fresh_run/olr_wait_age/olr_wait_lost/olr_done_keep_idle/olr_abort_recover；新增20项TB本地检查LOST-FIRE、LOST-RECOV、LSTK-START、LOST-IDLE、WIN-BEFORE（年龄4497）、WIN-IN（4499）、WIN-RECOV、WIN-AFTER、K-RED2、LSTK-BLOCK、K-ABORT、LSTK-CLR、K-CLEAR、K-SLOT、LSTK-PRIO、K-IR2、BUSY-07、BUSY-VOID、WDRAW-LOST、LOST-EXCL；HIST-RERUN按L-5改写（lane只在RUN结束且排空后落下，迟到DONE仍记cause 02）；看门狗放宽到4 ms。判据58改为78。
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -624,6 +626,118 @@ module tb_ppg_adc_measurement_idac_integration ();
 	integer cnt_detqual_meas_first_before;  // ABCD F-021：DET-QUAL场景前的窗口计数基线
 	reg flag_leaf_hold_ok;                  // ABCD F-044：LEAF-HOLD逐拍累计
 	integer idx_leaf_hold;                  // ABCD F-044：使能撤销观察拍索引
+	// owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）：作废、按槽位升级、长期忙、撤销合并与L-5检查的观测量
+	integer cnt_olr_since_fire = 0;         // 距最近一次start fire的拍数
+	integer cnt_olr_lost = 0;               // AMI作废事件累计
+	integer cnt_olr_lost_with_done = 0;     // 作废与完成同拍出现的次数，必须恒为0
+	integer cnt_olr_age_at_lost = 0;        // 最近一次作废时距start fire的拍数
+	integer cnt_olr_f02 = 0;                // AMI故障记录cause 02累计
+	integer cnt_olr_f06 = 0;                // AMI故障记录cause 06累计
+	integer cnt_olr_f07 = 0;                // AMI故障记录cause 07累计
+	integer cnt_olr_disc11 = 0;             // 原因码11的正式结果discard累计
+	integer cnt_olr_pwi_wdraw = 0;          // 送PWI的重检撤销事件累计
+	reg [15:0]reg_olr_lost_idx = 16'd0;     // 最近一次作废拍的序号总线值
+	reg [15:0]reg_olr_f06_idx = 16'd0;      // 最近一次cause 06记录的身份序号
+	reg [15:0]reg_olr_disc_idx = 16'd0;     // 最近一次原因11 discard的序号
+	reg [15:0]reg_olr_disc_frame = 16'd0;   // 最近一次原因11 discard的帧号
+	reg [1:0]reg_olr_disc_type = 2'b00;     // 最近一次原因11 discard的帧类型
+	reg reg_olr_disc_color = 1'b0;          // 最近一次原因11 discard的颜色
+	reg reg_olr_disc_sv = 1'b1;             // 最近一次原因11 discard的样本资格
+	reg reg_olr_disc_idv = 1'b0;            // 最近一次原因11 discard的身份可信位
+	reg flag_olr_ok;                        // 场景内判据累计
+	integer idx_olr;                        // 有界等待索引
+	integer cnt_olr_base;                   // 场景基线
+	integer cnt_olr_base2;                  // 场景第二基线
+	reg [1:0]reg_olr_req_type;              // 撤销前在途校准请求类型
+	reg reg_olr_req_color;                  // 撤销前在途校准请求颜色
+	always@(posedge i_clk)begin
+		if(o_transaction_start_fire) cnt_olr_since_fire <= 0; else cnt_olr_since_fire <= cnt_olr_since_fire + 1;
+		if(dut.o_adc_transaction_lost_event)begin
+			cnt_olr_lost <= cnt_olr_lost + 1;
+			cnt_olr_age_at_lost <= cnt_olr_since_fire;
+			reg_olr_lost_idx <= o_adc_complete_sample_index;
+			if(dut.o_adc_transaction_complete_event) cnt_olr_lost_with_done <= cnt_olr_lost_with_done + 1;
+		end
+		if(dut.o_ami_fault_valid && (dut.o_ami_fault_cause == 8'h02)) cnt_olr_f02 <= cnt_olr_f02 + 1;
+		if(dut.o_ami_fault_valid && (dut.o_ami_fault_cause == 8'h06))begin
+			cnt_olr_f06 <= cnt_olr_f06 + 1;
+			reg_olr_f06_idx <= dut.o_ami_fault_sample_index;
+		end
+		if(dut.o_ami_fault_valid && (dut.o_ami_fault_cause == 8'h07)) cnt_olr_f07 <= cnt_olr_f07 + 1;
+		if(o_measurement_result_discard_event && (o_measurement_result_discard_reason == 2'b11))begin
+			cnt_olr_disc11 <= cnt_olr_disc11 + 1;
+			reg_olr_disc_idx <= o_measurement_result_discard_sample_index;
+			reg_olr_disc_frame <= o_measurement_result_discard_frame_id;
+			reg_olr_disc_type <= o_measurement_result_discard_frame_type;
+			reg_olr_disc_color <= o_measurement_result_discard_color_ir;
+			reg_olr_disc_sv <= dut.o_measurement_result_discard_sample_valid;
+			reg_olr_disc_idv <= o_measurement_result_discard_identity_valid;
+		end
+		if(dut.ppg_precision_window_integration_Inst.i_calibration_request_withdraw_event) cnt_olr_pwi_wdraw <= cnt_olr_pwi_wdraw + 1;
+	end
+
+	// owner生命周期轮：STOP后重新START并完成启动搜索，进入可发NORMAL事务的干净RUN（START同时清零各槽位作废计数与lane）
+	task olr_fresh_run;
+		begin
+			i_run_enable = 1'b0;
+			pulse_stop_ack;
+			repeat(3) @(negedge i_clk);
+			i_allow_new_transaction = 1'b1;
+			i_amb_recheck_interval_frames = 16'hffff;
+			i_run_enable = 1'b1;
+			pulse_start_ack();
+			complete_wrapper_startup;
+			pulse_safe_boundary();
+			repeat(3) @(negedge i_clk);
+			i_measurement_result_ready = 1'b1;
+		end
+	endtask
+
+	// owner生命周期轮：在下降沿有界等待在途owner年龄计数到达指定值
+	task olr_wait_age;
+		input integer age;
+		begin
+			cnt_watchdog = 0;
+			while((dut.cnt_owner_age != age) && (cnt_watchdog < 20000))begin
+				@(negedge i_clk);
+				cnt_watchdog = cnt_watchdog + 1;
+			end
+		end
+	endtask
+
+	// owner生命周期轮：有界等待下一次作废事件
+	task olr_wait_lost;
+		integer lost_before;
+		begin
+			lost_before = cnt_olr_lost;
+			cnt_watchdog = 0;
+			while((cnt_olr_lost == lost_before) && (cnt_watchdog < 12000))begin
+				@(negedge i_clk);
+				cnt_watchdog = cnt_watchdog + 1;
+			end
+			repeat(2) @(negedge i_clk);
+		end
+	endtask
+
+	// owner生命周期轮：保持物理idle为1只拉CLK_DOUT，模拟DONE恰在作废判定窗口附近进入同步链
+	task olr_done_keep_idle;
+		begin
+			i_dout_stage1_low = 10'b0000100101;
+			i_dout_stage2_low = 10'd0;
+			i_clk_stage1_dout_low_async = 1'b1;
+			repeat(5) @(negedge i_clk);
+			i_clk_stage1_dout_low_async = 1'b0;
+		end
+	endtask
+
+	// owner生命周期轮：模拟supervisor对AMI阻断的处置——abort清lane，再STOP→诊断清除→START回到干净RUN
+	task olr_abort_recover;
+		begin
+			@(negedge i_clk); i_control_abort_event = 1'b1;
+			@(negedge i_clk); i_control_abort_event = 1'b0;
+			repeat(5) @(negedge i_clk);
+		end
+	endtask
 
 	// ABCD F-021：被动监视检测分支资格——每笔结果装入fork时记下资格，检测链真实握手（非abort）时PWI看到的
 	// i_sample_valid必须等于装入值；同时统计"正式分支先于检测分支消费"的窗口确实出现过
@@ -1777,8 +1891,8 @@ module tb_ppg_adc_measurement_idac_integration ();
 		// 只能在本地无活动blocking cause后由diag_clear清除。用无在途请求的AMB校准start制造集成阻断（start上下文
 		// 不匹配，sticky与阻断同时置位）。②RUN中阻断仍活跃时diag_clear必须被忽略；①abort解除阻断、链路空闲后
 		// diag_clear清除；④只有STOP、没有abort结束RUN并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；
-		// ⑤同一场景下空闲期阻断与AMI fault-active仍为1（L-5既有问题：系统级supervisor因此不关episode、manager拒绝
-		// 下一次START，需主机ABORT恢复，见control_top级复现），本TB直接给START时阻断随之清除而历史sticky保留（F-022）
+		// ⑤owner生命周期轮修复L-5后：只以STOP结束并排空后，集成阻断标志仍为1，但AMI fault-active（lane 02）已按'本RUN结束'落下；
+		// 空闲期再注入一次协议错误会留下sticky与cause 02记录、lane短暂置位后随排空再次落下，不会卡住下一次START；START清阻断、不清历史（F-022）
 		@(negedge i_clk); i_diag_clear_event = 1'b1;
 		@(negedge i_clk); i_diag_clear_event = 1'b0;
 		flag_hist_block_ok = (o_integration_protocol_error_sticky === 1'b0) && (dut.flag_integration_blocking === 1'b0); // 前提：干净起点
@@ -1809,9 +1923,12 @@ module tb_ppg_adc_measurement_idac_integration ();
 		@(negedge i_clk); i_diag_clear_event = 1'b0;
 		$display("HIST_STOP_ONLY blocking=%b ami_fault_active=%b sticky_after_diag_clear=%b", dut.flag_integration_blocking, dut.o_ami_fault_active, o_integration_protocol_error_sticky);
 		check_case("HIST-STOP", flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b0) && (dut.flag_integration_blocking === 1'b1)); // ④RUN结束后诊断清除只清历史
-		inject_amb_start_mismatch;                         // 空闲期再建一次历史，用来验证START不清历史
-		flag_hist_block_ok = (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1) &&
-			(dut.o_ami_fault_active === 1'b1);             // L-5既有问题如实断言：空闲期lane 02仍活跃
+		flag_hist_block_ok = (dut.o_ami_fault_active === 1'b0) && (dut.flag_integration_blocking === 1'b1); // L-5：排空后lane已落、阻断标志生命周期不变
+		cnt_olr_base = cnt_olr_f02;
+		inject_amb_start_mismatch;                         // 空闲期再建一次历史（迟到错误到达空闲期），用来验证留记录、lane不卡住、START不清历史
+		flag_hist_block_ok = flag_hist_block_ok && (o_integration_protocol_error_sticky === 1'b1) && (dut.flag_integration_blocking === 1'b1);
+		repeat(5) @(negedge i_clk);
+		flag_hist_block_ok = flag_hist_block_ok && (cnt_olr_f02 > cnt_olr_base) && (dut.o_ami_fault_active === 1'b0); // 留下cause 02记录，lane随RUN结束排空落下
 		i_run_enable = 1'b1;
 		pulse_start_ack();
 		repeat(3) @(negedge i_clk);
@@ -1907,7 +2024,198 @@ module tb_ppg_adc_measurement_idac_integration ();
 		@(negedge i_clk); i_control_abort_event = 1'b0;
 		repeat(10) @(negedge i_clk);
 
-		if(cnt_fail == 0 && cnt_pass == 58)begin
+		// ===== owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）AMI单元检查，全部TB本地名 =====
+		// LOST-FIRE（方案甲）：RED owner启动后无DONE、物理idle为1，年龄满4500拍时作废一次；作废拍序号总线给出owner序号且
+		// 无完成脉冲；同时发原因11 discard（owner身份、样本资格0）；lost sticky置位；首次作废不升级故障
+		olr_fresh_run;
+		cnt_olr_base = cnt_adc_complete;
+		cnt_olr_base2 = cnt_olr_disc11;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd96, 16'd960);
+		olr_wait_lost;
+		$display("OLR LOST-FIRE age_at_lost=%0d idx=%0d disc_reason11=%0d", cnt_olr_age_at_lost, reg_olr_lost_idx, cnt_olr_disc11 - cnt_olr_base2);
+		check_case("LOST-FIRE", (cnt_olr_age_at_lost >= 4500) && (cnt_olr_age_at_lost <= 4502) && (reg_olr_lost_idx == 16'd960) &&
+			(cnt_adc_complete == cnt_olr_base) && (cnt_olr_disc11 == cnt_olr_base2 + 1) && (reg_olr_disc_idx == 16'd960) && (reg_olr_disc_frame == 16'd96) &&
+			(reg_olr_disc_type == FRAME_NORMAL) && (reg_olr_disc_color == 1'b0) && (reg_olr_disc_sv == 1'b0) && reg_olr_disc_idv &&
+			(dut.o_owner_lost_sticky === 1'b1) && (dut.o_ami_fault_active === 1'b0) && (dut.flag_adc_transaction_inflight === 1'b0) && (dut.cnt_lost_red == 4'd1)); // 方案甲：作废释放owner并留历史sticky，未达k不报故障
+		// LOST-RECOV：作废后同槽位下一笔RED正常完成，计数清零
+		send_normal_sample(200, 1'b0, 1'b0);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "LOST-RECOV", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("LOST-RECOV", (cnt_adc_complete == cnt_olr_base + 1) && (dut.cnt_lost_red == 4'd0) && (dut.o_ami_fault_active === 1'b0));
+
+		// LSTK-START：新START不清lost sticky（F-022原则）
+		olr_fresh_run;
+		check_case("LSTK-START", dut.o_owner_lost_sticky === 1'b1);
+
+		// LOST-IDLE：物理ADC非idle时年龄超过4500也不作废；回到idle后才作废
+		cnt_olr_base = cnt_olr_lost;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd97, 16'd961);
+		i_adc_idle = 1'b0;
+		olr_wait_age(4700);
+		flag_olr_ok = (cnt_olr_lost == cnt_olr_base) && (dut.flag_adc_transaction_inflight === 1'b1);
+		i_adc_idle = 1'b1;
+		repeat(4) @(negedge i_clk);
+		check_case("LOST-IDLE", flag_olr_ok && (cnt_olr_lost == cnt_olr_base + 1) && (dut.flag_adc_transaction_inflight === 1'b0));
+		send_normal_sample(200, 1'b0, 1'b0);
+
+		// WIN-BEFORE / WIN-IN / WIN-AFTER（作废判定窗口，idle保持1只拉CLK_DOUT）：年龄4497拍DONE进入同步链，作废判定拍已见捕获缓存，
+		// 必须按正常完成；年龄4499拍DONE仍在同步链内，作废先发生，随后捕获按无owner拒绝并升级阻断（cause 02）；作废之后到达的DONE同样被拒
+		cnt_olr_base = cnt_olr_lost;
+		cnt_olr_base2 = cnt_adc_complete;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd98, 16'd962);
+		olr_wait_age(4497);
+		olr_done_keep_idle;
+		repeat(10) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "WIN-BEFORE", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("WIN-BEFORE", (cnt_olr_lost == cnt_olr_base) && (cnt_adc_complete == cnt_olr_base2 + 1) && (dut.flag_integration_blocking === 1'b0) && (dut.cnt_lost_red == 4'd0));
+		cnt_olr_base = cnt_olr_lost;
+		cnt_olr_base2 = cnt_adc_complete;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd99, 16'd963);
+		olr_wait_age(4499);
+		cnt_watchdog = cnt_olr_f02;
+		olr_done_keep_idle;
+		repeat(10) @(negedge i_clk);
+		$display("OLR WIN-IN lost=%0d complete=%0d blocking=%b fault_active=%b f02=%0d", cnt_olr_lost - cnt_olr_base, cnt_adc_complete - cnt_olr_base2,
+			dut.flag_integration_blocking, dut.o_ami_fault_active, cnt_olr_f02 - cnt_watchdog);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "WIN-IN", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("WIN-IN", (cnt_olr_lost == cnt_olr_base + 1) && (cnt_adc_complete == cnt_olr_base2) && (dut.flag_integration_blocking === 1'b1) &&
+			(dut.o_ami_fault_active === 1'b1) && (cnt_olr_f02 == cnt_watchdog + 1) && (o_integration_protocol_error_sticky === 1'b1)); // 窗口内完成被拒并升级
+		olr_abort_recover;
+		flag_olr_ok = (dut.o_ami_fault_active === 1'b0) && (dut.flag_integration_blocking === 1'b0);
+		olr_fresh_run;
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		cnt_olr_base2 = cnt_adc_complete;
+		send_normal_sample(200, 1'b0, 1'b0);
+		check_case("WIN-RECOV", flag_olr_ok && (o_integration_protocol_error_sticky === 1'b0) && (cnt_adc_complete == cnt_olr_base2 + 1));
+		cnt_olr_base = cnt_olr_lost;
+		cnt_olr_base2 = cnt_adc_complete;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd100, 16'd964);
+		olr_wait_lost;
+		cnt_watchdog = cnt_olr_f02;
+		repeat(100) @(negedge i_clk);
+		olr_done_keep_idle;
+		repeat(10) @(negedge i_clk);
+		check_case("WIN-AFTER", (cnt_olr_lost == cnt_olr_base + 1) && (cnt_adc_complete == cnt_olr_base2) && (dut.flag_integration_blocking === 1'b1) &&
+			(cnt_olr_f02 == cnt_watchdog + 1));
+		olr_abort_recover;
+
+		// K-RED2 / LSTK-BLOCK / K-ABORT / LSTK-CLR（按槽位k=2）：同一RED槽位连续2次作废，第2次置lane 06并出cause 06记录（身份为第2笔）；
+		// lane保持期间诊断清除不得清lost sticky；abort清lane后诊断清除才生效
+		olr_fresh_run;
+		cnt_olr_base = cnt_olr_f06;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd101, 16'd970);
+		olr_wait_lost;
+		flag_olr_ok = (cnt_olr_f06 == cnt_olr_base) && (dut.o_ami_fault_active === 1'b0);
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd102, 16'd971);
+		olr_wait_lost;
+		repeat(3) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "K-RED2", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("K-RED2", flag_olr_ok && (cnt_olr_f06 == cnt_olr_base + 1) && (reg_olr_f06_idx == 16'd971) && (dut.o_ami_fault_active === 1'b1) && o_wrapper_fault_blocking); // 同槽位连续2次作废升级为cause 06阻断
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		check_case("LSTK-BLOCK", dut.o_owner_lost_sticky === 1'b1);
+		olr_abort_recover;
+		check_case("K-ABORT", (dut.o_ami_fault_active === 1'b0) && !o_wrapper_fault_blocking);
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		check_case("LSTK-CLR", dut.o_owner_lost_sticky === 1'b0);
+
+		// K-CLEAR：RED作废→RED正常完成→RED再作废，不得升级（真实完成清零该槽位计数）
+		olr_fresh_run;
+		cnt_olr_base = cnt_olr_f06;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd103, 16'd972);
+		olr_wait_lost;
+		send_normal_sample(200, 1'b0, 1'b0);
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd104, 16'd973);
+		olr_wait_lost;
+		repeat(3) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "K-CLEAR", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("K-CLEAR", (cnt_olr_f06 == cnt_olr_base) && (dut.o_ami_fault_active === 1'b0) && (dut.cnt_lost_red == 4'd1));
+
+		// K-SLOT / LSTK-PRIO / K-IR2：RED作废一次后IR作废一次不升级（槽位独立）；IR第2次作废与诊断清除同拍，sticky必须保持1，且IR升级
+		olr_fresh_run;
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		cnt_olr_base = cnt_olr_f06;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd105, 16'd974);
+		olr_wait_lost;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b1, 16'd105, 16'd975);
+		olr_wait_lost;
+		repeat(3) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "K-SLOT", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("K-SLOT", (cnt_olr_f06 == cnt_olr_base) && (dut.cnt_lost_red == 4'd1) && (dut.cnt_lost_ir == 4'd1) && (dut.o_ami_fault_active === 1'b0));
+		@(negedge i_clk); i_diag_clear_event = 1'b1;
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		flag_olr_ok = (dut.o_owner_lost_sticky === 1'b0);
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b1, 16'd106, 16'd976);
+		cnt_watchdog = 0;
+		while((dut.flag_owner_lost_fire !== 1'b1) && (cnt_watchdog < 12000))begin
+			@(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		i_diag_clear_event = 1'b1;                         // 与作废判定拍同拍到达的诊断清除
+		@(negedge i_clk); i_diag_clear_event = 1'b0;
+		repeat(3) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "LSTK-PRIO", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("LSTK-PRIO", flag_olr_ok && (dut.o_owner_lost_sticky === 1'b1));
+		check_case("K-IR2", (cnt_olr_f06 == cnt_olr_base + 1) && (reg_olr_f06_idx == 16'd976) && (dut.o_ami_fault_active === 1'b1));
+		olr_abort_recover;
+
+		// BUSY-07 / BUSY-VOID：物理ADC一直不回idle，owner年龄到9000拍只报一次cause 07且不释放owner；ADC回idle后作废
+		olr_fresh_run;
+		cnt_olr_base = cnt_olr_f07;
+		cnt_olr_base2 = cnt_olr_lost;
+		start_transaction(FRAME_NORMAL, 1'b0, 1'b0, 16'd107, 16'd980);
+		i_adc_idle = 1'b0;
+		olr_wait_age(9000);
+		repeat(300) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "BUSY-07", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("BUSY-07", (cnt_olr_f07 == cnt_olr_base + 1) && (cnt_olr_lost == cnt_olr_base2) && (dut.flag_adc_transaction_inflight === 1'b1) &&
+			(dut.o_ami_fault_active === 1'b1) && o_wrapper_fault_blocking);
+		i_adc_idle = 1'b1;
+		repeat(4) @(negedge i_clk);
+		$display("OLR DBG %0s t=%0t complete=%0d lost=%0d f06=%0d f07=%0d f02=%0d red=%0d ir=%0d cal=%0d fault_active=%b wrap_block=%b integ_block=%b inflight=%b age=%0d sticky=%b idle=%b ready=%b", "BUSY-VOID", $time, cnt_adc_complete, cnt_olr_lost, cnt_olr_f06, cnt_olr_f07, cnt_olr_f02, dut.cnt_lost_red, dut.cnt_lost_ir, dut.cnt_lost_cal, dut.o_ami_fault_active, o_wrapper_fault_blocking, dut.flag_integration_blocking, dut.flag_adc_transaction_inflight, dut.cnt_owner_age, dut.o_owner_lost_sticky, i_adc_idle, o_transaction_start_ready); // owner生命周期轮诊断输出
+		check_case("BUSY-VOID", (cnt_olr_lost == cnt_olr_base2 + 1) && (dut.flag_adc_transaction_inflight === 1'b0) && (cnt_olr_f07 == cnt_olr_base + 1));
+		olr_abort_recover;
+
+		// WDRAW-LOST（撤销合并）：启动搜索的AMB校准请求被接受、owner启动后无DONE；作废时原因11 discard类型为AMB，在途请求被撤销并
+		// 立即重发同一候选；该请求来源为启动搜索，不得转送PWI（重检撤销只对周期重检来源生效）
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(3) @(negedge i_clk);
+		i_run_enable = 1'b1;
+		pulse_start_ack();
+		cnt_watchdog = 0;
+		while((o_calibration_sample_valid !== 1'b1) && (cnt_watchdog < 100))begin
+			pulse_safe_boundary;
+			repeat(2) @(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		reg_olr_req_type = o_calibration_frame_type;
+		reg_olr_req_color = o_calibration_color_ir;
+		cnt_olr_base = cnt_olr_pwi_wdraw;
+		i_calibration_sample_ready = 1'b1;
+		@(negedge i_clk);
+		start_transaction(reg_olr_req_type, 1'b0, reg_olr_req_color, 16'd108, 16'd990);
+		i_calibration_sample_ready = 1'b0;
+		flag_olr_ok = (dut.flag_calibration_request_inflight === 1'b1) && (dut.flag_adc_transaction_inflight === 1'b1);
+		olr_wait_lost;
+		cnt_watchdog = 0;
+		while((o_calibration_sample_valid !== 1'b1) && (cnt_watchdog < 20))begin
+			@(negedge i_clk);
+			cnt_watchdog = cnt_watchdog + 1;
+		end
+		check_case("WDRAW-LOST", flag_olr_ok && (reg_olr_disc_type == reg_olr_req_type) && (reg_olr_disc_idx == 16'd990) && (dut.flag_calibration_request_inflight === 1'b0) &&
+			(o_calibration_sample_valid === 1'b1) && (o_calibration_frame_type == reg_olr_req_type) && (o_calibration_color_ir == reg_olr_req_color) &&
+			(cnt_olr_pwi_wdraw == cnt_olr_base) && (dut.cnt_lost_cal == 4'd1)); // F-020撤销合并
+
+		// LOST-EXCL：全程作废事件与完成事件从未同拍
+		check_case("LOST-EXCL", (cnt_olr_lost > 0) && (cnt_olr_lost_with_done == 0));
+		i_run_enable = 1'b0;
+		pulse_stop_ack;
+		repeat(10) @(negedge i_clk);
+
+		if(cnt_fail == 0 && cnt_pass == 78)begin
 			$display("AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("AMI REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
@@ -1917,7 +2225,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 
 	// 仿真watchdog确保任何握手死锁都以明确失败结束。
 	initial begin
-		#2000000;
+		#4000000;
 		$display("FAIL AMI-WATCHDOG");
 		$finish;
 	end
