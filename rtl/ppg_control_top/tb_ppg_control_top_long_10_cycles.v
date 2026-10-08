@@ -19,8 +19,8 @@
 // Dependencies:       ppg_control_top and its full real hierarchy;
 //                      tb_ppg_real_raw_generator.vh (Phase 3 Stage 1/2 generator)
 //
-// Version:            V1.3
-// Revision Date:      2026/08/26
+// Version:            V1.4
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/25            V1.0          Erie                  Create file. Phase 3 Stage 4 group 5 (PPG-LONG-10-CYCLES), the last of the five core groups, per C25 section 9.2: "Run at least 10 seconds, 4,000 macro frames, and ten complete configured pulse periods. Check repeated baseline generation, precision entry/return, RED/IR continuity, bounded RAW arithmetic, and absence of accumulated stale context or owner leakage." Section 9.2's own note adds group 5 "may use any frozen deterministic pulse-period parameter that fits at least ten complete periods in the mandatory 10-second window... must not claim ten cycles merely because 10 seconds elapsed" -- with C_RAW_PULSE_PERIOD_FRAMES=400 and 400 Hz framing already frozen since Stage 1, ten periods is exactly the same 4,000-frame/10-second target Stage 3's tb_ppg_control_top_longrun.v already proved throughput for (RAW-12/13, real_red=4000/real_ir=4000/elapsed_ns=10,000,000,499). Critical finding before writing any new code: that Stage 3 file still carries the tiny placeholder Stage1 calibration weights (-17..26) every Phase 1-3 file inherited before Stage 4 traced the real defect to them -- reusing it verbatim would run a real 10-second/4000-frame regression with o_calibrated_s1_value pinned at a hard 0 the entire time, exactly the failure mode Stage 4 already diagnosed and fixed, just re-introduced silently. Built instead as a direct copy-and-extend of tb_ppg_control_top_fir_tail_isolation.v (the proven Group 4 delivery, itself extending Group 1/2/3), which already carries the real unbounded 2 MHz clock generators, C11 nominal Stage1 weights, peak_valley_config_valid=1, and the full PEAK/VALLEY/CROSS/RETURN_9BIT capture-register and assertion infrastructure -- swapping only the termination condition from a fixed red-sample target to Stage 3's own proven three-way AND (real_red>=4000 && real_ir>=4000 && elapsed>=10s, none of the three allowed to substitute for another) and the watchdog from a fixed sample-count safety margin to Stage 3's time-typed 12-second C_SIM_TIMEOUT_NS.
@@ -89,6 +89,7 @@
 //                                                             在real_red+real_ir=1201的容忍范围内通过，STOP排空无超时，其余几条FAIL
 //                                                             （GROUP2/3/4_EXISTENCE、GROUP5_REPEATED_*）都是缩小规模下走不完完整
 //                                                             SAR9/SAR15周期数的预期副作用，不是新问题。
+// 2026/10/08            V1.4          Erie                  ABCD F-009 follow-up (coordinator decision 20261008; TB-local label GROUP5_NO_STALE_CONTEXT kept): the criterion is now exact accounting, with no tolerance: formal results + STOP-reason discards == RED+IR transactions after this group's START. A reduced-scale probe (40 frames/100 ms, same frame alignment as 4000/10 s; old and new scheduler alike) showed the V1.3 'at most 1 short' tolerance was absorbing something else, not a STOP-boundary discard: one Q3 release from the JNT-09 prefix, blocked by flag_jnt_manual_adc_hold and counted by bg_responder in CONFIG about 5 us before this group's START. After F-009 adjacent frames are exactly 5000 cycles apart, so frame 4000 has started when STOP is acknowledged at the 10 s point; its committed RED owner is released with success=0 (contract section 13 late-DONE rule 1, STOP reason), a second legitimate difference. New TB-local counters cnt_l10_base_responses (RED+IR already counted at START), cnt_l10_stop_completion_discards (success=0 completions after this group's STOP ack while AMI STOP draining is active, without abort or system fault) and cnt_l10_stop_result_discards (formal-result discards with reason STOP after STOP ack). Negative controls: dropping the STOP-discard term, dropping the pre-START base, or hiding one real result each fails.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -108,8 +109,8 @@
 // 依赖文件:           ppg_control_top及其完整真实层次；
 //                      tb_ppg_real_raw_generator.vh（Phase 3 Stage 1/2生成器）
 //
-// 当前版本:           V1.3
-// 修订日期:           2026年08月26日
+// 当前版本:           V1.4
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月25日        V1.0          Erie                  创建文件。Phase 3 Stage 4第5组（PPG-LONG-10-CYCLES），五个核心组里的最后一组，照C25合同9.2节原文："跑至少10秒、4000宏帧、十个完整配置心动周期。检查反复的基线生成、精度进出、RED/IR连续性、有界的RAW运算、以及没有累积的过期上下文或owner泄漏。"合同9.2节自己还补了一句："可以用任何冻结的确定性脉冲周期参数，只要能在强制的10秒窗口内放下至少十个完整周期……不能只因为跑满10秒就号称覆盖了十个周期"——`C_RAW_PULSE_PERIOD_FRAMES`=400、400Hz帧率从Stage 1起就已经冻结，十个周期正好就是Stage 3的`tb_ppg_control_top_longrun.v`早已验证过吞吐率的同一个4000帧/10秒目标（RAW-12/13，real_red=4000/real_ir=4000/elapsed_ns=10,000,000,499）。动手写任何新代码之前的关键发现：那份Stage 3文件现在还带着Phase 1~3每份文件继承下来、Stage 4才追出真实缺陷的那批占位Stage1校准权重（-17~26）——原样复用会让一次真实的10秒/4000帧回归全程`o_calibrated_s1_value`卡死在硬0，正是Stage 4已经诊断并修复过的那个失效模式被悄悄重新引入。本文件改为直接复制+扩展`tb_ppg_control_top_fir_tail_isolation.v`（已交付的Group4版本，本身又是Group1/2/3的扩展）——它已经带着真实的不限次数2MHz时钟发生器、C11标称Stage1权重、`peak_valley_config_valid=1`，以及完整的PEAK/VALLEY/CROSS/RETURN_9BIT捕获寄存器和断言基础设施——只替换终止条件（从固定的RED样本数目标改成Stage 3自己验证过的三路AND：`real_red>=4000 && real_ir>=4000 && elapsed>=10s`，三者互不能替代）和看门狗（从固定样本数安全余量改成Stage 3的time类型12秒`C_SIM_TIMEOUT_NS`）。
@@ -178,6 +179,7 @@
 //                                                             real_red+real_ir=1201的容忍范围内通过，STOP排空无超时，其余几条
 //                                                             FAIL（GROUP2/3/4_EXISTENCE、GROUP5_REPEATED_*）都是缩小规模下走
 //                                                             不完完整SAR9/SAR15周期数的预期副作用，不是新问题。
+// 2026年10月08日        V1.4          Erie                  ABCD F-009后续（统筹决定20261008；TB本地标签GROUP5_NO_STALE_CONTEXT不变）：判据改为精确核算，不再容忍差额：正式结果数+STOP原因丢弃数==本组START之后的RED+IR事务数。缩小规模探针（40帧/100毫秒，与4000帧/10秒帧对齐相同，旧/新调度器一致）表明V1.3'最多少1笔'容忍吸收的并非STOP边界丢弃，而是JNT-09前缀中被flag_jnt_manual_adc_hold挡住的一次Q3释放，bg_responder在CONFIG中、本组START前约5微秒把它计成1笔RED。F-009后相邻宏帧严格5000拍，10秒到点时第4000帧已开始，STOP确认落在其RED owner提交之后，该owner按合同第13节迟到DONE规则1以success=0释放（STOP原因），构成第二笔合法差额。新增TB本地计数cnt_l10_base_responses（START时已计入的RED+IR）、cnt_l10_stop_completion_discards（本组STOP确认后、AMI STOP排空期间且无abort/系统故障的success=0完成）、cnt_l10_stop_result_discards（STOP确认后STOP原因的正式结果丢弃）。负对照：去掉STOP丢弃项、去掉START前基数、或隐去1笔真实结果，均失败。
 //
 // 复位后提交合法NORMAL双光MANUAL配置（含C11标称Stage1校准权重、
 // peak_valley_config_valid=1）并START，之后完全依赖既有bg_responder真实响应，
@@ -386,6 +388,11 @@ module tb_ppg_control_top_long_10_cycles();
 	integer cnt_red_response; // 已响应的真实RED事务数，按响应时owner身份分类
 	integer cnt_ir_response; // 已响应的真实IR事务数，按响应时owner身份分类
 	integer cnt_cal_response; // 已响应的真实校准事务数，按响应时owner身份分类
+	integer cnt_l10_base_responses; // ABCD F-009：本组START被接受时已计入的RED+IR响应数（JNT前缀残留，不属于本组事务）
+	integer cnt_l10_stop_completion_discards; // ABCD F-009：本组STOP确认后以success=0旁带释放的已提交owner笔数（STOP原因）
+	integer cnt_l10_stop_result_discards; // ABCD F-009：本组STOP确认后以STOP原因丢弃的正式结果笔数
+	reg flag_l10_scenario_started; // ABCD F-009：本组START已被接受
+	reg flag_l10_scenario_stopped; // ABCD F-009：本组STOP已被确认
 	reg [7:0] reg_last_cal_local_tick; // 未在本场景使用，保留以匹配复用task签名
 	reg [7:0] reg_last_cal_amb_snapshot; // 未在本场景使用，保留以匹配复用task签名
 	reg reg_last_precision_scheduler, reg_last_precision_ssw, reg_last_precision_ami; // 未在本场景使用，保留以匹配复用task签名
@@ -1569,6 +1576,11 @@ module tb_ppg_control_top_long_10_cycles();
 		cnt_error = 0;
 		cnt_measurement_result_valid = 0;
 		reg_measurement_start_time = 0;
+		cnt_l10_base_responses = 0;
+		cnt_l10_stop_completion_discards = 0;
+		cnt_l10_stop_result_discards = 0;
+		flag_l10_scenario_started = 1'b0;
+		flag_l10_scenario_stopped = 1'b0;
 		// Group 1/2事件捕获与断言状态的显式初始化：integer/reg在Verilog中默认是X，
 		// 靠隐式0初始化的假设会让`if(!flag_xxx)`这类判断在X上被当成false直接跳过，
 		// 这是本文件编写时真实踩到的一个bug（iverilog小规模跑通阶段发现Check A/B
@@ -1684,6 +1696,8 @@ module tb_ppg_control_top_long_10_cycles();
 			end
 		join
 		reg_measurement_start_time = $time; // 与合同"10-second measurement interval begins at the accepted measurement START event"对齐
+		cnt_l10_base_responses = cnt_red_response + cnt_ir_response; // ABCD F-009：START前已计入的响应不属于本组
+		flag_l10_scenario_started = 1'b1;
 		if((o_lifecycle_state != ST_RUN) || o_system_fault_blocking) begin
 			$display("FAIL LONGRUN START accepted into RUN");
 			cnt_error = cnt_error + 1;
@@ -1899,20 +1913,25 @@ module tb_ppg_control_top_long_10_cycles();
 		// discard-pending完全符合合同定义，不是丢失、重复或泄漏。因此核对改为
 		// 容忍"最多1笔"的合法差额（且只能是正式结果少于真实事务这个方向——
 		// 结果数超过事务数、或差额超过1笔，仍然按真实缺陷处理）
-		if((cnt_red_response + cnt_ir_response - cnt_measurement_result_valid) > 1) begin
-			$display("FAIL GROUP5_NO_STALE_CONTEXT measurement_result_valid=%0d falls more than 1 short of real_red+real_ir=%0d, possible accumulated loss/owner leakage beyond the one legitimate STOP-boundary discard-pending transaction",
-				cnt_measurement_result_valid, cnt_red_response + cnt_ir_response);
-			cnt_error = cnt_error + 1;
-		end else if(cnt_measurement_result_valid > (cnt_red_response + cnt_ir_response)) begin
-			$display("FAIL GROUP5_NO_STALE_CONTEXT measurement_result_valid=%0d exceeds real_red+real_ir=%0d, possible duplicated result",
-				cnt_measurement_result_valid, cnt_red_response + cnt_ir_response);
+		// ABCD F-009（统筹决定20261008，TB本地名GROUP5_NO_STALE_CONTEXT，判据改为精确核算，不再容忍差额）：
+		// 实测（缩小规模探针，旧/新调度器一致）旧版"容忍少1笔"吸收的并不是STOP边界丢弃，而是JNT-09前缀里被
+		// flag_jnt_manual_adc_hold挡住的一次Q3释放——hold撤销后bg_responder在本组START前把它计成1笔RED；
+		// F-009后相邻宏帧严格5000拍，10秒到点后第4000帧已开始，STOP确认落在其RED owner提交之后，
+		// 该owner按合同第13节迟到DONE规则1以success=0旁带释放（STOP原因），又多出1笔合法差额。
+		// 精确核算：正式结果数 + STOP原因丢弃数（success=0旁带释放 + STOP原因正式结果丢弃） == 本组START之后的RED+IR事务数
+		if((cnt_measurement_result_valid + cnt_l10_stop_completion_discards + cnt_l10_stop_result_discards) !=
+			(cnt_red_response + cnt_ir_response - cnt_l10_base_responses)) begin
+			$display("FAIL GROUP5_NO_STALE_CONTEXT measurement_result_valid=%0d + stop_discards=%0d (completion=%0d result=%0d) != scenario transactions=%0d (real_red+real_ir=%0d - pre_start=%0d), possible loss/duplication/owner leakage",
+				cnt_measurement_result_valid, cnt_l10_stop_completion_discards + cnt_l10_stop_result_discards, cnt_l10_stop_completion_discards, cnt_l10_stop_result_discards,
+				cnt_red_response + cnt_ir_response - cnt_l10_base_responses, cnt_red_response + cnt_ir_response, cnt_l10_base_responses);
 			cnt_error = cnt_error + 1;
 		end else if(flag_raw_arith_unbounded) begin
 			$display("FAIL GROUP5_NO_STALE_CONTEXT slope/baseline saturation was observed during the run, see the earlier GROUP5_BOUNDED_RAW_ARITHMETIC FAIL for detail");
 			cnt_error = cnt_error + 1;
 		end else begin
-			$display("PASS GROUP5_NO_STALE_CONTEXT measurement_result_valid=%0d within 1 of real_red+real_ir=%0d after STOP drain (deficit of 0 or 1 is the documented legitimate STOP-boundary discard-pending case), no RAW-arithmetic saturation observed",
-				cnt_measurement_result_valid, cnt_red_response + cnt_ir_response);
+			$display("PASS GROUP5_NO_STALE_CONTEXT measurement_result_valid=%0d + stop_discards=%0d (completion=%0d result=%0d) == scenario transactions=%0d (real_red+real_ir=%0d - pre_start=%0d) after STOP drain, no RAW-arithmetic saturation observed",
+				cnt_measurement_result_valid, cnt_l10_stop_completion_discards + cnt_l10_stop_result_discards, cnt_l10_stop_completion_discards, cnt_l10_stop_result_discards,
+				cnt_red_response + cnt_ir_response - cnt_l10_base_responses, cnt_red_response + cnt_ir_response, cnt_l10_base_responses);
 		end
 
 		// 全程协议错误sticky核查：这些信号从Phase 1的tb_ppg_control_top.v到Stage 3长跑
@@ -1982,6 +2001,19 @@ module tb_ppg_control_top_long_10_cycles();
 			$display("LONG_10_CYCLES_TB_FAIL error_count=%0d", cnt_error);
 		end
 		$finish;
+	end
+
+
+	//---------------ABCD F-009：本组STOP原因丢弃计数（服务GROUP5_NO_STALE_CONTEXT精确核算）---------------//
+	// 只统计本组START之后、本组STOP确认之后的丢弃：已提交owner的success=0旁带释放须发生在AMI STOP排空期间且无abort/系统故障；
+	// 正式结果丢弃须带STOP原因编码。abort、系统故障或完成丢失类丢弃不计入，出现即导致核算不平
+	always @(posedge i_clk) begin
+		if(flag_l10_scenario_started && o_stop_ack_event) flag_l10_scenario_stopped = 1'b1;
+		if(flag_l10_scenario_stopped && ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_adc_transaction_complete_event && !ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_adc_transaction_success &&
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_stop_result_draining && !ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_abort_draining && !ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_system_fault_discard_pending)
+			cnt_l10_stop_completion_discards = cnt_l10_stop_completion_discards + 1;
+		if(flag_l10_scenario_stopped && ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_measurement_result_discard_event && (ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_measurement_result_discard_reason == 2'b00))
+			cnt_l10_stop_result_discards = cnt_l10_stop_result_discards + 1;
 	end
 
 endmodule
