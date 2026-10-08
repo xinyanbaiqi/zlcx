@@ -1,2 +1,0 @@
-PASS: 3200 Hz frame, 80 us R/IR offsets, and Q3-center alignment verified.
-$finish called at time : 435250 ns : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_timing_3200hz_validation/tb_ppg_timing_3200hz.v" Line 209

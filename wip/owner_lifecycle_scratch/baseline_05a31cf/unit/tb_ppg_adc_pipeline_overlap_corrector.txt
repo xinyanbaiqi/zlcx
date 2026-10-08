@@ -1,2 +1,0 @@
-PASS ppg_adc_pipeline_overlap_corrector OVL-01..OVL-17 and 1024-code sweep
-$finish called at time : 537 us : File "D:/PPG/verilog/ppg_regression_runs/05a31cf_20261006/rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v" Line 796
