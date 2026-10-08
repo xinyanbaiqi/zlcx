@@ -16,8 +16,8 @@
 // Referrences:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.7
-// Revision Date:	2026/10/07 00:00:00
+// Version:			V1.8
+// Revision Date:	2026/10/08 00:00:00
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026/08/14          V1.2          Codex       Single-fire timing selector.
@@ -26,6 +26,7 @@
 // 2026/09/10          V1.5        Erie        AMB_CAL local tick [262,264) CTRL_Q2 gated to only pulse when reg_cal_frame_type==FRAME_TYPE_DCS; AMB_CAL no longer drives Q2 at all, per PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md section 6.4. Root cause: AMB code-value calibration judges candidates on the Q2/Q3 chopping-cancelled net value, but that cancellation is structurally insensitive to symmetric ambient residual present in both phases, so it never surfaces how much integrator headroom the candidate actually consumed short of hard saturation. DCS_CAL is unaffected because its LED is Q3-only, so Q2/Q3 are asymmetric there and chopping subtraction fully preserves the LED residual instead of masking it. CTRL_Q3 and all AMB_CAL AFERST/TIAEN/Q1_9 timing windows are unchanged.
 // 2026/10/06          V1.6        Erie        ABCD review F-035: in adc_owner_inflight_o and reg_owner_abort_seen the matching-completion release now has priority over the abort hold. Previously an abort and a matching DONE in the same cycle kept the owner in flight forever (no later DONE can arrive, and a new owner needs !inflight), so measurement stopped until reset. Abort still cancels the waveform context and commit is still blocked during abort; owner identity registers hold in both branches as before.
 // 2026/10/07          V1.7        Erie        Owner-lifecycle round. New input i_adc_transaction_lost_event releases the owner by the same index/generation match as a completion (unmatched void counts as transaction mismatch). Owner binding (S1/L-1): flag_red/ir/cal_has_owner now also require the owner to belong to the current context (frame id; for CAL also the new reg_owner_cal_subframe), so a stale owner neither drives the next context's Q3 nor masks its deadline. S1: calibration_timeout_sticky now sets when the owner bound to this subframe is still in flight at local tick 385 (late-read diagnostic, non-blocking).
+// 2026/10/08          V1.8        Erie        ABCD N-2 (no contract ID; found by the F-009 round regression, pre-existing): if STOP is acknowledged after a RED/IR/CAL waveform context is taken over but before its owner is committed, STOPPING completes immediately (ADC idle, datapath empty), and a START that follows before the waveform's last tick previously left the uncommitted context valid forever (it is released only at wave last or on abort, and the scheduler freezes the tick at 0 in STARTUP_PENDING), so o_sar_timing_idle stayed 0 and the new RUN stalled silently. New wire flag_start_restore = i_start_ack_event && !adc_owner_inflight_o && i_adc_idle replaces the old START-restore condition (start ack && o_wrapper_idle) at all six sites (reg_run_active, the four protocol stickies, flag_ssw_fault_identity_valid); on it flag_red/ir/cal_context_valid and flag_stop_pending are cleared like abort. Premise: STOPPING completion already requires ADC idle and an empty datapath, so no committed owner can be in flight at START. Waveform snapshot registers are only consumed while their context is valid, so they need no clearing.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -42,8 +43,8 @@
 // 参考资料:		PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.7
-// 修订日期:		2026年10月07日
+// 当前版本:		V1.8
+// 修订日期:		2026年10月08日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026年08月14日     V1.2          Codex       单fire时序选择实现。
@@ -52,6 +53,7 @@
 // 2026年09月10日     V1.5        Erie          按合同6.4节：AMB_CAL local tick[262,264)的CTRL_Q2改为仅reg_cal_frame_type==FRAME_TYPE_DCS时才产生脉冲，AMB_CAL全程不再驱动Q2。根因：AMB码值校准依赖Q2/Q3两相chopping抵消后的净值判据，但该抵消机制对两相都存在的对称环境光残余结构性不敏感，只有真正物理clip到轨才能被抓到；DCS_CAL不受影响，因其LED仅Q3导通、Q2/Q3本就不对称，chopping相减恰好完整保留LED残余。CTRL_Q3及AMB_CAL全部AFERST/TIAEN/Q1_9时序窗口不变。
 // 2026年10月06日     V1.6        Erie          ABCD复核F-035：adc_owner_inflight_o与reg_owner_abort_seen中匹配完成的释放改为优先于abort保持。此前abort与匹配DONE同拍时owner永久在途（之后不会再有DONE，新owner又要求!inflight），测量停到复位。abort仍撤销波形上下文、abort期间仍禁止提交；owner身份寄存器在两个分支都保持，与原来一致
 // 2026年10月07日     V1.7        Erie          owner生命周期轮。新增输入i_adc_transaction_lost_event，按与完成相同的序号/代际匹配释放owner（不匹配的作废记事务错配）。owner绑定（S1/L-1）：flag_red/ir/cal_has_owner增加'owner属于当前上下文'条件（帧号，校准另加新寄存器reg_owner_cal_subframe），跨上下文残留的旧owner既不驱动新上下文Q3，也不掩盖其截止。S1：calibration_timeout_sticky改为'绑定本子帧的校准owner在local tick 385仍在途'时置位（读出迟到诊断，非阻断）。
+// 2026年10月08日     V1.8        Erie          ABCD N-2（无合同编号，F-009轮回归发现，既有缺陷）：STOP确认落在RED/IR/CAL波形上下文已接管、owner尚未提交之间时，STOPPING立即完成（ADC空闲、数据链排空），若在波形末拍前再次START，未提交上下文原先只在波形末拍或abort时释放，而调度器STARTUP_PENDING冻结tick 0，上下文永不释放，o_sar_timing_idle恒0，新RUN静默卡死。新增连线flag_start_restore=i_start_ack_event&&!adc_owner_inflight_o&&i_adc_idle，替换六处原START恢复条件（启动确认&&o_wrapper_idle：reg_run_active、四个协议sticky、flag_ssw_fault_identity_valid）；该条件成立时与abort一样清除flag_red/ir/cal_context_valid与flag_stop_pending。前提：STOPPING完成已要求ADC空闲且数据链排空，START时不可能有已提交owner在途。波形快照寄存器只在对应上下文有效时被读取，无需清除。
 module ppg_sar9_sar15_safe_selection_wrapper
 #(
 	parameter C_FRAME_ID_WIDTH = 16, // 模块参数专用字段帧标识位宽高位编码端
@@ -363,6 +365,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	wire flag_cal_q3_end_passed;                // 组合条件CAL owner自身选定Q3窗口已经关闭
 	wire flag_owner_q3_closed_combo;            // 组合条件在途owner本拍即时Q3已关闭，不跨拍保持
 	wire flag_blocking_fault;                   // 组合条件条件阻断专用字段低位编码端
+	wire flag_start_restore;                    // 新RUN启动确认且无在途结果所有权、物理ADC空闲，丢弃未提交波形上下文并恢复运行资格
 	wire flag_switch_protocol_error_condition;  // 组合条件非法接管点、双模式同时活动或事务载荷非法的原始判定
 	wire flag_ssw_fault_rising;                 // 组合条件本地阻断故障从0跳变为1的首次时刻
 
@@ -443,6 +446,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 
 	//其他信号连线
 	assign flag_blocking_fault = switch_protocol_error_sticky_o || transaction_mismatch_sticky_o; // 组合连线条件阻断专用字段低位编码端
+	assign flag_start_restore = i_start_ack_event && !adc_owner_inflight_o && i_adc_idle; // 新RUN启动时上一RUN残留的未提交波形上下文一律作废（与abort一致），因此启动恢复不再以上下文空闲为前提；STOPPING完成已要求ADC空闲且数据链排空，START时不可能有已提交owner在途；服务ABCD N-2（STOP落在波形接管与owner提交之间后立即START的死锁）
 	assign flag_switch_protocol_error_condition = flag_static_bias_input_source_invalid || flag_owner_commit_error || (i_normal_frame_active && i_calibration_frame_active) || (i_waveform_context_valid && !o_waveform_context_ready && !flag_waveform_context_ready_raw && ((i_macro_tick == 13'd0) || (i_macro_tick == 13'd160) || (i_calibration_local_tick == 10'd0))); // 组合连线切换协议错误的原始判定，供sticky和故障记录共用避免重复表达式；接管反压注入合法压低ready时(flag_waveform_context_ready_raw为真)不构成协议违规，交由Scheduler自身的非阻断launch-timeout诊断独立表态；本表达式是LFA-10(b)与OIB-01共同调查的唯一锚点,第4个OR项经`i_context_handover_stall_request`收窄后关闭OIB-01,LFA-10(b)证明四项皆结构性不可达而延期 @satisfies: LFA-10, OIB-01
 	assign flag_ssw_fault_rising = !flag_blocking_fault && (flag_switch_protocol_error_condition || flag_done_mismatch); // 组合连线本地阻断故障首次跳变时刻，用于拉出故障记录valid脉冲
 	assign ssw_fault_cause_o = flag_blocking_fault ? 8'h21 : 8'h00; // 组合连线仅SSW身份/所有权协议错误的固定原因码
@@ -543,7 +547,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			calibration_timeout_sticky_o <= 1'b0; // 时序写入校准超时保持输出低位编码端异步复位清零
-		end else if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+		end else if(flag_start_restore == 1'b1)begin
 			calibration_timeout_sticky_o <= 1'b0; // 时序写入校准超时保持输出低位编码端启动确认复原
 		end else begin
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
@@ -559,7 +563,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			owner_deadline_timeout_sticky_o <= 1'b0; // 时序写入结果所有权截止超时保持输出低位编码端异步复位清零
-		end else if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+		end else if(flag_start_restore == 1'b1)begin
 			owner_deadline_timeout_sticky_o <= 1'b0; // 时序写入结果所有权截止超时保持输出低位编码端启动确认复原
 		end else begin
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
@@ -575,7 +579,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			switch_protocol_error_sticky_o <= 1'b0; // 时序写入切换协议错误保持输出高位编码端低位编码端异步复位清零
-		end else if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+		end else if(flag_start_restore == 1'b1)begin
 			switch_protocol_error_sticky_o <= 1'b0; // 时序写入切换协议错误保持输出高位编码端低位编码端启动确认复原
 		end else begin
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
@@ -591,7 +595,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			transaction_mismatch_sticky_o <= 1'b0; // 时序写入事务失配保持输出高位编码端异步复位清零
-		end else if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+		end else if(flag_start_restore == 1'b1)begin
 			transaction_mismatch_sticky_o <= 1'b0; // 时序写入事务失配保持输出高位编码端启动确认复原
 		end else begin
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
@@ -780,7 +784,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 		if(i_rstn == 1'b0)begin
 			reg_run_active <= 1'b0;             // 时序写入寄存运行活动异步复位清零
 		end else begin
-			if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+			if(flag_start_restore == 1'b1)begin
 				reg_run_active <= 1'b1;         // 时序写入寄存运行活动启动确认复原
 			end else if((i_run_enable == 1'b0 || flag_stop_pending == 1'b1) && o_wrapper_idle == 1'b1)begin
 				reg_run_active <= 1'b0;         // 时序写入寄存运行活动校准波形控制更新
@@ -799,6 +803,8 @@ module ppg_sar9_sar15_safe_selection_wrapper
 				flag_stop_pending <= 1'b1;      // 时序写入条件停止专用字段低位编码端停止确认挂起
 			end else if(reg_run_active == 1'b0 && o_wrapper_idle == 1'b1)begin
 				flag_stop_pending <= 1'b0;      // 时序写入条件停止专用字段低位编码端校准波形控制更新
+			end else if(flag_start_restore == 1'b1)begin
+				flag_stop_pending <= 1'b0;      // 新RUN启动恢复时撤销上一RUN残留的停止挂起
 			end
 		end
 	end
@@ -952,6 +958,8 @@ module ppg_sar9_sar15_safe_selection_wrapper
 			flag_cal_context_valid <= 1'b0;     // 时序写入条件校准上下文有效低位编码端异步复位清零
 		end else if(i_control_abort_event == 1'b1)begin
 			flag_cal_context_valid <= 1'b0;     // 时序写入条件校准上下文有效低位编码端撤销期间保持
+		end else if(flag_start_restore == 1'b1)begin
+			flag_cal_context_valid <= 1'b0;     // 新一轮启动清空滞留的校准接管资格
 		end else begin
 			if(flag_cal_wave_last == 1'b1)begin
 				flag_cal_context_valid <= 1'b0; // 时序写入条件校准上下文有效低位编码端波形末拍释放
@@ -1098,6 +1106,8 @@ module ppg_sar9_sar15_safe_selection_wrapper
 			flag_ir_context_valid <= 1'b0;      // 时序写入条件红外上下文有效红外专属红外光路低位编码端异步复位清零
 		end else if(i_control_abort_event == 1'b1)begin
 			flag_ir_context_valid <= 1'b0;      // 时序写入条件红外上下文有效红外专属红外光路低位编码端撤销期间保持
+		end else if(flag_start_restore == 1'b1)begin
+			flag_ir_context_valid <= 1'b0;      // 重新开始运行前撤销残留红外接管登记
 		end else begin
 			if(flag_ir_wave_last == 1'b1)begin
 				flag_ir_context_valid <= 1'b0;  // 时序写入条件红外上下文有效红外专属红外光路低位编码端波形末拍释放
@@ -1283,6 +1293,8 @@ module ppg_sar9_sar15_safe_selection_wrapper
 			flag_red_context_valid <= 1'b0;     // 时序写入条件红光上下文有效红光专属可见光路低位编码端异步复位清零
 		end else if(i_control_abort_event == 1'b1)begin
 			flag_red_context_valid <= 1'b0;     // 时序写入条件红光上下文有效红光专属可见光路低位编码端撤销期间保持
+		end else if(flag_start_restore == 1'b1)begin
+			flag_red_context_valid <= 1'b0;     // 开机重启时丢弃旧运行遗留的可见光接管
 		end else begin
 			if(flag_red_wave_last == 1'b1)begin
 				flag_red_context_valid <= 1'b0; // 时序写入条件红光上下文有效红光专属可见光路低位编码端波形末拍释放
@@ -1430,7 +1442,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
 			flag_ssw_fault_identity_valid <= 1'b0;    // 时序写入身份有效位异步复位清零
-		end else if(i_start_ack_event == 1'b1 && o_wrapper_idle == 1'b1)begin
+		end else if(flag_start_restore == 1'b1)begin
 			flag_ssw_fault_identity_valid <= 1'b0;    // 时序写入身份有效位启动确认复原
 		end else begin
 			if(i_diag_clear_event == 1'b1 && o_wrapper_idle == 1'b1)begin
