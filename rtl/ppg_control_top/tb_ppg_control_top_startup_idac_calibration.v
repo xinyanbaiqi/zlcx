@@ -16,10 +16,11 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.3
-// Revision Date:      2026/10/01
+// Version:            V1.4
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
+// 2026/10/08            V1.4          Erie                  ABCD review F-009 (coordinator review item 3): add a print-only macro-frame interval monitor. A frame start is recognised when a frame is active at tick 0 and the previous cycle was inactive or at tick 4999 (this also catches CAL rollover, which has no start pulse); the first frame after START is logged as F009_FRAME_FIRST, and every later start whose distance from the previous start is not 5000 cycles prints F009_FRAME_GAP with the interval, the idle cycles and the previous/next frame type (NORMAL/CAL). It never prints PASS or FAIL and does not touch the verdict.
 // 2026/10/01            V1.3          Erie                  Task C (TASKC_TICK248_P2S_20261001.md): connect i_test_calibration_loss_inject_valid to a reg initialised to 0 and never driven, the same pattern tb_ppg_control_top_robustness_corner_waveforms.v uses. This TB instantiates ppg_control_top with C_ENABLE_TEST_INJECTION=1, so the injection structure is generated, yet this input had been left unconnected (floating Z; REGRESSION_BASELINE_20260930.md section 6.6). All seven control_top verification-injection inputs were checked; this was the only unconnected one, and iverilog -Wall now reports no dangling input. Sorted PASS lines, $finish time and final banner are identical before and after the change (run on the same RTL).
 // 2026/09/18            V1.2          Erie                  Workline-D pending-item investigation, SID-05 (DC_R/DC_IR half) and SID-06: (1) Extracted the AMB-stage-only tick-248 deadline-suppression logic into a reusable task_verify_deadline_suppression and applied it for real to the DC_R and DC_IR stages' first candidate, which 2026-09-17 had found got permanently stuck (Q3 window never opens again after the deadline fires) when the same logic was copy-pasted in -- confirmed via a real iverilog A/B trace (not just re-reading code) that this is a genuine AMI (ppg_adc_measurement_idac_integration.v) RTL deadlock, not a TB construction mistake: flag_calibration_request_inflight only ever clears on a real consumed search result or STOP/abort, never on the scheduler's own graceful deadline-suppression, so a deadline-suppressed request strands AMI forever with no retry. Fixed at the RTL level (ppg_400hz_frame_calibration_scheduler.v V1.8 new o_cal_owner_deadline_event, AMI V1.15 consumes it as an additional inflight-clear condition, ppg_control_top.v V1.6 wires them together) -- see those files' own changelogs for the real root cause and fix. With the RTL fix in place, the same task_verify_deadline_suppression + wait_q3_release construction that already worked for AMB now genuinely works for DC_R/DC_IR too, confirmed by a clean real iverilog run (STARTUP_IDAC_CALIBRATION_TB_PASS, zero FAIL). (2) Built the first real test for SID-06 (previously only a PASS message piggybacked on SID-04's "AMB converged to target code" check, which tests a completely different property): directly reads the SSW's internal reg_cal_dc_code register (the actual per-subframe waveform-snapshot latch that only updates on its own tick-0 context handoff, ppg_sar9_sar15_safe_selection_wrapper.v) across a real DC_R candidate's tick-385 commit boundary, confirming the snapshot stays unperturbed through the rest of that same subframe and is only picked up by the very next subframe's real Q3 sample -- both PASS with real, non-vacuous code changes (old=0x42, newly committed=0x5d) confirmed by a real run. First construction attempt captured the "before" baseline too early (reading reg_cal_dc_code directly before that subframe's own Q3 sample), which is provably stale (SSW had not yet caught up to the PREVIOUS commit at that point) and produced a false FAIL; fixed by sourcing the baseline from the real Q3-sampled reg_sampled_dcn instead, which is guaranteed fresh for the current subframe. Per this project's standing methodology, this false FAIL was itself only caught by really running the test and tracing tick/register values, not by re-reading the diff. See WORKLINE_D_SID05_SID06_20260918.md for the full investigation.
 // 2026/08/30            V1.1          Erie                  Bucket-1 RTL session: `ppg_idac_code_controller.v` gained a dedicated `i_test_saturation_inject_valid`/`o_test_saturation_inject_ready` injection port (does not touch the shared `i_search_saturation_low`/`i_search_saturation_high` nets), letting SID-11's double-saturation half be constructed for real for the first time. Added Phase B2: a fresh COMMIT/START cleanly separated from Phase B's SID-10 hard fault, real AMB request wait, `wait_q3_release`, then hold `i_test_saturation_inject_valid=1` across a real `task_drive_amb_toward_target` call. First real run found one genuine timing bug in this new test code (not DUT RTL): checking the injection-fire sticky immediately after the drive task returned raced ahead of AMI's real capture/S1/calibration/router pipeline latency between the raw CLK_DOUT and the sample actually reaching `idac_code_controller`'s own `i_search_amb_valid` -- the injection was in fact firing correctly on schedule, but the check read it before it happened. Fixed with a bounded poll loop (up to 200 cycles) on the continuous-monitor sticky, matching this project's established "single-cycle pulse after a multi-cycle task call needs a continuous sticky monitor, not an immediate post-task read" lesson. Real iverilog + Vivado 2022.2 xsim both confirm SID-11 PASS with the committed AMB code unchanged, no fabricated success, and no escalation to a hard system fault -- `JNT_BASELINE 53/53 PASS`, `STARTUP_IDAC_CALIBRATION_TB_PASS result_captures=2`, byte-identical to the pre-existing V1.0 baseline on every other ID.
@@ -45,10 +46,11 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.3
-// 修订日期:           2026年10月01日
+// 当前版本:           V1.4
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
+// 2026年10月08日        V1.4          Erie                  ABCD复核F-009（统筹审核第3项）：新增只打印的宏帧间隔监视器。以"帧在tick 0处于活动且上一拍不活动或处于末拍4999"识别宏帧起点（含无起点脉冲的校准滚动）；START后第一帧记为F009_FRAME_FIRST，此后凡与上一起点相距不等于5000拍即打印F009_FRAME_GAP，给出间隔、空闲拍数和前后帧类型（NORMAL/CAL）。不打印PASS/FAIL，不影响结论
 // 2026年10月01日        V1.3          Erie                  任务C（TASKC_TICK248_P2S_20261001.md）：把i_test_calibration_loss_inject_valid接到初值为0、全程不驱动的寄存器，写法与tb_ppg_control_top_robustness_corner_waveforms.v相同。本TB例化ppg_control_top时C_ENABLE_TEST_INJECTION=1，注入结构会被生成，但这个输入此前一直未连接（浮空Z，见REGRESSION_BASELINE_20260930.md第6.6节）。已逐个核对control_top全部7个验证注入输入，只有这一个悬空，补接后iverilog -Wall不再报任何悬空输入。补接前后（同一套RTL）排序后的PASS行、$finish时刻和最终横幅完全相同。
 // 2026年09月18日        V1.2          Erie                  工作线D待查清单调查：SID-05（DC_R/DC_IR半句）与SID-06。（1）把原本只在AMB阶段用过一次的tick-248截止抑制逻辑提取为可复用的`task_verify_deadline_suppression`，真实应用到DC_R/DC_IR阶段各自的第一个候选——2026-09-17曾发现原样复制这段逻辑会导致永久卡死（截止触发后Q3窗口再也不会打开）；这次真实iverilog A/B trace确认（不是只回头重读代码）这是AMI（`ppg_adc_measurement_idac_integration.v`）真实RTL死锁，不是TB构造失误：`flag_calibration_request_inflight`只在真实消费到搜索结果或STOP/abort时才清零，调度器自己优雅降级式的deadline抑制不会触发清零，被抑制的请求从此永久搁浅、再也不重试。已在RTL层面修复（`ppg_400hz_frame_calibration_scheduler.v`V1.8新增`o_cal_owner_deadline_event`，AMI V1.15把它接成额外的inflight清零条件，`ppg_control_top.v`V1.6把两端接起来）——真实根因和修法见这几份文件各自的修订记录。RTL修复落地后，AMB早已用过的同一套`task_verify_deadline_suppression`+`wait_q3_release`构造对DC_R/DC_IR同样真实生效，真实iverilog干净跑通确认（`STARTUP_IDAC_CALIBRATION_TB_PASS`，零FAIL）。（2）为SID-06构造第一份真实测试（此前只有一条挂靠SID-04"AMB收敛到目标码"检查的PASS消息，测的完全是另一件事）：直接层次化读取SSW自己的内部寄存器`reg_cal_dc_code`（真正的每子帧波形快照锁存，只在自己的tick 0上下文接管点更新，`ppg_sar9_sar15_safe_selection_wrapper.v`），跨过一次真实DC_R候选的tick-385提交边界，确认快照在本子帧剩余部分保持不受扰动，直到下一子帧真实Q3采样才真正看到新码——两半句都用真实发生的码变化（旧=0x42，新提交=0x5d）真实通过。第一版构造把"旧值"基线取早了（在本子帧自己的Q3采样之前就直接读`reg_cal_dc_code`），这个读法可证明是陈旧的（此时SSW还没赶上*上一次*提交），导致一次假FAIL；改成从真实Q3采样得到的`reg_sampled_dcn`取基线，保证对当前子帧而言一定是新鲜值。按本项目一贯方法论，这次假FAIL正是靠真的跑一遍测试、追踪tick和寄存器真实取值才抓到的，不是回头重读diff看出来的。完整调查过程见`WORKLINE_D_SID05_SID06_20260918.md`。
 // 2026年08月30日        V1.1          Erie                  桶1 RTL会话：`ppg_idac_code_controller.v`新增专属`i_test_saturation_inject_valid`/`o_test_saturation_inject_ready`注入端口（不touch共享的`i_search_saturation_low`/`i_search_saturation_high`输入线），第一次真实构造出SID-11的双向饱和半句。新增阶段B2：独立于阶段B（SID-10硬故障）重新COMMIT/START，等真实AMB请求、`wait_q3_release`，然后在一次真实`task_drive_amb_toward_target`调用期间保持`i_test_saturation_inject_valid=1`。第一次真实跑通发现本文件新代码自己的一个真实时序bug（不在DUT RTL）：task返回后立刻检查注入fire的sticky，抢在了原始CLK_DOUT到真正抵达`idac_code_controller`自己`i_search_amb_valid`之间AMI捕获/S1/校准/router这段真实流水线延迟前面——注入其实按设计真的按时fire了，只是检查读早了。改成对同一个连续监视sticky做有界轮询（最多200拍）修复，和本项目已确立的"多拍task调用之后的单拍脉冲需要连续监视sticky，不能task返回后立刻读"这条教训一致。真实iverilog+Vivado 2022.2 xsim双工具都确认SID-11 PASS：committed AMB码不变、无虚假success、未连带触发硬系统故障——`JNT_BASELINE 53/53 PASS`，`STARTUP_IDAC_CALIBRATION_TB_PASS result_captures=2`，和V1.0既有基线在其它每一条ID上逐字节一致。
@@ -1502,6 +1504,48 @@ module tb_ppg_control_top_startup_idac_calibration();
 			$display("STARTUP_IDAC_CALIBRATION_TB_FAIL error_count=%0d", cnt_error);
 		end
 		$finish;
+	end
+
+
+	//---------------ABCD F-009：宏帧间隔监视（只打印，不产生PASS/FAIL，不影响结论）---------------//
+	// 以"帧在tick 0处于活动且上一拍不活动或上一拍处于末拍4999"识别每个宏帧起点（含校准滚动），START后第一帧只记起点；
+	// 凡相邻起点间隔不等于5000拍即打印一行F009_FRAME_GAP：间隔、空闲拍数、前后帧类型（NORMAL/CAL）
+	integer f009_cycle;                             // 监视器自有2 MHz拍计数
+	integer f009_last_start;                        // 上一宏帧起点拍号，-1表示START后尚无
+	integer f009_gap_count;                         // 已打印的非5000间隔数
+	integer f009_frame_count;                       // 已识别的宏帧起点数
+	reg f009_prev_active;                           // 上一拍是否有活动宏帧
+	reg [12:0] f009_prev_tick;                      // 上一拍宏帧tick
+	reg f009_last_cal;                              // 上一宏帧是否为校准帧
+	initial begin
+		f009_cycle = 0;
+		f009_last_start = -1;
+		f009_gap_count = 0;
+		f009_frame_count = 0;
+		f009_prev_active = 1'b0;
+		f009_prev_tick = 13'd0;
+		f009_last_cal = 1'b0;
+	end
+	always @(posedge i_clk) begin
+		f009_cycle = f009_cycle + 1;
+		if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_start_ack_event) begin
+			f009_last_start = -1;
+		end else if((ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active) && (ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick == 13'd0) &&
+			(!f009_prev_active || (f009_prev_tick == 13'd4999))) begin
+			f009_frame_count = f009_frame_count + 1;
+			if(f009_last_start < 0) begin
+				$display("F009_FRAME_FIRST t=%0t frame=%0d type=%0s", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL");
+			end else if((f009_cycle - f009_last_start) != 5000) begin
+				f009_gap_count = f009_gap_count + 1;
+				$display("F009_FRAME_GAP t=%0t frame=%0d interval=%0d idle=%0d prev=%0s next=%0s gaps=%0d frames=%0d", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id,
+					f009_cycle - f009_last_start, f009_cycle - f009_last_start - 5000, f009_last_cal ? "CAL" : "NORMAL",
+					ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL", f009_gap_count, f009_frame_count);
+			end
+			f009_last_start = f009_cycle;
+			f009_last_cal = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		end
+		f009_prev_active = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		f009_prev_tick = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick;
 	end
 
 endmodule

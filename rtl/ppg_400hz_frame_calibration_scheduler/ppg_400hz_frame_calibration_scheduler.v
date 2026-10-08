@@ -16,8 +16,8 @@
 // Referrences:		PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md
 //
 //
-// Version:			V1.11
-// Revision Date:	2026-10-07
+// Version:			V1.12
+// Revision Date:	2026-10-08
 // History:
 //    Time			   Version	   Revised by			Contents
 // 2026-08-13           V1.0       Erie        Create file.
@@ -32,6 +32,7 @@
 // 2026-10-01           V1.9     Erie        Task C (tick-248 A/B, TASKC_TICK248_P2S_20261001.md): mask the V1.8 o_cal_owner_deadline_event with !adc_owner_commit_event_o, the same gate the internal deadline branch already uses. SSW's calibration owner window includes local tick 248 (<= C_CAL_OWNER_DEADLINE) while flag_cal_owner_deadline fires at >= 248, so an owner committing exactly at tick 248 (legal: C25 SID-05 "no later than local tick 248", contract 4.5/10.3 report a deadline only when the owner has not fired) was committed normally here but still reported as a missed deadline to AMI. A real xsim/iverilog A/B on ppg_control_top showed the consequence: AMI released its in-flight request at tick 249 and latched a stale request before IDAC consumed the result; at each search-stage end that stale request was granted, so one extra previous-stage calibration conversion ran (an AMB_CAL inside DC_R, a DCS_IR after startup completed), its result arrived unqualified and set the IDAC protocol-error sticky. With the mask all of this disappears, and commit-at-247 and truly-missed-deadline behaviour are unchanged event for event. One-line RTL change; the event is still a single-cycle pulse on a real miss.
 // 2026-10-06           V1.10    Erie        ABCD review F-010: flag_calibration_rollover now also requires flag_lifecycle_active. Previously a STOP-ack/abort (or fault/run_enable drop) landing on tick 4999 of a CAL macro frame while a calibration request was held let the post-FSM rollover overlay set FRAME_ACTIVE/CAL_REQ_ACTIVE back to 1 after the main FSM had cleared them, so one extra 5000-cycle CAL frame ran after cancellation (frame_id jumped by two, drain delayed ~2.5 ms). Normal rollover in RUN is unchanged.
 // 2026-10-07           V1.11    Erie        Owner-lifecycle round. New input i_adc_transaction_lost_event: a void matching the in-flight owner (sample index and generation) releases B_INFLIGHT without success or color-done and marks the frame failed; an unmatched void is a completion mismatch. L-4: transaction_start_valid_o masked when the earliest candidate is past its owner deadline (RED >283, IR >443, CAL >248); the deadline tick itself still commits on time. L-1: the CAL macro-frame end no longer re-pends a request whose owner is already in flight. L-3: new input i_idac_boundary_request and a one-cycle idle IDAC boundary, only while startup search is incomplete, the scheduler is idle and no frame starts this cycle.
+// 2026-10-08           V1.12    Erie        ABCD review F-009: consecutive macro frames now start exactly 5000 cycles apart (C08 section 4.2, contract FSC-03). Previously every frame end left one idle cycle, because flag_frame_start_eligible requires !B_FRAME_ACTIVE, so frame starts were 5001 apart; only CAL-to-CAL rollover avoided it. A new branch in the state_rollover_next overlay, mutually exclusive with rollover, starts the next frame directly on MACRO_LAST_TICK when the same lifecycle gate as F-010 holds (flag_lifecycle_active) plus i_active_config_valid, and either a calibration request is pending after the main FSM's frame-end handling (state_next, including a same-cycle handshake and the cross-frame re-hang of an uncommitted request; an in-flight owner is still not re-hung, L-1) or the input-side NORMAL eligibility flag_next_frame_inputs_eligible holds (factored out of flag_frame_start_eligible, logic unchanged). The new frame is initialised exactly like the idle-cycle start, with calibration type/color/reason taken from state_next; frame_id and tick come from the frame-end handling. In-flight owner state, L-4 expiry, lost-owner release, deadlines, F-010 rollover and L-3 are untouched. Applies to every frame end (NORMAL/CAL in either direction). Out-of-context synthesis: no combinational or latch loops, no latches.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:		Erie
 // 开发人员:		Erie
@@ -48,8 +49,8 @@
 // 参考资料:		PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md
 //
 //
-// 当前版本:		V1.11
-// 修订日期:		2026年10月07日
+// 当前版本:		V1.12
+// 修订日期:		2026年10月08日
 // 修订历史:
 //	时间			    版本		修订人				修订内容
 // 2026-09-18           V1.8     Erie        修复调查工作线D待查项SID-05（合同9.4.1节"每个校准ADC owner不得晚于本地tick 248提交"）时发现的一个真实永久死锁：flag_cal_owner_deadline在校准owner错过tick-248截止时本来就正确抑制候选窗口并置位B_OWNER_DEADLINE_TIMEOUT（这一半已确认正确，真实xsim验证过），但这次抑制从未以可区分的事件形式回报给AMI。AMI的flag_calibration_request_inflight（ppg_adc_measurement_idac_integration.v）只在真实消费到搜索结果（flag_amb_sample_accepted/flag_dcs_sample_accepted）或STOP/abort时才清零——被抑制的请求两者都不会产生，因为按设计它从未真正建立过ADC owner或事务。真实iverilog A/B追查确认（不是仅凭静态阅读，遵循本项目一贯方法论）：对一笔真实进行中的DC_R候选，在其tick-248截止跨越期间强制i_adc_physical_idle=0，能正确在tick 248让B_CAL_WAVE_PENDING清零（flag_cal_owner_deadline按设计只脉冲一拍），但AMI的flag_calibration_request_inflight之后永远保持1，导致AMI再也不会重新拉高calibration_sample_valid_o，B_CAL_REQ_PENDING在之后任何一次tick-624子帧边界都不会再变成1，B_CAL_CONTEXT_SEEN永久锁定在1——整个校准搜索（无论当时是AMB还是DCS_CAL）从此卡死不再自行恢复，真实trace显示后续12/12个候选全部"real Q3 window never opened"。这是真实功能性缺口，不只是缺测试：任何让物理ADC真实晚于248拍变idle的硬件场景（不只是这次的合成测试）都会永久搁浅校准搜索，因为合同本身"优雅降级"的设计意图（软性、非阻断的B_OWNER_DEADLINE_TIMEOUT诊断，不升级故障，与既有RED/IR owner-deadline姊妹机制LFA-09/OIB-02同一惯例）被AMI静默不重试这一点架空了。修复：新增一个单周期事件输出o_cal_owner_deadline_event，直接接到原本就存在、本来就自清零的flag_cal_owner_deadline组合脉冲上（同一份trace确认它恰好一拍后自动清零，因为B_CAL_WAVE_PENDING——它自己的与项之一——在同一拍跟着清零）——不新增状态，不新增时序路径，只是把一个已有的内部脉冲暴露成端口供AMI响应。AMI V1.15（见该文件自己的修订记录）把这个新事件接成flag_calibration_request_inflight的额外清零条件，让它能为同一个仍在等待的候选立即重新拉高calibration_sample_valid_o发起重试。本次修复只涉及AMI calibration_sample_valid_o请求/接受握手依赖的校准（AMB/DCS_CAL）owner截止通路；姊妹机制RED/IR NORMAL测量owner截止超时（flag_red_owner_deadline/flag_ir_owner_deadline，LFA-09/OIB-02）走的是完全不同的请求通路（ppg_normal_transaction_fork.v，非AMI的校准仲裁），本次未触碰也未重新调查——不在本次修复范围内。
@@ -64,6 +65,7 @@
 // 2026-10-01           V1.9     Erie        任务C（tick-248 A/B，见TASKC_TICK248_P2S_20261001.md）：给V1.8新增的o_cal_owner_deadline_event加上!adc_owner_commit_event_o屏蔽，与内部截止分支原有门控一致。SSW校准owner窗口包含local tick 248（<= C_CAL_OWNER_DEADLINE），而flag_cal_owner_deadline在>= 248时成立，因此owner恰在tick 248提交时（C25 SID-05"不得晚于local tick 248"，合同4.5/10.3节只在owner仍未fire时才回报截止，属合法按时提交）本模块按正常提交处理，却仍向AMI回报一次截止。ppg_control_top真实xsim/iverilog A/B确认后果：AMI在tick 249释放在途请求，并在IDAC消费结果之前锁存一笔陈旧请求；每个搜索阶段末尾这笔陈旧请求都会被接受，从而多做一次上一阶段的校准转换（DC_R阶段插入一次AMB_CAL，启动搜索完成后又插入一次DCS_IR），其结果作为不合格样本到达并置位IDAC协议错误sticky。加屏蔽后上述现象全部消失，tick 247提交与真正错过截止两种情形逐事件不变。RTL只改一行；真正错过截止时事件仍是单周期脉冲。
 // 2026-10-06           V1.10    Erie        ABCD复核F-010：flag_calibration_rollover增加flag_lifecycle_active条件。此前校准请求保持期间，STOP确认/abort（或故障、run_enable撤销）落在CAL宏帧tick 4999时，主FSM之后的滚动叠加会把已清除的FRAME_ACTIVE/CAL_REQ_ACTIVE重新置1，撤销后多跑一个5000拍CAL帧（frame_id跳两号，排空延迟约2.5 ms）。RUN中的正常滚动不变
 // 2026-10-07           V1.11    Erie        owner生命周期轮。新增输入i_adc_transaction_lost_event：与在途owner序号和代际匹配的作废释放B_INFLIGHT，不置success或颜色完成位，并使该帧失败；不匹配的作废按DONE错配处理。L-4：最早候选越过本槽位owner截止（RED>283、IR>443、CAL>248）时屏蔽transaction_start_valid_o，截止相位当拍仍可按时提交。L-1：校准宏帧末不再重挂已成为在途owner的请求。L-3：新增输入i_idac_boundary_request与单拍空闲IDAC边界，只在启动搜索未完成、调度器空闲且本拍不开帧时出现。
+// 2026-10-08           V1.12    Erie        ABCD复核F-009：相邻宏帧起点改为严格相差5000拍（C08 §4.2、合同FSC-03）。此前每个宏帧末尾都留一个空拍（flag_frame_start_eligible要求!B_FRAME_ACTIVE），起点间隔5001拍，只有校准→校准滚动没有空拍。在state_rollover_next覆盖层新增与滚动互斥的分支：宏帧末拍在与F-010相同的生命周期门控（flag_lifecycle_active）且i_active_config_valid成立，并且主FSM帧末处理之后仍有校准请求pending（state_next，含本拍握手与未提交请求跨帧重挂；在途owner仍不重挂，L-1），或输入侧NORMAL资格flag_next_frame_inputs_eligible成立（从flag_frame_start_eligible抽出，逻辑不变）时，直接建立下一宏帧。新帧初始化与空拍起帧完全相同，校准类型/颜色/原因取state_next；frame_id与tick沿用帧末处理结果。在途owner状态、L-4过期、作废释放、截止、F-010滚动与L-3均不变。适用于全部帧末（NORMAL/CAL任意方向）。OOC综合：无组合环与锁存环，无锁存器
 module ppg_400hz_frame_calibration_scheduler
 #(
 	parameter C_FRAME_ID_WIDTH = 16,            // 400 Hz物理帧号宽度
@@ -343,6 +345,8 @@ module ppg_400hz_frame_calibration_scheduler
 	wire flag_calibration_request_valid;        // 输入校准载荷合法
 	wire flag_calibration_request_fire;         // 校准请求握手
 	wire flag_frame_start_eligible;             // 首帧或下一帧启动资格
+	wire flag_next_frame_inputs_eligible;       // 无校准请求时NORMAL或光学关闭宏帧的输入侧起帧资格
+	wire flag_frame_restart;                    // 宏帧末拍不经空拍直接建立下一宏帧，与校准滚动互斥
 	wire flag_red_required;                     // 当前帧需要RED
 	wire flag_ir_required;                      // 由帧内光学模式判定是否必须执行IR颜色槽
 	wire flag_red_context_due;                  // RED固定接管相位
@@ -442,7 +446,8 @@ module ppg_400hz_frame_calibration_scheduler
 		 ((state_current[B_CAL_REQ_ACTIVE] == 1'b1) && (dec_frame_mode == FRAME_MODE_CAL) &&
 		  !state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT])); // 校准序列在子帧间允许接收下一笔保持请求；合同9.1节要求ready本身就必须以接收端资格为前提，不能只在事后置协议错误——非法请求（CHARACTERIZATION/外部电流/非法编码/SAR15）必须在ready这一层就被挡住，不得建立波形上下文、owner或pending
 	assign flag_calibration_request_fire = i_calibration_sample_valid && calibration_sample_ready_o; // 请求原子握手
-	assign flag_frame_start_eligible = flag_lifecycle_active && !state_current[B_FRAME_ACTIVE] && !state_current[B_STARTUP_PENDING] && i_active_config_valid && (state_current[B_CAL_REQ_PENDING] || (i_allow_new_transaction && (i_optical_mode == OPTICAL_OFF || (i_normal_measurement_eligible && !i_switch_hold_new_transaction && (i_optical_mode != OPTICAL_OFF))))); // 宏帧启动资格
+	assign flag_next_frame_inputs_eligible = i_allow_new_transaction && (i_optical_mode == OPTICAL_OFF || (i_normal_measurement_eligible && !i_switch_hold_new_transaction && (i_optical_mode != OPTICAL_OFF))); // 无校准请求时起帧所需的输入侧资格，空闲起帧与宏帧末拍直接起帧共用同一判据
+	assign flag_frame_start_eligible = flag_lifecycle_active && !state_current[B_FRAME_ACTIVE] && !state_current[B_STARTUP_PENDING] && i_active_config_valid && (state_current[B_CAL_REQ_PENDING] || flag_next_frame_inputs_eligible); // 宏帧启动资格
 	assign flag_red_required = (dec_frame_optical_mode == OPTICAL_BOTH) || (dec_frame_optical_mode == OPTICAL_RED); // 当前宏帧是否需要RED
 	assign flag_ir_required = (dec_frame_optical_mode == OPTICAL_BOTH) || (dec_frame_optical_mode == OPTICAL_IR); // 当前帧配置包含IR槽时返回事务必需资格；ILM-02/ILM-03 RED_ONLY下本条件恒为0，宏帧从不构造IR槽，全程不产生IR波形或owner @satisfies: ILM-02, ILM-03
 	assign flag_red_context_due = state_current[B_FRAME_ACTIVE] && (dec_frame_mode == FRAME_MODE_NORMAL) && flag_red_required && !state_current[B_RED_CONTEXT_SEEN] && (macro_tick_o == NORMAL_RED_CONTEXT_TICK); // RED只允许tick 0
@@ -485,6 +490,8 @@ module ppg_400hz_frame_calibration_scheduler
 		(state_current[B_CAL_WAVE_PENDING] == 1'b0) &&
 		(state_current[B_INFLIGHT] == 1'b0) &&
 		((state_current[B_CAL_REQ_PENDING] == 1'b1) || (i_calibration_sample_valid == 1'b1)); // 校准宏帧末拍存在下一笔请求时直接滚入下一子帧的资格；同拍STOP/abort/故障或RUN撤销时不得滚动，否则叠加覆盖会把主FSM已清除的帧上下文重新置回 @satisfies: FSC-31, FSC-32
+	assign flag_frame_restart = state_current[B_FRAME_ACTIVE] && (macro_tick_o == MACRO_LAST_TICK) && !flag_calibration_rollover && flag_lifecycle_active && i_active_config_valid &&
+		(state_next[B_CAL_REQ_PENDING] || flag_next_frame_inputs_eligible); // 末拍下一帧资格成立即直接起帧，相邻宏帧起点严格5000拍；门控与F-010滚动相同；校准与否取主FSM帧末处理后的请求pending（含本拍握手与未提交请求跨帧重挂，在途owner不重挂）；只供覆盖层读取，主组合块不读，无组合环 @satisfies: FSC-03
 	//===================<波形载荷赋值>===================//
 	assign waveform_precision_mode_o = flag_waveform_is_calibration ? 1'b0 : state_current[B_FRAME_PRECISION]; // 校准强制SAR9
 
@@ -888,6 +895,44 @@ module ppg_400hz_frame_calibration_scheduler
 				state_rollover_next[B_CAL_FRAME_COLOR] = state_current[B_CAL_REQ_COLOR]; // 滚动路径把请求快照颜色转交给紧接着的下一子帧
 				state_rollover_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_current[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L]; // 滚动路径把请求快照原因转交给紧接着的下一子帧
 		end
+		end else if(flag_frame_restart == 1'b1)begin
+			state_rollover_next[B_FRAME_ACTIVE] = 1'b1; // 紧接上一宏帧末拍建立新宏帧，中间不留空拍
+			state_rollover_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = state_next[B_CAL_REQ_PENDING] ? FRAME_MODE_CAL : FRAME_MODE_NORMAL; // 存在待处理校准请求则为校准帧，否则为普通帧
+			state_rollover_next[B_FRAME_OPTICAL_H:B_FRAME_OPTICAL_L] = i_optical_mode; // 冻结本帧光路配置
+			state_rollover_next[B_FRAME_PRECISION] = state_next[B_CAL_REQ_PENDING] ? 1'b0 : i_active_precision_mode; // 普通帧冻结当前生效精度，校准帧强制九位
+			state_rollover_next[B_FRAME_INPUT_SOURCE] = i_input_source; // 冻结本帧信号来源
+			state_rollover_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = {C_MACRO_TICK_WIDTH{1'b0}}; // 宏帧相位归零
+			state_rollover_next[B_CAL_SUB_H:B_CAL_SUB_L] = 3'd0; // 子周期编号归零
+			state_rollover_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}}; // 局部相位归零
+			state_rollover_next[B_RED_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_RED); // 按光路配置决定红光槽是否存在
+			state_rollover_next[B_IR_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_IR); // 按光路配置决定红外槽是否存在
+			state_rollover_next[B_RED_DONE] = 1'b0;   // 撤销上一帧红光成功记录
+			state_rollover_next[B_IR_DONE] = 1'b0;    // 撤销上一帧红外成功记录
+			state_rollover_next[B_FRAME_FAILED] = 1'b0; // 撤销上一帧失败结论
+			state_rollover_next[B_RED_CONTEXT_SEEN] = 1'b0; // 重新允许红光波形接管
+			state_rollover_next[B_IR_CONTEXT_SEEN] = 1'b0; // 重新允许红外波形接管
+			state_rollover_next[B_CAL_CONTEXT_SEEN] = state_next[B_CAL_REQ_PENDING] ? 1'b0 : 1'b1; // 仅在有待处理请求时放开校准接管
+			state_rollover_next[B_RED_WAVE_PENDING] = 1'b0; // 红光所有权候选作废
+			state_rollover_next[B_IR_WAVE_PENDING] = 1'b0; // 红外所有权候选作废
+			state_rollover_next[B_CAL_WAVE_PENDING] = 1'b0; // 校准所有权候选作废
+			state_rollover_next[B_MACRO_START] = 1'b1; // 发出宏帧起点单拍
+			state_rollover_next[B_FRAME_AMB_H:B_FRAME_AMB_L] = i_amb_code; // 冻结环境光抵消码
+			state_rollover_next[B_FRAME_DCR_H:B_FRAME_DCR_L] = i_dcs_r_code; // 冻结红光直流抵消码
+			state_rollover_next[B_FRAME_DCIR_H:B_FRAME_DCIR_L] = i_dcs_ir_code; // 冻结红外直流抵消码
+			state_rollover_next[B_FRAME_AMB_EPOCH_H:B_FRAME_AMB_EPOCH_L] = i_amb_code_epoch; // 冻结环境光码版本号
+			state_rollover_next[B_FRAME_DCR_EPOCH_H:B_FRAME_DCR_EPOCH_L] = i_dcs_r_code_epoch; // 冻结红光直流码版本号
+			state_rollover_next[B_FRAME_DCIR_EPOCH_H:B_FRAME_DCIR_EPOCH_L] = i_dcs_ir_code_epoch; // 冻结红外直流码版本号
+			state_rollover_next[B_FRAME_LEDDAC_R_H:B_FRAME_LEDDAC_R_L] = i_leddac_r_code; // 冻结红光驱动电流码
+			state_rollover_next[B_FRAME_LEDDAC_IR_H:B_FRAME_LEDDAC_IR_L] = i_leddac_ir_code; // 冻结红外驱动电流码
+			if(state_next[B_CAL_REQ_PENDING])begin
+				state_rollover_next[B_CAL_REQ_PENDING] = 1'b0; // 新校准帧接手请求载荷
+				state_rollover_next[B_CAL_REQ_ACTIVE] = 1'b1; // 本校准帧内允许失败后再试
+				state_rollover_next[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] = state_next[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L]; // 取帧末处理后的请求类别
+				state_rollover_next[B_CAL_FRAME_COLOR] = state_next[B_CAL_REQ_COLOR]; // 取帧末处理后的请求色别
+				state_rollover_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_next[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L]; // 取帧末处理后的请求缘由
+			end else begin
+				state_rollover_next[B_CAL_REQ_ACTIVE] = 1'b0; // 普通帧不保留校准再试资格
+			end
 	end
 	end
 

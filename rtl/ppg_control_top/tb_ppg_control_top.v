@@ -14,8 +14,8 @@
 //
 // Dependencies:       ppg_control_top and its full real hierarchy
 //
-// Version:            V1.8
-// Revision Date:      2026/10/06
+// Version:            V1.9
+// Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/08/23            V1.0          Erie                  Create file. TB-SMOKE-01 minimal smoke test: reset, legal NORMAL MANUAL-IDAC COMMIT, START, respond to several real Q3-gated ADC transactions through the public physical RAW/CLK_DOUT boundary, STOP, and a clean $finish with no X observed on key outputs. This is the first real functional simulation of ppg_control_top; it is scoped as a smoke test only, not TOP-01~24 coverage.
@@ -28,6 +28,7 @@
 // 2026/09/02            V1.6          Erie                  Priority-1a dedicated acceptance evidence for the two new C01 top-level ports added in V1.3/V1.4 (o_active_precision_mode, o_source_config_update_ready), which previously had zero direct assertion anywhere -- existing background monitors only ever hierarchically probed the internal AMI wire, never the new port itself. Wires both new ports into this file's DUT instantiation for the first time. NPA-01: permanent every-cycle background monitor (same style as the existing TOP-17 fanout check) comparing o_active_precision_mode against the AMI-forwarded internal wire ppg_control_top_Inst.ami_active_precision_mode_o; ran clean across the entire 23-scenario suite including every SAR9<->SAR15 transition, confirming the V1.3 continuous-assignment passthrough is bit-identical with no tearing window. NPA-02: extends SMOKE-02's first real COMMIT into a busy-window rejection test -- confirms o_source_config_update_ready=1 idle-high before the first pulse, confirms it drops to 0 after the pulse (with an explicit vacuousness guard so the test cannot silently pass if busy is never observed), fires a second i_source_config_update_event with a deliberately different config (idac_mode=SEARCH_TRACK vs the real MANUAL) while still busy, then relies on SMOKE-02's own o_config_epoch==1 check to prove the second pulse was silently dropped per ppg_config_cdc_bridge.v's busy-latch semantics (lines 127/138: source domain neither re-latches nor re-toggles while flag_source_busy=1), not merged or queued as a real second commit. One real methodology bug found and fixed in this TB while first constructing NPA-02, not a DUT defect: initially asserted o_source_config_update_ready returns to 1 the same cycle o_commit_ack_event fires; real iverilog evidence showed FAIL immediately -- o_commit_ack_event only reflects the destination-domain config manager accepting config_transport_update_o, while o_source_config_update_ready additionally needs that acceptance to propagate back through ppg_config_cdc_bridge.v's flag_ack_sync_meta/flag_ack_sync two-flop synchronizer into the source domain, a strictly later, independent event -- fixed by replacing the same-cycle check with a bounded 64-source_clk-cycle poll (matches this file's own task_wait_config_result convention); re-run confirmed ready returns after exactly 1 source_clk cycle. Both new checks pass with real dual-tool evidence (iverilog -Wall clean compile plus full run, and Vivado 2022.2 xsim full elaboration plus run, both zero FAIL); the pre-existing SMOKE_TB_PASS baseline (all 23 scenarios, 47 real ADC responses, 32 measurement results) is unchanged from V1.5, confirming zero regression from this addition. No RTL changed.
 // 2026/09/17            V1.7          Erie                  Work-line-D remediation of the 5 confirmed TOP-01/02/09/15/18 gaps (no RTL change; investigation-driven, several false starts corrected against real simulation evidence rather than assumed). TOP-01: SMOKE-01 gains a real o_s_in==5'b00000 check (RTL:604 already carried an unverified @satisfies:TOP-01 tag); a new standalone scenario at file end drives a real in-flight owner then resets mid-transaction, confirming state fully clears and the result counter does not silently advance, then confirms a fresh commit+start genuinely produces a new result. TOP-02: a new negative scenario between SMOKE-05 and SMOKE-06 corrupts only the V5 reserved field (contract-legal V4 fields untouched) and confirms the whole 1024-bit snapshot is atomically rejected with config_epoch unchanged; a diag_clear pulse was added afterward since the config manager's error_sticky is W1C and would have silently blocked SMOKE-06's next legitimate commit otherwise. TOP-09: a new standalone scenario (not reusing SMOKE-06's early-STOP window, which real simulation proved has zero pending measurement result to discard by construction) builds a genuinely held result via output backpressure then STOPs while it is still held, for the first real assertion on o_measurement_result_discard_event (previously only a $display). TOP-15: a permanent background monitor compares o_adc_owner_commit_event against state_current[B_INFLIGHT] on the same edge (both read with blocking semantics, so both reflect pre-this-edge settled values on a common time basis); an earlier version that added an extra one-cycle delay register was wrong and produced 11 false positives by mis-timing the reference point against the scheduler's intentional zero-cycle release-then-reestablish scheduling (confirmed by direct multi-cycle waveform tracing, not assumed). TOP-18: SMOKE-19's existing 4000-cycle STATIC_BIAS steady-state loop gains two per-cycle checks; the first attempt asserted both analog_run_enable and measurement_run_enable at 0 and real simulation immediately failed the analog half -- ppg_control_top.v:408's own comment (also tagged @satisfies:TOP-18) states analog_run_enable must keep following RUN under STATIC_BIAS so SSW can still drive the static vector, so the assertion was corrected to measurement_run_enable==0 and analog_run_enable==1, matching the RTL's own documented intent rather than the literal but incorrect first reading of the contract prose. All 5 fixes independently mutation-tested where practical (TOP-02 and TOP-18 against real single-line RTL mutants restoring the pre-fix behavior; both correctly fail). Full regression re-run: 0 FAIL, SMOKE_TB_PASS (49 real ADC responses, 33 measurement results).
 // 2026/10/06            V1.8          Erie                  ABCD review F-024/F-014: at simulation start the TB reads the actually elaborated parameters hierarchically and checks them. PARAM-FIXED: Top config width 1024, config/coef/DC-recovery epoch widths 8, code epoch 4, generation 8, frame/sample 16/16, and the wrapper-internal config manager (1024/8) and config CDC bridge (1024), which Top does not parameterize. PARAM-WDOG: supervisor watchdog 5000/13 and legal (width >= clog2(cycles+1)). Guards against a changed parameter being silently truncated at a width-mismatched port, which only warns. Two new PASS lines (71 -> 73). Negative controls: Top watchdog width 12 fails PARAM-WDOG; manager generation width 9 fails PARAM-FIXED.
+// 2026/10/08            V1.9          Erie                  ABCD review F-009 (coordinator review item 3): add a print-only macro-frame interval monitor. A frame start is recognised when a frame is active at tick 0 and the previous cycle was inactive or at tick 4999 (this also catches CAL rollover, which has no start pulse); the first frame after START is logged as F009_FRAME_FIRST, and every later start whose distance from the previous start is not 5000 cycles prints F009_FRAME_GAP with the interval, the idle cycles and the previous/next frame type (NORMAL/CAL). It never prints PASS or FAIL and does not touch the verdict.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -42,8 +43,8 @@
 //
 // 依赖文件:           ppg_control_top及其完整真实层次
 //
-// 当前版本:           V1.8
-// 修订日期:           2026年10月06日
+// 当前版本:           V1.9
+// 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年08月23日        V1.0          Erie                  创建文件。TB-SMOKE-01最小烟雾测试：复位、合法NORMAL MANUAL IDAC COMMIT、START、通过公开物理RAW/CLK_DOUT边界响应若干笔真实Q3门控ADC事务、STOP，最终干净$finish且关键输出无X。这是ppg_control_top第一次真正的功能仿真，本轮只做烟雾测试，不是TOP-01~24全量覆盖。
@@ -54,6 +55,7 @@
 // 2026年09月02日        V1.6          Erie                  为V1.3/V1.4新增的两个C01顶层端口（o_active_precision_mode、o_source_config_update_ready）补上专属验收证据——此前从未有任何直接断言碰过这两个端口本身，既有的后台监控都只是层次化探针内部AMI线，没有验证过端口本身。首次把这两个新端口接入本文件的DUT实例化。NPA-01：新增一个全程逐拍的后台监控进程（和既有TOP-17扇出检查同一风格），比对o_active_precision_mode和AMI转发内部线ppg_control_top_Inst.ami_active_precision_mode_o，全部23个场景组（含每一次SAR9↔SAR15切换）全程跑下来零FAIL，确认V1.3那条纯组合透传逐位一致、没有撕裂窗口。NPA-02：把SMOKE-02第一次真实COMMIT扩展成一次忙碌期节流拒绝测试——先确认o_source_config_update_ready闲时为1，打第一拍后确认它跌为0（带一个"从未观测到忙碌"防空判条件测试）；忙碌期间故意打第二拍i_source_config_update_event（内容故意不同：idac_mode=SEARCH_TRACK而不是真正的MANUAL），随后靠SMOKE-02自己原有的o_config_epoch==1检查证明第二拍确实被ppg_config_cdc_bridge.v的忙碌锁存语义（第127/138行：flag_source_busy==1时source域既不重新锁存也不重新翻转代际）真实静默丢弃，没有被合并或排队成第二次真实提交。构造NPA-02过程中发现并修复了一个本TB自己的方法论错误，不是DUT缺陷：最初断言o_source_config_update_ready会在o_commit_ack_event置位的同一拍恢复为1，真实iverilog证据立刻FAIL——o_commit_ack_event只反映destination域的config manager已经接受了config_transport_update_o，而o_source_config_update_ready还需要这次接受再经过ppg_config_cdc_bridge.v的flag_ack_sync_meta/flag_ack_sync两级同步器真正传回source域，是一个更晚、独立的事件；改成有界64个source_clk周期的轮询（和本文件已有的task_wait_config_result同一惯例）后重跑，确认ready确实在1个source_clk周期后就恢复。两条新检查都拿到真实双工具证据（iverilog -Wall编译干净+全量跑通，Vivado 2022.2 xsim全量elaborate+跑通，均零FAIL）；原有SMOKE_TB_PASS基线（全部23个场景、47笔真实ADC响应、32笔正式结果）与V1.5完全一致，确认本次新增没有引入任何回归。未改动任何RTL。
 // 2026年09月17日        V1.7          Erie                  工作线D独立复核修复5个确认缺口TOP-01/02/09/15/18（不改RTL；调查驱动，过程中好几次最初假设都被真实仿真证据纠正，不是凭空猜对）。TOP-01：SMOKE-01新增真实`o_s_in==5'b00000`核对（RTL:604早已带着一个从未被验证过的`@satisfies:TOP-01`标签）；文件末尾新增独立场景，真实建立在途事务后触发复位，确认状态完全清零、结果计数不因旧事务静默递增，再确认重新COMMIT+START真的能产生全新结果。TOP-02：SMOKE-05与SMOKE-06之间新增负向场景，只破坏V5保留位段（V4合法字段不动），确认整份1024-bit快照原子拒绝且config_epoch不变；随后补了一次diag_clear脉冲，因为manager的error_sticky是W1C的，不清掉会静默挡住SMOKE-06紧接着的合法提交。TOP-09：新增独立场景（没有沿用SMOKE-06的"STOP早于DONE"窗口——真实仿真证明那个窗口结构上就没有正式结果可丢弃），用输出反压真实建立一笔held结果后在其仍被反压保持时STOP，第一次给`o_measurement_result_discard_event`加上真实断言（此前只是`$display`）。TOP-15：新增全程常驻后台监测，在同一个边沿以阻塞方式直接比较`o_adc_owner_commit_event`和`state_current[B_INFLIGHT]`（两者都读到进入本次边沿之前已结算的值，天然同一时间基准）；早先一版额外加了一拍延迟寄存器，结果用错了参照点，把调度器有意设计的"零周期浪费、释放同拍立即重建"衔接误判成11次重入（用多拍波形直接追证据核实，不是凭猜测下结论）。TOP-18：SMOKE-19已有的4000拍STATIC_BIAS steady-state循环新增两项逐拍核对；最初断言`analog_run_enable`和`measurement_run_enable`都该是0，真实仿真立刻让analog那半FAIL——`ppg_control_top.v:408`自己的注释（同样带`@satisfies:TOP-18`标签）写明STATIC_BIAS下`analog_run_enable`仍须跟随RUN以便SSW继续驱动静态向量，遂改为`measurement_run_enable==0`且`analog_run_enable==1`，按RTL自己记录的真实意图而不是对合同原文的字面误读。5条修复里TOP-02和TOP-18有条件地做了变异测试（针对真实单行RTL做还原式mutant，两者都正确FAIL）。完整回归重跑：0 FAIL，SMOKE_TB_PASS（49笔真实ADC响应，33笔正式结果）。
 // 2026年10月06日        V1.8          Erie                  ABCD复核F-024/F-014：仿真开始时按层次读取实际例化参数核对。PARAM-FIXED：Top配置宽度1024，配置/系数/DC恢复版本宽度8，码版本4，代际8，帧号/序号16/16，以及Top未参数化的wrapper内部config manager（1024/8）和配置CDC桥（1024）。PARAM-WDOG：supervisor看门狗5000/13且合法（宽度>=clog2(周期+1)）。防止参数被改后在位宽不匹配端口处只告警、被静默截断。新增两条PASS行（71变73）。负对照：Top看门狗宽度改12时PARAM-WDOG失败；manager代际宽度改9时PARAM-FIXED失败
+// 2026年10月08日        V1.9          Erie                  ABCD复核F-009（统筹审核第3项）：新增只打印的宏帧间隔监视器。以"帧在tick 0处于活动且上一拍不活动或处于末拍4999"识别宏帧起点（含无起点脉冲的校准滚动）；START后第一帧记为F009_FRAME_FIRST，此后凡与上一起点相距不等于5000拍即打印F009_FRAME_GAP，给出间隔、空闲拍数和前后帧类型（NORMAL/CAL）。不打印PASS/FAIL，不影响结论
 //
 // 复位后原子提交一组合法NORMAL双光MANUAL IDAC配置并启动RUN，只通过公开物理边界响应真实
 // Q1/Q2/Q3门控的ADC事务，STOP后确认排空与关键输出无X传播
@@ -3212,6 +3214,48 @@ module tb_ppg_control_top();
 			$display("SMOKE_TB_FAIL error_count=%0d", cnt_error);
 		end
 		$finish;
+	end
+
+
+	//---------------ABCD F-009：宏帧间隔监视（只打印，不产生PASS/FAIL，不影响结论）---------------//
+	// 以"帧在tick 0处于活动且上一拍不活动或上一拍处于末拍4999"识别每个宏帧起点（含校准滚动），START后第一帧只记起点；
+	// 凡相邻起点间隔不等于5000拍即打印一行F009_FRAME_GAP：间隔、空闲拍数、前后帧类型（NORMAL/CAL）
+	integer f009_cycle;                             // 监视器自有2 MHz拍计数
+	integer f009_last_start;                        // 上一宏帧起点拍号，-1表示START后尚无
+	integer f009_gap_count;                         // 已打印的非5000间隔数
+	integer f009_frame_count;                       // 已识别的宏帧起点数
+	reg f009_prev_active;                           // 上一拍是否有活动宏帧
+	reg [12:0] f009_prev_tick;                      // 上一拍宏帧tick
+	reg f009_last_cal;                              // 上一宏帧是否为校准帧
+	initial begin
+		f009_cycle = 0;
+		f009_last_start = -1;
+		f009_gap_count = 0;
+		f009_frame_count = 0;
+		f009_prev_active = 1'b0;
+		f009_prev_tick = 13'd0;
+		f009_last_cal = 1'b0;
+	end
+	always @(posedge i_clk) begin
+		f009_cycle = f009_cycle + 1;
+		if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_start_ack_event) begin
+			f009_last_start = -1;
+		end else if((ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active) && (ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick == 13'd0) &&
+			(!f009_prev_active || (f009_prev_tick == 13'd4999))) begin
+			f009_frame_count = f009_frame_count + 1;
+			if(f009_last_start < 0) begin
+				$display("F009_FRAME_FIRST t=%0t frame=%0d type=%0s", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL");
+			end else if((f009_cycle - f009_last_start) != 5000) begin
+				f009_gap_count = f009_gap_count + 1;
+				$display("F009_FRAME_GAP t=%0t frame=%0d interval=%0d idle=%0d prev=%0s next=%0s gaps=%0d frames=%0d", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id,
+					f009_cycle - f009_last_start, f009_cycle - f009_last_start - 5000, f009_last_cal ? "CAL" : "NORMAL",
+					ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL", f009_gap_count, f009_frame_count);
+			end
+			f009_last_start = f009_cycle;
+			f009_last_cal = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		end
+		f009_prev_active = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		f009_prev_tick = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick;
 	end
 
 endmodule

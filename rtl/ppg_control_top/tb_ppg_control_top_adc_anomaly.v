@@ -17,11 +17,12 @@
 // Dependencies:       ppg_control_top.v and its full hierarchy, tb_ppg_jnt_baseline_prefix.vh,
 //                     tb_ppg_real_raw_generator.vh
 //
-// Version:            V1.0
+// Version:            V1.1
 // Revision Date:      2026/10/08
 // History:
 //    Time               Version       Revised by            Contents
 // 2026/10/08            V1.0          Erie                  Create file. Owner-lifecycle round (F-020, S1, L-1..L-5, scheme A) permanent system regression at control_top level including the supervisor. The DUT instantiation, lifecycle/config tasks, physiological RAW generator, startup-search task, owner snapshot and recheck monitors are reused verbatim from tb_ppg_control_top_periodic_recheck_recovery.v; the main sequence is new and turns the temporary TBs of LOST_COMPLETION_NORMAL_AND_LATENESS_20261006 / SSW18_TICK385_INVESTIGATION_20261006 into checks with TB-local names (SYS-*). A policy-driven background ADC responder answers every real Q3 release (drop / delay / dead per slot). Passive monitors: Q3-to-owner binding (every Q3 must belong to an owner committed in the same frame, and for calibration the same subframe), void/completion exclusivity, and a generic liveness monitor (RUN or STOPPING for 3 macro frames with no completion, void, result, IDAC commit, lifecycle change or fault record while no system fault is reported -> FAIL).
+// 2026/10/08            V1.1          Erie                  ABCD review F-009 (coordinator review item 3): add a print-only macro-frame interval monitor. A frame start is recognised when a frame is active at tick 0 and the previous cycle was inactive or at tick 4999 (this also catches CAL rollover, which has no start pulse); the first frame after START is logged as F009_FRAME_FIRST, and every later start whose distance from the previous start is not 5000 cycles prints F009_FRAME_GAP with the interval, the idle cycles and the previous/next frame type (NORMAL/CAL). It never prints PASS or FAIL and does not touch the verdict.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -37,11 +38,12 @@
 //
 // 依赖文件:           ppg_control_top.v及其完整层次、tb_ppg_jnt_baseline_prefix.vh、tb_ppg_real_raw_generator.vh
 //
-// 当前版本:           V1.0
+// 当前版本:           V1.1
 // 修订日期:           2026年10月08日
 // 修订历史:
 //    时间                版本          修订人                修订内容
 // 2026年10月08日        V1.0          Erie                  创建文件。owner生命周期轮（F-020、S1、L-1~L-5，方案甲）的永久系统级回归，control_top层含supervisor。DUT例化、生命周期/配置任务、真实生理RAW生成器、启动搜索任务、owner快照与重检监视原样复用tb_ppg_control_top_periodic_recheck_recovery.v；主序列为新写，把两份临时TB（LOST_COMPLETION/SSW18报告）的场景改成TB本地名检查（SYS-*）。后台ADC响应进程按策略应答每次真实Q3释放（按槽位丢一次/推迟/持续失联）。被动监视：Q3与owner绑定（每次Q3必须属于同帧提交的owner，校准还须同子帧）、作废与完成互斥、通用活性监视（RUN或STOPPING中连续3个宏帧既无完成、作废、结果、IDAC提交、生命周期变化也无故障记录、且未报系统故障即FAIL）。
+// 2026年10月08日        V1.1          Erie                  ABCD复核F-009（统筹审核第3项）：新增只打印的宏帧间隔监视器。以"帧在tick 0处于活动且上一拍不活动或处于末拍4999"识别宏帧起点（含无起点脉冲的校准滚动）；START后第一帧记为F009_FRAME_FIRST，此后凡与上一起点相距不等于5000拍即打印F009_FRAME_GAP，给出间隔、空闲拍数和前后帧类型（NORMAL/CAL）。不打印PASS/FAIL，不影响结论
 
 // owner生命周期轮ADC异常系统级回归：丢失作废与恢复、合法迟到、按槽位升级、排空中丢失、迟到旧DONE、竞争窗口、
 // L-1/L-3/L-4/L-5原场景、ADC长期忙与看门狗、校准丢失后NORMAL帧不错绑
@@ -1762,6 +1764,48 @@ module tb_ppg_control_top_adc_anomaly();
 			$display("FAIL ADC_ANOMALY_TB pass=%0d errors=%0d", cnt_sys_pass, cnt_error);
 		end
 		$finish;
+	end
+
+
+	//---------------ABCD F-009：宏帧间隔监视（只打印，不产生PASS/FAIL，不影响结论）---------------//
+	// 以"帧在tick 0处于活动且上一拍不活动或上一拍处于末拍4999"识别每个宏帧起点（含校准滚动），START后第一帧只记起点；
+	// 凡相邻起点间隔不等于5000拍即打印一行F009_FRAME_GAP：间隔、空闲拍数、前后帧类型（NORMAL/CAL）
+	integer f009_cycle;                             // 监视器自有2 MHz拍计数
+	integer f009_last_start;                        // 上一宏帧起点拍号，-1表示START后尚无
+	integer f009_gap_count;                         // 已打印的非5000间隔数
+	integer f009_frame_count;                       // 已识别的宏帧起点数
+	reg f009_prev_active;                           // 上一拍是否有活动宏帧
+	reg [12:0] f009_prev_tick;                      // 上一拍宏帧tick
+	reg f009_last_cal;                              // 上一宏帧是否为校准帧
+	initial begin
+		f009_cycle = 0;
+		f009_last_start = -1;
+		f009_gap_count = 0;
+		f009_frame_count = 0;
+		f009_prev_active = 1'b0;
+		f009_prev_tick = 13'd0;
+		f009_last_cal = 1'b0;
+	end
+	always @(posedge i_clk) begin
+		f009_cycle = f009_cycle + 1;
+		if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_start_ack_event) begin
+			f009_last_start = -1;
+		end else if((ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active) && (ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick == 13'd0) &&
+			(!f009_prev_active || (f009_prev_tick == 13'd4999))) begin
+			f009_frame_count = f009_frame_count + 1;
+			if(f009_last_start < 0) begin
+				$display("F009_FRAME_FIRST t=%0t frame=%0d type=%0s", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL");
+			end else if((f009_cycle - f009_last_start) != 5000) begin
+				f009_gap_count = f009_gap_count + 1;
+				$display("F009_FRAME_GAP t=%0t frame=%0d interval=%0d idle=%0d prev=%0s next=%0s gaps=%0d frames=%0d", $time, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_current_frame_id,
+					f009_cycle - f009_last_start, f009_cycle - f009_last_start - 5000, f009_last_cal ? "CAL" : "NORMAL",
+					ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active ? "CAL" : "NORMAL", f009_gap_count, f009_frame_count);
+			end
+			f009_last_start = f009_cycle;
+			f009_last_cal = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		end
+		f009_prev_active = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_normal_frame_active || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+		f009_prev_tick = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_tick;
 	end
 
 endmodule

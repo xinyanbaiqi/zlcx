@@ -14,7 +14,7 @@
 //
 // Dependencies:       ppg_400hz_frame_calibration_scheduler.v
 //
-// Version:            V1.9
+// Version:            V1.10
 // Revision Date:      2026-10-08
 // History:
 // 2026-08-16          V1.3        Erie          Add independent-context FSC-01 through FSC-57 checks.
@@ -24,6 +24,7 @@
 // 2026-10-01          V1.7        Erie          Task C (TASKC_TICK248_P2S_20261001.md): add FSC-60..62, the SID-05 unit assertions for o_cal_owner_deadline_event, matching scheduler RTL V1.9 (event masked by a same-cycle owner commit). In the first calibration subframe the owner is held off with i_adc_owner_ready=0 and released at a negedge so the commit lands exactly on a chosen local tick. FSC-60: commit at tick 248 (legal on-time commit) -> one commit at local tick 248, zero deadline events, no owner-deadline sticky. FSC-61: commit at tick 247 -> same, commit at 247. FSC-62: never released -> exactly one deadline-event cycle, at tick 248, not coincident with a commit, zero commits, o_owner_deadline_timeout_sticky set (the pre-existing SID-05 behaviour). The event is counted by a new always block sampling at posedge, i.e. the value AMI actually samples (stimulus only changes at negedge, registers update in NBA, so the read is race-free). Pass criterion and banner raised from 59 to 62. Negative control: on the pre-fix RTL V1.8 FSC-60 fails (one event coincident with the commit) while FSC-61/62 pass.
 // 2026-10-06          V1.8        Erie          ABCD review F-010: add TB-local checks CAL-ROLLOVER-ABORT and CAL-ROLLOVER-STOP (task check_local; no FSC-nn number is taken). With a level-held AMB calibration request, abort or STOP-ack is applied on tick 4999 of the second CAL macro frame; the scheduler must be idle within 4 cycles, frame_id must settle at 2 (natural end of frame 1) and stay there, and no new macro frame, owner or waveform may appear for 6000 cycles. Pass criterion 62 -> 64; banner unchanged. Negative control: scheduler V1.9 without the lifecycle term goes idle only after 5000 cycles at frame 3, both checks FAIL.
 // 2026-10-08          V1.9        Erie          Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007) step 3: inputs i_idac_boundary_request and i_adc_transaction_lost_event are now TB regs; new TB-local checks LOST-REL (matching void releases B_INFLIGHT, FRAME_FAILED), LOST-MISM (unmatched void -> COMPLETION_MISMATCH), L1-NOREPEND (no macro-end re-pend while B_INFLIGHT), L4-EXPIRE / L4-ONTIME (candidate expiry after the deadline vs on-time commit), L3-IDLEBND / L3-NOEXTRA (one-shot idle IDAC boundary). Pass gate 64 -> 71.
+// 2026-10-08          V1.10       Erie          ABCD review F-011/F-009: FSC-14 now requires a frame period of exactly 5000 (it accepted 5001; this TB's FSC-14 corresponds to contract FSC-03). New TB-local checks serving F-009: FRAME-NN (two consecutive NORMAL periods), FRAME-NC and FRAME-CN (NORMAL-to-CAL and CAL-to-NORMAL periods and frame modes), FRAME-NC-LAST (a calibration handshake exactly on the NORMAL last tick must give a CAL frame 5000 cycles later), RESTART-STOP-SCAN and RESTART-ABORT-SCAN (STOP-ack or abort on tick 4998, 4999 or the new frame's tick 0: no further frame, wave or owner; STOP on tick 0 lets that empty frame run out, abort idles at once). The frame-start monitor now also records the mode of each frame. Pass criterion 71 -> 77. Negative controls: restart disabled fails FSC-14 and FRAME-NN/NC/CN/NC-LAST (5001); restart without the lifecycle gate fails both scans (and FSC-44 and the CAL-ROLLOVER checks); taking the next-frame mode from state_current fails FRAME-NC-LAST.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -38,7 +39,7 @@
 //
 // 依赖文件:           ppg_400hz_frame_calibration_scheduler.v
 //
-// 当前版本:           V1.9
+// 当前版本:           V1.10
 // 修订日期:           2026年10月08日
 // 修订历史:
 // 2026-08-16          V1.3        Erie          覆盖FSC-01至FSC-57及真实事务完成释放。
@@ -48,6 +49,7 @@
 // 2026-10-01          V1.7        Erie          任务C（TASKC_TICK248_P2S_20261001.md）：新增FSC-60~62，即o_cal_owner_deadline_event的SID-05单元断言，对应scheduler RTL V1.9（截止事件被同拍owner提交屏蔽）。在第一个校准子帧内用i_adc_owner_ready=0推迟owner，在下降沿放开，使提交精确落在指定local tick。FSC-60：tick 248提交（合法按时提交）→ 恰好一次提交且在local tick 248，截止事件0次，不置owner截止sticky。FSC-61：tick 247提交 → 同上，提交在247。FSC-62：始终不放开 → 截止事件恰好一个周期、在tick 248、不与提交同拍，提交0次，o_owner_deadline_timeout_sticky置位（SID-05既有行为）。事件由新增的上升沿采样always块计数，即AMI实际采样到的值（激励只在下降沿变化、寄存器在NBA阶段更新，读数无竞争）。通过判据与横幅由59提高到62。负对照：在修复前的RTL V1.8上FSC-60失败（有一次与提交同拍的截止事件），FSC-61/62通过。
 // 2026-10-06          V1.8        Erie          ABCD复核F-010：新增TB本地检查CAL-ROLLOVER-ABORT和CAL-ROLLOVER-STOP（check_local任务，不占用FSC编号）。电平保持AMB校准请求，在第二个CAL宏帧tick 4999施加abort或STOP确认；scheduler须在4拍内idle，frame_id停在2（帧1自然结束）并保持，6000拍内不得出现新宏帧、owner或波形。判据62改为64，横幅不变。负对照：去掉生命周期项的V1.9在5000拍后才idle且frame为3，两项均FAIL
 // 2026-10-08          V1.9        Erie          owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步：输入i_idac_boundary_request与i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-REL（匹配作废释放B_INFLIGHT并FRAME_FAILED）、LOST-MISM（不匹配作废记COMPLETION_MISMATCH）、L1-NOREPEND（B_INFLIGHT时宏帧末不重挂）、L4-EXPIRE/L4-ONTIME（截止后候选过期与按时提交对照）、L3-IDLEBND/L3-NOEXTRA（空闲IDAC边界只发一次）。判据64改为71。
+// 2026-10-08          V1.10       Erie          ABCD复核F-011/F-009：FSC-14改为要求帧周期严格5000（原先容许5001；本TB的FSC-14对应合同FSC-03）。新增服务F-009的TB本地检查：FRAME-NN（连续两个NORMAL周期）、FRAME-NC与FRAME-CN（NORMAL→CAL、CAL→NORMAL的周期与帧模式）、FRAME-NC-LAST（校准请求恰在NORMAL末拍握手，5000拍后必须是CAL帧）、RESTART-STOP-SCAN与RESTART-ABORT-SCAN（STOP确认或abort落在tick 4998、4999或新帧tick 0：不再起帧、无新波形或owner；STOP落在tick 0时该空帧走完，abort立即空闲）。宏帧起点监视器同时记录每帧模式。判据71改为77。负对照：去掉直接起帧时FSC-14与FRAME-NN/NC/CN/NC-LAST失败（5001）；去掉生命周期门控时两项扫描失败（FSC-44与CAL-ROLLOVER也失败）；下一帧模式改取state_current时FRAME-NC-LAST失败
 module tb_ppg_400hz_frame_calibration_scheduler ();
 
 	parameter C_FRAME_ID_WIDTH = 16;
@@ -211,6 +213,19 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 	reg [C_CODE_EPOCH_WIDTH - 1:0]reg_last_owner_dc_epoch;
 	reg [31:0]reg_last_frame_start_cycle;
 	reg [31:0]reg_frame_period;
+	reg reg_frame_start_is_cal;                 // ABCD F-009：最近一次宏帧起点为校准帧
+	reg reg_prev_frame_start_is_cal;            // ABCD F-009：上一次宏帧起点为校准帧
+	reg flag_period_ok;                         // ABCD F-009：周期检查逐步累计
+	integer idx_scan_kind;                      // ABCD F-009：0=STOP 1=abort
+	integer idx_scan_offset;                    // ABCD F-009：0=tick 4998 1=tick 4999 2=新帧tick 0
+	integer cnt_scan_wait;                      // ABCD F-009：有界等待计数
+	integer cnt_scan_frame_base;                // ABCD F-009：事件时的宏帧起点计数
+	integer cnt_scan_owner_base;                // ABCD F-009：事件时的owner提交计数
+	integer cnt_scan_wave_base;                 // ABCD F-009：事件时的波形fire计数
+	integer cnt_scan_idle_at;                   // ABCD F-009：事件后到调度器空闲的拍数
+	reg flag_scan_stop_ok;                      // ABCD F-009：STOP扫描累计结果
+	reg flag_scan_abort_ok;                     // ABCD F-009：abort扫描累计结果
+	reg flag_scan_case_ok;                      // ABCD F-009：单次扫描结果
 
 	ppg_400hz_frame_calibration_scheduler inst_ppg_400hz_frame_calibration_scheduler(
 		.i_clk(i_clk),
@@ -371,6 +386,8 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 			reg_last_owner_local_tick <= {C_CAL_TICK_WIDTH{1'b0}};
 			reg_last_frame_start_cycle <= 0;
 			reg_frame_period <= 0;
+			reg_frame_start_is_cal <= 1'b0;
+			reg_prev_frame_start_is_cal <= 1'b0;
 		end else begin
 			cnt_cycle <= cnt_cycle + 1;
 			if(o_macro_frame_start_event)begin
@@ -379,6 +396,8 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 					reg_frame_period <= cnt_cycle - reg_last_frame_start_cycle;
 				end
 				reg_last_frame_start_cycle <= cnt_cycle;
+				reg_prev_frame_start_is_cal <= reg_frame_start_is_cal; // ABCD F-009：上一宏帧模式
+				reg_frame_start_is_cal <= o_calibration_frame_active; // ABCD F-009：本宏帧起点时的模式
 			end
 			if(o_waveform_context_valid && i_waveform_context_ready)begin
 				cnt_wave_fire <= cnt_wave_fire + 1;
@@ -655,7 +674,7 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		check_fsc(13, flag_wait_ok && (cnt_idac_boundary >= 1) && (cnt_startup_boundary == 1));
 		wait_frame_start(300);
 		@(posedge i_clk);
-		check_fsc(14, flag_wait_ok && ((reg_frame_period == 5000) || (reg_frame_period == 5001)));
+		check_fsc(14, flag_wait_ok && (reg_frame_period == 5000)); // ABCD F-011：相邻宏帧起点严格5000拍（本TB的FSC-14对应合同FSC-03）
 		check_fsc(15, (cnt_normal_complete == 1) && (o_next_sample_index == 2));
 
 		drive_defaults;
@@ -1233,8 +1252,101 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		i_idac_boundary_request = 1'b0;
 		check_local("L3-NOEXTRA", flag_olr_ok && flag_wait_ok && (cnt_idac_boundary == cnt_olr_bnd_base + 2)); // L-3只在启动搜索空闲期补边界 @satisfies: FSC-38
 
+		// ABCD F-009（TB本地名，服务F-009/合同FSC-03）：宏帧末拍下一帧资格成立时直接起帧，相邻宏帧起点严格5000拍。
+		// FRAME-NN：连续NORMAL两个周期；FRAME-NC/FRAME-CN：NORMAL→CAL、CAL→NORMAL切换周期与模式；
+		// FRAME-NC-LAST：校准请求恰在NORMAL末拍握手，下一帧必须是CAL且周期5000
+		drive_defaults;
+		reset_dut;
+		pulse_start;
+		wait_frame_start(20);
+		flag_period_ok = flag_wait_ok;
+		wait_frame_start(5100);
+		@(posedge i_clk);
+		flag_period_ok = flag_period_ok && flag_wait_ok && (reg_frame_period == 5000) && !reg_frame_start_is_cal;
+		wait_frame_start(5100);
+		@(posedge i_clk);
+		$display("F009_PERIOD NN period=%0d cal=%b", reg_frame_period, reg_frame_start_is_cal);
+		check_local("FRAME-NN", flag_period_ok && flag_wait_ok && (reg_frame_period == 5000) && !reg_frame_start_is_cal);
+		wait_macro_tick(13'd1000, 1100);
+		@(negedge i_clk);
+		i_calibration_sample_valid = 1'b1;     // NORMAL帧中途送一笔AMB校准请求
+		cnt_scan_wait = 0;
+		while(!(o_calibration_sample_ready && i_calibration_sample_valid) && (cnt_scan_wait < 100)) begin
+			@(negedge i_clk); cnt_scan_wait = cnt_scan_wait + 1;
+		end
+		@(negedge i_clk);
+		i_calibration_sample_valid = 1'b0;     // 握手后撤销，避免校准滚动
+		wait_frame_start(5100);
+		@(posedge i_clk);
+		$display("F009_PERIOD NC period=%0d cal=%b prev_cal=%b", reg_frame_period, reg_frame_start_is_cal, reg_prev_frame_start_is_cal);
+		check_local("FRAME-NC", flag_wait_ok && (reg_frame_period == 5000) && reg_frame_start_is_cal && !reg_prev_frame_start_is_cal);
+		wait_frame_start(5100);
+		@(posedge i_clk);
+		$display("F009_PERIOD CN period=%0d cal=%b prev_cal=%b", reg_frame_period, reg_frame_start_is_cal, reg_prev_frame_start_is_cal);
+		check_local("FRAME-CN", flag_wait_ok && (reg_frame_period == 5000) && !reg_frame_start_is_cal && reg_prev_frame_start_is_cal);
+		cnt_scan_wait = 0;
+		while(!(o_normal_frame_active && (o_macro_tick == 13'd4999)) && (cnt_scan_wait < 5100)) begin
+			@(negedge i_clk); cnt_scan_wait = cnt_scan_wait + 1;
+		end
+		i_calibration_sample_valid = 1'b1;     // 恰在NORMAL末拍呈交请求，ready在本拍成立
+		flag_period_ok = o_calibration_sample_ready;
+		@(negedge i_clk);
+		i_calibration_sample_valid = 1'b0;
+		wait_frame_start(20);
+		@(posedge i_clk);
+		$display("F009_PERIOD NC_LAST ready_at_last=%b period=%0d cal=%b", flag_period_ok, reg_frame_period, reg_frame_start_is_cal);
+		check_local("FRAME-NC-LAST", flag_period_ok && flag_wait_ok && (reg_frame_period == 5000) && reg_frame_start_is_cal);
+
+		// RESTART-STOP-SCAN / RESTART-ABORT-SCAN（ABCD F-009，TB本地名）：STOP确认或abort落在tick 4998、4999或新帧tick 0。
+		// 前两种不得建立新宏帧；落在新帧tick 0时新帧已建立，此后不得再起帧、不得有新波形或owner：STOP时该帧空跑到4999后空闲，
+		// abort时立即空闲
+		flag_scan_stop_ok = 1'b1;
+		flag_scan_abort_ok = 1'b1;
+		for(idx_scan_kind = 0; idx_scan_kind < 2; idx_scan_kind = idx_scan_kind + 1) begin
+			for(idx_scan_offset = 0; idx_scan_offset < 3; idx_scan_offset = idx_scan_offset + 1) begin
+				drive_defaults;
+				reset_dut;
+				pulse_start;
+				wait_frame_start(20);
+				cnt_scan_wait = 0;
+				if(idx_scan_offset < 2) begin
+					while(!(o_normal_frame_active && (o_macro_tick == (13'd4998 + idx_scan_offset))) && (cnt_scan_wait < 5100)) begin
+						@(negedge i_clk); cnt_scan_wait = cnt_scan_wait + 1;
+					end
+				end else begin
+					while(!(o_normal_frame_active && (o_macro_tick == 13'd4999)) && (cnt_scan_wait < 5100)) begin
+						@(negedge i_clk); cnt_scan_wait = cnt_scan_wait + 1;
+					end
+					@(negedge i_clk);              // 进入新帧tick 0（起点脉冲本拍为1）
+				end
+				cnt_scan_frame_base = cnt_frame_start;
+				if(idx_scan_offset == 2) cnt_scan_frame_base = cnt_frame_start + 1; // 新帧起点脉冲本拍可见，计数下一沿才加
+				if(idx_scan_kind == 0) i_stop_ack_event = 1'b1; else i_control_abort_event = 1'b1;
+				@(negedge i_clk);
+				i_stop_ack_event = 1'b0;
+				i_control_abort_event = 1'b0;
+				i_run_enable = 1'b0;           // manager在STOP/abort后撤销RUN许可
+				cnt_scan_owner_base = cnt_owner_commit;
+				cnt_scan_wave_base = cnt_wave_fire;
+				cnt_scan_idle_at = -1;
+				for(cnt_scan_wait = 0; cnt_scan_wait < 6000; cnt_scan_wait = cnt_scan_wait + 1) begin
+					if(o_scheduler_idle && (cnt_scan_idle_at < 0)) cnt_scan_idle_at = cnt_scan_wait;
+					@(negedge i_clk);
+				end
+				flag_scan_case_ok = (cnt_frame_start == cnt_scan_frame_base) && (cnt_owner_commit == cnt_scan_owner_base) &&
+					(cnt_wave_fire == cnt_scan_wave_base) && (cnt_scan_idle_at >= 0) &&
+					((idx_scan_offset < 2 || idx_scan_kind == 1) ? (cnt_scan_idle_at < 8) : (cnt_scan_idle_at > 4990));
+				$display("F009_SCAN kind=%0d offset=%0d frames_after=%0d idle_after=%0d ok=%b", idx_scan_kind, idx_scan_offset,
+					cnt_frame_start - cnt_scan_frame_base, cnt_scan_idle_at, flag_scan_case_ok);
+				if(idx_scan_kind == 0) flag_scan_stop_ok = flag_scan_stop_ok && flag_scan_case_ok;
+				else flag_scan_abort_ok = flag_scan_abort_ok && flag_scan_case_ok;
+			end
+		end
+		check_local("RESTART-STOP-SCAN", flag_scan_stop_ok);
+		check_local("RESTART-ABORT-SCAN", flag_scan_abort_ok);
+
 		$display("FSC-01 through FSC-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
-		if(cnt_fail == 0 && cnt_pass == 71)begin
+		if(cnt_fail == 0 && cnt_pass == 77)begin
 			$display("ALL FSC-01 THROUGH FSC-62 PASSED");
 		end
 		$finish;
