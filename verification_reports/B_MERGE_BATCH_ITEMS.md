@@ -152,8 +152,8 @@
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-100 | OLR §8.4-2 | LFA-04 | 一级 | 同AMI-39，加超时作废例外 | 待做 |
-| BMI-101 | BR§3.9；F9R §7-3 | SID-04（约第552行） | 一级 | "Every evaluated candidate uses eight physical SAR9 subframes"与RTL不符：每个候选只取一笔样本、相邻候选相隔一个子帧（625拍）。核对RTL与TB SID-04 PASS行后订正 | 待做 |
+| BMI-100 | OLR §8.4-2 | LFA-04 | 一级 | 同AMI-39，加超时作废例外 | 已完成（C25 V1.8） |
+| BMI-101 | BR§3.9；F9R §7-3 | SID-04（约第552行） | 一级 | "Every evaluated candidate uses eight physical SAR9 subframes"与RTL不符：每个候选只取一笔样本、相邻候选相隔一个子帧（625拍）。核对RTL与TB SID-04 PASS行后订正 | 已完成（C25 V1.8） |
 | BMI-102 | IDG §4、§8、§10；BR Q6 | PRC-05/08 | 登记 | PASS行是无条件`$display`引用其他TB证据；改为INFO会改变PASS行数，按BR Q6只登记、交收尾计划 | 不做（改PASS行数，BR Q6） |
 | BMI-103 | IDG §6.5、§10 | LFA-11 / TB `LFA-11a` | 一级（合同侧）＋TB标签 | 合同LFA-11前半句无断言如实写；TB子标签LFA-11a改本地名（属§9.5.1规则5/P03）。"informational分支不再打印PASS"会改PASS行数，只登记 | 待做（标签）；登记（PASS行） |
 | BMI-104 | IDG §8 E类、§10 | RAW↔RGC | 一级 | 在别名表加RAW-01~11 ↔ RGC-01~15对照行（数据来自TB原文） | 待做 |
@@ -163,14 +163,14 @@
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-110 | ABCD §12.5、§12.8 F-030；BR§3.4 | 芯片合同§8 SPI协议参数（CS_N条款）；§7 CDC路径总表 | 一级 | CS_N作协议异步复位/门控，不加同步链；写入四点论证：① 只有7个协议状态寄存器被CS_N异步清零（列名），其余列明不受影响；② 接口时序要求t_su(CS)/recovery、t_h(CS)、t_cs_high；③ 传输中途CS_N毛刺的剩余风险→板级SI要求、写后读回校验；④ 命令与写入在第8个SCLK上升沿`flag_write_commit`产生，不被CS_N截断 | 待做 |
-| BMI-111 | OLR §8.4-7；BR§3.6 | 芯片合同§11 SPI地图；C01端口表 | 一级 | 新输出`o_ami_owner_lost_sticky`（C01）；0x0108 bit6 = AMI owner lost sticky，bit7仍保留；SPI `i_ami_owner_lost_sticky` | 待做 |
-| BMI-112 | OLR §8.4-7 | 芯片合同§11 诊断地图 | 一级 | 逐位写明清除方式：调度器sticky在START清；AMI历史（含0x0108 bit6）只由复位或诊断清除清；supervisor summary/cause只由复位或合法诊断清除清零（cause是首故障快照，新捕获时覆盖），START不清 | 待做 |
-| BMI-113 | ABCD §12.8 F-014/F-024；BR§3.4 | 芯片合同参数节；C01参数/§9 | 一级 | 冻结产品固定值：C_CONFIG_WIDTH=1024，config/coef/DC-recovery epoch=8，code epoch=4，generation=8，frame/sample=16，看门狗5000/13；检查所在TB：smoke `tb_ppg_control_top.v`（PARAM-FIXED、PARAM-WDOG）、`tb_ppg_chip_digital_top.v`、supervisor单元TB WDPARM | 待做 |
-| BMI-114 | ABCD §12.8 F-005/F-006 | 芯片合同§8.1 | 一级 | 规则无需改；读路径实现说明更新为"字节边界后下降沿装载"（`ST_DATA`且cnt==0的下降沿装载，去掉+1补偿） | 待做 |
-| BMI-115 | ABCD §10(b) F-007 | 芯片合同正文（V1.16的:55/66-67/82/84/103） | 一级 | 正文仍写两路reset_sync，RTL只有一个实例；按RTL订正 | 待做 |
-| BMI-116 | ABCD §10(b) F-048 | C01 §4.1"only四路" | 一级 | Top有5路`.i_diag_clear_event(flag_diag_clear_event)`（含CCC），订正 | 待做 |
-| BMI-117 | IDF P1；IDG S7 | C01:38 | 一级 | "Scheduler FSC-01～57、AMI-01～45和SSW-01～52均已有当前单模块PASS证据"订正（原文删除线保留） | 待做 |
+| BMI-110 | ABCD §12.5、§12.8 F-030；BR§3.4 | 芯片合同§8 SPI协议参数（CS_N条款）；§7 CDC路径总表 | 一级 | CS_N作协议异步复位/门控，不加同步链；写入四点论证：① 只有7个协议状态寄存器被CS_N异步清零（列名），其余列明不受影响；② 接口时序要求t_su(CS)/recovery、t_h(CS)、t_cs_high；③ 传输中途CS_N毛刺的剩余风险→板级SI要求、写后读回校验；④ 命令与写入在第8个SCLK上升沿`flag_write_commit`产生，不被CS_N截断 | 已完成（芯片顶层V1.17） |
+| BMI-111 | OLR §8.4-7；BR§3.6 | 芯片合同§11 SPI地图；C01端口表 | 一级 | 新输出`o_ami_owner_lost_sticky`（C01）；0x0108 bit6 = AMI owner lost sticky，bit7仍保留；SPI `i_ami_owner_lost_sticky` | 已完成（芯片顶层V1.17/C01 V1.18） |
+| BMI-112 | OLR §8.4-7 | 芯片合同§11 诊断地图 | 一级 | 逐位写明清除方式：调度器sticky在START清；AMI历史（含0x0108 bit6）只由复位或诊断清除清；supervisor summary/cause只由复位或合法诊断清除清零（cause是首故障快照，新捕获时覆盖），START不清 | 已完成（芯片顶层V1.17） |
+| BMI-113 | ABCD §12.8 F-014/F-024；BR§3.4 | 芯片合同参数节；C01参数/§9 | 一级 | 冻结产品固定值：C_CONFIG_WIDTH=1024，config/coef/DC-recovery epoch=8，code epoch=4，generation=8，frame/sample=16，看门狗5000/13；检查所在TB：smoke `tb_ppg_control_top.v`（PARAM-FIXED、PARAM-WDOG）、`tb_ppg_chip_digital_top.v`、supervisor单元TB WDPARM | 已完成（芯片顶层V1.17/C01 V1.18） |
+| BMI-114 | ABCD §12.8 F-005/F-006 | 芯片合同§8.1 | 一级 | 规则无需改；读路径实现说明更新为"字节边界后下降沿装载"（`ST_DATA`且cnt==0的下降沿装载，去掉+1补偿） | 已完成（芯片顶层V1.17） |
+| BMI-115 | ABCD §10(b) F-007 | 芯片合同正文（V1.16的:55/66-67/82/84/103） | 一级 | 正文仍写两路reset_sync，RTL只有一个实例；按RTL订正 | 已完成（芯片顶层V1.17） |
+| BMI-116 | ABCD §10(b) F-048 | C01 §4.1"only四路" | 一级 | Top有5路`.i_diag_clear_event(flag_diag_clear_event)`（含CCC），订正 | 已完成（C01 V1.18） |
+| BMI-117 | IDF P1；IDG S7 | C01:38 | 一级 | "Scheduler FSC-01～57、AMI-01～45和SSW-01～52均已有当前单模块PASS证据"订正（原文删除线保留） | 已完成（C01 V1.18（属历史行，写说明不改原文）） |
 | BMI-118 | ABCD §12.8 F-044 | 矩阵P06行；C01相关 | 一级 | P06注明系统级合法RUN下不可达（Top RUN锁存），证据范围只到AMI叶子级（LEAF-HOLD） | 待做 |
 
 ## 11. 矩阵（`PPG_CONTRACT_CLOSURE_MATRIX.md`）
