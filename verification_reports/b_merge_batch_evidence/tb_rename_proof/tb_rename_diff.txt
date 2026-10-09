@@ -1,0 +1,411 @@
+diff --git a/rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v b/rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v
+index 7f8306b..558fea8 100644
+--- a/rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v
++++ b/rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v
+@@ -14,8 +14,8 @@
+ //
+ // Dependencies:       ppg_400hz_frame_calibration_scheduler.v
+ //
+-// Version:            V1.10
+-// Revision Date:      2026-10-08
++// Version:            V1.11
++// Revision Date:      2026-10-09
+ // History:
+ // 2026-08-16          V1.3        Erie          Add independent-context FSC-01 through FSC-57 checks.
+ // 2026-08-24          V1.4        Erie          Fix three issues found while re-running this self-check against the current (V1.6) scheduler RTL after the STOP-drain deadlock fix. (1) This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated as X at the DUT instantiation, making i_run_generation==state_current[B_INFLIGHT_GENERATION] compare X and fail every case depending on completion matching (17 of 57 cases); fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation and driving it at a fixed constant in drive_defaults (none of FSC-01 through FSC-57 exercise cross-generation rejection; that remains a coverage gap, not newly added here). (2) FSC-33's manual late-DONE drive raced against the still-active background auto-done generator: flag_auto_done_enable was left on, so its every-cycle non-blocking i_adc_transaction_complete_event<=1'b0 default silently overwrote the test's own blocking drive of the same signal at the same edge, so the DUT never actually sampled the manual completion pulse as 1; fixed by disabling flag_auto_done_enable before the manual drive. (3) FSC-44 asserted the pre-V1.6 behavior that a plain i_run_enable==0 (no STOP/abort) immediately clears B_FRAME_ACTIVE; V1.6 intentionally changed this so only abort clears it immediately, letting an already-open macro frame drain via natural tick advance per contract section 16.3 — fixed by asserting the still-valid immediate property (no new owner commit, frame legitimately stays active) and then waiting for the frame to reach MACRO_LAST_TICK to confirm it actually does drain and clear on its own, rather than weakening the check.
+@@ -25,6 +25,7 @@
+ // 2026-10-06          V1.8        Erie          ABCD review F-010: add TB-local checks CAL-ROLLOVER-ABORT and CAL-ROLLOVER-STOP (task check_local; no FSC-nn number is taken). With a level-held AMB calibration request, abort or STOP-ack is applied on tick 4999 of the second CAL macro frame; the scheduler must be idle within 4 cycles, frame_id must settle at 2 (natural end of frame 1) and stay there, and no new macro frame, owner or waveform may appear for 6000 cycles. Pass criterion 62 -> 64; banner unchanged. Negative control: scheduler V1.9 without the lifecycle term goes idle only after 5000 cycles at frame 3, both checks FAIL.
+ // 2026-10-08          V1.9        Erie          Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007) step 3: inputs i_idac_boundary_request and i_adc_transaction_lost_event are now TB regs; new TB-local checks LOST-REL (matching void releases B_INFLIGHT, FRAME_FAILED), LOST-MISM (unmatched void -> COMPLETION_MISMATCH), L1-NOREPEND (no macro-end re-pend while B_INFLIGHT), L4-EXPIRE / L4-ONTIME (candidate expiry after the deadline vs on-time commit), L3-IDLEBND / L3-NOEXTRA (one-shot idle IDAC boundary). Pass gate 64 -> 71.
+ // 2026-10-08          V1.10       Erie          ABCD review F-011/F-009: FSC-14 now requires a frame period of exactly 5000 (it accepted 5001; this TB's FSC-14 corresponds to contract FSC-03). New TB-local checks serving F-009: FRAME-NN (two consecutive NORMAL periods), FRAME-NC and FRAME-CN (NORMAL-to-CAL and CAL-to-NORMAL periods and frame modes), FRAME-NC-LAST (a calibration handshake exactly on the NORMAL last tick must give a CAL frame 5000 cycles later), RESTART-STOP-SCAN and RESTART-ABORT-SCAN (STOP-ack or abort on tick 4998, 4999 or the new frame's tick 0: no further frame, wave or owner; STOP on tick 0 lets that empty frame run out, abort idles at once). The frame-start monitor now also records the mode of each frame. Pass criterion 71 -> 77. Negative controls: restart disabled fails FSC-14 and FRAME-NN/NC/CN/NC-LAST (5001); restart without the lifecycle gate fails both scans (and FSC-44 and the CAL-ROLLOVER checks); taking the next-frame mode from state_current fails FRAME-NC-LAST.
++// 2026-10-09          V1.11       Erie          B merge batch (ID governance): label strings only. check_fsc prints the TB-local name SCHT-n (was FSC-n, a TB scenario number that does not share meaning with C08 FSC-nn; TB SCHT-14 = contract FSC-03, SCHT-32 = FSC-30, mapping in the alias table); both summary banners follow. check_fsc arguments, stimulus, checks and counts unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 版权归属:           Erie
+ // 开发人员:           Erie
+@@ -40,7 +41,7 @@
+ // 依赖文件:           ppg_400hz_frame_calibration_scheduler.v
+ //
+ // 当前版本:           V1.10
+-// 修订日期:           2026年10月08日
++// 修订日期:           2026年10月09日
+ // 修订历史:
+ // 2026-08-16          V1.3        Erie          覆盖FSC-01至FSC-57及真实事务完成释放。
+ // 2026-08-24          V1.4        Erie          拿V1.6 scheduler（STOP排空死锁修复后）重跑这份自检时发现并修复三个问题。(1)这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接，导致它在DUT里浮空为X，使i_run_generation==在途owner锁存代际这条比较恒为假，凡是依赖DONE完成匹配的用例全部假失败（57个里17个）；修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在drive_defaults里给它一个全程固定常量——FSC-01至FSC-57本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。(2)FSC-33手动驱动迟到DONE时，后台自动DONE生成器flag_auto_done_enable还开着，它每拍非阻塞写回的i_adc_transaction_complete_event<=1'b0默认值在同一个时钟沿悄悄覆盖了测试自己的阻塞驱动，DUT从未真正采样到手动置的1；修复：手动驱动前先关掉flag_auto_done_enable。(3)FSC-44断言的是V1.6修复前的行为——纯i_run_enable掉底（无STOP/abort）立即清B_FRAME_ACTIVE；V1.6按合同16.3节故意改成只有abort才立即清，纯run_enable掉底要靠tick自然推进把已经打开的宏帧走完；修复为断言仍然成立的即时性质（没有新owner提交、宏帧合法地保持活动）之后再等到MACRO_LAST_TICK验证它确实会自己走完释放，而不是简单削弱断言
+@@ -50,6 +51,7 @@
+ // 2026-10-06          V1.8        Erie          ABCD复核F-010：新增TB本地检查CAL-ROLLOVER-ABORT和CAL-ROLLOVER-STOP（check_local任务，不占用FSC编号）。电平保持AMB校准请求，在第二个CAL宏帧tick 4999施加abort或STOP确认；scheduler须在4拍内idle，frame_id停在2（帧1自然结束）并保持，6000拍内不得出现新宏帧、owner或波形。判据62改为64，横幅不变。负对照：去掉生命周期项的V1.9在5000拍后才idle且frame为3，两项均FAIL
+ // 2026-10-08          V1.9        Erie          owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步：输入i_idac_boundary_request与i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-REL（匹配作废释放B_INFLIGHT并FRAME_FAILED）、LOST-MISM（不匹配作废记COMPLETION_MISMATCH）、L1-NOREPEND（B_INFLIGHT时宏帧末不重挂）、L4-EXPIRE/L4-ONTIME（截止后候选过期与按时提交对照）、L3-IDLEBND/L3-NOEXTRA（空闲IDAC边界只发一次）。判据64改为71。
+ // 2026-10-08          V1.10       Erie          ABCD复核F-011/F-009：FSC-14改为要求帧周期严格5000（原先容许5001；本TB的FSC-14对应合同FSC-03）。新增服务F-009的TB本地检查：FRAME-NN（连续两个NORMAL周期）、FRAME-NC与FRAME-CN（NORMAL→CAL、CAL→NORMAL的周期与帧模式）、FRAME-NC-LAST（校准请求恰在NORMAL末拍握手，5000拍后必须是CAL帧）、RESTART-STOP-SCAN与RESTART-ABORT-SCAN（STOP确认或abort落在tick 4998、4999或新帧tick 0：不再起帧、无新波形或owner；STOP落在tick 0时该空帧走完，abort立即空闲）。宏帧起点监视器同时记录每帧模式。判据71改为77。负对照：去掉直接起帧时FSC-14与FRAME-NN/NC/CN/NC-LAST失败（5001）；去掉生命周期门控时两项扫描失败（FSC-44与CAL-ROLLOVER也失败）；下一帧模式改取state_current时FRAME-NC-LAST失败
++// 2026-10-09          V1.11       Erie          B合并批次（编号治理）：只改标签字符串。check_fsc打印TB本地名SCHT-n（原FSC-n是TB场景序号，与C08同号条目含义不同；TB SCHT-14=合同FSC-03，SCHT-32=FSC-30，对应关系见别名表），两行总横幅同步。check_fsc实参、激励、判定与计数均不变。
+ module tb_ppg_400hz_frame_calibration_scheduler ();
+ 
+ 	parameter C_FRAME_ID_WIDTH = 16;
+@@ -486,10 +488,10 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
+ 		begin
+ 			if(i_condition)begin
+ 				cnt_pass = cnt_pass + 1;
+-				$display("PASS FSC-%0d", i_case_number);
++				$display("PASS SCHT-%0d", i_case_number);
+ 			end else begin
+ 				cnt_fail = cnt_fail + 1;
+-				$display("FAIL FSC-%0d cycle=%0d tick=%0d", i_case_number, cnt_cycle, o_macro_tick);
++				$display("FAIL SCHT-%0d cycle=%0d tick=%0d", i_case_number, cnt_cycle, o_macro_tick);
+ 			end
+ 		end
+ 	endtask
+@@ -1345,9 +1347,9 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
+ 		check_local("RESTART-STOP-SCAN", flag_scan_stop_ok);
+ 		check_local("RESTART-ABORT-SCAN", flag_scan_abort_ok);
+ 
+-		$display("FSC-01 through FSC-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
++		$display("SCHT-1 through SCHT-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
+ 		if(cnt_fail == 0 && cnt_pass == 77)begin
+-			$display("ALL FSC-01 THROUGH FSC-62 PASSED");
++			$display("ALL SCHT-1 THROUGH SCHT-62 PASSED");
+ 		end
+ 		$finish;
+ 	end
+diff --git a/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v b/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v
+index b5fe21b..508d5b9 100644
+--- a/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v
++++ b/rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v
+@@ -5,19 +5,21 @@
+ // Design Name:        PPG ADC DC Recovery Self-Checking Testbench
+ // Module Name:        tb_ppg_adc_dc_recovery
+ // Description:        Contract-directed checks for arithmetic, saturation and holding protocol.
+-// Version:            V1.1
+-// Revision Date:      2026-10-05
++// Version:            V1.2
++// Revision Date:      2026-10-09
+ // History:
+ // 2026-10-05           V1.1       Erie        ABCD review F-026: connect the eight previously floating diagnostic inputs (detect code, Stage1/Stage2 raw and code_ext, nominal 15-bit code/valid/saturated) and their outputs; every drive_and_check transaction now drives test-id-dependent values and compares all eight passthrough outputs. Negative control: RTL payload with inverted stage1_raw fails 21 cases.
++// 2026-10-09           V1.2       Erie        B merge batch (ID governance): label strings only. drive_and_check prints the TB-local vector name DCRT-n (test_id also drives stimulus, so it is unchanged; DCRT-3..7 test C15 DCR-04/07/12/09/09, mapping in the alias table); the PASS banner no longer claims DCR-01..DCR-22. Stimulus, checks and counts unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 公司:                Erie
+ // 设计名称:            PPG ADC DC恢复自检测试平台
+ // 模块名称:            tb_ppg_adc_dc_recovery
+ // 模块说明:            覆盖DC恢复公式、舍入、饱和、模式切换和反压保持合同。
+ // 当前版本:            V1.1
+-// 修订日期:            2026年10月05日
++// 修订日期:            2026年10月09日
+ // 修订历史:
+ // 2026-10-05           V1.1       Erie        ABCD复核F-026：接上此前悬空的8个诊断输入（检测码、Stage1/Stage2原始码与code_ext、标称15-bit码/资格/饱和）及对应输出；每笔drive_and_check事务驱动与test_id相关的取值并核对8个透传输出。负对照：RTL载荷中stage1_raw取反时21项失败。
++// 2026-10-09           V1.2       Erie        B合并批次（编号治理）：只改标签字符串。drive_and_check打印TB本地向量名DCRT-n（test_id参与激励，未改；DCRT-3~7实测C15 DCR-04/07/12/09/09，对应关系见别名表）；PASS横幅不再宣称DCR-01..DCR-22。激励、判定与计数不变。
+ 
+ module tb_ppg_adc_dc_recovery;
+ 	localparam integer C_FRAME_ID_WIDTH = 16;
+@@ -229,7 +231,7 @@ module tb_ppg_adc_dc_recovery;
+ 				o_stage2_code_ext !== i_stage2_code_ext || o_nominal_15_code !== i_nominal_15_code ||
+ 				o_nominal_15_valid !== i_nominal_15_valid || o_nominal_saturated !== i_nominal_saturated)begin
+ 				error_count = error_count + 1;
+-				$display("FAIL DCR-%0d coarse=%0d fine=%0d", test_id, $signed(o_coarse_ppg_value), $signed(o_fine_ppg_value));
++				$display("FAIL DCRT-%0d coarse=%0d fine=%0d", test_id, $signed(o_coarse_ppg_value), $signed(o_fine_ppg_value));
+ 			end
+ 			@(negedge i_clk);
+ 			i_result_valid = 1'b0;
+@@ -473,7 +475,7 @@ module tb_ppg_adc_dc_recovery;
+ 			$display("FAIL DCR-01 asynchronous reset");
+ 		end
+ 		if(error_count == 0)begin
+-			$display("PASS ppg_adc_dc_recovery DCR-01..DCR-22");
++			$display("PASS ppg_adc_dc_recovery directed DCR checks and DCRT-n vectors");
+ 		end else begin
+ 			$display("FAIL ppg_adc_dc_recovery errors=%0d", error_count);
+ 		end
+diff --git a/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v b/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v
+index fe51652..67c63cf 100644
+--- a/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v
++++ b/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v
+@@ -15,8 +15,8 @@
+ // Dependencies:
+ //      DUT and all real integration submodules
+ //
+-// Version:         V1.14
+-// Revision Date:   2026-10-08
++// Version:         V1.15
++// Revision Date:   2026-10-09
+ // History:
+ // 2026-08-12           V1.0       Erie        Create file.
+ // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
+@@ -33,6 +33,7 @@
+ // 2026-10-05           V1.12      Erie        Simplify the V1.11 label printing: drop the write_case_id byte-by-byte task and print with $display("PASS %0s") / $display("FAIL %0s at %0t"). %0s suppresses the zero-byte left padding of the 11-character label in both xsim 2022.2 and Icarus (plain %s prints it as spaces, which is what V1.11 worked around), so the output is byte-identical to V1.11 and every unchanged label prints exactly as before V1.11. No check condition changes; 50 cases.
+ // 2026-10-06           V1.13      Erie        ABCD review RTL round 1: eight TB-local checks appended after AMI-SID05-2 (pass gate 50 -> 58; banner regex unchanged). HIST-KEEP (F-022): a non-blocking protocol sticky survives STOP and a new START and is cleared only by diag_clear. HIST-BLOCK / HIST-ABORT / HIST-STOP / HIST-RERUN (N-1): with an integration-blocking cause (AMB start without an in-flight request) diag_clear is ignored during RUN; after abort releases the blocking, diag_clear clears the sticky; after a STOP-only end and a full drain, diag_clear clears the history although the blocking flag is still 1; in that idle state AMI fault-active also stays 1 (L-5, asserted as-is), and a START then clears the blocking and the lane but not the history. DISC-HELD (F-019): with result 92/920 held under backpressure and 93/930 already in the upstream fork, abort must report the discard identity of 92/920/RED/NORMAL/SAR9; the discard color/frame_type/precision outputs are now wired. DET-QUAL (F-021): the N08 back-to-back window without abort; a passive monitor requires the qualification PWI sees at each detection handshake to equal the value loaded with that transaction, and the formal-branch-first window must occur. LEAF-HOLD (F-044, P06 leaf evidence): the DUT is built with C_ENABLE_TEST_INJECTION=1 and the injection inputs are driven (0 everywhere else, so the effective enable and every earlier result are unchanged); after an identity injection is accepted, i_test_inject_enable is held low for 20 cycles and flag_test_identity_hold must stay 1. Negative controls: each check fails on the corresponding pre-fix or mutated RTL.
+ // 2026-10-08           V1.14      Erie        Owner-lifecycle round step 3: new owner-age monitor and helper tasks olr_fresh_run / olr_wait_age / olr_wait_lost / olr_done_keep_idle / olr_abort_recover; 20 TB-local checks LOST-FIRE, LOST-RECOV, LSTK-START, LOST-IDLE, WIN-BEFORE (age 4497), WIN-IN (4499), WIN-RECOV, WIN-AFTER, K-RED2, LSTK-BLOCK, K-ABORT, LSTK-CLR, K-CLEAR, K-SLOT, LSTK-PRIO, K-IR2, BUSY-07, BUSY-VOID, WDRAW-LOST, LOST-EXCL; HIST-RERUN rewritten for L-5 (lane falls only after RUN-ended-and-drained, the late DONE still records cause 02); watchdog raised to 4 ms. Pass gate 58 -> 78.
++// 2026-10-09           V1.15      Erie        B merge batch (ID governance): check label AMI-13 -> TB-local FORK-HOLD (it tests backpressure hold, part of C10 AMI-12; contract AMI-13 same-edge replacement has no dynamic check); banner notes the exception. Checks and counts unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 版权归属:        Erie
+ // 开发人员:        Erie
+@@ -49,7 +50,7 @@
+ //      DUT及全部真实集成子模块
+ //
+ // 当前版本:        V1.14
+-// 修订日期:        2026年10月08日
++// 修订日期:        2026年10月09日
+ // 修订历史:
+ // 2026-08-12           V1.0       Erie        创建文件
+ // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
+@@ -66,6 +67,7 @@
+ // 2026-10-05           V1.12      Erie        简化V1.11的标签打印：删除逐字节打印任务write_case_id，改用$display("PASS %0s")和$display("FAIL %0s at %0t")。%0s在xsim 2022.2与Icarus中都不输出11字符标签左侧补齐的零字节（普通%s会把它们打成空格，V1.11正是为绕开这一点），输出与V1.11逐字节相同，未改名的标签与V1.11之前完全一致。检查条件不变，仍为50项。
+ // 2026-10-06           V1.13      Erie        ABCD复核RTL第一轮：在AMI-SID05-2之后追加8项TB本地检查（判据50改为58，横幅正则不变）。HIST-KEEP（F-022）：非阻断协议sticky经STOP和新START仍保持，只由diag_clear清除。HIST-BLOCK/HIST-ABORT/HIST-STOP/HIST-RERUN（N-1）：存在集成阻断成因（无在途请求的AMB start）时RUN中diag_clear被忽略；abort解除阻断后diag_clear清除；只以STOP结束并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；此时空闲期AMI fault-active同样仍为1（L-5，如实断言），随后START清除阻断与lane但不清历史。DISC-HELD（F-019）：92/920被反压持住、93/930已进入上游fork时abort，discard身份必须是92/920/RED/NORMAL/SAR9；接上discard的颜色/类型/精度输出。DET-QUAL（F-021）：N08背靠背窗口不abort，被动监视要求每次检测握手时PWI看到的资格等于该笔装入时的值，且正式分支先消费的窗口确实出现。LEAF-HOLD（F-044，P06叶子证据）：DUT以C_ENABLE_TEST_INJECTION=1构建并驱动注入输入（其余场景恒为0，有效使能与此前全部结果不变）；错误身份注入被接纳后把i_test_inject_enable拉低20拍，flag_test_identity_hold必须保持1。负对照：每项在对应修复前或变异RTL上失败
+ // 2026-10-08           V1.14      Erie        owner生命周期轮第三步：新增owner年龄监视与辅助任务olr_fresh_run/olr_wait_age/olr_wait_lost/olr_done_keep_idle/olr_abort_recover；新增20项TB本地检查LOST-FIRE、LOST-RECOV、LSTK-START、LOST-IDLE、WIN-BEFORE（年龄4497）、WIN-IN（4499）、WIN-RECOV、WIN-AFTER、K-RED2、LSTK-BLOCK、K-ABORT、LSTK-CLR、K-CLEAR、K-SLOT、LSTK-PRIO、K-IR2、BUSY-07、BUSY-VOID、WDRAW-LOST、LOST-EXCL；HIST-RERUN按L-5改写（lane只在RUN结束且排空后落下，迟到DONE仍记cause 02）；看门狗放宽到4 ms。判据58改为78。
++// 2026-10-09           V1.15      Erie        B合并批次（编号治理）：检查标签AMI-13改为TB本地名FORK-HOLD（实测反压保持，属C10 AMI-12；合同AMI-13同拍替换无动态检查）；横幅注明此例外。判定与计数不变。
+ 
+ module tb_ppg_adc_measurement_idac_integration ();
+ 
+@@ -1421,7 +1423,7 @@ module tb_ppg_adc_measurement_idac_integration ();
+ 		wait_measurement_result();
+ 		check_case("AMI-12", o_measurement_result_valid && (o_result_sample_index == 16'd102));
+ 		repeat(5) @(negedge i_clk);
+-		check_case("AMI-13", o_measurement_result_valid && (o_result_sample_index == 16'd102));
++		check_case("FORK-HOLD", o_measurement_result_valid && (o_result_sample_index == 16'd102));
+ 		i_measurement_result_ready = 1'b1;
+ 		repeat(3) @(negedge i_clk);
+ 
+@@ -2216,7 +2218,7 @@ module tb_ppg_adc_measurement_idac_integration ();
+ 		repeat(10) @(negedge i_clk);
+ 
+ 		if(cnt_fail == 0 && cnt_pass == 78)begin
+-			$display("AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
++			$display("AMI-01 through AMI-45 except AMI-13 (TB-local FORK-HOLD), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
+ 		end else begin
+ 			$display("AMI REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
+ 		end
+diff --git a/rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v b/rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v
+index 6345342..cb4ec80 100644
+--- a/rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v
++++ b/rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v
+@@ -21,8 +21,8 @@
+ //
+ // Dependencies:       ppg_control_top and its full real hierarchy
+ //
+-// Version:            V1.4
+-// Revision Date:      2026/10/01
++// Version:            V1.5
++// Revision Date:      2026/10/09
+ // History:
+ //    Time               Version       Revised by            Contents
+ // 2026/10/01            V1.4          Erie                  Task C (TASKC_TICK248_P2S_20261001.md): connect i_test_calibration_loss_inject_valid to a reg initialised to 0 and never driven, the same pattern tb_ppg_control_top_robustness_corner_waveforms.v uses. This TB instantiates ppg_control_top with C_ENABLE_TEST_INJECTION=1, so the injection structure is generated, yet this input had been left unconnected (floating Z; REGRESSION_BASELINE_20260930.md section 6.6). All seven control_top verification-injection inputs were checked; this was the only unconnected one, and iverilog -Wall now reports no dangling input. Sorted PASS lines, $finish time and final banner are identical before and after the change (run on the same RTL).
+@@ -34,6 +34,7 @@
+ //                                                             Test strategy: unlike Group 7/8/9, this file never needs the real physiological generator -- every LFA ID is about STOP/abort/reset/duplicate-DONE/fault mechanics, not detection algorithm correctness, so a single continuous SEARCH_TRACK+dual-optical RUN driven entirely by fixed RAW values (this project's own established (100,200)/8/503/150 convention) covers all ten IDs, keeping the whole file fast enough for iverilog exploratory runs. C_ENABLE_TEST_INJECTION is set to 1 (like Group 6's SID-10) purely to reuse the injection TB's own already-debugged identity-mismatch mechanism as a convenient, real, AMI-local-only fault trigger for the combined LFA-02(b)/LFA-10(a)/LFA-11 stage -- i_test_inject_enable stays low for every other stage in this file, so it has zero side effects there per AMI contract rule 1. LFA-02(b)'s "AMI fork empty, PWI/FIR/detector not empty" complementary case and LFA-10's AMI-vs-SSW independence and LFA-11's diag-clear-vs-active-fault contrast are deliberately combined into one stage because they share the exact same real fault episode -- building three separate fault episodes for genuinely the same underlying mechanism would not add coverage, only simulation time.
+ // 2026/08/29            V1.1          Erie                  Real iverilog debugging arc closed: JNT_BASELINE 53/53 PASS, `LIFECYCLE_FAULT_ADC_ANOMALY_TB_PASS result_captures=7 owner_commit_total=220 measurement_discard_events=2 detection_discard_events=0`. Reaching this took roughly eighteen real simulation iterations and ten distinct real TB-only bugs (no RTL changes needed in this file), each root-caused against real RTL rather than guessed -- summarized here because several are directly reusable for future Stage 5/OIB work: (1) LFA-01/LFA-12(first) checked pending-clear/clean-restart one cycle after the raw i_stop_event/i_start_event request pulse instead of waiting for the real registered o_stop_ack_event/o_start_ack_event -- flag_control_cancel and the clean-search-state condition are keyed on the ack, not the request. (2) LFA-12(a) additionally over-asserted that pending-valid bits must read 0 immediately post-ack; real RTL legitimately arms the first startup candidate within a few cycles of START, which is normal fresh activity, not stale carryover -- relaxed to check only startup_search_complete/B_INFLIGHT. (3) LFA-09 took two wrong theories (grant-then-never-respond; forcing an AMB escalation that does not exist as a direct ST_NORMAL exit) before a real state-machine read confirmed ST_NORMAL only transitions to ST_AMB_RECHECK -- NORMAL slow-tracking confirm-count escalation is only checked inside ST_DCS_REVALIDATE_R (periodic-recheck territory), never reachable directly from ST_NORMAL. The only real, generator-free construction is holding the TB's own i_adc_physical_idle input low across a real macro-frame boundary so RED's context-due pending genuinely cannot be granted for 283+ ticks. (4) LFA-04's abort test corrupted everything downstream the first time: i_control_abort_event immediately zeroes B_FRAME_ACTIVE and sets FRAME_MODE_IDLE in the scheduler, and unlike STOP, NORMAL operation never resumes on its own afterward -- fixed with a full task_stop_and_drain+recommit+START recovery instead of continuing to drive samples into a dead frame. (5) LFA-07 and LFA-05's duplicate/stale-DONE checks both originally expected a diagnostic sticky (first the scheduler's, then AMI's) to fire; real RTL shows the physical capture stage (ppg_adc_async_stage_capture.v) safely drops any CLK_DOUT that was never armed by a real i_adc_transaction_start, with zero side effects and zero diagnostics anywhere in the chain -- the contract text only requires safety (no second completion/result/owner), not a sticky, so both checks were relaxed to the real, minimal, correctly-grounded requirement. (6) LFA-07's duplicate DONE, presented immediately after the base owner released, raced into a genuinely new, legitimately-granted owner (same near-instant-grant fact as #3) and was misread as "produced a second formal result" -- fixed by presenting it only while the system is genuinely stopped via task_stop_and_drain, guaranteeing no new grant is possible. (7) LFA-05's stale DONE, presented too late (two settle delays after START), let the real autonomous startup search begin requesting its first AMB candidate -- the IDAC controller's calibration-search state machine consumes ANY CLK_DOUT arriving while o_amb_sample_request/o_dcs_sample_request is asserted, completely independent of AMI/scheduler's owner-tracking abstraction (a real, generalizable fact distinct from #5's AMI-owner-gated path), silently corrupting the search's own progress before task_run_startup_search ever started tracking it and surfacing many stages later as "DC_R stage did not converge". Fixed by presenting the stale DONE immediately after o_start_ack_event with an explicit guard that FAILs loudly if either request signal is already asserted, proving the construction genuinely hits an idle window. (8) LFA-11(a) originally asserted flag_test_identity_hold must survive a bare i_diag_clear_event; real RTL (found via a continuous per-cycle edge monitor, not more guessing) shows ppg_control_top.v merges this TB's own i_control_abort_event with the supervisor's own automatic one-shot owner-scoped abort (flag_owner_abort_event = i_control_abort_event || supervisor_system_abort_event_o) before it ever reaches AMI/scheduler/SSW -- the supervisor's blocking episode auto-releases the injected-mismatch owner through the real original-identity path almost immediately once it opens, well before this file ever calls STOP or diag_clear manually, making the literal "diag_clear before any recovery" window structurally unobservable through this construction. Rewritten to verify the real safety property instead (the automatic release produced no fabricated formal result), with the finding documented for reuse. (9) LFA-02a had two independent bugs: (a) it snapshotted o_ami_datapath_empty, a broad top-level aggregate that also includes scheduler_idle/controller_idle and other components unrelated to detection state, instead of the actual signal flag_detection_discard_trigger checks (ppg_adc_measurement_idac_integration.v's internal flag_pwi_detection_datapath_empty); (b) it conflated the "held valid formal result" and "STOP discard-pending owner" requirements onto the same single transaction, but a discard-pending owner's real DONE structurally produces success=0 with zero formal data (already separately proven), so there was never a genuine valid-but-stuck result to discard -- split into two correctly-targeted transactions, the first completing normally while ready=0 to populate the held-result register for real, the second undergoing the STOP-during-commit sequence. (10) LFA-10(b) originally planned to reuse the duplicate-DONE mechanism to trigger SSW's own local transaction_mismatch_sticky_o; fact #5 above proves this shared broadcast event never reaches SSW at all when nothing is armed anywhere, so the construction was structurally impossible via this path. Rewritten to document this honestly as a confirmed real construction difficulty (SSW's real trigger, flag_owner_commit_error, needs a genuine scheduler-vs-SSW owner-identity divergence at commit time that this project's own SSW unit-level TB only exercises by directly forcing SSW's raw internal i_adc_owner_* inputs -- not legitimately reachable from the joint ppg_control_top boundary with this file's fixed-RAW driving approach), matching this project's LFA-06/SID-11 honesty convention rather than a fabricated PASS; LFA-10(a) (AMI-side) stands as solid, real, independent evidence.
+ // 2026/08/30            V1.2          Erie                  LFA-10(b) reclassified from "TB-construction difficulty" to a confirmed real RTL/contract gap, same category as SID-11/LFA-06/OIB-01, after a real construction attempt and a complete real-RTL trace of every OR-term in flag_switch_protocol_error_condition. A cross-session RTL investigation (during Stage 5 Group 13 OIB work) first ruled out identity-mismatch as flag_owner_commit_error's trigger (the Scheduler's commit-event amb/dc code+epoch fields and SSW's own context-acceptance-time snapshot both read the exact same once-per-frame-latched Scheduler register, structurally guaranteed equal within one owner's lifetime) and proposed racing the top-level i_control_abort_event against the Scheduler's own owner-commit event instead, reusing this file's own already-proven-safe LFA-04 abort mechanism. Built and ran it for real: iverilog showed the race successfully detected a real commit event every time, but commit_fire=1 (a normal successful grant), never commit_error. Root cause traced to source: ppg_400hz_frame_calibration_scheduler.v line 449's transaction_start_valid_o (the Scheduler's own precondition for ever asserting the commit event at all) already requires flag_lifecycle_active, which itself requires !i_control_abort_event -- meaning the Scheduler structurally never generates a commit event while abort is asserted, so "commit_event=1 && abort=1" is not a same-cycle timing-engineering problem, it is a logical impossibility on this signal path. Given this real dead end, the other two OR-terms of flag_switch_protocol_error_condition were checked too, closing the set: flag_static_bias_input_source_invalid requires reaching RUN with an illegal STATIC_BIAS+PHOTODIODE combination, but Group 10's ILM-15 already real-confirmed this exact combination is rejected at COMMIT by the V4/V5 config manager (C_ERROR_STATIC_BIAS_INPUT_SOURCE=8'h14, lifecycle stays in ST_CONFIG) and can never reach RUN; (i_normal_frame_active && i_calibration_frame_active) requires the Scheduler's own o_normal_frame_active/o_calibration_frame_active to both be true, but both are defined (lines 556-557) as equality checks against the same single, mutually-exclusive dec_frame_mode field, so they can never both be true by construction. Combined with the fourth term (OIB-01's already-confirmed structural gap), all four legal paths to switch_protocol_error_sticky_o are now independently proven unreachable -- this sticky appears entirely unreachable through any legal ppg_control_top top-level construction in the current RTL. Moved to project-ppg-stage5-deferred-rtl-interface-work as the fourth tracked item; the LFA-10(b) scenario in this file reverts to an honest SKIP carrying this complete evidence chain, not a fabricated PASS.
++// 2026/10/09            V1.5          Erie                  B merge batch (ID governance): sub-label LFA-11a -> TB-local AUTOABT-QUIET (it checks no formal result during the supervisor automatic owner-scoped abort, contract section 9.5.1 rule 5 / matrix P03, not C25 LFA-11). Checks and PASS count unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 版权归属:           Erie
+ // 开发人员:           Erie
+@@ -56,7 +57,7 @@
+ // 依赖文件:           ppg_control_top及其完整真实层次
+ //
+ // 当前版本:           V1.4
+-// 修订日期:           2026年10月01日
++// 修订日期:           2026年10月09日
+ // 修订历史:
+ //    时间                版本          修订人                修订内容
+ // 2026年10月01日        V1.4          Erie                  任务C（TASKC_TICK248_P2S_20261001.md）：把i_test_calibration_loss_inject_valid接到初值为0、全程不驱动的寄存器，写法与tb_ppg_control_top_robustness_corner_waveforms.v相同。本TB例化ppg_control_top时C_ENABLE_TEST_INJECTION=1，注入结构会被生成，但这个输入此前一直未连接（浮空Z，见REGRESSION_BASELINE_20260930.md第6.6节）。已逐个核对control_top全部7个验证注入输入，只有这一个悬空，补接后iverilog -Wall不再报任何悬空输入。补接前后（同一套RTL）排序后的PASS行、$finish时刻和最终横幅完全相同。
+@@ -67,6 +68,7 @@
+ // 2026年08月29日        V1.1          Erie                  真实iverilog debug收尾：JNT_BASELINE 53/53 PASS，`LIFECYCLE_FAULT_ADC_ANOMALY_TB_PASS result_captures=7 owner_commit_total=220 measurement_discard_events=2 detection_discard_events=0`。这一步走了大约十八轮真实仿真、十个真实的TB自己的问题（本文件全程没有改任何RTL），每一个都真正查到了根因，不是靠猜——记在这里因为其中几条对以后Stage5/OIB的工作直接有用：
+ //                                                             （1）LFA-01/LFA-12(第一处)在原始请求脉冲i_stop_event/i_start_event后一拍就检查pending清除/干净重启，而不是等真正的注册式ack o_stop_ack_event/o_start_ack_event——flag_control_cancel和干净搜索态判据都是拿ack驱动的，不是原始请求。（2）LFA-12(a)还多断言了pending位在ack后必须立即为0；真实RTL里全新搜索本来就会在START后几拍内建立第一个候选pending，这是正常新活动不是陈旧残留——改成只查startup_search_complete/B_INFLIGHT。（3）LFA-09先后两次基于错误理论的构造（先"授予后不响应"，再"强制AMB升级"——这条升级路径从ST_NORMAL根本走不到）都失败，直接读状态机才确认ST_NORMAL唯一出口是ST_AMB_RECHECK，NORMAL慢速跟踪的confirm-count升级判据只在ST_DCS_REVALIDATE_R（周期重检领域）内部才会被检查。唯一真实、不需要生成器的构造是持有TB自己的i_adc_physical_idle输入拉低跨过一个真实宏帧边界，让RED的tick0 pending真实来不及在283拍内被授予。（4）LFA-04的abort测试第一次拖垮了后面好几个阶段：i_control_abort_event会同拍清B_FRAME_ACTIVE并把FRAME_MODE打回IDLE，和STOP不同，NORMAL不会自己恢复——改成abort后走一次完整的task_stop_and_drain+recommit+START恢复，不再继续对着已经死掉的帧驱动样本。（5）LFA-07和LFA-05的重复/旧DONE检查最初都要求某个诊断sticky置位（先是scheduler的，后来是AMI的）；真实RTL确认物理capture层（ppg_adc_async_stage_capture.v）自己就会安全丢弃任何没被真实i_adc_transaction_start武装过的CLK_DOUT，全程零副作用零诊断——合同原文只要求安全（不产生第二次completion/result/owner），不要求sticky，两处检查都改成了真正、最小、有依据的判据。（6）LFA-07的重复DONE紧跟着owner释放就立即呈交，结果撞上了一个真实、合法、几乎瞬间就被授予的新owner（和第3条同一条近乎瞬时授予的真实事实），被误判成"产生了第二次正式结果"——改成只在系统真正STOP+drain到CONFIG之后才呈交，确保不会有新grant。（7）LFA-05的旧DONE呈交得太晚（START后两次settle延迟），真实自主搜索已经开始请求它自己的第一个AMB候选——IDAC控制器的校准搜索状态机会消费任何在o_amb_sample_request/o_dcs_sample_request保持为真期间到达的CLK_DOUT，完全独立于AMI/scheduler的owner抽象（和第5条AMI owner门控路径是完全不同、同样真实、可推广的事实），悄悄污染了搜索自己的进度，直到好几个阶段之后才以"DC_R stage不收敛"的形式暴露出来。改成o_start_ack_event确认后立即呈交，并显式加了guard，一旦发现任一请求信号已经抬起就直接FAIL报错，证明确实命中了真正空闲的窗口。（8）LFA-11(a)最初断言flag_test_identity_hold必须扛过一次裸的i_diag_clear_event；真实RTL（用逐拍连续edge监视器才查到，不是继续猜）确认ppg_control_top.v把本文件自己的i_control_abort_event和supervisor自己"每个故障episode恰好一次、只扇给事务owner"的自动abort（flag_owner_abort_event = i_control_abort_event || supervisor_system_abort_event_o）合并之后才送到AMI/scheduler/SSW——supervisor的阻断episode一旦打开，几乎立刻就会通过原始身份路径自动释放这笔错配owner，远早于本文件手动调用STOP或diag_clear，"diag_clear在任何恢复之前"这个字面窗口在这条构造下根本观察不到。改成核实真正的安全性质（这次自动释放没有伪造任何formal结果），并把这个发现记录下来供以后复用。（9）LFA-02a有两个独立问题：（a）快照用的是o_ami_datapath_empty（顶层宽泛聚合，还包含scheduler_idle/controller_idle等和检测代际完全无关的分量），不是flag_detection_discard_trigger真正查的那个信号（ppg_adc_measurement_idac_integration.v内部的flag_pwi_detection_datapath_empty）；（b）把"held住的valid正式结果"和"STOP discard-pending owner"两个要求绑在了同一笔事务上，但discard-pending owner的真实DONE结构上就只会产生success=0、零formal data（已经单独验证过），根本没有真正valid又卡住的结果可以discard——拆成两笔各自对准目标的独立事务，第一笔在ready=0期间正常完成、真正把held-result寄存器填上真实值，第二笔再走STOP-during-commit流程。（10）LFA-10(b)原计划复用重复DONE机制触发SSW自己的本地失配故障；上面第5条已经证明这个共享广播事件在无人武装的情况下根本到不了SSW，这条构造从机制上就走不通。改成如实记录为真实确认的构造难点（SSW真正的触发条件flag_owner_commit_error需要一次真实的scheduler-vs-SSW owner身份分歧，本项目自己的SSW单元级TB也只能靠直接force SSW内部原始输入i_adc_owner_*才能构造，联合ppg_control_top边界配合本文件固定RAW驱动惯例够不到），和本项目LFA-06/SID-11的诚实惯例一致，不是硬凑一个假PASS；LFA-10(a)（AMI侧）作为扎实、真实、独立的证据保留。
+ // 2026年08月30日        V1.2          Erie                  LFA-10(b)从"TB构造难点"改判为和SID-11/LFA-06/OIB-01同一类真实生产RTL/合同缺口——一次真实构造尝试+对`flag_switch_protocol_error_condition`全部四项OR分支做完整真实追查得出的结论。Group13(OIB)工作期间的一次跨会话RTL追查先排除了identity mismatch路径（scheduler commit事件携带的amb/dc code+epoch字段和SSW自己接管时锁存的字段读的是同一个每帧只锁存一次的Scheduler内部寄存器，帧内结构上不可能不一致），转而提出让顶层`i_control_abort_event`和scheduler自己的commit事件真实同拍race，复用本文件LFA-04已经验证过安全可用的同一个abort输入。真实动手构造并用iverilog跑过：race确实每次都真实命中了一笔真实commit事件，但`commit_fire=1`（正常成功建立，不是我们要的错误），从未出现`commit_error`。追到根因：`ppg_400hz_frame_calibration_scheduler.v`第449行`transaction_start_valid_o`（scheduler自己决定要不要发commit事件的判据本身）就要求`flag_lifecycle_active`，而它本身就要求`!i_control_abort_event`——也就是说scheduler看到abort=1根本不会发commit事件，`commit_event=1`和`abort=1`在这条信号链上结构上互斥，不是同拍时序工程问题，是逻辑上的不可能组合。既然这条路真死了，顺手把剩下两项OR分支也查完：`flag_static_bias_input_source_invalid`需要带着STATIC_BIAS+PHOTODIODE非法组合真的走到RUN，但Group10的ILM-15早就真实confirmed这个组合在COMMIT阶段就被V4/V5配置管理器拒绝（`C_ERROR_STATIC_BIAS_INPUT_SOURCE=8'h14`，`o_lifecycle_state`停在ST_CONFIG），永远到不了RUN；`(i_normal_frame_active && i_calibration_frame_active)`要求scheduler自己的`o_normal_frame_active`/`o_calibration_frame_active`同时为真，但两者（第556-557行）都是对同一个互斥的`dec_frame_mode`字段判等，结构上不可能同时成立。加上第四项（OIB-01已经确认的结构性缺口），`flag_switch_protocol_error_condition`全部四条合法路径现在都各自有真实证据（三项静态RTL追查+一项真实iverilog同拍race）确认无法通过任何合法顶层构造触发——这个sticky在当前RTL下看起来整体不可达。已经并入`project-ppg-stage5-deferred-rtl-interface-work`作为第四项被追踪的条目；本文件的LFA-10(b)场景改回一段带完整真实证据链的诚实SKIP，不是硬凑的假PASS。
++// 2026年10月09日        V1.5          Erie                  B合并批次（编号治理）：子标签LFA-11a改为TB本地名AUTOABT-QUIET（实测supervisor自动owner级abort期间无正式结果，属合同§9.5.1规则5/矩阵P03，不是C25 LFA-11）。判定与PASS行数不变。
+ //
+ // 复位后跑一个连续的SEARCH_TRACK双光固定RAW驱动RUN，依次核对STOP/abort/reset
+ // 在启动搜索pending、NORMAL owner在途、周期重检pending三种场景下的取消/discard
+@@ -1731,7 +1733,7 @@ module tb_ppg_control_top_lifecycle_fault_adc_anomaly();
+ 					$finish;
+ 				end
+ 				i_test_identity_inject_valid = 1'b0;
+-				cnt_before = cnt_result_capture; // 供LFA-11a核对整段故障episode期间自始至终没有虚假formal结果
++				cnt_before = cnt_result_capture; // 供AUTOABT-QUIET核对整段故障episode期间自始至终没有虚假formal结果
+ 				repeat(4) @(posedge i_clk);
+ 				$display("LFA02B_TRACE checkpoint=after_inject_settle identity_hold=%b", ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_test_identity_hold);
+ 				if(!o_ami_integration_protocol_error_sticky) begin
+@@ -1804,12 +1806,12 @@ module tb_ppg_control_top_lifecycle_fault_adc_anomaly();
+ 				// 关键的合同规则5安全性质：这次真实释放走的是原始身份
+ 				// success=0，不是静默丢弃，也没有产生虚假formal结果
+ 				if(cnt_result_capture != cnt_before) begin
+-					$display("FAIL LFA-11a a formal result appeared during the supervisor's automatic owner-scoped abort release");
++					$display("FAIL AUTOABT-QUIET a formal result appeared during the supervisor's automatic owner-scoped abort release");
+ 					cnt_error = cnt_error + 1;
+ 				end else if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT]) begin
+-					$display("PASS LFA-11a informational: owner still genuinely in flight at this checkpoint, supervisor auto-abort has not yet resolved it");
++					$display("PASS AUTOABT-QUIET informational: owner still genuinely in flight at this checkpoint, supervisor auto-abort has not yet resolved it");
+ 				end else begin
+-					$display("PASS LFA-11a the supervisor's own automatic owner-scoped abort (flag_owner_abort_event, not this TB's own i_control_abort_event) already released the owner through the real original-identity path before any manual diag_clear/STOP, with no formal result fabricated -- diag_clear alone was never the mechanism that discarded it");
++					$display("PASS AUTOABT-QUIET the supervisor's own automatic owner-scoped abort (flag_owner_abort_event, not this TB's own i_control_abort_event) already released the owner through the real original-identity path before any manual diag_clear/STOP, with no formal result fabricated -- diag_clear alone was never the mechanism that discarded it");
+ 				end
+ 				@(negedge i_clk);
+ 				i_diag_clear_event = 1'b1;
+@@ -1818,7 +1820,7 @@ module tb_ppg_control_top_lifecycle_fault_adc_anomaly();
+ 				repeat(4) @(posedge i_clk);
+ 
+ 				//---- STOP排空回CONFIG（owner这一刻大概率已经被supervisor自动abort
+-				// 释放，见上面LFA-11a的真实发现；这里再确认一次并推进生命周期）----//
++				// 释放，见上面AUTOABT-QUIET的真实发现；这里再确认一次并推进生命周期）----//
+ 				cnt_before = cnt_measurement_discard_events;
+ 				task_pulse_stop;
+ 				cnt_wait_loop = 0;
+diff --git a/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v b/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v
+index 517cbca..c96734d 100644
+--- a/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v
++++ b/rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v
+@@ -10,8 +10,8 @@
+ // Simulations:     tb_ppg_sar9_sar15_safe_selection_wrapper
+ // Referrences:     PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
+ // Dependencies:    ppg_sar9_sar15_safe_selection_wrapper.v
+-// Version:         V1.8
+-// Revision Date:   2026-10-08
++// Version:         V1.9
++// Revision Date:   2026-10-09
+ // History:
+ // 2026-08-15       V1.3.1      Codex       Add independent waveform and ADC-owner regression.
+ // 2026-08-24       V1.4        Erie        Re-run this self-check against the current (V1.4) SSW RTL before depending on it for C01 TOP-20 integration evidence. This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated at the DUT instantiation; unlike the scheduler's equivalent V1.4 gap (17 of 57 cases silently passed with a stale value), here every owner-identity match/release expression that depends on i_run_generation compares against an undriven net, and iverilog leaves an unconnected input floating as an indeterminate value rather than a clean constant, so the regression failed loudly and overtly (pass=12, error=109, FATAL) the first time it was actually run this session rather than passing quietly. Fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation, and driving it at a fixed constant in set_defaults; none of SSW-01 through SSW-52 exercise stale-generation rejection, so that remains a coverage gap, not newly added here. The new o_ssw_fault_* register group added alongside i_run_generation in RTL V1.4 is also not yet connected or asserted on by this TB; that is a separate, still-open coverage gap left for a future pass, not fixed here. All 52/52 pass after the fix.
+@@ -19,6 +19,7 @@
+ // 2026-10-06       V1.6        Erie        ABCD review F-035: add TB-local case ABT-DONE (no SSW-nn number taken): abort and a matching DONE in the same cycle must release the owner while the RED waveform is still cancelled, the wrapper must go idle, and after STOP, diag clear and a generation-2 START a new owner must be established and released. Pass criterion 52 -> 53; banner unchanged. Negative control: with abort-hold ahead of release (SSW V1.5 order) ABT-DONE fails 6 checks.
+ // 2026-10-08       V1.7        Erie        Owner-lifecycle round step 3: input i_adc_transaction_lost_event is now a TB reg; new TB-local checks LOST-RLS / LOST-MSM (matching void releases the owner, wrong-index void keeps it and raises the mismatch), BIND-Q3 (L-1: a stale owner of frame N must not drive TIA/Q3 of the frame N+1 RED context nor mask its deadline sticky), S1-LATE / S1-ONTM (calibration owner of the current subframe still in flight at local tick 385 sets the non-blocking late sticky; on-time completion does not). Macro ticks 2..320 are stepped one by one so the context release tick 317 is not skipped. Pass gate 53 -> 58.
+ // 2026-10-08       V1.8        Erie        ABCD L-6 (provisionally called N-2 in the working session): add TB-local case L6-START (no SSW contract number): a RED waveform context is taken over at tick 0 with no owner, STOP is acknowledged with the tick frozen, then START generation 2; requires sar timing idle, wrapper idle and analog safe after START, then a new waveform and owner work normally. Criterion 58->59. Negative control (old restore condition start ack && o_wrapper_idle) fails 4 checks.
++// 2026-10-09       V1.9        Erie        B merge batch (ID governance): case label SSW-18 -> TB-local CAL-ODL (it tests the calibration owner deadline, C09 SSW-37/38, not contract SSW-18). Checks unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 版权归属:        Erie
+ // 开发人员:        Codex
+@@ -30,7 +31,7 @@
+ // 参考资料:        PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
+ // 依赖文件:        ppg_sar9_sar15_safe_selection_wrapper.v
+ // 当前版本:        V1.8
+-// 修订日期:        2026年10月08日
++// 修订日期:        2026年10月09日
+ // 修订历史:
+ // 2026-08-15       V1.3      Codex       增加SSW-01至SSW-48独立通道回归。
+ // 2026-08-24       V1.4      Erie        为准备C01 TOP-20整机验收证据，先拿这份自检TB对当前V1.4 SSW RTL重跑一遍。这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接；和scheduler那次同类缺口不同（scheduler是17/57用旧值静默通过），这里owner身份匹配/释放全部依赖i_run_generation，而iverilog把未连接输入端浮空为不确定值而不是干净常量，导致本轮第一次真正跑这份回归时不是静默通过、而是直接响亮失败（pass=12、error=109、FATAL）。修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在set_defaults里给它一个全程固定常量——SSW-01至SSW-52本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。RTL V1.4同时新增的o_ssw_fault_*故障记录组，这份TB目前也还没有连接或断言，这是另一个仍然待补的覆盖缺口，本次未修复。修复后52/52全过。
+@@ -38,6 +39,7 @@
+ // 2026-10-06       V1.6      Erie        ABCD复核F-035：新增TB本地用例ABT-DONE（不占用SSW编号）：abort与匹配DONE同拍时必须释放owner，同时RED波形仍被撤销，wrapper回到idle；随后STOP、诊断清除、第2代START后必须能建立并释放新owner。判据52改为53，横幅不变。负对照：恢复V1.5的abort保持优先顺序时ABT-DONE有6项失败
+ // 2026-10-08       V1.7      Erie        owner生命周期轮第三步：输入i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-RLS/LOST-MSM（匹配作废释放owner，序号不符的作废保持owner并置错配）、BIND-Q3（L-1：帧N的旧owner不得驱动帧N+1 RED上下文的TIA/Q3，也不得掩盖其截止sticky）、S1-LATE/S1-ONTM（本子帧校准owner在local tick 385仍在途置非阻断迟到sticky，按时完成不置）。宏帧tick 2..320逐拍推进，避免跳过上下文释放tick 317。判据53改为58。
+ // 2026-10-08       V1.8      Erie        ABCD L-6（工作会话中曾暂称N-2）：新增TB本地用例L6-START（不占SSW合同编号）：tick 0接管RED波形上下文且无owner，冻结tick下STOP确认，再以代际2 START；要求START后sar时序空闲、wrapper空闲、模拟安全，随后新波形与owner正常工作。判据58→59。负对照（恢复条件改回启动确认&&o_wrapper_idle）4项失败。
++// 2026-10-09       V1.9      Erie        B合并批次（编号治理）：用例标签SSW-18改为TB本地名CAL-ODL（实测校准owner截止，属C09 SSW-37/38，不是合同SSW-18）。判定不变。
+ module tb_ppg_sar9_sar15_safe_selection_wrapper;
+ 
+ 	localparam [1:0] FRAME_TYPE_AMB    = 2'b00;
+@@ -711,13 +713,13 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
+ 		expect_true(o_transaction_mismatch_sticky && o_adc_owner_inflight && o_wrapper_fault_blocking, "mismatched DONE must preserve owner and raise a blocking diagnostic");
+ 		end_case("SSW-17");
+ 
+-		begin_case("SSW-18");
++		begin_case("CAL-ODL");
+ 		reset_and_start;
+ 		send_waveform(1'b0, 1'b0, FRAME_TYPE_AMB, 16'd118, 8'h31, 8'h00, 4'h1, 4'h0, 8'h00);
+ 		expect_true(dut.flag_cal_context_valid, "calibration context must remain valid while its owner is pending");
+ 		cal_tick(10'd249);
+ 		expect_true(o_owner_deadline_timeout_sticky, "missing calibration owner must time out before the local tick-249 back-end window");
+-		end_case("SSW-18");
++		end_case("CAL-ODL");
+ 
+ 		begin_case("SSW-19");
+ 		reset_and_start;
+diff --git a/rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v b/rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v
+index 352334f..b22d281 100644
+--- a/rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v
++++ b/rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v
+@@ -15,14 +15,15 @@
+ // Dependencies:
+ //      DUT only, no child submodules
+ //
+-// Version:         V1.4
+-// Revision Date:   2026-10-08
++// Version:         V1.5
++// Revision Date:   2026-10-09
+ // History:
+ // 2026-08-23           V1.0       Erie        Create file.
+ // 2026-09-28           V1.1       Erie        Add SUP10A: a second, independently-closed episode after SUP09A, asserting the full abort/STOP/discard trio and a fresh snapshot fire again -- closes a real dynamic-coverage gap for K02/N06's "later episode independent of first-fault history" claim, which previously had only static RTL-reading support and no simulation evidence.
+ // 2026-10-05           V1.2       Erie        ABCD review F-012: add the TB-local check RE-ARM (deliberately not a SUP-nn label: contract C24 SUP-10 means something else). After SUP10A the first-fault snapshot is deliberately NOT diag-cleared; once the episode really closes, an independent Scheduler cause 0x11 record must open a new episode with a full abort/STOP/discard trio while cause 0x03/source/identity stay as the retained first fault and only summary bit 0x0008 is added (contract section 4). Pass criterion 14 -> 15. Negative control: RTL episode-open changed from !blocking to !cause_valid passes the old 14 but fails RE-ARM.
+ // 2026-10-06           V1.3       Erie        ABCD review F-014: add TB-local check WDPARM (6-character label like the others): the instantiated watchdog parameters must be legal, CYCLES>=1 and COUNTER_WIDTH>=$clog2(CYCLES+1). This TB deliberately uses the shortened 8/4; the frozen product values 5000/13 are checked in the control-top and chip-top TBs. Pass criterion 15 -> 16. Negative control: with C_WD_WIDTH=3 only WDPARM fails, while every behavioural check still passes, which is exactly the silent risk the check guards against.
+ // 2026-10-08           V1.4       Erie        Owner-lifecycle round step 3: new TB-local checks SUM-06 / SUM-07 (AMI-originated cause 8'h06 sets summary bit 9 = 0x0200, cause 8'h07 sets summary bit 10 = 0x0400, source 4'h1). Pass gate 16 -> 18.
++// 2026-10-09           V1.5       Erie        B merge batch (ID governance): label strings only. SUP03A->CLRBLK, SUP06A->EPICLS, SUP09A->WDIDLE, SUP10A->EPI2ND (they do not test the same-numbered C24 rows); the final banner lists the SUP rows actually checked. Checks and counts unchanged.
+ ///////////////////////////////////Chinese////////////////////////////////////////
+ // 版权归属:        Erie
+ // 开发人员:        Erie
+@@ -39,13 +40,14 @@
+ //      仅DUT本体
+ //
+ // 当前版本:        V1.4
+-// 修订日期:        2026年10月08日
++// 修订日期:        2026年10月09日
+ // 修订历史:
+ // 2026-08-23           V1.0       Erie        创建文件
+ // 2026-09-28           V1.1       Erie        新增SUP10A：在SUP09A之后、独立完整关闭一次episode后，再验证第二个episode依然完整触发abort/STOP/丢弃三事件并锁存全新快照——补齐K02/N06"后续episode独立于首故障历史"这条此前只有RTL静态阅读支持、从未被真实仿真动态验证过的缺口
+ // 2026-10-05           V1.2       Erie        ABCD复核F-012：新增TB本地检查RE-ARM（刻意不用SUP族编号：合同C24的SUP-10是另一含义）。SUP10A之后故意不做诊断清除，episode真实关闭后送入独立的Scheduler cause 0x11记录，必须重新开episode并发出完整abort/STOP/丢弃三事件，首故障cause 0x03/来源/身份保持不变，只新增汇总位0x0008（合同第4节）。判据14项改为15项。负对照：RTL把episode开启条件由!blocking改为!cause_valid时，旧14项仍全通过，RE-ARM失败。
+ // 2026-10-06           V1.3       Erie        ABCD复核F-014：新增TB本地检查WDPARM（与其余标签同为6字符）：实际例化的看门狗参数必须合法，CYCLES>=1且COUNTER_WIDTH>=$clog2(CYCLES+1)。本TB故意用缩短的8/4；产品固定值5000/13由控制顶层与芯片顶层TB核对。判据15改为16。负对照：C_WD_WIDTH改为3时只有WDPARM失败，其余行为检查全部仍通过，这正是该检查要防的静默风险
+ // 2026-10-08           V1.4       Erie        owner生命周期轮第三步：新增TB本地检查SUM-06/SUM-07（AMI来源cause 8'h06置summary bit 9=0x0200，cause 8'h07置bit 10=0x0400，来源4'h1）。判据16改为18。
++// 2026-10-09           V1.5       Erie        B合并批次（编号治理）：只改标签字符串。SUP03A->CLRBLK、SUP06A->EPICLS、SUP09A->WDIDLE、SUP10A->EPI2ND（它们测的不是C24同号条目）；总横幅改为列出实际检查的SUP条目。判定与计数不变。
+ 
+ module tb_ppg_system_fault_abort_supervisor ();
+ 
+@@ -358,7 +360,7 @@ module tb_ppg_system_fault_abort_supervisor ();
+ 		@(negedge i_clk);
+ 		i_diag_clear_event = 1'b0;
+ 		@(negedge i_clk);
+-		check_case("SUP03A", (o_system_fault_cause_valid === 1'b1) &&
++		check_case("CLRBLK", (o_system_fault_cause_valid === 1'b1) &&
+ 			(o_system_fault_cause === 8'h01) &&
+ 			(o_system_fault_blocking === 1'b1) &&
+ 			(o_system_fault_summary[0] === 1'b1) &&
+@@ -368,7 +370,7 @@ module tb_ppg_system_fault_abort_supervisor ();
+ 		i_ami_fault_active = 1'b0;
+ 		i_ssw_fault_active = 1'b0;
+ 		@(negedge i_clk);
+-		check_case("SUP06A", o_system_fault_blocking === 1'b0);
++		check_case("EPICLS", o_system_fault_blocking === 1'b0);
+ 
+ 		// SUP-07：全部恢复后诊断清除生效，快照、汇总、丢弃sticky一并归零。
+ 		@(negedge i_clk);
+@@ -476,7 +478,7 @@ module tb_ppg_system_fault_abort_supervisor ();
+ 		repeat (C_WD_CYCLES - 2) @(negedge i_clk);
+ 		i_adc_physical_idle = 1'b1;
+ 		repeat (4) @(negedge i_clk);
+-		check_case("SUP09A", (o_system_fault_blocking === 1'b0) &&
++		check_case("WDIDLE", (o_system_fault_blocking === 1'b0) &&
+ 			(o_system_fault_cause_valid === 1'b0) &&
+ 			(o_system_fault_summary === 16'h0000));
+ 		i_stop_episode_active = 1'b0;
+@@ -486,7 +488,7 @@ module tb_ppg_system_fault_abort_supervisor ();
+ 		// 后续episode照样发一次完整trio"这条声明里此前只有RTL结构性阅读支持、从未被本文件任何真实
+ 		// 仿真动态验证过的那一半，本次补齐。
+ 		pulse_ami_fault(8'h03, 1'b1, 16'h4321, 16'h8765);
+-		check_case("SUP10A", (o_system_fault_blocking === 1'b1) &&
++		check_case("EPI2ND", (o_system_fault_blocking === 1'b1) &&
+ 			(o_system_fault_cause_valid === 1'b1) &&
+ 			(o_system_fault_cause === 8'h03) &&
+ 			(o_system_fault_source === 4'h1) &&
+@@ -551,7 +553,7 @@ module tb_ppg_system_fault_abort_supervisor ();
+ 		@(negedge i_clk);
+ 
+ 		if(cnt_fail == 0 && cnt_pass == 18)begin
+-			$display("SUP-01 through SUP-10 PASS: %0d real comparisons", cnt_pass);
++			$display("SUP-01/02/04/06/07 and TB-local supervisor checks PASS: %0d real comparisons", cnt_pass);
+ 		end else begin
+ 			$display("SUPERVISOR REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
+ 		end
+diff --git a/tools/run_unit_tb_regression.sh b/tools/run_unit_tb_regression.sh
+index a1e1012..305b910 100644
+--- a/tools/run_unit_tb_regression.sh
++++ b/tools/run_unit_tb_regression.sh
+@@ -56,11 +56,11 @@ native() {
+ # -----------------------------------------------------------------------------
+ TB_TABLE=(
+   # ---------------- hier: DUT inside the chip hierarchy (24) ----------------
+-  "tb_ppg_400hz_frame_calibration_scheduler|hier|ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v|^ALL FSC-01 THROUGH FSC-62 PASSED$|ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v"
++  "tb_ppg_400hz_frame_calibration_scheduler|hier|ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v|^ALL SCHT-1 THROUGH SCHT-62 PASSED$|ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v"
+   "tb_ppg_active_v4_control_plane_integration|hier|ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v|^ALL AV4C-01 THROUGH AV4C-22 PASSED$|ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v ppg_config_cdc_bridge/ppg_config_cdc_bridge.v ppg_system_active_config_unpack/ppg_system_active_config_unpack.v ppg_system_config_manager/ppg_system_config_manager.v"
+   "tb_ppg_adc_async_stage_capture|hier|ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v|^PASS ppg_adc_async_stage_capture explicit-frame checks$|ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v"
+-  "tb_ppg_adc_dc_recovery|hier|ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v|^PASS ppg_adc_dc_recovery DCR-01\.\.DCR-22$|ppg_adc_dc_recovery/ppg_adc_dc_recovery.v"
+-  "tb_ppg_adc_measurement_idac_integration|hier|ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v|^AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: [0-9]+ real comparisons$|ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v ppg_adc_dc_recovery/ppg_adc_dc_recovery.v ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v ppg_adc_result_router/ppg_adc_result_router.v ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v ppg_coarse_detection_fir/ppg_coarse_detection_fir.v ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v ppg_idac_code_controller/ppg_idac_code_controller.v ppg_normal_transaction_fork/ppg_normal_transaction_fork.v ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v ppg_precision_window_controller/ppg_precision_window_controller.v ppg_precision_window_integration/ppg_precision_window_integration.v"
++  "tb_ppg_adc_dc_recovery|hier|ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v|^PASS ppg_adc_dc_recovery directed DCR checks and DCRT-n vectors$|ppg_adc_dc_recovery/ppg_adc_dc_recovery.v"
++  "tb_ppg_adc_measurement_idac_integration|hier|ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v|^AMI-01 through AMI-45 except AMI-13 \(TB-local FORK-HOLD\), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: [0-9]+ real comparisons$|ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v ppg_adc_dc_recovery/ppg_adc_dc_recovery.v ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v ppg_adc_result_router/ppg_adc_result_router.v ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v ppg_coarse_detection_fir/ppg_coarse_detection_fir.v ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v ppg_idac_code_controller/ppg_idac_code_controller.v ppg_normal_transaction_fork/ppg_normal_transaction_fork.v ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v ppg_precision_window_controller/ppg_precision_window_controller.v ppg_precision_window_integration/ppg_precision_window_integration.v"
+   "tb_ppg_adc_pipeline_overlap_corrector|hier|ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v|^PASS ppg_adc_pipeline_overlap_corrector OVL-01\.\.OVL-17 and 1024-code sweep$|ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v"
+   "tb_ppg_adc_programmable_reconstructor|hier|ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v|^PASS ppg_adc_programmable_reconstructor PR-01\.\.PR-14 and 1024-code sweep$|ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v"
+   "tb_ppg_adc_result_router|hier|ppg_adc_result_router/tb_ppg_adc_result_router.v|^PASS ppg_adc_result_router RTR-01\.\.RTR-13$|ppg_adc_result_router/ppg_adc_result_router.v"
+@@ -79,7 +79,7 @@ TB_TABLE=(
+   "tb_ppg_sar9_sar15_safe_selection_wrapper|hier|ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v|^ALL SSW-01 THROUGH SSW-52 PASS$|ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v"
+   "tb_ppg_system_active_config_unpack|hier|ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v|^PASS: ppg_system_active_config_unpack all checks passed$|ppg_system_active_config_unpack/ppg_system_active_config_unpack.v"
+   "tb_ppg_system_config_manager|hier|ppg_system_config_manager/tb_ppg_system_config_manager.v|^PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed$|ppg_system_config_manager/ppg_system_config_manager.v"
+-  "tb_ppg_system_fault_abort_supervisor|hier|ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v|^SUP-01 through SUP-10 PASS: [0-9]+ real comparisons$|ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v"
++  "tb_ppg_system_fault_abort_supervisor|hier|ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v|^SUP-01/02/04/06/07 and TB-local supervisor checks PASS: [0-9]+ real comparisons$|ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v"
+   # ---------------- orphan: modules outside the chip hierarchy (4) ----------------
+   "tb_ppg_dual_precision_top|orphan|ppg_dual_precision_top/tb_ppg_dual_precision_top.v|^PASS: ppg_dual_precision_top CDC and frame-safe timing contract verified$|ppg_config_cdc_bridge/ppg_config_cdc_bridge.v ppg_dual_precision_top/ppg_dual_precision_top.v ppg_reset_sync/ppg_reset_sync.v ppg_timing_sar15/ppg_timing_sar15.v ppg_timing_sar9/ppg_timing_sar9.v"
+   "tb_ppg_timing_sar9|orphan|ppg_timing_sar9/tb_ppg_timing_sar9.v|^PASS: ppg_timing_sar9 optical, test-MUX, and static characterization modes matched\.$|ppg_timing_sar9/ppg_timing_sar9.v"

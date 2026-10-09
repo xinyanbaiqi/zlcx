@@ -1,0 +1,15 @@
+errors 715 -> 715 ; strict_warnings 0 -> 0
+by_rule baseline: {'VG000': 1, 'COMMENT_COMMENT_PLACEMENT': 714}
+by_rule branch  : {'VG000': 1, 'COMMENT_COMMENT_PLACEMENT': 714}
+per file (file, rule, severity): baseline -> branch
+  tb_ppg_400hz_frame_calibration_scheduler.v comment_gate error: 181 -> 181
+  tb_ppg_adc_dc_recovery.v comment_gate error: 106 -> 106
+  tb_ppg_adc_measurement_idac_integration.v comment_gate error: 58 -> 58
+  tb_ppg_control_top_lifecycle_fault_adc_anomaly.v comment_gate error: 212 -> 212
+  tb_ppg_sar9_sar15_safe_selection_wrapper.v comment_gate error: 142 -> 142
+  tb_ppg_system_fault_abort_supervisor.v comment_gate error: 15 -> 15
+  tbbase file.discovery error: 1 -> 0
+  tbnew file.discovery error: 0 -> 1
+issue (file, rule, severity, message without line numbers) differences: 2
+   0 -> 1 tbnew file.discovery No Verilog source files were found.
+   1 -> 0 tbbase file.discovery No Verilog source files were found.

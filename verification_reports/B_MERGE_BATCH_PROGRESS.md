@@ -9,9 +9,9 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段2已完成；阶段3/4/5的脚本与试跑已完成（条目7~10）。基线回归改到"回归机"上用Vivado 2022.2整套重跑（条目11），等其证据提交到`verification_reports/b_merge_batch_evidence/baseline_7a8eabf/`。等待期间完成的工作见条目12：§3.9的RTL注释、C08节号订正、别名表映射行、阶段3别名草稿、anchor_check负对照、阶段4全部9702个锚点的旧→新对照表。对照表尚未写入矩阵和别名表。
-- **下一步**：① `git pull`取回回归机基线证据，用`regression_evidence.py compare`按`REGRESSION_RUN_REQUEST.md` §1.4核对参考值（系统20/20、1250行、芯片20/0、模块级28/28）；**核对通过前不改TB标签**。② 核对通过后做阶段3：`tb_rename.py`改名、`strip_compare --strings`证明、把`alias_draft_renamed.md`各行写入别名表。③ 阶段4：按`anchor_conversion/anchor_mapping_table.tsv`写入矩阵和别名表；生成`anchor_history_allowlist.json`；补`@satisfies`（BMI-160）；接入门禁。④ 阶段5、6（终版回归在回归机上跑）、7。
-- **未决问题**：回归机的Vivado版本须为2022.2（待用户确认）。
+- **当前项**：阶段0基线已在回归机上核对通过（条目13）；阶段3（TB标签改名与别名表对照）已完成；下一步做阶段4锚点写入。
+- **下一步**：① 阶段4：按`anchor_conversion/anchor_mapping_table.tsv`把锚点一次性写入矩阵和别名表；生成`anchor_history_allowlist.json`；补`@satisfies`（BMI-160）；HEAD上anchor_check 0报错；独立复核；接入门禁。② 阶段5：正式重算§12.4a，刷新§13。③ 把最终提交号交给回归机，按`REGRESSION_RUN_REQUEST.md` §2跑终版回归，用`regression_evidence.py compare`与`baseline_7a8eabf`比对。④ 阶段7报告。
+- **未决问题**：无。“回归机Vivado须为2022.2”已确认（`ea60432`的MACHINE.txt为Vivado Simulator v2022.2）。
 
 ---
 
@@ -136,3 +136,13 @@
   - 7811条新文本逐条用anchor_check检查，0 error。另有210条"Cxx 文件头"不在检查范围，已人工抽查。
   - 证据在`b_merge_batch_evidence/anchor_conversion/`（README、TSV、汇总）。**未写入矩阵和别名表。**
 - 仍是旧写法的出处：alias第118行的`MATRIX.md §9.2.2`（该节不存在），写入时一并处理。
+
+### 条目13（2026-10-09）：基线核对通过；阶段3完成
+
+- **基线**：回归机证据`ea60432`（i5-10400，Vivado Simulator v2022.2）位于`baseline_7a8eabf/`。旁观会话从raw/的49个xsim.log独立重算过，本会话又核对了`index.tsv`。结果：49个TB全部rc=0、verdict PASS、`$finish`各1次；系统20/20、PASS 1250行，芯片20/0，模块级28/28（含FIR），与参考值一致。旁观会话另做了交叉验证：本机2019.2已跑完的44个TB，PASS行和`$finish`与2022.2完全相同。
+- **TB标签改名（BMI-103、140~144、146）**：由`tools/b_merge_tools/tb_rename.py`执行。共6个TB，只改字符串和文件头修订记录（LFA TB另有2处注释同步）；`tools/run_unit_tb_regression.sh`的4条横幅正则同步改了。新标签名在仓库其它文件中无撞号。
+  - `strip_compare --strings 7a8eabf`：6个TB全部IDENTICAL。负对照：改1个代码token报DIFFERENT，恢复后IDENTICAL。`strip_compare.py`新增一条规则：只含空白的行不参与比较（新增整行注释去掉后会留下空行）；加规则后f8986b3的RTL证明仍为IDENTICAL。
+  - deliverable gate：这些TB在基线上已有715个error（不是strict交付物）。改后按文件和规则逐项相同，即无新增发现（`tools/b_merge_tools/gate_compare.py`）。
+  - 证据在`b_merge_batch_evidence/tb_rename_proof/`。
+- **别名表（BMI-133）**：`alias_draft_renamed.md`两小节已写入别名表，包括57行FSC↔SCHT对照，以及SUP/DCR/SSW-18/AMI-13/LFA-11各行。旧行LFA-11、P03、P09、N06原先引用改名前的标签，已在原文旁注明新名。anchor_check在写入前后都是747个报错（746个旧行号锚点加第118行`§9.2.2`），新写入的行没有报错。
+- 未做：BMI-145（区间横幅），视重扫结论再定；BMI-105（C25中FSC/SUP/RRC编号引用的核对），放在阶段4一并处理。

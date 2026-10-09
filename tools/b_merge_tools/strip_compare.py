@@ -6,7 +6,8 @@ Usage:
 For every file, the version at <git-rev> and the working-tree version are both
 reduced by removing `//` line comments and `/* */` block comments (and, with
 --strings, replacing the content of every "..." string literal by an empty
-string). The reduced texts must be byte-identical. Line endings are normalised
+string). Whitespace-only lines are dropped, so a whole-line comment that is added
+or removed leaves no trace. The reduced texts must be byte-identical. Line endings are normalised
 to LF before reduction so that CRLF checkouts compare equal.
 
 Exit status: 0 when every file is identical after reduction, 1 otherwise.
@@ -41,8 +42,10 @@ def reduce_text(text, drop_strings):
         else:
             out.append(ch)
             i += 1
-    # trailing blanks left behind by removed comments are not significant
-    return '\n'.join(line.rstrip() for line in ''.join(out).split('\n'))
+    # trailing blanks left behind by removed comments are not significant, and neither
+    # are the empty lines left by added or removed whole-line comments (for example a
+    # new change-log entry in the file header)
+    return '\n'.join(line.rstrip() for line in ''.join(out).split('\n') if line.strip())
 
 
 def main():

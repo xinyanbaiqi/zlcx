@@ -5,19 +5,21 @@
 // Design Name:        PPG ADC DC Recovery Self-Checking Testbench
 // Module Name:        tb_ppg_adc_dc_recovery
 // Description:        Contract-directed checks for arithmetic, saturation and holding protocol.
-// Version:            V1.1
-// Revision Date:      2026-10-05
+// Version:            V1.2
+// Revision Date:      2026-10-09
 // History:
 // 2026-10-05           V1.1       Erie        ABCD review F-026: connect the eight previously floating diagnostic inputs (detect code, Stage1/Stage2 raw and code_ext, nominal 15-bit code/valid/saturated) and their outputs; every drive_and_check transaction now drives test-id-dependent values and compares all eight passthrough outputs. Negative control: RTL payload with inverted stage1_raw fails 21 cases.
+// 2026-10-09           V1.2       Erie        B merge batch (ID governance): label strings only. drive_and_check prints the TB-local vector name DCRT-n (test_id also drives stimulus, so it is unchanged; DCRT-3..7 test C15 DCR-04/07/12/09/09, mapping in the alias table); the PASS banner no longer claims DCR-01..DCR-22. Stimulus, checks and counts unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 公司:                Erie
 // 设计名称:            PPG ADC DC恢复自检测试平台
 // 模块名称:            tb_ppg_adc_dc_recovery
 // 模块说明:            覆盖DC恢复公式、舍入、饱和、模式切换和反压保持合同。
 // 当前版本:            V1.1
-// 修订日期:            2026年10月05日
+// 修订日期:            2026年10月09日
 // 修订历史:
 // 2026-10-05           V1.1       Erie        ABCD复核F-026：接上此前悬空的8个诊断输入（检测码、Stage1/Stage2原始码与code_ext、标称15-bit码/资格/饱和）及对应输出；每笔drive_and_check事务驱动与test_id相关的取值并核对8个透传输出。负对照：RTL载荷中stage1_raw取反时21项失败。
+// 2026-10-09           V1.2       Erie        B合并批次（编号治理）：只改标签字符串。drive_and_check打印TB本地向量名DCRT-n（test_id参与激励，未改；DCRT-3~7实测C15 DCR-04/07/12/09/09，对应关系见别名表）；PASS横幅不再宣称DCR-01..DCR-22。激励、判定与计数不变。
 
 module tb_ppg_adc_dc_recovery;
 	localparam integer C_FRAME_ID_WIDTH = 16;
@@ -229,7 +231,7 @@ module tb_ppg_adc_dc_recovery;
 				o_stage2_code_ext !== i_stage2_code_ext || o_nominal_15_code !== i_nominal_15_code ||
 				o_nominal_15_valid !== i_nominal_15_valid || o_nominal_saturated !== i_nominal_saturated)begin
 				error_count = error_count + 1;
-				$display("FAIL DCR-%0d coarse=%0d fine=%0d", test_id, $signed(o_coarse_ppg_value), $signed(o_fine_ppg_value));
+				$display("FAIL DCRT-%0d coarse=%0d fine=%0d", test_id, $signed(o_coarse_ppg_value), $signed(o_fine_ppg_value));
 			end
 			@(negedge i_clk);
 			i_result_valid = 1'b0;
@@ -473,7 +475,7 @@ module tb_ppg_adc_dc_recovery;
 			$display("FAIL DCR-01 asynchronous reset");
 		end
 		if(error_count == 0)begin
-			$display("PASS ppg_adc_dc_recovery DCR-01..DCR-22");
+			$display("PASS ppg_adc_dc_recovery directed DCR checks and DCRT-n vectors");
 		end else begin
 			$display("FAIL ppg_adc_dc_recovery errors=%0d", error_count);
 		end

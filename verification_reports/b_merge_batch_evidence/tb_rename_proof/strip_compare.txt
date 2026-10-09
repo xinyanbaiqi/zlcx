@@ -1,0 +1,30 @@
+# strip_compare proofs for the stage-3 TB label renames (run 2026-10-09 on the working tree before commit)
+
+## 1. --strings vs 7a8eabf (comments and string-literal bodies removed): must be IDENTICAL
+IDENTICAL rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v (raw changed)
+IDENTICAL rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v (raw changed)
+IDENTICAL rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v (raw changed)
+IDENTICAL rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v (raw changed)
+IDENTICAL rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v (raw changed)
+IDENTICAL rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v (raw changed)
+exit=0
+
+## 2. without --strings (strings kept): expected DIFFERENT, the label strings did change
+DIFFERENT rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v (raw changed)
+DIFFERENT rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v (raw changed)
+DIFFERENT rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v (raw changed)
+DIFFERENT rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v (raw changed)
+DIFFERENT rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v (raw changed)
+DIFFERENT rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v (raw changed)
+exit=1
+
+## 3. negative control: supervisor TB CLRBLK check 1'b1 -> 1'b0 (code token), --strings: expected DIFFERENT
+DIFFERENT rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v (raw changed)
+exit=1
+restored:
+IDENTICAL rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v (raw changed)
+exit=0
+
+## 4. earlier RTL proof re-run with the blank-line rule (f8986b3, no --strings): must stay IDENTICAL
+IDENTICAL rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v (raw changed)
+exit=0

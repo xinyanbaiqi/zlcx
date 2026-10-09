@@ -155,8 +155,8 @@
 | BMI-100 | OLR §8.4-2 | LFA-04 | 一级 | 同AMI-39，加超时作废例外 | 已完成（C25 V1.8） |
 | BMI-101 | BR§3.9；F9R §7-3 | SID-04（约第552行） | 一级 | "Every evaluated candidate uses eight physical SAR9 subframes"与RTL不符：每个候选只取一笔样本、相邻候选相隔一个子帧（625拍）。核对RTL与TB SID-04 PASS行后订正 | 已完成（C25 V1.8） |
 | BMI-102 | IDG §4、§8、§10；BR Q6 | PRC-05/08 | 登记 | PASS行是无条件`$display`引用其他TB证据；改为INFO会改变PASS行数，按BR Q6只登记、交收尾计划 | 不做（改PASS行数，BR Q6） |
-| BMI-103 | IDG §6.5、§10 | LFA-11 / TB `LFA-11a` | 一级（合同侧）＋TB标签 | 合同LFA-11前半句无断言如实写；TB子标签LFA-11a改本地名（属§9.5.1规则5/P03）。"informational分支不再打印PASS"会改PASS行数，只登记 | 待做（标签）；登记（PASS行） |
-| BMI-104 | IDG §8 E类、§10 | RAW↔RGC | 一级 | 在别名表加RAW-01~11 ↔ RGC-01~15对照行（数据来自TB原文） | 待做 |
+| BMI-103 | IDG §6.5、§10 | LFA-11 / TB `LFA-11a` | 一级（合同侧）＋TB标签 | 合同LFA-11前半句无断言如实写；TB子标签LFA-11a改本地名（属§9.5.1规则5/P03）。"informational分支不再打印PASS"会改PASS行数，只登记 | 已完成（标签AUTOABT-QUIET，阶段3提交）；PASS行只登记 |
+| BMI-104 | IDG §8 E类、§10 | RAW↔RGC | 一级 | 在别名表加RAW-01~11 ↔ RGC-01~15对照行（数据来自TB原文） | 已完成（`fd348d2`） |
 | BMI-105 | BR§5（C25：FSC/SUP/RRC编号治理） | RRC等 | 一级 | C25中涉及FSC/SUP/RRC的编号引用，随BMI-140/141核对；RRC族IDG判A，预计只需核对不改 | 待做 |
 
 ## 10. 芯片顶层合同（`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`）与C01
@@ -192,7 +192,7 @@
 | BMI-130 | IDF R1 | P05行（约:466） | 一级 | 去掉SUP06A作为5000周期看门狗证据 | 已完成（`fd348d2`） |
 | BMI-131 | ABCD §10(b) F-050 | SID-11行（约:148） | 一级 | 仍标SKIP、结构不可达；基线日志有`PASS SID-11`，按现状订正 | 已完成（`fd348d2`） |
 | BMI-132 | ABCD §4 F-003 | 约第58行出处`MATRIX:872` | 一级 | 失效出处，并入锚点转换（BMI-151） | 对照表已含（`anchor_conversion/`），随BMI-151写入 |
-| BMI-133 | F009 §9.4-5；BR§3.3 | 新增对照行 | 一级 | TB FSC-14 ↔ 合同FSC-03；TB FSC-32 ↔ 合同FSC-30（实参N不改，BR Q3）；其余调度器TB检查→合同条目对照（数据取IDG §5.2 FSC列，阶段3重扫后复核） | 草稿已入库（`affd3e3`，`alias_draft_renamed.md`），随TB改名同提交 |
+| BMI-133 | F009 §9.4-5；BR§3.3 | 新增对照行 | 一级 | TB FSC-14 ↔ 合同FSC-03；TB FSC-32 ↔ 合同FSC-30（实参N不改，BR Q3）；其余调度器TB检查→合同条目对照（数据取IDG §5.2 FSC列，阶段3重扫后复核） | 已完成（阶段3提交，草稿行已写入别名表） |
 | BMI-134 | ABCD §12.8；OLR §8.2；F009 §9.3 | 新增对照行 | 一级 | 三轮新增TB本地标签的映射：MGR-11、CAL-ROLLOVER-*、HIST-*、DISC-HELD、DET-QUAL、LEAF-HOLD、ABT-DONE、CANCEL-COMMIT、RETURN-HOLD、WDPARM、PARAM-*、DIAG-MAP38、CMD-STOP-PRIO；LOST-*、L1-*、L4-*、L3-*、BIND-Q3、S1-*、LSTK-*、K-*、WIN-*、BUSY-*、WDRAW-LOST、LOST-EXCL、F020-WDRAW、SUM-06/07、S1-ABANDON、LOST-SPI-*、SYS-*（37项）；FRAME-*、RESTART-*-SCAN、L6-START、SYS-RESTART-SCAN-*。无合同ID的如实填"无映射" | 已完成（`fd348d2`）；依赖TB改名的行在草稿中（`affd3e3`） |
 | BMI-135 | IDG §10；统筹§20-4 | IDC2/CIS/AV4/CF4（整族无TB编号） | 一级 | 本批做**族级登记**（"整族无TB编号、证据分散于…"）；逐条对照**不进**POST_TAPEOUT清单，改列"流片前验证收尾计划"（BMI-910） | 已完成族级登记（`fd348d2`）；逐条对照见BMI-910 |
 | BMI-136 | IDG §7、§10 JNT；OPTC；统筹§20-1、§20-2 | 别名表；C21 | 一级 | JNT：别名表注明；先查`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md`，已定义的JNT项映射到该文档章节，未定义的注明"TB定义"。OPTC-01/02：在C21登记，须对应C21规则或RTL实际行为，对不上的标"仅TB检查" | 别名表已完成（`fd348d2`，JNT按联合TB说明§11/§5.3）；OPTC在C21已有登记 |
@@ -201,13 +201,13 @@
 
 | 编号 | 来源 | 目标TB | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-140 | IDG §6.1、§10；IDF §4；ABCD F-046；BR Q3 | `tb_ppg_400hz_frame_calibration_scheduler.v` | TB标签 | `check_fsc(N,…)`不改实参，只把打印前缀改为TB本地名（命名先grep避撞号）；横幅`ALL FSC-01 THROUGH FSC-62 PASSED`、`FSC-01 through FSC-62: pass=…`同步改；FSC-32≡合同FSC-30只登记别名表 | 待做（阶段3先重扫） |
-| BMI-141 | IDG §6.2、§10；统筹§20-5 | `tb_ppg_system_fault_abort_supervisor.v` | TB标签 | SUP03A/06A/09A/10A：**一律改TB本地名**；只有重扫确认含义与某合同条目完全一致时才用该合同编号，不用"合同号+后缀"（如SUP07B、SUP06D）。横幅"SUP-01 through SUP-10 PASS"改为实际覆盖 | 待做 |
-| BMI-142 | IDF §1.1、§4 | AMI单元TB `AMI-13` | TB标签 | 改TB本地名（实测反压保持） | 待做 |
-| BMI-143 | IDG §6.3、§10；BR Q3 | `tb_ppg_adc_dc_recovery.v` `drive_and_check`第3~7号 | TB标签 | test_id参与生成激励，不动；若FAIL标签由test_id拼出则只改格式串前缀，做不到就只在别名表登记；横幅"DCR-01..DCR-22"改为实际覆盖 | 待做 |
-| BMI-144 | IDF §1.4、§4 | SSW TB的SSW-18场景 | TB标签 | 改本地名（实测校准owner截止，属SSW-37/38） | 待做 |
+| BMI-140 | IDG §6.1、§10；IDF §4；ABCD F-046；BR Q3 | `tb_ppg_400hz_frame_calibration_scheduler.v` | TB标签 | `check_fsc(N,…)`不改实参，只把打印前缀改为TB本地名（命名先grep避撞号）；横幅`ALL FSC-01 THROUGH FSC-62 PASSED`、`FSC-01 through FSC-62: pass=…`同步改；FSC-32≡合同FSC-30只登记别名表 | 已完成（阶段3提交，SCHT-n） |
+| BMI-141 | IDG §6.2、§10；统筹§20-5 | `tb_ppg_system_fault_abort_supervisor.v` | TB标签 | SUP03A/06A/09A/10A：**一律改TB本地名**；只有重扫确认含义与某合同条目完全一致时才用该合同编号，不用"合同号+后缀"（如SUP07B、SUP06D）。横幅"SUP-01 through SUP-10 PASS"改为实际覆盖 | 已完成（阶段3提交，CLRBLK/EPICLS/WDIDLE/EPI2ND） |
+| BMI-142 | IDF §1.1、§4 | AMI单元TB `AMI-13` | TB标签 | 改TB本地名（实测反压保持） | 已完成（阶段3提交，FORK-HOLD） |
+| BMI-143 | IDG §6.3、§10；BR Q3 | `tb_ppg_adc_dc_recovery.v` `drive_and_check`第3~7号 | TB标签 | test_id参与生成激励，不动；若FAIL标签由test_id拼出则只改格式串前缀，做不到就只在别名表登记；横幅"DCR-01..DCR-22"改为实际覆盖 | 已完成（阶段3提交，FAIL格式串前缀DCRT-；test_id未动） |
+| BMI-144 | IDF §1.4、§4 | SSW TB的SSW-18场景 | TB标签 | 改本地名（实测校准owner截止，属SSW-37/38） | 已完成（阶段3提交，CAL-ODL） |
 | BMI-145 | IDG §4、IDF §3.5 | MGR/PR/RTR/CAL/CCC/OVL/AV4C区间横幅 | TB标签 | 视重扫结论，只对"区间含无同义检查条目"的横幅改为实际覆盖；FSC/CCC/ADCN补零不一致随改名处理 | 待做 |
-| BMI-146 | BR Q3；IDF §3.5 | `tools/run_unit_tb_regression.sh` | 工具 | 同步依赖横幅文字的判据正则；回归证明判定数与`$finish`不变 | 待做 |
+| BMI-146 | BR Q3；IDF §3.5 | `tools/run_unit_tb_regression.sh` | 工具 | 同步依赖横幅文字的判据正则；回归证明判定数与`$finish`不变 | 已完成（阶段3提交，4条横幅正则）；判定数与`$finish`不变待终版回归证明 |
 | BMI-147 | BR§6.3 | 扫描器重跑 | 工具 | 从IDG附录A提取扫描器与`rescan_diff.py`；先对`2a90a69`生成基线`tb_sites.json`，再对`7a8eabf`扫描；逐条复读报出项（含当时31处"B?"） | 待做 |
 
 ## 14. 符号锚点、RTL注释与`@satisfies`

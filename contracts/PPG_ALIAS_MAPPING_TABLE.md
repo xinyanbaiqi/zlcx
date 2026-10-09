@@ -5,7 +5,7 @@
 >
 > schema与标签约定定义于memory `project-ppg-dual-anchor-tagging-convention.md`。
 >
-> 2026-10-09 B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md`）：新增节“B合同合并批次新增映射”；订正P05行（去掉SUP06A，BMI-130）与SID-11行（F-050，BMI-131）。schema按交接书§3.10抄录于该节节首，不再依赖仓库外memory文件（原引用保留为历史出处）。旧行号锚点的符号化转换在阶段4统一进行。
+> 2026-10-09 B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md`）：新增节“B合同合并批次新增映射”；订正P05行（去掉SUP06A，BMI-130）与SID-11行（F-050，BMI-131）。schema按交接书§3.10抄录于该节节首，不再依赖仓库外memory文件（原引用保留为历史出处）。旧行号锚点的符号化转换在阶段4统一进行。 阶段3 TB标签改名后补入调度器FSC↔SCHT与SUP/DCR/SSW-18/AMI-13/LFA-11对照，并在LFA-11、P03、P09、N06行注明新标签名。
 >
 > 本表由对话A1(Phase 1a/1b)创建并首批填充,后续对话(A2/Phase 2-5)继续核对与扩充。
 > Phase 4会把本表(或其快照)折叠进 `PPG_CONTRACT_CLOSURE_MATRIX.md` 新增的 §13。
@@ -158,7 +158,7 @@
 | LFA-05 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` PASS行2007/2083 | `ppg_400hz_frame_calibration_scheduler.v:876`(异步复位归零state_current含B_INFLIGHT，已打标签，"复位立即invalidate owner身份"半句)；`ppg_adc_async_stage_capture.v:107`(flag_capture_pending已清零，陈旧DONE在物理capture层被丢弃，已打标签，"旧DONE不能完成新owner"半句，与LFA-07共用) | 本行(2026-09-10 B_TAG_MISSING批次2) |
 | LFA-07 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` PASS行1318 | `ppg_adc_async_stage_capture.v:107`(与LFA-05共用同一锚点，已打标签)——真实RTL确认物理capture层安全丢弃机制，**不是**调度器本身某个diagnostic sticky | 本行(2026-09-10 B_TAG_MISSING批次2) |
 | LFA-09 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` PASS行1156 | `ppg_400hz_frame_calibration_scheduler.v:737`(RED owner-deadline分支置位B_OWNER_DEADLINE_TIMEOUT，已打标签；IR/CAL对称分支738-745同构未逐条打标签，代表性锚点)——只置非阻断历史诊断位，未汇入417行`scheduler_local_fault_blocking_o` | 本行(2026-09-10 B_TAG_MISSING批次2) |
-| LFA-11 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-11a/b场景，PASS行1808/1852 | `ppg_system_fault_abort_supervisor.v:200`(flag_diag_clear_legal要求system_fault_blocking_o已经真实关闭才合法，已打标签)——真实动态触发路径是supervisor自己的自动abort(`ppg_control_top.v:355`已有`@satisfies: G-FP-01`)先于手动diag_clear释放owner，**不是**调度器文件 | 本行(2026-09-10 B_TAG_MISSING批次2) |
+| LFA-11 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` AUTOABT-QUIET（原LFA-11a，2026-10-09 B合并批次改名）/LFA-11b场景，PASS行1808/1852 | `ppg_system_fault_abort_supervisor.v:200`(flag_diag_clear_legal要求system_fault_blocking_o已经真实关闭才合法，已打标签)——真实动态触发路径是supervisor自己的自动abort(`ppg_control_top.v:355`已有`@satisfies: G-FP-01`)先于手动diag_clear释放owner，**不是**调度器文件 | 本行(2026-09-10 B_TAG_MISSING批次2) |
 | LFA-12 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` PASS行1100/1105 | `ppg_idac_code_controller.v:1138`(flag_control_cancel同一取消块内CTX_STARTUP_COMPLETE_BIT清零，已打标签，与LFA-01共用同一取消块) | 本行(2026-09-10 B_TAG_MISSING批次2) |
 
 LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=LFA-08)`行，本次未重复处理。LFA-04原本也不在本批次范围内，但拆分本次8行后暴露出它自己从未有独立alias表行的真实缺口(见下方新增的`LFA-04`专属行)，顺手一并补齐。
@@ -463,12 +463,12 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 
 | P01 (CLOSED 2026-09-07) | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02a/LFA-02b(discard+reason,既有) + 同文件新增两处子断言:Facet1(LFA-02a内,held-result discard记录的color_ir/frame_type/sample_index逐项比对setup时真实快照的原始值) + Facet2(新增`p01_facet2_ready_vs_abort_race`场景,真实构造AMI内部abort_discard与i_measurement_result_ready同拍为真,确认discard单边胜出、cnt_result_capture不被双重记录);iverilog全量重跑`LIFECYCLE_FAULT_ADC_ANOMALY_TB_PASS`,0 FAIL,79 PASS | `ppg_adc_measurement_idac_integration.v:1024`(已打标签`@satisfies: P01`,Facet2核心互斥事实);`:1315`(已打标签`@satisfies: P01`,Facet1 branch ID锁存);`ppg_normal_transaction_fork.v:194-309` | `PPG_CONTRACT_CLOSURE_MATRIX.md:808` |
 | P02 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02a | `ppg_adc_measurement_idac_integration.v:967`(已打标签,同K04链) | `PPG_CONTRACT_CLOSURE_MATRIX.md:809` |
-| P03 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP01A/SUP06B(本次iverilog重跑13/13 PASS) + `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-11a(abort合并半) | `ppg_system_fault_abort_supervisor.v:279`(已打标签);Top合并`ppg_control_top.v:350-357,368-375`(静态wiring,未单独打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:810` |
+| P03 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP01A/SUP06B(本次iverilog重跑13/13 PASS) + `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` AUTOABT-QUIET（原LFA-11a）(abort合并半) | `ppg_system_fault_abort_supervisor.v:279`(已打标签);Top合并`ppg_control_top.v:350-357,368-375`(静态wiring,未单独打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:810` |
 | P04 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP01A/SUP01B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:302`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:811` |
 | P05 | `ppg_system_fault_abort_supervisor` 独立unit TB ~~SUP06A/B/C~~ SUP06B/C（2026-10-09 B合并批次订正：SUP06A测的是episode关闭后阻断解除，不是看门狗）(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:192`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:812` |
 | P06 (CLOSED 2026-09-06) | `tb_ppg_control_top_injection.v` INJ-02内新增P06子检查(V1.1,~774-791行):`flag_test_identity_hold`锁存后把`i_test_inject_enable`拉低,2拍安全窗口内确认仍为1'b1;真实iverilog PASS,`INJ_TB_PASS`(16/16,0 FAIL)**2026-09-28工作线D独立复核发现该文件自己V1.1 changelog写"20 cycles"，与同一文件真实断言代码(2拍)自相矛盾，已订正changelog文字，断言/RTL均未变** | `ppg_adc_measurement_idac_integration.v:1569`(已打标签`@satisfies: P06`) | `PPG_CONTRACT_CLOSURE_MATRIX.md:813` |
 | P08 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-04/LFA-02a/LFA-02b + `tb_ppg_control_top_owner_identity_backpressure.v` OIB-08 | `ppg_adc_measurement_idac_integration.v:1493`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:815` |
-| P09 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02b + 6份TB的`GROUP*_PROTOCOL_STICKY`守卫 + `ppg_system_fault_abort_supervisor` 独立unit TB SUP02A/SUP03A/SUP04A/B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:413`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:816` |
+| P09 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02b + 6份TB的`GROUP*_PROTOCOL_STICKY`守卫 + `ppg_system_fault_abort_supervisor` 独立unit TB SUP02A/CLRBLK（原SUP03A）/SUP04A/B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:413`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:816` |
 | P10 (类级别,非逐hex码) | `ppg_system_fault_abort_supervisor` 独立unit TB SUP02A/SUP06/SUP04A/B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:207`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:817` |
 | P11 | `tb_ppg_control_top_injection.v` INJ-01~04(=TOP-21~24) | `ppg_control_top.v:391`(已打标签,同N05) | `PPG_CONTRACT_CLOSURE_MATRIX.md:818` |
 | P12 (静态/合同定义完整性,非TB PASS) | 无TB场景 — RTL自身注释明确声明无可综合运行时检查存在 | N/A — 由G-FP-05(已闭合)参数传播台账担保,`ppg_control_top.v:295-299`(非RTL锚点,静态说明) | `PPG_CONTRACT_CLOSURE_MATRIX.md:819` |
@@ -481,7 +481,7 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 | N03 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP02B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:207`(已打标签,同P10) | `PPG_CONTRACT_CLOSURE_MATRIX.md:827` |
 | N04 | `tb_ppg_control_top_injection.v` INJ-02 + `tb_ppg_control_top.v` SMOKE-20→21 | `ppg_control_top.v:327`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:828` |
 | N05 | `tb_ppg_control_top_injection.v` INJ-01/02 changelog + `tb_ppg_control_top_startup_idac_calibration.v` SID-10/SID-11 | `ppg_control_top.v:391`(已打标签,同P11);AMI半`ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611`(未单独打标签,复用既有TOP-21/23/24标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:829` |
-| N06 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP07A/SUP09A(iverilog 13/13 PASS) + **2026-09-28工作线D独立复核新增`SUP10A`**——此前"后续episode独立于首故障历史"这半句只靠K02的RTL结构性阅读支持,从未被任何仿真动态验证过(SUP02B虽测了第二个episode但check时机错过trio脉冲窗口);新增SUP10A在全部既有episode关闭后再开一个全新episode,直接检查trio+新快照,iverilog+真实Vivado 2022.2 xsim双工具14/14 PASS | `ppg_system_fault_abort_supervisor.v:192`(已打标签,同P05) | `PPG_CONTRACT_CLOSURE_MATRIX.md:830`；SUP10A详见`NP_WORKLINE_D_INDEPENDENT_RECHECK_20260928.md` |
+| N06 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP07A/WDIDLE（原SUP09A）(iverilog 13/13 PASS) + **2026-09-28工作线D独立复核新增`SUP10A`**（2026-10-09 B合并批次改名为TB本地EPI2ND）——此前"后续episode独立于首故障历史"这半句只靠K02的RTL结构性阅读支持,从未被任何仿真动态验证过(SUP02B虽测了第二个episode但check时机错过trio脉冲窗口);新增SUP10A在全部既有episode关闭后再开一个全新episode,直接检查trio+新快照,iverilog+真实Vivado 2022.2 xsim双工具14/14 PASS | `ppg_system_fault_abort_supervisor.v:192`(已打标签,同P05) | `PPG_CONTRACT_CLOSURE_MATRIX.md:830`；SUP10A详见`NP_WORKLINE_D_INDEPENDENT_RECHECK_20260928.md` |
 | N08 (CLOSED 2026-09-08) | scope-only半:`tb_ppg_control_top_baseline_cross.v` V1.4场景,discard触发时`flag_detection_pending`已为0,`o_detection_discard_identity_valid`真实观测为0。交接前半(N08-01,2026-09-08新关闭):`ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v` V1.8新增N08-01——用新增`send_normal_sample_tight`任务背靠背驱动两笔RED SAR9 NORMAL事务,第二笔完成使`flag_detection_pending`武装到1时FIR恰好仍在处理第一笔样本触发的21点MAC计算(真实忙碌,非force),随后abort真实验证`o_detection_discard_identity_valid=1`且frame_id/sample_index/color_ir绑定这笔仍在AMI侧的事务身份;此前`tb_ppg_control_top_baseline_cross.v`层级因bg_responder背景激励物理节拍宽于窗口而够不到,改用AMI自身module-level unit TB直接驱动事务后命中。iverilog+Vivado 2022.2 xsim双工具real重跑`ppg_adc_measurement_idac_integration`回归,48/48 PASS(AMI-01~47+N08-01),干净`$finish`**2026-09-28工作线D独立复核观察(未修复,记录留待用户判断)：`flag_n08_fir_busy_observed`(FIR真实忙碌)只做`$display`诊断打印，未编入`check_case`硬性PASS/FAIL条件，真正硬性门控只有`flag_n08_window_hit`；当前构造确实命中FIR忙碌态、非vacuous，但若未来pipeline时序变化导致命中窗口消失，本测试不会FAIL、只会静默打印一行未被检查的DIAG——是否加固为硬性检查有让测试变脆弱的风险，留给用户判断** | `ppg_adc_measurement_idac_integration.v:978`(已打标签`@satisfies: N08`,注释追加交接前半覆盖说明) | `PPG_CONTRACT_CLOSURE_MATRIX.md:832` |
 
 > **本次(2026-09-06)25项P/N穷尽核对小结**:19项`CLOSED`(P02,P03,P04,P05,P07,P08,P09,P10,P11,P12,P14,P15,P17,N02,N03,N04,N05,N06,N07),
@@ -558,7 +558,7 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 ## B合同合并批次新增映射（2026-10-09，`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-104/134/135/136/027/063/130/131）
 
 > 本节按交接书§3.10字段写：验收ID｜对应TB场景名或PASS标记｜对应RTL锚点（符号锚点：文件 + 符号或`@satisfies`标签）｜出处。TB本地标签没有合同编号的，ID列写“（TB本地）标签名”，并写明对应的合同节号；没有真实映射时如实填“无映射”。
-> 调度器单元TB的FSC-n、supervisor TB的SUP03A/06A/09A/10A、DCR TB第3~7号、SSW TB的SSW-18场景、AMI TB的AMI-13与LFA TB的LFA-11a，其映射随TB标签改名（交接书§3.3）同一提交写入，不在本节。
+> 调度器单元TB的FSC-n、supervisor TB的SUP03A/06A/09A/10A、DCR TB第3~7号、SSW TB的SSW-18场景、AMI TB的AMI-13与LFA TB的LFA-11a，其映射在下方“调度器单元TB：合同FSC-nn ↔ TB本地SCHT-n”与“其余随改名生效的映射”两小节，与TB标签改名（交接书§3.3）同一提交写入。
 
 ### RTL已有`@satisfies`标签、此前别名表缺行的ID（reconcile试跑B2中的真实标签）
 
@@ -629,6 +629,92 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 | （TB本地）FRAME-NN、FRAME-NC、FRAME-CN、FRAME-NC-LAST | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`@satisfies: FSC-03` | C08 §4.2.1、FSC-03（F-009） |
 | （TB本地）RESTART-STOP-SCAN、RESTART-ABORT-SCAN | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`flag_lifecycle_active` | C08 §4.2.1第3条 |
 | （TB本地）SYS-*（owner生命周期轮37项） | `tb_ppg_control_top_adc_anomaly.v` SYS-N-BASELINE、SYS-LOST-RED/IR、SYS-K-CLEAR、SYS-LATE-RED、SYS-K-RED2/SYS-K-STOP/SYS-RESTART-K、SYS-DRAIN-LOST/SYS-RESTART-DRAIN、SYS-LATE-DRAIN/SYS-L5-RESTART、SYS-LATE-IDLE/SYS-RESTART-IDLE、SYS-LATE-NEXTRUN/SYS-RESTART-NEXTRUN、SYS-WIN-*、SYS-RESTART-WIN/WIN2、SYS-BUSY-Q3/07/WDOG/RECOVER、SYS-RESTART-BUSY、SYS-CAL-LATE385/LATE6SF/LOST/K2、SYS-RESTART-CAL、SYS-CAL-LOST-RETRY、SYS-CAL-BUSY-NORMAL、SYS-BUSY-FOREVER、SYS-MON-BIND/EXCL/LIVE | 见上方各行对应符号 | C10 §7.1a、C09 §5.3/§5.4、C08 §8.2.6/§10.4、C24 §3/§5/§6；OLR §4.2逐项说明 |
+
+### 调度器单元TB：合同FSC-nn ↔ TB本地SCHT-n（TB标签改名后生效，BMI-133/140）
+
+> 调度器单元TB原以`check_fsc(n, …)`打印`FSC-n`，n只是TB内场景序号，与C08同号条目含义不同（ID治理§6.1）。改名后打印`SCHT-n`，`check_fsc`实参不变（交接书Q3）。下表按合同条目列出真正检查其含义的TB检查。TB SCHT-14＝合同FSC-03（F-011已收紧为严格5000），TB SCHT-32＝合同FSC-30。TB SCHT-58/59语义属FSC-17，SCHT-60/61/62语义属FSC-50（V1.12补充），按用户决定不在C08登记FSC-58~62。
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| FSC-01 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-1（部分：复位后无在途、frame/sample为0、无协议sticky；缺完成事件与其他sticky清零） | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-01行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-02 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-6 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-02行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-03 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-14；另有TB本地FRAME-NN/FRAME-NC/FRAME-CN/FRAME-NC-LAST | `ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`@satisfies: FSC-03` | C08 §18 FSC-03行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-04 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-5、SCHT-9、SCHT-50 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-04行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-05 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-10、SCHT-11、SCHT-51 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-05行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-06 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-16、SCHT-17 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-06行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-07 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-18 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-07行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-08 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-19 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-08行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-09 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-5、SCHT-9、SCHT-56 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-09行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-10 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-20、SCHT-21 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-10行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-11 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-20 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-11行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-12 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-22 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-12行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-13 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-23、SCHT-24 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-13行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-14 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-26 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-14行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-15 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-27 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-15行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-16 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-25 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-16行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-17 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-49、SCHT-58、SCHT-59；另有TB本地L1-NOREPEND | `ppg_400hz_frame_calibration_scheduler.v` `@satisfies: FSC-17` | C08 §18 FSC-17行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-18 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-18行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-19 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；另有TB本地L3-IDLEBND；系统级证据：无 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-19行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-20 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：已有 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-20行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-21 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：已有 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-21行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-22 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-15 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-22行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-23 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：无 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-23行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-24 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：无 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-24行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-25 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-41 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-25行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-26 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-55 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-26行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-27 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：无 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-27行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-28 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-7、SCHT-40 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-28行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-29 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-28 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-29行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-30 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-32 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-30行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-31 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-35、SCHT-36；另有TB本地CAL-ROLLOVER-STOP | `ppg_400hz_frame_calibration_scheduler.v` `flag_calibration_rollover`、`@satisfies: FSC-31, FSC-32` | C08 §18 FSC-31行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-32 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-37、SCHT-53；另有TB本地CAL-ROLLOVER-ABORT | `ppg_400hz_frame_calibration_scheduler.v` `flag_calibration_rollover`、`@satisfies: FSC-31, FSC-32` | C08 §18 FSC-32行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-33 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-45 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-33行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-34 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-34行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-35 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-35行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-36 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-42 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-36行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-37 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-29 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-37行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-38 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-13、SCHT-52；另有TB本地L3-NOEXTRA | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-38行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-39 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-48 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-39行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-40 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-13 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-40行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-41 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-38、SCHT-44、SCHT-54 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-41行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-42 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-25 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-42行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-43 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：已有 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-43行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-44 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：无 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-44行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-45 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-24 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-45行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-46 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-6、SCHT-29；另有TB本地L4-EXPIRE/L4-ONTIME | `ppg_400hz_frame_calibration_scheduler.v` `flag_candidate_expired`、`@satisfies: FSC-46, FSC-49, FSC-50` | C08 §18 FSC-46行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-47 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：已有 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-47行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-48 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-48行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-49 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-30；另有TB本地L4-EXPIRE | `ppg_400hz_frame_calibration_scheduler.v` `flag_candidate_expired`、`@satisfies: FSC-46, FSC-49, FSC-50` | C08 §18 FSC-49行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-50 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-31、SCHT-60、SCHT-61、SCHT-62 | `ppg_400hz_frame_calibration_scheduler.v` `flag_candidate_expired`、`@satisfies: FSC-46, FSC-49, FSC-50` | C08 §18 FSC-50行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-51 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-42 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-51行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-52 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-10、SCHT-41、SCHT-49 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-52行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-53 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-53行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-54 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-33、SCHT-34；另有TB本地LOST-REL/LOST-MISM | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-54行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-55 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-2、SCHT-3 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-55行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-56 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-38、SCHT-39、SCHT-47 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-56行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-57 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-57行；ID治理§5.2；B合并批次7a8eabf重扫 |
+
+### 其余随改名生效的映射（BMI-141~144、103）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| SUP-03 | 无（原子标签SUP03A测的是episode开启期间诊断清除无效，改名为TB本地CLRBLK，属SUP-07前半） | 无映射 | C24 §7；ID治理§6.2 |
+| SUP-06 | `tb_ppg_system_fault_abort_supervisor.v` SUP06B、SUP06C（看门狗边界）；WDIDLE（原SUP09A：阈值前idle不超时） | `ppg_system_fault_abort_supervisor.v` `@satisfies: P05` | C24 §6；ID治理§6.2 |
+| SUP-07 | `tb_ppg_system_fault_abort_supervisor.v` SUP07A；CLRBLK（原SUP03A）；EPICLS（原SUP06A：episode关闭后阻断解除） | 无映射 | C24 §5、§7 |
+| SUP-09 | 无（原SUP09A改名为WDIDLE，属SUP-06） | 无映射 | C24 §7；ID治理§6.2 |
+| SUP-10 | 无（该条归C10 AMI-53；原SUP10A测第二个独立episode完整trio，改名为TB本地EPI2ND） | 无映射 | C24 §7（V1.6注明归属）；ID治理§6.2 |
+| （TB本地）EPI2ND、RE-ARM | `tb_ppg_system_fault_abort_supervisor.v` 同名 | 无映射 | C24 §4（episode重开） |
+| DCR-04 | `tb_ppg_adc_dc_recovery.v` DCRT-3向量（9-bit且DC码0时DC项为0） | 无映射 | C15 DCR-04行；ID治理§6.3 |
+| DCR-07、DCR-11 | `tb_ppg_adc_dc_recovery.v` DCRT-4向量（15-bit双结果+K_DC15） | 无映射 | C15；ID治理§6.3 |
+| DCR-12 | `tb_ppg_adc_dc_recovery.v` DCRT-5向量与"FAIL DCR-12 qualification"检查 | 无映射 | C15；ID治理§6.3 |
+| DCR-09 | `tb_ppg_adc_dc_recovery.v` DCRT-6、DCRT-7向量与"FAIL DCR-09 saturation endpoints"检查 | 无映射 | C15；ID治理§6.3 |
+| DCR-03、DCR-06 | 无（证据缺口） | 无映射 | ID治理§10 |
+| SSW-18 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` S1-LATE、S1-ONTM（原SSW-18场景测校准owner截止，已改名为TB本地CAL-ODL） | `ppg_sar9_sar15_safe_selection_wrapper.v` `calibration_timeout_sticky_o`（`@satisfies`在阶段4补） | C09 §5.4、§7.8、SSW-18行（V1.11改写） |
+| （TB本地）CAL-ODL | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` CAL-ODL | 无映射 | C09 §4.5、SSW-37/SSW-38 |
+| AMI-13 | 无（单元TB原同号检查测的是反压保持，已改名为TB本地FORK-HOLD，属AMI-12） | `ppg_adc_measurement_idac_integration.v` `flag_result_fork_all_released`（RTL结构，无动态证据） | C10 §17 AMI-13行（V2.5注明） |
+| （TB本地）FORK-HOLD | `tb_ppg_adc_measurement_idac_integration.v` FORK-HOLD | 无映射 | C10 §17 AMI-12 |
+| LFA-11 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-11b（后半句）；前半句无断言 | 无映射 | C25 LFA-11行；ID治理§6.5 |
+| （TB本地）AUTOABT-QUIET | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` AUTOABT-QUIET（原LFA-11a；informational分支仍打印PASS，按交接书Q6只登记） | 无映射 | 矩阵P03行；ID治理§6.5 |
 
 ### 整族无TB编号的合同族（统筹§20-4：本批做族级登记，逐条对照列入流片前验证收尾计划）
 
