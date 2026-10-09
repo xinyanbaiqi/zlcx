@@ -84,7 +84,7 @@ python tools/b_merge_tools/regression_evidence.py export $R verification_reports
   ```bash
   python tools/b_merge_tools/regression_evidence.py compare verification_reports/b_merge_batch_evidence/baseline_7a8eabf verification_reports/b_merge_batch_evidence/final_<提交号>
   ```
-- 预期结果：`$finish`全部相同（退出码0）。PASS行只允许出现TB标签改名造成的差异，脚本会逐行列出。
+- 预期结果：`$finish`的时刻和文件名全部相同（退出码0）。PASS行只允许出现TB标签改名造成的差异，脚本会逐行列出。7个TB（6个改名TB，以及BMI-145改横幅的`tb_ppg_system_config_manager`）的文件头各新增2行修订记录注释，它们的`$finish`行号会因此后移。脚本把这种情况标为`FINISH_LINE_SHIFT`，属预期，不计入问题数（见`regression_compare_negctl/README.md`）。
 - **锚点门禁演示（交接书§3.2“接入回归门禁”，BMI-153）**：模块级回归入口`tools/run_unit_tb_regression.sh`开头会先运行`tools/b_merge_tools/run_anchor_gate.sh`。门禁失败时整轮以退出码1结束，不跑任何仿真。终版回归时需要演示两次：
   1. 通过：正常运行模块级回归（即上面1.3的unit一路），`unit.out`开头应出现`ANCHOR GATE PASSED`。
   2. 负对照：在导出目录（不是仓库）里注入一处坏锚点后单跑一个TB，应报`name-missing`和`ANCHOR GATE FAILED`，退出码1，且不生成输出目录：

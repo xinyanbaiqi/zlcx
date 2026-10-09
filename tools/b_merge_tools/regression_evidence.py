@@ -13,8 +13,12 @@ export  <run_root> <out_dir>
 
 compare <baseline_evidence_dir> <final_evidence_dir>
     Per TB: compares the sorted PASS lines and the $finish lines. Prints every
-    differing PASS line so label-only renames can be listed one by one. Exit 1
-    when a TB is missing on one side or a $finish line differs.
+    differing PASS line so label-only renames can be listed one by one. $finish
+    lines are compared as ($finish time, file name): a difference there is
+    FINISH_DIFF. When only the source line number differs (a change-log entry
+    added to the TB header moves the $finish statement), the TB is marked
+    FINISH_LINE_SHIFT with the old and new line numbers; that is not a problem.
+    Exit 1 when a TB is missing on one side or a FINISH_DIFF is found.
 """
 import csv
 import difflib
@@ -98,6 +102,19 @@ def tb_files(evidence_dir):
     return found
 
 
+def finish_keys(lines):
+    """($finish time, file) per line; a line that does not parse is kept whole."""
+    keys = []
+    for ln in lines:
+        m = FIN_RE.search(ln)
+        keys.append((m.group(1), m.group(2)) if m else (ln, None))
+    return keys
+
+
+def finish_line_numbers(lines):
+    return [m.group(3) for m in (FIN_RE.search(ln) for ln in lines) if m]
+
+
 def compare(base_dir, final_dir):
     base, final = tb_files(base_dir), tb_files(final_dir)
     bad = 0
@@ -113,16 +130,27 @@ def compare(base_dir, final_dir):
         diff = [d for d in difflib.unified_diff(b_pass, f_pass, lineterm="", n=0)
                 if d[:1] in "+-" and not d.startswith(("+++", "---"))]
         status = "SAME" if not diff else "PASSDIFF(%d/%d lines)" % (len(b_pass), len(f_pass))
-        if b_fin != f_fin:
-            status = "FINISH_DIFF" if not diff else status + " FINISH_DIFF"
+        b_key, f_key = finish_keys(b_fin), finish_keys(f_fin)
+        fin_note = None
+        if b_key != f_key:
+            fin_note = "FINISH_DIFF"
             bad += 1
+        elif b_fin != f_fin:
+            # same $finish time and file, only the source line moved (e.g. a change-log
+            # entry added to the TB header): reported, not a problem
+            fin_note = "FINISH_LINE_SHIFT"
+        if fin_note:
+            status = fin_note if not diff else status + " " + fin_note
         print("%-28s %s" % (status, name))
         for d in diff:
             print("    " + d)
-        if b_fin != f_fin:
+        if fin_note == "FINISH_DIFF":
             print("    baseline finish: %s" % b_fin)
             print("    final    finish: %s" % f_fin)
-    print("TBs=%d problems(missing or $finish differs)=%d" % (len(set(base) | set(final)), bad))
+        elif fin_note == "FINISH_LINE_SHIFT":
+            print("    $finish line: baseline %s -> final %s (time and file equal)"
+                  % (",".join(finish_line_numbers(b_fin)), ",".join(finish_line_numbers(f_fin))))
+    print("TBs=%d problems(missing, or $finish time/file differs)=%d" % (len(set(base) | set(final)), bad))
     return 1 if bad else 0
 
 
