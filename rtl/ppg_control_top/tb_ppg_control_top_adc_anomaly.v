@@ -23,7 +23,7 @@
 //    Time               Version       Revised by            Contents
 // 2026/10/08            V1.0          Erie                  Create file. Owner-lifecycle round (F-020, S1, L-1..L-5, scheme A) permanent system regression at control_top level including the supervisor. The DUT instantiation, lifecycle/config tasks, physiological RAW generator, startup-search task, owner snapshot and recheck monitors are reused verbatim from tb_ppg_control_top_periodic_recheck_recovery.v; the main sequence is new and turns the temporary TBs of LOST_COMPLETION_NORMAL_AND_LATENESS_20261006 / SSW18_TICK385_INVESTIGATION_20261006 into checks with TB-local names (SYS-*). A policy-driven background ADC responder answers every real Q3 release (drop / delay / dead per slot). Passive monitors: Q3-to-owner binding (every Q3 must belong to an owner committed in the same frame, and for calibration the same subframe), void/completion exclusivity, and a generic liveness monitor (RUN or STOPPING for 3 macro frames with no completion, void, result, IDAC commit, lifecycle change or fault record while no system fault is reported -> FAIL).
 // 2026/10/08            V1.1          Erie                  ABCD review F-009 (coordinator review item 3): add a print-only macro-frame interval monitor. A frame start is recognised when a frame is active at tick 0 and the previous cycle was inactive or at tick 4999 (this also catches CAL rollover, which has no start pulse); the first frame after START is logged as F009_FRAME_FIRST, and every later start whose distance from the previous start is not 5000 cycles prints F009_FRAME_GAP with the interval, the idle cycles and the previous/next frame type (NORMAL/CAL). It never prints PASS or FAIL and does not touch the verdict.
-// 2026/10/08            V1.2          Erie                  ABCD N-2 (coordinator decision 20261008): keep the original STOP time as the regression case and add phase N2, a STOP x START-delay scan (TB-local names, serving N-2): STOP acknowledged in the RED window (tick 1, 2), IR window (tick 161, 200, 250, 300) and CAL window (subframe-1 local tick 1, 2), each followed by START after 0/100/200/400 cycles in CONFIG; every new RUN must start a macro frame within 20000 cycles. Checks SYS-RESTART-SCAN-RED/IR/CAL; criterion 37->40. With the old SSW, RED tick 1 and CAL local 1 deadlock at delays 0/100/200; IR never deadlocks because analog_safe holds STOPPING until tick 479, after the IR wave last tick 477.
+// 2026/10/08            V1.2          Erie                  ABCD L-6 (provisionally called N-2 in the working session; coordinator decision 20261008): keep the original STOP time as the regression case and add phase N2, a STOP x START-delay scan (TB-local names, serving L-6): STOP acknowledged in the RED window (tick 1, 2), IR window (tick 161, 200, 250, 300) and CAL window (subframe-1 local tick 1, 2), each followed by START after 0/100/200/400 cycles in CONFIG; every new RUN must start a macro frame within 20000 cycles. Checks SYS-RESTART-SCAN-RED/IR/CAL; criterion 37->40. With the old SSW, RED tick 1 and CAL local 1 deadlock at delays 0/100/200; IR never deadlocks because analog_safe holds STOPPING until tick 479, after the IR wave last tick 477.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -45,7 +45,7 @@
 //    时间                版本          修订人                修订内容
 // 2026年10月08日        V1.0          Erie                  创建文件。owner生命周期轮（F-020、S1、L-1~L-5，方案甲）的永久系统级回归，control_top层含supervisor。DUT例化、生命周期/配置任务、真实生理RAW生成器、启动搜索任务、owner快照与重检监视原样复用tb_ppg_control_top_periodic_recheck_recovery.v；主序列为新写，把两份临时TB（LOST_COMPLETION/SSW18报告）的场景改成TB本地名检查（SYS-*）。后台ADC响应进程按策略应答每次真实Q3释放（按槽位丢一次/推迟/持续失联）。被动监视：Q3与owner绑定（每次Q3必须属于同帧提交的owner，校准还须同子帧）、作废与完成互斥、通用活性监视（RUN或STOPPING中连续3个宏帧既无完成、作废、结果、IDAC提交、生命周期变化也无故障记录、且未报系统故障即FAIL）。
 // 2026年10月08日        V1.1          Erie                  ABCD复核F-009（统筹审核第3项）：新增只打印的宏帧间隔监视器。以"帧在tick 0处于活动且上一拍不活动或处于末拍4999"识别宏帧起点（含无起点脉冲的校准滚动）；START后第一帧记为F009_FRAME_FIRST，此后凡与上一起点相距不等于5000拍即打印F009_FRAME_GAP，给出间隔、空闲拍数和前后帧类型（NORMAL/CAL）。不打印PASS/FAIL，不影响结论
-// 2026年10月08日        V1.2          Erie                  ABCD N-2（统筹决定20261008）：保留原STOP时刻作为回归用例，新增阶段N2 STOP×START延迟扫描（TB本地名，服务N-2）：STOP确认分别落在RED窗口（tick 1、2）、IR窗口（tick 161、200、250、300）、CAL窗口（第1子帧local tick 1、2），回CONFIG后分别等0/100/200/400拍再START，新RUN须在20000拍内建立宏帧。检查SYS-RESTART-SCAN-RED/IR/CAL，判据37→40。旧SSW下RED tick 1与CAL local 1在延迟0/100/200卡死；IR窗口不会卡死，因analog_safe把STOPPING完成推迟到tick 479，晚于IR波形末拍477。
+// 2026年10月08日        V1.2          Erie                  ABCD L-6（工作会话中曾暂称N-2；统筹决定20261008）：保留原STOP时刻作为回归用例，新增阶段L6 STOP×START延迟扫描（TB本地名，服务L-6）：STOP确认分别落在RED窗口（tick 1、2）、IR窗口（tick 161、200、250、300）、CAL窗口（第1子帧local tick 1、2），回CONFIG后分别等0/100/200/400拍再START，新RUN须在20000拍内建立宏帧。检查SYS-RESTART-SCAN-RED/IR/CAL，判据37→40。旧SSW下RED tick 1与CAL local 1在延迟0/100/200卡死；IR窗口不会卡死，因analog_safe把STOPPING完成推迟到tick 479，晚于IR波形末拍477。
 
 // owner生命周期轮ADC异常系统级回归：丢失作废与恢复、合法迟到、按槽位升级、排空中丢失、迟到旧DONE、竞争窗口、
 // L-1/L-3/L-4/L-5原场景、ADC长期忙与看门狗、校准丢失后NORMAL帧不错绑
@@ -1384,21 +1384,21 @@ module tb_ppg_control_top_adc_anomaly();
 	end
 
 
-	//---------------ABCD N-2：STOP×START延迟扫描（TB本地名，服务N-2）---------------//
-	integer n2_win;                          // 0=RED 1=IR 2=CAL
-	integer n2_tick_idx;                     // 窗口内STOP确认目标相位索引
-	integer n2_delay_idx;                    // START延迟索引
-	integer n2_stop_tick;                    // 目标STOP确认相位（NORMAL为宏帧tick，CAL为第1子帧local tick）
-	integer n2_delay;                        // CONFIG后到重新提交START前的等待拍数
-	integer n2_ack_tick;                     // 实测STOP确认时的宏帧tick
-	integer n2_cfg_tick;                     // 回到CONFIG时的宏帧tick
-	reg n2_ack_cal;                          // STOP确认时是否处于校准帧
-	reg n2_ack_ctx_orphan;                   // STOP确认时SSW持有上下文且无owner在途
-	reg n2_case_ok;                          // 单例结果
-	reg n2_ok_red, n2_ok_ir, n2_ok_cal;      // 三个窗口累计结果
-	integer n2_cases, n2_orphans;            // 扫描例数与命中"上下文无owner"窗口的例数
+	//---------------ABCD L-6：STOP×START延迟扫描（TB本地名，服务L-6）---------------//
+	integer l6_win;                          // 0=RED 1=IR 2=CAL
+	integer l6_tick_idx;                     // 窗口内STOP确认目标相位索引
+	integer l6_delay_idx;                    // START延迟索引
+	integer l6_stop_tick;                    // 目标STOP确认相位（NORMAL为宏帧tick，CAL为第1子帧local tick）
+	integer l6_delay;                        // CONFIG后到重新提交START前的等待拍数
+	integer l6_ack_tick;                     // 实测STOP确认时的宏帧tick
+	integer l6_cfg_tick;                     // 回到CONFIG时的宏帧tick
+	reg l6_ack_cal;                          // STOP确认时是否处于校准帧
+	reg l6_ack_ctx_orphan;                   // STOP确认时SSW持有上下文且无owner在途
+	reg l6_case_ok;                          // 单例结果
+	reg l6_ok_red, l6_ok_ir, l6_ok_cal;      // 三个窗口累计结果
+	integer l6_cases, l6_orphans;            // 扫描例数与命中"上下文无owner"窗口的例数
 	// 每例独立：先硬复位清除上一例可能残留的卡死状态
-	task n2_reset;
+	task l6_reset;
 		begin
 			rsp_on = 1'b0;
 			rsp_gen = 1'b0;
@@ -1418,7 +1418,7 @@ module tb_ppg_control_top_adc_anomaly();
 		end
 	endtask
 	// 等到目标相位前3拍发STOP，使STOP确认落在目标相位（实测STOP→调度器stop_ack延迟3拍）
-	task n2_stop_at;
+	task l6_stop_at;
 		input integer win;
 		input integer tick;
 		integer kk;
@@ -1435,9 +1435,9 @@ module tb_ppg_control_top_adc_anomaly();
 			task_pulse_stop;
 			kk = 0;
 			while(!ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_stop_ack_event && (kk < 20)) begin @(posedge i_clk); kk = kk + 1; end
-			n2_ack_tick = w_mtick;
-			n2_ack_cal = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
-			n2_ack_ctx_orphan = !ppg_control_top_Inst.ppg_sar9_sar15_safe_selection_wrapper_Inst.o_sar_timing_idle && !ppg_control_top_Inst.ppg_sar9_sar15_safe_selection_wrapper_Inst.o_adc_owner_inflight;
+			l6_ack_tick = w_mtick;
+			l6_ack_cal = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_frame_active;
+			l6_ack_ctx_orphan = !ppg_control_top_Inst.ppg_sar9_sar15_safe_selection_wrapper_Inst.o_sar_timing_idle && !ppg_control_top_Inst.ppg_sar9_sar15_safe_selection_wrapper_Inst.o_adc_owner_inflight;
 		end
 	endtask
 	//===================<主序列>===================//
@@ -1795,45 +1795,45 @@ module tb_ppg_control_top_adc_anomaly();
 			sys_wait_life(ST_CONFIG, 12000, ok);
 		end
 
-		//=========== 阶段N2：STOP×START延迟扫描（ABCD N-2） ===========//
+		//=========== 阶段L6：STOP×START延迟扫描（ABCD L-6） ===========//
 		// STOP确认落在RED窗口（tick 1~2）、IR窗口（tick 161~300，IR波形已交、owner未提交）、CAL窗口（第1子帧local tick 1~2），
 		// 排空回CONFIG后分别等待0/100/200/400拍再提交并START；新RUN必须在20000拍内建立宏帧（不得卡死）
-		n2_ok_red = 1'b1; n2_ok_ir = 1'b1; n2_ok_cal = 1'b1; n2_cases = 0; n2_orphans = 0;
-		for(n2_win = 0; n2_win < 3; n2_win = n2_win + 1) begin
-			for(n2_tick_idx = 0; n2_tick_idx < ((n2_win == 1) ? 4 : 2); n2_tick_idx = n2_tick_idx + 1) begin
-				for(n2_delay_idx = 0; n2_delay_idx < 4; n2_delay_idx = n2_delay_idx + 1) begin
-					n2_stop_tick = (n2_win == 1) ? ((n2_tick_idx == 0) ? 161 : (n2_tick_idx == 1) ? 200 : (n2_tick_idx == 2) ? 250 : 300) : (1 + n2_tick_idx);
-					n2_delay = (n2_delay_idx == 0) ? 0 : (n2_delay_idx == 1) ? 100 : (n2_delay_idx == 2) ? 200 : 400;
-					n2_reset;
-					sys_commit_start((n2_win == 2) ? 1 : 0, ok);
-					n2_stop_at(n2_win, n2_stop_tick);
+		l6_ok_red = 1'b1; l6_ok_ir = 1'b1; l6_ok_cal = 1'b1; l6_cases = 0; l6_orphans = 0;
+		for(l6_win = 0; l6_win < 3; l6_win = l6_win + 1) begin
+			for(l6_tick_idx = 0; l6_tick_idx < ((l6_win == 1) ? 4 : 2); l6_tick_idx = l6_tick_idx + 1) begin
+				for(l6_delay_idx = 0; l6_delay_idx < 4; l6_delay_idx = l6_delay_idx + 1) begin
+					l6_stop_tick = (l6_win == 1) ? ((l6_tick_idx == 0) ? 161 : (l6_tick_idx == 1) ? 200 : (l6_tick_idx == 2) ? 250 : 300) : (1 + l6_tick_idx);
+					l6_delay = (l6_delay_idx == 0) ? 0 : (l6_delay_idx == 1) ? 100 : (l6_delay_idx == 2) ? 200 : 400;
+					l6_reset;
+					sys_commit_start((l6_win == 2) ? 1 : 0, ok);
+					l6_stop_at(l6_win, l6_stop_tick);
 					sys_wait_life(ST_CONFIG, 12000, ok2);
-					n2_cfg_tick = w_mtick; // 回到CONFIG时的宏帧tick（纯STOP后帧仍在CONFIG中走）
-					sys_wait(n2_delay);
+					l6_cfg_tick = w_mtick; // 回到CONFIG时的宏帧tick（纯STOP后帧仍在CONFIG中走）
+					sys_wait(l6_delay);
 					sys_diag_clear;
-					sys_commit_start((n2_win == 2) ? 1 : 0, n2_case_ok);
+					sys_commit_start((l6_win == 2) ? 1 : 0, l6_case_ok);
 					k = 0;
 					while(!ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_frame_start_event && (k < 20000)) begin // 新RUN的第一个真实宏帧起点脉冲
 						@(posedge i_clk); k = k + 1;
 					end
-					n2_case_ok = ok && ok2 && n2_case_ok && (k < 20000);
-					n2_cases = n2_cases + 1;
-					if(n2_ack_ctx_orphan) n2_orphans = n2_orphans + 1;
-					$display("N2SCAN win=%0d stop_tick=%0d ack_tick=%0d ack_cal=%b ctx_orphan=%b cfg_tick=%0d delay=%0d first_frame_after_start=%0d ok=%b", n2_win, n2_stop_tick, n2_ack_tick, n2_ack_cal,
-						n2_ack_ctx_orphan, n2_cfg_tick, n2_delay, k, n2_case_ok);
-					if(n2_win == 0) n2_ok_red = n2_ok_red && n2_case_ok;
-					else if(n2_win == 1) n2_ok_ir = n2_ok_ir && n2_case_ok;
-					else n2_ok_cal = n2_ok_cal && n2_case_ok;
+					l6_case_ok = ok && ok2 && l6_case_ok && (k < 20000);
+					l6_cases = l6_cases + 1;
+					if(l6_ack_ctx_orphan) l6_orphans = l6_orphans + 1;
+					$display("L6SCAN win=%0d stop_tick=%0d ack_tick=%0d ack_cal=%b ctx_orphan=%b cfg_tick=%0d delay=%0d first_frame_after_start=%0d ok=%b", l6_win, l6_stop_tick, l6_ack_tick, l6_ack_cal,
+						l6_ack_ctx_orphan, l6_cfg_tick, l6_delay, k, l6_case_ok);
+					if(l6_win == 0) l6_ok_red = l6_ok_red && l6_case_ok;
+					else if(l6_win == 1) l6_ok_ir = l6_ok_ir && l6_case_ok;
+					else l6_ok_cal = l6_ok_cal && l6_case_ok;
 					task_pulse_stop;
 					sys_wait_life(ST_CONFIG, 12000, ok);
 				end
 			end
 		end
-		$display("N2SCAN_SUMMARY cases=%0d ctx_orphan_hits=%0d", n2_cases, n2_orphans);
-		sys_check("SYS-RESTART-SCAN-RED", n2_ok_red);
-		sys_check("SYS-RESTART-SCAN-IR", n2_ok_ir);
-		sys_check("SYS-RESTART-SCAN-CAL", n2_ok_cal);
-		n2_reset;
+		$display("L6SCAN_SUMMARY cases=%0d ctx_orphan_hits=%0d", l6_cases, l6_orphans);
+		sys_check("SYS-RESTART-SCAN-RED", l6_ok_red);
+		sys_check("SYS-RESTART-SCAN-IR", l6_ok_ir);
+		sys_check("SYS-RESTART-SCAN-CAL", l6_ok_cal);
+		l6_reset;
 
 		//=========== 阶段B：ADC永不回空闲 ===========//
 		// SYS-BUSY-FOREVER：ADC卡忙不恢复时停在STOPPING并已报cause 07与看门狗0x31，系统故障阻断保持，不是静默卡死（活性监视不报）

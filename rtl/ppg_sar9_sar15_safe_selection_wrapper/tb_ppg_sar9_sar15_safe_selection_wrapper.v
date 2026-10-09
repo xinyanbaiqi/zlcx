@@ -18,7 +18,7 @@
 // 2026-09-10       V1.5        Erie        DUT V1.5 stopped driving CTRL_Q2 during AMB_CAL (single-phase integration, contract 6.4). Extended SSW-08 with explicit o_clk_q2_low==0 checks at local tick 262/263/266, extended the SSW-11 all-subframe sweep to assert !o_clk_q2_low at every tick from 2 to 283, and extended SSW-09/SSW-10 with o_clk_q2_low==1 checks at 262/263 to prove DCS_CAL keeps driving Q2 unchanged. All 52/52 still pass.
 // 2026-10-06       V1.6        Erie        ABCD review F-035: add TB-local case ABT-DONE (no SSW-nn number taken): abort and a matching DONE in the same cycle must release the owner while the RED waveform is still cancelled, the wrapper must go idle, and after STOP, diag clear and a generation-2 START a new owner must be established and released. Pass criterion 52 -> 53; banner unchanged. Negative control: with abort-hold ahead of release (SSW V1.5 order) ABT-DONE fails 6 checks.
 // 2026-10-08       V1.7        Erie        Owner-lifecycle round step 3: input i_adc_transaction_lost_event is now a TB reg; new TB-local checks LOST-RLS / LOST-MSM (matching void releases the owner, wrong-index void keeps it and raises the mismatch), BIND-Q3 (L-1: a stale owner of frame N must not drive TIA/Q3 of the frame N+1 RED context nor mask its deadline sticky), S1-LATE / S1-ONTM (calibration owner of the current subframe still in flight at local tick 385 sets the non-blocking late sticky; on-time completion does not). Macro ticks 2..320 are stepped one by one so the context release tick 317 is not skipped. Pass gate 53 -> 58.
-// 2026-10-08       V1.8        Erie        ABCD N-2: add TB-local case N2-START (no SSW contract number): a RED waveform context is taken over at tick 0 with no owner, STOP is acknowledged with the tick frozen, then START generation 2; requires sar timing idle, wrapper idle and analog safe after START, then a new waveform and owner work normally. Criterion 58->59. Negative control (old restore condition start ack && o_wrapper_idle) fails 4 checks.
+// 2026-10-08       V1.8        Erie        ABCD L-6 (provisionally called N-2 in the working session): add TB-local case L6-START (no SSW contract number): a RED waveform context is taken over at tick 0 with no owner, STOP is acknowledged with the tick frozen, then START generation 2; requires sar timing idle, wrapper idle and analog safe after START, then a new waveform and owner work normally. Criterion 58->59. Negative control (old restore condition start ack && o_wrapper_idle) fails 4 checks.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Codex
@@ -37,7 +37,7 @@
 // 2026-09-10       V1.5      Erie        DUT V1.5起AMB_CAL不再驱动CTRL_Q2（单相积分改造，合同6.4节）。扩展SSW-08在local tick 262/263/266三点显式断言o_clk_q2_low为0；扩展SSW-11全子帧遍历循环在tick 2至283每一拍都断言!o_clk_q2_low；扩展SSW-09/SSW-10在262/263两点断言o_clk_q2_low为1，证明DCS_CAL的Q2行为未被改动波及。52/52仍全过。
 // 2026-10-06       V1.6      Erie        ABCD复核F-035：新增TB本地用例ABT-DONE（不占用SSW编号）：abort与匹配DONE同拍时必须释放owner，同时RED波形仍被撤销，wrapper回到idle；随后STOP、诊断清除、第2代START后必须能建立并释放新owner。判据52改为53，横幅不变。负对照：恢复V1.5的abort保持优先顺序时ABT-DONE有6项失败
 // 2026-10-08       V1.7      Erie        owner生命周期轮第三步：输入i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-RLS/LOST-MSM（匹配作废释放owner，序号不符的作废保持owner并置错配）、BIND-Q3（L-1：帧N的旧owner不得驱动帧N+1 RED上下文的TIA/Q3，也不得掩盖其截止sticky）、S1-LATE/S1-ONTM（本子帧校准owner在local tick 385仍在途置非阻断迟到sticky，按时完成不置）。宏帧tick 2..320逐拍推进，避免跳过上下文释放tick 317。判据53改为58。
-// 2026-10-08       V1.8      Erie        ABCD N-2：新增TB本地用例N2-START（不占SSW合同编号）：tick 0接管RED波形上下文且无owner，冻结tick下STOP确认，再以代际2 START；要求START后sar时序空闲、wrapper空闲、模拟安全，随后新波形与owner正常工作。判据58→59。负对照（恢复条件改回启动确认&&o_wrapper_idle）4项失败。
+// 2026-10-08       V1.8      Erie        ABCD L-6（工作会话中曾暂称N-2）：新增TB本地用例L6-START（不占SSW合同编号）：tick 0接管RED波形上下文且无owner，冻结tick下STOP确认，再以代际2 START；要求START后sar时序空闲、wrapper空闲、模拟安全，随后新波形与owner正常工作。判据58→59。负对照（恢复条件改回启动确认&&o_wrapper_idle）4项失败。
 module tb_ppg_sar9_sar15_safe_selection_wrapper;
 
 	localparam [1:0] FRAME_TYPE_AMB    = 2'b00;
@@ -1216,10 +1216,10 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
 		expect_true(!o_calibration_timeout_sticky, "an owner completed before local tick 385 must not set the late diagnostic");
 		end_case("S1-ONTM");
 
-		// N2-START（ABCD N-2，TB本地名，不占用SSW编号）：RED波形在tick 0已交给SSW、owner尚未提交时STOP，宏帧tick冻结在0
+		// L6-START（ABCD L-6，TB本地名，不占用SSW编号）：RED波形在tick 0已交给SSW、owner尚未提交时STOP，宏帧tick冻结在0
 		// （调度器被新START复位），随后新代际START。上一RUN残留的未提交波形上下文必须在START时作废：SAR时序空闲、封装空闲，
 		// 新RUN的波形与owner能正常建立并释放（缺陷时上下文永不释放，启动边界永不发出）
-		begin_case("N2-START");
+		begin_case("L6-START");
 		reset_and_start;
 		send_waveform(1'b0, 1'b0, FRAME_TYPE_NORMAL, 16'd201, 8'h31, 8'h41, 4'h1, 4'h2, 8'hA1);
 		expect_true(!o_sar_timing_idle && !o_adc_owner_inflight, "RED waveform context is held with no owner before STOP");
@@ -1238,7 +1238,7 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
 		complete_owner(16'd3, 1'b1);
 		macro_tick(13'd317);
 		expect_true(!o_adc_owner_inflight && o_sar_timing_idle, "the new run's waveform and owner complete normally after the restart");
-		end_case("N2-START");
+		end_case("L6-START");
 
 		if((cnt_error == 0) && (cnt_pass == 59)) begin
 			$display("ALL SSW-01 THROUGH SSW-52 PASS");
