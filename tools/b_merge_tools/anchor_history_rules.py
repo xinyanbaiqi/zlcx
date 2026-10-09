@@ -5,7 +5,10 @@ Rule set of the coordinator's ruling of 2026-10-09 on report section 9-1 (it rep
 the earlier "a date earlier in the same cell makes it history" rule, which came from an
 ambiguous wording in the brief):
 
-  history-strike      inside ~~strikethrough~~ (decided by the inventory)
+  history-strike      class 1: inside ~~strikethrough~~ with nothing after it in the cell
+  history-superseded-struck
+                      class 3 (and 1): a struck old entry followed, in the same cell, by the
+                      later entry that replaces it ("~~old~~ **new**"); counted as class 3
   history-block       the line is a "> " block (errata / explanation block)
   history-revision    the line lies in a revision-record section (heading names a
                       revision / change record / history)
@@ -52,6 +55,19 @@ def cell_bounds(line, pos):
     return a, (len(line) if b < 0 else b)
 
 
+def classify_struck(line, pos):
+    """For an anchor inside ~~strikethrough~~ (class 1 or class 3 of the ruling):
+    'history-superseded-struck' when the struck old entry is followed, in the same cell,
+    by a later entry that replaces it (text after the closing ~~); 'history-strike'
+    when nothing follows it in the cell."""
+    a, b = cell_bounds(line, pos)
+    close = line.find('~~', pos)
+    after = line[close + 2:b] if 0 <= close < b else ''
+    if re.search(r'[A-Za-z0-9一-鿿]', after):
+        return 'history-superseded-struck'
+    return 'history-strike'
+
+
 def classify(lines, n, pos, end):
     """(status or None, uncertain) for the anchor at lines[n-1][pos:end]."""
     line = lines[n - 1]
@@ -87,8 +103,22 @@ SAMPLES = [
 ]
 
 
+STRUCK_SAMPLES = [
+    # (line, anchor text, expected)
+    ('| C01 | ~~old `ppg_x.v:9` ledger~~ **2026-09-16重建**：Top端口 |', 'ppg_x.v:9', 'history-superseded-struck'),
+    ('| P05 | ~~SUP06A `ppg_x.v:9`~~ SUP06B/C |', 'ppg_x.v:9', 'history-superseded-struck'),
+    ('| X | ~~`ppg_x.v:9` removed~~ |', 'ppg_x.v:9', 'history-strike'),
+    ('| X | ~~`ppg_x.v:9`~~ | next cell text |', 'ppg_x.v:9', 'history-strike'),
+]
+
+
 def self_test():
     bad = 0
+    for line, text, want in STRUCK_SAMPLES:
+        got = classify_struck(line, line.index(text))
+        ok = got == want
+        bad += not ok
+        print('%s %-26s -> %s' % ('OK  ' if ok else 'FAIL', want, got))
     for lines, n, text, want, want_u in SAMPLES:
         pos = lines[n - 1].index(text)
         got, unc = classify(lines, n, pos, pos + len(text))
@@ -96,7 +126,7 @@ def self_test():
         bad += not ok
         print('%s %-20s %-6s -> %s%s' % ('OK  ' if ok else 'FAIL', want or 'convert', 'unc' if want_u else '',
                                         got or 'convert', ' (uncertain)' if unc else ''))
-    print('samples %d, failures %d' % (len(SAMPLES), bad))
+    print('samples %d, failures %d' % (len(SAMPLES) + len(STRUCK_SAMPLES), bad))
     return 1 if bad else 0
 
 

@@ -17,7 +17,8 @@ the matrix or the alias table; the outputs are
 
 Classes:
   convert          the old anchor is replaced by `new`
-  history-strike   inside ~~strikethrough~~ -- kept verbatim (history)
+  history-strike   inside ~~strikethrough~~, nothing after it in the cell -- kept (class 1)
+  history-superseded-struck  struck old entry replaced by a later entry of the cell -- kept (class 3)
   history-block    the line is a "> " errata / explanation block -- kept verbatim
   history-revision the line lies in a revision-record section -- kept verbatim
   history-superseded  an older entry of the cell that a later entry explicitly voids -- kept
@@ -100,8 +101,8 @@ def main():
         sha = hashlib.sha1(line_text.encode('utf-8')).hexdigest()[:12]
         st, d = r['status'], dec.get((r['file'], r['line'], r['text']))
         source, note = 'auto', ''
-        if st == 'history-strike':
-            cls, new = 'history-strike', ''
+        if st in ('history-strike', 'history-superseded-struck'):
+            cls, new = st, ''
         elif st in ('history-block', 'history-revision', 'history-superseded'):
             cls, new = st, ''
         elif d is not None and d['action'] != 'keep-auto':
@@ -149,6 +150,21 @@ def main():
         fh.write('| 类别 | 来源 | 数量 |\n|---|---|---|\n')
         for (c, s), n in sorted(cnt.items()):
             fh.write('| %s | %s | %d |\n' % (c, s, n))
+        by_cls = Counter(row[7] for row in out_rows)
+        fh.write('\n统筹2026-10-09裁定的历史保留类别（判定规则见`tools/b_merge_tools/anchor_history_rules.py`，数量为0的类别也列出）：\n\n')
+        fh.write('| 裁定类别 | 本表分类 | 数量 | 判定方法 |\n|---|---|---:|---|\n')
+        for lab, c, how in [
+                ('①删除线内', 'history-strike', '在~~删除线~~内，且同一格中删除线之后没有接续条目'),
+                ('②历史块：“> ”勘误/说明块', 'history-block', '所在行以“> ”开头'),
+                ('②历史块：修订记录节', 'history-revision', '所在节标题含修订记录/变更记录/change record/history等'),
+                ('③被后续条目取代的旧条目（带删除线）', 'history-superseded-struck', '在~~删除线~~内，且同一格中删除线之后接续了取代它的新条目（“~~旧~~ **新**”）'),
+                ('③被后续条目取代的旧条目（无删除线）', 'history-superseded', '不在删除线内，但同一格后文明示前文作废/不成立/已被取代'),
+                ('其它历史（人工）', 'history', '人工判定，理由见note'),
+                ('非锚点', 'not-anchor', '形似行号但不是锚点'),
+                ('仓库外文档', 'external', '指向未入库文档'),
+                ('转换', 'convert', '其余全部；同格后文有带日期勘误/补记但未明示作废前文的，默认转换并在note中标uncertain')]:
+            fh.write('| %s | %s | %d | %s |\n' % (lab, c, by_cls.get(c, 0), how))
+        fh.write('\nuncertain（默认转换的③类候选）：%d\n' % sum(1 for row in out_rows if row[7] == 'convert' and str(row[10]).startswith('uncertain')))
         per_doc = Counter((row[0], row[7]) for row in out_rows)
         fh.write('\n| 文件 | 类别 | 数量 |\n|---|---|---|\n')
         for (f, c), n in sorted(per_doc.items()):

@@ -42,7 +42,7 @@ import sys
 from collections import defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from anchor_history_rules import classify as history_classify  # noqa: E402
+from anchor_history_rules import classify as history_classify, classify_struck  # noqa: E402
 
 MODULE_WORDS = [
     (r'\bAMI\b', 'ppg_adc_measurement_idac_integration.v'),
@@ -275,7 +275,7 @@ def main():
         res = dict(it)
         res['written_at_import'] = it['blame'] in imp_short
         if it['strike']:
-            res.update(status='history-strike', new=None)
+            res.update(status=classify_struck(docs[it['file']][it['line'] - 1], it.get('pos', 0)), new=None)
             results.append(res)
             continue
         row = docs[it['file']][it['line'] - 1]

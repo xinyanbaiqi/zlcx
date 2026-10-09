@@ -19,7 +19,7 @@
 - **RTL逻辑没有改动。** 6个RTL文件只动了注释：§3.9点名的3处，加上`@satisfies`17处（含按统筹裁定补的SUP-08）。去掉注释后，与`7a8eabf`逐字节相同。
 - **TB只改了标签字符串。** 7个TB去掉注释和字符串后与`7a8eabf`相同（§5）。
 - **符号锚点体系已建立并接入门禁。**
-  - 矩阵与别名表的9702个旧行号锚点全部有了去向：9254处改为符号锚点；440处作为历史保留（删除线410、"> "历史块30）；8处为非锚点、仓库外引用或其它历史。按统筹10-09裁定，带日期的现行结论也已转换（锚点第二轮，§8）。
+  - 矩阵与别名表的9702个旧行号锚点全部有了去向：9254处改为符号锚点；440处作为历史保留（①删除线内8、②"> "历史块30、③被后续条目取代的旧条目402）；8处为非锚点、仓库外引用或其它历史。按统筹10-09裁定，带日期的现行结论也已转换（锚点第二轮，§8）。
   - `anchor_check.py`在HEAD上0报错。
   - 门禁接在模块级回归入口开头，检查失败则整轮报错。回归机上做过两次演示：一次通过，一次负对照失败。
 - **回归：基线与终版在同一台回归机上用同一分组运行**（i5-10400，Vivado 2022.2）。
@@ -205,16 +205,18 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
   - 第二轮（`557cdfd`快照，`9dd4333`写入）只写增量：新增转换1455个，其中自动1381个、人工74个、uncertain 49个；17个在"> "历史块中，保留；1个是计数“:2”，不是锚点。另外，第一轮已转换的锚点中有12个位于"> "历史块，已恢复原文；4个G-FP-01台账锚点改写。
   - 第二轮人工核对发现并订正两类问题：一是G-FP-01台账“Top边界输入/输出（`ppg_control_top.v:N`）”的行号与写入时版本有偏移，现按本行端口名（规则化，共26处与解析器结果不同）；二是别名表277行的SSW裸行号曾被误归C17，已按格内描述订正。另有一处冒号写节号（“MATRIX.md:12.14节”）。
   - 计数与按类抽样（原文与新锚点）见`anchor_conversion/round2/reclassification.md`，49个uncertain逐条列出。
+  - 裁定③“被后续条目取代的旧条目”单列为一类，见`anchor_conversion/round2/history_class3.md`。402个都是删除线内的旧条目，同一格中紧接着取代它的新条目（典型写法“~~旧~~ **2026-09-16重建…**”）。它们同时满足①，按③单列。不划删除线、只用文字明示作废的为0个（判定：同格后文出现“以上/上述/前述…作废/不成立/已被…取代”或“superseded”）。同格后文有带日期勘误或补记但未明示作废前文的98个，按“拿不准时默认转换”转换并标uncertain，逐条列在该文件。判定规则的自测共17个样例，本类6个；逐条停用规则后，各自恰好2个样例失败。
 - **结果**（附录A）：
 
 | 分类 | 数量 |
 |---|---:|
 | 自动转换 | 8925 |
 | 人工判定后转换 | 329 |
-| "> "历史块，保留 | 30 |
-| 修订记录节，保留 | 0 |
-| 被后续条目明示取代的旧条目，保留 | 0 |
-| 删除线内，保留 | 410 |
+| ①删除线内（同格中删除线之后无接续条目），保留 | 8 |
+| ②"> "历史块，保留 | 30 |
+| ②修订记录节，保留 | 0 |
+| ③被后续条目取代的旧条目：删除线内、同格后接取代条目（“~~旧~~ **新**”），保留 | 402 |
+| ③被后续条目取代的旧条目：无删除线、同格后文明示作废，保留 | 0 |
 | 其它历史（gate输出原文） | 1 |
 | 非锚点（如“1024-bit”、计数） | 4 |
 | 仓库外文档（会话交接文档） | 3 |
@@ -234,7 +236,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 
 | # | 事项 | 统筹裁定 | 处置 |
 |---|---|---|---|
-| 1 | 带日期叙述中的锚点按历史保留（1473处） | 不接受。只有删除线、"> "历史块、修订记录节、同格中被后续条目取代的旧条目保留；带日期的现行结论一律转换，拿不准时默认转换 | 已执行锚点第二轮（§8）：规则脚本`anchor_history_rules.py`及负对照；新增转换1455处（uncertain 49），12处"> "块内锚点恢复原文，4处改写；anchor_verify 0不符、负对照4/4；allowlist降为20行；anchor_check 0报错；§12.4a重算26/26 |
+| 1 | 带日期叙述中的锚点按历史保留（1473处） | 不接受。只有删除线、"> "历史块、修订记录节、同格中被后续条目取代的旧条目保留；带日期的现行结论一律转换，拿不准时默认转换 | 已执行锚点第二轮（§8）：规则脚本`anchor_history_rules.py`及负对照；三类历史分别计数（①8、②30、③402，其中③均为删除线内旧条目后接取代条目，无删除线的明示取代为0）；新增转换1455处（uncertain 49），12处"> "块内锚点恢复原文，4处改写；anchor_verify 0不符、负对照4/4；allowlist降为20行；anchor_check 0报错；§12.4a重算26/26 |
 | 2 | 冒号写的节号按节号转换（28处，含C13 §3.1→§4.1、`C10:11`→§11） | 接受 | 维持；第二轮另发现1处同类写法（MATRIX.md:12.14节），同样处理 |
 | 3 | 两处格内节号与行号不一致，按格内所写 | 接受 | 维持 |
 | 4 | SUP-08未改写、未补标签 | 本次一起改：扩写为“AMI阻断类故障（错配、连续完成丢失cause 06、长期忙cause 07）经supervisor进入STOPPING后，不复位即可合法重启”，补`@satisfies: SUP-08`，别名表映射adc_anomaly TB的重启检查 | C24 V1.7（`3570ab6`）；supervisor episode关闭分支补标签，只改注释（strip IDENTICAL、comment-only成功、gate 1/0→1/0）；版本联动16处（`98a61e4`，verlink_check 16/0）；别名表SUP-08行（`a2f1533`）。覆盖范围如实写出：8'h06由SYS-RESTART-K、SYS-L5-RESTART、SYS-RESTART-CAL覆盖；8'h07由SYS-RESTART-BUSY覆盖；错配类只有8'h02，由SYS-RESTART-IDLE、SYS-RESTART-NEXTRUN、SYS-RESTART-WIN、SYS-RESTART-WIN2覆盖；8'h01、8'h03的重启该TB未覆盖 |
@@ -286,13 +288,16 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | PPG_ALIAS_MAPPING_TABLE.md | external | manual | 3 |
 | PPG_ALIAS_MAPPING_TABLE.md | history | manual | 1 |
 | PPG_ALIAS_MAPPING_TABLE.md | history-block | auto | 3 |
-| PPG_ALIAS_MAPPING_TABLE.md | history-strike | auto | 12 |
+| PPG_ALIAS_MAPPING_TABLE.md | history-strike | auto | 8 |
+| PPG_ALIAS_MAPPING_TABLE.md | history-superseded-struck | auto | 4 |
 | PPG_ALIAS_MAPPING_TABLE.md | not-anchor | manual | 3 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | convert | auto | 8173 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | convert | manual | 212 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | history-block | auto | 27 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | history-strike | auto | 398 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | history-superseded-struck | auto | 398 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | not-anchor | manual | 1 |
+
+分类说明：history-strike为裁定①（删除线内且同格无接续条目）；history-block为裁定②；history-superseded-struck为裁定③（删除线内旧条目，同格后接取代条目）；history-revision与history-superseded均为0个，未出现在表中。
 
 ### A.2 人工判定（337条）
 

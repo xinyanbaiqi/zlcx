@@ -15,7 +15,7 @@
 | 第一轮已转换→history-block（恢复原文） | 12 |
 | 第一轮转换改写 | 4 |
 
-第二轮之后全部9702个锚点：convert 9254、external 3、history 1、history-block 30、history-strike 410、not-anchor 4。修订记录节（history-revision）与被明示取代的旧条目（history-superseded）在两份文件中均为0个。
+第二轮之后全部9702个锚点：convert 9254、external 3、history 1、history-block 30、history-strike 8、history-superseded-struck 402、not-anchor 4。其中history-superseded-struck为删除线内、同格后接取代条目的旧条目（裁定③，详见`history_class3.md`）；修订记录节（history-revision）与无删除线的明示取代（history-superseded）均为0个。
 
 ## 抽样（每类若干条：原文上下文中【】为旧锚点，后为新文本）
 

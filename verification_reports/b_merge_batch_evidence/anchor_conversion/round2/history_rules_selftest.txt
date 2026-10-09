@@ -1,3 +1,7 @@
+OK   history-superseded-struck  -> history-superseded-struck
+OK   history-superseded-struck  -> history-superseded-struck
+OK   history-strike             -> history-strike
+OK   history-strike             -> history-strike
 OK   convert                     -> convert
 OK   convert                     -> convert
 OK   convert                     -> convert
@@ -11,5 +15,5 @@ OK   convert              unc    -> convert (uncertain)
 OK   convert                     -> convert
 OK   convert                     -> convert
 OK   convert                     -> convert
-samples 13, failures 0
+samples 17, failures 0
 exit=0
