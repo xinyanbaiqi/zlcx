@@ -1,0 +1,46 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 15:41:26 2026
+# Process ID: 1840
+# Current directory: D:/PPG/runs_7a8eabf/chip/rtl/ppg_chip_digital_top
+# Command line: xsim.exe -log xsim_regression_20261009/tb_ppg_chip_digital_top/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_chip_digital_top/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/chip/rtl/ppg_chip_digital_top/xsim_regression_20261009/tb_ppg_chip_digital_top/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/chip/rtl/ppg_chip_digital_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_chip_digital_top/xsim_script.tcl
+# xsim {snap_tb_ppg_chip_digital_top} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS PARAM-FIXED control-top parameters equal the frozen product values (config 1024, epochs 8/8/8, code epoch 4, generation 8, frame/sample 16/16, manager and CDC bridge 1024/8)
+PASS PARAM-WDOG supervisor watchdog parameters are the frozen 5000/13 and legal (width >= clog2(cycles+1))
+PASS TC1 SPI基本读写、生命周期CONFIG->READY->RUN轮询与DBG_OUT候选0/2脉冲核对
+PASS TC4a SAR9下空闲合成器只跟随Stage1
+PASS TC2 真实单笔结果P2S字段与字节位置核对、DBG_OUT候选4脉冲核对（帧号=0）
+PASS TC3 真实双光背靠背深度2队列两笔结果均未丢失且顺序正确
+PASS TC4b SAR15下空闲合成器改跟随Stage2，DBG_OUT候选5正确反映精度切换
+PASS TC6 架构级窄窗口结论确认：主动STOP精确命中ADC选通脉冲这一子场景下两组discard锁存翻转位均未变化，符合合同§11.3/V1.12勘误的预期结论（mr_discard_seen=0 dd_discard_seen=0，机制本身已通过替代真实触发路径独立验证）
+PASS DIAG-MAP38 after-TC6 all 38 read-only bytes 0x0100-0x0125 match the contract section 11.2 map (status 0x08 err 0x00 fault 0x00 mr 0x00 dd 0x00)
+CMD_STOP_PRIO cmd=0x03 lifecycle=00 last_error=0x0a
+PASS CMD-STOP-PRIO SPI command 0x03 in RUN: STOP took effect (left RUN) and the rejected command was recorded as 0x0a
+CMD_STOP_PRIO cmd=0x0a lifecycle=00 last_error=0x01
+PASS CMD-STOP-PRIO SPI command 0x0a in RUN: STOP took effect (left RUN) and the rejected command was recorded as 0x01
+PASS DIAG-MAP38 after-conflict all 38 read-only bytes 0x0100-0x0125 match the contract section 11.2 map (status 0x18 err 0x01 fault 0x00 mr 0x00 dd 0x00)
+CHIP_LOST first void: 0x0108=42 0x0114 00->af fault_blocking=0
+PASS LOST-SPI-VOID
+CHIP_LOST k=2: lifecycle=00 0x0108=42 0x010A=ae cause=06 source=01 summary=0200
+PASS LOST-SPI-K2
+PASS DIAG-MAP38 after-owner-lost all 38 read-only bytes 0x0100-0x0125 match the contract section 11.2 map (status 0x18 err 0x0c fault 0xae mr 0xae dd 0x00)
+CHIP_LOST after diag clear: 0x0108=02 0x010A=00 summary=0000
+PASS LOST-SPI-CLR
+PASS LOST-SPI-RESTART
+CHIP_LOST start keeps sticky: lifecycle=10 0x0108=42
+PASS LOST-SPI-STKSTART
+PASS DIAG-MAP38 after-lost-clear all 38 read-only bytes 0x0100-0x0125 match the contract section 11.2 map (status 0x00 err 0x00 fault 0x00 mr 0xaf dd 0x00)
+PASS TC7 全程每一拍AMI正式结果valid为1时P2S o_result_ready均为1，正式结果从未被持住（valid_cycles=5），P2S遥测与正式结果同属一笔的前提成立
+TB_CHIP_DIGITAL_TOP_PASS all scenarios passed
+$finish called at time : 11362750 ns : File "D:/PPG/runs_7a8eabf/chip/rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v" Line 1216
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 15:41:30 2026...

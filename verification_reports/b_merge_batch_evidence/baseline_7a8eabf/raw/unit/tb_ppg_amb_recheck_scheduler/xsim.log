@@ -1,0 +1,56 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 15:45:53 2026
+# Process ID: 14428
+# Current directory: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_amb_recheck_scheduler
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_amb_recheck_scheduler/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_amb_recheck_scheduler/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_amb_recheck_scheduler\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_amb_recheck_scheduler/xsim_script.tcl
+# xsim {snap_tb_ppg_amb_recheck_scheduler} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: AMR reset clears pending, busy and inhibit
+PASS: AMR-01 interval zero disables periodic counting
+PASS: AMR-02 MANUAL ignores interval field
+PASS: AMR-02 HOLD ignores interval field
+PASS: interval 65535 remains inactive through frame 65534
+PASS: interval 65535 includes terminal frame before pending
+PASS: AMR-03 N minus one frames do not request recheck
+PASS: AMR-04 Nth frame latches persistent pending
+PASS: AMR-05 pending waits switch without blocking NORMAL output
+PASS: precision switch cycle immediately inhibits new NORMAL launch
+PASS: AMR-06 switch waits until ADC and fork are drained
+PASS: takeover waits while FIR output is held
+PASS: FIR-held recheck remains pending after frame boundary is safe
+PASS: peak-valley held event blocks recheck after FIR drains
+PASS: FIR and peak-valley idle permit AMB takeover
+PASS: safe takeover starts AMB frame with AMB metadata
+PASS: AMB sample valid holds through downstream backpressure
+PASS: one accepted AMB request creates one inflight sample
+PASS: held IDAC request cannot duplicate an inflight conversion
+PASS: F020-WDRAW withdrawn inflight request re-raises the held AMB sample request
+PASS: F020-WDRAW re-issued request is accepted once and holds inflight again
+PASS: matching AMB result releases inflight ownership for next evidence
+PASS: AMB frame completion waits for digital sequence result
+PASS: AMR-07 and AMR-10 always continue with DC_R frame
+PASS: DC_R digital completion cannot start IR before frame boundary
+PASS: DC_IR frame start carries IR color on the transition cycle
+PASS: third frame serves pending IR calibration request
+PASS: DC result completion waits for final physical frame boundary
+PASS: AMR-11 fixed AMB DC_R DC_IR frame order and metadata
+PASS: successful sequence clears pending and restarts interval count
+PASS: same-cycle interval hit and switch asserts takeover inhibit
+PASS: same-cycle interval hit and switch enters drain wait
+PASS: AMR-12 search exhausted terminates and releases scheduler
+PASS: DCS disabled closes periodic sequence after AMB stage
+PASS: AMR-14 STOP clears pending while waiting for switch
+PASS: STOP clears active takeover without false completion
+PASS: ppg_amb_recheck_scheduler completed scheduler regression
+$finish called at time : 1312040 ns : File "D:/PPG/runs_7a8eabf/unit/rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v" Line 609
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 15:45:55 2026...

@@ -1,0 +1,122 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 16:21:06 2026
+# Process ID: 15964
+# Current directory: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top_baseline_cross/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top_baseline_cross/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_baseline_cross/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top_baseline_cross/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top_baseline_cross} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+JNT_BASELINE_BEGIN required=54
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-01 (jnt 2/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-09 (jnt 54/54)
+JNT_BASELINE checked=54 pass=54 required=54 status=PASS
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS LONGRUN START accepted into RUN, measurement start latched t=1134751000
+PEAK CAPTURE t=193801750000 frame_id=63 value=2975 count=1
+PASS GROUP1_BSL04_CHECK_A first PEAK live_frame_id=77 peak_frame_id=63 diff=14 >= 10
+PASS GROUP1_PVW17_CHECK_B first PEAK frame_id=63 theoretical_rise_corner=60 diff=3 <= tol=11
+DIAG progress t=248790504000 red=101 ir=99 cal=0
+DIAG progress t=498790504000 red=201 ir=199 cal=0
+VALLEY CAPTURE t=538800750000 frame_id=201 value=-402 count=1
+PEAK CAPTURE t=598826750000 frame_id=225 value=85 count=2
+DIAG progress t=748790504000 red=301 ir=299 cal=0
+DIAG progress t=998790504000 red=401 ir=399 cal=0
+VALLEY CAPTURE t=1021300750000 frame_id=395 value=-1003 count=2
+CROSS CAPTURE t=1058800750000 frame_id=411 sample_index=822 baseline_q16=-19454066 slope_q16=-134541 time_unknown=0 count=1
+PASS GROUP2_REAL_DATAPATH cross frame_id=411 sample_index=822 traced to a real RED FIR handshake at candidate_start
+PASS GROUP1_BASELINE_FORMULA recomputed B[f]=-19454066 matches RTL o_cross_baseline_q16 peak_value=85 peak_frame=225 cross_frame=411 frame_delta=186 slope=-134541
+PASS GROUP2_BSL04_CHECK_A first CROSS live_frame_id=423 cross_frame_id=411 diff=12 >= 10
+SAR15_TRANSITION CAPTURE t=1061017250000 safe_frame_id=424
+PASS GROUP2_SAFE_BOUNDARY fine_window_start_event committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle
+PASS GROUP2_SAMPLE_CONTINUITY sample_index continuous across transition pretransition=847 posttransition=848
+PASS GROUP2_CODE_SNAPSHOT_STABILITY AMB/DC snapshot+epoch unchanged across transition amb_snapshot=64 amb_epoch=1 dc_snapshot=80 dc_epoch=1
+PEAK CAPTURE t=1193828250000 frame_id=464 value=3190 count=3
+DIAG progress t=1248792004000 red=501 ir=499 cal=0
+DIAG progress t=1498792004000 red=601 ir=599 cal=0
+VALLEY CAPTURE t=1538802250000 frame_id=601 value=-186 count=3
+RETURN_9BIT CAPTURE t=1538802250000 frame_id=605 reason=0 count=1
+PEAK CAPTURE t=1598826750000 frame_id=625 value=301 count=4
+PASS BASELINE_CROSS main sequence reached target red=700 within watchdog budget
+PASS GROUP1_EXISTENCE real PEAK/VALLEY warmup cycle observed peak_count=4 valley_count=3
+PASS GROUP2_EXISTENCE real CROSS/SAR15-entry/RETURN_9BIT cycle observed cross_count=1 return_count=1
+PASS N01 real detection-generation discard fired at STOP while downstream datapath was genuinely non-empty (detection_pending_at_stop=0)
+PASS N08 scope-only detection discard correctly reported identity_valid=0 (AMI's own fork had already handed off before STOP)
+PASS N01 all four PWI consumers (FIR/baseline/peak-valley/precision) individually settled to local-empty after the discard broadcast cleared them
+DIAG progress t=1746534504000 red=701 ir=699 cal=0
+PEAK CAPTURE t=1939045750000 frame_id=63 value=2975 count=5
+PASS D01 Acceptance-D01-01a real in-flight state (C20 candidate_active=0, C22 active_peak_valid=1) safely drained at STOP with zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events (peak=5 valley=3 cross=1 return=1 unchanged) and C20/C22/C23 all settled to o_local_empty=1
+DIAG progress t=1994278004000 red=801 ir=799 cal=0
+DIAG progress t=2244278004000 red=901 ir=899 cal=0
+DIAG progress t=2494278004000 red=1001 ir=999 cal=0
+PASS D01 Acceptance-D01-01b 250 real RED transactions driven with peak_valley_config_valid=0 produced zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events, C20/C22/C23 o_local_empty held 1 throughout and C23 never entered FINE window
+DIAG progress t=2742101504000 red=1101 ir=1099 cal=0
+PEAK CAPTURE t=2754532750000 frame_id=63 value=2975 count=6
+PASS D01 Acceptance-D01-01b reversibility: real PEAK detection resumed (peak_count=6) immediately after restoring peak_valley_config_valid=1, confirming a single reversible gate with no second producer
+PASS BASELINE_CROSS STOP drained back to CONFIG without fault
+PASS GROUP12_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across real_red=1106 real_ir=1104 transactions
+BASELINE_CROSS_TB_PASS real_red=1106 real_ir=1104 real_cal=0 measurement_result_valid=2207 peak_count=6 valley_count=3 cross_count=1 return_count=1
+$finish called at time : 2754606751 ns : File "D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v" Line 1904
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:07:39 . Memory (MB): peak = 239.605 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 13688 KB (Peak: 13688 KB), Simulation CPU Usage: 456984 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 16:28:47 2026...

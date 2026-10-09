@@ -1,0 +1,36 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 16:21:50 2026
+# Process ID: 5684
+# Current directory: D:/PPG/runs_7a8eabf/sys_g2/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top_injection/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top_injection/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/sys_g2/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_injection/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/sys_g2/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top_injection/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top_injection} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS INJ-00 initial commit before injection scenarios
+PASS INJ-01 injection ready stayed 0 with i_test_inject_enable=0; real transaction completed normally with sample_valid=1
+PASS INJ-02 re-commit before enabling injection
+PASS P06 flag_test_identity_hold stayed 1 across 2 cycles of i_test_inject_enable deasserted (the real window before the independent protocol-error/abort path clears it on its own); enable deassertion cannot revoke an accepted request
+PASS INJ-02 owner retained and integration protocol error sticky asserted after mismatched identity injection
+PASS INJ-02 AMI blocking fault propagated to o_system_fault_blocking via supervisor
+PASS INJ-02 owner released exactly once by the STOP-triggered original-identity success=0 recovery, original sample_index=0
+PASS INJ-02 diagnostics cleared after i_diag_clear_event
+PASS INJ-02 re-commit after LFA-08 recovery
+PASS INJ-02 next legal transaction after LFA-08 recovery completed cleanly with no stale identity
+PASS INJ-03 invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact
+PASS INJ-03 later legal sample recovered sample_valid=1 after the PRC-08 injection
+PASS INJ-04 both injection ready outputs stayed 0 during simultaneous double request on the same owner
+PASS INJ-04 real transaction completed cleanly with no side effect from the blocked double request
+INJ04_WINDOW eligible_cycles=2 ready_cycles=0
+PASS INJ final drain back to CONFIG without fault
+INJ_TB_PASS
+$finish called at time : 223203500 ps : File "D:/PPG/runs_7a8eabf/sys_g2/rtl/ppg_control_top/tb_ppg_control_top_injection.v" Line 1108
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 16:21:53 2026...

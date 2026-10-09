@@ -1,0 +1,232 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 15:59:04 2026
+# Process ID: 12388
+# Current directory: D:/PPG/runs_7a8eabf/sys_g4/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top_robustness_corner_waveforms/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top_robustness_corner_waveforms/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/sys_g4/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_robustness_corner_waveforms/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/sys_g4/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top_robustness_corner_waveforms/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top_robustness_corner_waveforms} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+JNT_BASELINE_BEGIN required=54
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-01 (jnt 2/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-09 (jnt 54/54)
+JNT_BASELINE checked=54 pass=54 required=54 status=PASS
+DIAG progress t=248790504000 red=100 ir=99 cal=0 profile=1
+PASS PRC-01 FLAT profile red=120 produced zero cross/peak/valley/precision-transition events
+DIAG progress t=496614004000 red=80 ir=80 cal=0 profile=2
+PEAK CAPTURE t=504045250000 frame_id=67 value=-435 count=1
+DIAG progress t=746614004000 red=180 ir=180 cal=0 profile=2
+VALLEY CAPTURE t=866544250000 frame_id=203 value=-976 count=1
+PEAK CAPTURE t=979070250000 frame_id=250 value=-917 count=2
+DIAG progress t=996614004000 red=280 ir=280 cal=0 profile=2
+VALLEY CAPTURE t=1071544250000 frame_id=288 value=-972 count=2
+PEAK CAPTURE t=1211545250000 frame_id=352 value=-986 count=3
+DIAG progress t=1246614004000 red=380 ir=380 cal=0 profile=2
+DIAG progress t=1496614004000 red=480 ir=480 cal=0 profile=2
+PEAK CAPTURE t=1504045250000 frame_id=467 value=-220 count=4
+DIAG progress t=1746614004000 red=580 ir=580 cal=0 profile=2
+VALLEY CAPTURE t=1869044250000 frame_id=602 value=-761 count=3
+PEAK CAPTURE t=1981570250000 frame_id=656 value=-702 count=5
+DIAG progress t=1996614004000 red=680 ir=680 cal=0 profile=2
+VALLEY CAPTURE t=2069044250000 frame_id=692 value=-756 count=4
+DIAG progress t=2246614004000 red=780 ir=780 cal=0 profile=2
+DIAG progress t=2496614004000 red=880 ir=880 cal=0 profile=2
+PEAK CAPTURE t=2504045250000 frame_id=867 value=-5 count=6
+PASS PRC-02 LOW_AMPLITUDE red=900 cross_count=0 peak_count=6 valley_count=4 entered_sar15=0 (no fabricated fine window)
+DIAG progress t=2746777504000 red=81 ir=80 cal=0 profile=3
+DIAG progress t=2996777504000 red=181 ir=180 cal=0 profile=3
+DIAG progress t=3246777504000 red=281 ir=280 cal=0 profile=3
+DIAG progress t=3496777504000 red=381 ir=380 cal=0 profile=3
+PASS PRC-03 HIGH_AMPLITUDE_SATURATED asserted real saturation (high_count=858 low_count=0) and every saturated window stayed unqualified for baseline/cross/peak/valley evidence
+DIAG progress t=3744601004000 red=31 ir=31 cal=0 profile=4
+PEAK CAPTURE t=3862032250000 frame_id=64 value=454 count=1
+DIAG progress t=3994601004000 red=131 ir=131 cal=0 profile=4
+VALLEY CAPTURE t=4207031250000 frame_id=201 value=-2558 count=1
+DIAG progress t=4244601004000 red=231 ir=231 cal=0 profile=4
+PEAK CAPTURE t=4269557250000 frame_id=226 value=-2018 count=2
+DIAG progress t=4494601004000 red=331 ir=331 cal=0 profile=4
+VALLEY CAPTURE t=4689531250000 frame_id=395 value=-2621 count=2
+CROSS CAPTURE t=4709531250000 frame_id=404 slope_q16=-125312 count=1
+DIAG progress t=4744602504000 red=431 ir=431 cal=0 profile=4
+PASS PRC-04 STRONG_DRIFT red=450 cross_count=1 peak_count=2 valley_count=2 completed with no blocking protocol-error sticky (no identity loss)
+INFO PRC-04 o_baseline_saturation_high/low never asserted under this real drift -- not dynamically confirmed this round, see WORKLINE_D_PRC04_PRC06_20260918.md; not counted as FAIL
+INFO PRC-04 dec_baseline_wide_q16 never exceeded the 48-bit clamp boundary under this real drift -- see WORKLINE_D_PRC04_PRC06_20260918.md for the quantitative reachability argument; not counted as FAIL
+DIAG PRC04B_TRACE t=4792101750000 red=0 i_frame_id=0 dec_peak_frame_id=226 dec_result_frame_delta=-226 slope_current_q16_o=-125312 dec_baseline_wide_q16=-8316378368
+DIAG PRC04B_TRACE t=4914756750000 red=50 i_frame_id=38 dec_peak_frame_id=0 dec_result_frame_delta=38 slope_current_q16_o=-65536 dec_baseline_wide_q16=-2490368
+DIAG progress t=4994759504000 red=82 ir=81 cal=0 profile=4
+DIAG PRC04B_TRACE t=5039756750000 red=100 i_frame_id=88 dec_peak_frame_id=0 dec_result_frame_delta=88 slope_current_q16_o=-65536 dec_baseline_wide_q16=-5767168
+DIAG PRC04B_TRACE t=5164756750000 red=150 i_frame_id=138 dec_peak_frame_id=0 dec_result_frame_delta=138 slope_current_q16_o=-65536 dec_baseline_wide_q16=-9043968
+DIAG progress t=5244759504000 red=182 ir=181 cal=0 profile=4
+DIAG PRC04B_TRACE t=5289756750000 red=200 i_frame_id=188 dec_peak_frame_id=0 dec_result_frame_delta=188 slope_current_q16_o=-65536 dec_baseline_wide_q16=-12320768
+DIAG PRC04B_TRACE t=5414756750000 red=250 i_frame_id=238 dec_peak_frame_id=0 dec_result_frame_delta=238 slope_current_q16_o=-65536 dec_baseline_wide_q16=-15597568
+DIAG progress t=5494759504000 red=282 ir=281 cal=0 profile=4
+DIAG PRC04B_TRACE t=5539756750000 red=300 i_frame_id=288 dec_peak_frame_id=0 dec_result_frame_delta=288 slope_current_q16_o=-65536 dec_baseline_wide_q16=-18874368
+DIAG PRC04B_TRACE t=5664756750000 red=350 i_frame_id=338 dec_peak_frame_id=0 dec_result_frame_delta=338 slope_current_q16_o=-65536 dec_baseline_wide_q16=-22151168
+DIAG progress t=5744759504000 red=382 ir=381 cal=0 profile=4
+DIAG PRC04B_TRACE t=5789756750000 red=400 i_frame_id=388 dec_peak_frame_id=0 dec_result_frame_delta=388 slope_current_q16_o=-65536 dec_baseline_wide_q16=-25427968
+DIAG PRC04B_TRACE t=5914756750000 red=450 i_frame_id=438 dec_peak_frame_id=0 dec_result_frame_delta=438 slope_current_q16_o=-65536 dec_baseline_wide_q16=-28704768
+DIAG progress t=5994759504000 red=482 ir=481 cal=0 profile=4
+DIAG PRC04B_TRACE t=6039756750000 red=500 i_frame_id=488 dec_peak_frame_id=0 dec_result_frame_delta=488 slope_current_q16_o=-65536 dec_baseline_wide_q16=-31981568
+DIAG PRC04B_TRACE t=6164756750000 red=550 i_frame_id=538 dec_peak_frame_id=0 dec_result_frame_delta=538 slope_current_q16_o=-65536 dec_baseline_wide_q16=-35258368
+DIAG progress t=6244759504000 red=582 ir=581 cal=0 profile=4
+DIAG PRC04B_TRACE t=6289756750000 red=600 i_frame_id=588 dec_peak_frame_id=0 dec_result_frame_delta=588 slope_current_q16_o=-65536 dec_baseline_wide_q16=-38535168
+DIAG PRC04B_TRACE t=6414756750000 red=650 i_frame_id=638 dec_peak_frame_id=0 dec_result_frame_delta=638 slope_current_q16_o=-65536 dec_baseline_wide_q16=-41811968
+DIAG progress t=6494759504000 red=682 ir=681 cal=0 profile=4
+DIAG PRC04B_TRACE t=6539756750000 red=700 i_frame_id=688 dec_peak_frame_id=0 dec_result_frame_delta=688 slope_current_q16_o=-65536 dec_baseline_wide_q16=-45088768
+DIAG PRC04B_TRACE t=6664756750000 red=750 i_frame_id=738 dec_peak_frame_id=0 dec_result_frame_delta=738 slope_current_q16_o=-65536 dec_baseline_wide_q16=-48365568
+DIAG progress t=6744759504000 red=782 ir=781 cal=0 profile=4
+DIAG PRC04B_TRACE t=6789756750000 red=800 i_frame_id=788 dec_peak_frame_id=0 dec_result_frame_delta=788 slope_current_q16_o=-65536 dec_baseline_wide_q16=-51642368
+DIAG PRC04B_TRACE t=6914756750000 red=850 i_frame_id=838 dec_peak_frame_id=0 dec_result_frame_delta=838 slope_current_q16_o=-65536 dec_baseline_wide_q16=-54919168
+DIAG progress t=6994759504000 red=882 ir=881 cal=0 profile=4
+INFO PRC-04b o_baseline_saturation_high/low never asserted even under zero pulse amplitude + STRONG drift (red=900), even though dec_baseline_wide_q16 itself is confirmed (by real DIAG PRC04B_TRACE data) to cross +-8388607 around frame_delta~128 -- root cause found: baseline_valid_o (ppg_dynamic_baseline_cross_detector.v line 652-662) only ever becomes 1 via a real flag_peak_transfer (an actual accepted PEAK), and starts/stays 0 from i_start_ack_event onward; a construction with zero pulse amplitude from START never produces a real PEAK (confirmed peak_count=0 above), so baseline_valid_o is permanently 0 and the saturation diagnostic's own gating condition (line 764/777: flag_formal_red_result && baseline_valid_o && flag_result_frame_legal) never fires, regardless of how large the underlying arithmetic grows. This is a structural conflict, not a vacuous-by-bad-luck result: 'zero pulse from the start' and 'a valid baseline to stress' are mutually exclusive under this gating. A viable next construction would bootstrap with normal pulse amplitude until exactly one real peak commits (establishing baseline_valid_o=1 legitimately), then switch to zero pulse amplitude mid-RUN without a STOP/START boundary (which would itself re-clear baseline_valid_o) -- not attempted this round, see WORKLINE_D_PRC04_PRC06_20260918.md 2026-09-19 addendum for the full trace data and reasoning; not counted as FAIL
+DIAG PRC04B_TRACE t=7039756750000 red=900 i_frame_id=888 dec_peak_frame_id=0 dec_result_frame_delta=888 slope_current_q16_o=-65536 dec_baseline_wide_q16=-58195968
+PEAK CAPTURE t=7135014250000 frame_id=25 value=2786 count=1
+DIAG progress t=7242583004000 red=82 ir=82 cal=0 profile=5
+VALLEY CAPTURE t=7262513250000 frame_id=76 value=-292 count=1
+PEAK CAPTURE t=7385039250000 frame_id=125 value=-702 count=2
+VALLEY CAPTURE t=7435013250000 frame_id=145 value=-1032 count=2
+CROSS CAPTURE t=7447513250000 frame_id=151 slope_q16=-175235 count=1
+DIAG progress t=7492584504000 red=182 ir=182 cal=0 profile=5
+PEAK CAPTURE t=7662540750000 frame_id=236 value=19 count=3
+DIAG progress t=7742584504000 red=282 ir=282 cal=0 profile=5
+VALLEY CAPTURE t=7810014750000 frame_id=295 value=-975 count=3
+PEAK CAPTURE t=7915039250000 frame_id=337 value=2396 count=4
+DIAG progress t=7992583004000 red=382 ir=382 cal=0 profile=5
+VALLEY CAPTURE t=8012513250000 frame_id=376 value=-130 count=4
+PEAK CAPTURE t=8165014250000 frame_id=437 value=-756 count=5
+DIAG progress t=8242583004000 red=482 ir=482 cal=0 profile=5
+PASS PRC-06a FAST_PERIOD(150 frames) red=500 peak_count=5 valley_count=4 real interval checks satisfied (no false out-of-range rejection observed)
+DIAG progress t=8492746504000 red=83 ir=82 cal=0 profile=6
+PEAK CAPTURE t=8592757750000 frame_id=109 value=3080 count=1
+DIAG progress t=8742746504000 red=183 ir=182 cal=0 profile=6
+DIAG progress t=8992746504000 red=283 ir=282 cal=0 profile=6
+VALLEY CAPTURE t=9202756750000 frame_id=353 value=-374 count=1
+DIAG progress t=9242746504000 red=383 ir=382 cal=0 profile=6
+PEAK CAPTURE t=9340282750000 frame_id=393 value=157 count=2
+DIAG progress t=9492746504000 red=483 ir=482 cal=0 profile=6
+DIAG progress t=9742746504000 red=583 ir=582 cal=0 profile=6
+DIAG progress t=9992746504000 red=683 ir=682 cal=0 profile=6
+VALLEY CAPTURE t=10057756750000 frame_id=694 value=-862 count=2
+CROSS CAPTURE t=10102756750000 frame_id=714 slope_q16=-98971 count=1
+DIAG progress t=10242748004000 red=783 ir=782 cal=0 profile=6
+PEAK CAPTURE t=10345284250000 frame_id=809 value=3457 count=3
+DIAG progress t=10492748004000 red=883 ir=882 cal=0 profile=6
+DIAG progress t=10742748004000 red=983 ir=982 cal=0 profile=6
+VALLEY CAPTURE t=10952758250000 frame_id=1053 value=3 count=3
+DIAG progress t=10992746504000 red=1083 ir=1082 cal=0 profile=6
+PEAK CAPTURE t=11092782750000 frame_id=1092 value=535 count=4
+DIAG progress t=11242746504000 red=1183 ir=1182 cal=0 profile=6
+DIAG progress t=11492746504000 red=1283 ir=1282 cal=0 profile=6
+DIAG progress t=11742746504000 red=1383 ir=1382 cal=0 profile=6
+VALLEY CAPTURE t=11807756750000 frame_id=1394 value=-485 count=4
+CROSS CAPTURE t=11850256750000 frame_id=1413 slope_q16=-110181 count=2
+PASS PRC-06b SLOW_PERIOD(700 frames) red=1450 peak_count=4 valley_count=4 real interval checks satisfied (no false out-of-range rejection observed)
+DIAG progress t=11990565004000 red=33 ir=33 cal=0 profile=6
+DIAG progress t=12240565004000 red=133 ir=133 cal=0 profile=6
+DIAG progress t=12490565004000 red=233 ir=233 cal=0 profile=6
+DIAG progress t=12740565004000 red=333 ir=333 cal=0 profile=6
+DIAG progress t=12990565004000 red=433 ir=433 cal=0 profile=6
+DIAG progress t=13240565004000 red=533 ir=533 cal=0 profile=6
+DIAG progress t=13490565004000 red=633 ir=633 cal=0 profile=6
+DIAG progress t=13740565004000 red=733 ir=733 cal=0 profile=6
+DIAG progress t=13990565004000 red=833 ir=833 cal=0 profile=6
+DIAG progress t=14240565004000 red=933 ir=933 cal=0 profile=6
+DIAG PRC06_REACQUIRE_TIMEOUT t=14460494750000 count=2
+DIAG progress t=14490565004000 red=1033 ir=1033 cal=0 profile=6
+DIAG progress t=14740565004000 red=1133 ir=1133 cal=0 profile=6
+PEAK CAPTURE t=14857996250000 frame_id=1161 value=3666 count=1
+VALLEY CAPTURE t=14932995250000 frame_id=1191 value=3612 count=1
+CROSS CAPTURE t=14937995250000 frame_id=1199 slope_q16=-65536 count=1
+DIAG progress t=14990566504000 red=1233 ir=1233 cal=0 profile=6
+PEAK CAPTURE t=15098022750000 frame_id=1262 value=3602 count=2
+VALLEY CAPTURE t=15180496750000 frame_id=1290 value=3558 count=2
+DIAG progress t=15240565004000 red=1333 ir=1333 cal=0 profile=6
+PASS PRC-06c ILLEGAL_PERIOD(7500 frames) red=1400 reacquire_timeout_count=1 valley_timeout_count=0 peak_count=2 valley_count=2: real out-of-range period correctly followed the timeout/reacquire path with no false acceptance
+DIAG progress t=15490728504000 red=34 ir=33 cal=0 profile=7
+PEAK CAPTURE t=15600739750000 frame_id=63 value=2975 count=1
+DIAG progress t=15740728504000 red=134 ir=133 cal=0 profile=7
+VALLEY CAPTURE t=15978238750000 frame_id=202 value=479 count=1
+DIAG progress t=15990728504000 red=234 ir=233 cal=0 profile=7
+PEAK CAPTURE t=15998264750000 frame_id=223 value=513 count=2
+DIAG progress t=16240728504000 red=334 ir=333 cal=0 profile=7
+VALLEY CAPTURE t=16430738750000 frame_id=395 value=-990 count=2
+DIAG progress t=16490728504000 red=434 ir=433 cal=0 profile=7
+PEAK CAPTURE t=16600739750000 frame_id=464 value=3190 count=3
+DIAG progress t=16740728504000 red=534 ir=533 cal=0 profile=7
+PEAK CAPTURE t=16850739750000 frame_id=564 value=1121 count=4
+VALLEY CAPTURE t=16978238750000 frame_id=602 value=695 count=3
+DIAG progress t=16990728504000 red=634 ir=633 cal=0 profile=7
+PEAK CAPTURE t=17105764750000 frame_id=666 value=354 count=5
+PASS PRC-07 WEAK_NOTCH red=700 valley_count=3 peak_count=5 weak notch still produced a fully qualified VALLEY
+DIAG progress t=17238552004000 red=34 ir=34 cal=0 profile=0
+PEAK CAPTURE t=17348483250000 frame_id=63 value=2975 count=1
+PASS PRC-09 injected calibration-loss sample produced 1 real unqualified FIR output handshake(s), then a qualified FIR output genuinely recovered
+PASS PRC-10 sample_index strictly advanced (no duplicate or backward step) across the injected sample and its recovery, order_violation_count stayed 0
+PASS PRC-05 cited: tb_ppg_real_raw_generator_selfcheck.v RGC-06 real evidence (2026/08/29 rerun) -- noise bounded to configured amplitude and bit-identical across 1000 repeated frame evaluations, both colors
+PASS PRC-08 cited: tb_ppg_control_top_injection.v INJ-03 real confirmed evidence -- invalid-sample-injected transaction reached the formal boundary with sample_valid=0 and identity/value fields intact, later legal sample recovered sample_valid=1
+PASS PRC_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across the entire nine-scenario run
+ROBUSTNESS_CORNER_WAVEFORMS_TB_PASS measurement_result_valid=13924 order_violation_count=0
+$finish called at time : 17403562751 ns : File "D:/PPG/runs_7a8eabf/sys_g4/rtl/ppg_control_top/tb_ppg_control_top_robustness_corner_waveforms.v" Line 1776
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:48:21 . Memory (MB): peak = 239.566 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 13660 KB (Peak: 13660 KB), Simulation CPU Usage: 2888812 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 16:47:27 2026...

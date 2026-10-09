@@ -1,0 +1,76 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 15:47:15 2026
+# Process ID: 1596
+# Current directory: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_peak_valley_window_detector
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_peak_valley_window_detector/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_peak_valley_window_detector/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/unit_runs/tb_ppg_peak_valley_window_detector\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_peak_valley_window_detector/xsim_script.tcl
+# xsim {snap_tb_ppg_peak_valley_window_detector} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+[PASS] PVW-01
+[PASS] PVW-02
+[PASS] PVW-03
+[PASS] PVW-04
+[PASS] PVW-05
+[PASS] PVW-06
+[PASS] PVW-07
+[PASS] PVW-08
+[PASS] PVW-09
+[PASS] PVW-09-WRAP
+[PASS] PVW-39-WRAP
+[PASS] PVW-10
+[PASS] PVW-11
+[PASS] PVW-12
+[PASS] PVW-13
+[PASS] PVW-14
+[PASS] PVW-15
+[PASS] PVW-16
+[PASS] PVW-17
+[PASS] PVW-18
+[PASS] PVW-19
+[PASS] PVW-20
+[PASS] PVW-21
+[PASS] PVW-22
+[PASS] PVW-23
+[PASS] PVW-24
+[PASS] PVW-25
+[PASS] PVW-26
+[PASS] PVW-27
+[PASS] PVW-28
+[PASS] PVW-29
+[PASS] PVW-30
+[PASS] PVW-31
+[PASS] PVW-32-BUSY
+[PASS] PVW-32
+[PASS] PVW-33
+[PASS] PVW-33-BUSY
+[PASS] PVW-34
+[PASS] PVW-35
+[PASS] PVW-36
+[PASS] PVW-37
+[PASS] PVW-38
+[PASS] PVW-39
+[PASS] PVW-40
+[PASS] PVW-41
+[PASS] PVW-42
+[PASS] PVW-43
+[PASS] PVW-44
+[PASS] PVW-45
+[PASS] PVW-46
+[PASS] PVW-47-SETUP
+[PASS] PVW-47
+[PASS] PVW-48-SETUP
+[PASS] PVW-48
+RETURN_HOLD second_valley valid=1 reason=0 frame=10
+[PASS] RETURN-HOLD
+PVW-01 through PVW-48 ALL PASS: 55 checks
+$finish called at time : 33389500 ns : File "D:/PPG/runs_7a8eabf/unit/rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v" Line 1210
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 15:47:18 2026...

@@ -1,0 +1,37 @@
+基线7a8eabf回归（按REGRESSION_RUN_REQUEST.md第1节执行）
+
+机器
+  CPU      : Intel(R) Core(TM) i5-10400 CPU @ 2.90GHz（12逻辑处理器），内存15.8 GB
+  操作系统 : Microsoft Windows 11 专业版 10.0.26200 build 26200
+  Shell    : GNU bash 5.3.9(1)-release (x86_64-pc-cygwin)（Git for Windows 2.54.0）
+  Vivado   : Vivado Simulator v2022.2   （xelab -version第一行）
+  VIVADO_BIN=/c/Xilinx/Vivado/2022.2/bin
+
+时间（本机时区+0800）
+  开始 : 2026-10-09 15:40:59
+  结束 : 2026-10-09 16:53:04（最后一组sys_g4结束）
+  总耗时 : 1小时12分05秒
+  各组结束 : chip 15:41:30, unit 15:49:17, sys_g3 15:56:25, sys_g2 16:21:53, sys_g1 16:28:48, sys_g4 16:53:04
+
+导出与运行
+  每组一个独立目录：git -c core.autocrlf=false archive 7a8eabf | tar -x，根目录在仓库外（D:/PPG/runs_7a8eabf/）。
+  sys_g1..sys_g4只改了rtl/ppg_control_top/run_xsim_regression.sh的ORDER=(...)数组；与未改的导出副本diff -rq，
+  除该文件外无其它差异，该文件除ORDER外逐字节相同。
+  6组同时启动并行运行（sys_g1..g4、chip、unit -g all），组内按ORDER串行。
+
+分组（与REGRESSION_RUN_REQUEST.md 1.2一致；4组合起来恰为TB_FILELIST的20个，不重复不遗漏）
+  g1: tb_ppg_control_top_longrun tb_diag_algo_probe tb_ppg_real_raw_generator_selfcheck tb_ppg_control_top tb_ppg_control_top_baseline_cross
+  g2: tb_ppg_control_top_long_10_cycles tb_ppg_control_top_fir_tail_isolation tb_ppg_control_top_adc_numeric_scoreboard tb_ppg_control_top_idac_bus_isolation tb_ppg_control_top_injection
+  g3: tb_ppg_control_top_lifecycle_fault_adc_anomaly tb_ppg_control_top_input_light_static_matrix tb_ppg_control_top_normal_slow_tracking tb_ppg_control_top_no_recheck_control tb_ppg_control_top_owner_identity_backpressure
+  g4: tb_ppg_control_top_peak_valley_return tb_ppg_control_top_periodic_recheck_recovery tb_ppg_control_top_robustness_corner_waveforms tb_ppg_control_top_startup_idac_calibration tb_ppg_control_top_adc_anomaly
+  chip: rtl/ppg_chip_digital_top/run_xsim_regression.sh
+  unit: tools/run_unit_tb_regression.sh -o <run_root>/unit_runs -g all（UNIT_EXIT=0）
+
+结果（regression_evidence.py export）与参考值（统筹机器，Vivado 2022.2）
+  系统TB : 20/20，xvlog/xelab/xsim全0，0 FAIL，$finish各1次      参考 20/20     一致
+  PASS行 : 1250（index.tsv中system各行pass_lines之和）            参考 1250      一致
+  芯片   : 20/0                                                    参考 20/0      一致
+  模块级 : 28/28                                                   参考 28/28     一致
+
+raw/目录
+  raw/<组>/summary.tsv（unit为unit_summary.tsv），raw/<组>/<tb>/xsim.log；组为sys_g1..sys_g4、chip、unit。
