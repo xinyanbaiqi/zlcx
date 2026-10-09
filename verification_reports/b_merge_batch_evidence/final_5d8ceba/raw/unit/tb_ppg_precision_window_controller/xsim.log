@@ -1,0 +1,70 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:59:49 2026
+# Process ID: 24556
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_precision_window_controller
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_precision_window_controller/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_precision_window_controller/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_precision_window_controller\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_precision_window_controller/xsim_script.tcl
+# xsim {snap_tb_ppg_precision_window_controller} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS PWC-01 async reset
+PASS PWC-02 normal legal start
+PASS PWC-03 illegal normal initial 15bit
+PASS PWC-04 characterization fixed 9bit
+PASS PWC-04 characterization safely consumes cross without formal window
+PASS PWC-04 characterization safely consumes return without formal window
+PASS PWC-05 characterization fixed 15bit
+PASS PWC-06 cross during startup calibration
+PASS PWC-07 cross backpressure does not sample
+PASS PWC-08 atomic cross context
+PASS PWC-09 enter at next safe frame
+PASS PWC-10 start frame uses safe frame id
+PASS PWC-11 atomic mode commit hold
+PASS PWC-12 unknown crossing accepted
+PASS PWC-13 second cross during fine
+PASS PWC-14 return payload held under backpressure
+PASS PWC-15 valley normal return
+PASS PWC-15 valley normal return still no reacquire one cycle later
+PASS PWC-16 fine timeout reacquire
+PASS PWC-17 protocol fallback return
+PASS PWC-18 reserved reason normalized
+PASS PWC-19 return frame uses safe frame id
+PASS PWC-20 actual return event remains visible
+PASS PWC-21 recheck busy keeps 9bit
+PASS PWC-22 ordinary switch needs only safety inputs
+PASS PWC-23 pending waits for safe conditions
+PASS PWC-24 no timeout before threshold
+PASS PWC-25 safe commit wins at threshold
+PASS PWC-26 switch timeout fault
+PASS PWC-26 switch timeout reports exactly one fault pulse
+PASS PWC-27 generation-scoped STOP discard cancels pending
+PASS PWC-28 generation-scoped abort and system-fault discard cancel pending
+PASS PWC-29 reset clears pending context
+PASS PWC-30 cross return collision
+PASS PWC-31 duplicate request preserves context
+PASS PWC-32 abnormal return before recheck takeover
+PASS PWC-33 STOP discard preserves sticky
+PASS PWC-34 diagnostic clear keeps active fault
+PASS PWC-34 diagnostic clear does not release active fault hold
+PASS PWC-35 controller idle definition
+PASS PWC-35 controller idle excludes pending switch
+PASS PWC-36 red infrared share committed precision
+PASS PWC-37 enter ignores FIR history tail
+PASS PWC-38 return ignores FIR history tail
+PASS PWC-39 FIR tail excluded from switch timeout
+PASS PWC-40 peak valley config gate blocks formal cross
+PASS PWC-41 new legal START preserves protocol sticky
+PASS PWC-41 new legal START preserves switch-timeout sticky
+PASS CANCEL-COMMIT enter: same-cycle current-generation discard wins over the 15-bit safe commit
+PASS CANCEL-COMMIT return: same-cycle current-generation discard wins over the 9-bit safe commit
+PWC-01 through PWC-41 ALL PASS pass=50 fail=0
+$finish called at time : 2636 ns : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v" Line 793
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:59:52 2026...

@@ -1,0 +1,29 @@
+group	tb	xvlog	xelab	xsim	finish	fail_lines	banner	verdict	dur_s	banner_line
+hier	tb_ppg_400hz_frame_calibration_scheduler	0	0	0	1	0	Y	PASS	11	ALL SCHT-1 THROUGH SCHT-62 PASSED
+hier	tb_ppg_active_v4_control_plane_integration	0	0	0	1	0	Y	PASS	9	ALL AV4C-01 THROUGH AV4C-22 PASSED
+hier	tb_ppg_adc_async_stage_capture	0	0	0	1	0	Y	PASS	11	PASS ppg_adc_async_stage_capture explicit-frame checks
+hier	tb_ppg_adc_dc_recovery	0	0	0	1	0	Y	PASS	9	PASS ppg_adc_dc_recovery directed DCR checks and DCRT-n vectors
+hier	tb_ppg_adc_measurement_idac_integration	0	0	0	1	0	Y	PASS	21	AMI-01 through AMI-45 except AMI-13 (TB-local FORK-HOLD), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 78 real comparisons
+hier	tb_ppg_adc_pipeline_overlap_corrector	0	0	0	1	0	Y	PASS	17	PASS ppg_adc_pipeline_overlap_corrector OVL-01..OVL-17 and 1024-code sweep
+hier	tb_ppg_adc_programmable_reconstructor	0	0	0	1	0	Y	PASS	83	PASS ppg_adc_programmable_reconstructor PR-01..PR-14 and 1024-code sweep
+hier	tb_ppg_adc_result_router	0	0	0	1	0	Y	PASS	9	PASS ppg_adc_result_router RTR-01..RTR-13
+hier	tb_ppg_adc_s1_programmable_calibrator	0	0	0	1	0	Y	PASS	43	PASS ppg_adc_s1_programmable_calibrator CAL-01..CAL-17
+hier	tb_ppg_adc_s1_redundancy_corrector	0	0	0	1	0	Y	PASS	61	PASS ppg_adc_s1_redundancy_corrector integrated exhaustive checks
+hier	tb_ppg_amb_recheck_scheduler	0	0	0	1	0	Y	PASS	10	PASS: ppg_amb_recheck_scheduler completed scheduler regression
+hier	tb_ppg_characterization_control_cdc	0	0	0	1	0	Y	PASS	10	ALL CCC-01 TO CCC-26 PASS (26 checks)
+hier	tb_ppg_coarse_detection_fir	0	0	0	1	0	Y	PASS	12	PPG_COARSE_DETECTION_FIR_V2_TB_PASS pass=103
+hier	tb_ppg_dynamic_baseline_cross_detector	0	0	0	1	0	Y	PASS	15	ALL BSL-01 THROUGH BSL-39, OPT-01 THROUGH OPT-24 AND OPTC-01 THROUGH OPTC-02 PASS count=65
+hier	tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence	0	0	0	1	0	Y	PASS	10	PHASE_A_ARITH_EQV PASS vectors=20005
+hier	tb_ppg_idac_code_controller	0	0	0	1	0	Y	PASS	13	PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed
+hier	tb_ppg_normal_transaction_fork	0	0	0	1	0	Y	PASS	10	PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09
+hier	tb_ppg_peak_valley_window_detector	0	0	0	1	0	Y	PASS	15	PVW-01 through PVW-48 ALL PASS: 55 checks
+hier	tb_ppg_precision_window_controller	0	0	0	1	0	Y	PASS	14	PWC-01 through PWC-41 ALL PASS pass=50 fail=0
+hier	tb_ppg_precision_window_integration	0	0	0	1	0	Y	PASS	15	ALL PWI-01 THROUGH PWI-05 PASS count=5
+hier	tb_ppg_sar9_sar15_safe_selection_wrapper	0	0	0	1	0	Y	PASS	14	ALL SSW-01 THROUGH SSW-52 PASS
+hier	tb_ppg_system_active_config_unpack	0	0	0	1	0	Y	PASS	9	PASS: ppg_system_active_config_unpack all checks passed
+hier	tb_ppg_system_config_manager	0	0	0	1	0	Y	PASS	13	PASS: ppg_system_config_manager MGR-01 through MGR-24 except MGR-21 (joint-TB item) all directed checks passed
+hier	tb_ppg_system_fault_abort_supervisor	0	0	0	1	0	Y	PASS	11	SUP-01/02/04/06/07 and TB-local supervisor checks PASS: 18 real comparisons
+orphan	tb_ppg_dual_precision_top	0	0	0	1	0	Y	PASS	12	PASS: ppg_dual_precision_top CDC and frame-safe timing contract verified
+orphan	tb_ppg_timing_sar9	0	0	0	1	0	Y	PASS	10	PASS: ppg_timing_sar9 optical, test-MUX, and static characterization modes matched.
+orphan	tb_ppg_timing_sar15	0	0	0	1	0	Y	PASS	10	PASS: ppg_timing_sar15 optical, test-MUX, and static characterization modes matched.
+orphan	tb_ppg_timing_3200hz	0	0	0	1	0	Y	PASS	11	PASS: 3200 Hz frame, 80 us R/IR offsets, and Q3-center alignment verified.

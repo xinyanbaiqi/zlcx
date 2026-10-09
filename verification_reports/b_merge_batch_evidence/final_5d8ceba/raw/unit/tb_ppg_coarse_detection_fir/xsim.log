@@ -1,0 +1,124 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:58:31 2026
+# Process ID: 27276
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_coarse_detection_fir
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_coarse_detection_fir/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_coarse_detection_fir/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_coarse_detection_fir\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_coarse_detection_fir/xsim_script.tcl
+# xsim {snap_tb_ppg_coarse_detection_fir} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+[PASS] FIR-01 asynchronous reset
+[PASS] FIR-01 payload and diagnostics freeze to reset value
+[PASS] FIR-01 sample counts exactly zero after reset
+[PASS] FIR-01 MAC genuinely in flight before reset
+[PASS] FIR-01 reset cancels genuinely in-flight MAC
+[PASS] FIR-02 first twenty samples
+[PASS] FIR-03 twenty-first sample and latency
+[PASS] FIR-04 unity DC gain
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-06 positive half LSB away from zero
+[PASS] FIR-06 negative half LSB away from zero
+[PASS] FIR-07 positive signed endpoint
+[PASS] FIR-07 negative signed endpoint
+[PASS] FIR-08 independent dual-color histories
+[PASS] FIR-09 center metadata x[n-10]
+[PASS] FIR-10 precision metadata follows center
+[PASS] FIR-11 precision return keeps history
+[PASS] FIR-12 pending alone keeps histories
+[PASS] FIR-13 recheck accept clears both histories
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-15 rewarm first twenty samples
+[PASS] FIR-15 rewarm twenty-first sample
+[PASS] FIR-16 slow DC tracking keeps history
+[PASS] FIR-17 uncalibrated sample keeps value but clears qualification
+[PASS] FIR-18 saturation OR and qualification
+[PROTOCOL_ERROR] FIR-19 non-NORMAL frame_type=0 observed on upstream interface at time=581000000 (contract:95 upstream integration violation)
+[PASS] FIR-19 non-NORMAL input ignored
+[PASS] FIR-19 self-checking TB reports the integration protocol error
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 input resumes exactly once
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 commit follows eleven products
+[PASS] FIR-23 maximum sixteen-cycle processing
+[PASS] FIR-24 pending output is not idle
+[PASS] FIR-24 fully drained idle
+[PASS] FIR-25 START cancels in-flight MAC
+[PASS] FIR-25 STOP discard cancels in-flight MAC
+[PASS] FIR-25 abort discard cancels in-flight MAC
+[PASS] FIR-25 stale-generation discard keeps in-flight MAC
+[PASS] FIR-26 unsafe recheck cannot revoke output
+[PASS] FIR-26 safe recheck takeover
+[PASS] FIR-27 dual-color random wide-model regression
+[PASS] FIR-28 five-Hz response
+[PASS] FIR-28 ten-Hz response
+[PASS] FIR-28 twenty-Hz attenuation
+[PASS] FIR-28 fifty-Hz attenuation
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 center precision changes without clearing history
+[PASS] FIR-30 timeout cancels partial result without clearing history
+[PASS] FIR-31 invalid transaction consumed once without history MAC or output
+[PASS] FIR-32 qualification orthogonal to sample_valid
+[PASS] FIR-33 invalid gap keeps legal history continuity
+PPG_COARSE_DETECTION_FIR_V2_TB_PASS pass=103
+$finish called at time : 1887 us : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v" Line 1092
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:58:33 2026...

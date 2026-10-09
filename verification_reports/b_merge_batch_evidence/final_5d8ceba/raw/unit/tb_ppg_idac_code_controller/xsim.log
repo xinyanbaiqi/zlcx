@@ -1,0 +1,169 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:59:09 2026
+# Process ID: 6700
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_idac_code_controller
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_idac_code_controller/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_idac_code_controller/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_idac_code_controller\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_idac_code_controller/xsim_script.tcl
+# xsim {snap_tb_ppg_idac_code_controller} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: RESET three codes, epochs and idle state
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: STARTUP final AMB, red and infrared codes match model targets
+PASS: PERIODIC AMB samples precede both DCS colors
+PASS: PERIODIC unchanged AMB still requests DCS revalidation
+PASS: PERIODIC red DCS follows AMB and precedes infrared
+PASS: PERIODIC infrared DCS follows red DCS
+PASS: PERIODIC fixed AMB-R-IR sequence terminates before watchdog
+PASS: PERIODIC fixed sequence services AMB, red and infrared
+PASS: PERIODIC fixed sequence completes without failure
+PASS: PERIODIC in-window revalidation preserves all codes and epochs
+PASS: IDT-01 invalid bus activity leaves codes and pending unchanged
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-02 in-window sample clears both red confirmation directions
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-03 N_CONFIRM one creates red pending on first outlier
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-04 second red outlier does not create pending
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-04 third consecutive red outlier creates pending
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-05 direction reversal discards old red evidence
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-05 new direction reaches threshold only after three samples
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-06 interleaved colors create only red pending first
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-06 infrared evidence survives unrelated red commit
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-07 SAR9 and SAR15 red samples share one confirmation state
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-08 uncalibrated samples are consumed without counting
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-09 stale config or code epoch evidence is rejected
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-10 saturation_high creates explicit increase request
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-10 saturation_low creates explicit decrease request
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-11 red pending exists before safe boundary
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-11 pending wait consumes samples without early code change
+PASS: IDT-12 safe boundary commits one LSB, epoch and event exactly once
+PASS: IDT-12 update and track-adjust events are one cycle wide
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-13 maximum boundary holds without wrap or false update
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-13 minimum boundary holds without underflow
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-14 precision switching preserves confirmation and creates pending
+PASS: IDT-15 STOP cancels pending while preserving committed code and epoch
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: tracking branch remains ready for bounded consumption
+PASS: IDT-15 control error abort clears pending and run qualification
+PASS: STARTUP request order begins with AMB
+PASS: STARTUP requests red DCS before infrared
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP infrared follows red DCS
+PASS: STARTUP search terminates before watchdog
+PASS: STARTUP AMB-R-IR binary searches complete without fault
+PASS: IDT-15 simultaneous entries set protocol error sticky
+PASS: IDT-15 status clear removes protocol sticky without restart
+PASS: HIGHCODE-SEARCH AMB 0..255 search visits floor midpoints 127/191/223/207/199/203/201/200
+PASS: HIGHCODE-SEARCH AMB high-code search commits target 200
+PASS: ppg_idac_code_controller V2.1 periodic sequence and IDT regression completed
+$finish called at time : 4090 ns : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v" Line 812
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:59:11 2026...

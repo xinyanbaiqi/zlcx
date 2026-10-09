@@ -1,0 +1,67 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:53:11 2026
+# Process ID: 17024
+# Current directory: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top_longrun/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top_longrun/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_longrun/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top_longrun/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top_longrun} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS LONGRUN START accepted into RUN, measurement start latched t=5251000
+DIAG longrun progress t=247741004000 red=100 ir=100 cal=0 elapsed_ns=247735753
+DIAG longrun progress t=497741004000 red=200 ir=200 cal=0 elapsed_ns=497735753
+DIAG longrun progress t=747741004000 red=300 ir=300 cal=0 elapsed_ns=747735753
+DIAG longrun progress t=997741004000 red=400 ir=400 cal=0 elapsed_ns=997735753
+DIAG longrun progress t=1247741004000 red=500 ir=500 cal=0 elapsed_ns=1247735753
+DIAG longrun progress t=1497741004000 red=600 ir=600 cal=0 elapsed_ns=1497735753
+DIAG longrun progress t=1747741004000 red=700 ir=700 cal=0 elapsed_ns=1747735753
+DIAG longrun progress t=1997741004000 red=800 ir=800 cal=0 elapsed_ns=1997735753
+DIAG longrun progress t=2247741004000 red=900 ir=900 cal=0 elapsed_ns=2247735753
+DIAG longrun progress t=2497741004000 red=1000 ir=1000 cal=0 elapsed_ns=2497735753
+DIAG longrun progress t=2747741004000 red=1100 ir=1100 cal=0 elapsed_ns=2747735753
+DIAG longrun progress t=2997741004000 red=1200 ir=1200 cal=0 elapsed_ns=2997735753
+DIAG longrun progress t=3247741004000 red=1300 ir=1300 cal=0 elapsed_ns=3247735753
+DIAG longrun progress t=3497741004000 red=1400 ir=1400 cal=0 elapsed_ns=3497735753
+DIAG longrun progress t=3747741004000 red=1500 ir=1500 cal=0 elapsed_ns=3747735753
+DIAG longrun progress t=3997741004000 red=1600 ir=1600 cal=0 elapsed_ns=3997735753
+DIAG longrun progress t=4247741004000 red=1700 ir=1700 cal=0 elapsed_ns=4247735753
+DIAG longrun progress t=4497741004000 red=1800 ir=1800 cal=0 elapsed_ns=4497735753
+DIAG longrun progress t=4747741004000 red=1900 ir=1900 cal=0 elapsed_ns=4747735753
+DIAG longrun progress t=4997741004000 red=2000 ir=2000 cal=0 elapsed_ns=4997735753
+DIAG longrun progress t=5247741004000 red=2100 ir=2100 cal=0 elapsed_ns=5247735753
+DIAG longrun progress t=5497741004000 red=2200 ir=2200 cal=0 elapsed_ns=5497735753
+DIAG longrun progress t=5747741004000 red=2300 ir=2300 cal=0 elapsed_ns=5747735753
+DIAG longrun progress t=5997741004000 red=2400 ir=2400 cal=0 elapsed_ns=5997735753
+DIAG longrun progress t=6247741004000 red=2500 ir=2500 cal=0 elapsed_ns=6247735753
+DIAG longrun progress t=6497741004000 red=2600 ir=2600 cal=0 elapsed_ns=6497735753
+DIAG longrun progress t=6747741004000 red=2700 ir=2700 cal=0 elapsed_ns=6747735753
+DIAG longrun progress t=6997741004000 red=2800 ir=2800 cal=0 elapsed_ns=6997735753
+DIAG longrun progress t=7247741004000 red=2900 ir=2900 cal=0 elapsed_ns=7247735753
+DIAG longrun progress t=7497741004000 red=3000 ir=3000 cal=0 elapsed_ns=7497735753
+DIAG longrun progress t=7747741004000 red=3100 ir=3100 cal=0 elapsed_ns=7747735753
+DIAG longrun progress t=7997741004000 red=3200 ir=3200 cal=0 elapsed_ns=7997735753
+DIAG longrun progress t=8247741004000 red=3300 ir=3300 cal=0 elapsed_ns=8247735753
+DIAG longrun progress t=8497741004000 red=3400 ir=3400 cal=0 elapsed_ns=8497735753
+DIAG longrun progress t=8747741004000 red=3500 ir=3500 cal=0 elapsed_ns=8747735753
+DIAG longrun progress t=8997741004000 red=3600 ir=3600 cal=0 elapsed_ns=8997735753
+DIAG longrun progress t=9247741004000 red=3700 ir=3700 cal=0 elapsed_ns=9247735753
+DIAG longrun progress t=9497741004000 red=3800 ir=3800 cal=0 elapsed_ns=9497735753
+DIAG longrun progress t=9747741004000 red=3900 ir=3900 cal=0 elapsed_ns=9747735753
+DIAG longrun progress t=9997741004000 red=4000 ir=4000 cal=0 elapsed_ns=9997735753
+PASS RAW-12 post-START run covers real_red=4000 real_ir=4000 elapsed_ns=10000000499 (>=10000000000) with no 32-bit overflow (time-typed)
+PASS RAW-13 time-typed 12s watchdog (C_SIM_TIMEOUT_NS=12000000000) did not fire and did not substitute for the frame/sample checks above
+PASS LONGRUN STOP drained back to CONFIG without fault
+LONGRUN_TB_PASS real_red=4000 real_ir=4000 real_cal=0 elapsed_ns=10000000499 measurement_result_valid=8000
+$finish called at time : 10000007251 ns : File "D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top/tb_ppg_control_top_longrun.v" Line 859
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:33:06 . Memory (MB): peak = 266.031 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 13440 KB (Peak: 13440 KB), Simulation CPU Usage: 1969499 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 21:26:19 2026...
