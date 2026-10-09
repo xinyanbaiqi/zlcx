@@ -1,5 +1,6 @@
 # PPG精度窗口检测链集成Wrapper接口与握手合同
 
+> V2.2修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-071~074，按基线`7a8eabf` PWI RTL V1.5改写，符号锚点格式为“文件 + 符号（§节）”）：① §5.5端口表新增`i_calibration_request_withdraw_event`（F-020，原样转给重检调度器）；② §5子模块消费表订正`i_max_fine_window_frames`、`i_max_reacquire_frames`的直接消费者为峰谷检测器（F-043）；③ §14门禁范围订正为实际验收表PWI-01至PWI-08（S4）。文件头V1.3历史状态行与§15历史记录中的“PWI-06至PWI-10”属带日期的历史叙述，保持原样；表格实际上限为PWI-08。
 > V2.1修订日期：2026-10-01。合同补记批次3：补入PWI RTL V1.4（2026-08-31，Stage5 Group15 PRC-09/10）新增、但本合同一直缺失的内容：参数`C_ENABLE_TEST_INJECTION`（`ppg_precision_window_integration.v:72`，默认0），以及3个纯透传端口`i_test_inject_enable`、`i_test_calibration_loss_inject_valid`、`o_test_calibration_loss_inject_ready`（`:249-251`）。第4节参数表新增一行，并新增第5.12节。口径与C10 V2.3第6.5b节（AMI侧）一致：PWI既不解释也不门控，只把参数和三个端口原样接到粗检测FIR例化（`:600`、`:650-652`），请求的接受和作用都在FIR内。不改变PWI-01至PWI-10的任何条款。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > Current normative version: V2.0, 2026-08-20. Status: `ACTIVE_NORMATIVE`; this module consumes only the AMI-forwarded V5 named detection fields, `peak_valley_config_valid` safety gate and config_epoch. System closure is `NOT_CLOSED` until the matrix reverse-port audit records zero defects; RTL/TB evidence remains `EVIDENCE_PENDING`.
 > Historical V1.9 change record (non-normative): it replaced stale dependencies and implementation-result assertions with the then-current parent/child contract set. Current V2.0 rules above are authoritative.
@@ -198,7 +199,7 @@ V5字段的唯一producer为ACTIVE unpacker经AMI转发的注册/稳定2 MHz输�
 | `i_slope_mode`, `i_fixed_slope_q16`, `i_alpha_q15`, `i_beta_q15`, `i_timing_adjust_ratio_q15`, `i_slope_min_q16`, `i_slope_max_q16`, `i_baseline_delta_q16`, `i_cross_hysteresis_q16`, `i_lead_min_frames`, `i_lead_max_frames`, `i_cross_confirm_count`, `i_no_cross_limit` | FIR后动态baseline/cross | 逐位稳定；任何V5非法值不得到达此端口 |
 | `i_peak_confirm_count`, `i_valley_confirm_count`, `i_direction_deadband`, `i_min_peak_valley_amplitude`, `i_min_peak_to_valley_frames`, `i_min_peak_to_peak_frames` | peak/valley detector | `peak_valley_config_valid=0`时只允许安全消费，不得发布正式事件 |
 | `i_peak_valley_config_valid` | dynamic baseline/cross, peak/valley detector, precision controller | Single AMI-forwarded registered gate fanout. `0` prohibits formal cross, peak, valley, 9-to-15 request and fine-window control; detector children still consume/drain held transactions and do not publish those formal events or controls. |
-| `i_max_fine_window_frames`, `i_max_reacquire_frames` | precision controller | The limits are stable configuration values; the separate valid gate prohibits formal fine-window control and 9-to-15 requests when low. |
+| `i_max_fine_window_frames`, `i_max_reacquire_frames` | ~~precision controller~~ V2.2 (F-043, RTL): peak/valley detector (`ppg_precision_window_integration.v` instance `ppg_peak_valley_window_detector_Inst`); the precision controller has no such ports | The limits are stable configuration values; the separate valid gate prohibits formal fine-window control and 9-to-15 requests when low. |
 | `i_config_epoch` | FIR、baseline/cross、peak/valley、precision controller | 与检测事务/`run_generation`绑定，禁止跨epoch混用 |
 
 PWI内部仍只有AMI generation-scoped detection discard清理运行态；STOP、abort、fault
@@ -269,6 +270,7 @@ AMB重检接管则必须等待第9节冻结的完整安全条件。
 | input | `i_dcs_revalidate_failed` | 1 | 任一路DC失败单拍 |
 | input | `i_amb_sample_accepted_event` | 1 | 匹配AMB_CAL结果已消费 |
 | input | `i_dcs_sample_accepted_event` | 1 | 匹配DCS_CAL结果已消费 |
+| input | `i_calibration_request_withdraw_event` | 1 | V2.2补记（F-020）。AMI转送的周期重检外层在途校准请求撤销单拍（来源为调度器校准owner截止或校准owner完成丢失超时作废）；PWI原样转给重检调度器，由其释放内层在途状态（C16 §9.3、§9.4） |
 | output | `o_amb_sequence_start` | 1 | 安全接管后启动AMB检查单拍 |
 | output | `o_dcs_revalidate_accept` | 1 | AMB帧后接受DC_R/DC_IR重验证单拍 |
 
@@ -656,7 +658,7 @@ wrapper和集成TB完成后必须执行：
 - formatter-AST：0 error / 0 strict warning；
 - 独立RTL lint：0 error / 0 warning；
 - Vivado `xvlog`与`xelab`通过；
-- xsim中PWI-01至PWI-07全部真实比较PASS；
+- xsim中~~PWI-01至PWI-07~~ PWI-01至PWI-08（V2.2：范围按第13节表格订正）全部真实比较PASS；这是要求，不是当前状态：当前单元TB只有PWI-01~PWI-05，PWI-06~PWI-08的证据状态见别名表与矩阵§13（ID=PWI-01～PWI-08）；
 - wrapper Vivado OOC综合：0 error / 0 critical warning；
 - Latch = 0；
 - Blackbox = 0；
