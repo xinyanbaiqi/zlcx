@@ -2,24 +2,24 @@
 
 > 依据：`verification_reports/B_MERGE_BATCH_BRIEF_20261009.md`（下称“交接书”）§7。
 > 分支：`b-merge-batch`；基线：`7a8eabf`；终版回归提交：`5d8ceba`；终版回归证据：`b161d13`。
-> 分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。它相对终版回归提交`5d8ceba`只新增或修改了`verification_reports/`下的文件，可用`git diff --name-only 5d8ceba HEAD`复核；`rtl/`、`contracts/`、`tools/`都没有变动，所以终版回归的结论适用于分支HEAD。
-> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~16）。
+> 分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。相对终版回归提交`5d8ceba`的改动如下，可用`git diff --stat 5d8ceba HEAD`复核：`rtl/`只有一处注释改动（supervisor补`@satisfies: SUP-08`，去注释后与`7a8eabf`逐字节相同，见`final_strip_proof/`）；`contracts/`为锚点第二轮、C24 V1.7（SUP-08改写）及其版本联动、别名表SUP-08行、矩阵§13.1与§12.4a；`tools/`为锚点工具第二轮（`anchor_history_rules.py`、增量写入与复核）、`verlink`第二次联动、reconcile报告刷新。TB与RTL逻辑没有改动，统筹已裁定这些改动不需要重跑全套回归，终版回归结论适用于分支HEAD。
+> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~17）。
 > 二级清单：`verification_reports/POST_TAPEOUT_DOC_CLEANUP_LIST.md`。证据目录：`verification_reports/b_merge_batch_evidence/`。
 
 ---
 
 ## 0. 结论
 
-- **合同、矩阵、别名表已按基线`7a8eabf`的RTL一次性改对。** 总表137项中：
+- **合同、矩阵、别名表已按基线`7a8eabf`的RTL一次性改对。** 总表138项中：
   - 已完成116项（含并入BMI-133的BMI-012）；
   - 只登记或不做8项，各有理由（§3）；
   - 二级登记2项，已进二级清单；
-  - 排除项11项，各有去向（§3.3）；
-  - 总表中待裁定0项；执行中另有6项判断请用户确认（§9）。
-- **RTL逻辑没有改动。** 6个RTL文件只动了注释：§3.9点名的3处，加上`@satisfies`16处。去掉注释后，与`7a8eabf`逐字节相同。
+  - 排除项12项，各有去向（§3.3；BMI-911为统筹10-09裁定新增）；
+  - 待裁定0项。报告初稿§9列出的6项执行判断，统筹已于2026-10-09裁定并已执行（§9）。
+- **RTL逻辑没有改动。** 6个RTL文件只动了注释：§3.9点名的3处，加上`@satisfies`17处（含按统筹裁定补的SUP-08）。去掉注释后，与`7a8eabf`逐字节相同。
 - **TB只改了标签字符串。** 7个TB去掉注释和字符串后与`7a8eabf`相同（§5）。
 - **符号锚点体系已建立并接入门禁。**
-  - 矩阵与别名表的9702个旧行号锚点全部有了去向：7811处改为符号锚点，1883处作为历史保留，8处为非锚点或仓库外引用。
+  - 矩阵与别名表的9702个旧行号锚点全部有了去向：9254处改为符号锚点；440处作为历史保留（删除线410、"> "历史块30）；8处为非锚点、仓库外引用或其它历史。按统筹10-09裁定，带日期的现行结论也已转换（锚点第二轮，§8）。
   - `anchor_check.py`在HEAD上0报错。
   - 门禁接在模块级回归入口开头，检查失败则整轮报错。回归机上做过两次演示：一次通过，一次负对照失败。
 - **回归：基线与终版在同一台回归机上用同一分组运行**（i5-10400，Vivado 2022.2）。
@@ -74,7 +74,7 @@
 | BMI-126、190 | 历史叙述中的旧编号或旧版本 | 历史叙述不改 |
 | BMI-161 | TB侧`@satisfies` | 交接书§0.3：TB只允许改PASS标签 |
 | BMI-188、189 | C22 §11.4、C02 | 核对后与RTL一致，无需改 |
-| SUP-08、SID-05的`@satisfies` | BMI-160清单中的两项 | 合同含义与代码不完全一致，所以不补。C24 SUP-08行（“Final Top proves mismatch to STOPPING and legal restart”）不描述`flag_owner_lost_fault_hold`。SID-05讲的是截止撤销，owner-lost测试验证的是作废撤销 |
+| SID-05的`@satisfies` | BMI-160清单中的一项 | 合同含义与代码不完全一致，所以不补：SID-05讲的是截止撤销，owner-lost测试验证的是作废撤销。（SUP-08原也不补，统筹10-09裁定后C24改写为V1.7并已补，§9-4） |
 | PR/RTR/CAL/CCC/OVL/AV4C区间横幅 | BMI-145 | 区间内的条目都有同义检查：PR-13在组合标签“PR-09/13”中检查。只有MGR区间含无检查条目（MGR-21），因此只改了MGR横幅 |
 
 ### 3.2 二级清单
@@ -91,6 +91,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | BMI-908 | dynamic baseline TB的EQV采样竞争；芯片层没有验收ID | 只登记 |
 | BMI-909 | MGR未使用的`ERROR_ENUM_ENCODING` | RTL注释/清理轮 |
 | BMI-910 | IDC2/CIS/AV4/CF4逐条对照 | 流片前验证收尾计划；本批只在别名表做族级登记 |
+| BMI-911 | reconcile报告E_STALE_MATRIX_TEXT 16项与B_TAG_MISSING 22项的逐ID闭环 | 流片前验证收尾计划V8逐ID闭环，不进二级清单（统筹10-09裁定；ID清单见总表BMI-911与矩阵§13.1） |
 | MGR-21 | 校准责任边界，合同要求三模块联合TB | 单元TB无此检查；MGR横幅已注明例外（BMI-145）。补检查属补测试 |
 
 ## 4. 回归比对结论
@@ -100,7 +101,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 - **本机Vivado 2019.2只作参考。** 本机基线中途被打断：Claude进程退出时，后台仿真被一并结束。另外，`tb_ppg_coarse_detection_fir`的xelab在“Completed static elaboration”后确定性崩溃（`EXCEPTION_ACCESS_VIOLATION`）。在无其它负载时重跑两次，都在同一位置崩溃，判为2019.2的工具缺陷。没有改RTL或TB。
   - 本机已跑完的44个TB，PASS行与`$finish`与2022.2结果完全相同（旁观会话核对）。
   - 本机部分证据在`baseline_7a8eabf_vivado2019.2_partial/`（`24d0b8d`）。
-- **正式基线与终版**都在回归机上运行：i5-10400，Vivado Simulator v2022.2，同一分组，在`git archive`导出目录中执行（交接书§6.8）。运行与回传方法见`REGRESSION_RUN_REQUEST.md`。分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。它相对终版回归提交`5d8ceba`只新增或修改了`verification_reports/`下的文件，可用`git diff --name-only 5d8ceba HEAD`复核；`rtl/`、`contracts/`、`tools/`都没有变动，所以终版回归的结论适用于分支HEAD。
+- **正式基线与终版**都在回归机上运行：i5-10400，Vivado Simulator v2022.2，同一分组，在`git archive`导出目录中执行（交接书§6.8）。运行与回传方法见`REGRESSION_RUN_REQUEST.md`。分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。相对终版回归提交`5d8ceba`的改动如下，可用`git diff --stat 5d8ceba HEAD`复核：`rtl/`只有一处注释改动（supervisor补`@satisfies: SUP-08`，去注释后与`7a8eabf`逐字节相同，见`final_strip_proof/`）；`contracts/`为锚点第二轮、C24 V1.7（SUP-08改写）及其版本联动、别名表SUP-08行、矩阵§13.1与§12.4a；`tools/`为锚点工具第二轮（`anchor_history_rules.py`、增量写入与复核）、`verlink`第二次联动、reconcile报告刷新。TB与RTL逻辑没有改动，统筹已裁定这些改动不需要重跑全套回归，终版回归结论适用于分支HEAD。
   - 基线证据：`ea60432`（`baseline_7a8eabf/`）。
   - 终版证据：`b161d13`（`final_5d8ceba/`）。
   - 两次回归的`raw/`下各有49个xsim.log。`.gitignore`忽略`*.log`，这些日志是用`git add -f`加入的，`.gitignore`没有改。
@@ -154,7 +155,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | `ppg_adc_s1_redundancy_corrector.v` | AMI-40 | 3/0 → 3/0，无新增 | 成功 |
 | `ppg_400hz_frame_calibration_scheduler.v` | FSC-19、FSC-54 | 4/0 → 4/0，无新增 | 成功 |
 | `ppg_sar9_sar15_safe_selection_wrapper.v` | SSW-42、SSW-18、SSW-53 | 10/0 → 10/0，无新增 | 成功 |
-| `ppg_system_fault_abort_supervisor.v` | P09 | 1/0 → 1/0，无新增 | 成功 |
+| `ppg_system_fault_abort_supervisor.v` | P09；SUP-08（统筹10-09裁定后补，`3570ab6`，episode关闭分支） | 1/0 → 1/0，无新增（两次各比对一次） | 成功 |
 
 - 后5个文件在基线上就不满足strict 0/0（共29个error、1个strict warning），因此判据是“不新增发现”。比对按文件、规则、去掉行号的消息逐项进行（`gate_compare.py`），差异为0。
 - `@satisfies`都补在已有的实质性中文注释末尾。每处先核对了阶段2改写后的合同行与所在代码一致。
@@ -180,10 +181,12 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | `manifest_digest.py` | 导出副本中C04改1字节，恰好多报C04；`--write`往返26/26 | `stage5_dryrun/`、`stage5_final/` |
 | `strip_compare.py` | 代码token改动报DIFFERENT，恢复后IDENTICAL | `rtl_comment_proof/README.md`、`tb_rename_proof/strip_compare.txt` |
 | `regression_evidence.py` | 自比全SAME；行号改动报`FINISH_LINE_SHIFT`，退出0；时刻改动报`FINISH_DIFF`，退出1；早先版本改1行PASS与1行`$finish`恰好报2处 | `regression_compare_negctl/` |
-| `verlink_check.py` | 版本联动207/0，负对照恰好报出 | `version_linkage/` |
+| `verlink_check.py` | 版本联动207/0，负对照恰好报出；第二次联动（C24 V1.6→V1.7）16/0，第一轮复现仍为207/0 | `version_linkage/`（`round2_check.txt`） |
+| `anchor_history_rules.py` | 13个构造样例全对；逐条停用"> "块、修订记录节、被取代旧条目三类规则，各恰好2个样例失败 | `anchor_conversion/round2/history_rules_*.txt` |
+| `anchor_verify.py --previous`（第二轮） | 注入4处（撤销一处新增转换、保留一处应回退的转换、改写回错符号、改非锚点文字），恰好报出4处；anchor_check在其范围内报出2处 | `anchor_conversion/round2/negctl.md` |
 | `tools/id_governance_scan` | 重扫37处，负对照恰好多报2处 | `id_rescan/` |
 
-最终状态：HEAD上`anchor_check.py` 0报错（符号锚点5356、`@satisfies` 96、TB标签145、合同节号2806）；`manifest_digest.py --rev HEAD` 26/26。
+最终状态：HEAD上`anchor_check.py` 0报错（符号锚点6835、`@satisfies` 113、TB标签184、合同节号2812；allowlist 20行）；`manifest_digest.py --rev HEAD` 26/26。
 
 ## 7. RTL疑点（只登记，未修改）
 
@@ -193,44 +196,52 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 ## 8. 锚点转换（BMI-150~153）
 
 - **盘点**：基线`7a8eabf`的矩阵与别名表中共有9702个旧行号锚点。其中4103个的写入时点是2026-09-28的导入提交，git历史从导入开始。
-- **口径**：
-  - 已写明符号的锚点，以格内所写符号为准，在写入时版本中定位（交接书§3.13 Q1）。
-  - 裸行号追到写入时版本取符号。
-  - 删除线内的锚点按历史保留。
-  - 同一格内锚点之前出现日期的叙述，按历史保留；无日期的一律转换。这一条是本批定的口径，见§9-1。
+- **口径**（第二轮起按统筹2026-10-09裁定）：
+  - 已写明符号的锚点，以格内所写符号为准，在写入时版本中定位（交接书§3.13 Q1）。裸行号追到写入时版本取符号。
+  - 保留为历史的只有：删除线内、"> "开头的勘误或说明块、修订记录节、同一格中被后续条目明示取代的旧条目。带日期的现行结论（“CLOSED 2026-09-07…”“2026-09-16重建…”“2026-09-16新增行…”“…复核确认…”之后的证据链）一律转换；拿不准时默认转换，单独计为uncertain。
+  - 规则实现在`tools/b_merge_tools/anchor_history_rules.py`，带自测和负对照。
+- **两轮**：
+  - 第一轮（`3b6df78`快照，`1fab116`写入）把“同格中日期之前”的1473个锚点按历史保留。统筹不接受这一口径（交接书措辞有歧义，统筹已更正）。
+  - 第二轮（`557cdfd`快照，`9dd4333`写入）只写增量：新增转换1455个，其中自动1381个、人工74个、uncertain 49个；17个在"> "历史块中，保留；1个是计数“:2”，不是锚点。另外，第一轮已转换的锚点中有12个位于"> "历史块，已恢复原文；4个G-FP-01台账锚点改写。
+  - 第二轮人工核对发现并订正两类问题：一是G-FP-01台账“Top边界输入/输出（`ppg_control_top.v:N`）”的行号与写入时版本有偏移，现按本行端口名（规则化，共26处与解析器结果不同）；二是别名表277行的SSW裸行号曾被误归C17，已按格内描述订正。另有一处冒号写节号（“MATRIX.md:12.14节”）。
+  - 计数与按类抽样（原文与新锚点）见`anchor_conversion/round2/reclassification.md`，49个uncertain逐条列出。
 - **结果**（附录A）：
 
 | 分类 | 数量 |
 |---|---:|
-| 自动转换 | 7584 |
-| 人工判定后转换 | 227 |
-| 带日期叙述，作为历史保留 | 1473 |
-| 删除线内，作为历史保留 | 410 |
+| 自动转换 | 8925 |
+| 人工判定后转换 | 329 |
+| "> "历史块，保留 | 30 |
+| 修订记录节，保留 | 0 |
+| 被后续条目明示取代的旧条目，保留 | 0 |
+| 删除线内，保留 | 410 |
 | 其它历史（gate输出原文） | 1 |
-| 非锚点（如“1024-bit”中的冒号数字） | 4 |
+| 非锚点（如“1024-bit”、计数） | 4 |
 | 仓库外文档（会话交接文档） | 3 |
 | 失效锚点（无法追溯） | 0 |
 
 - **写入与复核**：
-  - 写入前快照`3b6df78`；写入`1fab116`：7811处、2385行，0处无法定位。
-  - 343行历史锚点按行SHA-1写入`tools/b_merge_tools/anchor_history_allowlist.json`。§12.4a重算后，该文件用`--allowlist-only`重算过一次，现为342行：C02摘要行更新了哈希，§13.1重写时删掉1行。
-  - 独立复核`anchor_verify.py`用另一种定位方法，结果0不符。
+  - 两轮都按“写入前快照 → apply → anchor_verify独立复核 → 负对照”执行。
+  - 第一轮：7811处、2385行，0处无法定位，复核0不符。
+  - 第二轮：增量1471处、338行，0处无法定位。复核从基线按两张表分别重建，0不符；6个第一轮后另有编辑的行，用“撤销增量后等于快照”核对通过。
+  - allowlist（`tools/b_merge_tools/anchor_history_allowlist.json`，按行SHA-1）由第一轮的342行降为20行，只剩真正的历史。
+  - 新文本全部经anchor_check逐条校验，0报错。
 - **门禁**（`de814e7`、`871ff61`）：`run_unit_tb_regression.sh`开头先跑`run_anchor_gate.sh`，失败则整轮在仿真前退出1。
 
-## 9. 待用户裁定项
+## 9. 已裁定项（统筹2026-10-09）
 
-阶段1的Q-1~Q-5已由统筹裁定。下列是本批执行中做出的判断，请确认或给出不同意见：
+阶段1的Q-1~Q-5已由统筹裁定。报告初稿列出的6项执行判断，统筹裁定与处置如下：
 
-1. **带日期叙述中的锚点作为历史保留**（1473处）。依据是交接书§3.2“G-FP-01台账的删除线/带日期条目保留”，本批推广到矩阵与别名表全部带日期的叙述。
-2. **用冒号写的节号，按节号转换。** 矩阵中有两张表（修复记录R01~R08、陈旧文本台账）用`Cxx:N`写节号，例如`C23:18.5`、`C10:2`，共28处。解析器原先把它们当成行号，现按节号转换（附录A“SECTION_COLON”行）。其中两处需要特别说明：
-   - C13自导入起就没有§3.1，按本行内容（generation标记交接）取§4.1；
-   - 矩阵第3397行的`C10:11`取§11。写入时C10第11行是版本日期，没有意义。
-3. **两处格内节号与行号不一致**，按格内所写为准：
-   - 矩阵第2636行`:84`：格内写明“§3”，写入时该行已漂入§2，取§3；
-   - 别名表第303行`:3532`：写入时该行是续行，按格内描述取§12.13 Acceptance-D01-01行。
-4. **SUP-08**：C24该行未在本批改写，不描述owner-lost的故障保持，因此没有补标签。是否要在后续批次改写SUP-08，请决定。
-5. **reconcile报告中的E_STALE_MATRIX_TEXT 16项与B_TAG_MISSING 22项**：本批没有逐项复核（矩阵§13.1）。是否列入后续文档清理，请决定。
-6. **别名表3处引用`PPG_SESSION_HANDOFF_20260826_2.md`**：该文件未随仓库快照入库。本批保留原文，标为仓库外引用。
+| # | 事项 | 统筹裁定 | 处置 |
+|---|---|---|---|
+| 1 | 带日期叙述中的锚点按历史保留（1473处） | 不接受。只有删除线、"> "历史块、修订记录节、同格中被后续条目取代的旧条目保留；带日期的现行结论一律转换，拿不准时默认转换 | 已执行锚点第二轮（§8）：规则脚本`anchor_history_rules.py`及负对照；新增转换1455处（uncertain 49），12处"> "块内锚点恢复原文，4处改写；anchor_verify 0不符、负对照4/4；allowlist降为20行；anchor_check 0报错；§12.4a重算26/26 |
+| 2 | 冒号写的节号按节号转换（28处，含C13 §3.1→§4.1、`C10:11`→§11） | 接受 | 维持；第二轮另发现1处同类写法（MATRIX.md:12.14节），同样处理 |
+| 3 | 两处格内节号与行号不一致，按格内所写 | 接受 | 维持 |
+| 4 | SUP-08未改写、未补标签 | 本次一起改：扩写为“AMI阻断类故障（错配、连续完成丢失cause 06、长期忙cause 07）经supervisor进入STOPPING后，不复位即可合法重启”，补`@satisfies: SUP-08`，别名表映射adc_anomaly TB的重启检查 | C24 V1.7（`3570ab6`）；supervisor episode关闭分支补标签，只改注释（strip IDENTICAL、comment-only成功、gate 1/0→1/0）；版本联动16处（`98a61e4`，verlink_check 16/0）；别名表SUP-08行（`a2f1533`）。覆盖范围如实写出：8'h06由SYS-RESTART-K、SYS-L5-RESTART、SYS-RESTART-CAL覆盖；8'h07由SYS-RESTART-BUSY覆盖；错配类只有8'h02，由SYS-RESTART-IDLE、SYS-RESTART-NEXTRUN、SYS-RESTART-WIN、SYS-RESTART-WIN2覆盖；8'h01、8'h03的重启该TB未覆盖 |
+| 5 | E_STALE_MATRIX_TEXT 16项与B_TAG_MISSING 22项 | 列入流片前验证收尾计划的逐ID闭环（V8），不进二级清单 | 总表新增BMI-911；矩阵§13.1注明去向；reconcile重跑为327个ID、A 288（SUP-08转A） |
+| 6 | 别名表3处引用未入库的会话交接文档 | 接受 | 维持，标为仓库外引用 |
+
+RTL和TB不变，按统筹裁定不重跑全套回归。
 
 ## 10. 过程记录
 
@@ -239,6 +250,13 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
   - `6197609`因`git add`路径错误，只提交了文件改名，正文由`e30b46c`补齐。
   - 之后提交都按路径逐个`git add`，并确认暂存区没有`__pycache__`。
 - **.gitignore**：建议增加`__pycache__/`。本批次未改，不在授权范围内。
+- **执行统筹10-09裁定**（进度条目17）：
+  - `557cdfd`：锚点第二轮快照。
+  - `9dd4333`：第二轮写入。
+  - `3570ab6`：SUP-08标签与C24 V1.7。
+  - `98a61e4`：版本联动。
+  - `a2f1533`：别名表SUP-08行与§13.1。
+  - `f9e981b`：§12.4a重算。
 - **C08节号**：阶段2新增的“启动搜索空闲边界”小节最初编成§8.2.3，与已有小节重号，在`be82819`改为§8.2.6，同步改了5处引用。重号是anchor_check报出的。
 - **三处纯文字节号引用**：在`3b6df78`中补了标题或改了指向，使它们能唯一定位：
   - 矩阵中两处`C01§4.1`；
@@ -257,30 +275,33 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 
 ## 附录A 锚点转换对照表
 
-完整对照表共9702行（每行一个旧锚点：文件、基线行号、行SHA-1、列、旧文本、类别、写入时提交、分类、新文本、来源、理由），见`verification_reports/b_merge_batch_evidence/anchor_conversion/anchor_mapping_table.tsv`。写入结果逐条见同目录`anchor_apply_report.tsv`，独立复核见`anchor_verify.txt`。下面是分类计数和全部人工判定。
+完整对照表共9702行（每行一个旧锚点：文件、基线行号、行SHA-1、列、旧文本、类别、写入时提交、分类、新文本、来源、理由），见`verification_reports/b_merge_batch_evidence/anchor_conversion/anchor_mapping_table.tsv`（第二轮终版）。第一轮的表保存在同目录`anchor_mapping_table_round1.tsv`。逐条写入记录见`anchor_apply_report.tsv`（第一轮）与`round2/apply_report.tsv`（第二轮），独立复核记录见`anchor_verify.txt`与`round2/verify.txt`。第二轮的重新分类计数与按类抽样见`round2/reclassification.md`。下面是终版分类计数，以及全部人工判定。
 
-### A.1 分类计数
+### A.1 分类计数（终版）
 
 | 文件 | 分类 | 来源 | 数量 |
 |---|---|---|---:|
-| PPG_ALIAS_MAPPING_TABLE.md | convert | auto | 692 |
-| PPG_ALIAS_MAPPING_TABLE.md | convert | manual | 99 |
+| PPG_ALIAS_MAPPING_TABLE.md | convert | auto | 752 |
+| PPG_ALIAS_MAPPING_TABLE.md | convert | manual | 117 |
 | PPG_ALIAS_MAPPING_TABLE.md | external | manual | 3 |
 | PPG_ALIAS_MAPPING_TABLE.md | history | manual | 1 |
-| PPG_ALIAS_MAPPING_TABLE.md | history-dated | auto | 80 |
+| PPG_ALIAS_MAPPING_TABLE.md | history-block | auto | 3 |
 | PPG_ALIAS_MAPPING_TABLE.md | history-strike | auto | 12 |
-| PPG_ALIAS_MAPPING_TABLE.md | not-anchor | manual | 4 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | auto | 6892 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | manual | 128 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | history-dated | auto | 1393 |
+| PPG_ALIAS_MAPPING_TABLE.md | not-anchor | manual | 3 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | auto | 8173 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | manual | 212 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | history-block | auto | 27 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | history-strike | auto | 398 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | not-anchor | manual | 1 |
 
-### A.2 人工判定（235条）
+### A.2 人工判定（337条）
 
-来源`tools/b_merge_tools/anchor_manual_decisions.tsv`。“基线行”是`7a8eabf`中的行号。
+来源：`tools/b_merge_tools/anchor_manual_decisions.tsv`。理由以“第二轮”开头的，是按统筹10-09裁定新增的判定。“基线行”是`7a8eabf`中的行号。
 
 | 文件 | 基线行 | 旧锚点 | 新文本 | 理由 |
 |---|---:|---|---|---|
+| 矩阵 | 934 | ppg_control_top.v:295-299 | `ppg_control_top.v` `C_ADC_DRAIN_WATCHDOG_CYCLES` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：参数化位宽约束注释块，同alias P12行 |
+| 矩阵 | 937 | ppg_control_top.v:1378-1439 | `ppg_control_top.v` `ppg_system_fault_abort_supervisor_Inst` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内写明“C24 supervisor instantiation” |
 | 矩阵 | 999 | C23:18 | C23 §18 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 1000 | C17:3 | C17 §3 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 1001 | C10:2 | C10 §2 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
@@ -291,6 +312,86 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 矩阵 | 1002 | C23:8 | C23 §8 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 1003 | C01:6 | C01 §6 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 1003 | C10:6 | C10 §6 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
+| 矩阵 | 1324 | ppg_control_top.v:121 | `ppg_control_top.v` `i_adc_physical_idle` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1324 | ppg_control_top.v:121 | `ppg_control_top.v` `i_adc_physical_idle` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1332 | ppg_control_top.v:114 | `ppg_control_top.v` `i_control_abort_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1332 | ppg_control_top.v:114 | `ppg_control_top.v` `i_control_abort_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1334 | ppg_control_top.v:113 | `ppg_control_top.v` `i_diag_clear_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1334 | ppg_control_top.v:113 | `ppg_control_top.v` `i_diag_clear_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1334 | `:515` | C01 §5.2 | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“§5.2（当前:515）”指C01合同行 |
+| 矩阵 | 1354 | ppg_control_top.v:99 | `ppg_control_top.v` `i_source_rstn` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1354 | ppg_control_top.v:99 | `ppg_control_top.v` `i_source_rstn` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1365 | ppg_control_top.v:130 | `ppg_control_top.v` `i_test_identity_inject_sample_index` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1365 | ppg_control_top.v:130 | `ppg_control_top.v` `i_test_identity_inject_sample_index` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1368 | ppg_control_top.v:131 | `ppg_control_top.v` `i_test_invalid_sample_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1368 | ppg_control_top.v:131 | `ppg_control_top.v` `i_test_invalid_sample_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1381 | `:410` | `ppg_control_top.v` `measurement_allow_new_transaction` | 第二轮：“Top内部网`measurement_allow_new_transaction`（:N）”，按格内网名 |
+| 矩阵 | 1388 | ppg_control_top.v:233 | `ppg_control_top.v` `o_characterization_control_reject_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1388 | ppg_control_top.v:233 | `ppg_control_top.v` `o_characterization_control_reject_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1389 | ppg_control_top.v:232 | `ppg_control_top.v` `o_characterization_control_update_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1389 | ppg_control_top.v:232 | `ppg_control_top.v` `o_characterization_control_update_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1390 | ppg_control_top.v:231 | `ppg_control_top.v` `o_characterization_control_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1390 | ppg_control_top.v:231 | `ppg_control_top.v` `o_characterization_control_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1391 | ppg_control_top.v:234 | `ppg_control_top.v` `o_characterization_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1391 | ppg_control_top.v:234 | `ppg_control_top.v` `o_characterization_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1392 | `:1539` | `ppg_control_top.v` `o_characterization_control_reject_event` | 第二轮：“Top内部网`o_characterization_control_reject_event`（:N）”，按格内网名 |
+| 矩阵 | 1392 | `:233` | `ppg_control_top.v` `o_characterization_control_reject_event` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_reject_event`同名输出端口 |
+| 矩阵 | 1393 | `:1538` | `ppg_control_top.v` `o_characterization_control_update_event` | 第二轮：“Top内部网`o_characterization_control_update_event`（:N）”，按格内网名 |
+| 矩阵 | 1393 | `:232` | `ppg_control_top.v` `o_characterization_control_update_event` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_update_event`同名输出端口 |
+| 矩阵 | 1394 | `:1537` | `ppg_control_top.v` `o_characterization_control_valid` | 第二轮：“Top内部网`o_characterization_control_valid`（:N）”，按格内网名 |
+| 矩阵 | 1394 | `:231` | `ppg_control_top.v` `o_characterization_control_valid` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_valid`同名输出端口 |
+| 矩阵 | 1395 | `:1524` | `ppg_control_top.v` `o_ami_datapath_empty` | 第二轮：“Top内部网`o_ami_datapath_empty`（:N）”，按格内网名 |
+| 矩阵 | 1395 | `:218` | `ppg_control_top.v` `o_ami_datapath_empty` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_ami_datapath_empty`同名输出端口 |
+| 矩阵 | 1398 | `:1525` | `ppg_control_top.v` `o_ami_idac_idle` | 第二轮：“Top内部网`o_ami_idac_idle`（:N）”，按格内网名 |
+| 矩阵 | 1398 | `:219` | `ppg_control_top.v` `o_ami_idac_idle` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_ami_idac_idle`同名输出端口 |
+| 矩阵 | 1407 | `:1540` | `ppg_control_top.v` `o_characterization_protocol_error_sticky` | 第二轮：“Top内部网`o_characterization_protocol_error_sticky`（:N）”，按格内网名 |
+| 矩阵 | 1407 | `:234` | `ppg_control_top.v` `o_characterization_protocol_error_sticky` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_protocol_error_sticky`同名输出端口 |
+| 矩阵 | 1407 | `:1523` | `ppg_control_top.v` `o_scheduler_protocol_error_sticky` | 第二轮：“Top内部网`o_scheduler_protocol_error_sticky`（:N）”，按格内网名 |
+| 矩阵 | 1407 | `:217` | `ppg_control_top.v` `o_scheduler_protocol_error_sticky` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_scheduler_protocol_error_sticky`同名输出端口 |
+| 矩阵 | 1410 | `:408` | `ppg_control_top.v` `analog_run_enable` | 第二轮：“Top内部网`analog_run_enable`（:N）”，按格内网名 |
+| 矩阵 | 1410 | `:409` | `ppg_control_top.v` `measurement_run_enable` | 第二轮：“Top内部网`measurement_run_enable`（:N）”，按格内网名 |
+| 矩阵 | 1416 | `:1536` | `ppg_control_top.v` `o_source_characterization_update_ready` | 第二轮：“Top内部网`o_source_characterization_update_ready`（:N）”，按格内网名 |
+| 矩阵 | 1416 | `:230` | `ppg_control_top.v` `o_source_characterization_update_ready` | 第二轮：“→Top边界输出:N”即紧前Top内部网`o_source_characterization_update_ready`同名输出端口 |
+| 矩阵 | 1417 | ppg_control_top.v:200 | `ppg_control_top.v` `o_start_ack_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1417 | ppg_control_top.v:200 | `ppg_control_top.v` `o_start_ack_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1418 | `:409` | `ppg_control_top.v` `measurement_run_enable` | 第二轮：“Top内部网`measurement_run_enable`（:N）”，按格内网名 |
+| 矩阵 | 1418 | `:410` | `ppg_control_top.v` `measurement_allow_new_transaction` | 第二轮：“Top内部网`measurement_allow_new_transaction`（:N）”，按格内网名 |
+| 矩阵 | 1418 | `:412` | `ppg_control_top.v` `flag_measurement_start_ack_event` | 第二轮：“Top内部网`flag_measurement_start_ack_event`（:N）”，按格内网名 |
+| 矩阵 | 1419 | ppg_control_top.v:201 | `ppg_control_top.v` `o_stop_ack_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1419 | ppg_control_top.v:201 | `ppg_control_top.v` `o_stop_ack_event` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1453 | ppg_control_top.v:122 | `ppg_control_top.v` `i_analog_ready` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1453 | ppg_control_top.v:122 | `ppg_control_top.v` `i_analog_ready` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1453 | `:74-77` | `ppg_control_top.v` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“RTL头注释:74-77已自述该缺口”，Top文件头注释，文件级锚点 |
+| 矩阵 | 1467 | ppg_control_top.v:108 | `ppg_control_top.v` `i_source_test_mux_ctrl` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1467 | ppg_control_top.v:108 | `ppg_control_top.v` `i_source_test_mux_ctrl` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1468 | ppg_control_top.v:134 | `ppg_control_top.v` `i_context_handover_stall_request` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1468 | ppg_control_top.v:134 | `ppg_control_top.v` `i_context_handover_stall_request` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1499 | ppg_control_top.v:215 | `ppg_control_top.v` `o_scheduler_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1499 | ppg_control_top.v:215 | `ppg_control_top.v` `o_scheduler_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1500 | ppg_control_top.v:216 | `ppg_control_top.v` `o_scheduler_completion_mismatch_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1500 | ppg_control_top.v:216 | `ppg_control_top.v` `o_scheduler_completion_mismatch_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1501 | ppg_control_top.v:217 | `ppg_control_top.v` `o_scheduler_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1501 | ppg_control_top.v:217 | `ppg_control_top.v` `o_scheduler_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1502 | ppg_control_top.v:222 | `ppg_control_top.v` `o_ssw_wrapper_idle` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1502 | ppg_control_top.v:222 | `ppg_control_top.v` `o_ssw_wrapper_idle` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1503 | ppg_control_top.v:223 | `ppg_control_top.v` `o_ssw_switch_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1503 | ppg_control_top.v:223 | `ppg_control_top.v` `o_ssw_switch_protocol_error_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1504 | ppg_control_top.v:224 | `ppg_control_top.v` `o_ssw_transaction_mismatch_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1504 | ppg_control_top.v:224 | `ppg_control_top.v` `o_ssw_transaction_mismatch_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1505 | ppg_control_top.v:225 | `ppg_control_top.v` `o_ssw_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1505 | ppg_control_top.v:225 | `ppg_control_top.v` `o_ssw_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1506 | ppg_control_top.v:226 | `ppg_control_top.v` `o_ssw_calibration_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1506 | ppg_control_top.v:226 | `ppg_control_top.v` `o_ssw_calibration_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1509 | ppg_control_top.v:119 | `ppg_control_top.v` `i_dout_stage2_low` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1509 | ppg_control_top.v:119 | `ppg_control_top.v` `i_dout_stage2_low` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1510 | ppg_control_top.v:120 | `ppg_control_top.v` `i_clk_stage2_dout_low_async` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1510 | ppg_control_top.v:120 | `ppg_control_top.v` `i_clk_stage2_dout_low_async` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1512 | ppg_control_top.v:132 | `ppg_control_top.v` `i_test_saturation_inject_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1512 | ppg_control_top.v:132 | `ppg_control_top.v` `i_test_saturation_inject_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1513 | ppg_control_top.v:133 | `ppg_control_top.v` `i_test_calibration_loss_inject_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1513 | ppg_control_top.v:133 | `ppg_control_top.v` `i_test_calibration_loss_inject_valid` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1571 | ppg_control_top.v:292 | `ppg_control_top.v` `o_s2_raw` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
+| 矩阵 | 1571 | ppg_control_top.v:292 | `ppg_control_top.v` `o_s2_raw` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
 | 矩阵 | 1593 | semantic_contract.md:297 | C02 §4 | C02语义合同简写；行号取写入时该合同所在小节 |
 | 矩阵 | 1593 | `:88-100` | C02 §2.1 | 续接左侧semantic_contract.md（C02），正式I/O表 |
 | 矩阵 | 1640 | semantic_contract.md:297 | C02 §4 | C02语义合同简写 |
@@ -371,7 +472,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 矩阵 | 3167 | `:1149` | `ppg_adc_measurement_idac_integration.v` `flag_detection_discard_trigger` | AMI内部线/端口（括注符号） |
 | 矩阵 | 3182 | `:1121,1174` | `ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o` | AMI内部线/端口（括注符号） |
 | 矩阵 | 3188 | `:1016` | `ppg_adc_measurement_idac_integration.v` `result_sample_valid_o` | AMI内部线/端口（括注符号） |
-| 矩阵 | 3189 | ppg_idac_code_controller.v:2314 | `ppg_adc_measurement_idac_integration.v` `i_idac_code_safe_boundary` | 写入时C17不足2314行，该行号属AMI（C17例化端口连线）；符号i_idac_code_safe_boundary在AMI |
+| 矩阵 | 3189 | ppg_idac_code_controller.v:2314 | `ppg_adc_measurement_idac_integration.v` `i_idac_code_safe_boundary` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；写入时C17不足2314行，该行号属AMI（C17例化端口连线）；符号i_idac_code_safe_boundary在AMI |
 | 矩阵 | 3215 | C10:6 | C10 §6 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 3216 | C10:7, 10 | C10 §7、§10 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号 |
 | 矩阵 | 3216 | C13:3 | C13 §4 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；C13自导入起从无§3.1（§3为Stage1校准字段），本行内容为generation标记交接，取§4.1 Generation and lifecycle pass-through（原文“.1”保留） |
@@ -388,6 +489,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 矩阵 | 3241 | ppg_400hz_frame_calibration_scheduler.v:421 | `ppg_400hz_frame_calibration_scheduler.v` `scheduler_fault_cause_o` | 右侧引文scheduler_fault_cause_o = … |
 | 矩阵 | 3241 | `:419` | `ppg_400hz_frame_calibration_scheduler.v` `B_COMPLETION_MISMATCH` | 调度器故障原因位（括注符号） |
 | 矩阵 | 3242 | `:48` | `ppg_sar9_sar15_safe_selection_wrapper.v` | SSW文件头V1.4注记，非代码行，文件级锚点 |
+| 矩阵 | 3242 | `:480` | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“o_analog_safe/i_analog_safe ... inverse (:480)” |
 | 矩阵 | 3246 | `:1171-1172` | `ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o` | 本行AMI集成协议sticky，START ACK/诊断清除 |
 | 矩阵 | 3246 | `:1170` | `ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o` | 本行AMI集成协议sticky，复位清除 |
 | 矩阵 | 3247 | `:521-526,592-613` | `ppg_system_config_manager.v` `dec_error_code` | 本行C02命令拒绝（dec_error_code） |
@@ -405,10 +507,12 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 矩阵 | 3397 | C10:11 | C10 §11 | 写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；写入时C10第11行为版本日期，同表“matrix 9.”亦为节号写法 |
 | 矩阵 | 3401 | `:66,70,124-143` | `ppg_config_cdc_bridge.v` `flag_source_request` | CDC桥源域寄存器（括注符号） |
 | 矩阵 | 3401 | ppg_config_cdc_bridge.v:70-190 | `ppg_config_cdc_bridge.v` | 整段两域实现（70-190），文件级锚点 |
+| 矩阵 | 3408 | tb_ppg_precision_window_controller.v:737-758 | `tb_ppg_precision_window_controller.v` `"PWC-41 new legal START preserves protocol sticky"` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：PWC-41的两条检查（另一条为switch-timeout sticky） |
 | 矩阵 | 3456 | wrapper.v:480 | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe` | SSW简写；:480为assign o_analog_safe |
 | 矩阵 | 3557 | ppg_sar9_sar15_safe_selection_wrapper.v:480 | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe` | 右侧引文assign o_analog_safe |
 | 矩阵 | 3561 | `:400-402` | `ppg_sar9_sar15_safe_selection_wrapper.v` `i_macro_tick` | SSW宏帧tick（括注符号） |
 | 矩阵 | 3585 | ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480 | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe` | :25/:48为文件头修订记录，:480为assign o_analog_safe |
+| 矩阵 | 3832 | :2 | （保留原文：not-anchor） | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“前8项:2项(G-FP-02/G-FP-06)”计数，不是行号 |
 | 别名表 | 28 | ppg_sar9_sar15_safe_selection_wrapper.v:602 | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: TOP-01` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 34 | ppg_sar9_sar15_safe_selection_wrapper.v:379 | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: TOP-07` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 39 | ppg_control_top.v:409 | `ppg_control_top.v` `@satisfies: TOP-12` | 行ID/本格点名ID在ppg_control_top.v有@satisfies标签 |
@@ -419,9 +523,12 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 46 | ppg_adc_measurement_idac_integration.v:905 | `ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-21` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
 | 别名表 | 48 | ppg_adc_measurement_idac_integration.v:1010 | `ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-23` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
 | 别名表 | 86 | :1024 | （保留原文：not-anchor） | “1024-bit CDC payload”位宽，不是行号 |
+| 别名表 | 90 | :12 | PPG_CONTRACT_CLOSURE_MATRIX.md §12 | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“MATRIX.md:12.14节”用冒号写节号（§12.14），解析器误作第12行；原文“.14”保留 |
+| 别名表 | 96 | ppg_sar9_sar15_safe_selection_wrapper.v:480 | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：写入时:480为assign o_analog_safe |
 | 别名表 | 108 | ppg_adc_measurement_idac_integration.v:1605 | `ppg_adc_measurement_idac_integration.v` `flag_adc_transaction_inflight` | 本行“AMI物理ADC owner代表行”；写入时:1605为owner交接注释，AMI无G-FP-01本号标签 |
 | 别名表 | 112 | `:26` | `ppg_idac_code_controller.v` | C17文件头V2.3修订记录，文件级锚点 |
-| 别名表 | 116 | ppg_config_cdc_bridge.v:66-190 | `ppg_config_cdc_bridge.v` | 整段两域实现，文件级锚点 |
+| 别名表 | 116 | ppg_config_cdc_bridge.v:66-190 | `ppg_config_cdc_bridge.v` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；整段两域实现，文件级锚点 |
+| 别名表 | 143 | tb_ppg_control_top_startup_idac_calibration.v:1278-1305 | `tb_ppg_control_top_startup_idac_calibration.v` `"PASS SID-06 next-subframe waveform snapshot correctly reflects"` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“已补真实断言…见…”指该TB的SID-06下一子帧检查 |
 | 别名表 | 153 | ppg_400hz_frame_calibration_scheduler.v:452 | `ppg_400hz_frame_calibration_scheduler.v` `@satisfies: LFA-01` | 行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签 |
 | 别名表 | 154 | ppg_400hz_frame_calibration_scheduler.v:452 | `ppg_400hz_frame_calibration_scheduler.v` `@satisfies: LFA-02` | 行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签 |
 | 别名表 | 156 | ppg_400hz_frame_calibration_scheduler.v:876 | `ppg_400hz_frame_calibration_scheduler.v` `@satisfies: LFA-05` | 行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签 |
@@ -432,6 +539,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 175 | PPG_SESSION_HANDOFF_20260826_2.md:1042-1044 | （保留原文：external） | 会话交接文档未随本仓库快照入库，无法读取 |
 | 别名表 | 176 | PPG_SESSION_HANDOFF_20260826_2.md:1042-1044 | （保留原文：external） | 会话交接文档未随本仓库快照入库，无法读取 |
 | 别名表 | 177 | ppg_sar9_sar15_safe_selection_wrapper.v:438 | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: OIB-01` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
+| 别名表 | 179 | ppg_adc_measurement_idac_integration.v:1010 | `ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-23` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已打@satisfies: TOP-23, TOP-24(…)” |
 | 别名表 | 246 | `:381` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-05` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 246 | `:673-674` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-05` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 246 | `:727-728` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-05` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
@@ -441,8 +549,19 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 248 | `:381` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-07` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 248 | `:727-728` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-07` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 248 | `:388` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-07` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
+| 别名表 | 260 | ppg_adc_measurement_idac_integration.v:1745 | `ppg_adc_measurement_idac_integration.v` `reg_result_fork_payload` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：右侧引文reg_result_fork_payload<=enc_dc_result_payload |
 | 别名表 | 270 | ppg_adc_measurement_idac_integration.v:1745 | `ppg_adc_measurement_idac_integration.v` `@satisfies: ADCN-07` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
 | 别名表 | 271 | ppg_adc_measurement_idac_integration.v:1745 | `ppg_adc_measurement_idac_integration.v` `@satisfies: ADCN-08` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
+| 别名表 | 277 | ppg_idac_code_controller.v:879 | `ppg_idac_code_controller.v` `@satisfies: ISE-10` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“ISE-10直接追加到…(TRK-07/TRK-08既有锚点)” |
+| 别名表 | 277 | `:808` | `ppg_sar9_sar15_safe_selection_wrapper.v` `reg_cal_amb_code` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内写明“SSW自己的…门控快照锁存(:808环境码”；写入时SSW:808为reg_cal_amb_code锁存，解析器误归C17 |
+| 别名表 | 277 | `:847` | `ppg_sar9_sar15_safe_selection_wrapper.v` `reg_cal_dc_code` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：同上“:847直流码”；写入时SSW:847为reg_cal_dc_code锁存 |
+| 别名表 | 277 | `:652,654,702,704` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-04` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“锚定在SSW的NORMAL运行波形块”SAR9总线；写入时这些SSW行带ISE-04注释 |
+| 别名表 | 277 | `:642,644,692,694` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-05` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：同上SAR15总线；写入时这些SSW行带ISE-05注释 |
+| 别名表 | 277 | `:642,652` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-07` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“(:642,652追加ISE-07)” |
+| 别名表 | 277 | `:615` | `ppg_sar9_sar15_safe_selection_wrapper.v` `reg_control_next` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06 STATIC_BIAS“无条件清零初值”；写入时SSW:615为reg_control_next默认清零 |
+| 别名表 | 277 | `:742` | `ppg_sar9_sar15_safe_selection_wrapper.v` `reg_cal_amb_code` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06 AMB总线；写入时SSW:742为reg_cal_amb_code码窗 |
+| 别名表 | 277 | `:745` | `ppg_sar9_sar15_safe_selection_wrapper.v` `CTRL_EN_9_DC` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06“EN_9_DC使能门控”；写入时SSW:745为CTRL_EN_9_DC赋值 |
+| 别名表 | 277 | `:747` | `ppg_sar9_sar15_safe_selection_wrapper.v` `reg_cal_dc_code` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06“DC9码窗”；写入时SSW:747为reg_cal_dc_code码窗 |
 | 别名表 | 282 | `:808` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-02` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 282 | `:847` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-02` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 283 | `:808` | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-03` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
@@ -462,6 +581,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 315 | tb_ppg_peak_valley_window_detector.v:571 | `tb_ppg_peak_valley_window_detector.v` `"PVW-07"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 316 | tb_ppg_peak_valley_window_detector.v:586 | `tb_ppg_peak_valley_window_detector.v` `"PVW-08"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 317 | tb_ppg_peak_valley_window_detector.v:595 | `tb_ppg_peak_valley_window_detector.v` `"PVW-09"` | 行ID即TB check_case用例名；写入时行号已漂移 |
+| 别名表 | 317 | tb_ppg_peak_valley_window_detector.v:615 | `tb_ppg_peak_valley_window_detector.v` `"PVW-09-WRAP"` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-09-WRAP(…)” |
 | 别名表 | 319 | tb_ppg_peak_valley_window_detector.v:614 | `tb_ppg_peak_valley_window_detector.v` `"PVW-11"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 320 | tb_ppg_peak_valley_window_detector.v:627 | `tb_ppg_peak_valley_window_detector.v` `"PVW-12"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 321 | tb_ppg_peak_valley_window_detector.v:642 | `tb_ppg_peak_valley_window_detector.v` `"PVW-13"` | 行ID即TB check_case用例名；写入时行号已漂移 |
@@ -484,11 +604,13 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 338 | tb_ppg_peak_valley_window_detector.v:816 | `tb_ppg_peak_valley_window_detector.v` `"PVW-30"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 339 | tb_ppg_peak_valley_window_detector.v:829 | `tb_ppg_peak_valley_window_detector.v` `"PVW-31"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 340 | tb_ppg_peak_valley_window_detector.v:838 | `tb_ppg_peak_valley_window_detector.v` `"PVW-32"` | 行ID即TB check_case用例名；写入时行号已漂移 |
+| 别名表 | 340 | tb_ppg_peak_valley_window_detector.v:875 | `tb_ppg_peak_valley_window_detector.v` `"PVW-32-BUSY"` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-32-BUSY(…)” |
 | 别名表 | 342 | tb_ppg_peak_valley_window_detector.v:854 | `tb_ppg_peak_valley_window_detector.v` `"PVW-34"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 343 | tb_ppg_peak_valley_window_detector.v:865 | `tb_ppg_peak_valley_window_detector.v` `"PVW-35"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 345 | tb_ppg_peak_valley_window_detector.v:905 | `tb_ppg_peak_valley_window_detector.v` `"PVW-37"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 346 | tb_ppg_peak_valley_window_detector.v:915 | `tb_ppg_peak_valley_window_detector.v` `"PVW-38"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 347 | tb_ppg_peak_valley_window_detector.v:921 | `tb_ppg_peak_valley_window_detector.v` `"PVW-39"` | 行ID即TB check_case用例名；写入时行号已漂移 |
+| 别名表 | 347 | tb_ppg_peak_valley_window_detector.v:636 | `tb_ppg_peak_valley_window_detector.v` `"PVW-39-WRAP"` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-39-WRAP(…)” |
 | 别名表 | 348 | tb_ppg_peak_valley_window_detector.v:969 | `tb_ppg_peak_valley_window_detector.v` `"PVW-40"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 349 | tb_ppg_peak_valley_window_detector.v:978 | `tb_ppg_peak_valley_window_detector.v` `"PVW-41"` | 行ID即TB check_case用例名；写入时行号已漂移 |
 | 别名表 | 350 | tb_ppg_peak_valley_window_detector.v:989 | `tb_ppg_peak_valley_window_detector.v` `"PVW-42"` | 行ID即TB check_case用例名；写入时行号已漂移 |
@@ -513,11 +635,10 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | 别名表 | 475 | `:1493` | `ppg_adc_measurement_idac_integration.v` `@satisfies: LFA-04` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
 | 别名表 | 476 | ppg_adc_measurement_idac_integration.v:1223 | `ppg_adc_measurement_idac_integration.v` `@satisfies: OIB-08` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
 | 别名表 | 476 | `:1493` | `ppg_adc_measurement_idac_integration.v` `@satisfies: OIB-08` | 行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签 |
-| 别名表 | 486 | :4 | （保留原文：not-anchor） | “方法:4个并行…”数量，不是行号 |
 | 别名表 | 562 | :6 | （保留原文：not-anchor） | “D01链…:6段”数量，不是行号 |
 | 别名表 | 568 | ppg_control_top.v:295-299 | `ppg_control_top.v` `C_ADC_DRAIN_WATCHDOG_CYCLES` | 同P12行 |
 
-## 附录B 本批提交（`7a8eabf..b161d13`，按时间顺序）
+## 附录B 本批提交（`7a8eabf..f9e981b`，按时间顺序；本报告所在的提交在其后）
 
 | 提交 | 说明 |
 |---|---|
@@ -579,3 +700,12 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | `871ff61` | B合并批次：anchor_check.py在git archive导出目录中改用目录遍历建文件索引 |
 | `5d8ceba` | B合并批次：锚点门禁导出目录演示证据、运行说明与进度条目15（终版回归提交） |
 | `b161d13` | B合并批次阶段6：终版5d8ceba正式回归证据（Vivado 2022.2，按REGRESSION_RUN_REQUEST §2，与基线同机同分组）——系统20/20、PASS共1250行、芯片20/0、模块级28/28；compare退出码0：SAME 42、PASSDIFF+FINISH_LINE_SHIFT 7 |
+| `b0d225e` | B合并批次阶段7：批次报告B_MERGE_BATCH_REPORT_20261009、终版全量去注释证明、总表终版状态与进度条目16 |
+| `a3bd8fa` | B合并批次报告文字补正：写明分支HEAD与终版回归提交5d8ceba的关系、待裁定项表述、进度条目范围 |
+| `557cdfd` | B合并批次锚点第二轮（写入前快照）：按统筹10-09裁定重分类历史锚点，对照表v2与工具 |
+| `9dd4333` | B合并批次锚点第二轮写入：带日期的现行结论转换、"> "历史块内锚点恢复原文（统筹10-09裁定） |
+| `f50b2ca` | B合并批次：supervisor补@satisfies: SUP-08（统筹10-09裁定，只改注释） |
+| `3570ab6` | B合并批次：C24 supervisor合同V1.7——SUP-08按RTL改写（统筹10-09裁定） |
+| `98a61e4` | B合并批次：C24 V1.6→V1.7版本联动（16处：各依赖表与矩阵§12.4/12.4a/12.4b） |
+| `a2f1533` | B合并批次：别名表SUP-08行、矩阵§13.1刷新与E/B两类去向（统筹10-09裁定） |
+| `f9e981b` | B合并批次：矩阵§12.4a摘要重算（锚点第二轮、C24 V1.7及版本联动之后） |

@@ -215,11 +215,11 @@
 | 编号 | 来源 | 目标 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
 | BMI-150 | BR§3.2 | `tools/`锚点检查脚本 | 工具 | 检查文件存在、名字/`@satisfies` ID按词边界存在（端口/信号尽量用skill formatter AST）、合同节号存在（重名按"节号+标题"）；`[[project-ppg-...]]`记忆引用单列"仓库外引用"豁免；先做负对照（人为改错几处，恰好报出） | 已完成（`anchor_check.py`；负对照`70fb907`、`fd348d2`、`1fab116`） |
-| BMI-151 | BR§3.2、Q1；§6.5 | 矩阵、别名表一次性转换 | 一级 | 已写明符号的以原文为准到基线按名定位；裸行号用`git log -L`/blame追到写入时版本取符号；追不出来标"失效锚点（无法追溯）"；G-FP-01台账的删除线/带日期条目保留；`Cxx:NNN`互引改节号；覆盖§6.5列举的各种写法与陷阱；旧→新对照表入报告附录 | 已完成（`1fab116`：7811处写入，快照`3b6df78`） |
+| BMI-151 | BR§3.2、Q1；§6.5 | 矩阵、别名表一次性转换 | 一级 | 已写明符号的以原文为准到基线按名定位；裸行号用`git log -L`/blame追到写入时版本取符号；追不出来标"失效锚点（无法追溯）"；G-FP-01台账的删除线/带日期条目保留；`Cxx:NNN`互引改节号；覆盖§6.5列举的各种写法与陷阱；旧→新对照表入报告附录 | 已完成（第一轮`1fab116`；按统筹10-09裁定第二轮`9dd4333`：带日期的现行结论一并转换） |
 | BMI-152 | BR§3.2 | 转换复核 | 工具 | 改前快照；最后读磁盘新旧文件独立复核，引用逐条配对后文字相等；复核脚本同样先做负对照 | 已完成（`anchor_verify.py`独立复核0不符，负对照4/4） |
 | BMI-153 | BR§3.2 | 门禁接入 | 工具 | 检查脚本放进回归入口开头或作为独立一步，失败则整轮报错；真实回归中演示一次通过、一次负对照失败 | 已完成（`de814e7`：回归入口开头门禁，本机演示通过与负对照失败；回归机演示见REGRESSION_RUN_REQUEST §2） |
 | BMI-155 | BR§3.9-3；F9R §5修法3 | `ppg_amb_recheck_scheduler.v`基线第148、215、269行注释 | RTL注释 | 按F-9语义改写（只改注释）；去注释后与基线逐字节相同；对该文件跑deliverable gate不新增问题 | 已完成（`f8986b3`；gate 0/0，去注释逐字节相同） |
-| BMI-160 | OLR §8.3"本轮移除" | RTL/TB相应符号 | RTL注释 | 合同改写后，在已有实质性中文注释末尾补`@satisfies`：AMI-40（`flag_adc_transaction_inflight`作废释放、冗余校正器`flag_capture_drop`）、AMI-39与LFA-04（`adc_transaction_lost_event_o`）、AMI-24（`owner_lost_sticky_o`、L-5三个lane清零）、SUP-08（`flag_owner_lost_fault_hold`）、FSC-54（`flag_owner_lost_match`）、FSC-19（`flag_idle_idac_safe_boundary`）、SSW-42、SSW-18（S1 sticky）、P09、SID-05（只在含义一致处）。每处先核对合同新文字与实现完全一致；每个RTL文件做去注释比对与gate | 已完成（`467a8ad`：16处；SUP-08、SID-05按含义不符不补） |
+| BMI-160 | OLR §8.3"本轮移除" | RTL/TB相应符号 | RTL注释 | 合同改写后，在已有实质性中文注释末尾补`@satisfies`：AMI-40（`flag_adc_transaction_inflight`作废释放、冗余校正器`flag_capture_drop`）、AMI-39与LFA-04（`adc_transaction_lost_event_o`）、AMI-24（`owner_lost_sticky_o`、L-5三个lane清零）、SUP-08（`flag_owner_lost_fault_hold`）、FSC-54（`flag_owner_lost_match`）、FSC-19（`flag_idle_idac_safe_boundary`）、SSW-42、SSW-18（S1 sticky）、P09、SID-05（只在含义一致处）。每处先核对合同新文字与实现完全一致；每个RTL文件做去注释比对与gate | 已完成（`467a8ad`：16处；SUP-08按统筹10-09裁定在C24 V1.7改写后补标签，`3570ab6`；SID-05含义不符不补） |
 | BMI-161 | BR§3.10 | TB侧`@satisfies` | — | 已有TB历史PASS文本不追溯改写；TB注释中的`@satisfies`不在本批新增（TB只允许改PASS标签） | 不做（BR§0.3） |
 
 ## 15. 摘要、§13与交付工具
@@ -260,12 +260,13 @@
 | BMI-908 | ABCD §11.4观察项：dynamic baseline TB的EQV追踪下降沿采样竞争；芯片层没有验收ID（既有缺口） | 只登记 |
 | BMI-909 | MGR的未使用localparam `ERROR_ENUM_ENCODING`清理 | RTL注释/清理轮 |
 | BMI-910 | IDC2/CIS/AV4/CF4逐条对照（统筹§20-4） | 流片前验证收尾计划（不进POST_TAPEOUT清单） |
+| BMI-911 | reconcile报告E_STALE_MATRIX_TEXT 16项与B_TAG_MISSING 22项的逐ID闭环（统筹10-09裁定） | 流片前验证收尾计划V8逐ID闭环（不进POST_TAPEOUT清单）。E：JNT-01、K02、LFA-04/06/08、OIB-01/08、P16、PRC-09、PWC-40/41、SID-05/10/11、TOP-17/23；B：Acceptance-D01-01、D01、D03、G-FP-01-D01-01~03、G-FP-02-D01-01、G-FP-03-D01-01、G-FP-04、G-FP-05-D01-01、G-FP-06-D01-01/02、G-FP-07、JNT-09、L01、N07、OIB-04、P12、PRC-05、PVW-47/48、TOP-10 |
 
 ---
 
 ## 18. 待用户/统筹裁定
 
-阶段1提出的Q-1~Q-5已由统筹裁定，见§20。目前无未决项。
+阶段1提出的Q-1~Q-5已由统筹裁定，见§20。目前无未决项。报告§9所列执行中的6项判断，统筹已于2026-10-09裁定：第1项（带日期即历史）不接受，改为只保留删除线、"> "历史块、修订记录节与被明示取代的旧条目，锚点第二轮已执行；第2、3、6项接受；第4项SUP-08本批改写并补标签；第5项列入流片前验证收尾计划V8（BMI-911）。
 
 ## 19. 统计
 
@@ -282,7 +283,7 @@
 | RTL疑点 | 1 | BMI-057 |
 | 不做（无需改/超出边界） | 3 | BMI-161、188、189 |
 | 待裁定 | 0 | BMI-063、136已裁定转一级 |
-| 排除项（§17） | 11 | BMI-900~910 |
+| 排除项（§17） | 12 | BMI-900~911 |
 
 ## 20. 统筹审核意见（2026-10-09，经用户转达）
 
