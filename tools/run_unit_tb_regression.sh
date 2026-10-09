@@ -27,7 +27,11 @@
 #   banner (listed per TB below) is present.
 # Output: <OUT_DIR>/<tb>/{filelist.f,xvlog.log,xelab.log,xsim.log,...}
 #         <OUT_DIR>/unit_summary.tsv (one line per TB)
-# Exit status: 0 when every selected TB passes, 1 otherwise, 2 on usage error.
+# Anchor gate: before any simulation the symbol-anchor gate
+#   tools/b_merge_tools/run_anchor_gate.sh checks the closure matrix, the alias
+#   table and the contracts; if it fails the whole round stops with exit 1.
+# Exit status: 0 when every selected TB passes, 1 otherwise (including a failed
+#   anchor gate), 2 on usage error.
 # =============================================================================
 set -u
 
@@ -35,6 +39,12 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 RTL="$REPO/rtl"
 VIVADO_BIN="${VIVADO_BIN:-/c/Xilinx/Vivado/2022.2/bin}"
 export PATH="$VIVADO_BIN:$PATH"
+
+# Symbol-anchor gate first: a broken matrix/alias/contract anchor fails the round.
+if ! bash "$REPO/tools/b_merge_tools/run_anchor_gate.sh"; then
+  echo "ERROR: anchor gate failed; regression round stopped before simulation" >&2
+  exit 1
+fi
 
 # Windows Vivado ships xvlog.bat etc.; Linux ships plain executables.
 if command -v xvlog.bat >/dev/null 2>&1; then EXE=".bat"; else EXE=""; fi

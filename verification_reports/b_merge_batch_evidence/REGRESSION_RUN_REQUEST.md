@@ -85,3 +85,13 @@ python tools/b_merge_tools/regression_evidence.py export $R verification_reports
   python tools/b_merge_tools/regression_evidence.py compare verification_reports/b_merge_batch_evidence/baseline_7a8eabf verification_reports/b_merge_batch_evidence/final_<提交号>
   ```
 - 预期结果：`$finish`全部相同（退出码0）。PASS行只允许出现TB标签改名造成的差异，脚本会逐行列出。
+- **锚点门禁演示（交接书§3.2“接入回归门禁”，BMI-153）**：模块级回归入口`tools/run_unit_tb_regression.sh`开头会先运行`tools/b_merge_tools/run_anchor_gate.sh`。门禁失败时整轮以退出码1结束，不跑任何仿真。终版回归时需要演示两次：
+  1. 通过：正常运行模块级回归（即上面1.3的unit一路），`unit.out`开头应出现`ANCHOR GATE PASSED`。
+  2. 负对照：在导出目录（不是仓库）里注入一处坏锚点后单跑一个TB，应报`name-missing`和`ANCHOR GATE FAILED`，退出码1，且不生成输出目录：
+     ```bash
+     cd $R/unit
+     sed -i '0,/`ppg_amb_recheck_scheduler.v` `i_amb_enable`/s//`ppg_amb_recheck_scheduler.v` `i_amb_enablX`/' contracts/PPG_CONTRACT_CLOSURE_MATRIX.md
+     bash tools/run_unit_tb_regression.sh -o $R/gate_negctl tb_ppg_adc_dc_recovery > $R/gate_negctl.out 2>&1; echo "EXIT=$?" >> $R/gate_negctl.out
+     ```
+     这一步放在全部回归跑完之后做，做完后该导出目录作废。把`gate_negctl.out`与`unit.out`开头的门禁几行一起放进`final_<提交号>/`。
+  - 门禁需要Python 3（>=3.9时用formatter AST；更低版本自动退回文本检索，判据相同）。

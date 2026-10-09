@@ -1,0 +1,15 @@
+ANCHOR GATE: Python 3.8.5 /d/ppg_zlcx/zlcx/tools/b_merge_tools/anchor_check.py 
+stats {"symbol_anchors": 5348, "satisfies_anchors": 87, "label_anchors": 145, "section_refs": 2804, "old_anchor_history": 1169}; external refs 27; errors 0
+ANCHOR GATE PASSED
+repo=/d/ppg_zlcx/zlcx
+out=/d/ppg_zlcx/ppg_unit_tb_runs/renamed_tbs_172621
+vivado_bin=/d/vivado/2019.2/bin
+=== [hier] tb_ppg_400hz_frame_calibration_scheduler ===
+  PASS xvlog=0 xelab=0 xsim=0 finish=1 fail_lines=0 banner=Y dur=35s
+=== [hier] tb_ppg_adc_measurement_idac_integration ===
+  PASS xvlog=0 xelab=0 xsim=0 finish=1 fail_lines=0 banner=Y dur=51s
+=== [hier] tb_ppg_sar9_sar15_safe_selection_wrapper ===
+  PASS xvlog=0 xelab=0 xsim=0 finish=1 fail_lines=0 banner=Y dur=44s
+=== DONE: run=3 pass=3 fail=0 ===
+summary: /d/ppg_zlcx/ppg_unit_tb_runs/renamed_tbs_172621/unit_summary.tsv
+exit=0
