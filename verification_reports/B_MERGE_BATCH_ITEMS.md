@@ -103,49 +103,50 @@
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-060 | ABCD §12.8；F28 §3；BR§3.4 | C13 §4 保留载荷（§4.1） | 一级 | `i_datapath_discard_*`收窄为6字段；"For a matching retained transaction"改写为按代际匹配，身份字段仅诊断（`overlap`/`fork`只用`i_datapath_discard_event`与`run_generation_o == i_run_generation`） | 待做 |
+| BMI-060 | ABCD §12.8；F28 §3；BR§3.4 | C13 §4 保留载荷（§4.1） | 一级 | `i_datapath_discard_*`收窄为6字段；"For a matching retained transaction"改写为按代际匹配，身份字段仅诊断（`overlap`/`fork`只用`i_datapath_discard_event`与`run_generation_o == i_run_generation`） | 已完成（C13 V1.3） |
 | BMI-061 | ABCD §12.8；F28 §3 | C01 公开端口表（§4） | 一级 | `o_measurement_result_discard_*`收窄（7字段，含`sample_valid`） | 待做 |
-| BMI-062 | ABCD §10(b) F-004 | C13（Router `local_empty`描述） | 一级 | Router无always、无该端口，与C12:65矛盾；按RTL订正 | 待做 |
-| BMI-063 | IDG §7、§10 OVL；统筹§20-1 | C13 §7 验收用例 | 一级 | 在C13 §7登记OVL-01~17。每条须对应C13已有规则或RTL实际行为；对不上的标"仅TB检查"，不硬登记 | 待做 |
+| BMI-062 | ABCD §10(b) F-004 | C13（Router `local_empty`描述） | 一级 | Router无always、无该端口，与C12:65矛盾；按RTL订正 | 已完成（C13 V1.3） |
+| BMI-063 | IDG §7、§10 OVL；统筹§20-1 | C13 §7 验收用例 | 一级 | 在C13 §7登记OVL-01~17。每条须对应C13已有规则或RTL实际行为；对不上的标"仅TB检查"，不硬登记 | 已完成（C13 V1.3） |
+| BMI-064 | 阶段2改写C13时发现（RTL核对） | C13 §4.1 `o_local_empty`消费关系 | 一级 | 原文写AMI是`o_local_empty`的唯一消费者并用于`o_datapath_empty`；RTL中AMI只把fork/overlap的`o_local_empty`接出供观测，`o_datapath_empty`用各级`o_result_valid`（经`o_measurement_output_idle`）汇总，对单元素缓存语义相同。按RTL订正C13；C10 §6.11的汇总式按语义保留 | 已完成（C13 V1.3） |
 
 ## 5. C16 / C18 重检、PWI
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-070 | BR§3.9-1；F9R §5修法3；BR§3.12-1；OLR §8.4-6 | C16 §9.4 流程图；必要时§17、§18 | 一级 | "第1/2/3个9-bit校准帧"→"第1/2/3个校准阶段"；每个阶段从新的物理校准宏帧开始；跨宏帧延长（C08 §9.6）或跨宏帧重试之后，下一阶段可在同一物理校准宏帧的后续子帧开始；下一阶段首样本用上一阶段最终已提交的码。OLR §8.4-6"每个重检阶段在新的校准宏帧sf0开始…"按此覆盖 | 待做 |
-| BMI-071 | OLR §8.2、§8.4-6 | C16 §9（端口）/§13；C18 §5 端口表 | 一级 | 新输入`i_calibration_request_withdraw_event`（PWI、重检调度器） | 待做 |
-| BMI-072 | OLR §8.4-6；ABCD F-020 | C16 §9；C18 §8 重检事件连接 | 一级 | F-020撤销规则：AMB重检inflight在未建立owner的截止时由撤销释放。RTL锚点：重检调度器撤销释放（`@satisfies: SID-05`保留） | 待做 |
-| BMI-073 | ABCD §10(b) F-043 | C18（窗口长度的直接消费者） | 一级 | 直接消费者写成PWC，但PWC无这两个端口；按RTL订正 | 待做 |
-| BMI-074 | IDG S3、S4；IDF G3 | C18 :3、:10、:690（"PWI-01至PWI-10""PWI-06至PWI-10"）；§14 :659 | 一级 | 范围订正为表格实际上限PWI-08；门禁"PWI-01至PWI-07全部真实比较PASS"改为单元TB实际PWI-01~05，PWI-06/07/08状态如实写 | 待做 |
-| BMI-075 | IDG S5 | C23 §21 / C18 §13 | 一级 | PWI-01~05在C18与C23重复定义：在C23 §21标注"PWI-01~05以C18为准" | 待做 |
+| BMI-070 | BR§3.9-1；F9R §5修法3；BR§3.12-1；OLR §8.4-6 | C16 §9.4 流程图；必要时§17、§18 | 一级 | "第1/2/3个9-bit校准帧"→"第1/2/3个校准阶段"；每个阶段从新的物理校准宏帧开始；跨宏帧延长（C08 §9.6）或跨宏帧重试之后，下一阶段可在同一物理校准宏帧的后续子帧开始；下一阶段首样本用上一阶段最终已提交的码。OLR §8.4-6"每个重检阶段在新的校准宏帧sf0开始…"按此覆盖 | 已完成（C16 V2.2） |
+| BMI-071 | OLR §8.2、§8.4-6 | C16 §9（端口）/§13；C18 §5 端口表 | 一级 | 新输入`i_calibration_request_withdraw_event`（PWI、重检调度器） | 已完成（C16 V2.2/C18 V2.2） |
+| BMI-072 | OLR §8.4-6；ABCD F-020 | C16 §9；C18 §8 重检事件连接 | 一级 | F-020撤销规则：AMB重检inflight在未建立owner的截止时由撤销释放。RTL锚点：重检调度器撤销释放（`@satisfies: SID-05`保留） | 已完成（C16 V2.2） |
+| BMI-073 | ABCD §10(b) F-043 | C18（窗口长度的直接消费者） | 一级 | 直接消费者写成PWC，但PWC无这两个端口；按RTL订正 | 已完成（C18 V2.2） |
+| BMI-074 | IDG S3、S4；IDF G3 | C18 :3、:10、:690（"PWI-01至PWI-10""PWI-06至PWI-10"）；§14 :659 | 一级 | 范围订正为表格实际上限PWI-08；门禁"PWI-01至PWI-07全部真实比较PASS"改为单元TB实际PWI-01~05，PWI-06/07/08状态如实写 | 已完成（C18 V2.2） |
+| BMI-075 | IDG S5 | C23 §21 / C18 §13 | 一级 | PWI-01~05在C18与C23重复定义：在C23 §21标注"PWI-01~05以C18为准" | 已完成（C23 V2.7） |
 
 ## 6. C17 IDAC（`PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md`，基线V2.3）
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-080 | ABCD §12.8 F-032；BR§3.4 | C17端口表；矩阵约第2032行 | 一级 | RTL已改名为`i_diag_clear_event`。C17正文已是此名（基线C17中3处）；矩阵第2032行登记的RTL名`i_status_clear_event`改为`i_diag_clear_event`并换符号锚点 | 待做 |
-| BMI-081 | BR§3.9；ABCD F-033；IDF §1.3 T3；F9R §7-2 | C17 §8.4末句（第503行） | 一级 | "AMB码未实际改变时不得产生`o_dcs_revalidate_request`"与C16 §9.6/§18、RTL相反，按C16改写（`o_dcs_revalidate_request = (state_current == ST_DCS_REVALIDATE_WAIT)`，窗口内也进入该状态） | 待做 |
-| BMI-082 | IDF §1.3；BR Q6 | C17 §15 IDC2-17（第670行） | 一级 | 同BMI-081的同一问题，订正为"周期AMB在窗口内仍请求两色DC重验" | 待做 |
+| BMI-080 | ABCD §12.8 F-032；BR§3.4 | C17端口表；矩阵约第2032行 | 一级 | RTL已改名为`i_diag_clear_event`。C17正文已是此名（基线C17中3处）；矩阵第2032行登记的RTL名`i_status_clear_event`改为`i_diag_clear_event`并换符号锚点 | 已完成（C17 V2.4；矩阵行待矩阵提交） |
+| BMI-081 | BR§3.9；ABCD F-033；IDF §1.3 T3；F9R §7-2 | C17 §8.4末句（第503行） | 一级 | "AMB码未实际改变时不得产生`o_dcs_revalidate_request`"与C16 §9.6/§18、RTL相反，按C16改写（`o_dcs_revalidate_request = (state_current == ST_DCS_REVALIDATE_WAIT)`，窗口内也进入该状态） | 已完成（C17 V2.4） |
+| BMI-082 | IDF §1.3；BR Q6 | C17 §15 IDC2-17（第670行） | 一级 | 同BMI-081的同一问题，订正为"周期AMB在窗口内仍请求两色DC重验" | 已完成（C17 V2.4） |
 
 ## 7. C23 精度窗口控制器（基线V2.6）
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-085 | OLR §8.4-9；§7.2 F-1；BR§3.6 | §15 两帧切换超时保护 | 一级 | F-1例外：双光IR丢失与精度切换挂起同帧→作废晚于提交点→切换超时cause 04→abort+STOP→诊断清除后可重启 | 待做 |
-| BMI-086 | ABCD §12.8 F-034 | §14 新事务阻断和提交原子性 / §16 优先级 | 一级 | 补"commit与当前代际撤销同拍时撤销优先"（与既有冻结优先级一致）。RTL锚点：两处commit（`@satisfies: PWC-27`） | 待做 |
+| BMI-085 | OLR §8.4-9；§7.2 F-1；BR§3.6 | §15 两帧切换超时保护 | 一级 | F-1例外：双光IR丢失与精度切换挂起同帧→作废晚于提交点→切换超时cause 04→abort+STOP→诊断清除后可重启 | 已完成（C23 V2.7） |
+| BMI-086 | ABCD §12.8 F-034 | §14 新事务阻断和提交原子性 / §16 优先级 | 一级 | 补"commit与当前代际撤销同拍时撤销优先"（与既有冻结优先级一致）。RTL锚点：两处commit（`@satisfies: PWC-27`） | 已完成（C23 V2.7） |
 
 ## 8. C24 supervisor（`PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md`，基线V1.5）
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-090 | OLR §8.4-3；BR§3.6 | §3 Fixed Encoding | 一级 | 原因表加`8'h06`（同槽位连续丢失，summary bit 9）、`8'h07`（owner在途≥9000拍、ADC仍不回idle，summary bit 10），source均`4'h1` | 待做 |
-| BMI-091 | OLR §8.4-3 | §5 Recovery and Diagnostic Clear（AMI active fault下降条件） | 一级 | 补"abort、START、RUN结束排空" | 待做 |
-| BMI-092 | OLR §8.4-3 | §6 ADC Physical-Drain Watchdog | 一级 | 补"超时作废不属于伪造"；写明RUN中/排空中丢失与长期忙的处理及不卡死保证 | 待做 |
-| BMI-093 | OLR §8.4-3；BR§3.6 F-1/F-2 | §5 恢复流程 | 一级 | F-1、F-2写入恢复流程（同BMI-049） | 待做 |
-| BMI-094 | ABCD §12.8 F-014/F-024；BR§3.4 | §1 Ownership and Parameters | 一级 | 参数冻结为产品固定值（看门狗5000/13），F-014条款改写为"固定值+仿真开始检查合法性"；检查所在TB：supervisor单元TB `WDPARM` | 待做 |
-| BMI-095 | ABCD §10(b) F-051 | §2 端口表（`i_rstn_2m`） | 一级 | RTL端口为`i_rstn`，订正 | 待做 |
-| BMI-096 | IDG S10、§10 | SUP-10（:161） | 一级 | 内容"AMI本地保留fault-discard原因"归C10 AMI-53：标注"归C10 AMI-53"（不删行，避免改变编号） | 待做 |
-| BMI-097 | IDG §6.2、§10；OLR §8.3 P09 | §7 Required Evidence | 一级 | 证据状态订正：SUP-05/08无/部分证据，SUP-03/09/10的TB子标签同号不同义（改名见BMI-141）；P09（summary映射）恢复`@satisfies`见BMI-160 | 待做 |
+| BMI-090 | OLR §8.4-3；BR§3.6 | §3 Fixed Encoding | 一级 | 原因表加`8'h06`（同槽位连续丢失，summary bit 9）、`8'h07`（owner在途≥9000拍、ADC仍不回idle，summary bit 10），source均`4'h1` | 已完成（C24 V1.6） |
+| BMI-091 | OLR §8.4-3 | §5 Recovery and Diagnostic Clear（AMI active fault下降条件） | 一级 | 补"abort、START、RUN结束排空" | 已完成（C24 V1.6） |
+| BMI-092 | OLR §8.4-3 | §6 ADC Physical-Drain Watchdog | 一级 | 补"超时作废不属于伪造"；写明RUN中/排空中丢失与长期忙的处理及不卡死保证 | 已完成（C24 V1.6） |
+| BMI-093 | OLR §8.4-3；BR§3.6 F-1/F-2 | §5 恢复流程 | 一级 | F-1、F-2写入恢复流程（同BMI-049） | 已完成（C24 V1.6） |
+| BMI-094 | ABCD §12.8 F-014/F-024；BR§3.4 | §1 Ownership and Parameters | 一级 | 参数冻结为产品固定值（看门狗5000/13），F-014条款改写为"固定值+仿真开始检查合法性"；检查所在TB：supervisor单元TB `WDPARM` | 已完成（C24 V1.6） |
+| BMI-095 | ABCD §10(b) F-051 | §2 端口表（`i_rstn_2m`） | 一级 | RTL端口为`i_rstn`，订正 | 已完成（C24 V1.6） |
+| BMI-096 | IDG S10、§10 | SUP-10（:161） | 一级 | 内容"AMI本地保留fault-discard原因"归C10 AMI-53：标注"归C10 AMI-53"（不删行，避免改变编号） | 已完成（C24 V1.6） |
+| BMI-097 | IDG §6.2、§10；OLR §8.3 P09 | §7 Required Evidence | 一级 | 证据状态订正：SUP-05/08无/部分证据，SUP-03/09/10的TB子标签同号不同义（改名见BMI-141）；P09（summary映射）恢复`@satisfies`见BMI-160 | 已完成（C24 V1.6） |
 
 ## 9. C25 测试合同（`PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md`）
 

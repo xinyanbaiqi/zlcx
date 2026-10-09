@@ -1,6 +1,7 @@
 # PPG ADC Router到Pipeline Overlap Corrector接口冻结合同
 
-> Current normative version: V1.2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; ID/generation pass-through and local-drain ownership remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`.
+> V1.3修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-060、062~064，按基线`7a8eabf` router RTL、overlap RTL与AMI RTL改写，符号锚点格式为“文件 + 符号（§节）”）：① §4.1私有datapath discard身份组收窄为矩阵§1.1 `TXN_KEY`（F-002），并写明按代际匹配、身份字段仅诊断；② §4.1按RTL订正router边界（F-004：router是纯组合透传，没有`o_local_empty`和datapath discard端口；这组端口只在overlap上）以及`o_local_empty`的消费关系；③ §7登记OVL-01~OVL-17验收表（单元TB已有同名检查，此前合同无编号）。不改变握手、位宽、缓存深度或延迟。
+> Current normative version: ~~V1.2, 2026-08-20~~ V1.3, 2026-10-09（V1.2记录日期2026-08-20）. Status: `ACTIVE_NORMATIVE`; ID/generation pass-through and local-drain ownership remain normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`.
 
 > Historical V1 interface, width, handshake and payload-hold freeze date: 2026-08-06.
 > 上游RTL：`ppg_adc_result_router.v`  
@@ -82,6 +83,12 @@ normal_transfer = i_normal_valid && o_normal_ready
 
 ### 4.1 Generation and lifecycle pass-through
 
+V1.3 correction (F-002, F-004; RTL `ppg_adc_result_router.v`, `ppg_adc_pipeline_overlap_corrector.v`, `ppg_adc_measurement_idac_integration.v`). The paragraphs below are kept as originally written; where they differ from RTL, the following governs:
+- **Router** has `i_run_generation`/`o_run_generation` only. It is purely combinational pass-through (no always block, no retained state), and has neither `o_local_empty` nor any `i_datapath_discard_*` port. "A stale generation is dropped" and "Router `o_local_empty`" below do not apply to the router.
+- **Overlap** declares `i_run_generation`, the private `i_datapath_discard_event`, `i_datapath_discard_reason[1:0]`, `i_datapath_discard_identity_valid`, the `i_datapath_discard_<TXN_KEY>` group (six fields `frame_id`, `sample_index`, `color_ir`, `frame_type`, `precision`, `run_generation`; no epoch; closure matrix §1.1), `o_run_generation` and `o_local_empty`.
+- **Matching is generation-scoped**: overlap applies the event when `i_datapath_discard_event && (run_generation_o == i_run_generation)` (`flag_discard_apply`); the identity fields are diagnostic only and never take part in matching. "For a matching retained transaction" below means this generation match.
+- AMI connects overlap `o_local_empty` for observation only; AMI's `o_datapath_empty` uses overlap `o_result_valid` (through `o_measurement_output_idle`) instead, which for this single-element buffer carries the same fact.
+
 The formal Router/overlap boundary additionally declares the following ports:
 `i_run_generation[C_RUN_GENERATION_WIDTH-1:0]`,
 `i_datapath_discard_event`, `i_datapath_discard_reason[1:0]`,
@@ -153,5 +160,29 @@ o_normal_ready = i_rstn && (!o_result_valid || i_result_ready)
 6. 9-bit与15-bit NORMAL事务均携带Stage1校准载荷；
 7. 原1024个S2物理码扫描和固定标称重构结果不发生回归；
 8. 异步复位清除valid和全部新增保持字段。
+
+### 7.1 验收编号表（V1.3登记）
+
+overlap单元TB（`tb_ppg_adc_pipeline_overlap_corrector.v`）的检查标签为OVL-01~OVL-17，此前本合同没有编号表。下表逐条登记，并写明对应的本合同规则；17项都能对应到本合同已有规则或RTL实际行为，没有“仅TB检查”项。TB只在FAIL分支打印编号，PASS时只有总横幅。
+
+| 编号 | 场景 | 验收要求 | 对应本合同规则 |
+| --- | --- | --- | --- |
+| OVL-01 | 复位确定状态 | 复位期间及释放后valid、全部保持字段为确定值，复位释放后ready恢复 | §5第4条；§7第8条 |
+| OVL-02 | 无valid不建事务 | `i_normal_valid=0`时任意改变输入总线不产生或改写输出事务 | §2（只有`normal_transfer`才锁存） |
+| OVL-03 | RED 9-bit透传 | 检测码与全部元数据逐位透传，fine/标称字段保持0 | §4；§7第6条 |
+| OVL-04 | IR 9-bit同拍替换 | IR事务同拍替换RED事务，保持各自独立的DC快照 | §5第2条；§4 |
+| OVL-05 | RED 15-bit | 同时保留检测码并产生固定标称15-bit重构结果 | §4（标称输出）；§6 |
+| OVL-06 | IR 15-bit | 复用同一算术硬件，全部IR元数据不串色 | §4；§6 |
+| OVL-07 | 1024码扫描 | 遍历全部1024个S2物理码，用变化的D1_EXT交叉核对标称结果 | §7第7条 |
+| OVL-08 | D1_EXT边界 | 覆盖冗余边界、中点两侧与正向量程端点 | §6（S2冗余解码与标称重构） |
+| OVL-09 | 对称舍入 | 半LSB门限上下的正负样本舍入完全对称 | §6（舍入） |
+| OVL-10 | 饱和不回绕 | 接口可表达的异常D1_EXT在上下端饱和，不发生二进制回绕 | §6（饱和） |
+| OVL-11 | 反压保持 | 下游持续反压时全部数值、资格和元数据逐拍保持，ready为0 | §5第1条；§7第4条 |
+| OVL-12 | 恰好消费一次 | 解除反压后当前事务只被消费一次并释放缓存 | §5第3条 |
+| OVL-13 | 同拍消费与接收 | 旧输出消费与新输入接收同拍时valid连续、载荷完整替换 | §5第2条；§7第5条 |
+| OVL-14 | 精度快照 | 连续9/15/9/15事务的fine资格只由各自事务的精度快照决定 | §4（`precision_mode`）；§7第6条 |
+| OVL-15 | 旧事务不复活 | 输出消费后valid为0，之后输入总线变化不能复活或改写旧事务 | §2；§5第3条 |
+| OVL-16 | 异步复位中断 | 有效输出等待期间异步复位立即清除valid和全部结果字段，复位后可恢复 | §5第4条；§7第8条 |
+| OVL-17 | 校准载荷端点 | signed 12-bit校准端点、独立状态位与版本标签逐位保持 | §3第1~5条；§7第1~3条 |
 
 任何改变字段位宽、握手条件、缓存深度、固定标称结果语义或新增延迟的方案，必须先修订本合同。
