@@ -12,8 +12,8 @@
 | manager（C02） | `V1_CONFLICT_MGR.md` | 已完成：(c) 3项（1中、2低） |
 | supervisor（C24） | `V1_CONFLICT_SUP.md` | 已完成：本模块(c) 0项；V1-MGR-C1、V1-AMI-C3在此有体现 |
 | IDAC控制器（C17） | `V1_CONFLICT_IDAC.md` | 已完成：(c) 2项（低） |
-| 精度窗口控制器（C23） | `V1_CONFLICT_PWC.md` | 当前 |
-| 重检调度器（C16） | `V1_CONFLICT_RCK.md` | 待做 |
+| 精度窗口控制器（C23） | `V1_CONFLICT_PWC.md` | 已完成：(c) 3项（2低、1无可观测） |
+| 重检调度器（C16） | `V1_CONFLICT_RCK.md` | 当前 |
 | PWI（C18） | `V1_CONFLICT_PWI.md` | 待做 |
 | SPI寄存器文件（芯片顶层合同） | `V1_CONFLICT_SPI.md` | 待做 |
 | 冗余校正器（C10/OLR §2.2） | `V1_CONFLICT_RDC.md` | 待做 |
