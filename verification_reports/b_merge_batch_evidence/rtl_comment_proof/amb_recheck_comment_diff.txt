@@ -1,0 +1,13 @@
+diff --git a/rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v b/rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v
+index bd1459a..45cf630 100644
+--- a/rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v
++++ b/rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v
+@@ -148 +148 @@ module ppg_amb_recheck_scheduler
+-	reg flag_stage_frame_complete;              // 当前校准阶段对应物理帧已经结束
++	reg flag_stage_frame_complete;              // 本阶段内已出现过一次物理校准宏帧完成事件；不要求晚于本阶段最后一笔样本，阶段跨帧延长或重试后可沿用较早帧的完成并在后续子帧推进
+@@ -215 +215 @@ module ppg_amb_recheck_scheduler
+-	assign o_calibration_frame_start = flag_enter_amb || dcs_revalidate_accept_o || flag_enter_ir; // 三个物理校准帧分别产生一次开始事件
++	assign o_calibration_frame_start = flag_enter_amb || dcs_revalidate_accept_o || flag_enter_ir; // 三个校准阶段各产生一次开始单拍；正常时各自从新的物理校准宏帧开始，延长或重试后下一阶段可在同一物理宏帧的后续子帧开始
+@@ -269 +269 @@ module ppg_amb_recheck_scheduler
+-	// 下一状态逻辑强制三个校准阶段由各自物理帧边界隔开
++	// 下一状态逻辑要求本阶段的数字结果事实与本阶段内物理校准帧完成事实同时具备后才推进到下一校准阶段

@@ -145,7 +145,7 @@ module ppg_amb_recheck_scheduler
 
 	//-----------------标志信号-----------------//
 	reg flag_stage_result_done;                 // 当前校准阶段的数字判断已经完成
-	reg flag_stage_frame_complete;              // 当前校准阶段对应物理帧已经结束
+	reg flag_stage_frame_complete;              // 本阶段内已出现过一次物理校准宏帧完成事件；不要求晚于本阶段最后一笔样本，阶段跨帧延长或重试后可沿用较早帧的完成并在后续子帧推进
 	reg flag_sample_inflight;                   // 已发出请求且等待匹配结果事务返回
 	wire flag_control_cancel;                   // STOP、abort或离开RUN统一取消序列
 	wire flag_period_enabled;                   // 当前ACTIVE和生命周期允许帧计数
@@ -212,7 +212,7 @@ module ppg_amb_recheck_scheduler
 	assign o_calibration_frame_type = ((state_current == ST_WAIT_DRAIN) || (state_current == ST_AMB)) ? FRAME_TYPE_AMB : FRAME_TYPE_DCS; // AMB阶段与两色DCS阶段使用既有类别编码
 	assign o_calibration_color_ir = flag_enter_ir || (state_current == ST_DCS_IR); // 第三帧启动拍和活动期均选择红外颜色
 	assign o_calibration_precision_mode = 1'b0; // 所有周期重检事务强制采用SAR9
-	assign o_calibration_frame_start = flag_enter_amb || dcs_revalidate_accept_o || flag_enter_ir; // 三个物理校准帧分别产生一次开始事件
+	assign o_calibration_frame_start = flag_enter_amb || dcs_revalidate_accept_o || flag_enter_ir; // 三个校准阶段各产生一次开始单拍；正常时各自从新的物理校准宏帧开始，延长或重试后下一阶段可在同一物理宏帧的后续子帧开始
 	assign o_calibration_stage = flag_enter_ir ? CAL_STAGE_DCS_IR : (((state_current == ST_WAIT_DRAIN) || (state_current == ST_AMB)) ? CAL_STAGE_AMB : (((state_current == ST_WAIT_DCS_ACCEPT) || (state_current == ST_DCS_R)) ? CAL_STAGE_DCS_R : ((state_current == ST_DCS_IR) ? CAL_STAGE_DCS_IR : CAL_STAGE_IDLE))); // 输出当前或正进入的校准阶段
 
 	//状态输出接口
@@ -266,7 +266,7 @@ module ppg_amb_recheck_scheduler
 		end
 	end
 
-	// 下一状态逻辑强制三个校准阶段由各自物理帧边界隔开
+	// 下一状态逻辑要求本阶段的数字结果事实与本阶段内物理校准帧完成事实同时具备后才推进到下一校准阶段
 	always@(*)begin
 		state_next = state_current;             // 默认保持当前调度阶段
 		if(i_start_ack_event == 1'b1 || flag_control_cancel == 1'b1)begin
