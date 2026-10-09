@@ -94,3 +94,10 @@
 
 - 提交`9e932d6`误带入`tools/id_governance_scan/__pycache__/scan_tb_labels_lib.cpython-38.pyc`（运行扫描器时由Python生成）。本提交用`git rm --cached`将其移出版本库，不改历史、不force push。
 - 今后提交一律按路径逐个`git add`，提交前用`git status`确认暂存区没有`__pycache__`。`.gitignore`不在本批次授权范围内，不改；最终报告中提一句建议。
+
+### 条目9（2026-10-09）：阶段5脚本开发与试跑（未写入矩阵）
+
+- 应旁观会话转达的用户要求，利用基线回归等待时间开发阶段5脚本，只开发和试跑：
+  - `tools/b_merge_tools/manifest_digest.py`（F-045）：在`7a8eabf`与`3f4673d`上都复现§12.4a的26行清单，3个相符（C04、C05、C21）、23个不符；负对照（导出副本中C04改1字节）恰好多报C04一处；`--write`往返后26/26相符。分支HEAD当前0相符（预期，正式重算在阶段5最后）。
+  - `tools/cross_reference_tools/reconcile_acceptance_ids.py`：只改路径（`contracts/`、`tools/cross_reference_tools/`）并排除`.claude/`，ID正则与分类逻辑不变。试跑341个ID：A 267、B 22、B2 35、D 1、E_STALE 16（基线与HEAD相同）。B2中22个是TB文件头修订记录切出的伪ID（已知误报清单），13个是RTL中真实存在、别名表缺行的`@satisfies`标签（AMI-24、FSC-03/17/31/32/38/46/49/50、MGR-11、SSW-22/34/38），在阶段3补别名表行。已提交的`reconciliation_report.*`未刷新。
+  - 证据：`verification_reports/b_merge_batch_evidence/stage5_dryrun/`。

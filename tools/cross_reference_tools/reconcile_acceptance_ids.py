@@ -28,10 +28,18 @@ previously-observed patterns in this project (TOP-06, K01-K05, D01 chain) and co
 them into A/B/C would hide exactly the kind of finding this project has repeatedly needed
 to catch.
 
-Usage (from repo root D:\\PPG\\verilog\\jxa):
-    python ppg_system_integration/cross_reference_tools/reconcile_acceptance_ids.py \
-        --json ppg_system_integration/cross_reference_tools/reconciliation_report.json \
-        --markdown ppg_system_integration/cross_reference_tools/reconciliation_report.md
+Usage (from the zlcx repository root):
+    python tools/cross_reference_tools/reconcile_acceptance_ids.py \
+        --json tools/cross_reference_tools/reconciliation_report.json \
+        --markdown tools/cross_reference_tools/reconciliation_report.md
+
+2026-10-09 B merge batch (B_MERGE_BATCH_BRIEF_20261009.md section 3.11): paths moved
+from the original development tree (ppg_system_integration/) to this repository
+(contracts/ and tools/cross_reference_tools/); the skill tree .claude/ is excluded from
+the RTL tag scan. ID patterns and classification logic are unchanged. Known limits:
+ID_PATTERN covers 22 families only (FSC, SUP, SSW, DCR, AMI ... are not seen), and
+`@satisfies:` text in TB file-header revision notes yields pseudo IDs (listed as known
+false positives in the batch report).
 """
 
 import argparse
@@ -41,7 +49,7 @@ import re
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-INTEGRATION_DIR = REPO_ROOT / "ppg_system_integration"
+INTEGRATION_DIR = REPO_ROOT / "contracts"
 ALIAS_TABLE_PATH = INTEGRATION_DIR / "PPG_ALIAS_MAPPING_TABLE.md"
 MATRIX_PATH = INTEGRATION_DIR / "PPG_CONTRACT_CLOSURE_MATRIX.md"
 
@@ -53,14 +61,15 @@ EXCLUDED_DIR_MARKERS = (
     "history",
     "legacy",
     ".git",
+    ".claude",
 )
 
 # The 25 active contracts (C01-C25) live directly under ppg_system_integration/ as the
 # *_CONTRACT.md / *_INTERFACE_CONTRACT.md files; this glob intentionally also enumerates
 # module-local *_semantic_contract.md files (C02, C05) which live in their own module dirs.
 CONTRACT_GLOBS = [
-    "ppg_system_integration/*CONTRACT*.md",
-    "*/*_semantic_contract.md",
+    "contracts/*CONTRACT*.md",
+    "contracts/*_semantic_contract.md",
 ]
 
 ID_PATTERN = re.compile(
@@ -268,7 +277,7 @@ def render_markdown(results, generated_at):
     lines.append(f"生成时间: {generated_at}")
     lines.append("")
     lines.append(
-        "由 `ppg_system_integration/cross_reference_tools/reconcile_acceptance_ids.py` 生成。"
+        "由 `tools/cross_reference_tools/reconcile_acceptance_ids.py` 生成。"
         "任何人工修改前必须重新运行该脚本,不要手工编辑本表格内容。"
     )
     lines.append("")
