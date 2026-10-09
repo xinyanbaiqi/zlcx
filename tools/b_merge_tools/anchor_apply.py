@@ -19,6 +19,10 @@ Every line that keeps an old anchor on purpose (history-dated, history, not-anch
 external) is written to anchor_history_allowlist.json by SHA-1 of the stripped final
 line, which is what anchor_check.py reads.
 
+With --allowlist-only nothing is converted: the base text is aligned with the
+already converted files and only the allowlist is rewritten (needed when an
+allowlisted line is edited later, e.g. a regenerated §12.4a digest cell).
+
 Exit status 1 when any convert row could not be placed.
 """
 import argparse
@@ -77,6 +81,9 @@ def main():
     ap.add_argument('--repo', default='.')
     ap.add_argument('--base', default='7a8eabf')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--allowlist-only', action='store_true',
+                    help='after the conversion: recompute anchor_history_allowlist.json for the current files '
+                         '(for example after a later edit of an allowlisted line) without converting anything')
     ap.add_argument('--report')
     a = ap.parse_args()
     rows = list(csv.DictReader(open(a.table, encoding='utf-8'), delimiter='\t'))
@@ -104,7 +111,7 @@ def main():
                 if bl in mapping:
                     keep_lines.add(mapping[bl])
                 continue
-            if r['class'] != 'convert':
+            if r['class'] != 'convert' or a.allowlist_only:
                 continue
             cl = mapping.get(bl)
             k = occurrence(base[bl - 1], r['old'], int(r['col']))
@@ -131,7 +138,7 @@ def main():
             cur[cl - 1] = line
         for cl in keep_lines:
             allow.add(hashlib.sha1(cur[cl - 1].strip().encode('utf-8')).hexdigest())
-        if not a.dry_run:
+        if not a.dry_run and not a.allowlist_only:
             text = '\n'.join(cur)
             if crlf:
                 text = text.replace('\n', '\r\n')
