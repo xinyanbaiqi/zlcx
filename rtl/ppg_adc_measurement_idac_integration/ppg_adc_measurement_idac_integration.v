@@ -1286,7 +1286,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(i_start_ack_event == 1'b1)begin
 			adc_transaction_lost_event_o <= 1'b0; // 新RUN边界不发布前一生命周期的作废
 		end else begin
-			adc_transaction_lost_event_o <= flag_owner_lost_fire; // 物理空闲且捕获链无完成时向调度器与SSW发布一次作废
+			adc_transaction_lost_event_o <= flag_owner_lost_fire; // 物理空闲且捕获链无完成时向调度器与SSW发布一次作废 @satisfies: AMI-39, LFA-04
 		end
 	end
 
@@ -1297,7 +1297,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(flag_owner_lost_fire == 1'b1)begin
 			owner_lost_sticky_o <= 1'b1;        // 任一槽位超时作废都留下软件可读历史，同拍诊断清除不得吞掉
 		end else if(i_diag_clear_event == 1'b1 && (flag_owner_lost_fault_hold == 1'b0 || flag_run_context_drained == 1'b1))begin
-			owner_lost_sticky_o <= 1'b0;        // 与集成sticky同一清除规则：无活跃连续丢失阻断或本RUN已结束排空时才允许撤销历史
+			owner_lost_sticky_o <= 1'b0;        // 与集成sticky同一清除规则：无活跃连续丢失阻断或本RUN已结束排空时才允许撤销历史 @satisfies: AMI-24
 		end
 	end
 
@@ -1569,11 +1569,11 @@ module ppg_adc_measurement_idac_integration
 		if(i_rstn == 1'b0)begin
 			flag_owner_lost_fault_hold <= 1'b0; // 复位解除连续丢失阻断
 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
-			flag_owner_lost_fault_hold <= 1'b0; // 新RUN或supervisor abort结束本episode的连续丢失阻断
+			flag_owner_lost_fault_hold <= 1'b0; // 新RUN或supervisor abort结束本episode的连续丢失阻断 @satisfies: AMI-24
 		end else if(flag_owner_lost_limit_reached == 1'b1)begin
 			flag_owner_lost_fault_hold <= 1'b1; // T-dead：同槽位连续k次作废，经supervisor升级为系统故障并STOP
 		end else if(flag_run_context_drained == 1'b1)begin
-			flag_owner_lost_fault_hold <= 1'b0; // 本RUN已结束且排空，连续丢失不再有在途事务
+			flag_owner_lost_fault_hold <= 1'b0; // 本RUN已结束且排空，连续丢失不再有在途事务 @satisfies: AMI-24
 		end
 	end
 
@@ -1768,7 +1768,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(flag_test_identity_inject_fire == 1'b1)begin
 			flag_test_identity_hold <= 1'b1;    // 错配进入原matcher后保留真实完成等待恢复
 		end else if(flag_run_context_drained == 1'b1)begin
-			flag_test_identity_hold <= 1'b0;    // STOP结束本RUN且全链排空后测试身份不再有可恢复的owner，lane 01随RUN结束落下；L-5
+			flag_test_identity_hold <= 1'b0;    // STOP结束本RUN且全链排空后测试身份不再有可恢复的owner，lane 01随RUN结束落下；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1781,7 +1781,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(flag_calibration_result_mismatch == 1'b1 || flag_adc_capture_without_owner == 1'b1 || (i_transaction_start_valid == 1'b1 && ((i_transaction_frame_type == FRAME_TYPE_AMB) || (i_transaction_frame_type == FRAME_TYPE_DCS)) && flag_calibration_start_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1))begin
 			flag_owner_protocol_fault_hold <= 1'b1; // 四类协议错误任一到达即置位并保持
 		end else if(flag_run_context_drained == 1'b1)begin
-			flag_owner_protocol_fault_hold <= 1'b0; // 保持到本RUN结束：STOP确认且AMI全链排空即无残留阻断原因，lane 02落下使episode可关闭；置位优先于本清零；L-5
+			flag_owner_protocol_fault_hold <= 1'b0; // 保持到本RUN结束：STOP确认且AMI全链排空即无残留阻断原因，lane 02落下使episode可关闭；置位优先于本清零；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1794,7 +1794,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0)begin
 			flag_recovery_context_fault_hold <= 1'b1; // 无法证明可用原owner执行失败释放
 		end else if(flag_run_context_drained == 1'b1)begin
-			flag_recovery_context_fault_hold <= 1'b0; // STOP结束本RUN且排空后无可恢复的原owner，lane 03随之落下；L-5
+			flag_recovery_context_fault_hold <= 1'b0; // STOP结束本RUN且排空后无可恢复的原owner，lane 03随之落下；L-5 @satisfies: AMI-24
 		end
 	end
 
@@ -1818,7 +1818,7 @@ module ppg_adc_measurement_idac_integration
 		end else if(flag_adc_completion_emit == 1'b1)begin
 			flag_adc_transaction_inflight <= 1'b0; // 成功或失败完成旁带发布后才释放物理ADC owner
 		end else if(flag_owner_lost_fire == 1'b1)begin
-			flag_adc_transaction_inflight <= 1'b0; // 超时作废释放owner，不产生RAW、结果或success；作废不清捕获模块等待权，旧DONE随后按无owner捕获拒绝
+			flag_adc_transaction_inflight <= 1'b0; // 超时作废释放owner，不产生RAW、结果或success；作废不清捕获模块等待权，旧DONE随后按无owner捕获拒绝 @satisfies: AMI-40
 		end
 	end
 

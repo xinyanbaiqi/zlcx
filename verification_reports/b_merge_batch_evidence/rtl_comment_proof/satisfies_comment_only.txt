@@ -1,0 +1,13 @@
+== ppg_adc_measurement_idac_integration.v
+> INFO: [Python] Comment-only verification successful.
+== ppg_adc_s1_redundancy_corrector.v
+> INFO: [Python] Comment-only verification successful.
+== ppg_400hz_frame_calibration_scheduler.v
+> INFO: [Python] Comment-only verification successful.
+== ppg_sar9_sar15_safe_selection_wrapper.v
+> INFO: [Python] Comment-only verification successful.
+== ppg_system_fault_abort_supervisor.v
+> INFO: [Python] Comment-only verification successful.
+
+## negative control: ppg_adc_s1_redundancy_corrector.v line 312 flag_capture_drop_armed <= 1'b0 -> 1'b1 (code token)
+> ERR: [Python] Comment-only verification failed: Code tokens differ after comment annotation: first difference at token 1197: before="1'b0", after="1'b1"

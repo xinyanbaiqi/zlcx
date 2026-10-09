@@ -365,7 +365,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	wire flag_cal_q3_end_passed;                // 组合条件CAL owner自身选定Q3窗口已经关闭
 	wire flag_owner_q3_closed_combo;            // 组合条件在途owner本拍即时Q3已关闭，不跨拍保持
 	wire flag_blocking_fault;                   // 组合条件条件阻断专用字段低位编码端
-	wire flag_start_restore;                    // 新RUN启动确认且无在途结果所有权、物理ADC空闲，丢弃未提交波形上下文并恢复运行资格
+	wire flag_start_restore;                    // 新RUN启动确认且无在途结果所有权、物理ADC空闲，丢弃未提交波形上下文并恢复运行资格 @satisfies: SSW-53
 	wire flag_switch_protocol_error_condition;  // 组合条件非法接管点、双模式同时活动或事务载荷非法的原始判定
 	wire flag_ssw_fault_rising;                 // 组合条件本地阻断故障从0跳变为1的首次时刻
 
@@ -433,7 +433,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 	//其他信号连线
 	assign flag_owner_commit_fire = i_adc_owner_commit_event && o_adc_owner_ready && flag_owner_identity_match && !i_control_abort_event; // 组合连线条件结果所有权专用字段提交低位编码端
 	assign flag_owner_commit_error = i_adc_owner_commit_event && !flag_owner_commit_fire; // 组合连线条件结果所有权专用字段错误低位编码端
-	assign flag_owner_release = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁
+	assign flag_owner_release = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁 @satisfies: SSW-42
 	assign flag_done_mismatch = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && !flag_owner_release; // 组合连线条件完成失配高位编码端低位编码端，与owner_release互补，代际或序号任一不符均视为失配；作废事件与完成事件同样以事件限定序号并按同一规则核对
 
 	//其他信号连线
@@ -554,7 +554,7 @@ module ppg_sar9_sar15_safe_selection_wrapper
 				calibration_timeout_sticky_o <= 1'b0; // 时序写入校准超时保持输出低位编码端诊断确认清除
 			end
 			if(i_calibration_frame_active == 1'b1 && (i_calibration_local_tick == CAL_COMMIT_TICK) && flag_cal_has_owner == 1'b1)begin
-				calibration_timeout_sticky_o <= 1'b1; // 本子帧校准owner到local tick 385仍未完成即记迟到诊断（ADC已在tick 266采样、迟到的只是读出），非阻断；丢失由AMI超时作废另报；S1
+				calibration_timeout_sticky_o <= 1'b1; // 本子帧校准owner到local tick 385仍未完成即记迟到诊断（ADC已在tick 266采样、迟到的只是读出），非阻断；丢失由AMI超时作废另报；S1 @satisfies: SSW-18
 			end
 		end
 	end

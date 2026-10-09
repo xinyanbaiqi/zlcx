@@ -364,7 +364,7 @@ module ppg_400hz_frame_calibration_scheduler
 	wire flag_completion_success;               // 匹配且成功且非丢弃
 	wire flag_owner_lost_match;                 // AMI作废事件与在途owner序号及代际一致
 	wire flag_candidate_expired;                // 当前最早候选已越过本槽位owner截止相位，不得再提交
-	wire flag_idle_idac_safe_boundary;          // 启动搜索中调度器空闲且本拍不开帧时为IDAC待提交候选补发的单拍边界
+	wire flag_idle_idac_safe_boundary;          // 启动搜索中调度器空闲且本拍不开帧时为IDAC待提交候选补发的单拍边界 @satisfies: FSC-19
 	wire flag_red_owner_deadline;               // RED owner截止到达
 	wire flag_ir_owner_deadline;                // IR波形未提交ADC owner时触发的443 tick超时条件
 	wire flag_cal_owner_deadline;               // 校准owner截止到达
@@ -742,10 +742,10 @@ module ppg_400hz_frame_calibration_scheduler
 					state_next[B_FRAME_FAILED] = 1'b1; // success=0只做失败收尾
 				end
 			end else if(flag_owner_lost_match == 1'b1)begin
-				state_next[B_INFLIGHT] = 1'b0;  // AMI超时作废释放唯一owner，下一拍起可按截止或新候选推进
+				state_next[B_INFLIGHT] = 1'b0;  // AMI超时作废释放唯一owner，下一拍起可按截止或新候选推进 @satisfies: FSC-54
 				state_next[B_INFLIGHT_DISCARD] = 1'b0; // 作废后不再保留最小身份，STOP或abort排空随之可结束
 				if(!state_current[B_INFLIGHT_DISCARD])begin
-					state_next[B_FRAME_FAILED] = 1'b1; // 当前宏帧沿用失败收尾语义，不计NORMAL完成帧；owner跨帧时置失败的是当前帧而非作废事务的起始帧
+					state_next[B_FRAME_FAILED] = 1'b1; // 当前宏帧沿用失败收尾语义，不计NORMAL完成帧；owner跨帧时置失败的是当前帧而非作废事务的起始帧 @satisfies: FSC-54
 				end
 			end else if(i_adc_transaction_complete_event == 1'b1 || i_adc_transaction_lost_event == 1'b1)begin
 				state_next[B_COMPLETION_MISMATCH] = 1'b1; // 错配或无owner DONE不得消费新事务
