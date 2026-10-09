@@ -56,11 +56,11 @@ CAL活动帧有已接受的下一请求pending=1，且无CAL wave pending/owner�
 
 请求可在前一子帧结果消费后通过AMI L2015–2023重新握手；既有pending保持到下一个local0，所以local624出现pending1是正常保持路径，主机STOP可独立选中该沿。C08 §15/§16、B §3.7要求取消未提交控制。后果是取消沿之后一个周期出现被复活的请求状态；下一拍`!run_enable`一般再次清除，START也整向量清除，因此没有证据将其夸大为新owner、持久死锁或跨RUN错绑。abort若FRAME_ACTIVE已清，下一拍仍由生命周期分支清pending。
 
-### V1-FSC-03：CAL末拍新请求被滚动路径沿用旧payload，并留下可二次消费的pending（中；模块边界确定，系统可达性待测）
+### V1-FSC-03：CAL末拍新请求未同步转移活动payload（中；模块边界确定，系统可达性待测）
 
 条件：CAL macro4999、ACTIVE1、WAVE_PENDING0、INFLIGHT0、旧REQ_PENDING0、合法新valid1。L444–448允许R，L671–676装新请求。L487–492让K成立；L890/891开放sf0并保留ACTIVE，但L892只在**旧pending1**时装活动请求和消费pending，本例不执行。因此下一帧sf0的`waveform_*`仍用旧CAL_FRAME_TYPE/COLOR（L500–505），新REQ_PENDING却保持1。下一拍CAL W清该pending，即新请求被旧活动身份消费。与C08 §9.1、§10的请求载荷原子保持和一请求一owner不一致。
 
-即使新payload与旧完全相同也需检查一次请求只转换一次；不同阶段/颜色时，AMI L983以自己的新inflight身份拒绝旧类型owner，可能产生cause02。常规2–20拍ADC返回通常在local约270–290完成，请求会早于624握手；本审查**没有证明正常固定延迟会恰落4999**。跨帧重试/异常延迟允许阶段变化（B §3.9/F009），但必须用生产完整链定向延迟证明该边界，而不是强制内部状态冒充系统证据。
+新旧payload相同时该错配不显现；不同阶段/颜色时，AMI L983以自己的新inflight身份拒绝旧类型owner，可能产生cause02。这里没有证明一请求实际生成了两个owner。常规2–20拍ADC返回通常在local约270–290完成，请求会早于624握手；本审查**没有证明正常固定延迟会恰落4999**。跨帧重试/异常延迟允许阶段变化（B §3.9/F009），但必须用生产完整链定向延迟证明该边界，而不是强制内部状态冒充系统证据。
 
 ## 4. 待定项与最小仿真
 
@@ -81,3 +81,351 @@ CAL活动帧有已接受的下一请求pending=1，且无CAL wave pending/owner�
 ## 6. 文末汇总
 
 (c)：V1-FSC-01（中，停止后错误NORMAL完成）；V1-FSC-02（低，取消被边界重写）；V1-FSC-03（中，末拍新请求与旧payload错配，系统可达性待测）。待定：T-FSC-01～05。不得将模块边界静态反例标成已运行的系统反例。
+
+## 补充覆盖证据：技能AST与全部always原始顺序
+
+技能静态门禁的compile/AST均passed；compile在这里仅指formatter AST+静态lint，testbench/toolchain未请求，没有外部编译、仿真或综合。
+基线严格风格门禁：0 error(s)，0 strict warning(s)。现有源文件不修复，门禁成功也不能证明同拍功能正确。
+
+### L607：state_next
+
+```text
+607: 	always@(*)begin
+608: 		state_next = state_current;
+609: 		state_next[B_MACRO_START] = 1'b0;
+610: 		state_next[B_NORMAL_COMPLETE] = 1'b0;
+611: 		state_next[B_CAL_COMPLETE] = 1'b0;
+612: 		state_next[B_SCHED_FAULT_VALID] = 1'b0;
+613: 		if(i_start_ack_event == 1'b1)begin
+614: 			state_next = {STATE_WIDTH{1'b0}};
+615: 			state_next[B_STARTED] = 1'b1;
+616: 			state_next[B_STARTUP_PENDING] = 1'b1;
+617: 		end else begin
+618: 			if(i_stop_ack_event == 1'b1 || i_control_abort_event == 1'b1 || i_run_enable == 1'b0)begin
+619: 				state_next[B_STARTED] = 1'b0;
+620: 				state_next[B_STOP_DRAIN] = 1'b1;
+621: 				state_next[B_STARTUP_PENDING] = 1'b0;
+622: 				if(i_control_abort_event == 1'b1)begin
+623: 					state_next[B_FRAME_ACTIVE] = 1'b0;
+624: 					state_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = FRAME_MODE_IDLE;
+625: 				end
+630: 				state_next[B_RED_CONTEXT_SEEN] = 1'b1;
+631: 				state_next[B_IR_CONTEXT_SEEN] = 1'b1;
+632: 				state_next[B_CAL_CONTEXT_SEEN] = 1'b1;
+633: 				state_next[B_RED_WAVE_PENDING] = 1'b0;
+634: 				state_next[B_IR_WAVE_PENDING] = 1'b0;
+635: 				state_next[B_CAL_WAVE_PENDING] = 1'b0;
+636: 				state_next[B_CAL_REQ_PENDING] = 1'b0;
+637: 				state_next[B_CAL_REQ_ACTIVE] = 1'b0;
+638: 				if(state_current[B_INFLIGHT])begin
+639: 					state_next[B_INFLIGHT_DISCARD] = 1'b1;
+640: 				end
+641: 			end
+642: 			if(startup_idac_safe_boundary_o == 1'b1)begin
+643: 				state_next[B_STARTUP_PENDING] = 1'b0;
+644: 			end
+645: 			if(i_diag_clear_event == 1'b1 && !state_current[B_FRAME_ACTIVE] && !state_current[B_INFLIGHT] && !state_current[B_RED_WAVE_PENDING] && !state_current[B_IR_WAVE_PENDING] && !state_current[B_CAL_WAVE_PENDING] && flag_external_fault == 1'b0)begin
+646: 				state_next[B_LAUNCH_TIMEOUT] = 1'b0;
+647: 				state_next[B_OWNER_DEADLINE_TIMEOUT] = 1'b0;
+648: 				state_next[B_COMPLETION_MISMATCH] = 1'b0;
+649: 				state_next[B_PROTOCOL_ERROR] = 1'b0;
+650: 			end
+651: 			if(i_calibration_sample_valid == 1'b1 && flag_calibration_request_valid == 1'b0)begin
+652: 				state_next[B_PROTOCOL_ERROR] = 1'b1;
+653: 				if(!scheduler_local_fault_blocking_o)begin
+654: 					state_next[B_SCHED_FAULT_VALID] = 1'b1;
+655: 					state_next[B_SCHED_FAULT_IDENTITY_VALID] = 1'b0;
+656: 				end
+657: 			end
+658: 			if(i_start_ack_event == 1'b0 && (i_transaction_start_fire != adc_owner_commit_event_o))begin
+659: 				state_next[B_PROTOCOL_ERROR] = 1'b1;
+660: 				if(!scheduler_local_fault_blocking_o)begin
+661: 					state_next[B_SCHED_FAULT_VALID] = 1'b1;
+662: 					state_next[B_SCHED_FAULT_IDENTITY_VALID] = 1'b1;
+663: 					state_next[B_SCHED_FAULT_FRAME_ID_H:B_SCHED_FAULT_FRAME_ID_L] = current_frame_id_o;
+664: 					state_next[B_SCHED_FAULT_SAMPLE_INDEX_H:B_SCHED_FAULT_SAMPLE_INDEX_L] = transaction_sample_index_o;
+665: 					state_next[B_SCHED_FAULT_COLOR] = transaction_color_ir_o;
+666: 					state_next[B_SCHED_FAULT_FRAME_TYPE_H:B_SCHED_FAULT_FRAME_TYPE_L] = transaction_frame_type_o;
+667: 					state_next[B_SCHED_FAULT_PRECISION] = transaction_precision_mode_o;
+668: 					state_next[B_SCHED_FAULT_GENERATION_H:B_SCHED_FAULT_GENERATION_L] = i_run_generation;
+669: 				end
+670: 			end
+671: 			if(flag_calibration_request_fire == 1'b1)begin
+672: 				state_next[B_CAL_CONTEXT_SEEN] = 1'b0;
+673: 				state_next[B_CAL_REQ_PENDING] = 1'b1;
+674: 				state_next[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L] = i_calibration_frame_type;
+675: 				state_next[B_CAL_REQ_COLOR] = i_calibration_color_ir;
+676: 				state_next[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L] = i_calibration_request_reason;
+677: 			end
+678: 			if(flag_waveform_fire == 1'b1)begin
+679: 				if(flag_waveform_is_calibration == 1'b1)begin
+681: 					state_next[B_CAL_REQ_PENDING] = 1'b0;
+682: 				end
+683: 				if(flag_waveform_is_calibration == 1'b1)begin
+684: 					state_next[B_CAL_CONTEXT_SEEN] = 1'b1;
+685: 					state_next[B_CAL_WAVE_PENDING] = 1'b1;
+686: 					state_next[B_CAL_WAVE_AMB_H:B_CAL_WAVE_AMB_L] = i_amb_code;
+687: 					state_next[B_CAL_WAVE_DC_H:B_CAL_WAVE_DC_L] = (state_current[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] == FRAME_TYPE_AMB) ? {C_IDAC_CODE_WIDTH{1'b0}} : (state_current[B_CAL_FRAME_COLOR] ? i_dcs_ir_code : i_dcs_r_code);
+688: 					state_next[B_CAL_WAVE_AMB_EPOCH_H:B_CAL_WAVE_AMB_EPOCH_L] = i_amb_code_epoch;
+689: 					state_next[B_CAL_WAVE_DC_EPOCH_H:B_CAL_WAVE_DC_EPOCH_L] = (state_current[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] == FRAME_TYPE_AMB) ? {C_CODE_EPOCH_WIDTH{1'b0}} : (state_current[B_CAL_FRAME_COLOR] ? i_dcs_ir_code_epoch : i_dcs_r_code_epoch);
+690: 				end else if(flag_waveform_is_ir == 1'b1)begin
+691: 					state_next[B_IR_CONTEXT_SEEN] = 1'b1;
+692: 					state_next[B_IR_WAVE_PENDING] = 1'b1;
+693: 				end else begin
+694: 					state_next[B_RED_CONTEXT_SEEN] = 1'b1;
+695: 					state_next[B_RED_WAVE_PENDING] = 1'b1;
+696: 				end
+697: 			end else begin
+698: 				if(flag_red_context_due == 1'b1)begin
+699: 					state_next[B_RED_CONTEXT_SEEN] = 1'b1;
+700: 					state_next[B_LAUNCH_TIMEOUT] = 1'b1;
+701: 					state_next[B_FRAME_FAILED] = 1'b1;
+702: 				end
+703: 				if(flag_ir_context_due == 1'b1)begin
+704: 					state_next[B_IR_CONTEXT_SEEN] = 1'b1;
+705: 					state_next[B_LAUNCH_TIMEOUT] = 1'b1;
+706: 					state_next[B_FRAME_FAILED] = 1'b1;
+707: 				end
+708: 				if(flag_cal_context_due == 1'b1)begin
+709: 					state_next[B_CAL_CONTEXT_SEEN] = 1'b1;
+710: 					state_next[B_LAUNCH_TIMEOUT] = 1'b1;
+711: 				end
+712: 			end
+713: 			if(adc_owner_commit_event_o == 1'b1)begin
+714: 				state_next[B_INFLIGHT] = 1'b1;
+715: 				state_next[B_INFLIGHT_DISCARD] = 1'b0;
+716: 				state_next[B_INFLIGHT_SAMPLE_H:B_INFLIGHT_SAMPLE_L] = transaction_sample_index_o;
+717: 				state_next[B_INFLIGHT_TYPE_H:B_INFLIGHT_TYPE_L] = transaction_frame_type_o;
+718: 				state_next[B_INFLIGHT_COLOR] = transaction_color_ir_o;
+719: 				state_next[B_INFLIGHT_GENERATION_H:B_INFLIGHT_GENERATION_L] = i_run_generation;
+720: 				state_next[B_NEXT_SAMPLE_H:B_NEXT_SAMPLE_L] = state_current[B_NEXT_SAMPLE_H:B_NEXT_SAMPLE_L] + {{(C_SAMPLE_INDEX_WIDTH - 1){1'b0}}, 1'b1};
+721: 				if(flag_candidate_calibration == 1'b1)begin
+722: 					state_next[B_CAL_WAVE_PENDING] = 1'b0;
+725: 					state_next[B_CAL_REQ_ACTIVE] = state_current[B_CAL_REQ_ACTIVE];
+726: 				end else if(flag_candidate_red == 1'b1)begin
+727: 					state_next[B_RED_WAVE_PENDING] = 1'b0;
+728: 				end else begin
+729: 					state_next[B_IR_WAVE_PENDING] = 1'b0;
+730: 				end
+731: 			end
+732: 			if(flag_completion_match == 1'b1)begin
+733: 				state_next[B_INFLIGHT] = 1'b0;
+734: 				state_next[B_INFLIGHT_DISCARD] = 1'b0;
+735: 				if(flag_completion_success == 1'b1 && (state_current[B_INFLIGHT_TYPE_H:B_INFLIGHT_TYPE_L] == FRAME_TYPE_NORMAL))begin
+736: 					if(state_current[B_INFLIGHT_COLOR])begin
+737: 						state_next[B_IR_DONE] = 1'b1;
+738: 					end else begin
+739: 						state_next[B_RED_DONE] = 1'b1;
+740: 					end
+741: 				end else if(i_adc_transaction_success == 1'b0 && !state_current[B_INFLIGHT_DISCARD])begin
+742: 					state_next[B_FRAME_FAILED] = 1'b1;
+743: 				end
+744: 			end else if(flag_owner_lost_match == 1'b1)begin
+745: 				state_next[B_INFLIGHT] = 1'b0;
+746: 				state_next[B_INFLIGHT_DISCARD] = 1'b0;
+747: 				if(!state_current[B_INFLIGHT_DISCARD])begin
+748: 					state_next[B_FRAME_FAILED] = 1'b1;
+749: 				end
+750: 			end else if(i_adc_transaction_complete_event == 1'b1 || i_adc_transaction_lost_event == 1'b1)begin
+751: 				state_next[B_COMPLETION_MISMATCH] = 1'b1;
+752: 				if(!scheduler_local_fault_blocking_o)begin
+753: 					state_next[B_SCHED_FAULT_VALID] = 1'b1;
+754: 					state_next[B_SCHED_FAULT_IDENTITY_VALID] = state_current[B_INFLIGHT];
+755: 					state_next[B_SCHED_FAULT_FRAME_ID_H:B_SCHED_FAULT_FRAME_ID_L] = current_frame_id_o;
+756: 					state_next[B_SCHED_FAULT_SAMPLE_INDEX_H:B_SCHED_FAULT_SAMPLE_INDEX_L] = state_current[B_INFLIGHT_SAMPLE_H:B_INFLIGHT_SAMPLE_L];
+757: 					state_next[B_SCHED_FAULT_COLOR] = state_current[B_INFLIGHT_COLOR];
+758: 					state_next[B_SCHED_FAULT_FRAME_TYPE_H:B_SCHED_FAULT_FRAME_TYPE_L] = state_current[B_INFLIGHT_TYPE_H:B_INFLIGHT_TYPE_L];
+759: 					state_next[B_SCHED_FAULT_PRECISION] = (state_current[B_INFLIGHT_TYPE_H:B_INFLIGHT_TYPE_L] == FRAME_TYPE_NORMAL) ? state_current[B_FRAME_PRECISION] : 1'b0;
+760: 					state_next[B_SCHED_FAULT_GENERATION_H:B_SCHED_FAULT_GENERATION_L] = state_current[B_INFLIGHT_GENERATION_H:B_INFLIGHT_GENERATION_L];
+761: 				end
+762: 			end
+763: 			if(adc_owner_commit_event_o == 1'b0)begin
+764: 				if(flag_red_owner_deadline == 1'b1)begin
+765: 					state_next[B_RED_WAVE_PENDING] = 1'b0;
+766: 					state_next[B_OWNER_DEADLINE_TIMEOUT] = 1'b1;
+767: 					state_next[B_FRAME_FAILED] = 1'b1;
+768: 				end
+769: 				if(flag_ir_owner_deadline == 1'b1)begin
+770: 					state_next[B_IR_WAVE_PENDING] = 1'b0;
+771: 					state_next[B_OWNER_DEADLINE_TIMEOUT] = 1'b1;
+772: 					state_next[B_FRAME_FAILED] = 1'b1;
+773: 				end
+774: 				if(flag_cal_owner_deadline == 1'b1)begin
+775: 					state_next[B_CAL_WAVE_PENDING] = 1'b0;
+776: 					state_next[B_OWNER_DEADLINE_TIMEOUT] = 1'b1;
+777: 				end
+778: 			end
+779: 			if(flag_frame_start_eligible == 1'b1)begin
+780: 				state_next[B_FRAME_ACTIVE] = 1'b1;
+781: 				state_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = state_current[B_CAL_REQ_PENDING] ? FRAME_MODE_CAL : FRAME_MODE_NORMAL;
+782: 				state_next[B_FRAME_OPTICAL_H:B_FRAME_OPTICAL_L] = i_optical_mode;
+783: 				state_next[B_FRAME_PRECISION] = state_current[B_CAL_REQ_PENDING] ? 1'b0 : i_active_precision_mode;
+784: 				state_next[B_FRAME_INPUT_SOURCE] = i_input_source;
+785: 				state_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = {C_MACRO_TICK_WIDTH{1'b0}};
+786: 				state_next[B_CAL_SUB_H:B_CAL_SUB_L] = 3'd0;
+787: 				state_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}};
+788: 				state_next[B_RED_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_RED);
+789: 				state_next[B_IR_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_IR);
+790: 				state_next[B_RED_DONE] = 1'b0;
+791: 				state_next[B_IR_DONE] = 1'b0;
+792: 				state_next[B_FRAME_FAILED] = 1'b0;
+793: 				state_next[B_RED_CONTEXT_SEEN] = 1'b0;
+794: 				state_next[B_IR_CONTEXT_SEEN] = 1'b0;
+795: 				state_next[B_CAL_CONTEXT_SEEN] = 1'b0;
+796: 				state_next[B_RED_WAVE_PENDING] = 1'b0;
+797: 				state_next[B_IR_WAVE_PENDING] = 1'b0;
+798: 				state_next[B_CAL_WAVE_PENDING] = 1'b0;
+799: 				state_next[B_MACRO_START] = 1'b1;
+800: 				state_next[B_FRAME_AMB_H:B_FRAME_AMB_L] = i_amb_code;
+801: 				state_next[B_FRAME_DCR_H:B_FRAME_DCR_L] = i_dcs_r_code;
+802: 				state_next[B_FRAME_DCIR_H:B_FRAME_DCIR_L] = i_dcs_ir_code;
+803: 				state_next[B_FRAME_AMB_EPOCH_H:B_FRAME_AMB_EPOCH_L] = i_amb_code_epoch;
+804: 				state_next[B_FRAME_DCR_EPOCH_H:B_FRAME_DCR_EPOCH_L] = i_dcs_r_code_epoch;
+805: 				state_next[B_FRAME_DCIR_EPOCH_H:B_FRAME_DCIR_EPOCH_L] = i_dcs_ir_code_epoch;
+806: 				state_next[B_FRAME_LEDDAC_R_H:B_FRAME_LEDDAC_R_L] = i_leddac_r_code;
+807: 				state_next[B_FRAME_LEDDAC_IR_H:B_FRAME_LEDDAC_IR_L] = i_leddac_ir_code;
+808: 				state_next[B_CAL_CONTEXT_SEEN] = (state_current[B_CAL_REQ_PENDING] || flag_calibration_request_fire) ? 1'b0 : 1'b1;
+809: 				if(state_current[B_CAL_REQ_PENDING])begin
+810: 					state_next[B_CAL_REQ_PENDING] = 1'b0;
+811: 					state_next[B_CAL_REQ_ACTIVE] = 1'b1;
+812: 					state_next[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] = state_current[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L];
+813: 					state_next[B_CAL_FRAME_COLOR] = state_current[B_CAL_REQ_COLOR];
+814: 					state_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_current[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L];
+815: 				end else begin
+816: 					state_next[B_CAL_REQ_ACTIVE] = 1'b0;
+817: 				end
+818: 			end
+819: 			if(state_current[B_FRAME_ACTIVE])begin
+820: 				if(dec_frame_mode == FRAME_MODE_CAL && (calibration_local_tick_o == CAL_LAST_LOCAL_TICK) && state_current[B_CAL_REQ_ACTIVE] && !state_current[B_CAL_WAVE_PENDING] && !state_current[B_INFLIGHT])begin
+821: 					state_next[B_CAL_CONTEXT_SEEN] = (state_current[B_CAL_REQ_PENDING] || flag_calibration_request_fire) ? 1'b0 : 1'b1;
+822: 					state_next[B_CAL_CONTEXT_SEEN] = 1'b0;
+823: 					if(!state_current[B_CAL_REQ_PENDING] && !flag_calibration_request_fire)begin
+825: 						state_next[B_CAL_CONTEXT_SEEN] = 1'b1;
+826: 					end
+827: 					if(state_current[B_CAL_REQ_PENDING])begin
+829: 						state_next[B_CAL_REQ_PENDING] = 1'b0;
+830: 						state_next[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] = state_current[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L];
+831: 						state_next[B_CAL_FRAME_COLOR] = state_current[B_CAL_REQ_COLOR];
+832: 						state_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_current[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L];
+833: 					end
+835: 					if(state_current[B_CAL_REQ_PENDING])begin
+836: 						state_next[B_CAL_REQ_PENDING] = 1'b1;
+837: 					end
+838: 				end
+839: 			if(macro_tick_o == MACRO_LAST_TICK)begin
+840: 					if((dec_frame_mode == FRAME_MODE_NORMAL) && (dec_frame_optical_mode != OPTICAL_OFF) && !state_current[B_FRAME_FAILED] && ((!state_current[B_RED_REQUIRED] || state_current[B_RED_DONE]) && (!state_current[B_IR_REQUIRED] || state_current[B_IR_DONE])))begin
+841: 						state_next[B_NORMAL_COMPLETE] = 1'b1;
+842: 					end
+843: 					if(dec_frame_mode == FRAME_MODE_CAL)begin
+844: 						state_next[B_CAL_COMPLETE] = 1'b1;
+845: 						if(state_current[B_CAL_REQ_ACTIVE])begin
+846: 							if(state_current[B_CAL_REQ_PENDING] || state_current[B_CAL_WAVE_PENDING])begin
+847: 								state_next[B_CAL_REQ_PENDING] = 1'b1;
+848: 							end
+849: 							state_next[B_CAL_REQ_ACTIVE] = 1'b0;
+850: 						end
+851: 					end
+852: 					state_next[B_FRAME_ACTIVE] = 1'b0;
+853: 					state_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = FRAME_MODE_IDLE;
+854: 					state_next[B_FRAME_ID_H:B_FRAME_ID_L] = current_frame_id_o + {{(C_FRAME_ID_WIDTH - 1){1'b0}}, 1'b1};
+855: 					state_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = {C_MACRO_TICK_WIDTH{1'b0}};
+856: 					state_next[B_CAL_SUB_H:B_CAL_SUB_L] = 3'd0;
+857: 					state_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}};
+858: 					state_next[B_RED_CONTEXT_SEEN] = 1'b1;
+859: 					state_next[B_IR_CONTEXT_SEEN] = 1'b1;
+860: 					state_next[B_CAL_CONTEXT_SEEN] = 1'b1;
+861: 					state_next[B_RED_WAVE_PENDING] = 1'b0;
+862: 					state_next[B_IR_WAVE_PENDING] = 1'b0;
+863: 					state_next[B_CAL_WAVE_PENDING] = 1'b0;
+864: 				end else begin
+865: 					state_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = macro_tick_o + {{(C_MACRO_TICK_WIDTH - 1){1'b0}}, 1'b1};
+866: 					if(calibration_local_tick_o == CAL_LAST_LOCAL_TICK)begin
+867: 						state_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}};
+868: 						state_next[B_CAL_SUB_H:B_CAL_SUB_L] = calibration_subframe_index_o + 3'd1;
+869: 					end else begin
+870: 						state_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = calibration_local_tick_o + {{(C_CAL_TICK_WIDTH - 1){1'b0}}, 1'b1};
+871: 					end
+872: 				end
+873: 			end
+874: 		end
+875: 	end
+```
+
+### L880：state_rollover_next
+
+```text
+880: 	always @* begin
+881: 		state_rollover_next = state_next;
+882: 		if(flag_calibration_rollover)begin
+883: 			state_rollover_next[B_CAL_COMPLETE] = 1'b1;
+884: 			state_rollover_next[B_FRAME_ACTIVE] = 1'b1;
+885: 			state_rollover_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = FRAME_MODE_CAL;
+886: 			state_rollover_next[B_FRAME_ID_H:B_FRAME_ID_L] = current_frame_id_o + {{(C_FRAME_ID_WIDTH - 1){1'b0}}, 1'b1};
+887: 			state_rollover_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = {C_MACRO_TICK_WIDTH{1'b0}};
+888: 			state_rollover_next[B_CAL_SUB_H:B_CAL_SUB_L] = 3'd0;
+889: 			state_rollover_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}};
+890: 			state_rollover_next[B_CAL_CONTEXT_SEEN] = 1'b0;
+891: 			state_rollover_next[B_CAL_REQ_ACTIVE] = 1'b1;
+892: 		if(state_current[B_CAL_REQ_PENDING] == 1'b1)begin
+893: 				state_rollover_next[B_CAL_REQ_PENDING] = 1'b0;
+894: 				state_rollover_next[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] = state_current[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L];
+895: 				state_rollover_next[B_CAL_FRAME_COLOR] = state_current[B_CAL_REQ_COLOR];
+896: 				state_rollover_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_current[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L];
+897: 		end
+898: 		end else if(flag_frame_restart == 1'b1)begin
+899: 			state_rollover_next[B_FRAME_ACTIVE] = 1'b1;
+900: 			state_rollover_next[B_FRAME_MODE_H:B_FRAME_MODE_L] = state_next[B_CAL_REQ_PENDING] ? FRAME_MODE_CAL : FRAME_MODE_NORMAL;
+901: 			state_rollover_next[B_FRAME_OPTICAL_H:B_FRAME_OPTICAL_L] = i_optical_mode;
+902: 			state_rollover_next[B_FRAME_PRECISION] = state_next[B_CAL_REQ_PENDING] ? 1'b0 : i_active_precision_mode;
+903: 			state_rollover_next[B_FRAME_INPUT_SOURCE] = i_input_source;
+904: 			state_rollover_next[B_MACRO_TICK_H:B_MACRO_TICK_L] = {C_MACRO_TICK_WIDTH{1'b0}};
+905: 			state_rollover_next[B_CAL_SUB_H:B_CAL_SUB_L] = 3'd0;
+906: 			state_rollover_next[B_CAL_LOCAL_H:B_CAL_LOCAL_L] = {C_CAL_TICK_WIDTH{1'b0}};
+907: 			state_rollover_next[B_RED_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_RED);
+908: 			state_rollover_next[B_IR_REQUIRED] = (i_optical_mode == OPTICAL_BOTH) || (i_optical_mode == OPTICAL_IR);
+909: 			state_rollover_next[B_RED_DONE] = 1'b0;
+910: 			state_rollover_next[B_IR_DONE] = 1'b0;
+911: 			state_rollover_next[B_FRAME_FAILED] = 1'b0;
+912: 			state_rollover_next[B_RED_CONTEXT_SEEN] = 1'b0;
+913: 			state_rollover_next[B_IR_CONTEXT_SEEN] = 1'b0;
+914: 			state_rollover_next[B_CAL_CONTEXT_SEEN] = state_next[B_CAL_REQ_PENDING] ? 1'b0 : 1'b1;
+915: 			state_rollover_next[B_RED_WAVE_PENDING] = 1'b0;
+916: 			state_rollover_next[B_IR_WAVE_PENDING] = 1'b0;
+917: 			state_rollover_next[B_CAL_WAVE_PENDING] = 1'b0;
+918: 			state_rollover_next[B_MACRO_START] = 1'b1;
+919: 			state_rollover_next[B_FRAME_AMB_H:B_FRAME_AMB_L] = i_amb_code;
+920: 			state_rollover_next[B_FRAME_DCR_H:B_FRAME_DCR_L] = i_dcs_r_code;
+921: 			state_rollover_next[B_FRAME_DCIR_H:B_FRAME_DCIR_L] = i_dcs_ir_code;
+922: 			state_rollover_next[B_FRAME_AMB_EPOCH_H:B_FRAME_AMB_EPOCH_L] = i_amb_code_epoch;
+923: 			state_rollover_next[B_FRAME_DCR_EPOCH_H:B_FRAME_DCR_EPOCH_L] = i_dcs_r_code_epoch;
+924: 			state_rollover_next[B_FRAME_DCIR_EPOCH_H:B_FRAME_DCIR_EPOCH_L] = i_dcs_ir_code_epoch;
+925: 			state_rollover_next[B_FRAME_LEDDAC_R_H:B_FRAME_LEDDAC_R_L] = i_leddac_r_code;
+926: 			state_rollover_next[B_FRAME_LEDDAC_IR_H:B_FRAME_LEDDAC_IR_L] = i_leddac_ir_code;
+927: 			if(state_next[B_CAL_REQ_PENDING])begin
+928: 				state_rollover_next[B_CAL_REQ_PENDING] = 1'b0;
+929: 				state_rollover_next[B_CAL_REQ_ACTIVE] = 1'b1;
+930: 				state_rollover_next[B_CAL_FRAME_TYPE_H:B_CAL_FRAME_TYPE_L] = state_next[B_CAL_REQ_TYPE_H:B_CAL_REQ_TYPE_L];
+931: 				state_rollover_next[B_CAL_FRAME_COLOR] = state_next[B_CAL_REQ_COLOR];
+932: 				state_rollover_next[B_CAL_FRAME_REASON_H:B_CAL_FRAME_REASON_L] = state_next[B_CAL_REQ_REASON_H:B_CAL_REQ_REASON_L];
+933: 			end else begin
+934: 				state_rollover_next[B_CAL_REQ_ACTIVE] = 1'b0;
+935: 			end
+936: 	end
+937: 	end
+```
+
+### L941：state_current
+
+```text
+941: 	always@(posedge i_clk or negedge i_rstn)begin
+942: 		if(i_rstn == 1'b0)begin
+943: 			state_current <= {STATE_WIDTH{1'b0}};
+944: 		end else begin
+945: 			state_current <= state_rollover_next;
+946: 		end
+947: 	end
+```
+
+## 最终文末汇总
+
+(c)：V1-FSC-01（中）、02（低）、03（中，模块边界确定、系统待测）；待定：T-FSC-01～05。

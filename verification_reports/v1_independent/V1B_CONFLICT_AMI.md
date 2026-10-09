@@ -70,7 +70,7 @@ C10 §6.11要求SYSTEM_FAULT（**含本拍事件**）>ABORT>STOP，B §3.6并未
 
 系统discard来自supervisor，外部abort经Top独立寄存，可以人为对齐；没有排斥门。若仅系统fault事件到达而无即时A，measurement通常延后一拍丢弃且原因正确，故不把所有system-fault discard都报错。后果是同一终端动作的measurement/detection原因不一致，诊断误分类。复核需双路终端组合扫描。
 
-### V1-AMI-04：错配完成释放AMI owner与故障pending同沿，次拍fault身份失效（中；防御路径）
+### 待定 V1-AMI-04：错配完成释放AMI owner与故障pending同沿，次拍fault身份失效（候选严重度中；防御路径可达性未证）
 
 当C=1且`flag_adc_completion_owner_match=0`，L1638–1642登记lane03；L1818–1819却无匹配检查而释放AMI owner。下一拍dispatch03，L1206按**当前**`flag_adc_transaction_inflight`给identity_valid，L1207–1211也按当前在途位输出身份。本例已为0，故障的原owner身份被全部遮为0，虽L1682–1758仍持有原metadata。C10 §6.11要求发生故障时原子捕获FAULT_ID并在待分发期间保持，而这里只保存pending，没有lane03身份快照。
 
@@ -134,4 +134,1063 @@ AST共73个always，全为posedge i_clk/negedge i_rstn；没有组合always可�
 
 ## 6. 文末汇总
 
-(c)：V1-AMI-01（中，STOP同拍成功旁带）；V1-AMI-02（中，diag覆盖新错误）；V1-AMI-03（中，同拍system/abort原因覆盖）；V1-AMI-04（中，错配完成与故障身份保留冲突，防御路径系统可达性待测）。待定：T-AMI-01～07。这里的静态反例和历史报告中的仿真证据分开陈述，没有宣称本次运行验证闭合。
+(c)：V1-AMI-01（中，STOP同拍成功旁带）；V1-AMI-02（中，diag覆盖新错误）；V1-AMI-03（中，同拍system/abort原因覆盖）。待定：T-AMI-01～08，含V1-AMI-04条件性身份保留缺口。这里的静态反例和历史报告中的仿真证据分开陈述，没有宣称本次运行验证闭合。
+
+## 补充覆盖证据：技能AST与全部always原始顺序
+
+技能静态门禁的compile/AST均passed；compile在这里仅指formatter AST+静态lint，testbench/toolchain未请求，没有外部编译、仿真或综合。
+基线严格风格门禁：2 error(s)，1 strict warning(s)。现有源文件不修复，门禁成功也不能证明同拍功能正确。
+
+### L1235：integration_protocol_error_sticky_o
+
+```text
+1235: 	always@(posedge i_clk or negedge i_rstn)begin
+1236: 		if(i_rstn == 1'b0)begin
+1237: 			integration_protocol_error_sticky_o <= 1'b0;
+1238: 		end else if(i_diag_clear_event == 1'b1 && (flag_integration_blocking == 1'b0 || (flag_run_context_ended == 1'b1 && o_datapath_empty == 1'b1)))begin
+1239: 			integration_protocol_error_sticky_o <= 1'b0;
+1240: 		end else if(flag_router_frame_type_error == 1'b1 || flag_start_payload_changed == 1'b1 || flag_start_context_mismatch == 1'b1 || flag_calibration_result_mismatch == 1'b1 || flag_late_normal_result == 1'b1 || flag_adc_capture_without_owner == 1'b1 || flag_test_identity_inject_fire == 1'b1 || (flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1) || (i_transaction_start_valid == 1'b1 && (i_transaction_frame_type == 2'b11)))begin
+1241: 			integration_protocol_error_sticky_o <= 1'b1;
+1242: 		end
+1243: 	end
+```
+
+### L1246：adc_transaction_complete_event_o
+
+```text
+1246: 	always@(posedge i_clk or negedge i_rstn)begin
+1247: 		if(i_rstn == 1'b0)begin
+1248: 			adc_transaction_complete_event_o <= 1'b0;
+1249: 		end else if(i_start_ack_event == 1'b1)begin
+1250: 			adc_transaction_complete_event_o <= 1'b0;
+1251: 		end else if(flag_adc_completion_emit == 1'b1)begin
+1252: 			adc_transaction_complete_event_o <= 1'b1;
+1253: 		end else begin
+1254: 			adc_transaction_complete_event_o <= 1'b0;
+1255: 		end
+1256: 	end
+```
+
+### L1259：adc_transaction_success_o
+
+```text
+1259: 	always@(posedge i_clk or negedge i_rstn)begin
+1260: 		if(i_rstn == 1'b0)begin
+1261: 			adc_transaction_success_o <= 1'b0;
+1262: 		end else if(i_start_ack_event == 1'b1)begin
+1263: 			adc_transaction_success_o <= 1'b0;
+1264: 		end else if(flag_adc_completion_emit == 1'b1)begin
+1265: 			adc_transaction_success_o <= flag_adc_completion_success;
+1266: 		end else begin
+1267: 			adc_transaction_success_o <= 1'b0;
+1268: 		end
+1269: 	end
+```
+
+### L1272：adc_complete_sample_index_o
+
+```text
+1272: 	always@(posedge i_clk or negedge i_rstn)begin
+1273: 		if(i_rstn == 1'b0)begin
+1274: 			adc_complete_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1275: 		end else if(i_start_ack_event == 1'b1)begin
+1276: 			adc_complete_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1277: 		end else if(flag_adc_completion_emit == 1'b1 || flag_owner_lost_fire == 1'b1)begin
+1278: 			adc_complete_sample_index_o <= reg_adc_inflight_sample_index;
+1279: 		end
+1280: 	end
+```
+
+### L1283：adc_transaction_lost_event_o
+
+```text
+1283: 	always@(posedge i_clk or negedge i_rstn)begin
+1284: 		if(i_rstn == 1'b0)begin
+1285: 			adc_transaction_lost_event_o <= 1'b0;
+1286: 		end else if(i_start_ack_event == 1'b1)begin
+1287: 			adc_transaction_lost_event_o <= 1'b0;
+1288: 		end else begin
+1289: 			adc_transaction_lost_event_o <= flag_owner_lost_fire;
+1290: 		end
+1291: 	end
+```
+
+### L1294：owner_lost_sticky_o
+
+```text
+1294: 	always@(posedge i_clk or negedge i_rstn)begin
+1295: 		if(i_rstn == 1'b0)begin
+1296: 			owner_lost_sticky_o <= 1'b0;
+1297: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1298: 			owner_lost_sticky_o <= 1'b1;
+1299: 		end else if(i_diag_clear_event == 1'b1 && (flag_owner_lost_fault_hold == 1'b0 || flag_run_context_drained == 1'b1))begin
+1300: 			owner_lost_sticky_o <= 1'b0;
+1301: 		end
+1302: 	end
+```
+
+### L1305：result_sample_valid_o
+
+```text
+1305: 	always@(posedge i_clk or negedge i_rstn)begin
+1306: 		if(i_rstn == 1'b0)begin
+1307: 			result_sample_valid_o <= 1'b0;
+1308: 		end else if(flag_result_abort_discard == 1'b1)begin
+1309: 			result_sample_valid_o <= 1'b0;
+1310: 		end else if(flag_dc_result_transfer == 1'b1)begin
+1311: 			result_sample_valid_o <= !flag_test_invalid_sample_fire;
+1312: 		end else if(flag_measurement_transfer == 1'b1)begin
+1313: 			result_sample_valid_o <= 1'b0;
+1314: 		end
+1315: 	end
+```
+
+### L1318：measurement_result_discard_event_o
+
+```text
+1318: 	always@(posedge i_clk or negedge i_rstn)begin
+1319: 		if(i_rstn == 1'b0)begin
+1320: 			measurement_result_discard_event_o <= 1'b0;
+1321: 		end else if(i_start_ack_event == 1'b1)begin
+1322: 			measurement_result_discard_event_o <= 1'b0;
+1323: 		end else if(flag_measurement_result_discard_fire == 1'b1 || flag_owner_lost_fire == 1'b1)begin
+1324: 			measurement_result_discard_event_o <= 1'b1;
+1325: 		end else begin
+1326: 			measurement_result_discard_event_o <= 1'b0;
+1327: 		end
+1328: 	end
+```
+
+### L1331：measurement_result_discard_reason_o
+
+```text
+1331: 	always@(posedge i_clk or negedge i_rstn)begin
+1332: 		if(i_rstn == 1'b0)begin
+1333: 			measurement_result_discard_reason_o <= 2'b00;
+1334: 		end else if(i_start_ack_event == 1'b1)begin
+1335: 			measurement_result_discard_reason_o <= 2'b00;
+1336: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1337: 			measurement_result_discard_reason_o <= flag_measurement_result_discard_reason;
+1338: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1339: 			measurement_result_discard_reason_o <= DISCARD_REASON_COMPLETION_LOST;
+1340: 		end
+1341: 	end
+```
+
+### L1344：measurement_result_discard_identity_valid_o
+
+```text
+1344: 	always@(posedge i_clk or negedge i_rstn)begin
+1345: 		if(i_rstn == 1'b0)begin
+1346: 			measurement_result_discard_identity_valid_o <= 1'b0;
+1347: 		end else if(i_start_ack_event == 1'b1)begin
+1348: 			measurement_result_discard_identity_valid_o <= 1'b0;
+1349: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1350: 			measurement_result_discard_identity_valid_o <= 1'b1;
+1351: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1352: 			measurement_result_discard_identity_valid_o <= 1'b1;
+1353: 		end
+1354: 	end
+```
+
+### L1357：measurement_result_discard_sample_valid_o
+
+```text
+1357: 	always@(posedge i_clk or negedge i_rstn)begin
+1358: 		if(i_rstn == 1'b0)begin
+1359: 			measurement_result_discard_sample_valid_o <= 1'b0;
+1360: 		end else if(i_start_ack_event == 1'b1)begin
+1361: 			measurement_result_discard_sample_valid_o <= 1'b0;
+1362: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1363: 			measurement_result_discard_sample_valid_o <= result_sample_valid_o;
+1364: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1365: 			measurement_result_discard_sample_valid_o <= 1'b0;
+1366: 		end
+1367: 	end
+```
+
+### L1370：measurement_result_discard_frame_id_o
+
+```text
+1370: 	always@(posedge i_clk or negedge i_rstn)begin
+1371: 		if(i_rstn == 1'b0)begin
+1372: 			measurement_result_discard_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}};
+1373: 		end else if(i_start_ack_event == 1'b1)begin
+1374: 			measurement_result_discard_frame_id_o <= {C_FRAME_ID_WIDTH{1'b0}};
+1375: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1376: 			measurement_result_discard_frame_id_o <= result_frame_id_o;
+1377: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1378: 			measurement_result_discard_frame_id_o <= reg_adc_inflight_frame_id;
+1379: 		end
+1380: 	end
+```
+
+### L1383：measurement_result_discard_sample_index_o
+
+```text
+1383: 	always@(posedge i_clk or negedge i_rstn)begin
+1384: 		if(i_rstn == 1'b0)begin
+1385: 			measurement_result_discard_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1386: 		end else if(i_start_ack_event == 1'b1)begin
+1387: 			measurement_result_discard_sample_index_o <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1388: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1389: 			measurement_result_discard_sample_index_o <= result_sample_index_o;
+1390: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1391: 			measurement_result_discard_sample_index_o <= reg_adc_inflight_sample_index;
+1392: 		end
+1393: 	end
+```
+
+### L1396：measurement_result_discard_color_ir_o
+
+```text
+1396: 	always@(posedge i_clk or negedge i_rstn)begin
+1397: 		if(i_rstn == 1'b0)begin
+1398: 			measurement_result_discard_color_ir_o <= 1'b0;
+1399: 		end else if(i_start_ack_event == 1'b1)begin
+1400: 			measurement_result_discard_color_ir_o <= 1'b0;
+1401: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1402: 			measurement_result_discard_color_ir_o <= result_color_ir_o;
+1403: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1404: 			measurement_result_discard_color_ir_o <= reg_adc_inflight_color_ir;
+1405: 		end
+1406: 	end
+```
+
+### L1409：measurement_result_discard_frame_type_o
+
+```text
+1409: 	always@(posedge i_clk or negedge i_rstn)begin
+1410: 		if(i_rstn == 1'b0)begin
+1411: 			measurement_result_discard_frame_type_o <= 2'b00;
+1412: 		end else if(i_start_ack_event == 1'b1)begin
+1413: 			measurement_result_discard_frame_type_o <= 2'b00;
+1414: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1415: 			measurement_result_discard_frame_type_o <= result_frame_type_o;
+1416: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1417: 			measurement_result_discard_frame_type_o <= reg_adc_inflight_frame_type;
+1418: 		end
+1419: 	end
+```
+
+### L1422：measurement_result_discard_precision_o
+
+```text
+1422: 	always@(posedge i_clk or negedge i_rstn)begin
+1423: 		if(i_rstn == 1'b0)begin
+1424: 			measurement_result_discard_precision_o <= 1'b0;
+1425: 		end else if(i_start_ack_event == 1'b1)begin
+1426: 			measurement_result_discard_precision_o <= 1'b0;
+1427: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1428: 			measurement_result_discard_precision_o <= result_precision_mode_o;
+1429: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1430: 			measurement_result_discard_precision_o <= reg_adc_inflight_precision_mode;
+1431: 		end
+1432: 	end
+```
+
+### L1435：measurement_result_discard_run_generation_o
+
+```text
+1435: 	always@(posedge i_clk or negedge i_rstn)begin
+1436: 		if(i_rstn == 1'b0)begin
+1437: 			measurement_result_discard_run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}};
+1438: 		end else if(i_start_ack_event == 1'b1)begin
+1439: 			measurement_result_discard_run_generation_o <= {C_RUN_GENERATION_WIDTH{1'b0}};
+1440: 		end else if(flag_measurement_result_discard_fire == 1'b1)begin
+1441: 			measurement_result_discard_run_generation_o <= dec_fork_measurement_run_generation;
+1442: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1443: 			measurement_result_discard_run_generation_o <= i_run_generation;
+1444: 		end
+1445: 	end
+```
+
+### L1449：calibration_sample_valid_o
+
+```text
+1449: 	always@(posedge i_clk or negedge i_rstn)begin
+1450: 		if(i_rstn == 1'b0)begin
+1451: 			calibration_sample_valid_o <= 1'b0;
+1452: 		end else if(i_stop_ack_event == 1'b1 || i_control_abort_event == 1'b1 || flag_integration_blocking == 1'b1)begin
+1453: 			calibration_sample_valid_o <= 1'b0;
+1454: 		end else if(calibration_request_fire_o == 1'b1)begin
+1455: 			calibration_sample_valid_o <= 1'b0;
+1456: 		end else if(calibration_sample_valid_o == 1'b0 && flag_calibration_request_inflight == 1'b0)begin
+1457: 			if(flag_recheck_request_source == 1'b1)begin
+1458: 				calibration_sample_valid_o <= 1'b1;
+1459: 			end else if(flag_startup_request_source == 1'b1)begin
+1460: 				calibration_sample_valid_o <= 1'b1;
+1461: 			end
+1462: 		end
+1463: 	end
+```
+
+### L1466：calibration_color_ir_o
+
+```text
+1466: 	always@(posedge i_clk or negedge i_rstn)begin
+1467: 		if(i_rstn == 1'b0)begin
+1468: 			calibration_color_ir_o <= 1'b0;
+1469: 		end else if(calibration_sample_valid_o == 1'b0 && flag_calibration_request_inflight == 1'b0)begin
+1470: 			if(flag_recheck_request_source == 1'b1)begin
+1471: 				calibration_color_ir_o <= flag_precision_calibration_color_ir;
+1472: 			end else if(flag_startup_request_source == 1'b1)begin
+1473: 				calibration_color_ir_o <= flag_startup_request_color_ir;
+1474: 			end
+1475: 		end
+1476: 	end
+```
+
+### L1479：calibration_frame_type_o
+
+```text
+1479: 	always@(posedge i_clk or negedge i_rstn)begin
+1480: 		if(i_rstn == 1'b0)begin
+1481: 			calibration_frame_type_o <= FRAME_TYPE_AMB;
+1482: 		end else if(calibration_sample_valid_o == 1'b0 && flag_calibration_request_inflight == 1'b0)begin
+1483: 			if(flag_recheck_request_source == 1'b1)begin
+1484: 				calibration_frame_type_o <= dec_precision_calibration_frame_type;
+1485: 			end else if(flag_startup_request_source == 1'b1)begin
+1486: 				calibration_frame_type_o <= flag_startup_request_frame_type;
+1487: 			end
+1488: 		end
+1489: 	end
+```
+
+### L1492：calibration_request_reason_o
+
+```text
+1492: 	always@(posedge i_clk or negedge i_rstn)begin
+1493: 		if(i_rstn == 1'b0)begin
+1494: 			calibration_request_reason_o <= REASON_STARTUP;
+1495: 		end else if(calibration_sample_valid_o == 1'b0 && flag_calibration_request_inflight == 1'b0)begin
+1496: 			if(flag_recheck_request_source == 1'b1)begin
+1497: 				calibration_request_reason_o <= REASON_RECHECK;
+1498: 			end else if(flag_startup_request_source == 1'b1)begin
+1499: 				calibration_request_reason_o <= REASON_STARTUP;
+1500: 			end
+1501: 		end
+1502: 	end
+```
+
+### L1507：flag_system_fault_discard_pending
+
+```text
+1507: 	always@(posedge i_clk or negedge i_rstn)begin
+1508: 		if(i_rstn == 1'b0)begin
+1509: 			flag_system_fault_discard_pending <= 1'b0;
+1510: 		end else if(i_system_fault_discard_event == 1'b1)begin
+1511: 			flag_system_fault_discard_pending <= 1'b1;
+1512: 		end else if(o_datapath_empty == 1'b1)begin
+1513: 			flag_system_fault_discard_pending <= 1'b0;
+1514: 		end
+1515: 	end
+```
+
+### L1518：cnt_owner_age
+
+```text
+1518: 	always@(posedge i_clk or negedge i_rstn)begin
+1519: 		if(i_rstn == 1'b0)begin
+1520: 			cnt_owner_age <= 16'd0;
+1521: 		end else if(o_transaction_start_fire == 1'b1)begin
+1522: 			cnt_owner_age <= 16'd0;
+1523: 		end else if(flag_adc_transaction_inflight == 1'b1 && cnt_owner_age < ADC_BUSY_FAULT_CYCLES)begin
+1524: 			cnt_owner_age <= cnt_owner_age + 16'd1;
+1525: 		end
+1526: 	end
+```
+
+### L1529：cnt_lost_red
+
+```text
+1529: 	always@(posedge i_clk or negedge i_rstn)begin
+1530: 		if(i_rstn == 1'b0)begin
+1531: 			cnt_lost_red <= 4'd0;
+1532: 		end else if(i_start_ack_event == 1'b1)begin
+1533: 			cnt_lost_red <= 4'd0;
+1534: 		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_red == 1'b1)begin
+1535: 			cnt_lost_red <= 4'd0;
+1536: 		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_red == 1'b1 && cnt_lost_red < C_ADC_COMPLETION_LOST_LIMIT)begin
+1537: 			cnt_lost_red <= cnt_lost_red + 4'd1;
+1538: 		end
+1539: 	end
+```
+
+### L1542：cnt_lost_ir
+
+```text
+1542: 	always@(posedge i_clk or negedge i_rstn)begin
+1543: 		if(i_rstn == 1'b0)begin
+1544: 			cnt_lost_ir <= 4'd0;
+1545: 		end else if(i_start_ack_event == 1'b1)begin
+1546: 			cnt_lost_ir <= 4'd0;
+1547: 		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_ir == 1'b1)begin
+1548: 			cnt_lost_ir <= 4'd0;
+1549: 		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_ir == 1'b1 && cnt_lost_ir < C_ADC_COMPLETION_LOST_LIMIT)begin
+1550: 			cnt_lost_ir <= cnt_lost_ir + 4'd1;
+1551: 		end
+1552: 	end
+```
+
+### L1555：cnt_lost_cal
+
+```text
+1555: 	always@(posedge i_clk or negedge i_rstn)begin
+1556: 		if(i_rstn == 1'b0)begin
+1557: 			cnt_lost_cal <= 4'd0;
+1558: 		end else if(i_start_ack_event == 1'b1)begin
+1559: 			cnt_lost_cal <= 4'd0;
+1560: 		end else if(flag_owner_alive_completion == 1'b1 && flag_owner_slot_cal == 1'b1)begin
+1561: 			cnt_lost_cal <= 4'd0;
+1562: 		end else if(flag_owner_lost_fire == 1'b1 && flag_owner_slot_cal == 1'b1 && cnt_lost_cal < C_ADC_COMPLETION_LOST_LIMIT)begin
+1563: 			cnt_lost_cal <= cnt_lost_cal + 4'd1;
+1564: 		end
+1565: 	end
+```
+
+### L1568：flag_owner_lost_fault_hold
+
+```text
+1568: 	always@(posedge i_clk or negedge i_rstn)begin
+1569: 		if(i_rstn == 1'b0)begin
+1570: 			flag_owner_lost_fault_hold <= 1'b0;
+1571: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1572: 			flag_owner_lost_fault_hold <= 1'b0;
+1573: 		end else if(flag_owner_lost_limit_reached == 1'b1)begin
+1574: 			flag_owner_lost_fault_hold <= 1'b1;
+1575: 		end else if(flag_run_context_drained == 1'b1)begin
+1576: 			flag_owner_lost_fault_hold <= 1'b0;
+1577: 		end
+1578: 	end
+```
+
+### L1581：flag_adc_busy_fault_hold
+
+```text
+1581: 	always@(posedge i_clk or negedge i_rstn)begin
+1582: 		if(i_rstn == 1'b0)begin
+1583: 			flag_adc_busy_fault_hold <= 1'b0;
+1584: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1585: 			flag_adc_busy_fault_hold <= 1'b0;
+1586: 		end else if(flag_adc_busy_fault_fire == 1'b1)begin
+1587: 			flag_adc_busy_fault_hold <= 1'b1;
+1588: 		end else if(flag_run_context_drained == 1'b1)begin
+1589: 			flag_adc_busy_fault_hold <= 1'b0;
+1590: 		end
+1591: 	end
+```
+
+### L1594：flag_ami_fault_pending_06
+
+```text
+1594: 	always@(posedge i_clk or negedge i_rstn)begin
+1595: 		if(i_rstn == 1'b0)begin
+1596: 			flag_ami_fault_pending_06 <= 1'b0;
+1597: 		end else if(flag_owner_lost_limit_reached == 1'b1)begin
+1598: 			flag_ami_fault_pending_06 <= 1'b1;
+1599: 		end else if(flag_ami_fault_dispatch_06 == 1'b1)begin
+1600: 			flag_ami_fault_pending_06 <= 1'b0;
+1601: 		end
+1602: 	end
+```
+
+### L1605：flag_ami_fault_pending_07
+
+```text
+1605: 	always@(posedge i_clk or negedge i_rstn)begin
+1606: 		if(i_rstn == 1'b0)begin
+1607: 			flag_ami_fault_pending_07 <= 1'b0;
+1608: 		end else if(flag_adc_busy_fault_fire == 1'b1)begin
+1609: 			flag_ami_fault_pending_07 <= 1'b1;
+1610: 		end else if(flag_ami_fault_dispatch_07 == 1'b1)begin
+1611: 			flag_ami_fault_pending_07 <= 1'b0;
+1612: 		end
+1613: 	end
+```
+
+### L1616：flag_ami_fault_pending_01
+
+```text
+1616: 	always@(posedge i_clk or negedge i_rstn)begin
+1617: 		if(i_rstn == 1'b0)begin
+1618: 			flag_ami_fault_pending_01 <= 1'b0;
+1619: 		end else if(flag_test_identity_inject_fire == 1'b1)begin
+1620: 			flag_ami_fault_pending_01 <= 1'b1;
+1621: 		end else if(flag_ami_fault_dispatch_01 == 1'b1)begin
+1622: 			flag_ami_fault_pending_01 <= 1'b0;
+1623: 		end
+1624: 	end
+```
+
+### L1627：flag_ami_fault_pending_02
+
+```text
+1627: 	always@(posedge i_clk or negedge i_rstn)begin
+1628: 		if(i_rstn == 1'b0)begin
+1629: 			flag_ami_fault_pending_02 <= 1'b0;
+1630: 		end else if(flag_calibration_result_mismatch == 1'b1 || flag_adc_capture_without_owner == 1'b1 || (i_transaction_start_valid == 1'b1 && ((i_transaction_frame_type == FRAME_TYPE_AMB) || (i_transaction_frame_type == FRAME_TYPE_DCS)) && flag_calibration_start_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1))begin
+1631: 			flag_ami_fault_pending_02 <= 1'b1;
+1632: 		end else if(flag_ami_fault_dispatch_02 == 1'b1)begin
+1633: 			flag_ami_fault_pending_02 <= 1'b0;
+1634: 		end
+1635: 	end
+```
+
+### L1638：flag_ami_fault_pending_03
+
+```text
+1638: 	always@(posedge i_clk or negedge i_rstn)begin
+1639: 		if(i_rstn == 1'b0)begin
+1640: 			flag_ami_fault_pending_03 <= 1'b0;
+1641: 		end else if(flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0)begin
+1642: 			flag_ami_fault_pending_03 <= 1'b1;
+1643: 		end else if(flag_ami_fault_dispatch_03 == 1'b1)begin
+1644: 			flag_ami_fault_pending_03 <= 1'b0;
+1645: 		end
+1646: 	end
+```
+
+### L1649：flag_ami_fault_pending_04
+
+```text
+1649: 	always@(posedge i_clk or negedge i_rstn)begin
+1650: 		if(i_rstn == 1'b0)begin
+1651: 			flag_ami_fault_pending_04 <= 1'b0;
+1652: 		end else if(flag_precision_fault_event == 1'b1)begin
+1653: 			flag_ami_fault_pending_04 <= 1'b1;
+1654: 		end else if(flag_ami_fault_dispatch_04 == 1'b1)begin
+1655: 			flag_ami_fault_pending_04 <= 1'b0;
+1656: 		end
+1657: 	end
+```
+
+### L1660：flag_ami_fault_pending_05
+
+```text
+1660: 	always@(posedge i_clk or negedge i_rstn)begin
+1661: 		if(i_rstn == 1'b0)begin
+1662: 			flag_ami_fault_pending_05 <= 1'b0;
+1663: 		end else if(flag_idac_fault_event == 1'b1)begin
+1664: 			flag_ami_fault_pending_05 <= 1'b1;
+1665: 		end else if(flag_ami_fault_dispatch_05 == 1'b1)begin
+1666: 			flag_ami_fault_pending_05 <= 1'b0;
+1667: 		end
+1668: 	end
+```
+
+### L1671：flag_detection_discard_episode_active
+
+```text
+1671: 	always@(posedge i_clk or negedge i_rstn)begin
+1672: 		if(i_rstn == 1'b0)begin
+1673: 			flag_detection_discard_episode_active <= 1'b0;
+1674: 		end else if(flag_detection_discard_trigger == 1'b1)begin
+1675: 			flag_detection_discard_episode_active <= 1'b1;
+1676: 		end else if(flag_pwi_detection_datapath_empty == 1'b1)begin
+1677: 			flag_detection_discard_episode_active <= 1'b0;
+1678: 		end
+1679: 	end
+```
+
+### L1682：reg_adc_inflight_sample_index
+
+```text
+1682: 	always@(posedge i_clk or negedge i_rstn)begin
+1683: 		if(i_rstn == 1'b0)begin
+1684: 			reg_adc_inflight_sample_index <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1685: 		end else if(o_transaction_start_fire == 1'b1)begin
+1686: 			reg_adc_inflight_sample_index <= i_transaction_sample_index;
+1687: 		end
+1688: 	end
+```
+
+### L1691：reg_adc_inflight_precision_mode
+
+```text
+1691: 	always@(posedge i_clk or negedge i_rstn)begin
+1692: 		if(i_rstn == 1'b0)begin
+1693: 			reg_adc_inflight_precision_mode <= 1'b0;
+1694: 		end else if(o_transaction_start_fire == 1'b1)begin
+1695: 			reg_adc_inflight_precision_mode <= i_transaction_precision_mode;
+1696: 		end
+1697: 	end
+```
+
+### L1700：reg_adc_inflight_frame_id
+
+```text
+1700: 	always@(posedge i_clk or negedge i_rstn)begin
+1701: 		if(i_rstn == 1'b0)begin
+1702: 			reg_adc_inflight_frame_id <= {C_FRAME_ID_WIDTH{1'b0}};
+1703: 		end else if(o_transaction_start_fire == 1'b1)begin
+1704: 			reg_adc_inflight_frame_id <= i_transaction_frame_id;
+1705: 		end
+1706: 	end
+```
+
+### L1709：reg_adc_inflight_color_ir
+
+```text
+1709: 	always@(posedge i_clk or negedge i_rstn)begin
+1710: 		if(i_rstn == 1'b0)begin
+1711: 			reg_adc_inflight_color_ir <= 1'b0;
+1712: 		end else if(o_transaction_start_fire == 1'b1)begin
+1713: 			reg_adc_inflight_color_ir <= i_transaction_color_ir;
+1714: 		end
+1715: 	end
+```
+
+### L1718：reg_adc_inflight_frame_type
+
+```text
+1718: 	always@(posedge i_clk or negedge i_rstn)begin
+1719: 		if(i_rstn == 1'b0)begin
+1720: 			reg_adc_inflight_frame_type <= FRAME_TYPE_AMB;
+1721: 		end else if(o_transaction_start_fire == 1'b1)begin
+1722: 			reg_adc_inflight_frame_type <= i_transaction_frame_type;
+1723: 		end
+1724: 	end
+```
+
+### L1727：reg_adc_inflight_amb_code
+
+```text
+1727: 	always@(posedge i_clk or negedge i_rstn)begin
+1728: 		if(i_rstn == 1'b0)begin
+1729: 			reg_adc_inflight_amb_code <= {C_IDAC_CODE_WIDTH{1'b0}};
+1730: 		end else if(o_transaction_start_fire == 1'b1)begin
+1731: 			reg_adc_inflight_amb_code <= i_transaction_amb_code_snapshot;
+1732: 		end
+1733: 	end
+```
+
+### L1736：reg_adc_inflight_dc_code
+
+```text
+1736: 	always@(posedge i_clk or negedge i_rstn)begin
+1737: 		if(i_rstn == 1'b0)begin
+1738: 			reg_adc_inflight_dc_code <= {C_IDAC_CODE_WIDTH{1'b0}};
+1739: 		end else if(o_transaction_start_fire == 1'b1)begin
+1740: 			reg_adc_inflight_dc_code <= i_transaction_dc_code_snapshot;
+1741: 		end
+1742: 	end
+```
+
+### L1745：reg_adc_inflight_amb_epoch
+
+```text
+1745: 	always@(posedge i_clk or negedge i_rstn)begin
+1746: 		if(i_rstn == 1'b0)begin
+1747: 			reg_adc_inflight_amb_epoch <= {C_CODE_EPOCH_WIDTH{1'b0}};
+1748: 		end else if(o_transaction_start_fire == 1'b1)begin
+1749: 			reg_adc_inflight_amb_epoch <= i_transaction_amb_code_epoch;
+1750: 		end
+1751: 	end
+```
+
+### L1754：reg_adc_inflight_dc_epoch
+
+```text
+1754: 	always@(posedge i_clk or negedge i_rstn)begin
+1755: 		if(i_rstn == 1'b0)begin
+1756: 			reg_adc_inflight_dc_epoch <= {C_CODE_EPOCH_WIDTH{1'b0}};
+1757: 		end else if(o_transaction_start_fire == 1'b1)begin
+1758: 			reg_adc_inflight_dc_epoch <= i_transaction_dc_code_epoch;
+1759: 		end
+1760: 	end
+```
+
+### L1763：flag_test_identity_hold
+
+```text
+1763: 	always@(posedge i_clk or negedge i_rstn)begin
+1764: 		if(i_rstn == 1'b0)begin
+1765: 			flag_test_identity_hold <= 1'b0;
+1766: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1767: 			flag_test_identity_hold <= 1'b0;
+1768: 		end else if(flag_test_identity_inject_fire == 1'b1)begin
+1769: 			flag_test_identity_hold <= 1'b1;
+1770: 		end else if(flag_run_context_drained == 1'b1)begin
+1771: 			flag_test_identity_hold <= 1'b0;
+1772: 		end
+1773: 	end
+```
+
+### L1776：flag_owner_protocol_fault_hold
+
+```text
+1776: 	always@(posedge i_clk or negedge i_rstn)begin
+1777: 		if(i_rstn == 1'b0)begin
+1778: 			flag_owner_protocol_fault_hold <= 1'b0;
+1779: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1780: 			flag_owner_protocol_fault_hold <= 1'b0;
+1781: 		end else if(flag_calibration_result_mismatch == 1'b1 || flag_adc_capture_without_owner == 1'b1 || (i_transaction_start_valid == 1'b1 && ((i_transaction_frame_type == FRAME_TYPE_AMB) || (i_transaction_frame_type == FRAME_TYPE_DCS)) && flag_calibration_start_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1))begin
+1782: 			flag_owner_protocol_fault_hold <= 1'b1;
+1783: 		end else if(flag_run_context_drained == 1'b1)begin
+1784: 			flag_owner_protocol_fault_hold <= 1'b0;
+1785: 		end
+1786: 	end
+```
+
+### L1789：flag_recovery_context_fault_hold
+
+```text
+1789: 	always@(posedge i_clk or negedge i_rstn)begin
+1790: 		if(i_rstn == 1'b0)begin
+1791: 			flag_recovery_context_fault_hold <= 1'b0;
+1792: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1793: 			flag_recovery_context_fault_hold <= 1'b0;
+1794: 		end else if(flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0)begin
+1795: 			flag_recovery_context_fault_hold <= 1'b1;
+1796: 		end else if(flag_run_context_drained == 1'b1)begin
+1797: 			flag_recovery_context_fault_hold <= 1'b0;
+1798: 		end
+1799: 	end
+```
+
+### L1802：flag_adc_completion_pending
+
+```text
+1802: 	always@(posedge i_clk or negedge i_rstn)begin
+1803: 		if(i_rstn == 1'b0)begin
+1804: 			flag_adc_completion_pending <= 1'b0;
+1805: 		end else if(flag_adc_completion_emit == 1'b1)begin
+1806: 			flag_adc_completion_pending <= 1'b0;
+1807: 		end else if(flag_adc_capture_transfer == 1'b1 && flag_adc_transaction_inflight == 1'b1)begin
+1808: 			flag_adc_completion_pending <= 1'b1;
+1809: 		end
+1810: 	end
+```
+
+### L1813：flag_adc_transaction_inflight
+
+```text
+1813: 	always@(posedge i_clk or negedge i_rstn)begin
+1814: 		if(i_rstn == 1'b0)begin
+1815: 			flag_adc_transaction_inflight <= 1'b0;
+1816: 		end else if(o_transaction_start_fire == 1'b1)begin
+1817: 			flag_adc_transaction_inflight <= 1'b1;
+1818: 		end else if(flag_adc_completion_emit == 1'b1)begin
+1819: 			flag_adc_transaction_inflight <= 1'b0;
+1820: 		end else if(flag_owner_lost_fire == 1'b1)begin
+1821: 			flag_adc_transaction_inflight <= 1'b0;
+1822: 		end
+1823: 	end
+```
+
+### L1826：flag_adc_transaction_abort
+
+```text
+1826: 	always@(posedge i_clk or negedge i_rstn)begin
+1827: 		if(i_rstn == 1'b0)begin
+1828: 			flag_adc_transaction_abort <= 1'b0;
+1829: 		end else if(o_transaction_start_fire == 1'b1 || flag_adc_completion_emit == 1'b1 || flag_owner_lost_fire == 1'b1)begin
+1830: 			flag_adc_transaction_abort <= 1'b0;
+1831: 		end else if(i_control_abort_event == 1'b1 && (flag_adc_transaction_inflight == 1'b1 || flag_adc_completion_pending == 1'b1))begin
+1832: 			flag_adc_transaction_abort <= 1'b1;
+1833: 		end
+1834: 	end
+```
+
+### L1837：flag_held_start_valid
+
+```text
+1837: 	always@(posedge i_clk or negedge i_rstn)begin
+1838: 		if(i_rstn == 1'b0)begin
+1839: 			flag_held_start_valid <= 1'b0;
+1840: 		end else if(i_transaction_start_valid == 1'b0 || o_transaction_start_fire == 1'b1)begin
+1841: 			flag_held_start_valid <= 1'b0;
+1842: 		end else if(o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1843: 			flag_held_start_valid <= 1'b1;
+1844: 		end
+1845: 	end
+```
+
+### L1848：reg_held_start_amb_code
+
+```text
+1848: 	always@(posedge i_clk or negedge i_rstn)begin
+1849: 		if(i_rstn == 1'b0)begin
+1850: 			reg_held_start_amb_code <= {C_IDAC_CODE_WIDTH{1'b0}};
+1851: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1852: 			reg_held_start_amb_code <= i_transaction_amb_code_snapshot;
+1853: 		end
+1854: 	end
+```
+
+### L1857：reg_held_start_amb_epoch
+
+```text
+1857: 	always@(posedge i_clk or negedge i_rstn)begin
+1858: 		if(i_rstn == 1'b0)begin
+1859: 			reg_held_start_amb_epoch <= {C_CODE_EPOCH_WIDTH{1'b0}};
+1860: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1861: 			reg_held_start_amb_epoch <= i_transaction_amb_code_epoch;
+1862: 		end
+1863: 	end
+```
+
+### L1866：reg_held_start_color_ir
+
+```text
+1866: 	always@(posedge i_clk or negedge i_rstn)begin
+1867: 		if(i_rstn == 1'b0)begin
+1868: 			reg_held_start_color_ir <= 1'b0;
+1869: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1870: 			reg_held_start_color_ir <= i_transaction_color_ir;
+1871: 		end
+1872: 	end
+```
+
+### L1875：reg_held_start_dc_code
+
+```text
+1875: 	always@(posedge i_clk or negedge i_rstn)begin
+1876: 		if(i_rstn == 1'b0)begin
+1877: 			reg_held_start_dc_code <= {C_IDAC_CODE_WIDTH{1'b0}};
+1878: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1879: 			reg_held_start_dc_code <= i_transaction_dc_code_snapshot;
+1880: 		end
+1881: 	end
+```
+
+### L1884：reg_held_start_dc_epoch
+
+```text
+1884: 	always@(posedge i_clk or negedge i_rstn)begin
+1885: 		if(i_rstn == 1'b0)begin
+1886: 			reg_held_start_dc_epoch <= {C_CODE_EPOCH_WIDTH{1'b0}};
+1887: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1888: 			reg_held_start_dc_epoch <= i_transaction_dc_code_epoch;
+1889: 		end
+1890: 	end
+```
+
+### L1893：reg_held_start_frame_id
+
+```text
+1893: 	always@(posedge i_clk or negedge i_rstn)begin
+1894: 		if(i_rstn == 1'b0)begin
+1895: 			reg_held_start_frame_id <= {C_FRAME_ID_WIDTH{1'b0}};
+1896: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1897: 			reg_held_start_frame_id <= i_transaction_frame_id;
+1898: 		end
+1899: 	end
+```
+
+### L1902：reg_held_start_frame_type
+
+```text
+1902: 	always@(posedge i_clk or negedge i_rstn)begin
+1903: 		if(i_rstn == 1'b0)begin
+1904: 			reg_held_start_frame_type <= 2'b00;
+1905: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1906: 			reg_held_start_frame_type <= i_transaction_frame_type;
+1907: 		end
+1908: 	end
+```
+
+### L1911：reg_held_start_precision
+
+```text
+1911: 	always@(posedge i_clk or negedge i_rstn)begin
+1912: 		if(i_rstn == 1'b0)begin
+1913: 			reg_held_start_precision <= 1'b0;
+1914: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1915: 			reg_held_start_precision <= i_transaction_precision_mode;
+1916: 		end
+1917: 	end
+```
+
+### L1920：reg_held_start_sample_index
+
+```text
+1920: 	always@(posedge i_clk or negedge i_rstn)begin
+1921: 		if(i_rstn == 1'b0)begin
+1922: 			reg_held_start_sample_index <= {C_SAMPLE_INDEX_WIDTH{1'b0}};
+1923: 		end else if(i_transaction_start_valid == 1'b1 && o_transaction_start_ready == 1'b0 && flag_held_start_valid == 1'b0)begin
+1924: 			reg_held_start_sample_index <= i_transaction_sample_index;
+1925: 		end
+1926: 	end
+```
+
+### L1929：flag_integration_blocking
+
+```text
+1929: 	always@(posedge i_clk or negedge i_rstn)begin
+1930: 		if(i_rstn == 1'b0)begin
+1931: 			flag_integration_blocking <= 1'b0;
+1932: 		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
+1933: 			flag_integration_blocking <= 1'b0;
+1934: 		end else if(flag_test_identity_inject_fire == 1'b1 || flag_calibration_result_mismatch == 1'b1 || flag_adc_capture_without_owner == 1'b1 || (flag_adc_completion_emit == 1'b1 && flag_adc_completion_owner_match == 1'b0) || (i_transaction_start_valid == 1'b1 && ((i_transaction_frame_type == FRAME_TYPE_AMB) || (i_transaction_frame_type == FRAME_TYPE_DCS)) && flag_calibration_start_match == 1'b0) || (flag_startup_request_source == 1'b1 && flag_recheck_request_source == 1'b1))begin
+1935: 			flag_integration_blocking <= 1'b1;
+1936: 		end
+1937: 	end
+```
+
+### L1940：flag_run_context_ended
+
+```text
+1940: 	always@(posedge i_clk or negedge i_rstn)begin
+1941: 		if(i_rstn == 1'b0)begin
+1942: 			flag_run_context_ended <= 1'b1;
+1943: 		end else if(i_start_ack_event == 1'b1)begin
+1944: 			flag_run_context_ended <= 1'b0;
+1945: 		end else if(i_stop_ack_event == 1'b1)begin
+1946: 			flag_run_context_ended <= 1'b1;
+1947: 		end
+1948: 	end
+```
+
+### L1951：reg_result_fork_payload
+
+```text
+1951: 	always@(posedge i_clk or negedge i_rstn)begin
+1952: 		if(i_rstn == 1'b0)begin
+1953: 			reg_result_fork_payload <= {FORK_PAYLOAD_WIDTH{1'b0}};
+1954: 		end else if(i_start_ack_event == 1'b1 || (i_control_abort_event == 1'b1 && o_measurement_output_idle == 1'b1))begin
+1955: 			reg_result_fork_payload <= {FORK_PAYLOAD_WIDTH{1'b0}};
+1956: 		end else if(flag_dc_result_transfer == 1'b1)begin
+1957: 			reg_result_fork_payload <= enc_dc_result_payload;
+1958: 		end
+1959: 	end
+```
+
+### L1962：flag_detection_pending
+
+```text
+1962: 	always@(posedge i_clk or negedge i_rstn)begin
+1963: 		if(i_rstn == 1'b0)begin
+1964: 			flag_detection_pending <= 1'b0;
+1965: 		end else if(flag_result_abort_discard == 1'b1)begin
+1966: 			flag_detection_pending <= 1'b0;
+1967: 		end else if(flag_dc_result_transfer == 1'b1 && normal_output_inhibit_o == 1'b0)begin
+1968: 			flag_detection_pending <= 1'b1;
+1969: 		end else if(flag_detection_transfer == 1'b1)begin
+1970: 			flag_detection_pending <= 1'b0;
+1971: 		end
+1972: 	end
+```
+
+### L1976：flag_detection_branch_sample_valid
+
+```text
+1976: 	always@(posedge i_clk or negedge i_rstn)begin
+1977: 		if(i_rstn == 1'b0)begin
+1978: 			flag_detection_branch_sample_valid <= 1'b0;
+1979: 		end else if(flag_result_abort_discard == 1'b1)begin
+1980: 			flag_detection_branch_sample_valid <= 1'b0;
+1981: 		end else if(flag_dc_result_transfer == 1'b1)begin
+1982: 			flag_detection_branch_sample_valid <= !flag_test_invalid_sample_fire;
+1983: 		end else if(flag_detection_transfer == 1'b1)begin
+1984: 			flag_detection_branch_sample_valid <= 1'b0;
+1985: 		end
+1986: 	end
+```
+
+### L1989：flag_measurement_pending
+
+```text
+1989: 	always@(posedge i_clk or negedge i_rstn)begin
+1990: 		if(i_rstn == 1'b0)begin
+1991: 			flag_measurement_pending <= 1'b0;
+1992: 		end else if(flag_result_abort_discard == 1'b1)begin
+1993: 			flag_measurement_pending <= 1'b0;
+1994: 		end else if(flag_dc_result_transfer == 1'b1 && normal_output_inhibit_o == 1'b0)begin
+1995: 			flag_measurement_pending <= 1'b1;
+1996: 		end else if(flag_measurement_transfer == 1'b1)begin
+1997: 			flag_measurement_pending <= 1'b0;
+1998: 		end
+1999: 	end
+```
+
+### L2002：flag_abort_draining
+
+```text
+2002: 	always@(posedge i_clk or negedge i_rstn)begin
+2003: 		if(i_rstn == 1'b0)begin
+2004: 			flag_abort_draining <= 1'b0;
+2005: 		end else if(i_start_ack_event == 1'b1)begin
+2006: 			flag_abort_draining <= 1'b0;
+2007: 		end else if(i_control_abort_event == 1'b1)begin
+2008: 			flag_abort_draining <= 1'b1;
+2009: 		end else if(o_adc_chain_idle == 1'b1 && o_normal_fork_idle == 1'b1 && o_measurement_output_idle == 1'b1)begin
+2010: 			flag_abort_draining <= 1'b0;
+2011: 		end
+2012: 	end
+```
+
+### L2015：flag_calibration_request_inflight
+
+```text
+2015: 	always@(posedge i_clk or negedge i_rstn)begin
+2016: 		if(i_rstn == 1'b0)begin
+2017: 			flag_calibration_request_inflight <= 1'b0;
+2018: 		end else if(i_stop_ack_event == 1'b1 || i_control_abort_event == 1'b1 || flag_integration_blocking == 1'b1)begin
+2019: 			flag_calibration_request_inflight <= 1'b0;
+2020: 		end else if(flag_amb_sample_accepted == 1'b1 || flag_dcs_sample_accepted == 1'b1 || flag_calibration_request_withdraw == 1'b1)begin
+2021: 			flag_calibration_request_inflight <= 1'b0;
+2022: 		end else if(calibration_request_fire_o == 1'b1)begin
+2023: 			flag_calibration_request_inflight <= 1'b1;
+2024: 		end
+2025: 	end
+```
+
+### L2028：reg_inflight_color_ir
+
+```text
+2028: 	always@(posedge i_clk or negedge i_rstn)begin
+2029: 		if(i_rstn == 1'b0)begin
+2030: 			reg_inflight_color_ir <= 1'b0;
+2031: 		end else if(calibration_request_fire_o == 1'b1)begin
+2032: 			reg_inflight_color_ir <= calibration_color_ir_o;
+2033: 		end
+2034: 	end
+```
+
+### L2037：reg_inflight_frame_type
+
+```text
+2037: 	always@(posedge i_clk or negedge i_rstn)begin
+2038: 		if(i_rstn == 1'b0)begin
+2039: 			reg_inflight_frame_type <= FRAME_TYPE_AMB;
+2040: 		end else if(calibration_request_fire_o == 1'b1)begin
+2041: 			reg_inflight_frame_type <= calibration_frame_type_o;
+2042: 		end
+2043: 	end
+```
+
+### L2046：reg_inflight_reason
+
+```text
+2046: 	always@(posedge i_clk or negedge i_rstn)begin
+2047: 		if(i_rstn == 1'b0)begin
+2048: 			reg_inflight_reason <= REASON_STARTUP;
+2049: 		end else if(calibration_request_fire_o == 1'b1)begin
+2050: 			reg_inflight_reason <= calibration_request_reason_o;
+2051: 		end
+2052: 	end
+```
+
+### L2057：flag_stop_result_draining
+
+```text
+2057: 	always@(posedge i_clk or negedge i_rstn)begin
+2058: 		if(i_rstn == 1'b0)begin
+2059: 			flag_stop_result_draining <= 1'b0;
+2060: 		end else if(i_start_ack_event == 1'b1)begin
+2061: 			flag_stop_result_draining <= 1'b0;
+2062: 		end else if(i_stop_ack_event == 1'b1)begin
+2063: 			flag_stop_result_draining <= 1'b1;
+2064: 		end
+2065: 	end
+```
+
+### T-AMI-08：lane03错配完成的上游可达性收窄
+
+后续逐路核对：正常S1由同一个fire锁存metadata，保护identity注入在flag_adc_completion_normal_emit中被显式屏蔽，随后受控abort又重放原身份。因此不能用注入错配证明V1-AMI-04的C且!owner_match。该条件下next-cycle身份失效的RTL推导成立，但需要真实可达的metadata/precision错配来源，或明确将内部状态故障列入验证范围；本次未证明生产可达，最终列待定，不计新增已确认系统缺陷。
+
+## 最终文末汇总
+
+(c)：V1-AMI-01～03（中）；V1-AMI-04是防御条件下的身份保留缺口，正常metadata链和保护注入尚未证明可达，按T-AMI-08保留待定。待定：T-AMI-01～08。
