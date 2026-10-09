@@ -17,7 +17,7 @@
 | PWI（C18） | `V1_CONFLICT_PWI.md` | 已完成：(c) 0项 |
 | SPI寄存器文件（芯片顶层合同） | `V1_CONFLICT_SPI.md` | 已完成：本模块(c) 0项；系统级见MGR-C2/C3、SCH-C3 |
 | 冗余校正器（C10/OLR §2.2） | `V1_CONFLICT_RDC.md` | 已完成：(c) 0项 |
-| control_top（C01） | `V1_CONFLICT_TOP.md` | 当前 |
+| control_top（C01） | `V1_CONFLICT_TOP.md` | 已完成：TOP-C1/C2为MGR-C2/C3的根因，不重复计数 |
 
 ## 跨模块遗留：已全部在AMI文件§3结案
 - V1-SCH-C3（START×abort）：调度器与AMI按START处理，SSW按abort处理，三模块不一致，维持低级别。
@@ -26,3 +26,11 @@
 
 ## 状态
 三个模块全部完成。(c)类合计16项：高1（V1-SSW-C1）、中2（V1-SCH-C1、V1-AMI-C1）、低12、无可观测1；待定：V1-SSW-P1（模拟后果）。
+
+## 第二批状态（9个模块全部完成）
+新增(c)类10项，按编号去重（TOP-C1/C2与MGR-C2/C3同根，不重复计数）：
+- 中：V1-MGR-C1（`o_stop_episode_active`在“重复STOP × STOPPING完成”同拍后卡1，下一RUN中长时间ADC忙会误触发看门狗0x31）；
+- 低：V1-MGR-C2、V1-MGR-C3、V1-IDAC-C1、V1-IDAC-C2、V1-PWC-C1、V1-PWC-C2；
+- 无可观测：V1-PWC-C3。
+supervisor、重检调度器、PWI、SPI、冗余校正器自身0项。
+两批合计(c)类：高1、中3、低18、无可观测2（共24项）；待定：V1-SSW-P1。
