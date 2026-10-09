@@ -94,4 +94,4 @@ python tools/b_merge_tools/regression_evidence.py export $R verification_reports
      bash tools/run_unit_tb_regression.sh -o $R/gate_negctl tb_ppg_adc_dc_recovery > $R/gate_negctl.out 2>&1; echo "EXIT=$?" >> $R/gate_negctl.out
      ```
      这一步放在全部回归跑完之后做，做完后该导出目录作废。把`gate_negctl.out`与`unit.out`开头的门禁几行一起放进`final_<提交号>/`。
-  - 门禁需要Python 3（>=3.9时用formatter AST；更低版本自动退回文本检索，判据相同）。
+  - 门禁需要Python 3（>=3.9时用formatter AST；更低版本自动退回文本检索，判据相同）。在导出目录（非git仓库）里，门禁用目录遍历建文件索引，输出末尾显示`file index walk (N files)`；`871ff61`之前的提交在导出目录里门禁必然失败，不能用作终版。

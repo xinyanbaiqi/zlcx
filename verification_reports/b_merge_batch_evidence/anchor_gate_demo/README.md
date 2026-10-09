@@ -18,3 +18,23 @@ the final regression on the regression machine, `../REGRESSION_RUN_REQUEST.md` Â
 
 The renamed system TB (`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v`) is run by
 `rtl/ppg_control_top/run_xsim_regression.sh`, which has no banner regex for it. Its PASS lines are compared in the final regression.
+
+## Exported tree (`git archive`), as on the regression machine (2026-10-09, `871ff61`)
+
+The regression machine runs inside a `git archive` export, which has no git metadata. Before `871ff61`,
+`anchor_check.py` built its file index with `git ls-files`. In an export that index came back empty, every
+file reference failed as `file-missing` (the other session reproduced 5081 errors on a `c64e9dc` export),
+and the gate would have stopped the final regression. The demonstrations above ran in the working tree,
+which is a git checkout, so they did not show the problem. `anchor_check.py` now uses `git ls-files` when it
+works and walks the directory otherwise (skipping `.git`, `__pycache__`, `.claude`), and prints which index
+it used.
+
+| File | Run | Result |
+|---|---|---|
+| `index_equivalence.txt` | working tree, `--index git` vs `--index walk` | 0 errors both; stats, errors, external refs identical |
+| `export_gate_pass.txt` | clean `git -c core.autocrlf=false archive 871ff61` outside the repository, `bash tools/b_merge_tools/run_anchor_gate.sh` | `file index walk (604 files)`, 0 errors, PASSED, exit 0 |
+| `export_regression_gate_pass.txt` | same export, `tools/run_unit_tb_regression.sh -o <outside> tb_ppg_adc_dc_recovery` (Vivado 2019.2) | ANCHOR GATE PASSED, then the TB PASS with the new banner; exit 0 |
+| `export_regression_gate_negctl.txt` | same export after injecting one bad anchor into its matrix copy | name-missing, ANCHOR GATE FAILED, round stopped before simulation (no output directory), exit 1 |
+
+Other scripts that run in the export: `regression_evidence.py` uses no git. `manifest_digest.py` calls git
+only with `--rev`; its working-tree check passed 26/26 on a clean export (checked by the other session).

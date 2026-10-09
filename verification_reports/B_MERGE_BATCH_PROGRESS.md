@@ -9,7 +9,7 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段3、4、5已完成（条目13、14）。下一步是阶段6：终版回归在回归机上跑。
+- **当前项**：阶段3、4、5已完成（条目13~15）。下一步是阶段6：终版回归在回归机上跑。终版提交号见条目15（`c64e9dc`作废：其锚点门禁在导出目录里会失败）。
 - **下一步**：① 回归机按`REGRESSION_RUN_REQUEST.md` §2，对条目14给出的提交跑终版回归（含锚点门禁的通过演示和负对照演示），用`regression_evidence.py compare`与`baseline_7a8eabf`比对；预期：$finish时刻全部相同，7个TB报FINISH_LINE_SHIFT，PASS差异只来自标签改名。② 阶段7报告`verification_reports/B_MERGE_BATCH_REPORT_20261009.md`。
 - **未决问题**：无。“回归机Vivado须为2022.2”已确认（`ea60432`的MACHINE.txt为Vivado Simulator v2022.2）。
 
@@ -165,3 +165,11 @@
   - `f5f6e3f`：reconcile脚本不再统计非ID形状的标签文字（22处，在报告中列出），对其余族的标签按通用ID形状查别名表行。结果：326个ID，A 287、B 22、B2 0、C 0、D 1、E 16。别名表FSC-38行改为TB侧标签锚点；矩阵§13.1重写。
   - `5d294db`：§12.4a的26行SHA-256由脚本重算，HEAD上26/26相符。C02行摘要变化导致其历史锚点行的SHA-1变化，已用`--allowlist-only`重算allowlist。
   - 证据在`stage5_final/`。
+
+### 条目15（2026-10-09）：锚点门禁在导出目录失败的修正（旁观会话发现）
+
+- 问题：`c64e9dc`导出到仓库外后，`anchor_check.py`用`git ls-files`建的文件索引为空，全部文件引用都判file-missing（5081个error），门禁会在`run_unit_tb_regression.sh`开头拦下整轮。条目14的门禁演示是在工作区（git仓库）里做的，所以没有暴露。用户已通知回归机暂缓。
+- 修正（`871ff61`，只改工具）：git索引不可用时改为遍历目录建索引，输出末尾注明索引来源。工作区内git索引与walk索引的结果逐项相同。
+- 在仓库外的干净导出（`871ff61`）中演示：门禁PASSED；单跑改名TB `tb_ppg_adc_dc_recovery`，先门禁通过、后TB PASS；注入一处坏锚点后，门禁FAILED、退出1、未开始仿真。证据在`anchor_gate_demo/`的export_*文件。
+- `regression_evidence.py`不依赖git；`manifest_digest.py`只在`--rev`时用git。没有改RTL、TB、合同，§12.4a不受影响。
+- **终版回归提交：本条目所在提交**（推送后的b-merge-batch HEAD）。它的RTL、TB、回归脚本、合同与`871ff61`相同，只多了证据与文档。

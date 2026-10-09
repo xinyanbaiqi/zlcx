@@ -1,0 +1,6 @@
+ANCHOR GATE: Python 3.8.5 /d/ppg_zlcx/export_871ff61/tools/b_merge_tools/anchor_check.py 
+ERROR PPG_CONTRACT_CLOSURE_MATRIX.md:1732 name-missing ppg_amb_recheck_scheduler.v i_amb_enablX
+stats {"symbol_anchors": 5356, "satisfies_anchors": 96, "label_anchors": 145, "section_refs": 2806, "old_anchor_history": 1169}; external refs 27; errors 1; file index walk (604 files)
+ANCHOR GATE FAILED (anchor_check.py exit 1)
+ERROR: anchor gate failed; regression round stopped before simulation
+exit=1
