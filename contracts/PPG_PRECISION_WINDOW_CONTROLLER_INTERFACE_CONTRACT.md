@@ -1,6 +1,7 @@
 # PPG精度窗口模式控制器接口合同
 
-> Current normative version: V2.6, 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. `i_precision_takeover_safe` is an AMI/PWI forwarded composite switch predicate, not physical idle; `i_peak_valley_config_valid` is the registered V5 formal-detection gate. RTL/TB evidence is `EVIDENCE_PENDING`.
+> V2.7修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-075、085、086，按基线`7a8eabf` PWC RTL V1.5改写，符号锚点格式为“文件 + 符号（§节）”）：① §16补记F-034实现：安全提交与当前代际撤销同拍时撤销优先（`flag_enter_commit`、`flag_return_commit`、`flag_lifecycle_cancel`）；② §15.3补记F-1已知例外（双光IR完成丢失与精度切换挂起同帧导致切换超时）；③ 第21节PWI-01~05行注明以C18为准（S5）。不改变任何编码、优先级或既有编号含义。
+> Current normative version: ~~V2.6, 2026-08-20~~ V2.7, 2026-10-09（V2.6记录日期2026-08-20）. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. `i_precision_takeover_safe` is an AMI/PWI forwarded composite switch predicate, not physical idle; `i_peak_valley_config_valid` is the registered V5 formal-detection gate. RTL/TB evidence is `EVIDENCE_PENDING`.
 > V2.6 change record: adds the explicit PWI-forwarded `i_peak_valley_config_valid` input and requires it for formal cross consumption, 9-to-15 requests and fine-window control. Safe drain and discard semantics are unchanged.  
 > 2026-09-17内容更新记录（2026-10-01补记；规范标签仍为V2.6，沿用本文件08-20之后“内容更新、标签不变”的惯例）：第21节验收矩阵新增PWC-41“新START不清历史sticky”。第6.2节和第17.1节本来就规定新START不清`switch_timeout_sticky`/`protocol_error_sticky`，只有`i_diag_clear_event`或复位可以清；PWC-41补的是验收覆盖，同时对应当天修复的一处RTL实现缺陷：`ppg_precision_window_controller.v`此前把`i_start_ack_event`当成清除条件，修复后见`:496`、`:513`处的`@satisfies: PWC-41`。PWC RTL文件头changelog缺这一条，由任务C处理。依据：`verification_reports/PWC_STICKY_CLEAR_RTL_FIX_20260917.md`。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > 冻结日期：2026-08-20  
@@ -692,6 +693,8 @@ config/coef/DC recovery epoch
 等待当前`run_generation`的`i_detection_discard_event`（包括scope-only flush）或复位清除故障保持
 ```
 
+**已知例外F-1（V2.7补记，用户裁定，RTL不改）**：双光模式下，若同一宏帧中IR完成丢失与精度切换挂起同时发生，AMI的超时作废约在macro tick 4810（C10 §7.1a），晚于精度安全提交点macro tick 4760。此时安全提交条件在本帧已经错过，而切换挂起（`o_switch_hold_new_transaction`）又阻止下一个NORMAL帧，所以本节的10000周期保护到期，报`o_switch_timeout_sticky`与mode fault（AMI cause `8'h04`），supervisor随之abort并请求STOP。软件恢复流程：等待排空完成，诊断清除，然后COMMIT/START（C24 §5）。这是“单次ADC完成丢失不升级”规则的唯一例外。
+
 不得因超时在ADC转换中途强制切换。两帧保护只用于发现
 `i_precision_takeover_safe`、`i_analog_safe`、帧安全边界或
 模拟时序状态机异常，正常系统不会使用完整两帧等待时间。
@@ -713,6 +716,7 @@ config/coef/DC recovery epoch
 补充规则：
 
 - 同周期安全提交和超时达到阈值时，安全提交优先；
+- V2.7补记（F-034，`ppg_precision_window_controller.v` `flag_enter_commit`、`flag_return_commit`）：安全提交与当前代际撤销（命中当前`run_generation`的detection discard，或离开RUN，即`flag_lifecycle_cancel`）同拍时，撤销优先：不提交精度、不产生fine start或15-to-9提交事件。这是上面冻结优先级的直接实现；
 - 当前为9-bit时只允许cross建立进入请求；
 - 当前为正式15-bit窗口时只允许return建立返回请求；
 - cross和return同时有效属于协议异常，按当前活动精度选择唯一合法方向并置诊断；
@@ -960,7 +964,7 @@ fault必须先由AMI形成带触发身份的generation-scoped discard，再由PW
 
 | 编号 | 场景 | 必须满足 |
 | --- | --- | --- |
-| PWI-01 | 进入尾部责任分离 | 控制器不统计尾部，峰谷检测器独立检查最多10笔旧9-bit中心样本 |
+| PWI-01 | 进入尾部责任分离 | 控制器不统计尾部，峰谷检测器独立检查最多10笔旧9-bit中心样本。V2.7原行补充（S5）：PWI-01~PWI-05以C18第13节为准，本表各行只是从控制器视角的摘要，不另立条目 |
 | PWI-02 | 退出尾部禁止新cross | 旧15-bit中心样本可以维护粗趋势，但不得建立新的9-bit进入请求 |
 | PWI-03 | AMB接管被动尾部 | 真实事务排空后，被动退出尾部不阻止detector idle和重检accept |
 | PWI-04 | AMB接管真实事务 | peak、valley、return或内部事件未排空时仍必须等待，不得借尾部规则强行接管 |
