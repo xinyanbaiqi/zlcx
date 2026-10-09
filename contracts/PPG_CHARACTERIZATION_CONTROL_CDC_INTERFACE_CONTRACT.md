@@ -36,10 +36,10 @@ test_mux_ctrl[4:0]
 **当前规范依赖（可决定CDC语义）**
 
 1. C06 — `ppg_system_integration/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md` V1.3；
-2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.6；
+2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.7；
 3. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
-4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
-5. C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` V4.9。
+4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.11；
+5. C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` V4.10。
 
 The request/acknowledge toggle protocol is defined by this contract's Sections
 3-7 and the C03 CDC boundary. `ppg_config_cdc_bridge.v`, RTL/TB and historical

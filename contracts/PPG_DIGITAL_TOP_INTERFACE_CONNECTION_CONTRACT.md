@@ -94,14 +94,14 @@ baselines and drafts are not dependencies and cannot override this table.
 | Contract | Current version | Top use |
 | --- | --- | --- |
 | C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` | V1.7 | ACTIVE, manager-wrapper, generation, fault-blocking and lifecycle routes |
-| C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | sole generation production and STOPPING lifecycle |
-| C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | sole manager parent and transparent manager port forwarding |
-| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.12 | Rule A, owner deadline and scheduler fault records |
-| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | completion, discard, drain, AMI feedback/blocking gate and fault records |
-| C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | internal detection-chain lifecycle forwarding |
-| C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.9 | waveform/physical owner and SSW fault records |
-| C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.1 | dedicated characterization CDC boundary |
-| C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.5 | mandatory dedicated registered supervisor boundary |
+| C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.10 | sole generation production and STOPPING lifecycle |
+| C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.7 | sole manager parent and transparent manager port forwarding |
+| C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` | V1.13 | Rule A, owner deadline and scheduler fault records |
+| C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.5 | completion, discard, drain, AMI feedback/blocking gate and fault records |
+| C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | internal detection-chain lifecycle forwarding |
+| C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.11 | waveform/physical owner and SSW fault records |
+| C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.2 | dedicated characterization CDC boundary |
+| C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.6 | mandatory dedicated registered supervisor boundary |
 
 ### 2.2 Historical dependency list
 

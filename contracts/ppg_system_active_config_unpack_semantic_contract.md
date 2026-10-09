@@ -8,8 +8,8 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.9 | Sole committed `i_active_config[1023:0]` producer, atomic ACTIVE stability and lifecycle owner. |
-| C03 | `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.6 | Sole manager parent and unchanged wrapper forwarding boundary. |
+| C02 | `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` | V4.10 | Sole committed `i_active_config[1023:0]` producer, atomic ACTIVE stability and lifecycle owner. |
+| C03 | `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V1.7 | Sole manager parent and unchanged wrapper forwarding boundary. |
 
 ## 1. 模块职责
 

@@ -33,7 +33,7 @@
 **规范依赖（可决定本合同语义）**
 
 1. 用户确认的640-bit ACTIVE V4位图、384-bit V5位图和字段编码；
-2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.6的联合配置快照和manager-wrapper边界；
+2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.7的联合配置快照和manager-wrapper边界；
 3. C05 — `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` V5的唯一字段解包规则。
 
 **一致性引用（只用于实现对齐，不覆盖本合同）**

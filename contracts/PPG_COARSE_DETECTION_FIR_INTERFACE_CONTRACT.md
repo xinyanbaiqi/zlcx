@@ -20,10 +20,10 @@
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
 | C15 | `ppg_system_integration/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md` | V1 | Sole recovered-NORMAL coarse-sample source. |
-| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole detection parent, V5 forwarding and discard broadcast owner. |
+| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | Sole detection parent, V5 forwarding and discard broadcast owner. |
 | C20 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md` | V2.6 | One direct detection-fork consumer of FIR output. |
 | C22 | `ppg_system_integration/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md` | V2.6 | One direct detection-fork consumer of FIR output. |
-| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.6 | Consumes FIR local-empty/qualification and cannot redefine FIR ownership. |
+| C23 | `ppg_system_integration/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md` | V2.7 | Consumes FIR local-empty/qualification and cannot redefine FIR ownership. |
 
 ## 1. 合同目的
 
