@@ -1,5 +1,6 @@
 # PPG NORMAL事务Fork、IDAC跟踪与AMB周期重检接口合同
 
+> V2.2修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-070~072，按基线`7a8eabf`重检调度器RTL V1.2与PWI V1.5改写，符号锚点格式为“文件 + 符号（§节）”）：① §9.4流程图“第1/2/3个9-bit校准帧”改为“第1/2/3个校准阶段”，并写明阶段与物理校准宏帧的关系（F-9，用户裁定不改RTL）；② §9.3表新增`i_calibration_request_withdraw_event`，§9.4写明F-020撤销规则。不改变三阶段顺序、接管条件或任何既有编号含义。
 > V2.1修订日期：2026-10-01。合同补记批次3：amb_recheck RTL V1.1（2026-08-23）把重检调度器的输入`i_adc_idle`改名为`i_precision_takeover_safe`（纯改名，不改逻辑，`ppg_amb_recheck_scheduler.v:75`）。本合同此前两个名字都没有出现，只在第9.2节笼统写作“ADC……排空”。本次在第9.3节表中补`i_precision_takeover_safe`，以及同样缺失的`i_peak_valley_idle`两行，并在第9.2节补写RTL接管条件的准确六项形式（`:179`）。不改变AMR自检验收条款。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > Current normative version: V2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the NORMAL fork, IDAC tracking and AMB recheck lifecycle rules are normative. System closure is `NOT_CLOSED`; implementation evidence is `EVIDENCE_PENDING`.
 > Historical V2 freeze date: 2026-08-08.
@@ -448,6 +449,7 @@ V2.1补记：上述接管条件在RTL中的准确形式是`flag_takeover_safe = 
 | `amb_sequence_done` | IDAC控制器 -> 序列控制 | 检查完成或重搜索成功 |
 | `amb_sequence_failed` | IDAC控制器 -> 序列控制 | 搜索耗尽，无法恢复到窗口 |
 | `dcs_revalidate_request` | IDAC控制器 -> 序列控制 | AMB阶段成功后固定要求重新检查DC_R/DC_IR |
+| `i_calibration_request_withdraw_event` | AMI -> PWI -> 序列控制 | V2.2补记（F-020）。周期重检的外层AMI在途校准请求被撤销的单拍：来源是调度器校准owner截止（SID-05）或校准owner完成丢失超时作废（C10 §7.1a），两者都意味着不会再有对应结果返回。AMI只在撤销命中周期重检在途请求时转送（`flag_recheck_request_withdraw`），PWI原样转给重检调度器 |
 
 这些信号均位于2 MHz域。事件型信号为单周期；request型信号必须保持到明确accept。
 本合同表列出的端口名称、方向和分组是唯一规范，不允许以未来模块的不同端口分组、隐式别名或层次化引用替代。
@@ -459,11 +461,19 @@ NORMAL
     -> 间隔到期并锁存amb_recheck_pending
     -> 等待下一次15-bit到9-bit切换
     -> 等待当前ADC事务和NORMAL fork排空
-    -> 第1个9-bit校准帧执行AMB检查或搜索
-    -> 第2个9-bit校准帧执行DC_R检查或搜索
-    -> 第3个9-bit校准帧执行DC_IR检查或搜索
+    -> 第1个校准阶段执行AMB检查或搜索
+    -> 第2个校准阶段执行DC_R检查或搜索
+    -> 第3个校准阶段执行DC_IR检查或搜索
     -> 三路全部成功后清除pending并恢复正式9-bit NORMAL
 ```
+
+~~原流程图各阶段写作“第1/2/3个9-bit校准帧”。~~ V2.2改写（F-9）：
+
+- 正常情况下每个阶段从一个新的物理校准宏帧开始；
+- 阶段跨宏帧延长（C08 §9.6）或跨宏帧重试之后，阶段在后一宏帧中途得到结果时立即推进，下一阶段可以在同一物理校准宏帧的后续子帧开始。这是因为阶段推进所需的“物理校准宏帧结束事实”指本阶段内出现过的任一次校准宏帧完成事件，不要求晚于本阶段最后一笔样本（C08 §12.3；`ppg_amb_recheck_scheduler.v` `flag_stage_frame_complete`）；
+- 下一阶段首样本用的是上一阶段最终已提交的码：IDAC样本资格要求样本快照码和epoch等于当前已提交的码和epoch（`ppg_idac_code_controller.v` `flag_amb_sample_qualified`、`flag_dcs_sample_qualified`），未生效的码不可能被采用。
+
+V2.2补记（F-020，`ppg_amb_recheck_scheduler.v` `flag_sample_inflight`）：重检调度器发出校准请求后以`flag_sample_inflight`等待匹配结果。若外层AMI请求被撤销（`i_calibration_request_withdraw_event`，见§9.3），不会再有结果返回；重检调度器在该拍释放`flag_sample_inflight`，保持型的IDAC请求随即重发同一候选。没有这条规则时，周期AMB截止或作废后内层在途永不释放，重检永不重试。
 
 AMB_CAL继续使用现有`frame_type=2'b00`。周期检查身份由序列控制器和IDAC控制器的
 `amb_sequence_start`上下文保存，不增加第四种frame_type编码。
