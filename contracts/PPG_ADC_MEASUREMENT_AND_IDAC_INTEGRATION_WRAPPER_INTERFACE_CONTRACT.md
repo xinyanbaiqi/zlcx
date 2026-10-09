@@ -1,5 +1,6 @@
 # PPG ADC测量、DC恢复、IDAC与精度窗口集成Wrapper接口合同
 
+> V2.5修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-040~058，按基线`7a8eabf` AMI RTL V1.18改写，符号锚点格式为“文件 + 符号（§节）”）：① 新增§7.1a ADC完成丢失超时作废（方案甲R3：T-lost=4500、k=2按槽位计数、cause 06/07、作废后旧DONE处理、捕获窗口前提F-3、已知限制F-1/F-2）；② §6.1参数、§6.5a与§6.9端口表新增`C_ADC_COMPLETION_LOST_CYCLES`/`C_ADC_COMPLETION_LOST_LIMIT`（冻结4500/2，F-6）、`o_adc_transaction_lost_event`、`o_owner_lost_sticky`；③ §6.10/§6.11：discard原因`2'b11` COMPLETION_LOST，正式结果discard身份取正式输出当前持有的结果（F-019），正式结果与私有datapath discard身份收窄为矩阵§1.1 `TXN_KEY`（F-002/F-008），私有datapath discard扇出订正为RTL实际的NORMAL fork与overlap两路；分发器扩为七路，并改写lane清零规则（F-4）；④ §8.1补冗余校正器作废丢弃；§10.1补检测分支自有资格（F-021）；§11.3补撤销合并（F-020）；⑤ §15.1诊断清除条件按N-1改写；§15.2按最终RTL改写阻断与lane生命周期（含L-5，系统级不可观测、属纵深防御）；⑥ AMI-13/24/39/40原行补充；§18门禁范围订正。文件头V1.3.3/V1.4状态行与§19历史记录中的“AMI-01至AMI-45全部PASS”“AMI-46至AMI-55”属带日期的历史叙述，保持原样；表格实际上限为AMI-54，当前证据状态以别名表与矩阵§13为准。
 > V2.4修订日期：2026-10-04。合同补记批次3第二阶段：① 第11.3节原指向C08开放观察项的一句改为“已由scheduler RTL V1.9修复”（保留原文于删除线中）；AMI-14原行补充截止事件释放在途的情形（不新开ID）。② 按用户裁定方案(c)（不改RTL逻辑，只写限制），第6.7节新增“P2S遥测同笔限制”一段，写明三个P2S遥测端口与`o_result_*`同属一笔的条件、芯片级的三条结构保证，以及守护该前提的芯片顶层TB TC7断言；`o_s2_raw`行原指向开放观察项的一句改为指向该段。AMI端口注释（`ppg_adc_measurement_idac_integration.v:403`）和assign注释（`:1029`）已由任务C原行改正，本合同据此表述。证据：`verification_reports/TASKC_TICK248_P2S_20261001.md`第1、4节。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_PHASE2_20261004.md`。
 > V2.3修订日期：2026-09-30。合同补记批次2：补入AMI RTL V1.13（2026-08-31）和V1.14（2026-09-05）新增、但正式端口表一直缺失的5个端口。① 第6.5b节补验证专用注入端口对`i_test_calibration_loss_inject_valid`/`o_test_calibration_loss_inject_ready`（`ppg_adc_measurement_idac_integration.v:398-399`，Stage5 Group15 PRC-09/10），并补写这对端口在AMI内原样直通PWI和粗检测FIR、由FIR绑定到下一笔真实样本的行为；② 第6.7节补P2S遥测输出`o_s1_calibration_applied`、`o_s1_raw[9:0]`、`o_s2_raw[9:0]`（`:403-405`）。这三个字段的定义以芯片顶层合同`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`第8.4.5节为准，本合同只写AMI侧的来源和连接。不改变AMI-01至AMI-54的任何既有条款，也不涉及`i_cal_owner_deadline_event`的相关描述。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`（其中记录了P2S三个端口与正式结果是否同拍对应的开放观察项）。
 > V2.2修订日期：2026-09-30。补记2026-09-18 SID-05修复在AMI RTL V1.15中新增的输入`i_cal_owner_deadline_event`（1 bit；端口声明`ppg_adc_measurement_idac_integration.v:153`；来自调度器`o_cal_owner_deadline_event`，经Top内部网`sched_cal_owner_deadline_event_o`），以及`flag_calibration_request_inflight`因此新增的清零条件（`:1797-1798`）。此前在途标志只在AMB/DCS校准结果被IDAC真实消费（`flag_amb_sample_accepted`/`flag_dcs_sample_accepted`）或STOP/abort/integration阻断时清零；现在调度器报告校准owner截止抑制时也清零，下一拍AMI按仍然有效的请求来源重新拉高`o_calibration_sample_valid`，重新发起同一个尚未得到结果的候选。**为什么**：被截止抑制的请求从未建立ADC owner或事务，不会产生“结果已消费”事件，原逻辑下在途标志永久为1，校准搜索永久卡死（真实RTL缺陷）。**本次改动**：第6.6节端口表新增一行，并补全表后的在途所有权释放说明；第11.3节补清零条件与重新发起行为。不改变AMI-01至AMI-54既有验收编号、结果匹配规则或其它端口。**真实证据**：`verification_reports/WORKLINE_D_SID05_SID06_20260918.md`；`rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v` V1.2，iverilog与Vivado 2022.2 xsim均83 PASS/0 FAIL；2026-09-19全套19个TB的xsim系统级回归19/19 PASS、0 FAIL、合计1208 PASS。AMI模块级`tb_ppg_adc_measurement_idac_integration.v`未连接该输入，合同同步记录见`verification_reports/CONTRACT_SYNC_SID05_20260930.md`。
@@ -212,6 +213,8 @@ ppg_idac_code_controller          ppg_normal_transaction_fork
 | `C_RUN_GENERATION_WIDTH` | 8 | manager唯一生产、经ACTIVE wrapper与Top透明扇出的RUN代际宽度 |
 | `C_DATA_WIDTH` | 24 | 统一PPG码宽度 |
 | `C_ENABLE_TEST_INJECTION` | 0 | 验证专用异常注入结构生成开关；生产构建必须保持0，只有联合/最终顶层验证构建可显式覆盖为1 |
+| `C_ADC_COMPLETION_LOST_CYCLES` | 4500 | V2.5补记。完成丢失超时T-lost（§7.1a），**产品固定值4500**，不得在集成层覆盖。合法范围：须小于32768（否则2×T超出16位`cnt_owner_age`，cause `8'h07`永不触发）；取值依据为大于实测最晚合法迟到4355拍、小于下一帧同色接管4717拍 |
+| `C_ADC_COMPLETION_LOST_LIMIT` | 2 | V2.5补记。同槽位连续作废升级次数k（§7.1a），**产品固定值2**。合法范围1~15（`cnt_lost_*`只有4位，取0或≥16时永不升级） |
 
 ### 6.2 全局与生命周期输入
 
@@ -371,7 +374,8 @@ V1.2新增以下三个输出。V1.3进一步冻结它们只描述“ADC结果已
 | --- | ---: | --- |
 | `o_adc_transaction_complete_event` | 1 | 当前事务完成的单周期脉冲 |
 | `o_adc_transaction_success` | 1 | 与完成脉冲同拍的结果有效资格；失败时为0 |
-| `o_adc_complete_sample_index` | `C_SAMPLE_INDEX_WIDTH` | 与完成脉冲绑定的事务`sample_index` |
+| `o_adc_complete_sample_index` | `C_SAMPLE_INDEX_WIDTH` | 与完成脉冲绑定的事务`sample_index`；V2.5补记：作废单拍时为被作废owner的`sample_index` |
+| `o_adc_transaction_lost_event` | 1 | V2.5补记。在途owner完成丢失超时作废单拍（§7.1a）；与完成脉冲永不同拍，不携带success |
 
 三项输出的原子关系冻结为：
 
@@ -407,6 +411,8 @@ ppg_sar9_sar15_safe_selection_wrapper.i_adc_transaction_complete_event
 ppg_sar9_sar15_safe_selection_wrapper.i_adc_transaction_success
 ppg_sar9_sar15_safe_selection_wrapper.i_adc_complete_sample_index
 ```
+
+V2.5补记：`o_adc_complete_sample_index`在完成拍和作废拍都有效，其余时间不承诺有效值。全部接收方都必须以事件限定读取它：调度器以`flag_completion_match`/`flag_owner_lost_match`、SSW以`flag_owner_release`/`flag_done_mismatch`。`o_adc_transaction_lost_event`与上述三个输出接到相同的两个消费者（调度器、SSW的`i_adc_transaction_lost_event`）。
 
 顶层不得用Q3结束、SAR波形末沿、固定延迟、`i_adc_idle`或`i_normal_frame_complete_event`伪造这三个输出，也不得将两个消费者分别生成的完成脉冲合并。`i_adc_idle`只表示物理转换和DONE返回启动资格，不能替代已经提交结果owner的身份化完成。
 
@@ -576,6 +582,7 @@ the stated consumer path.
 | `o_amb_code_update`, `o_dcs_r_code_update`, `o_dcs_ir_code_update`, `o_dcs_r_track_adjust`, `o_dcs_ir_track_adjust` | each 1 / 0 | IDAC controller registered events | Explicit AMI diagnostic/observation endpoint only unless a future active contract adds one declared consumer; no event is a manager, Scheduler-ready, abort or STOP input. |
 | `o_amb_search_done`, `o_dcs_r_search_done`, `o_dcs_ir_search_done`, `o_amb_search_exhausted`, `o_dcs_r_search_exhausted`, `o_dcs_ir_search_exhausted` | each 1 / 0 | IDAC controller registered status/event outputs | Explicit AMI diagnostic/observation endpoint only; exhaustion contributes only through the declared IDAC fault record, never through an undeclared direct route. |
 | PWI fine-window, recheck and detector diagnostics | declared child widths / reset 0 | PWI and its contained children | Explicit AMI diagnostic/observation endpoint only; no Top, manager or supervisor consumer is implicit. |
+| `o_owner_lost_sticky` | 1 / 0 | AMI `owner_lost_sticky_o` | V2.5补记。ADC完成丢失超时作废历史诊断（§7.1a）：任一槽位作废即置1；清除规则见§15.1，新START不清。Top -> `o_ami_owner_lost_sticky` -> 芯片顶层SPI 0x0108 bit6；非阻断，不进入fault record |
 | `o_integration_protocol_error_sticky`, `o_wrapper_fault_blocking` | each 1 / 0 | AMI protocol/fault state | `o_wrapper_fault_blocking` only -> Top -> Scheduler `i_ami_fault_blocking`; the sticky is an AMI diagnostic observation. Neither bypasses the AMI fault record. |
 | `o_adc_chain_idle`, `o_normal_fork_idle`, `o_measurement_output_idle`, `o_datapath_empty` | each 1 / reset as its named retained state requires | AMI retained-state aggregates | `o_datapath_empty` only -> Top -> ACTIVE wrapper `i_datapath_empty` -> manager; the other three are explicit AMI diagnostic/observation endpoints and never replace physical idle. |
 
@@ -617,10 +624,10 @@ The following registered AMI outputs are part of this external port group:
 | Port group | Width | Meaning |
 | --- | ---: | --- |
 | `o_measurement_result_discard_event` | 1 | Registered one-cycle explicit formal-result lifecycle discard observation. |
-| `o_measurement_result_discard_reason` | 2 | `DISCARD_STOP`/`DISCARD_ABORT`/`DISCARD_SYSTEM_FAULT`; stable with the event. |
-| `o_measurement_result_discard_identity_valid` | 1 | Always 1 when the measurement discard event is asserted; its retained `TXN_ID` is therefore meaningful. |
+| `o_measurement_result_discard_reason` | 2 | `DISCARD_STOP`/`DISCARD_ABORT`/`DISCARD_SYSTEM_FAULT`, or (V2.5) `DISCARD_COMPLETION_LOST=2'b11` for a §7.1a timeout void; stable with the event. |
+| `o_measurement_result_discard_identity_valid` | 1 | Always 1 when the measurement discard event is asserted; its retained ~~`TXN_ID`~~ `TXN_KEY` (V2.5) is therefore meaningful. |
 | `o_measurement_result_discard_sample_valid` | 1 | Discarded measurement qualification snapshot; stable with the event. |
-| `o_measurement_result_discard_<TXN_ID>` | each transaction field width | Complete retained transaction identity; the exact field expansion is defined in the closure matrix and stable with the event. |
+| `o_measurement_result_discard_<TXN_ID>` | each transaction field width | ~~Complete retained transaction identity; the exact field expansion is defined in the closure matrix and stable with the event.~~ V2.5 (F-008): the group is `o_measurement_result_discard_<TXN_KEY>`, i.e. exactly the six RTL fields `frame_id`, `sample_index`, `color_ir`, `frame_type`, `precision`, `run_generation` (closure matrix §1.1); it carries no epoch field. It is unique only within the 16-bit `frame_id`/`sample_index` wrap window. For a lifecycle discard the fields are those of the result currently held at the formal output (`result_*_o`, F-019; `run_generation` from the measurement fork); for a §7.1a void they are the owner start snapshot, with `sample_valid=0`, and a void is reported for calibration owners too. Stable with the event. |
 | `o_detection_discard_event` | 1 | Registered one-cycle unconditional detection lifecycle-discard broadcast. |
 | `o_detection_discard_reason` | 2 | `DISCARD_STOP`/`DISCARD_ABORT`/`DISCARD_SYSTEM_FAULT`; stable with the event. |
 | `o_detection_discard_identity_valid` | 1 | Trigger identity valid. It is 1 only when a retained detection-fork transaction initiated the generation-scoped flush; otherwise every trigger transaction field except mandatory target `run_generation`, and sample-valid, are 0. |
@@ -635,28 +642,38 @@ The following registered AMI outputs are part of this external port group:
 
 ### 6.11 AMI local fault-record arbitration
 
-AMI owns one registered fault-record dispatcher for its five blocking-cause
+AMI owns one registered fault-record dispatcher for its ~~five~~ seven (V2.5) blocking-cause
 lanes. The lanes are `8'h01` protected sample-index mismatch, `8'h02`
 unrecoverable owner/protocol error, `8'h03` unprovable controlled-recovery
-context, `8'h04` registered PWI precision fault and `8'h05` registered IDAC
-controller fault. A rising event for a lane captures that lane's `FAULT_ID`
+context, `8'h04` registered PWI precision fault ~~and~~, `8'h05` registered IDAC
+controller fault, and (V2.5, §7.1a) `8'h06` same-slot consecutive completion loss
+(`flag_owner_lost_fault_hold`) and `8'h07` ADC still busy with the owner in flight
+for 9000 cycles (`flag_adc_busy_fault_hold`). A rising event for a lane captures that lane's `FAULT_ID`
 atomically, sets its lane-pending bit and sets its lane-active bit. An invalid
 identity captures every `FAULT_ID` field as zero.
 
-`o_ami_fault_active` is the OR of the five lane-active bits. AMI dispatches
+`o_ami_fault_active` is the OR of the ~~five~~ seven (V2.5) lane-active bits. AMI dispatches
 exactly one pending lane per 2 MHz cycle as the one-cycle
 `o_ami_fault_valid/cause/identity_valid/<FAULT_ID>` record. If two or more
 lanes become pending on the same edge, or a new lane arrives while another is
 pending, AMI retains each lane independently and dispatches them in this fixed
-order: `8'h01 > 8'h02 > 8'h03 > 8'h04 > 8'h05`. A dispatched lane is removed
+order: `8'h01 > 8'h02 > 8'h03 > 8'h04 > 8'h05` (V2.5: `> 8'h06 > 8'h07`; `ppg_adc_measurement_idac_integration.v` `flag_ami_fault_dispatch_01`…`_07`). A dispatched lane is removed
 from the event-pending set but remains active until its source-specific
 recovery predicate is true. Consequently a simultaneous PWI and IDAC fault
 produces two distinct AMI valid pulses in deterministic order; the supervisor
 can set both summary bits without a second child-to-supervisor route.
 
-Reset clears every lane state and emits no fault record. `diag_clear`, STOP,
+Reset clears every lane state and emits no fault record. ~~`diag_clear`, STOP,
 abort, a result discard, enable deassertion and START neither remove a pending
-fault record nor clear an active lane. A stale-generation fault event is
+fault record nor clear an active lane.~~ V2.5 (F-4, rewritten to match RTL): a
+pending fault record is removed only by its own dispatch. `diag_clear`, a result
+discard and enable deassertion never clear an active lane. Lanes `8'h01`,
+`8'h02`, `8'h03`, `8'h06` and `8'h07` are cleared by START, by abort, and by
+"the RUN has been ended by STOP and AMI has drained"
+(`flag_run_context_drained = flag_run_context_ended && o_datapath_empty`). START
+and abort clear with top priority; a new lane set on the same edge wins over the
+STOP-drain clear. Lanes `8'h04` and `8'h05`
+follow their PWI/IDAC child recovery predicates. A stale-generation fault event is
 discarded without a record or active-lane mutation. PWI and IDAC child outputs
 are the only producers of lanes `8'h04` and `8'h05`; neither may drive the
 supervisor or manager directly.
@@ -670,14 +687,26 @@ flush and prevents that transaction from entering PWI. If no normal measurement
 transfer occurs, priority is
 `system_fault_discard_pending (including a same-edge
 i_system_fault_discard_event) > i_control_abort_event > i_stop_ack_event`.
-Reasons are `STOP=2'b00`, `ABORT=2'b01`, `SYSTEM_FAULT=2'b10`; `2'b11` is
-reserved and is never emitted. Reset clears state without a discard event.
+Reasons are `STOP=2'b00`, `ABORT=2'b01`, `SYSTEM_FAULT=2'b10`; ~~`2'b11` is
+reserved and is never emitted.~~ V2.5: `2'b11` is `COMPLETION_LOST`, emitted only
+on the measurement-discard branch for a §7.1a timeout void
+(`DISCARD_REASON_COMPLETION_LOST`); detection and private datapath discards
+never use it. `2'b11` was the last free code of the 2-bit field; any further
+reason requires widening the field. Reset clears state without a discard event.
 There is no `discard_ready`, and clearing a held valid without transfer or its
 branch's explicit discard event is forbidden.
 
 For retained work before the DC-result fork, AMI is the sole producer of the
 private registered `datapath_discard_event/reason/identity_valid/TXN_ID`
-fanout to NORMAL fork, Router, overlap, reconstructor and DC recovery. It uses
+fanout to NORMAL fork, Router, overlap, reconstructor and DC recovery. V2.5
+(F-002, and correction to RTL): the group is
+`datapath_discard_event/reason/identity_valid/<TXN_KEY>` (six fields, no epoch);
+in RTL only `ppg_normal_transaction_fork` and
+`ppg_adc_pipeline_overlap_corrector` receive it. Router, reconstructor and DC
+recovery have no such ports; their retained-state clearing is defined by their
+own contracts (C12, C14, C15). Each receiver applies the event by
+generation match only (`run_generation_o == i_run_generation`); the identity
+fields are diagnostic and never take part in matching. It uses
 the same terminal selection, including the retained
 `system_fault_discard_pending` reason, and current `run_generation` as this section, has
 no ready return and is not a public result-discard observation. It is a
@@ -765,10 +794,54 @@ wrapper必须保存`flag_adc_transaction_inflight`及完整结果owner identity�
 - STOP不强制清除，等待已启动转换返回并排空；
 - abort保留仅用于释放物理owner的原始身份并进入受控丢弃，匹配旧DONE只产生`success=0`完成旁带；
 - 新START不得在旧物理owner、旧DONE或受控丢弃上下文仍未排空时取得新结果owner。
+- V2.5补记：完成永远不返回时，由§7.1a的超时作废清0；这是匹配DONE之外唯一的另一条释放路径。
 
 现有capture没有独立`transaction_ready`输出，因此wrapper不得仅依赖`i_adc_idle`重复启动；必须同时使用上述所有权。
 
 AMI的`flag_adc_transaction_inflight`只表示已握手的ADC结果owner，不表示SSW模拟波形槽、预建立状态、owner-pending或Q3资格。AMI不得因观察到调度器波形接管而提前置位，也不得因模拟包络结束而提前清除。
+
+### 7.1a ADC完成丢失超时作废（V2.5新增，方案甲R3）
+
+**裁决点**：AMI是owner作废与迟到完成的唯一裁决点；调度器和SSW只按AMI的作废单拍释放（C08 §10.4、C09 §5.3）。
+
+**判定**（`ppg_adc_measurement_idac_integration.v` `flag_owner_lost_fire`，同一拍原子成立）：
+
+```text
+flag_adc_transaction_inflight
+&& cnt_owner_age >= C_ADC_COMPLETION_LOST_CYCLES   // T-lost = 4500
+&& i_adc_idle                                      // 物理ADC空闲
+&& !flag_capture_valid && !flag_adc_completion_pending  // 捕获链没有在途完成
+&& !flag_measurement_result_discard_fire           // 不与正式结果discard同拍
+&& !i_start_ack_event
+```
+
+`cnt_owner_age`从owner的start fire起逐拍计数，STOP、abort和帧停止都不暂停计时，饱和于`2*C_ADC_COMPLETION_LOST_CYCLES`（`ADC_BUSY_FAULT_CYCLES`）。
+
+**作废拍的动作**：
+- 清除`flag_adc_transaction_inflight`，不产生RAW、正式结果或success；
+- 下一拍输出`o_adc_transaction_lost_event`单拍，并在`o_adc_complete_sample_index`给出被作废owner的序号（§6.5a）；
+- 发出一次正式结果discard：原因`2'b11` COMPLETION_LOST，身份取owner启动快照，`sample_valid=0`，校准owner也发（§6.10）；
+- 置`o_owner_lost_sticky`（§6.9、§15.1）；
+- 校准owner被作废时，与调度器截止事件合并为同一撤销事件（`flag_calibration_request_withdraw`），释放校准在途请求（§11.3）；
+- 通知S1冗余校正器放弃待配对上下文（§8.1）。
+
+**连续丢失升级（k=2）**：RED、IR、校准三个槽位分别计数（`cnt_lost_red`/`cnt_lost_ir`/`cnt_lost_cal`）。同一槽位的作废使该槽计数加1；同槽位的匹配完成（含`success=0`的受控释放）或START把它清零。同槽位第k次作废时置lane `8'h06`（`flag_owner_lost_fault_hold`），经supervisor升级为系统故障（cause `8'h06`，C24 §3）。
+
+**ADC长期忙**：owner年龄到达`2*C_ADC_COMPLETION_LOST_CYCLES`（9000拍）的那一拍物理ADC仍不空闲时，置lane `8'h07`（`flag_adc_busy_fault_hold`），经supervisor报cause `8'h07`。lane 07不释放owner。
+
+lane 06/07的清零规则见§6.11：START或abort清零（优先级最高）；“RUN已由STOP结束且AMI排空”也清零，但同拍新置位优先于这一项。
+
+**作废后到达的旧DONE**：作废不撤销捕获模块的等待资格。作废后才到达的旧DONE按“无owner捕获”被拒绝（`flag_adc_capture_without_owner`），置集成协议sticky与lane `8'h02`并升级为系统故障。恢复路径为STOP→诊断清除→COMMIT→START，不需要复位。
+
+**捕获窗口前提（F-3）**：作废判定时只能看到同步链之后的状态。因此：
+- 物理DONE落在约2拍的同步链窗口内时，owner会先被作废，随后这笔DONE按上一条被拒并升级；
+- 作废后，旧DONE若恰好在下一笔start当拍或之后到达，它与新事务的DONE在物理上不可区分，会绑定到新事务。**这笔错绑结果会以`success=1`正式输出**。冗余校正器在这两种时序下的行为见§8.1。
+本合同把这一窗口作为前提接受，不改`ppg_adc_async_stage_capture`。
+
+**已知限制**：
+1. 同一槽位间歇丢失、但从不连续丢失两次时不升级；每次作废都有discard `2'b11`和`o_owner_lost_sticky`可见。
+2. F-1（用户裁定的已知例外，RTL不改）：双光模式下，若IR完成丢失与精度切换挂起发生在同一宏帧，作废约在macro tick 4810，晚于精度提交点macro tick 4760（`MACRO_SAFE_TICK`）。切换挂起会阻止下一个NORMAL帧，10000拍后精度切换超时，报cause `8'h04`，supervisor abort+STOP；诊断清除后可重新START。因此“单次丢失不升级”在这种情形下不成立（C23 §15、C24 §5）。
+3. F-2：同槽位第k次作废若落在主机STOP后的排空末尾，lane 06只保持1拍（随即被`flag_run_context_drained`清掉）；cause 06的episode要到manager回到CONFIG后才开，supervisor此时发出的STOP使manager记错误0x0C；START前须先诊断清除（C24 §5）。
 
 ### 7.2 NORMAL启动资格
 
@@ -827,6 +900,8 @@ AMB_CAL或DCS_CAL只能在已经握手取得的校准请求上下文存在时启
 
 capture的四个输出逐项连接S1重构器输入，S1的`o_capture_ready`返回capture的`i_capture_ready`。
 S1上下文只在唯一start fire沿锁存，禁止直接使用未握手的外部帧控制电平。
+
+V2.5补记（S1冗余校正器作废丢弃，`ppg_adc_s1_redundancy_corrector.v` `i_transaction_abandon`、`flag_capture_drop_armed`、`flag_capture_drop`）：AMI把`flag_owner_lost_fire`接到冗余校正器的`i_transaction_abandon`。作废拍撤销其待配对上下文，并布防“丢弃迟到RAW”。布防期间且没有上下文时，到达的RAW被接收并丢弃（`o_capture_ready`据此放行，捕获缓存不滞留），绝不与后续上下文配对；下一次上下文接管（start）或吞掉一笔RAW后撤防。三种时序：迟到RAW在下一笔start之前到达——被吞掉，不产生输出；与下一笔start同拍或在其后约2拍内到达——绑定到下一笔上下文（§7.1a捕获窗口前提）。没有这条连接时，作废后待配对上下文永不释放，下一笔事务无法启动。
 
 ### 8.2 S1可编程校准
 
@@ -944,7 +1019,7 @@ measurement_pending = 1
 - fork建立时必须把该事务的`result_sample_valid`复制到两个分支各自拥有的事务payload；语义上分别形成`detection_sample_valid`和`measurement_sample_valid`，不得让两个分支在pending期间读取一个会被任一消费者提前清除的共享可变资格寄存器；
 - detection分支的资格快照只送precision wrapper `i_sample_valid`，measurement分支的资格快照只驱动`o_result_sample_valid`；两者初值必须逐位相同；
 - 每个pending只在对应ready/valid握手、或第6.10节定义的同分支显式生命周期discard时清除；reset按复位规则清除且不产生discard事件；
-- 任一分支握手只能释放该分支的pending和资格快照，不得改变另一仍pending分支可见的`result_sample_valid`；
+- 任一分支握手只能释放该分支的pending和资格快照，不得改变另一仍pending分支可见的`result_sample_valid`；V2.5补记（F-021）：检测分支在RTL中有自己的资格寄存器`flag_detection_branch_sample_valid`（`ppg_adc_measurement_idac_integration.v`），measurement分支先消费不会清掉检测分支待用的资格；
 - 任一分支反压时，整个载荷逐位保持；
 - 两个pending均清除后才允许释放或同拍替换为下一事务。
 
@@ -995,6 +1070,7 @@ STOP / abort / blocking fault
 - 只允许一笔匹配校准ADC事务启动；
 - 不匹配结果被消费以避免死锁，但不得更新搜索，并置协议诊断；
 - STOP、abort和复位撤销未启动请求；已经启动的ADC事务按第13节排空或丢弃。
+- V2.5补记（F-020）：调度器的校准owner截止事件（`i_cal_owner_deadline_event`）与校准owner超时作废（§7.1a）合并为同一撤销事件`flag_calibration_request_withdraw`，两者都意味着在途请求不会再有结果，都清除`flag_calibration_request_inflight`。撤销命中周期重检在途请求时（`flag_recheck_request_withdraw`），AMI还把它转送PWI的`i_calibration_request_withdraw_event`，由重检调度器释放内层在途状态（C16、C18）。
 
 V2.2补记（SID-05，AMI RTL V1.15）：`flag_calibration_request_inflight`的更新优先级为（`ppg_adc_measurement_idac_integration.v:1791-1802`）：①复位清零；②`i_stop_ack_event`、`i_control_abort_event`或`flag_integration_blocking`清零；③`flag_amb_sample_accepted`、`flag_dcs_sample_accepted`或`i_cal_owner_deadline_event`任一为1时清零；④否则`calibration_request_fire_o`为1时置1。③中的`i_cal_owner_deadline_event`是本版新增条件：调度器在local tick 248截止点抑制了尚未取得owner的校准候选时，这笔请求不会有ADC事务，也不会有结果返回，不释放在途标志，AMI就永远不会再发起请求。在途标志清零后的下一拍，`o_calibration_sample_valid`与在途标志同为0，仲裁寄存器按当时有效的请求来源（周期重检优先于启动搜索，第11.2节）重新锁存类型、颜色和reason并拉高`o_calibration_sample_valid`（`:1357-1410`）；由于没有结果被消费，IDAC搜索状态未推进，重新发起的就是同一个候选。`reg_inflight_frame_type`、`reg_inflight_color_ir`和`reg_inflight_reason`不随截止事件清除，只在下一次请求握手时更新。在途标志为1期间`o_calibration_sample_valid`恒为0（握手当拍清valid、置在途），因此截止事件不会与本侧请求握手同拍冲突。~~调度器侧“截止与owner提交同拍”的开放观察项见C08第10.3节。~~ V2.4补记：该开放项已由scheduler RTL V1.9修复（截止事件以`!adc_owner_commit_event_o`屏蔽，owner在local tick 248当拍提交时不再发出），见C08 V1.12第10.3节。
 
@@ -1153,7 +1229,13 @@ precision_takeover_safe =
 - 重检禁止期间异常到达旧NORMAL结果；
 - 同一事务在任一fork分支重复消费。
 
-AMI历史协议sticky保持到异步复位，或在本地无活动blocking cause后由Top唯一注册式`i_diag_clear_event`清除。新合法START和STOP本身不得清除该历史诊断；START只建立新`run_generation`的运行上下文，不能覆盖未清除的故障历史。
+~~AMI历史协议sticky保持到异步复位，或在本地无活动blocking cause后由Top唯一注册式`i_diag_clear_event`清除。~~ V2.5改写（N-1、F-022，`ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o`）：AMI历史协议sticky保持到异步复位，或由Top唯一注册式`i_diag_clear_event`在下列任一条件成立时清除：
+- 无活跃集成阻断（`flag_integration_blocking == 0`）；
+- 当前RUN已由STOP结束且AMI排空（`flag_run_context_ended && o_datapath_empty`；`flag_run_context_ended`复位为1、START置0、STOP确认置1）。
+
+诊断清除只清历史，不释放阻断本身。新合法START和STOP本身不得清除该历史诊断；START只建立新`run_generation`的运行上下文，不能覆盖未清除的故障历史。
+
+`o_owner_lost_sticky`（§7.1a）采用同一规则：任一槽位作废置1，同拍诊断清除不得吞掉；诊断清除在“无活跃连续丢失阻断（lane 06未保持）或本RUN已由STOP结束且排空”时生效；START不清。
 
 ### 15.2 blocking fault
 
@@ -1165,7 +1247,15 @@ AMI历史协议sticky保持到异步复位，或在本地无活动blocking cause
 - 生产路径真实completion identity无法与当前owner匹配，或无法证明可用原owner执行合同允许的失败释放；
 - 第6.5b节production identity matcher拒绝的受保护错误completion identity。
 
+- V2.5补记：lane `8'h06`（同槽位连续丢失）与lane `8'h07`（ADC长期忙），§7.1a。
+
 blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复位结束当前RUN上下文。
+
+V2.5补记（按最终RTL写，`ppg_adc_measurement_idac_integration.v` `o_wrapper_fault_blocking`、`o_ami_fault_active`）：
+- `o_wrapper_fault_blocking = o_idac_fault_blocking || flag_precision_fault_blocking || flag_integration_blocking || flag_owner_lost_fault_hold || flag_adc_busy_fault_hold`。
+- `flag_integration_blocking`只在复位、START或abort时清零；**只以STOP结束RUN并排空后它仍为1**，所以`o_wrapper_fault_blocking`在这种情况下保持为高，直到下一次START或abort。
+- 各lane与`o_ami_fault_active`的落下条件见§6.11：lane 01/02/03/06/07在START、abort或“RUN已由STOP结束且AMI排空”时落下。因此只以STOP结束、排空完成、且lane 04/05也无活动时，`o_ami_fault_active`落下，supervisor的episode可以关闭，下一次START能被接受；历史诊断仍保留，可按§15.1诊断清除。
+- 这条“STOP结束且排空后lane落下”的规则修复了L-5（只以STOP结束的异常在空闲期仍保持lane 02/03）。在当前生产构建的系统级它不可观测：每次lane置位都会产生故障记录，supervisor随即abort，abort先清掉lane。因此它属于纵深防御，目前只在AMI单元级起作用（`verification_reports/OWNER_LIFECYCLE_ROUND_20261007.md` §7.1(c)）。
 
 ## 16. 禁止事项
 
@@ -1225,7 +1315,7 @@ blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复�
 | AMI-10 | 9-bit DC恢复 | 粗结果有效、精细结果无效、码值和epoch正确 |
 | AMI-11 | 15-bit DC恢复 | 粗细结果同事务有效且元数据完全一致 |
 | AMI-12 | DC恢复双fork | 检测和正式输出各消费一次；分别构造measurement先完成、detection反压及detection先完成、measurement反压，两种顺序下仍pending分支的全部payload及其独立sample-valid资格逐拍不变 |
-| AMI-13 | 输出同拍替换 | 旧事务两个分支最后消费与新事务装入同拍，无空泡和覆盖 |
+| AMI-13 | 输出同拍替换 | 旧事务两个分支最后消费与新事务装入同拍，无空泡和覆盖。V2.5原行补充：当前只有RTL结构证据（`flag_result_fork_all_released`），无动态证据；单元TB同号检查实测的是反压保持，对应关系见别名表 |
 | AMI-14 | 启动AMB搜索 | 请求只握手一次，匹配结果消费后才允许下一请求；V2.4原行补充：或调度器以`i_cal_owner_deadline_event`报告该请求已被owner截止抑制后，释放在途并重新握手同一候选（第11.3节，SID-05） |
 | AMI-15 | 启动DC_R/DC_IR | 颜色、码快照和epoch正确，搜索顺序闭合 |
 | AMI-16 | NORMAL慢速跟踪 | IDAC仅使用未恢复calibrated S1，调码不阻塞正式测量 |
@@ -1236,7 +1326,7 @@ blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复�
 | AMI-21 | STOP排空 | 禁止新start，已接受事务和正式输出全部真实排空 |
 | AMI-22 | abort在途 | 不产生迟到正式输出或控制提交，数据链最终回到empty |
 | AMI-23 | epoch与配置变化 | 已接受事务使用旧快照，新事务使用新快照，无跨事务混合 |
-| AMI-24 | blocking fault | 禁止新事务，sticky和fault保持到冻结清理事件 |
+| AMI-24 | blocking fault | 禁止新事务，sticky和fault保持到冻结清理事件。V2.5原行补充：冻结清理事件按§15.1/§15.2/§6.11——集成sticky与`o_owner_lost_sticky`由诊断清除在“无活跃阻断或RUN已由STOP结束且排空”时清，START不清；lane 01/02/03/06/07在START、abort或RUN结束排空时落下 |
 | AMI-25 | NORMAL边界同拍 | 两路输入同拍时precision和IDAC各消费一次，IDAC最多提交一次 |
 | AMI-26 | 快速校准IDAC边界 | 仅IDAC码和epoch允许更新，不触发精度、重检、FIR或safe frame ID动作 |
 | AMI-27 | 宏帧边界隔离 | 仅宏帧边界可驱动精度提交和AMB重检接管，不额外提交IDAC码 |
@@ -1251,8 +1341,8 @@ blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复�
 | AMI-36 | START启动边界隔离 | 启动边界不产生ADC fire、capture/S1上下文、宏帧/精度/重检动作或sample index变化，同一输入脉冲只消费一次 |
 | AMI-37 | 真实DONE资格 | 9-bit等待Stage1、15-bit等待Stage1/Stage2的同步DONE和RAW锁存；Q3、包络末沿、固定延时及ADC idle均不能完成owner |
 | AMI-38 | 完成身份逐字段匹配 | capture精度及S1上下文与owner的帧号、sample index、颜色、类型、码值和epoch逐位比较；原始owner仍可证明的内部处理失败使用原owner `success=0`释放，无法匹配或受保护错误identity注入不得释放owner并置阻断诊断 |
-| AMI-39 | abort迟到DONE | abort后保留旧owner identity；匹配真实DONE只产生一次原sample index、`success=0`释放旁带，不进入任何数据或IDAC链 |
-| AMI-40 | STOP在途排空 | STOP禁止新owner，旧owner等待真实DONE并完成受控排空；若测试错配已缓存真实DONE，则STOP以原identity产生一次`success=0`释放；不得清valid伪造idle、直接清owner或补发安全边界 |
+| AMI-39 | abort迟到DONE | abort后保留旧owner identity；匹配真实DONE只产生一次原sample index、`success=0`释放旁带，不进入任何数据或IDAC链。V2.5原行补充：DONE永不返回时，按§7.1a在年龄满T-lost且ADC空闲后作废，输出`o_adc_transaction_lost_event`与原sample index，不产生完成旁带 |
+| AMI-40 | STOP在途排空 | STOP禁止新owner，旧owner等待真实DONE并完成受控排空；若测试错配已缓存真实DONE，则STOP以原identity产生一次`success=0`释放；不得清valid伪造idle、直接清owner或补发安全边界。V2.5原行补充：唯一例外是§7.1a超时作废，它在排空期间同样计时，作废后`flag_adc_transaction_inflight`清0，排空不会因完成丢失而永久卡住 |
 | AMI-41 | reset后旧DONE | 复位清owner；释放复位后的旧DONE不产生完成旁带、不绑定新事务，等待物理ADC/DONE重新idle |
 | AMI-42 | 精度切换IDAC保持 | SAR9/SAR15切换不清RED/IR确认计数、tracking pending、committed码、epoch和饱和状态，也不因切换产生码提交 |
 | AMI-43 | CHARACTERIZATION档案与校准资格隔离 | 固定精度测量只进入measurement链；tracking分支valid/pending保持0，`o_calibration_sample_valid=0`，`o_dcs_r_track_adjust=0`且`o_dcs_ir_track_adjust=0`；启动MANUAL码提交完成后，测量结果不得使RED/IR pending重新置位；无manager校准计划输入 |
@@ -1279,7 +1369,7 @@ blocking fault发生后禁止新NORMAL和校准start；等待STOP、abort或复�
 - formatter-AST：0 error / 0 strict warning；
 - 独立Verilog lint：0 error / 0 warning；
 - Vivado `xvlog`和`xelab`通过；
-- xsim中AMI-01至AMI-52全部真实比较PASS；
+- xsim中~~AMI-01至AMI-52~~ AMI-01至AMI-54（V2.5：范围按第17节表格订正）全部真实比较PASS；这是要求，不是当前状态，当前证据状态见别名表AMI对照行与矩阵§13（ID=AMI-01～AMI-54）；
 - wrapper为顶层、包含十个真实子模块的Vivado OOC综合；
 - 综合0 error / 0 critical warning；
 - Latch = 0，Blackbox = 0，无组合环；

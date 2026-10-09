@@ -79,24 +79,25 @@
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-040 | OLR §8.4-1 R3；BR§3.6 | §7.1 内部ADC在途所有权；§7（"只有真实DONE释放owner"正文）；§17 AMI-39/AMI-40 | 一级 | 加超时作废规则：T-lost=4500拍从owner start fire起计年龄，ADC物理空闲且无捕获在途才作废；AMI为唯一裁决点；作废拍的序号语义；作废后旧DONE按无owner捕获被拒并升级；k=2按RED/IR/CAL槽位分别计数，同槽位真实完成清零。RTL锚点：`cnt_owner_age`、`flag_owner_lost_fire`、`cnt_lost_red/ir/cal`、`flag_owner_lost_limit_reached` | 待做 |
-| BMI-041 | OLR §8.2、§8.4-1；§7.2 F-6；BR§3.6 | §6.1 参数；§6.5a 或§6.9 端口表 | 一级 | 加`o_adc_transaction_lost_event`、`o_owner_lost_sticky`；参数`C_ADC_COMPLETION_LOST_CYCLES`、`C_ADC_COMPLETION_LOST_LIMIT`冻结为固定值4500/2，合法范围LIMIT 1~15、CYCLES<32768 | 待做 |
-| BMI-042 | OLR §8.2"端口语义扩展" | §6.5a ADC可靠完成旁带输出 | 一级 | `o_adc_complete_sample_index`在作废拍也有效；全部接收方以事件限定（调度器`flag_completion_match`/`flag_owner_lost_match`、SSW`flag_owner_release`/`flag_done_mismatch`） | 待做 |
-| BMI-043 | OLR §8.4-1；BR§3.6 | §6.10 discard原因表 | 一级 | 加`2'b11` COMPLETION_LOST（2位字段最后一个空位，以后新增原因须加宽字段）；作废discard身份取owner启动快照、`sample_valid=0`、对校准owner也发。RTL锚点：`DISCARD_REASON_COMPLETION_LOST` | 待做 |
-| BMI-044 | ABCD §12.8 F-019 | §6.10 | 一级 | discard身份取自正式输出当前持有的结果（`result_*_o`） | 待做 |
-| BMI-045 | OLR §8.4-1；§7.2 F-4；BR§3.6 | §6.11 AMI local fault-record arbitration（约第657~659行） | 一级 | 分发器扩为七路；改写F-4点名句：lane 01/02/03/06/07在START、abort、"RUN已由STOP结束且AMI排空"时清零，新故障置位优先。RTL锚点：`flag_ami_fault_dispatch_06/07`、`flag_run_context_drained` | 待做 |
-| BMI-046 | ABCD §12.8 F-022/N-1；OLR §8.4-1；BR§3.4 | §15.1 integration协议sticky | 一级 | 清除条件："无活跃集成阻断（`!flag_integration_blocking`），或当前RUN已由STOP结束且AMI排空"；START不清；`o_owner_lost_sticky`清除规则同N-1，START不清。RTL锚点：`flag_run_context_ended` | 待做 |
-| BMI-047 | ABCD §12.8；OLR §8.4-1、§8.4-10；BR§3.6 L-5、§3.12-2、§3.12-4、Q5 | §15.2 blocking fault；§6（lane生命周期） | 一级 | 按最终RTL直接写（不写过程）：STOP结束且排空后各lane与`o_ami_fault_active`落下；`o_wrapper_fault_blocking`仍含`flag_integration_blocking`，只在复位/START/abort清零（与OLR §8.4-1原文不符，按RTL写并在报告列差异）；历史诊断保留、可诊断清除；L-5修复在当前生产构建的系统级不可观测（supervisor abort先清lane），属纵深防御 | 待做 |
-| BMI-048 | OLR §8.4-1；§7.2 F-3；BR§3.6 | §6.4 ADC异步物理结果输入或§7（新增"捕获窗口前提"） | 一级 | 约2拍竞争窗口写成合同前提：窗口内到达的完成先被作废，之后按无owner捕获被拒并升级，可经STOP→诊断清除→COMMIT→START恢复；作废后在下一笔start当拍或之后到达的旧DONE会绑定新事务，错绑结果以success=1正式输出（F-3）；不改`async_stage_capture` | 待做 |
-| BMI-049 | OLR §8.4-1；§7.2 F-1、F-2；BR§3.6 | 已知限制（§15.2或§16后） | 一级 | ① 同槽位间歇丢失、从不连续丢两次时不升级（每次有discard 11与lost sticky）；② F-1：双光IR丢失与精度切换挂起同帧时，作废约mt4810晚于提交点mt4760，10000拍后切换超时报cause 04→abort+STOP，诊断清除后可重启（"单次丢失不升级"的例外）；③ F-2：第k次作废落在STOP排空末尾时lane 06只保持1拍，cause 06在回到CONFIG后才开episode，manager记0x0C，START前须先诊断清除 | 待做 |
-| BMI-050 | OLR §8.4-8；§2.2；BR§3.6 | §3 集成模块范围（S1冗余校正器部分）或对应小节 | 一级 | 冗余校正器新端口`i_transaction_abandon`、布防丢弃规则（`flag_capture_drop_armed`/`flag_capture_drop`）、`o_capture_ready`在布防期间可接收并丢弃、三种时序（OLR §2.2） | 待做 |
-| BMI-051 | ABCD §12.8 F-021 | §8.4 NORMAL双分支 / §10.2 检测分支 | 一级 | 补"检测分支自有样本资格"。RTL锚点：`flag_detection_branch_sample_valid` | 待做 |
-| BMI-052 | OLR §8.2 | §11 校准请求仲裁 | 一级 | `flag_calibration_request_inflight`清零源加入撤销合并（`flag_calibration_request_withdraw`、`flag_recheck_request_withdraw`），与F-020一致（见BMI-090） | 待做 |
-| BMI-053 | ABCD §12.8 F-002/F-008；F28 §3；BR§3.4 | §6.7 正式PPG测量输出（`o_measurement_result_discard_*`）；§8/§9中`i_datapath_discard_*` | 一级 | 收窄为RTL实际6字段`frame_id`、`sample_index`、`color_ir`、`frame_type`、`precision`、`run_generation`（正式结果组另有`sample_valid`）；改用缩小身份组名（拟`TXN_KEY`，见BMI-120）；措辞"在16位计数回绕窗口内唯一"；"按代际匹配（generation-scoped），身份字段仅作诊断" | 待做 |
-| BMI-054 | IDF G4/G5；IDG S1 | 文件头:27/:30；§18 门禁（:1282）；:1340 | 一级 | 范围订正："AMI-46至AMI-55"→表格实际上限AMI-54；"AMI-01至AMI-52全部真实比较PASS"与表格/单元TB不一致；"45项真实比较且全部PASS"加限定（AMI-13同号不同义、27条部分覆盖） | 待做 |
-| BMI-055 | IDF §1.1 T1；IDG §8 | §17 AMI-13 | 一级 | 合同AMI-13记为"无动态证据"（只有RTL结构`flag_result_fork_all_released`）；TB标签改名见BMI-142 | 待做 |
+| BMI-040 | OLR §8.4-1 R3；BR§3.6 | §7.1 内部ADC在途所有权；§7（"只有真实DONE释放owner"正文）；§17 AMI-39/AMI-40 | 一级 | 加超时作废规则：T-lost=4500拍从owner start fire起计年龄，ADC物理空闲且无捕获在途才作废；AMI为唯一裁决点；作废拍的序号语义；作废后旧DONE按无owner捕获被拒并升级；k=2按RED/IR/CAL槽位分别计数，同槽位真实完成清零。RTL锚点：`cnt_owner_age`、`flag_owner_lost_fire`、`cnt_lost_red/ir/cal`、`flag_owner_lost_limit_reached` | 已完成（C10 V2.5） |
+| BMI-041 | OLR §8.2、§8.4-1；§7.2 F-6；BR§3.6 | §6.1 参数；§6.5a 或§6.9 端口表 | 一级 | 加`o_adc_transaction_lost_event`、`o_owner_lost_sticky`；参数`C_ADC_COMPLETION_LOST_CYCLES`、`C_ADC_COMPLETION_LOST_LIMIT`冻结为固定值4500/2，合法范围LIMIT 1~15、CYCLES<32768 | 已完成（C10 V2.5） |
+| BMI-042 | OLR §8.2"端口语义扩展" | §6.5a ADC可靠完成旁带输出 | 一级 | `o_adc_complete_sample_index`在作废拍也有效；全部接收方以事件限定（调度器`flag_completion_match`/`flag_owner_lost_match`、SSW`flag_owner_release`/`flag_done_mismatch`） | 已完成（C10 V2.5） |
+| BMI-043 | OLR §8.4-1；BR§3.6 | §6.10 discard原因表 | 一级 | 加`2'b11` COMPLETION_LOST（2位字段最后一个空位，以后新增原因须加宽字段）；作废discard身份取owner启动快照、`sample_valid=0`、对校准owner也发。RTL锚点：`DISCARD_REASON_COMPLETION_LOST` | 已完成（C10 V2.5） |
+| BMI-044 | ABCD §12.8 F-019 | §6.10 | 一级 | discard身份取自正式输出当前持有的结果（`result_*_o`） | 已完成（C10 V2.5） |
+| BMI-045 | OLR §8.4-1；§7.2 F-4；BR§3.6 | §6.11 AMI local fault-record arbitration（约第657~659行） | 一级 | 分发器扩为七路；改写F-4点名句：lane 01/02/03/06/07在START、abort、"RUN已由STOP结束且AMI排空"时清零，新故障置位优先。RTL锚点：`flag_ami_fault_dispatch_06/07`、`flag_run_context_drained` | 已完成（C10 V2.5） |
+| BMI-046 | ABCD §12.8 F-022/N-1；OLR §8.4-1；BR§3.4 | §15.1 integration协议sticky | 一级 | 清除条件："无活跃集成阻断（`!flag_integration_blocking`），或当前RUN已由STOP结束且AMI排空"；START不清；`o_owner_lost_sticky`清除规则同N-1，START不清。RTL锚点：`flag_run_context_ended` | 已完成（C10 V2.5） |
+| BMI-047 | ABCD §12.8；OLR §8.4-1、§8.4-10；BR§3.6 L-5、§3.12-2、§3.12-4、Q5 | §15.2 blocking fault；§6（lane生命周期） | 一级 | 按最终RTL直接写（不写过程）：STOP结束且排空后各lane与`o_ami_fault_active`落下；`o_wrapper_fault_blocking`仍含`flag_integration_blocking`，只在复位/START/abort清零（与OLR §8.4-1原文不符，按RTL写并在报告列差异）；历史诊断保留、可诊断清除；L-5修复在当前生产构建的系统级不可观测（supervisor abort先清lane），属纵深防御 | 已完成（C10 V2.5） |
+| BMI-048 | OLR §8.4-1；§7.2 F-3；BR§3.6 | §6.4 ADC异步物理结果输入或§7（新增"捕获窗口前提"） | 一级 | 约2拍竞争窗口写成合同前提：窗口内到达的完成先被作废，之后按无owner捕获被拒并升级，可经STOP→诊断清除→COMMIT→START恢复；作废后在下一笔start当拍或之后到达的旧DONE会绑定新事务，错绑结果以success=1正式输出（F-3）；不改`async_stage_capture` | 已完成（C10 V2.5） |
+| BMI-049 | OLR §8.4-1；§7.2 F-1、F-2；BR§3.6 | 已知限制（§15.2或§16后） | 一级 | ① 同槽位间歇丢失、从不连续丢两次时不升级（每次有discard 11与lost sticky）；② F-1：双光IR丢失与精度切换挂起同帧时，作废约mt4810晚于提交点mt4760，10000拍后切换超时报cause 04→abort+STOP，诊断清除后可重启（"单次丢失不升级"的例外）；③ F-2：第k次作废落在STOP排空末尾时lane 06只保持1拍，cause 06在回到CONFIG后才开episode，manager记0x0C，START前须先诊断清除 | 已完成（C10 V2.5） |
+| BMI-050 | OLR §8.4-8；§2.2；BR§3.6 | §3 集成模块范围（S1冗余校正器部分）或对应小节 | 一级 | 冗余校正器新端口`i_transaction_abandon`、布防丢弃规则（`flag_capture_drop_armed`/`flag_capture_drop`）、`o_capture_ready`在布防期间可接收并丢弃、三种时序（OLR §2.2） | 已完成（C10 V2.5） |
+| BMI-051 | ABCD §12.8 F-021 | §8.4 NORMAL双分支 / §10.2 检测分支 | 一级 | 补"检测分支自有样本资格"。RTL锚点：`flag_detection_branch_sample_valid` | 已完成（C10 V2.5） |
+| BMI-052 | OLR §8.2 | §11 校准请求仲裁 | 一级 | `flag_calibration_request_inflight`清零源加入撤销合并（`flag_calibration_request_withdraw`、`flag_recheck_request_withdraw`），与F-020一致（见BMI-090） | 已完成（C10 V2.5） |
+| BMI-053 | ABCD §12.8 F-002/F-008；F28 §3；BR§3.4 | §6.7 正式PPG测量输出（`o_measurement_result_discard_*`）；§8/§9中`i_datapath_discard_*` | 一级 | 收窄为RTL实际6字段`frame_id`、`sample_index`、`color_ir`、`frame_type`、`precision`、`run_generation`（正式结果组另有`sample_valid`）；改用缩小身份组名（拟`TXN_KEY`，见BMI-120）；措辞"在16位计数回绕窗口内唯一"；"按代际匹配（generation-scoped），身份字段仅作诊断" | 已完成（C10 V2.5） |
+| BMI-054 | IDF G4/G5；IDG S1 | 文件头:27/:30；§18 门禁（:1282）；:1340 | 一级 | 范围订正："AMI-46至AMI-55"→表格实际上限AMI-54；"AMI-01至AMI-52全部真实比较PASS"与表格/单元TB不一致；"45项真实比较且全部PASS"加限定（AMI-13同号不同义、27条部分覆盖） | 已完成（C10 V2.5） |
+| BMI-055 | IDF §1.1 T1；IDG §8 | §17 AMI-13 | 一级 | 合同AMI-13记为"无动态证据"（只有RTL结构`flag_result_fork_all_released`）；TB标签改名见BMI-142 | 已完成（C10 V2.5） |
 | BMI-056 | IDG §8 AMI-24 | — | 登记 | AMI-24可能空真（`!o_wrapper_fault_blocking || !o_transaction_start_ready`在无阻断时恒真），需改TB判定，按BR Q6只登记、交收尾计划 | 不做（改TB判定，BR Q6） |
 | BMI-057 | ABCD §12.8"观察项" | AMI约2085行注释"overlap只比较该字段" | RTL疑点 | 注释与实现不符（F28 §1旁注），不在BR§3.9点名范围，不改；写入报告"RTL疑点"一节 | 不做（只登记） |
+| BMI-058 | 阶段2改写C10时发现（RTL核对） | C10 §6.11私有datapath discard扇出 | 一级 | 原文写扇出到NORMAL fork、Router、overlap、reconstructor和DC recovery；RTL中只有`ppg_normal_transaction_fork`与`ppg_adc_pipeline_overlap_corrector`有`i_datapath_discard_*`端口。按RTL订正，其余各级的清除方式指向各自合同（C12/C14/C15）；矩阵对应行（约第637行）随矩阵提交订正 | 已完成（C10 V2.5） |
 
 ## 4. C13 / C01 / 矩阵§1.1 身份组（F-002/F-008）
 
