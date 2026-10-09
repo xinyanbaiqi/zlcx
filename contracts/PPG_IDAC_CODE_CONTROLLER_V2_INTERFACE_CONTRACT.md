@@ -1,6 +1,7 @@
 # PPG IDAC码控制器V2逐端口接口合同
 
-> Current normative version: V2.3, 2026-08-30. Bucket-1 RTL session (dedicated SID-11+LFA-06+OIB-01+LFA-10(b) session): adds module parameter `C_ENABLE_TEST_INJECTION`（默认0，生产网表必须为0）and a verification-only injection pair `i_test_saturation_inject_valid`/`o_test_saturation_inject_ready`，与AMI已有的`i_test_identity_inject_*`同一约定：只在`C_ENABLE_TEST_INJECTION!=0`且`i_test_inject_enable=1`时可用，`o_test_saturation_inject_ready`只在真实AMB/DCS样本本拍参与`flag_amb_sample_qualified`/`flag_dcs_sample_qualified`判定时可以接纳，直接覆盖判据里的双向饱和判据项，不touch共享的`i_search_saturation_low`/`i_search_saturation_high`输入线（第一版曾尝试force这两根共享网线导致污染其它真实消费者，见SID-11原始调查记录）。用于真实构造SID-11（此前记录为结构性不可达的双向饱和拒绝路径，因为真实RAW值无法让两个饱和标志同时为真）。真实证据：`tb_ppg_control_top_startup_idac_calibration.v` SID-11（V1.1，iverilog+Vivado 2022.2 xsim双工具confirmed）。不改变本合同任何既有IDC2-XX编号条款的行为，不touch任何既有生产信号路径。
+> V2.4修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-080~082，按基线`7a8eabf` IDAC RTL V2.4改写）：§8.4末句与IDC2-17原文写“AMB码未实际改变时不得产生/不请求DCS重验”，与C16 §9.6/§18、C10 AMI-18、C08 FSC-21、C25 RRC-06及RTL相反（F-033），按RTL订正（原文保留于删除线中）。RTL端口`i_status_clear_event`已改名为`i_diag_clear_event`（F-032，IDAC RTL V2.4），本合同端口表原已使用`i_diag_clear_event`，无需改动。
+> Current normative version: ~~V2.3, 2026-08-30~~ V2.4, 2026-10-09（V2.3记录日期2026-08-30）. Bucket-1 RTL session (dedicated SID-11+LFA-06+OIB-01+LFA-10(b) session): adds module parameter `C_ENABLE_TEST_INJECTION`（默认0，生产网表必须为0）and a verification-only injection pair `i_test_saturation_inject_valid`/`o_test_saturation_inject_ready`，与AMI已有的`i_test_identity_inject_*`同一约定：只在`C_ENABLE_TEST_INJECTION!=0`且`i_test_inject_enable=1`时可用，`o_test_saturation_inject_ready`只在真实AMB/DCS样本本拍参与`flag_amb_sample_qualified`/`flag_dcs_sample_qualified`判定时可以接纳，直接覆盖判据里的双向饱和判据项，不touch共享的`i_search_saturation_low`/`i_search_saturation_high`输入线（第一版曾尝试force这两根共享网线导致污染其它真实消费者，见SID-11原始调查记录）。用于真实构造SID-11（此前记录为结构性不可达的双向饱和拒绝路径，因为真实RAW值无法让两个饱和标志同时为真）。真实证据：`tb_ppg_control_top_startup_idac_calibration.v` SID-11（V1.1，iverilog+Vivado 2022.2 xsim双工具confirmed）。不改变本合同任何既有IDC2-XX编号条款的行为，不touch任何既有生产信号路径。
 > Current normative version: V2.2, 2026-08-20. Status: `ACTIVE_NORMATIVE`; the V2 interface remains normative, but the system closure verdict is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`.
 > V2.2 change record: adds the previously omitted formal `C_RUN_GENERATION_WIDTH` parameter to the parameter table and requires the AMI equality check. No IDAC search, tracking, fault or code-epoch semantic changes.  
 > Historical V2.2 freeze date: 2026-08-07.
@@ -500,7 +501,7 @@ o_startup_search_complete == 1
 7. 两个启用颜色均恢复窗口后产生单拍`o_dcs_revalidate_done`；任一路耗尽产生单拍
    `o_dcs_revalidate_failed`并置对应阻断故障。
 
-AMB码未实际改变时不得产生`o_dcs_revalidate_request`。该request为电平握手，不得实现为可能丢失的单拍。
+~~AMB码未实际改变时不得产生`o_dcs_revalidate_request`。~~ V2.4改写（F-033）：只要`i_dcs_enable=1`，周期AMB阶段成功结束后，无论AMB码是否实际改变，都必须产生`o_dcs_revalidate_request`（`ppg_idac_code_controller.v` `ST_DCS_REVALIDATE_WAIT`；`o_dcs_revalidate_request = (state_current == ST_DCS_REVALIDATE_WAIT)`，周期AMB在窗口内时同样进入该状态），与C16 §9.6一致。该request为电平握手，不得实现为可能丢失的单拍。
 
 ## 9. 搜索算法冻结
 
@@ -667,7 +668,7 @@ NORMAL_PPG不得把`o_controller_fault_blocking==1`后的数据标记为正式�
 | IDC2-14 | pending等待 | tracking继续被消费但不覆盖pending |
 | IDC2-15 | 安全提交 | 实际改码、epoch加1、update单拍；track来源另有track_adjust |
 | IDC2-16 | min/max继续越界 | 不回绕、不虚假update、不递增epoch |
-| IDC2-17 | 周期AMB在窗口 | done单拍，AMB码/epoch不变，不请求DCS重验 |
+| IDC2-17 | 周期AMB在窗口 | done单拍，AMB码/epoch不变，~~不请求DCS重验~~ V2.4改写（F-033）：`i_dcs_enable=1`时仍请求DCS重验（`o_dcs_revalidate_request`），两路DC在窗口内时保持原码与epoch |
 | IDC2-18 | 周期AMB重搜改码 | AMB epoch更新，成功后保持DCS revalidate request至accept |
 | IDC2-19 | DCS重验证 | 依次检查R/IR，全部成功才产生done |
 | IDC2-20 | 双入口冲突 | 最多接纳一笔并置protocol error，不混合载荷 |
