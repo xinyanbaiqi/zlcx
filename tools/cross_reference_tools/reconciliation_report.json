@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-09T20:25:24",
+  "generated_at": "2026-10-09T23:13:29",
   "counts": {
-    "A_CONSISTENT": 287,
+    "A_CONSISTENT": 288,
     "B_TAG_MISSING": 22,
     "D_PENDING_KNOWN": 1,
     "E_STALE_MATRIX_TEXT": 16
@@ -445,7 +445,7 @@
         {
           "tb": "见上方6行peak_valley_config_valid链 + Acceptance-D01-01真实动态证据(上一行)",
           "rtl": "见上方各行,本行仅做ID层级汇总,不重复登记RTL位置",
-          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3367-3373,12.14批次4新增记录`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a(2026-09-10同上订正,同一行号漂移原因)——D01汇总关系本身核实无误:12.14节仍确认D01`CLOSED`,3591行\"D01 V5 chain\"收尾行状态字样与之一致,汇总关系未过期**",
+          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3367-3373,12.14批次4新增记录`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a(2026-09-10同上订正,同一行号漂移原因)——D01汇总关系本身核实无误PPG_CONTRACT_CLOSURE_MATRIX.md §12.14节仍确认D01`CLOSED`,3591行\"D01 V5 chain\"收尾行状态字样与之一致,汇总关系未过期**",
           "no_mapping": false,
           "row": "D01 (裸ID汇总行,批次4(2026-09-07)后更新——定义性/wiring锚点上面6行 + 动态安全排空Acceptance-D01-01均已有真实证据,D01整体状态从`PARTIAL`改为`CLOSED`;**本行故意不重复书写另一个ID的编号本身,避免被脚本误当成那一行的映射证据**)"
         }
@@ -494,7 +494,7 @@
         {
           "tb": "见上方6行peak_valley_config_valid链 + Acceptance-D01-01真实动态证据(上一行)",
           "rtl": "见上方各行,本行仅做ID层级汇总,不重复登记RTL位置",
-          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3367-3373,12.14批次4新增记录`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a(2026-09-10同上订正,同一行号漂移原因)——D01汇总关系本身核实无误:12.14节仍确认D01`CLOSED`,3591行\"D01 V5 chain\"收尾行状态字样与之一致,汇总关系未过期**",
+          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:3367-3373,12.14批次4新增记录`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a(2026-09-10同上订正,同一行号漂移原因)——D01汇总关系本身核实无误PPG_CONTRACT_CLOSURE_MATRIX.md §12.14节仍确认D01`CLOSED`,3591行\"D01 V5 chain\"收尾行状态字样与之一致,汇总关系未过期**",
           "no_mapping": false,
           "row": "D01 (裸ID汇总行,批次4(2026-09-07)后更新——定义性/wiring锚点上面6行 + 动态安全排空Acceptance-D01-01均已有真实证据,D01整体状态从`PARTIAL`改为`CLOSED`;**本行故意不重复书写另一个ID的编号本身,避免被脚本误当成那一行的映射证据**)"
         }
@@ -583,7 +583,7 @@
       "alias_rows": [
         {
           "tb": "无(产品/架构决策,非仿真项,与G-FP-04/G-FP-07/L01/N07/P12同证据类别)",
-          "rtl": "N/A — 2026-09-05 `FROZEN`:`i_analog_ready`是一次性启动资格电平非时变收敛过程(`ppg_control_top.v:120`);`o_analog_safe`/`i_analog_safe`是SSW自身数字波形驱动态的反相(`ppg_sar9_sar15_safe_selection_wrapper.v:480`),非模拟反馈信号;芯片模拟设计师确认这是硬接线偏置的实验室测试芯片,无收敛动态。`o_ssw_fault_cause`仍只映射`8'h21`(`ppg_sar9_sar15_safe_selection_wrapper.v:440,495-496`)",
+          "rtl": "N/A — 2026-09-05 `FROZEN`:`i_analog_ready`是一次性启动资格电平非时变收敛过程(`ppg_control_top.v` `i_analog_ready`、`o_analog_safe`);`o_analog_safe`/`i_analog_safe`是SSW自身数字波形驱动态的反相(`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`),非模拟反馈信号;芯片模拟设计师确认这是硬接线偏置的实验室测试芯片,无收敛动态。`o_ssw_fault_cause`仍只映射`8'h21`(`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`、`o_ssw_fault_cause`)",
           "source": "PPG_CONTRACT_CLOSURE_MATRIX.md §12.9–§12.10(§12.12b完整决策记录,含证据链1-3与Scope of this decision段落);同一结论摘要复述见PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C15行(§12.7 C09 SSW行,\"Resolved 2026-09-05 (see 12.12b/D03)\");memory [[project-ppg-p3-analog-safe-convergence-resolved-20260905]] — 2026-09-11 D2_NO_STATUS_FOUND批次1独立复核:两处文字现状与结论仍一致,未过期,登记既有证据非新调查",
           "no_mapping": false,
           "row": "D03 (SSW cause `8'h22`独立模拟收敛检测器,不适用性产品决策)"
@@ -633,7 +633,7 @@
         {
           "tb": "`tb_ppg_coarse_detection_fir.v` `\"FIR-01 asynchronous reset\"` 用例名\"FIR-01 asynchronous reset\";条件`o_result_valid == 1'b0 && o_history_full_r == 1'b0 && o_history_full_ir == 1'b0 && o_fir_idle ==…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_coarse_detection_fir/xsim.log:17`",
           "rtl": "`ppg_coarse_detection_fir.v` `result_valid_o`(`result_valid_o <= 1'b0`)",
-          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(异步复位);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言在\"处女态\"（从未收过事务）时复位，\"撤销MAC\"零覆盖；载荷/诊断端口复位值、精确零计数均零覆盖。已补3条新check_condition（`tb_ppg_coarse_detection_fir.v:724`载荷诊断冻结值、`:725`层次化`dut.cnt_red_sample`/`dut.cnt_ir_sample`精确零、`:729-730`真实在途MAC复位撤销，先确认`dut.state_current==2'b01`证明复位前MAC真的在途）；变异测试确认复位不清`state_current`的mutant会让新断言FAIL（含下游级联失败，交叉确认）；2026-09-17回归PASS（103/103）`xsim.log:18-21`**",
+          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(异步复位);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言在\"处女态\"（从未收过事务）时复位，\"撤销MAC\"零覆盖；载荷/诊断端口复位值、精确零计数均零覆盖。已补3条新check_condition（`tb_ppg_coarse_detection_fir.v` `\"FIR-01 asynchronous reset\"`载荷诊断冻结值、`tb_ppg_coarse_detection_fir.v` `\"FIR-01 asynchronous reset\"`层次化`dut.cnt_red_sample`/`dut.cnt_ir_sample`精确零、`tb_ppg_coarse_detection_fir.v` `\"FIR-01 payload and diagnostics freeze to reset value\"`、`\"FIR-01 sample counts exactly zero after reset\"`真实在途MAC复位撤销，先确认`dut.state_current==2'b01`证明复位前MAC真的在途）；变异测试确认复位不清`state_current`的mutant会让新断言FAIL（含下游级联失败，交叉确认）；2026-09-17回归PASS（103/103）`xsim.log:18-21`**",
           "no_mapping": false,
           "row": "FIR-01"
         }
@@ -1191,7 +1191,7 @@
         {
           "tb": "`tb_ppg_coarse_detection_fir.v` `\"FIR-19 non-NORMAL input ignored\"`、`\"自检TB必须报告该错误\"` 用例名\"FIR-19 non-NORMAL input ignored\";条件`o_history_full_r == 1'b0 && o_result_valid == 1'b0`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_coarse_detection_fir/xsim.log:63`",
           "rtl": "`ppg_coarse_detection_fir.v` `flag_history_transfer`(`assign flag_history_transfer = flag_input_transfer && i_sample_valid &…`)",
-          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(非NORMAL输入);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认合同`:95`明文\"自检TB必须报告该错误\"从未实现，原断言只覆盖\"不移动历史\"半句。已新增`cnt_protocol_violation_report`计数器（依据真实驱动的`i_frame_type`而非硬编码判定，声明于`tb_ppg_coarse_detection_fir.v:153`附近）+`[PROTOCOL_ERROR]`真实`$display`告警+新断言`cnt_protocol_violation_report==1`（`tb_ppg_coarse_detection_fir.v:852`）；2026-09-17回归PASS（103/103），告警行与新断言见`xsim.log:67-69`**",
+          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(非NORMAL输入);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认合同PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §3.2明文\"自检TB必须报告该错误\"从未实现，原断言只覆盖\"不移动历史\"半句。已新增`cnt_protocol_violation_report`计数器（依据真实驱动的`i_frame_type`而非硬编码判定，声明于`tb_ppg_coarse_detection_fir.v` `\"FIR-19 non-NORMAL input ignored\"`、`\"自检TB必须报告该错误\"`附近）+`[PROTOCOL_ERROR]`真实`$display`告警+新断言`cnt_protocol_violation_report==1`（`tb_ppg_coarse_detection_fir.v` `\"FIR-19 non-NORMAL input ignored\"`、`\"自检TB必须报告该错误\"`）；2026-09-17回归PASS（103/103），告警行与新断言见`xsim.log:67-69`**",
           "no_mapping": false,
           "row": "FIR-19"
         }
@@ -1251,7 +1251,7 @@
         {
           "tb": "`tb_ppg_coarse_detection_fir.v` `\"FIR-21 bounded input backpressure\"`(共2处调用,另见`tb_ppg_coarse_detection_fir.v` `\"FIR-21 bounded input backpressure\"`) 用例名\"FIR-21 bounded input backpressure\";条件`o_result_ready == 1'b0 && i_coarse_ppg_value == reg_held_payload[23:0]`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_coarse_detection_fir/xsim.log:69`(共5行PASS)",
           "rtl": "`ppg_coarse_detection_fir.v` `o_result_ready`(`assign o_result_ready = i_rstn && i_run_enable && (i_recheck_busy == 1…`)",
-          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(MAC有界反压);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认\"输入载荷保持\"子句原断言是TB拿`i_coarse_ppg_value`跟自己`:855`抄的副本比（零DUT信息量，且独立核实`ppg_coarse_detection_fir.v:406`的`o_result_ready`纯组合、DUT在ready=0时本就不锁存输入，不存在可比对的DUT侧保持寄存器）；\"只消费一次\"原断言是近乎恒真析取式。已改用层次化`dut.cnt_ir_sample`计数：反压前后各取一次快照（`cnt_ir_snapshot`），busy期间核对计数不变（`tb_ppg_coarse_detection_fir.v:874-878`），解除后核对精确`+1`（`:887`）；2026-09-17回归PASS（103/103）`xsim.log:75-79`**",
+          "source": "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §16(MAC有界反压);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认\"输入载荷保持\"子句原断言是TB拿`i_coarse_ppg_value`跟自己PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §18抄的副本比（零DUT信息量，且独立核实`ppg_coarse_detection_fir.v` `o_result_ready`的`o_result_ready`纯组合、DUT在ready=0时本就不锁存输入，不存在可比对的DUT侧保持寄存器）；\"只消费一次\"原断言是近乎恒真析取式。已改用层次化`dut.cnt_ir_sample`计数：反压前后各取一次快照（`cnt_ir_snapshot`），busy期间核对计数不变（`tb_ppg_coarse_detection_fir.v` `\"FIR-21 bounded input backpressure\"`），解除后核对精确`+1`（`tb_ppg_coarse_detection_fir.v` `\"FIR-21 bounded input backpressure\"`）；2026-09-17回归PASS（103/103）`xsim.log:75-79`**",
           "no_mapping": false,
           "row": "FIR-21"
         }
@@ -2151,14 +2151,14 @@
         {
           "tb": "无独立TB场景",
           "rtl": "`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_ir_context_valid`、`flag_red_context_valid`",
-          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:2968`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C15行 (2026-09-10 Stage2批次1订正:2968现指向G-FP-01港口账12.5节`o_measurement_result_discard_color_ir`行,与本ID无关——矩阵12.6节`G-FP-05/06`等新增内容使行号整体下移,真实证据行是3033)**",
+          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:2968`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C15行 (2026-09-10 Stage2批次1订正PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C14行现指向G-FP-01港口账12.5节`o_measurement_result_discard_color_ir`行,与本ID无关——矩阵12.6节`G-FP-05/06`等新增内容使行号整体下移,真实证据行是3033)**",
           "no_mapping": false,
           "row": "G-FP-02 (SSW波形上下文owner)"
         },
         {
           "tb": "无独立TB场景",
           "rtl": "`ppg_precision_window_controller.v` `flag_enter_commit`、`flag_return_commit`、`flag_pending_state`、`flag_lifecycle_cancel`",
-          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:2970`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C15行 (2026-09-10 Stage2批次1订正,同上行原因:2970同样落在12.5节G-FP-01港口账里,真实证据行是3035)**",
+          "source": "~~`PPG_CONTRACT_CLOSURE_MATRIX.md:2970`~~ **PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C15行 (2026-09-10 Stage2批次1订正,同上行原因PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C14行同样落在12.5节G-FP-01港口账里,真实证据行是3035)**",
           "no_mapping": false,
           "row": "G-FP-02 (C23精度切换pending)"
         }
@@ -2472,7 +2472,7 @@
       "alias_rows": [
         {
           "tb": "无独立TB场景",
-          "rtl": "`ppg_config_cdc_bridge.v`(~~双向双触发器,含复位~~ **2026-09-13 Stage3 Item4a逐行核实订正:\"双触发器\"字面表述有歧义,容易误读成对整条总线(该实例`ppg_active_v4_control_plane_integration.v:379`以`C_CONFIG_WIDTH=1024`调用)直接打两级触发器——逐行trace后确认实际实现不是这样,是三分类CDC账本的Class 3\"专用更新事件+目标域本地锁存\"范式(与DBG_OUT V1.14修复同一模式,非同一bug):源域`reg_source_config`(:66)仅在`!flag_source_busy`时更新(:124-132,与`flag_source_request`翻转同一时钟沿),因此从请求翻转起到应答完成整个往返期间总线值绝对静止;目标域`destination_config_o`(:112-120)只在检测到已用标准翻转+2级同步器(:163-179,核心结构与`ppg_pulse_cdc_sync.v`一致)确认过的新事务时整体原子捕获这个早已静止的总线,不对总线本身打任何触发器。\"双触发器\"这三个字真正对应的是`flag_request_sync_meta/stable`(:76-78)和`flag_ack_sync_meta/stable`(:72-74)这两条单bit握手标志各自的2级同步链,不是数据总线——1024-bit/123-bit(`ppg_dual_precision_top.v:338`)/6-bit(`ppg_characterization_control_cdc.v:210`)三处实例化全部复用同一份RTL,结论对三者同时成立,机制核实无误,原表述保留其\"双触发器\"用词但缺乏精度,现予以澄清,不视为真实缺陷** **2026-09-15 Item4b Phase4追加交叉引用**：本行手工核实的判定，已被Item 4b机器可核对台账独立复算并再次确认——`PPG_CONTRACT_CLOSURE_MATRIX.md`§9.2（第9.2.2段 Whitelist IP real instance census）`ppg_config_cdc_bridge.v`真实可达实例census（1024-bit`ppg_active_v4_control_plane_integration.v:379`+6-bit`ppg_characterization_control_cdc.v:210`两个可达实例，123-bit那个确认在孤儿模块`ppg_dual_precision_top.v`内不计入真实芯片）与§9.2.4 Class 3(a)白名单自洽性检查（把这份RTL自己的门控捕获结构单独喂给同一套Class 3判据，不靠\"这是白名单\"这句话兜底，独立得出安全结论），两者结论一致，互为交叉印证 )",
+          "rtl": "`ppg_config_cdc_bridge.v`(~~双向双触发器,含复位~~ **2026-09-13 Stage3 Item4a逐行核实订正:\"双触发器\"字面表述有歧义,容易误读成对整条总线(该实例`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`以`C_CONFIG_WIDTH=1024`调用)直接打两级触发器——逐行trace后确认实际实现不是这样,是三分类CDC账本的Class 3\"专用更新事件+目标域本地锁存\"范式(与DBG_OUT V1.14修复同一模式,非同一bug):源域`reg_source_config`(`ppg_config_cdc_bridge.v` `reg_source_config`)仅在`!flag_source_busy`时更新(`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`,与`flag_source_request`翻转同一时钟沿),因此从请求翻转起到应答完成整个往返期间总线值绝对静止;目标域`destination_config_o`(`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`)只在检测到已用标准翻转+2级同步器(`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`,核心结构与`ppg_pulse_cdc_sync.v`一致)确认过的新事务时整体原子捕获这个早已静止的总线,不对总线本身打任何触发器。\"双触发器\"这三个字真正对应的是`flag_request_sync_meta/stable`(`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`)和`flag_ack_sync_meta/stable`(`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`)这两条单bit握手标志各自的2级同步链,不是数据总线——1024-bit/123-bit(`ppg_dual_precision_top.v` `C_CONFIG_WIDTH`)/6-bit(`ppg_characterization_control_cdc.v` `C_CONFIG_WIDTH`)三处实例化全部复用同一份RTL,结论对三者同时成立,机制核实无误,原表述保留其\"双触发器\"用词但缺乏精度,现予以澄清,不视为真实缺陷** **2026-09-15 Item4b Phase4追加交叉引用**：本行手工核实的判定，已被Item 4b机器可核对台账独立复算并再次确认——`PPG_CONTRACT_CLOSURE_MATRIX.md`§9.2（第9.2.2段 Whitelist IP real instance census）`ppg_config_cdc_bridge.v`真实可达实例census（1024-bit`ppg_active_v4_control_plane_integration.v` `C_CONFIG_WIDTH`+6-bit`ppg_characterization_control_cdc.v` `C_CONFIG_WIDTH`两个可达实例，123-bit那个确认在孤儿模块`ppg_dual_precision_top.v`内不计入真实芯片）与§9.2.4 Class 3(a)白名单自洽性检查（把这份RTL自己的门控捕获结构单独喂给同一套Class 3判据，不靠\"这是白名单\"这句话兜底，独立得出安全结论），两者结论一致，互为交叉印证 )",
           "source": "PPG_CONTRACT_CLOSURE_MATRIX.md §12.5 C10行；`PPG_CONTRACT_CLOSURE_MATRIX.md`§9.2",
           "no_mapping": false,
           "row": "G-FP-06 (ACTIVE配置CDC双触发器桥)"
@@ -2907,6 +2907,12 @@
       "matrix_mentions": [
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "line": 1412,
+          "status": null,
+          "text": "| C01 | PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5.2<br>~~`:516`~~ **当前PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5.2** | output | `o_control_valid` | `ppg_characterization_control_cdc"
+        },
+        {
+          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 1603,
           "status": null,
           "text": "| C02 | ppg_system_config_manager_semantic_contract.md §2.1 | input | `i_static_characterization_enable` |  | Producer: `ppg_characterization_control_cdc` (cluster 2) via `ppg_control_top.v` `flag_sta"
@@ -2975,12 +2981,6 @@
         }
       ],
       "matrix_mentions": [
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3686,
-          "status": null,
-          "text": ">    `ppg_system_config_manager.v` `@satisfies: ILM-10`'s"
-        },
         {
           "file": "contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
           "line": 639,
@@ -3163,6 +3163,12 @@
         }
       ],
       "matrix_mentions": [
+        {
+          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "line": 1412,
+          "status": null,
+          "text": "| C01 | PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5.2<br>~~`:516`~~ **当前PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5.2** | output | `o_control_valid` | `ppg_characterization_control_cdc"
+        },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 1603,
@@ -3591,13 +3597,7 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3865,
+          "line": 3868,
           "status": null,
           "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
         },
@@ -3625,7 +3625,7 @@
         {
           "tb": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**)",
           "rtl": "N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v` `startup_idac_safe_boundary_o`、`macro_frame_safe_boundary_o`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`",
-          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
+          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh` `\"IR波形上下文在RED owner未释放时已真实预建立\"`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
           "no_mapping": false,
           "row": "JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状)"
         },
@@ -3799,13 +3799,7 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3865,
+          "line": 3868,
           "status": null,
           "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
         }
@@ -4123,7 +4117,7 @@
         {
           "tb": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**)",
           "rtl": "N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v` `startup_idac_safe_boundary_o`、`macro_frame_safe_boundary_o`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`",
-          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
+          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh` `\"IR波形上下文在RED owner未释放时已真实预建立\"`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
           "no_mapping": false,
           "row": "JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状)"
         },
@@ -4164,21 +4158,21 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3865,
+          "line": 3868,
           "status": null,
           "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3871,
+          "line": 3874,
           "status": null,
           "text": ">     JNT-01出现在P01段落808\"包括全部53项JNT-01~09前置检查\"一句里、LFA-04/OIB-08出现在P08段落"
+        },
+        {
+          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "line": 3875,
+          "status": null,
+          "text": ">     815\"LFA-04(abort)...OIB-08(abort)\"一句里),该段落本身仍以删除线旧状态开头。LFA-08还叠加了"
         }
       ]
     },
@@ -4712,7 +4706,7 @@
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 961,
           "status": "EVIDENCE_PENDING",
-          "text": "| N04 | Top | Single diagnostic-clear source and fanout are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): `ppg_control_top.v:316-336` registers single-source `i_diag_clear_eve"
+          "text": "| N04 | Top | Single diagnostic-clear source and fanout are fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): `ppg_control_top.v` `flag_diag_clear_event`、`flag_status_clear_event`"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
@@ -4748,7 +4742,7 @@
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 962,
           "status": "EVIDENCE_PENDING",
-          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v:377-396` `flag_test_inject_mode_latched` only follow"
+          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v` `flag_test_inject_mode_latched`、`wrapper_run_enable"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
@@ -5135,15 +5129,15 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
+          "line": 3868,
+          "status": null,
+          "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3865,
-          "status": null,
-          "text": "> 外,其余6项(JNT-01/K02/LFA-04/LFA-06/LFA-08/OIB-01)逐条打开矩阵引用行核实后,全部确认是脚本"
+          "line": 3888,
+          "status": "NOT_CLOSED",
+          "text": ">     1120\"...OIB-01/LFA-06)\")时,脚本会把这一整行的系统级`NOT_CLOSED`误记成该ID自己的状态断言。"
         }
       ]
     },
@@ -5332,7 +5326,7 @@
         {
           "tb": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**)",
           "rtl": "N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v` `startup_idac_safe_boundary_o`、`macro_frame_safe_boundary_o`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`",
-          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
+          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh` `\"IR波形上下文在RED owner未释放时已真实预建立\"`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
           "no_mapping": false,
           "row": "JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状)"
         },
@@ -5369,21 +5363,21 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3872,
+          "line": 3875,
           "status": null,
           "text": ">     815\"LFA-04(abort)...OIB-08(abort)\"一句里),该段落本身仍以删除线旧状态开头。LFA-08还叠加了"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3888,
+          "line": 3891,
           "status": null,
           "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
+        },
+        {
+          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "line": 3894,
+          "status": null,
+          "text": "> - **(d)删除线/同行旧状态误取词**:`OIB-08`(矩阵815/821行,分别裸写在P08\"OIB-08(abort)\"、"
         }
       ]
     },
@@ -6076,7 +6070,7 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3892,
+          "line": 3895,
           "status": null,
           "text": ">   P14\"OIB-08(cross-check)\"两处已关闭段落里)、`P16`(矩阵823行是P16自己的"
         }
@@ -6149,21 +6143,21 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3888,
+          "line": 3891,
           "status": null,
           "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3892,
+          "line": 3895,
           "status": null,
           "text": ">   P14\"OIB-08(cross-check)\"两处已关闭段落里)、`P16`(矩阵823行是P16自己的"
+        },
+        {
+          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+          "line": 3896,
+          "status": "EVIDENCE_PENDING",
+          "text": ">   `~~EVIDENCE_PENDING~~ **CLOSED**`行,与K02同型;831行是N07段落里\"same reasoning as P16\"的裸"
         }
       ]
     },
@@ -6489,7 +6483,7 @@
         {
           "tb": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**)",
           "rtl": "N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v` `startup_idac_safe_boundary_o`、`macro_frame_safe_boundary_o`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`",
-          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
+          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh` `\"IR波形上下文在RED owner未释放时已真实预建立\"`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
           "no_mapping": false,
           "row": "JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状)"
         },
@@ -7584,7 +7578,7 @@
         {
           "tb": "`tb_ppg_peak_valley_window_detector.v` `\"PVW-32\"` 条件`(o_peak_valid === 1'b1) && ($signed(o_peak_value) == 100)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_peak_valley_window_detector/xsim.log:48`",
           "rtl": "`ppg_peak_valley_window_detector.v` `flag_runtime_clear`(`assign flag_runtime_clear = (i_detection_discard_event && (i_detection…`)",
-          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(recheck pending);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原场景全程`i_recheck_busy=0`，对该信号零判别力。已补`PVW-32-BUSY`（`tb_ppg_peak_valley_window_detector.v:875`）：真实驱动`i_recheck_busy=1`且运行最大值已建立，层次化核对`dec_running_value`/`dec_running_frame_id`/`o_fine_window_active`原样不变；变异测试确认给`flag_runtime_clear`加`i_recheck_busy`的mutant会让本断言FAIL；2026-09-17回归PASS（54/54）`xsim.log:50`**",
+          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(recheck pending);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原场景全程`i_recheck_busy=0`，对该信号零判别力。已补`PVW-32-BUSY`（`tb_ppg_peak_valley_window_detector.v` `\"PVW-32-BUSY\"`）：真实驱动`i_recheck_busy=1`且运行最大值已建立，层次化核对`dec_running_value`/`dec_running_frame_id`/`o_fine_window_active`原样不变；变异测试确认给`flag_runtime_clear`加`i_recheck_busy`的mutant会让本断言FAIL；2026-09-17回归PASS（54/54）`xsim.log:50`**",
           "no_mapping": false,
           "row": "PVW-32"
         }
@@ -7618,7 +7612,7 @@
         {
           "tb": "`tb_ppg_peak_valley_window_detector.v` `\"诊断标记+仍执行清除\"` 条件`flag_case_ok && (o_protocol_error_sticky === 1'b0) && (o_peak_valid === 1'b0) && (o_valley_valid…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_peak_valley_window_detector/xsim.log:49`",
           "rtl": "`ppg_peak_valley_window_detector.v` `o_detector_idle`(`assign o_detector_idle = (peak_valid_o == 1'b0) && (valley_valid_o == …`)",
-          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(recheck安全接管);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原场景两次accept脉冲全在完全idle状态触发，\"仅idle时允许\"排除半句零覆盖。已补`PVW-33-BUSY`（`tb_ppg_peak_valley_window_detector.v:893`）：真实建立未消费峰值使`o_detector_idle=0`后打accept脉冲；独立核实RTL`:346`（`flag_runtime_clear`早已无条件含`i_recheck_accept_event`，带`@satisfies: PVW-32,35,36`既有标签）确认真实行为是\"诊断标记+仍执行清除\"而非\"阻止清除\"，断言据此设计（sticky置位+状态清零+重回idle）；变异测试确认移除非idle-accept诊断项后本断言FAIL；2026-09-17回归PASS（54/54）`xsim.log:53`**",
+          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(recheck安全接管);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原场景两次accept脉冲全在完全idle状态触发，\"仅idle时允许\"排除半句零覆盖。已补`PVW-33-BUSY`（`tb_ppg_peak_valley_window_detector.v` `\"诊断标记+仍执行清除\"`）：真实建立未消费峰值使`o_detector_idle=0`后打accept脉冲；独立核实RTL`tb_ppg_peak_valley_window_detector.v` `\"诊断标记+仍执行清除\"`（`flag_runtime_clear`早已无条件含`i_recheck_accept_event`，带`@satisfies: PVW-32,35,36`既有标签）确认真实行为是\"诊断标记+仍执行清除\"而非\"阻止清除\"，断言据此设计（sticky置位+状态清零+重回idle）；变异测试确认移除非idle-accept诊断项后本断言FAIL；2026-09-17回归PASS（54/54）`xsim.log:53`**",
           "no_mapping": false,
           "row": "PVW-33"
         }
@@ -7814,7 +7808,7 @@
         {
           "tb": "`tb_ppg_peak_valley_window_detector.v` `\"PVW-39\"` 条件`(o_protocol_error_sticky === 1'b1) && (o_peak_valid === 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_peak_valley_window_detector/xsim.log:55`",
           "rtl": "`ppg_peak_valley_window_detector.v` `flag_frame_protocol_error_event`(`assign flag_frame_protocol_error_event = (flag_formal_sample && flag_p…`)",
-          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(frame_id半回绕);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言实际触发的是RTL:427第1项（帧不连续，同PVW-20），跟\"模回绕\"无关；把RTL:427后4项半回绕检查整体删掉本断言依然PASS。已补`PVW-39-WRAP`（`tb_ppg_peak_valley_window_detector.v:636`）：全程保持帧号严格连续，用32768拍平坦值走够半回绕距离（帧差MSB=1），断言经RTL:427第2项（峰峰半回绕）被正确拒绝并置协议诊断；变异测试确认移除第2项后本断言FAIL（PVW-09-WRAP不受影响，交叉确认两者互相独立）；2026-09-17回归PASS（54/54）`xsim.log:27`**",
+          "source": "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md §16(frame_id半回绕);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言实际触发的是RTL:427第1项（帧不连续，同PVW-20），跟\"模回绕\"无关；把RTL:427后4项半回绕检查整体删掉本断言依然PASS。已补`PVW-39-WRAP`（`tb_ppg_peak_valley_window_detector.v` `\"PVW-39-WRAP\"`）：全程保持帧号严格连续，用32768拍平坦值走够半回绕距离（帧差MSB=1），断言经RTL:427第2项（峰峰半回绕）被正确拒绝并置协议诊断；变异测试确认移除第2项后本断言FAIL（PVW-09-WRAP不受影响，交叉确认两者互相独立）；2026-09-17回归PASS（54/54）`xsim.log:27`**",
           "no_mapping": false,
           "row": "PVW-39"
         }
@@ -8204,7 +8198,7 @@
         {
           "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-03 illegal normal initial 15bit\"` 用例名\"PWC-04 characterization fixed 9bit\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && (o_fine_window_start_even…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:20`",
           "rtl": "`ppg_precision_window_controller.v` `active_precision_mode_o`(`active_precision_mode_o <= i_initial_precision`)",
-          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(CHARACTERIZATION 9-bit);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言从未在表征profile下真实驱动cross/return（46变异体零抓获），已补两条`tb_ppg_precision_window_controller.v:435`\"characterization safely consumes cross without formal window\"+`:439`\"...return...\"（真实驱动`i_cross_valid`/`i_return_9bit_valid`并核对`o_cross_ready`/`o_return_9bit_ready`/`o_switch_pending`/`o_protocol_error_sticky`），RTL锚点`ppg_precision_window_controller.v:279`(`o_cross_ready`表征分支)+`:282`(`o_return_9bit_ready`表征分支)+`:857`(`flag_characterization_request`)；变异测试确认移除表征分支后两条新断言均FAIL；2026-09-17回归PASS（48/48）`xsim.log:21-22`**",
+          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(CHARACTERIZATION 9-bit);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言从未在表征profile下真实驱动cross/return（46变异体零抓获），已补两条`tb_ppg_precision_window_controller.v` `\"PWC-04 characterization safely consumes cross without formal window\"`\"characterization safely consumes cross without formal window\"+`tb_ppg_precision_window_controller.v` `\"PWC-04 characterization safely consumes return without formal window\"`\"...return...\"（真实驱动`i_cross_valid`/`i_return_9bit_valid`并核对`o_cross_ready`/`o_return_9bit_ready`/`o_switch_pending`/`o_protocol_error_sticky`），RTL锚点`ppg_precision_window_controller.v` `o_cross_ready`(`o_cross_ready`表征分支)+`ppg_precision_window_controller.v` `o_return_9bit_ready`(`o_return_9bit_ready`表征分支)+`ppg_precision_window_controller.v` `flag_characterization_request`(`flag_characterization_request`)；变异测试确认移除表征分支后两条新断言均FAIL；2026-09-17回归PASS（48/48）`xsim.log:21-22`**",
           "no_mapping": false,
           "row": "PWC-04"
         }
@@ -8534,7 +8528,7 @@
         {
           "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-15 valley normal return\"`、`\"valley normal return still no reacquire one cycle later\"` 用例名\"PWC-15 valley normal return\";条件`(o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0) && o_precision_15_to_9_event…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:31`",
           "rtl": "`ppg_precision_window_controller.v` `state_next`(`state_next = ST_IDLE`)",
-          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(VALLEY正常返回);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_reacquire_request_event==0`子句采样点比PWC-16的真正交付拍早一拍，把返回原因换成异常仍PASS（零判别力）；已补第二条`tb_ppg_precision_window_controller.v:507`\"valley normal return still no reacquire one cycle later\"，在多等一拍的正确交付拍单独核对该信号；探针确认把返回原因换成`RETURN_FINE_TIMEOUT`后新断言FAIL（原断言仍PASS，符合预期，因为原断言其余子句依然真实有效）；2026-09-17回归PASS（48/48）`xsim.log:34`**",
+          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(VALLEY正常返回);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_reacquire_request_event==0`子句采样点比PWC-16的真正交付拍早一拍，把返回原因换成异常仍PASS（零判别力）；已补第二条`tb_ppg_precision_window_controller.v` `\"PWC-15 valley normal return still no reacquire one cycle later\"`\"valley normal return still no reacquire one cycle later\"，在多等一拍的正确交付拍单独核对该信号；探针确认把返回原因换成`RETURN_FINE_TIMEOUT`后新断言FAIL（原断言仍PASS，符合预期，因为原断言其余子句依然真实有效）；2026-09-17回归PASS（48/48）`xsim.log:34`**",
           "no_mapping": false,
           "row": "PWC-15"
         }
@@ -8714,7 +8708,7 @@
         {
           "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-18 reserved reason normalized\"` 用例名\"PWC-21 recheck busy keeps 9bit\";条件`(o_cross_ready == 1'b0) && (o_active_precision_mode == 1'b0) && (o_fine_window_active == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:37`",
           "rtl": "`ppg_precision_window_controller.v` `i_recheck_busy`(`assign o_cross_ready = i_run_enable && i_active_config_valid && i_peak…`)",
-          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(recheck busy);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_cross_ready==0`被握手后状态跳转顶替、对`i_recheck_busy`门控本身零判别力（只有PWC-07顺带抓到）；已按PWC-06的模式补上`o_switch_pending==0`子句（现`tb_ppg_precision_window_controller.v:546`）；变异测试确认移除`o_cross_ready`里的`i_recheck_busy`门控后本断言FAIL（同时PWC-07依旧FAIL，交叉一致）；2026-09-17回归PASS（48/48）`xsim.log:40`**",
+          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(recheck busy);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言的`o_cross_ready==0`被握手后状态跳转顶替、对`i_recheck_busy`门控本身零判别力（只有PWC-07顺带抓到）；已按PWC-06的模式补上`o_switch_pending==0`子句（现`tb_ppg_precision_window_controller.v` `\"PWC-21 recheck busy keeps 9bit\"`）；变异测试确认移除`o_cross_ready`里的`i_recheck_busy`门控后本断言FAIL（同时PWC-07依旧FAIL，交叉一致）；2026-09-17回归PASS（48/48）`xsim.log:40`**",
           "no_mapping": false,
           "row": "PWC-21"
         }
@@ -8864,7 +8858,7 @@
         {
           "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-26 switch timeout fault\"` 用例名\"PWC-26 switch timeout fault\";条件`o_switch_timeout_sticky && (o_active_precision_mode == 1'b0) && (o_switch_pending == 1'b0) && o_…`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:42`",
           "rtl": "`ppg_precision_window_controller.v` `@satisfies: PWC-26`(`state_next = ST_FAULT`)",
-          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(切换超时);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言未覆盖要求原文\"报告fault\"+\"无假事件\"两个子句；已改为逐拍统计`o_mode_fault_event`真实出现次数（新增`cnt_fault_pulse`，`tb_ppg_precision_window_controller.v:114`附近声明），补第二条`:587`\"switch timeout reports exactly one fault pulse\"断言`cnt_fault_pulse==1`且循环结束后已回到0（不依赖假设具体的周期偏移）；变异测试确认移除`mode_fault_event_o`里的切换超时触发源后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:46`**",
+          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(切换超时);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言未覆盖要求原文\"报告fault\"+\"无假事件\"两个子句；已改为逐拍统计`o_mode_fault_event`真实出现次数（新增`cnt_fault_pulse`，`tb_ppg_precision_window_controller.v` `\"PWC-26 switch timeout fault\"`附近声明），补第二条`tb_ppg_precision_window_controller.v` `\"PWC-26 switch timeout reports exactly one fault pulse\"`\"switch timeout reports exactly one fault pulse\"断言`cnt_fault_pulse==1`且循环结束后已回到0（不依赖假设具体的周期偏移）；变异测试确认移除`mode_fault_event_o`里的切换超时触发源后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:46`**",
           "no_mapping": false,
           "row": "PWC-26"
         }
@@ -9124,7 +9118,7 @@
         {
           "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-34 diagnostic clear keeps active fault\"`、`\"diagnostic clear does not release active fault hold\"` 用例名\"PWC-34 diagnostic clear keeps active fault\";条件`(o_switch_timeout_sticky == 1'b0) && o_switch_hold_new_transaction && (o_cross_ready == 1'b0)`;2026-09-16回归PASS `ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:50`",
           "rtl": "`ppg_precision_window_controller.v` `@satisfies: PWC-34`(`flag_fault_hold <= flag_fault_hold`)",
-          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(diagnostic clear);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言完全被`state_current==ST_FAULT`顶替，\"不解除活动故障保持\"这半句零判别力（已连出的`o_mode_fault_active`此前40条断言从未用过）；已补第二条`tb_ppg_precision_window_controller.v:685`\"diagnostic clear does not release active fault hold\"直接核对`o_mode_fault_active`（`ppg_precision_window_controller.v:294`）；变异测试确认给`flag_fault_hold`加一条`i_diag_clear_event`释放分支后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:55`**",
+          "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(diagnostic clear);本行(2026-09-16 TB适配+真实回归+打标签)。**2026-09-17工作线D复核确认原断言完全被`state_current==ST_FAULT`顶替，\"不解除活动故障保持\"这半句零判别力（已连出的`o_mode_fault_active`此前40条断言从未用过）；已补第二条`tb_ppg_precision_window_controller.v` `\"PWC-34 diagnostic clear does not release active fault hold\"`\"diagnostic clear does not release active fault hold\"直接核对`o_mode_fault_active`（`ppg_precision_window_controller.v` `o_mode_fault_active`）；变异测试确认给`flag_fault_hold`加一条`i_diag_clear_event`释放分支后本断言FAIL；2026-09-17回归PASS（48/48）`xsim.log:55`**",
           "no_mapping": false,
           "row": "PWC-34"
         }
@@ -9362,7 +9356,7 @@
       "asserts_pending": true,
       "alias_rows": [
         {
-          "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-39 FIR tail excluded from switch timeout\"`（2026-09-17新增，工作线D独立复核RTL缺陷修复）两个用例\"PWC-41 new legal START preserves protocol sticky\"（`:722`）+\"PWC-41 new legal START preserves switch-timeout sticky\"（`:734`）；条件均为`flag_case_ok && o_*_sticky`（先真实建立sticky再不经复位发第二次合法START）；变异测试确认：改回旧RTL后两条均FAIL（`switch_timeout_sticky_o`/`protocol_error_sticky_o`把`i_start_ack_event`当清除条件）；2026-09-17回归PASS（42/42）`ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:57-58`",
+          "tb": "`tb_ppg_precision_window_controller.v` `\"PWC-39 FIR tail excluded from switch timeout\"`（2026-09-17新增，工作线D独立复核RTL缺陷修复）两个用例\"PWC-41 new legal START preserves protocol sticky\"（`ppg_precision_window_controller.v` `switch_timeout_sticky_o`、`protocol_error_sticky_o`）+\"PWC-41 new legal START preserves switch-timeout sticky\"（`ppg_precision_window_controller.v` `switch_timeout_sticky_o`、`protocol_error_sticky_o`）；条件均为`flag_case_ok && o_*_sticky`（先真实建立sticky再不经复位发第二次合法START）；变异测试确认：改回旧RTL后两条均FAIL（`switch_timeout_sticky_o`/`protocol_error_sticky_o`把`i_start_ack_event`当清除条件）；2026-09-17回归PASS（42/42）`ppg_system_integration/module_tb_regression/xsim_module_regression/tb_ppg_precision_window_controller/xsim.log:57-58`",
           "rtl": "`ppg_precision_window_controller.v` `switch_timeout_sticky_o`(`switch_timeout_sticky_o`清除条件，`@satisfies: PWC-41`)+`ppg_precision_window_controller.v` `protocol_error_sticky_o`(`protocol_error_sticky_o`保持分支，`@satisfies: PWC-33, PWC-41`)",
           "source": "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md §21(START不清sticky，2026-09-17新增行);同日`PWC_01_40_WORKLINE_D_INDEPENDENT_RECHECK_20260916.md`\"RTL发现\"一节+`PWC_STICKY_CLEAR_RTL_FIX_20260917.md`",
           "no_mapping": false,
@@ -10216,7 +10210,7 @@
         {
           "tb": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case(\"JNT-09-STARTUP\",...)`/`jnt_check_case(\"JNT-09\",...)`,被全部14份`ppg_control_top/tb_ppg_control_top_*.v`文件`` `include` ``并在各自`run_jnt_baseline_01_09`调用点实际执行;动态PASS证据见`ppg_control_top/xsim_regression_20260906/*/xsim_stdout.log`全部14份均为`JNT_BASELINE checked=53 pass=53 required=53 status=PASS`(零fail,含JNT-09自身2条子检查;**2026-09-17工作线D批次1[JNT]修复JNT-02/03/05/07/08后变为checked=54 pass=54 required=54,JNT-09自身2条子检查内容不受影响,详见上一行`JNT-01~09`条目新增说明**)",
           "rtl": "N/A — 跨系统TB基线检查,非单一RTL文件实现;检查内容锚定`o_scheduler_owner_deadline_timeout_sticky`(`ppg_400hz_frame_calibration_scheduler.v` `startup_idac_safe_boundary_o`、`macro_frame_safe_boundary_o`附近deadline逻辑,同批次未新增标签,该信号本身已是既有`o_*`产品端口)。真实TB源码位置:`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`",
-          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh:297`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
+          "source": "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md §9.1(§9.1\"JNT-01 through JNT-09 baseline, all 52 sub-checks PASS\");`tb_ppg_jnt_baseline_prefix.vh` `\"JNT-09-STARTUP\"`、`\"JNT-09\"`(V1.0/V1.1 changelog,含JNT-09自身一处真实TB-only bug修复:V1.0初版把`i_adc_physical_idle`激励方向搞反,owner永不进in-flight判定,deadline sticky永不触发,V1.1修复为先确认JNT-09-STARTUP就绪再翻转到0,与源TB时序对齐) — 2026-09-11 D2_NO_STATUS_FOUND批次1新增本行(上面`JNT-01~09`旧行是bundled概览,不含可被核对脚本逐ID匹配的独立`JNT-09`字面token,本行补齐);**已知偏差,如实记录不隐藏**:合同§9.1文字仍写\"52 sub-checks\",但`tb_ppg_jnt_baseline_prefix.vh` `\"IR波形上下文在RED owner未释放时已真实预建立\"`本身的注释已自述现在是53(JNT-06在`ppg_control_top`上因V4级联STOP效应需要独立重启,多产生一次`JNT-STARTUP-READY`子检查,52+1=53,检查\"内容\"与源规格逐条对应未变化)——这是TB代码自身注释里已经解释清楚的真实事实,不是矩阵/合同文字失实(未列入`E_STALE_MATRIX_TEXT`名单,该优先级已收尾,本批次不新增矩阵文字改动),仅供后续读者知悉",
           "no_mapping": false,
           "row": "JNT-09 (启动边界提交后ADC不可用必须触发owner deadline超时,上面这一行的登记缺口,同`LFA-04`/`OIB-08`/`SID-10`/`PRC-08`形状)"
         },
@@ -10243,31 +10237,31 @@
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 962,
           "status": "EVIDENCE_PENDING",
-          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v:377-396` `flag_test_inject_mode_latched` only follow"
+          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v` `flag_test_inject_mode_latched`、`wrapper_run_enable"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3888,
+          "line": 3891,
           "status": null,
           "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3894,
+          "line": 3897,
           "status": null,
           "text": ">   提及)、`SID-10`(矩阵829行裸写在N05\"tb_ppg_control_top_startup_idac_calibration.v"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3895,
+          "line": 3898,
           "status": null,
           "text": ">   SID-10/SID-11\"已关闭段落里)、`SID-11`(同一829行,与SID-10共用)、`TOP-17`(矩阵822行裸写"
+        },
+        {
+          "file": "contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+          "line": 559,
+          "status": null,
+          "text": "| SID-10 | Exactly eight matching successful results contribute to each candidate evaluation; wrong type, color, sample index, code snapshot, or epoch is consumed only by its contractual reject path a"
         }
       ]
     },
@@ -10298,7 +10292,7 @@
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
           "line": 962,
           "status": "EVIDENCE_PENDING",
-          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v:377-396` `flag_test_inject_mode_latched` only follow"
+          "text": "| N05 | Top / AMI | Runtime test-mode lock is fixed. | ~~`EVIDENCE_PENDING`~~ **`CLOSED` 2026-09-06 (Phase 3, 对话A2): Top half -- `ppg_control_top.v` `flag_test_inject_mode_latched`、`wrapper_run_enable"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
@@ -10314,9 +10308,9 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
+          "line": 3891,
+          "status": null,
+          "text": "> **2026-09-10 Stage 2批次2核对(剩余7项`OIB-08`/`P16`/`PRC-09`/`SID-10`/`SID-11`/`TOP-17`/"
         }
       ]
     },
@@ -10510,6 +10504,29 @@
       ],
       "matrix_mentions": []
     },
+    "SUP-08": {
+      "category": "A_CONSISTENT",
+      "has_real_alias": true,
+      "has_rtl_tag": true,
+      "asserts_closed_or_partial": false,
+      "asserts_pending": false,
+      "alias_rows": [
+        {
+          "tb": "8'h06（连续完成丢失）：`tb_ppg_control_top_adc_anomaly.v` `\"SYS-RESTART-K\"`、`\"SYS-L5-RESTART\"`、`\"SYS-RESTART-CAL\"`（前序SYS-K-RED2、SYS-CAL-K2报cause 06）；8'h07（长期忙）：`tb_ppg_control_top_adc_anomaly.v` `\"SYS-RESTART-BUSY\"`（前序SYS-BUSY-07）；错配类只覆盖8'h02：`tb_ppg_control_top_adc_anomaly.v` `\"SYS-RESTART-IDLE\"`、`\"SYS-RESTART-NEXTRUN\"`、`\"SYS-RESTART-WIN\"`、`\"SYS-RESTART-WIN2\"`（前序SYS-LATE-IDLE、SYS-LATE-NEXTRUN、SYS-WIN-IN、SYS-WIN-AFTER报cause 02）。各重启检查都是STOP排空→诊断清除→START、不复位。8'h01、8'h03的重启本TB未覆盖",
+          "rtl": "`ppg_system_fault_abort_supervisor.v` `system_fault_blocking_o`、`@satisfies: SUP-08`",
+          "source": "C24 SUP-08行（V1.7，§4、§5）；统筹2026-10-09裁定",
+          "no_mapping": false,
+          "row": "SUP-08"
+        }
+      ],
+      "rtl_tag_locations": [
+        {
+          "file": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+          "line": 263
+        }
+      ],
+      "matrix_mentions": []
+    },
     "TOP-01": {
       "category": "A_CONSISTENT",
       "has_real_alias": true,
@@ -10552,9 +10569,9 @@
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3929,
+          "line": 3932,
           "status": null,
-          "text": "> (i) **TB修订记录伪ID**：脚本把全仓`*.v`里的`@satisfies:`文字都当标签。TB文件头修订记录中叙述`@satisfies`的文字（例如“`@satisfies: TOP-01`标签）”）会被切成伪ID，路径修正后约有22个，归入`B2_ALIAS_ROW_MISSING`。这些是已知误报，刷新本节时逐个列出排除。"
+          "text": "> (i) **TB修订记录伪ID**：脚本把全仓`*.v`里的`@satisfies:`文字都当标签。TB文件头修订记录中叙述`@satisfies`的文字（例如“`@satisfies: TOP-01`标签）”）会被切成伪ID，路径修正后约有22个，归入`B2_ALIAS_ROW_MISSING`。这些是已知误报，刷新本节时逐个列出排除。2026-10-09起脚本只接受ID形状的标签，其余文字"
         },
         {
           "file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
@@ -11381,21 +11398,15 @@
       "matrix_mentions": [
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3850,
-          "status": "EVIDENCE_PENDING",
-          "text": "| E_STALE_MATRIX_TEXT | ~~15 (从18降到15)~~ **13 (2026-09-10, Stage 2批次1+2逐项核对完毕后的真实终态)** | 别名表已有真实映射但矩阵文字某处仍写EVIDENCE_PENDING/NOT_CLOSED——多为§11.2/§12.16等历史grouped汇总段落的固有滞后措辞,以及沿用`~~EVIDENCE_PENDING~~ **"
-        },
-        {
-          "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3889,
+          "line": 3892,
           "status": null,
           "text": "> `TOP-23`)**:逐项打开矩阵引用行核实,全部命中上面(d)/(e)/(f)三条已知局限,没有发现第4种新根因,"
         },
         {
           "file": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
-          "line": 3898,
+          "line": 3901,
           "status": null,
-          "text": ">   同外观**:`TOP-23`命中PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §10,该行不是"
+          "text": ">   同外观**:`TOP-23`命中`PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:946`,该行不是"
         },
         {
           "file": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",

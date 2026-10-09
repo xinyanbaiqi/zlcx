@@ -1,0 +1,6 @@
+# verlink_check --round2 3570ab6 98a61e4 (C24 V1.6 -> V1.7)
+good 16 bad 0
+exit=0
+
+# round-1 reproduction still holds
+good 207 bad 0

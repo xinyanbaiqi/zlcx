@@ -723,8 +723,9 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 | AMI-39 | `tb_ppg_adc_measurement_idac_integration.v` LOST-FIRE；系统级`tb_ppg_control_top_adc_anomaly.v` SYS-LOST-RED | `ppg_adc_measurement_idac_integration.v` `adc_transaction_lost_event_o`、`@satisfies: AMI-39` | C10 §17 AMI-39行（V2.5补充，§7.1a） |
 | AMI-40 | `tb_ppg_adc_measurement_idac_integration.v` WIN-IN；系统级`tb_ppg_control_top_adc_anomaly.v` SYS-WIN-IN | `ppg_adc_measurement_idac_integration.v` `flag_adc_transaction_inflight`、`@satisfies: AMI-40`；`ppg_adc_s1_redundancy_corrector.v` `flag_capture_drop`、`@satisfies: AMI-40` | C10 §17 AMI-40行（V2.5补充，§7.1a通知S1冗余校正器） |
 | SSW-42 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` LOST-RLS、LOST-MSM | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_owner_release`、`@satisfies: SSW-42` | C09 SSW-42行（V1.11补充，§5.3） |
+| SUP-08 | 8'h06（连续完成丢失）：`tb_ppg_control_top_adc_anomaly.v` `"SYS-RESTART-K"`、`"SYS-L5-RESTART"`、`"SYS-RESTART-CAL"`（前序SYS-K-RED2、SYS-CAL-K2报cause 06）；8'h07（长期忙）：`tb_ppg_control_top_adc_anomaly.v` `"SYS-RESTART-BUSY"`（前序SYS-BUSY-07）；错配类只覆盖8'h02：`tb_ppg_control_top_adc_anomaly.v` `"SYS-RESTART-IDLE"`、`"SYS-RESTART-NEXTRUN"`、`"SYS-RESTART-WIN"`、`"SYS-RESTART-WIN2"`（前序SYS-LATE-IDLE、SYS-LATE-NEXTRUN、SYS-WIN-IN、SYS-WIN-AFTER报cause 02）。各重启检查都是STOP排空→诊断清除→START、不复位。8'h01、8'h03的重启本TB未覆盖 | `ppg_system_fault_abort_supervisor.v` `system_fault_blocking_o`、`@satisfies: SUP-08` | C24 SUP-08行（V1.7，§4、§5）；统筹2026-10-09裁定 |
 
-> 同批补标签但已有别名行的：AMI-24、FSC-19、FSC-54、SSW-18、SSW-53（各行已改为标签锚点），LFA-04（与AMI-39同一处）、P09（supervisor汇总位映射）。SUP-08、SID-05不补：C24 SUP-08行未改写，不描述`flag_owner_lost_fault_hold`；SID-05是截止撤销，作废撤销含义不同（见`verification_reports/b_merge_batch_evidence/rtl_comment_proof/README.md`）。
+> SUP-08：统筹2026-10-09裁定后C24改写为V1.7（AMI阻断类故障经STOPPING后不复位合法重启），本节新增一行并补标签。> 同批补标签但已有别名行的：AMI-24、FSC-19、FSC-54、SSW-18、SSW-53（各行已改为标签锚点），LFA-04（与AMI-39同一处）、P09（supervisor汇总位映射）。SID-05不补：SID-05是截止撤销，作废撤销含义不同（见`verification_reports/b_merge_batch_evidence/rtl_comment_proof/README.md`）。
 
 ### 整族无TB编号的合同族（统筹§20-4：本批做族级登记，逐条对照列入流片前验证收尾计划）
 
