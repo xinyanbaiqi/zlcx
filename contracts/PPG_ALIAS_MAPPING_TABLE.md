@@ -5,6 +5,8 @@
 >
 > schema与标签约定定义于memory `project-ppg-dual-anchor-tagging-convention.md`。
 >
+> 2026-10-09 B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md`）：新增节“B合同合并批次新增映射”；订正P05行（去掉SUP06A，BMI-130）与SID-11行（F-050，BMI-131）。schema按交接书§3.10抄录于该节节首，不再依赖仓库外memory文件（原引用保留为历史出处）。旧行号锚点的符号化转换在阶段4统一进行。
+>
 > 本表由对话A1(Phase 1a/1b)创建并首批填充,后续对话(A2/Phase 2-5)继续核对与扩充。
 > Phase 4会把本表(或其快照)折叠进 `PPG_CONTRACT_CLOSURE_MATRIX.md` 新增的 §13。
 >
@@ -145,7 +147,7 @@
 | SID-08 | `tb_ppg_control_top_startup_idac_calibration.v` PASS行1190 | `ppg_sar9_sar15_safe_selection_wrapper.v:742`(`CTRL_AMB9`窗口与frame_type/颜色无关,DC_R阶段AMB总线持续保持已确认AMB码,已打标签);`:762`(`CTRL_LED_R = !reg_cal_color_ir`,DC_R阶段color_ir=0仅此行置位,红光LED窗口唯一生效,已打标签) | 本行(2026-09-11 B_TAG_MISSING批次5) |
 | SID-09 | `tb_ppg_control_top_startup_idac_calibration.v` PASS行1235 | `ppg_sar9_sar15_safe_selection_wrapper.v:763`(`CTRL_LED_IR = reg_cal_color_ir`,DC_IR阶段color_ir=1仅此行置位,红外LED窗口唯一生效,与762行红光位互斥,已打标签) | 本行(2026-09-11 B_TAG_MISSING批次5) |
 | SID-10 (原合并行遗留的登记缺口,现已补齐) | `tb_ppg_control_top_startup_idac_calibration.v` PASS行933/944 | `ppg_adc_measurement_idac_integration.v:908`(`dec_completion_sample_index`身份替换通道,与`TOP-22`/`P07`共用,已追加标签);`:1569`(`flag_test_identity_hold`保持sticky,与`P06`共用,TB直接轮询该信号名,已追加标签) | 本行(2026-09-11 B_TAG_MISSING批次5,`E_STALE_MATRIX_TEXT`批次2已确认矩阵文字侧是脚本误报,此处只补RTL标签侧的登记缺口，同`LFA-04`/`OIB-08`模式) |
-| SID-11 (延期,结构性不可达) | `tb_ppg_control_top_startup_idac_calibration.v` (标记SKIP非PASS) | `ppg_adc_s1_programmable_calibrator.v:232-233` (`flag_saturation_low`/`flag_saturation_high`互斥,双饱和数学不可达) | [[project-ppg-stage5-batching-plan]] |
+| SID-11 ~~(延期,结构性不可达)~~ | ~~`tb_ppg_control_top_startup_idac_calibration.v` (标记SKIP非PASS)~~ `tb_ppg_control_top_startup_idac_calibration.v` `"PASS SID-11 double-saturated sample consumed by its own qualified-gate reject path"`（2026-10-09 B合并批次订正F-050：基线日志已有`PASS SID-11`，由验证专用饱和注入构造） | ~~`ppg_adc_s1_programmable_calibrator.v:232-233` (`flag_saturation_low`/`flag_saturation_high`互斥,双饱和数学不可达)~~ `ppg_idac_code_controller.v` `flag_test_saturation_inject_fire`、`flag_amb_sample_qualified`（注入使下一笔真实搜索样本按双向饱和判不合格） | [[project-ppg-stage5-batching-plan]]；ABCD §4 F-050 |
 | SID-12 | `tb_ppg_control_top_startup_idac_calibration.v` PASS行1261/1280(正向闭合半句)、1321(耗尽半句) | 两个独立场景各自真实寄存器：`ppg_idac_code_controller.v:975`(`CTX_STARTUP_COMPLETE_BIT`在DC_IR成功闭合三阶段后置位,先于任何NORMAL owner,已打标签);`:931`(`CTX_AMB_EXHAUSTED_BIT`在AMB区间耗尽时锁存,已打标签);`:932`(`CTX_AMB_FAULT_BIT`同拍锁存,阻断`o_controller_fault_blocking`,已打标签) | 本行(2026-09-11 B_TAG_MISSING批次5) |
 ~~LFA-01, LFA-02, LFA-03, LFA-04, LFA-05, LFA-07, LFA-08, LFA-09, LFA-11, LFA-12 (10项) | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` (各PASS行如1031/1148/1203/1310/1421/1753/1796) | `ppg_400hz_frame_calibration_scheduler.v:424,452,455,461`; LFA-08另交叉引用`tb_ppg_control_top_injection.v` INJ-02(=TOP-22) | [[project-ppg-stage5-batching-plan]]~~
 **2026-09-10 Stage2 `B_TAG_MISSING`批次2订正：上面这一行把8个语义完全不同的ID(LFA-01/02/03/05/07/09/11/12)全部堆到`ppg_400hz_frame_calibration_scheduler.v`同4行(422/450/453/459)，逐条打开TB的真实PASS消息(`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v`)和对应RTL通读后确认这个映射对多数ID是错的——真实证据分散在至少4个不同文件里，且459行(`macro_frame_safe_boundary_o`宏帧边界)与这8个ID里任何一个的验收文字都对不上号，是原映射本身的一处错误，不是脚本问题。已按真实映射拆成下面8行，逐行都已在对应RTL位置插入`@satisfies`标签：**
@@ -463,7 +465,7 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 | P02 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02a | `ppg_adc_measurement_idac_integration.v:967`(已打标签,同K04链) | `PPG_CONTRACT_CLOSURE_MATRIX.md:809` |
 | P03 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP01A/SUP06B(本次iverilog重跑13/13 PASS) + `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-11a(abort合并半) | `ppg_system_fault_abort_supervisor.v:279`(已打标签);Top合并`ppg_control_top.v:350-357,368-375`(静态wiring,未单独打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:810` |
 | P04 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP01A/SUP01B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:302`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:811` |
-| P05 | `ppg_system_fault_abort_supervisor` 独立unit TB SUP06A/B/C(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:192`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:812` |
+| P05 | `ppg_system_fault_abort_supervisor` 独立unit TB ~~SUP06A/B/C~~ SUP06B/C（2026-10-09 B合并批次订正：SUP06A测的是episode关闭后阻断解除，不是看门狗）(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:192`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:812` |
 | P06 (CLOSED 2026-09-06) | `tb_ppg_control_top_injection.v` INJ-02内新增P06子检查(V1.1,~774-791行):`flag_test_identity_hold`锁存后把`i_test_inject_enable`拉低,2拍安全窗口内确认仍为1'b1;真实iverilog PASS,`INJ_TB_PASS`(16/16,0 FAIL)**2026-09-28工作线D独立复核发现该文件自己V1.1 changelog写"20 cycles"，与同一文件真实断言代码(2拍)自相矛盾，已订正changelog文字，断言/RTL均未变** | `ppg_adc_measurement_idac_integration.v:1569`(已打标签`@satisfies: P06`) | `PPG_CONTRACT_CLOSURE_MATRIX.md:813` |
 | P08 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-04/LFA-02a/LFA-02b + `tb_ppg_control_top_owner_identity_backpressure.v` OIB-08 | `ppg_adc_measurement_idac_integration.v:1493`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:815` |
 | P09 | `tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-02b + 6份TB的`GROUP*_PROTOCOL_STICKY`守卫 + `ppg_system_fault_abort_supervisor` 独立unit TB SUP02A/SUP03A/SUP04A/B(本次iverilog重跑13/13 PASS) | `ppg_system_fault_abort_supervisor.v:413`(已打标签) | `PPG_CONTRACT_CLOSURE_MATRIX.md:816` |
@@ -552,6 +554,90 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 > (AMI-01~47+新增N08-01),干净`$finish`。**至此N08交接前半正式关闭,25项P/N + D01 + N08交接
 > 前半这一整条开放项系列全部处理完毕**,系统级状态仍是`NOT_CLOSED`(P1/P2和四项独立审计未在
 > 本系列范围内)。
+
+## B合同合并批次新增映射（2026-10-09，`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-104/134/135/136/027/063/130/131）
+
+> 本节按交接书§3.10字段写：验收ID｜对应TB场景名或PASS标记｜对应RTL锚点（符号锚点：文件 + 符号或`@satisfies`标签）｜出处。TB本地标签没有合同编号的，ID列写“（TB本地）标签名”，并写明对应的合同节号；没有真实映射时如实填“无映射”。
+> 调度器单元TB的FSC-n、supervisor TB的SUP03A/06A/09A/10A、DCR TB第3~7号、SSW TB的SSW-18场景、AMI TB的AMI-13与LFA TB的LFA-11a，其映射随TB标签改名（交接书§3.3）同一提交写入，不在本节。
+
+### RTL已有`@satisfies`标签、此前别名表缺行的ID（reconcile试跑B2中的真实标签）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| AMI-24 | `tb_ppg_adc_measurement_idac_integration.v` AMI-24、HIST-KEEP/HIST-BLOCK/HIST-ABORT/HIST-STOP/HIST-RERUN、LSTK-START/LSTK-BLOCK/LSTK-CLR/LSTK-PRIO | `ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o`、`@satisfies: AMI-24` | C10 §15.1、§15.2；ABCD §12.3；OLR §8.2 |
+| MGR-11 | `tb_ppg_system_config_manager.v` MGR-11（FAIL分支带编号，RUN/STOPPING部分另有信息行MGR11_STOP_PRIORITY）；`tb_ppg_chip_digital_top.v` CMD-STOP-PRIO | `ppg_system_config_manager.v` `flag_stop_accept`、`@satisfies: MGR-11` | C02 MGR-11行；ABCD §12.2 F-023 |
+| SSW-22 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` SSW-22、ABT-DONE | `ppg_sar9_sar15_safe_selection_wrapper.v` `adc_owner_inflight_o`、`@satisfies: SSW-22` | C09 §8.3、SSW-22行；ABCD §12.2 F-035 |
+| SSW-34 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` SSW-34、BIND-Q3 | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_red_has_owner`、`flag_ir_has_owner`、`@satisfies: SSW-34` | C09 §5.3；OLR §8.3 |
+| SSW-38 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` SSW-38、BIND-Q3；`tb_ppg_control_top_adc_anomaly.v` SYS-BUSY-Q3、SYS-MON-BIND | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_red_has_owner`、`@satisfies: SSW-38` | C09 §5.3；OLR §4.2、§8.3 |
+
+### 新增验收编号与登记的TB编号
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| SSW-53 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` L6-START；`tb_ppg_control_top_adc_anomaly.v` SYS-RESTART-SCAN-RED/SYS-RESTART-SCAN-IR/SYS-RESTART-SCAN-CAL | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_start_restore`（无`@satisfies`标签，阶段4补） | C09 §8.3a、SSW-53行（V1.11新增）；F009 §6 |
+| OVL-01~OVL-17 | `tb_ppg_adc_pipeline_overlap_corrector.v`（检查标签OVL-01~17只在FAIL分支打印，PASS为总横幅"OVL-01..OVL-17 and 1024-code sweep"） | 无映射（RTL无`@satisfies`标签；各条对应规则见C13 §7.1表） | C13 §7.1（V1.3登记） |
+| OPTC-01 | `tb_ppg_dynamic_baseline_cross_detector.v` OPTC-01 | `ppg_dynamic_baseline_cross_detector.v` `dec_shared_product` | C21 §12（V1.3登记） |
+| OPTC-02 | `tb_ppg_dynamic_baseline_cross_detector.v` OPTC-02 | `ppg_dynamic_baseline_cross_detector.v` `dec_shared_operand_a`、`dec_shared_operand_b` | C21 §12（V1.3登记，RTL实际行为） |
+
+### JNT（统筹§20-2：先查联合TB说明）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| JNT-01~JNT-09 | `tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case`子检查（JNT-01、JNT-02-IR-PREESTABLISH、JNT-02A/02B、JNT-03A/03B、JNT-04、JNT-05A/05B、JNT-06、JNT-07A/07C/07D/07F、JNT-08、JNT-09、JNT-09-STARTUP及JNT-STARTUP-READY/JNT-PHASE-ORDER/JNT-OWNER-WAIT/JNT-DONE-WAIT/JNT-Q3-RELEASE） | 无映射（跨系统基线，见本表上方JNT-01~09行） | **TB定义**：`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md` §11只规定“JNT-01～09为固定基线”，没有逐条定义表 |
+| JNT-PWR-MANUAL、JNT-PWR-SEARCH-HOLD、JNT-PWR-SEARCH-TRACK、JNT-PWR-SNAPSHOT、JNT-PWR-FAIL、JNT-PWR-DISABLE、JNT-PWR-RESTART、JNT-PWR-NO-DEADLOCK | 无映射（全仓TB无这些标签） | 无映射 | `PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md` §5.3（文档定义的场景名） |
+
+### RAW ↔ RGC（BMI-104，RGC为纯TB生成器自检，不驱动RTL）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| RAW-01 | 无映射（RGC不检查每帧事务数；系统级证据见RAW-12与各control_top TB） | 无映射 | C25 RAW-01行 |
+| RAW-02 | `tb_ppg_real_raw_generator_selfcheck.v` RGC-01（快速上升）、RGC-02（慢速下降）、RGC-03（重搏切迹）、RGC-04（晚期回落）、RGC-05（基线漂移） | 无映射（TB模型） | C25 RAW-02行 |
+| RAW-03 | `tb_ppg_real_raw_generator_selfcheck.v` RGC-06（噪声有界且重复仿真逐位相同）、RGC-08（NORMAL全流程有界且逐位可复现） | 无映射（TB模型） | C25 RAW-03行 |
+| RAW-04 | `tb_ppg_real_raw_generator_selfcheck.v` RGC-07（钳位）、RGC-11（高幅饱和曲线达到钳位上限） | 无映射（TB模型） | C25 RAW-04行 |
+| RAW-05~RAW-11 | 无映射（这些条目涉及`CLK_DOUT`时序、AMI捕获、owner提交与abort，RGC不驱动RTL，无法覆盖） | 无映射 | C25 RAW-05~11行 |
+| （TB本地）RGC-09、RGC-10、RGC-12、RGC-13、RGC-14、RGC-15 | `tb_ppg_real_raw_generator_selfcheck.v` 同名检查（FLAT、幅度、强漂移、周期、弱切迹及各曲线的有界与可复现） | 无映射 | 无对应RAW条目：生成器曲线库自检 |
+
+### 三轮RTL修复新增的TB本地检查（BMI-134；合同无同号条目的写合同节号）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| （TB本地）CAL-ROLLOVER-ABORT、CAL-ROLLOVER-STOP | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_calibration_rollover`、`@satisfies: FSC-31, FSC-32` | C08 §4.2.1第3条（F-010）；ABCD §12.2 |
+| （TB本地）DISC-HELD | `tb_ppg_adc_measurement_idac_integration.v` DISC-HELD | `ppg_adc_measurement_idac_integration.v` `measurement_result_discard_sample_index_o`、`@satisfies: OIB-06` | C10 §6.10（F-019） |
+| （TB本地）DET-QUAL | `tb_ppg_adc_measurement_idac_integration.v` DET-QUAL | `ppg_adc_measurement_idac_integration.v` `flag_detection_branch_sample_valid` | C10 §10.1（F-021） |
+| （TB本地）LEAF-HOLD | `tb_ppg_adc_measurement_idac_integration.v` LEAF-HOLD | `ppg_adc_measurement_idac_integration.v` `flag_test_identity_hold` | 矩阵P06行（F-044，证据只到AMI叶子级） |
+| （TB本地）CANCEL-COMMIT | `tb_ppg_precision_window_controller.v` CANCEL-COMMIT（2项） | `ppg_precision_window_controller.v` `flag_enter_commit`、`flag_return_commit`、`@satisfies: PWC-27` | C23 §16（F-034） |
+| （TB本地）RETURN-HOLD | `tb_ppg_peak_valley_window_detector.v` RETURN-HOLD | `ppg_peak_valley_window_detector.v` `@satisfies: PVW-30` | C22 §11.4（F-018，合同无需改） |
+| （TB本地）WDPARM | `tb_ppg_system_fault_abort_supervisor.v` WDPARM | 无映射（参数检查，见C24 §1） | C24 §1（F-014） |
+| （TB本地）PARAM-FIXED、PARAM-WDOG | `tb_ppg_control_top.v`、`tb_ppg_chip_digital_top.v` 同名 | 无映射（参数检查） | C01 §4.1 V1.10 final system boundary and one-to-one connection requirements（V1.18）、芯片顶层合同§8.6（F-014/F-024） |
+| （TB本地）DIAG-MAP38、DIAG-MAP38 after-owner-lost/after-lost-clear | `tb_ppg_chip_digital_top.v` 同名 | `ppg_spi_register_file.v` `flag_load_read_byte` | 芯片顶层合同§8.1、§11.2、§11.4（F-005/F-006） |
+| （TB本地）LOST-REL、LOST-MISM | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_owner_lost_match` | C08 §10.4、FSC-54（R3、F-7） |
+| （TB本地）L1-NOREPEND | `tb_ppg_400hz_frame_calibration_scheduler.v` L1-NOREPEND | `ppg_400hz_frame_calibration_scheduler.v` `@satisfies: FSC-17` | C08 §10.4、FSC-17（L-1） |
+| （TB本地）L4-EXPIRE、L4-ONTIME | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_candidate_expired`、`@satisfies: FSC-46, FSC-49, FSC-50` | C08 §10.3、FSC-46/49/50（L-4） |
+| （TB本地）L3-IDLEBND、L3-NOEXTRA | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_idle_idac_safe_boundary` | C08 §8.2.6、FSC-19/FSC-38（L-3） |
+| （TB本地）LOST-RLS、LOST-MSM | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` 同名 | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_owner_release`、`flag_done_mismatch` | C09 §5.3、SSW-16/17/42 |
+| （TB本地）BIND-Q3 | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` BIND-Q3 | `ppg_sar9_sar15_safe_selection_wrapper.v` `flag_cal_has_owner`、`reg_owner_cal_subframe` | C09 §5.3、SSW-34/38（L-1） |
+| （TB本地）S1-LATE、S1-ONTM | `tb_ppg_sar9_sar15_safe_selection_wrapper.v` 同名 | `ppg_sar9_sar15_safe_selection_wrapper.v` `calibration_timeout_sticky_o` | C09 §5.4、§7.8、SSW-18（S1） |
+| （TB本地）LOST-FIRE、LOST-RECOV、LOST-IDLE、LOST-EXCL | `tb_ppg_adc_measurement_idac_integration.v` 同名 | `ppg_adc_measurement_idac_integration.v` `flag_owner_lost_fire`、`adc_transaction_lost_event_o` | C10 §7.1a、AMI-39/AMI-40 |
+| （TB本地）WIN-BEFORE、WIN-IN、WIN-RECOV、WIN-AFTER | `tb_ppg_adc_measurement_idac_integration.v` 同名；系统级`tb_ppg_control_top_adc_anomaly.v` SYS-WIN-BEFORE/SYS-WIN-IN/SYS-WIN-AFTER | `ppg_adc_measurement_idac_integration.v` `flag_owner_lost_fire` | C10 §7.1a捕获窗口前提（F-3） |
+| （TB本地）K-RED2、K-IR2、K-SLOT、K-ABORT、K-CLEAR | `tb_ppg_adc_measurement_idac_integration.v` 同名；系统级SYS-K-RED2/SYS-K-CLEAR/SYS-CAL-K2 | `ppg_adc_measurement_idac_integration.v` `flag_owner_lost_limit_reached`、`flag_owner_lost_fault_hold` | C10 §7.1a（k=2）、C24 §3 cause `8'h06` |
+| （TB本地）BUSY-07、BUSY-VOID | `tb_ppg_adc_measurement_idac_integration.v` 同名；系统级SYS-BUSY-07/SYS-BUSY-WDOG/SYS-BUSY-RECOVER | `ppg_adc_measurement_idac_integration.v` `flag_adc_busy_fault_fire`、`flag_adc_busy_fault_hold` | C10 §7.1a、C24 §3 cause `8'h07`、§6 |
+| （TB本地）WDRAW-LOST | `tb_ppg_adc_measurement_idac_integration.v` WDRAW-LOST | `ppg_adc_measurement_idac_integration.v` `flag_calibration_request_withdraw`、`flag_recheck_request_withdraw` | C10 §11.3（F-020） |
+| （TB本地）F020-WDRAW | `tb_ppg_amb_recheck_scheduler.v` F020-WDRAW | `ppg_amb_recheck_scheduler.v` `flag_sample_inflight` | C16 §9.3、§9.4（F-020） |
+| （TB本地）SUM-06、SUM-07 | `tb_ppg_system_fault_abort_supervisor.v` 同名 | `ppg_system_fault_abort_supervisor.v` `flag_new_summary_bits` | C24 §3（cause `8'h06`/`8'h07`，summary bit 9/10） |
+| （TB本地）S1-ABANDON（信息行S1-ABANDON-TIMING） | `tb_ppg_adc_s1_redundancy_corrector.v` S1-ABANDON | `ppg_adc_s1_redundancy_corrector.v` `i_transaction_abandon`、`flag_capture_drop_armed`、`flag_capture_drop` | C10 §8.1（冗余校正器作废丢弃） |
+| （TB本地）LOST-SPI-VOID、LOST-SPI-K2、LOST-SPI-CLR、LOST-SPI-RESTART、LOST-SPI-STKSTART | `tb_ppg_chip_digital_top.v` 同名 | `ppg_spi_register_file.v` `i_ami_owner_lost_sticky` | 芯片顶层合同§11.2 0x0108 bit6、§11.4 |
+| （TB本地）FRAME-NN、FRAME-NC、FRAME-CN、FRAME-NC-LAST | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`@satisfies: FSC-03` | C08 §4.2.1、FSC-03（F-009） |
+| （TB本地）RESTART-STOP-SCAN、RESTART-ABORT-SCAN | `tb_ppg_400hz_frame_calibration_scheduler.v` 同名 | `ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`flag_lifecycle_active` | C08 §4.2.1第3条 |
+| （TB本地）SYS-*（owner生命周期轮37项） | `tb_ppg_control_top_adc_anomaly.v` SYS-N-BASELINE、SYS-LOST-RED/IR、SYS-K-CLEAR、SYS-LATE-RED、SYS-K-RED2/SYS-K-STOP/SYS-RESTART-K、SYS-DRAIN-LOST/SYS-RESTART-DRAIN、SYS-LATE-DRAIN/SYS-L5-RESTART、SYS-LATE-IDLE/SYS-RESTART-IDLE、SYS-LATE-NEXTRUN/SYS-RESTART-NEXTRUN、SYS-WIN-*、SYS-RESTART-WIN/WIN2、SYS-BUSY-Q3/07/WDOG/RECOVER、SYS-RESTART-BUSY、SYS-CAL-LATE385/LATE6SF/LOST/K2、SYS-RESTART-CAL、SYS-CAL-LOST-RETRY、SYS-CAL-BUSY-NORMAL、SYS-BUSY-FOREVER、SYS-MON-BIND/EXCL/LIVE | 见上方各行对应符号 | C10 §7.1a、C09 §5.3/§5.4、C08 §8.2.6/§10.4、C24 §3/§5/§6；OLR §4.2逐项说明 |
+
+### 整族无TB编号的合同族（统筹§20-4：本批做族级登记，逐条对照列入流片前验证收尾计划）
+
+| 验收ID | 对应TB场景名 | 对应RTL标签位置 | 出处 |
+| --- | --- | --- | --- |
+| IDC2-01~IDC2-24 | 无逐条映射。IDAC单元TB `tb_ppg_idac_code_controller.v` 用无编号描述行（如"PASS: PERIODIC unchanged AMB still requests DCS revalidation"）与C16的IDT标签 | 无映射（逐条对照列入收尾计划，BMI-910） | C17 §15；ID治理§8 |
+| CIS-01~CIS-30 | 无逐条映射。内容分散于MGR/SSW/ILM/CCC/AV4C等TB | 无映射（同上） | C06验收表；ID治理§8 |
+| AV4-01~AV4-19 | 无逐条映射。内容分散于AV4C/MGR/UNPACK等TB | 无映射（同上） | C04验收表；ID治理§8 |
+| CF4-01~CF4-05 | 无逐条映射 | 无映射（同上） | C16验收表；ID治理§8 |
 
 ## 本对话(A1)RTL打标签 vs 仅建表 的完成度说明
 

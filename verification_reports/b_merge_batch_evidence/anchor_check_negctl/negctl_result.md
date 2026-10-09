@@ -20,3 +20,10 @@ A first attempt changed a mention of `flag_frame_restart` inside a change-record
 
 `@satisfies` anchors: none exist yet in the new format, so that path is negative-controlled again after the stage-4 conversion.
 The ~7,400 pre-existing errors are the old line anchors of the matrix and alias table that stage 4 converts.
+
+## Addendum: TB label tokens (2026-10-09)
+
+`anchor_check.py` now also checks backticked `"text"` tokens after a TB file name (verbatim
+substring of the TB source). Negative control on a scratch copy of the alias table: changing
+"consumed" to "eaten" in the SID-11 PASS text gave exactly one new error
+(`label-missing tb_ppg_control_top_startup_idac_calibration.v "PASS SID-11 double-saturated sample eaten by its own qualified-gate reject path"`).

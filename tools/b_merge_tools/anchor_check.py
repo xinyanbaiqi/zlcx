@@ -9,7 +9,8 @@ contracts/PPG_ALIAS_MAPPING_TABLE.md and every other contracts/*.md.
 What is checked (B merge batch brief, section 3.2):
   1. Symbol anchors  `<file>.v` `<name>`  (also .vh): the file exists in the
      repository and every following backticked name exists in that file at a
-     word boundary. Port, parameter, localparam, declaration and instance names
+     word boundary; a backticked `"text"` token (TB check label or PASS text) must
+     occur verbatim in that file. Port, parameter, localparam, declaration and instance names
      are taken from the erie-verilog-generator formatter AST when it parses the
      file; otherwise (or for other identifiers) a comment-aware word-boundary
      search of the source is used. `@satisfies: ID` anchors require the tag to
@@ -44,6 +45,7 @@ FILE_TOKEN = re.compile(r'`([A-Za-z0-9_./-]+\.(?:v|vh))`')
 NAME_TOKEN = re.compile(r'\s*(?:[、,，/+]|and|和|及)?\s*`([^`]+)`')
 IDENT = re.compile(r'^[A-Za-z_][A-Za-z0-9_$]*(?:\[[^\]]*\])?$')
 SAT_TAG = re.compile(r'^@satisfies:\s*([A-Za-z0-9_-]+(?:\s*,\s*[A-Za-z0-9_-]+)*)$')
+LABEL = re.compile(r'^"([^"`]{3,})"$')  # TB check label / PASS text, matched verbatim in the source
 CSEC = re.compile(r'(?<![A-Za-z0-9])(C\d\d)\s*§\s*(\d+(?:\.\d+)*[a-z]?)((?:\s+[^\s，。；;,|）)]+)?)')
 MDSEC = re.compile(r'`?((?:[A-Za-z0-9_/]+/)?[A-Za-z0-9_]+\.md)`?\s*§\s*(\d+(?:\.\d+)*[a-z]?)')
 OLD_ANCHOR = re.compile(
@@ -81,6 +83,7 @@ class SourceIndex:
     def __init__(self, path, use_ast):
         self.path = path
         text = open(path, encoding='utf-8', errors='replace').read()
+        self.raw_text = text
         self.code = []
         self.comments = []
         for line in text.split('\n'):
@@ -198,7 +201,7 @@ def main():
         return src_cache[rel]
 
     errors, infos, external = [], [], []
-    stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0}
+    stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'label_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0}
 
     def err(f, n, kind, text):
         errors.append({'file': os.path.basename(f), 'line': n, 'kind': kind, 'text': text})
@@ -222,7 +225,7 @@ def main():
                     if not nm:
                         break
                     tok = nm.group(1).strip()
-                    if not (IDENT.match(tok) or SAT_TAG.match(tok)):
+                    if not (IDENT.match(tok) or SAT_TAG.match(tok) or LABEL.match(tok)):
                         break
                     names.append(tok)
                     pos = nm.end()
@@ -235,7 +238,12 @@ def main():
                 src = source(cands[0])
                 for tok in names:
                     sm = SAT_TAG.match(tok)
-                    if sm:
+                    lm = LABEL.match(tok)
+                    if lm:
+                        stats['label_anchors'] += 1
+                        if lm.group(1) not in src.raw_text:
+                            err(f, n, 'label-missing', '%s "%s"' % (fname, lm.group(1)))
+                    elif sm:
                         for ident in re.split(r'\s*,\s*', sm.group(1)):
                             stats['satisfies_anchors'] += 1
                             if not src.has_satisfies(ident):
