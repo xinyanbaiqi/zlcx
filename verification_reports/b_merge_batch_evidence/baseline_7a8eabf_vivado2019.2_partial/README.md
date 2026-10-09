@@ -1,5 +1,7 @@
 # 基线`7a8eabf`回归证据（本机Vivado 2019.2，部分完成）
 
+> **仅作参考，不作为正式证据。** 用户2026-10-09决定，基线和终版回归整套改在另一台机器上用Vivado 2022.2运行，见`../REGRESSION_RUN_REQUEST.md`。正式基线证据将放在`../baseline_7a8eabf/`。
+
 - 机器：i7-10510U笔记本，Windows 11 + Git Bash，`VIVADO_BIN=/d/vivado/2019.2/bin`。导出方式按交接书§6.8：`git -c core.autocrlf=false archive 7a8eabf | tar -x`，导出到仓库外目录。
 - 分组：系统TB分4组并行，只改各组本地运行副本的`ORDER=(...)`数组（见进度文件条目2）。芯片TB与模块级`-g all`同时运行。
 - 每个TB两个文件：
@@ -21,7 +23,7 @@
 - `tb_ppg_control_top_startup_idac_calibration`（g4，未开始）
 - `tb_ppg_control_top_adc_anomaly`（g4，未开始）
 
-这4份改在另一台机器上补跑，见`../BASELINE_RERUN_REQUEST.md`。
+整套基线改在另一台机器上重跑，见`../REGRESSION_RUN_REQUEST.md`。
 
 **模块级失败1份：`tb_ppg_coarse_detection_fir`**
 - xvlog通过；xelab在"Completed static elaboration"之后崩溃（`ERROR: [XSIM 43-3294] Signal EXCEPTION_ACCESS_VIOLATION received`，栈在`ISIMC::VlogCompiler::transform`）。

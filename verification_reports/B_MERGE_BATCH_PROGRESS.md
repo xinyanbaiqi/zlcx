@@ -9,9 +9,9 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段2已完成（全部一级合同改写、矩阵内容项、版本联动、二级清单）。基线回归仍在后台运行。
-- **下一步**：① 基线回归跑完后按交接书§6.8核对参考值；**若不符，阶段3改TB标签之前停下报告**；② 阶段3：提取IDG附录A扫描器，对`2a90a69`建基线`tb_sites.json`、对`7a8eabf`重扫，`rescan_diff.py`逐条复读；③ 别名表内容项（P05、SID-11、FSC/SUP/DCR/RAW↔RGC/JNT/OVL/OPTC/L6等映射）随阶段3做。
-- **未决问题**：无。
+- **当前项**：阶段2已完成；阶段3/4/5的脚本与试跑已完成（条目7~10）。**基线回归改在"回归机"上用Vivado 2022.2整套重跑（条目11），等待其证据提交到`verification_reports/b_merge_batch_evidence/baseline_7a8eabf/`。**
+- **下一步**：① 先`git pull`，取回回归机提交的基线证据，按`REGRESSION_RUN_REQUEST.md` §1.4核对参考值（系统20/20、1250行、芯片20/0、模块级28/28）；**核对通过前不执行阶段3的TB标签改名**；② 阶段3：TB改名、别名表映射（含13个真实缺行标签）；③ 阶段4改写；④ 阶段6终版回归同样在回归机上跑（`REGRESSION_RUN_REQUEST.md` §2）。
+- **未决问题**：回归机的Vivado版本须为2022.2（待用户确认）。
 
 ---
 
@@ -107,3 +107,17 @@
 - 基线回归仍在跑（6路后台）。已完成：芯片20/0；系统TB 6份全部0 FAIL；模块级18份PASS、**1份FAIL：xelab返回139（疑似并行负载下xelab崩溃/内存不足，xsim未运行）**，须单独重跑该TB确认是环境问题再下结论；对不上参考值前不做阶段3改TB标签。
 - 阶段4准备：`tools/b_merge_tools/anchor_inventory.py`、`anchor_resolve.py`已入库（`35aec60`），只试跑。基线7a8eabf上9702个旧锚点：约9000个自动解析（含by-name与TB标签），约390个需人工（RTL unresolved 153、裸`:N`歧义176+未解析22、weak 25、symbol-gone 4、合同6）；4103个的写入时点为2026-09-28导入提交。尚未定：带日期叙述中锚点的转换口径。
 - 下一步：① 确认xelab 139的TB并单独重跑；② 基线核对通过后执行阶段3（`scratchpad/tb_rename.py`需先移入`tools/b_merge_tools/`）、别名表映射（含13个真实缺行标签）；③ 阶段4改写。
+
+### 条目11（2026-10-09 15:40）：本机基线中断与FIR崩溃；回归整套改到回归机（用户决定）
+
+（本条由旁观会话应用户要求写入。）
+- **中断**：约14:22 Claude进程退出，后台仿真被一并结束。系统TB完成16/20，全部rc=0、0 FAIL、`$finish`各1次，PASS 985行。未完成：`baseline_cross`、`robustness_corner_waveforms`（中断），`startup_idac_calibration`、`adc_anomaly`（未开始）。芯片20/0。模块级27/28。
+- **FIR崩溃不是负载问题**：`tb_ppg_coarse_detection_fir`的xelab在"Completed static elaboration"后崩溃（`EXCEPTION_ACCESS_VIOLATION`）。在无其它负载时单独重跑两次（默认设置；`-mt off`），都在同一位置崩溃，判定为Vivado 2019.2的确定性工具缺陷。没有改RTL/TB。
+- **用户决定**：基线和终版回归整套改在另一台性能更好的机器（回归机）上，用Vivado 2022.2运行。
+  - 本机结果只作参考：`verification_reports/b_merge_batch_evidence/baseline_7a8eabf_vivado2019.2_partial/`（`24d0b8d`）。
+  - 运行与回传说明：`verification_reports/b_merge_batch_evidence/REGRESSION_RUN_REQUEST.md`，分组与条目2相同。
+- **新工具**：`tools/b_merge_tools/regression_evidence.py`。
+  - `export`：逐TB生成排序PASS行、`$finish`行和`index.tsv`。
+  - `compare`：逐行列出PASS差异；`$finish`有差异或TB缺失时退出码为1。
+  - 负对照：改1行PASS、1行`$finish`，恰好报出这2处。
+  - 自比对：45个TB全部SAME，退出码0。

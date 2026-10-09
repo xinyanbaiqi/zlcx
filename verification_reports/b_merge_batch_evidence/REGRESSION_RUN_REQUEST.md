@@ -1,51 +1,87 @@
-# 基线补跑请求：4份系统TB + 1份模块级TB（基线`7a8eabf`）
+# 回归运行说明：基线与终版都在"回归机"上跑（用户2026-10-09决定）
 
-> 背景：本机（Vivado 2019.2）的基线回归中，4份系统TB因进程被结束而未跑完，1份模块级TB在2019.2下xelab确定性崩溃。详情见`baseline_7a8eabf_vivado2019.2_partial/README.md`。请在另一台机器上补跑以下TB。
+## 0. 决定与理由
 
-## 1. 要跑的TB
+- **用户决定（2026-10-09）**：本批次的基线回归和终版回归，整套都改在另一台性能更好的电脑（下称"回归机"）上跑。
+- **原因**：本机（i7-10510U笔记本，Vivado 2019.2）的情况如下。
+  - 跑得慢：最长的TB单个约3小时。
+  - 关闭Claude时，后台仿真会被一并结束。
+  - `tb_ppg_coarse_detection_fir`在2019.2下xelab确定性崩溃。
+- **本机已有结果只作参考**，不作为正式证据：`baseline_7a8eabf_vivado2019.2_partial/`。
+- **交接书§6.8的要求**：基线和终版必须在同一台机器、同一Vivado版本上跑。所以两次都在回归机上跑，分组方式也保持一致。
+- **Vivado版本**：回归机须用**Vivado 2022.2**，与统筹参考值同版本。如果回归机上没有2022.2，先不要跑，告诉用户。
 
-- 系统TB（`rtl/ppg_control_top/run_xsim_regression.sh`）：
-  - `tb_ppg_control_top_baseline_cross`
-  - `tb_ppg_control_top_robustness_corner_waveforms`
-  - `tb_ppg_control_top_startup_idac_calibration`
-  - `tb_ppg_control_top_adc_anomaly`
-- 模块级TB（`tools/run_unit_tb_regression.sh`）：`tb_ppg_coarse_detection_fir`。用Vivado 2019.2时它必定崩溃，可以跳过；用其它版本时请跑。
+## 1. 基线回归（现在跑）
 
-## 2. 步骤（Windows + Git Bash）
+在Windows + Git Bash下执行。如果回归机是Linux，按交接书§6.8把`.bat`改成本地可执行文件，只改本地运行副本。
 
-1. 拉取仓库，导出基线到**仓库外**的独立目录。不要在工作区直接跑：autocrlf会改写文件字节，`.sh`带CRLF在bash下会出错。
-   ```bash
-   git clone https://github.com/xinyanbaiqi/zlcx && cd zlcx
-   mkdir -p ../rerun_7a8eabf && git -c core.autocrlf=false archive 7a8eabf | tar -x -C ../rerun_7a8eabf
-   cd ../rerun_7a8eabf
-   ```
-2. 指定Vivado，并记下版本：
-   ```bash
-   export VIVADO_BIN=/c/Xilinx/Vivado/2022.2/bin   # 按实际安装路径改
-   "$VIVADO_BIN/xelab.bat" -version | head -1
-   ```
-3. 系统TB：只改**导出副本**中`rtl/ppg_control_top/run_xsim_regression.sh`的`ORDER=( ... )`数组，改成上面4个TB名（每行一个），其余内容不动。然后运行：
-   ```bash
-   bash rtl/ppg_control_top/run_xsim_regression.sh > sys_rerun4.out 2>&1
-   ```
-   想要2路并行的话，导出两份目录，各放2个TB。
-4. 模块级（版本不是2019.2时）：
-   ```bash
-   bash tools/run_unit_tb_regression.sh -o "$PWD/unit_fir" tb_ppg_coarse_detection_fir > unit_fir.out 2>&1
-   ```
-5. 运行期间不要关闭启动仿真的程序，也不要让电脑睡眠。
+### 1.1 导出
 
-## 3. 回传（提交到`b-merge-batch`分支）
+对每个运行组，从基线`7a8eabf`导出一个独立目录，都放在仓库外的同一个根目录下：
 
-把原始结果放进`verification_reports/b_merge_batch_evidence/baseline_7a8eabf_rerun/`：
-- `MACHINE.txt`：CPU、操作系统、Vivado版本号（第2步的输出）、开始和结束时间；
-- 系统TB：`rtl/ppg_control_top/xsim_regression_20260906/summary.tsv`，以及每个TB目录下的`xsim.log`，按`<tb>/xsim.log`放；
-- 模块级（如果跑了）：`unit_fir/unit_summary.tsv`与`unit_fir/tb_ppg_coarse_detection_fir/xsim.log`。
+```bash
+git clone https://github.com/xinyanbaiqi/zlcx && cd zlcx
+R=../runs_7a8eabf
+for d in sys_g1 sys_g2 sys_g3 sys_g4 chip unit; do mkdir -p $R/$d && git -c core.autocrlf=false archive 7a8eabf | tar -x -C $R/$d; done
+```
 
-提交前先`git pull`，只`git add`上面这个目录。不要改动其它文件。
+不要在工作区里直接跑：autocrlf会改写文件字节，`.sh`带CRLF在bash下会出错。
 
-## 4. 对后续比对的约束（交接书§6.8）
+### 1.2 分组
 
-- 交接书要求基线与终版回归在**同一台机器、同一Vivado版本**上跑。因此这5份TB的**终版回归也必须在这台机器、这个Vivado版本上跑**，比对才成立。
-- 合格判据：每个TB的xvlog、xelab、xsim返回0，0 FAIL，`$finish`恰好1次。4份系统TB的PASS行合计应为1250 − 985 = 265行（参考值来自统筹机器，Vivado 2022.2）。
-- 如果这台机器装的是Vivado 2022.2，可以考虑把整套基线和终版回归都改在这台机器上跑：版本与参考值一致，FIR的崩溃问题也不存在。这一点由用户与统筹决定。
+在每个`sys_gN/rtl/ppg_control_top/run_xsim_regression.sh`中，只改`ORDER=( ... )`数组，其余内容不动。分组与本机一致：
+
+- g1：`tb_ppg_control_top_longrun`、`tb_diag_algo_probe`、`tb_ppg_real_raw_generator_selfcheck`、`tb_ppg_control_top`、`tb_ppg_control_top_baseline_cross`
+- g2：`tb_ppg_control_top_long_10_cycles`、`tb_ppg_control_top_fir_tail_isolation`、`tb_ppg_control_top_adc_numeric_scoreboard`、`tb_ppg_control_top_idac_bus_isolation`、`tb_ppg_control_top_injection`
+- g3：`tb_ppg_control_top_lifecycle_fault_adc_anomaly`、`tb_ppg_control_top_input_light_static_matrix`、`tb_ppg_control_top_normal_slow_tracking`、`tb_ppg_control_top_no_recheck_control`、`tb_ppg_control_top_owner_identity_backpressure`
+- g4：`tb_ppg_control_top_peak_valley_return`、`tb_ppg_control_top_periodic_recheck_recovery`、`tb_ppg_control_top_robustness_corner_waveforms`、`tb_ppg_control_top_startup_idac_calibration`、`tb_ppg_control_top_adc_anomaly`
+
+改完后核对：4组合起来恰好是脚本`TB_FILELIST`中的20个TB，不重复、不遗漏。
+
+### 1.3 运行
+
+```bash
+export VIVADO_BIN=/c/Xilinx/Vivado/2022.2/bin      # 按实际路径改
+R=$(cd ../runs_7a8eabf && pwd)
+for g in 1 2 3 4; do (bash $R/sys_g$g/rtl/ppg_control_top/run_xsim_regression.sh > $R/sys_g$g.out 2>&1 &); done
+(bash $R/chip/rtl/ppg_chip_digital_top/run_xsim_regression.sh > $R/chip.out 2>&1 &)
+(bash $R/unit/tools/run_unit_tb_regression.sh -o $R/unit_runs -g all > $R/unit.out 2>&1; echo "UNIT_EXIT=$?" >> $R/unit.out) &
+```
+
+- 运行期间不要关闭启动仿真的程序，不要让电脑睡眠。
+- 如果是在Claude会话里启动的，关闭Claude会结束这些仿真。
+- 回归机核数较少时，可以先跑4组系统TB，再跑芯片和模块级。分组本身不要改。
+
+### 1.4 核对与证据
+
+跑完后在仓库里执行：
+
+```bash
+python tools/b_merge_tools/regression_evidence.py export $R verification_reports/b_merge_batch_evidence/baseline_7a8eabf
+```
+
+- 合格判据（参考值来自统筹机器，Vivado 2022.2）：
+  - 系统TB 20/20，每份xvlog、xelab、xsim返回0，0 FAIL，`$finish`恰好1次；
+  - PASS共1250行（`index.tsv`中system各行`pass_lines`之和）；
+  - 芯片20/0；
+  - 模块级28/28。
+- 对不上时**停下报告**，先查环境。不得为迁就版本改RTL/TB。
+
+### 1.5 回传
+
+提交到`b-merge-batch`分支，放在`verification_reports/b_merge_batch_evidence/baseline_7a8eabf/`下：
+
+- `export`的输出：`index.tsv`和`system/`、`chip/`、`unit/`三个目录；
+- `raw/`：各`summary.tsv`、`unit_summary.tsv`、每个TB的`xsim.log`（本机全套约0.7 MB），按`raw/<组>/<tb>/xsim.log`放；
+- `MACHINE.txt`：CPU、操作系统、Vivado版本（`xelab -version`的第一行）、开始和结束时间、分组。
+
+提交前先`git pull`，只`git add`这个目录。
+
+## 2. 终版回归（批次最后，阶段6）
+
+- 在回归机上，用同一Vivado、同一分组，对`b-merge-batch`的最终提交重复1.1~1.4：把`7a8eabf`换成最终提交号，证据目录名换成`final_<提交号前7位>`。
+- 比对命令：
+  ```bash
+  python tools/b_merge_tools/regression_evidence.py compare verification_reports/b_merge_batch_evidence/baseline_7a8eabf verification_reports/b_merge_batch_evidence/final_<提交号>
+  ```
+- 预期结果：`$finish`全部相同（退出码0）。PASS行只允许出现TB标签改名造成的差异，脚本会逐行列出。
