@@ -140,6 +140,20 @@ def extract(line):
 
 
 NOISE = {'i_clk', 'i_rstn', 'always', 'begin', 'end', 'else'}
+DATED = re.compile(r'20\d\d-\d\d-\d\d|20\d\d年\d+月\d+日|20\d\d/\d\d/\d\d')
+# module words that only appear inside clauses (used to give a bare `:N` its file)
+EXTRA_WORDS = [
+    (r'AMI[- ]internal|AMI\'s own|AMI-hub', 'ppg_adc_measurement_idac_integration.v'),
+    (r'Top[- ]internal|Top\'s own', 'ppg_control_top.v'),
+    (r'\bC05\b|unpack', 'ppg_system_active_config_unpack.v'),
+    (r'\bC03\b', 'ppg_active_v4_control_plane_integration.v'),
+    (r'\bC17\b', 'ppg_idac_code_controller.v'),
+    (r'\bC02\b', 'ppg_system_config_manager.v'),
+    (r'\bC24\b', 'ppg_system_fault_abort_supervisor.v'),
+    (r'characterization CDC|表征CDC', 'ppg_characterization_control_cdc.v'),
+]
+# symbols renamed in RTL after the anchor was written (F-032)
+RENAMED = {'i_status_clear_event': 'i_diag_clear_event'}
 CALL_LABEL = re.compile(r'\b(check_fsc|check_case|check_local|drive_and_check|send_transaction|check_transaction|'
                         r'drive_and_check_transaction|jnt_check_case|begin_case|end_case)\s*\(\s*([^,)]+)')
 
@@ -250,6 +264,12 @@ def main():
             results.append(res)
             continue
         row = docs[it['file']][it['line'] - 1]
+        # brief 3.2 / Q1: dated narrative is history -- a date earlier in the same cell
+        cell0 = row.rfind('|', 0, it.get('pos', 0)) + 1
+        if DATED.search(row[cell0:it.get('pos', 0)]):
+            res.update(status='history-dated', new=None)
+            results.append(res)
+            continue
         if it['kind'] in ('rtl', 'bare-no-context'):
             cell_syms = []
             for s in it['cell_symbols']:
@@ -264,6 +284,95 @@ def main():
                 cands = [b for b in re.findall(r'([A-Za-z0-9_]+\.vh?)\b', row) if b in rtl_names]
                 cands += [f for pat, f in MODULE_WORDS if re.search(pat, it['text'] + ' ' + row)]
                 cands = list(dict.fromkeys(cands))
+            # symbol / module stated right next to the anchor (brief 3.13 Q1: the cell text governs)
+            pos, end = it.get('pos', 0), it.get('end', 0)
+            before, after = row[max(0, pos - 80):pos], row[end:end + 90]
+            bare = it['text'].lstrip('`').startswith(':')
+            near = before[-14:]
+            mod = [f for pat, f in MODULE_WORDS if re.search(pat, near)]
+            if bare and not mod:
+                # nearest module word earlier in the same clause (stop at a previous file anchor)
+                clause = re.split(r'\.vh?:\d|->|→|←|；|。', before)[-1]
+                hits = []
+                for pat, f in MODULE_WORDS + EXTRA_WORDS:
+                    for m in re.finditer(pat, clause):
+                        hits.append((m.end(), f))
+                if hits:
+                    mod = [max(hits)[1]]
+            if bare:
+                # a bare `:N` right after a contract mention is a contract line, not RTL
+                cm = re.search(r'(?:(C\d\d)|contract|合同)\s*(?:§\s*([\d.]+[a-z]?))?\s*[（(]?\s*(?:当前|now|at)?\s*`?$', before[-40:])
+                if cm:
+                    cname = cid.get(cm.group(1)) if cm.group(1) else None
+                    if not cname:
+                        fm = re.search(r'`(?:[a-z_/]+/)?([A-Za-z0-9_]+\.md)(?::\d+)?`', row)
+                        cname = fm.group(1) if fm else None
+                    then = g.lines(it['blame'], cname) if cname else None
+                    if then:
+                        lo = nums_list(it['nums'])[0][0]
+                        num, title = governing_heading(then, lo)
+                        if num:
+                            idx = heading_index(g.lines(a.base, cname) or [])
+                            label = '§%s' % num + (' ' + title[:30] if len(idx.get(num, [])) > 1 else '')
+                            res.update(status='resolved-contract-bare' if num in idx else 'section-gone',
+                                       target=cname, new=label, sections=[(num, title)])
+                            results.append(res)
+                            continue
+            if bare and mod:
+                cands = [mod[-1]]
+            hints = []
+            h1 = re.match(r'^[`\s]*[,，(（]\s*`([^`]+)`', after) or re.match(r'^\s*[(（]`([^`]+)`', after)
+            if h1:
+                hints.append(h1.group(1).strip())
+            h2 = re.search(r'([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\s*[（(][^（(）)]*$', before)
+            if h2:
+                hints.append(h2.group(2))
+            h3 = re.search(r'`([A-Za-z_][A-Za-z0-9_]*)`\s*(?:at|在|[(（])\s*`?$', before)
+            if h3:
+                hints.append(h3.group(1))
+            h4 = re.search(r'`assign\s+([A-Za-z_][A-Za-z0-9_]*)[^`]*`\s*[(（]\s*`?$', before)
+            if h4:
+                hints.append(h4.group(1))
+            if hints and (len(cands) == 1 or bare) and not (cands and (cands[0].startswith('tb_') or cands[0].endswith('.vh'))):
+                f = cands[0] if len(cands) == 1 else None
+                code_now, cmt_now = '', ''
+                if f:
+                    if f not in base_cache:
+                        base_src = g.lines(a.base, f) or []
+                        base_cache[f] = ('\n'.join(split_comment(l)[0] for l in base_src),
+                                         '\n'.join(split_comment(l)[1] for l in base_src))
+                    code_now, cmt_now = base_cache[f]
+                good_h = []
+                for h in (hints if f else []):
+                    sm = re.match(r'^@satisfies:\s*(.+)$', h)
+                    if sm and all(re.search(r'@satisfies:[^\n]*' + re.escape(t.strip()), cmt_now) for t in sm.group(1).split(',')):
+                        good_h.append('@satisfies:' + sm.group(1).strip())
+                    elif IDENT.fullmatch(h) and re.search(r'(?<![A-Za-z0-9_$])' + re.escape(h) + r'(?![A-Za-z0-9_$])', code_now):
+                        good_h.append(h)
+                    elif h in RENAMED and re.search(r'(?<![A-Za-z0-9_$])' + re.escape(RENAMED[h]) + r'(?![A-Za-z0-9_$])', code_now):
+                        good_h.append(RENAMED[h])
+                if not good_h and bare:
+                    # the stated symbol decides the file: the RTL file whose line N (at the
+                    # written-at commit) contains it
+                    lo = nums_list(it['nums'])[0][0]
+                    owners = []
+                    for fname in sorted(rtl_names):
+                        if fname.startswith('tb_'):
+                            continue
+                        src = g.lines(it['blame'], fname)
+                        if src and lo <= len(src) and any(re.search(r'(?<![A-Za-z0-9_$])' + re.escape(h) + r'(?![A-Za-z0-9_$])', split_comment(src[lo - 1])[0]) for h in hints if IDENT.fullmatch(h)):
+                            owners.append(fname)
+                    if len(owners) == 1:
+                        f = owners[0]
+                        now = '\n'.join(split_comment(l)[0] for l in (g.lines(a.base, f) or []))
+                        good_h = [h for h in hints if IDENT.fullmatch(h) and re.search(r'(?<![A-Za-z0-9_$])' + re.escape(h) + r'(?![A-Za-z0-9_$])', now)][:1]
+                if good_h:
+                    sat = [x.split(':', 1)[1] for x in good_h if x.startswith('@satisfies:')]
+                    plain = [x for x in good_h if not x.startswith('@satisfies:')]
+                    parts = ['`%s`' % x for x in dict.fromkeys(plain)] + (['`@satisfies: %s`' % ', '.join(sat)] if sat else [])
+                    res.update(status='resolved-by-hint', target=f, symbols=good_h, new='`%s` %s' % (f, '、'.join(parts)))
+                    results.append(res)
+                    continue
             if cands and all(c.startswith('tb_') or c.endswith('.vh') for c in cands):
                 resolve_tb(g, a.base, it, row, cands, res)
                 results.append(res)
@@ -350,6 +459,11 @@ def main():
                         ok.append(re.search(r'@satisfies:[^\n]*' + re.escape(s.split(':', 1)[1]), base_cmt) is not None)
                     else:
                         ok.append(re.search(r'(?<![A-Za-z0-9_$])' + re.escape(s) + r'(?![A-Za-z0-9_$])', base_code) is not None)
+                if not all(ok) and any(s in RENAMED for s in uniq):
+                    uniq = [RENAMED[s] if (s in RENAMED and not o) else s for s, o in zip(uniq, ok)]
+                    ok = [re.search(r'(?<![A-Za-z0-9_$])' + re.escape(s) + r'(?![A-Za-z0-9_$])', base_code) is not None
+                          if not s.startswith('@satisfies:') else o for s, o in zip(uniq, ok)]
+                    kinds = kinds + ['renamed']
                 if not uniq:
                     status = 'unresolved'
                 elif by_name and all(ok):

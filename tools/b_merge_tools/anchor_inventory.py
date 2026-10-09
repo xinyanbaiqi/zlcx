@@ -113,7 +113,7 @@ def main():
                 symbols = [t for t in TICKED.findall(cell) if not re.search(r':\d', t)]
                 for s, e, kind, ref, nums in sorted(found):
                     items.append({'file': os.path.basename(path), 'line': n, 'blame': commits[n - 1][:10] if n - 1 < len(commits) else None,
-                                  'kind': kind, 'ref': ref, 'nums': re.sub(r'\s+', '', nums),
+                                  'kind': kind, 'ref': ref, 'nums': re.sub(r'\s+', '', nums), 'pos': c0 + s, 'end': c0 + e,
                                   'strike': any(x <= c0 + s < y for x, y in sp),
                                   'text': cell[s:e], 'cell_symbols': symbols[:8]})
     json.dump(items, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)

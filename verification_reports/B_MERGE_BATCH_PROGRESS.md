@@ -9,8 +9,8 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段2已完成；阶段3/4/5的脚本与试跑已完成（条目7~10）。**基线回归改在"回归机"上用Vivado 2022.2整套重跑（条目11），等待其证据提交到`verification_reports/b_merge_batch_evidence/baseline_7a8eabf/`。**
-- **下一步**：① 先`git pull`，取回回归机提交的基线证据，按`REGRESSION_RUN_REQUEST.md` §1.4核对参考值（系统20/20、1250行、芯片20/0、模块级28/28）；**核对通过前不执行阶段3的TB标签改名**；② 阶段3：TB改名、别名表映射（含13个真实缺行标签）；③ 阶段4改写；④ 阶段6终版回归同样在回归机上跑（`REGRESSION_RUN_REQUEST.md` §2）。
+- **当前项**：阶段2已完成；阶段3/4/5的脚本与试跑已完成（条目7~10）。基线回归改到"回归机"上用Vivado 2022.2整套重跑（条目11），等其证据提交到`verification_reports/b_merge_batch_evidence/baseline_7a8eabf/`。等待期间完成的工作见条目12：§3.9的RTL注释、C08节号订正、别名表映射行、阶段3别名草稿、anchor_check负对照、阶段4全部9702个锚点的旧→新对照表。对照表尚未写入矩阵和别名表。
+- **下一步**：① `git pull`取回回归机基线证据，用`regression_evidence.py compare`按`REGRESSION_RUN_REQUEST.md` §1.4核对参考值（系统20/20、1250行、芯片20/0、模块级28/28）；**核对通过前不改TB标签**。② 核对通过后做阶段3：`tb_rename.py`改名、`strip_compare --strings`证明、把`alias_draft_renamed.md`各行写入别名表。③ 阶段4：按`anchor_conversion/anchor_mapping_table.tsv`写入矩阵和别名表；生成`anchor_history_allowlist.json`；补`@satisfies`（BMI-160）；接入门禁。④ 阶段5、6（终版回归在回归机上跑）、7。
 - **未决问题**：回归机的Vivado版本须为2022.2（待用户确认）。
 
 ---
@@ -121,3 +121,18 @@
   - `compare`：逐行列出PASS差异；`$finish`有差异或TB缺失时退出码为1。
   - 负对照：改1行PASS、1行`$finish`，恰好报出这2处。
   - 自比对：45个TB全部SAME，退出码0。
+
+### 条目12（2026-10-09）：等待回归机期间的工作（不涉及TB改名）
+
+- **§3.9 RTL注释（BMI-155，`f8986b3`）**：`ppg_amb_recheck_scheduler.v`中点名的3处注释，按"阶段沿用本阶段内帧完成"的语义改写。去掉注释后与`7a8eabf`逐字节相同。skill的deliverable gate在基线和分支上都是0 error / 0 strict warning；skill的comment-only校验通过。负对照：往代码里改1个字符，比对随即报出。证据在`b_merge_batch_evidence/rtl_comment_proof/`。
+- **C08节号订正（`be82819`）**：阶段2新增的"启动搜索空闲边界"小节编成了§8.2.3，与已有的§8.2.3~8.2.5重号（anchor_check报section-ambiguous）。现改为§8.2.6，同步改了5处引用。
+- **anchor_check负对照（BMI-150，`70fb907`）**：注入5处错误，恰好多报5处，原有报错没有一处消失。支持TB标签锚点（`` `tb_x.v` `"label"` ``）后又补做一次负对照（`fd348d2`）。证据在`anchor_check_negctl/`。
+- **别名表映射行（`fd348d2`）**：新增"B合同合并批次新增映射"一节，包括：13个缺行标签中不依赖TB改名的部分（AMI-24、MGR-11、SSW-22/34/38）；SSW-53（L-6）；OVL-01~17与OPTC-01/02，各对应C13/C21的规则或RTL行为，对不上的标"仅TB检查"；JNT（联合TB说明§11/§5.3）；RAW↔RGC；三轮新增TB本地标签；SYS-*；IDC2/CIS/AV4/CF4族级登记。另订正P05行（去掉SUP06A）和SID-11行（F-050）。46个符号、15个`@satisfies`、1个TB标签全部通过anchor_check。
+- **阶段3别名草稿（BMI-133，`affd3e3`）**：`tools/b_merge_tools/make_alias_draft_renamed.py`由ID治理§5.2生成57行FSC对照（合同FSC-nn ↔ TB本地SCHT-n），以及SUP/DCR/SSW-18/AMI-13/LFA-11各行。这些行只在TB改名后才成立，未写入别名表，与TB改名同一次提交。
+- **阶段4旧→新对照表（BMI-151，本次提交）**：
+  - 基线`7a8eabf`上共9702个旧锚点，全部已定。自动转换7612；人工判定后转换199；带日期叙述按历史保留1473；删除线保留410；其它历史1；非锚点4；仓库外文档3；失效锚点0。
+  - 人工判定共207条（条目10时约390条，解析器改进后减少）。逐条写在`tools/b_merge_tools/anchor_manual_decisions.tsv`，每条附理由，由`anchor_manual_seed.py`生成，由`anchor_mapping.py`汇总。
+  - 带日期叙述的口径（条目10未定项）现定为：同一格内锚点之前出现日期的，按历史保留原文；无日期的一律转换。
+  - 7811条新文本逐条用anchor_check检查，0 error。另有210条"Cxx 文件头"不在检查范围，已人工抽查。
+  - 证据在`b_merge_batch_evidence/anchor_conversion/`（README、TSV、汇总）。**未写入矩阵和别名表。**
+- 仍是旧写法的出处：alias第118行的`MATRIX.md §9.2.2`（该节不存在），写入时一并处理。
