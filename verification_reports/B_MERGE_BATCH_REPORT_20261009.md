@@ -2,7 +2,8 @@
 
 > 依据：`verification_reports/B_MERGE_BATCH_BRIEF_20261009.md`（下称“交接书”）§7。
 > 分支：`b-merge-batch`；基线：`7a8eabf`；终版回归提交：`5d8ceba`；终版回归证据：`b161d13`。
-> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~15）。
+> 分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。它相对终版回归提交`5d8ceba`只新增或修改了`verification_reports/`下的文件，可用`git diff --name-only 5d8ceba HEAD`复核；`rtl/`、`contracts/`、`tools/`都没有变动，所以终版回归的结论适用于分支HEAD。
+> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~16）。
 > 二级清单：`verification_reports/POST_TAPEOUT_DOC_CLEANUP_LIST.md`。证据目录：`verification_reports/b_merge_batch_evidence/`。
 
 ---
@@ -14,7 +15,7 @@
   - 只登记或不做8项，各有理由（§3）；
   - 二级登记2项，已进二级清单；
   - 排除项11项，各有去向（§3.3）；
-  - 待裁定0项。
+  - 总表中待裁定0项；执行中另有6项判断请用户确认（§9）。
 - **RTL逻辑没有改动。** 6个RTL文件只动了注释：§3.9点名的3处，加上`@satisfies`16处。去掉注释后，与`7a8eabf`逐字节相同。
 - **TB只改了标签字符串。** 7个TB去掉注释和字符串后与`7a8eabf`相同（§5）。
 - **符号锚点体系已建立并接入门禁。**
@@ -99,7 +100,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 - **本机Vivado 2019.2只作参考。** 本机基线中途被打断：Claude进程退出时，后台仿真被一并结束。另外，`tb_ppg_coarse_detection_fir`的xelab在“Completed static elaboration”后确定性崩溃（`EXCEPTION_ACCESS_VIOLATION`）。在无其它负载时重跑两次，都在同一位置崩溃，判为2019.2的工具缺陷。没有改RTL或TB。
   - 本机已跑完的44个TB，PASS行与`$finish`与2022.2结果完全相同（旁观会话核对）。
   - 本机部分证据在`baseline_7a8eabf_vivado2019.2_partial/`（`24d0b8d`）。
-- **正式基线与终版**都在回归机上运行：i5-10400，Vivado Simulator v2022.2，同一分组，在`git archive`导出目录中执行（交接书§6.8）。运行与回传方法见`REGRESSION_RUN_REQUEST.md`。
+- **正式基线与终版**都在回归机上运行：i5-10400，Vivado Simulator v2022.2，同一分组，在`git archive`导出目录中执行（交接书§6.8）。运行与回传方法见`REGRESSION_RUN_REQUEST.md`。分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。它相对终版回归提交`5d8ceba`只新增或修改了`verification_reports/`下的文件，可用`git diff --name-only 5d8ceba HEAD`复核；`rtl/`、`contracts/`、`tools/`都没有变动，所以终版回归的结论适用于分支HEAD。
   - 基线证据：`ea60432`（`baseline_7a8eabf/`）。
   - 终版证据：`b161d13`（`final_5d8ceba/`）。
   - 两次回归的`raw/`下各有49个xsim.log。`.gitignore`忽略`*.log`，这些日志是用`git add -f`加入的，`.gitignore`没有改。
