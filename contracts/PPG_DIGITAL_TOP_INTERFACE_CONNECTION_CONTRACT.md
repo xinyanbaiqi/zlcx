@@ -1,5 +1,6 @@
 # PPG数字功能顶层接口连接合同
 
+> V1.18 errata, 2026-10-09: B merge batch (`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-061, 111, 113, 116, 117; checked against baseline `7a8eabf` `ppg_control_top.v`; symbol anchors are "file + symbol (section)"). (1) §4.2 records the new Top output `o_ami_owner_lost_sticky` (owner-lifecycle round). (2) §4.2 port table: the public measurement-discard identity group is narrowed to `TXN_KEY` (F-008). (3) §4.1 V1.10: the frozen width/watchdog parameters are fixed product values checked at simulation start; RTL performs no elaboration reject (F-014/F-024). (4) §4.0/§4.1 V1.10: `flag_diag_clear_event` fans out to five direct consumers, including the characterization CDC (F-048). (5) The V1.3.4 status line "Scheduler FSC-01～57、AMI AMI-01～45和SSW SSW-01～52均已有当前单模块PASS证据" is dated history and, per the supersession note below, non-normative; it is kept unchanged. The unit-TB check labels do not all share meaning with the same-numbered contract IDs; the current evidence state is kept in the alias table and matrix §13. No port, width or connection changes beyond these records.
 > V1.10 fail-closed integration review, 2026-08-20: the direct-child hierarchy, system-blocking manager gate, wrapper generation/stop-episode forwarding, supervisor boundary, clear, external-abort, discard and watchdog connections remain normative, but system closure is `NOT_CLOSED` until the matrix audit records zero defects. Implementation evidence is `EVIDENCE_PENDING`.
 > V1.10 change record: replaces two nonexistent Scheduler input mappings with the only declared AMI and SSW blocking-gate paths; no Scheduler timing, owner, RAW or sample-index rule changes.
 >
@@ -190,7 +191,7 @@ module.
 | manager `o_stop_episode_active` | wrapper `o_stop_episode_active` -> `flag_stop_episode_active` | supervisor `i_stop_episode_active` | Sole proof of an accepted drain episode; normal RUN busy cannot replace it. |
 | external STOP, supervisor stop request, registered external-abort drain request | one registered `flag_stop_request_event` merge | ACTIVE wrapper `i_stop_event` -> manager `i_stop_event` | Sole manager terminal control; STOP wins same-cycle START/COMMIT/clear. |
 | supervisor `o_system_abort_event` plus external `i_control_abort_event` | one registered `flag_owner_abort_event` merge | AMI/Scheduler/SSW `i_control_abort_event` | The sole owner-abort fanout. It never enters manager; the external contribution is not a blocking cause by itself. |
-| Top registered `flag_diag_clear_event` | unchanged direct fanout | AMI/Scheduler/SSW/supervisor `i_diag_clear_event` | Cannot release owner, active fault, injection request or generation. |
+| Top registered `flag_diag_clear_event` | unchanged direct fanout | AMI/Scheduler/SSW/supervisor `i_diag_clear_event`; V1.18 (F-048): also the characterization CDC `i_diag_clear_event` (five direct consumers in `ppg_control_top.v`) | Cannot release owner, active fault, injection request or generation. |
 
 No table elsewhere in this document may replace or bypass these paths. The
 wrapper is transparent for the manager-owned signals above; the Top is
@@ -219,6 +220,8 @@ the sole system-fault aggregate owner.
 模拟顶层输出只能原样来自SSW：LED、LEDDAC、`EN_TEST`、`S[4:0]`、所有Q1/Q2/Q3/IREF/TIA/SAR/IDAC控制和`o_clk_2m`。顶层不得反相、屏蔽、合并或延迟任一模拟控制输出。
 
 顶层还应输出AMI正式测量结果、V4生命周期ACK/错误、ACTIVE版本、调度器/AMI/SSW诊断和只读空闲状态。
+
+V1.18补记（owner生命周期轮）：AMI/SSW诊断输出组新增`o_ami_owner_lost_sticky`（1 bit，复位0），逐位直连AMI `o_owner_lost_sticky`（C10 §6.9、§7.1a）。它是ADC完成丢失超时作废的历史诊断，非阻断，新START不清，只由复位或合法诊断清除清零（C10 §15.1）；芯片顶层经SPI读地图0x0108 bit6导出。
 
 AMI正式测量输出必须新增逐位直连的`o_result_sample_valid`。它与`o_measurement_result_valid`、全部数值和身份属于同一保持型事务；顶层不得把它与calibration-valid、饱和或RAW数值组合后再导出。
 
@@ -287,7 +290,7 @@ parameter integer C_ENABLE_TEST_INJECTION = 0
 | output | `o_system_fault_run_generation` | `C_RUN_GENERATION_WIDTH` | first-fault所属RUN代际；仅manager产生、Top不重建 |
 | output | `o_system_fault_summary` | 16 | 历史blocking-cause summary位图 |
 | output | `o_result_discard_summary_sticky` | 1 | 非blocking正式结果discard历史summary；只由AMI measurement-discard事件置位 |
-| output | `o_measurement_result_discard_event` / `reason` / `identity_valid` / `sample_valid` / `<TXN_ID>` | `1/2/1/1/each field` | AMI正式结果discard公开观测；identity-valid必须为1，完整字段在事件采样沿稳定，且不产生成功transfer |
+| output | `o_measurement_result_discard_event` / `reason` / `identity_valid` / `sample_valid` / ~~`<TXN_ID>`~~ `<TXN_KEY>`（V1.18，F-008） | `1/2/1/1/each field` | AMI正式结果discard公开观测；identity-valid必须为1，完整字段在事件采样沿稳定，且不产生成功transfer。V1.18补记：身份组为矩阵§1.1 `TXN_KEY`，即RTL实际的`frame_id`、`sample_index`、`color_ir`、`frame_type`、`precision`、`run_generation`六项，不含epoch；在16位计数回绕窗口内唯一；reason可为`2'b11` COMPLETION_LOST（C10 §6.10） |
 | output | `o_detection_discard_event` / `reason` / `identity_valid` / `sample_valid` / `<TXN_ID>` | `1/2/1/1/each field` | AMI检测generation-scoped discard公开观测；identity-valid为0时除目标`run_generation`外的触发身份与sample-valid为0，PWI内部无ready广播使用同一稳定字段 |
 
 只有联合验证或最终顶层验证构建可显式覆盖为1。生产网表、流片配置和普通功能回归必须保持0，并把`i_test_inject_enable`及三个请求/payload输入（V1.16起连同`i_test_calibration_loss_inject_valid`共四个）约束为非活动值。有效使能定义为：
@@ -319,10 +322,18 @@ parameter integer C_ADC_DRAIN_WATCHDOG_CYCLES = 5000;
 parameter integer C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH = 13;
 ```
 
-Elaboration rejects mismatched child widths, including `C_CONFIG_WIDTH` against
+~~Elaboration rejects mismatched child widths, including `C_CONFIG_WIDTH` against
 the wrapper, manager, unpacker and configuration-CDC bridge (all must equal
 1024), a zero watchdog count, or a
-watchdog counter narrower than `$clog2(C_ADC_DRAIN_WATCHDOG_CYCLES + 1)`.
+watchdog counter narrower than `$clog2(C_ADC_DRAIN_WATCHDOG_CYCLES + 1)`.~~
+V1.18 (F-014/F-024): the width and watchdog values above are **fixed product values** and shall not
+be overridden: `C_CONFIG_WIDTH=1024`; config/coef/DC-recovery epoch width 8;
+code epoch width 4; generation width 8; frame/sample width 16/16; watchdog
+5000/13. The Verilog-2001 RTL performs no elaboration-time reject. Instead the
+actually elaborated values are read hierarchically and checked at simulation
+start in `tb_ppg_control_top.v` (TB-local checks `PARAM-FIXED`, `PARAM-WDOG`),
+`tb_ppg_chip_digital_top.v` (`PARAM-FIXED`, `PARAM-WDOG`) and the supervisor
+unit TB (`WDPARM`) (C24 §1).
 `5000` cycles is a provisional product policy, not macro timing signoff.
 
 `ppg_system_config_manager.o_run_generation` leaves its only parent as
@@ -363,7 +374,7 @@ source deassertion during RUN cannot revoke an accepted AMI request.
 
 Top creates one registered `flag_diag_clear_event` from its sole 2 MHz
 diagnostic-clear source and fans it unchanged only to the direct diagnostic
-consumers AMI, Scheduler, SSW and supervisor. AMI/PWI forward that same event
+consumers AMI, Scheduler, SSW and supervisor (V1.18, F-048: and the characterization CDC, which uses it only for its own sticky diagnostics). AMI/PWI forward that same event
 to every internal diagnostic consumer. Manager status clear remains local.
 Diagnostic clear cannot release an owner or active blocking fault and START
 cannot clear a first-fault snapshot.
