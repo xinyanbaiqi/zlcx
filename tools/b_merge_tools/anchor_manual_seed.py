@@ -153,6 +153,63 @@ def git(repo, *args):
     return subprocess.run(['git', '-C', repo] + list(args), capture_output=True).stdout.decode('utf-8', 'replace')
 
 
+# ---- round 2 (coordinator's ruling of 2026-10-09: dated current conclusions are converted) ----
+# Hand decisions for anchors that were dated history in round 1 and do not resolve, or that
+# resolve to a symbol the row never names (file misattributed / ledger line offset).
+# Applied whatever the resolver status, except history statuses.
+_R2 = '第二轮（统筹10-09裁定：带日期的现行结论一律转换）：'
+OVERRIDES_R2 = {
+    (M, 934, 'ppg_control_top.v:295-299'): ('sym', TOP, 'C_ADC_DRAIN_WATCHDOG_CYCLES', _R2 + '参数化位宽约束注释块，同alias P12行'),
+    (M, 937, 'ppg_control_top.v:1378-1439'): ('sym', TOP, 'ppg_system_fault_abort_supervisor_Inst', _R2 + '格内写明“C24 supervisor instantiation”'),
+    (M, 1334, '`:515`'): ('text', 'C01 §5.2', '', _R2 + '格内“§5.2（当前:515）”指C01合同行'),
+    (M, 1453, '`:74-77`'): ('file', TOP, '', _R2 + '“RTL头注释:74-77已自述该缺口”，Top文件头注释，文件级锚点'),
+    (M, 3242, '`:480`'): ('sym', SSW, 'o_analog_safe', _R2 + '格内“o_analog_safe/i_analog_safe ... inverse (:480)”'),
+    (M, 3408, 'tb_ppg_precision_window_controller.v:737-758'): ('label', 'tb_ppg_precision_window_controller.v', 'PWC-41 new legal START preserves protocol sticky', _R2 + 'PWC-41的两条检查（另一条为switch-timeout sticky）'),
+    (M, 3832, ':2'): ('not-anchor', '', '', _R2 + '“前8项:2项(G-FP-02/G-FP-06)”计数，不是行号'),
+    (A, 96, 'ppg_sar9_sar15_safe_selection_wrapper.v:480'): ('sym', SSW, 'o_analog_safe', _R2 + '写入时:480为assign o_analog_safe'),
+    (A, 143, 'tb_ppg_control_top_startup_idac_calibration.v:1278-1305'): ('label', 'tb_ppg_control_top_startup_idac_calibration.v', 'PASS SID-06 next-subframe waveform snapshot correctly reflects', _R2 + '“已补真实断言…见…”指该TB的SID-06下一子帧检查'),
+    (A, 179, 'ppg_adc_measurement_idac_integration.v:1010'): ('tag', AMI, 'TOP-23', _R2 + '格内“已打@satisfies: TOP-23, TOP-24(…)”'),
+    (A, 260, 'ppg_adc_measurement_idac_integration.v:1745'): ('sym', AMI, 'reg_result_fork_payload', _R2 + '右侧引文reg_result_fork_payload<=enc_dc_result_payload'),
+    (A, 277, 'ppg_idac_code_controller.v:879'): ('tag', C17, 'ISE-10', _R2 + '“ISE-10直接追加到…(TRK-07/TRK-08既有锚点)”'),
+    (A, 277, '`:808`'): ('sym', SSW, 'reg_cal_amb_code', _R2 + '格内写明“SSW自己的…门控快照锁存(:808环境码”；写入时SSW:808为reg_cal_amb_code锁存，解析器误归C17'),
+    (A, 277, '`:847`'): ('sym', SSW, 'reg_cal_dc_code', _R2 + '同上“:847直流码”；写入时SSW:847为reg_cal_dc_code锁存'),
+    (A, 277, '`:652,654,702,704`'): ('tag', SSW, 'ISE-04', _R2 + '“锚定在SSW的NORMAL运行波形块”SAR9总线；写入时这些SSW行带ISE-04注释'),
+    (A, 277, '`:642,644,692,694`'): ('tag', SSW, 'ISE-05', _R2 + '同上SAR15总线；写入时这些SSW行带ISE-05注释'),
+    (A, 277, '`:642,652`'): ('tag', SSW, 'ISE-07', _R2 + '格内“(:642,652追加ISE-07)”'),
+    (A, 277, '`:615`'): ('sym', SSW, 'reg_control_next', _R2 + 'ISE-06 STATIC_BIAS“无条件清零初值”；写入时SSW:615为reg_control_next默认清零'),
+    (A, 277, '`:742`'): ('sym', SSW, 'reg_cal_amb_code', _R2 + 'ISE-06 AMB总线；写入时SSW:742为reg_cal_amb_code码窗'),
+    (A, 277, '`:745`'): ('sym', SSW, 'CTRL_EN_9_DC', _R2 + 'ISE-06“EN_9_DC使能门控”；写入时SSW:745为CTRL_EN_9_DC赋值'),
+    (A, 277, '`:747`'): ('sym', SSW, 'reg_cal_dc_code', _R2 + 'ISE-06“DC9码窗”；写入时SSW:747为reg_cal_dc_code码窗'),
+    (A, 317, 'tb_ppg_peak_valley_window_detector.v:615'): ('label', PVW_TB, 'PVW-09-WRAP', _R2 + '格内“已补PVW-09-WRAP(…)”'),
+    (A, 340, 'tb_ppg_peak_valley_window_detector.v:875'): ('label', PVW_TB, 'PVW-32-BUSY', _R2 + '格内“已补PVW-32-BUSY(…)”'),
+    (A, 347, 'tb_ppg_peak_valley_window_detector.v:636'): ('label', PVW_TB, 'PVW-39-WRAP', _R2 + '格内“已补PVW-39-WRAP(…)”'),
+}
+HISTORY_STATUSES = ('history-strike', 'history-block', 'history-revision', 'history-superseded')
+TOP_EDGE = re.compile(r'Top边界(?:输入|输出)（`$')
+TOP_NET = re.compile(r'Top内部网`([A-Za-z_][A-Za-z0-9_]*)`（$')
+TOP_OUT_BARE = re.compile(r'Top边界输出$')
+
+
+def top_rule(line, pos, text, top_src, top_ports):
+    """G-FP-01 ledger patterns whose line numbers drift: the symbol the cell names governs.
+    'Top边界输入/输出（`ppg_control_top.v:N`' -> the row's own Top port (column 4);
+    'Top内部网`X`（`:N`' -> net X; '→Top边界输出`:N`' -> the net named just before it."""
+    pre = line[max(0, pos - 80):pos]
+    cols = line.split('|')
+    if TOP_EDGE.search(pre) and text.startswith('ppg_control_top.v:') and len(cols) > 5:
+        port = cols[4].strip().strip('`').split()[0] if cols[4].strip() else ''
+        if port in top_ports:
+            return ('sym', TOP, port, '第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名')
+    m = TOP_NET.search(pre)
+    if m and text.startswith('`:') and re.search(r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % m.group(1), top_src):
+        return ('sym', TOP, m.group(1), '第二轮：“Top内部网`%s`（:N）”，按格内网名' % m.group(1))
+    if TOP_OUT_BARE.search(pre) and text.startswith('`:'):
+        nets = re.findall(r'Top内部网`([A-Za-z_][A-Za-z0-9_]*)`', line[:pos])
+        if nets and nets[-1] in top_ports:
+            return ('sym', TOP, nets[-1], '第二轮：“→Top边界输出:N”即紧前Top内部网`%s`同名输出端口' % nets[-1])
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--resolved', required=True)
@@ -175,13 +232,23 @@ def main():
         return open('%s/%s' % (a.repo, paths[f]), encoding='utf-8').read() if f in paths else ''
 
     docs = {d: git(a.repo, 'show', '%s:contracts/%s' % (a.base, d)).split('\n') for d in (M, A)}
+    top_src = src(TOP)
+    top_ports = set(re.findall(r'^\s*(?:input|output)\b[^/\n]*?\b([io]_[A-Za-z0-9_]+)\s*,?\s*//', top_src, re.M))
     rows, todo = [], 0
     for r in res:
         key = (r['file'], r['line'], r['text'])
-        if r['status'] not in ('unresolved', 'ambiguous', 'resolved-weak', 'symbol-gone', 'section-gone') and key not in SECTION_COLON:
-            continue
         line = docs[r['file']][r['line'] - 1]
-        dec = OVERRIDES.get(key) or SECTION_COLON.get(key)
+        if r['status'] in HISTORY_STATUSES:
+            continue
+        r2 = OVERRIDES_R2.get(key)
+        if r2 is None and r['file'] == M:
+            r2 = top_rule(line, r['pos'], r['text'], top_src, top_ports)
+            if r2 and r.get('new') == '`%s` `%s`' % (r2[1], r2[2]):
+                r2 = None                      # resolver already agrees
+        if r['status'] not in ('unresolved', 'ambiguous', 'resolved-weak', 'symbol-gone', 'section-gone') \
+                and key not in SECTION_COLON and r2 is None:
+            continue
+        dec = r2 or OVERRIDES.get(key) or SECTION_COLON.get(key)
         if dec is None and r['file'] == M:
             for lo, hi, f, why in FAMILIES:
                 if lo <= r['line'] <= hi:

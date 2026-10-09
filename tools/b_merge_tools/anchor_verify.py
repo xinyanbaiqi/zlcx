@@ -61,6 +61,67 @@ def rebuild(line, entries):
     return ''.join(out)
 
 
+def verify_round2(a, prev_rows, rows):
+    """Second round: every line is rebuilt from the BASE line twice, once with the previous
+    table (what --before should hold) and once with the new table (what the disk should
+    hold). A line whose --before text equals its previous-table rebuild must equal its
+    new-table rebuild on disk; a line edited after the first round (its --before text no
+    longer equals the rebuild) must be unchanged when the two tables agree on it, and is
+    listed with both texts otherwise. Lines without anchors must be unchanged."""
+    bad = edited = pairs = changed = 0
+    for doc in DOCS:
+        base = show(a.repo, a.base, 'contracts/' + doc)
+        before = show(a.repo, a.before, 'contracts/' + doc)
+        after_path = os.path.join(a.after_dir, doc) if a.after_dir else os.path.join(a.repo, 'contracts', doc)
+        after = open(after_path, encoding='utf-8').read().replace('\r\n', '\n').split('\n')
+        if len(after) != len(before):
+            print('LINE-COUNT %s before=%d after=%d' % (doc, len(before), len(after)))
+            bad += 1
+            continue
+        b2s = {}
+        for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, base, before, autojunk=False).get_opcodes():
+            if tag == 'equal' or (tag == 'replace' and i2 - i1 == j2 - j1):
+                for k in range(i2 - i1):
+                    b2s[j1 + k] = i1 + k
+        old_by, new_by = {}, {}
+        for r in prev_rows:
+            if r['doc'] == doc:
+                old_by.setdefault(int(r['line']) - 1, []).append(r)
+        for r in rows:
+            if r['doc'] == doc:
+                new_by.setdefault(int(r['line']) - 1, []).append(r)
+        for j, (b_line, a_line) in enumerate(zip(before, after)):
+            changed += b_line != a_line
+            i = b2s.get(j)
+            if i is None or i not in new_by:
+                if b_line != a_line:
+                    bad += 1
+                    print('UNEXPECTED-CHANGE %s:%d' % (doc, j + 1))
+                continue
+            o_rows = sorted(old_by[i], key=lambda r: int(r['col']))
+            n_rows = sorted(new_by[i], key=lambda r: int(r['col']))
+            exp_before = rebuild(base[i], o_rows) if any(r['class'] == 'convert' for r in o_rows) else base[i]
+            exp_after = rebuild(base[i], n_rows) if any(r['class'] == 'convert' for r in n_rows) else base[i]
+            delta = sum(1 for x, y in zip(o_rows, n_rows)
+                        if (x['class'] == 'convert') != (y['class'] == 'convert') or x['new'] != y['new'])
+            pairs += delta
+            if b_line == exp_before:
+                if a_line != exp_after:
+                    bad += 1
+                    print('MISMATCH %s:%d\n  expected: %s\n  on disk : %s' % (doc, j + 1, (exp_after or '')[:400], a_line[:400]))
+            elif exp_after == exp_before:
+                if a_line != b_line:
+                    bad += 1
+                    print('UNEXPECTED-CHANGE %s:%d (edited after round 1, no delta)' % (doc, j + 1))
+            else:
+                edited += 1
+                print('EDITED-LINE %s:%d (edited after round 1 and changed in round 2; review)\n  before : %s\n  after  : %s'
+                      % (doc, j + 1, b_line[:300], a_line[:300]))
+    print('delta pairs %d, changed lines %d, lines edited after round 1 needing review %d, mismatches %d'
+          % (pairs, changed, edited, bad))
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--table', required=True)
@@ -68,8 +129,11 @@ def main():
     ap.add_argument('--base', default='7a8eabf')
     ap.add_argument('--repo', default='.')
     ap.add_argument('--after-dir')
+    ap.add_argument('--previous', help='second round: the table the --before files carry')
     a = ap.parse_args()
     rows = list(csv.DictReader(open(a.table, encoding='utf-8'), delimiter='\t'))
+    if a.previous:
+        return verify_round2(a, list(csv.DictReader(open(a.previous, encoding='utf-8'), delimiter='\t')), rows)
     bad = checked_pairs = changed = 0
     for doc in DOCS:
         base = show(a.repo, a.base, 'contracts/' + doc)

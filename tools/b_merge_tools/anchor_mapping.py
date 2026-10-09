@@ -18,7 +18,11 @@ the matrix or the alias table; the outputs are
 Classes:
   convert          the old anchor is replaced by `new`
   history-strike   inside ~~strikethrough~~ -- kept verbatim (history)
-  history-dated    dated narrative (date earlier in the same cell) -- kept verbatim
+  history-block    the line is a "> " errata / explanation block -- kept verbatim
+  history-revision the line lies in a revision-record section -- kept verbatim
+  history-superseded  an older entry of the cell that a later entry explicitly voids -- kept
+  (rules: anchor_history_rules.py, coordinator's ruling of 2026-10-09; dated current
+  conclusions are converted, doubtful ones are converted and noted `uncertain`)
   history          other history kept verbatim (manual, reason in note)
   not-anchor       the pattern matched but the text is not a line number (kept)
   external         points into a document not in this repository (kept, flagged)
@@ -98,8 +102,8 @@ def main():
         source, note = 'auto', ''
         if st == 'history-strike':
             cls, new = 'history-strike', ''
-        elif st == 'history-dated':
-            cls, new = 'history-dated', ''
+        elif st in ('history-block', 'history-revision', 'history-superseded'):
+            cls, new = st, ''
         elif d is not None and d['action'] != 'keep-auto':
             source, act, a1, a2, note = 'manual', d['action'], d['arg1'], d['arg2'], d['reason']
             cls = 'convert'
@@ -130,6 +134,8 @@ def main():
                 source, note = 'manual', d['reason']
         else:
             raise SystemExit('no decision for %s:%d %s (%s)' % (r['file'], r['line'], r['text'], st))
+        if cls == 'convert' and r.get('uncertain'):
+            note = ('uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；' + note).rstrip('；')
         cnt[(cls, source)] += 1
         out_rows.append([r['file'], r['line'], sha, r['pos'], r['text'], r['kind'], r['blame'], cls, new, source, note])
     os.makedirs(a.out_dir, exist_ok=True)

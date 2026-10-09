@@ -1,0 +1,48 @@
+== SUPERSEDED disabled
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   history-block               -> history-block
+OK   history-block               -> history-block
+OK   history-revision            -> history-revision
+OK   history-revision            -> history-revision
+FAIL history-superseded          -> convert
+FAIL history-superseded          -> convert
+OK   convert              unc    -> convert (uncertain)
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+samples 13, failures 2
+exit 1
+== REVISION_HEADING disabled
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   history-block               -> history-block
+OK   history-block               -> history-block
+FAIL history-revision            -> convert
+FAIL history-revision            -> convert
+OK   history-superseded          -> history-superseded
+OK   history-superseded          -> history-superseded
+OK   convert              unc    -> convert (uncertain)
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+samples 13, failures 2
+exit 1
+== "> " block rule disabled
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+FAIL history-block               -> convert
+FAIL history-block               -> convert
+OK   history-revision            -> history-revision
+OK   history-revision            -> history-revision
+OK   history-superseded          -> history-superseded
+OK   history-superseded          -> history-superseded
+OK   convert              unc    -> convert (uncertain)
+OK   convert                     -> convert
+OK   convert                     -> convert
+OK   convert                     -> convert
+samples 13, failures 2
+exit 1

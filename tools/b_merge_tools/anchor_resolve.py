@@ -38,7 +38,11 @@ import json
 import os
 import re
 import subprocess
+import sys
 from collections import defaultdict
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from anchor_history_rules import classify as history_classify  # noqa: E402
 
 MODULE_WORDS = [
     (r'\bAMI\b', 'ppg_adc_measurement_idac_integration.v'),
@@ -275,12 +279,15 @@ def main():
             results.append(res)
             continue
         row = docs[it['file']][it['line'] - 1]
-        # brief 3.2 / Q1: dated narrative is history -- a date earlier in the same cell
-        cell0 = row.rfind('|', 0, it.get('pos', 0)) + 1
-        if DATED.search(row[cell0:it.get('pos', 0)]):
-            res.update(status='history-dated', new=None)
+        # history rules of the coordinator's 2026-10-09 ruling (anchor_history_rules.py):
+        # "> " blocks, revision-record sections and explicitly superseded entries are
+        # kept; dated current conclusions are converted (doubtful ones flagged)
+        hist, uncertain = history_classify(docs[it['file']], it['line'], it.get('pos', 0), it.get('end', 0))
+        if hist:
+            res.update(status=hist, new=None)
             results.append(res)
             continue
+        res['uncertain'] = uncertain
         if it['kind'] in ('rtl', 'bare-no-context'):
             cell_syms = []
             for s in it['cell_symbols']:
