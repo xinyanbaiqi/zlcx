@@ -36,6 +36,8 @@
 >
 > V1.16勘误，2026-10-04：订正第8.4.5节`s1_calibration_applied`来源的不实描述，并写明P2S三个遥测字段与正式结果同属一笔的前提（用户裁定方案(c)：不改RTL逻辑，只写限制）。AMI V1.14实际导出的是结果fork之前DC恢复实例的`flag_dc_s1_calibration_applied`（`ppg_adc_measurement_idac_integration.v:1029`，来源`:2278`），而不是本节原文所写的fork解包字段`flag_unused_output_calibration`；`stage1_raw`/`stage2_raw`同样取自fork之前（`:1030-1031`）。AMI端口注释（`:403`）和assign注释（`:1029`）已由任务C原行改正；芯片顶层TB V1.2新增TC7永久断言守护该前提。证据：`verification_reports/TASKC_TICK248_P2S_20261001.md`第4节。同步记录：`verification_reports/CONTRACT_SYNC_BATCH3_PHASE2_20261004.md`。
 >
+> V1.17勘误，2026-10-09：B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-110~115，按基线`7a8eabf`芯片顶层RTL、`ppg_spi_register_file.v` V1.5改写，符号锚点格式为“文件 + 符号（§节）”）。① 新增§8.5：`SPI_CS_N`作为SPI协议状态的异步复位/门控，不加同步链，写入四点安全论证（F-030）；§7新增对应行。② 第2、3、4、6节订正复位同步器为一个实例，源域复位借用已同步的数字域复位（F-007，RTL自V1.1起如此）。③ §8.1新增“读数据移出相位”一行（F-005/F-006）。④ §11.2地图0x0108 bit6为AMI owner lost sticky，并新增§11.4逐位清除方式。⑤ 新增§8.6产品固定参数与检查所在TB（F-014/F-024）。不改变任何地址、位定义（0x0108 bit6除外，它原为保留位）或协议时序。
+>
 > 目标RTL：`ppg_chip_digital_top/ppg_chip_digital_top.v`（V1.3勘误确认路径，V1.11勘误首次实现，V1.14勘误修复DBG_OUT选择值CDC后现为V1.2）
 > 目标TB：`ppg_chip_digital_top/tb_ppg_chip_digital_top.v`（V1.3勘误确认路径，V1.11勘误首次实现）
 > 工作时钟：`CLK_2M`域（2 MHz数字系统域，与C01的`i_clk`同源）+ `SPI_SCLK`域（SPI配置源域，与C01的`i_source_clk`同源，非自由振荡）
@@ -52,7 +54,7 @@
 | 依赖 | 版本 | 用途 |
 | --- | --- | --- |
 | `PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md`（C01） | V1.14 | `ppg_control_top`边界端口定义、`i_source_*`语义、`o_active_precision_mode`语义、`flag_adc_physical_idle`合成公式、`o_source_config_update_ready`语义；V1.13/V1.14为另一会话对TOP-01~24验收表的证据核对勘误（V1.14收尾TOP-06，24项全部CLOSED），与本合同信号/CDC内容无冲突 |
-| `ppg_reset_sync/ppg_reset_sync.v` | V1.0 | 复位同步器标准IP，glue顶层例化两次 |
+| `ppg_reset_sync/ppg_reset_sync.v` | V1.0 | 复位同步器标准IP，glue顶层例化~~两次~~一次（V1.17订正，F-007：`ppg_chip_digital_top.v` `ppg_reset_sync_clk2m_Inst`） |
 | `ppg_config_cdc_bridge/ppg_config_cdc_bridge.v` | 现有 | 1024-bit ACTIVE配置的写方向CDC参考实现（该模块本身例化在`ppg_active_v4_control_plane_integration`内部，glue顶层只需按其`i_source_config`端口语义提供已经在`SPI_SCLK`域稳定的完整寄存器组，不重复实现CDC逻辑） |
 | `ppg_characterization_control_cdc`合同 | V1.1 | 表征控制6-bit字段的CDC语义参考 |
 | `ppg_digital_esd_shell/ppg_digital_esd_shell.v` | 现有（黑盒） | glue顶层对外边界端口名称必须与该黑盒一致（该文件的电源Pin号注释和幽灵AUX Pin问题已在封装复核中记录，不影响本合同的信号语义部分） |
@@ -64,7 +66,7 @@ glue顶层的直接子模块（新建）加一个既有模块例化：
 ```text
 ppg_chip_digital_top
 ├── ppg_reset_sync（例化1，i_clk=CLK_2M_PAD，产i_rstn）
-├── ppg_reset_sync（例化2，i_clk=SPI_SCLK，产i_source_rstn）
+├── ~~ppg_reset_sync（例化2，i_clk=SPI_SCLK，产i_source_rstn）~~ V1.17订正（F-007）：无例化2；i_source_rstn = i_rstn（`w_source_rstn = w_rstn`）
 ├── SPI从机（新建，移位引擎+寄存器文件，写方向+读方向）
 ├── flag_adc_physical_idle合成器（新建，精度模式选择+单点同步）
 ├── P2S打包器（新建，含深度2内部缓冲，字段清单见第8.4节）
@@ -79,9 +81,9 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 | # | 信号 | 方向 | glue顶层内接收/驱动方 |
 | --- | --- | --- | --- |
 | 1 | `CLK_2M_PAD` | 输入 | `ppg_reset_sync`例化1的`i_clk`；`ppg_control_top.i_clk`；P2S打包器`P2S_CLK`派生源 |
-| 2 | `RESET_N` | 输入 | `ppg_reset_sync`例化1、例化2的`i_async_rstn`各接一份 |
+| 2 | `RESET_N` | 输入 | `ppg_reset_sync`例化1~~、例化2~~的`i_async_rstn`（V1.17订正，F-007：只有一个实例；源域复位借用其同步结果） |
 | 3 | `SPI_CS_N` | 输入 | SPI从机移位引擎 |
-| 4 | `SPI_SCLK` | 输入 | SPI从机移位引擎；`ppg_reset_sync`例化2的`i_clk`；等效于C01的`i_source_clk` |
+| 4 | `SPI_SCLK` | 输入 | SPI从机移位引擎；~~`ppg_reset_sync`例化2的`i_clk`；~~等效于C01的`i_source_clk`（V1.17订正，F-007：不再驱动任何复位同步器） |
 | 5 | `SPI_SDI` | 输入 | SPI从机移位引擎（写方向） |
 | 6 | `SPI_SDO` | 输出 | SPI从机寄存器文件读方向逻辑驱动 |
 | 7 | `P2S_CLK` | 输出 | P2S打包器驱动，`CLK_2M_PAD`派生 |
@@ -100,7 +102,7 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 
 | 块 | 有无逻辑 | 职责 |
 | --- | --- | --- |
-| ① 复位同步 ×2 | 有 | `RESET_N`分别经`CLK_2M_PAD`域和`SPI_SCLK`域各自的`ppg_reset_sync`实例，产出`i_rstn`和`i_source_rstn` |
+| ① 复位同步 ~~×2~~ ×1 | 有 | ~~`RESET_N`分别经`CLK_2M_PAD`域和`SPI_SCLK`域各自的`ppg_reset_sync`实例，产出`i_rstn`和`i_source_rstn`~~ V1.17订正（F-007）：`RESET_N`只经`CLK_2M_PAD`域的一个`ppg_reset_sync`实例产出`i_rstn`；`i_source_rstn`直接借用该同步结果（`w_source_rstn = w_rstn`）。原因：`SPI_SCLK`在主机第一次真实传输前保持低电平静止，由它驱动的复位同步器会用第一次传输自己的时钟沿释放复位，破坏首次传输的前1~2位（芯片顶层RTL V1.1修复，TB TC1发现） |
 | ② SPI从机 | 有 | 移位引擎+寄存器文件；写方向把SPI串行写入解码为`i_source_config_snapshot[1023:0]`、`i_source_config_update_event`、`i_source_characterization_update_valid`等C01已冻结的`i_source_*`端口，以及一次性命令脉冲（映射到C01的`i_start_event`/`i_stop_event`/`i_diag_clear_event`/`i_control_abort_event`）；读方向把`ppg_control_top`输出的快照通过`SPI_SDO`移出 |
 | ③ `flag_adc_physical_idle`合成 | 有 | 按C01 V1.11冻结公式，用`ppg_control_top.o_active_precision_mode`在`!CLK_STAGE1_DOUT_LOW`和`!CLK_STAGE2_DOUT_LOW`之间二选一，经单点同步器产出`ppg_control_top.i_adc_physical_idle` |
 | ④ P2S打包器 | 有 | 12字段固定包（161 bit），事件触发（`o_measurement_result_valid`）、深度2内部缓冲承接背压，字段清单见第8.4节 |
@@ -113,6 +115,7 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 | --- | --- | --- | --- |
 | SPI写入 → `i_source_config_snapshot`等`i_source_*` | `SPI_SCLK`域 → `CLK_2M`域 | 复用C01既有的`ppg_config_cdc_bridge`（1024-bit ACTIVE）与`ppg_characterization_control_cdc`（6-bit表征字段）语义；glue顶层SPI寄存器文件按其`i_source_config`端口要求提供稳定并行总线；写入节流由C01 V1.12新增的`o_source_config_update_ready`回报（`=1`才可再拉`i_source_config_update_event`），不再需要保守限速猜测 | 已有CDC基础设施，`o_source_config_update_ready`已在C01落地，glue顶层只需正确驱动 |
 | `ppg_control_top`输出 → `SPI_SDO`读回 | `CLK_2M`域 → `SPI_SCLK`域 | 每次新读事务在`CLK_2M`域整体捕获`0x0100+`只读诊断区快照并冻结至事务结束，快照完成更新的同一事件再桥接一次跨入`SPI_SCLK`域生成门控脉冲，`SPI_SCLK`域寄存器只在该脉冲为真时才整体捕获总线（非对总线的无门控直接双触发器），读命令地址后插入2个哑字节覆盖往返延迟；机制细节见第8.1节 | 已确认（V1.2勘误确认哑字节数与频率上限；V1.15勘误修复回读段门控缺陷、更新本行机制描述与第8.1节时序数字），RTL见`ppg_spi_register_file.v` V1.3 |
+| `SPI_CS_N` → SPI协议状态 | 异步 → `SPI_SCLK`域 | V1.17补记（F-030）：作为7个SPI协议状态寄存器的异步复位/门控，不加同步链；安全论证与接口时序要求见§8.5 | 已冻结 |
 | ADC DONE → `flag_adc_physical_idle` | 异步 → `CLK_2M`域 | 精度模式选择后单点两级同步器，选择信号`o_active_precision_mode`本身已是`CLK_2M`域同步电平 | 已确定机制，待写RTL |
 | SPI寄存器（选择值）→ `DBG_OUT`候选选择器 | `SPI_SCLK`域 → `CLK_2M`域 | 与既有`i_source_test_mux_ctrl[4:0]`同类的小型CDC，具体走既有握手结构还是独立小型同步器待定 | 开放项，见第8节 |
 | ~~SPI寄存器 → P2S打包器~~ | 不适用 | V1.6勘误：P2S字段清单最终确认为全部固定、不受SPI配置影响（无模式播报、无可配置字段选择），P2S打包器全程只消费`ppg_control_top`的`CLK_2M`域输出，不存在SPI→P2S的CDC路径 | 已确认为不适用，非遗漏 |
@@ -132,6 +135,7 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 | 读命令哑字节数 | 2个字节（16拍），仅读命令的地址与首个真实数据字节之间插入，写命令不需要 | 覆盖读方向CDC往返总延迟：前段（`flag_read_start`→`reg_diag_snapshot`完成更新）3个`CLK_2M`周期=1.5us（2级同步器2拍+捕获寄存器1拍），返程（`reg_diag_snapshot`→`SPI_SCLK`域可安全读取，V1.15勘误改为门控捕获后）4个`SPI_SCLK`周期（2级同步器2拍+门控捕获寄存器1拍+同域流水线1拍）；4MHz上限下返程=1.0us，往返合计2.5us，2字节(4us)窗口余量约1.5us（约1.6倍），代价是每次读事务多2字节协议开销，可忽略。V1.15勘误前的旧实现返程是无门控连续双触发器，本行返程数字与"2倍余量"表述当时未把返程计入总账，且旧机制本身存在撕裂风险，详见memory `project-ppg-stage3-item4a-extension-spi-diag-tearing-confirmed-20260914`与`ppg_spi_register_file.v` V1.3改动记录 |
 | `SPI_SCLK`频率上限 | 4 MHz | 2个哑字节（16拍）需覆盖2.5us往返总延迟，理论可支持到约6.4MHz（16拍/2.5us，V1.15勘误据修复后真实往返延迟重新核算；V1.2勘误原10.7MHz数值只计入了前段1.5us、遗漏了返程，是本次连带修正的合同文字滞后，不影响4MHz生产上限本身的正确性），但SPI只承担低频配置/轮询（高带宽遥测由P2S承担），刻意选保守的低几MHz值而非逼近理论上限：一是留足PVT和后续实现细节（如同步链多一级）的余量，二是较低的`SPI_SCLK`翻转速率对旁边的精密PPG模拟输入前端（`VIN/VIP`等，已在封装复核中标记`CLK_2M`邻近噪声耦合风险）更友好 |
 | 读方向CDC快照捕获范围 | `0x0100+`整个只读诊断区一次性整体捕获，不做逐字段独立刷新 | 保证一次多字节读回内所有字节属于同一时刻，不会前后字节撕裂 |
+| 读数据移出相位（V1.17补记，F-005/F-006） | Mode 0读：每字节第8个`SPI_SCLK`上升沿之后的下降沿装载下一字节（`ST_DATA`且`cnt_bit_in_byte==0`时的下降沿，含哑字节结束后的首个数据字节），其余下降沿移位；不做地址+1补偿 | `ppg_spi_register_file.v` `flag_load_read_byte`。主机在上升沿采样SDO，从机在下降沿更新；芯片TB在SCLK上升沿采样SDO并做38字节全读（DIAG-MAP38） |
 | 读方向CDC捕获触发时机 | 每次新读事务（`CS_N`拉低+识别为读命令）触发一次新捕获，不支持host手动刷新命令 | 保证每次读到的是"当下最新"快照，逻辑最简单，不需要额外命令 |
 | 读方向CDC冻结策略 | 捕获完成后，快照在整个读事务期间（到`CS_N`拉高为止）保持冻结，不被`CLK_2M`域实时更新覆盖 | 避免读到一半Top侧数据更新导致同一次读回前后字节不一致；冻结期间的"滞后"仅持续一次读事务的耗时（微秒级），远小于PPG 400Hz采样周期（2.5ms），不影响正确性 |
 | 冻结快照进`SPI_SCLK`域方式 | 门控捕获：专用同步事件+目标域寄存器只在该事件为真时才整体采样（V1.15勘误改正，与写方向`ppg_config_cdc_bridge.v`的Class 3(a)范式结构对齐） | V1.2勘误原表述是"逐bit标准两级同步器，不使用握手协议"，理由是"源端在整个读期间不再变化，只需处理捕获那一瞬间的亚稳态风险，不存在数据撕裂问题"——这个理由把多bit总线的跨域采样风险等同于单bit信号的亚稳态解析时间风险，二者不是同一类风险：304个bit被无门控双触发器各自独立采样时，如果源端跳变沿恰好落在某次`SPI_SCLK`采样沿的建立/保持窗口内，这304个触发器会各自独立发生亚稳态解析，可能撕裂出一个源端从未真实存在过的拼凑值，而"源端此后不再变化"只保证这个已撕裂的值不会被自我纠正，并不能防止它在采样瞬间产生；时序余量（哑字节窗口）解决的是"值多久能传到位"，解决不了"采样那一拍本身是不是原子的"，二者是不同维度的问题。该表述已被判定为真实的结构性CDC缺陷（非文字滞后），经Stage 3 Item 4a延伸审计发现、独立复核（含本节时序数字的重新推导）后确认成立，`ppg_spi_register_file.v`已升级至V1.3改为门控捕获修复，本处合同文字同步为V1.15勘误，完整推导见memory `project-ppg-stage3-item4a-extension-spi-diag-tearing-confirmed-20260914` |
@@ -230,6 +234,22 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 | 状态/故障事件快照（`o_system_fault_blocking`等） | 保持"P2S管数值、SPI管状态"分工；且能收到P2S包本身已隐含"这笔结果未被判定丢弃"（按C01 TOP-09，STOP/abort期间在途结果走显式discard，不以`valid`身份交付） |
 | `coarse`/`fine`/`stage1`各自的饱和标志位（`saturation_low`/`saturation_high`） | RTL对饱和值做的是钳位到固定边界常数（如24-bit`-8388608`/`8388607`），"数值==边界常数"与"标志位=1"完全等价，外部检查数值本身即可判断，无需单独占位传输；`valid`/`recovery_calibrated`/`calibration_applied`类标志不受此逻辑影响，因为它们无法从数值反推，予以保留 |
 
+### 8.5 `SPI_CS_N`作为协议异步复位/门控（V1.17新增，F-030）
+
+`SPI_CS_N`不经同步链，直接作为SPI协议状态的异步复位/门控（`ppg_spi_register_file.v`中7个`always`块的敏感表含`posedge i_spi_cs_n`）。这是冻结设计，安全依据如下四点：
+
+1. **被`SPI_CS_N`异步清零的只有7个协议状态寄存器**：`state_current`、`cnt_field_byte`、`reg_byte_addr`、`flag_cmd_is_read`、`reg_read_byte`、`cnt_bit_in_byte`、`reg_shift_in`。以下寄存器只受源域或系统复位，不受`SPI_CS_N`影响：`reg_active_shadow`、`reg_characterization`、`reg_dbg_out_select`、`flag_char_request_held`；`CLK_2M`域的`reg_diag_snapshot`、`reg_diag_snapshot_gated`、`reg_diag_sync_stable`、`reg_mr_latch`、`reg_dd_latch`；以及各`ppg_pulse_cdc_sync`的源域翻转寄存器。
+2. **接口时序要求**（Mode 0下`SPI_CS_N`翻转时`SPI_SCLK`为低且静止）：
+   - `SPI_CS_N`下降沿到第一个`SPI_SCLK`上升沿 ≥ t_su(CS)，且满足异步清零释放的recovery时间；
+   - 最后一个`SPI_SCLK`上升沿到`SPI_CS_N`上升沿 ≥ t_h(CS)；
+   - `SPI_CS_N`高电平宽度 ≥ t_cs_high。
+3. **剩余风险**：传输中途`SPI_CS_N`出现毛刺，会让协议状态回到IDLE，后续比特被当作新命令字节解析，可能误写影子区或0x0090命令寄存器。这作为板级信号完整性要求；主机侧可配合写后读回校验。
+4. **命令与写入不会被`SPI_CS_N`截断**：写入影子区、0x0080、0x0081，以及0x0090的命令触发（START/STOP/COMMIT/DIAG_CLEAR/ABORT/表征），都在该字节第8个`SPI_SCLK`上升沿由`flag_write_commit`成立时产生，并由源域时钟沿采样进脉冲CDC的源域翻转寄存器（只受源域复位）。读方向快照触发`flag_read_start`也在上升沿产生。这些都不依赖`SPI_CS_N`上升沿，此后`SPI_CS_N`的异步清零也不会截断已经产生的事件。字节不完整（第8个上升沿之前`SPI_CS_N`就升高）时不提交，这是正确行为。
+
+### 8.6 产品固定参数（V1.17新增，F-014/F-024）
+
+glue顶层例化的`ppg_control_top`参数为产品固定值，不得覆盖：`C_CONFIG_WIDTH=1024`；config/coef/DC-recovery epoch宽度8；code epoch宽度4；generation宽度8；frame/sample宽度16/16；supervisor看门狗5000/13（C01 §4.1 V1.18、C24 §1）。RTL不做elaboration期拒绝；仿真开始时按层次读取实际例化值核对，检查所在TB：`tb_ppg_chip_digital_top.v`（TB本地检查`PARAM-FIXED`、`PARAM-WDOG`）、`tb_ppg_control_top.v`（同名检查）、supervisor单元TB（`WDPARM`）。
+
 ## 9. 严格禁止
 
 1. glue顶层不得在`ppg_control_top`之外重新实现或复制任何PPG测量、校准、检测算法逻辑；
@@ -278,7 +298,7 @@ V1.11勘误前，本合同是**架构级冻结**，不是实现完成声明；gl
 | `0x0105` | `o_stage2_coef_epoch` |
 | `0x0106` | `o_dc_recovery_coef_epoch` |
 | `0x0107` | bit0=scheduler_idle，bit1=launch_timeout_sticky，bit2=owner_deadline_timeout_sticky，bit3=completion_mismatch_sticky，bit4=protocol_error_sticky，bit5=ami_datapath_empty，bit6=ami_idac_idle，bit7=`o_active_precision_mode` |
-| `0x0108` | bit0=ami_integration_protocol_error_sticky，bit1=ssw_wrapper_idle，bit2=ssw_switch_protocol_error_sticky，bit3=ssw_transaction_mismatch_sticky，bit4=ssw_owner_deadline_timeout_sticky，bit5=ssw_calibration_timeout_sticky，bits[7:6]保留 |
+| `0x0108` | bit0=ami_integration_protocol_error_sticky，bit1=ssw_wrapper_idle，bit2=ssw_switch_protocol_error_sticky，bit3=ssw_transaction_mismatch_sticky，bit4=ssw_owner_deadline_timeout_sticky，bit5=ssw_calibration_timeout_sticky，~~bits[7:6]保留~~ bit6=ami_owner_lost_sticky（V1.17补记，owner生命周期轮，`ppg_spi_register_file.v` `i_ami_owner_lost_sticky`），bit7保留 |
 | `0x0109` | bit0=source_config_update_ready，bit1=source_characterization_update_ready，bit2=characterization_control_valid，bit3=characterization_protocol_error_sticky，bits[7:4]保留 |
 | `0x010A` | bit0=system_fault_blocking，bit1=fault_cause_valid，bit2=fault_identity_valid，bit3=fault_color_ir，bits[5:4]=fault_frame_type，bit6=fault_precision，bit7=result_discard_summary_sticky |
 | `0x010B` | `o_system_fault_cause[7:0]` |
@@ -311,3 +331,19 @@ V1.11勘误前，本合同是**架构级冻结**，不是实现完成声明；gl
 `tb_ppg_chip_digital_top.v`验证第6项（两组discard锁存翻转位）时，尝试用"STOP命中一个真实在途owner"的场景（同`tb_ppg_control_top.v`已验证的SMOKE-06时序窗口）复现，经四种独立构造方法（STOP与真实DONE并发下发、剥离残留状态后重建干净现场再试、完全不补DONE只看STOP自身能否触发、把STOP提前到Q3仍拉高的采样窗口内下发）均未能真实触发任一discard锁存翻转，现象一致不变。定位的直接原因：STOPPING收尾条件`flag_stopping_complete`（`ppg_system_config_manager.v:463-464`）要求`i_adc_idle`为真，而glue顶层`flag_adc_physical_idle`合成器按C01 V1.11冻结公式即`!CLK_STAGE1/2_DOUT_LOW`——DOUT选通脉冲的取反，只要没有正在选通就恒为1；这与调度器自己"在途owner等待稍后到达的真实DONE"（`B_INFLIGHT`）语义天然脱节，STOPPING一旦被接受、`i_adc_idle`这一路几乎立即满足。真实存在的"主动STOP精确命中ADC选通脉冲那一瞬间"窗口理论上只有DOUT选通脉冲本身那几拍宽，而SPI一次命令事务（32-bit定长帧）本身就需要约16个`CLK_2M`周期，两者是不同数量级的物理量，不是可以靠调整RTL压缩的巧合窗口。
 
 **V1.12勘误分析结论（已结案）**：`flag_stopping_complete`并非只由`i_adc_idle`单独把关，而是`i_adc_idle && i_datapath_empty && i_idac_idle && i_analog_safe`四路独立AND；真正防止"流水线在途数据被STOPPING收尾提前吞掉"的是`i_datapath_empty`（`ppg_adc_measurement_idac_integration.v:1140`的`o_datapath_empty`，聚合ADC chain、fork分支、FIR、detection fork、detector、controller、scheduler、calibration等8路以上子模块idle标志），真实数据流经这些阶段需要数十到上百个`CLK_2M`周期，与SPI命令事务传输延迟同一数量级，SPI STOP完全够得着这一路——`i_adc_idle`从未独自承担过防止数据丢失的职责，TC6打不中的窄窗口只发生在`i_adc_idle`这一路本身，不代表整条防线有缺口。discard锁存翻转位机制本身也已经用"无owner在途的spurious DONE脉冲经fault supervisor级联"这条更宽的真实触发通路正面验证工作正常（与P06发现的~2-3拍自动abort级联路径同源）。综合两点：**不新增专用硬件触发通道，也不新增QFN引脚**（48脚封装已多轮冻结，新增物理引脚的代价与本项开放项完全不成比例），维持现状。此项从未影响本节字节级地图的正确性，discard锁存的写入/翻转/清零路径本身按第9节第10项要求实现且已独立验证；面向主机固件作者的措辞澄清：**主机不需要、也不应该设计成依赖"STOP精确命中ADC选通脉冲瞬间"这一子场景来触发discard**——真实防止数据丢失的是`i_datapath_empty`这一路，任何在数据仍处于流水线中途时发出的STOP都会被正确挡在`i_datapath_empty`收尾之前，该机制已通过独立触发路径验证工作正常（触发通路为`i_control_abort_event`，与P06发现的约2-3拍自动abort级联同源）。
+
+### 11.4 诊断地图逐位清除方式（V1.17新增）
+
+读方向地图只反映`ppg_control_top`输出的当前值，SPI从机本身不清除任何诊断位。各位的清除方式由其源模块决定，下表按源分组写明。“诊断清除”指0x0090 bit3（DIAG_CLEAR）经Top注册式`flag_diag_clear_event`送达各源；manager状态清除经Top的`flag_status_clear_event`。
+
+| 地址/位 | 源 | 置位 | 清除方式 | START是否清 |
+| --- | --- | --- | --- | --- |
+| 0x0100 bit3 commit_ack_sticky、bit4 error_sticky；0x0101 last_error_code | manager | 见C02 | 复位；manager状态清除（条件见C02） | 否 |
+| 0x0107 bit1~bit4（调度器launch/owner-deadline/completion-mismatch/protocol sticky） | 调度器 | 见C08 | 复位；**新START清零**；诊断清除只在无活动宏帧、无在途owner、无owner-pending且无外部阻断时生效，所以RUN中实际清不掉（C08 §16.2、§16.5） | 是 |
+| 0x0108 bit0 ami_integration_protocol_error_sticky | AMI | 见C10 §15.1 | 复位；诊断清除在“无活跃集成阻断，或RUN已由STOP结束且AMI排空”时生效（C10 §15.1） | 否 |
+| 0x0108 bit6 ami_owner_lost_sticky | AMI | 任一槽位ADC完成丢失超时作废（C10 §7.1a） | 复位；诊断清除在“lane 06未保持，或RUN已由STOP结束且排空”时生效；同拍新作废优先（C10 §15.1） | 否 |
+| 0x0108 bit2~bit5（SSW switch-protocol/transaction-mismatch/owner-deadline/calibration-timeout sticky） | SSW | 见C09 | 复位；START恢复（C09 §8.3a）；诊断清除在SSW `o_wrapper_idle`时生效 | 是（START恢复成立时） |
+| 0x0109 bit3 characterization_protocol_error_sticky | 表征CDC | 见C07 | 复位；诊断清除 | 否 |
+| 0x010A bit1~bit6、0x010B~0x0113（supervisor首故障快照与summary） | supervisor | 首个阻断故障记录捕获快照；之后的故障只置summary位 | 复位；合法诊断清除（全部本地故障已恢复后，C24 §5）。首故障快照只在首次捕获时写入，episode关闭后若尚未清除，新episode不覆盖它；清除后的下一个阻断故障重新捕获快照 | 否 |
+| 0x010A bit7 result_discard_summary_sticky | supervisor | AMI正式结果discard事件（含COMPLETION_LOST） | 复位；合法诊断清除 | 否 |
+| 0x0114~0x0125 discard锁存 | SPI寄存器文件`CLK_2M`域锁存 | 每次discard事件整体锁存并翻转bit0 | 不清除，下次事件覆盖（翻转位语义，§11.2） | 否 |
