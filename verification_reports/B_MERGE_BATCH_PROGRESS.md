@@ -8,9 +8,9 @@
 
 ## 当前状态
 
-- **已完成**：克隆仓库、切出分支、首次回复（理解/计划/阻塞问题）、用户答复全部落定（见条目1）。
-- **当前项**：等待用户在仓库根目录 `D:\ppg_zlcx\zlcx` 重开会话（让CLAUDE.md与skill自动加载）。
-- **下一步**：重开会话后读交接书，然后开始阶段0：设定`VIVADO_BIN=/d/vivado/2019.2/bin`，用`git -c core.autocrlf=false archive 7a8eabf | tar -x`导出到仓库外独立目录，在后台跑基线回归（系统TB 20份分3~4组，芯片，模块级`-g all`），同时开始阶段1。
+- **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
+- **当前项**：阶段1总表`verification_reports/B_MERGE_BATCH_ITEMS.md`（读三份交B清单与ID治理/F002_F008等材料）。
+- **下一步**：基线回归跑完后，按交接书§6.8提取逐TB排序PASS行与`$finish`行，与参考值（系统20/20、1250行、芯片20/0、模块级28/28）核对；对不上就停下报告。总表推送后停在检查点。
 - **未决问题**：无。
 
 ---
@@ -42,3 +42,15 @@
 **环境记录**
 - Git Bash，Windows 11。Python 3.8.5（`/d/DevSoftwares/Python38`）与Python 3.12.4（`/c/Users/DAWN/AppData/Local/Programs/Python/Python312`）都已安装。本机无`gh`。
 - iverilog在`/d/iverilog/bin`，本批次不用（回归以xsim为准）。
+
+### 条目2（2026-10-09）：重开会话，阶段0启动
+
+- 会话在`D:\ppg_zlcx\zlcx`重开，CLAUDE.md与`erie-verilog-generator`skill已加载。
+- 基线导出：`git -c core.autocrlf=false archive 7a8eabf | tar -x`，导出到仓库外`D:/ppg_zlcx/b_merge_runs/baseline_7a8eabf/`下6个独立目录（`sys_g1..g4`、`chip`、`unit`）；`.sh`无CR。
+- 系统TB分4组并行。分组只改各组**本地运行副本**中`run_xsim_regression.sh`的`ORDER=(...)`数组（不提交，其余逐字未动）：
+  - g1：longrun、diag_algo_probe、raw_generator_selfcheck、control_top(smoke)、baseline_cross
+  - g2：long_10_cycles、fir_tail_isolation、adc_numeric_scoreboard、idac_bus_isolation、injection
+  - g3：lifecycle_fault_adc_anomaly、input_light_static_matrix、normal_slow_tracking、no_recheck_control、owner_identity_backpressure
+  - g4：peak_valley_return、periodic_recheck_recovery、robustness_corner_waveforms、startup_idac_calibration、adc_anomaly
+- 芯片：`rtl/ppg_chip_digital_top/run_xsim_regression.sh`；模块级：`tools/run_unit_tb_regression.sh -o <baseline>/unit_runs -g all`。
+- `VIVADO_BIN=/d/vivado/2019.2/bin`。终版回归须用相同分组与相同Vivado。
