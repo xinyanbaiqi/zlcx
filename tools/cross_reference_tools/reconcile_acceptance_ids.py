@@ -106,6 +106,16 @@ STATUS_PATTERN = re.compile(
 
 SATISFIES_PATTERN = re.compile(r"@satisfies:\s*([^*/\n]+)")
 
+# A real tag token is ID-shaped (e.g. AMI-24, G-FP-01-D01-04, K01). Text captured after
+# "@satisfies:" inside TB revision-record prose (sentences, backticks, CJK) is not a tag;
+# such tokens are kept out of the classification and listed in the report instead.
+TAG_TOKEN_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*$")
+
+# ID cell of an alias-table row for families outside ID_PATTERN (AMI, FSC, MGR, SSW, ...).
+# Used only to find the alias row of an ID that carries an RTL tag (B2 check), so the
+# classified ID set stays the ID_PATTERN families plus the RTL-tagged IDs (section 13.2).
+GENERIC_ALIAS_ID = re.compile(r"(?<![A-Za-z0-9-])[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*-\d{2}(?![0-9])")
+
 
 def is_excluded(path: Path) -> bool:
     parts = {p.lower() for p in path.parts}
@@ -128,7 +138,7 @@ def expand_range_token(token):
     return [f"{prefix}{n:02d}" for n in range(lo, hi + 1)]
 
 
-def parse_alias_table(path: Path):
+def parse_alias_table(path: Path, id_pattern=ID_PATTERN):
     """Return {id: [{"tb": str, "rtl": str, "source": str, "no_mapping": bool}, ...]}."""
     mapping = {}
     if not path.exists():
@@ -144,7 +154,7 @@ def parse_alias_table(path: Path):
         id_cell, tb_cell, rtl_cell, source_cell = cols[0], cols[1], cols[2], cols[3]
         if id_cell in ("验收ID", "字段"):
             continue
-        raw_ids_found = ID_PATTERN.findall(id_cell)
+        raw_ids_found = id_pattern.findall(id_cell)
         if not raw_ids_found:
             continue
         ids_found = []
@@ -164,8 +174,9 @@ def parse_alias_table(path: Path):
     return mapping
 
 
-def scan_rtl_tags(root: Path):
-    """Return {id: [{"file": str, "line": int}, ...]} for every @satisfies tag."""
+def scan_rtl_tags(root: Path, pseudo=None):
+    """Return {id: [{"file": str, "line": int}, ...]} for every @satisfies tag.
+    Tokens that are not ID-shaped go to `pseudo` (list of dicts) instead."""
     tags = {}
     for v_file in root.rglob("*.v"):
         if is_excluded(v_file.relative_to(root)):
@@ -181,6 +192,10 @@ def scan_rtl_tags(root: Path):
             id_list = [tok.strip() for tok in m.group(1).split(",") if tok.strip()]
             rel = v_file.relative_to(root).as_posix()
             for raw_id in id_list:
+                if not TAG_TOKEN_PATTERN.match(raw_id):
+                    if pseudo is not None:
+                        pseudo.append({"token": raw_id[:120], "file": rel, "line": lineno})
+                    continue
                 expanded = expand_range_token(raw_id)
                 for one_id in expanded:
                     tags.setdefault(one_id, []).append({"file": rel, "line": lineno})
@@ -270,7 +285,7 @@ def classify(all_ids, alias_map, rtl_tags, matrix_mentions):
     return results
 
 
-def render_markdown(results, generated_at):
+def render_markdown(results, generated_at, pseudo=()):
     lines = []
     lines.append("# PPG 交叉引用核对表 (自动生成,脚本产物)")
     lines.append("")
@@ -321,6 +336,18 @@ def render_markdown(results, generated_at):
             lines.append(f"| {one_id} | {alias_txt} | {rtl_txt} | {mtx_txt} |")
         lines.append("")
 
+    if pseudo:
+        lines.append(f"## 已排除的非ID标签文字 ({len(pseudo)}处)")
+        lines.append("")
+        lines.append("`@satisfies:`之后不是ID形状的文字（多为TB修订记录正文里引用标签的句子），不参与分类，属已知误报（矩阵§13.2）。")
+        lines.append("")
+        lines.append("| 文字 | 位置 |")
+        lines.append("| --- | --- |")
+        for p in pseudo:
+            tok = p["token"].replace("|", "/")
+            lines.append(f"| {tok} | {p['file']}:{p['line']} |")
+        lines.append("")
+
     return "\n".join(lines)
 
 
@@ -331,7 +358,12 @@ def main():
     args = parser.parse_args()
 
     alias_map = parse_alias_table(ALIAS_TABLE_PATH)
-    rtl_tags = scan_rtl_tags(REPO_ROOT)
+    pseudo = []
+    rtl_tags = scan_rtl_tags(REPO_ROOT, pseudo)
+    generic_alias = parse_alias_table(ALIAS_TABLE_PATH, GENERIC_ALIAS_ID)
+    for one_id in rtl_tags:
+        if one_id not in alias_map and one_id in generic_alias:
+            alias_map[one_id] = generic_alias[one_id]
     matrix_mentions = scan_matrix_and_contracts(REPO_ROOT)
 
     all_ids = set(alias_map) | set(rtl_tags) | set(matrix_mentions)
@@ -342,6 +374,7 @@ def main():
         "generated_at": generated_at,
         "counts": {},
         "results": results,
+        "excluded_pseudo_tags": pseudo,
     }
     for r in results.values():
         report["counts"][r["category"]] = report["counts"].get(r["category"], 0) + 1
@@ -352,11 +385,12 @@ def main():
         )
     if args.markdown:
         Path(args.markdown).write_text(
-            render_markdown(results, generated_at), encoding="utf-8"
+            render_markdown(results, generated_at, pseudo), encoding="utf-8"
         )
 
     print(f"INFO: reconciliation complete; {len(results)} IDs classified.")
     print(f"INFO: counts = {report['counts']}")
+    print(f"INFO: excluded non-ID tag text = {len(pseudo)}")
 
 
 if __name__ == "__main__":

@@ -673,7 +673,7 @@ LFA-08不在本次批次范围内，其真实证据已登记在上方`TOP-22 (=L
 | FSC-35 | `tb_ppg_400hz_frame_calibration_scheduler.v` 无（单元TB无同义检查）；系统级证据：部分 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-35行；ID治理§5.2；B合并批次7a8eabf重扫 |
 | FSC-36 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-42 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-36行；ID治理§5.2；B合并批次7a8eabf重扫 |
 | FSC-37 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-29 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-37行；ID治理§5.2；B合并批次7a8eabf重扫 |
-| FSC-38 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-13、SCHT-52；另有TB本地L3-NOEXTRA | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-38行；ID治理§5.2；B合并批次7a8eabf重扫 |
+| FSC-38 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-13、SCHT-52；另有TB本地L3-NOEXTRA | `tb_ppg_400hz_frame_calibration_scheduler.v` `@satisfies: FSC-38`（TB侧标签，在L3-NOEXTRA检查上；RTL无该ID标签） | C08 §18 FSC-38行；ID治理§5.2；B合并批次7a8eabf重扫 |
 | FSC-39 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-48 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-39行；ID治理§5.2；B合并批次7a8eabf重扫 |
 | FSC-40 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-13 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-40行；ID治理§5.2；B合并批次7a8eabf重扫 |
 | FSC-41 | `tb_ppg_400hz_frame_calibration_scheduler.v` SCHT-38、SCHT-44、SCHT-54 | 无映射（RTL无该ID的`@satisfies`标签） | C08 §18 FSC-41行；ID治理§5.2；B合并批次7a8eabf重扫 |
