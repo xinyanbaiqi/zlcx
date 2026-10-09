@@ -1,6 +1,7 @@
 # PPG动态基线算术优化合同
 
-> Current normative version: V1.2, 2026-08-20. Status: `ACTIVE_NORMATIVE` arithmetic sub-rule; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`.
+> V1.3修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-136、185）：① 第12节登记OPTC-01/02（单元TB已有同名检查，此前合同无编号）；② 门禁与交付要求中的BSL范围按C20验收表订正为BSL-01至BSL-40（ID治理G7）。不改变任何算术规则。
+> Current normative version: ~~V1.2, 2026-08-20~~ V1.3, 2026-10-09（V1.2记录日期2026-08-20）. Status: `ACTIVE_NORMATIVE` arithmetic sub-rule; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`.
 > 目标RTL：`ppg_dynamic_baseline_cross_detector.v`  
 > 目标TB：`tb_ppg_dynamic_baseline_cross_detector.v`  
 > 上位合同：`PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md`  
@@ -591,6 +592,13 @@ RUN期间ACTIVE字段冻结，但算术引擎仍必须使用捕获时的配置�
 
 `OPT-24`必须同时覆盖合法配置边界、正负平滑差值、无相交、lead三个区间、frame回绕短跨度和各类饱和。
 
+V1.3登记：单元TB另有两项共享乘法器检查，编号OPTC，此前本合同无编号。逐条对应如下：
+
+| 编号 | 场景 | 验收要求 | 对应规则 |
+| --- | --- | --- | --- |
+| OPTC-01 | 共享乘法器复用 | `A*alpha`、`difference*beta`、`abs(S_BASE)*adjust_ratio`三个周期操作都由同一个signed乘法路径完成，结果逐位正确 | 本合同第1节第3条、§6.4 |
+| OPTC-02 | 共享乘法器空闲 | 不在三个乘法状态时，共享乘法器的两个操作数保持为0，避免无效翻转 | RTL实际行为（`ppg_dynamic_baseline_cross_detector.v` `dec_shared_operand_a`、`dec_shared_operand_b`）；本合同此前无条文，V1.3起作为实现约定登记 |
+
 ## 13. 验证和交付门禁
 
 ### 13.1 静态门禁
@@ -610,8 +618,9 @@ formatter-AST：0 error，0 strict warning
 ### 13.2 仿真门禁
 
 ```text
-BSL-01至BSL-28全部通过
+BSL-01至BSL-40全部通过（V1.3订正，原文BSL-01至BSL-28）
 OPT-01至OPT-24全部通过
+OPTC-01至OPTC-02全部通过（V1.3新增）
 优化前后算术随机差分全部通过
 ready/valid反压载荷保持检查通过
 带身份detection discard/重检/复位逐状态撤销检查通过
@@ -661,6 +670,6 @@ V1正式冻结：
 7. 算术忙期间峰、FIR和波谷输入允许有界反压，上游必须保持valid和载荷；
 8. 新波峰锚点、新活动斜率、基础斜率和全部周期诊断必须在波峰正式握手沿原子提交；
 9. 复位、当前generation的detection discard（包括scope-only flush）和AMB/DC重检可以在任一算术状态取消在途结果，旧结果不得迟到写回；
-10. 优化不得改变动态基线数学时间、PPG相交方向、BSL-01至BSL-28结果或外部模块端口；
-11. 正式交付必须通过BSL-01至BSL-28、OPT-01至OPT-24、随机差分、formatter-AST、lint、xsim和综合；
+10. 优化不得改变动态基线数学时间、PPG相交方向、~~BSL-01至BSL-28~~ BSL-01至BSL-40（V1.3）结果或外部模块端口；
+11. 正式交付必须通过~~BSL-01至BSL-28~~ BSL-01至BSL-40（V1.3）、OPT-01至OPT-24、OPTC-01至OPTC-02（V1.3）、随机差分、formatter-AST、lint、xsim和综合；
 12. 当前合同只授权算术微架构优化，不授权ACTIVE版本、顶层连接或检测算法变化。
