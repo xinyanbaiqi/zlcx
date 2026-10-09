@@ -10,8 +10,8 @@
 | AMI（C10、C24） | `V1_CONFLICT_AMI.md`（单文件，73个always块） | 已完成：(c) 5项（1中、4低），待定0项；附注N1 |
 | **第二批（续）** | | |
 | manager（C02） | `V1_CONFLICT_MGR.md` | 已完成：(c) 3项（1中、2低） |
-| supervisor（C24） | `V1_CONFLICT_SUP.md` | 当前 |
-| IDAC控制器（C17） | `V1_CONFLICT_IDAC.md` | 待做 |
+| supervisor（C24） | `V1_CONFLICT_SUP.md` | 已完成：本模块(c) 0项；V1-MGR-C1、V1-AMI-C3在此有体现 |
+| IDAC控制器（C17） | `V1_CONFLICT_IDAC.md` | 当前 |
 | 精度窗口控制器（C23） | `V1_CONFLICT_PWC.md` | 待做 |
 | 重检调度器（C16） | `V1_CONFLICT_RCK.md` | 待做 |
 | PWI（C18） | `V1_CONFLICT_PWI.md` | 待做 |
