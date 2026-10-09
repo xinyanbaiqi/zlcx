@@ -77,8 +77,15 @@
 ### 条目6（2026-10-09）：阶段2完成
 
 - 合同提交（按合同一个提交）：C08 V1.13、C09 V1.11、C10 V2.5、C24 V1.6、C16 V2.2、C18 V2.2、C23 V2.7、C17 V2.4、C13 V1.3、C25 V1.8、C01 V1.18勘误、芯片顶层V1.17勘误、C02 V4.10、C07 V1.2、C19 V2.6、C03 V1.7、C21 V1.3、核对表§15补记、矩阵V4.5内容项。
-- 版本联动：207处引用，脚本`scratchpad/verlink.py`（严格规则：版本号须是文件名后的第一个版本记号），独立核对脚本`verlink_check.py`逐条配对通过，负对照（人为改错1处）恰好报出1处。第一次宽松匹配会误改6处，已回滚重做，记入报告。
+- 版本联动：207处引用，脚本`tools/b_merge_tools/verlink.py`（严格规则：版本号须是文件名后的第一个版本记号），独立核对脚本`tools/b_merge_tools/verlink_check.py`逐条配对通过（证据`verification_reports/b_merge_batch_evidence/version_linkage/`，可用`verlink_check.py . 8b2b259~1 8b2b259 contracts/PPG_CONTRACT_CLOSURE_MATRIX.md:4`复现），负对照（人为改错1处）恰好报出1处。第一次宽松匹配会误改6处，已回滚重做，记入报告。
 - 新发现并处理：BMI-058（C10私有discard扇出）、BMI-064（C13 local_empty消费关系）、C07 F-039按RTL判定（`o_control_valid`只观测）。
 - 二级清单`POST_TAPEOUT_DOC_CLEANUP_LIST.md`新建，9条。
 - 别名表的内容项全部移到阶段3（与编号治理一起做，只升一次版）。
 - 基线回归：S1可编程校准器单元TB在2019.2下xelab约22分钟（2.7 GB），最终PASS；其余正常。
+
+### 条目7（2026-10-09）：旁观会话转达的两点提醒（已处理）
+
+- 旧会话（只读旁观核查）转达用户两点：① 阶段4对矩阵与别名表锚点的正式改写须等阶段3（TB标签改名与别名表映射）完成后再落盘，检查脚本与追溯可先做——与本会话计划一致；② 版本联动脚本须入库——已将`verlink.py`、`verlink_check.py`放入`tools/b_merge_tools/`（`aec4b14`），`verlink_check.py`改为可按两个提交复现，干跑记录与负对照记录入`verification_reports/b_merge_batch_evidence/version_linkage/`。最终报告将指明这些位置。
+- 旧会话也在独立核对基线回归；本会话照常核对。
+- 阶段3准备：扫描器在`tools/id_governance_scan/`，重扫37处已复读（只有TB FSC-14属新的同号不同义，其余36处是TB轮加严、含义不变），负对照恰好多报2处；TB改名脚本已备好、未执行（等基线核对）。本地名：SCHT-n、CLRBLK/EPICLS/WDIDLE/EPI2ND、DCRT-n、CAL-ODL、FORK-HOLD、AUTOABT-QUIET（全仓grep未占用）。
+- 阶段4准备：`tools/b_merge_tools/anchor_check.py`首跑：阶段2写入合同的39个符号锚点全部能在RTL中找到；4处节号引用需消歧；矩阵与别名表旧行号锚点共7409处待转换（矩阵6662、别名表747）。
