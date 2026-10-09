@@ -2,7 +2,7 @@
 
 > 依据：`verification_reports/B_MERGE_BATCH_BRIEF_20261009.md`（下称"交接书"）§4阶段1。
 > 基线：`7a8eabf`。分支：`b-merge-batch`。
-> 状态：**阶段1检查点稿，待统筹审核**（审核前不开始阶段2的合同改写）。
+> 状态：**统筹已批准（2026-10-09，经用户转达）**，进入阶段2。审核意见见§20，已落到各条目。
 > 权威顺序：RTL > 交接书§3（覆盖点§3.12）> 三份交B清单 > 更早报告（交接书§0.2）。
 
 ---
@@ -70,7 +70,7 @@
 | BMI-024 | OLR §8.4-4；L-1 | §5.3；§10 SSW-34/38 | 一级 | owner与帧/子帧绑定写入正文。RTL锚点：`flag_red_has_owner`/`flag_ir_has_owner`/`flag_cal_has_owner` | 待做 |
 | BMI-025 | OLR §8.2、§8.4-4 | §7.6 ADC完成与空闲输入 | 一级 | 端口表加`i_adc_transaction_lost_event` | 待做 |
 | BMI-026 | F009 §9.4-4；BR§3.7 | §8.2 STOP / §8.3（START恢复处） | 一级 | L-6规则：新RUN的START确认时，若无在途owner且ADC空闲，作废上一RUN残留的未提交RED/IR/CAL波形上下文和停止挂起，与abort一致；前提：STOPPING完成要求ADC空闲且数据链排空。RTL锚点：`flag_start_restore`。是否给编号见BMI-027 | 待做 |
-| BMI-027 | BR§3.7、§3.3 | §10 验收表 | 一级 | L-6是否新增验收编号：按§13.3规则查矩阵§13、C09验收表与全仓后决定；SSW TB已有本地标签`L6-START`。倾向：不新增合同编号，别名表登记`L6-START`→C09对应节（无合同ID时如实写"无映射"） | 待做 |
+| BMI-027 | BR§3.7、§3.3；统筹§20-3 | §10 验收表 | 一级 | **给L-6新增C09验收编号**（统筹裁定：流片前逐ID动态闭环按验收表进行，无编号会漏掉这个曾经的静默卡死）。编号按§13.3规则：先查矩阵§13、C09验收表与全仓，确认未占用、无歧义；别名表登记SSW TB本地标签`L6-START`→新编号 | 待做 |
 | BMI-028 | ABCD §12.8 F-035 | §10 SSW-22；§8.3 | 一级 | 补"abort与匹配完成同拍时完成优先释放"（abort仍取消波形和结果资格）。RTL锚点：`adc_owner_inflight_o`（`@satisfies: SSW-22`） | 待做 |
 | BMI-029 | IDF G2；IDG S7 | §10（:878"SSW-01至SSW-52全部真实PASS"） | 一级 | 订正状态/门禁声明：SSW-18当前无同义检查（置1检查按BR§8不在本批补） | 待做 |
 | BMI-030 | ABCD §10(b) F-047 | 文件头（第3行V1.10与第7行sole V1.9）、依赖表 | 一级 | 随本批升版统一版本号与依赖表绑定 | 待做 |
@@ -105,7 +105,7 @@
 | BMI-060 | ABCD §12.8；F28 §3；BR§3.4 | C13 §4 保留载荷（§4.1） | 一级 | `i_datapath_discard_*`收窄为6字段；"For a matching retained transaction"改写为按代际匹配，身份字段仅诊断（`overlap`/`fork`只用`i_datapath_discard_event`与`run_generation_o == i_run_generation`） | 待做 |
 | BMI-061 | ABCD §12.8；F28 §3 | C01 公开端口表（§4） | 一级 | `o_measurement_result_discard_*`收窄（7字段，含`sample_valid`） | 待做 |
 | BMI-062 | ABCD §10(b) F-004 | C13（Router `local_empty`描述） | 一级 | Router无always、无该端口，与C12:65矛盾；按RTL订正 | 待做 |
-| BMI-063 | IDG §7、§10 OVL | C13 §7 验收用例 | 待裁定 | TB的OVL-01~17在C13无编号表。选项：(a) 在C13 §7登记OVL-01~17表（IDG推荐）；(b) TB改本地名（会改PASS横幅与判据）。倾向(a) | 待裁定 |
+| BMI-063 | IDG §7、§10 OVL；统筹§20-1 | C13 §7 验收用例 | 一级 | 在C13 §7登记OVL-01~17。每条须对应C13已有规则或RTL实际行为；对不上的标"仅TB检查"，不硬登记 | 待做 |
 
 ## 5. C16 / C18 重检、PWI
 
@@ -192,15 +192,15 @@
 | BMI-132 | ABCD §4 F-003 | 约第58行出处`MATRIX:872` | 一级 | 失效出处，并入锚点转换（BMI-151） | 待做 |
 | BMI-133 | F009 §9.4-5；BR§3.3 | 新增对照行 | 一级 | TB FSC-14 ↔ 合同FSC-03；TB FSC-32 ↔ 合同FSC-30（实参N不改，BR Q3）；其余调度器TB检查→合同条目对照（数据取IDG §5.2 FSC列，阶段3重扫后复核） | 待做 |
 | BMI-134 | ABCD §12.8；OLR §8.2；F009 §9.3 | 新增对照行 | 一级 | 三轮新增TB本地标签的映射：MGR-11、CAL-ROLLOVER-*、HIST-*、DISC-HELD、DET-QUAL、LEAF-HOLD、ABT-DONE、CANCEL-COMMIT、RETURN-HOLD、WDPARM、PARAM-*、DIAG-MAP38、CMD-STOP-PRIO；LOST-*、L1-*、L4-*、L3-*、BIND-Q3、S1-*、LSTK-*、K-*、WIN-*、BUSY-*、WDRAW-LOST、LOST-EXCL、F020-WDRAW、SUM-06/07、S1-ABANDON、LOST-SPI-*、SYS-*（37项）；FRAME-*、RESTART-*-SCAN、L6-START、SYS-RESTART-SCAN-*。无合同ID的如实填"无映射" | 待做 |
-| BMI-135 | IDG §10 | IDC2/CIS/AV4/CF4（整族无TB编号） | 一级 | 加对照行或"无映射"登记；工作量大的部分若无法在本批完成，拆为二级登记 | 待做 |
-| BMI-136 | IDG §7、§10 JNT；OPTC | 联合TB说明 / C21 / 别名表 | 待裁定 | JNT（D类）：在别名表明确"TB定义"或在联合TB说明加定义表；OPTC-01/02：在C21登记或改本地名（IDG推荐登记） | 待裁定 |
+| BMI-135 | IDG §10；统筹§20-4 | IDC2/CIS/AV4/CF4（整族无TB编号） | 一级 | 本批做**族级登记**（"整族无TB编号、证据分散于…"）；逐条对照**不进**POST_TAPEOUT清单，改列"流片前验证收尾计划"（BMI-910） | 待做 |
+| BMI-136 | IDG §7、§10 JNT；OPTC；统筹§20-1、§20-2 | 别名表；C21 | 一级 | JNT：别名表注明；先查`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md`，已定义的JNT项映射到该文档章节，未定义的注明"TB定义"。OPTC-01/02：在C21登记，须对应C21规则或RTL实际行为，对不上的标"仅TB检查" | 待做 |
 
 ## 13. 编号治理：TB标签改名（只改格式串/字符串，BR§3.3、Q3）
 
 | 编号 | 来源 | 目标TB | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
 | BMI-140 | IDG §6.1、§10；IDF §4；ABCD F-046；BR Q3 | `tb_ppg_400hz_frame_calibration_scheduler.v` | TB标签 | `check_fsc(N,…)`不改实参，只把打印前缀改为TB本地名（命名先grep避撞号）；横幅`ALL FSC-01 THROUGH FSC-62 PASSED`、`FSC-01 through FSC-62: pass=…`同步改；FSC-32≡合同FSC-30只登记别名表 | 待做（阶段3先重扫） |
-| BMI-141 | IDG §6.2、§10 | `tb_ppg_system_fault_abort_supervisor.v` | TB标签 | SUP03A→SUP07B、SUP09A→SUP06D、SUP10A→本地名、SUP06A→SUP07C或本地名（含义以重扫复读为准）；横幅"SUP-01 through SUP-10 PASS"改为实际覆盖 | 待做 |
+| BMI-141 | IDG §6.2、§10；统筹§20-5 | `tb_ppg_system_fault_abort_supervisor.v` | TB标签 | SUP03A/06A/09A/10A：**一律改TB本地名**；只有重扫确认含义与某合同条目完全一致时才用该合同编号，不用"合同号+后缀"（如SUP07B、SUP06D）。横幅"SUP-01 through SUP-10 PASS"改为实际覆盖 | 待做 |
 | BMI-142 | IDF §1.1、§4 | AMI单元TB `AMI-13` | TB标签 | 改TB本地名（实测反压保持） | 待做 |
 | BMI-143 | IDG §6.3、§10；BR Q3 | `tb_ppg_adc_dc_recovery.v` `drive_and_check`第3~7号 | TB标签 | test_id参与生成激励，不动；若FAIL标签由test_id拼出则只改格式串前缀，做不到就只在别名表登记；横幅"DCR-01..DCR-22"改为实际覆盖 | 待做 |
 | BMI-144 | IDF §1.4、§4 | SSW TB的SSW-18场景 | TB标签 | 改本地名（实测校准owner截止，属SSW-37/38） | 待做 |
@@ -254,27 +254,22 @@
 | BMI-904 | START后IDAC码提交到第一帧接管只隔2~16拍；240拍建立预算是否足够（F9R §7-1） | 同上（模拟侧确认） |
 | BMI-905 | 补测试：FSC-19/23/24/27/44、SSW-18 sticky置1检查 | 本批次之后 |
 | BMI-906 | F-1实测（真实检测链触发切换） | 收尾计划 |
-| BMI-907 | OLR §7.1(b)纯丢DONE版本是否补入系统TB；§7.1(c) L-5可达场景构造 | 用户/收尾计划 |
+| BMI-907 | OLR §7.1(b)纯丢DONE变体；§7.1(c) L-5 | 用户10-09已定：纯丢DONE变体进收尾计划的逐拍扫描；L-5保留为纵深防御，不可达证明进收尾计划的形式验证 |
 | BMI-908 | ABCD §11.4观察项：dynamic baseline TB的EQV追踪下降沿采样竞争；芯片层没有验收ID（既有缺口） | 只登记 |
 | BMI-909 | MGR的未使用localparam `ERROR_ENUM_ENCODING`清理 | RTL注释/清理轮 |
+| BMI-910 | IDC2/CIS/AV4/CF4逐条对照（统筹§20-4） | 流片前验证收尾计划（不进POST_TAPEOUT清单） |
 
 ---
 
 ## 18. 待用户/统筹裁定
 
-| # | 项 | 选项与倾向 |
-|---|---|---|
-| Q-1 | BMI-063 OVL-01~17 | (a) 在C13 §7登记OVL表；(b) TB改本地名。倾向(a)：不改TB横幅与判据，17项都是C13相关行为 |
-| Q-2 | BMI-136 OPTC-01/02 | (a) 在C21登记；(b) 改本地名。倾向(a) |
-| Q-3 | BMI-136 JNT | (a) 联合TB说明加JNT定义表；(b) 别名表注明"TB定义"。倾向(b)，工作量小、不新增合同ID |
-| Q-4 | BMI-027 L-6编号 | 倾向不新增合同编号，以C09节号+TB本地标签`L6-START`登记 |
-| Q-5 | BMI-135 IDC2/CIS/AV4/CF4整族对照 | 共78条，若逐条建对照超出本批容量，倾向本批只做"整族无TB编号、证据分散于…"的族级登记，逐条对照列二级 |
+阶段1提出的Q-1~Q-5已由统筹裁定，见§20。目前无未决项。
 
 ## 19. 统计
 
 | 分级 | 条数 | 说明 |
 |---|---:|---|
-| 一级 | 95 | 含BMI-012（并入BMI-133）；BMI-103另有TB标签部分，单列下行 |
+| 一级 | 97 | 含BMI-012（并入BMI-133）；BMI-103另有TB标签部分，单列下行 |
 | 一级（合同侧）＋TB标签 | 1 | BMI-103 |
 | TB标签 | 6 | BMI-140~145 |
 | 工具 | 8 | BMI-123、146、147、150、152、153、170、171 |
@@ -284,5 +279,16 @@
 | 只登记不做（改TB判定/PASS行数） | 2 | BMI-056、102 |
 | RTL疑点 | 1 | BMI-057 |
 | 不做（无需改/超出边界） | 3 | BMI-161、188、189 |
-| 待裁定 | 2 | BMI-063、136（另见§18 Q-4、Q-5的倾向） |
-| 排除项（§17） | 10 | BMI-900~909 |
+| 待裁定 | 0 | BMI-063、136已裁定转一级 |
+| 排除项（§17） | 11 | BMI-900~910 |
+
+## 20. 统筹审核意见（2026-10-09，经用户转达）
+
+总表批准，进入阶段2。
+1. Q-1/Q-2：同意在C13/C21补登记OVL、OPTC。每条须对应C13/C21已有规则或RTL实际行为；对不上的标"仅TB检查"，不硬登记。→BMI-063、BMI-136
+2. Q-3：同意别名表注明。但先查`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md`，已定义JNT各项的映射到该文档章节。→BMI-136
+3. Q-4：给编号。流片前逐ID动态闭环按验收表逐条进行，无编号会漏掉这个曾经的静默卡死。→BMI-027
+4. Q-5：本批做族级登记；逐条对照不进POST_TAPEOUT清单，改列"流片前验证收尾计划"（台账层同样重要）。→BMI-135、BMI-910
+5. BMI-141：不用"合同号+后缀"写法，除非重扫确认含义与合同条目完全一致；否则一律TB本地名。
+6. BMI-907：用户10-09已定，纯丢DONE变体进收尾计划逐拍扫描；L-5保留为纵深防御，不可达证明进收尾计划形式验证。
+7. 基线回归若与参考值不符，在阶段3改TB标签之前停下报告；阶段2可先进行。
