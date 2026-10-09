@@ -260,7 +260,7 @@ module ppg_system_fault_abort_supervisor
 		end else if(flag_new_any == 1'b1)begin
 			system_fault_blocking_o <= 1'b1;    // 新记录到达立即开启或维持episode
 		end else if(flag_episode_close_condition == 1'b1)begin
-			system_fault_blocking_o <= 1'b0;    // 全部本地条件恢复后关闭episode
+			system_fault_blocking_o <= 1'b0;    // 全部本地条件恢复后关闭episode；AMI阻断类故障经STOPPING排空、各lane落下后由此关闭，无需复位即可重新START @satisfies: SUP-08
 		end
 	end
 
