@@ -194,6 +194,7 @@ PPG_ALIAS_MAPPING_TABLE.md	45	ppg_system_config_manager.v:394-448	sym	ppg_system
 PPG_ALIAS_MAPPING_TABLE.md	46	ppg_adc_measurement_idac_integration.v:905	tag	ppg_adc_measurement_idac_integration.v	TOP-21	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
 PPG_ALIAS_MAPPING_TABLE.md	48	ppg_adc_measurement_idac_integration.v:1010	tag	ppg_adc_measurement_idac_integration.v	TOP-23	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
 PPG_ALIAS_MAPPING_TABLE.md	86	:1024	not-anchor			“1024-bit CDC payload”位宽，不是行号
+PPG_ALIAS_MAPPING_TABLE.md	90	:12	text	PPG_CONTRACT_CLOSURE_MATRIX.md §12		第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“MATRIX.md:12.14节”用冒号写节号（§12.14），解析器误作第12行；原文“.14”保留
 PPG_ALIAS_MAPPING_TABLE.md	96	ppg_sar9_sar15_safe_selection_wrapper.v:480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：写入时:480为assign o_analog_safe
 PPG_ALIAS_MAPPING_TABLE.md	108	ppg_adc_measurement_idac_integration.v:1605	sym	ppg_adc_measurement_idac_integration.v	flag_adc_transaction_inflight	本行“AMI物理ADC owner代表行”；写入时:1605为owner交接注释，AMI无G-FP-01本号标签
 PPG_ALIAS_MAPPING_TABLE.md	112	`:26`	file	ppg_idac_code_controller.v		C17文件头V2.3修订记录，文件级锚点

@@ -61,6 +61,21 @@ def rebuild(line, entries):
     return ''.join(out)
 
 
+def widen_text(line, s, e):
+    """Same backtick rule as rebuild(): absorb the backticks around an old anchor."""
+    ticks = line[s:e].count('`')
+    if ticks % 2 == 0 and s > 0 and line[s - 1] == '`' and e < len(line) and line[e] == '`':
+        return s - 1, e + 1
+    if ticks % 2 == 1:
+        if line[s:e].startswith('`') and e < len(line) and line[e] == '`':
+            return s, e + 1
+        if s > 0 and line[s - 1] == '`':
+            return s - 1, e
+        if e < len(line) and line[e] == '`':
+            return s, e + 1
+    return s, e
+
+
 def verify_round2(a, prev_rows, rows):
     """Second round: every line is rebuilt from the BASE line twice, once with the previous
     table (what --before should hold) and once with the new table (what the disk should
@@ -114,10 +129,28 @@ def verify_round2(a, prev_rows, rows):
                     bad += 1
                     print('UNEXPECTED-CHANGE %s:%d (edited after round 1, no delta)' % (doc, j + 1))
             else:
+                # line edited after round 1: undo the delta on the disk text (right to left);
+                # the result must be the --before text exactly
                 edited += 1
-                print('EDITED-LINE %s:%d (edited after round 1 and changed in round 2; review)\n  before : %s\n  after  : %s'
-                      % (doc, j + 1, b_line[:300], a_line[:300]))
-    print('delta pairs %d, changed lines %d, lines edited after round 1 needing review %d, mismatches %d'
+                t, ok = a_line, True
+                for x, y in sorted(zip(o_rows, n_rows), key=lambda p: -int(p[1]['col'])):
+                    if (x['class'] == 'convert') == (y['class'] == 'convert') and x['new'] == y['new']:
+                        continue
+                    s0, e0 = widen_text(base[i], int(y['col']), int(y['col']) + len(y['old']))
+                    new_tok = base[i][s0:e0] if y['class'] != 'convert' else y['new']
+                    old_tok = x['new'] if x['class'] == 'convert' else base[i][s0:e0]
+                    k = t.rfind(new_tok)
+                    if k < 0:
+                        ok = False
+                        break
+                    t = t[:k] + old_tok + t[k + len(new_tok):]
+                if not ok or t != b_line:
+                    bad += 1
+                    print('MISMATCH %s:%d (edited after round 1; undoing the delta does not give the --before text)\n'
+                          '  before : %s\n  after  : %s' % (doc, j + 1, b_line[:300], a_line[:300]))
+                else:
+                    print('EDITED-LINE-OK %s:%d (edited after round 1; undoing the delta gives the --before text)' % (doc, j + 1))
+    print('delta pairs %d, changed lines %d, lines edited after round 1 (checked by undoing the delta) %d, mismatches %d'
           % (pairs, changed, edited, bad))
     return 1 if bad else 0
 

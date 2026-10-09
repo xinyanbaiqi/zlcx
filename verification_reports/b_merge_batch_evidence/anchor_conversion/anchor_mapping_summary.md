@@ -1,11 +1,11 @@
 # 阶段4锚点旧→新对照表汇总
 
-清单基线 `7a8eabf`，新节号核对版本 `a3bd8fa`；锚点总数 9702。
+清单基线 `7a8eabf`，新节号核对版本 `557cdfd`；锚点总数 9702。
 
 | 类别 | 来源 | 数量 |
 |---|---|---|
-| convert | auto | 8926 |
-| convert | manual | 328 |
+| convert | auto | 8925 |
+| convert | manual | 329 |
 | external | manual | 3 |
 | history | manual | 1 |
 | history-block | auto | 30 |

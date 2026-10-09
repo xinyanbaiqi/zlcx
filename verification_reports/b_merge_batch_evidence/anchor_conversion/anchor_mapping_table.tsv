@@ -8926,7 +8926,7 @@ PPG_ALIAS_MAPPING_TABLE.md	89	5c829e4c449b	600	PPG_CONTRACT_CLOSURE_MATRIX.md:33
 PPG_ALIAS_MAPPING_TABLE.md	89	5c829e4c449b	660	PPG_CONTRACT_CLOSURE_MATRIX.md:3463-3524	matrix	bb39a0f821	convert	PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a	auto	uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理
 PPG_ALIAS_MAPPING_TABLE.md	90	b5f0d891d328	253	PPG_CONTRACT_CLOSURE_MATRIX.md:3367-3373,12	matrix	b858bf0d0f	history-strike		auto	
 PPG_ALIAS_MAPPING_TABLE.md	90	b5f0d891d328	313	PPG_CONTRACT_CLOSURE_MATRIX.md:3419-3524	matrix	b858bf0d0f	convert	PPG_CONTRACT_CLOSURE_MATRIX.md §12.12–§12.12a	auto	uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理
-PPG_ALIAS_MAPPING_TABLE.md	90	b5f0d891d328	394	:12	matrix	b858bf0d0f	convert	PPG_CONTRACT_CLOSURE_MATRIX.md §1.0	auto	
+PPG_ALIAS_MAPPING_TABLE.md	90	b5f0d891d328	394	:12	matrix	b858bf0d0f	convert	PPG_CONTRACT_CLOSURE_MATRIX.md §12	manual	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“MATRIX.md:12.14节”用冒号写节号（§12.14），解析器误作第12行；原文“.14”保留
 PPG_ALIAS_MAPPING_TABLE.md	96	9c55de91b14b	159	ppg_control_top.v:120	rtl	b858bf0d0f	convert	`ppg_control_top.v` `i_analog_ready`、`o_analog_safe`	auto	
 PPG_ALIAS_MAPPING_TABLE.md	96	9c55de91b14b	232	ppg_sar9_sar15_safe_selection_wrapper.v:480	rtl	b858bf0d0f	convert	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`	manual	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：写入时:480为assign o_analog_safe
 PPG_ALIAS_MAPPING_TABLE.md	96	9c55de91b14b	349	ppg_sar9_sar15_safe_selection_wrapper.v:440,495-496	rtl	b858bf0d0f	convert	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`、`o_ssw_fault_cause`	auto	

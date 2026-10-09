@@ -166,6 +166,7 @@ OVERRIDES_R2 = {
     (M, 3242, '`:480`'): ('sym', SSW, 'o_analog_safe', _R2 + '格内“o_analog_safe/i_analog_safe ... inverse (:480)”'),
     (M, 3408, 'tb_ppg_precision_window_controller.v:737-758'): ('label', 'tb_ppg_precision_window_controller.v', 'PWC-41 new legal START preserves protocol sticky', _R2 + 'PWC-41的两条检查（另一条为switch-timeout sticky）'),
     (M, 3832, ':2'): ('not-anchor', '', '', _R2 + '“前8项:2项(G-FP-02/G-FP-06)”计数，不是行号'),
+    (A, 90, ':12'): ('text', 'PPG_CONTRACT_CLOSURE_MATRIX.md §12', '', _R2 + '“MATRIX.md:12.14节”用冒号写节号（§12.14），解析器误作第12行；原文“.14”保留'),
     (A, 96, 'ppg_sar9_sar15_safe_selection_wrapper.v:480'): ('sym', SSW, 'o_analog_safe', _R2 + '写入时:480为assign o_analog_safe'),
     (A, 143, 'tb_ppg_control_top_startup_idac_calibration.v:1278-1305'): ('label', 'tb_ppg_control_top_startup_idac_calibration.v', 'PASS SID-06 next-subframe waveform snapshot correctly reflects', _R2 + '“已补真实断言…见…”指该TB的SID-06下一子帧检查'),
     (A, 179, 'ppg_adc_measurement_idac_integration.v:1010'): ('tag', AMI, 'TOP-23', _R2 + '格内“已打@satisfies: TOP-23, TOP-24(…)”'),
