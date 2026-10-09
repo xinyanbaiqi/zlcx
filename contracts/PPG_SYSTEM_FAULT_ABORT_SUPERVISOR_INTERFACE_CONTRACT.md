@@ -1,6 +1,7 @@
 # PPG System Fault / Abort Supervisor Interface Contract
 
-> Version: V1.6, 2026-10-09.
+> Version: V1.7, 2026-10-09.
+> V1.7 change record (B merge batch, coordinator ruling of 2026-10-09 on report §9-4): SUP-08 rewritten to the RTL. An AMI blocking fault (mismatch/protocol causes `8'h01`-`8'h03`, consecutive completion loss `8'h06`, long busy `8'h07`) is promoted by the supervisor, which drives the system into STOPPING; after the RUN ends and drains, the AMI lanes drop (C10 §6.11), the episode closes (`ppg_system_fault_abort_supervisor.v` `system_fault_blocking_o`, `@satisfies: SUP-08`) and a legal START is accepted without reset. No port, parameter or other rule changes.
 > V1.6 change record (B merge batch, `verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-090~097, rewritten against baseline `7a8eabf` supervisor and AMI RTL; symbol anchors are "file + symbol (section)"): §1 watchdog parameters frozen as fixed product values 5000/13 with a simulation-start legality check instead of an elaboration reject (F-014/F-024); §2 reset port name corrected to `i_rstn` (F-051); §3 new AMI causes `8'h06`/`8'h07` (source `4'h1`, summary bits 9/10); §5 AMI active-fault fall conditions extended (abort, START, RUN ended by STOP and drained) and F-1/F-2 written into the recovery flow; §6 "a completion-loss timeout void is not fabrication" plus the RUN/drain loss and long-busy handling and the no-deadlock guarantee; §7 SUP-10 attributed to C10 AMI-53 and an evidence-state pointer added. No existing behavior, encoding or ID meaning changes.
 > V1.5 record date: 2026-08-20.
 > Status: normative supervisor source; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL, final-Top and TB evidence are `EVIDENCE_PENDING`.
@@ -167,7 +168,7 @@ V1.6 (completion loss, C10 §7.1a). An AMI completion-loss timeout void is **not
 | SUP-05 | External/system STOP merge is idempotent. | `EVIDENCE_PENDING` |
 | SUP-06 | Watchdog boundary, idle priority and no-fabrication behavior are observed. | `EVIDENCE_PENDING` |
 | SUP-07 | Clear cannot release active owner/cause; legal clear removes history. | `EVIDENCE_PENDING` |
-| SUP-08 | Final Top proves mismatch to STOPPING and legal restart. | `EVIDENCE_PENDING` |
+| SUP-08 | ~~Final Top proves mismatch to STOPPING and legal restart.~~ V1.7: after an AMI blocking fault (mismatch/protocol `8'h01`-`8'h03`, consecutive completion loss `8'h06`, long busy `8'h07`) has taken the system through STOPPING, the episode closes once the RUN has ended and drained and every source's active is low, and a legal restart (diagnostic clear, then START) succeeds without reset (§4, §5). | `EVIDENCE_PENDING` (final-Top evidence covers `8'h02`, `8'h06` and `8'h07`; `8'h01`/`8'h03` restart not covered; mapping in the alias table) |
 | SUP-09 | A blocking fault emits one fault-discard event; an external abort emits none unless a separate blocking record exists. | `EVIDENCE_PENDING` |
 | SUP-10 | A single fault-discard event is retained as an AMI-local current-generation reason until terminal digital drain, so delayed discardable work remains `DISCARD_SYSTEM_FAULT` without a repeated supervisor pulse. V1.6: this is AMI behavior; the governing entry is C10 AMI-53 (the row is kept here so the ID is not reused). | `EVIDENCE_PENDING` |
 
