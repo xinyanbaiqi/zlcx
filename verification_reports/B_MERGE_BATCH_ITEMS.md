@@ -43,37 +43,37 @@
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-001 | F009 §9.4-1；BR§3.7 | §4.2 400 Hz宏帧 | 一级 | 补"宏帧末拍下一帧资格成立即直接起帧"条款：门控与F-010滚动相同；校准与否取帧末处理后的请求pending（含本拍握手与跨帧重挂；在途owner不重挂）。RTL锚点：`flag_frame_restart`、`flag_next_frame_inputs_eligible` | 待做 |
-| BMI-002 | F009 §9.4-1；BR§3.7、§3.12-3 | §4.2；§18 FSC-03 | 一级 | FSC-03（相邻宏帧起点严格相差5000）对所有帧末成立，写明**例外C**：CAL帧末owner在途、无pending、NORMAL资格不成立（如启动搜索期）、AMI以电平保持校准请求时，间隔不是5000，至少空2拍，由在途owner释放时刻决定；回归实测5004、5131，换回旧调度器也相同，属既有行为；4份带帧间隔监视器的TB没有其它非5000间隔 | 待做 |
-| BMI-003 | F009 §9.4-2；OLR §7.1(d)；BR§3.7、Q4 | §16.5 诊断清除；§17或已知限制处 | 一级 | ① 调度器诊断sticky清除要求`!B_FRAME_ACTIVE`，RUN中帧首尾相接，只能在RUN之外清除；② 已知限制：周期重检期间夹在校准帧之间的NORMAL帧会出现无owner的RED/IR波形，owner截止sticky因此置位，重检期间该sticky不能作为异常指示。（只写合同；后续验证按BR§3.8不在本批） | 待做 |
-| BMI-004 | F009 §9.4-3；BR§3.7 | §16.3 STOP | 一级 | STOP语义：manager的STOPPING不等帧结束；已建立的帧在CONFIG中以空帧走完，不触发任何STOPPING计时（STOP落在新帧tick 0时空帧约2.5 ms） | 待做 |
-| BMI-005 | ABCD §12.8 F-010 | §9（校准事务）CAL滚动相关处；§16.3/§16.4 | 一级 | 补"CAL滚动受生命周期撤销屏蔽（STOP/abort/故障/离开RUN）"条文。RTL锚点：`flag_calibration_rollover`（`@satisfies: FSC-31, FSC-32`） | 待做 |
-| BMI-006 | OLR §8.4-5 L-1；LCN | §10.4 完成和owner释放；§18 FSC-17 | 一级 | 宏帧末不重挂在途owner的请求（FSC-17）。RTL锚点：宏帧末重挂条件 | 待做 |
-| BMI-007 | OLR §8.4-5 L-4；LCN | §10.3；§18 FSC-46/49/50 | 一级 | 截止当拍可提交，越过截止只收尾。RTL锚点：`flag_candidate_expired`、`transaction_start_valid_o` | 待做 |
-| BMI-008 | OLR §8.4-5 L-3；LCN | §8.2 IDAC候选提交安全边界；FSC-19/38相关行 | 一级 | 第4种IDAC边界：启动搜索空闲边界。RTL锚点：`flag_idle_idac_safe_boundary`、`idac_code_safe_boundary_o`；FSC-19恢复`@satisfies`见BMI-160 | 待做 |
-| BMI-009 | OLR §8.4-5、§7.2 F-7；BR§3.6 | §10.4；§18 FSC-54 | 一级 | 作废释放（R3）：作废置失败的是**当前宏帧**，不是owner所在帧；owner跨帧时与作废事务起始帧不同。RTL锚点：`flag_owner_lost_match` | 待做 |
-| BMI-010 | OLR §8.2、§8.4-5 | §13.4/§13.7 端口表 | 一级 | 加输入`i_adc_transaction_lost_event`、`i_idac_boundary_request`（位宽、方向、复位语义按RTL） | 待做 |
-| BMI-011 | OLR §8.4-5 | §16.2 START | 一级 | 写明调度器sticky按§16.2在新START清零，而AMI历史诊断（含lost sticky）在新START不清，两套规则并存 | 待做 |
-| BMI-012 | F009 §9.4-5；BR§3.3、§3.7 | 别名表（见BMI-133） | 一级 | TB标签FSC-14 ↔ 合同FSC-03 | 并入BMI-133 |
-| BMI-013 | BR§3.9-2；F9R §5修法3 | §12.3 校准物理宏帧完成 | 一级 | 写明"物理校准宏帧结束事实"指本阶段内出现过的任一次`o_calibration_frame_complete_event`，不要求晚于本阶段最后一笔样本 | 待做 |
-| BMI-014 | IDG §6.1、§10；IDF P/G；ABCD F-046；BR§3.3 | §18、§19（:1206"必须真实覆盖FSC-01至FSC-57"） | 一级 | 不在C08建对照表；FSC-58~62不登记。订正G1：原文保留（删除线），改为"单元TB按别名表对照覆盖，缺口见…"；FSC-19/23/24/27/44无证据、FSC-35部分（BMI-015）如实写 | 待做 |
-| BMI-015 | SSW18 §5-2；BR§3.3 | 证据状态说明处（§18/§19） | 一级 | FSC-35改判"部分"（RAW-12分辨不出5000/5001）；F-009+F-011后完整证据由TB FSC-14（=合同FSC-03）提供的说法按RTL/TB现状核实后写入 | 待做 |
+| BMI-001 | F009 §9.4-1；BR§3.7 | §4.2 400 Hz宏帧 | 一级 | 补"宏帧末拍下一帧资格成立即直接起帧"条款：门控与F-010滚动相同；校准与否取帧末处理后的请求pending（含本拍握手与跨帧重挂；在途owner不重挂）。RTL锚点：`flag_frame_restart`、`flag_next_frame_inputs_eligible` | 已完成（C08 V1.13） |
+| BMI-002 | F009 §9.4-1；BR§3.7、§3.12-3 | §4.2；§18 FSC-03 | 一级 | FSC-03（相邻宏帧起点严格相差5000）对所有帧末成立，写明**例外C**：CAL帧末owner在途、无pending、NORMAL资格不成立（如启动搜索期）、AMI以电平保持校准请求时，间隔不是5000，至少空2拍，由在途owner释放时刻决定；回归实测5004、5131，换回旧调度器也相同，属既有行为；4份带帧间隔监视器的TB没有其它非5000间隔 | 已完成（C08 V1.13） |
+| BMI-003 | F009 §9.4-2；OLR §7.1(d)；BR§3.7、Q4 | §16.5 诊断清除；§17或已知限制处 | 一级 | ① 调度器诊断sticky清除要求`!B_FRAME_ACTIVE`，RUN中帧首尾相接，只能在RUN之外清除；② 已知限制：周期重检期间夹在校准帧之间的NORMAL帧会出现无owner的RED/IR波形，owner截止sticky因此置位，重检期间该sticky不能作为异常指示。（只写合同；后续验证按BR§3.8不在本批） | 已完成（C08 V1.13） |
+| BMI-004 | F009 §9.4-3；BR§3.7 | §16.3 STOP | 一级 | STOP语义：manager的STOPPING不等帧结束；已建立的帧在CONFIG中以空帧走完，不触发任何STOPPING计时（STOP落在新帧tick 0时空帧约2.5 ms） | 已完成（C08 V1.13） |
+| BMI-005 | ABCD §12.8 F-010 | §9（校准事务）CAL滚动相关处；§16.3/§16.4 | 一级 | 补"CAL滚动受生命周期撤销屏蔽（STOP/abort/故障/离开RUN）"条文。RTL锚点：`flag_calibration_rollover`（`@satisfies: FSC-31, FSC-32`） | 已完成（C08 V1.13） |
+| BMI-006 | OLR §8.4-5 L-1；LCN | §10.4 完成和owner释放；§18 FSC-17 | 一级 | 宏帧末不重挂在途owner的请求（FSC-17）。RTL锚点：宏帧末重挂条件 | 已完成（C08 V1.13） |
+| BMI-007 | OLR §8.4-5 L-4；LCN | §10.3；§18 FSC-46/49/50 | 一级 | 截止当拍可提交，越过截止只收尾。RTL锚点：`flag_candidate_expired`、`transaction_start_valid_o` | 已完成（C08 V1.13） |
+| BMI-008 | OLR §8.4-5 L-3；LCN | §8.2 IDAC候选提交安全边界；FSC-19/38相关行 | 一级 | 第4种IDAC边界：启动搜索空闲边界。RTL锚点：`flag_idle_idac_safe_boundary`、`idac_code_safe_boundary_o`；FSC-19恢复`@satisfies`见BMI-160 | 已完成（C08 V1.13） |
+| BMI-009 | OLR §8.4-5、§7.2 F-7；BR§3.6 | §10.4；§18 FSC-54 | 一级 | 作废释放（R3）：作废置失败的是**当前宏帧**，不是owner所在帧；owner跨帧时与作废事务起始帧不同。RTL锚点：`flag_owner_lost_match` | 已完成（C08 V1.13） |
+| BMI-010 | OLR §8.2、§8.4-5 | §13.4/§13.7 端口表 | 一级 | 加输入`i_adc_transaction_lost_event`、`i_idac_boundary_request`（位宽、方向、复位语义按RTL） | 已完成（C08 V1.13） |
+| BMI-011 | OLR §8.4-5 | §16.2 START | 一级 | 写明调度器sticky按§16.2在新START清零，而AMI历史诊断（含lost sticky）在新START不清，两套规则并存 | 已完成（C08 V1.13） |
+| BMI-012 | F009 §9.4-5；BR§3.3、§3.7 | 别名表（见BMI-133） | 一级 | TB标签FSC-14 ↔ 合同FSC-03 | 并入BMI-133（C08 §19已写指针） |
+| BMI-013 | BR§3.9-2；F9R §5修法3 | §12.3 校准物理宏帧完成 | 一级 | 写明"物理校准宏帧结束事实"指本阶段内出现过的任一次`o_calibration_frame_complete_event`，不要求晚于本阶段最后一笔样本 | 已完成（C08 V1.13） |
+| BMI-014 | IDG §6.1、§10；IDF P/G；ABCD F-046；BR§3.3 | §18、§19（:1206"必须真实覆盖FSC-01至FSC-57"） | 一级 | 不在C08建对照表；FSC-58~62不登记。订正G1：原文保留（删除线），改为"单元TB按别名表对照覆盖，缺口见…"；FSC-19/23/24/27/44无证据、FSC-35部分（BMI-015）如实写 | 已完成（C08 V1.13） |
+| BMI-015 | SSW18 §5-2；BR§3.3 | 证据状态说明处（§18/§19） | 一级 | FSC-35改判"部分"（RAW-12分辨不出5000/5001）；F-009+F-011后完整证据由TB FSC-14（=合同FSC-03）提供的说法按RTL/TB现状核实后写入 | 已完成（C08 V1.13） |
 
 ## 2. C09 SSW（`PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md`，基线头部V1.10）
 
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-020 | BR§3.5；OLR §8.4-4；SSW18 S1；IDF §1.4 | §10 SSW-18验收行（约第835行） | 一级 | 按S1改写：迟到诊断只置sticky，不终止burst；条件是"本子帧校准owner在tick 385仍未完成"，owner与子帧绑定。RTL锚点：`calibration_timeout_sticky_o`、`reg_owner_cal_subframe` | 待做 |
-| BMI-021 | BR§3.5 | §5.4 IDAC候选码提交（约第373行"若当前结果未能在local tick 385前…"） | 一级 | 改写为：迟到结果由三道防护挡住，不复用旧码；明文写出前提"ADC在Q3（tick 266）已完成采样，迟到的只是读出" | 待做 |
-| BMI-022 | BR§3.5 | §7.8 状态与诊断输出（`o_calibration_timeout_sticky`，约第602行） | 一级 | 端口说明按S1改写 | 待做 |
-| BMI-023 | OLR §8.4-4 | §10 SSW-16/17/42；§5.3 | 一级 | 加作废释放（R3）；SSW-42作废释放/错配。RTL锚点：`flag_owner_release`、`flag_done_mismatch` | 待做 |
-| BMI-024 | OLR §8.4-4；L-1 | §5.3；§10 SSW-34/38 | 一级 | owner与帧/子帧绑定写入正文。RTL锚点：`flag_red_has_owner`/`flag_ir_has_owner`/`flag_cal_has_owner` | 待做 |
-| BMI-025 | OLR §8.2、§8.4-4 | §7.6 ADC完成与空闲输入 | 一级 | 端口表加`i_adc_transaction_lost_event` | 待做 |
-| BMI-026 | F009 §9.4-4；BR§3.7 | §8.2 STOP / §8.3（START恢复处） | 一级 | L-6规则：新RUN的START确认时，若无在途owner且ADC空闲，作废上一RUN残留的未提交RED/IR/CAL波形上下文和停止挂起，与abort一致；前提：STOPPING完成要求ADC空闲且数据链排空。RTL锚点：`flag_start_restore`。是否给编号见BMI-027 | 待做 |
-| BMI-027 | BR§3.7、§3.3；统筹§20-3 | §10 验收表 | 一级 | **给L-6新增C09验收编号**（统筹裁定：流片前逐ID动态闭环按验收表进行，无编号会漏掉这个曾经的静默卡死）。编号按§13.3规则：先查矩阵§13、C09验收表与全仓，确认未占用、无歧义；别名表登记SSW TB本地标签`L6-START`→新编号 | 待做 |
-| BMI-028 | ABCD §12.8 F-035 | §10 SSW-22；§8.3 | 一级 | 补"abort与匹配完成同拍时完成优先释放"（abort仍取消波形和结果资格）。RTL锚点：`adc_owner_inflight_o`（`@satisfies: SSW-22`） | 待做 |
-| BMI-029 | IDF G2；IDG S7 | §10（:878"SSW-01至SSW-52全部真实PASS"） | 一级 | 订正状态/门禁声明：SSW-18当前无同义检查（置1检查按BR§8不在本批补） | 待做 |
-| BMI-030 | ABCD §10(b) F-047 | 文件头（第3行V1.10与第7行sole V1.9）、依赖表 | 一级 | 随本批升版统一版本号与依赖表绑定 | 待做 |
+| BMI-020 | BR§3.5；OLR §8.4-4；SSW18 S1；IDF §1.4 | §10 SSW-18验收行（约第835行） | 一级 | 按S1改写：迟到诊断只置sticky，不终止burst；条件是"本子帧校准owner在tick 385仍未完成"，owner与子帧绑定。RTL锚点：`calibration_timeout_sticky_o`、`reg_owner_cal_subframe` | 已完成（C09 V1.11） |
+| BMI-021 | BR§3.5 | §5.4 IDAC候选码提交（约第373行"若当前结果未能在local tick 385前…"） | 一级 | 改写为：迟到结果由三道防护挡住，不复用旧码；明文写出前提"ADC在Q3（tick 266）已完成采样，迟到的只是读出" | 已完成（C09 V1.11） |
+| BMI-022 | BR§3.5 | §7.8 状态与诊断输出（`o_calibration_timeout_sticky`，约第602行） | 一级 | 端口说明按S1改写 | 已完成（C09 V1.11） |
+| BMI-023 | OLR §8.4-4 | §10 SSW-16/17/42；§5.3 | 一级 | 加作废释放（R3）；SSW-42作废释放/错配。RTL锚点：`flag_owner_release`、`flag_done_mismatch` | 已完成（C09 V1.11） |
+| BMI-024 | OLR §8.4-4；L-1 | §5.3；§10 SSW-34/38 | 一级 | owner与帧/子帧绑定写入正文。RTL锚点：`flag_red_has_owner`/`flag_ir_has_owner`/`flag_cal_has_owner` | 已完成（C09 V1.11） |
+| BMI-025 | OLR §8.2、§8.4-4 | §7.6 ADC完成与空闲输入 | 一级 | 端口表加`i_adc_transaction_lost_event` | 已完成（C09 V1.11） |
+| BMI-026 | F009 §9.4-4；BR§3.7 | §8.2 STOP / §8.3（START恢复处） | 一级 | L-6规则：新RUN的START确认时，若无在途owner且ADC空闲，作废上一RUN残留的未提交RED/IR/CAL波形上下文和停止挂起，与abort一致；前提：STOPPING完成要求ADC空闲且数据链排空。RTL锚点：`flag_start_restore`。是否给编号见BMI-027 | 已完成（C09 V1.11） |
+| BMI-027 | BR§3.7、§3.3；统筹§20-3 | §10 验收表 | 一级 | **给L-6新增C09验收编号**（统筹裁定：流片前逐ID动态闭环按验收表进行，无编号会漏掉这个曾经的静默卡死）。编号按§13.3规则：先查矩阵§13、C09验收表与全仓，确认未占用、无歧义；别名表登记SSW TB本地标签`L6-START`→新编号 | 已完成（C09 V1.11） |
+| BMI-028 | ABCD §12.8 F-035 | §10 SSW-22；§8.3 | 一级 | 补"abort与匹配完成同拍时完成优先释放"（abort仍取消波形和结果资格）。RTL锚点：`adc_owner_inflight_o`（`@satisfies: SSW-22`） | 已完成（C09 V1.11） |
+| BMI-029 | IDF G2；IDG S7 | §10（:878"SSW-01至SSW-52全部真实PASS"） | 一级 | 订正状态/门禁声明：SSW-18当前无同义检查（置1检查按BR§8不在本批补） | 已完成（C09 V1.11） |
+| BMI-030 | ABCD §10(b) F-047 | 文件头（第3行V1.10与第7行sole V1.9）、依赖表 | 一级 | 随本批升版统一版本号与依赖表绑定 | 已完成（C09 V1.11） |
 
 ## 3. C10 AMI（`PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md`，基线V2.4）
 
