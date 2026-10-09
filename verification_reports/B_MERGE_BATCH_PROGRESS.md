@@ -89,3 +89,8 @@
 - 旧会话也在独立核对基线回归；本会话照常核对。
 - 阶段3准备：扫描器在`tools/id_governance_scan/`，重扫37处已复读（只有TB FSC-14属新的同号不同义，其余36处是TB轮加严、含义不变），负对照恰好多报2处；TB改名脚本已备好、未执行（等基线核对）。本地名：SCHT-n、CLRBLK/EPICLS/WDIDLE/EPI2ND、DCRT-n、CAL-ODL、FORK-HOLD、AUTOABT-QUIET（全仓grep未占用）。
 - 阶段4准备：`tools/b_merge_tools/anchor_check.py`首跑：阶段2写入合同的39个符号锚点全部能在RTL中找到；4处节号引用需消歧；矩阵与别名表旧行号锚点共7409处待转换（矩阵6662、别名表747）。
+
+### 条目8（2026-10-09）：误提交的.pyc已移出版本库
+
+- 提交`9e932d6`误带入`tools/id_governance_scan/__pycache__/scan_tb_labels_lib.cpython-38.pyc`（运行扫描器时由Python生成）。本提交用`git rm --cached`将其移出版本库，不改历史、不force push。
+- 今后提交一律按路径逐个`git add`，提交前用`git status`确认暂存区没有`__pycache__`。`.gitignore`不在本批次授权范围内，不改；最终报告中提一句建议。
