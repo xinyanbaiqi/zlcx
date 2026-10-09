@@ -104,7 +104,7 @@
 | 编号 | 来源 | 目标节 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
 | BMI-060 | ABCD §12.8；F28 §3；BR§3.4 | C13 §4 保留载荷（§4.1） | 一级 | `i_datapath_discard_*`收窄为6字段；"For a matching retained transaction"改写为按代际匹配，身份字段仅诊断（`overlap`/`fork`只用`i_datapath_discard_event`与`run_generation_o == i_run_generation`） | 已完成（C13 V1.3） |
-| BMI-061 | ABCD §12.8；F28 §3 | C01 公开端口表（§4） | 一级 | `o_measurement_result_discard_*`收窄（7字段，含`sample_valid`） | 待做 |
+| BMI-061 | ABCD §12.8；F28 §3 | C01 公开端口表（§4） | 一级 | `o_measurement_result_discard_*`收窄（7字段，含`sample_valid`） | 已完成（`9c6c0dc`，C01 V1.18：公开discard组改为`TXN_KEY`，与RTL 7字段一致） |
 | BMI-062 | ABCD §10(b) F-004 | C13（Router `local_empty`描述） | 一级 | Router无always、无该端口，与C12:65矛盾；按RTL订正 | 已完成（C13 V1.3） |
 | BMI-063 | IDG §7、§10 OVL；统筹§20-1 | C13 §7 验收用例 | 一级 | 在C13 §7登记OVL-01~17。每条须对应C13已有规则或RTL实际行为；对不上的标"仅TB检查"，不硬登记 | 已完成（C13 V1.3） |
 | BMI-064 | 阶段2改写C13时发现（RTL核对） | C13 §4.1 `o_local_empty`消费关系 | 一级 | 原文写AMI是`o_local_empty`的唯一消费者并用于`o_datapath_empty`；RTL中AMI只把fork/overlap的`o_local_empty`接出供观测，`o_datapath_empty`用各级`o_result_valid`（经`o_measurement_output_idle`）汇总，对单元素缓存语义相同。按RTL订正C13；C10 §6.11的汇总式按语义保留 | 已完成（C13 V1.3） |
@@ -180,7 +180,7 @@
 | BMI-120 | BR§3.4；F28 §3 | §1.1 身份组展开 | 一级 | 另立`TXN_KEY`（6字段；正式结果组另加`sample_valid`），与完整`TXN_ID`分开；检测丢弃组与owner/完成组仍用`TXN_ID`。命名前按BR§3.3先查§13与全仓 | 已完成（矩阵V4.5） |
 | BMI-121 | IDF R2；IDG §6.2 | P05行（约:927） | 一级 | 去掉"SUP06A"作为看门狗证据 | 已完成（矩阵V4.5） |
 | BMI-122 | ABCD §10(b) F-003；BR§3.2、Q1 | 全表证据/锚点列 | 一级 | 并入符号锚点一次性转换（BMI-150~153） | 已完成（并入BMI-151，`1fab116`） |
-| BMI-123 | ABCD §10(b) F-045；BR§3.2 | §12.4a 26-file Baseline Manifest | 工具 | 摘要改脚本生成（BMI-171），阶段5执行 | 待做 |
+| BMI-123 | ABCD §10(b) F-045；BR§3.2 | §12.4a 26-file Baseline Manifest | 工具 | 摘要改脚本生成（BMI-171），阶段5执行 | 已完成（经BMI-171，`5d294db`） |
 | BMI-124 | BR§3.11；IDG §9 | §13.1/§13.2/§13.3 | 一级 | §13.3规则正文抄自BR§3.11；§13.2补记核对脚本盲区（29族不在ID正则内、TB修订记录伪ID）；§13.1快照数字随刷新更新 | 已完成（矩阵V4.5（§13.2/§13.3；§13.1刷新在阶段5）） |
 | BMI-125 | 各合同升版 | §12.4 版本登记表 | 一级 | 本批次升版的合同同步登记新版本与符号锚点（取代"C08:57-C08:65"式行号区间） | 已完成（版本联动提交8b2b259（行号区间锚点在阶段4转换）） |
 | BMI-126 | IDF §3.4 H1 | :947、:3724、:3731、:3736（旧"AMI-46/47"） | 三级 | 历史叙述，按用户决定不改 | 不做（历史叙述） |
@@ -195,7 +195,7 @@
 | BMI-133 | F009 §9.4-5；BR§3.3 | 新增对照行 | 一级 | TB FSC-14 ↔ 合同FSC-03；TB FSC-32 ↔ 合同FSC-30（实参N不改，BR Q3）；其余调度器TB检查→合同条目对照（数据取IDG §5.2 FSC列，阶段3重扫后复核） | 已完成（阶段3提交，草稿行已写入别名表） |
 | BMI-134 | ABCD §12.8；OLR §8.2；F009 §9.3 | 新增对照行 | 一级 | 三轮新增TB本地标签的映射：MGR-11、CAL-ROLLOVER-*、HIST-*、DISC-HELD、DET-QUAL、LEAF-HOLD、ABT-DONE、CANCEL-COMMIT、RETURN-HOLD、WDPARM、PARAM-*、DIAG-MAP38、CMD-STOP-PRIO；LOST-*、L1-*、L4-*、L3-*、BIND-Q3、S1-*、LSTK-*、K-*、WIN-*、BUSY-*、WDRAW-LOST、LOST-EXCL、F020-WDRAW、SUM-06/07、S1-ABANDON、LOST-SPI-*、SYS-*（37项）；FRAME-*、RESTART-*-SCAN、L6-START、SYS-RESTART-SCAN-*。无合同ID的如实填"无映射" | 已完成（`fd348d2`）；依赖TB改名的行在草稿中（`affd3e3`） |
 | BMI-135 | IDG §10；统筹§20-4 | IDC2/CIS/AV4/CF4（整族无TB编号） | 一级 | 本批做**族级登记**（"整族无TB编号、证据分散于…"）；逐条对照**不进**POST_TAPEOUT清单，改列"流片前验证收尾计划"（BMI-910） | 已完成族级登记（`fd348d2`）；逐条对照见BMI-910 |
-| BMI-136 | IDG §7、§10 JNT；OPTC；统筹§20-1、§20-2 | 别名表；C21 | 一级 | JNT：别名表注明；先查`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md`，已定义的JNT项映射到该文档章节，未定义的注明"TB定义"。OPTC-01/02：在C21登记，须对应C21规则或RTL实际行为，对不上的标"仅TB检查" | 别名表已完成（`fd348d2`，JNT按联合TB说明§11/§5.3）；OPTC在C21已有登记 |
+| BMI-136 | IDG §7、§10 JNT；OPTC；统筹§20-1、§20-2 | 别名表；C21 | 一级 | JNT：别名表注明；先查`PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md`，已定义的JNT项映射到该文档章节，未定义的注明"TB定义"。OPTC-01/02：在C21登记，须对应C21规则或RTL实际行为，对不上的标"仅TB检查" | 已完成（别名表`fd348d2`，JNT按联合TB说明§11/§5.3；OPTC在C21已有登记） |
 
 ## 13. 编号治理：TB标签改名（只改格式串/字符串，BR§3.3、Q3）
 

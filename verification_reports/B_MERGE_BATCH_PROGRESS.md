@@ -9,8 +9,8 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段3、4、5已完成（条目13~15）。下一步是阶段6：终版回归在回归机上跑。终版提交号见条目15（`c64e9dc`作废：其锚点门禁在导出目录里会失败）。
-- **下一步**：① 回归机按`REGRESSION_RUN_REQUEST.md` §2，对条目14给出的提交跑终版回归（含锚点门禁的通过演示和负对照演示），用`regression_evidence.py compare`与`baseline_7a8eabf`比对；预期：$finish时刻全部相同，7个TB报FINISH_LINE_SHIFT，PASS差异只来自标签改名。② 阶段7报告`verification_reports/B_MERGE_BATCH_REPORT_20261009.md`。
+- **当前项**：全部阶段完成（条目16）。报告：`verification_reports/B_MERGE_BATCH_REPORT_20261009.md`。
+- **下一步**：等用户/统筹审阅报告，并对报告§9的待裁定项给出意见。
 - **未决问题**：无。“回归机Vivado须为2022.2”已确认（`ea60432`的MACHINE.txt为Vivado Simulator v2022.2）。
 
 ---
@@ -173,3 +173,11 @@
 - 在仓库外的干净导出（`871ff61`）中演示：门禁PASSED；单跑改名TB `tb_ppg_adc_dc_recovery`，先门禁通过、后TB PASS；注入一处坏锚点后，门禁FAILED、退出1、未开始仿真。证据在`anchor_gate_demo/`的export_*文件。
 - `regression_evidence.py`不依赖git；`manifest_digest.py`只在`--rev`时用git。没有改RTL、TB、合同，§12.4a不受影响。
 - **终版回归提交：本条目所在提交**（推送后的b-merge-batch HEAD）。它的RTL、TB、回归脚本、合同与`871ff61`相同，只多了证据与文档。
+
+### 条目16（2026-10-09）：阶段6核对与阶段7报告
+
+- 终版回归：回归机证据`b161d13`（`final_5d8ceba/`），对终版提交`5d8ceba`运行。系统20/20、PASS 1250行、芯片20/0、模块级28/28。compare退出0：SAME 42；PASSDIFF+FINISH_LINE_SHIFT 7；49个TB的$finish时刻与文件名全部相同。门禁的通过演示与负对照演示都已完成。
+- 本会话独立复核：49个TB全部PASS；compare结果与提交版一致；7个TB的PASS差异把新标签反向映射回旧标签后，与基线逐行相等。旁观会话另从原始日志重算，结论相同。
+- 终版全量去注释证明：HEAD上6个RTL去注释后IDENTICAL，7个TB去注释、去字符串后IDENTICAL（`final_strip_proof/`）。
+- 总表：BMI-061（`9c6c0dc`已做）、BMI-123（经BMI-171）、BMI-136的状态文字补正。终计：已完成116，不做或只登记8，二级登记2，排除11，待裁定0。
+- 阶段7报告已写，待裁定项见报告§9。
