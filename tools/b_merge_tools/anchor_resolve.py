@@ -224,6 +224,17 @@ def governing_heading(lines, n):
     return None, None
 
 
+def short_title(title, limit=30):
+    """Heading title for a duplicated section number, cut at a word boundary."""
+    title = title.strip()
+    if len(title) <= limit:
+        return title
+    cut = title[:limit]
+    if title[limit].isascii() and title[limit].isalnum() and ' ' in cut:
+        cut = cut[:cut.rfind(' ')]
+    return cut.rstrip(' ,;:-')
+
+
 def heading_index(lines):
     idx = defaultdict(list)
     for l in lines:
@@ -313,7 +324,7 @@ def main():
                         num, title = governing_heading(then, lo)
                         if num:
                             idx = heading_index(g.lines(a.base, cname) or [])
-                            label = '§%s' % num + (' ' + title[:30] if len(idx.get(num, [])) > 1 else '')
+                            label = '§%s' % num + (' ' + short_title(title) if len(idx.get(num, [])) > 1 else '')
                             res.update(status='resolved-contract-bare' if num in idx else 'section-gone',
                                        target=cname, new=label, sections=[(num, title)])
                             results.append(res)
@@ -515,7 +526,7 @@ def main():
                         st = 'section-gone'
                     label = '§%s' % num
                     if len(idx.get(num, [])) > 1:
-                        label += ' ' + title[:30]
+                        label += ' ' + short_title(title)
                     if it['kind'] != 'contract' and rowid and not rowid.startswith('---'):
                         label += ' %s行' % rowid
                     outs.append(label)

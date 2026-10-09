@@ -122,6 +122,30 @@ FAMILIES = [
     (3401, 3401, CDC, 'CDC桥源域寄存器（括注符号）'),
     (3561, 3561, SSW, 'SSW宏帧tick（括注符号）'),
 ]
+# Contract references written as `Cxx:N` that are section numbers, not line numbers
+# (the resolver read them as lines).  Only the two "repair record" tables use this
+# form (matrix rows R01-R08 and the stale-text ledger), recognisable by dotted
+# numbers such as `C23:18.5, 19` or by dependency sections (`C10:2`).  The inventory
+# matched only the integer part, so the replacement is `Cxx §N` and the rest of the
+# original text (".5, 19") stays, giving `C23 §18.5, 19`.
+_W = '写入人用冒号写节号（同格/同表为节号写法），解析器误作行号'
+SECTION_COLON = {}
+for _ln, _old, _new in [
+        (999, 'C23:18', 'C23 §18'), (1000, 'C17:3', 'C17 §3'),
+        (1001, 'C10:2', 'C10 §2'), (1001, 'C18:2-2', 'C18 §2–§2'), (1001, 'C23:2', 'C23 §2'), (1001, 'C25:2', 'C25 §2'),
+        (1002, 'C18:5', 'C18 §5'), (1002, 'C23:8', 'C23 §8'),
+        (1003, 'C01:6', 'C01 §6'), (1003, 'C10:6', 'C10 §6'),
+        (3215, 'C10:6', 'C10 §6'),
+        (3216, 'C10:7, 10', 'C10 §7、§10'), (3216, 'C13:3', 'C13 §4'), (3216, 'C18:5', 'C18 §5'),
+        (3217, 'C16:8-13', 'C16 §8–§13'), (3217, 'C17:10-12', 'C17 §10–§12'),
+        (3263, 'C17:11', 'C17 §11'),
+        (3265, 'C01:6', 'C01 §6'), (3265, 'C23:19', 'C23 §19'),
+        (3266, 'C18:5', 'C18 §5'), (3266, 'C23:8', 'C23 §8'),
+        (3267, 'C01:6', 'C01 §6'), (3267, 'C10:6', 'C10 §6'),
+        (3268, 'C10:2', 'C10 §2'), (3268, 'C18:2-2', 'C18 §2–§2'), (3268, 'C23:2', 'C23 §2'), (3268, 'C25:2', 'C25 §2'),
+        (3397, 'C10:11', 'C10 §11')]:
+    SECTION_COLON[(M, _ln, _old)] = ('text', _new, '', _W + ('；写入时C10第11行为版本日期，同表“matrix 9.”亦为节号写法' if _ln == 3397 else ''))
+SECTION_COLON[(M, 3216, 'C13:3')] = ('text', 'C13 §4', '', _W + '；C13自导入起从无§3.1（§3为Stage1校准字段），本行内容为generation标记交接，取§4.1 Generation and lifecycle pass-through（原文“.1”保留）')
 ID = re.compile(r'\b(?:[A-Z][A-Z0-9]*(?:-[A-Za-z0-9]+)+|P\d\d|N\d\d|K\d\d)\b')
 
 
@@ -153,11 +177,11 @@ def main():
     docs = {d: git(a.repo, 'show', '%s:contracts/%s' % (a.base, d)).split('\n') for d in (M, A)}
     rows, todo = [], 0
     for r in res:
-        if r['status'] not in ('unresolved', 'ambiguous', 'resolved-weak', 'symbol-gone', 'section-gone'):
-            continue
         key = (r['file'], r['line'], r['text'])
+        if r['status'] not in ('unresolved', 'ambiguous', 'resolved-weak', 'symbol-gone', 'section-gone') and key not in SECTION_COLON:
+            continue
         line = docs[r['file']][r['line'] - 1]
-        dec = OVERRIDES.get(key)
+        dec = OVERRIDES.get(key) or SECTION_COLON.get(key)
         if dec is None and r['file'] == M:
             for lo, hi, f, why in FAMILIES:
                 if lo <= r['line'] <= hi:

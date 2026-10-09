@@ -35,7 +35,7 @@ import sys
 from collections import Counter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from anchor_resolve import governing_heading, heading_index, nums_list  # noqa: E402
+from anchor_resolve import governing_heading, heading_index, nums_list, short_title  # noqa: E402
 
 MATRIX, ALIAS = 'PPG_CONTRACT_CLOSURE_MATRIX.md', 'PPG_ALIAS_MAPPING_TABLE.md'
 
@@ -81,7 +81,7 @@ def main():
                 outs.append('文件头')
                 continue
             ok = ok and num in idx
-            lab = '§%s' % num + (' ' + title[:30] if len(idx.get(num, [])) > 1 else '')
+            lab = '§%s' % num + (' ' + short_title(title) if len(idx.get(num, [])) > 1 else '')
             if row_id and lo <= len(then) and then[lo - 1].startswith('|'):
                 lab += ' %s行' % then[lo - 1].strip('|').split('|')[0].strip()[:40]
             num2, _ = governing_heading(then, hi)

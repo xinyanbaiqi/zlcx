@@ -248,7 +248,7 @@ glue顶层不得直接例化`ppg_control_top`内部的任何子模块（ACTIVE�
 
 ### 8.6 产品固定参数（V1.17新增，F-014/F-024）
 
-glue顶层例化的`ppg_control_top`参数为产品固定值，不得覆盖：`C_CONFIG_WIDTH=1024`；config/coef/DC-recovery epoch宽度8；code epoch宽度4；generation宽度8；frame/sample宽度16/16；supervisor看门狗5000/13（C01 §4.1 V1.18、C24 §1）。RTL不做elaboration期拒绝；仿真开始时按层次读取实际例化值核对，检查所在TB：`tb_ppg_chip_digital_top.v`（TB本地检查`PARAM-FIXED`、`PARAM-WDOG`）、`tb_ppg_control_top.v`（同名检查）、supervisor单元TB（`WDPARM`）。
+glue顶层例化的`ppg_control_top`参数为产品固定值，不得覆盖：`C_CONFIG_WIDTH=1024`；config/coef/DC-recovery epoch宽度8；code epoch宽度4；generation宽度8；frame/sample宽度16/16；supervisor看门狗5000/13（C01 §4.1 V1.10 final system boundary（V1.18）、C24 §1）。RTL不做elaboration期拒绝；仿真开始时按层次读取实际例化值核对，检查所在TB：`tb_ppg_chip_digital_top.v`（TB本地检查`PARAM-FIXED`、`PARAM-WDOG`）、`tb_ppg_control_top.v`（同名检查）、supervisor单元TB（`WDPARM`）。
 
 ## 9. 严格禁止
 

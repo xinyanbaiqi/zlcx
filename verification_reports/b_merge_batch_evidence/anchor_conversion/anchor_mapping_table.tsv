@@ -39,18 +39,18 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	997	7c5f7c1eb1ad	96	C01:552-563	contract	bb39a0f8
 PPG_CONTRACT_CLOSURE_MATRIX.md	997	7c5f7c1eb1ad	109	C08:861-863	contract	bb39a0f821	convert	C08 §13.3	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	997	7c5f7c1eb1ad	122	C09:590	contract	bb39a0f821	convert	C09 §7.8	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	998	07b2cd46249d	96	C10:528-546, 581-600, 1125-1138	contract	bb39a0f821	convert	C10 §6.7–§6.8、§6.9–§6.10、§14.5–§15	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	999	7003a551c905	100	C23:18	contract	b858bf0d0f	convert	C23 §1	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1000	29f4fb710d6f	88	C17:3	contract	b858bf0d0f	convert	C17 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	113	C10:2	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	120	C18:2-2	contract	b858bf0d0f	convert	C18 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	131	C23:2	contract	b858bf0d0f	convert	C23 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	138	C25:2	contract	b858bf0d0f	convert	C25 文件头	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	999	7003a551c905	100	C23:18	contract	b858bf0d0f	convert	C23 §18	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1000	29f4fb710d6f	88	C17:3	contract	b858bf0d0f	convert	C17 §3	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	113	C10:2	contract	b858bf0d0f	convert	C10 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	120	C18:2-2	contract	b858bf0d0f	convert	C18 §2–§2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	131	C23:2	contract	b858bf0d0f	convert	C23 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	a57007b90778	138	C25:2	contract	b858bf0d0f	convert	C25 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1002	8b77bb42e2a3	144	C01:63-73	contract	d18c695462	convert	C01 §1	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1002	8b77bb42e2a3	155	C18:5	contract	d18c695462	convert	C18 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1002	8b77bb42e2a3	164	C23:8	contract	d18c695462	convert	C23 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1003	486c9eb23a1c	138	C01:6	contract	b858bf0d0f	convert	C01 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1003	486c9eb23a1c	151	C10:6	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1004	e924a58bdd75	145	C01:397-401, 593-599	contract	d18c695462	convert	C01 §4.1 V1.10 final system boundary an、§6.2.1	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	8b77bb42e2a3	155	C18:5	contract	d18c695462	convert	C18 §5	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	8b77bb42e2a3	164	C23:8	contract	d18c695462	convert	C23 §8	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	486c9eb23a1c	138	C01:6	contract	b858bf0d0f	convert	C01 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	486c9eb23a1c	151	C10:6	contract	b858bf0d0f	convert	C10 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1004	e924a58bdd75	145	C01:397-401, 593-599	contract	d18c695462	convert	C01 §4.1 V1.10 final system boundary、§6.2.1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1004	e924a58bdd75	175	C24:40	contract	d18c695462	convert	C24 §1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1005	e4b080c819f3	163	C01:87-95	contract	bb39a0f821	convert	C01 §2.1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1005	e4b080c819f3	174	C02:24-27	contract	bb39a0f821	convert	C02 §1	auto	
@@ -436,7 +436,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1316	5e92b999c268	1368	`:745`	bare-no-context	b85
 PPG_CONTRACT_CLOSURE_MATRIX.md	1316	5e92b999c268	1602	ppg_control_top.v:305-306	rtl	b858bf0d0f	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1318	ae9eff1af47a	490	`:214`	bare-no-context	b858bf0d0f	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1318	ae9eff1af47a	512	`:215`	bare-no-context	b858bf0d0f	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1322	311812f90c36	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:418	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1322	311812f90c36	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:418	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1322	311812f90c36	91	`:418`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1322	311812f90c36	104	`:431`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1322	311812f90c36	150	ppg_400hz_frame_calibration_scheduler.v:82	rtl	bb39a0f821	convert	`ppg_400hz_frame_calibration_scheduler.v` `i_active_config_valid`	auto	
@@ -635,7 +635,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1336	b2b6bfa306b4	361	ppg_control_top.v:740	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1336	b2b6bfa306b4	387	ppg_active_v4_control_plane_integration.v:68	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1336	b2b6bfa306b4	474	ppg_control_top.v:1287	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1336	b2b6bfa306b4	501	ppg_adc_measurement_idac_integration.v:303	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:426	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:426	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	91	`:426`	contract	d18c695462	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	104	`:439`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	148	ppg_adc_measurement_idac_integration.v:245	rtl	d18c695462	convert	`ppg_adc_measurement_idac_integration.v` `i_initial_precision`	auto	
@@ -643,7 +643,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	371	ppg_control_top.v:1231	rtl	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	398	ppg_adc_measurement_idac_integration.v:245	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	507	ppg_control_top.v:770	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1337	3f049a63668b	533	ppg_active_v4_control_plane_integration.v:108	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1338	7a30a97c2d74	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:424	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1338	7a30a97c2d74	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:424	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1338	7a30a97c2d74	91	`:424`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1338	7a30a97c2d74	104	`:437`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1338	7a30a97c2d74	143	ppg_400hz_frame_calibration_scheduler.v:93	rtl	bb39a0f821	convert	`ppg_400hz_frame_calibration_scheduler.v` `i_input_source`	auto	
@@ -677,9 +677,9 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1340	d1877c1b79be	357	ppg_control_top.v:995	rtl	b
 PPG_CONTRACT_CLOSURE_MATRIX.md	1340	d1877c1b79be	383	ppg_sar9_sar15_safe_selection_wrapper.v:77	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1340	d1877c1b79be	478	ppg_control_top.v:947	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1340	d1877c1b79be	504	ppg_400hz_frame_calibration_scheduler.v:174	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:368	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:368	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	91	`:368`	contract	d18c695462	history-strike		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	104	`:381`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	104	`:381`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	163	ppg_system_fault_abort_supervisor.v:102	rtl	d18c695462	convert	`ppg_system_fault_abort_supervisor.v` `i_measurement_result_discard_event`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	405	ppg_control_top.v:1422	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1341	ecd0f9fc74d6	432	ppg_system_fault_abort_supervisor.v:102	rtl	d18c695462	history-dated		auto	
@@ -701,7 +701,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1343	f8513655b3fc	397	ppg_control_top.v:881	rtl	b
 PPG_CONTRACT_CLOSURE_MATRIX.md	1343	f8513655b3fc	423	ppg_400hz_frame_calibration_scheduler.v:96	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1343	f8513655b3fc	544	ppg_control_top.v:1329	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1343	f8513655b3fc	571	ppg_adc_measurement_idac_integration.v:351	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1344	a06e46da56ae	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:425	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1344	a06e46da56ae	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:425	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1344	a06e46da56ae	91	`:425`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1344	a06e46da56ae	104	`:438`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1344	a06e46da56ae	143	ppg_400hz_frame_calibration_scheduler.v:94	rtl	bb39a0f821	convert	`ppg_400hz_frame_calibration_scheduler.v` `i_run_profile`	auto	
@@ -789,7 +789,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1348	6045d66dadc9	899	ppg_control_top.v:1114	rtl	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1348	6045d66dadc9	926	ppg_adc_measurement_idac_integration.v:106	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1348	6045d66dadc9	1024	ppg_control_top.v:756	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1348	6045d66dadc9	1050	ppg_active_v4_control_plane_integration.v:90	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1349	d8722da2dc58	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:423	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1349	d8722da2dc58	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:423	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1349	d8722da2dc58	91	`:423`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1349	d8722da2dc58	104	`:436`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1349	d8722da2dc58	142	ppg_400hz_frame_calibration_scheduler.v:92	rtl	bb39a0f821	convert	`ppg_400hz_frame_calibration_scheduler.v` `i_run_profile`	auto	
@@ -916,7 +916,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1359	f5560ea2a9db	708	ppg_control_top.v:1006	rtl	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1359	f5560ea2a9db	735	ppg_sar9_sar15_safe_selection_wrapper.v:90	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1359	f5560ea2a9db	863	ppg_control_top.v:848	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1359	f5560ea2a9db	889	ppg_characterization_control_cdc.v:64	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1360	f6ce9749b04f	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:422	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1360	f6ce9749b04f	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:422	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1360	f6ce9749b04f	91	`:422`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1360	f6ce9749b04f	104	`:435`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1360	f6ce9749b04f	145	ppg_400hz_frame_calibration_scheduler.v:86	rtl	bb39a0f821	convert	`ppg_400hz_frame_calibration_scheduler.v` `i_allow_new_transaction`	auto	
@@ -1090,7 +1090,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1379	ec82f386130f	347	ppg_control_top.v:220	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1379	ec82f386130f	378	`:1526`	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1379	ec82f386130f	471	ppg_control_top.v:1288	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1379	ec82f386130f	498	ppg_adc_measurement_idac_integration.v:306	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:418	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:418	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	91	`:418`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	104	`:431`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	144	ppg_active_v4_control_plane_integration.v:79	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_active_valid`	auto	
@@ -1100,7 +1100,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	504	ppg_control_top.v:869	rtl	b
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	530	ppg_400hz_frame_calibration_scheduler.v:82	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	602	ppg_control_top.v:1107	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1380	cdb8ae33c738	629	ppg_adc_measurement_idac_integration.v:99	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1381	cd5524e161a8	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:420	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1381	cd5524e161a8	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:420	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1381	cd5524e161a8	91	`:420`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1381	cd5524e161a8	104	`:433`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1381	cd5524e161a8	153	ppg_active_v4_control_plane_integration.v:89	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_allow_new_transaction`	auto	
@@ -1268,7 +1268,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1398	3c188540ec54	472	ppg_control_top.v:740	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1398	3c188540ec54	498	ppg_active_v4_control_plane_integration.v:68	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1398	3c188540ec54	569	`:1525`	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1398	3c188540ec54	585	`:219`	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:426	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:426	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	91	`:426`	contract	d18c695462	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	104	`:439`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	149	ppg_active_v4_control_plane_integration.v:108	rtl	d18c695462	convert	`ppg_active_v4_control_plane_integration.v` `o_initial_precision`	auto	
@@ -1276,7 +1276,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	379	ppg_control_top.v:770	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	405	ppg_active_v4_control_plane_integration.v:108	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	513	ppg_control_top.v:1231	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1399	c5a2d7aad9f7	540	ppg_adc_measurement_idac_integration.v:245	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1400	e99a1fae5d38	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:424	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1400	e99a1fae5d38	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:424	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1400	e99a1fae5d38	91	`:424`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1400	e99a1fae5d38	104	`:437`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1400	e99a1fae5d38	144	ppg_active_v4_control_plane_integration.v:105	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_input_source`	auto	
@@ -1328,7 +1328,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1405	ed6b4f797910	392	ppg_control_top.v:1329	rtl	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1405	ed6b4f797910	419	ppg_adc_measurement_idac_integration.v:351	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1405	ed6b4f797910	546	ppg_control_top.v:881	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1405	ed6b4f797910	572	ppg_400hz_frame_calibration_scheduler.v:96	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1406	6ee1bdb542ea	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:425	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1406	6ee1bdb542ea	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:425	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1406	6ee1bdb542ea	91	`:425`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1406	6ee1bdb542ea	104	`:438`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1406	6ee1bdb542ea	144	ppg_active_v4_control_plane_integration.v:107	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_optical_mode`	auto	
@@ -1367,7 +1367,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1409	edfb19ddc466	343	ppg_control_top.v:194	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1409	edfb19ddc466	374	`:1500`	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1409	edfb19ddc466	461	ppg_control_top.v:1369	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1409	edfb19ddc466	488	ppg_adc_measurement_idac_integration.v:397	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1410	23e885c58790	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:419	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1410	23e885c58790	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:419	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1410	23e885c58790	91	`:419`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1410	23e885c58790	104	`:432`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1410	23e885c58790	142	ppg_active_v4_control_plane_integration.v:88	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_run_enable`	auto	
@@ -1395,7 +1395,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1411	36ec80b74696	593	ppg_control_top.v:994	rtl	b
 PPG_CONTRACT_CLOSURE_MATRIX.md	1411	36ec80b74696	619	ppg_sar9_sar15_safe_selection_wrapper.v:74	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1411	36ec80b74696	686	ppg_control_top.v:1114	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1411	36ec80b74696	713	ppg_adc_measurement_idac_integration.v:106	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1412	c7ce2a0abcd2	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:423	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1412	c7ce2a0abcd2	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:423	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1412	c7ce2a0abcd2	91	`:423`	contract	bb39a0f821	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1412	c7ce2a0abcd2	104	`:436`	contract	bb39a0f821	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1412	c7ce2a0abcd2	143	ppg_active_v4_control_plane_integration.v:104	rtl	bb39a0f821	convert	`ppg_active_v4_control_plane_integration.v` `o_run_profile`	auto	
@@ -1441,7 +1441,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1416	9b16360b04da	373	ppg_control_top.v:847	rtl	d
 PPG_CONTRACT_CLOSURE_MATRIX.md	1416	9b16360b04da	399	ppg_characterization_control_cdc.v:61	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1416	9b16360b04da	519	`:1536`	rtl	d18c695462	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1416	9b16360b04da	535	`:230`	rtl	d18c695462	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1417	2870d6cafd3c	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:421	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1417	2870d6cafd3c	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:421	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1417	2870d6cafd3c	91	`:421`	contract	d18c695462	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1417	2870d6cafd3c	104	`:434`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1417	2870d6cafd3c	147	ppg_control_top.v:200	rtl	d18c695462	convert	`ppg_control_top.v` `o_start_ack_event`	auto	
@@ -1478,7 +1478,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1418	a82d4376baea	1288	ppg_control_top.v:872	rtl	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1418	a82d4376baea	1314	ppg_400hz_frame_calibration_scheduler.v:85	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1418	a82d4376baea	1382	ppg_control_top.v:1110	rtl	bb39a0f821	history-dated		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1418	a82d4376baea	1409	ppg_adc_measurement_idac_integration.v:102	rtl	bb39a0f821	history-dated		auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	1419	0d8e5901b62f	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:422	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	1419	0d8e5901b62f	9	ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md:422	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1419	0d8e5901b62f	91	`:422`	contract	d18c695462	history-strike		auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1419	0d8e5901b62f	104	`:435`	contract	d18c695462	convert	PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md §5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	1419	0d8e5901b62f	146	ppg_control_top.v:201	rtl	d18c695462	convert	`ppg_control_top.v` `o_stop_ack_event`	auto	
@@ -6356,49 +6356,49 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	2552	30e785a2d1a4	237	ppg_coarse_detection_fir.v:
 PPG_CONTRACT_CLOSURE_MATRIX.md	2553	ea2b0a3b9cd2	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:474	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.2	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2553	ea2b0a3b9cd2	197	`:627`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `amb_recheck_busy_o`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2553	ea2b0a3b9cd2	217	ppg_coarse_detection_fir.v:74	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_recheck_busy`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2554	a0939d3acdf6	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2554	a0939d3acdf6	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2554	a0939d3acdf6	210	ppg_precision_window_integration.v:609	rtl	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_event`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2554	a0939d3acdf6	344	ppg_coarse_detection_fir.v:77	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_event`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2555	71d149fcb35f	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2555	71d149fcb35f	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2555	71d149fcb35f	154	`:610`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_reason`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2555	71d149fcb35f	174	ppg_coarse_detection_fir.v:78	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_reason`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2556	173ba142e774	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2556	173ba142e774	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2556	173ba142e774	162	`:611`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_identity_valid`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2556	173ba142e774	182	ppg_coarse_detection_fir.v:79	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_identity_valid`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2557	d26351f3a6f6	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2557	d26351f3a6f6	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2557	d26351f3a6f6	160	`:612`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_sample_valid`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2557	d26351f3a6f6	180	ppg_coarse_detection_fir.v:80	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_sample_valid`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2558	e9081bc79886	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2558	e9081bc79886	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2558	e9081bc79886	156	`:613`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_frame_id`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2558	e9081bc79886	176	ppg_coarse_detection_fir.v:81	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_frame_id`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2559	2c09e26fb01a	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2559	2c09e26fb01a	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2559	2c09e26fb01a	160	`:614`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_sample_index`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2559	2c09e26fb01a	180	ppg_coarse_detection_fir.v:82	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_sample_index`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2560	a307d855b7f0	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2560	a307d855b7f0	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2560	a307d855b7f0	156	`:615`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_color_ir`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2560	a307d855b7f0	176	ppg_coarse_detection_fir.v:83	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_color_ir`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2561	b70aa03e2b96	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2561	b70aa03e2b96	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2561	b70aa03e2b96	158	`:616`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_frame_type`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2561	b70aa03e2b96	178	ppg_coarse_detection_fir.v:84	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_frame_type`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2562	3a1ee2d3d629	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2562	3a1ee2d3d629	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2562	3a1ee2d3d629	157	`:617`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_precision`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2562	3a1ee2d3d629	177	ppg_coarse_detection_fir.v:85	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_precision`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2563	9c8af245dc8e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2563	9c8af245dc8e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2563	9c8af245dc8e	160	`:618`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_config_epoch`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2563	9c8af245dc8e	180	ppg_coarse_detection_fir.v:86	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_config_epoch`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2564	0964fdf6d5ce	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2564	0964fdf6d5ce	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2564	0964fdf6d5ce	158	`:619`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_coef_epoch`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2564	0964fdf6d5ce	178	ppg_coarse_detection_fir.v:87	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_coef_epoch`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2565	f5f4c3496519	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2565	f5f4c3496519	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2565	f5f4c3496519	165	`:620`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_dc_recovery_epoch`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2565	f5f4c3496519	185	ppg_coarse_detection_fir.v:88	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_dc_recovery_epoch`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2566	63030ea0c84e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2566	63030ea0c84e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2566	63030ea0c84e	162	`:621`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_amb_code_epoch`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2566	63030ea0c84e	182	ppg_coarse_detection_fir.v:89	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_amb_code_epoch`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2567	c47a4de4fd3e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2567	c47a4de4fd3e	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2567	c47a4de4fd3e	161	`:622`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_dc_code_epoch`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2567	c47a4de4fd3e	181	ppg_coarse_detection_fir.v:90	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_dc_code_epoch`	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	2568	b81c3be7e25d	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation 	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	2568	b81c3be7e25d	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:528	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.1 V2.2 lifecycle and generation	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2568	b81c3be7e25d	162	`:623`	bare-no-context	b858bf0d0f	convert	`ppg_precision_window_integration.v` `i_detection_discard_run_generation`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2568	b81c3be7e25d	182	ppg_coarse_detection_fir.v:91	rtl	b858bf0d0f	convert	`ppg_coarse_detection_fir.v` `i_detection_discard_run_generation`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	2569	3d60ce5b0dcb	9	ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md:474	contract	b858bf0d0f	convert	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md §11.2	auto	
@@ -8486,12 +8486,12 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3207	b3c078eeb287	2	C25:654-674	contract	b858bf0d
 PPG_CONTRACT_CLOSURE_MATRIX.md	3207	b3c078eeb287	212	C25:471-674	contract	b858bf0d0f	convert	C25 §9.3–§9.4.7	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3213	4046f071ec60	2	C08:817-966	contract	bb39a0f821	convert	C08 §12.3–§13.8	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3214	6922f547c23b	2	C10:422-583	contract	bb39a0f821	convert	C10 §6.5b–§6.10	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3215	fed074780d64	2	C10:6	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	2	C10:7, 10	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	13	C13:3	contract	b858bf0d0f	convert	C13 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	22	C18:5	contract	b858bf0d0f	convert	C18 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	2	C16:8-13	contract	b858bf0d0f	convert	C16 文件头–§0	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	12	C17:10-12	contract	b858bf0d0f	convert	C17 文件头–§0	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3215	fed074780d64	2	C10:6	contract	b858bf0d0f	convert	C10 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	2	C10:7, 10	contract	b858bf0d0f	convert	C10 §7、§10	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	13	C13:3	contract	b858bf0d0f	convert	C13 §4	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；C13自导入起从无§3.1（§3为Stage1校准字段），本行内容为generation标记交接，取§4.1 Generation and lifecycle pass-through（原文“.1”保留）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	21e28139ca5b	22	C18:5	contract	b858bf0d0f	convert	C18 §5	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	2	C16:8-13	contract	b858bf0d0f	convert	C16 §8–§13	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	12	C17:10-12	contract	b858bf0d0f	convert	C17 §10–§12	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	493	ppg_idac_code_controller.v:221-223	rtl	b858bf0d0f	convert	`ppg_idac_code_controller.v` `CTX_DCS_IR_PENDING_VALID_BIT`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	589	`:928,1001`	rtl	b858bf0d0f	convert	`ppg_idac_code_controller.v` `CTX_AMB_PENDING_VALID_BIT`	manual	写入时两行均为reg_context_next[CTX_AMB_PENDING_VALID_BIT]置位
 PPG_CONTRACT_CLOSURE_MATRIX.md	3217	2b4570b680d1	678	`:582,855-856`	rtl	b858bf0d0f	convert	`ppg_idac_code_controller.v` `CTX_AMB_PENDING_VALID_BIT`、`flag_amb_commit`	auto	
@@ -8615,24 +8615,24 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3247	5d534b44ebf5	765	ppg_control_top.v:1495,1497
 PPG_CONTRACT_CLOSURE_MATRIX.md	3262	930aa5fecad8	21	C01:53,78	contract	d18c695462	convert	C01 §1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3263	527124a735ed	47	C03:139-167	contract	bb39a0f821	convert	C03 §4–§5	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3263	527124a735ed	60	C10:632	contract	bb39a0f821	convert	C10 §6.10	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3263	527124a735ed	69	C17:11	contract	bb39a0f821	convert	C17 §0	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3263	527124a735ed	69	C17:11	contract	bb39a0f821	convert	C17 §11	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	3264	d95b8cfe9ad4	37	C18:366	contract	d18c695462	convert	C18 §5.10	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3265	fd47079179e8	45	C01:6	contract	b858bf0d0f	convert	C01 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3265	fd47079179e8	54	C23:19	contract	b858bf0d0f	convert	C23 §1	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	fd47079179e8	45	C01:6	contract	b858bf0d0f	convert	C01 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	fd47079179e8	54	C23:19	contract	b858bf0d0f	convert	C23 §19	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	3266	ea2c2febb419	69	C01:69-81	contract	d18c695462	convert	C01 §1	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3266	ea2c2febb419	80	C18:5	contract	d18c695462	convert	C18 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3266	ea2c2febb419	89	C23:8	contract	d18c695462	convert	C23 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3267	ceab761c35ee	35	C01:6	contract	b858bf0d0f	convert	C01 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3267	ceab761c35ee	48	C10:6	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	38	C10:2	contract	b858bf0d0f	convert	C10 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	45	C18:2-2	contract	b858bf0d0f	convert	C18 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	56	C23:2	contract	b858bf0d0f	convert	C23 文件头	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	63	C25:2	contract	b858bf0d0f	convert	C25 文件头	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	ea2c2febb419	80	C18:5	contract	d18c695462	convert	C18 §5	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	ea2c2febb419	89	C23:8	contract	d18c695462	convert	C23 §8	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	ceab761c35ee	35	C01:6	contract	b858bf0d0f	convert	C01 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	ceab761c35ee	48	C10:6	contract	b858bf0d0f	convert	C10 §6	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	38	C10:2	contract	b858bf0d0f	convert	C10 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	45	C18:2-2	contract	b858bf0d0f	convert	C18 §2–§2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	56	C23:2	contract	b858bf0d0f	convert	C23 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	6240363856ec	63	C25:2	contract	b858bf0d0f	convert	C25 §2	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	3271	e14e4bd57a61	29	C01:28-36	contract	bb39a0f821	convert	C01 文件头	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3271	e14e4bd57a61	40	C08:1253	contract	bb39a0f821	convert	C08 §20	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3271	e14e4bd57a61	50	C25:79	contract	bb39a0f821	convert	C25 文件头	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3289	ea3f000bee7d	2	C01:53	contract	d18c695462	convert	C01 §1	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3290	bb87fb6ae1f3	2	C01:423	contract	d18c695462	convert	C01 §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3290	bb87fb6ae1f3	2	C01:423	contract	d18c695462	convert	C01 §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3291	bf1302e11da3	2	C02:76	contract	b858bf0d0f	convert	C02 §2	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3292	ebfbfbd701b3	2	C03:73	contract	b858bf0d0f	convert	C03 §2.1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3293	fbd4e60be698	2	C04:4,455	contract	b858bf0d0f	convert	C04 文件头、§10.5	auto	
@@ -8706,7 +8706,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3396	1f2ad574d78f	410	`:201-202`	bare-no-context	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3396	1f2ad574d78f	451	`:198`	bare-no-context	b858bf0d0f	convert	`ppg_characterization_control_cdc.v` `reg_source_update_armed`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3396	1f2ad574d78f	520	ppg_characterization_control_cdc.v:196-206	rtl	b858bf0d0f	convert	`ppg_characterization_control_cdc.v` `i_source_clk`、`reg_source_update_armed`、`i_source_update_valid`	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3397	13aeac1d2917	145	C01:235-284	contract	d18c695462	convert	C01 §4.2–§4.3	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3397	13aeac1d2917	158	C10:11	contract	d18c695462	convert	C10 文件头	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3397	13aeac1d2917	158	C10:11	contract	d18c695462	convert	C10 §11	manual	写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；写入时C10第11行为版本日期，同表“matrix 9.”亦为节号写法
 PPG_CONTRACT_CLOSURE_MATRIX.md	3398	c03e0efbd957	140	C24:30-57, 75-109	contract	b858bf0d0f	convert	C24 §1–§2、§3–§4	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3400	71c0f7fac1bf	157	C01:741-779	contract	d18c695462	convert	C01 §6.6–§6.7	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3401	55cbe85181f7	324	ppg_config_cdc_bridge.v:163-179	rtl	b858bf0d0f	convert	`ppg_config_cdc_bridge.v` `flag_request_sync_meta`、`flag_source_request`、`flag_request_sync`	auto	
@@ -8804,7 +8804,7 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3668	117f53fcc76f	6	ppg_system_config_manager.v:4
 PPG_CONTRACT_CLOSURE_MATRIX.md	3773	69a2d837133c	61	C01:51	contract	bb39a0f821	convert	C01 §1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3773	69a2d837133c	71	C03:77-85	contract	bb39a0f821	convert	C03 §2.1–§3.1	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3773	69a2d837133c	84	C10:551	contract	bb39a0f821	convert	C10 §6.8	auto	
-PPG_CONTRACT_CLOSURE_MATRIX.md	3774	f4aa9efc32f3	99	C01:397-401	contract	bb39a0f821	convert	C01 §4.1 V1.10 final system boundary an	auto	
+PPG_CONTRACT_CLOSURE_MATRIX.md	3774	f4aa9efc32f3	99	C01:397-401	contract	bb39a0f821	convert	C01 §4.1 V1.10 final system boundary	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3774	f4aa9efc32f3	114	C10:518-583	contract	bb39a0f821	convert	C10 §6.7–§6.10	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3774	f4aa9efc32f3	129	C24:86-103	contract	bb39a0f821	convert	C24 §3–§4	auto	
 PPG_CONTRACT_CLOSURE_MATRIX.md	3832	f7f42b012d64	318	:2	bare-no-context	b858bf0d0f	history-dated		auto	

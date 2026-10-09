@@ -1,4 +1,14 @@
 doc	line	old	action	arg1	arg2	reason
+PPG_CONTRACT_CLOSURE_MATRIX.md	999	C23:18	text	C23 §18		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1000	C17:3	text	C17 §3		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C10:2	text	C10 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C18:2-2	text	C18 §2–§2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C23:2	text	C23 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C25:2	text	C25 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	C23:8	text	C23 §8		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1593	semantic_contract.md:297	csec	ppg_system_config_manager_semantic_contract.md		C02语义合同简写；行号取写入时该合同所在小节
 PPG_CONTRACT_CLOSURE_MATRIX.md	1593	`:88-100`	csec	ppg_system_config_manager_semantic_contract.md		续接左侧semantic_contract.md（C02），正式I/O表
 PPG_CONTRACT_CLOSURE_MATRIX.md	1640	semantic_contract.md:297	csec	ppg_system_config_manager_semantic_contract.md		C02语义合同简写
@@ -80,6 +90,12 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3167	`:1149`	sym	ppg_adc_measurement_idac_integra
 PPG_CONTRACT_CLOSURE_MATRIX.md	3182	`:1121,1174`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	AMI内部线/端口（括注符号）
 PPG_CONTRACT_CLOSURE_MATRIX.md	3188	`:1016`	sym	ppg_adc_measurement_idac_integration.v	result_sample_valid_o	AMI内部线/端口（括注符号）
 PPG_CONTRACT_CLOSURE_MATRIX.md	3189	ppg_idac_code_controller.v:2314	sym	ppg_adc_measurement_idac_integration.v	i_idac_code_safe_boundary	写入时C17不足2314行，该行号属AMI（C17例化端口连线）；符号i_idac_code_safe_boundary在AMI
+PPG_CONTRACT_CLOSURE_MATRIX.md	3215	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C10:7, 10	text	C10 §7、§10		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C13:3	text	C13 §4		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；C13自导入起从无§3.1（§3为Stage1校准字段），本行内容为generation标记交接，取§4.1 Generation and lifecycle pass-through（原文“.1”保留）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	C16:8-13	text	C16 §8–§13		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	C17:10-12	text	C17 §10–§12		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
 PPG_CONTRACT_CLOSURE_MATRIX.md	3217	`:928,1001`	sym	ppg_idac_code_controller.v	CTX_AMB_PENDING_VALID_BIT	写入时两行均为reg_context_next[CTX_AMB_PENDING_VALID_BIT]置位
 PPG_CONTRACT_CLOSURE_MATRIX.md	3228	`:1091,1276`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	flag_red_context_valid,flag_ir_context_valid	本行RED/IR波形上下文锁存，abort立即释放
 PPG_CONTRACT_CLOSURE_MATRIX.md	3228	`:1089,1274`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	flag_red_context_valid,flag_ir_context_valid	本行RED/IR波形上下文锁存，复位清零
@@ -93,6 +109,18 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	3242	`:48`	file	ppg_sar9_sar15_safe_selection_wra
 PPG_CONTRACT_CLOSURE_MATRIX.md	3246	`:1171-1172`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	本行AMI集成协议sticky，START ACK/诊断清除
 PPG_CONTRACT_CLOSURE_MATRIX.md	3246	`:1170`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	本行AMI集成协议sticky，复位清除
 PPG_CONTRACT_CLOSURE_MATRIX.md	3247	`:521-526,592-613`	sym	ppg_system_config_manager.v	dec_error_code	本行C02命令拒绝（dec_error_code）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3263	C17:11	text	C17 §11		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	C23:19	text	C23 §19		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	C23:8	text	C23 §8		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C10:2	text	C10 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C18:2-2	text	C18 §2–§2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C23:2	text	C23 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C25:2	text	C25 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3397	C10:11	text	C10 §11		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；写入时C10第11行为版本日期，同表“matrix 9.”亦为节号写法
 PPG_CONTRACT_CLOSURE_MATRIX.md	3401	`:66,70,124-143`	sym	ppg_config_cdc_bridge.v	flag_source_request	CDC桥源域寄存器（括注符号）
 PPG_CONTRACT_CLOSURE_MATRIX.md	3401	ppg_config_cdc_bridge.v:70-190	file	ppg_config_cdc_bridge.v		整段两域实现（70-190），文件级锚点
 PPG_CONTRACT_CLOSURE_MATRIX.md	3456	wrapper.v:480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	SSW简写；:480为assign o_analog_safe
