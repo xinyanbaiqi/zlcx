@@ -9,8 +9,8 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段1总表`verification_reports/B_MERGE_BATCH_ITEMS.md`（读三份交B清单与ID治理/F002_F008等材料）。
-- **下一步**：基线回归跑完后，按交接书§6.8提取逐TB排序PASS行与`$finish`行，与参考值（系统20/20、1250行、芯片20/0、模块级28/28）核对；对不上就停下报告。总表推送后停在检查点。
+- **当前项**：**阶段1检查点**——总表`verification_reports/B_MERGE_BATCH_ITEMS.md`已推送，等待统筹审核（或用户直接确认）。审核前不开始阶段2合同改写。
+- **下一步**：① 基线回归跑完后，按交接书§6.8提取逐TB排序PASS行与`$finish`行，与参考值（系统20/20、1250行、芯片20/0、模块级28/28）核对，对不上就停下报告；② 检查点等待期间可做阶段4检查脚本开发与阶段3扫描器提取（交接书§4允许）。
 - **未决问题**：无。
 
 ---
@@ -54,3 +54,9 @@
   - g4：peak_valley_return、periodic_recheck_recovery、robustness_corner_waveforms、startup_idac_calibration、adc_anomaly
 - 芯片：`rtl/ppg_chip_digital_top/run_xsim_regression.sh`；模块级：`tools/run_unit_tb_regression.sh -o <baseline>/unit_runs -g all`。
 - `VIVADO_BIN=/d/vivado/2019.2/bin`。终版回归须用相同分组与相同Vivado。
+
+### 条目3（2026-10-09）：阶段1总表
+
+- 读完三份交B清单（ABCD §12.8与§10(b)、OLR §8、F009 §9）、IDG/IDF、F28、F9R、SSW18 §5、LCN §5，合成总表`B_MERGE_BATCH_ITEMS.md`。
+- 条目编号用`BMI-nnn`（全仓grep确认未被占用）。一级95条，另有TB标签、工具、RTL注释、二级、排除项等；5个待裁定问题见总表§18。
+- 表中引用的RTL符号已在`7a8eabf`的非TB RTL中逐个grep确认存在。
