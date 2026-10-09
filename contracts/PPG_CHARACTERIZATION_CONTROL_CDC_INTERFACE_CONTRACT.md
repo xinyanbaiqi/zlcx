@@ -1,6 +1,7 @@
 # PPG表征控制CDC接口合同
 
 > Current normative version: V1.1. Substantive interface-freeze date: 2026-08-14; metadata baseline date: 2026-08-20. Status: `ACTIVE_NORMATIVE`; system closure is `NOT_CLOSED` until the current matrix audit records zero defects. RTL/TB evidence is `EVIDENCE_PENDING`.
+> V1.2修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-182，F-039，按基线`7a8eabf` `ppg_control_top.v`核对）：第11节“复位后必须重新完成至少一笔合法6-bit提交，才能允许新的START”与第10.1节“NORMAL和外部固定电流START不以`o_control_valid`为硬门槛”矛盾。RTL中`o_control_valid`（Top `ccc_control_valid_o`）只导出观测，不门控任何START；复位后`o_static_characterization_enable=0`，所以只有STATIC_BIAS START在事实上需要先完成一笔合法提交。第11节该句按此订正（原文保留于删除线中）。
 > V1.1 change record: replaces a non-normative bridge RTL dependency and stale downstream versions with active-contract authority. CDC protocol and payload behavior do not change.  
 > Historical display of the substantive interface-freeze date: 2026-08-14.
 > 目标RTL：`ppg_characterization_control_cdc.v`  
@@ -292,7 +293,7 @@ o_control_reject_event      = 0
 o_protocol_error_sticky     = 0
 ```
 
-复位断言必须取消所有在途CDC事务，复位释放不得产生伪提交或伪拒绝事件。复位后必须重新完成至少一笔合法6-bit提交，才能允许新的START。
+复位断言必须取消所有在途CDC事务，复位释放不得产生伪提交或伪拒绝事件。~~复位后必须重新完成至少一笔合法6-bit提交，才能允许新的START。~~ V1.2订正（F-039）：复位后必须重新完成至少一笔合法6-bit提交，才能允许新的STATIC_BIAS START（第10.1节）；NORMAL和外部固定电流START不以此为门槛，继续使用复位安全默认值。
 
 只复位单一时钟域而保持另一域继续运行不属于合法系统操作，因为会破坏toggle事务代际。TB必须覆盖共同断言、不同步释放，但不得把单域独立复位定义为正常运行功能。
 
