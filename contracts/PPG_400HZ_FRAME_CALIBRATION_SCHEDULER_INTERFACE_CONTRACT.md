@@ -1,6 +1,6 @@
 # PPG 400 Hz帧与校准事务调度器接口合同
 
-> V1.13修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-001~015，按基线`7a8eabf`调度器RTL V1.12改写，符号锚点格式为“文件 + 符号（§节）”）：① §4.2新增§4.2.1宏帧末拍衔接：F-009末拍直接起帧（`flag_frame_restart`、`flag_next_frame_inputs_eligible`）、F-010校准滚动受生命周期门控（`flag_calibration_rollover`）、起帧快照在末拍采样，以及FSC-03例外C；② §8.2新增§8.2.3启动搜索空闲边界（L-3，`flag_idle_idac_safe_boundary`）；③ §9.6、§10.4写明宏帧末不重挂在途owner（L-1）；④ §10.3写明截止当拍可提交、越过截止只收尾（L-4，`flag_candidate_expired`）；⑤ §10.4新增AMI超时作废释放（R3，`flag_owner_lost_match`），作废置失败的是当前宏帧（F-7）；⑥ §12.3写明“物理校准宏帧结束事实”的含义（F-9）；⑦ §13.3、§13.7端口表新增`i_idac_boundary_request`、`i_adc_transaction_lost_event`；⑧ §16.2写明调度器sticky与AMI历史诊断两套START规则；§16.3写明STOP不等帧结束；§16.5写明诊断清除门控与已知限制（重检期间owner截止sticky）；⑨ §18 FSC-03/17/19/38/46/49/50/54原行补充；§19证据状态声明订正。不改变任何时间点、端口位宽或既有编号含义。
+> V1.13修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-001~015，按基线`7a8eabf`调度器RTL V1.12改写，符号锚点格式为“文件 + 符号（§节）”）：① §4.2新增§4.2.1宏帧末拍衔接：F-009末拍直接起帧（`flag_frame_restart`、`flag_next_frame_inputs_eligible`）、F-010校准滚动受生命周期门控（`flag_calibration_rollover`）、起帧快照在末拍采样，以及FSC-03例外C；② §8.2新增§8.2.6启动搜索空闲边界（L-3，`flag_idle_idac_safe_boundary`）；③ §9.6、§10.4写明宏帧末不重挂在途owner（L-1）；④ §10.3写明截止当拍可提交、越过截止只收尾（L-4，`flag_candidate_expired`）；⑤ §10.4新增AMI超时作废释放（R3，`flag_owner_lost_match`），作废置失败的是当前宏帧（F-7）；⑥ §12.3写明“物理校准宏帧结束事实”的含义（F-9）；⑦ §13.3、§13.7端口表新增`i_idac_boundary_request`、`i_adc_transaction_lost_event`；⑧ §16.2写明调度器sticky与AMI历史诊断两套START规则；§16.3写明STOP不等帧结束；§16.5写明诊断清除门控与已知限制（重检期间owner截止sticky）；⑨ §18 FSC-03/17/19/38/46/49/50/54原行补充；§19证据状态声明订正。不改变任何时间点、端口位宽或既有编号含义。
 > V1.12修订日期：2026-10-04。合同补记批次3第二阶段：按任务C的结论关闭第10.3节的tick-248开放观察项。scheduler RTL V1.9（2026-10-01）把`o_cal_owner_deadline_event`改为`flag_cal_owner_deadline && !adc_owner_commit_event_o`（`ppg_400hz_frame_calibration_scheduler.v:569`），与内部截止分支`if(adc_owner_commit_event_o == 1'b0)`（`:738`）同一门控：截止事件只在截止点到达而owner仍未提交时发出，local tick 248当拍提交属于按时提交，不回报截止。本次相应修改：第10.3节两段（保留原文于删除线中）、第13.9节`o_cal_owner_deadline_event`行、FSC-50原行补充（不新开ID）。证据：`verification_reports/TASKC_TICK248_P2S_20261001.md`第1节（A/B仿真确认缺陷，tick 247与真正错过截止两组对照逐事件不变）、调度器单元TB V1.7新增检查（TB内编号FSC-60/61/62，本表未登记，见同步记录）、全套19-TB回归19/19 PASS。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_PHASE2_20261004.md`。
 > V1.11修订日期：2026-10-01。合同补记批次3：第10.4节的`owner_release`公式补上RTL中已有的RUN代际匹配项`i_run_generation == current_owner_run_generation`（`ppg_400hz_frame_calibration_scheduler.v:461`，`flag_completion_match`）。该规则本身早已由第15.1节规定（陈旧代际不得匹配、释放或重新绑定owner）；本次只让第10.4节公式与第15.1节及RTL一致，并加交叉引用，不新增规则。不涉及`o_cal_owner_deadline_event`的相关描述。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > V1.10修订日期：2026-09-30。合同补记批次2：V1.8修订记录已经描述、但正式端口表一直缺失的输入`i_owner_q3_window_closed`（`ppg_400hz_frame_calibration_scheduler.v:165`声明），本次补进第13.7节端口表；第10.4节补写它对完成成功判定的门控，即`flag_completion_success = flag_completion_match && i_adc_transaction_success && !B_INFLIGHT_DISCARD && i_owner_q3_window_closed`（`:462`）。调度器内部只有NORMAL事务用到这个判据，用来置位`B_RED_DONE`/`B_IR_DONE`（`:716-721`）。以下内容均不改变：owner释放条件`flag_completion_match`（`:461`，不含该门控）、owner截止、FSC-01至FSC-57的任何条款，以及`o_cal_owner_deadline_event`的相关描述。依据：本合同V1.8修订记录，以及该输出的生产者SSW合同C09 V1.9；真实证据为V1.8记录所引的`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-06。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`。
@@ -385,7 +385,7 @@ macro_tick = 4760
 
 ### 8.2 IDAC候选提交安全边界
 
-`o_idac_code_safe_boundary`是`ppg_idac_code_controller`把pending候选提交为committed码的唯一外部安全脉冲。它在NORMAL和快速校准期间采用不同的重复频率，但始终是2 MHz域单周期事件。V1.13补记：它是四类边界的合并——START启动边界（§8.3）、宏帧安全边界（§8.2.1）、快速校准边界（§8.2.2）和启动搜索空闲边界（§8.2.3）（`ppg_400hz_frame_calibration_scheduler.v` `idac_code_safe_boundary_o`）。
+`o_idac_code_safe_boundary`是`ppg_idac_code_controller`把pending候选提交为committed码的唯一外部安全脉冲。它在NORMAL和快速校准期间采用不同的重复频率，但始终是2 MHz域单周期事件。V1.13补记：它是四类边界的合并——START启动边界（§8.3）、宏帧安全边界（§8.2.1）、快速校准边界（§8.2.2）和启动搜索空闲边界（§8.2.6）（`ppg_400hz_frame_calibration_scheduler.v` `idac_code_safe_boundary_o`）。
 
 #### 8.2.1 NORMAL、单光和安全关闭RUN宏帧
 
@@ -483,7 +483,7 @@ o_idac_code_safe_boundary   = 1
 
 `o_idac_code_safe_boundary`只提供提交时刻，不判断pending是否合法，也不直接修改IDAC码。pending所有权、提交优先级、码值钳位、实际变化判断和epoch更新仍全部属于`ppg_idac_code_controller`。
 
-#### 8.2.3 启动搜索空闲边界（V1.13补记，L-3）
+#### 8.2.6 启动搜索空闲边界（V1.13补记，L-3）
 
 启动搜索期间，若校准结果在子帧7的local tick 385之后才被消费，IDAC的下一候选码没有校准边界可等；而调度器此时既没有校准请求、又没有NORMAL资格，不会起帧，也就不会产生宏帧边界。为避免这种互相等待的死锁，调度器在以下条件全部成立时补发一拍边界（`ppg_400hz_frame_calibration_scheduler.v` `flag_idle_idac_safe_boundary`）：
 
@@ -920,7 +920,7 @@ V1.13补记（F-9）：上式中的“物理校准宏帧结束事实”，指本
 | `i_dcs_ir_code_epoch` | 4 | IR DC码版本 |
 | `i_leddac_r_code` | 8 | 独立已提交RED LEDDAC码，供波形上下文快照 |
 | `i_leddac_ir_code` | 8 | 独立已提交IR LEDDAC码，供波形上下文快照 |
-| `i_idac_boundary_request` | 1 | V1.13补记。AMI三路IDAC候选（AMB、DC_R、DC_IR）任一路等待安全边界提交；Top由三路`pending_valid`相或得到。只用于启动搜索空闲边界（§8.2.3） |
+| `i_idac_boundary_request` | 1 | V1.13补记。AMI三路IDAC候选（AMB、DC_R、DC_IR）任一路等待安全边界提交；Top由三路`pending_valid`相或得到。只用于启动搜索空闲边界（§8.2.6） |
 
 ### 13.4 AMI校准请求输入
 
@@ -1206,7 +1206,7 @@ V1.13补记（清除门控，`ppg_400hz_frame_calibration_scheduler.v`诊断清�
 | FSC-16 | 3200 Hz容量 | 子周期严格625 tick，每宏帧8个容量 |
 | FSC-17 | 校准请求资格与缓冲 | 仅RUN期NORMAL_PPG+PHOTODIODE+AMB/DCS+SAR9请求握手一次；非法请求无波形/owner/序号副作用；合法请求错过接管或owner截止后保留到下一子帧重试。V1.13原行补充：校准宏帧末仍为在途owner的请求不跨帧重挂（§10.4，L-1） |
 | FSC-18 | IDAC子周期提交 | 候选提交边界不触发精度或重检提交 |
-| FSC-19 | 阶段超过8笔 | 同阶段延长到下一宏帧，不伪造完成。V1.13原行补充：启动搜索期结果晚于子帧7 local tick 385时，由§8.2.3空闲边界提交下一候选，不得死锁 |
+| FSC-19 | 阶段超过8笔 | 同阶段延长到下一宏帧，不伪造完成。V1.13原行补充：启动搜索期结果晚于子帧7 local tick 385时，由§8.2.6空闲边界提交下一候选，不得死锁 |
 | FSC-20 | 三阶段顺序 | AMB成功后固定DC_R、DC_IR，禁止跳序 |
 | FSC-21 | AMB码未改变 | 仍执行两色DC重验证 |
 | FSC-22 | 双光完成事件 | 两色完成后仅一拍，RED完成时不得提前输出 |
@@ -1225,7 +1225,7 @@ V1.13补记（清除门控，`ppg_400hz_frame_calibration_scheduler.v`诊断清�
 | FSC-35 | 长时间回归 | RED/IR各自400 Hz，完成事件和计数无漂移 |
 | FSC-36 | AMI fire一致性 | 返回fire必须逐拍等于valid与ready；错配置协议sticky且不得伪造启动 |
 | FSC-37 | owner资格反压 | SSW owner未ready时不对AMI形成可握手valid，不消费序号；截止后置owner sticky |
-| FSC-38 | NORMAL IDAC边界 | 每个400 Hz宏帧只与宏帧安全边界同拍一次，双光不增加次数。V1.13原行补充：§8.2.3空闲边界只在无宏帧时出现，不计入宏帧内次数 |
+| FSC-38 | NORMAL IDAC边界 | 每个400 Hz宏帧只与宏帧安全边界同拍一次，双光不增加次数。V1.13原行补充：§8.2.6空闲边界只在无宏帧时出现，不计入宏帧内次数 |
 | FSC-39 | 快速校准IDAC边界 | 一个完整校准宏帧在指定8个tick各输出一拍 |
 | FSC-40 | 边界同拍 | macro tick 4760两路边界可同拍，但IDAC只提交一次且epoch最多递增一次 |
 | FSC-41 | 生命周期门控 | 非RUN、STOP、abort和阻断故障期间不产生新的IDAC提交脉冲 |
