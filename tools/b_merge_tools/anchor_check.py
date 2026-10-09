@@ -39,6 +39,7 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+WALK_SKIP_DIRS = {'.git', '__pycache__', '.claude'}  # directory-walk index: no git metadata, bytecode or skill tree
 C_MAP_SECTION = '## 2. Active Contract Sources and Source Classification'
 
 FILE_TOKEN = re.compile(r'`([A-Za-z0-9_./-]+\.(?:v|vh))`')
@@ -170,6 +171,9 @@ def main():
     ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
     ap.add_argument('--json')
     ap.add_argument('--no-ast', action='store_true')
+    ap.add_argument('--index', choices=('auto', 'git', 'walk'), default='auto',
+                    help='file index: git ls-files, a directory walk, or auto (git, else walk when '
+                         'the tree is not a git checkout, e.g. a `git archive` export)')
     ap.add_argument('files', nargs='*')
     args = ap.parse_args()
     repo = args.repo
@@ -179,8 +183,21 @@ def main():
     allow_path = os.path.join(HERE, 'anchor_history_allowlist.json')
     allow = set(json.load(open(allow_path, encoding='utf-8'))['line_sha1']) if os.path.exists(allow_path) else set()
 
-    # repository file index by base name
-    tracked = subprocess.run(['git', '-C', repo, 'ls-files'], capture_output=True).stdout.decode('utf-8').split('\n')
+    # repository file index by base name: `git ls-files` in a checkout; in a
+    # `git archive` export (the regression machine runs there, brief section 6.8)
+    # there is no git metadata, so walk the tree instead -- an export holds exactly
+    # the tracked files.
+    tracked, index_source = [], args.index
+    if args.index in ('auto', 'git'):
+        res = subprocess.run(['git', '-C', repo, 'ls-files'], capture_output=True)
+        tracked = [t for t in res.stdout.decode('utf-8').split('\n') if t] if res.returncode == 0 else []
+        index_source = 'git'
+    if args.index == 'walk' or (args.index == 'auto' and not tracked):
+        tracked, index_source = [], 'walk'
+        for dirpath, dirnames, filenames in os.walk(repo):
+            dirnames[:] = sorted(d for d in dirnames if d not in WALK_SKIP_DIRS)
+            for fn in sorted(filenames):
+                tracked.append(os.path.relpath(os.path.join(dirpath, fn), repo).replace(os.sep, '/'))
     by_base = {}
     for rel in tracked:
         if rel:
@@ -296,7 +313,8 @@ def main():
         json.dump(result, open(args.json, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     for e in errors:
         print('ERROR %(file)s:%(line)d %(kind)s %(text)s' % e)
-    print('stats %s; external refs %d; errors %d' % (json.dumps(stats), len(external), len(errors)))
+    print('stats %s; external refs %d; errors %d; file index %s (%d files)'
+          % (json.dumps(stats), len(external), len(errors), index_source, len(tracked)))
     return 1 if errors else 0
 
 
