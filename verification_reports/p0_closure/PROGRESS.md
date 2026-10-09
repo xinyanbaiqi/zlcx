@@ -8,6 +8,16 @@
 | 调度器（C08） | `V1_CONFLICT_SCH.md` | 已完成：(c) 8项（1中、6低、1无可观测），待定1项 |
 | SSW（C09） | `V1_CONFLICT_SSW.md` | 已完成：(c) 3项（1高、2低），待定1项；START×abort并入V1-SCH-C3 |
 | AMI（C10、C24） | `V1_CONFLICT_AMI.md`（单文件，73个always块） | 已完成：(c) 5项（1中、4低），待定0项；附注N1 |
+| **第二批（续）** | | |
+| manager（C02） | `V1_CONFLICT_MGR.md` | 已完成：(c) 3项（1中、2低） |
+| supervisor（C24） | `V1_CONFLICT_SUP.md` | 当前 |
+| IDAC控制器（C17） | `V1_CONFLICT_IDAC.md` | 待做 |
+| 精度窗口控制器（C23） | `V1_CONFLICT_PWC.md` | 待做 |
+| 重检调度器（C16） | `V1_CONFLICT_RCK.md` | 待做 |
+| PWI（C18） | `V1_CONFLICT_PWI.md` | 待做 |
+| SPI寄存器文件（芯片顶层合同） | `V1_CONFLICT_SPI.md` | 待做 |
+| 冗余校正器（C10/OLR §2.2） | `V1_CONFLICT_RDC.md` | 待做 |
+| control_top（C01） | `V1_CONFLICT_TOP.md` | 待做 |
 
 ## 跨模块遗留：已全部在AMI文件§3结案
 - V1-SCH-C3（START×abort）：调度器与AMI按START处理，SSW按abort处理，三模块不一致，维持低级别。
