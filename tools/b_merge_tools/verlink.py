@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Inventory / apply dependency-version linkage for contracts bumped in the B merge batch.
-usage: verlink.py <contracts_dir> [--apply]
+usage: verlink.py <contracts_dir> [--apply] [--round2]
+--round2 uses BUMPS_R2 (second linkage of the batch) instead of BUMPS.
 Only lines that are dependency-table rows are touched:
   * markdown table rows ("| ...") or numbered list rows ("N. Cxx — ...")
   * containing the target file name AND the old version as a separate token
@@ -26,17 +27,23 @@ BUMPS = {
     'PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md': ('V1.5', 'V1.6'),
     'PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md': ('V1.7', 'V1.8'),
 }
+# second linkage of the same batch (coordinator ruling of 2026-10-09: C24 SUP-08 rewrite)
+BUMPS_R2 = {
+    'PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md': ('V1.6', 'V1.7'),
+}
 
 def main():
     root = sys.argv[1]
     apply = '--apply' in sys.argv
+    round2 = '--round2' in sys.argv
+    bumps = BUMPS_R2 if round2 else BUMPS
     total = 0
     for path in sorted(glob.glob(os.path.join(root, '*.md'))):
         fname = os.path.basename(path)
         lines = open(path, encoding='utf-8').read().split('\n')
         changed = False
         for n, line in enumerate(lines):
-            if fname == 'PPG_CONTRACT_CLOSURE_MATRIX.md' and (n + 1) in (956, 1912, 2151, 2152, 2153):
+            if not round2 and fname == 'PPG_CONTRACT_CLOSURE_MATRIX.md' and (n + 1) in (956, 1912, 2151, 2152, 2153):
                 continue
             st = line.lstrip()
             if st.startswith('>'):
@@ -44,7 +51,7 @@ def main():
             is_row = st.startswith('|') or re.match(r'^\d+\.\s+C\d\d\s', st)
             if not is_row:
                 continue
-            for target, (old, new) in BUMPS.items():
+            for target, (old, new) in bumps.items():
                 if target == fname:
                     continue
                 # left boundary on file name to avoid tb_/prefix confusion

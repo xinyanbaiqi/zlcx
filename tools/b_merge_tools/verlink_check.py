@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Independent check of the version-linkage edit.
-Usage: python verlink_check.py <repo> [OLD_REV NEW_REV [ALLOW_FILE:LINE ...]]
+Usage: python verlink_check.py <repo> [OLD_REV NEW_REV [ALLOW_FILE:LINE ...]] [--round2]
+--round2 checks against BUMPS_R2 of verlink.py (second linkage) instead of BUMPS.
 ALLOW_FILE:LINE names a line that is expected to differ in other text (for example
 the change-record line written in the same commit); it is reported as ALLOWED.
 Without revisions it compares HEAD with the working tree; the B merge batch
@@ -10,7 +11,10 @@ Every differing line must differ only in version tokens; each changed token must
 the first version token after a file-name occurrence whose bump is (old -> new)."""
 import re, subprocess, sys, os, glob
 src = open(os.path.join(os.path.dirname(__file__), 'verlink.py'), encoding='utf-8').read()
-BUMPS = eval(src.split('BUMPS = ', 1)[1].split('\n}\n', 1)[0] + '\n}')
+ROUND2 = '--round2' in sys.argv
+if ROUND2:
+    sys.argv.remove('--round2')
+BUMPS = eval(src.split('BUMPS_R2 = ' if ROUND2 else 'BUMPS = ', 1)[1].split('\n}\n', 1)[0] + '\n}')
 VTOK = re.compile(r'(?<![A-Za-z0-9.])V\d+(?:\.\d+)*(?![0-9.])')
 root = sys.argv[1]
 OLD = sys.argv[2] if len(sys.argv) > 3 else 'HEAD'

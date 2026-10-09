@@ -29,7 +29,7 @@
 4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.11；
 5. C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` V4.10；
 6. C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` V1.2；
-7. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.6。
+7. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7。
 
 若字段所有权与本文冲突，以ACTIVE V4控制连接映射合同为准；若Wrapper端口和握手语义与本文冲突，以本文为准。
 

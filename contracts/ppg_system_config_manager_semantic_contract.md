@@ -25,7 +25,7 @@
 1. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
 2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.7；
 3. C05 — `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` V5字段解释；
-4. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.6（仅定义经Top/wrapper转发的`i_system_fault_blocking`语义，不授予manager直接supervisor端口）。
+4. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7（仅定义经Top/wrapper转发的`i_system_fault_blocking`语义，不授予manager直接supervisor端口）。
 
 **一致性引用（只用于对齐，不覆盖配置管理器责任）**
 

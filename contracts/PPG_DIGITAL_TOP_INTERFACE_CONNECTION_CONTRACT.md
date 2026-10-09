@@ -101,7 +101,7 @@ baselines and drafts are not dependencies and cannot override this table.
 | C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | internal detection-chain lifecycle forwarding |
 | C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` | V1.11 | waveform/physical owner and SSW fault records |
 | C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` | V1.2 | dedicated characterization CDC boundary |
-| C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.6 | mandatory dedicated registered supervisor boundary |
+| C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` | V1.7 | mandatory dedicated registered supervisor boundary |
 
 ### 2.2 Historical dependency list
 
