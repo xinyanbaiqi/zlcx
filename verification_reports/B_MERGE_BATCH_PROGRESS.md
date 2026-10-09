@@ -101,3 +101,9 @@
   - `tools/b_merge_tools/manifest_digest.py`（F-045）：在`7a8eabf`与`3f4673d`上都复现§12.4a的26行清单，3个相符（C04、C05、C21）、23个不符；负对照（导出副本中C04改1字节）恰好多报C04一处；`--write`往返后26/26相符。分支HEAD当前0相符（预期，正式重算在阶段5最后）。
   - `tools/cross_reference_tools/reconcile_acceptance_ids.py`：只改路径（`contracts/`、`tools/cross_reference_tools/`）并排除`.claude/`，ID正则与分类逻辑不变。试跑341个ID：A 267、B 22、B2 35、D 1、E_STALE 16（基线与HEAD相同）。B2中22个是TB文件头修订记录切出的伪ID（已知误报清单），13个是RTL中真实存在、别名表缺行的`@satisfies`标签（AMI-24、FSC-03/17/31/32/38/46/49/50、MGR-11、SSW-22/34/38），在阶段3补别名表行。已提交的`reconciliation_report.*`未刷新。
   - 证据：`verification_reports/b_merge_batch_evidence/stage5_dryrun/`。
+
+### 条目10（2026-10-09 12:31）：中断点（会话额度用尽）
+
+- 基线回归仍在跑（6路后台）。已完成：芯片20/0；系统TB 6份全部0 FAIL；模块级18份PASS、**1份FAIL：xelab返回139（疑似并行负载下xelab崩溃/内存不足，xsim未运行）**，须单独重跑该TB确认是环境问题再下结论；对不上参考值前不做阶段3改TB标签。
+- 阶段4准备：`tools/b_merge_tools/anchor_inventory.py`、`anchor_resolve.py`已入库（`35aec60`），只试跑。基线7a8eabf上9702个旧锚点：约9000个自动解析（含by-name与TB标签），约390个需人工（RTL unresolved 153、裸`:N`歧义176+未解析22、weak 25、symbol-gone 4、合同6）；4103个的写入时点为2026-09-28导入提交。尚未定：带日期叙述中锚点的转换口径。
+- 下一步：① 确认xelab 139的TB并单独重跑；② 基线核对通过后执行阶段3（`scratchpad/tb_rename.py`需先移入`tools/b_merge_tools/`）、别名表映射（含13个真实缺行标签）；③ 阶段4改写。
