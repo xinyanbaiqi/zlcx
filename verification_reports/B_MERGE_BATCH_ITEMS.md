@@ -157,7 +157,7 @@
 | BMI-102 | IDG §4、§8、§10；BR Q6 | PRC-05/08 | 登记 | PASS行是无条件`$display`引用其他TB证据；改为INFO会改变PASS行数，按BR Q6只登记、交收尾计划 | 不做（改PASS行数，BR Q6） |
 | BMI-103 | IDG §6.5、§10 | LFA-11 / TB `LFA-11a` | 一级（合同侧）＋TB标签 | 合同LFA-11前半句无断言如实写；TB子标签LFA-11a改本地名（属§9.5.1规则5/P03）。"informational分支不再打印PASS"会改PASS行数，只登记 | 已完成（标签AUTOABT-QUIET，阶段3提交）；PASS行只登记 |
 | BMI-104 | IDG §8 E类、§10 | RAW↔RGC | 一级 | 在别名表加RAW-01~11 ↔ RGC-01~15对照行（数据来自TB原文） | 已完成（`fd348d2`） |
-| BMI-105 | BR§5（C25：FSC/SUP/RRC编号治理） | RRC等 | 一级 | C25中涉及FSC/SUP/RRC的编号引用，随BMI-140/141核对；RRC族IDG判A，预计只需核对不改 | 待做 |
+| BMI-105 | BR§5（C25：FSC/SUP/RRC编号治理） | RRC等 | 一级 | C25中涉及FSC/SUP/RRC的编号引用，随BMI-140/141核对；RRC族IDG判A，预计只需核对不改 | 已完成（`c15e648`：C25无需改；C24 V1.6证据指针补新标签名） |
 
 ## 10. 芯片顶层合同（`PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md`）与C01
 
@@ -179,7 +179,7 @@
 |---|---|---|---|---|---|
 | BMI-120 | BR§3.4；F28 §3 | §1.1 身份组展开 | 一级 | 另立`TXN_KEY`（6字段；正式结果组另加`sample_valid`），与完整`TXN_ID`分开；检测丢弃组与owner/完成组仍用`TXN_ID`。命名前按BR§3.3先查§13与全仓 | 已完成（矩阵V4.5） |
 | BMI-121 | IDF R2；IDG §6.2 | P05行（约:927） | 一级 | 去掉"SUP06A"作为看门狗证据 | 已完成（矩阵V4.5） |
-| BMI-122 | ABCD §10(b) F-003；BR§3.2、Q1 | 全表证据/锚点列 | 一级 | 并入符号锚点一次性转换（BMI-150~153） | 待做 |
+| BMI-122 | ABCD §10(b) F-003；BR§3.2、Q1 | 全表证据/锚点列 | 一级 | 并入符号锚点一次性转换（BMI-150~153） | 已完成（并入BMI-151，`1fab116`） |
 | BMI-123 | ABCD §10(b) F-045；BR§3.2 | §12.4a 26-file Baseline Manifest | 工具 | 摘要改脚本生成（BMI-171），阶段5执行 | 待做 |
 | BMI-124 | BR§3.11；IDG §9 | §13.1/§13.2/§13.3 | 一级 | §13.3规则正文抄自BR§3.11；§13.2补记核对脚本盲区（29族不在ID正则内、TB修订记录伪ID）；§13.1快照数字随刷新更新 | 已完成（矩阵V4.5（§13.2/§13.3；§13.1刷新在阶段5）） |
 | BMI-125 | 各合同升版 | §12.4 版本登记表 | 一级 | 本批次升版的合同同步登记新版本与符号锚点（取代"C08:57-C08:65"式行号区间） | 已完成（版本联动提交8b2b259（行号区间锚点在阶段4转换）） |
@@ -191,7 +191,7 @@
 |---|---|---|---|---|---|
 | BMI-130 | IDF R1 | P05行（约:466） | 一级 | 去掉SUP06A作为5000周期看门狗证据 | 已完成（`fd348d2`） |
 | BMI-131 | ABCD §10(b) F-050 | SID-11行（约:148） | 一级 | 仍标SKIP、结构不可达；基线日志有`PASS SID-11`，按现状订正 | 已完成（`fd348d2`） |
-| BMI-132 | ABCD §4 F-003 | 约第58行出处`MATRIX:872` | 一级 | 失效出处，并入锚点转换（BMI-151） | 对照表已含（`anchor_conversion/`），随BMI-151写入 |
+| BMI-132 | ABCD §4 F-003 | 约第58行出处`MATRIX:872` | 一级 | 失效出处，并入锚点转换（BMI-151） | 已完成（`1fab116`，改为矩阵§9.2） |
 | BMI-133 | F009 §9.4-5；BR§3.3 | 新增对照行 | 一级 | TB FSC-14 ↔ 合同FSC-03；TB FSC-32 ↔ 合同FSC-30（实参N不改，BR Q3）；其余调度器TB检查→合同条目对照（数据取IDG §5.2 FSC列，阶段3重扫后复核） | 已完成（阶段3提交，草稿行已写入别名表） |
 | BMI-134 | ABCD §12.8；OLR §8.2；F009 §9.3 | 新增对照行 | 一级 | 三轮新增TB本地标签的映射：MGR-11、CAL-ROLLOVER-*、HIST-*、DISC-HELD、DET-QUAL、LEAF-HOLD、ABT-DONE、CANCEL-COMMIT、RETURN-HOLD、WDPARM、PARAM-*、DIAG-MAP38、CMD-STOP-PRIO；LOST-*、L1-*、L4-*、L3-*、BIND-Q3、S1-*、LSTK-*、K-*、WIN-*、BUSY-*、WDRAW-LOST、LOST-EXCL、F020-WDRAW、SUM-06/07、S1-ABANDON、LOST-SPI-*、SYS-*（37项）；FRAME-*、RESTART-*-SCAN、L6-START、SYS-RESTART-SCAN-*。无合同ID的如实填"无映射" | 已完成（`fd348d2`）；依赖TB改名的行在草稿中（`affd3e3`） |
 | BMI-135 | IDG §10；统筹§20-4 | IDC2/CIS/AV4/CF4（整族无TB编号） | 一级 | 本批做**族级登记**（"整族无TB编号、证据分散于…"）；逐条对照**不进**POST_TAPEOUT清单，改列"流片前验证收尾计划"（BMI-910） | 已完成族级登记（`fd348d2`）；逐条对照见BMI-910 |
@@ -206,28 +206,28 @@
 | BMI-142 | IDF §1.1、§4 | AMI单元TB `AMI-13` | TB标签 | 改TB本地名（实测反压保持） | 已完成（阶段3提交，FORK-HOLD） |
 | BMI-143 | IDG §6.3、§10；BR Q3 | `tb_ppg_adc_dc_recovery.v` `drive_and_check`第3~7号 | TB标签 | test_id参与生成激励，不动；若FAIL标签由test_id拼出则只改格式串前缀，做不到就只在别名表登记；横幅"DCR-01..DCR-22"改为实际覆盖 | 已完成（阶段3提交，FAIL格式串前缀DCRT-；test_id未动） |
 | BMI-144 | IDF §1.4、§4 | SSW TB的SSW-18场景 | TB标签 | 改本地名（实测校准owner截止，属SSW-37/38） | 已完成（阶段3提交，CAL-ODL） |
-| BMI-145 | IDG §4、IDF §3.5 | MGR/PR/RTR/CAL/CCC/OVL/AV4C区间横幅 | TB标签 | 视重扫结论，只对"区间含无同义检查条目"的横幅改为实际覆盖；FSC/CCC/ADCN补零不一致随改名处理 | 待做 |
+| BMI-145 | IDG §4、IDF §3.5 | MGR/PR/RTR/CAL/CCC/OVL/AV4C区间横幅 | TB标签 | 视重扫结论，只对"区间含无同义检查条目"的横幅改为实际覆盖；FSC/CCC/ADCN补零不一致随改名处理 | 已完成（`c15e648`：只有MGR需改；PR/RTR/CAL/CCC/OVL/AV4C不改，理由见提交说明与`tb_rename_bmi145.py`） |
 | BMI-146 | BR Q3；IDF §3.5 | `tools/run_unit_tb_regression.sh` | 工具 | 同步依赖横幅文字的判据正则；回归证明判定数与`$finish`不变 | 已完成（阶段3提交，4条横幅正则）；判定数与`$finish`不变待终版回归证明 |
-| BMI-147 | BR§6.3 | 扫描器重跑 | 工具 | 从IDG附录A提取扫描器与`rescan_diff.py`；先对`2a90a69`生成基线`tb_sites.json`，再对`7a8eabf`扫描；逐条复读报出项（含当时31处"B?"） | 待做 |
+| BMI-147 | BR§6.3 | 扫描器重跑 | 工具 | 从IDG附录A提取扫描器与`rescan_diff.py`；先对`2a90a69`生成基线`tb_sites.json`，再对`7a8eabf`扫描；逐条复读报出项（含当时31处"B?"） | 已完成（`9e932d6`；37处复读，只有FSC-14属新同号不同义） |
 
 ## 14. 符号锚点、RTL注释与`@satisfies`
 
 | 编号 | 来源 | 目标 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-150 | BR§3.2 | `tools/`锚点检查脚本 | 工具 | 检查文件存在、名字/`@satisfies` ID按词边界存在（端口/信号尽量用skill formatter AST）、合同节号存在（重名按"节号+标题"）；`[[project-ppg-...]]`记忆引用单列"仓库外引用"豁免；先做负对照（人为改错几处，恰好报出） | 已完成（`anchor_check.py`；负对照`70fb907`，TB标签锚点`fd348d2`） |
-| BMI-151 | BR§3.2、Q1；§6.5 | 矩阵、别名表一次性转换 | 一级 | 已写明符号的以原文为准到基线按名定位；裸行号用`git log -L`/blame追到写入时版本取符号；追不出来标"失效锚点（无法追溯）"；G-FP-01台账的删除线/带日期条目保留；`Cxx:NNN`互引改节号；覆盖§6.5列举的各种写法与陷阱；旧→新对照表入报告附录 | 旧→新对照表已完成（9702条，`anchor_conversion/`）；待阶段3后写入 |
-| BMI-152 | BR§3.2 | 转换复核 | 工具 | 改前快照；最后读磁盘新旧文件独立复核，引用逐条配对后文字相等；复核脚本同样先做负对照 | 待做 |
-| BMI-153 | BR§3.2 | 门禁接入 | 工具 | 检查脚本放进回归入口开头或作为独立一步，失败则整轮报错；真实回归中演示一次通过、一次负对照失败 | 待做 |
+| BMI-150 | BR§3.2 | `tools/`锚点检查脚本 | 工具 | 检查文件存在、名字/`@satisfies` ID按词边界存在（端口/信号尽量用skill formatter AST）、合同节号存在（重名按"节号+标题"）；`[[project-ppg-...]]`记忆引用单列"仓库外引用"豁免；先做负对照（人为改错几处，恰好报出） | 已完成（`anchor_check.py`；负对照`70fb907`、`fd348d2`、`1fab116`） |
+| BMI-151 | BR§3.2、Q1；§6.5 | 矩阵、别名表一次性转换 | 一级 | 已写明符号的以原文为准到基线按名定位；裸行号用`git log -L`/blame追到写入时版本取符号；追不出来标"失效锚点（无法追溯）"；G-FP-01台账的删除线/带日期条目保留；`Cxx:NNN`互引改节号；覆盖§6.5列举的各种写法与陷阱；旧→新对照表入报告附录 | 已完成（`1fab116`：7811处写入，快照`3b6df78`） |
+| BMI-152 | BR§3.2 | 转换复核 | 工具 | 改前快照；最后读磁盘新旧文件独立复核，引用逐条配对后文字相等；复核脚本同样先做负对照 | 已完成（`anchor_verify.py`独立复核0不符，负对照4/4） |
+| BMI-153 | BR§3.2 | 门禁接入 | 工具 | 检查脚本放进回归入口开头或作为独立一步，失败则整轮报错；真实回归中演示一次通过、一次负对照失败 | 已完成（`de814e7`：回归入口开头门禁，本机演示通过与负对照失败；回归机演示见REGRESSION_RUN_REQUEST §2） |
 | BMI-155 | BR§3.9-3；F9R §5修法3 | `ppg_amb_recheck_scheduler.v`基线第148、215、269行注释 | RTL注释 | 按F-9语义改写（只改注释）；去注释后与基线逐字节相同；对该文件跑deliverable gate不新增问题 | 已完成（`f8986b3`；gate 0/0，去注释逐字节相同） |
-| BMI-160 | OLR §8.3"本轮移除" | RTL/TB相应符号 | RTL注释 | 合同改写后，在已有实质性中文注释末尾补`@satisfies`：AMI-40（`flag_adc_transaction_inflight`作废释放、冗余校正器`flag_capture_drop`）、AMI-39与LFA-04（`adc_transaction_lost_event_o`）、AMI-24（`owner_lost_sticky_o`、L-5三个lane清零）、SUP-08（`flag_owner_lost_fault_hold`）、FSC-54（`flag_owner_lost_match`）、FSC-19（`flag_idle_idac_safe_boundary`）、SSW-42、SSW-18（S1 sticky）、P09、SID-05（只在含义一致处）。每处先核对合同新文字与实现完全一致；每个RTL文件做去注释比对与gate | 待做 |
+| BMI-160 | OLR §8.3"本轮移除" | RTL/TB相应符号 | RTL注释 | 合同改写后，在已有实质性中文注释末尾补`@satisfies`：AMI-40（`flag_adc_transaction_inflight`作废释放、冗余校正器`flag_capture_drop`）、AMI-39与LFA-04（`adc_transaction_lost_event_o`）、AMI-24（`owner_lost_sticky_o`、L-5三个lane清零）、SUP-08（`flag_owner_lost_fault_hold`）、FSC-54（`flag_owner_lost_match`）、FSC-19（`flag_idle_idac_safe_boundary`）、SSW-42、SSW-18（S1 sticky）、P09、SID-05（只在含义一致处）。每处先核对合同新文字与实现完全一致；每个RTL文件做去注释比对与gate | 已完成（`467a8ad`：16处；SUP-08、SID-05按含义不符不补） |
 | BMI-161 | BR§3.10 | TB侧`@satisfies` | — | 已有TB历史PASS文本不追溯改写；TB注释中的`@satisfies`不在本批新增（TB只允许改PASS标签） | 不做（BR§0.3） |
 
 ## 15. 摘要、§13与交付工具
 
 | 编号 | 来源 | 目标 | 分级 | 处理要点 | 状态 |
 |---|---|---|---|---|---|
-| BMI-170 | BR§3.11；IDG §9 | `tools/cross_reference_tools/reconcile_acceptance_ids.py` | 工具 | 路径改到本仓库`contracts/`；ID正则只覆盖22族，作辅助；约22个TB修订记录伪ID作已知误报排除并在报告列出；刷新§13 | 待做（阶段5） |
-| BMI-171 | ABCD F-045；BR§3.2 | `tools/`摘要生成脚本 | 工具 | 按当时文件生成§12.4a的26个SHA256，放在全部合同改动之后 | 待做（阶段5） |
+| BMI-170 | BR§3.11；IDG §9 | `tools/cross_reference_tools/reconcile_acceptance_ids.py` | 工具 | 路径改到本仓库`contracts/`；ID正则只覆盖22族，作辅助；约22个TB修订记录伪ID作已知误报排除并在报告列出；刷新§13 | 已完成（`f5f6e3f`） |
+| BMI-171 | ABCD F-045；BR§3.2 | `tools/`摘要生成脚本 | 工具 | 按当时文件生成§12.4a的26个SHA256，放在全部合同改动之后 | 已完成（`5d294db`，HEAD上26/26相符） |
 
 ## 16. 其它合同的一级订正（ID治理与ABCD §10(b)）
 

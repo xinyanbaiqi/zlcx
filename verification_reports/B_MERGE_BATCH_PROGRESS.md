@@ -9,8 +9,8 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：阶段0基线已在回归机上核对通过（条目13）；阶段3（TB标签改名与别名表对照）已完成；下一步做阶段4锚点写入。
-- **下一步**：① 阶段4：按`anchor_conversion/anchor_mapping_table.tsv`把锚点一次性写入矩阵和别名表；生成`anchor_history_allowlist.json`；补`@satisfies`（BMI-160）；HEAD上anchor_check 0报错；独立复核；接入门禁。② 阶段5：正式重算§12.4a，刷新§13。③ 把最终提交号交给回归机，按`REGRESSION_RUN_REQUEST.md` §2跑终版回归，用`regression_evidence.py compare`与`baseline_7a8eabf`比对。④ 阶段7报告。
+- **当前项**：阶段3、4、5已完成（条目13、14）。下一步是阶段6：终版回归在回归机上跑。
+- **下一步**：① 回归机按`REGRESSION_RUN_REQUEST.md` §2，对条目14给出的提交跑终版回归（含锚点门禁的通过演示和负对照演示），用`regression_evidence.py compare`与`baseline_7a8eabf`比对；预期：$finish时刻全部相同，7个TB报FINISH_LINE_SHIFT，PASS差异只来自标签改名。② 阶段7报告`verification_reports/B_MERGE_BATCH_REPORT_20261009.md`。
 - **未决问题**：无。“回归机Vivado须为2022.2”已确认（`ea60432`的MACHINE.txt为Vivado Simulator v2022.2）。
 
 ---
@@ -146,3 +146,22 @@
   - 证据在`b_merge_batch_evidence/tb_rename_proof/`。
 - **别名表（BMI-133）**：`alias_draft_renamed.md`两小节已写入别名表，包括57行FSC↔SCHT对照，以及SUP/DCR/SSW-18/AMI-13/LFA-11各行。旧行LFA-11、P03、P09、N06原先引用改名前的标签，已在原文旁注明新名。anchor_check在写入前后都是747个报错（746个旧行号锚点加第118行`§9.2.2`），新写入的行没有报错。
 - 未做：BMI-145（区间横幅），视重扫结论再定；BMI-105（C25中FSC/SUP/RRC编号引用的核对），放在阶段4一并处理。
+
+### 条目14（2026-10-09）：阶段4、5完成
+
+- **锚点写入（BMI-151/152）**：
+  - 先修正对照表，再提交写入前快照`3b6df78`。修正内容：两张修复记录表里28处“Cxx:N”实为用冒号写的节号（如C23:18.5、C10:2），改按节号转换；C13从无§3.1，按本行内容取§4.1。另外，重名小节的标题改在词边界截断；三处纯文字节号引用补了标题。
+  - `1fab116`：用`anchor_apply.py`写入7811处（2385行），0处无法定位；343行历史锚点按行SHA-1写入`anchor_history_allowlist.json`。
+  - 独立复核：`anchor_verify.py`用另一种定位方法，结果0不符；负对照注入4处，恰好报出4处。HEAD上anchor_check 0报错。
+- **@satisfies（BMI-160，`467a8ad`）**：5个RTL文件共16处，补在已有的实质性中文注释末尾。每处先核对阶段2改写后的合同行。SUP-08、SID-05与合同含义不符，不补。
+  - 证明：strip_compare 5/5 IDENTICAL；skill comment-only 5/5成功（含负对照）；gate基线29/1到29/1，逐条无新增（这5个文件在基线上本来就不是strict 0/0）。
+  - 别名表：5行改为标签锚点，新增AMI-39、AMI-40、SSW-42三行。
+- **门禁（BMI-153，`de814e7`）**：`run_anchor_gate.sh`接在`run_unit_tb_regression.sh`开头，门禁失败则整轮退出1、不跑仿真。本机演示了一次通过和一次负对照失败；5个改名单元TB在本机2019.2上PASS，新横幅正则全部命中。回归机上的正式演示步骤写在REGRESSION_RUN_REQUEST §2。
+- **BMI-145/105（`c15e648`）**：
+  - BMI-145：7个区间横幅中只有MGR的区间含无检查条目（MGR-21），横幅改为“MGR-01 through MGR-24 except MGR-21 (joint-TB item)”，判据正则同步。证明同阶段3（strings-only IDENTICAL、gate无新增、本机PASS）。
+  - BMI-105：C25无需改；C24 V1.6证据指针补记SUP子标签的新名字。
+- **regression_evidence.py（`dc7175a`，旁观会话转达）**：compare改为按($finish时刻,文件名)比对，只有行号不同时标FINISH_LINE_SHIFT、不计问题；负对照3种情况结果符合预期。会后移行号的是7个TB（6个改名TB加上MGR TB）。
+- **阶段5**：
+  - `f5f6e3f`：reconcile脚本不再统计非ID形状的标签文字（22处，在报告中列出），对其余族的标签按通用ID形状查别名表行。结果：326个ID，A 287、B 22、B2 0、C 0、D 1、E 16。别名表FSC-38行改为TB侧标签锚点；矩阵§13.1重写。
+  - `5d294db`：§12.4a的26行SHA-256由脚本重算，HEAD上26/26相符。C02行摘要变化导致其历史锚点行的SHA-1变化，已用`--allowlist-only`重算allowlist。
+  - 证据在`stage5_final/`。
