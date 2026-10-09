@@ -1,0 +1,10 @@
+errors 4 -> 4 ; strict_warnings 0 -> 0
+by_rule baseline: {'VG000': 1, 'COMMENT_COMMENT_PLACEMENT': 3}
+by_rule branch  : {'VG000': 1, 'COMMENT_COMMENT_PLACEMENT': 3}
+per file (file, rule, severity): baseline -> branch
+  mgrb file.discovery error: 1 -> 0
+  mgrn file.discovery error: 0 -> 1
+  tb_ppg_system_config_manager.v comment_gate error: 3 -> 3
+issue (file, rule, severity, message without line numbers) differences: 2
+   0 -> 1 mgrn file.discovery No Verilog source files were found.
+   1 -> 0 mgrb file.discovery No Verilog source files were found.

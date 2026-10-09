@@ -1,0 +1,6 @@
+## BMI-145 MGR banner: --strings vs 7a8eabf (must be IDENTICAL)
+IDENTICAL rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v (raw changed)
+exit=0
+## without --strings (expected DIFFERENT)
+DIFFERENT rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v (raw changed)
+exit=1
