@@ -35,6 +35,558 @@
    "anchor": "`ppg_adc_measurement_idac_integration.v` `REASON_RECHECK`, `REASON_RECHECK`",
    "written": "(port ledger) o_calibration_request_reason",
    "reason": "矩阵2242行（当前；基线2224行）：端口台账行o_calibration_request_reason，Producer格写“AMI-internal arbiter (`:N`, `REASON_RECHECK` (amb-recheck) or `REASON_STARTUP` (idac))”，锚点指向仲裁处的REASON_RECHECK，格内后随的写明名在转换后并入锚点名列表；锚点正确，不取本行端口（第三轮补正人工判定，anchor_check端口台账检查1c）"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "3fda1a169105404606f0b964903901196ab1dc15",
+   "anchor": "`ppg_system_config_manager.v` `active_valid_o`、`active_config_o`",
+   "written": "(rule 1d) ppg_system_config_manager.v active_valid_o/active_config_o: not stated by the row (unstated: active_valid_o/active_config_o)",
+   "reason": "基线28行（ppg_system_config_manager.v:556,519-520）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：写入时版本d18c695 519-520行active_config_o复位、556行active_valid_o复位，即格内“清空ACTIVE”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "320c21b955632d470d94272d5785a1efc6819f27",
+   "anchor": "`ppg_control_top.v` `o_startup_idac_safe_boundary`",
+   "written": "(rule 1d) ppg_control_top.v o_startup_idac_safe_boundary: not stated by the row (unstated: o_startup_idac_safe_boundary)",
+   "reason": "基线38行（ppg_control_top.v:945）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：TOP-11标签在调度器`o_startup_idac_safe_boundary`上，格内“该端口对Top边界留空未连”指该端口；Top中`.o_startup_idac_safe_boundary()`留空（原解析o_macro_frame_start_event，行号漂移）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "111491e372441dc04aef27ee99cb848548d5a250",
+   "anchor": "`ppg_system_config_manager.v` `flag_snapshot_valid`",
+   "written": "(rule 1d) ppg_system_config_manager.v flag_snapshot_valid: not stated by the row (unstated: flag_snapshot_valid)",
+   "reason": "基线45行（ppg_system_config_manager.v:394-448）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“静态检查侧”：394-448为快照静态检查块（各flag_snapshot_*，止于汇总flag_snapshot_valid），取汇总；原解析只取了末行的flag_snapshot_dc_qualification_valid；此前：静态检查侧，写入时:448为该汇总资格",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "79428b316e3a148845ac52bf94953312c3c92a6b",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_adc_transaction_inflight`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_adc_transaction_inflight: not stated by the row (unstated: flag_adc_transaction_inflight)",
+   "reason": "基线108行（ppg_adc_measurement_idac_integration.v:1605）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：“AMI物理ADC owner代表行”即AMI的owner在途寄存器flag_adc_transaction_inflight（导入版本1605行为其上方注释，1619-1621行为该寄存器）；本行“AMI物理ADC owner代表行”；写入时:1605为owner交接注释，AMI无G-FP-01本号标签",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "4dc35cdc9621bb6d9ebcbc0cf88528d6714492bf",
+   "anchor": "`ppg_idac_code_controller.v` `flag_test_saturation_inject_fire`、`flag_amb_sample_qualified`",
+   "written": "(rule 1d) ppg_idac_code_controller.v flag_test_saturation_inject_fire/flag_amb_sample_qualified: not stated by the row (unstated: flag_test_saturation_inject_fire/flag_amb_sample_qualified)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_test_saturation_inject_fire：wire flag_test_saturation_inject_fire;  // ready/valid唯一接纳一次饱和注入；flag_amb_sample_qualified：wire flag_amb_sample_qualified;         // AMB事务版本、快照和类别全部匹配",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "a569037267de880ea11ea960ebecf1bfe4b85ef8",
+   "anchor": "`ppg_system_config_manager.v` `flag_snapshot_char_current_optical_valid`",
+   "written": "(rule 1d) ppg_system_config_manager.v flag_snapshot_char_current_optical_valid: not stated by the row (unstated: flag_snapshot_char_current_optical_valid)",
+   "reason": "基线241行（ppg_system_config_manager.v:369-371）：格内“OFF拒绝锚点(…:369-371,新)”：导入版本369-371行为flag_snapshot_char_current_optical_valid（禁止optical_mode=2'b11全关闭）；原解析flag_snapshot_char_idac_valid为364行",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "4ff7c280e35767b6159fcfec86cfb388a1b91e2b",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `DISCARD_REASON_STOP`、`DISCARD_REASON_ABORT`、`DISCARD_REASON_SYSTEM_FAULT`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v DISCARD_REASON_STOP/DISCARD_REASON_ABORT/DISCARD_REASON_SYSTEM_FAULT: not stated by the row (unstated: DISCARD_REASON_STOP/DISCARD_REASON_ABORT/DISCARD_REASON_SY",
+   "reason": "基线297行（ppg_adc_measurement_idac_integration.v:416-418）：例化端口连接扩查：格内“discard广播(`DISCARD_STOP`/`DISCARD_ABORT`/`DISCARD_SYSTEM_FAULT`,常量取自`…:416-418`)”：所指为AMI的三个discard原因常量DISCARD_REASON_*；原解析i_run_generation/o_local_empty落在fork/overlap例化的端口连接上，与本行无关",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "33bf7c344298e99cdd0f90a3c9595fbe88e1f934",
+   "anchor": "`ppg_control_top.v` `supervisor_system_stop_request_event_o`、`flag_owner_abort_event`、`flag_stop_request_event`",
+   "written": "(rule 1d) ppg_control_top.v supervisor_system_stop_request_event_o/flag_owner_abort_event/flag_stop_request_event: not stated by the row (unstated: supervisor_system_stop_request_event_o/flag_owner_abort_event/",
+   "reason": "基线464行（ppg_control_top.v:350-357,368-375）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本350行supervisor_system_stop_request_event_o、345-347行abort合并寄存器、368-375行flag_stop_request_event合并，即格内“Top合并(静态wiring)”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "3e5cc1204100d03d78986116d64b058c040a119f",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_red_has_owner`、`flag_ir_has_owner`、`@satisfies: SSW-34`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v flag_red_has_owner/flag_ir_has_owner: not stated by the row (unstated: flag_ir_has_owner)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_red_has_owner：wire flag_red_has_owner;                    // 组合条件条件红光存在结果所有权红光专属可见光路高位编码端低位编码端；flag_ir_has_owner：wire flag_ir_has_owner;                     // 组合条件条件红外存在结果所有权红外专属红外光路高位编码端低位编码端",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "ecf9a18ad17fb86f46142e7744bc73f1157ce25f",
+   "anchor": "`ppg_dynamic_baseline_cross_detector.v` `dec_shared_product`",
+   "written": "(rule 1d) ppg_dynamic_baseline_cross_detector.v dec_shared_product: not stated by the row (unstated: dec_shared_product)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：dec_shared_product：wire signed [49:0]dec_shared_product;       // 唯一33乘17周期更新乘法器完整结果",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "52f8fc6cab7d628bd0939cd1846990e5fb04dc21",
+   "anchor": "`ppg_dynamic_baseline_cross_detector.v` `dec_shared_operand_a`、`dec_shared_operand_b`",
+   "written": "(rule 1d) ppg_dynamic_baseline_cross_detector.v dec_shared_operand_a/dec_shared_operand_b: not stated by the row (unstated: dec_shared_operand_a/dec_shared_operand_b)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：dec_shared_operand_a：wire signed [32:0]dec_shared_operand_a;     // 状态选择后的共享33-bit signed左操作数；dec_shared_operand_b：wire signed [16:0]dec_shared_operand_b;     // 比例补零形成的共享17-bit signed右操作数",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "aacbe927cd7a9243b745202bd60ebcfdb0d9ca44",
+   "anchor": "`tb_ppg_jnt_baseline_prefix.vh` `jnt_check_case`",
+   "written": "(rule 1d) tb_ppg_jnt_baseline_prefix.vh jnt_check_case: not stated by the row (unstated: jnt_check_case)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：jnt_check_case：task jnt_check_case;",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "fbd449413f8b13568bb3cc192d636c602e81511e",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `flag_calibration_rollover`、`@satisfies: FSC-31, FSC-32`",
+   "written": "(rule 1d) ppg_400hz_frame_calibration_scheduler.v flag_calibration_rollover: not stated by the row (unstated: flag_calibration_rollover)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_calibration_rollover：wire flag_calibration_rollover;             // 校准宏帧末拍存在下一笔请求时，标记直接滚入下一625-tick子帧而不产生边界空拍",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "8129845eca239be674dda36f6be6aa8bcc4c9ee0",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `measurement_result_discard_sample_index_o`、`@satisfies: OIB-06`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v measurement_result_discard_sample_index_o: not stated by the row (unstated: measurement_result_discard_sample_index_o)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：measurement_result_discard_sample_index_o：reg [C_SAMPLE_INDEX_WIDTH - 1:0]measurement_result_discard_sample_index_o = {C_SAMPLE_INDEX_WIDTH{1'b0}}; // TXN_ID分量之一，全局序号寄存镜像",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "f74480df9606c65e5f507aafa57f466ed8b3cb6e",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_detection_branch_sample_valid`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_detection_branch_sample_valid: not stated by the row (unstated: flag_detection_branch_sample_valid)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_detection_branch_sample_valid：reg flag_detection_branch_sample_valid = 1'b0; // 检测分支自有的独立样本资格，正式分支先消费时不受影响",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "a9e1e9dd9c432c6d801cc43053d47b66d142cc4c",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_test_identity_hold`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_test_identity_hold: not stated by the row (unstated: flag_test_identity_hold)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_test_identity_hold：reg flag_test_identity_hold = 1'b0;         // 测试错配后保留真实DONE和owner，等待受控恢复",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "dc411fc3f59c1085f03005f93c65c679479a2f1a",
+   "anchor": "`ppg_precision_window_controller.v` `flag_enter_commit`、`flag_return_commit`、`@satisfies: PWC-27`",
+   "written": "(rule 1d) ppg_precision_window_controller.v flag_enter_commit/flag_return_commit: not stated by the row (unstated: flag_enter_commit/flag_return_commit)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_enter_commit：wire flag_enter_commit;                     // 等待进入状态满足安全提交条件；flag_return_commit：wire flag_return_commit;                    // 等待返回状态满足安全提交条件",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "b4df71030aedff6679ccc2b8b5bbb0ac5ad79baa",
+   "anchor": "`ppg_spi_register_file.v` `flag_load_read_byte`",
+   "written": "(rule 1d) ppg_spi_register_file.v flag_load_read_byte: not stated by the row (unstated: flag_load_read_byte)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_load_read_byte：wire flag_load_read_byte;               // 本拍需要为下一字节重新加载读方向移位寄存器",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "426e323fb19966017aec52f3b6c91727d446966b",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `flag_owner_lost_match`",
+   "written": "(rule 1d) ppg_400hz_frame_calibration_scheduler.v flag_owner_lost_match: not stated by the row (unstated: flag_owner_lost_match)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_lost_match：wire flag_owner_lost_match;                 // AMI作废事件与在途owner序号及代际一致",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "75c233c958e1ce750202ecefd85846bfeef56c01",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `flag_idle_idac_safe_boundary`",
+   "written": "(rule 1d) ppg_400hz_frame_calibration_scheduler.v flag_idle_idac_safe_boundary: not stated by the row (unstated: flag_idle_idac_safe_boundary)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_idle_idac_safe_boundary：wire flag_idle_idac_safe_boundary;          // 启动搜索中调度器空闲且本拍不开帧时为IDAC待提交候选补发的单拍边界 @satisfies: FSC-19",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "b8a0306484204dad097e5e06fdb6e7b2f90d6f50",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_owner_release`、`flag_done_mismatch`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v flag_owner_release/flag_done_mismatch: not stated by the row (unstated: flag_owner_release/flag_done_mismatch)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_release：wire flag_owner_release;                    // 组合条件条件结果所有权释放低位编码端；flag_done_mismatch：wire flag_done_mismatch;                    // 组合条件条件完成失配高位编码端低位编码端",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "34eca0e4896c0a27e83f26e3e5da85c5741f5e4d",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_cal_has_owner`、`reg_owner_cal_subframe`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v flag_cal_has_owner/reg_owner_cal_subframe: not stated by the row (unstated: flag_cal_has_owner/reg_owner_cal_subframe)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_cal_has_owner：wire flag_cal_has_owner;                    // 组合条件条件校准存在结果所有权高位编码端低位编码端；reg_owner_cal_subframe：reg [2:0]reg_owner_cal_subframe = 3'd0;     // 校准owner提交时所在的3200 Hz子帧序号，与帧号一起把owner绑定到本子帧上下文",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "0c6b130a32bba869b558a6e21209f9292acaabe1",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `calibration_timeout_sticky_o`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v calibration_timeout_sticky_o: not stated by the row (unstated: calibration_timeout_sticky_o)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：calibration_timeout_sticky_o：reg calibration_timeout_sticky_o = 1'b0;    // 时序寄存校准超时保持输出低位编码端",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "9583350a14b9c7db0bcee76b9cc2a2e146a0f7a7",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_owner_lost_fire`、`adc_transaction_lost_event_o`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_owner_lost_fire/adc_transaction_lost_event_o: not stated by the row (unstated: flag_owner_lost_fire/adc_transaction_lost_event_o)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_lost_fire：wire flag_owner_lost_fire;                  // 本拍作废在途owner：年龄满T-lost、物理空闲、捕获与待发布完成均空、无同拍正式discard；adc_transaction_lost_event_o：reg adc_transaction_lost_event_o = 1'b0;    // 超时作废通知寄存，与完成通知分属两条独立事件线",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "27afc5eead9a16b0d5fee066e79044ba7f39cd63",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_owner_lost_fire`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_owner_lost_fire: not stated by the row (unstated: flag_owner_lost_fire)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_lost_fire：wire flag_owner_lost_fire;                  // 本拍作废在途owner：年龄满T-lost、物理空闲、捕获与待发布完成均空、无同拍正式discard",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "9213b43ed77228bfd93c70c0ad3620e35a73968f",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_owner_lost_limit_reached`、`flag_owner_lost_fault_hold`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_owner_lost_limit_reached/flag_owner_lost_fault_hold: not stated by the row (unstated: flag_owner_lost_limit_reached/flag_owner_lost_fault_hold)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_lost_limit_reached：wire flag_owner_lost_limit_reached;         // 本次作废使该槽位连续作废次数达到k；flag_owner_lost_fault_hold：reg flag_owner_lost_fault_hold = 1'b0;      // cause 8'h06同槽位连续完成丢失，保持到abort、START或本RUN结束排空",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "21c04a4c50cc3bc85803a6c3f2d8d83f57e5898b",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_adc_busy_fault_fire`、`flag_adc_busy_fault_hold`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_adc_busy_fault_fire/flag_adc_busy_fault_hold: not stated by the row (unstated: flag_adc_busy_fault_fire/flag_adc_busy_fault_hold)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_adc_busy_fault_fire：wire flag_adc_busy_fault_fire;              // owner年龄恰到9000拍且物理ADC仍非空闲、无法作废的单拍；flag_adc_busy_fault_hold：reg flag_adc_busy_fault_hold = 1'b0;        // cause 8'h07物理ADC长期不回空闲，保持到abort、START或本RUN结束排空",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "51888d9214229bc1541f154df416f6f5fd99231b",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_calibration_request_withdraw`、`flag_recheck_request_withdraw`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_calibration_request_withdraw/flag_recheck_request_withdraw: not stated by the row (unstated: flag_calibration_request_withdraw/flag_recheck_request_withdraw",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_calibration_request_withdraw：wire flag_calibration_request_withdraw;     // 在途校准请求撤销：SID-05截止或校准owner超时作废，二者合并；flag_recheck_request_withdraw：wire flag_recheck_request_withdraw;         // 撤销命中的在途请求来自周期重检时转送PWI释放内层在途",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "73dfa97406966e86ae177a7b3cb165b9e347241b",
+   "anchor": "`ppg_amb_recheck_scheduler.v` `flag_sample_inflight`",
+   "written": "(rule 1d) ppg_amb_recheck_scheduler.v flag_sample_inflight: not stated by the row (unstated: flag_sample_inflight)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_sample_inflight：reg flag_sample_inflight;                   // 已发出请求且等待匹配结果事务返回",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "4ee0308ddd39a6cd57e0932dc3e4b9307ac25f57",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `flag_new_summary_bits`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v flag_new_summary_bits: not stated by the row (unstated: flag_new_summary_bits)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_new_summary_bits：wire [C_FAULT_SUMMARY_WIDTH - 1:0]flag_new_summary_bits; // 本拍新命中的历史汇总位掩码",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "4e403b0ac8b1dc80d237c25dac58719c3bcda045",
+   "anchor": "`ppg_adc_s1_redundancy_corrector.v` `i_transaction_abandon`、`flag_capture_drop_armed`、`flag_capture_drop`",
+   "written": "(rule 1d) ppg_adc_s1_redundancy_corrector.v i_transaction_abandon/flag_capture_drop_armed/flag_capture_drop: not stated by the row (unstated: i_transaction_abandon/flag_capture_drop_armed/flag_capture_drop)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：i_transaction_abandon：input i_transaction_abandon,               // 上层判定在途事务完成丢失并作废的单拍，撤销待配对上下文并布防丢弃迟到RAW；flag_capture_drop_armed：reg flag_capture_drop_armed;            // 作废后布防：下一次到达的RAW属于已作废事务，只接收丢弃、不配对任何上下文；flag_capture_drop：wire flag_capture_drop;                 // 布防期间到达的迟到RAW被接收并丢弃",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "eaa99802a63d6aadc55066a84c77b8761b804ffa",
+   "anchor": "`ppg_spi_register_file.v` `i_ami_owner_lost_sticky`",
+   "written": "(rule 1d) ppg_spi_register_file.v i_ami_owner_lost_sticky: not stated by the row (unstated: i_ami_owner_lost_sticky)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：i_ami_owner_lost_sticky：input i_ami_owner_lost_sticky,                   // AMI完成丢失超时作废历史诊断，占用0x0108 bit6",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "9d704ae65fe6f0ef42c6bba068f9ef1f71d10150",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `flag_frame_restart`、`flag_lifecycle_active`",
+   "written": "(rule 1d) ppg_400hz_frame_calibration_scheduler.v flag_frame_restart/flag_lifecycle_active: not stated by the row (unstated: flag_frame_restart/flag_lifecycle_active)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_frame_restart：wire flag_frame_restart;                    // 宏帧末拍不经空拍直接建立下一宏帧，与校准滚动互斥；flag_lifecycle_active：wire flag_lifecycle_active;                 // 可发起新上下文",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "5065d5f75c67935f7886cae23cf1fa8881b97b85",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `flag_owner_lost_match`、`@satisfies: FSC-54`",
+   "written": "(rule 1d) ppg_400hz_frame_calibration_scheduler.v flag_owner_lost_match: not stated by the row (unstated: flag_owner_lost_match)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_owner_lost_match：wire flag_owner_lost_match;                 // AMI作废事件与在途owner序号及代际一致",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "d79633deaf8545c71f938c3c641a3b866d87b5d9",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_result_fork_all_released`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_result_fork_all_released: not stated by the row (unstated: flag_result_fork_all_released)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：flag_result_fork_all_released：wire flag_result_fork_all_released;         // 两分支在本拍均释放旧事务",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "4b60281457dd863132fc37ad846cf8a9188c6ab8",
+   "anchor": "`ppg_dual_precision_top.v` `C_CONFIG_WIDTH`、`i_source_clk`、`i_source_rstn`、`i_source_config`",
+   "written": "(rule 1d) ppg_dual_precision_top.v C_CONFIG_WIDTH/i_source_clk/i_source_rstn/i_source_config: not stated by the row (unstated: C_CONFIG_WIDTH/i_source_clk/i_source_rstn/i_source_config)",
+   "reason": "基线837行（ppg_dual_precision_top.v:336-343）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：本批不改：引用ppg_dual_precision_top.v的锚点按统筹10-10意见随P1孤立模块归档移入legacy/再处理（修复轮任务书§1.11）（人工核对：导入版本336-343行为ppg_config_cdc_bridge_Inst_control例化）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "859708d8c801e8463c73761ba78ff6f54c05c0f9",
+   "anchor": "`ppg_chip_digital_top.v` `w_source_rstn`、`ppg_reset_sync_clk2m_Inst`",
+   "written": "(rule 1d) ppg_chip_digital_top.v w_source_rstn/ppg_reset_sync_clk2m_Inst: not stated by the row (unstated: w_source_rstn/ppg_reset_sync_clk2m_Inst)",
+   "reason": "基线895行（ppg_chip_digital_top.v:284,373）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本284行`assign w_source_rstn = w_rstn`（源域复位借用系统复位）、373行`ppg_reset_sync_clk2m_Inst`，即格内“reset-borrow special case”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "45b8d592fec57e6a5f7db0617f92c881f2bb42c2",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_detection_discard_trigger`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_detection_discard_trigger: not stated by the row (unstated: flag_detection_discard_trigger)",
+   "reason": "基线924行（ppg_adc_measurement_idac_integration.v:967）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：P02“unconditional broadcast”：导入版本967行为fault dispatch 03（无关），970行`flag_detection_discard_trigger`为detection-discard无条件广播（驱动o_detection_discard_event），行号漂移3行",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "45b8d592fec57e6a5f7db0617f92c881f2bb42c2",
+   "anchor": "`ppg_precision_window_integration.v` `detection_datapath_empty_o`",
+   "written": "(rule 1d) ppg_precision_window_integration.v detection_datapath_empty_o: not stated by the row (unstated: detection_datapath_empty_o)",
+   "reason": "基线924行（`:522`）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本PWI 522行`detection_datapath_empty_o <=`，即格内“next-cycle empty”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "48cd012ae90f3c1b95ccf42b42fb677ae6936b2a",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `flag_capture_watchdog`、`flag_capture_ami`、`flag_capture_scheduler`、`flag_capture_ssw`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v flag_capture_watchdog/flag_capture_ami/flag_capture_scheduler/flag_capture_ssw: not stated by the row (unstated: flag_capture_watchdog/flag_capture_ami/flag_capture",
+   "reason": "基线926行（ppg_system_fault_abort_supervisor.v:201-230,296-405）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本201-215行首故障捕获仲裁flag_capture_*、296-405行首故障原子快照寄存器，即格内“atomic first-fault snapshot latch”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "447688fbdb6f5e2f3bfcb3599a07d4484cd30e7b",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `system_fault_blocking_o`、`system_fault_cause_valid_o`、`system_fault_cause_o`、`system_fault_source_o`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v system_fault_blocking_o/system_fault_cause_valid_o/system_fault_cause_o/system_fault_source_o: not stated by the row (unstated: system_fault_blocking_o/system_fault",
+   "reason": "基线931行（ppg_system_fault_abort_supervisor.v:170,174-183,184,185,419-428）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：写入时版本bb39a0f 170、174-176行为system_fault_blocking_o/cause_valid_o/cause_o/source_o寄存器",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "947c7d1f0d6cf050354492a677a40c1567decc95",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `SOURCE_AMI`、`SOURCE_SCHEDULER`、`SOURCE_SSW`、`SOURCE_SUPERVISOR`、`CAUSE_WATCHDOG_TIMEOUT`、`flag_new_summary_bits`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v SOURCE_AMI/SOURCE_SCHEDULER/SOURCE_SSW/SOURCE_SUPERVISOR/CAUSE_WATCHDOG_TIMEOUT/flag_new_summary_bits: not stated by the row (unstated: SOURCE_AMI/SOURCE_SCHEDULER/",
+   "reason": "基线932行（ppg_system_fault_abort_supervisor.v:129-133,217-230）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：导入版本129-133行为SOURCE_*四个来源码与CAUSE_WATCHDOG_TIMEOUT(8'h31)，217-230行为flag_new_summary_bits（历史位图），对应格内“blocking-class causes (8'h01, 8'h31 watchdog) and the non-blocking discard class”；原解析只取了前4个",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "2e678949430109ab1c583d0cba2c88a96379d614",
+   "anchor": "`ppg_control_top.v` `i_test_identity_inject_valid`、`i_test_invalid_sample_valid`、`i_test_saturation_inject_valid`、`i_test_calibration_loss_inject_valid`、`i_test_inject_enable`",
+   "written": "(rule 1d) ppg_control_top.v i_test_identity_inject_valid/i_test_invalid_sample_valid/i_test_saturation_inject_valid/i_test_calibration_loss_inject_valid/i_test_inject_enable: not stated by the row (unstated: i_",
+   "reason": "基线933行（ppg_control_top.v:128-133）：第四轮（范围锚点逐条核对，规则1d）：格内“declares the four held-valid one-shot test-control inputs, all gated by `i_test_inject_enable`”：四个保持型one-shot输入为identity/invalid-sample/saturation/calibration-loss（原解析含i_test_identity_inject_sample_index，那是数据不是one-shot请求，且缺calibration-loss）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "b8a45fa7c5ad82974ab0ee99ef9471c9c6832331",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_adc_completion_abort_release`、`flag_adc_transaction_inflight`、`adc_complete_sample_index_o`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_adc_completion_abort_release/flag_adc_transaction_inflight/adc_complete_sample_index_o: not stated by the row (unstated: flag_adc_completion_abort_release/f",
+   "reason": "基线936行（ppg_adc_measurement_idac_integration.v:1223,1620,913）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：P14“exactly-once original-ID success=0 release”：导入版本913行flag_adc_completion_abort_release、1620-1621行flag_adc_transaction_inflight置位、1219-1223行adc_complete_*完成身份寄存器；原解析只取了913",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "2f8ef9ee7525edb82986e192ad25e537f60f156e",
+   "anchor": "`ppg_control_top.v` `ppg_system_fault_abort_supervisor_Inst`",
+   "written": "(rule 1d) ppg_control_top.v ppg_system_fault_abort_supervisor_Inst: not stated by the row (unstated: ppg_system_fault_abort_supervisor_Inst)",
+   "reason": "基线937行（ppg_control_top.v:1378-1439）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“C24 supervisor instantiation”：1378-1439为supervisor例化端口表，取例化名；此前：第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内写明“C24 supervisor instantiation”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "19e6b1eb802bee04f91d8f57b511330c02fea541",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `flag_capture_watchdog`、`flag_capture_ami`、`flag_capture_scheduler`、`flag_capture_ssw`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v flag_capture_watchdog/flag_capture_ami/flag_capture_scheduler/flag_capture_ssw: not stated by the row (unstated: flag_capture_watchdog/flag_capture_ami/flag_capture",
+   "reason": "基线942行（ppg_system_fault_abort_supervisor.v:201-205,184）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本201-205行首故障捕获仲裁（看门狗>AMI>Scheduler>SSW），即格内“priority AMI>Scheduler>SSW determines snapshot source”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "1cf404cc7a7867f333c007cd99d59d92b9b13ac8",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `flag_episode_open_edge`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v flag_episode_open_edge: not stated by the row (unstated: flag_episode_open_edge)",
+   "reason": "基线945行（ppg_system_fault_abort_supervisor.v:198）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：导入版本198行`flag_episode_open_edge`，即格内“open/close/rearm design”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "1dd50288a1eee823128cdfbeff23781121a3e236",
+   "anchor": "`ppg_system_config_manager.v` `flag_snapshot_static_bias_valid`、`flag_start_static_bias_valid`、`@satisfies: ILM-08, ILM-15`",
+   "written": "(rule 1d) ppg_system_config_manager.v flag_snapshot_static_bias_valid/flag_start_static_bias_valid: not stated by the row (unstated: flag_snapshot_static_bias_valid/flag_start_static_bias_valid)",
+   "reason": "基线1394行（ppg_system_config_manager.v:370-376）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：写入时版本d18c695 372、375行为flag_snapshot_static_bias_valid/flag_start_static_bias_valid，即格内“manager只用使能位做组合校验”",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "4c631560f592509f349f3075ff377ade09bd5220",
+   "anchor": "`ppg_system_config_manager.v` `i_static_characterization_enable`、`flag_snapshot_static_bias_valid`、`flag_start_static_bias_valid`、`@satisfies: ILM-08, ILM-15`",
+   "written": "(rule 1d) ppg_system_config_manager.v i_static_characterization_enable/flag_snapshot_static_bias_valid/flag_start_static_bias_valid: not stated by the row (unstated: flag_snapshot_static_bias_valid/flag_start_s",
+   "reason": "基线1585行（`:370-377`）：第四轮（范围锚点逐条核对，规则1d）：格内“used in STATIC_BIAS combination checks at `:370-377`”：所指即flag_snapshot_static_bias_valid/flag_start_static_bias_valid两个组合检查，保留全部",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "765e0fc7c2644080134e953d08dcf73a0b51c4fb",
+   "anchor": "`ppg_amb_recheck_scheduler.v` `o_calibration_sample_valid`",
+   "written": "(rule 1d) ppg_amb_recheck_scheduler.v o_calibration_sample_valid: not stated by the row (unstated: o_calibration_sample_valid)",
+   "reason": "基线2169行（ppg_amb_recheck_scheduler.v:84）：人工核对：格内“Consumer: `ppg_amb_recheck_scheduler.v:84`, `o_calibration_sample_valid` formula (`:208`)”，消费处即该输出公式，写明名紧随锚点（逗号后），解析一致",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "361db8a5f78069b1db1a21987f8777ce1c39da9d",
+   "anchor": "`ppg_amb_recheck_scheduler.v` `i_dcs_sample_color_ir`、`o_calibration_color_ir`",
+   "written": "(rule 1d) ppg_amb_recheck_scheduler.v i_dcs_sample_color_ir/o_calibration_color_ir: not stated by the row (unstated: o_calibration_color_ir)",
+   "reason": "基线2174行（`:182,208,210`）：第四轮（范围锚点逐条核对，规则1d）：本行端口i_dcs_sample_color_ir在调度器中的使用处：`o_calibration_color_ir`由其选出（208/210行），保留",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "97b23ebdc7af07095c12f4ff908ade1216e5f5c8",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `calibration_color_ir_o`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v calibration_color_ir_o but the row port `o_calibration_sample_valid` is carried by that file (unrelated symbol)",
+   "reason": "基线2182行（`:1374-1384`）：第四轮（范围锚点逐条核对，规则1d）：格内“颜色`:1374-1384`”：颜色载荷锁存块即calibration_color_ir_o",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "97b23ebdc7af07095c12f4ff908ade1216e5f5c8",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `calibration_frame_type_o`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v calibration_frame_type_o but the row port `o_calibration_sample_valid` is carried by that file (unrelated symbol)",
+   "reason": "基线2182行（`:1387-1397`）：第四轮（范围锚点逐条核对，规则1d）：格内“帧类型`:1387-1397`”：即calibration_frame_type_o",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "97b23ebdc7af07095c12f4ff908ade1216e5f5c8",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `calibration_request_reason_o`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v calibration_request_reason_o but the row port `o_calibration_sample_valid` is carried by that file (unrelated symbol)",
+   "reason": "基线2182行（`:1400-1410`）：第四轮（范围锚点逐条核对，规则1d）：格内“请求原因`:1400-1410`”：即calibration_request_reason_o",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "8b1f32f6f2de77caf5ad420b5afd0f1fdebcb9c0",
+   "anchor": "`ppg_control_top.v` `flag_owner_abort_event`、`flag_abort_drain_stop_request`、`flag_stop_request_event`",
+   "written": "(rule 1d) ppg_control_top.v flag_owner_abort_event/flag_abort_drain_stop_request/flag_stop_request_event: not stated by the row (unstated: flag_owner_abort_event/flag_abort_drain_stop_request/flag_stop_request_",
+   "reason": "基线3223行（ppg_control_top.v:338,344-350）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“abort merges into STOP upstream”：导入版本344-347行为abort→STOP合并寄存器flag_owner_abort_event/flag_abort_drain_stop_request/flag_stop_request_event；338行为flag_status_clear_event（无关，去掉）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "dc3e10b0864c7edcdce0efd2445c01767f486441",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_ami_fault_pending_02`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_ami_fault_pending_02: not stated by the row (unstated: flag_ami_fault_pending_02)",
+   "reason": "基线3238行（`:1421-1430`）：第四轮（范围锚点逐条核对，规则1d）：格内“Lane `8'h02` (`:1421-1430`)”：lane 02为flag_ami_fault_pending_02（导入版本1441行置位；原解析为lane 01的寄存器，行号漂移约11行）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "dc3e10b0864c7edcdce0efd2445c01767f486441",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_ami_fault_pending_03`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v flag_ami_fault_pending_03: not stated by the row (unstated: flag_ami_fault_pending_03)",
+   "reason": "基线3238行（`:1432-1440`）：第四轮（范围锚点逐条核对，规则1d）：格内“Lane `8'h03` (`:1432-1440`)”：lane 03为flag_ami_fault_pending_03（原解析为lane 01/02，漂移）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "d5916b8f615ce6b93bc2245c581184b7292e45c1",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `baseline_protocol_error_sticky_o`、`peak_valley_protocol_error_sticky_o`",
+   "written": "(rule 1d) ppg_adc_measurement_idac_integration.v baseline_protocol_error_sticky_o/peak_valley_protocol_error_sticky_o: not stated by the row (unstated: baseline_protocol_error_sticky_o/peak_valley_protocol_erro",
+   "reason": "基线3245行（ppg_adc_measurement_idac_integration.v:851,854,1113,1116,2593,2596）：例化端口连接扩查：本行讨论C20/C22（基线检测器、峰谷检测器）的protocol-error sticky，格内“both wires are wire-declared and directly passed through to AMI's own top-level ports”：即AMI中的两条wire baseline_protocol_error_sticky_o、peak_valley_protocol_error_sticky_o（经assign送o_baseline_/o_peak_valley_protocol_error_sticky）；原解析o_protocol_error_sticky落在IDAC控制器例化的连接上，模块不对",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "aa6e3de36bc103807907cbcc30bb896f4d2ff24f",
+   "anchor": "`ppg_system_fault_abort_supervisor.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_FAULT_CAUSE_WIDTH`、`C_FAULT_SOURCE_WIDTH`、`C_FAULT_SUMMARY_WIDTH`、`C_ADC_DRAIN_WATCHDOG_CYCLES`、`C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH`",
+   "written": "(rule 1d) ppg_system_fault_abort_supervisor.v C_FRAME_ID_WIDTH/C_SAMPLE_INDEX_WIDTH/C_CONFIG_EPOCH_WIDTH/C_COEF_EPOCH_WIDTH/C_DC_RECOVERY_EPOCH_WIDTH/C_CODE_EPOCH_WIDTH/C_RUN_GENERATION_WIDTH/C_FAULT_CAUSE_WIDT",
+   "reason": "基线3371行（ppg_system_fault_abort_supervisor.v:44-55）：第四轮（范围锚点逐条核对，规则1d）：格内“12 declared…(full declaration block)”：列出全部12个参数（原解析只取4个）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "b5382fe14c2579f1769c390d1e5c7fe90dce4872",
+   "anchor": "`ppg_dual_precision_top.v` `C_CONFIG_WIDTH`",
+   "written": "(rule 1e) ppg_dual_precision_top.v C_CONFIG_WIDTH: not an instance of ppg_config_cdc_bridge (instances: ppg_config_cdc_bridge_Inst_control)",
+   "reason": "基线3387行（ppg_dual_precision_top.v:338）：第四轮（参数绑定台账同类扩查）：本批不改：引用ppg_dual_precision_top.v的锚点按统筹10-10意见随P1孤立模块归档移入legacy/再处理（修复轮任务书§1.11）（人工核对：导入版本336-343行为ppg_config_cdc_bridge_Inst_control例化）",
+   "rule": "1e"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "45a22a245330ca363fba2228de8e787e50c7aa5e",
+   "anchor": "`ppg_system_config_manager.v` `i_config_snapshot`/`i_config_update_event`",
+   "written": "(rule 1d) ppg_system_config_manager.v i_config_snapshot/i_config_update_event: not stated by the row (unstated: i_config_snapshot/i_config_update_event)",
+   "reason": "以符号形式直接写入的锚点（B合并批次阶段3/4新增行，非行号转换），人工核对符号与本行ID/TB标签所述机制一致；RTL定义：i_config_snapshot：input [C_CONFIG_WIDTH - 1:0]i_config_snapshot, // CDC桥已经稳定传入的V4+V5联合完整配置快照；i_config_update_event：input i_config_update_event,              // 完整配置到达2 MHz域的单周期事件",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "45a22a245330ca363fba2228de8e787e50c7aa5e",
+   "anchor": "`ppg_config_cdc_bridge.v` `flag_request_sync_meta`、`flag_source_request`、`flag_request_sync`",
+   "written": "(rule 1d) ppg_config_cdc_bridge.v flag_request_sync_meta/flag_source_request/flag_request_sync: not stated by the row (unstated: flag_request_sync_meta)",
+   "reason": "基线3401行（ppg_config_cdc_bridge.v:163-179）：第四轮（范围锚点逐条核对，规则1d）：格内“source->dest request sync”：flag_request_sync_meta/flag_request_sync即该双触发器同步器，保留全部",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "45a22a245330ca363fba2228de8e787e50c7aa5e",
+   "anchor": "`ppg_config_cdc_bridge.v` `flag_ack_sync_meta`、`flag_destination_ack`、`flag_ack_sync`",
+   "written": "(rule 1d) ppg_config_cdc_bridge.v flag_ack_sync_meta/flag_destination_ack/flag_ack_sync: not stated by the row (unstated: flag_ack_sync_meta/flag_ack_sync)",
+   "reason": "基线3401行（`:145-161`）：第四轮（范围锚点逐条核对，规则1d）：格内“dest->source ack sync”：flag_ack_sync_meta/flag_ack_sync即该同步器，保留全部",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "4c858cdf1fef514be4a0cd3af822a8719ff465b8",
+   "anchor": "`ppg_control_top.v` `flag_status_clear_event`",
+   "written": "(rule 1d) ppg_control_top.v flag_status_clear_event: not stated by the row (unstated: flag_status_clear_event)",
+   "reason": "基线3402行（`:313,324-330`）：第四轮（裸行号文件归属同类扩查）：格内“`flag_status_clear_event` (independent register, `:313,324-330`)”：所指为该独立寄存器（原解析flag_system_fault_blocking/flag_diag_clear_event为相邻寄存器，行号漂移）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "4c858cdf1fef514be4a0cd3af822a8719ff465b8",
+   "anchor": "`ppg_system_config_manager.v` `i_status_clear_event`、`commit_ack_sticky_o`、`error_sticky_o`、`last_error_code_o`",
+   "written": "(rule 1d) ppg_system_config_manager.v i_status_clear_event/commit_ack_sticky_o/error_sticky_o/last_error_code_o: not stated by the row (unstated: last_error_code_o)",
+   "reason": "基线3402行（ppg_system_config_manager.v:657-659,671-673,685-687）：第四轮（范围锚点逐条核对，规则1d）：格内“only clears `commit_ack_sticky`/`error_sticky` (W1C, …)”：所指三个sticky寄存器，保留",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "66dd07cdce8b6f38593c5a8eb2649a317a620bbe",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v o_analog_safe: not stated by the row (unstated: o_analog_safe)",
+   "reason": "基线3456行（wrapper.v:480）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：SSW `o_analog_safe = !(flag_red_wave_active || flag_ir_wave_active || calibration_wave_active_o)`，即格内“no RED/IR/calibration waveform”；SSW简写；:480为assign o_analog_safe",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "7e498078ddfbe237bfd65fdea4a3d7831b87b87d",
+   "anchor": "`ppg_control_top.v` `i_analog_ready`",
+   "written": "(rule 1d) ppg_control_top.v i_analog_ready: not stated by the row (unstated: i_analog_ready)",
+   "reason": "基线3552行（ppg_control_top.v:120）：第三轮（统筹10-10核对：格内写明的符号为准）：段落上一行写明`i_analog_ready`，锚点后引的注释原文“已同步模拟偏置/参考/输入选择RUN启动资格聚合结果”即基线该端口声明行（:126）的注释（原解析为:120处的i_clk_stage1_dout_low_async，行号漂移6行）",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "d936da924282140a45673aeb8a5d3718dc639846",
+   "anchor": "`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`",
+   "written": "(rule 1d) ppg_sar9_sar15_safe_selection_wrapper.v o_analog_safe: not stated by the row (unstated: o_analog_safe)",
+   "reason": "基线3585行（ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480）：第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：480行同3456行为o_analog_safe；25、48行在导入版本是文件头修订记录，写入时（09-05）版本不在仓库，所指内容无法确定，如实记为未能定位；此前：:25/:48为文件头修订记录，:480为assign o_analog_safe",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "d936da924282140a45673aeb8a5d3718dc639846",
+   "anchor": "`ppg_control_top.v` `i_analog_ready`",
+   "written": "(rule 1d) ppg_control_top.v i_analog_ready: not stated by the row (unstated: i_analog_ready)",
+   "reason": "基线3585行（ppg_control_top.v:120）：第三轮（统筹10-10核对：格内写明的符号为准）：D03（cause 8'h22模拟收敛检测）引用的Top锚点即上方冻结决定段（矩阵3550-3553行）所述`i_analog_ready`（原解析i_clk_stage1_dout_low_async，行号漂移）",
+   "rule": "1d"
   }
  ]
 }

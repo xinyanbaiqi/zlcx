@@ -423,3 +423,21 @@
 | 别名表:472 | ppg_control_top.v:295-299 | `ppg_control_top.v` `C_ADC_DRAIN_WATCHDOG_CYCLES` |
 | 别名表:481 | ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611 | `ppg_adc_measurement_idac_integration.v` `o_measurement_result_discard_run_generation`、`i_search_calibration_applied`、`o_peak_valley_protocol_error_sticky` |
 | 别名表:568 | ppg_control_top.v:295-299 | `ppg_control_top.v` `C_ADC_DRAIN_WATCHDOG_CYCLES` |
+
+## 第四轮更新（统筹2026-10-10对`66bebdf`的核对意见）
+
+统筹指出，上文“(b) 低置信”56条“保留原解析”不成立：低置信即解析符号与本行无关，保留等于把可疑符号写进合同。其中至少17条确定是错的：G-FP-05参数绑定12行，以及基线矩阵1596、3223行，基线别名表192、302行（`:119`、`:465`）。第四轮（快照`0647563`）的处理如下：
+
+- 56条逐条判定，不再“保留原解析”：
+  - 改正31条（含参数绑定12行，改为“例化名 + 本行写明的被绑定参数”）；
+  - 恢复原文4条（历史3、非锚点1）；
+  - 钉住版本“未能定位符号”2条；
+  - 核对确认原解析即正确符号18条（依据逐条写明，记入例外表）；
+  - 引用`ppg_dual_precision_top.v`的1条按统筹意见本批不改（修复轮任务书§1.11）。
+- 同类扩查：
+  - G-FP-05全部18个binding锚点：17个改为target模块的例化名加参数，1个dual_precision行不改；
+  - 裸行号文件归属：改正14处；
+  - 范围锚点：核对31处；
+  - 例化端口连接：核对481个锚点，改正3处。
+- 门禁新增规则1d（符号须由本行述及）、1e（binding须落在target模块的例化上），并识别钉住版本形式。
+- 上文“(b) 低置信”列表由`../round4/review.md`第一部分逐条判定表取代。

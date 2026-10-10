@@ -1,0 +1,14 @@
+# 例化端口连接扩查（统筹10-10对66bebdf核对意见三(2)）：落在例化端口连接.x(上的符号锚点，核对该例化的模块是否为本行讨论的模块
+# 工具：扫描脚本输出（第四轮写入后文本）；11个“未述及”均为本行以口语称呼该模块（peak-valley detector / precision-controller / active_config_unpack_Inst.），人工确认
+instance-connection anchors 481 {'ok': 470, 'not-discussed': 11}
+   CONTR 1639 ppg_active_v4_control_plane_integration.v i_active_config ['active_config_unpack_Inst(ppg_system_active_config_unpack)']
+   CONTR 2329 ppg_precision_window_integration.v i_peak_ready ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2337 ppg_precision_window_integration.v i_valley_ready ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2374 ppg_precision_window_integration.v i_reacquire_active ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2436 ppg_precision_window_integration.v i_return_9bit_valid ['ppg_precision_window_controller_Inst(ppg_precision_window_controller)']
+   CONTR 2438 ppg_precision_window_integration.v i_return_reason ['ppg_precision_window_controller_Inst(ppg_precision_window_controller)']
+   CONTR 2439 ppg_precision_window_integration.v i_return_frame_id ['ppg_precision_window_controller_Inst(ppg_precision_window_controller)']
+   CONTR 2521 ppg_precision_window_integration.v i_characterization_mode ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2542 ppg_precision_window_integration.v i_active_precision_mode ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2544 ppg_precision_window_integration.v i_fine_window_start_event ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']
+   CONTR 2545 ppg_precision_window_integration.v i_fine_window_start_frame_id ['ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)']

@@ -1,0 +1,205 @@
+{
+ "errors": [],
+ "external_refs": [
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 6,
+   "ref": "memory `project-ppg-dual-anchor-tagging-convention.md`"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 98,
+   "ref": "[[project-ppg-p3-analog-safe-convergence-resolved-20260905]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 130,
+   "ref": "[[project-ppg-jnt-baseline-deferred]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 138,
+   "ref": "[[project-ppg-stage5-batching-plan]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 150,
+   "ref": "[[project-ppg-stage5-batching-plan]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 152,
+   "ref": "[[project-ppg-stage5-batching-plan]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 165,
+   "ref": "[[project-ppg-stage5-deferred-rtl-interface-work]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 166,
+   "ref": "[[project-ppg-stage5-group13-oib-status]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 179,
+   "ref": "[[project-ppg-stage5-deferred-rtl-interface-work]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 180,
+   "ref": "[[project-ppg-stage5-group15-prc-status]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 190,
+   "ref": "[[project-ppg-stage5-group15-prc-status]]"
+  },
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 191,
+   "ref": "[[project-ppg-stage5-batching-plan]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 815,
+   "ref": "memory `project-ppg-item4b-phase1-cdc-domain-tagging-20260914.md`"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 884,
+   "ref": "memory `project-ppg-stage3-item4a-extension-spi-diag-tearing-fixed-20260914.md`"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 959,
+   "ref": "[[project-ppg-p1-discard-broadcast-investigation-20260905]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 986,
+   "ref": "[[project-ppg-p1-discard-broadcast-investigation-20260905]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 1122,
+   "ref": "[[project-ppg-gfp07-batch8-closed-20260902]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 1130,
+   "ref": "[[project-ppg-deliverable-gate-stale-finding-20260823]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3258,
+   "ref": "[[feedback-idac-fault-bit-stop-not-start-clears]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3347,
+   "ref": "[[project-ppg-gfp05-batch7a-scope-20260902]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3348,
+   "ref": "[[project-ppg-gfp05-batch7b-ami-closed-20260902]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3349,
+   "ref": "[[project-ppg-gfp05-batch7c-pwi-closed-20260902]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3405,
+   "ref": "[[project-ppg-full-system-audit-20260831]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3425,
+   "ref": "[[feedback-idac-fault-bit-stop-not-start-clears]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3862,
+   "ref": "memory `project-ppg-phase2-reconciliation-script-20260906.md`"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3924,
+   "ref": "[[project-ppg-stage2-btagmissing-batch1-na-confirmations-20260910]]"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3937,
+   "ref": "memory `project-ppg-naming-governance-rule-20260906.md`"
+  }
+ ],
+ "stats": {
+  "symbol_anchors": 6792,
+  "satisfies_anchors": 194,
+  "label_anchors": 190,
+  "section_refs": 2812,
+  "old_anchor_history": 74,
+  "semantic_checked": 2002,
+  "port_ledger_rows": 1803,
+  "port_ledger_anchors": 5543,
+  "mention_checked": 6167,
+  "mention_exceptions": 69,
+  "unlocated": 2,
+  "binding_checked": 18
+ },
+ "unlocated": [
+  {
+   "file": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line": 114,
+   "target": "ppg_idac_code_controller.v",
+   "lines": "170-172,580",
+   "rev": "b858bf0"
+  },
+  {
+   "file": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line": 3603,
+   "target": "ppg_sar9_sar15_safe_selection_wrapper.v",
+   "lines": "25,48",
+   "rev": "b858bf0"
+  }
+ ],
+ "files": [
+  "PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+  "PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+  "PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+  "PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+  "PPG_ADC_IDAC_INTEGRATION_SPEC.md",
+  "PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+  "PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+  "PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+  "PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+  "PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+  "PPG_ALIAS_MAPPING_TABLE.md",
+  "PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+  "PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+  "PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md",
+  "PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+  "PPG_CONTRACT_CLOSURE_MATRIX.md",
+  "PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+  "PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+  "PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+  "PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+  "PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md",
+  "PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+  "PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+  "PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+  "PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+  "PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+  "PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+  "PPG_SCHEDULER_SSW_AMI_PORT_CONNECTION_CHECKLIST.md",
+  "PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+  "TAPEOUT_FINAL_REVIEW_GUIDE.md",
+  "ppg_system_active_config_unpack_semantic_contract.md",
+  "ppg_system_config_manager_semantic_contract.md"
+ ],
+ "info_count": 43
+}

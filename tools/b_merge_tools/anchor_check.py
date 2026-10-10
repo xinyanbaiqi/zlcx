@@ -56,6 +56,9 @@ C_MAP_SECTION = '## 2. Active Contract Sources and Source Classification'
 
 FILE_TOKEN = re.compile(r'`([A-Za-z0-9_./-]+\.(?:v|vh))`')
 NAME_TOKEN = re.compile(r'\s*(?:[、,，/+]|and|和|及)?\s*`([^`]+)`')
+# round 4 (coordinator review of 66bebdf, 3(1)(c)): a line anchor pinned to the version it was
+# checked against, whose symbol could not be identified -- legal, counted and listed
+PINNED = re.compile(r'`([A-Za-z0-9_./-]+\.(?:v|vh)):([0-9][0-9,\-]*)`（`([0-9a-f]{7,40})`版，未能定位符号）')
 SYM_ANCHOR = re.compile(r'`[A-Za-z0-9_./-]+\.(?:v|vh)`(?:\s*(?:[、,，/+]|and|和|及)?\s*`[^`]+`)*')  # a whole symbol anchor
 IDENT = re.compile(r'^[A-Za-z_][A-Za-z0-9_$]*(?:\[[^\]]*\])?$')
 SAT_TAG = re.compile(r'^@satisfies:\s*([A-Za-z0-9_-]+(?:\s*,\s*[A-Za-z0-9_-]+)*)$')
@@ -189,6 +192,8 @@ def main():
                          'the tree is not a git checkout, e.g. a `git archive` export)')
     ap.add_argument('--no-semantic', action='store_true',
                     help='skip the semantic mode (anchor symbol vs the symbol the cell writes next to it)')
+    ap.add_argument('--mention', choices=('all', 'any'), default='all',
+                    help='rule 1d: every identifier of an anchor must be stated by the row (all), or at least one (any)')
     ap.add_argument('files', nargs='*')
     args = ap.parse_args()
     repo = args.repo
@@ -232,9 +237,71 @@ def main():
             src_cache[rel] = SourceIndex(os.path.join(repo, rel), not args.no_ast)
         return src_cache[rel]
 
-    errors, infos, external = [], [], []
+    unstated = []
+
+    def mention_basis(line, s, e, names, idents, src):
+        """Why the anchor's identifiers count as stated by the row (rule 1d), or None.
+
+        Anchor level: a name written next to the anchor (W1-W10; 1b checks it), or a name
+        repeated in the anchor's own list (the cell's written mention absorbed by the anchor
+        syntax, e.g. "`f.v` `flag_x`, `flag_x`"). Otherwise every identifier needs one of:
+          row      named in the row outside symbol anchors (file names do not count)
+          port     the row port, or sharing its stem (port ledger rows)
+          family   member of a `family_*` the row writes (prefix >= 8 characters)
+          tag      on a source line carrying an @satisfies tag of this anchor whose ID the row
+                   names outside the anchor
+          inst     an instance `<module>_Inst...` of a module the row names
+          conn     an instance port whose connected net the row names, in a file the row cites
+        """
+        wd = lambda x: r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(x)
+        port = row_port(line)
+        unstated[:] = []
+        if written_name(line, s, e, port)[0]:
+            return 'written'
+        if len(set(idents)) < len(idents):
+            return 'repeat'
+        bare = re.sub(r'[A-Za-z0-9_./-]+\.(?:v|vh|md)\b', ' ', SYM_ANCHOR.sub(' ', line))
+        rest = line[:s] + ' ' + line[e:]
+        wild = [w for w in re.findall(r'([A-Za-z_][A-Za-z0-9_]*_)\*', line) if len(w) >= 8]
+        tag_ids = [i for t in names for m in [SAT_TAG.match(t)] if m for i in re.split(r'\s*,\s*', m.group(1))]
+        tag_ids = [i for i in tag_ids if re.search(r'(?<![A-Za-z0-9-])%s(?![A-Za-z0-9-])' % re.escape(i), rest)]
+        cited = []
+        for fn in set(os.path.basename(x) for x in re.findall(r'([A-Za-z0-9_./-]+\.(?:v|vh))\b', line)):
+            c = [r for r in by_base.get(fn, []) if not r.startswith('legacy/')]
+            if len(c) == 1:
+                cited.append(source(c[0]))
+        def stated(t):
+            b = re.sub(r'\[.*\]$', '', t)
+            if re.search(wd(b), bare) or (port and (b == port or related(b, port))) or any(b.startswith(w) for w in wild):
+                return True
+            # register named `x_o` behind output x: the row writing `x` states it
+            if b.endswith('_o') and len(b) > 8 and re.search(wd(b[:-2]), bare):
+                return True
+            if tag_ids:
+                # the tag sits on the last line of a (possibly multi-line) statement: the
+                # identifier must occur in that statement
+                for i, c in enumerate(src.comments):
+                    if '@satisfies' in c and any(re.search(r'(?<![A-Za-z0-9-])%s(?![A-Za-z0-9-])' % re.escape(x), c) for x in tag_ids):
+                        k = i
+                        while k > 0 and i - k < 12 and src.code[k - 1].strip() and not re.search(r'(;|\bbegin|\bend)\s*$', src.code[k - 1].strip()):
+                            k -= 1
+                        if any(re.search(wd(b), src.code[j]) for j in range(k, i + 1)):
+                            return True
+            im = re.match(r'^([A-Za-z_][A-Za-z0-9_]*?)_Inst', b)
+            if im and re.search(r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(im.group(1)), rest):
+                return True
+            nets = set(m.group(1) for cs in cited for m in re.finditer(r'\.\s*%s\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)' % re.escape(b), cs.code_text))
+            return any(re.search(wd(x), bare) for x in nets)
+        ok = [stated(t) for t in idents]
+        if all(ok) if args.mention == 'all' else any(ok):
+            return 'stated'
+        unstated[:] = [t for t, k in zip(idents, ok) if not k]
+        return None
+
+    errors, infos, external, unlocated = [], [], [], []
     stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'label_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0,
-             'semantic_checked': 0, 'port_ledger_rows': 0, 'port_ledger_anchors': 0}
+             'semantic_checked': 0, 'port_ledger_rows': 0, 'port_ledger_anchors': 0,
+             'mention_checked': 0, 'mention_exceptions': 0, 'unlocated': 0, 'binding_checked': 0}
     port_rows = set()
     sem_path = os.path.join(HERE, 'anchor_semantic_exceptions.json')
     sem_exceptions = set((x['line_sha1'], x['anchor']) for x in json.load(open(sem_path, encoding='utf-8'))['exceptions']) \
@@ -313,6 +380,26 @@ def main():
                         if col5 or loose:
                             err(f, n, 'port-mismatch', '%s %s but the row port `%s` is carried by that file (%s)'
                                 % (fname, '/'.join(idents), port, 'RTL column' if col5 else 'unrelated symbol'))
+                # 1e. G-FP-05 parameter-propagation ledger (coordinator review of 66bebdf, 3(2)):
+                # the "binding" anchor must name an instance of the module the row's "target
+                # declarations" cite (the instance's module = the target file)
+                if base in gated and not args.no_semantic and line[:fm.start()].rstrip().endswith('binding'):
+                    tm = re.search(r'target declarations?\s+`([A-Za-z0-9_./-]+\.(?:v|vh))', line[pos:])
+                    if tm:
+                        stats['binding_checked'] += 1
+                        mod = os.path.basename(tm.group(1))[:-2]
+                        insts = set(re.findall(r'(?<![A-Za-z0-9_])%s\s*(?:#\s*\((?:[^()]|\([^()]*\))*\))?\s*([A-Za-z_][A-Za-z0-9_]*)\s*\(' % re.escape(mod), src.code_text))
+                        if not (insts & set(idents)) and (line_hash(line), line[fm.start():pos]) not in sem_exceptions:
+                            err(f, n, 'binding-instance', '%s %s: not an instance of %s (instances: %s)' % (fname, '/'.join(idents), mod, '/'.join(sorted(insts)) or 'none'))
+                # 1d. mention rule (coordinator review of 66bebdf, 2026-10-10): a symbol anchor in
+                # the matrix or the alias table must name something the row itself states.
+                if base in gated and not args.no_semantic and idents:
+                    stats['mention_checked'] += 1
+                    why = mention_basis(line, fm.start(), pos, names, idents, src)
+                    if why is None and (line_hash(line), line[fm.start():pos]) not in sem_exceptions:
+                        err(f, n, 'symbol-unmentioned', '%s %s: not stated by the row (unstated: %s)' % (fname, '/'.join(idents), '/'.join(unstated)))
+                    elif why is None:
+                        stats['mention_exceptions'] += 1
                 for tok in names:
                     sm = SAT_TAG.match(tok)
                     lm = LABEL.match(tok)
@@ -357,7 +444,16 @@ def main():
                 elif mm.group(2) not in hd:
                     err(f, n, 'section-missing', '%s §%s' % (name, mm.group(2)))
             # 3. old line anchors
-            olds = [om for om in OLD_ANCHOR.finditer(line) if not in_spans(om.start(), spans)]
+            pinned = []
+            for pm in PINNED.finditer(line):
+                if in_spans(pm.start(), spans):
+                    continue
+                pinned.append((pm.start(), pm.end()))
+                pf = os.path.basename(pm.group(1))
+                if len([r for r in by_base.get(pf, []) if not r.startswith('legacy/')]) != 1:
+                    err(f, n, 'file-missing', pf)
+                unlocated.append({'file': base, 'line': n, 'target': pf, 'lines': pm.group(2), 'rev': pm.group(3)})
+            olds = [om for om in OLD_ANCHOR.finditer(line) if not in_spans(om.start(), spans + pinned)]
             if olds:
                 if base in gated and line_hash(line) not in allow:
                     for om in olds:
@@ -368,10 +464,13 @@ def main():
                         infos.append({'file': base, 'line': n, 'kind': 'contract-line-anchor', 'count': len(olds)})
 
     stats['port_ledger_rows'] = len(port_rows)
-    result = {'errors': errors, 'external_refs': external, 'stats': stats,
+    stats['unlocated'] = len(unlocated)
+    result = {'errors': errors, 'external_refs': external, 'stats': stats, 'unlocated': unlocated,
               'files': [os.path.basename(f) for f in files], 'info_count': len(infos)}
     if args.json:
         json.dump(result, open(args.json, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    for u in unlocated:
+        print('UNLOCATED %(file)s:%(line)d %(target)s lines %(lines)s at %(rev)s' % u)
     for e in errors:
         print('ERROR %(file)s:%(line)d %(kind)s %(text)s' % e)
     print('stats %s; external refs %d; errors %d; file index %s (%d files)'

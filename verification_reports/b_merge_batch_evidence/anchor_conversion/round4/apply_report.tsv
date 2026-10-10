@@ -1,0 +1,118 @@
+doc	base_line	line	old	result	detail
+PPG_CONTRACT_CLOSURE_MATRIX.md	924	942	ppg_adc_measurement_idac_integration.v:967	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_detection_discard_trigger`
+PPG_CONTRACT_CLOSURE_MATRIX.md	927	945	ppg_system_fault_abort_supervisor.v:54-55,136,190-192,433-441	rewrite	`ppg_system_fault_abort_supervisor.v` `C_ADC_DRAIN_WATCHDOG_CYCLES`
+PPG_CONTRACT_CLOSURE_MATRIX.md	930	948	ppg_adc_measurement_idac_integration.v:434-462,1602-1620,913	rewrite	`ppg_adc_measurement_idac_integration.v` `reg_adc_inflight_sample_index`、`flag_adc_transaction_inflight`
+PPG_CONTRACT_CLOSURE_MATRIX.md	932	950	ppg_system_fault_abort_supervisor.v:129-133,217-230	rewrite	`ppg_system_fault_abort_supervisor.v` `SOURCE_AMI`、`SOURCE_SCHEDULER`、`SOURCE_SSW`、`SOURCE_SUPERVISOR`、`CAUSE_WATCHDOG_TIMEOUT`、`flag_new_summary_bits`
+PPG_CONTRACT_CLOSURE_MATRIX.md	933	951	ppg_control_top.v:128-133	rewrite	`ppg_control_top.v` `i_test_identity_inject_valid`、`i_test_invalid_sample_valid`、`i_test_saturation_inject_valid`、`i_test_calibration_loss_inject_valid`、`i_test_inject_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	934	952	ppg_control_top.v:295-299	rewrite	`ppg_control_top.v` `"参数化位宽约束（架构不变量，非运行时检查）"`
+PPG_CONTRACT_CLOSURE_MATRIX.md	936	954	ppg_adc_measurement_idac_integration.v:1223,1620,913	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_adc_completion_abort_release`、`flag_adc_transaction_inflight`、`adc_complete_sample_index_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1347	1365	`:409`	rewrite	`ppg_control_top.v` `measurement_run_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1347	1365	`:408`	rewrite	`ppg_control_top.v` `analog_run_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1347	1365	`:409`	rewrite	`ppg_control_top.v` `measurement_run_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1390	1408	`:1537`	rewrite	`ppg_control_top.v` `o_characterization_control_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1391	1409	`:1540`	rewrite	`ppg_control_top.v` `o_characterization_protocol_error_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1415	1433	`:1536`	rewrite	`ppg_control_top.v` `o_source_characterization_update_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1498	1516	`:1520`	rewrite	`ppg_control_top.v` `o_scheduler_launch_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1499	1517	`:1521`	rewrite	`ppg_control_top.v` `o_scheduler_owner_deadline_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1502	1520	`:1528`	rewrite	`ppg_control_top.v` `o_ssw_wrapper_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1503	1521	`:1529`	rewrite	`ppg_control_top.v` `o_ssw_switch_protocol_error_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1504	1522	`:1530`	rewrite	`ppg_control_top.v` `o_ssw_transaction_mismatch_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1505	1523	`:1531`	rewrite	`ppg_control_top.v` `o_ssw_owner_deadline_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1506	1524	`:1532`	rewrite	`ppg_control_top.v` `o_ssw_calibration_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1596	1614	`:247`	revert	`:247`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1624	1642	`:1501`	rewrite	`ppg_control_top.v` `o_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1625	1643	`:1500`	rewrite	`ppg_control_top.v` `o_config_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1626	1644	`:1503`	rewrite	`ppg_control_top.v` `o_dc_recovery_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1629	1647	`:1502`	rewrite	`ppg_control_top.v` `o_stage2_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1634	1652	`:1492`	rewrite	`ppg_control_top.v` `o_commit_ack_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1635	1653	`:1496`	rewrite	`ppg_control_top.v` `o_commit_ack_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1636	1654	`:1495`	rewrite	`ppg_control_top.v` `o_error_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1637	1655	`:1497`	rewrite	`ppg_control_top.v` `o_error_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1638	1656	`:1498`	rewrite	`ppg_control_top.v` `o_last_error_code`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1641	1659	`:1499`	rewrite	`ppg_control_top.v` `o_schema_version`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2182	2200	`:1400-1410`	rewrite	`ppg_adc_measurement_idac_integration.v` `calibration_request_reason_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2182	2200	`:1387-1397`	rewrite	`ppg_adc_measurement_idac_integration.v` `calibration_frame_type_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2182	2200	`:1374-1384`	rewrite	`ppg_adc_measurement_idac_integration.v` `calibration_color_ir_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2182	2200	`:1359-1377`	revert	`:1359-1377`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2523	2541	`:990,952`	rewrite	`ppg_precision_window_integration.v` `amb_recheck_busy_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2682	2700	ppg_adc_measurement_idac_integration.v:1858	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_s1_programmable_calibrator_Inst`、`i_result_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3223	3241	ppg_control_top.v:338,344-350	rewrite	`ppg_control_top.v` `flag_owner_abort_event`、`flag_abort_drain_stop_request`、`flag_stop_request_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	3244	`:380`	rewrite	`ppg_control_top.v` `flag_test_inject_mode_latched`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	3244	`:381-382`	rewrite	`ppg_control_top.v` `flag_test_inject_mode_latched`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	3244	`:384`	rewrite	`ppg_control_top.v` `flag_test_inject_mode_latched`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	3244	ppg_control_top.v:373,377-386	rewrite	`ppg_control_top.v` `flag_test_inject_mode_latched`、`wrapper_run_enable_o`、`wrapper_stop_ack_event_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3228	3246	ppg_sar9_sar15_safe_selection_wrapper.v:304-305,1089-1097,1274-1282	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_red_context_valid`、`flag_ir_context_valid`、`i_control_abort_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3229	3247	ppg_peak_valley_window_detector.v:353-357,391,475-487	rewrite	`ppg_peak_valley_window_detector.v` `peak_valid_o`、`flag_peak_accept_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3231	3249	ppg_coarse_detection_fir.v:310,322,325,437-459	rewrite	`ppg_coarse_detection_fir.v` `result_valid_o`、`flag_commit_event`、`flag_recheck_clear`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3232	3250	ppg_adc_measurement_idac_integration.v:1602-1610,1493-1499	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_adc_completion_emit`、`reg_adc_inflight_sample_index`、`o_transaction_start_fire`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3238	3256	`:1432-1440`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_ami_fault_pending_03`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3238	3256	`:1421-1430`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_ami_fault_pending_02`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3242	3260	ppg_control_top.v:1068-1069	rewrite	`ppg_control_top.v` `o_ssw_fault_valid`、`o_ssw_fault_cause`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3244	3262	`:635-638`	rewrite	`ppg_idac_code_controller.v` `o_controller_fault_blocking`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3245	3263	ppg_adc_measurement_idac_integration.v:851,854,1113,1116,2593,2596	rewrite	`ppg_adc_measurement_idac_integration.v` `baseline_protocol_error_sticky_o`、`peak_valley_protocol_error_sticky_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3352	3370	ppg_control_top.v:288-292	rewrite	`ppg_control_top.v` `"综合RTL禁止使用initial块做运行时elaboration检查"`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3366	3384	ppg_control_top.v:288-292	rewrite	`ppg_control_top.v` `"综合RTL禁止使用initial块做运行时elaboration检查"`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3367	3385	`:65,68-74`	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `C_IDAC_CODE_WIDTH`、`C_MACRO_TICK_WIDTH`、`C_CAL_TICK_WIDTH`、`C_MACRO_FRAME_TICKS`、`C_CAL_SUBFRAME_TICKS`、`C_NORMAL_RED_OWNER_DEADLINE`、`C_NORMAL_IR_OWNER_DEADLINE`、`C_CAL_OWNER_DEADLINE`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3367	3385	ppg_400hz_frame_calibration_scheduler.v:63-64,66-67	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3367	3385	ppg_control_top.v:851-854	rewrite	`ppg_control_top.v` `ppg_400hz_frame_calibration_scheduler_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3368	3386	`:53,56-60`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `C_IDAC_CODE_WIDTH`、`C_MACRO_TICK_WIDTH`、`C_CAL_TICK_WIDTH`、`C_NORMAL_RED_OWNER_DEADLINE`、`C_NORMAL_IR_OWNER_DEADLINE`、`C_CAL_OWNER_DEADLINE`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3368	3386	ppg_sar9_sar15_safe_selection_wrapper.v:51-52,54-55,61	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3368	3386	ppg_control_top.v:970-974	rewrite	`ppg_control_top.v` `ppg_sar9_sar15_safe_selection_wrapper_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3369	3387	ppg_adc_measurement_idac_integration.v:75-89	rewrite	`ppg_adc_measurement_idac_integration.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3369	3387	ppg_control_top.v:1085-1092	rewrite	`ppg_control_top.v` `ppg_adc_measurement_idac_integration_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3370	3388	ppg_system_fault_abort_supervisor.v:44-45,50,54-55	rewrite	`ppg_system_fault_abort_supervisor.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ADC_DRAIN_WATCHDOG_CYCLES`、`C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3370	3388	ppg_control_top.v:1367-1371	rewrite	`ppg_control_top.v` `ppg_system_fault_abort_supervisor_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ADC_DRAIN_WATCHDOG_CYCLES`、`C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3371	3389	ppg_system_fault_abort_supervisor.v:44-55	rewrite	`ppg_system_fault_abort_supervisor.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_FAULT_CAUSE_WIDTH`、`C_FAULT_SOURCE_WIDTH`、`C_FAULT_SUMMARY_WIDTH`、`C_ADC_DRAIN_WATCHDOG_CYCLES`、`C_ADC_DRAIN_WATCHDOG_COUNTER_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3374	3392	ppg_adc_s1_programmable_calibrator.v:49-54	rewrite	`ppg_adc_s1_programmable_calibrator.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3374	3392	ppg_adc_measurement_idac_integration.v:1832-1837	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_s1_programmable_calibrator_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3375	3393	ppg_adc_result_router.v:55-61	rewrite	`ppg_adc_result_router.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3375	3393	ppg_adc_measurement_idac_integration.v:1898-1904	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_result_router_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3376	3394	ppg_normal_transaction_fork.v:51-57	rewrite	`ppg_normal_transaction_fork.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3376	3394	ppg_adc_measurement_idac_integration.v:1962-1968	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3377	3395	ppg_adc_pipeline_overlap_corrector.v:55-61	rewrite	`ppg_adc_pipeline_overlap_corrector.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3377	3395	ppg_adc_measurement_idac_integration.v:2050-2056	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3378	3396	ppg_adc_programmable_reconstructor.v:45-50	rewrite	`ppg_adc_programmable_reconstructor.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3378	3396	ppg_adc_measurement_idac_integration.v:2124-2129	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_programmable_reconstructor_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3379	3397	ppg_adc_dc_recovery.v:45-51	rewrite	`ppg_adc_dc_recovery.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3379	3397	ppg_adc_measurement_idac_integration.v:2200-2206	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_dc_recovery_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3380	3398	`:62`	rewrite	`ppg_idac_code_controller.v` `C_RESET_CODE`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3380	3398	ppg_idac_code_controller.v:55-61,63	rewrite	`ppg_idac_code_controller.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3380	3398	ppg_adc_measurement_idac_integration.v:2295-2302	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3381	3399	ppg_precision_window_integration.v:55-67,71-72	rewrite	`ppg_precision_window_integration.v` `C_DATA_WIDTH`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SLOPE_WIDTH`、`C_BASELINE_WIDTH`、`C_RATIO_WIDTH`、`C_CONFIRM_COUNT_WIDTH`、`C_INTERVAL_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3381	3399	ppg_adc_measurement_idac_integration.v:2432-2446	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_precision_window_integration_Inst`、`C_DATA_WIDTH`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SLOPE_WIDTH`、`C_BASELINE_WIDTH`、`C_RATIO_WIDTH`、`C_CONFIRM_COUNT_WIDTH`、`C_INTERVAL_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3382	3400	ppg_adc_measurement_idac_integration.v:2625-2628	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_s1_redundancy_corrector_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3383	3401	ppg_coarse_detection_fir.v:55-63	rewrite	`ppg_coarse_detection_fir.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3383	3401	ppg_precision_window_integration.v:592-600	rewrite	`ppg_precision_window_integration.v` `ppg_coarse_detection_fir_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_IDAC_CODE_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`、`C_ENABLE_TEST_INJECTION`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3384	3402	ppg_dynamic_baseline_cross_detector.v:58-67	rewrite	`ppg_dynamic_baseline_cross_detector.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SLOPE_WIDTH`、`C_BASELINE_WIDTH`、`C_RATIO_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3384	3402	ppg_precision_window_integration.v:681-690	rewrite	`ppg_precision_window_integration.v` `ppg_dynamic_baseline_cross_detector_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SLOPE_WIDTH`、`C_BASELINE_WIDTH`、`C_RATIO_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3385	3403	ppg_peak_valley_window_detector.v:56-66	rewrite	`ppg_peak_valley_window_detector.v` `C_DATA_WIDTH`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CONFIRM_COUNT_WIDTH`、`C_INTERVAL_WIDTH`、`C_FIR_GROUP_DELAY_SAMPLES`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3385	3403	ppg_precision_window_integration.v:794-804	rewrite	`ppg_precision_window_integration.v` `ppg_peak_valley_window_detector_Inst`、`C_DATA_WIDTH`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_CONFIRM_COUNT_WIDTH`、`C_INTERVAL_WIDTH`、`C_FIR_GROUP_DELAY_SAMPLES`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3386	3404	ppg_precision_window_controller.v:62-70	rewrite	`ppg_precision_window_controller.v` `C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SWITCH_TIMEOUT_CYCLES`、`C_SWITCH_TIMEOUT_COUNTER_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3386	3404	ppg_precision_window_integration.v:896-904	rewrite	`ppg_precision_window_integration.v` `ppg_precision_window_controller_Inst`、`C_FRAME_ID_WIDTH`、`C_SAMPLE_INDEX_WIDTH`、`C_CONFIG_EPOCH_WIDTH`、`C_COEF_EPOCH_WIDTH`、`C_DC_RECOVERY_EPOCH_WIDTH`、`C_SWITCH_TIMEOUT_CYCLES`、`C_SWITCH_TIMEOUT_COUNTER_WIDTH`、`C_CODE_EPOCH_WIDTH`、`C_RUN_GENERATION_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3402	3420	`:313,324-330`	rewrite	`ppg_control_top.v` `flag_status_clear_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3403	3421	ppg_precision_window_integration.v:980-987	rewrite	`ppg_precision_window_integration.v` `ppg_amb_recheck_scheduler_Inst`、`flag_detection_discard_apply`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3404	3422	ppg_idac_code_controller.v:26,580,1123-1124	rewrite	`ppg_idac_code_controller.v` `flag_control_cancel`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3405	3423	ppg_peak_valley_window_detector.v:346-347,478-481	rewrite	`ppg_peak_valley_window_detector.v` `flag_runtime_clear`、`flag_context_clear`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3409	3427	ppg_adc_measurement_idac_integration.v:1168-1175	rewrite	`ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3409	3427	ppg_adc_measurement_idac_integration.v:1168-1175	rewrite	`ppg_adc_measurement_idac_integration.v` `integration_protocol_error_sticky_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3585	3603	ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_analog_safe`；`ppg_sar9_sar15_safe_selection_wrapper.v:25,48`（`b858bf0`版，未能定位符号）
+PPG_ALIAS_MAPPING_TABLE.md	38	40	ppg_control_top.v:945	rewrite	`ppg_control_top.v` `o_startup_idac_safe_boundary`
+PPG_ALIAS_MAPPING_TABLE.md	45	47	ppg_system_config_manager.v:394-448	rewrite	`ppg_system_config_manager.v` `flag_snapshot_valid`
+PPG_ALIAS_MAPPING_TABLE.md	67	69	ppg_precision_window_controller.v:269,672-684	rewrite	`ppg_precision_window_controller.v` `flag_lifecycle_cancel`
+PPG_ALIAS_MAPPING_TABLE.md	111	113	ppg_adc_measurement_idac_integration.v:2576-2583	rewrite	`ppg_adc_measurement_idac_integration.v` `o_mode_fault_active`
+PPG_ALIAS_MAPPING_TABLE.md	111	113	ppg_precision_window_integration.v:960-961	rewrite	`ppg_precision_window_integration.v` `o_mode_fault_active`
+PPG_ALIAS_MAPPING_TABLE.md	112	114	`:26`	rewrite	`ppg_idac_code_controller.v` `"Fix a real cross-module deadlock"`
+PPG_ALIAS_MAPPING_TABLE.md	112	114	ppg_idac_code_controller.v:170-172,580	rewrite	`ppg_idac_code_controller.v:170-172,580`（`b858bf0`版，未能定位符号）
+PPG_ALIAS_MAPPING_TABLE.md	115	117	ppg_adc_measurement_idac_integration.v:2446-2461	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_precision_window_integration_Inst`
+PPG_ALIAS_MAPPING_TABLE.md	159	161	ppg_control_top.v:355	rewrite	`ppg_control_top.v` `flag_owner_abort_event`、`@satisfies: G-FP-01`
+PPG_ALIAS_MAPPING_TABLE.md	192	194	ppg_idac_code_controller.v:285	revert	`ppg_idac_code_controller.v:285`
+PPG_ALIAS_MAPPING_TABLE.md	241	243	ppg_characterization_control_cdc.v:118	rewrite	`ppg_characterization_control_cdc.v` `o_test_mux_ctrl`、`@satisfies: ILM-14`
+PPG_ALIAS_MAPPING_TABLE.md	241	243	`:522`	rewrite	`ppg_system_config_manager.v` `active_config_o`
+PPG_ALIAS_MAPPING_TABLE.md	241	243	ppg_system_config_manager.v:369-371	rewrite	`ppg_system_config_manager.v` `flag_snapshot_char_current_optical_valid`
+PPG_ALIAS_MAPPING_TABLE.md	297	299	ppg_adc_measurement_idac_integration.v:416-418	rewrite	`ppg_adc_measurement_idac_integration.v` `DISCARD_REASON_STOP`、`DISCARD_REASON_ABORT`、`DISCARD_REASON_SYSTEM_FAULT`
+PPG_ALIAS_MAPPING_TABLE.md	302	304	`:465`	revert	`:465`
+PPG_ALIAS_MAPPING_TABLE.md	302	304	:119	revert	:119
+PPG_ALIAS_MAPPING_TABLE.md	458	460	ppg_precision_window_integration.v:443	rewrite	`ppg_precision_window_integration.v` `flag_detection_discard_apply`、`@satisfies: K04`
+PPG_ALIAS_MAPPING_TABLE.md	472	474	ppg_control_top.v:295-299	rewrite	`ppg_control_top.v` `"参数化位宽约束（架构不变量，非运行时检查）"`
+PPG_ALIAS_MAPPING_TABLE.md	481	483	ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-21, TOP-23, TOP-24`
+PPG_ALIAS_MAPPING_TABLE.md	568	751	ppg_control_top.v:295-299	rewrite	`ppg_control_top.v` `"参数化位宽约束（架构不变量，非运行时检查）"`
