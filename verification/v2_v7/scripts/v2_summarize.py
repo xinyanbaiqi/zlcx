@@ -15,6 +15,8 @@ Classification (first matching rule wins):
   NEW              any other system fault cause (each needs triage; tag lists the causes)
   KNOWN-FIX-7 / KNOWN-FIX-4   the corresponding V2SIG signature was printed (monitors otherwise clean)
   KNOWN-FIX-3      AMI integration-protocol sticky set at the end (AMI-C1 signature, monitors otherwise clean)
+V7 assertions (V7SUM lines): a failing assertion makes the point NEW, except P9a/P9b alone (MGR-C1, KNOWN-FIX-4)
+and P8 alone (IDAC idle with pending valid, an additional requirement of the repair round: KNOWN-FIX-P8).
   PASS             everything else
 `landing` is OK / MISMATCH / NONE from the V2POINT landing_ok and rule fields.
 
@@ -28,7 +30,7 @@ KV = re.compile(r'(\w+)=(\S*)')
 
 
 def parse(log):
-    d = {'mon': {}, 'sig': [], 'lost': [], 'causes_sys': [], 'causes_ami': [], 'sticky': {}, 'timeout': False}
+    d = {'mon': {}, 'sig': [], 'lost': [], 'causes_sys': [], 'causes_ami': [], 'sticky': {}, 'timeout': False, 'v7': {}}
     for line in log.read_text(encoding='utf-8', errors='replace').splitlines():
         if line.startswith('V2POINT '):
             d['point'] = dict(KV.findall(line))
@@ -45,6 +47,9 @@ def parse(log):
             d['sig'].append(line.split()[1])
         elif line.startswith('V2LOST '):
             d['lost'].append(dict(KV.findall(line)))
+        elif line.startswith('V7SUM '):
+            f = line.split()
+            d['v7'][f[1]] = f[2]
         elif line.startswith('V2TIMEOUT'):
             d['timeout'] = True
     return d
@@ -55,6 +60,8 @@ def classify(d):
     if p is None:
         return 'ERROR', 'no V2POINT'
     mon_fail = [k for k, v in d['mon'].items() if v[0] == 'FAIL']
+    v7_fail = sorted(k for k, v in d['v7'].items() if v == 'FAIL')
+    v7_known = {'P9a_MGR_STOP_ACK_FROM_RUN': 'KNOWN-FIX-4', 'P9b_MGR_IDLE_NO_STOP_EPISODE': 'KNOWN-FIX-4', 'P8_IDAC_IDLE_NO_PENDING': 'KNOWN-FIX-P8'}
     ev = p.get('event', '')
     end = p.get('end', '')
     held = p.get('done_mode') in ('1', '3') or p.get('idle_mode') == '1'
@@ -65,6 +72,11 @@ def classify(d):
     if ev == 'FOREVER':
         ok = ('07' in d['causes_sys'] or '07' in d['causes_ami']) and d['mon'].get('LIVENESS', ('FAIL',))[0] == 'PASS' and p.get('blocking') == '1'
         return ('PASS', 'expected cause07+blocking') if ok else ('NEW', 'FOREVER without cause 07/blocking')
+    if v7_fail and not abnormal and all(n in v7_known for n in v7_fail):
+        return sorted({v7_known[n] for n in v7_fail})[0], 'V7 ' + ','.join(v7_fail)
+    if v7_fail:
+        abnormal = True
+        mon_fail = mon_fail + ['V7:' + n for n in v7_fail]
     if abnormal:
         return 'NEW', ','.join(mon_fail + ([f'end={end}'] if end != 'DONE' else []) + (['restart_rejected'] if bad_restart else []))
     if '04' in d['causes_sys'] and any(int(l.get('tick', '0')) >= 4760 for l in d['lost']):
@@ -99,16 +111,17 @@ def main(run_dir, title='V2 sweep'):
         if rule in ('next_conv', 'observe') and landing == 'MISMATCH':
             landing = 'INFO'
         mons = ' '.join(f"{k}:{v[0]}" for k, v in d['mon'].items())
+        v7f = ','.join(sorted(k for k, v in d['v7'].items() if v == 'FAIL')) or ('-' if d['v7'] else 'not_bound')
         rows.append({
             'point': pd.name, 'mode': p.get('mode', ''), 'event': p.get('event', ''), 'slot': p.get('slot', ''),
             'target': f"f{p.get('frame', '')}/t{p.get('tick', '')}" + (f"/sf{p.get('sf')}lt{p.get('lt')}" if p.get('sf', '-1') != '-1' else ''),
             'landed': f"f{p.get('land_frame', '')}/t{p.get('land_tick', '')}/sf{p.get('land_sf', '')}lt{p.get('land_lt', '')}",
-            'landing': landing, 'rule': rule, 'verdict': verdict, 'why': why, 'monitors': mons,
+            'landing': landing, 'rule': rule, 'verdict': verdict, 'why': why, 'monitors': mons, 'v7_fail': v7f,
             'sys_causes': ','.join(d['causes_sys']) or '-', 'ami_causes': ','.join(d['causes_ami']) or '-',
             'sigs': ','.join(sorted(set(d['sig']))) or '-', 'end': p.get('end', ''), 'cycles': p.get('cycles', ''), 'seconds': secs,
             'log': str(log),
         })
-    cols = ['point', 'mode', 'event', 'slot', 'target', 'landed', 'landing', 'rule', 'verdict', 'why', 'monitors', 'sys_causes', 'ami_causes', 'sigs', 'end', 'cycles', 'seconds', 'log']
+    cols = ['point', 'mode', 'event', 'slot', 'target', 'landed', 'landing', 'rule', 'verdict', 'why', 'monitors', 'v7_fail', 'sys_causes', 'ami_causes', 'sigs', 'end', 'cycles', 'seconds', 'log']
     with open(run / 'summary.tsv', 'w', encoding='utf-8', newline='\n') as f:
         f.write('\t'.join(cols) + '\n')
         for r in rows:

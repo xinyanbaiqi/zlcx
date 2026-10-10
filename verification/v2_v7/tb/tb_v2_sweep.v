@@ -1036,7 +1036,7 @@ module tb_v2_sweep();
 			pre_tick = v2_target_tick - lead;
 			pre_frame = v2_target_frame;
 			if(pre_tick < 0) begin pre_tick = pre_tick + 5000; pre_frame = pre_frame - 1; end
-			v2_wait_frame_tick(pre_frame, pre_tick, 200000, ok);
+			v2_wait_frame_tick(pre_frame, pre_tick, (pre_frame + 3) * 5000 + 100000, ok);
 		end
 	endtask
 
@@ -1176,7 +1176,7 @@ module tb_v2_sweep();
 		// 注入事件
 		if(ev == "NONE") begin
 			v2_landing_rule = "none";
-			v2_wait_frame_tick(v2_target_frame, v2_target_tick, 200000, ok);
+			v2_wait_frame_tick(v2_target_frame, v2_target_tick, (v2_target_frame + 3) * 5000 + 100000, ok);
 		end else if((ev == "STOP") || (ev == "START_DELAY")) begin
 			// 本TB的等待口径下（v2_wait_frame_tick在上升沿后判定、task_pulse_stop在下一下降沿拉高），STOP到调度器i_stop_ack_event实测2拍，故提前2拍发出
 			v2_landing_rule = "exact";
@@ -1213,7 +1213,7 @@ module tb_v2_sweep();
 			if(ev == "LATE") v2_watch_rise = 1'b1; else v2_watch_idle = 1'b1;
 			q3_tick = (slot_code == 1) ? 460 : (slot_code == 2) ? -1 : 300;
 			if(slot_code == 2) q3_tick = 625 * ((v2_target_sf >= 0) ? v2_target_sf : 0) + 266;
-			v2_wait_frame_tick(v2_target_frame, 1, 200000, ok);
+			v2_wait_frame_tick(v2_target_frame, 1, (v2_target_frame + 3) * 5000 + 100000, ok);
 			v2_arm_fault((ev == "LATE") ? 3'd2 : 3'd3, (slot_code == 3) ? 2'd0 : slot_code[1:0], 16'd1, 8'd1,
 				(v2_target_tick > q3_tick) ? 3'd0 : 3'd1, v2_target_tick[12:0]);
 		end else if(ev == "PREC_IR_LOST") begin
