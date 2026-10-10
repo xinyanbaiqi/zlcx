@@ -1,0 +1,811 @@
+[
+  {
+    "name": "normal_both_sar9_a5",
+    "precision": 0,
+    "optical_mode": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_both_sar9_5a",
+    "precision": 0,
+    "optical_mode": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_both_sar9_00",
+    "precision": 0,
+    "optical_mode": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_both_sar9_ff",
+    "precision": 0,
+    "optical_mode": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "normal_red_sar9_a5",
+    "precision": 0,
+    "optical_mode": 1,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_red_sar9_5a",
+    "precision": 0,
+    "optical_mode": 1,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_red_sar9_00",
+    "precision": 0,
+    "optical_mode": 1,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_red_sar9_ff",
+    "precision": 0,
+    "optical_mode": 1,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "normal_ir_sar9_a5",
+    "precision": 0,
+    "optical_mode": 2,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_ir_sar9_5a",
+    "precision": 0,
+    "optical_mode": 2,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_ir_sar9_00",
+    "precision": 0,
+    "optical_mode": 2,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_ir_sar9_ff",
+    "precision": 0,
+    "optical_mode": 2,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "normal_both_sar15_a5",
+    "precision": 1,
+    "optical_mode": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_both_sar15_5a",
+    "precision": 1,
+    "optical_mode": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_both_sar15_00",
+    "precision": 1,
+    "optical_mode": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_both_sar15_ff",
+    "precision": 1,
+    "optical_mode": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "normal_red_sar15_a5",
+    "precision": 1,
+    "optical_mode": 1,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_red_sar15_5a",
+    "precision": 1,
+    "optical_mode": 1,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_red_sar15_00",
+    "precision": 1,
+    "optical_mode": 1,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_red_sar15_ff",
+    "precision": 1,
+    "optical_mode": 1,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "normal_ir_sar15_a5",
+    "precision": 1,
+    "optical_mode": 2,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "normal_ir_sar15_5a",
+    "precision": 1,
+    "optical_mode": 2,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "normal_ir_sar15_00",
+    "precision": 1,
+    "optical_mode": 2,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "normal_ir_sar15_ff",
+    "precision": 1,
+    "optical_mode": 2,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "cal_amb_a5",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "cal_amb_5a",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "cal_amb_00",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "cal_amb_ff",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "cal_dcs_red_a5",
+    "frame_type": 1,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "cal_dcs_red_5a",
+    "frame_type": 1,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "cal_dcs_red_00",
+    "frame_type": 1,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "cal_dcs_red_ff",
+    "frame_type": 1,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "cal_dcs_ir_a5",
+    "frame_type": 1,
+    "color": 1,
+    "precision": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "cal_dcs_ir_5a",
+    "frame_type": 1,
+    "color": 1,
+    "precision": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "cal_dcs_ir_00",
+    "frame_type": 1,
+    "color": 1,
+    "precision": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "cal_dcs_ir_ff",
+    "frame_type": 1,
+    "color": 1,
+    "precision": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "precision_switch_0_1",
+    "precisions": [
+      0,
+      1
+    ]
+  },
+  {
+    "name": "precision_switch_1_0",
+    "precisions": [
+      1,
+      0
+    ]
+  },
+  {
+    "name": "owner_miss_red",
+    "miss_owner": "red"
+  },
+  {
+    "name": "owner_miss_ir",
+    "miss_owner": "ir"
+  },
+  {
+    "name": "owner_miss_cal",
+    "miss_owner": "cal",
+    "frame_type": 0
+  },
+  {
+    "name": "owner_at_deadline_normal9",
+    "owner_tick": 283,
+    "ir_owner_tick": 443
+  },
+  {
+    "name": "owner_at_deadline_normal15",
+    "precision": 1,
+    "owner_tick": 283,
+    "ir_owner_tick": 443
+  },
+  {
+    "name": "owner_at_deadline_cal",
+    "frame_type": 0,
+    "owner_tick": 248
+  },
+  {
+    "name": "char_photodiode_red_sar9",
+    "characterization": true,
+    "precision": 0,
+    "optical_mode": 1
+  },
+  {
+    "name": "char_current_both_sar9",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 0,
+    "precision": 0
+  },
+  {
+    "name": "char_current_red_sar9",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 1,
+    "precision": 0
+  },
+  {
+    "name": "char_current_ir_sar9",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 2,
+    "precision": 0
+  },
+  {
+    "name": "char_photodiode_red_sar15",
+    "characterization": true,
+    "precision": 1,
+    "optical_mode": 1
+  },
+  {
+    "name": "char_current_both_sar15",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 0,
+    "precision": 1
+  },
+  {
+    "name": "char_current_red_sar15",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 1,
+    "precision": 1
+  },
+  {
+    "name": "char_current_ir_sar15",
+    "characterization": true,
+    "input_source": 1,
+    "optical_mode": 2,
+    "precision": 1
+  },
+  {
+    "name": "static_bias",
+    "static": true,
+    "characterization": true,
+    "input_source": 1
+  },
+  {
+    "name": "stop_red_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 43
+  },
+  {
+    "name": "stop_red_sar9_after_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 45
+  },
+  {
+    "name": "stop_red_sar9_before_q1",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 292
+  },
+  {
+    "name": "stop_red_sar9_in_q3",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 300
+  },
+  {
+    "name": "stop_red_sar9_after_q3",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 302
+  },
+  {
+    "name": "stop_red_sar9_before_end",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 317
+  },
+  {
+    "name": "abort_red_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 43
+  },
+  {
+    "name": "abort_red_sar9_after_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 45
+  },
+  {
+    "name": "abort_red_sar9_before_q1",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 292
+  },
+  {
+    "name": "abort_red_sar9_in_q3",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 300
+  },
+  {
+    "name": "abort_red_sar9_after_q3",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 302
+  },
+  {
+    "name": "abort_red_sar9_before_end",
+    "precision": 0,
+    "optical_mode": 1,
+    "abort_tick": 317
+  },
+  {
+    "name": "stop_ir_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 203
+  },
+  {
+    "name": "stop_ir_sar9_after_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 205
+  },
+  {
+    "name": "stop_ir_sar9_before_q1",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 452
+  },
+  {
+    "name": "stop_ir_sar9_in_q3",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 460
+  },
+  {
+    "name": "stop_ir_sar9_after_q3",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 462
+  },
+  {
+    "name": "stop_ir_sar9_before_end",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 477
+  },
+  {
+    "name": "abort_ir_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 203
+  },
+  {
+    "name": "abort_ir_sar9_after_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 205
+  },
+  {
+    "name": "abort_ir_sar9_before_q1",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 452
+  },
+  {
+    "name": "abort_ir_sar9_in_q3",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 460
+  },
+  {
+    "name": "abort_ir_sar9_after_q3",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 462
+  },
+  {
+    "name": "abort_ir_sar9_before_end",
+    "precision": 0,
+    "optical_mode": 2,
+    "abort_tick": 477
+  },
+  {
+    "name": "stop_red_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 26
+  },
+  {
+    "name": "stop_red_sar15_after_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 28
+  },
+  {
+    "name": "stop_red_sar15_before_q1",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 283
+  },
+  {
+    "name": "stop_red_sar15_in_q3",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 300
+  },
+  {
+    "name": "stop_red_sar15_after_q3",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 305
+  },
+  {
+    "name": "stop_red_sar15_before_end",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 307
+  },
+  {
+    "name": "abort_red_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 26
+  },
+  {
+    "name": "abort_red_sar15_after_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 28
+  },
+  {
+    "name": "abort_red_sar15_before_q1",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 283
+  },
+  {
+    "name": "abort_red_sar15_in_q3",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 300
+  },
+  {
+    "name": "abort_red_sar15_after_q3",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 305
+  },
+  {
+    "name": "abort_red_sar15_before_end",
+    "precision": 1,
+    "optical_mode": 1,
+    "abort_tick": 307
+  },
+  {
+    "name": "stop_ir_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 186
+  },
+  {
+    "name": "stop_ir_sar15_after_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 188
+  },
+  {
+    "name": "stop_ir_sar15_before_q1",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 443
+  },
+  {
+    "name": "stop_ir_sar15_in_q3",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 460
+  },
+  {
+    "name": "stop_ir_sar15_after_q3",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 465
+  },
+  {
+    "name": "stop_ir_sar15_before_end",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 467
+  },
+  {
+    "name": "abort_ir_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 186
+  },
+  {
+    "name": "abort_ir_sar15_after_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 188
+  },
+  {
+    "name": "abort_ir_sar15_before_q1",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 443
+  },
+  {
+    "name": "abort_ir_sar15_in_q3",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 460
+  },
+  {
+    "name": "abort_ir_sar15_after_q3",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 465
+  },
+  {
+    "name": "abort_ir_sar15_before_end",
+    "precision": 1,
+    "optical_mode": 2,
+    "abort_tick": 467
+  },
+  {
+    "name": "snapshot_payload_changes_sar9",
+    "precision": 0,
+    "perturb_payload": true
+  },
+  {
+    "name": "snapshot_payload_changes_sar15",
+    "precision": 1,
+    "perturb_payload": true
+  }
+]

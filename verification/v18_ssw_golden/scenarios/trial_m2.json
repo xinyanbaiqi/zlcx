@@ -1,0 +1,293 @@
+{
+  "status": "MISMATCH",
+  "rows": 5008,
+  "structure_errors": [],
+  "audit": {
+    "wave_fire": 2,
+    "owner_fire": 2,
+    "clock_low_errors": 0,
+    "stability_errors": 0
+  },
+  "signals": {
+    "o_en_tia_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_leddac": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_leden1_low": {
+      "mismatch_ticks": 1,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 1,
+      "first": {
+        "row": 306,
+        "tick": 298,
+        "macro_tick": 298,
+        "local_tick": 298,
+        "expected": 0,
+        "actual": 1
+      },
+      "last_tick": 298
+    },
+    "o_leden2_low": {
+      "mismatch_ticks": 1,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 1,
+      "first": {
+        "row": 466,
+        "tick": 458,
+        "macro_tick": 458,
+        "local_tick": 458,
+        "expected": 0,
+        "actual": 1
+      },
+      "last_tick": 458
+    },
+    "o_en_test": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_buf_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_2m": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_iref_idac_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_9q1_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_15q1_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_aferst_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_iref_idac_sar9_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_iref_idac_sar15_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_q2_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_q3_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_clk_tiaen_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_en_15sar_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_en_sar9_amb_low": {
+      "mismatch_ticks": 54,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 54,
+      "first": {
+        "row": 264,
+        "tick": 256,
+        "macro_tick": 256,
+        "local_tick": 256,
+        "expected": 1,
+        "actual": 0
+      },
+      "last_tick": 309
+    },
+    "o_en_sar9_dc_low": {
+      "mismatch_ticks": 54,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 54,
+      "first": {
+        "row": 264,
+        "tick": 256,
+        "macro_tick": 256,
+        "local_tick": 256,
+        "expected": 1,
+        "actual": 0
+      },
+      "last_tick": 309
+    },
+    "o_en_sar9_iref": {
+      "mismatch_ticks": 72,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 72,
+      "first": {
+        "row": 244,
+        "tick": 236,
+        "macro_tick": 236,
+        "local_tick": 236,
+        "expected": 1,
+        "actual": 0
+      },
+      "last_tick": 307
+    },
+    "o_en_sar15_amb_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_en_sar15_dc_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_en_sar15_iref": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_idac_sar9ambn_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_idac_sar9dcn_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_idac_sar15ambn_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_idac_sar15dcn_low": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    },
+    "o_s_in": {
+      "mismatch_ticks": 0,
+      "compared_ticks": 5004,
+      "unknown_ticks": 0,
+      "mismatch_bits": 0,
+      "first": null,
+      "last_tick": null
+    }
+  },
+  "planned_fires": {
+    "wave_fire": 2,
+    "owner_fire": 2
+  },
+  "handshake_matches_plan": true,
+  "scenario": {
+    "name": "normal_both_sar9_a5",
+    "precision": 0,
+    "optical_mode": 0,
+    "patterns": [
+      165,
+      90,
+      0,
+      255
+    ]
+  },
+  "trace_sha256": {
+    "expected.csv": "18262e5699d3c14e1413a5c063e3aefd634328a5e36ca10872dc680b8f7fc921",
+    "actual.csv": "56cde51d438b4c70c5b0fc4384c4bf16a24a5946bf2ea40ece9443ef8df2cc55",
+    "stimulus.hex": "a35ce41cffcde49a448ae4709e5adfcd4daa368aa1a3dcea580ac1ac7bfe43e5"
+  }
+}
