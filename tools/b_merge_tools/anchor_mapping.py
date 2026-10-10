@@ -70,7 +70,11 @@ def main():
     for path in a.review or []:
         with open(path, encoding='utf-8') as fh:
             for row in csv.DictReader(fh, delimiter='\t'):
-                review[(row['doc'], int(row['line']), row['old'])] = row
+                # optional 'col' pins a decision to one occurrence when the same old text recurs in a line
+                if row.get('col'):
+                    review[(row['doc'], int(row['line']), row['old'], int(row['col']))] = row
+                else:
+                    review[(row['doc'], int(row['line']), row['old'])] = row
     docs = {d: git(a.repo, 'show', '%s:contracts/%s' % (a.base, d)).split('\n') for d in (MATRIX, ALIAS)}
     cid = {}
     for l in docs[MATRIX]:
@@ -144,7 +148,7 @@ def main():
         else:
             raise SystemExit('no decision for %s:%d %s (%s)' % (r['file'], r['line'], r['text'], st))
         # later review files override earlier ones (round 4 after round 3), see the loader
-        rv = review.get((r['file'], r['line'], r['text']))
+        rv = review.get((r['file'], r['line'], r['text'], r.get('pos', 0))) or review.get((r['file'], r['line'], r['text']))
         if rv is not None and cls == 'convert':
             if rv['action'] == 'sym':
                 new = '`%s` %s' % (rv['arg1'], '、'.join('`%s`' % s for s in rv['arg2'].split(',')))
@@ -155,7 +159,7 @@ def main():
             elif rv['action'] == 'text':
                 new = rv['arg1']
                 source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
-            elif rv['action'] in ('history', 'not-anchor'):
+            elif rv['action'] in ('history', 'not-anchor', 'history-superseded'):
                 cls, new = rv['action'], ''
                 source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
             elif rv['action'] in ('note', 'keep'):

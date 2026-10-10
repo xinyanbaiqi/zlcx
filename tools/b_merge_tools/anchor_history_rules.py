@@ -37,6 +37,25 @@ REVISION_HEADING = re.compile(r'修订记录|变更记录|修订历史|版本记
 SUPERSEDED = re.compile(r'(以上|上述|前述|此前|前一条|该条|本条)[^|。]{0,24}?(作废|不成立|已被[^|。]{0,24}?取代|已撤回|已废止)'
                         r'|[Ss]uperseded\b|no longer (?:valid|holds|applies)')
 CORRECTION = re.compile(r'勘误|订正|更正|纠正|补记|补充|取代|改判|corrected|errat')
+# class 3 without strikethrough, by wording right at the anchor (coordinator review of
+# 67707b3): the anchor itself is named as the old / voided / wrong reference.
+#   before it: "corrected from stale `:234`", "旧文字把C01 `:632`", "旧范围若按+15换算得`:N`",
+#              "矩阵标`:1972`", "——**不是**`f.v:285`", "原格实为\"`:2092,2005`\""
+#   after it:  "`:234` (unrelated §4 heading)", "`:1972`,实际`:1987`", "\"`:2005,2092`\"顺序有误",
+#              the old side of an old->new pair "`:2005`-`:2025`→`:2020`-`:2040`"
+SUPERSEDED_BEFORE = re.compile(r'(?:\bstale|corrected\s+from|旧锚点|旧引用|旧文字把[^`|]{0,8}|旧范围[^`|，。]{0,12}得|原写|原先|曾指|原引用|'
+                               r'矩阵标|\*\*不是\*\*|原格实为["“]?)\s*`?$', re.I)
+SUPERSEDED_AFTER = re.compile(r'^[`"”]?\s*(?:[(（]\s*unrelated\b|[,，]\s*实际\s*`|顺序有误|'
+                              r'(?:[-–]\s*`:\d+`\s*)?(?:及\s*`:\d+`\s*)?→\s*`:\d)', re.I)  # old->new pair of bare line numbers
+
+
+def superseded_wording(line, pos, end):
+    """The wording that marks line[pos:end] itself as an explicitly superseded old anchor, or None."""
+    m = SUPERSEDED_BEFORE.search(line[max(0, pos - 30):pos])
+    if m:
+        return m.group(0).strip()
+    m = SUPERSEDED_AFTER.match(line[end:end + 40])
+    return m.group(0).strip() if m else None
 
 
 def heading_of(lines, n):
@@ -77,7 +96,7 @@ def classify(lines, n, pos, end):
         return 'history-revision', False
     a, b = cell_bounds(line, pos)
     after = line[end:b]
-    if SUPERSEDED.search(after):
+    if SUPERSEDED.search(after) or superseded_wording(line, pos, end):
         return 'history-superseded', False
     uncertain = any(CORRECTION.search(after[m.start():m.start() + 120]) for m in DATE.finditer(after))
     return None, uncertain
@@ -100,6 +119,17 @@ SAMPLES = [
     (['## 12.5', '| X | `ppg_x.v:5` | 2026-09-30勘误：另一格 |'], 2, 'ppg_x.v:5', None, False),
     (['## 12.5', '| X | 上述作废的说明在另一格 | `ppg_x.v:5` |'], 2, 'ppg_x.v:5', None, False),
     (['## 历史', '| X | 2026-09-10 `ppg_x.v:5` |'], 2, 'ppg_x.v:5', None, False),
+    # class 3 by wording at the anchor (coordinator review of 67707b3)
+    (['## 12.5', '| X | Anchor corrected from stale `:234` (unrelated §4 heading) to the row. |'], 2, '`:234`', 'history-superseded', False),
+    (['## 12.5', '| X | 旧文字把C01 `:632`称作“idle来源映射” |'], 2, '`:632`', 'history-superseded', False),
+    (['## 12.5', '| X | `i_clk`矩阵标`:1972`,实际`:1987` |'], 2, '`:1972`', 'history-superseded', False),
+    (['## 12.5', '| X | `i_clk`矩阵标`:1972`,实际`:1987` |'], 2, '`:1987`', None, False),
+    (['## 12.5', '| X | fork连接点21个（`:2005`-`:2025`→`:2020`-`:2040`） |'], 2, '`:2005`', 'history-superseded', False),
+    (['## 12.5', '| X | fork连接点21个（`:2005`-`:2025`→`:2020`-`:2040`） |'], 2, '`:2020`', None, False),
+    (['## 12.5', '| X | 已打标签)——**不是**`ppg_x.v:285` |'], 2, 'ppg_x.v:285', 'history-superseded', False),
+    (['## 12.5', '| X | Producer: `ppg_x.v:5` -> PWI `:768` (unrelated to Y) |'], 2, 'ppg_x.v:5', None, False),
+    (['## 12.5', '| X | 作废旧锚点,已打标签);`:696`(`reacquire_active_o`) |'], 2, '`:696`', None, False),
+    (['## G', '| G-FP-03 | `ppg_x.v:139` → `ppg_y.v:960-961` → `ppg_z.v:2576` |'], 2, 'ppg_x.v:139', None, False),
 ]
 
 

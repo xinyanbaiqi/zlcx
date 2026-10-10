@@ -1,0 +1,47 @@
+doc	line	col	old	action	arg1	arg2	reason
+PPG_CONTRACT_CLOSURE_MATRIX.md	1497	754	`:632`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“旧文字把C01”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1577	425	`:234`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1585	446	`:245`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1596	409	`:247`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	472	ppg_idac_code_controller.v:67-207	sym	ppg_idac_code_controller.v	ppg_idac_code_controller	第五轮：“`ppg_idac_code_controller.v:67-207`声明区”：所指为模块端口声明区，取模块名（原解析取本行端口o_idac_idle）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	620	`:602-682`	text	`ppg_idac_code_controller.v` `"输出信号连线"`		第五轮：“模块自身文件内引用（声明行+实现行，如`:602-682`）”：b1de2e0版602-682行为“输出信号连线”段，改为该段标题注释原文锚点（原解析取本行端口o_idac_idle）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	853	`:2306`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“行号引用（形如"`:2306`"至"`:2427`"）统一比实际行号少15”：旧行号示例，本格明示错误
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	863	`:2427`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：同上，旧行号示例`:2427`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	915	`:2306`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	925	`:2321`	sym	ppg_adc_measurement_idac_integration.v	ppg_idac_code_controller_Inst,i_clk	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_clk`矩阵标`:2306`，实际`:2321`”：b1de2e0版AMI为IDAC控制器例化的`.i_clk(i_clk)`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	951	`:2427`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	961	`:2442`	sym	ppg_adc_measurement_idac_integration.v	ppg_idac_code_controller_Inst,o_idac_idle	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“本行`o_idac_idle`…实际`:2442`”：AMI中IDAC控制器例化的`.o_idac_idle(`连接
+PPG_CONTRACT_CLOSURE_MATRIX.md	2182	912	`:1359-1377`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“旧范围若按+15换算得”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	732	ppg_normal_transaction_fork.v:61-146	sym	ppg_normal_transaction_fork.v	ppg_normal_transaction_fork	第五轮：“与`ppg_normal_transaction_fork.v:61-146`独立核对的端口声明”：所指为模块端口声明区，取模块名（原解析取本行端口o_local_empty）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	993	`:61-146`	sym	ppg_normal_transaction_fork.v	ppg_normal_transaction_fork	第五轮：“本子模块自身文件声明行引用（`:61-146`）”：同上
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1082	`:1972`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“如`i_clk`标`:1972`”：矩阵原标的旧行号（统一少15），本格明示错误
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1114	`:2005`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“`i_measurement_ready`所引的`:2005`等…统一比实际行号少15”：旧行号，本格明示错误
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1159	`:1972`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1169	`:1987`	sym	ppg_adc_measurement_idac_integration.v	ppg_normal_transaction_fork_Inst,i_clk	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_clk`…实际`:1987`”：d18c695版AMI 1987行为fork例化的`.i_clk(i_clk)`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1215	`:1983`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1225	`:1998`	sym	ppg_adc_measurement_idac_integration.v	ppg_normal_transaction_fork_Inst,i_datapath_discard_run_generation	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_datapath_discard_run_generation`…实际`:1998`”：d18c695版AMI 1998行为fork例化的该端口连接
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1761	`:2005`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2025`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1769	`:2025`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1777	`:2020`	sym	ppg_adc_measurement_idac_integration.v	ppg_normal_transaction_fork_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“fork自身连接点21个（…→`:2020`-`:2040`）”：d18c695版AMI 2020~2040行为fork例化的端口连接
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1785	`:2040`	sym	ppg_adc_measurement_idac_integration.v	ppg_normal_transaction_fork_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（区间终点`:2040`）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1839	`:2071`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2090`及`:2092`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1847	`:2090`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“及`:2092`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1855	`:2092`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1863	`:2086`	sym	ppg_adc_measurement_idac_integration.v	ppg_adc_pipeline_overlap_corrector_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“overlap_corrector例化连接点21个（…→`:2086`-`:2105`及`:2107`）”：d18c695版AMI为该例化的端口连接
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1871	`:2105`	sym	ppg_adc_measurement_idac_integration.v	ppg_adc_pipeline_overlap_corrector_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2105`）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1879	`:2107`	sym	ppg_adc_measurement_idac_integration.v	ppg_adc_pipeline_overlap_corrector_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2107`）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1900	`:2074`	sym	ppg_adc_measurement_idac_integration.v	ppg_adc_pipeline_overlap_corrector_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“逐端口名对照AMI内该例化`:2074`-`:2135`”：d18c695版AMI 2074行为`)ppg_adc_pipeline_overlap_corrector_Inst(`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1908	`:2135`	sym	ppg_adc_measurement_idac_integration.v	ppg_adc_pipeline_overlap_corrector_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（例化块终点`:2135`）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1975	`:2359`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2374`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1983	`:2374`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1991	`:2374`	sym	ppg_adc_measurement_idac_integration.v	ppg_idac_code_controller_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“IDAC控制器例化连接点16个（…→`:2374`-`:2389`）”：d18c695版AMI为该例化的端口连接
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	1999	`:2389`	sym	ppg_adc_measurement_idac_integration.v	ppg_idac_code_controller_Inst	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2389`）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2044	`:1336`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:1”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2052	`:1351`	sym	ppg_adc_measurement_idac_integration.v	measurement_result_discard_run_generation_o	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“AMI内部信号（`:1336`→`:1351`）”：d18c695版AMI 1351行为measurement_result_discard_run_generation_o寄存器赋值
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2060	`:912`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:9”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2067	`:919`	sym	ppg_adc_measurement_idac_integration.v	flag_normal_track_qualified	第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`:912`→`:919`”：d18c695版AMI 919行为`assign flag_normal_track_qualified`（同2843行所述）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2122	`:912`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“`:912`实际只差+7”：指旧行号`:912`本身（实为`:919`），明示取代
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2207	`:1336`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“…连接锚点及`:1336`处”：指旧行号`:1336`（实为`:1351`），明示取代
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2256	`:2005,2092`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“"顺序有误”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2284	`:2092,2005`	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“原格实为"”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
+PPG_ALIAS_MAPPING_TABLE.md	192	213	ppg_idac_code_controller.v:285	history-superseded			第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“**不是**`”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording）
