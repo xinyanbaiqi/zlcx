@@ -3,24 +3,24 @@
 > 依据：`verification_reports/B_MERGE_BATCH_BRIEF_20261009.md`（下称“交接书”）§7。
 > 分支：`b-merge-batch`；基线：`7a8eabf`；终版回归提交：`5d8ceba`；终版回归证据：`b161d13`。
 > 分支最终提交是本报告所在的提交（`b-merge-batch` HEAD）。相对终版回归提交`5d8ceba`的改动如下，可用`git diff --stat 5d8ceba HEAD`复核：`rtl/`只有一处注释改动（supervisor补`@satisfies: SUP-08`，去注释后与`7a8eabf`逐字节相同，见`final_strip_proof/`）；`contracts/`为锚点第二轮、C24 V1.7（SUP-08改写）及其版本联动、别名表SUP-08行、矩阵§13.1与§12.4a；`tools/`为锚点工具第二、三轮（`anchor_history_rules.py`、`anchor_semantics.py`、`anchor_round3.py`、增量写入与复核）、anchor_check语义模式（随门禁执行）、`verlink`第二次联动、reconcile报告刷新。TB与RTL逻辑没有改动，统筹已裁定这些改动不需要重跑全套回归，终版回归结论适用于分支HEAD。
-> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~21）。
+> 总表：`verification_reports/B_MERGE_BATCH_ITEMS.md`。进度记录：`verification_reports/B_MERGE_BATCH_PROGRESS.md`（条目1~22）。
 > 二级清单：`verification_reports/POST_TAPEOUT_DOC_CLEANUP_LIST.md`。证据目录：`verification_reports/b_merge_batch_evidence/`。
 
 ---
 
 ## 0. 结论
 
-- **合同、矩阵、别名表已按基线`7a8eabf`的RTL一次性改对。** 总表140项中：
+- **合同、矩阵、别名表已按基线`7a8eabf`的RTL一次性改对。** 总表141项中：
   - 已完成116项（含并入BMI-133的BMI-012）；
   - 只登记或不做8项，各有理由（§3）；
   - 二级登记2项，已进二级清单；
   - 排除项14项，各有去向（§3.3；BMI-911、BMI-912为统筹10-09、10-10意见新增，BMI-913为锚点第四轮扩查登记）；
-  - 待裁定0项。报告初稿§9列出的6项执行判断，统筹已于2026-10-09裁定并已执行（§9）。
+  - 待裁定1项：BMI-914（锚点第五轮发现的按名解析锚点问题，§8）。报告初稿§9列出的6项执行判断，统筹已于2026-10-09裁定并已执行（§9）。
 - **RTL逻辑没有改动。** 6个RTL文件只动了注释：§3.9点名的3处，加上`@satisfies`17处（含按统筹裁定补的SUP-08）。去掉注释后，与`7a8eabf`逐字节相同。
 - **TB只改了标签字符串。** 7个TB去掉注释和字符串后与`7a8eabf`相同（§5）。
 - **符号锚点体系已建立并接入门禁。**
-  - 矩阵与别名表的9702个旧行号锚点全部有了去向：9249处改为符号锚点；440处作为历史保留（①删除线内8、②"> "历史块30、③被后续条目取代的旧条目402）；13处为非锚点、仓库外引用或其它历史。按统筹10-09裁定，带日期的现行结论也已转换（锚点第二轮）；按统筹10-10核对意见，又做了语义一致性复查（锚点第三轮，§8）。其后按统筹的跟进意见补正了端口台账：端口列是行主题，锚点文件有同名端口即取同名。第三轮终版相对第二轮共改写554处。按统筹对`66bebdf`的核对意见，第四轮把56条低置信逐条判定（不再“保留原解析”），并扩查了G-FP-05参数绑定、裸行号文件归属、范围锚点和例化端口连接（§8）。
-  - `anchor_check.py`在HEAD上0报错，含语义模式，规则有四条：锚点符号必须等于格内写明的符号；端口台账行中，锚点文件有本行同名端口时，锚点必须取它；符号必须由本行述及（否则须在例外表写明理由）；参数绑定锚点必须落在target模块的例化上。该模式随门禁执行，负对照恰好命中。
+  - 矩阵与别名表的9702个旧行号锚点全部有了去向：9225处改为符号锚点；467处作为历史保留（①删除线内8、②"> "历史块30、③被后续条目取代的旧条目429，其中无删除线、格内措辞明示取代的27）；10处为非锚点、仓库外引用或其它历史。按统筹10-09裁定，带日期的现行结论也已转换（锚点第二轮）；按统筹10-10核对意见，又做了语义一致性复查（锚点第三轮，§8）。其后按统筹的跟进意见补正了端口台账：端口列是行主题，锚点文件有同名端口即取同名。第三轮终版相对第二轮共改写554处。按统筹对`66bebdf`的核对意见，第四轮把56条低置信逐条判定（不再“保留原解析”），并扩查了G-FP-05参数绑定、裸行号文件归属、范围锚点和例化端口连接（§8）。第五轮按统筹对`67707b3`的意见，把格内明示已被取代的旧锚点（如“corrected from stale `:234`”）全部恢复原文并归历史类；同时发现一批按名解析的锚点所引行号与所取符号不符，已登记BMI-914待统筹决定。
+  - `anchor_check.py`在HEAD上0报错，含语义模式，规则有五条：锚点符号必须等于格内写明的符号；端口台账行中，锚点文件有本行同名端口时，锚点必须取它；符号必须由本行述及（否则须在例外表写明理由）；参数绑定锚点必须落在target模块的例化上；格内明示已被取代的旧锚点不得被转换。该模式随门禁执行，负对照恰好命中。
   - 门禁接在模块级回归入口开头，检查失败则整轮报错。回归机上做过两次演示：一次通过，一次负对照失败。
 - **回归：基线与终版在同一台回归机上用同一分组运行**（i5-10400，Vivado 2022.2）。
   - 两次结果都是：系统20/20、PASS 1250行、芯片20/0、模块级28/28。
@@ -58,6 +58,7 @@
 | RTL疑点 | 1 | BMI-057（§7） |
 | 不做 | 3 | BMI-161：交接书§0.3规定TB只允许改PASS标签。BMI-188、189：核对后无需改 |
 | 排除项 | 14 | BMI-900~913，去向见§3.3（此前漏计BMI-911、912，一并订正） |
+| 待裁定 | 1 | BMI-914（§8第五轮，待统筹决定） |
 
 阶段2改写合同时，有两处是核对RTL才发现的。两处都按RTL订正了合同，RTL没有改：
 - **BMI-058**：C10 §6.11写的私有datapath discard扇出范围比RTL宽。RTL中只有fork和overlap有`i_datapath_discard_*`端口。
@@ -94,6 +95,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | BMI-911 | reconcile报告E_STALE_MATRIX_TEXT 16项与B_TAG_MISSING 22项的逐ID闭环 | 流片前验证收尾计划V8逐ID闭环，不进二级清单（统筹10-09裁定；ID清单见总表BMI-911与矩阵§13.1） |
 | BMI-912 | SUP-08：cause 8'h01、8'h03经STOPPING后不复位重启的检查（终版TB只覆盖8'h02/06/07） | P1补测试，用现有注入机制构造（统筹10-10），本批不做 |
 | BMI-913 | G-FP-05台账基线3369行“own-default 7”与基线RTL（9个）不符 | 本批只改锚点，计数文字交修复轮订正 |
+| BMI-914 | 按名解析（resolved-by-name）锚点中262个所引行号与所取符号不符（118个超出所指文件末行，文件必然错），分布在210行；锚点第五轮核对2860行时发现 | 待统筹决定（建议合并前再做一轮：按行内上下文重定文件、按写入时版本取符号，取不到用钉住版本写法，并把“行号须在符号附近”加进门禁）；清单`anchor_conversion/round5/resolved_by_name_audit.json` |
 | MGR-21 | 校准责任边界，合同要求三模块联合TB | 单元TB无此检查；MGR横幅已注明例外（BMI-145）。补检查属补测试 |
 
 ## 4. 回归比对结论
@@ -189,10 +191,12 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 | anchor_check端口台账检查（第三轮补正新增） | 在已推送第三轮文本（`77d281a`）上：第5列报出49个锚点（44行，对应统筹的49/493），其它列230个，W10写明名21个。在副本中各改1处，恰好各报出1处：一行三个模块锚点中只把AMI一个换成AMI相邻端口；一个Consumer锚点换成相邻例化连接；一个W10锚点换成相邻连接。未改副本与`--no-semantic`均为0报错 | `anchor_conversion/round3b/port_negctl.md`、`round3b/review.md` |
 | anchor_check规则1d/1e与钉住版本形式（第四轮新增） | 各在独立副本上只改一处：参数绑定行（基线3367）恢复为`66bebdf`现文，门禁失败（1e与1d报错，统筹指定）；锚点换成本行未提到的同文件符号，恰好报1处；删掉本行唯一写明该名的文字，报出依赖它的那些锚点，`--no-semantic`为0；钉住版本形式指向不存在文件，报file-missing；未改副本0报错 | `anchor_conversion/round4/negctl.md` |
 | `anchor_semantics.py` | 21个构造样例全对：W1~W7、W10、W11，无写明符号的反例，related()正反例 | `anchor_conversion/round4/semantics_selftest.txt` |
+| anchor_check规则1f与历史类history-superseded（第五轮新增） | 正对照：恢复后的文本0报错，基线1577 `:234`、1585 `:245`、1596 `:247`、别名表192均归history-superseded；负对照：1577行恢复成转换写法，门禁失败（superseded-converted）；别名表192行“**不是**”旧锚点恢复成转换写法，同样报出 | `anchor_conversion/round5/negctl.md` |
+| `anchor_history_rules.py`（第五轮） | 27个构造样例全对，新增被明示取代措辞的正例6个、反例3个（现行行号、信号链、RTL行为） | `anchor_conversion/round5/history_rules_selftest.txt` |
 | `anchor_verify.py --previous`（第二轮） | 注入4处（撤销一处新增转换、保留一处应回退的转换、改写回错符号、改非锚点文字），恰好报出4处；anchor_check在其范围内报出2处 | `anchor_conversion/round2/negctl.md` |
 | `tools/id_governance_scan` | 重扫37处，负对照恰好多报2处 | `id_rescan/` |
 
-最终状态：HEAD上`anchor_check.py` 0报错（符号锚点6792、`@satisfies` 194、TB标签与注释原文190、合同节号2812、写明名核对2002处、端口台账1803行/5543个锚点、本行述及核对6167个锚点、参数绑定18行、钉住版本2处、例外74条、allowlist 23行）；`manifest_digest.py --rev HEAD` 26/26。
+最终状态：HEAD上`anchor_check.py` 0报错（符号锚点6771、`@satisfies` 194、TB标签与注释原文191、合同节号2811、写明名核对2002处、端口台账1803行/5519个锚点、本行述及核对6143个锚点、参数绑定18行、钉住版本2处、例外81条、allowlist 28行）；`manifest_digest.py --rev HEAD` 26/26。
 
 ## 7. RTL疑点（只登记，未修改）
 
@@ -254,18 +258,35 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
     - 例外表共74条（1b 5、1c 3、1d 65、1e 1），按行SHA-1与锚点原文绑定，每条写明理由。
   - 第四轮增量改写117处（rewrite 112、恢复原文5），83行，0处无法定位，anchor_verify对快照0不符。
   - 逐条判定表、扩查与dual_precision单列见`anchor_conversion/round4/review.md`；`round3b/review.md`已注明被取代。
+- **第五轮：被明示取代的旧锚点**（统筹2026-10-10对`67707b3`的核对意见`verification_reports/coord_review_20261010/B_MERGE_BATCH_REVIEW_ROUND4_20261010.md`，main `3867083`，未合入本分支；快照`c6ce496`，写入`ce888bb`）：
+  - **统筹点名的两行**：基线1577行“Anchor corrected from stale `:234` (unrelated §4 heading)”、1585行“…stale `:245` (unrelated §4 prose)”。两处所指都是已作废的合同行号，却被转成了符号；规则1d没有拦住，因为这两个符号恰好在本行别处出现。现已恢复原文，归入history-superseded。
+  - **规则**：`anchor_history_rules.superseded_wording`认定锚点本身被格内措辞指为旧的、作废的或错误的引用（自测27例）：
+    - 紧挨在前：stale、corrected from、旧文字把…、旧范围…得、矩阵标、**不是**、原格实为等；
+    - 紧跟在后：(unrelated …、“,实际`:N`”、顺序有误；
+    - 旧→新裸行号对的旧侧。
+  - **同类扫描**：扫描对象是基线全部9702个锚点。
+    - 规则命中21处，全部属本类；另有6处同类措辞不规则，人工归入；共27处归history-superseded。
+    - 其中1596 `:247`、2182 `:1359-1377`、别名表192（**不是**）原为第四轮的人工history，现改归同一类，文本不变。
+    - 宽关键词扫描命中19处，属本类的已归入，其余12处逐条写明不属本类的理由，例如“stale dependency”是缺陷类别名、“作废旧锚点”描述的是RTL行为。
+  - **同行顺带改正**：基线2147、2860两行是AMI行号的审计注记。注记中核实的“实际/→右侧”行号此前被误归本行第一个文件，又取了本行端口；现按写入时版本的AMI改正，符号18处、注释原文锚点1处。
+  - **门禁规则1f**：格内措辞标明为被取代旧锚点处，若出现转换后的符号锚点即报错。
+    - 正对照：恢复后的文本0报错，四处同类旧锚点均归history-superseded。
+    - 负对照：基线1577行恢复成转换写法，门禁失败；别名表192行同样报出。
+  - 第五轮增量：恢复原文24处、改写19处，5行，0处无法定位，anchor_verify对快照0不符。
+  - **新发现，待统筹决定（BMI-914）**：解析器对一部分锚点按“本行写明的名字”取符号（resolved-by-name），未改写的有857个。其中262个所引行号与所取符号不符：118个超出所指文件末行，144个离该符号最近出现处超过15行，分布在210行。抽查均确为错误，例如矩阵2784行的`:1955`是AMI行号，却被归到188行的router文件。本轮未改，清单与建议见`anchor_conversion/round5/review.md`第四部分。
+  - 扫描规则与结果、逐条判定见`anchor_conversion/round5/review.md`。
 - **结果**（附录A）：
 
 | 分类 | 数量 |
 |---|---:|
-| 自动转换 | 8176 |
-| 人工判定后转换（含第三、四轮纠正） | 1073 |
+| 自动转换 | 8134 |
+| 人工判定后转换（含第三~五轮纠正） | 1091 |
 | ①删除线内（同格中删除线之后无接续条目），保留 | 8 |
 | ②"> "历史块，保留 | 30 |
 | ②修订记录节，保留 | 0 |
 | ③被后续条目取代的旧条目：删除线内、同格后接取代条目（“~~旧~~ **新**”），保留 | 402 |
-| ③被后续条目取代的旧条目：无删除线、同格后文明示作废，保留 | 0 |
-| 其它历史（gate输出原文、被明示取代或否定的旧锚点） | 5 |
+| ③被后续条目取代的旧条目：无删除线，格内措辞明示该锚点已被取代/作废（第五轮），保留 | 27 |
+| 其它历史（gate输出原文） | 2 |
 | 非锚点（如“1024-bit”、计数） | 5 |
 | 仓库外文档（会话交接文档） | 3 |
 | 失效锚点（无法追溯） | 0 |
@@ -293,7 +314,7 @@ BMI-181（C02 MGR-18与MGR-23重叠）、BMI-186（C22 PVW-47/48表格多一列�
 
 RTL和TB不变，按统筹裁定不重跑全套回归。
 
-统筹2026-10-10对`9d62ad4`的核对意见（第1、4项确认完成；发现第一轮转换遗留的符号错误）已执行：锚点第三轮语义一致性复查（§8）；SUP-08 cause 01/03重启检查列入P1补测试（BMI-912）。其后按统筹跟进意见补正了端口台账锚点（§8“第三轮补正”）。统筹对`66bebdf`的核对意见（第一部分确认端口台账、门禁、§12.4a；第二、三部分要求低置信逐条判定与同类扩查）已执行：锚点第四轮（§8）。RTL和TB仍不变，不重跑回归。
+统筹2026-10-10对`9d62ad4`的核对意见（第1、4项确认完成；发现第一轮转换遗留的符号错误）已执行：锚点第三轮语义一致性复查（§8）；SUP-08 cause 01/03重启检查列入P1补测试（BMI-912）。其后按统筹跟进意见补正了端口台账锚点（§8“第三轮补正”）。统筹对`66bebdf`的核对意见（第一部分确认端口台账、门禁、§12.4a；第二、三部分要求低置信逐条判定与同类扩查）已执行：锚点第四轮（§8）。统筹对`67707b3`的核对意见（第一部分确认第四轮；第二部分要求同类遗留2行及全类扫描）已执行：锚点第五轮（§8）。RTL和TB仍不变，不重跑回归。
 
 ## 10. 过程记录
 
@@ -322,6 +343,11 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
   - `4f33535`：第四轮写入，anchor_check新增规则1d、1e与钉住版本形式。
   - `dcffe68`：§12.4a重算。
   - 统筹的独立脚本`port_ledger_check.py`在本批终版的干净导出目录上复跑，输出见`anchor_conversion/round4/port_ledger_check.txt`。
+- **执行统筹对`67707b3`的核对意见**（进度条目22）：
+  - `c6ce496`：第五轮快照。
+  - `ce888bb`：第五轮写入，anchor_check新增规则1f。
+  - `f5bbd5c`：§12.4a重算。
+  - 干净导出中门禁、manifest_digest与`port_ledger_check.py`复核见`anchor_conversion/round5/`。
 - 旁观会话说明：它此前核对锚点时只验证了符号存在、门禁0报错，没有核对符号是否就是本行所指的符号。
 - **C08节号**：阶段2新增的“启动搜索空闲边界”小节最初编成§8.2.3，与已有小节重号，在`be82819`改为§8.2.6，同步改了5处引用。重号是anchor_check报出的。
 - **三处纯文字节号引用**：在`3b6df78`中补了标题或改了指向，使它们能唯一定位：
@@ -350,23 +376,24 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | PPG_ALIAS_MAPPING_TABLE.md | convert | auto | 661 |
 | PPG_ALIAS_MAPPING_TABLE.md | convert | manual | 205 |
 | PPG_ALIAS_MAPPING_TABLE.md | external | manual | 3 |
-| PPG_ALIAS_MAPPING_TABLE.md | history | manual | 3 |
+| PPG_ALIAS_MAPPING_TABLE.md | history | manual | 2 |
 | PPG_ALIAS_MAPPING_TABLE.md | history-block | auto | 3 |
 | PPG_ALIAS_MAPPING_TABLE.md | history-strike | auto | 8 |
+| PPG_ALIAS_MAPPING_TABLE.md | history-superseded | manual | 1 |
 | PPG_ALIAS_MAPPING_TABLE.md | history-superseded-struck | auto | 4 |
 | PPG_ALIAS_MAPPING_TABLE.md | not-anchor | manual | 4 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | auto | 7515 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | manual | 868 |
-| PPG_CONTRACT_CLOSURE_MATRIX.md | history | manual | 2 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | auto | 7473 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | convert | manual | 886 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | history-block | auto | 27 |
+| PPG_CONTRACT_CLOSURE_MATRIX.md | history-superseded | manual | 26 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | history-superseded-struck | auto | 398 |
 | PPG_CONTRACT_CLOSURE_MATRIX.md | not-anchor | manual | 1 |
 
-分类说明：history-strike为裁定①（删除线内且同格无接续条目）；history-block为裁定②；history-superseded-struck为裁定③（删除线内旧条目，同格后接取代条目）；history（manual）为gate输出原文与被明示取代或否定的旧锚点；history-revision与history-superseded均为0个，未出现在表中。
+分类说明：history-strike为裁定①（删除线内且同格无接续条目）；history-block为裁定②；history-superseded-struck为裁定③（删除线内旧条目，同格后接取代条目）；history-superseded为裁定③无删除线一类（格内措辞明示该锚点为被取代/作废/错误的旧锚点，第五轮）；history（manual）为gate输出原文；history-revision为0个，未出现在表中。
 
-### A.2 人工判定与第三、四轮纠正（1086条）
+### A.2 人工判定与第三~五轮纠正（1128条）
 
-来源：`tools/b_merge_tools/anchor_manual_decisions.tsv`（第一、二轮）、`anchor_round3_decisions.tsv`（第三轮及补正）、`anchor_round4_decisions.tsv`（第四轮）。理由以“第二轮”“第三轮”“第四轮”开头的分别为统筹10-09、10-10、10-10（对66bebdf）意见后新增。“基线行”是`7a8eabf`中的行号。
+来源：`tools/b_merge_tools/anchor_manual_decisions.tsv`（第一、二轮）、`anchor_round3_decisions.tsv`（第三轮及补正）、`anchor_round4_decisions.tsv`（第四轮）、`anchor_round5_decisions.tsv`（第五轮）。理由以“第二轮”至“第五轮”开头的分别为统筹10-09、10-10、10-10（对66bebdf）、10-10（对67707b3）意见后新增。“基线行”是`7a8eabf`中的行号。
 
 | 文件 | 基线行 | 旧锚点 | 新文本 | 理由 |
 |---|---:|---|---|---|
@@ -582,6 +609,7 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 矩阵 | 1494 | ppg_control_top.v:162 | `ppg_control_top.v` `o_idac_sar15dcn_low` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9 端口台账第5列为本行端口`o_idac_sar15dcn_low`在子模块中的声明，ppg_control_top.v有同名端口，原解析为o_idac_sar9dcn_low（导入版本行号漂移） |
 | 矩阵 | 1495 | ppg_control_top.v:163 | `ppg_control_top.v` `o_s_in` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9 端口台账第5列为本行端口`o_s_in`在子模块中的声明，ppg_control_top.v有同名端口，原解析为o_idac_sar15ambn_low（导入版本行号漂移） |
 | 矩阵 | 1495 | ppg_control_top.v:163 | `ppg_control_top.v` `o_s_in` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9 端口台账第5列为本行端口`o_s_in`在子模块中的声明，ppg_control_top.v有同名端口，原解析为o_idac_sar15ambn_low（导入版本行号漂移） |
+| 矩阵 | 1497 | `:632` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“旧文字把C01”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 1498 | `:1520` | `ppg_control_top.v` `o_scheduler_launch_timeout_sticky` | 第三轮（统筹10-10核对：格内写明的符号为准）：W11 格内写明`o_scheduler_launch_timeout_sticky`，原解析为o_launch_timeout_sticky、sched_launch_timeout_sticky_o |
 | 矩阵 | 1499 | ppg_control_top.v:215 | `ppg_control_top.v` `o_scheduler_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
 | 矩阵 | 1499 | ppg_control_top.v:215 | `ppg_control_top.v` `o_scheduler_owner_deadline_timeout_sticky` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
@@ -670,15 +698,16 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 矩阵 | 1571 | ppg_control_top.v:292 | `ppg_control_top.v` `o_s2_raw` | 第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
 | 矩阵 | 1571 | ppg_control_top.v:292 | `ppg_control_top.v` `o_s2_raw` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名 |
 | 矩阵 | 1576 | ppg_control_top.v:109,724 | `ppg_control_top.v` `i_start_event` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析i_source_static_characterization_enable与本行无关；ppg_control_top.v有本行端口`i_start_event`（声明或例化连接），取本行端口（行号漂移） |
+| 矩阵 | 1577 | `:234` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 1579 | ppg_control_top.v:120,727 | `ppg_control_top.v` `i_analog_ready` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析i_clk_stage1_dout_low_async与本行无关；ppg_control_top.v有本行端口`i_analog_ready`（声明或例化连接），取本行端口（行号漂移） |
-| 矩阵 | 1585 | `:245` | `ppg_system_config_manager.v` `i_static_characterization_enable` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析dec_amb_threshold_low与本行无关；ppg_system_config_manager.v有本行端口`i_static_characterization_enable`（声明或例化连接），取本行端口（行号漂移） |
+| 矩阵 | 1585 | `:245` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 1590 | ppg_control_top.v:740 | `ppg_control_top.v` `o_stage2_coef_epoch` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析i_analog_ready与本行无关；ppg_control_top.v有本行端口`o_stage2_coef_epoch`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1590 | ppg_control_top.v:1502 | `ppg_control_top.v` `o_stage2_coef_epoch` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_result_dc_code_snapshot与本行无关；ppg_control_top.v有本行端口`o_stage2_coef_epoch`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1591 | ppg_control_top.v:741 | `ppg_control_top.v` `o_dc_recovery_coef_epoch` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析i_adc_idle与本行无关；ppg_control_top.v有本行端口`o_dc_recovery_coef_epoch`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1591 | ppg_control_top.v:1503 | `ppg_control_top.v` `o_dc_recovery_coef_epoch` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_result_amb_code_epoch与本行无关；ppg_control_top.v有本行端口`o_dc_recovery_coef_epoch`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1593 | semantic_contract.md:297 | C02 §4 | C02语义合同简写；行号取写入时该合同所在小节 |
 | 矩阵 | 1593 | `:88-100` | C02 §2.1 | 续接左侧semantic_contract.md（C02），正式I/O表 |
-| 矩阵 | 1596 | `:247` | （保留原文：history） | 第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“Anchor corrected from stale `:247` (unrelated §4 prose)”：记录的是已被弃用的旧锚点，按历史保留原文 |
+| 矩阵 | 1596 | `:247` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“stale”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 1606 | ppg_control_top.v:120,727 | `ppg_control_top.v` `i_analog_ready` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析i_clk_stage1_dout_low_async与本行无关；ppg_control_top.v有本行端口`i_analog_ready`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1608 | ppg_control_top.v:722 | `ppg_control_top.v` `i_clk` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析sup_system_fault_summary_o与本行无关；ppg_control_top.v有本行端口`i_clk`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 1611 | ppg_control_top.v:723 | `ppg_control_top.v` `i_rstn` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析sup_result_discard_summary_sticky_o与本行无关；ppg_control_top.v有本行端口`i_rstn`（声明或例化连接），取本行端口（行号漂移） |
@@ -940,7 +969,15 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 矩阵 | 2023 | ppg_control_top.v:1075 | `ppg_control_top.v` `o_ssw_fault_frame_type` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_adc_owner_inflight与本行无关；ppg_control_top.v有本行端口`o_ssw_fault_frame_type`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 2024 | ppg_sar9_sar15_safe_selection_wrapper.v:182 | `ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_precision_mode` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_ssw_fault_color_ir与本行无关；ppg_sar9_sar15_safe_selection_wrapper.v有本行端口`o_ssw_fault_precision_mode`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 2024 | ppg_control_top.v:1076 | `ppg_control_top.v` `o_ssw_fault_precision_mode` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_owner_q3_window_closed与本行无关；ppg_control_top.v有本行端口`o_ssw_fault_precision_mode`（声明或例化连接），取本行端口（行号漂移） |
-| 矩阵 | 2182 | `:1359-1377` | （保留原文：history） | 第四轮（范围锚点逐条核对，规则1d）：格内“旧范围若按+15换算得`:1359-1377`…都不是块边界，故此处不能靠加偏移量”：这是被否定的换算范围，按历史保留原文 |
+| 矩阵 | 2147 | ppg_idac_code_controller.v:67-207 | `ppg_idac_code_controller.v` `ppg_idac_code_controller` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“`ppg_idac_code_controller.v:67-207`声明区”：所指为模块端口声明区，取模块名（原解析取本行端口o_idac_idle） |
+| 矩阵 | 2147 | `:602-682` | `ppg_idac_code_controller.v` `"输出信号连线"` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“模块自身文件内引用（声明行+实现行，如`:602-682`）”：b1de2e0版602-682行为“输出信号连线”段，改为该段标题注释原文锚点（原解析取本行端口o_idac_idle） |
+| 矩阵 | 2147 | `:2306` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“行号引用（形如"`:2306`"至"`:2427`"）统一比实际行号少15”：旧行号示例，本格明示错误 |
+| 矩阵 | 2147 | `:2427` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：同上，旧行号示例`:2427` |
+| 矩阵 | 2147 | `:2306` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2147 | `:2321` | `ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`、`i_clk` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_clk`矩阵标`:2306`，实际`:2321`”：b1de2e0版AMI为IDAC控制器例化的`.i_clk(i_clk)` |
+| 矩阵 | 2147 | `:2427` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2147 | `:2442` | `ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`、`o_idac_idle` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“本行`o_idac_idle`…实际`:2442`”：AMI中IDAC控制器例化的`.o_idac_idle(`连接 |
+| 矩阵 | 2182 | `:1359-1377` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“旧范围若按+15换算得”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 2182 | `:1374-1384` | `ppg_adc_measurement_idac_integration.v` `calibration_color_ir_o` | 第四轮（范围锚点逐条核对，规则1d）：格内“颜色`:1374-1384`”：颜色载荷锁存块即calibration_color_ir_o |
 | 矩阵 | 2182 | `:1387-1397` | `ppg_adc_measurement_idac_integration.v` `calibration_frame_type_o` | 第四轮（范围锚点逐条核对，规则1d）：格内“帧类型`:1387-1397`”：即calibration_frame_type_o |
 | 矩阵 | 2182 | `:1400-1410` | `ppg_adc_measurement_idac_integration.v` `calibration_request_reason_o` | 第四轮（范围锚点逐条核对，规则1d）：格内“请求原因`:1400-1410`”：即calibration_request_reason_o |
@@ -1080,6 +1117,38 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 矩阵 | 2736 | `:1985` | `ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst` | 第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：保留（人工核对）：格内“ppg_normal_transaction_fork's own instantiation (`:1985`, …)”，取例化名ppg_normal_transaction_fork_Inst；AMI内fork例化 |
 | 矩阵 | 2760 | `:1931` | `ppg_adc_measurement_idac_integration.v` `flag_idac_search_dcs_ready` | 括注符号 |
 | 矩阵 | 2767 | ppg_adc_measurement_idac_integration.v:1938 | `ppg_adc_measurement_idac_integration.v` `o_calibrated_s1_value` | 第三轮（统筹10-10核对：格内写明的符号为准）：W10 格内写明`o_calibrated_s1_value`，原解析为i_sample_index |
+| 矩阵 | 2860 | ppg_normal_transaction_fork.v:61-146 | `ppg_normal_transaction_fork.v` `ppg_normal_transaction_fork` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“与`ppg_normal_transaction_fork.v:61-146`独立核对的端口声明”：所指为模块端口声明区，取模块名（原解析取本行端口o_local_empty） |
+| 矩阵 | 2860 | `:61-146` | `ppg_normal_transaction_fork.v` `ppg_normal_transaction_fork` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“本子模块自身文件声明行引用（`:61-146`）”：同上 |
+| 矩阵 | 2860 | `:1972` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“如`i_clk`标`:1972`”：矩阵原标的旧行号（统一少15），本格明示错误 |
+| 矩阵 | 2860 | `:2005` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“`i_measurement_ready`所引的`:2005`等…统一比实际行号少15”：旧行号，本格明示错误 |
+| 矩阵 | 2860 | `:1972` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:1987` | `ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`、`i_clk` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_clk`…实际`:1987`”：d18c695版AMI 1987行为fork例化的`.i_clk(i_clk)` |
+| 矩阵 | 2860 | `:1983` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“矩阵标”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:1998` | `ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`、`i_datapath_discard_run_generation` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`i_datapath_discard_run_generation`…实际`:1998`”：d18c695版AMI 1998行为fork例化的该端口连接 |
+| 矩阵 | 2860 | `:2005` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2025`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2025` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2020` | `ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“fork自身连接点21个（…→`:2020`-`:2040`）”：d18c695版AMI 2020~2040行为fork例化的端口连接 |
+| 矩阵 | 2860 | `:2040` | `ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（区间终点`:2040`） |
+| 矩阵 | 2860 | `:2071` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2090`及`:2092`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2090` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“及`:2092`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2092` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2086` | `ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“overlap_corrector例化连接点21个（…→`:2086`-`:2105`及`:2107`）”：d18c695版AMI为该例化的端口连接 |
+| 矩阵 | 2860 | `:2105` | `ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2105`） |
+| 矩阵 | 2860 | `:2107` | `ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2107`） |
+| 矩阵 | 2860 | `:2074` | `ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“逐端口名对照AMI内该例化`:2074`-`:2135`”：d18c695版AMI 2074行为`)ppg_adc_pipeline_overlap_corrector_Inst(` |
+| 矩阵 | 2860 | `:2135` | `ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（例化块终点`:2135`） |
+| 矩阵 | 2860 | `:2359` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“-`:2374`→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2374` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:2”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2374` | `ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“IDAC控制器例化连接点16个（…→`:2374`-`:2389`）”：d18c695版AMI为该例化的端口连接 |
+| 矩阵 | 2860 | `:2389` | `ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：同上（`:2389`） |
+| 矩阵 | 2860 | `:1336` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:1”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:1351` | `ppg_adc_measurement_idac_integration.v` `measurement_result_discard_run_generation_o` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“AMI内部信号（`:1336`→`:1351`）”：d18c695版AMI 1351行为measurement_result_discard_run_generation_o寄存器赋值 |
+| 矩阵 | 2860 | `:912` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“→`:9”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:919` | `ppg_adc_measurement_idac_integration.v` `flag_normal_track_qualified` | uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`:912`→`:919`”：d18c695版AMI 919行为`assign flag_normal_track_qualified`（同2843行所述） |
+| 矩阵 | 2860 | `:912` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“`:912`实际只差+7”：指旧行号`:912`本身（实为`:919`），明示取代 |
+| 矩阵 | 2860 | `:1336` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：“…连接锚点及`:1336`处”：指旧行号`:1336`（实为`:1351`），明示取代 |
+| 矩阵 | 2860 | `:2005,2092` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“"顺序有误”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
+| 矩阵 | 2860 | `:2092,2005` | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“原格实为"”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 矩阵 | 2872 | ppg_normal_transaction_fork.v:101 | `ppg_normal_transaction_fork.v` `i_normal_valid` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析o_measurement_valid与本行无关；ppg_normal_transaction_fork.v有本行端口`i_normal_valid`（声明或例化连接），取本行端口（行号漂移） |
 | 矩阵 | 2927 | `:2138` | `ppg_adc_measurement_idac_integration.v` `i_stage2_offset_q16` | 第三轮（统筹10-10核对：格内写明的符号为准）：W9b 无格内符号，原解析ppg_adc_programmable_reconstructor与本行无关；ppg_adc_measurement_idac_integration.v有本行端口`i_stage2_offset_q16`（声明或例化连接），取本行端口（行号漂移）；此前：弱解析结果经人工核对接受 |
 | 矩阵 | 2985 | `:482-500` | C15 §11.5 | “§11.5 (…)”指C15合同行 |
@@ -1320,7 +1389,7 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 别名表 | 177 | ppg_sar9_sar15_safe_selection_wrapper.v:438 | `ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: OIB-01` | 行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签 |
 | 别名表 | 179 | ppg_adc_measurement_idac_integration.v:1010 | `ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-23` | 第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已打@satisfies: TOP-23, TOP-24(…)” |
 | 别名表 | 188 | ppg_coarse_detection_fir.v:120-122,309,312-313,315 | `ppg_coarse_detection_fir.v` `@satisfies: PRC-09` | 第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析i_test_inject_enable、i_test_calibration_loss_inject_valid、o_test_calibration_loss_inject_ready、flag_history_transfer与本行无关；本行ID在ppg_coarse_detection_fir.v有@satisfies标签 |
-| 别名表 | 192 | ppg_idac_code_controller.v:285 | （保留原文：history） | 第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“——**不是**`ppg_idac_code_controller.v:285`”：记录的是被否定的旧假设位置，按历史保留原文 |
+| 别名表 | 192 | ppg_idac_code_controller.v:285 | （保留原文：history-superseded） | 第五轮（统筹10-10对67707b3核对意见：被明示取代的旧锚点）：格内措辞“**不是**`”表明该锚点本身是被明示取代/作废的旧锚点，按历史保留原文（规则anchor_history_rules.superseded_wording） |
 | 别名表 | 199 | ppg_dynamic_baseline_cross_detector.v:1510,632 | `ppg_dynamic_baseline_cross_detector.v` `@satisfies: RRC-09` | 第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_peak_context、slope_current_q16_o与本行无关；本行ID在ppg_dynamic_baseline_cross_detector.v有@satisfies标签 |
 | 别名表 | 214 | ppg_idac_code_controller.v:1084 | `ppg_idac_code_controller.v` `@satisfies: TRK-03` | 第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签 |
 | 别名表 | 214 | `:1087` | `ppg_idac_code_controller.v` `@satisfies: TRK-03` | 第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签 |
@@ -1457,7 +1526,7 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | 别名表 | 562 | :6 | （保留原文：not-anchor） | “D01链…:6段”数量，不是行号 |
 | 别名表 | 568 | ppg_control_top.v:295-299 | `ppg_control_top.v` `"参数化位宽约束（架构不变量，非运行时检查）"` | 第四轮（统筹10-10对66bebdf核对意见：低置信逐条判定）：格内“真去…295-299读了原文,确认是纯中文注释块”：改为注释原文锚点；此前：同P12行 |
 
-## 附录B 本批提交（`7a8eabf..dcffe68`，按时间顺序；本报告所在的提交在其后）
+## 附录B 本批提交（`7a8eabf..f5bbd5c`，按时间顺序；本报告所在的提交在其后）
 
 | 提交 | 说明 |
 |---|---|
@@ -1542,3 +1611,7 @@ RTL和TB不变，按统筹裁定不重跑全套回归。
 | `0647563` | B合并批次锚点第四轮（写入前快照）：低置信56条逐条判定、G-FP-05参数绑定18行、范围锚点与例化连接扩查（统筹10-10对66bebdf核对意见） |
 | `4f33535` | B合并批次锚点第四轮写入：低置信56条逐条判定、G-FP-05参数绑定、同类扩查；anchor_check新增规则1d/1e与钉住版本形式 |
 | `dcffe68` | B合并批次：矩阵§12.4a摘要重算（锚点第四轮后，仅M01变化，26/26） |
+| `67707b3` | B合并批次：报告、总表、进度按统筹对66bebdf的核对意见更新（锚点第四轮、规则1d/1e、BMI-913、干净导出与统筹独立脚本复核） |
+| `c6ce496` | B合并批次锚点第五轮（写入前快照）：被明示取代的旧锚点归历史类（统筹10-10对67707b3核对意见） |
+| `ce888bb` | B合并批次锚点第五轮写入：被明示取代的旧锚点恢复原文并归history-superseded；anchor_check新增规则1f |
+| `f5bbd5c` | B合并批次：矩阵§12.4a摘要重算（锚点第五轮后，仅M01变化，26/26） |

@@ -1,0 +1,34 @@
+# f5bbd5c git archive 干净导出目录：run_anchor_gate.sh（walk索引）与 manifest_digest.py --repo .
+ANCHOR GATE: Python 3.12.4 <export>/tools/b_merge_tools/anchor_check.py 
+UNLOCATED PPG_ALIAS_MAPPING_TABLE.md:114 ppg_idac_code_controller.v lines 170-172,580 at b858bf0
+UNLOCATED PPG_CONTRACT_CLOSURE_MATRIX.md:3603 ppg_sar9_sar15_safe_selection_wrapper.v lines 25,48 at b858bf0
+stats {"symbol_anchors": 6771, "satisfies_anchors": 194, "label_anchors": 191, "section_refs": 2811, "old_anchor_history": 74, "semantic_checked": 2002, "port_ledger_rows": 1803, "port_ledger_anchors": 5519, "mention_checked": 6143, "mention_exceptions": 76, "unlocated": 2, "binding_checked": 18}; external refs 27; errors 0; file index walk (831 files)
+ANCHOR GATE PASSED
+
+MATCH    C01 contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md recorded=7bc15aa3df70 computed=7bc15aa3df70
+MATCH    C02 contracts/ppg_system_config_manager_semantic_contract.md recorded=33ae68306756 computed=33ae68306756
+MATCH    C03 contracts/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md recorded=93608f6788fd computed=93608f6788fd
+MATCH    C04 contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md recorded=f0b00f41aaeb computed=f0b00f41aaeb
+MATCH    C05 contracts/ppg_system_active_config_unpack_semantic_contract.md recorded=d0a24d6adc31 computed=d0a24d6adc31
+MATCH    C06 contracts/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md recorded=3836c3bf89f9 computed=3836c3bf89f9
+MATCH    C07 contracts/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md recorded=354f71a96918 computed=354f71a96918
+MATCH    C08 contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md recorded=1573b0626aaa computed=1573b0626aaa
+MATCH    C09 contracts/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md recorded=3aba0d1ddd80 computed=3aba0d1ddd80
+MATCH    C10 contracts/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md recorded=64412072f13b computed=64412072f13b
+MATCH    C11 contracts/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md recorded=c1e3b2cc1a7c computed=c1e3b2cc1a7c
+MATCH    C12 contracts/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md recorded=44c125b9d705 computed=44c125b9d705
+MATCH    C13 contracts/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md recorded=5bad15df131d computed=5bad15df131d
+MATCH    C14 contracts/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md recorded=9419e32924a4 computed=9419e32924a4
+MATCH    C15 contracts/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md recorded=22bcdce9fe8b computed=22bcdce9fe8b
+MATCH    C16 contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md recorded=5734b0421e65 computed=5734b0421e65
+MATCH    C17 contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md recorded=b44be78502d6 computed=b44be78502d6
+MATCH    C18 contracts/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md recorded=7a22530ef5fa computed=7a22530ef5fa
+MATCH    C19 contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md recorded=0f01923ea69a computed=0f01923ea69a
+MATCH    C20 contracts/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md recorded=8eecc3fa1d7d computed=8eecc3fa1d7d
+MATCH    C21 contracts/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md recorded=40fe3f9b8cda computed=40fe3f9b8cda
+MATCH    C22 contracts/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md recorded=9926df80c714 computed=9926df80c714
+MATCH    C23 contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md recorded=09efd3c05704 computed=09efd3c05704
+MATCH    C24 contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md recorded=c995330d39ec computed=c995330d39ec
+MATCH    C25 contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md recorded=2a7081f9ad1c computed=2a7081f9ad1c
+MATCH    M01 contracts/PPG_CONTRACT_CLOSURE_MATRIX.md recorded=c5af219a5241 computed=c5af219a5241
+rows 26, match 26, mismatch/missing 0
