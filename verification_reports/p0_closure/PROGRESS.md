@@ -45,7 +45,15 @@ supervisor、重检调度器、PWI、SPI、冗余校正器自身0项。
 | 任务 | 文件 | 状态 |
 |---|---|---|
 | V15 TB中ADC行为模型核对 | `V15_TB_ADC_MODEL_CHECK.md` | 已完成：需修改3项（高1 V15-N1、中1 V15-N2、低1 V15-N3）；保守差异5个模型、符合2个模型 |
-| V10 Python静态扫描重跑 | `V10_STATIC_RERUN.md` | 未开始 |
+| V10 Python静态扫描重跑 | `V10_STATIC_RERUN.md`，原始输出在`V10_raw/` | 已完成：真问题0，待查2项（FIR和IDAC控制器gate中的注入就绪端口区块归属；esd_shell中的非命名类规则）；CDC四阶段无新增跨域项 |
 
 ## V15要点
 - V15-N1（高）：芯片层物理idle=`!CLK_STAGEx_DOUT_LOW`。若DONE按模拟侧事实保持到下一次转换开始，RUN中会静默停采，STOP后无法完成STOPPING（报0x31），START被挡。所有TB用5拍短脉冲，从未触发。**需要模拟侧回答：哪个引脚的哪个边沿使DONE回落，相对owner截止（283/443/CAL 248）早还是晚，STOP后DONE是否会自行回落。**
+
+## V10要点
+- 脚本放到仓库外的镜像中运行，复现原工作树布局；只把`PATH_SKILL_ROOT`改为本仓库的skill目录，仓库内文件未改。
+- CDC：新增寄存器全部为CLK_2M同域；主候选为0，门控候选仍为1；Phase3结果逐字节相同；Phase4漏检为0。语义lint为0。文字滞后新增1条，为误报（删除线）。
+- gate：10个可比文件与OLR §6.1相同；其余20个以本次为新基线。任务书口径订正：VG031在control_top，不在芯片顶层。
+
+## 状态
+V15、V10两项均已完成。没有做V6、V9。

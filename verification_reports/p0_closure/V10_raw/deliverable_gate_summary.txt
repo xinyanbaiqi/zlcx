@@ -1,0 +1,38 @@
+ppg_400hz_frame_calibration_scheduler      ready=True err=0 sw=0  
+ppg_active_v4_control_plane_integration    ready=True err=0 sw=0  
+ppg_adc_async_stage_capture                ready=True err=0 sw=0  
+ppg_adc_dc_recovery                        ready=True err=0 sw=0  
+ppg_adc_measurement_idac_integration       ready=False err=2 sw=1  VG014/w×1 VG061/e×1 VG066/e×1
+ppg_adc_pipeline_overlap_corrector         ready=True err=0 sw=0  
+ppg_adc_programmable_reconstructor         ready=True err=0 sw=0  
+ppg_adc_result_router                      ready=True err=0 sw=0  
+ppg_adc_s1_programmable_calibrator         ready=True err=0 sw=0  
+ppg_adc_s1_redundancy_corrector            ready=True err=0 sw=0  
+ppg_amb_recheck_scheduler                  ready=True err=0 sw=0  
+ppg_characterization_control_cdc           ready=True err=0 sw=0  
+ppg_chip_digital_top                       ready=False err=46 sw=0  VG010/e×46
+ppg_coarse_detection_fir                   ready=False err=3 sw=0  VG052/e×1 VG061/e×2
+ppg_config_cdc_bridge                      ready=True err=0 sw=0  
+ppg_control_top                            ready=False err=1 sw=0  VG031/e×1
+ppg_digital_esd_shell                      ready=False err=163 sw=89  VG001/e×1 VG004/e×52 VG007/e×4 VG009/e×1 VG010/e×52 VG011/e×52 VG014/w×37 VG040/e×1 VG041/w×52
+ppg_digital_shell                          ready=False err=135 sw=65  VG001/e×1 VG004/e×42 VG007/e×4 VG009/e×1 VG010/e×40 VG011/e×40 VG012/e×2 VG014/w×25 VG040/e×3 VG041/e×1 VG041/w×40 VG042/e×1
+ppg_dual_precision_top                     ready=False err=301 sw=0  VG021/e×4 VG060/e×234 VG061/e×2 VG066/e×61
+ppg_dynamic_baseline_cross_detector        ready=True err=0 sw=0  
+ppg_idac_code_controller                   ready=False err=3 sw=0  VG052/e×1 VG061/e×1 VG066/e×1
+ppg_normal_transaction_fork                ready=True err=0 sw=0  
+ppg_p2s_packer                             ready=True err=0 sw=0  
+ppg_peak_valley_window_detector            ready=True err=0 sw=0  
+ppg_precision_window_controller            ready=True err=0 sw=0  
+ppg_precision_window_integration           ready=False err=0 sw=1  VG014/w×1
+ppg_pulse_cdc_sync                         ready=True err=0 sw=0  
+ppg_reset_sync                             ready=False err=10 sw=0  VG060/e×10
+ppg_sar9_sar15_safe_selection_wrapper      ready=False err=10 sw=0  VG060/e×3 VG061/e×1 VG066/e×6
+ppg_spi_register_file                      ready=True err=0 sw=0  
+ppg_system_active_config_unpack            ready=True err=0 sw=0  
+ppg_system_config_manager                  ready=True err=0 sw=0  
+ppg_system_fault_abort_supervisor          ready=True err=0 sw=0  
+ppg_timing_sar15                           ready=False err=193 sw=0  VG000/e×1 VG007/e×2 VG040/e×1 VG060/e×189
+ppg_timing_sar15_3200hz                    ready=False err=97 sw=75  VG007/e×2 VG009/e×1 VG014/w×29 VG040/e×1 VG041/w×46 VG060/e×46 VG064/e×47
+ppg_timing_sar9                            ready=False err=202 sw=0  VG000/e×1 VG007/e×2 VG040/e×1 VG060/e×198
+ppg_timing_sar9_3200hz                     ready=False err=97 sw=75  VG007/e×2 VG009/e×1 VG014/w×29 VG040/e×1 VG041/w×46 VG060/e×46 VG064/e×47
+tb_ppg_timing_3200hz                       ready=False err=1 sw=0  VG000/e×1
