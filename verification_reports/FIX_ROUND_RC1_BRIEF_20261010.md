@@ -24,7 +24,7 @@
 - **CPU**：开始跑全套回归前告诉用户，由用户通知V2会话暂停批量仿真。
 - 按根目录`CLAUDE.md`使用`.claude/skills/erie-verilog-generator`：改动的RTL文件要跑deliverable gate，问题集不得新增。
 - 所有RTL修改先在仓库外的导出副本中进行（`git -c core.autocrlf=false archive`导出），验证通过后再提交。
-- 修复点在已有实质性中文注释末尾追加`@satisfies`标签（不单独成行），新检查用TB本地名，并写明服务于哪个发现编号。
+- 修复点在已有实质性中文注释末尾追加`@satisfies`标签（不单独成行），新检查用TB本地名，并写明服务于哪个发现编号。芯片顶层的新检查同样用本地名：用户10-10已决定建立CHIP-xx验收ID族，由V8统一定义并映射，本轮不要自行编CHIP号。
 - 合同改写必须使用符号锚点（文件 + 符号 + 合同节号）。B合并批次后，`tools/run_unit_tb_regression.sh`的开头会先跑`tools/b_merge_tools/run_anchor_gate.sh`，锚点检查不通过整轮报错。改合同后先单独跑`tools/b_merge_tools/anchor_check.py`。若合同改动影响矩阵§12.4a摘要，用`tools/b_merge_tools/manifest_digest.py --write`重算。
 - 每个修复先写检查，确认检查在**旧RTL上FAIL、新RTL上PASS**（负对照），再提交。
 - 下任何"不会卡死、可以恢复"的结论前，把相关lane和状态位的置位、清零条件逐路追完，并实测。
