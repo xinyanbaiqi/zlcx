@@ -1,0 +1,632 @@
+doc	line	old	action	arg1	arg2	reason
+PPG_CONTRACT_CLOSURE_MATRIX.md	837	ppg_dual_precision_top.v:336-343	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_CONFIG_WIDTH、i_source_clk、i_source_rstn、i_source_config与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	895	ppg_chip_digital_top.v:284,373	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号w_source_rstn、ppg_reset_sync_clk2m_Inst与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	924	ppg_adc_measurement_idac_integration.v:967	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_ami_fault_dispatch_03与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	924	`:522`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号detection_datapath_empty_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	926	ppg_system_fault_abort_supervisor.v:201-230,296-405	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_capture_watchdog、flag_capture_ami、flag_capture_scheduler、flag_capture_ssw与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	930	ppg_adc_measurement_idac_integration.v:434-462,1602-1620,913	sym	ppg_adc_measurement_idac_integration.v	flag_adc_transaction_inflight	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第456行（距引用0行）出现本行所述`flag_adc_transaction_inflight`
+PPG_CONTRACT_CLOSURE_MATRIX.md	931	ppg_system_fault_abort_supervisor.v:170,174-183,184,185,419-428	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	932	ppg_system_fault_abort_supervisor.v:129-133,217-230	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号SOURCE_AMI、SOURCE_SCHEDULER、SOURCE_SSW、SOURCE_SUPERVISOR与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	934	ppg_control_top.v:295-299	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_ADC_DRAIN_WATCHDOG_CYCLES与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	936	ppg_adc_measurement_idac_integration.v:1223,1620,913	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_adc_completion_abort_release与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	937	ppg_control_top.v:1378-1439	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号ppg_system_fault_abort_supervisor_Inst与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	942	ppg_system_fault_abort_supervisor.v:201-205,184	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_capture_watchdog、flag_capture_ami、flag_capture_scheduler、flag_capture_ssw与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	945	ppg_system_fault_abort_supervisor.v:198	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_episode_open_edge与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1323	ppg_400hz_frame_calibration_scheduler.v:95	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1325	ppg_400hz_frame_calibration_scheduler.v:84	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1325	ppg_adc_measurement_idac_integration.v:101	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1326	ppg_400hz_frame_calibration_scheduler.v:98	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1327	ppg_400hz_frame_calibration_scheduler.v:165	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1327	ppg_adc_measurement_idac_integration.v:142	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1335	ppg_adc_measurement_idac_integration.v:144	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1339	ppg_adc_measurement_idac_integration.v:143	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1343	ppg_400hz_frame_calibration_scheduler.v:96	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1344	ppg_400hz_frame_calibration_scheduler.v:94	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1348	ppg_400hz_frame_calibration_scheduler.v:89	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1348	ppg_adc_measurement_idac_integration.v:106	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1349	ppg_adc_measurement_idac_integration.v:244	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1350	ppg_adc_measurement_idac_integration.v:145	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1351	ppg_400hz_frame_calibration_scheduler.v:166	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1357	ppg_400hz_frame_calibration_scheduler.v:99	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1358	ppg_400hz_frame_calibration_scheduler.v:85	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1358	ppg_adc_measurement_idac_integration.v:102	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1360	ppg_400hz_frame_calibration_scheduler.v:86	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1360	ppg_adc_measurement_idac_integration.v:103	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1363	ppg_400hz_frame_calibration_scheduler.v:97	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1369	ppg_adc_measurement_idac_integration.v:133	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1370	ppg_adc_measurement_idac_integration.v:131	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1371	ppg_adc_measurement_idac_integration.v:129	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1372	ppg_adc_measurement_idac_integration.v:134	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1373	ppg_adc_measurement_idac_integration.v:132	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1374	ppg_adc_measurement_idac_integration.v:127	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1375	ppg_adc_measurement_idac_integration.v:130	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1376	ppg_adc_measurement_idac_integration.v:126	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1377	ppg_adc_measurement_idac_integration.v:128	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1383	ppg_400hz_frame_calibration_scheduler.v:183	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1384	ppg_400hz_frame_calibration_scheduler.v:176	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1387	ppg_400hz_frame_calibration_scheduler.v:175	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1394	ppg_system_config_manager.v:370-376	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1395	ppg_adc_measurement_idac_integration.v:355	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1397	ppg_400hz_frame_calibration_scheduler.v:171	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1398	ppg_adc_measurement_idac_integration.v:303	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1402	ppg_400hz_frame_calibration_scheduler.v:174	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1407	ppg_400hz_frame_calibration_scheduler.v:190	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1413	ppg_400hz_frame_calibration_scheduler.v:173	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1421	ppg_adc_measurement_idac_integration.v:313	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1424	ppg_control_top.v:248	sym	ppg_control_top.v	o_system_fault_cause	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_cause`，原解析为o_system_fault_discard_event
+PPG_CONTRACT_CLOSURE_MATRIX.md	1428	ppg_control_top.v:251	sym	ppg_control_top.v	o_system_fault_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_frame_id`，原解析为o_system_fault_source
+PPG_CONTRACT_CLOSURE_MATRIX.md	1429	ppg_control_top.v:254	sym	ppg_control_top.v	o_system_fault_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_frame_type`，原解析为o_system_fault_sample_index
+PPG_CONTRACT_CLOSURE_MATRIX.md	1432	ppg_control_top.v:256	sym	ppg_control_top.v	o_system_fault_run_generation	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_run_generation`，原解析为o_system_fault_frame_type
+PPG_CONTRACT_CLOSURE_MATRIX.md	1433	ppg_control_top.v:252	sym	ppg_control_top.v	o_system_fault_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_sample_index`，原解析为o_system_fault_identity_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1434	ppg_control_top.v:249	sym	ppg_control_top.v	o_system_fault_source	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_source`，原解析为o_system_fault_cause_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1435	ppg_control_top.v:257	sym	ppg_control_top.v	o_system_fault_summary	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_system_fault_summary`，原解析为o_system_fault_precision
+PPG_CONTRACT_CLOSURE_MATRIX.md	1439	ppg_400hz_frame_calibration_scheduler.v:145	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1440	ppg_400hz_frame_calibration_scheduler.v:143	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1441	ppg_400hz_frame_calibration_scheduler.v:141	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1442	ppg_400hz_frame_calibration_scheduler.v:146	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1443	ppg_400hz_frame_calibration_scheduler.v:144	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1444	ppg_400hz_frame_calibration_scheduler.v:139	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1445	ppg_400hz_frame_calibration_scheduler.v:142	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1446	ppg_400hz_frame_calibration_scheduler.v:138	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1447	ppg_400hz_frame_calibration_scheduler.v:140	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1460	ppg_control_top.v:205	sym	ppg_control_top.v	o_last_error_code	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_last_error_code`，原解析为o_commit_ack_sticky
+PPG_CONTRACT_CLOSURE_MATRIX.md	1461	ppg_control_top.v:206	sym	ppg_control_top.v	o_schema_version	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_schema_version`，原解析为o_error_sticky
+PPG_CONTRACT_CLOSURE_MATRIX.md	1462	ppg_control_top.v:207	sym	ppg_control_top.v	o_config_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_config_epoch`，原解析为o_last_error_code
+PPG_CONTRACT_CLOSURE_MATRIX.md	1463	ppg_control_top.v:208	sym	ppg_control_top.v	o_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_coef_epoch`，原解析为o_schema_version
+PPG_CONTRACT_CLOSURE_MATRIX.md	1464	ppg_control_top.v:209	sym	ppg_control_top.v	o_stage2_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_stage2_coef_epoch`，原解析为o_config_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1465	ppg_control_top.v:210	sym	ppg_control_top.v	o_dc_recovery_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_dc_recovery_coef_epoch`，原解析为o_coef_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1491	ppg_control_top.v:159	sym	ppg_control_top.v	o_idac_sar9ambn_low	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_idac_sar9ambn_low`，原解析为o_en_sar15_dc_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1492	ppg_control_top.v:160	sym	ppg_control_top.v	o_idac_sar9dcn_low	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_idac_sar9dcn_low`，原解析为o_en_sar15_iref
+PPG_CONTRACT_CLOSURE_MATRIX.md	1493	ppg_control_top.v:161	sym	ppg_control_top.v	o_idac_sar15ambn_low	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_idac_sar15ambn_low`，原解析为o_idac_sar9ambn_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1494	ppg_control_top.v:162	sym	ppg_control_top.v	o_idac_sar15dcn_low	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_idac_sar15dcn_low`，原解析为o_idac_sar9dcn_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1495	ppg_control_top.v:163	sym	ppg_control_top.v	o_s_in	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_s_in`，原解析为o_idac_sar15ambn_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1520	ppg_control_top.v:173	sym	ppg_control_top.v	o_fine_ppg_value	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_fine_ppg_value`，原解析为o_coarse_saturation_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1525	ppg_control_top.v:178	sym	ppg_control_top.v	o_calibrated_s1_value	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_calibrated_s1_value`，原解析为o_fine_saturation_low
+PPG_CONTRACT_CLOSURE_MATRIX.md	1526	ppg_control_top.v:179	sym	ppg_control_top.v	o_programmable_15_code	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_programmable_15_code`，原解析为o_fine_saturation_high
+PPG_CONTRACT_CLOSURE_MATRIX.md	1528	ppg_control_top.v:181	sym	ppg_control_top.v	o_result_config_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_config_epoch`，原解析为o_programmable_15_code
+PPG_CONTRACT_CLOSURE_MATRIX.md	1529	ppg_control_top.v:182	sym	ppg_control_top.v	o_result_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_coef_epoch`，原解析为o_programmable_15_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1530	ppg_control_top.v:183	sym	ppg_control_top.v	o_result_stage2_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_stage2_coef_epoch`，原解析为o_result_config_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1531	ppg_control_top.v:184	sym	ppg_control_top.v	o_result_dc_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_dc_coef_epoch`，原解析为o_result_coef_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1533	ppg_control_top.v:186	sym	ppg_control_top.v	o_result_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_frame_id`，原解析为o_result_dc_coef_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1534	ppg_control_top.v:187	sym	ppg_control_top.v	o_result_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_sample_index`，原解析为o_result_precision_mode
+PPG_CONTRACT_CLOSURE_MATRIX.md	1536	ppg_control_top.v:189	sym	ppg_control_top.v	o_result_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_frame_type`，原解析为o_result_sample_index
+PPG_CONTRACT_CLOSURE_MATRIX.md	1537	ppg_control_top.v:190	sym	ppg_control_top.v	o_result_amb_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_amb_code_snapshot`，原解析为o_result_color_ir
+PPG_CONTRACT_CLOSURE_MATRIX.md	1538	ppg_control_top.v:191	sym	ppg_control_top.v	o_result_dc_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_dc_code_snapshot`，原解析为o_result_frame_type
+PPG_CONTRACT_CLOSURE_MATRIX.md	1539	ppg_control_top.v:192	sym	ppg_control_top.v	o_result_amb_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_amb_code_epoch`，原解析为o_result_amb_code_snapshot
+PPG_CONTRACT_CLOSURE_MATRIX.md	1540	ppg_control_top.v:193	sym	ppg_control_top.v	o_result_dc_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_result_dc_code_epoch`，原解析为o_result_dc_code_snapshot
+PPG_CONTRACT_CLOSURE_MATRIX.md	1549	ppg_control_top.v:265	sym	ppg_control_top.v	o_measurement_result_discard_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_measurement_result_discard_frame_id`，原解析为o_measurement_result_discard_identity_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1550	ppg_control_top.v:266	sym	ppg_control_top.v	o_measurement_result_discard_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_measurement_result_discard_sample_index`，原解析为o_measurement_result_discard_sample_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1552	ppg_control_top.v:268	sym	ppg_control_top.v	o_measurement_result_discard_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_measurement_result_discard_frame_type`，原解析为o_measurement_result_discard_sample_index
+PPG_CONTRACT_CLOSURE_MATRIX.md	1554	ppg_control_top.v:270	sym	ppg_control_top.v	o_measurement_result_discard_run_generation	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_measurement_result_discard_run_generation`，原解析为o_measurement_result_discard_frame_type
+PPG_CONTRACT_CLOSURE_MATRIX.md	1558	ppg_control_top.v:277	sym	ppg_control_top.v	o_detection_discard_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_frame_id`，原解析为o_detection_discard_identity_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1559	ppg_control_top.v:278	sym	ppg_control_top.v	o_detection_discard_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_sample_index`，原解析为o_detection_discard_sample_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	1561	ppg_control_top.v:280	sym	ppg_control_top.v	o_detection_discard_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_frame_type`，原解析为o_detection_discard_sample_index
+PPG_CONTRACT_CLOSURE_MATRIX.md	1563	ppg_control_top.v:282	sym	ppg_control_top.v	o_detection_discard_config_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_config_epoch`，原解析为o_detection_discard_frame_type
+PPG_CONTRACT_CLOSURE_MATRIX.md	1564	ppg_control_top.v:283	sym	ppg_control_top.v	o_detection_discard_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_coef_epoch`，原解析为o_detection_discard_precision
+PPG_CONTRACT_CLOSURE_MATRIX.md	1565	ppg_control_top.v:284	sym	ppg_control_top.v	o_detection_discard_dc_recovery_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_dc_recovery_epoch`，原解析为o_detection_discard_config_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1566	ppg_control_top.v:285	sym	ppg_control_top.v	o_detection_discard_amb_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_amb_code_epoch`，原解析为o_detection_discard_coef_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1567	ppg_control_top.v:286	sym	ppg_control_top.v	o_detection_discard_dc_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_dc_code_epoch`，原解析为o_detection_discard_dc_recovery_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1568	ppg_control_top.v:287	sym	ppg_control_top.v	o_detection_discard_run_generation	第三轮（统筹10-10核对：格内写明的符号为准）：W1 格内写明`o_detection_discard_run_generation`，原解析为o_detection_discard_amb_code_epoch
+PPG_CONTRACT_CLOSURE_MATRIX.md	1576	ppg_control_top.v:109,724	sym	ppg_control_top.v	i_start_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第113行（距引用0行）出现本行所述`i_start_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1579	ppg_control_top.v:120,727	sym	ppg_control_top.v	i_analog_ready	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第124行（距引用0行）出现本行所述`i_analog_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1585	`:245`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号dec_amb_threshold_low与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1590	ppg_control_top.v:740	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_analog_ready与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1590	ppg_control_top.v:1502	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_result_dc_code_snapshot与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1591	ppg_control_top.v:741	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_adc_idle与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1591	ppg_control_top.v:1503	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_result_amb_code_epoch与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1596	`:247`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号CTRL_EN_TEST与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1606	ppg_control_top.v:120,727	sym	ppg_control_top.v	i_analog_ready	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第124行（距引用0行）出现本行所述`i_analog_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1608	ppg_control_top.v:722	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_system_fault_summary_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1611	ppg_control_top.v:723	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_result_discard_summary_sticky_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1612	ppg_control_top.v:718	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_system_fault_frame_id_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1613	ppg_control_top.v:720	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_system_fault_frame_type_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1614	ppg_control_top.v:721	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_system_fault_run_generation_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1615	ppg_control_top.v:719	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号sup_system_fault_sample_index_o与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1616	ppg_control_top.v:109,724	sym	ppg_control_top.v	i_start_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第113行（距引用0行）出现本行所述`i_start_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1617	ppg_control_top.v:305,733	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_source_config_snapshot与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1639	ppg_control_top.v:742,1490	sym	ppg_control_top.v	o_lifecycle_state	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第755行（距引用0行）出现本行所述`o_lifecycle_state`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1640	ppg_control_top.v:743,1491	sym	ppg_control_top.v	o_start_ready	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第756行（距引用0行）出现本行所述`o_start_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1643	ppg_control_top.v:757	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_run_enable与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1644	ppg_control_top.v:758	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_allow_new_transaction与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1645	ppg_control_top.v:759	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_run_generation与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1646	ppg_control_top.v:760	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stop_episode_active与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1647	ppg_control_top.v:761	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_commit_ack_event与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1648	ppg_control_top.v:762	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_start_ack_event与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1649	ppg_control_top.v:763	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stop_ack_event与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1650	ppg_control_top.v:764	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_error_event与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1651	ppg_control_top.v:765	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_commit_ack_sticky与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1652	ppg_control_top.v:766	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_error_sticky与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1653	ppg_control_top.v:767	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_last_error_code与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1654	ppg_control_top.v:768	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_schema_version与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1655	ppg_control_top.v:769	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_run_profile与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1656	ppg_control_top.v:770	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_input_source与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1657	ppg_control_top.v:771	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_idac_mode与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1658	ppg_control_top.v:772	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_optical_mode与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1659	ppg_control_top.v:773	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_initial_precision与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1660	ppg_control_top.v:774	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_enable与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1661	ppg_control_top.v:775	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_enable与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1662	ppg_control_top.v:776	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_polarity与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1663	ppg_control_top.v:777	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_polarity与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1664	ppg_control_top.v:778	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_calibration_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1665	ppg_control_top.v:779	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage2_calibration_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1666	ppg_control_top.v:780	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dc9_recovery_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1667	ppg_control_top.v:781	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dc15_recovery_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1670	ppg_control_top.v:784	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_code_max与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1671	ppg_control_top.v:785	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_r_manual_code与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1672	ppg_control_top.v:786	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_r_code_min与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1673	ppg_control_top.v:787	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_r_code_max与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1674	ppg_control_top.v:788	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_ir_manual_code与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1675	ppg_control_top.v:789	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_ir_code_min与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1676	ppg_control_top.v:790	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_ir_code_max与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1677	ppg_control_top.v:791	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_threshold_low与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1678	ppg_control_top.v:792	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_threshold_high与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1679	ppg_control_top.v:793	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_threshold_low与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1680	ppg_control_top.v:794	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_threshold_high与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1681	ppg_control_top.v:795	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_confirm_count与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1682	ppg_control_top.v:796	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_confirm_count与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1683	ppg_control_top.v:797	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_0与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1684	ppg_control_top.v:798	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_1与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1685	ppg_control_top.v:799	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_2与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1686	ppg_control_top.v:800	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_3与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1687	ppg_control_top.v:801	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_4与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1688	ppg_control_top.v:802	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_5与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1689	ppg_control_top.v:803	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_6与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1690	ppg_control_top.v:804	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_7与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1691	ppg_control_top.v:805	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_8与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1692	ppg_control_top.v:806	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_weight_q16_9与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1693	ppg_control_top.v:807	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_offset_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1694	ppg_control_top.v:808	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage2_gain_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1695	ppg_control_top.v:809	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage2_offset_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1696	ppg_control_top.v:810	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dc9_recovery_gain_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1698	ppg_control_top.v:812	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_amb_recheck_interval_frames与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1701	ppg_control_top.v:815	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_alpha_q15与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1702	ppg_control_top.v:816	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_beta_q15与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1703	ppg_control_top.v:817	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_timing_adjust_ratio_q15与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1704	ppg_control_top.v:818	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_slope_min_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1705	ppg_control_top.v:819	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_slope_max_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1706	ppg_control_top.v:820	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_baseline_delta_q16与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1713	ppg_adc_measurement_idac_integration.v:2334	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_amb_polarity与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1714	ppg_adc_measurement_idac_integration.v:2317	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_ENABLE_TEST_INJECTION与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1715	ppg_adc_measurement_idac_integration.v:2321	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_clk与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1717	ppg_adc_measurement_idac_integration.v:2331	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_idac_mode与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1718	ppg_adc_measurement_idac_integration.v:2330	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_active_config_epoch与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1803	ppg_control_top.v:828	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_direction_deadband与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1804	ppg_control_top.v:829	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_min_peak_valley_amplitude与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1805	ppg_control_top.v:830	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_min_peak_to_valley_frames与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1806	ppg_control_top.v:831	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_min_peak_to_peak_frames与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1808	ppg_control_top.v:833	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_max_reacquire_frames与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1809	ppg_control_top.v:834	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_peak_valley_config_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1823	ppg_400hz_frame_calibration_scheduler.v:84	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1824	ppg_400hz_frame_calibration_scheduler.v:85	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1825	ppg_400hz_frame_calibration_scheduler.v:86	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1826	ppg_400hz_frame_calibration_scheduler.v:87	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1827	ppg_400hz_frame_calibration_scheduler.v:88	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1828	ppg_400hz_frame_calibration_scheduler.v:89	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1831	ppg_400hz_frame_calibration_scheduler.v:94	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1832	ppg_400hz_frame_calibration_scheduler.v:95	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1833	ppg_400hz_frame_calibration_scheduler.v:96	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1834	ppg_400hz_frame_calibration_scheduler.v:97	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1835	ppg_400hz_frame_calibration_scheduler.v:98	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1836	ppg_400hz_frame_calibration_scheduler.v:99	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1837	ppg_400hz_frame_calibration_scheduler.v:100	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1838	ppg_400hz_frame_calibration_scheduler.v:101	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1839	ppg_400hz_frame_calibration_scheduler.v:102	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1840	ppg_400hz_frame_calibration_scheduler.v:103	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1841	ppg_400hz_frame_calibration_scheduler.v:104	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1842	ppg_400hz_frame_calibration_scheduler.v:105	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1843	ppg_400hz_frame_calibration_scheduler.v:106	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1844	ppg_400hz_frame_calibration_scheduler.v:107	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1847	ppg_400hz_frame_calibration_scheduler.v:112	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1848	ppg_400hz_frame_calibration_scheduler.v:113	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1849	ppg_400hz_frame_calibration_scheduler.v:114	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1850	ppg_400hz_frame_calibration_scheduler.v:115	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1853	ppg_400hz_frame_calibration_scheduler.v:120	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1854	ppg_400hz_frame_calibration_scheduler.v:121	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1855	ppg_400hz_frame_calibration_scheduler.v:122	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1856	ppg_400hz_frame_calibration_scheduler.v:123	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1857	ppg_400hz_frame_calibration_scheduler.v:124	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1858	ppg_400hz_frame_calibration_scheduler.v:125	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1859	ppg_400hz_frame_calibration_scheduler.v:126	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1860	ppg_400hz_frame_calibration_scheduler.v:127	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1861	ppg_400hz_frame_calibration_scheduler.v:128	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1862	ppg_400hz_frame_calibration_scheduler.v:129	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1863	ppg_400hz_frame_calibration_scheduler.v:130	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1866	ppg_400hz_frame_calibration_scheduler.v:137	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1867	ppg_400hz_frame_calibration_scheduler.v:138	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1867	ppg_control_top.v:905	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1868	ppg_400hz_frame_calibration_scheduler.v:139	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1868	ppg_control_top.v:906	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1869	ppg_400hz_frame_calibration_scheduler.v:140	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1869	ppg_control_top.v:907	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1870	ppg_400hz_frame_calibration_scheduler.v:141	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1870	ppg_control_top.v:908	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1871	ppg_400hz_frame_calibration_scheduler.v:142	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1871	ppg_control_top.v:909	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1872	ppg_400hz_frame_calibration_scheduler.v:143	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1872	ppg_control_top.v:910	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1873	ppg_400hz_frame_calibration_scheduler.v:144	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1873	ppg_control_top.v:911	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1874	ppg_400hz_frame_calibration_scheduler.v:145	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1874	ppg_control_top.v:912	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1875	ppg_400hz_frame_calibration_scheduler.v:146	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1875	ppg_control_top.v:913	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1878	ppg_400hz_frame_calibration_scheduler.v:151	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1879	ppg_400hz_frame_calibration_scheduler.v:152	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1880	ppg_400hz_frame_calibration_scheduler.v:153	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1881	ppg_400hz_frame_calibration_scheduler.v:154	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1882	ppg_400hz_frame_calibration_scheduler.v:155	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1883	ppg_400hz_frame_calibration_scheduler.v:156	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1884	ppg_400hz_frame_calibration_scheduler.v:157	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1885	ppg_400hz_frame_calibration_scheduler.v:158	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1886	ppg_400hz_frame_calibration_scheduler.v:159	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1887	ppg_400hz_frame_calibration_scheduler.v:160	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1888	ppg_400hz_frame_calibration_scheduler.v:161	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1889	ppg_400hz_frame_calibration_scheduler.v:162	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1890	ppg_400hz_frame_calibration_scheduler.v:163	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1891	ppg_400hz_frame_calibration_scheduler.v:164	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1892	ppg_400hz_frame_calibration_scheduler.v:165	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1893	ppg_400hz_frame_calibration_scheduler.v:166	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1894	ppg_control_top.v:932	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1896	ppg_400hz_frame_calibration_scheduler.v:171	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1898	ppg_400hz_frame_calibration_scheduler.v:173	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1899	ppg_400hz_frame_calibration_scheduler.v:174	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1900	ppg_400hz_frame_calibration_scheduler.v:175	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1901	ppg_400hz_frame_calibration_scheduler.v:176	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1902	ppg_400hz_frame_calibration_scheduler.v:177	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1903	ppg_400hz_frame_calibration_scheduler.v:178	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1906	ppg_400hz_frame_calibration_scheduler.v:183	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1907	ppg_400hz_frame_calibration_scheduler.v:184	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1907	ppg_control_top.v:945	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1908	ppg_400hz_frame_calibration_scheduler.v:185	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1908	ppg_control_top.v:946	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1909	ppg_400hz_frame_calibration_scheduler.v:186	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1909	ppg_control_top.v:947	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1910	ppg_400hz_frame_calibration_scheduler.v:187	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1911	ppg_400hz_frame_calibration_scheduler.v:188	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1912	ppg_400hz_frame_calibration_scheduler.v:189	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1913	ppg_400hz_frame_calibration_scheduler.v:190	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1915	ppg_400hz_frame_calibration_scheduler.v:194	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1916	ppg_control_top.v:954	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1917	ppg_control_top.v:955	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1918	ppg_400hz_frame_calibration_scheduler.v:197	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1918	ppg_control_top.v:956	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1919	ppg_400hz_frame_calibration_scheduler.v:198	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1919	ppg_control_top.v:957	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1920	ppg_400hz_frame_calibration_scheduler.v:199	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1920	ppg_control_top.v:958	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1921	ppg_400hz_frame_calibration_scheduler.v:200	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1921	ppg_control_top.v:959	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1922	ppg_400hz_frame_calibration_scheduler.v:201	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1922	ppg_control_top.v:960	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1923	ppg_400hz_frame_calibration_scheduler.v:202	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1923	ppg_control_top.v:961	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	1927	ppg_sar9_sar15_safe_selection_wrapper.v:67	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_run_enable	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第69行（距引用2行）出现本行所述`i_run_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1928	ppg_sar9_sar15_safe_selection_wrapper.v:68	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_start_ack_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第70行（距引用2行）出现本行所述`i_start_ack_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1929	ppg_sar9_sar15_safe_selection_wrapper.v:69	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_stop_ack_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第71行（距引用2行）出现本行所述`i_stop_ack_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1930	ppg_sar9_sar15_safe_selection_wrapper.v:70	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_control_abort_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第72行（距引用2行）出现本行所述`i_control_abort_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1931	ppg_sar9_sar15_safe_selection_wrapper.v:71	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_diag_clear_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第73行（距引用2行）出现本行所述`i_diag_clear_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1932	ppg_sar9_sar15_safe_selection_wrapper.v:72	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_run_generation	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第74行（距引用2行）出现本行所述`i_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1935	ppg_sar9_sar15_safe_selection_wrapper.v:77	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_calibration_local_tick	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第79行（距引用2行）出现本行所述`i_calibration_local_tick`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1936	ppg_sar9_sar15_safe_selection_wrapper.v:78	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_normal_frame_active	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第80行（距引用2行）出现本行所述`i_normal_frame_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1937	ppg_sar9_sar15_safe_selection_wrapper.v:79	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_calibration_frame_active	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第81行（距引用2行）出现本行所述`i_calibration_frame_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1938	ppg_sar9_sar15_safe_selection_wrapper.v:80	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_macro_frame_safe_boundary	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第82行（距引用2行）出现本行所述`i_macro_frame_safe_boundary`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1939	ppg_sar9_sar15_safe_selection_wrapper.v:81	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_idac_code_safe_boundary	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第83行（距引用2行）出现本行所述`i_idac_code_safe_boundary`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1942	ppg_sar9_sar15_safe_selection_wrapper.v:86	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_optical_mode	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第88行（距引用2行）出现本行所述`i_optical_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1943	ppg_sar9_sar15_safe_selection_wrapper.v:87	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_precision_mode_committed	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第89行（距引用2行）出现本行所述`i_precision_mode_committed`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1944	ppg_sar9_sar15_safe_selection_wrapper.v:88	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_static_characterization_enable	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第90行（距引用2行）出现本行所述`i_static_characterization_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1945	ppg_sar9_sar15_safe_selection_wrapper.v:89	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_test_mux_ctrl	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第91行（距引用2行）出现本行所述`i_test_mux_ctrl`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1950	ppg_sar9_sar15_safe_selection_wrapper.v:98	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_precision_mode	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第100行（距引用2行）出现本行所述`i_waveform_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1951	ppg_sar9_sar15_safe_selection_wrapper.v:99	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第101行（距引用2行）出现本行所述`i_waveform_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1952	ppg_sar9_sar15_safe_selection_wrapper.v:100	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第102行（距引用2行）出现本行所述`i_waveform_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1953	ppg_sar9_sar15_safe_selection_wrapper.v:101	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第103行（距引用2行）出现本行所述`i_waveform_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1954	ppg_sar9_sar15_safe_selection_wrapper.v:102	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_amb_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第104行（距引用2行）出现本行所述`i_waveform_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1955	ppg_sar9_sar15_safe_selection_wrapper.v:103	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_dc_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第105行（距引用2行）出现本行所述`i_waveform_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1956	ppg_sar9_sar15_safe_selection_wrapper.v:104	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_amb_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第106行（距引用2行）出现本行所述`i_waveform_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1957	ppg_sar9_sar15_safe_selection_wrapper.v:105	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_dc_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第107行（距引用2行）出现本行所述`i_waveform_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1958	ppg_sar9_sar15_safe_selection_wrapper.v:106	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_input_source	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第108行（距引用2行）出现本行所述`i_waveform_input_source`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1959	ppg_sar9_sar15_safe_selection_wrapper.v:107	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_optical_mode	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第109行（距引用2行）出现本行所述`i_waveform_optical_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1960	ppg_sar9_sar15_safe_selection_wrapper.v:108	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_waveform_leddac_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第110行（距引用2行）出现本行所述`i_waveform_leddac_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1963	ppg_sar9_sar15_safe_selection_wrapper.v:113	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_precision_mode	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第115行（距引用2行）出现本行所述`i_adc_owner_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1964	ppg_sar9_sar15_safe_selection_wrapper.v:114	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第116行（距引用2行）出现本行所述`i_adc_owner_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1965	ppg_sar9_sar15_safe_selection_wrapper.v:115	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第117行（距引用2行）出现本行所述`i_adc_owner_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1966	ppg_sar9_sar15_safe_selection_wrapper.v:116	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第118行（距引用2行）出现本行所述`i_adc_owner_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1967	ppg_sar9_sar15_safe_selection_wrapper.v:117	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_amb_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第119行（距引用2行）出现本行所述`i_adc_owner_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1968	ppg_sar9_sar15_safe_selection_wrapper.v:118	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_dc_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第120行（距引用2行）出现本行所述`i_adc_owner_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1969	ppg_sar9_sar15_safe_selection_wrapper.v:119	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_amb_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第121行（距引用2行）出现本行所述`i_adc_owner_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1970	ppg_sar9_sar15_safe_selection_wrapper.v:120	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_dc_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第122行（距引用2行）出现本行所述`i_adc_owner_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1971	ppg_sar9_sar15_safe_selection_wrapper.v:121	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_owner_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第123行（距引用2行）出现本行所述`i_adc_owner_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1974	ppg_sar9_sar15_safe_selection_wrapper.v:126	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_complete_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第128行（距引用2行）出现本行所述`i_adc_complete_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1975	ppg_sar9_sar15_safe_selection_wrapper.v:127	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_adc_idle	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第129行（距引用2行）出现本行所述`i_adc_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2006	ppg_sar9_sar15_safe_selection_wrapper.v:162	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_wrapper_idle	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第164行（距引用2行）出现本行所述`o_wrapper_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2007	ppg_sar9_sar15_safe_selection_wrapper.v:163	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_precision_active	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第165行（距引用2行）出现本行所述`o_precision_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2010	ppg_sar9_sar15_safe_selection_wrapper.v:166	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_owner_q3_window_closed	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第168行（距引用2行）出现本行所述`o_owner_q3_window_closed`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2011	ppg_sar9_sar15_safe_selection_wrapper.v:167	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_switch_protocol_error_sticky	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第169行（距引用2行）出现本行所述`o_switch_protocol_error_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2012	ppg_sar9_sar15_safe_selection_wrapper.v:168	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_transaction_mismatch_sticky	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第170行（距引用2行）出现本行所述`o_transaction_mismatch_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2013	ppg_sar9_sar15_safe_selection_wrapper.v:169	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_owner_deadline_timeout_sticky	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第171行（距引用2行）出现本行所述`o_owner_deadline_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2014	ppg_sar9_sar15_safe_selection_wrapper.v:170	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_calibration_timeout_sticky	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第172行（距引用2行）出现本行所述`o_calibration_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2015	ppg_sar9_sar15_safe_selection_wrapper.v:171	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_wrapper_fault_blocking	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第173行（距引用2行）出现本行所述`o_wrapper_fault_blocking`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2016	ppg_control_top.v:1068	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_s_in与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2017	ppg_control_top.v:1069	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_clk_2m与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2018	ppg_sar9_sar15_safe_selection_wrapper.v:176	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_cause	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第178行（距引用2行）出现本行所述`o_ssw_fault_cause`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2018	ppg_control_top.v:1070	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_analog_safe与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2019	ppg_sar9_sar15_safe_selection_wrapper.v:177	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_identity_valid	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第179行（距引用2行）出现本行所述`o_ssw_fault_identity_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2019	ppg_control_top.v:1071	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_sar_timing_idle与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2020	ppg_sar9_sar15_safe_selection_wrapper.v:178	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第180行（距引用2行）出现本行所述`o_ssw_fault_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2020	ppg_control_top.v:1072	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_wrapper_idle与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2021	ppg_sar9_sar15_safe_selection_wrapper.v:179	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第181行（距引用2行）出现本行所述`o_ssw_fault_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2021	ppg_control_top.v:1073	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_precision_active与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2022	ppg_sar9_sar15_safe_selection_wrapper.v:180	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第182行（距引用2行）出现本行所述`o_ssw_fault_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2022	ppg_control_top.v:1074	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_calibration_wave_active与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2023	ppg_sar9_sar15_safe_selection_wrapper.v:181	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第183行（距引用2行）出现本行所述`o_ssw_fault_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2023	ppg_control_top.v:1075	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_adc_owner_inflight与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2024	ppg_sar9_sar15_safe_selection_wrapper.v:182	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_ssw_fault_precision_mode	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第184行（距引用2行）出现本行所述`o_ssw_fault_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2024	ppg_control_top.v:1076	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_owner_q3_window_closed与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2195	`:203-224`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2260	`:2570,1090`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2261	`:2571,1091`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2262	`:2572,1092`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2263	`:2573,1093`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2265	ppg_amb_recheck_scheduler.v:223	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2265	`:1028`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2272	`:959,716`	sym	ppg_precision_window_controller.v	reacquire_request_event_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内“cluster ⑤'s ppg_precision_window_controller (reacquire_request_event_o, …)”，生产方为PWC
+PPG_CONTRACT_CLOSURE_MATRIX.md	2273	`:219,717`	sym	ppg_precision_window_integration.v	amb_recheck_accept_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内写明amb_recheck_accept_o；该名只存在于PWI（重检调度器o_amb_recheck_accept接出的网）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2313	`:872,740`	sym	ppg_dynamic_baseline_cross_detector.v	dec_peak_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_peak_frame_id`，原解析为i_peak_frame_id
+PPG_CONTRACT_CLOSURE_MATRIX.md	2317	`:876,744`	sym	ppg_precision_window_integration.v	dec_peak_dc_recovery_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_peak_dc_recovery_coef_epoch`，原解析文件ppg_dynamic_baseline_cross_detector.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2318	`:877,745`	sym	ppg_precision_window_integration.v	valley_pending_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内写明valley_pending_o；该名只存在于PWI
+PPG_CONTRACT_CLOSURE_MATRIX.md	2325	`:884,752`	sym	ppg_precision_window_integration.v	dec_valley_dc_recovery_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_valley_dc_recovery_coef_epoch`，原解析文件ppg_dynamic_baseline_cross_detector.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2367	`:219,831`	sym	ppg_precision_window_integration.v	amb_recheck_accept_o	第三轮（统筹10-10核对：格内写明的符号为准）：同上
+PPG_CONTRACT_CLOSURE_MATRIX.md	2416	`:956,863`	sym	ppg_precision_window_controller.v	fine_window_start_frame_id_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内“ppg_precision_window_controller (fine_window_start_frame_id_o, …)”
+PPG_CONTRACT_CLOSURE_MATRIX.md	2417	`:953,864`	sym	ppg_precision_window_controller.v	active_precision_mode_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内“ppg_precision_window_controller (active_precision_mode_o, …)”
+PPG_CONTRACT_CLOSURE_MATRIX.md	2419	`:945,866`	sym	ppg_precision_window_integration.v	flag_return_9bit_ready	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_return_9bit_ready`，原解析文件ppg_peak_valley_window_detector.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2444	`:244`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2447	`:247`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2448	`:248`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2449	`:249`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2450	`:250`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2451	`:251`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2452	`:252`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2453	`:253`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2454	`:254`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2455	`:255`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2456	`:256`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2457	`:257`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2458	`:258`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2459	`:259`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2460	`:260`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2461	`:261`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2462	`:262`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2465	`:265`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2466	ppg_control_top.v:1297	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2467	ppg_control_top.v:1298	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2468	ppg_dynamic_baseline_cross_detector.v:550	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2468	ppg_control_top.v:1301	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2469	ppg_peak_valley_window_detector.v:446	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2469	ppg_control_top.v:1302	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2470	ppg_peak_valley_window_detector.v:455	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2470	ppg_control_top.v:1303	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2471	ppg_peak_valley_window_detector.v:441	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2471	ppg_control_top.v:1304	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2472	ppg_control_top.v:1305	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2473	ppg_control_top.v:1306	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2474	ppg_peak_valley_window_detector.v:466	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2474	ppg_control_top.v:1307	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2475	ppg_control_top.v:1310	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2476	ppg_dynamic_baseline_cross_detector.v:566	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2476	ppg_control_top.v:1311	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2477	ppg_control_top.v:1312	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2478	ppg_control_top.v:1313	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2479	ppg_peak_valley_window_detector.v:470	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2479	ppg_control_top.v:1314	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2503	ppg_adc_measurement_idac_integration.v:242	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2504	`:243`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2505	`:993`	sym	ppg_precision_window_integration.v	ppg_amb_recheck_scheduler	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`ppg_amb_recheck_scheduler`，原解析为i_normal_measurement_active
+PPG_CONTRACT_CLOSURE_MATRIX.md	2509	ppg_dynamic_baseline_cross_detector.v:531	note			第三轮（统筹10-10核对：格内写明的符号为准）：保留：显式文件为交叉检测器，o_cross_frame_id为其输出；格内dec_cross_frame_id是其后“-> PWI”一段的下游网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	2510	`:532`	sym	ppg_precision_window_integration.v	dec_cross_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_cross_sample_index`，原解析文件ppg_dynamic_baseline_cross_detector.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2519	`:1001`	sym	ppg_amb_recheck_scheduler.v	ppg_amb_recheck_scheduler	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`ppg_amb_recheck_scheduler`，原解析文件ppg_400hz_frame_calibration_scheduler.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2520	`:2525`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2522	`:2527`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2534	`:1140`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_frame_id`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2536	`:362`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_color_ir`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2538	`:364`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_precision	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_precision`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2552	`:219`	sym	ppg_precision_window_integration.v	amb_recheck_accept_o	第三轮（统筹10-10核对：格内写明的符号为准）：同上
+PPG_CONTRACT_CLOSURE_MATRIX.md	2594	ppg_adc_measurement_idac_integration.v:393	sym	ppg_adc_measurement_idac_integration.v	i_test_calibration_loss_inject_valid	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第398行（距引用5行）出现本行所述`i_test_calibration_loss_inject_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2619	`:242`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2620	`:243`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2622	`:143`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2623	`:140`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2624	`:393`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2625	`:394,2601`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2634	`:157`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2641	`:316`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2642	`:317`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2643	`:318`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2689	`:1847`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_FRAME_ID_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2690	`:1848`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_SAMPLE_INDEX_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2691	`:1849`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_IDAC_CODE_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2692	`:1850`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_CODE_EPOCH_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2693	`:1851`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_CONFIG_EPOCH_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2694	`:1852`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_COEF_EPOCH_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2697	`:1855`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号ppg_adc_s1_programmable_calibrator_Inst与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2698	`:1856`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_clk与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2736	ppg_adc_measurement_idac_integration.v:1938-1956	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2736	`:1985`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2767	ppg_adc_measurement_idac_integration.v:1938	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2822	ppg_adc_pipeline_overlap_corrector.v:81	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2823	ppg_adc_pipeline_overlap_corrector.v:82	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2824	ppg_adc_pipeline_overlap_corrector.v:83	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2825	ppg_adc_pipeline_overlap_corrector.v:84	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2826	ppg_adc_pipeline_overlap_corrector.v:85	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2827	ppg_adc_pipeline_overlap_corrector.v:86	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2828	ppg_adc_pipeline_overlap_corrector.v:87	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2829	ppg_adc_pipeline_overlap_corrector.v:88	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2830	ppg_adc_pipeline_overlap_corrector.v:89	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2831	ppg_adc_pipeline_overlap_corrector.v:90	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2832	ppg_adc_pipeline_overlap_corrector.v:91	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2833	ppg_adc_pipeline_overlap_corrector.v:92	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2834	ppg_adc_pipeline_overlap_corrector.v:93	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2835	ppg_adc_pipeline_overlap_corrector.v:94	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2836	ppg_adc_pipeline_overlap_corrector.v:95	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2837	ppg_adc_pipeline_overlap_corrector.v:96	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2838	ppg_adc_pipeline_overlap_corrector.v:97	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2839	ppg_adc_pipeline_overlap_corrector.v:98	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2840	ppg_adc_pipeline_overlap_corrector.v:99	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2872	ppg_normal_transaction_fork.v:101	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_measurement_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2985	ppg_adc_measurement_idac_integration.v:2268-2290	sym	ppg_adc_measurement_idac_integration.v	o_programmable_15_calibration_applied	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第2283行（距引用0行）出现本行所述`o_programmable_15_calibration_applied`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2991	`:2215`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_FRAME_ID_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2992	`:2216`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_SAMPLE_INDEX_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3028	`:2252`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_coarse_valid	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_coarse_valid`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3029	`:2253`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_coarse_calibrated	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_coarse_calibrated`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3030	`:2254`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_coarse_saturation_low	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_coarse_saturation_low`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3031	`:2255`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_coarse_saturation_high	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_coarse_saturation_high`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3032	`:2256`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_fine_ppg_value	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_fine_ppg_value`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3033	`:2257`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_fine_valid	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_fine_valid`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3034	`:2258`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_fine_calibrated	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_fine_calibrated`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3035	`:2259`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_fine_saturation_low	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_fine_saturation_low`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3036	`:2260`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_fine_saturation_high	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_fine_saturation_high`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3037	`:2261`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_recovery_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_recovery_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3038	`:2262`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_s1_value	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_s1_value`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3039	`:2263`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_s1_calibration_applied	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_s1_calibration_applied`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3040	`:2264`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_s1_saturation_low	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_s1_saturation_low`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3041	`:2265`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_s1_saturation_high	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_s1_saturation_high`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3042	`:2266`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_programmable_15_code	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_programmable_15_code`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3043	`:2267`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_programmable_15_valid	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_programmable_15_valid`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3047	`:2271`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_config_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_config_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3048	`:2272`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_coef_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_coef_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3049	`:2273`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_stage2_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_stage2_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3050	`:2274`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_precision_mode	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_precision_mode`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3051	`:2275`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_frame_id`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3052	`:2276`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_sample_index`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3053	`:2277`	sym	ppg_adc_measurement_idac_integration.v	flag_dc_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`flag_dc_color_ir`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3054	`:2278`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_frame_type	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_frame_type`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3055	`:2279`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_amb_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_amb_code_snapshot`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3056	`:2280`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_dc_code_snapshot	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_dc_code_snapshot`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3057	`:2281`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_amb_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_amb_code_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3058	`:2282`	sym	ppg_adc_measurement_idac_integration.v	dec_dc_dc_code_epoch	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_dc_dc_code_epoch`，原解析文件ppg_adc_dc_recovery.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3104	ppg_control_top.v:348	sym	ppg_control_top.v	supervisor_system_abort_event_o	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`supervisor_system_abort_event_o`，原解析为o_system_abort_event
+PPG_CONTRACT_CLOSURE_MATRIX.md	3125	ppg_adc_async_stage_capture.v:59	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3125	ppg_adc_s1_redundancy_corrector.v:62	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3157	`:988`	sym	ppg_adc_measurement_idac_integration.v	measurement_result_discard_event_o	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`measurement_result_discard_event_o`，原解析文件ppg_system_fault_abort_supervisor.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	`:167,218,246-254`	sym	ppg_amb_recheck_scheduler.v	amb_recheck_pending_o	第三轮（统筹10-10核对：格内写明的符号为准）：格内“C16/amb_recheck_scheduler's own pending state (amb_recheck_pending_o, …)”
+PPG_CONTRACT_CLOSURE_MATRIX.md	3223	ppg_control_top.v:338,344-350	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_status_clear_event、flag_owner_abort_event、flag_abort_drain_stop_request、flag_stop_request_event与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	`:384`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_source_busy与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3226	`:381-382`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_source_rstn、i_source_config与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3232	`:1499`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3246	`:1171-1172`	sym	ppg_adc_measurement_idac_integration.v	i_diag_clear_event	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`i_diag_clear_event`，原解析为integration_protocol_error_sticky_o
+PPG_CONTRACT_CLOSURE_MATRIX.md	3352	ppg_control_top.v:288-292	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_detection_discard_dc_code_epoch、o_detection_discard_run_generation、o_s1_calibration_applied与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3367	ppg_control_top.v:851-854	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3368	ppg_control_top.v:970-974	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_scheduler_fault_identity_valid、o_scheduler_fault_frame_id、o_scheduler_fault_sample_index、o_scheduler_fault_color_ir与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3369	ppg_control_top.v:1085-1092	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_ssw_fault_identity_valid、o_ssw_fault_frame_id、o_ssw_fault_sample_index、o_ssw_fault_color_ir与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3370	ppg_control_top.v:1367-1371	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_test_identity_inject_sample_index、i_test_invalid_sample_valid、o_test_invalid_sample_ready、i_test_saturation_inject_valid与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3374	ppg_adc_measurement_idac_integration.v:1832-1837	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_stop_result_draining与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3375	ppg_adc_measurement_idac_integration.v:1898-1904	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage1_code_ext、o_stage2_raw、o_precision_mode、o_frame_id与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3376	ppg_adc_measurement_idac_integration.v:1962-1968	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_stage2_raw、o_precision_mode、o_frame_id、o_sample_index与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3377	ppg_adc_measurement_idac_integration.v:2050-2056	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_track_precision_mode、o_track_frame_id、o_track_sample_index、o_track_color_ir与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3378	ppg_adc_measurement_idac_integration.v:2124-2129	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_precision_mode、o_frame_id、o_sample_index、o_color_ir与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3379	ppg_adc_measurement_idac_integration.v:2200-2206	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_nominal_15_valid、o_nominal_saturated、o_precision_mode、o_frame_id与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3380	ppg_adc_measurement_idac_integration.v:2295-2302	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dc_code_snapshot、o_amb_code_epoch、o_dc_code_epoch、o_detect_code与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3381	ppg_adc_measurement_idac_integration.v:2432-2446	sym	ppg_adc_measurement_idac_integration.v	C_DATA_WIDTH	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第2447行（距引用1行）出现本行所述`C_DATA_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3382	ppg_adc_measurement_idac_integration.v:2625-2628	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_precision_mode_committed、i_dout_stage1_low、i_clk_stage1_dout_low_async、i_dout_stage2_low与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3402	ppg_control_top.v:308-313,324-330	sym	ppg_control_top.v	flag_diag_clear_event	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为导入提交（行号可能漂移）；导入版本第318行（距引用0行）出现本行所述`flag_diag_clear_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3409	ppg_adc_measurement_idac_integration.v:1168-1175	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_detection_discard_frame_id、o_detection_discard_sample_index、o_detection_discard_color_ir、o_detection_discard_frame_type与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3456	wrapper.v:480	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_analog_safe与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3552	ppg_control_top.v:120	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_clk_stage1_dout_low_async与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3585	ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_analog_safe与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3585	ppg_control_top.v:120	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_clk_stage1_dout_low_async与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	28	ppg_system_config_manager.v:556,519-520	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交d18c695，按写入时版本取符号（可靠）
+PPG_ALIAS_MAPPING_TABLE.md	29	ppg_system_config_manager.v:394-448,455-457,521-522,593-599	tag	ppg_system_config_manager.v	TOP-02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_commit_accept、active_config_o、config_epoch_o、@satisfies: ILM-10与本行无关；本行ID在ppg_system_config_manager.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	29	ppg_system_config_manager.v:340	tag	ppg_system_config_manager.v	TOP-02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析dec_v5_reserved与本行无关；本行ID在ppg_system_config_manager.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	30	ppg_400hz_frame_calibration_scheduler.v:458	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析adc_owner_commit_event_o与本行无关；本行ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	31	ppg_sar9_sar15_safe_selection_wrapper.v:207	tag	ppg_sar9_sar15_safe_selection_wrapper.v	TOP-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析RED_Q3_TICK与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	31	ppg_400hz_frame_calibration_scheduler.v:224	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析MACRO_SAFE_TICK与本行无关；本行ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	32	ppg_400hz_frame_calibration_scheduler.v:222-223	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析INPUT_SOURCE_PHOTODIODE、MACRO_LAST_TICK与本行无关；本行ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	33	ppg_dynamic_baseline_cross_detector.v:446,1590	tag	ppg_dynamic_baseline_cross_detector.v	TOP-06	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_cross_eligible_red_result、flag_below_seen与本行无关；本行ID在ppg_dynamic_baseline_cross_detector.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	35	ppg_characterization_control_cdc.v:118	tag	ppg_characterization_control_cdc.v	TOP-08	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_test_mux_ctrl与本行无关；本行ID在ppg_characterization_control_cdc.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	36	ppg_system_config_manager.v:460-462	tag	ppg_system_config_manager.v	TOP-09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_stop_accept、@satisfies: TOP-09与本行无关；本行ID在ppg_system_config_manager.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	38	ppg_400hz_frame_calibration_scheduler.v:549	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-11	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_macro_frame_start_event与本行无关；本行ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	38	ppg_control_top.v:945	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_ALIAS_MAPPING_TABLE.md	42	ppg_control_top.v:414	tag	ppg_control_top.v	TOP-17	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_measurement_start_ack_event与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	43	ppg_control_top.v:408-409	tag	ppg_control_top.v	TOP-18	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析wrapper_start_ack_event_o与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	44	ppg_control_top.v:848	tag	ppg_control_top.v	TOP-19	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析i_run_enable与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	45	ppg_system_config_manager.v:394-448	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_ALIAS_MAPPING_TABLE.md	47	ppg_adc_measurement_idac_integration.v:908,909	tag	ppg_adc_measurement_idac_integration.v	TOP-22	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_test_inject_effective、flag_test_identity_inject_fire与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	49	ppg_adc_measurement_idac_integration.v:1009,1010	tag	ppg_adc_measurement_idac_integration.v	TOP-24	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_measurement_result_discard_run_generation与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	59	ppg_precision_window_integration.v:308,472,961	tag	ppg_precision_window_integration.v	K01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_precision_controller_fault_active、o_mode_fault_active与本行无关；本行ID在ppg_precision_window_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	60	ppg_adc_measurement_idac_integration.v:2573	tag	ppg_adc_measurement_idac_integration.v	K01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_reacquire_request_event与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	61	ppg_adc_measurement_idac_integration.v:1150,450-451,1455-1474	tag	ppg_adc_measurement_idac_integration.v	K01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_ami_fault_active、flag_ami_fault_pending_01、flag_ami_fault_pending_02、flag_ami_fault_pending_04与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	62	ppg_idac_code_controller.v:638	tag	ppg_idac_code_controller.v	K01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_controller_fault_blocking与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	62	ppg_adc_measurement_idac_integration.v:2431-2432	tag	ppg_adc_measurement_idac_integration.v	K01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_controller_fault_blocking、o_controller_fault_event与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	63	ppg_system_fault_abort_supervisor.v:198,251-299	tag	ppg_system_fault_abort_supervisor.v	K02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_episode_open_edge与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	64	ppg_precision_window_integration.v:71	tag	ppg_precision_window_integration.v	K03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析C_RUN_GENERATION_WIDTH与本行无关；本行ID在ppg_precision_window_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	65	ppg_idac_code_controller.v:61	tag	ppg_idac_code_controller.v	K03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析C_RUN_GENERATION_WIDTH与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	66	ppg_adc_measurement_idac_integration.v:92	tag	ppg_adc_measurement_idac_integration.v	K03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析C_RUN_GENERATION_WIDTH与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	68	ppg_precision_window_integration.v:443	tag	ppg_precision_window_integration.v	K04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_detection_discard_apply与本行无关；本行ID在ppg_precision_window_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	69	ppg_precision_window_controller.v:139-147	tag	ppg_precision_window_controller.v	K05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_mode_fault_event、o_mode_fault_active、o_mode_fault_identity_valid、o_mode_fault_frame_id与本行无关；本行ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	75	ppg_system_active_config_unpack.v:209	tag	ppg_system_active_config_unpack.v	G-FP-01-D01-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_peak_valley_config_valid与本行无关；本行ID在ppg_system_active_config_unpack.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	76	ppg_active_v4_control_plane_integration.v:375	tag	ppg_active_v4_control_plane_integration.v	G-FP-01-D01-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析o_peak_valley_config_valid与本行无关；本行ID在ppg_active_v4_control_plane_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	77	ppg_adc_measurement_idac_integration.v:2512	tag	ppg_adc_measurement_idac_integration.v	G-FP-01-D01-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析i_peak_valley_config_valid与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	78	ppg_dynamic_baseline_cross_detector.v:480	tag	ppg_dynamic_baseline_cross_detector.v	G-FP-01-D01-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_candidate_start与本行无关；本行ID在ppg_dynamic_baseline_cross_detector.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	79	ppg_peak_valley_window_detector.v:111	tag	ppg_peak_valley_window_detector.v	G-FP-01-D01-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析i_peak_valley_config_valid与本行无关；本行ID在ppg_peak_valley_window_detector.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	89	ppg_adc_measurement_idac_integration.v:2509	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_ALIAS_MAPPING_TABLE.md	106	ppg_control_top.v:316,722	tag	ppg_control_top.v	G-FP-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析sup_system_fault_summary_o与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	107	ppg_control_top.v:355	tag	ppg_control_top.v	G-FP-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_owner_abort_event与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	108	ppg_adc_measurement_idac_integration.v:1605	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_adc_transaction_inflight与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	109	ppg_sar9_sar15_safe_selection_wrapper.v:1089-1097,1274-1282	tag	ppg_sar9_sar15_safe_selection_wrapper.v	G-FP-02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_ir_context_valid、flag_red_context_valid与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	110	ppg_precision_window_controller.v:266-270,829,831,842,844	tag	ppg_precision_window_controller.v	G-FP-02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_enter_commit、flag_return_commit、flag_pending_state、flag_lifecycle_cancel与本行无关；本行ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	112	ppg_idac_code_controller.v:170-172,580	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_dcs_ir_code_update、o_dcs_r_track_adjust、o_dcs_ir_track_adjust、flag_control_cancel与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	115	ppg_adc_measurement_idac_integration.v:2446-2461	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_DATA_WIDTH、C_FRAME_ID_WIDTH、C_SAMPLE_INDEX_WIDTH、C_IDAC_CODE_WIDTH与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	115	ppg_precision_window_integration.v:55-72	tag	ppg_precision_window_integration.v	G-FP-05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析C_DATA_WIDTH、C_FRAME_ID_WIDTH、C_SAMPLE_INDEX_WIDTH、C_IDAC_CODE_WIDTH与本行无关；本行ID在ppg_precision_window_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	116	:112-120	sym	ppg_config_cdc_bridge.v	destination_config_o	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`destination_config_o`，原解析文件ppg_active_v4_control_plane_integration.v无此名，按声明所在文件
+PPG_ALIAS_MAPPING_TABLE.md	117	ppg_idac_code_controller.v:580	tag	ppg_idac_code_controller.v	G-FP-06	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_control_cancel与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	135	ppg_400hz_frame_calibration_scheduler.v:463-464	sym	ppg_400hz_frame_calibration_scheduler.v	o_owner_deadline_timeout_sticky	第三轮（统筹10-10核对：格内写明的符号为准）：格内“o_scheduler_owner_deadline_timeout_sticky(scheduler.v:463-464附近deadline逻辑)”：Top端口由调度器o_owner_deadline_timeout_sticky驱动，锚点文件为调度器
+PPG_ALIAS_MAPPING_TABLE.md	153	ppg_idac_code_controller.v:1124	tag	ppg_idac_code_controller.v	LFA-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	156	ppg_adc_async_stage_capture.v:107	tag	ppg_adc_async_stage_capture.v	LFA-05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_capture_accept与本行无关；本行ID在ppg_adc_async_stage_capture.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	157	ppg_adc_async_stage_capture.v:107	tag	ppg_adc_async_stage_capture.v	LFA-07	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_capture_accept与本行无关；本行ID在ppg_adc_async_stage_capture.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	159	ppg_control_top.v:355	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号flag_owner_abort_event与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	160	ppg_idac_code_controller.v:1138	tag	ppg_idac_code_controller.v	LFA-12	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	169	ppg_adc_async_stage_capture.v:107	tag	ppg_adc_async_stage_capture.v	OIB-05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_capture_accept与本行无关；本行ID在ppg_adc_async_stage_capture.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	188	ppg_coarse_detection_fir.v:120-122,309,312-313,315	tag	ppg_coarse_detection_fir.v	PRC-09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析i_test_inject_enable、i_test_calibration_loss_inject_valid、o_test_calibration_loss_inject_ready、flag_history_transfer与本行无关；本行ID在ppg_coarse_detection_fir.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	192	ppg_idac_code_controller.v:285	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号ST_AMB_RECHECK与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	199	ppg_dynamic_baseline_cross_detector.v:1510,632	tag	ppg_dynamic_baseline_cross_detector.v	RRC-09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_peak_context、slope_current_q16_o与本行无关；本行ID在ppg_dynamic_baseline_cross_detector.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	214	ppg_idac_code_controller.v:1084	tag	ppg_idac_code_controller.v	TRK-03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	214	`:1087`	tag	ppg_idac_code_controller.v	TRK-03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	215	ppg_idac_code_controller.v:1070	tag	ppg_idac_code_controller.v	TRK-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	215	`:1091`	tag	ppg_idac_code_controller.v	TRK-04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_context_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	233	ppg_dynamic_baseline_cross_detector.v:1545	tag	ppg_dynamic_baseline_cross_detector.v	NRE-05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_candidate_context与本行无关；本行ID在ppg_dynamic_baseline_cross_detector.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	241	ppg_idac_code_controller.v:703	tag	ppg_idac_code_controller.v	ILM-09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析state_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	241	ppg_characterization_control_cdc.v:118	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_test_mux_ctrl与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	250	ppg_idac_code_controller.v:703	tag	ppg_idac_code_controller.v	ILM-09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析state_next与本行无关；本行ID在ppg_idac_code_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	253	ppg_sar9_sar15_safe_selection_wrapper.v:387	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-12	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_calibration_mode_legal与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	253	`:741-742`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-12	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_control_next、@satisfies: SID-08与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	253	`:762`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-12	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_control_next与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	253	`:763`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-12	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_control_next与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:808`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_cal_amb_code与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:847`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_cal_dc_code与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:615`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_control_next与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:742`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_cal_amb_code与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:745`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析CTRL_EN_9_DC与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	`:747`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析reg_cal_dc_code与本行无关；本行ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	302	:119	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_window_saturation_low与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	302	`:465`	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_local_empty与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	408	`:607-639`	tag	ppg_coarse_detection_fir.v	FIR-01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析dec_mac_operand、dec_mac_coefficient与本行无关；本行ID在ppg_coarse_detection_fir.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	455	ppg_adc_measurement_idac_integration.v:908,909	tag	ppg_adc_measurement_idac_integration.v	P07	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_test_inject_effective、flag_test_identity_inject_fire与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	456	ppg_control_top.v:414	tag	ppg_control_top.v	P17	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_measurement_start_ack_event与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	458	ppg_precision_window_controller.v:269	tag	ppg_precision_window_controller.v	N02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_lifecycle_cancel与本行无关；本行ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	458	ppg_precision_window_integration.v:443	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_ALIAS_MAPPING_TABLE.md	463	ppg_adc_measurement_idac_integration.v:967	tag	ppg_adc_measurement_idac_integration.v	P02	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_ami_fault_dispatch_03与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	464	ppg_system_fault_abort_supervisor.v:279	tag	ppg_system_fault_abort_supervisor.v	P03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析system_stop_request_event_o与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	464	ppg_control_top.v:350-357,368-375	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号supervisor_system_stop_request_event_o、flag_owner_abort_event、flag_stop_request_event与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	465	ppg_system_fault_abort_supervisor.v:302	tag	ppg_system_fault_abort_supervisor.v	P04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析system_fault_cause_valid_o与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	466	ppg_system_fault_abort_supervisor.v:192	tag	ppg_system_fault_abort_supervisor.v	P05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_watchdog_timeout_fire与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	469	ppg_system_fault_abort_supervisor.v:413	tag	ppg_system_fault_abort_supervisor.v	P09	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析system_fault_summary_o与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	470	ppg_system_fault_abort_supervisor.v:207	tag	ppg_system_fault_abort_supervisor.v	P10	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析dec_selected_cause与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	471	ppg_control_top.v:391	tag	ppg_control_top.v	P11	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_test_inject_mode_latched与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	472	ppg_control_top.v:295-299	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_ADC_DRAIN_WATCHDOG_CYCLES与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	477	ppg_control_top.v:1387	tag	ppg_control_top.v	P15	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析C_RUN_GENERATION_WIDTH与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	478	ppg_adc_measurement_idac_integration.v:967	tag	ppg_adc_measurement_idac_integration.v	N01	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_ami_fault_dispatch_03与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	479	ppg_system_fault_abort_supervisor.v:207	tag	ppg_system_fault_abort_supervisor.v	N03	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析dec_selected_cause与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	480	ppg_control_top.v:327	tag	ppg_control_top.v	N04	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_diag_clear_event与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	481	ppg_control_top.v:391	tag	ppg_control_top.v	N05	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_test_inject_mode_latched与本行无关；本行ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	481	ppg_adc_measurement_idac_integration.v:905,1009-1010,2356,2611	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_measurement_result_discard_run_generation、i_search_calibration_applied、o_peak_valley_protocol_error_sticky与本行无关联，±5行内也无本行所述符号
+PPG_ALIAS_MAPPING_TABLE.md	482	ppg_system_fault_abort_supervisor.v:192	tag	ppg_system_fault_abort_supervisor.v	N06	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_watchdog_timeout_fire与本行无关；本行ID在ppg_system_fault_abort_supervisor.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	483	ppg_adc_measurement_idac_integration.v:978	tag	ppg_adc_measurement_idac_integration.v	N08	第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，原解析flag_datapath_discard_precision与本行无关；本行ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	568	ppg_control_top.v:295-299	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_ADC_DRAIN_WATCHDOG_CYCLES与本行无关联，±5行内也无本行所述符号

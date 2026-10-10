@@ -53,6 +53,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--resolved', required=True)
     ap.add_argument('--decisions', required=True)
+    ap.add_argument('--review', nargs='*', help='round-3 review decisions (anchor_round3.py), applied last')
     ap.add_argument('--repo', default='.')
     ap.add_argument('--base', default='7a8eabf', help='revision the inventory was taken at')
     ap.add_argument('--head', default='HEAD', help='revision new section numbers are checked against')
@@ -63,6 +64,13 @@ def main():
     with open(a.decisions, encoding='utf-8') as fh:
         for row in csv.DictReader(fh, delimiter='\t'):
             dec[(row['doc'], int(row['line']), row['old'])] = row
+    # round-3 review (anchor_round3.py): 'sym'/'tag' replace the earlier result, 'note'
+    # keeps it and records the review outcome (reliable / low confidence / kept)
+    review = {}
+    for path in a.review or []:
+        with open(path, encoding='utf-8') as fh:
+            for row in csv.DictReader(fh, delimiter='\t'):
+                review[(row['doc'], int(row['line']), row['old'])] = row
     docs = {d: git(a.repo, 'show', '%s:contracts/%s' % (a.base, d)).split('\n') for d in (MATRIX, ALIAS)}
     cid = {}
     for l in docs[MATRIX]:
@@ -135,6 +143,16 @@ def main():
                 source, note = 'manual', d['reason']
         else:
             raise SystemExit('no decision for %s:%d %s (%s)' % (r['file'], r['line'], r['text'], st))
+        rv = review.get((r['file'], r['line'], r['text']))
+        if rv is not None and cls == 'convert':
+            if rv['action'] == 'sym':
+                new = '`%s` %s' % (rv['arg1'], '、'.join('`%s`' % s for s in rv['arg2'].split(',')))
+                source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
+            elif rv['action'] == 'tag':
+                new = '`%s` `@satisfies: %s`' % (rv['arg1'], rv['arg2'])
+                source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
+            elif rv['action'] == 'note':
+                note = (rv['reason'] + ('；' + note if note else '')).rstrip('；')
         if cls == 'convert' and r.get('uncertain'):
             note = ('uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；' + note).rstrip('；')
         cnt[(cls, source)] += 1
