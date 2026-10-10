@@ -34,3 +34,18 @@
 - 无可观测：V1-PWC-C3。
 supervisor、重检调度器、PWI、SPI、冗余校正器自身0项。
 两批合计(c)类：高1、中3、低18、无可观测2（共24项）；待定：V1-SSW-P1。
+
+---
+
+# P0-V15 / V10（Python部分）：进度
+
+- 任务书：`verification_reports/P0_CLOUD_BRIEF_V15_V10_20261010.md`；在`p0-closure`上继续，已合并origin/main `bb3c1ab`。
+- 环境：云端会话，无仿真器；只新增本目录下文件。
+
+| 任务 | 文件 | 状态 |
+|---|---|---|
+| V15 TB中ADC行为模型核对 | `V15_TB_ADC_MODEL_CHECK.md` | 已完成：需修改3项（高1 V15-N1、中1 V15-N2、低1 V15-N3）；保守差异5个模型、符合2个模型 |
+| V10 Python静态扫描重跑 | `V10_STATIC_RERUN.md` | 未开始 |
+
+## V15要点
+- V15-N1（高）：芯片层物理idle=`!CLK_STAGEx_DOUT_LOW`。若DONE按模拟侧事实保持到下一次转换开始，RUN中会静默停采，STOP后无法完成STOPPING（报0x31），START被挡。所有TB用5拍短脉冲，从未触发。**需要模拟侧回答：哪个引脚的哪个边沿使DONE回落，相对owner截止（283/443/CAL 248）早还是晚，STOP后DONE是否会自行回落。**
