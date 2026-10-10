@@ -23,6 +23,6 @@ MATCH    C22 contracts/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md rec
 MATCH    C23 contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md recorded=09efd3c05704 computed=09efd3c05704
 MATCH    C24 contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md recorded=c995330d39ec computed=c995330d39ec
 MATCH    C25 contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md recorded=2a7081f9ad1c computed=2a7081f9ad1c
-MATCH    M01 contracts/PPG_CONTRACT_CLOSURE_MATRIX.md recorded=3afc177ba1fd computed=3afc177ba1fd
+MATCH    M01 contracts/PPG_CONTRACT_CLOSURE_MATRIX.md recorded=582faffb64ae computed=582faffb64ae
 rows 26, match 26, mismatch/missing 0
 exit=0
