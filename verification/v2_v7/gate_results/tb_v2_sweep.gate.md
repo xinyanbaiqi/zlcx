@@ -2,7 +2,7 @@
 
 Root: `D:\PPG\verilog\ppg_github_release\verification\v2_v7\tb\tb_v2_sweep.v`
 Delivery ready: `False`
-Summary: **174 error(s)**, **0 strict warning(s)**
+Summary: **178 error(s)**, **0 strict warning(s)**
 
 | Severity | Code | Path | Line | Message |
 |---|---|---|---:|---|
@@ -63,8 +63,6 @@ Summary: **174 error(s)**, **0 strict warning(s)**
 | error | VG060 | `tb_v2_sweep.v` | 492 | Inline comment must start at display column 101, aligned from region anchor column 101; got 53. |
 | error | VG060 | `tb_v2_sweep.v` | 578 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 579 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 616 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 617 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 618 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 619 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 620 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
@@ -82,33 +80,24 @@ Summary: **174 error(s)**, **0 strict warning(s)**
 | error | VG060 | `tb_v2_sweep.v` | 632 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 633 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 634 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 678 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 679 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 635 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 636 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 680 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 681 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 682 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 701 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 702 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 789 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 790 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 810 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 811 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 828 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 912 | Inline comment must start at display column 57, aligned from region anchor column 57; got 52. |
-| error | VG060 | `tb_v2_sweep.v` | 914 | Inline comment must start at display column 57, aligned from region anchor column 57; got 53. |
-| error | VG060 | `tb_v2_sweep.v` | 953 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 954 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 683 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 684 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 703 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 704 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 791 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 792 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 812 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 813 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 830 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 924 | Inline comment must start at display column 57, aligned from region anchor column 57; got 52. |
+| error | VG060 | `tb_v2_sweep.v` | 926 | Inline comment must start at display column 57, aligned from region anchor column 57; got 53. |
+| error | VG060 | `tb_v2_sweep.v` | 965 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 966 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 967 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 968 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 969 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 970 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 971 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 972 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 973 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 974 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 975 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
-| error | VG060 | `tb_v2_sweep.v` | 976 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 978 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 979 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 980 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
@@ -116,67 +105,82 @@ Summary: **174 error(s)**, **0 strict warning(s)**
 | error | VG060 | `tb_v2_sweep.v` | 982 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 983 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG060 | `tb_v2_sweep.v` | 984 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 985 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 986 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 987 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 988 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 990 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 991 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 992 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 993 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 994 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 995 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 996 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
+| error | VG060 | `tb_v2_sweep.v` | 997 | Inline comment must start at display column 57, aligned from region anchor column 57; got 45. |
 | error | VG025 | `tb_v2_sweep.v` | 550 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 551 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 637 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 639 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 706 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 793 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 794 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 641 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 708 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 795 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 796 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 797 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 798 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 801 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 804 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 817 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 799 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 800 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 803 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 806 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 819 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 820 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 823 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 831 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 832 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 821 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 822 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 825 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 833 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 834 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 835 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 836 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 837 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 838 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 839 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 840 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 845 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 846 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 842 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 847 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 848 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 861 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 909 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 916 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 917 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 931 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 957 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 985 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 993 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1077 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1092 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1117 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1118 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1119 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1120 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1121 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1122 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1123 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1124 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1125 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1126 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1127 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1128 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1129 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1131 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1132 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 849 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 850 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 854 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 873 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 921 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 928 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 929 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 943 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 969 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 998 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1006 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1054 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1055 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1093 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1108 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1133 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1134 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 1135 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 1136 | Control statements must use explicit begin/end blocks. |
 | error | VG025 | `tb_v2_sweep.v` | 1137 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1213 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1215 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1258 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1260 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1261 | Control statements must use explicit begin/end blocks. |
-| error | VG025 | `tb_v2_sweep.v` | 1271 | Control statements must use explicit begin/end blocks. |
-| error | VG042 | `tb_v2_sweep.v` |  | Comment coverage is too low for generated RTL (17.17%); add semantic comments near declarations, assigns, always blocks, FSM, and instances. |
+| error | VG025 | `tb_v2_sweep.v` | 1138 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1139 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1140 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1141 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1142 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1143 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1144 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1145 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1147 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1148 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1151 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1152 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1153 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1229 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1231 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1274 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1276 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1277 | Control statements must use explicit begin/end blocks. |
+| error | VG025 | `tb_v2_sweep.v` | 1287 | Control statements must use explicit begin/end blocks. |
+| error | VG042 | `tb_v2_sweep.v` |  | Comment coverage is too low for generated RTL (17.09%); add semantic comments near declarations, assigns, always blocks, FSM, and instances. |

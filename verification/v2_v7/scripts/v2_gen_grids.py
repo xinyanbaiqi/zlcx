@@ -91,8 +91,12 @@ def must_cover():
     #   the first calibration conversion of frame 0 completes late, at frame 1 tick 100, so the owner is in flight at the CAL frame end
     r.append(row("MC4_EXCC_SEARCH_LATE_CAL", "SEARCH", "LATE", "CAL", 0, 100))
     # 5 SID-05 deadline cross-frame retry: ADC busy across the local-248 calibration owner deadline
-    #   the subframe-0 calibration conversion stays busy until subframe 1 local 300, so the subframe-1 owner misses local 248
-    r.append(row("MC5_SID05_BUSY_ACROSS_248", "SEARCH", "BUSY", "CAL", 0, 625 + 300, sf=1, lt=300))
+    #   the subframe-0 calibration conversion completes on time (owner released) but the ADC stays physically busy until
+    #   subframe 1 local 300, so the subframe-1 owner cannot commit before its local-248 deadline (SID-05 retry path)
+    r.append(row("MC5_SID05_POSTBUSY_ACROSS_248", "SEARCH", "POSTBUSY", "CAL", 0, 625 + 300, sf=1, lt=300))
+    #   cross-frame variant: the 2nd calibration conversion (subframe 1) completes, then the ADC stays busy until subframe 7
+    #   local 300, so every later subframe misses local 248 and the retry can only commit in the next calibration frame
+    r.append(row("MC5_SID05_POSTBUSY_CROSS_FRAME", "SEARCH", "POSTBUSY", "CAL", 0, 625 * 7 + 300, sf=7, lt=300, extra="V2_FAULT_SERIAL=2"))
     # 6 late completion across a frame boundary (NORMAL RED, DONE in the next frame before T-lost)
     r.append(row("MC6_LATE_CROSS_FRAME", "DUAL9", "LATE", "RED", 3, 200))
     # 7 SAR15 void timing

@@ -95,10 +95,10 @@
     "metrics": {
       "files": 1,
       "modules": 1,
-      "lines": 562,
-      "code_lines": 425,
-      "line_comments": 315,
-      "commented_code_lines": 218,
+      "lines": 576,
+      "code_lines": 437,
+      "line_comments": 321,
+      "commented_code_lines": 223,
       "block_comment_markers": 0,
       "formatter_decisions": {
         "preserve_micro_format": 1
@@ -147,14 +147,14 @@
             "hard_gates": [],
             "diagnostics": [],
             "metrics": {
-              "line_count": 562,
+              "line_count": 576,
               "module_count": 1,
               "module_names": [
                 "v2_adc_behavior_model"
               ],
               "endmodule_count": 1,
-              "begin_count": 131,
-              "end_count": 131,
+              "begin_count": 136,
+              "end_count": 136,
               "case_count": 1,
               "endcase_count": 1,
               "generate_count": 0,
@@ -197,7 +197,7 @@
                 "o_slot_serial"
               ],
               "unprefixed_port_count": 0,
-              "always_count": 25,
+              "always_count": 26,
               "multi_target_always_count": 0,
               "case_always_multi_target_count": 0,
               "inline_wire_assign_count": 0,
@@ -205,7 +205,7 @@
               "function_task_initial_count": 0,
               "generate_or_preprocessor_count": 0,
               "vendor_instance_count": 0,
-              "comment_line_count": 97,
+              "comment_line_count": 98,
               "trailing_whitespace_count": 0,
               "dense_statement_lines": 1,
               "missing_reset_always_count": 0,
@@ -232,7 +232,7 @@
             "history_lines": [],
             "history_lines_en": [],
             "history_lines_cn": [
-              "2026年10月10日   V1.0        Erie          创建文件。仅供验证的9位（Stage1）与15位（Stage1+Stage2）流水线SAR ADC行为模型。转换在owner的Q3窗口上升沿开始，所选CLK_DOUT在i_latency拍后上升，DOUT在上升沿前一拍已稳定。DONE形态可选：兼容模式（Q3关闭后一拍发出5拍脉冲，等价于tb_ppg_control_top_adc_anomaly.v V1.2的bg_adc_responder），以及三种电平模式，DONE在转换结束后保持高：模式1是模拟设计者2026-10-10确认的保持型行为（Stage1 DONE在下一笔有owner事务的Q1上升沿回落，即CLK_9Q1_LOW或CLK_15Q1_LOW，ADC从该Q1起算忙；15位事务Stage2在Stage1上升之后才回落，低5拍、最短4拍，在Stage2比较结束时上升）；模式2在事务启动fire时回落，非物理行为，只作对照；模式3由外部脉冲回落。物理空闲可取\"无转换进行\"或C01第6.2.1节\"另要求所选DONE为低\"的公式，可再按i_idle_delay延迟0~3拍，模拟ppg_control_top之外的单点同步器。按槽位（RED/IR/CAL）与序号注入故障：完成丢失、迟到到指定绝对帧/拍（各模式下迟到期间ADC都保持忙，迟到DONE不会出现在物理空闲之后）、忙后恢复不发DONE、永久忙。",
+              "2026年10月10日   V1.0        Erie          创建文件。仅供验证的9位（Stage1）与15位（Stage1+Stage2）流水线SAR ADC行为模型。转换在owner的Q3窗口上升沿开始，所选CLK_DOUT在i_latency拍后上升，DOUT在上升沿前一拍已稳定。DONE形态可选：兼容模式（Q3关闭后一拍发出5拍脉冲，等价于tb_ppg_control_top_adc_anomaly.v V1.2的bg_adc_responder），以及三种电平模式，DONE在转换结束后保持高：模式1是模拟设计者2026-10-10确认的保持型行为（Stage1 DONE在下一笔有owner事务的Q1上升沿回落，即CLK_9Q1_LOW或CLK_15Q1_LOW，ADC从该Q1起算忙；15位事务Stage2在Stage1上升之后才回落，低5拍、最短4拍，在Stage2比较结束时上升）；模式2在事务启动fire时回落，非物理行为，只作对照；模式3由外部脉冲回落。物理空闲可取\"无转换进行\"或C01第6.2.1节\"另要求所选DONE为低\"的公式，可再按i_idle_delay延迟0~3拍，模拟ppg_control_top之外的单点同步器。按槽位（RED/IR/CAL）与序号注入故障：完成丢失、迟到到指定绝对帧/拍（转换开始时换算为绝对拍数：帧偏移×5000+目标相位−当前相位，因此在途owner使宏帧停顿时照样到期；各模式下迟到期间ADC都保持忙，迟到DONE不会出现在物理空闲之后）、忙后恢复不发DONE、永久忙。",
               "两级SAR ADC行为模型：Q3上升沿启动转换，按模式产生完成电平、物理空闲和故障"
             ],
             "extra_lines": []
@@ -1072,6 +1072,20 @@
                 },
                 {
                   "kind": "reg",
+                  "width": "[16:0]",
+                  "name": "cnt_since_start",
+                  "init": "",
+                  "comment": "自转换开始起的绝对拍数，不依赖宏帧是否继续推进",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 128,
+                  "line_end": 128
+                },
+                {
+                  "kind": "reg",
                   "width": "[15:0]",
                   "name": "cnt_serial_red",
                   "init": "",
@@ -1081,8 +1095,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 128,
-                  "line_end": 128
+                  "line_start": 129,
+                  "line_end": 129
                 },
                 {
                   "kind": "reg",
@@ -1095,8 +1109,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 129,
-                  "line_end": 129
+                  "line_start": 130,
+                  "line_end": 130
                 },
                 {
                   "kind": "reg",
@@ -1109,8 +1123,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 130,
-                  "line_end": 130
+                  "line_start": 131,
+                  "line_end": 131
                 },
                 {
                   "kind": "reg",
@@ -1125,8 +1139,8 @@
                   "leading_comments": [
                     "// 三段式状态机现态与次态"
                   ],
-                  "line_start": 134,
-                  "line_end": 134
+                  "line_start": 135,
+                  "line_end": 135
                 },
                 {
                   "kind": "reg",
@@ -1139,8 +1153,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 135,
-                  "line_end": 135
+                  "line_start": 136,
+                  "line_end": 136
                 },
                 {
                   "kind": "reg",
@@ -1155,8 +1169,8 @@
                   "leading_comments": [
                     "// 每次转换开始时锁存的事务属性"
                   ],
-                  "line_start": 139,
-                  "line_end": 139
+                  "line_start": 140,
+                  "line_end": 140
                 },
                 {
                   "kind": "reg",
@@ -1169,8 +1183,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 140,
-                  "line_end": 140
+                  "line_start": 141,
+                  "line_end": 141
                 },
                 {
                   "kind": "reg",
@@ -1183,22 +1197,22 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 141,
-                  "line_end": 141
+                  "line_start": 142,
+                  "line_end": 142
                 },
                 {
                   "kind": "reg",
-                  "width": "[15:0]",
-                  "name": "reg_target_frame",
+                  "width": "[16:0]",
+                  "name": "reg_release_wait",
                   "init": "",
-                  "comment": "迟到或忙释放的目标帧号",
+                  "comment": "转换开始拍到迟到或忙释放落点的绝对拍数，按5000拍宏帧换算",
                   "signed": false,
                   "unpacked": "",
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 142,
-                  "line_end": 142
+                  "line_start": 143,
+                  "line_end": 143
                 },
                 {
                   "kind": "reg",
@@ -1211,8 +1225,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 143,
-                  "line_end": 143
+                  "line_start": 144,
+                  "line_end": 144
                 },
                 {
                   "kind": "reg",
@@ -1225,8 +1239,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 144,
-                  "line_end": 144
+                  "line_start": 145,
+                  "line_end": 145
                 },
                 {
                   "kind": "reg",
@@ -1239,8 +1253,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 145,
-                  "line_end": 145
+                  "line_start": 146,
+                  "line_end": 146
                 },
                 {
                   "kind": "reg",
@@ -1255,8 +1269,8 @@
                   "leading_comments": [
                     "// 输入边沿历史与组合判定"
                   ],
-                  "line_start": 149,
-                  "line_end": 149
+                  "line_start": 150,
+                  "line_end": 150
                 },
                 {
                   "kind": "reg",
@@ -1269,8 +1283,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 150,
-                  "line_end": 150
+                  "line_start": 151,
+                  "line_end": 151
                 },
                 {
                   "kind": "wire",
@@ -1283,8 +1297,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 151,
-                  "line_end": 151
+                  "line_start": 152,
+                  "line_end": 152
                 },
                 {
                   "kind": "wire",
@@ -1297,8 +1311,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 152,
-                  "line_end": 152
+                  "line_start": 153,
+                  "line_end": 153
                 },
                 {
                   "kind": "wire",
@@ -1311,8 +1325,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 153,
-                  "line_end": 153
+                  "line_start": 154,
+                  "line_end": 154
                 },
                 {
                   "kind": "reg",
@@ -1325,8 +1339,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 154,
-                  "line_end": 154
+                  "line_start": 155,
+                  "line_end": 155
                 },
                 {
                   "kind": "wire",
@@ -1339,8 +1353,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 155,
-                  "line_end": 155
+                  "line_start": 156,
+                  "line_end": 156
                 },
                 {
                   "kind": "wire",
@@ -1353,8 +1367,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 156,
-                  "line_end": 156
+                  "line_start": 157,
+                  "line_end": 157
                 },
                 {
                   "kind": "wire",
@@ -1367,8 +1381,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 157,
-                  "line_end": 157
+                  "line_start": 158,
+                  "line_end": 158
                 },
                 {
                   "kind": "wire",
@@ -1381,22 +1395,22 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 158,
-                  "line_end": 158
+                  "line_start": 159,
+                  "line_end": 159
                 },
                 {
                   "kind": "wire",
-                  "width": "[15:0]",
-                  "name": "flag_frame_diff",
+                  "width": "[16:0]",
+                  "name": "flag_release_wait_next",
                   "init": "",
-                  "comment": "当前帧号减目标帧号",
+                  "comment": "转换开始拍换算出的释放等待拍数",
                   "signed": false,
                   "unpacked": "",
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 159,
-                  "line_end": 159
+                  "line_start": 160,
+                  "line_end": 160
                 },
                 {
                   "kind": "wire",
@@ -1409,8 +1423,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 160,
-                  "line_end": 160
+                  "line_start": 161,
+                  "line_end": 161
                 },
                 {
                   "kind": "wire",
@@ -1423,8 +1437,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 161,
-                  "line_end": 161
+                  "line_start": 162,
+                  "line_end": 162
                 },
                 {
                   "kind": "wire",
@@ -1437,8 +1451,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 162,
-                  "line_end": 162
+                  "line_start": 163,
+                  "line_end": 163
                 },
                 {
                   "kind": "wire",
@@ -1451,8 +1465,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 163,
-                  "line_end": 163
+                  "line_start": 164,
+                  "line_end": 164
                 },
                 {
                   "kind": "wire",
@@ -1465,8 +1479,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 164,
-                  "line_end": 164
+                  "line_start": 165,
+                  "line_end": 165
                 },
                 {
                   "kind": "wire",
@@ -1479,8 +1493,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 165,
-                  "line_end": 165
+                  "line_start": 166,
+                  "line_end": 166
                 },
                 {
                   "kind": "wire",
@@ -1493,8 +1507,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 166,
-                  "line_end": 166
+                  "line_start": 167,
+                  "line_end": 167
                 },
                 {
                   "kind": "reg",
@@ -1507,8 +1521,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 167,
-                  "line_end": 167
+                  "line_start": 168,
+                  "line_end": 168
                 },
                 {
                   "kind": "reg",
@@ -1521,8 +1535,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 168,
-                  "line_end": 168
+                  "line_start": 169,
+                  "line_end": 169
                 },
                 {
                   "kind": "reg",
@@ -1535,8 +1549,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 169,
-                  "line_end": 169
+                  "line_start": 170,
+                  "line_end": 170
                 },
                 {
                   "kind": "reg",
@@ -1551,8 +1565,8 @@
                   "leading_comments": [
                     "// 输出端口的内部寄存驱动"
                   ],
-                  "line_start": 175,
-                  "line_end": 175
+                  "line_start": 176,
+                  "line_end": 176
                 },
                 {
                   "kind": "reg",
@@ -1565,8 +1579,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 176,
-                  "line_end": 176
+                  "line_start": 177,
+                  "line_end": 177
                 },
                 {
                   "kind": "reg",
@@ -1579,8 +1593,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 177,
-                  "line_end": 177
+                  "line_start": 178,
+                  "line_end": 178
                 },
                 {
                   "kind": "reg",
@@ -1593,8 +1607,8 @@
                   "attributes": "",
                   "suffix": "",
                   "leading_comments": [],
-                  "line_start": 178,
-                  "line_end": 178
+                  "line_start": 179,
+                  "line_end": 179
                 }
               ],
               "assigns": [
@@ -1606,8 +1620,8 @@
                     "// 边沿、序号、故障命中与落点判定"
                   ],
                   "delay": "",
-                  "line_start": 182,
-                  "line_end": 182
+                  "line_start": 183,
+                  "line_end": 183
                 },
                 {
                   "lhs": "flag_q1_rise",
@@ -1615,8 +1629,8 @@
                   "comment": "Q1由低变高",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 183,
-                  "line_end": 183
+                  "line_start": 184,
+                  "line_end": 184
                 },
                 {
                   "lhs": "flag_q3_rise",
@@ -1624,8 +1638,8 @@
                   "comment": "Q3由低变高的一拍",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 184,
-                  "line_end": 184
+                  "line_start": 185,
+                  "line_end": 185
                 },
                 {
                   "lhs": "flag_q3_fall",
@@ -1633,8 +1647,8 @@
                   "comment": "Q3由高变低的一拍",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 185,
-                  "line_end": 185
+                  "line_start": 186,
+                  "line_end": 186
                 },
                 {
                   "lhs": "flag_slot_serial_next",
@@ -1642,8 +1656,8 @@
                   "comment": "按槽位取下一序号",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 186,
-                  "line_end": 186
+                  "line_start": 187,
+                  "line_end": 187
                 },
                 {
                   "lhs": "flag_fault_hit",
@@ -1651,26 +1665,26 @@
                   "comment": "槽位与序号区间同时命中",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 187,
-                  "line_end": 187
-                },
-                {
-                  "lhs": "flag_frame_diff",
-                  "rhs": "i_frame_id - reg_target_frame",
-                  "comment": "帧号差，最高位为1表示尚未到目标帧",
-                  "leading_comments": [],
-                  "delay": "",
                   "line_start": 188,
                   "line_end": 188
                 },
                 {
-                  "lhs": "flag_release_point",
-                  "rhs": "!flag_frame_diff[15] && ((flag_frame_diff != 16'd0) || (i_macro_tick >= i_fault_release_tick))",
-                  "comment": "越过目标帧或在目标帧内到达目标相位",
+                  "lhs": "flag_release_wait_next",
+                  "rhs": "({14'd0, i_fault_frame_offset} * 17'd5000) + {4'd0, i_fault_release_tick} - {4'd0, i_macro_tick}",
+                  "comment": "偏移帧数乘5000加目标相位减当前相位",
                   "leading_comments": [],
                   "delay": "",
                   "line_start": 189,
                   "line_end": 189
+                },
+                {
+                  "lhs": "flag_release_point",
+                  "rhs": "(cnt_since_start >= reg_release_wait)",
+                  "comment": "按绝对拍数到达落点；宏帧因在途owner停顿时照样到期",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 190,
+                  "line_end": 190
                 },
                 {
                   "lhs": "flag_s1_rise_cycle",
@@ -1678,8 +1692,8 @@
                   "comment": "15位时Stage1早于Stage2完成",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 190,
-                  "line_end": 190
+                  "line_start": 191,
+                  "line_end": 191
                 },
                 {
                   "lhs": "flag_conv_end",
@@ -1687,8 +1701,8 @@
                   "comment": "电平模式转换时延到达",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 191,
-                  "line_end": 191
+                  "line_start": 192,
+                  "line_end": 192
                 },
                 {
                   "lhs": "flag_s2_fall",
@@ -1696,8 +1710,8 @@
                   "comment": "Stage1上升后一拍Stage2回落；故障事务在时延到时回落",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 192,
-                  "line_end": 192
+                  "line_start": 193,
+                  "line_end": 193
                 },
                 {
                   "lhs": "flag_s1_rise",
@@ -1705,8 +1719,8 @@
                   "comment": "正常、迟到落点或兼容脉冲首拍",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 193,
-                  "line_end": 193
+                  "line_start": 194,
+                  "line_end": 194
                 },
                 {
                   "lhs": "flag_s2_rise",
@@ -1714,8 +1728,8 @@
                   "comment": "15位事务的最终完成电平上升",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 194,
-                  "line_end": 194
+                  "line_start": 195,
+                  "line_end": 195
                 },
                 {
                   "lhs": "flag_adc_rst",
@@ -1723,8 +1737,8 @@
                   "comment": "使完成电平回落的事件：保持型取Q1上升沿",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 195,
-                  "line_end": 195
+                  "line_start": 196,
+                  "line_end": 196
                 },
                 {
                   "lhs": "flag_idle_raw",
@@ -1732,8 +1746,8 @@
                   "comment": "无转换进行且按模式要求所选DONE为低；兼容迟到的脉冲空档拍仍算忙",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 196,
-                  "line_end": 196
+                  "line_start": 197,
+                  "line_end": 197
                 },
                 {
                   "lhs": "o_dout_stage1",
@@ -1743,8 +1757,8 @@
                     "// 物理输出与观测事件连接到端口"
                   ],
                   "delay": "",
-                  "line_start": 200,
-                  "line_end": 200
+                  "line_start": 201,
+                  "line_end": 201
                 },
                 {
                   "lhs": "o_clk_stage1_dout",
@@ -1752,8 +1766,8 @@
                   "comment": "Stage1完成电平送DUT",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 201,
-                  "line_end": 201
+                  "line_start": 202,
+                  "line_end": 202
                 },
                 {
                   "lhs": "o_dout_stage2",
@@ -1761,8 +1775,8 @@
                   "comment": "Stage2码送DUT",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 202,
-                  "line_end": 202
+                  "line_start": 203,
+                  "line_end": 203
                 },
                 {
                   "lhs": "o_clk_stage2_dout",
@@ -1770,8 +1784,8 @@
                   "comment": "15位最终完成电平转发到端口",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 203,
-                  "line_end": 203
+                  "line_start": 204,
+                  "line_end": 204
                 },
                 {
                   "lhs": "o_adc_physical_idle",
@@ -1779,8 +1793,8 @@
                   "comment": "按配置的同步延迟送DUT",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 204,
-                  "line_end": 204
+                  "line_start": 205,
+                  "line_end": 205
                 },
                 {
                   "lhs": "o_conv_start_event",
@@ -1788,8 +1802,8 @@
                   "comment": "空闲中识别到的Q3上升沿才算新转换",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 205,
-                  "line_end": 205
+                  "line_start": 206,
+                  "line_end": 206
                 },
                 {
                   "lhs": "o_done_rise_event",
@@ -1797,8 +1811,8 @@
                   "comment": "所选完成电平上升事件",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 206,
-                  "line_end": 206
+                  "line_start": 207,
+                  "line_end": 207
                 },
                 {
                   "lhs": "o_fault_hit_event",
@@ -1806,8 +1820,8 @@
                   "comment": "新转换开始即命中故障",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 207,
-                  "line_end": 207
+                  "line_start": 208,
+                  "line_end": 208
                 },
                 {
                   "lhs": "o_slot_serial",
@@ -1815,8 +1829,8 @@
                   "comment": "最近一次转换的槽位序号",
                   "leading_comments": [],
                   "delay": "",
-                  "line_start": 208,
-                  "line_end": 208
+                  "line_start": 209,
+                  "line_end": 209
                 }
               ],
               "always": [
@@ -1856,8 +1870,8 @@
                     "dout_stage1_o <= dout_stage1_o;     // 结果码保持到下一次转换",
                     "end"
                   ],
-                  "line_start": 212,
-                  "line_end": 220
+                  "line_start": 213,
+                  "line_end": 221
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -1895,8 +1909,8 @@
                     "dout_stage2_o <= dout_stage2_o;     // 第二级码线维持到下次换码",
                     "end"
                   ],
-                  "line_start": 225,
-                  "line_end": 233
+                  "line_start": 226,
+                  "line_end": 234
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -1937,8 +1951,8 @@
                     "clk_stage1_dout_o <= clk_stage1_dout_o; // 其余时刻保持电平",
                     "end"
                   ],
-                  "line_start": 238,
-                  "line_end": 248
+                  "line_start": 239,
+                  "line_end": 249
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -1982,8 +1996,8 @@
                     "clk_stage2_dout_o <= clk_stage2_dout_o; // 无事件时第二级完成电平不动",
                     "end"
                   ],
-                  "line_start": 253,
-                  "line_end": 265
+                  "line_start": 254,
+                  "line_end": 266
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2015,8 +2029,8 @@
                     "state_current <= state_next;        // 每拍采用组合次态",
                     "end"
                   ],
-                  "line_start": 271,
-                  "line_end": 275
+                  "line_start": 272,
+                  "line_end": 276
                 },
                 {
                   "header": "always@(*)",
@@ -2124,8 +2138,8 @@
                     "end",
                     "endcase"
                   ],
-                  "line_start": 280,
-                  "line_end": 345
+                  "line_start": 281,
+                  "line_end": 346
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2163,8 +2177,8 @@
                     "cnt_conv <= cnt_conv;               // 其余状态保持最近计数",
                     "end"
                   ],
-                  "line_start": 351,
-                  "line_end": 359
+                  "line_start": 352,
+                  "line_end": 360
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2199,8 +2213,8 @@
                     "cnt_pulse <= 8'd0;                  // 离开脉冲期即清零备下次",
                     "end"
                   ],
-                  "line_start": 364,
-                  "line_end": 370
+                  "line_start": 365,
+                  "line_end": 371
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2238,8 +2252,8 @@
                     "flag_pre_busy <= flag_pre_busy;     // Q1与Q3之间保持忙",
                     "end"
                   ],
-                  "line_start": 375,
-                  "line_end": 383
+                  "line_start": 376,
+                  "line_end": 384
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2277,8 +2291,8 @@
                     "cnt_serial_red <= cnt_serial_red;   // 非RED转换不改变RED序号",
                     "end"
                   ],
-                  "line_start": 389,
-                  "line_end": 397
+                  "line_start": 390,
+                  "line_end": 398
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2316,8 +2330,8 @@
                     "cnt_serial_ir <= cnt_serial_ir;     // 其他槽位转换时红外计数保持",
                     "end"
                   ],
-                  "line_start": 402,
-                  "line_end": 410
+                  "line_start": 403,
+                  "line_end": 411
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2355,8 +2369,8 @@
                     "cnt_serial_cal <= cnt_serial_cal;   // NORMAL转换不影响校准计数",
                     "end"
                   ],
-                  "line_start": 415,
-                  "line_end": 423
+                  "line_start": 416,
+                  "line_end": 424
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2388,8 +2402,8 @@
                     "flag_q3_prev <= i_q3;               // 每拍记录Q3电平",
                     "end"
                   ],
-                  "line_start": 428,
-                  "line_end": 432
+                  "line_start": 429,
+                  "line_end": 433
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2421,8 +2435,8 @@
                     "flag_q1_prev <= i_q1;               // 逐拍保存CLK_Q1之或，用于找上升沿",
                     "end"
                   ],
-                  "line_start": 437,
-                  "line_end": 441
+                  "line_start": 438,
+                  "line_end": 442
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2457,8 +2471,8 @@
                     "cnt_pre_busy <= 8'd0;               // 不在Q1到Q3之间时为0",
                     "end"
                   ],
-                  "line_start": 446,
-                  "line_end": 452
+                  "line_start": 447,
+                  "line_end": 453
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2490,8 +2504,8 @@
                     "flag_idle_d1 <= flag_idle_raw;      // 采样未延迟空闲",
                     "end"
                   ],
-                  "line_start": 457,
-                  "line_end": 461
+                  "line_start": 458,
+                  "line_end": 462
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2523,8 +2537,8 @@
                     "flag_idle_d2 <= flag_idle_d1;       // 推进一级",
                     "end"
                   ],
-                  "line_start": 466,
-                  "line_end": 470
+                  "line_start": 467,
+                  "line_end": 471
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2556,8 +2570,8 @@
                     "flag_idle_d3 <= flag_idle_d2;       // 再推进一级",
                     "end"
                   ],
-                  "line_start": 475,
-                  "line_end": 479
+                  "line_start": 476,
+                  "line_end": 480
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2592,8 +2606,8 @@
                     "reg_precision <= reg_precision;     // 转换期间精度不变",
                     "end"
                   ],
-                  "line_start": 484,
-                  "line_end": 490
+                  "line_start": 485,
+                  "line_end": 491
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2628,8 +2642,8 @@
                     "reg_conv_cycles <= reg_conv_cycles; // 转换期间时延不变",
                     "end"
                   ],
-                  "line_start": 495,
-                  "line_end": 501
+                  "line_start": 496,
+                  "line_end": 502
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2667,13 +2681,13 @@
                     "reg_fault <= reg_fault;             // 本次转换期间故障类型不变",
                     "end"
                   ],
-                  "line_start": 506,
-                  "line_end": 514
+                  "line_start": 507,
+                  "line_end": 515
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
                   "targets": [
-                    "reg_target_frame"
+                    "reg_release_wait"
                   ],
                   "clock": "i_clk",
                   "reset": "i_rstn",
@@ -2685,26 +2699,65 @@
                   "block_kind": "main_task_always",
                   "target_count": 1,
                   "lvalues": [
-                    "reg_target_frame",
-                    "reg_target_frame",
-                    "reg_target_frame"
+                    "reg_release_wait",
+                    "reg_release_wait",
+                    "reg_release_wait"
                   ],
                   "has_complex_lvalues": false,
                   "line_count": 7,
                   "leading_comments": [
-                    "// 转换开始锁存绝对落点的目标帧号"
+                    "// 转换开始锁存释放落点的绝对等待拍数"
                   ],
                   "lines": [
                     "if(i_rstn == 1'b0)begin",
-                    "reg_target_frame <= 16'd0;          // 复位清零目标帧",
+                    "reg_release_wait <= 17'd0;          // 复位清零等待拍数",
                     "end else if(o_conv_start_event == 1'b1)begin",
-                    "reg_target_frame <= i_frame_id + {13'd0, i_fault_frame_offset}; // 当前帧加帧偏移",
+                    "reg_release_wait <= flag_release_wait_next; // 以本转换开始拍为零点",
                     "end else begin",
-                    "reg_target_frame <= reg_target_frame; // 等待期间目标帧不变",
+                    "reg_release_wait <= reg_release_wait; // 等待期间落点不变",
                     "end"
                   ],
-                  "line_start": 519,
-                  "line_end": 525
+                  "line_start": 520,
+                  "line_end": 526
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_since_start"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_since_start",
+                    "cnt_since_start",
+                    "cnt_since_start",
+                    "cnt_since_start"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 自转换开始起的绝对拍数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_since_start <= 17'd0;           // 复位清零绝对拍数",
+                    "end else if(o_conv_start_event == 1'b1)begin",
+                    "cnt_since_start <= 17'd1;           // 以转换开始为原点，下一拍记作第1拍",
+                    "end else if(cnt_since_start != 17'h1ffff)begin",
+                    "cnt_since_start <= cnt_since_start + 17'd1; // 逐拍累加且饱和",
+                    "end else begin",
+                    "cnt_since_start <= cnt_since_start; // 饱和后保持",
+                    "end"
+                  ],
+                  "line_start": 531,
+                  "line_end": 539
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2739,8 +2792,8 @@
                     "reg_raw1 <= reg_raw1;               // 转换期间Stage1待发码不变",
                     "end"
                   ],
-                  "line_start": 530,
-                  "line_end": 536
+                  "line_start": 544,
+                  "line_end": 550
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2775,8 +2828,8 @@
                     "reg_raw2 <= reg_raw2;               // 残差码快照在两次转换开始之间冻结",
                     "end"
                   ],
-                  "line_start": 541,
-                  "line_end": 547
+                  "line_start": 555,
+                  "line_end": 561
                 },
                 {
                   "header": "always@(posedge i_clk or negedge i_rstn)",
@@ -2811,8 +2864,8 @@
                     "reg_serial <= reg_serial;           // 两次转换之间保持",
                     "end"
                   ],
-                  "line_start": 552,
-                  "line_end": 558
+                  "line_start": 566,
+                  "line_end": 572
                 }
               ],
               "instances": [],
@@ -2826,9 +2879,9 @@
                 "functions": 0,
                 "tasks": 0,
                 "localparams": 25,
-                "decls": 40,
+                "decls": 41,
                 "assigns": 24,
-                "always": 25,
+                "always": 26,
                 "initials": 0,
                 "instances": 0,
                 "raw_blocks": 0,
@@ -2837,15 +2890,15 @@
                 "generates": 0
               },
               "line_start": 46,
-              "line_end": 562
+              "line_end": 576
             }
           ],
           "source_metrics": {
-            "lines": 562,
-            "nonempty_lines": 522,
-            "line_comments": 315,
+            "lines": 576,
+            "nonempty_lines": 535,
+            "line_comments": 321,
             "block_comment_markers": 0,
-            "tab_indented_lines": 475,
+            "tab_indented_lines": 488,
             "space_indented_lines": 0,
             "has_timescale": true,
             "has_bilingual_header": true

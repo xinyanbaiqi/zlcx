@@ -986,6 +986,7 @@ module tb_v2_sweep();
 	integer v2_target_lt;                    // 目标校准local tick（+V2_LT）
 	integer v2_param;                        // 事件参数（+V2_PARAM，START延迟的d等）
 	integer v2_post_frames;                  // 恢复后至少再跑的宏帧数（+V2_POST）
+	integer v2_fault_serial_cfg;             // LATE/BUSY/POSTBUSY命中该槽位的第几笔转换（+V2_FAULT_SERIAL，默认1）
 	integer v2_ev_frame, v2_ev_tick, v2_ev_sf, v2_ev_lt; // 事件实际落点
 	reg v2_ev_landed;                        // 事件已记录落点
 	reg v2_ev_active;                        // 落点那一拍是否有NORMAL或校准宏帧处于活动
@@ -1141,6 +1142,7 @@ module tb_v2_sweep();
 		if(v2_target_sf >= 0) v2_target_tick = 625 * v2_target_sf + v2_target_lt;
 		if(!$value$plusargs("V2_PARAM=%d", v2_param)) v2_param = 20;
 		if(!$value$plusargs("V2_POST=%d", v2_post_frames)) v2_post_frames = 3;
+		if(!$value$plusargs("V2_FAULT_SERIAL=%d", v2_fault_serial_cfg)) v2_fault_serial_cfg = 1;
 		if(!$value$plusargs("V2_DETAIL=%d", v2_detail_max)) v2_detail_max = 8;
 		if(!$value$plusargs("V2_SEED=%d", v2_seed)) v2_seed = 1;
 		v2_seed_cfg = v2_seed;
@@ -1223,6 +1225,12 @@ module tb_v2_sweep();
 			v2_watch_hit = 1'b1;
 			v2_wait_before_target(1, ok);
 			v2_arm_fault((ev == "LOST") ? 3'd1 : 3'd4, slot_code[1:0], 16'd1, (v2_param == 255) ? 8'd255 : 8'd1, 3'd0, 13'd0);
+		end else if(ev == "POSTBUSY") begin
+			// 按时给出DONE释放owner，但物理ADC继续忙到目标拍（SID-05：下一子帧owner在local 248前因ADC不空闲而错过截止）
+			v2_landing_rule = "exact";
+			v2_watch_idle = 1'b1;
+			v2_wait_frame_tick(v2_target_frame, 1, (v2_target_frame + 3) * 5000 + 100000, ok);
+			v2_arm_fault(3'd5, (slot_code == 3) ? 2'd0 : slot_code[1:0], v2_fault_serial_cfg[15:0], 8'd1, 3'd0, v2_target_tick[12:0]);
 		end else if((ev == "LATE") || (ev == "BUSY")) begin
 			// 第target_frame帧中该槽位的那笔转换：完成（LATE）或忙释放（BUSY）推迟到目标拍；目标拍早于该槽位Q3时落在下一帧
 			v2_landing_rule = "exact";
@@ -1230,7 +1238,7 @@ module tb_v2_sweep();
 			q3_tick = (slot_code == 1) ? 460 : (slot_code == 2) ? -1 : 300;
 			if(slot_code == 2) q3_tick = 625 * ((v2_target_sf >= 0) ? v2_target_sf : 0) + 266;
 			v2_wait_frame_tick(v2_target_frame, 1, (v2_target_frame + 3) * 5000 + 100000, ok);
-			v2_arm_fault((ev == "LATE") ? 3'd2 : 3'd3, (slot_code == 3) ? 2'd0 : slot_code[1:0], 16'd1, 8'd1,
+			v2_arm_fault((ev == "LATE") ? 3'd2 : 3'd3, (slot_code == 3) ? 2'd0 : slot_code[1:0], v2_fault_serial_cfg[15:0], 8'd1,
 				(v2_target_tick > q3_tick) ? 3'd0 : 3'd1, v2_target_tick[12:0]);
 		end else if(ev == "PREC_IR_LOST") begin
 			// F-1（必须覆盖场景1）：生理生成器驱动真实检测链，精度控制器接受切换请求（o_switch_pending上升）后，丢掉下一笔IR完成

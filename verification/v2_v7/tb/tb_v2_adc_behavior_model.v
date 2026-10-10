@@ -43,7 +43,7 @@
 module tb_v2_adc_behavior_model();
 
 	//---------------配置参数区域---------------//
-	localparam integer C_EXPECTED_CHECKS = 44;       // 本自检预期执行的检查条数
+	localparam integer C_EXPECTED_CHECKS = 46;       // 本自检预期执行的检查条数
 
 	//---------------全局时钟与复位信号---------------//
 	reg i_clk;                                       // 2 MHz激励时钟
@@ -463,6 +463,20 @@ module tb_v2_adc_behavior_model();
 		adcm_arm(3'd2, 2'd0, 16'd1, 8'd1);
 		adcm_clear; adcm_q3; repeat(120) @(negedge i_clk);
 		adcm_check("COMPAT-LATE-BUSY-THEN-PULSE", (n_s1_rise == 1) && (t_idle_fall == t_q3_fall_seen) && (t_idle_rise == t_s1_fall) && (t_s1_rise > t_q3_seen + 90)); // 兼容迟到：Q3关闭起保持忙，落点后发脉冲，脉冲结束才空闲
+
+		// 15 按时完成后继续忙（模式5）：电平模式DONE按时延上升且保持，idle保持为低直到落点；兼容模式脉冲照常，脉冲后继续忙
+		adcm_reset;
+		i_done_mode = 2'd2; i_latency = 8'd6; i_owner_slot = 2'd2;
+		i_fault_frame_offset = 3'd0; i_fault_release_tick = i_macro_tick + 13'd200;
+		adcm_arm(3'd5, 2'd2, 16'd1, 8'd1);
+		adcm_clear; adcm_q3; repeat(230) @(negedge i_clk);
+		adcm_check("POSTBUSY-LEVEL-DONE-ON-TIME", (n_s1_rise == 1) && (t_s1_rise == t_q3_seen + 6) && (t_idle_rise > t_s1_rise + 150)); // 完成按时、空闲推迟
+		adcm_reset;
+		i_done_mode = 2'd0;
+		i_fault_frame_offset = 3'd0; i_fault_release_tick = i_macro_tick + 13'd200;
+		adcm_arm(3'd5, 2'd2, 16'd1, 8'd1);
+		adcm_clear; adcm_q3; repeat(230) @(negedge i_clk);
+		adcm_check("POSTBUSY-COMPAT-PULSE-THEN-BUSY", (n_s1_rise == 1) && (t_s1_fall == t_s1_rise + 5) && (t_idle_rise > t_s1_fall + 150)); // 脉冲照常、之后继续忙
 
 		repeat(5) @(negedge i_clk);
 		if((cnt_fail == 0) && (cnt_pass == C_EXPECTED_CHECKS)) begin
