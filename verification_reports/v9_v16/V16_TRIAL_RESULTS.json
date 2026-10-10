@@ -407,10 +407,10 @@
       "reference_finish": "1655648500 ps",
       "reference_finish_fs": "1655648500000",
       "compile": 0,
-      "run": "HOST_TIMEOUT",
-      "pass_comparison": "未比较：宿主限时中断",
-      "finish_comparison": "未比较：非正常finish",
-      "classification": "未完成：90秒宿主预算，不裁定RTL/TB差异",
+      "run": 0,
+      "pass_comparison": "DIFF",
+      "finish_comparison": "MATCH",
+      "classification": "累计结果计数差异待定位：TOP-01打印32/33与33/34，不能允许差1",
       "compile_commands": [
         [
           "${REPO}\\verification_reports\\v9_v16\\runs\\icarus11\\runtime\\usr\\bin\\iverilog",
@@ -526,9 +526,23 @@
         "v16_finish_probe",
         "${REPO}\\verification_reports\\v9_v16\\runs\\wsl_trial\\cases\\03\\sim.vvp"
       ],
-      "actual_pass_count": 44,
+      "actual_pass_count": 73,
+      "actual_finish_fs": "1655648500000",
       "fail_lines": 0,
-      "interrupted_time_fs": "1191833500000"
+      "host_timeout_seconds": 14400,
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g1/tb_ppg_control_top/xsim.log",
+      "raw_reference_pass_count": 73,
+      "raw_reference_pass_comparison": "DIFF",
+      "result_count_summary": {
+        "xsim": {
+          "real_adc_responses": 49,
+          "measurement_result_valid": 33
+        },
+        "iverilog": {
+          "real_adc_responses": 49,
+          "measurement_result_valid": 34
+        }
+      }
     },
     {
       "kind": "system",
@@ -1156,9 +1170,9 @@
       "actual_pass_count": 70,
       "actual_finish_fs": "24450751000000",
       "fail_lines": 0,
-      "raw_reference_pass_comparison": "MATCH",
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g2/tb_ppg_control_top_adc_numeric_scoreboard/xsim.log",
       "raw_reference_pass_count": 70,
-      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g2/tb_ppg_control_top_adc_numeric_scoreboard/xsim.log"
+      "raw_reference_pass_comparison": "MATCH"
     },
     {
       "kind": "system",
@@ -1675,10 +1689,10 @@
       "reference_finish": "54319751 ns",
       "reference_finish_fs": "54319751000000",
       "compile": 0,
-      "run": "HOST_TIMEOUT",
-      "pass_comparison": "未比较：宿主限时中断",
-      "finish_comparison": "未比较：非正常finish",
-      "classification": "未完成：90秒宿主预算，不裁定RTL/TB差异",
+      "run": 0,
+      "pass_comparison": "DIFF",
+      "finish_comparison": "MATCH",
+      "classification": "参考提取口径差异：原始xsim按统一口径逐行一致；非RTL差异",
       "compile_commands": [
         [
           "${REPO}\\verification_reports\\v9_v16\\runs\\icarus11\\runtime\\usr\\bin\\iverilog",
@@ -1794,9 +1808,13 @@
         "v16_finish_probe",
         "${REPO}\\verification_reports\\v9_v16\\runs\\wsl_trial\\cases\\11\\sim.vvp"
       ],
-      "actual_pass_count": 70,
+      "actual_pass_count": 74,
+      "actual_finish_fs": "54319751000000",
       "fail_lines": 0,
-      "interrupted_time_fs": "46228754000000"
+      "host_timeout_seconds": 14400,
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g3/tb_ppg_control_top_input_light_static_matrix/xsim.log",
+      "raw_reference_pass_count": 74,
+      "raw_reference_pass_comparison": "MATCH"
     },
     {
       "kind": "system",
@@ -2148,10 +2166,10 @@
       "reference_finish": "105193250 ns",
       "reference_finish_fs": "105193250000000",
       "compile": 0,
-      "run": "HOST_TIMEOUT",
-      "pass_comparison": "未比较：宿主限时中断",
-      "finish_comparison": "未比较：非正常finish",
-      "classification": "未完成：90秒宿主预算，不裁定RTL/TB差异",
+      "run": 0,
+      "pass_comparison": "DIFF",
+      "finish_comparison": "MATCH",
+      "classification": "参考提取口径差异：原始xsim按统一口径逐行一致；非RTL差异",
       "compile_commands": [
         [
           "${REPO}\\verification_reports\\v9_v16\\runs\\icarus11\\runtime\\usr\\bin\\iverilog",
@@ -2267,9 +2285,13 @@
         "v16_finish_probe",
         "${REPO}\\verification_reports\\v9_v16\\runs\\wsl_trial\\cases\\14\\sim.vvp"
       ],
-      "actual_pass_count": 58,
+      "actual_pass_count": 69,
+      "actual_finish_fs": "105193250000000",
       "fail_lines": 0,
-      "interrupted_time_fs": "41810250000000"
+      "host_timeout_seconds": 14400,
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g3/tb_ppg_control_top_owner_identity_backpressure/xsim.log",
+      "raw_reference_pass_count": 69,
+      "raw_reference_pass_comparison": "MATCH"
     },
     {
       "kind": "system",
@@ -2897,9 +2919,9 @@
       "actual_pass_count": 84,
       "actual_finish_fs": "12728250000000",
       "fail_lines": 0,
-      "raw_reference_pass_comparison": "MATCH",
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g4/tb_ppg_control_top_startup_idac_calibration/xsim.log",
       "raw_reference_pass_count": 84,
-      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/sys_g4/tb_ppg_control_top_startup_idac_calibration/xsim.log"
+      "raw_reference_pass_comparison": "MATCH"
     },
     {
       "kind": "system",
@@ -4160,9 +4182,9 @@
       "actual_pass_count": 51,
       "actual_finish_fs": "2636000000",
       "fail_lines": 0,
-      "raw_reference_pass_comparison": "MATCH",
+      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/unit/tb_ppg_precision_window_controller/xsim.log",
       "raw_reference_pass_count": 51,
-      "raw_reference_path": "verification_reports/b_merge_batch_evidence/final_5d8ceba/raw/unit/tb_ppg_precision_window_controller/xsim.log"
+      "raw_reference_pass_comparison": "MATCH"
     },
     {
       "kind": "unit",
@@ -4624,16 +4646,23 @@
     "iverilog_package_sha256": "337d0f723aba0f56651b47ae0e240077f076b3128bc7be0237f84a1aafc2ccf8",
     "vpi_build": "隔离TCC及libc6-dev头文件，-nostdlib -shared",
     "vpi_source_sha256": "eee90f8939e0df2424db286a221b66eec9cf774a05ff8f2402ff083afccde84b",
-    "timeout_seconds": 90
+    "original_timeout_seconds": 90,
+    "continued_timeout_seconds": 14400,
+    "continued_tbs": [
+      "tb_ppg_control_top",
+      "tb_ppg_control_top_input_light_static_matrix",
+      "tb_ppg_control_top_owner_identity_backpressure"
+    ]
   },
   "summary": {
     "compiled": 49,
-    "normal_end": 33,
-    "host_timeout": 3,
+    "normal_end": 36,
+    "host_timeout": 0,
     "compile_only": 13,
     "strict_reference_match": 29,
-    "reference_extraction_scope_difference": 3,
+    "reference_extraction_scope_difference": 5,
     "finish_difference_pending": 1,
+    "result_counter_difference_pending": 1,
     "confirmed_rtl_races": 0,
     "confirmed_rtl_races_means": "本次未确认，并非证明全设计不存在"
   }
