@@ -28,6 +28,29 @@ EVIDENCE = Path("verification_reports/b_merge_batch_evidence/final_5d8ceba")
 LONG = {"tb_ppg_control_top_longrun", "tb_ppg_control_top_long_10_cycles"}
 FAIL = re.compile(r"^FAIL|^\[FAIL\]|^\[[0-9]+\] [A-Z0-9-]+ FAIL|_TB_FAIL|REGRESSION FAIL|ERROR:|FATAL:|status=FAIL", re.M)
 UNIT_FS = {"fs": 1, "ps": 1000, "ns": 10**6, "us": 10**9, "ms": 10**12, "s": 10**15}
+WSL_DISTRIBUTION = None
+COMPILER_BASE = None
+TOOL_EXECUTABLES = {}
+
+
+def linux_path(value: str) -> str:
+    """只转换Windows绝对路径，不拼接shell命令或展开变量。"""
+    match = re.match(r"^([A-Za-z]):[/\\](.*)$", value)
+    return "/mnt/" + match[1].lower() + "/" + match[2].replace("\\", "/") if match else value
+
+
+def backend_command(command: list[str], cwd: Path) -> list[str]:
+    """以独立argv直接调用WSL，避免两种shell之间的引用和变量竞争。"""
+    if not WSL_DISTRIBUTION:
+        return command
+    return ["wsl.exe", "-d", WSL_DISTRIBUTION, "--cd", linux_path(str(cwd)), "--", *map(linux_path, command)]
+
+
+def read_bytes(path: Path) -> bytes:
+    """读取归档文件时兼容Windows长路径，不改变任何源码。"""
+    if sys.platform == "win32":
+        return Path("\\\\?\\" + str(path.resolve())).read_bytes()
+    return path.read_bytes()
 
 
 def archive_command(commit: str) -> list[str]:
@@ -46,7 +69,15 @@ def run_command(command: list[str], cwd: Path, log: Path, timeout: int) -> int |
     """保留完整工具日志；超时返回独立状态，不当作正常finish。"""
     with log.open("w", encoding="utf-8") as stream:
         try:
-            return subprocess.run(command, cwd=cwd, stdout=stream, stderr=subprocess.STDOUT,
+            if WSL_DISTRIBUTION:
+                # WSL宿主诊断采用UTF-16，Linux仿真stdout采用UTF-8；分开保留以免污染PASS首行。
+                with log.with_suffix(".stderr.txt").open("w", encoding="utf-8") as errors:
+                    # 在Linux侧限时，避免只杀wsl.exe却留下耗时vvp进程。
+                    limited = ["timeout", "--kill-after=5s", f"{timeout}s", *command]
+                    code = subprocess.run(backend_command(limited, cwd), cwd=cwd, stdout=stream, stderr=errors,
+                                          timeout=timeout + 10, check=False).returncode
+                    return "HOST_TIMEOUT" if code == 124 else code
+            return subprocess.run(backend_command(command, cwd), cwd=cwd, stdout=stream, stderr=subprocess.STDOUT,
                                   timeout=timeout, check=False).returncode
         except subprocess.TimeoutExpired:
             stream.write("\nV16_HOST_TIMEOUT\n")
@@ -67,6 +98,17 @@ def export_source(revision: str, run_root: Path) -> tuple[Path, str]:
         return source, commit
     archive = subprocess.check_output(archive_command(commit), cwd=ROOT)
     source.mkdir(parents=True)
+    if WSL_DISTRIBUTION:
+        with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+            if any(Path(item.name).is_absolute() or ".." in Path(item.name).parts or not (item.isdir() or item.isfile()) for item in stream):
+                raise ValueError("归档含不安全条目")
+        archive_path = run_root / "source.tar"
+        archive_path.write_bytes(archive)
+        rc = run_command(["tar", "-xf", str(archive_path), "-C", str(source)], run_root, run_root / "export.txt", 120)
+        if rc != 0:
+            raise ValueError("WSL归档提取失败，见export.txt")
+        marker.write_text(commit + "\n", encoding="utf-8")
+        return source, commit
     with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
         # Windows沙箱中tarfile严格realpath可能拒绝打开目录句柄；显式校验后只写普通文件。
         # 不接受链接/设备/绝对路径/..，并在写入前验证最终路径仍在新导出目录。
@@ -92,7 +134,7 @@ def get_cases(source: Path, archive_files: dict[str, bytes] | None = None) -> li
     def read(path: Path) -> str:
         if archive_files is not None:
             return archive_files[path.relative_to(source).as_posix()].decode("utf-8-sig")
-        return path.read_text(encoding="utf-8-sig")
+        return read_bytes(path).decode("utf-8-sig")
 
     refs = list(csv.DictReader(io.StringIO(read(source / EVIDENCE / "index.tsv")), delimiter="\t"))
     system = read(source / "rtl/ppg_control_top/run_xsim_regression.sh")
@@ -140,14 +182,17 @@ def get_cases(source: Path, archive_files: dict[str, bytes] | None = None) -> li
     return cases
 
 
-def execute_case(case: dict, source: Path, work: Path, timeout: int, vpi_module: Path | None) -> None:
+def execute_case(case: dict, source: Path, work: Path, timeout: int, vpi_module: Path | None, run_simulation: bool = True) -> None:
     """从最低语言标准尝试编译，并保留排序PASS差异及精确结束时间。"""
     work.mkdir(parents=True, exist_ok=True)
     paths = [(source / item).resolve() for item in case["source_files"]]
     includes = sorted({str(path.parent) for path in paths})
     rc = None
     for standard in ["2001", "2005", "2005-sv", "2012"]:
-        command = [shutil.which("iverilog"), "-o", str(work / "sim.vvp"), "-g" + standard, "-s", case["tb"]]
+        command = [TOOL_EXECUTABLES["iverilog"], "-o", str(work / "sim.vvp")]
+        if COMPILER_BASE:
+            command.extend(["-B", str(COMPILER_BASE)])
+        command.extend(["-g" + standard, "-s", case["tb"]])
         for folder in includes:
             command.extend(["-I", folder])
         command.extend(map(str, paths))
@@ -162,7 +207,10 @@ def execute_case(case: dict, source: Path, work: Path, timeout: int, vpi_module:
     if rc != 0:
         case["classification"] = "编译不兼容或工具失败；须人工核对日志"
         return
-    command = [shutil.which("vvp")]
+    if not run_simulation:
+        case["classification"] = "编译通过，未运行：本次子集/长跑预算"
+        return
+    command = [TOOL_EXECUTABLES["vvp"]]
     if vpi_module:
         command.extend(["-M", str(vpi_module.parent), "-m", vpi_module.stem])
     command.append(str(work / "sim.vvp"))
@@ -171,7 +219,12 @@ def execute_case(case: dict, source: Path, work: Path, timeout: int, vpi_module:
     log = (work / "run.txt").read_text(encoding="utf-8", errors="replace")
     # 已核对49份参考均使用独立PASS单词口径；PASS:/[PASS]保留，_TB_PASS/PASSED不混入。
     actual = sorted(line.rstrip("\r") for line in log.splitlines() if re.search(r"\bPASS\b", line))
-    expected = sorted((source / EVIDENCE / case["kind"] / (case["tb"] + ".pass_sorted.txt")).read_text(encoding="utf-8-sig").splitlines())
+    if case["run"] == "HOST_TIMEOUT":
+        # cbEndOfSimulation在SIGTERM时也可能执行；宿主限时中断不能冒充TB的正常$finish。
+        case.update({"actual_pass_count": len(actual), "pass_comparison": "未比较：运行被宿主限时中断",
+                     "finish_comparison": "未比较：非正常finish", "classification": "未完成：宿主时间预算，不裁定RTL/TB差异"})
+        return
+    expected = sorted(read_bytes(source / EVIDENCE / case["kind"] / (case["tb"] + ".pass_sorted.txt")).decode("utf-8-sig").splitlines())
     (work / "actual.pass_sorted.txt").write_text("\n".join(actual) + ("\n" if actual else ""), encoding="utf-8")
     (work / "pass.diff.txt").write_text("\n".join(difflib.unified_diff(expected, actual, fromfile="xsim", tofile="iverilog")) + "\n", encoding="utf-8")
     case["pass_comparison"] = "MATCH" if expected == actual else "DIFF"
@@ -183,14 +236,16 @@ def execute_case(case: dict, source: Path, work: Path, timeout: int, vpi_module:
         case["finish_comparison"] = "MATCH" if Decimal(case["actual_finish_fs"]) == Decimal(case["reference_finish_fs"]) else "DIFF"
     else:
         case["finish_comparison"] = "UNAVAILABLE：无唯一VPI结束时间"
-    case["fail_lines"] = len(FAIL.findall(log))
+    errors = work / "run.stderr.txt"
+    stderr = errors.read_text(encoding="utf-8", errors="replace") if errors.exists() else ""
+    case["fail_lines"] = len(FAIL.findall(log)) + len(FAIL.findall(stderr))
     matched = (case["run"] == 0 and case["fail_lines"] == 0 and case["pass_comparison"] == "MATCH" and case["finish_comparison"] == "MATCH")
     case["classification"] = "观测一致（不等于无RTL竞争）" if matched else "差异待人工分类：TB竞争/RTL竞争/仿真器语义/工具"
 
 
 def main() -> int:
     """生成每TB计划；缺工具、未跑、比较缺失或未分类差异绝不算通过。"""
-    global EVIDENCE
+    global EVIDENCE, WSL_DISTRIBUTION, COMPILER_BASE, TOOL_EXECUTABLES
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--revision", default="66bebdf")
     parser.add_argument("--run-name", default="trial_66bebdf")
@@ -199,7 +254,14 @@ def main() -> int:
     parser.add_argument("--tb", action="append", help="可重复指定；其他TB仍明确列为未选")
     parser.add_argument("--timeout-seconds", type=int, default=1800)
     parser.add_argument("--reference-dir", default=str(EVIDENCE), help="RC1需提供与源码完全对应的49-TB参考目录")
+    parser.add_argument("--wsl-distribution", help="Windows宿主通过指定WSL发行版执行编译器")
+    parser.add_argument("--tool-root", type=Path, help="隔离解包的工具根目录（包含usr/bin），不要求系统安装")
+    parser.add_argument("--vpi-module", type=Path, help="已编译的只读VPI模块")
+    parser.add_argument("--run-group", action="append", choices=["unit", "chip", "system"], help="其他组只编译；可重复")
+    parser.add_argument("--compile-only", action="store_true")
+    parser.add_argument("--reuse-results", action="store_true", help="同基线下保留本次未选TB的既有结果")
     args = parser.parse_args()
+    WSL_DISTRIBUTION = args.wsl_distribution
     # 参考路径必须为Git归档内的普通相对路径，禁止路径逃逸。
     EVIDENCE = Path(args.reference_dir)
     if EVIDENCE.is_absolute() or ".." in EVIDENCE.parts:
@@ -219,20 +281,35 @@ def main() -> int:
     if args.tb and not set(args.tb).issubset(names):
         parser.error("--tb包含未登记TB")
     tools = {name: shutil.which(name) for name in ["iverilog", "vvp", "iverilog-vpi"]}
+    if WSL_DISTRIBUTION and not args.tool_root:
+        tools = {name: "/usr/bin/" + name for name in tools}
+    if args.tool_root:
+        runtime = args.tool_root.resolve()
+        tools = {name: str(runtime / "usr/bin" / name) for name in tools}
+        COMPILER_BASE = runtime / "usr/lib/x86_64-linux-gnu/ivl"
+    TOOL_EXECUTABLES = tools
     versions = {}
     usable = bool(tools["iverilog"] and tools["vvp"])
     if usable:
-        version = subprocess.run([tools["iverilog"], "-V"], text=True, capture_output=True, check=False)
+        command = [tools["iverilog"]]
+        if COMPILER_BASE:
+            command.extend(["-B", str(COMPILER_BASE)])
+        command.append("-V")
+        version = subprocess.run(backend_command(command, ROOT), text=True, encoding="utf-8", errors="replace", capture_output=True, check=False)
         versions["iverilog"] = version.stdout + version.stderr
         match = re.search(r"Icarus Verilog version\s+(\d+)", versions["iverilog"])
         usable = version.returncode == 0 and bool(match) and int(match[1]) >= 11
     if args.execute and usable:
         source, commit = export_source(args.revision, run_root)
         for name, data in archive_files.items():
-            if hashlib.sha256((source / name).read_bytes()).digest() != hashlib.sha256(data).digest():
+            if hashlib.sha256(read_bytes(source / name)).digest() != hashlib.sha256(data).digest():
                 raise ValueError(f"导出被改动或不完整，不允许混基线运行：{name}")
     vpi_module = None
-    if args.execute and usable and tools["iverilog-vpi"]:
+    if args.vpi_module:
+        vpi_module = args.vpi_module.resolve()
+        if not vpi_module.is_file():
+            parser.error("指定的VPI模块不存在")
+    elif args.execute and usable and tools["iverilog-vpi"]:
         vpi_dir = run_root / "vpi"
         vpi_dir.mkdir(parents=True, exist_ok=True)
         probe = Path(__file__).with_name("v16_finish_probe.c")
@@ -240,19 +317,34 @@ def main() -> int:
         modules = list(vpi_dir.glob("v16_finish_probe.vpi"))
         if rc == 0 and len(modules) == 1:
             vpi_module = modules[0].resolve()
-    for case in cases:
+    old_cases = {}
+    results_path = run_root / "results.json"
+    if args.reuse_results and results_path.is_file():
+        previous = json.loads(results_path.read_text(encoding="utf-8"))
+        if previous["revision"] != commit:
+            parser.error("不得跨源码提交复用结果")
+        old_cases = {case["tb"]: case for case in previous["cases"]}
+    for index, case in enumerate(cases):
+        if args.reuse_results and not args.tb and old_cases.get(case["tb"], {}).get("classification", "").startswith("观测一致"):
+            case.update(old_cases[case["tb"]])
+            continue
+        if args.tb and case["tb"] not in args.tb and case["tb"] in old_cases:
+            case.update(old_cases[case["tb"]])
+            continue
+        if args.reuse_results and args.run_group and case["kind"] not in args.run_group and old_cases.get(case["tb"], {}).get("run") == 0:
+            case.update(old_cases[case["tb"]])
+            continue
         case.update({"compile": "未跑", "run": "未跑", "pass_comparison": "未比较", "finish_comparison": "未比较", "classification": "未跑：计划模式"})
         if not usable:
             case["classification"] = "未跑：无可用Icarus 11+/vvp"
         elif args.tb and case["tb"] not in args.tb:
             case["classification"] = "未跑：未选"
-        elif case["tb"] in LONG and not args.include_long:
-            case["classification"] = "未跑：长跑默认跳过"
         elif args.execute:
-            execute_case(case, source, run_root / case["tb"], args.timeout_seconds, vpi_module)
+            run_simulation = not args.compile_only and (not args.run_group or case["kind"] in args.run_group) and (case["tb"] not in LONG or args.include_long)
+            execute_case(case, source, run_root / "cases" / f"{index:02d}", args.timeout_seconds, vpi_module, run_simulation)
         print(case["tb"], case["classification"], flush=True)
     result = {"revision": commit, "reference_dir": EVIDENCE.as_posix(), "tools": tools, "versions": versions,
-              "execute_requested": args.execute, "vpi_loaded": bool(vpi_module), "cases": cases}
+              "execute_requested": args.execute, "vpi_loaded": bool(vpi_module), "backend": WSL_DISTRIBUTION or "native", "cases": cases}
     (run_root / "results.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("results:", run_root / "results.json")
     return 0 if not args.execute else (0 if all(case["classification"].startswith("观测一致") for case in cases) else 1)
