@@ -14,7 +14,7 @@ numbers may have drifted (e.g. matrix §12.5, written 09-16, shifted by 2 lines 
 cell writes next to the anchor. This script reviews every converted symbol anchor:
 
   (a) written symbol governs (brief §3.13 Q1): when the cell writes a symbol next to the
-      anchor (anchor_semantics.written_name: W1 declaration after the anchor, W2/W3
+      anchor (W8: "`a.v:N` (`b.v:M`)" names the symbol of the anchor before it; anchor_semantics.written_name: W1 declaration after the anchor, W2/W3
       "Mod.port（ ... 声明", W4 "Top内部网", W5 "Top边界输入/输出" + row port, W6/W7 a
       backticked name opening / inside the anchor's parenthesis), the anchor must name it.
       If the name exists in the anchor's file it is corrected there; a bare `:N` whose
@@ -62,6 +62,11 @@ MANUAL = {
     (M, 2416, '`:956,863`'): ('ppg_precision_window_controller.v', 'fine_window_start_frame_id_o', '格内“ppg_precision_window_controller (fine_window_start_frame_id_o, …)”'),
     (M, 2417, '`:953,864`'): ('ppg_precision_window_controller.v', 'active_precision_mode_o', '格内“ppg_precision_window_controller (active_precision_mode_o, …)”'),
     (M, 3217, '`:167,218,246-254`'): ('ppg_amb_recheck_scheduler.v', 'amb_recheck_pending_o', '格内“C16/amb_recheck_scheduler\'s own pending state (amb_recheck_pending_o, …)”'),
+    (M, 2507, 'ppg_dynamic_baseline_cross_detector.v:550'): ('ppg_dynamic_baseline_cross_detector.v', 'o_cross_valid',
+                                                           '括注名cross_pending_o是AMI网、不在显式文件中；本行端口i_cross_valid，写入时版本:550为assign o_cross_valid，按显式文件与本行端口'),
+    (M, 2515, 'ppg_peak_valley_window_detector.v:441'): ('ppg_peak_valley_window_detector.v', 'o_return_9bit_valid',
+                                                        '括注名return_pending_o是AMI网、不在显式文件中；本行端口i_return_9bit_valid，导入版本:440为assign o_return_9bit_valid（漂移1行）'),
+    (M, 2532, '`:1135`'): ('ppg_adc_measurement_idac_integration.v', 'o_ami_fault_active', '格内“ORed into `o_ami_fault_active` (:1135)”，AMI的5路lane-active汇总（原解析为PWI o_mode_fault_active，文件错归）'),
     (M, 2509, 'ppg_dynamic_baseline_cross_detector.v:531'): (None, None, '保留：显式文件为交叉检测器，o_cross_frame_id为其输出；格内dec_cross_frame_id是其后“-> PWI”一段的下游网名'),
     (A, 135, 'ppg_400hz_frame_calibration_scheduler.v:463-464'): ('ppg_400hz_frame_calibration_scheduler.v', 'o_owner_deadline_timeout_sticky',
                                                               '格内“o_scheduler_owner_deadline_timeout_sticky(scheduler.v:463-464附近deadline逻辑)”：Top端口由调度器o_owner_deadline_timeout_sticky驱动，锚点文件为调度器'),
@@ -128,12 +133,18 @@ def main():
 
     def emit(r, action, a1, a2, reason, cat):
         out.append([r['doc'], r['line'], r['old'], action, a1, a2, reason])
+        if action == 'sym':
+            done[(r['doc'], r['line'], int(r['col']))] = '`%s` `%s`' % (a1, a2)
+        elif action == 'tag':
+            done[(r['doc'], r['line'], int(r['col']))] = '`%s` `@satisfies: %s`' % (a1, a2)
         stats[cat] = stats.get(cat, 0) + 1
         listing.append((cat, r, action, a1, a2, reason))
 
+    done = {}                                  # (doc, line, col) -> effective new text after this review
     for r in rows:
         if r['class'] != 'convert':
             continue
+        done[(r['doc'], r['line'], int(r['col']))] = r['new']
         m = NEW.match(r['new'])
         if not m:
             continue
@@ -152,6 +163,18 @@ def main():
                 emit(r, 'sym', mf, msym, _M + why, '(a) 人工：纠正')
             continue
         name, rule = written_name(L, s, e, row_port(L))
+        if not name:
+            # W8: "`a.v:N` (`b.v:M`)" -- the parenthetical anchor wires the symbol named by the
+            # anchor just before it; that anchor's (corrected) symbol is the written name
+            pre = L[max(0, s - 160):s]
+            pm = re.search(r'`([A-Za-z0-9_./]+\.vh?):[0-9,\-\s]+`\s*[（(]\s*$', pre)
+            if pm:
+                pcol = s - len(pre) + pm.start(1)
+                prev_new = done.get((r['doc'], r['line'], pcol))
+                if prev_new:
+                    pn = [x for x in re.findall(r'`([^`]+)`', prev_new)[1:] if not x.startswith(('@', '"'))]
+                    if len(pn) == 1:
+                        name, rule = pn[0], 'W8'
         if name and not name.startswith('_') and name not in syms and RENAMED.get(name) not in syms:
             a0 = L.rfind('|', 0, s) + 1
             clause = L[max(a0, s - 150):s]

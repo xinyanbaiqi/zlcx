@@ -39,6 +39,9 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from anchor_semantics import written_name, row_port  # noqa: E402
+RENAMED = {'i_status_clear_event': 'i_diag_clear_event'}  # F-032 port rename after the anchor was written
 WALK_SKIP_DIRS = {'.git', '__pycache__', '.claude'}  # directory-walk index: no git metadata, bytecode or skill tree
 C_MAP_SECTION = '## 2. Active Contract Sources and Source Classification'
 
@@ -174,6 +177,8 @@ def main():
     ap.add_argument('--index', choices=('auto', 'git', 'walk'), default='auto',
                     help='file index: git ls-files, a directory walk, or auto (git, else walk when '
                          'the tree is not a git checkout, e.g. a `git archive` export)')
+    ap.add_argument('--no-semantic', action='store_true',
+                    help='skip the semantic mode (anchor symbol vs the symbol the cell writes next to it)')
     ap.add_argument('files', nargs='*')
     args = ap.parse_args()
     repo = args.repo
@@ -218,7 +223,11 @@ def main():
         return src_cache[rel]
 
     errors, infos, external = [], [], []
-    stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'label_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0}
+    stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'label_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0,
+             'semantic_checked': 0}
+    sem_path = os.path.join(HERE, 'anchor_semantic_exceptions.json')
+    sem_exceptions = set((x['line_sha1'], x['anchor']) for x in json.load(open(sem_path, encoding='utf-8'))['exceptions']) \
+        if os.path.exists(sem_path) else set()
 
     def err(f, n, kind, text):
         errors.append({'file': os.path.basename(f), 'line': n, 'kind': kind, 'text': text})
@@ -248,6 +257,20 @@ def main():
                     pos = nm.end()
                 if not names:
                     continue
+                # 1b. semantic mode (coordinator review 2026-10-10): the anchor must name
+                # the symbol the cell writes next to it (declaration text, "Mod.port（",
+                # "Top内部网`x`（", Top boundary + row port, name opening its parenthesis)
+                if base in gated and not args.no_semantic:
+                    idents = [t for t in names if IDENT.match(t)]
+                    wn, rule = written_name(line, fm.start(), pos, row_port(line))
+                    if idents and wn and not wn.startswith('_'):
+                        stats['semantic_checked'] += 1
+                        clause = line[max(line.rfind('|', 0, fm.start()) + 1, fm.start() - 150):fm.start()]
+                        ok = (wn in idents or RENAMED.get(wn) in idents
+                              or (rule in ('W6', 'W7') and any(re.search(r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(t), clause) for t in idents))
+                              or (line_hash(line), line[fm.start():pos]) in sem_exceptions)
+                        if not ok:
+                            err(f, n, 'symbol-mismatch', '%s %s but the cell writes `%s` (%s)' % (fname, '/'.join(idents), wn, rule))
                 cands = [r for r in by_base.get(fname, []) if not r.startswith('legacy/')]
                 if len(cands) != 1:
                     err(f, n, 'file-missing' if not cands else 'file-ambiguous', fname)

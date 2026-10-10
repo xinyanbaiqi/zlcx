@@ -1,0 +1,248 @@
+doc	base_line	line	old	result	detail
+PPG_CONTRACT_CLOSURE_MATRIX.md	930	948	ppg_adc_measurement_idac_integration.v:434-462,1602-1620,913	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_adc_transaction_inflight`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1424	1442	ppg_control_top.v:248	rewrite	`ppg_control_top.v` `o_system_fault_cause`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1428	1446	ppg_control_top.v:251	rewrite	`ppg_control_top.v` `o_system_fault_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1429	1447	ppg_control_top.v:254	rewrite	`ppg_control_top.v` `o_system_fault_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1432	1450	ppg_control_top.v:256	rewrite	`ppg_control_top.v` `o_system_fault_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1433	1451	ppg_control_top.v:252	rewrite	`ppg_control_top.v` `o_system_fault_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1434	1452	ppg_control_top.v:249	rewrite	`ppg_control_top.v` `o_system_fault_source`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1435	1453	ppg_control_top.v:257	rewrite	`ppg_control_top.v` `o_system_fault_summary`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1460	1478	ppg_control_top.v:205	rewrite	`ppg_control_top.v` `o_last_error_code`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1461	1479	ppg_control_top.v:206	rewrite	`ppg_control_top.v` `o_schema_version`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1462	1480	ppg_control_top.v:207	rewrite	`ppg_control_top.v` `o_config_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1463	1481	ppg_control_top.v:208	rewrite	`ppg_control_top.v` `o_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1464	1482	ppg_control_top.v:209	rewrite	`ppg_control_top.v` `o_stage2_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1465	1483	ppg_control_top.v:210	rewrite	`ppg_control_top.v` `o_dc_recovery_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1491	1509	ppg_control_top.v:159	rewrite	`ppg_control_top.v` `o_idac_sar9ambn_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1492	1510	ppg_control_top.v:160	rewrite	`ppg_control_top.v` `o_idac_sar9dcn_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1493	1511	ppg_control_top.v:161	rewrite	`ppg_control_top.v` `o_idac_sar15ambn_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1494	1512	ppg_control_top.v:162	rewrite	`ppg_control_top.v` `o_idac_sar15dcn_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1495	1513	ppg_control_top.v:163	rewrite	`ppg_control_top.v` `o_s_in`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1520	1538	ppg_control_top.v:173	rewrite	`ppg_control_top.v` `o_fine_ppg_value`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1525	1543	ppg_control_top.v:178	rewrite	`ppg_control_top.v` `o_calibrated_s1_value`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1526	1544	ppg_control_top.v:179	rewrite	`ppg_control_top.v` `o_programmable_15_code`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1528	1546	ppg_control_top.v:181	rewrite	`ppg_control_top.v` `o_result_config_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1529	1547	ppg_control_top.v:182	rewrite	`ppg_control_top.v` `o_result_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1530	1548	ppg_control_top.v:183	rewrite	`ppg_control_top.v` `o_result_stage2_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1531	1549	ppg_control_top.v:184	rewrite	`ppg_control_top.v` `o_result_dc_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1533	1551	ppg_control_top.v:186	rewrite	`ppg_control_top.v` `o_result_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1534	1552	ppg_control_top.v:187	rewrite	`ppg_control_top.v` `o_result_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1536	1554	ppg_control_top.v:189	rewrite	`ppg_control_top.v` `o_result_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1537	1555	ppg_control_top.v:190	rewrite	`ppg_control_top.v` `o_result_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1538	1556	ppg_control_top.v:191	rewrite	`ppg_control_top.v` `o_result_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1539	1557	ppg_control_top.v:192	rewrite	`ppg_control_top.v` `o_result_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1540	1558	ppg_control_top.v:193	rewrite	`ppg_control_top.v` `o_result_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1549	1567	ppg_control_top.v:265	rewrite	`ppg_control_top.v` `o_measurement_result_discard_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1550	1568	ppg_control_top.v:266	rewrite	`ppg_control_top.v` `o_measurement_result_discard_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1552	1570	ppg_control_top.v:268	rewrite	`ppg_control_top.v` `o_measurement_result_discard_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1554	1572	ppg_control_top.v:270	rewrite	`ppg_control_top.v` `o_measurement_result_discard_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1558	1576	ppg_control_top.v:277	rewrite	`ppg_control_top.v` `o_detection_discard_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1559	1577	ppg_control_top.v:278	rewrite	`ppg_control_top.v` `o_detection_discard_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1561	1579	ppg_control_top.v:280	rewrite	`ppg_control_top.v` `o_detection_discard_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1563	1581	ppg_control_top.v:282	rewrite	`ppg_control_top.v` `o_detection_discard_config_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1564	1582	ppg_control_top.v:283	rewrite	`ppg_control_top.v` `o_detection_discard_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1565	1583	ppg_control_top.v:284	rewrite	`ppg_control_top.v` `o_detection_discard_dc_recovery_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1566	1584	ppg_control_top.v:285	rewrite	`ppg_control_top.v` `o_detection_discard_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1567	1585	ppg_control_top.v:286	rewrite	`ppg_control_top.v` `o_detection_discard_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1568	1586	ppg_control_top.v:287	rewrite	`ppg_control_top.v` `o_detection_discard_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1576	1594	ppg_control_top.v:109,724	rewrite	`ppg_control_top.v` `i_start_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1579	1597	ppg_control_top.v:120,727	rewrite	`ppg_control_top.v` `i_analog_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1606	1624	ppg_control_top.v:120,727	rewrite	`ppg_control_top.v` `i_analog_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1616	1634	ppg_control_top.v:109,724	rewrite	`ppg_control_top.v` `i_start_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1639	1657	ppg_control_top.v:742,1490	rewrite	`ppg_control_top.v` `o_lifecycle_state`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1640	1658	ppg_control_top.v:743,1491	rewrite	`ppg_control_top.v` `o_start_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1712	1730	ppg_adc_measurement_idac_integration.v:2322	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_code_min`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1713	1731	ppg_adc_measurement_idac_integration.v:2334	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_confirm_count`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1714	1732	ppg_adc_measurement_idac_integration.v:2317	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1715	1733	ppg_adc_measurement_idac_integration.v:2321	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_manual_code`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1717	1735	ppg_adc_measurement_idac_integration.v:2331	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_threshold_high`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1718	1736	ppg_adc_measurement_idac_integration.v:2330	rewrite	`ppg_adc_measurement_idac_integration.v` `i_amb_threshold_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1927	1945	ppg_sar9_sar15_safe_selection_wrapper.v:67	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_run_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1928	1946	ppg_sar9_sar15_safe_selection_wrapper.v:68	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_start_ack_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1929	1947	ppg_sar9_sar15_safe_selection_wrapper.v:69	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_stop_ack_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1930	1948	ppg_sar9_sar15_safe_selection_wrapper.v:70	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_control_abort_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1931	1949	ppg_sar9_sar15_safe_selection_wrapper.v:71	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_diag_clear_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1932	1950	ppg_sar9_sar15_safe_selection_wrapper.v:72	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1935	1953	ppg_sar9_sar15_safe_selection_wrapper.v:77	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_calibration_local_tick`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1936	1954	ppg_sar9_sar15_safe_selection_wrapper.v:78	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_normal_frame_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1937	1955	ppg_sar9_sar15_safe_selection_wrapper.v:79	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_calibration_frame_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1938	1956	ppg_sar9_sar15_safe_selection_wrapper.v:80	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_macro_frame_safe_boundary`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1939	1957	ppg_sar9_sar15_safe_selection_wrapper.v:81	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_idac_code_safe_boundary`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1942	1960	ppg_sar9_sar15_safe_selection_wrapper.v:86	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_optical_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1943	1961	ppg_sar9_sar15_safe_selection_wrapper.v:87	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_precision_mode_committed`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1944	1962	ppg_sar9_sar15_safe_selection_wrapper.v:88	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_static_characterization_enable`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1945	1963	ppg_sar9_sar15_safe_selection_wrapper.v:89	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_test_mux_ctrl`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1950	1968	ppg_sar9_sar15_safe_selection_wrapper.v:98	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1951	1969	ppg_sar9_sar15_safe_selection_wrapper.v:99	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1952	1970	ppg_sar9_sar15_safe_selection_wrapper.v:100	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1953	1971	ppg_sar9_sar15_safe_selection_wrapper.v:101	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1954	1972	ppg_sar9_sar15_safe_selection_wrapper.v:102	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1955	1973	ppg_sar9_sar15_safe_selection_wrapper.v:103	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1956	1974	ppg_sar9_sar15_safe_selection_wrapper.v:104	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1957	1975	ppg_sar9_sar15_safe_selection_wrapper.v:105	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1958	1976	ppg_sar9_sar15_safe_selection_wrapper.v:106	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_input_source`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1959	1977	ppg_sar9_sar15_safe_selection_wrapper.v:107	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_optical_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1960	1978	ppg_sar9_sar15_safe_selection_wrapper.v:108	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_waveform_leddac_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1963	1981	ppg_sar9_sar15_safe_selection_wrapper.v:113	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1964	1982	ppg_sar9_sar15_safe_selection_wrapper.v:114	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1965	1983	ppg_sar9_sar15_safe_selection_wrapper.v:115	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1966	1984	ppg_sar9_sar15_safe_selection_wrapper.v:116	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1967	1985	ppg_sar9_sar15_safe_selection_wrapper.v:117	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1968	1986	ppg_sar9_sar15_safe_selection_wrapper.v:118	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1969	1987	ppg_sar9_sar15_safe_selection_wrapper.v:119	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1970	1988	ppg_sar9_sar15_safe_selection_wrapper.v:120	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1971	1989	ppg_sar9_sar15_safe_selection_wrapper.v:121	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_owner_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1974	1992	ppg_sar9_sar15_safe_selection_wrapper.v:126	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_complete_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1975	1993	ppg_sar9_sar15_safe_selection_wrapper.v:127	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `i_adc_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2006	2024	ppg_sar9_sar15_safe_selection_wrapper.v:162	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_wrapper_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2007	2025	ppg_sar9_sar15_safe_selection_wrapper.v:163	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_precision_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2010	2028	ppg_sar9_sar15_safe_selection_wrapper.v:166	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_owner_q3_window_closed`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2011	2029	ppg_sar9_sar15_safe_selection_wrapper.v:167	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_switch_protocol_error_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2012	2030	ppg_sar9_sar15_safe_selection_wrapper.v:168	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_transaction_mismatch_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2013	2031	ppg_sar9_sar15_safe_selection_wrapper.v:169	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_owner_deadline_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2014	2032	ppg_sar9_sar15_safe_selection_wrapper.v:170	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_calibration_timeout_sticky`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2015	2033	ppg_sar9_sar15_safe_selection_wrapper.v:171	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_wrapper_fault_blocking`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2018	2036	ppg_sar9_sar15_safe_selection_wrapper.v:176	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_cause`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2019	2037	ppg_sar9_sar15_safe_selection_wrapper.v:177	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_identity_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2020	2038	ppg_sar9_sar15_safe_selection_wrapper.v:178	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2021	2039	ppg_sar9_sar15_safe_selection_wrapper.v:179	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2022	2040	ppg_sar9_sar15_safe_selection_wrapper.v:180	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2023	2041	ppg_sar9_sar15_safe_selection_wrapper.v:181	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2024	2042	ppg_sar9_sar15_safe_selection_wrapper.v:182	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `o_ssw_fault_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2272	2290	`:959,716`	rewrite	`ppg_precision_window_controller.v` `reacquire_request_event_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2273	2291	`:219,717`	rewrite	`ppg_precision_window_integration.v` `amb_recheck_accept_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2313	2331	`:872,740`	rewrite	`ppg_dynamic_baseline_cross_detector.v` `dec_peak_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2317	2335	`:876,744`	rewrite	`ppg_precision_window_integration.v` `dec_peak_dc_recovery_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2318	2336	`:877,745`	rewrite	`ppg_precision_window_integration.v` `valley_pending_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2325	2343	`:884,752`	rewrite	`ppg_precision_window_integration.v` `dec_valley_dc_recovery_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2367	2385	`:219,831`	rewrite	`ppg_precision_window_integration.v` `amb_recheck_accept_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2416	2434	`:956,863`	rewrite	`ppg_precision_window_controller.v` `fine_window_start_frame_id_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2417	2435	`:953,864`	rewrite	`ppg_precision_window_controller.v` `active_precision_mode_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2419	2437	`:945,866`	rewrite	`ppg_precision_window_integration.v` `flag_return_9bit_ready`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2505	2523	`:993`	rewrite	`ppg_precision_window_integration.v` `ppg_amb_recheck_scheduler`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2507	2525	ppg_dynamic_baseline_cross_detector.v:550	rewrite	`ppg_dynamic_baseline_cross_detector.v` `o_cross_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2510	2528	`:532`	rewrite	`ppg_precision_window_integration.v` `dec_cross_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2515	2533	ppg_peak_valley_window_detector.v:441	rewrite	`ppg_peak_valley_window_detector.v` `o_return_9bit_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2519	2537	`:1001`	rewrite	`ppg_amb_recheck_scheduler.v` `ppg_amb_recheck_scheduler`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2532	2550	`:1135`	rewrite	`ppg_adc_measurement_idac_integration.v` `o_ami_fault_active`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2534	2552	`:1140`	rewrite	`ppg_adc_measurement_idac_integration.v` `o_ami_fault_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2536	2554	`:362`	rewrite	`ppg_adc_measurement_idac_integration.v` `o_ami_fault_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2538	2556	`:364`	rewrite	`ppg_adc_measurement_idac_integration.v` `o_ami_fault_precision`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2552	2570	`:219`	rewrite	`ppg_precision_window_integration.v` `amb_recheck_accept_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2594	2612	ppg_adc_measurement_idac_integration.v:393	rewrite	`ppg_adc_measurement_idac_integration.v` `i_test_calibration_loss_inject_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2985	3003	ppg_adc_measurement_idac_integration.v:2268-2290	rewrite	`ppg_adc_measurement_idac_integration.v` `o_programmable_15_calibration_applied`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3028	3046	`:2252`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_coarse_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3029	3047	`:2253`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_coarse_calibrated`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3030	3048	`:2254`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_coarse_saturation_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3031	3049	`:2255`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_coarse_saturation_high`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3032	3050	`:2256`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_fine_ppg_value`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3033	3051	`:2257`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_fine_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3034	3052	`:2258`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_fine_calibrated`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3035	3053	`:2259`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_fine_saturation_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3036	3054	`:2260`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_fine_saturation_high`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3037	3055	`:2261`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_recovery_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3038	3056	`:2262`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_s1_value`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3039	3057	`:2263`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_s1_calibration_applied`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3040	3058	`:2264`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_s1_saturation_low`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3041	3059	`:2265`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_s1_saturation_high`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3042	3060	`:2266`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_programmable_15_code`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3043	3061	`:2267`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_programmable_15_valid`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3047	3065	`:2271`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_config_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3048	3066	`:2272`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_coef_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3049	3067	`:2273`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_stage2_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3050	3068	`:2274`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_precision_mode`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3051	3069	`:2275`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_frame_id`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3052	3070	`:2276`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_sample_index`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3053	3071	`:2277`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_dc_color_ir`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3054	3072	`:2278`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_frame_type`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3055	3073	`:2279`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_amb_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3056	3074	`:2280`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_dc_code_snapshot`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3057	3075	`:2281`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_amb_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3058	3076	`:2282`	rewrite	`ppg_adc_measurement_idac_integration.v` `dec_dc_dc_code_epoch`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3104	3122	ppg_control_top.v:348	rewrite	`ppg_control_top.v` `supervisor_system_abort_event_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3157	3175	`:988`	rewrite	`ppg_adc_measurement_idac_integration.v` `measurement_result_discard_event_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	3235	`:167,218,246-254`	rewrite	`ppg_amb_recheck_scheduler.v` `amb_recheck_pending_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3246	3264	`:1171-1172`	rewrite	`ppg_adc_measurement_idac_integration.v` `i_diag_clear_event`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3381	3399	ppg_adc_measurement_idac_integration.v:2432-2446	rewrite	`ppg_adc_measurement_idac_integration.v` `C_DATA_WIDTH`
+PPG_CONTRACT_CLOSURE_MATRIX.md	3402	3420	ppg_control_top.v:308-313,324-330	rewrite	`ppg_control_top.v` `flag_diag_clear_event`
+PPG_ALIAS_MAPPING_TABLE.md	29	31	ppg_system_config_manager.v:340	rewrite	`ppg_system_config_manager.v` `@satisfies: TOP-02`
+PPG_ALIAS_MAPPING_TABLE.md	29	31	ppg_system_config_manager.v:394-448,455-457,521-522,593-599	rewrite	`ppg_system_config_manager.v` `@satisfies: TOP-02`
+PPG_ALIAS_MAPPING_TABLE.md	30	32	ppg_400hz_frame_calibration_scheduler.v:458	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `@satisfies: TOP-03`
+PPG_ALIAS_MAPPING_TABLE.md	31	33	ppg_400hz_frame_calibration_scheduler.v:224	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `@satisfies: TOP-04`
+PPG_ALIAS_MAPPING_TABLE.md	31	33	ppg_sar9_sar15_safe_selection_wrapper.v:207	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: TOP-04`
+PPG_ALIAS_MAPPING_TABLE.md	32	34	ppg_400hz_frame_calibration_scheduler.v:222-223	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `@satisfies: TOP-05`
+PPG_ALIAS_MAPPING_TABLE.md	33	35	ppg_dynamic_baseline_cross_detector.v:446,1590	rewrite	`ppg_dynamic_baseline_cross_detector.v` `@satisfies: TOP-06`
+PPG_ALIAS_MAPPING_TABLE.md	35	37	ppg_characterization_control_cdc.v:118	rewrite	`ppg_characterization_control_cdc.v` `@satisfies: TOP-08`
+PPG_ALIAS_MAPPING_TABLE.md	36	38	ppg_system_config_manager.v:460-462	rewrite	`ppg_system_config_manager.v` `@satisfies: TOP-09`
+PPG_ALIAS_MAPPING_TABLE.md	38	40	ppg_400hz_frame_calibration_scheduler.v:549	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `@satisfies: TOP-11`
+PPG_ALIAS_MAPPING_TABLE.md	42	44	ppg_control_top.v:414	rewrite	`ppg_control_top.v` `@satisfies: TOP-17`
+PPG_ALIAS_MAPPING_TABLE.md	43	45	ppg_control_top.v:408-409	rewrite	`ppg_control_top.v` `@satisfies: TOP-18`
+PPG_ALIAS_MAPPING_TABLE.md	44	46	ppg_control_top.v:848	rewrite	`ppg_control_top.v` `@satisfies: TOP-19`
+PPG_ALIAS_MAPPING_TABLE.md	47	49	ppg_adc_measurement_idac_integration.v:908,909	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-22`
+PPG_ALIAS_MAPPING_TABLE.md	49	51	ppg_adc_measurement_idac_integration.v:1009,1010	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: TOP-24`
+PPG_ALIAS_MAPPING_TABLE.md	59	61	ppg_precision_window_integration.v:308,472,961	rewrite	`ppg_precision_window_integration.v` `@satisfies: K01`
+PPG_ALIAS_MAPPING_TABLE.md	60	62	ppg_adc_measurement_idac_integration.v:2573	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: K01`
+PPG_ALIAS_MAPPING_TABLE.md	61	63	ppg_adc_measurement_idac_integration.v:1150,450-451,1455-1474	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: K01`
+PPG_ALIAS_MAPPING_TABLE.md	62	64	ppg_adc_measurement_idac_integration.v:2431-2432	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: K01`
+PPG_ALIAS_MAPPING_TABLE.md	62	64	ppg_idac_code_controller.v:638	rewrite	`ppg_idac_code_controller.v` `@satisfies: K01`
+PPG_ALIAS_MAPPING_TABLE.md	63	65	ppg_system_fault_abort_supervisor.v:198,251-299	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: K02`
+PPG_ALIAS_MAPPING_TABLE.md	64	66	ppg_precision_window_integration.v:71	rewrite	`ppg_precision_window_integration.v` `@satisfies: K03`
+PPG_ALIAS_MAPPING_TABLE.md	65	67	ppg_idac_code_controller.v:61	rewrite	`ppg_idac_code_controller.v` `@satisfies: K03`
+PPG_ALIAS_MAPPING_TABLE.md	66	68	ppg_adc_measurement_idac_integration.v:92	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: K03`
+PPG_ALIAS_MAPPING_TABLE.md	68	70	ppg_precision_window_integration.v:443	rewrite	`ppg_precision_window_integration.v` `@satisfies: K04`
+PPG_ALIAS_MAPPING_TABLE.md	69	71	ppg_precision_window_controller.v:139-147	rewrite	`ppg_precision_window_controller.v` `@satisfies: K05`
+PPG_ALIAS_MAPPING_TABLE.md	75	77	ppg_system_active_config_unpack.v:209	rewrite	`ppg_system_active_config_unpack.v` `@satisfies: G-FP-01-D01-04`
+PPG_ALIAS_MAPPING_TABLE.md	76	78	ppg_active_v4_control_plane_integration.v:375	rewrite	`ppg_active_v4_control_plane_integration.v` `@satisfies: G-FP-01-D01-04`
+PPG_ALIAS_MAPPING_TABLE.md	77	79	ppg_adc_measurement_idac_integration.v:2512	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: G-FP-01-D01-04`
+PPG_ALIAS_MAPPING_TABLE.md	78	80	ppg_dynamic_baseline_cross_detector.v:480	rewrite	`ppg_dynamic_baseline_cross_detector.v` `@satisfies: G-FP-01-D01-04`
+PPG_ALIAS_MAPPING_TABLE.md	79	81	ppg_peak_valley_window_detector.v:111	rewrite	`ppg_peak_valley_window_detector.v` `@satisfies: G-FP-01-D01-04`
+PPG_ALIAS_MAPPING_TABLE.md	106	108	ppg_control_top.v:316,722	rewrite	`ppg_control_top.v` `@satisfies: G-FP-01`
+PPG_ALIAS_MAPPING_TABLE.md	107	109	ppg_control_top.v:355	rewrite	`ppg_control_top.v` `@satisfies: G-FP-01`
+PPG_ALIAS_MAPPING_TABLE.md	109	111	ppg_sar9_sar15_safe_selection_wrapper.v:1089-1097,1274-1282	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: G-FP-02`
+PPG_ALIAS_MAPPING_TABLE.md	110	112	ppg_precision_window_controller.v:266-270,829,831,842,844	rewrite	`ppg_precision_window_controller.v` `@satisfies: G-FP-02`
+PPG_ALIAS_MAPPING_TABLE.md	115	117	ppg_precision_window_integration.v:55-72	rewrite	`ppg_precision_window_integration.v` `@satisfies: G-FP-05`
+PPG_ALIAS_MAPPING_TABLE.md	116	118	:112-120	rewrite	`ppg_config_cdc_bridge.v` `destination_config_o`
+PPG_ALIAS_MAPPING_TABLE.md	117	119	ppg_idac_code_controller.v:580	rewrite	`ppg_idac_code_controller.v` `@satisfies: G-FP-06`
+PPG_ALIAS_MAPPING_TABLE.md	135	137	ppg_400hz_frame_calibration_scheduler.v:463-464	rewrite	`ppg_400hz_frame_calibration_scheduler.v` `o_owner_deadline_timeout_sticky`
+PPG_ALIAS_MAPPING_TABLE.md	153	155	ppg_idac_code_controller.v:1124	rewrite	`ppg_idac_code_controller.v` `@satisfies: LFA-01`
+PPG_ALIAS_MAPPING_TABLE.md	156	158	ppg_adc_async_stage_capture.v:107	rewrite	`ppg_adc_async_stage_capture.v` `@satisfies: LFA-05`
+PPG_ALIAS_MAPPING_TABLE.md	157	159	ppg_adc_async_stage_capture.v:107	rewrite	`ppg_adc_async_stage_capture.v` `@satisfies: LFA-07`
+PPG_ALIAS_MAPPING_TABLE.md	160	162	ppg_idac_code_controller.v:1138	rewrite	`ppg_idac_code_controller.v` `@satisfies: LFA-12`
+PPG_ALIAS_MAPPING_TABLE.md	169	171	ppg_adc_async_stage_capture.v:107	rewrite	`ppg_adc_async_stage_capture.v` `@satisfies: OIB-05`
+PPG_ALIAS_MAPPING_TABLE.md	188	190	ppg_coarse_detection_fir.v:120-122,309,312-313,315	rewrite	`ppg_coarse_detection_fir.v` `@satisfies: PRC-09`
+PPG_ALIAS_MAPPING_TABLE.md	199	201	ppg_dynamic_baseline_cross_detector.v:1510,632	rewrite	`ppg_dynamic_baseline_cross_detector.v` `@satisfies: RRC-09`
+PPG_ALIAS_MAPPING_TABLE.md	214	216	`:1087`	rewrite	`ppg_idac_code_controller.v` `@satisfies: TRK-03`
+PPG_ALIAS_MAPPING_TABLE.md	214	216	ppg_idac_code_controller.v:1084	rewrite	`ppg_idac_code_controller.v` `@satisfies: TRK-03`
+PPG_ALIAS_MAPPING_TABLE.md	215	217	`:1091`	rewrite	`ppg_idac_code_controller.v` `@satisfies: TRK-04`
+PPG_ALIAS_MAPPING_TABLE.md	215	217	ppg_idac_code_controller.v:1070	rewrite	`ppg_idac_code_controller.v` `@satisfies: TRK-04`
+PPG_ALIAS_MAPPING_TABLE.md	233	235	ppg_dynamic_baseline_cross_detector.v:1545	rewrite	`ppg_dynamic_baseline_cross_detector.v` `@satisfies: NRE-05`
+PPG_ALIAS_MAPPING_TABLE.md	241	243	ppg_idac_code_controller.v:703	rewrite	`ppg_idac_code_controller.v` `@satisfies: ILM-09`
+PPG_ALIAS_MAPPING_TABLE.md	250	252	ppg_idac_code_controller.v:703	rewrite	`ppg_idac_code_controller.v` `@satisfies: ILM-09`
+PPG_ALIAS_MAPPING_TABLE.md	253	255	`:763`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-12`
+PPG_ALIAS_MAPPING_TABLE.md	253	255	`:762`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-12`
+PPG_ALIAS_MAPPING_TABLE.md	253	255	`:741-742`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-12`
+PPG_ALIAS_MAPPING_TABLE.md	253	255	ppg_sar9_sar15_safe_selection_wrapper.v:387	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ILM-12`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:747`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:745`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:742`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:615`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:847`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	277	279	`:808`	rewrite	`ppg_sar9_sar15_safe_selection_wrapper.v` `@satisfies: ISE-01`
+PPG_ALIAS_MAPPING_TABLE.md	408	410	`:607-639`	rewrite	`ppg_coarse_detection_fir.v` `@satisfies: FIR-01`
+PPG_ALIAS_MAPPING_TABLE.md	455	457	ppg_adc_measurement_idac_integration.v:908,909	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: P07`
+PPG_ALIAS_MAPPING_TABLE.md	456	458	ppg_control_top.v:414	rewrite	`ppg_control_top.v` `@satisfies: P17`
+PPG_ALIAS_MAPPING_TABLE.md	458	460	ppg_precision_window_controller.v:269	rewrite	`ppg_precision_window_controller.v` `@satisfies: N02`
+PPG_ALIAS_MAPPING_TABLE.md	463	465	ppg_adc_measurement_idac_integration.v:967	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: P02`
+PPG_ALIAS_MAPPING_TABLE.md	464	466	ppg_system_fault_abort_supervisor.v:279	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: P03`
+PPG_ALIAS_MAPPING_TABLE.md	465	467	ppg_system_fault_abort_supervisor.v:302	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: P04`
+PPG_ALIAS_MAPPING_TABLE.md	466	468	ppg_system_fault_abort_supervisor.v:192	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: P05`
+PPG_ALIAS_MAPPING_TABLE.md	469	471	ppg_system_fault_abort_supervisor.v:413	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: P09`
+PPG_ALIAS_MAPPING_TABLE.md	470	472	ppg_system_fault_abort_supervisor.v:207	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: P10`
+PPG_ALIAS_MAPPING_TABLE.md	471	473	ppg_control_top.v:391	rewrite	`ppg_control_top.v` `@satisfies: P11`
+PPG_ALIAS_MAPPING_TABLE.md	477	479	ppg_control_top.v:1387	rewrite	`ppg_control_top.v` `@satisfies: P15`
+PPG_ALIAS_MAPPING_TABLE.md	478	480	ppg_adc_measurement_idac_integration.v:967	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: N01`
+PPG_ALIAS_MAPPING_TABLE.md	479	481	ppg_system_fault_abort_supervisor.v:207	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: N03`
+PPG_ALIAS_MAPPING_TABLE.md	480	482	ppg_control_top.v:327	rewrite	`ppg_control_top.v` `@satisfies: N04`
+PPG_ALIAS_MAPPING_TABLE.md	481	483	ppg_control_top.v:391	rewrite	`ppg_control_top.v` `@satisfies: N05`
+PPG_ALIAS_MAPPING_TABLE.md	482	484	ppg_system_fault_abort_supervisor.v:192	rewrite	`ppg_system_fault_abort_supervisor.v` `@satisfies: N06`
+PPG_ALIAS_MAPPING_TABLE.md	483	485	ppg_adc_measurement_idac_integration.v:978	rewrite	`ppg_adc_measurement_idac_integration.v` `@satisfies: N08`

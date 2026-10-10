@@ -1,0 +1,33 @@
+{
+ "note": "Reviewed exceptions to anchor_check.py semantic mode: the cell writes a different name next to the anchor, and the decision to keep the anchor symbol is recorded here. Keyed by SHA-1 of the stripped line and the exact anchor text; an edit to the line voids the exception.",
+ "exceptions": [
+  {
+   "doc": "PPG_ALIAS_MAPPING_TABLE.md",
+   "line_sha1": "a8578ed9fd4f583bd5679a3e59cceb1a49d72458",
+   "anchor": "`ppg_400hz_frame_calibration_scheduler.v` `o_owner_deadline_timeout_sticky`",
+   "written": "o_scheduler_owner_deadline_timeout_sticky",
+   "reason": "别名表ALIAS 135（基线）：格内括注写的是Top端口o_scheduler_owner_deadline_timeout_sticky，但锚点显式指向调度器“附近deadline逻辑”；Top端口由调度器o_owner_deadline_timeout_sticky驱动，按显式文件取后者（第三轮人工判定）"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "882b6dd4c33da5fece97cb4860d003a8ddfc9653",
+   "anchor": "`ppg_dynamic_baseline_cross_detector.v` `o_cross_valid`",
+   "written": "cross_pending_o",
+   "reason": "矩阵2507行（基线）：括注名cross_pending_o是AMI网、不在显式文件交叉检测器中；本行端口i_cross_valid，写入时版本:550为assign o_cross_valid（第三轮人工判定）"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "cf87cf9635cfc121524a06e1f19cc50abac59c2e",
+   "anchor": "`ppg_dynamic_baseline_cross_detector.v` `o_cross_frame_id`",
+   "written": "dec_cross_frame_id",
+   "reason": "矩阵2509行（基线）：显式文件为交叉检测器，o_cross_frame_id为其输出；括注名dec_cross_frame_id是其后“-> PWI”一段的下游网名（第三轮人工判定）"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "18c83ef05e434cf66039a36a213a12a7774bf6c3",
+   "anchor": "`ppg_peak_valley_window_detector.v` `o_return_9bit_valid`",
+   "written": "return_pending_o",
+   "reason": "矩阵2515行（基线）：括注名return_pending_o是AMI网、不在显式文件峰谷检测器中；本行端口i_return_9bit_valid，导入版本:440为assign o_return_9bit_valid（第三轮人工判定）"
+  }
+ ]
+}

@@ -185,11 +185,12 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	1703	ppg_control_top.v:817	note			第三轮（统
 PPG_CONTRACT_CLOSURE_MATRIX.md	1704	ppg_control_top.v:818	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_slope_min_q16与本行无关联，±5行内也无本行所述符号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1705	ppg_control_top.v:819	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_slope_max_q16与本行无关联，±5行内也无本行所述符号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1706	ppg_control_top.v:820	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_baseline_delta_q16与本行无关联，±5行内也无本行所述符号
-PPG_CONTRACT_CLOSURE_MATRIX.md	1713	ppg_adc_measurement_idac_integration.v:2334	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_amb_polarity与本行无关联，±5行内也无本行所述符号
-PPG_CONTRACT_CLOSURE_MATRIX.md	1714	ppg_adc_measurement_idac_integration.v:2317	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号C_ENABLE_TEST_INJECTION与本行无关联，±5行内也无本行所述符号
-PPG_CONTRACT_CLOSURE_MATRIX.md	1715	ppg_adc_measurement_idac_integration.v:2321	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_clk与本行无关联，±5行内也无本行所述符号
-PPG_CONTRACT_CLOSURE_MATRIX.md	1717	ppg_adc_measurement_idac_integration.v:2331	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_idac_mode与本行无关联，±5行内也无本行所述符号
-PPG_CONTRACT_CLOSURE_MATRIX.md	1718	ppg_adc_measurement_idac_integration.v:2330	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号i_active_config_epoch与本行无关联，±5行内也无本行所述符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1712	ppg_adc_measurement_idac_integration.v:2322	sym	ppg_adc_measurement_idac_integration.v	i_amb_code_min	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_code_min`，原解析为i_amb_code_max
+PPG_CONTRACT_CLOSURE_MATRIX.md	1713	ppg_adc_measurement_idac_integration.v:2334	sym	ppg_adc_measurement_idac_integration.v	i_amb_confirm_count	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_confirm_count`，原解析为i_amb_polarity
+PPG_CONTRACT_CLOSURE_MATRIX.md	1714	ppg_adc_measurement_idac_integration.v:2317	sym	ppg_adc_measurement_idac_integration.v	i_amb_enable	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_enable`，原解析为C_ENABLE_TEST_INJECTION
+PPG_CONTRACT_CLOSURE_MATRIX.md	1715	ppg_adc_measurement_idac_integration.v:2321	sym	ppg_adc_measurement_idac_integration.v	i_amb_manual_code	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_manual_code`，原解析为i_clk
+PPG_CONTRACT_CLOSURE_MATRIX.md	1717	ppg_adc_measurement_idac_integration.v:2331	sym	ppg_adc_measurement_idac_integration.v	i_amb_threshold_high	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_threshold_high`，原解析为i_idac_mode
+PPG_CONTRACT_CLOSURE_MATRIX.md	1718	ppg_adc_measurement_idac_integration.v:2330	sym	ppg_adc_measurement_idac_integration.v	i_amb_threshold_low	第三轮（统筹10-10核对：格内写明的符号为准）：W8 格内写明`i_amb_threshold_low`，原解析为i_active_config_epoch
 PPG_CONTRACT_CLOSURE_MATRIX.md	1803	ppg_control_top.v:828	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_direction_deadband与本行无关联，±5行内也无本行所述符号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1804	ppg_control_top.v:829	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_min_peak_valley_amplitude与本行无关联，±5行内也无本行所述符号
 PPG_CONTRACT_CLOSURE_MATRIX.md	1805	ppg_control_top.v:830	note			第三轮（统筹10-10核对：格内写明的符号为准）：低置信：无格内符号，写入时点为导入提交（行号可能漂移），解析符号o_min_peak_to_valley_frames与本行无关联，±5行内也无本行所述符号
@@ -420,11 +421,14 @@ PPG_CONTRACT_CLOSURE_MATRIX.md	2479	ppg_control_top.v:1314	note			第三轮（�
 PPG_CONTRACT_CLOSURE_MATRIX.md	2503	ppg_adc_measurement_idac_integration.v:242	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
 PPG_CONTRACT_CLOSURE_MATRIX.md	2504	`:243`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
 PPG_CONTRACT_CLOSURE_MATRIX.md	2505	`:993`	sym	ppg_precision_window_integration.v	ppg_amb_recheck_scheduler	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`ppg_amb_recheck_scheduler`，原解析为i_normal_measurement_active
+PPG_CONTRACT_CLOSURE_MATRIX.md	2507	ppg_dynamic_baseline_cross_detector.v:550	sym	ppg_dynamic_baseline_cross_detector.v	o_cross_valid	第三轮（统筹10-10核对：格内写明的符号为准）：括注名cross_pending_o是AMI网、不在显式文件中；本行端口i_cross_valid，写入时版本:550为assign o_cross_valid，按显式文件与本行端口
 PPG_CONTRACT_CLOSURE_MATRIX.md	2509	ppg_dynamic_baseline_cross_detector.v:531	note			第三轮（统筹10-10核对：格内写明的符号为准）：保留：显式文件为交叉检测器，o_cross_frame_id为其输出；格内dec_cross_frame_id是其后“-> PWI”一段的下游网名
 PPG_CONTRACT_CLOSURE_MATRIX.md	2510	`:532`	sym	ppg_precision_window_integration.v	dec_cross_sample_index	第三轮（统筹10-10核对：格内写明的符号为准）：W7 格内写明`dec_cross_sample_index`，原解析文件ppg_dynamic_baseline_cross_detector.v无此名，按声明所在文件
+PPG_CONTRACT_CLOSURE_MATRIX.md	2515	ppg_peak_valley_window_detector.v:441	sym	ppg_peak_valley_window_detector.v	o_return_9bit_valid	第三轮（统筹10-10核对：格内写明的符号为准）：括注名return_pending_o是AMI网、不在显式文件中；本行端口i_return_9bit_valid，导入版本:440为assign o_return_9bit_valid（漂移1行）
 PPG_CONTRACT_CLOSURE_MATRIX.md	2519	`:1001`	sym	ppg_amb_recheck_scheduler.v	ppg_amb_recheck_scheduler	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`ppg_amb_recheck_scheduler`，原解析文件ppg_400hz_frame_calibration_scheduler.v无此名，按声明所在文件
 PPG_CONTRACT_CLOSURE_MATRIX.md	2520	`:2525`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
 PPG_CONTRACT_CLOSURE_MATRIX.md	2522	`:2527`	note			第三轮（统筹10-10核对：格内写明的符号为准）：无格内符号，写入时点为真实提交bb39a0f，按写入时版本取符号（可靠）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2532	`:1135`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_active	第三轮（统筹10-10核对：格内写明的符号为准）：格内“ORed into `o_ami_fault_active` (:1135)”，AMI的5路lane-active汇总（原解析为PWI o_mode_fault_active，文件错归）
 PPG_CONTRACT_CLOSURE_MATRIX.md	2534	`:1140`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_frame_id	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_frame_id`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
 PPG_CONTRACT_CLOSURE_MATRIX.md	2536	`:362`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_color_ir	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_color_ir`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
 PPG_CONTRACT_CLOSURE_MATRIX.md	2538	`:364`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_precision	第三轮（统筹10-10核对：格内写明的符号为准）：W6 格内写明`o_ami_fault_precision`，原解析文件ppg_precision_window_integration.v无此名，按声明所在文件
