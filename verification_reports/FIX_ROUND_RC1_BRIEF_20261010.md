@@ -215,7 +215,7 @@
 | IDAC-01 | C17 §10/§12；C02 | START与取消（abort/STOP）同拍时，IDAC两个always块的优先级相反。由1.6命令仲裁排除：外部abort只来自SPI，同一次写入不会同时放行START与ABORT；supervisor abort只在episode打开时发出，此时manager不接受START。写明"START与取消同拍不会发生"，不改RTL |
 | SSW-D1（V18问题3，用户10-10定） | C09 §4.5 | owner未按时提交、本槽采样被抑制时，LEDEN不出现，LEDDAC码总线同样保持8'h00（与AMB_CAL、固定电流、STATIC_BIAS"不点亮LED则LEDDAC为0"的惯例一致）。若RTL不符，改为RTL修复项并报统筹 |
 | SSW-D2（V18问题2，用户10-10定） | C09 §7.7 | **已转为RTL修复，见§1.13 F03**（V18已证实RTL不符）；合同按§1.13写明 |
-| SSW-D3（V18问题4，10-10订正） | C09 §8.2 | 写明STOP落在已接管、但首个预热边沿尚未出现的槽时：①owner已在STOP之前提交：该槽完整运行，以便真实DONE以success=0释放owner，结果丢弃（V18 F06证实RTL如此）；②owner尚未提交：该槽不再启动，此后不得出现该波形的任何边沿。②若RTL不符，改为RTL修复项并报统筹 |
+| SSW-D3（V18问题4，10-10订正，用户10-10定） | C09 §8.2、§4.5 | 写明STOP落在波形已接管的槽时：①owner已在STOP之前提交：该槽完整运行，以便真实DONE以success=0释放owner，结果丢弃（V18 F06证实RTL如此）；②owner尚未提交：**按"owner错过截止"处理**——不受owner控制的预建立（IDAC与参考：`o_clk_iref_idac_sar9/15_low`、`o_en_sar9/15_iref`、AMB/DC使能、四组IDAC码总线、`o_clk_iref_idac_low`）照常运行到既定末沿，受owner控制的采样相关输出（Q1/Q2/Q3、LEDEN、LEDDAC、EN_TIA、AFERST、TIAEN）整槽不出现；STOPPING等待模拟安全，最多约0.24 ms。V18补充的7个场景证实RTL如此，不改RTL |
 | SSW-D4（V18问题5） | C09 §8.5、§7.3 | 订正措辞：`static_test_commit_event`指上游表征CDC桥的提交事件，SSW没有该端口；`o_s_in[4:0]`在STATIC_BIAS期间跟随已提交的`i_test_mux_ctrl`，五位同拍变化 |
 | BMI-913（B批次登记） | 矩阵§12 G-FP-05参数传播台账，Top→AMI一行 | AMI中Top未绑定的参数应为9个（含后来新增的`C_ADC_COMPLETION_LOST_CYCLES`、`C_ADC_COMPLETION_LOST_LIMIT`），台账写成7个；订正计数与说明文字，使用符号锚点，跑锚点门禁和§12.4a摘要重算 |
 | V2-C1（V2试跑§7第3条） | C08 §4.2.1例外C第4项 | "AMI以电平保持校准请求"改为与RTL一致："AMI校准请求valid，或已被调度器接受、仍在AMI在途（`flag_calibration_request_inflight`）"。V2实测帧末拍valid=0、在途=1；按原字面，例外C的条件不成立 |
