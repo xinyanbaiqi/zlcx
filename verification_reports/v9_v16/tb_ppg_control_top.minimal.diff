@@ -1,0 +1,20 @@
+--- baseline/tb_ppg_control_top.v
++++ temporary_minimal/tb_ppg_control_top.v
+@@ -2912,7 +2912,7 @@
+ 			// 等第一对RED+IR都真实提交
+ 			cnt_wait_pair = 0;
+ 			while(((cnt_owner_commit_red - cnt_red_before) < 1 || (cnt_owner_commit_ir - cnt_ir_before) < 1) && (cnt_wait_pair < 60000) && !flag_global_timeout) begin
+-				@(posedge i_clk);
++				@(posedge i_clk); #1; // 实验：结算TB owner计数后再读取
+ 				cnt_wait_pair = cnt_wait_pair + 1;
+ 			end
+ 			pair1_red_frame_id = reg_last_red_frame_id;
+@@ -2927,7 +2927,7 @@
+ 			// 再等第二对RED+IR都真实提交，用于核对Q3相位跨帧固定
+ 			cnt_wait_pair = 0;
+ 			while(((cnt_owner_commit_red - cnt_red_before) < 2 || (cnt_owner_commit_ir - cnt_ir_before) < 2) && (cnt_wait_pair < 60000) && !flag_global_timeout) begin
+-				@(posedge i_clk);
++				@(posedge i_clk); #1; // 实验：结算TB owner计数后再读取
+ 				cnt_wait_pair = cnt_wait_pair + 1;
+ 			end
+ 			pair2_red_frame_id = reg_last_red_frame_id;

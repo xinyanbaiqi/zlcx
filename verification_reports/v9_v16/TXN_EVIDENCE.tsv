@@ -1,0 +1,488 @@
+tb	variant	backend	time_ns	cycle	epoch	kind	txn	owner_txn	reason	discard_generation_raw	delta	ready_before	ready_after	pending_before	pending_after	valid_before	valid_after	abort_discard_before	abort_discard_after	counter_before	counter_after	ns_after_rise
+tb_ppg_chip_digital_top	minimal	iverilog	850750.0	1702	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	1412750.0	2826	0	OUTPUT	[0, 0, 0, 0, 2, 0, 2]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	1492750.0	2986	0	OUTPUT	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	1492750.0	2986	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	1493750.0	2988	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	1916250.0	3833	0	OUTPUT	[0, 0, 0, 0, 2, 1, 3]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	2482750.0	4966	0	OUTPUT	[0, 0, 0, 1, 2, 0, 4]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	6058750.0	12118	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	6058750.0	12118	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	6059250.0	12119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	minimal	iverilog	6308250.0	12617	0	OWNER_ACCEPT	[0, 1, 1, 1, 2, 0, 7]	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	8558750.0	17118	0	OWNER_LOST	-	[0, 1, 1, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	8558750.0	17118	0	DISCARD_EVENT	[0, 1, 1, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	8559250.0	17119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	1	2	0.0
+tb_ppg_chip_digital_top	minimal	iverilog	8559750.0	17120	0	ABORT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	minimal	iverilog	8559750.0	17120	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	minimal	iverilog	8560250.0	17121	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	2	2	-
+tb_ppg_chip_digital_top	minimal	iverilog	8803125.0	17606	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	-2	1	1	0	0	0	0	1	1	2	0	375.0
+tb_ppg_chip_digital_top	minimal	iverilog	8804250.0	17609	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	8886750.0	17774	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 8]	-	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	11137250.0	22275	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 8]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	11137250.0	22275	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 8]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	iverilog	11137750.0	22276	0	COUNTER	[0, 0, 0, 0, 0, 0, 8]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	minimal	iverilog	11147750.0	22296	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	11148250.0	22297	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	11182250.0	22365	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	11234750.0	22470	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	iverilog	11235250.0	22471	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	850750.0	1702	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	1412750.0	2826	0	OUTPUT	[0, 0, 0, 0, 2, 0, 2]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	1492750.0	2986	0	OUTPUT	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	1492750.0	2986	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	1493750.0	2988	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	1916250.0	3833	0	OUTPUT	[0, 0, 0, 0, 2, 1, 3]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	2482750.0	4966	0	OUTPUT	[0, 0, 0, 1, 2, 0, 4]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	6058750.0	12118	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	6058750.0	12118	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	6059250.0	12119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	minimal	xsim	6308250.0	12617	0	OWNER_ACCEPT	[0, 1, 1, 1, 2, 0, 7]	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	8558750.0	17118	0	OWNER_LOST	-	[0, 1, 1, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	8558750.0	17118	0	DISCARD_EVENT	[0, 1, 1, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	8559250.0	17119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	1	2	0.0
+tb_ppg_chip_digital_top	minimal	xsim	8559750.0	17120	0	ABORT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	minimal	xsim	8559750.0	17120	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	minimal	xsim	8560250.0	17121	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	2	2	-
+tb_ppg_chip_digital_top	minimal	xsim	8803125.0	17606	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	-2	1	1	0	0	0	0	1	1	2	0	375.0
+tb_ppg_chip_digital_top	minimal	xsim	8804250.0	17609	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	8886750.0	17774	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 8]	-	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	11137250.0	22275	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 8]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	11137250.0	22275	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 8]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	minimal	xsim	11137750.0	22276	0	COUNTER	[0, 0, 0, 0, 0, 0, 8]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	minimal	xsim	11147750.0	22296	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	11148250.0	22297	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	11182250.0	22365	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	11234750.0	22470	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	minimal	xsim	11235250.0	22471	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	850750.0	1702	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	1412750.0	2826	0	OUTPUT	[0, 0, 0, 0, 2, 0, 2]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	1492750.0	2986	0	OUTPUT	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	1492750.0	2986	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	1493750.0	2988	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	1916250.0	3833	0	OUTPUT	[0, 0, 0, 0, 2, 1, 3]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	2482750.0	4966	0	OUTPUT	[0, 0, 0, 1, 2, 0, 4]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	6058750.0	12118	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	6058750.0	12118	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	6059250.0	12119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	original	iverilog	6308250.0	12617	0	OWNER_ACCEPT	[0, 1, 1, 1, 2, 0, 7]	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	8558750.0	17118	0	OWNER_LOST	-	[0, 1, 1, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	8558750.0	17118	0	DISCARD_EVENT	[0, 1, 1, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	8559250.0	17119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	1	2	0.0
+tb_ppg_chip_digital_top	original	iverilog	8559750.0	17120	0	ABORT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	original	iverilog	8559750.0	17120	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	original	iverilog	8560250.0	17121	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	2	2	-
+tb_ppg_chip_digital_top	original	iverilog	8803125.0	17606	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	-2	1	1	0	0	0	0	1	1	2	0	375.0
+tb_ppg_chip_digital_top	original	iverilog	8804250.0	17609	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	8886750.0	17774	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 8]	-	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	11137250.0	22275	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 8]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	11137250.0	22275	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 8]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	iverilog	11137750.0	22276	0	COUNTER	[0, 0, 0, 0, 0, 0, 8]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	original	iverilog	11147750.0	22296	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	11148250.0	22297	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	11182250.0	22365	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	11234750.0	22470	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	iverilog	11235250.0	22471	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	original	xsim	850750.0	1702	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	1412750.0	2826	0	OUTPUT	[0, 0, 0, 0, 2, 0, 2]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	1492750.0	2986	0	OUTPUT	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	1492750.0	2986	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	1	0	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	1493750.0	2988	0	READY_CHANGE	[0, 0, 1, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	1916250.0	3833	0	OUTPUT	[0, 0, 0, 0, 2, 1, 3]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	2482750.0	4966	0	OUTPUT	[0, 0, 0, 1, 2, 0, 4]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	6058750.0	12118	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	6058750.0	12118	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	6059250.0	12119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	original	xsim	6308250.0	12617	0	OWNER_ACCEPT	[0, 1, 1, 1, 2, 0, 7]	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	xsim	8558750.0	17118	0	OWNER_LOST	-	[0, 1, 1, 1, 2, 0, 7]	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	xsim	8558750.0	17118	0	DISCARD_EVENT	[0, 1, 1, 1, 2, 0, 7]	-	3	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	xsim	8559250.0	17119	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	1	1	1	0	0	0	0	0	0	1	2	0.0
+tb_ppg_chip_digital_top	original	xsim	8559750.0	17120	0	ABORT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	original	xsim	8559750.0	17120	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	2	2	-
+tb_ppg_chip_digital_top	original	xsim	8560250.0	17121	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	2	2	-
+tb_ppg_chip_digital_top	original	xsim	8803625.0	17607	0	COUNTER	[0, 0, 0, 0, 0, 0, 7]	-	-	-	-2	1	1	0	0	0	0	1	1	2	0	375.0
+tb_ppg_chip_digital_top	original	xsim	8804750.0	17610	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	0	0	-
+tb_ppg_chip_digital_top	original	xsim	8887250.0	17775	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 8]	-	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	11137750.0	22276	0	OWNER_LOST	-	[0, 0, 0, 1, 2, 0, 8]	-	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	11137750.0	22276	0	DISCARD_EVENT	[0, 0, 0, 1, 2, 0, 8]	-	3	-	-	1	1	0	0	0	0	0	0	0	0	-
+tb_ppg_chip_digital_top	original	xsim	11138250.0	22277	0	COUNTER	[0, 0, 0, 0, 0, 0, 8]	-	-	-	1	1	1	0	0	0	0	0	0	0	1	0.0
+tb_ppg_chip_digital_top	original	xsim	11148750.0	22298	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	xsim	11149250.0	22299	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_chip_digital_top	original	xsim	11183250.0	22367	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	1	1	-
+tb_ppg_chip_digital_top	original	xsim	11235750.0	22472	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	1	1	-
+tb_ppg_chip_digital_top	original	xsim	11236250.0	22473	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	1	1	-
+tb_ppg_control_top	fixed_v2	iverilog	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_control_top	fixed_v2	iverilog	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	1	-
+tb_ppg_control_top	fixed_v2	iverilog	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	2	-
+tb_ppg_control_top	fixed_v2	iverilog	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	3	-
+tb_ppg_control_top	fixed_v2	iverilog	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	4	-
+tb_ppg_control_top	fixed_v2	iverilog	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	5	-
+tb_ppg_control_top	fixed_v2	iverilog	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	6	-
+tb_ppg_control_top	fixed_v2	iverilog	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	7	-
+tb_ppg_control_top	fixed_v2	iverilog	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	fixed_v2	iverilog	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	8	-
+tb_ppg_control_top	fixed_v2	iverilog	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	9	-
+tb_ppg_control_top	fixed_v2	iverilog	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	10	-
+tb_ppg_control_top	fixed_v2	iverilog	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	11	-
+tb_ppg_control_top	fixed_v2	iverilog	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	12	-
+tb_ppg_control_top	fixed_v2	iverilog	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	13	-
+tb_ppg_control_top	fixed_v2	iverilog	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	14	-
+tb_ppg_control_top	fixed_v2	iverilog	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	15	-
+tb_ppg_control_top	fixed_v2	iverilog	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	16	-
+tb_ppg_control_top	fixed_v2	iverilog	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	17	-
+tb_ppg_control_top	fixed_v2	iverilog	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	18	-
+tb_ppg_control_top	fixed_v2	iverilog	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161433.0	89341	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161439.5	89342	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161439.5	89342	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	iverilog	1161440.5	89342	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	1.0
+tb_ppg_control_top	fixed_v2	iverilog	1161452.5	89343	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	20	-
+tb_ppg_control_top	fixed_v2	iverilog	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	20	-
+tb_ppg_control_top	fixed_v2	iverilog	1161453.5	89343	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	20	21	1.0
+tb_ppg_control_top	fixed_v2	iverilog	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	21	21	-
+tb_ppg_control_top	fixed_v2	iverilog	1161466.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	0	0	0	0	0	0	21	22	1.0
+tb_ppg_control_top	fixed_v2	iverilog	1161478.5	89345	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1161491.5	89346	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	iverilog	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	23	-
+tb_ppg_control_top	fixed_v2	iverilog	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	24	-
+tb_ppg_control_top	fixed_v2	iverilog	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	25	-
+tb_ppg_control_top	fixed_v2	iverilog	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	26	-
+tb_ppg_control_top	fixed_v2	iverilog	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	27	-
+tb_ppg_control_top	fixed_v2	iverilog	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	28	-
+tb_ppg_control_top	fixed_v2	iverilog	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	29	-
+tb_ppg_control_top	fixed_v2	iverilog	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	30	-
+tb_ppg_control_top	fixed_v2	iverilog	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	31	-
+tb_ppg_control_top	fixed_v2	iverilog	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638487.5	126038	0	STOP_ACK	-	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638500.5	126039	0	OUTPUT	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	1	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638500.5	126039	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	1	0	1	0	0	1	32	32	-
+tb_ppg_control_top	fixed_v2	iverilog	1638501.5	126039	0	COUNTER	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	1	0	0	0	0	1	1	32	33	1.0
+tb_ppg_control_top	fixed_v2	iverilog	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	iverilog	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	34	34	-
+tb_ppg_control_top	fixed_v2	iverilog	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	34	34	-
+tb_ppg_control_top	fixed_v2	iverilog	1655648.5	127358	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	1	1	34	34	-
+tb_ppg_control_top	fixed_v2	xsim	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	0	-
+tb_ppg_control_top	fixed_v2	xsim	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	1	-
+tb_ppg_control_top	fixed_v2	xsim	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	2	-
+tb_ppg_control_top	fixed_v2	xsim	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	3	-
+tb_ppg_control_top	fixed_v2	xsim	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	4	-
+tb_ppg_control_top	fixed_v2	xsim	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	5	-
+tb_ppg_control_top	fixed_v2	xsim	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	6	-
+tb_ppg_control_top	fixed_v2	xsim	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	7	-
+tb_ppg_control_top	fixed_v2	xsim	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	fixed_v2	xsim	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	8	-
+tb_ppg_control_top	fixed_v2	xsim	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	9	-
+tb_ppg_control_top	fixed_v2	xsim	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	10	-
+tb_ppg_control_top	fixed_v2	xsim	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	11	-
+tb_ppg_control_top	fixed_v2	xsim	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	12	-
+tb_ppg_control_top	fixed_v2	xsim	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	13	-
+tb_ppg_control_top	fixed_v2	xsim	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	14	-
+tb_ppg_control_top	fixed_v2	xsim	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	15	-
+tb_ppg_control_top	fixed_v2	xsim	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	16	-
+tb_ppg_control_top	fixed_v2	xsim	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	17	-
+tb_ppg_control_top	fixed_v2	xsim	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	18	-
+tb_ppg_control_top	fixed_v2	xsim	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161433.0	89341	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161439.5	89342	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161439.5	89342	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	fixed_v2	xsim	1161440.5	89342	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	1.0
+tb_ppg_control_top	fixed_v2	xsim	1161452.5	89343	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	20	-
+tb_ppg_control_top	fixed_v2	xsim	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	20	-
+tb_ppg_control_top	fixed_v2	xsim	1161453.5	89343	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	20	21	1.0
+tb_ppg_control_top	fixed_v2	xsim	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	21	21	-
+tb_ppg_control_top	fixed_v2	xsim	1161466.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	0	0	0	0	0	0	21	22	1.0
+tb_ppg_control_top	fixed_v2	xsim	1161478.5	89345	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1161491.5	89346	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	22	-
+tb_ppg_control_top	fixed_v2	xsim	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	23	-
+tb_ppg_control_top	fixed_v2	xsim	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	24	-
+tb_ppg_control_top	fixed_v2	xsim	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	25	-
+tb_ppg_control_top	fixed_v2	xsim	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	26	-
+tb_ppg_control_top	fixed_v2	xsim	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	27	-
+tb_ppg_control_top	fixed_v2	xsim	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	28	-
+tb_ppg_control_top	fixed_v2	xsim	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	29	-
+tb_ppg_control_top	fixed_v2	xsim	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	30	-
+tb_ppg_control_top	fixed_v2	xsim	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	31	-
+tb_ppg_control_top	fixed_v2	xsim	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638487.5	126038	0	STOP_ACK	-	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638500.5	126039	0	OUTPUT	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	1	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638500.5	126039	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	1	0	1	0	0	1	32	32	-
+tb_ppg_control_top	fixed_v2	xsim	1638501.5	126039	0	COUNTER	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	1	0	0	0	0	1	1	32	33	1.0
+tb_ppg_control_top	fixed_v2	xsim	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	33	33	-
+tb_ppg_control_top	fixed_v2	xsim	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	34	34	-
+tb_ppg_control_top	fixed_v2	xsim	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	34	34	-
+tb_ppg_control_top	minimal	iverilog	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	1	-
+tb_ppg_control_top	minimal	iverilog	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	2	-
+tb_ppg_control_top	minimal	iverilog	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	3	-
+tb_ppg_control_top	minimal	iverilog	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	4	-
+tb_ppg_control_top	minimal	iverilog	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	5	-
+tb_ppg_control_top	minimal	iverilog	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	6	-
+tb_ppg_control_top	minimal	iverilog	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	7	-
+tb_ppg_control_top	minimal	iverilog	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	8	-
+tb_ppg_control_top	minimal	iverilog	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	minimal	iverilog	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	9	-
+tb_ppg_control_top	minimal	iverilog	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	10	-
+tb_ppg_control_top	minimal	iverilog	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	11	-
+tb_ppg_control_top	minimal	iverilog	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	12	-
+tb_ppg_control_top	minimal	iverilog	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	13	-
+tb_ppg_control_top	minimal	iverilog	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	14	-
+tb_ppg_control_top	minimal	iverilog	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	15	-
+tb_ppg_control_top	minimal	iverilog	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	16	-
+tb_ppg_control_top	minimal	iverilog	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	17	-
+tb_ppg_control_top	minimal	iverilog	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	18	-
+tb_ppg_control_top	minimal	iverilog	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	19	-
+tb_ppg_control_top	minimal	iverilog	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	minimal	iverilog	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	iverilog	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	iverilog	1161426.5	89341	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	iverilog	1161439.5	89342	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	minimal	iverilog	1161439.5	89342	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	minimal	iverilog	1161439.5	89342	0	COUNTER	[0, 0, 0, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	0.0
+tb_ppg_control_top	minimal	iverilog	1161452.5	89343	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	21	-
+tb_ppg_control_top	minimal	iverilog	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	21	-
+tb_ppg_control_top	minimal	iverilog	1161452.5	89343	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	20	21	0.0
+tb_ppg_control_top	minimal	iverilog	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	21	22	-
+tb_ppg_control_top	minimal	iverilog	1161465.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	0	21	22	0.0
+tb_ppg_control_top	minimal	iverilog	1161478.5	89345	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	minimal	iverilog	1161491.5	89346	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	22	22	-
+tb_ppg_control_top	minimal	iverilog	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	minimal	iverilog	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	minimal	iverilog	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	minimal	iverilog	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	23	-
+tb_ppg_control_top	minimal	iverilog	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	24	-
+tb_ppg_control_top	minimal	iverilog	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	25	-
+tb_ppg_control_top	minimal	iverilog	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	26	-
+tb_ppg_control_top	minimal	iverilog	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	27	-
+tb_ppg_control_top	minimal	iverilog	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	28	-
+tb_ppg_control_top	minimal	iverilog	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	29	-
+tb_ppg_control_top	minimal	iverilog	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	30	-
+tb_ppg_control_top	minimal	iverilog	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	31	-
+tb_ppg_control_top	minimal	iverilog	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	32	-
+tb_ppg_control_top	minimal	iverilog	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638474.5	126037	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638487.5	126038	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638500.5	126039	0	FORMAL_DISCARD	[0, 1, 2, 0, 2, 0, 15]	-	0	0	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1638500.5	126039	0	DISCARD_EVENT	[0, 1, 2, 0, 2, 0, 0]	-	0	-	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	iverilog	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	iverilog	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	32	33	-
+tb_ppg_control_top	minimal	iverilog	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	minimal	iverilog	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	33	33	-
+tb_ppg_control_top	minimal	iverilog	1655648.5	127358	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	minimal	xsim	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	1	-
+tb_ppg_control_top	minimal	xsim	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	2	-
+tb_ppg_control_top	minimal	xsim	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	3	-
+tb_ppg_control_top	minimal	xsim	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	4	-
+tb_ppg_control_top	minimal	xsim	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	5	-
+tb_ppg_control_top	minimal	xsim	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	6	-
+tb_ppg_control_top	minimal	xsim	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	7	-
+tb_ppg_control_top	minimal	xsim	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	8	-
+tb_ppg_control_top	minimal	xsim	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	minimal	xsim	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	9	-
+tb_ppg_control_top	minimal	xsim	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	10	-
+tb_ppg_control_top	minimal	xsim	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	11	-
+tb_ppg_control_top	minimal	xsim	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	12	-
+tb_ppg_control_top	minimal	xsim	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	13	-
+tb_ppg_control_top	minimal	xsim	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	14	-
+tb_ppg_control_top	minimal	xsim	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	15	-
+tb_ppg_control_top	minimal	xsim	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	16	-
+tb_ppg_control_top	minimal	xsim	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	17	-
+tb_ppg_control_top	minimal	xsim	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	18	-
+tb_ppg_control_top	minimal	xsim	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	19	-
+tb_ppg_control_top	minimal	xsim	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	minimal	xsim	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	xsim	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	xsim	1161413.5	89340	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	minimal	xsim	1161426.5	89341	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	minimal	xsim	1161426.5	89341	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	minimal	xsim	1161426.5	89341	0	COUNTER	[0, 0, 0, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	0.0
+tb_ppg_control_top	minimal	xsim	1161439.5	89342	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	20	21	-
+tb_ppg_control_top	minimal	xsim	1161439.5	89342	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	0	20	21	0.0
+tb_ppg_control_top	minimal	xsim	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	0	1	0	1	0	0	21	21	-
+tb_ppg_control_top	minimal	xsim	1161452.5	89343	0	STOP_ACK	-	-	-	-	-	1	1	0	1	0	1	0	0	21	21	-
+tb_ppg_control_top	minimal	xsim	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	1	21	22	-
+tb_ppg_control_top	minimal	xsim	1161465.5	89344	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	1	0	1	0	0	1	21	22	-
+tb_ppg_control_top	minimal	xsim	1161465.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	1	21	22	0.0
+tb_ppg_control_top	minimal	xsim	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	minimal	xsim	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	minimal	xsim	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	minimal	xsim	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	23	-
+tb_ppg_control_top	minimal	xsim	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	24	-
+tb_ppg_control_top	minimal	xsim	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	25	-
+tb_ppg_control_top	minimal	xsim	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	26	-
+tb_ppg_control_top	minimal	xsim	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	27	-
+tb_ppg_control_top	minimal	xsim	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	28	-
+tb_ppg_control_top	minimal	xsim	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	29	-
+tb_ppg_control_top	minimal	xsim	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	30	-
+tb_ppg_control_top	minimal	xsim	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	31	-
+tb_ppg_control_top	minimal	xsim	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	32	-
+tb_ppg_control_top	minimal	xsim	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1638474.5	126037	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1638487.5	126038	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1638500.5	126039	0	FORMAL_DISCARD	[0, 1, 2, 0, 2, 0, 15]	-	0	0	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1638500.5	126039	0	DISCARD_EVENT	[0, 1, 2, 0, 2, 0, 0]	-	0	-	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	minimal	xsim	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	minimal	xsim	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	32	33	-
+tb_ppg_control_top	minimal	xsim	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	minimal	xsim	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	33	33	-
+tb_ppg_control_top	original	iverilog	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	1	-
+tb_ppg_control_top	original	iverilog	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	2	-
+tb_ppg_control_top	original	iverilog	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	3	-
+tb_ppg_control_top	original	iverilog	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	4	-
+tb_ppg_control_top	original	iverilog	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	5	-
+tb_ppg_control_top	original	iverilog	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	6	-
+tb_ppg_control_top	original	iverilog	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	7	-
+tb_ppg_control_top	original	iverilog	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	8	-
+tb_ppg_control_top	original	iverilog	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	original	iverilog	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	9	-
+tb_ppg_control_top	original	iverilog	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	10	-
+tb_ppg_control_top	original	iverilog	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	11	-
+tb_ppg_control_top	original	iverilog	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	12	-
+tb_ppg_control_top	original	iverilog	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	13	-
+tb_ppg_control_top	original	iverilog	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	14	-
+tb_ppg_control_top	original	iverilog	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	15	-
+tb_ppg_control_top	original	iverilog	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	16	-
+tb_ppg_control_top	original	iverilog	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	17	-
+tb_ppg_control_top	original	iverilog	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	18	-
+tb_ppg_control_top	original	iverilog	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	19	-
+tb_ppg_control_top	original	iverilog	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	original	iverilog	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	iverilog	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	iverilog	1161426.5	89341	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	iverilog	1161439.5	89342	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	original	iverilog	1161439.5	89342	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	original	iverilog	1161439.5	89342	0	COUNTER	[0, 0, 0, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	0.0
+tb_ppg_control_top	original	iverilog	1161452.5	89343	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	21	-
+tb_ppg_control_top	original	iverilog	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	20	21	-
+tb_ppg_control_top	original	iverilog	1161452.5	89343	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	20	21	0.0
+tb_ppg_control_top	original	iverilog	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	21	22	-
+tb_ppg_control_top	original	iverilog	1161465.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	0	21	22	0.0
+tb_ppg_control_top	original	iverilog	1161478.5	89345	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	original	iverilog	1161491.5	89346	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	1	22	22	-
+tb_ppg_control_top	original	iverilog	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	original	iverilog	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	original	iverilog	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	original	iverilog	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	23	-
+tb_ppg_control_top	original	iverilog	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	24	-
+tb_ppg_control_top	original	iverilog	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	25	-
+tb_ppg_control_top	original	iverilog	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	26	-
+tb_ppg_control_top	original	iverilog	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	27	-
+tb_ppg_control_top	original	iverilog	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	28	-
+tb_ppg_control_top	original	iverilog	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	29	-
+tb_ppg_control_top	original	iverilog	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	30	-
+tb_ppg_control_top	original	iverilog	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	31	-
+tb_ppg_control_top	original	iverilog	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	32	-
+tb_ppg_control_top	original	iverilog	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	iverilog	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	iverilog	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	original	iverilog	1638487.5	126038	0	STOP_ACK	-	-	-	-	-	1	1	0	1	0	1	0	0	32	32	-
+tb_ppg_control_top	original	iverilog	1638500.5	126039	0	OUTPUT	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	1	32	33	-
+tb_ppg_control_top	original	iverilog	1638500.5	126039	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	1	0	1	0	0	1	32	33	-
+tb_ppg_control_top	original	iverilog	1638500.5	126039	0	COUNTER	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	1	1	0	1	0	0	1	32	33	0.0
+tb_ppg_control_top	original	iverilog	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	original	iverilog	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	original	iverilog	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	original	iverilog	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	original	iverilog	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	33	33	-
+tb_ppg_control_top	original	iverilog	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	33	34	-
+tb_ppg_control_top	original	iverilog	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	34	34	-
+tb_ppg_control_top	original	iverilog	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	34	34	-
+tb_ppg_control_top	original	iverilog	1655648.5	127358	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 2]	-	-	-	-	0	1	0	0	0	0	1	1	34	34	-
+tb_ppg_control_top	original	xsim	6363.5	490	0	OUTPUT	[0, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	0	1	-
+tb_ppg_control_top	original	xsim	71363.5	5490	0	OUTPUT	[0, 1, 1, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	1	2	-
+tb_ppg_control_top	original	xsim	136363.5	10490	0	OUTPUT	[0, 2, 2, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	2	3	-
+tb_ppg_control_top	original	xsim	201363.5	15490	0	OUTPUT	[0, 3, 3, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	3	4	-
+tb_ppg_control_top	original	xsim	266363.5	20490	0	OUTPUT	[0, 4, 4, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	4	5	-
+tb_ppg_control_top	original	xsim	344155.5	26474	0	OUTPUT	[0, 0, 0, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	5	6	-
+tb_ppg_control_top	original	xsim	409155.5	31474	0	OUTPUT	[0, 1, 1, 1, 2, 0, 3]	-	-	-	-	1	1	1	0	1	0	0	0	6	7	-
+tb_ppg_control_top	original	xsim	523243.5	40250	0	OUTPUT	[0, 0, 0, 1, 2, 0, 5]	-	-	-	-	1	1	1	0	1	0	0	0	7	8	-
+tb_ppg_control_top	original	xsim	549412.5	42263	0	FORMAL_DISCARD	[0, 1, 1, 1, 2, 0, 5]	-	0	0	-	1	1	1	0	0	0	1	1	8	8	-
+tb_ppg_control_top	original	xsim	553611.5	42586	0	OUTPUT	[0, 0, 0, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	8	9	-
+tb_ppg_control_top	original	xsim	618611.5	47586	0	OUTPUT	[0, 1, 1, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	9	10	-
+tb_ppg_control_top	original	xsim	683611.5	52586	0	OUTPUT	[0, 2, 2, 0, 2, 0, 6]	-	-	-	-	1	1	1	0	1	0	0	0	10	11	-
+tb_ppg_control_top	original	xsim	752914.5	57917	0	OUTPUT	[0, 0, 0, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	11	12	-
+tb_ppg_control_top	original	xsim	817914.5	62917	0	OUTPUT	[0, 1, 1, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	12	13	-
+tb_ppg_control_top	original	xsim	882914.5	67917	0	OUTPUT	[0, 2, 2, 0, 2, 1, 7]	-	-	-	-	1	1	1	0	1	0	0	0	13	14	-
+tb_ppg_control_top	original	xsim	952048.5	73235	0	OUTPUT	[0, 0, 0, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	14	15	-
+tb_ppg_control_top	original	xsim	954128.5	73395	0	OUTPUT	[0, 0, 1, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	15	16	-
+tb_ppg_control_top	original	xsim	1017048.5	78235	0	OUTPUT	[0, 1, 2, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	16	17	-
+tb_ppg_control_top	original	xsim	1019128.5	78395	0	OUTPUT	[0, 1, 3, 1, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	17	18	-
+tb_ppg_control_top	original	xsim	1082048.5	83235	0	OUTPUT	[0, 2, 4, 0, 2, 0, 8]	-	-	-	-	1	1	1	0	1	0	0	0	18	19	-
+tb_ppg_control_top	original	xsim	1092332.5	84026	0	READY_CHANGE	[0, 0, 0, 0, 0, 0, 10]	-	-	-	-	1	0	0	0	0	0	1	1	19	19	-
+tb_ppg_control_top	original	xsim	1161387.5	89338	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 11]	-	-	-	0	0	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	xsim	1161413.5	89340	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	xsim	1161413.5	89340	0	READY_CHANGE	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	0	1	1	1	1	1	0	0	19	19	-
+tb_ppg_control_top	original	xsim	1161426.5	89341	0	OUTPUT	[0, 0, 0, 0, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	original	xsim	1161426.5	89341	0	FORMAL_LOAD	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	1	1	1	0	0	19	20	-
+tb_ppg_control_top	original	xsim	1161426.5	89341	0	COUNTER	[0, 0, 0, 0, 2, 0, 11]	-	-	-	1	1	1	1	1	1	1	0	0	19	20	0.0
+tb_ppg_control_top	original	xsim	1161439.5	89342	0	OUTPUT	[0, 0, 1, 1, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	0	20	21	-
+tb_ppg_control_top	original	xsim	1161439.5	89342	0	COUNTER	[0, 0, 1, 1, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	0	20	21	0.0
+tb_ppg_control_top	original	xsim	1161452.5	89343	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	0	1	0	1	0	0	21	21	-
+tb_ppg_control_top	original	xsim	1161452.5	89343	0	STOP_ACK	-	-	-	-	-	1	1	0	1	0	1	0	0	21	21	-
+tb_ppg_control_top	original	xsim	1161465.5	89344	0	OUTPUT	[0, 1, 2, 0, 2, 0, 11]	-	-	-	-	1	1	1	0	1	0	0	1	21	22	-
+tb_ppg_control_top	original	xsim	1161465.5	89344	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	1	0	1	0	0	1	21	22	-
+tb_ppg_control_top	original	xsim	1161465.5	89344	0	COUNTER	[0, 1, 2, 0, 2, 0, 11]	-	-	-	1	1	1	1	0	1	0	0	1	21	22	0.0
+tb_ppg_control_top	original	xsim	1163467.5	89498	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 11]	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	original	xsim	1163675.5	89514	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	22	22	-
+tb_ppg_control_top	original	xsim	1163740.5	89519	0	OWNER_ACCEPT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	0	0	0	0	0	0	22	22	-
+tb_ppg_control_top	original	xsim	1167796.5	89831	0	OUTPUT	[0, 0, 0, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	22	23	-
+tb_ppg_control_top	original	xsim	1169876.5	89991	0	OUTPUT	[0, 0, 1, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	23	24	-
+tb_ppg_control_top	original	xsim	1232796.5	94831	0	OUTPUT	[0, 1, 2, 0, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	24	25	-
+tb_ppg_control_top	original	xsim	1234876.5	94991	0	OUTPUT	[0, 1, 3, 1, 2, 0, 12]	-	-	-	-	1	1	1	0	1	0	0	0	25	26	-
+tb_ppg_control_top	original	xsim	1439119.5	110702	0	OUTPUT	[0, 0, 0, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	26	27	-
+tb_ppg_control_top	original	xsim	1441199.5	110862	0	OUTPUT	[0, 0, 1, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	27	28	-
+tb_ppg_control_top	original	xsim	1504119.5	115702	0	OUTPUT	[0, 1, 2, 0, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	28	29	-
+tb_ppg_control_top	original	xsim	1506199.5	115862	0	OUTPUT	[0, 1, 3, 1, 2, 0, 14]	-	-	-	-	1	1	1	0	1	0	0	0	29	30	-
+tb_ppg_control_top	original	xsim	1573500.5	121039	0	OUTPUT	[0, 0, 0, 0, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	30	31	-
+tb_ppg_control_top	original	xsim	1575580.5	121199	0	OUTPUT	[0, 0, 1, 1, 2, 0, 15]	-	-	-	-	1	1	1	0	1	0	0	0	31	32	-
+tb_ppg_control_top	original	xsim	1638422.5	126033	0	OWNER_COMPLETE	-	[0, 1, 2, 0, 2, 0, 15]	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1638448.5	126035	0	OWNER_ACCEPT	[0, 1, 3, 1, 2, 0, 15]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1638474.5	126037	0	STOP_ACK	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1638487.5	126038	0	FORMAL_LOAD	[0, 1, 2, 0, 2, 0, 15]	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	original	xsim	1638487.5	126038	0	DRAIN_MASK_ASSERT	-	-	-	-	-	1	1	0	1	0	0	0	1	32	32	-
+tb_ppg_control_top	original	xsim	1638500.5	126039	0	FORMAL_DISCARD	[0, 1, 2, 0, 2, 0, 15]	-	0	0	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	original	xsim	1638500.5	126039	0	DISCARD_EVENT	[0, 1, 2, 0, 2, 0, 0]	-	0	-	-	1	1	1	0	0	0	1	1	32	32	-
+tb_ppg_control_top	original	xsim	1640502.5	126193	0	OWNER_COMPLETE	-	[0, 1, 3, 1, 2, 0, 15]	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	original	xsim	1640710.5	126209	0	START_ACK	-	-	-	-	-	1	1	0	0	0	0	1	1	32	32	-
+tb_ppg_control_top	original	xsim	1642855.5	126374	0	OWNER_ACCEPT	[0, 0, 0, 1, 2, 0, 16]	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1642875.0	126375	0	RESET_ASSERT	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1642940.0	126380	1	RESET_RELEASE	-	-	-	-	-	1	1	0	0	0	0	0	0	32	32	-
+tb_ppg_control_top	original	xsim	1649251.5	126866	1	OUTPUT	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	1	1	0	1	0	0	0	32	33	-
+tb_ppg_control_top	original	xsim	1649369.5	126875	1	READY_CHANGE	[1, 0, 0, 1, 2, 0, 1]	-	-	-	-	1	0	0	0	0	0	1	1	33	33	-
+tb_ppg_control_top	original	xsim	1655634.5	127357	1	FORMAL_DISCARD	[1, 0, 0, 1, 2, 0, 2]	-	0	0	-	0	0	1	0	0	0	1	1	33	33	-

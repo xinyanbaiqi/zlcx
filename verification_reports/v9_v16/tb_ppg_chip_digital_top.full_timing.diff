@@ -1,0 +1,42 @@
+--- baseline/tb_ppg_chip_digital_top.v
++++ temporary_fixed/tb_ppg_chip_digital_top.v
+@@ -159,7 +159,7 @@
+ 		end
+ 		SPI_SCLK = 1'b0;
+ 		repeat(7) @(posedge CLK_2M_PAD);
+-		RESET_N = 1'b1;
++		#1 RESET_N = 1'b1; // 实验：复位释放避开CLK_2M采样沿
+ 	end
+ 
+ 	//---------------错误计数与场景统计---------------//
+@@ -777,7 +777,7 @@
+ 	initial cnt_chip_lost = 0;
+ 	always @(posedge CLK_2M_PAD)begin
+ 		if(dut.ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_adc_transaction_lost_event === 1'b1)begin
+-			cnt_chip_lost = cnt_chip_lost + 1; // 作废是单拍事件，按上升沿计数
++			cnt_chip_lost <= #1 cnt_chip_lost + 1; // 作废是单拍事件，按上升沿计数
+ 		end
+ 	end
+ 
+@@ -788,7 +788,7 @@
+ 		begin
+ 			cnt_wd = 0;
+ 			while((cnt_chip_lost < target) && (cnt_wd < 30000))begin
+-				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
++				@(negedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+ 			end
+ 		end
+ 	endtask
+@@ -799,9 +799,9 @@
+ 		begin
+ 			cnt_wd = 0;
+ 			while(((dut.top_lifecycle_state_o == 2'b10) || (dut.top_lifecycle_state_o == 2'b11)) && (cnt_wd < 30000))begin
+-				@(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
+-			end
+-			repeat(16) @(posedge CLK_2M_PAD);
++				@(negedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
++			end
++			repeat(16) @(negedge CLK_2M_PAD);
+ 		end
+ 	endtask
+ 

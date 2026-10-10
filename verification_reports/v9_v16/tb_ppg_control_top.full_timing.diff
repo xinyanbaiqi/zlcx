@@ -1,0 +1,93 @@
+--- baseline/tb_ppg_control_top.v
++++ temporary_fixed_v2/tb_ppg_control_top.v
+@@ -940,7 +940,7 @@
+ 	// 只统计真实o_measurement_result_valid拉高次数，不参与握手
+ 	always @(posedge i_clk) begin
+ 		if(i_rstn && o_measurement_result_valid && i_measurement_result_ready) begin
+-			cnt_measurement_result_valid = cnt_measurement_result_valid + 1;
++			cnt_measurement_result_valid <= #1 cnt_measurement_result_valid + 1;
+ 		end
+ 	end
+ 
+@@ -1011,14 +1011,14 @@
+ 		reg_last_precision_scheduler = 1'b0;
+ 		reg_last_precision_ssw = 1'b0;
+ 		reg_last_precision_ami = 1'b0;
+-		reg_last_red_frame_id = {C_FRAME_ID_WIDTH{1'b0}};
+-		reg_last_ir_frame_id = {C_FRAME_ID_WIDTH{1'b0}};
+-		reg_last_red_sample_index = {C_SAMPLE_INDEX_WIDTH{1'b0}};
+-		reg_last_ir_sample_index = {C_SAMPLE_INDEX_WIDTH{1'b0}};
+-		reg_last_red_precision = 1'b0;
+-		reg_last_ir_precision = 1'b0;
+-		reg_last_red_tick = 13'd0;
+-		reg_last_ir_tick = 13'd0;
++		reg_last_red_frame_id <= #1 {C_FRAME_ID_WIDTH{1'b0}};
++		reg_last_ir_frame_id <= #1 {C_FRAME_ID_WIDTH{1'b0}};
++		reg_last_red_sample_index <= #1 {C_SAMPLE_INDEX_WIDTH{1'b0}};
++		reg_last_ir_sample_index <= #1 {C_SAMPLE_INDEX_WIDTH{1'b0}};
++		reg_last_red_precision <= #1 1'b0;
++		reg_last_ir_precision <= #1 1'b0;
++		reg_last_red_tick <= #1 13'd0;
++		reg_last_ir_tick <= #1 13'd0;
+ 	end
+ 	always @(posedge i_clk) begin
+ 		if(i_rstn && ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_macro_frame_start_event) begin
+@@ -1041,21 +1041,21 @@
+ 			end
+ 		end
+ 		if(i_rstn && ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_commit_event) begin
+-			cnt_owner_commit_total = cnt_owner_commit_total + 1;
++			cnt_owner_commit_total <= #1 cnt_owner_commit_total + 1;
+ 			if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_color_ir) begin
+-				cnt_owner_commit_ir = cnt_owner_commit_ir + 1;
++				cnt_owner_commit_ir <= #1 cnt_owner_commit_ir + 1;
+ 				// TOP-03：IR owner提交同拍采样scheduler直接保持型输出的身份字段
+-				reg_last_ir_frame_id = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_frame_id;
+-				reg_last_ir_sample_index = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_sample_index;
+-				reg_last_ir_precision = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_precision_mode;
+-				reg_last_ir_tick = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.macro_tick_o;
++				reg_last_ir_frame_id <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_frame_id;
++				reg_last_ir_sample_index <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_sample_index;
++				reg_last_ir_precision <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_precision_mode;
++				reg_last_ir_tick <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.macro_tick_o;
+ 			end else begin
+-				cnt_owner_commit_red = cnt_owner_commit_red + 1;
++				cnt_owner_commit_red <= #1 cnt_owner_commit_red + 1;
+ 				// TOP-03：RED owner提交同拍采样，与上面IR分支对称
+-				reg_last_red_frame_id = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_frame_id;
+-				reg_last_red_sample_index = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_sample_index;
+-				reg_last_red_precision = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_precision_mode;
+-				reg_last_red_tick = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.macro_tick_o;
++				reg_last_red_frame_id <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_frame_id;
++				reg_last_red_sample_index <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_sample_index;
++				reg_last_red_precision <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_adc_owner_precision_mode;
++				reg_last_red_tick <= #1 ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.macro_tick_o;
+ 			end
+ 		end
+ 	end
+@@ -2354,6 +2354,7 @@
+ 			integer cnt_meas_before_release;
+ 			integer cnt_wait_release;
+ 			cnt_meas_before_release = cnt_measurement_result_valid;
++			@(negedge i_clk); // 实验：消费许可在非采样沿建立
+ 			i_measurement_result_ready = 1'b1;
+ 			cnt_wait_release = 0;
+ 			while((cnt_measurement_result_valid < (cnt_meas_before_release + 1)) && (cnt_wait_release < 200) && !flag_global_timeout) begin
+@@ -2912,7 +2913,7 @@
+ 			// 等第一对RED+IR都真实提交
+ 			cnt_wait_pair = 0;
+ 			while(((cnt_owner_commit_red - cnt_red_before) < 1 || (cnt_owner_commit_ir - cnt_ir_before) < 1) && (cnt_wait_pair < 60000) && !flag_global_timeout) begin
+-				@(posedge i_clk);
++				@(negedge i_clk); // 实验：等owner计数与身份快照结算后再决定STOP
+ 				cnt_wait_pair = cnt_wait_pair + 1;
+ 			end
+ 			pair1_red_frame_id = reg_last_red_frame_id;
+@@ -2927,7 +2928,7 @@
+ 			// 再等第二对RED+IR都真实提交，用于核对Q3相位跨帧固定
+ 			cnt_wait_pair = 0;
+ 			while(((cnt_owner_commit_red - cnt_red_before) < 2 || (cnt_owner_commit_ir - cnt_ir_before) < 2) && (cnt_wait_pair < 60000) && !flag_global_timeout) begin
+-				@(posedge i_clk);
++				@(negedge i_clk); // 实验：等owner计数与身份快照结算后再决定STOP
+ 				cnt_wait_pair = cnt_wait_pair + 1;
+ 			end
+ 			pair2_red_frame_id = reg_last_red_frame_id;

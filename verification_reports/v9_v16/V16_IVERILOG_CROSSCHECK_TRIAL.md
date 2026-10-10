@@ -2,7 +2,7 @@
 
 2026-10-10。**当前平台可以运行Icarus。49个TB全部以 `-g2001` 编译成功；36个正常结束，当前没有宿主限时中断项，13个只编译未运行。原3项90秒中断已按用户要求改为每项4小时预算并完整重跑。**
 
-与已提交参考清单严格比较：29个TB的排序PASS及结束时刻完全一致；5个存在参考提取口径差异，已核对原始xsim日志同口径结果完全一致；1个芯片TB的PASS一致但结束时刻不同；1个control_top TB的累计结果计数字段不同。后两项原因未闭合。**不声称49个TB全部通过，也不声称不存在RTL竞争。**
+与已提交参考清单严格比较：29个TB的排序PASS及结束时刻完全一致；5个存在参考提取口径差异，已核对原始xsim日志同口径结果完全一致；1个芯片TB的PASS一致但结束时刻不同；1个control_top TB的累计结果计数字段不同。后两项已在仓库外用Icarus 11 / XSIM 2019.2完成定因，统筹认可为TB同沿竞争，**不是RTL竞争**；原始DIFF保留，实验补丁未应用到仓库TB。**不声称49个TB全部通过，本次结论不外推为整个RTL无缺陷。**
 
 ## 环境调查更正
 
@@ -26,8 +26,8 @@ Icarus、TCC和libc6-dev头文件仅下载并解包到任务目录下被忽略�
 | 正常运行结束 | 36 | 模块28、芯片1、系统7；全部tool run rc=0且未检出FAIL |
 | 严格参考清单和finish均MATCH | 29 | 保留完整文字、时间、计数和身份字段，排序后逐行比较 |
 | 参考提取口径差异 | 5 | ADC数值scoreboard、启动IDAC校准、输入矩阵、owner反压、PWC；与原始xsim日志按相同口径逐行MATCH |
-| 正常结束时刻差异 | 1 | 芯片TB早1000ns（两个500ns主时钟周期），待定位 |
-| 累计结果计数差异 | 1 | control_top的TOP-01两条PASS计数字段偏移1，finish一致，待定位 |
+| 正常结束时刻差异 | 1 | 原始芯片TB早1000ns（两个500ns周期）；D04已确认TB竞争 |
+| 累计结果计数差异 | 1 | 原始control_top计数字段偏移1，finish一致；D06已确认TB竞争 |
 | 当前宿主限时中断 | 0 | 原3项在每项14400秒预算下已正常完成，不放宽判据 |
 | 只编译未运行 | 13 | 其余系统级及两份10秒长跑，时间预算子集，不是工具不可用 |
 
@@ -85,21 +85,15 @@ RC1后必须同时改变 `--revision <RC1提交>`和 `--reference-dir <该提交
 
 原始xsim路径分别为 `raw/unit/tb_ppg_precision_window_controller/xsim.log`、`raw/sys_g2/tb_ppg_control_top_adc_numeric_scoreboard/xsim.log`、`raw/sys_g4/tb_ppg_control_top_startup_idac_calibration/xsim.log`，均相对同一final_5d8ceba目录。输入矩阵原始日志在 `raw/sys_g3/tb_ppg_control_top_input_light_static_matrix/xsim.log`，owner反压在 `raw/sys_g3/tb_ppg_control_top_owner_identity_backpressure/xsim.log`。统一提取后51/70/84/74/69行分别逐行一致，finish亦一致，属于参考清单提取口径，不是仿真器算术或RTL竞争。
 
-### D04：芯片TB结束时间差异（未闭合）
+### D04：芯片TB结束时间差异（已闭合：TB同沿竞争）
 
-`tb_ppg_chip_digital_top`的20条正式参考PASS完全一致，均无FAIL、tool rc=0，最终成功横幅也出现；但xsim在 **11,362,750ns**结束，Icarus在 **11,361,750ns**结束，差 **-1000ns**。VPI全局ticks/precision转成fs后精确比较，其他TB正常结束时刻一致，不能把这一差异抹平为时间格式。
+原始 `tb_ppg_chip_digital_top` 的20条PASS一致、0 FAIL，但XSIM结束于11,362,750 ns、Icarus结束于11,361,750 ns，相差1000 ns。原始finish DIFF保留，不放宽时间判据。
 
-已定位的TB竞争候选：同文件的 `cnt_chip_lost`由 `always @(posedge CLK_2M_PAD)`以阻塞赋值更新，`wait_chip_lost`也在同一posedge时间槽读取它；`wait_chip_stopped`也在posedge后立即读生命周期。读/写先后可影响等待器提前或晚一拍返回。符号锚点：owner生命周期监视块、`wait_chip_lost`、`wait_chip_stopped`；本基线约779/785/797行。
+`cnt_chip_lost`在 `always @(posedge CLK_2M_PAD)` 内以阻塞赋值递增，`wait_chip_lost`在同一Active时间区读该计数，进程先后改变后续SPI/STOP排期。仓库外最小实验只在wait_chip_lost的posedge后加 `#1`，保留原等待计数增量和超时上限；Icarus 11及XSIM 2019.2均20 PASS、0 FAIL、正常结束于 **11,361,750 ns**。扩展实验将相关复位释放/计数更新错开，并改为下降沿读取，结果亦一致。
 
-```verilog
-// 源码摘录，未修改；以下两进程共享posedge时间槽
-cnt_chip_lost = cnt_chip_lost + 1;
-while((cnt_chip_lost < target) && (cnt_wd < 30000))begin
-    @(posedge CLK_2M_PAD); cnt_wd = cnt_wd + 1;
-end
-```
+原始两边真实输出的五笔结果，其身份、时间与拍号完全相同；三笔completion-lost身份相同，第三笔时刻随TB排期移动。最小实验后lost、START/STOP和结果序列及拍号一致。因此D04归入V9 **Q02：TB计数更新/读取竞争**，不是RTL竞争；没有修改仓库TB或RTL。
 
-这证明存在需要审阅的TB同沿计数结构，**尚未证明它就是本次1000ns差异的全部原因，也尚未排除其他RTL/TB时序原因**。需下一轮将SPI步骤、lost监视/等待返回和STOP排空时刻对应起来，再裁定。只记录、不改原TB或RTL；本次没有确认RTL竞争，故没有伪造“RTL最小复现”。
+实验源码固定为 `66bebdfabe9e1cb173c34a0ce44e48ba4230398d`。本次XSIM 2019.2复现原XSIM 2022.2参考差异；未在本机运行2022.2或Icarus 12。完整diff、TXN和运行汇总见 [定因报告](D04_D06_CAUSE_REPORT.md)、[TXN摘录](TXN_EVIDENCE.tsv)、[运行汇总](RUN_RESULTS.json)。
 
 ### D05：原宿主限时中断已完成补跑
 
@@ -119,19 +113,17 @@ python -B verification_reports/v9_v16/scripts/v16_crosscheck.py --revision 66beb
 
 `cbEndOfSimulation`在SIGTERM时也可能执行，原90秒中断时打印的时间不能冒充TB正常finish。本次未发生宿主中断，不再把历史中断列入当前结果。
 
-### D06：control_top累计结果计数差异（未闭合）
+### D06：control_top累计结果计数差异（已闭合：TB同沿竞争）
 
-完成的 `tb_ppg_control_top` 与xsim均73条正式参考PASS、无FAIL、finish精确一致，但两条TOP-01输出存在真实字段差异；对同提交原始xsim日志复核仍是该差异，不属于参考提取口径。
+原始两边均73条PASS、49笔ADC响应、0 FAIL，finish同为1,655,648.5 ns，但XSIM最终33笔正式结果、Icarus为34；TOP-01旧事务检查分别打印32/33，新结果检查打印32→33/33→34。原始排序DIFF保留，不允许计数差1、不删除字段。
 
-| TOP-01检查 | xsim | Icarus |
-| --- | --- | --- |
-| reset后旧事务不产生结果 | count stayed at 32 | count stayed at 33 |
-| reset+restart后的新结果 | count 32 -> 33 | count 33 -> 34 |
-| 最终SMOKE_TB_PASS汇总 | real_adc_responses=49，measurement_result_valid=33 | real_adc_responses=49，measurement_result_valid=34 |
+逐拍TXN证实差异发生在 **SMOKE-23**：复位epoch0、RUN15、frame_id=1/sample_index=2的RED NORMAL SAR9结果，在第126039拍（1,638,500.5 ns）由Icarus真实输出，XSIM则产生STOP discard（reason=0）。XSIM的STOP_ACK在126037拍，Icarus在126038拍；后续复位在1,642,875 ns，因此这笔差异不是重复计数或被复位清掉。
 
-这些断言各自的delta（旧事务0、新事务+1）都满足原TB检查，但累计结果数量相差1，而且相同49笔ADC响应下最终正式结果汇总也分别为33和34。**不放宽成“允许差1”，不删除计数字段，不因delta一样就判MATCH。** 正式排序比较仍为DIFF。
+根因是SMOKE-23主刺激在posedge读取由另一个posedge进程阻塞更新的owner计数/身份快照，导致退出等待并驱动下一次STOP早晚相差一拍。最小实验仅在两个读取点加 `#1`，两边都恢复为 **73 PASS、49 ADC/33 results、finish=1,655,648.5 ns、0 FAIL**，差异TXN在两边同拍STOP丢弃，完整输出/正式丢弃身份序列一致。
 
-待核对的TB结构：`rtl/ppg_control_top/tb_ppg_control_top.v` 的 `cnt_measurement_result_valid` 由posedge监视进程阻塞递增（约943行）；SMOKE-17从posedge等待循环返回后直接将 `i_measurement_result_ready` 从0改为1（约2357行），可能与同沿DUT/监视器的采样产生先后竞争。TOP-01在约3051/3066/3102行保存并打印累计计数。须按实际TXN_KEY把真实valid&&ready握手、TB计数和反压释放时刻对齐，判断是TB采样竞争、合法边界变化还是实际消费差异；**目前不能裁定为无害文本差异或确认RTL错误**。只记录，没有修改TB或RTL。
+单独调整SMOKE-17 ready下降沿驱动及结果计数#1更新未消除D06，不能将本次差异归因SMOKE-17。最小SMOKE-23补丁也未处理其他同沿等待点，RUN11前两笔输出仍有13 ns偏移，另有四个STOP_ACK相差13或26 ns。扩展实验将owner计数/身份更新延后#1、相关读取/ready驱动改到下降沿，两边均49 ADC/34 results，完整事务去向及运行期观测拍号全部一致；33/34来自两种明确的STOP排期，不是放宽结果接受标准。
+
+统筹认可D06为 **V9 Q01：TB同沿计数更新/读取竞争，不是RTL竞争**。原公开discard_generation在差异笔实测为0，证据原样保留；RUN15由当前RUN和接受owner身份关联，本轮未评价该字段的独立合同一致性。实验版本为Icarus 11 / XSIM 2019.2，未修改仓库TB/RTL；详见 [定因报告](D04_D06_CAUSE_REPORT.md)。
 
 ## 逐TB结果
 
@@ -142,7 +134,7 @@ python -B verification_reports/v9_v16/scripts/v16_crosscheck.py --revision 66beb
 | system | `tb_ppg_control_top_longrun` | 成功/2001 | 未跑 | —/5 | 未比较 | 未比较 | 只编译 |
 | system | `tb_diag_algo_probe` | 成功/2001 | 未跑 | —/5 | 未比较 | 未比较 | 只编译 |
 | system | `tb_ppg_real_raw_generator_selfcheck` | 成功/2001 | 正常结束 | 40/40 | MATCH | MATCH | 观测一致 |
-| system | `tb_ppg_control_top` | 成功/2001 | 正常结束 | 73/73 | DIFF | MATCH | 累计计数差待定位 |
+| system | `tb_ppg_control_top` | 成功/2001 | 正常结束 | 73/73 | DIFF | MATCH | TB竞争已确认（Q01）；原DIFF保留 |
 | system | `tb_ppg_control_top_baseline_cross` | 成功/2001 | 未跑 | —/75 | 未比较 | 未比较 | 只编译 |
 | system | `tb_ppg_control_top_long_10_cycles` | 成功/2001 | 未跑 | —/129 | 未比较 | 未比较 | 只编译 |
 | system | `tb_ppg_control_top_fir_tail_isolation` | 成功/2001 | 未跑 | —/80 | 未比较 | 未比较 | 只编译 |
@@ -159,7 +151,7 @@ python -B verification_reports/v9_v16/scripts/v16_crosscheck.py --revision 66beb
 | system | `tb_ppg_control_top_robustness_corner_waveforms` | 成功/2001 | 未跑 | —/67 | 未比较 | 未比较 | 只编译 |
 | system | `tb_ppg_control_top_startup_idac_calibration` | 成功/2001 | 正常结束 | 84/83 | DIFF | MATCH | 参考口径：原始日志MATCH |
 | system | `tb_ppg_control_top_adc_anomaly` | 成功/2001 | 未跑 | —/40 | 未比较 | 未比较 | 只编译 |
-| chip | `tb_ppg_chip_digital_top` | 成功/2001 | 正常结束 | 20/20 | MATCH | DIFF | 时间差待定位 |
+| chip | `tb_ppg_chip_digital_top` | 成功/2001 | 正常结束 | 20/20 | MATCH | DIFF | TB竞争已确认（Q02）；原DIFF保留 |
 | unit | `tb_ppg_400hz_frame_calibration_scheduler` | 成功/2001 | 正常结束 | 77/77 | MATCH | MATCH | 观测一致 |
 | unit | `tb_ppg_active_v4_control_plane_integration` | 成功/2001 | 正常结束 | 22/22 | MATCH | MATCH | 观测一致 |
 | unit | `tb_ppg_adc_async_stage_capture` | 成功/2001 | 正常结束 | 1/1 | MATCH | MATCH | 观测一致 |
@@ -191,4 +183,4 @@ python -B verification_reports/v9_v16/scripts/v16_crosscheck.py --revision 66beb
 
 ## 结论及待办
 
-Icarus平台可用，初版跳过结论已更正。V16试跑已取得真实模块级及部分系统/芯片级证据；尚需：D04芯片结束时间差异和D06主控制累计计数差异定因、13项未运行系统TB补跑、RC1对应参考提取口径统一。原3项限时中断已全部正常完成。本试跑不是最终签核，不把未跑项、宿主中断或仅有PASS文本当作闭合。
+Icarus平台可用，原3项限时中断已全部正常完成。D04/D06定因完成，统筹认可两项为TB同沿竞争，不是RTL竞争；证据已归档，实际TB/RTL未改，本阶段结束。剩余13项系统级TB维持只编译状态，RC1后由统筹在本机用Icarus 12和既有脚本补跑，并使用RC1对应的XSIM参考及统一提取口径。本试跑不是最终签核，不把未跑项或仅有PASS文本当作通过。原始运行JSON和DIFF作为历史观测保留，定因实验另见 `RUN_RESULTS.json`。

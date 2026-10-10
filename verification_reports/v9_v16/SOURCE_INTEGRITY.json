@@ -1,0 +1,1965 @@
+{
+  "revision": "66bebdfabe9e1cb173c34a0ce44e48ba4230398d",
+  "export_file_count": 484,
+  "export_modified_files": [],
+  "rtl_byte_unchanged": true,
+  "original_tb_overlay_equivalent_after_newline_normalization": true,
+  "repo_head": "bd5cfe2cc59e54c1c4bacf02aca2337257b8eae8",
+  "repo_status_porcelain": "",
+  "repo_diff_name_status": [
+    "A\tverification_reports/v9_v16/.gitignore",
+    "A\tverification_reports/v9_v16/PROGRESS.md",
+    "A\tverification_reports/v9_v16/V16_IVERILOG_CROSSCHECK_TRIAL.md",
+    "A\tverification_reports/v9_v16/V16_TRIAL_RESULTS.json",
+    "A\tverification_reports/v9_v16/V9_FILE_REVIEW.tsv",
+    "A\tverification_reports/v9_v16/V9_SCAN_CANDIDATES.tsv",
+    "A\tverification_reports/v9_v16/V9_SOURCE_COVERAGE.json",
+    "A\tverification_reports/v9_v16/V9_TB_TOLERANCE_INVENTORY.md",
+    "A\tverification_reports/v9_v16/scripts/v16_crosscheck.py",
+    "A\tverification_reports/v9_v16/scripts/v16_finish_probe.c",
+    "A\tverification_reports/v9_v16/scripts/v9_collect_evidence.py"
+  ],
+  "new_commit_or_push": false,
+  "original_trace_matches_plain_pass_finish": true,
+  "minimal_same_output_discard_key_sequence": true,
+  "d06_full_timing_same_output_discard_sequence_with_exact_cycles": true,
+  "d04_minimal_same_output_discard_sequence_with_exact_cycles": true,
+  "manifest": [
+    {
+      "path": ".claude/skills/erie-verilog-generator/ENGINEERING_DESIGN_GOALS.md",
+      "sha256": "d5389443813b28ccccb5783554890def2468c9f47ecf83f0abdd63c15b30865b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/LICENSE",
+      "sha256": "3235c80f13dae213ae809ddf436925118958451bd8da79fcbad21bccacb96a31"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/README-CN.md",
+      "sha256": "f31df6539283d7dbc381b5263afaf1839976d9b4e43f8b5800281ec7461e02c7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/README.md",
+      "sha256": "b26165e75884263577903ec2df38a9df08db6c5fc8e57158f81213f82b232f48"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/RELEASE_RECEIPT.json",
+      "sha256": "6ad772f4429bbf00e522a3f892e9c2fb492ad89b4058f80f8a3a3bc38b9d2130"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/SKILL.md",
+      "sha256": "287d24796d837fe5769bf04e1096734f664eabf9c50601ef13d8097817994bdb"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/VERSION",
+      "sha256": "1e074676bd4d07d1160c863b324be0ea4fbac1a21d3d2478aab61f902cfbf731"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/agents/openai.yaml",
+      "sha256": "df10d69b0c60239a52ccf0d96ed8ba2a533ac31726e9d7e1816b063f465c1714"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/fsm_without_default.v",
+      "sha256": "c8b1738c51766ff46cbec1cd35b7c800e074f05cc87eb5fef49f9f9ef0c56fe7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/fsm_without_default_spec.md",
+      "sha256": "cb39f443c5563cb14769a83ef9b7c48e80890e1c9eabc16656759541f56aef7f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/leaf_counter.v",
+      "sha256": "3243828756e0adc071e348d37274456b6d9a3265cb8a417986e669f3c20dcb30"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/missing_output_register.v",
+      "sha256": "9653209e64d55fd39fc324d6c3e0fd87dacfa55707b63f7d770b88a600695ced"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/missing_output_register_spec.md",
+      "sha256": "0978516905dc255fb09a7dd660f1bf0ba5a09d5d5a21b2b0bd87bc537cf7b634"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/ready_valid_slice.v",
+      "sha256": "750aad9b64ac459cd38c7a6f8d9f59afa114266175df5eff29da84356ffe97dd"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/ready_valid_slice_spec.md",
+      "sha256": "ae3b122e8e5c08cc3f297a070cf900e4c8962df9de0ef2eacf066a5b9c8efacf"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/ready_valid_slice_tb.v",
+      "sha256": "e45dae4a9d1fadcee662c6e98177cf16e47ef9b88826c66021eb3d0569449d4a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/reset_gap_counter.v",
+      "sha256": "6eeb794cc94e109136fb61536f432c586477451ebcc4e4d8b5cddb0b40d850c4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/reset_gap_counter_spec.md",
+      "sha256": "6d94683d9fc9be077ceafae11141f2b88be5778306c6b36918f359ce304e790d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/top_counter.v",
+      "sha256": "207fbce232ac0104bf7e1872317140f28debaad2c077ec77b852dc85a4449c06"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/traffic_light.v",
+      "sha256": "852d839f90996df3c5da134294c5e9d7e2cdf0d343a36d29784eccc746c0e293"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/existing_rtl/traffic_light_spec.md",
+      "sha256": "967e8ea1f393a6cc0412d3ddff5eb6273aa741035f4313a020aff114edc8b035"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/comb_parity_mux/generated/rtl/comb_parity_mux.v",
+      "sha256": "dc3d50fdc38473af0630c71b365ceaea6ef8add1edfe268767754afcae484fba"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/comb_parity_mux/generated/tb/comb_parity_mux_tb.v",
+      "sha256": "e24553510f55cab5c36341376c6851ff9b6e763e006f8c624456b0a390ebf6d8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/comb_parity_mux/spec.json",
+      "sha256": "f2c4ad026e348104e15ff12b267dc51c12b90be90ed446bcf1173b7d5e1614f0"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/pipeline_delay/generated/rtl/pipeline_delay.v",
+      "sha256": "31162e6f92b55e294e7909e1f94ed28582a741664e0988c773e46549d4a9965f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/pipeline_delay/generated/tb/pipeline_delay_tb.v",
+      "sha256": "8ac857c1cd633ecf4fe2af217a519e1e2234dbec14ef4641a378065b0eb71004"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/pipeline_delay/spec.json",
+      "sha256": "5068ef26fb5d7862924a010f84ceecb3284f7158c57c5590ca09581c7f312532"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/ready_valid_slice/generated/rtl/ready_valid_slice.v",
+      "sha256": "c2a98de4ea29e3bcd5707cd882bd443ebc3d1f418f508d91d3eece034e15ada5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/ready_valid_slice/generated/tb/ready_valid_slice_tb.v",
+      "sha256": "0bf20238360d6ddb4d74269faa1a9f8bf31593b760adbc8df1fc06765f4b6ed4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/remote_fixtures/ready_valid_slice/spec.json",
+      "sha256": "b9ff9a40d4a7be80c84395ec5fdf8db8e0f1debecddebc4d50fa034e5bd185c4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/rtl_erie_verilog_spec.json",
+      "sha256": "4af03d09ac7aa3c107bf7dc65b69be963ba24d82d48a498ad1d2aa9ed7428114"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/use_case_templates/jesd_adc.json",
+      "sha256": "c5ec63fb0a34356538303d272492308f24f184e8a70fa1ab533ed00f9d7718a3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/use_case_templates/jesd_dac.json",
+      "sha256": "153bfc5f93efaba58e6d3e8fa0cf010ea8a6b9210078813a7a79a0cbea7cd833"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/use_case_templates/mxfe_mixed.json",
+      "sha256": "29c55f9c187a44a8cb1a29f08ee69c9a569c445d2c20f3df4affab9ba76d46ea"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/use_case_templates/spi_adc.json",
+      "sha256": "518980f5f2fb63431c94076f2abde67c7caaee72a7aee5e6320454367795576a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/use_case_templates/spi_dac.json",
+      "sha256": "c00aeb894d244dda722a295779416d59abb959e4aba08110d479ddb42a9c9ffe"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/verilog_pattern_templates/axi4_lite_csr.json",
+      "sha256": "b562ed6f0e1191986bb3f008d4848b0d833393d4e4e3c5b314f0a4077c8c68fa"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/verilog_pattern_templates/axi_interconnect_dma.json",
+      "sha256": "92787980d6a04c17978d22977699b6ac88e05ef3296d86070f7c15254449d207"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/verilog_pattern_templates/axis_ready_valid.json",
+      "sha256": "23aaf3163314d21bec5cd6f55bfa18622e26ce993fc52099b4bd2e36c87eb8e8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/examples/verilog_pattern_templates/conv_load_store.json",
+      "sha256": "88418a47e6dd8e576f032cf8911bbdeaadba3b404604cd6c02e8dc0b478ca1b9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/ideal_bad_style_metrics.json",
+      "sha256": "b333e78ca03bc3549a131b3ce82763fd241d13a2adfa4956f33efd7290974e94"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/ahb_lite_config.vinc",
+      "sha256": "0b6bef1b90edce226211d00b083d979e1e9b89c6a8c47d2aa5ef80f45053e9ec"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/apb_config.vinc",
+      "sha256": "9873177b3bf1c652ada3b4a5d6bb7e8fed766902dc54f691816df71e6cd7afbc"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/axi4_full_master.vinc",
+      "sha256": "2f49595f01b9bbe027149ffb04b90fb21083404d980e22ff6ee5dd09fc629424"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/axi4_full_slave.vinc",
+      "sha256": "e58ab22e49faaf89a4f59b87f2f3845e3755dabe4d4bab240929df669c84ba15"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/axi4_lite_config.vinc",
+      "sha256": "b62c0531842be4c4e101383a504ef2d3b9083910a8b777cbdecfb544055820e5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/axi_stream_duplex.vinc",
+      "sha256": "154b0628cb51bd385e211226edf5ee5f4634835ac6d5f6c2b9627c5ecf7f5d5e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/interface_templates/catalog.json",
+      "sha256": "1c2ec720dec0a592d357e1f5646191021cb260609e2ba0faab4a8649d55d37c5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/rtl_md_constraints.json",
+      "sha256": "e46f49a3d271de3c07ada2ab367aada6a9b93217fb22911b5743092ff6c544c8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/style_templates/rtl_bus_grouping.tpl",
+      "sha256": "5f5cf4d2288e5551196a425444997004b17e3caada8b6568fd910ef91aad9007"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/style_templates/rtl_fsm.tpl",
+      "sha256": "ec4cbd88396a56e6e622f449b63d03221a1ed14a74f69f60a479635ac089eb58"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/style_templates/rtl_header_bilingual.tpl",
+      "sha256": "40170404a96ed7056b6e9d4fea6cc112226d3ffa50aad3d564c745950f3e153d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/style_templates/rtl_instantiation.tpl",
+      "sha256": "be7a76961d7125cba5684372504df5bf12c85908b1a0cada1ef0e9c45c2c155d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/style_templates/rtl_region_order.tpl",
+      "sha256": "18225481e7132baf00ba88406a5929d4267d912d583df7f547b71c5cda345378"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/catalog.json",
+      "sha256": "70910d5f60d7455350dca75b7b1ef784be58aa751f52fc4cfe55807989bb68b4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/README.md",
+      "sha256": "bdd11f8ef38bd1bb264d8018455f564ea493ccfd101fc39f42e807ede3b48413"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/constraints/system_constr.xdc",
+      "sha256": "3b929bb6a42a18c7bdb7c5695509e3a1fad0bab71ddb298d657c37187908f248"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/manifest.json",
+      "sha256": "d8b989ff18e5e9e9dde46999d810a97b1eae9c37aee2a84065e5e1358a09f8a7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/tcl/common_bd.tcl",
+      "sha256": "d3db0bf67c2e552c668f6d9116772c03c37857043848c681a09f35c3a6985a65"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/tcl/system_bd.tcl",
+      "sha256": "ad1cb4e50e79e72485dd973cbc6682efb9fb94f44f69278829e5f8ecdbe4d579"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/tcl/system_project.tcl",
+      "sha256": "e5520fb83fe8d300e9b637372123c2cb52c66a7a7b2e66870d5a4e26be5fa0e0"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_adc/verilog/system_top.v",
+      "sha256": "08914fac553a921b2f2ce05b01ef525e2e12621e52116a0882d7e3ef32923e26"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/README.md",
+      "sha256": "20ec21d787191d92d5b2655bc48075c5249b206e4a621698187f5d46094684ba"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/constraints/system_constr.xdc",
+      "sha256": "1658d04e2af7f2c0d975e76b96506fd05a135180841c1e1bdf56fd422d9b33ff"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/manifest.json",
+      "sha256": "a3d3cf624c69ce6a061c45f4497456858f7d5475ea893cdac5b853405c5b1b09"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/tcl/common_bd.tcl",
+      "sha256": "9bcb36f4b79010fac50efb112a0d492479b3d91cb176d2fc13e4badfa2cb6030"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/tcl/system_bd.tcl",
+      "sha256": "538532802b1a5f123a7a435e86a98f7c0cc5284b5f8df0f69df866efa45339f2"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/tcl/system_project.tcl",
+      "sha256": "920ed5b8b735af281de95c1aaf162a1f63588110d7885709a6d2589c3438aa7d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/jesd_dac/verilog/system_top.v",
+      "sha256": "b74e49756fdb86adf9dad08563105f0783e47776e07996dd6f12b82e0963742a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/README.md",
+      "sha256": "20bc7b6f7588359ec09bcfdcefa79f52ecfd0270396ab26f739129c1ebde7c43"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/constraints/system_constr.xdc",
+      "sha256": "bd3c491dcb54d4dbce4759e012a4324f4025b22d4987b0ab0be57c4daa8e0fb6"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/manifest.json",
+      "sha256": "7a0078bdc4898e082fa202e3a53e423b6251d5dda0a0dee78f1136cd48a97dd5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/tcl/common_bd.tcl",
+      "sha256": "13e6b3a017d056570d1ddf0707e6f7fc60da2c69371b0563e901925555805e66"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/tcl/system_bd.tcl",
+      "sha256": "99648325ad58d927f3bddacd7ef03c10e24a6e0c1f541283b625f50ab862e96b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/tcl/system_project.tcl",
+      "sha256": "49ffe51b9cbb3e3e9a5f4abe35b3028b65c71f958c69962f0958135d9beb53c3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/mxfe_mixed/verilog/system_top.v",
+      "sha256": "a65afe8d34ee50a4b334a093ad74ecaa85dd5c4dcbbdddb4fe37178550cbdad7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/README.md",
+      "sha256": "2cffb294e2d52cc38aec59082279f26fc4841bbdf57b232805e19bfb6139ce35"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/constraints/system_constr.xdc",
+      "sha256": "18801adb0ca3982091ba78d086ad72d97b75125518404ab2cca90e690b599d24"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/manifest.json",
+      "sha256": "b315dc877c6ed1cb818fe7eb4c6f3df4c0db96e411833caefc5e6f23caaed4a9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/tcl/common_bd.tcl",
+      "sha256": "d56005516141cac746fa0a78522d6fbaf9b72c37517baed540b6f396f46affc9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/tcl/system_bd.tcl",
+      "sha256": "ea902a306d78637afeb637f767b3bbd4ecdeb70cc8a7cab3342dbe3f2fb9b23c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/tcl/system_project.tcl",
+      "sha256": "ce1c173f0494f20d665de1cbfd0538a131a2bef74903817115fe4d71d786c093"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_adc/verilog/system_top.v",
+      "sha256": "027f8914e29d1fd74ceb191d139700d0d8351b8a3cdf74ecc7c1d73f57057d84"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/README.md",
+      "sha256": "8238b3aeb6534e65856a49038d770749008f33161fc7fa43a8a8881f1cfb1ad6"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/constraints/system_constr.xdc",
+      "sha256": "1547fb8f0206958c16f320d1067d30fe9e073b4c6dac50f0f91b7a1b1eaef95d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/manifest.json",
+      "sha256": "749160bd5c8b9267ae178cf033f2f38fdc57336626d72b9d427430f045e00547"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/tcl/common_bd.tcl",
+      "sha256": "4986851877d8fd64bfa1d51e1c2e9b5c4625ee4959ff71d5d856604ebe26c0be"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/tcl/system_bd.tcl",
+      "sha256": "021fa4a319719b48c638218df642d32e5a5641c57daa609d9fc29ff537b1bad4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/tcl/system_project.tcl",
+      "sha256": "538569afe59e9077bb73550cc0027de0faf50288feb5a42e99ff87e72de1dec9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/use_case_templates/spi_dac/verilog/system_top.v",
+      "sha256": "871d2b77d87a05d6ab98d0b6663bc78d6afb8bdac7593b18ee052830be619381"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/defaults.json",
+      "sha256": "1ec534650ef9c7a546cdfff217fd91d5b727ecec1276b3c9fdc318a1ef25def8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/conservative.json",
+      "sha256": "dff50e77ef96c18be9beef5a6e5a258d275636a0fc3acec2a537c562e1763db3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/example_compat.json",
+      "sha256": "5ac51e02c00a77c23502d15eb26f8ae931f9730fa322ffdb60accb0721d61d62"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/formatter-auto.json",
+      "sha256": "58df0f0822ed905810e90bb8bb5ecbdaa47460835022bd9bfcdf66636b97e61a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/formatter-lint.json",
+      "sha256": "60ac5eb272122623386648e59f1bc211e02f8e471bf1a3440048e8d5a7446b14"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/formatter-normalize.json",
+      "sha256": "6f5bf4de848ef963c3a014c6a444b22b9790163adcb715a5074037aefc14a0b1"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/formatter-preserve.json",
+      "sha256": "21d32ea65dbe267a911c3a3ae0013c1077410773d974eced049a80c3c2bbe36d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/formatting.json",
+      "sha256": "248d18562612c0c194d16127c82f3342639d41405093ef0b1dc4de17b1c7d64e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/lint.json",
+      "sha256": "8fd514e63e3c9d689a1b14952278419b4191f1830003f5e48bbbb7af86658968"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/migration.json",
+      "sha256": "ffd34c3e004c6b0c2c7699336cb51255fb1c82a41baa66d18a86aa8a21099738"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/stress_cases_compat.json",
+      "sha256": "5ac51e02c00a77c23502d15eb26f8ae931f9730fa322ffdb60accb0721d61d62"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/profiles/vitis-wrapper.json",
+      "sha256": "b43d9a7a1eefc0eeec9d40e5b82a1b644ea6331b2fe79272a9df104d64e2ef81"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/schema.json",
+      "sha256": "21f9b6a1fc4cd4beaa1f8c8be7aa72293913d867e6af5e24358329af14c6deb6"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/templates/task-batch.json",
+      "sha256": "4c9a3c68ace3d1a453e43eb3450de4362df9f3f3f99bf819012a6dbc8c5e8f21"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/templates/task-inplace.json",
+      "sha256": "ba9b13e9edae0dbf0b5471231955145e8a6ae77af2ff591f30cbf5d3c49135e1"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_formatter_config/templates/task-single-file.json",
+      "sha256": "face9cf717604ac517df6c67094f28b779ed9e5e35d34ff236e3b089c3c10f29"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/axi4_lite_csr_shell.vinc",
+      "sha256": "82998a2140fc44e5601382b7bd0c7f688d0aca106c9c19803d548154c34b7c40"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/axi_interconnect_port_groups.vinc",
+      "sha256": "6227ba2a6982041fc576c9644cdb54a3b6f22950f8bbd3dc7dcd5dfdc64dc688"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/axis_ready_valid_slice.vinc",
+      "sha256": "1de1ef4cdeff10ad42365947d649f72e98b5023deda7782cdd50fc59169f7d40"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/catalog.json",
+      "sha256": "cff3531e51bf34c8a588eeeda8d25c8adb146ca151bf4b6ca8cf278e9ed1cd38"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/conv_load_store_pipeline.vinc",
+      "sha256": "cb22bb28bf9f741a89b37fa88808aebfc5c5a9ac1038439cf7cc676d7397c63e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/counter_state_bridge.vinc",
+      "sha256": "c69cad835a280d64141f83994b29997932024f1bd912f340877e658330220580"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/equivalence_wrapper_probe.vinc",
+      "sha256": "80c06ac029ba3734b0fe65b988fdb89b944390468d3f0aa16da5f3a7c2263d3a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/fsm_state_transition.vinc",
+      "sha256": "29fa86bf575af605297202b14be891d476ff0c7d64211d2c22ddd3858731eb50"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/phase_output_registering.vinc",
+      "sha256": "97508df397a6a5b6b36a342bfdb0de2d4f13913a56a09d3d54d2dd2f6676365c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_pattern_templates/wrapper_top_stitching.vinc",
+      "sha256": "80686f19a795ba4e8ad485689328f12f97de92eab66815789348498a51f4c2a6"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/assets/verilog_style_rules.json",
+      "sha256": "64f7f4908f3145da488308aca5ac96f2aa551810d4a3ad12ecc904fdf210e9a1"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/config/defaults.json",
+      "sha256": "1691539eca58378f935e2af467bee067ce2d0f4d1ab1346918505648c65ae2e9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/evals/evals.json",
+      "sha256": "d9ebc5d3a3aade09199d0c734f4cfd0ef4048a7d304a29d8a76836390a0fdbee"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/checklists/capability-distillation-checklist.md",
+      "sha256": "03f480a13bf7b8231075bc74e80121d7c6987ad4641411751ddebe0da8c2562b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/checklists/lint-checklist.md",
+      "sha256": "3af90799bb57c949e96d75e4a7b76d003cbcc584b9c2ce8e665656083ece8a7b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/checklists/verilog-readability-gate.md",
+      "sha256": "adaceaf6b97960b660f13270dcaf106830682581fd4e1a94afa0db79e1bd6b23"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/corpus/verilog-style-observations.md",
+      "sha256": "f5792551e23a64d2a8d9577ee93c8bac3b54c1541579471613a9bfc564a78c79"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/integration/configuration.md",
+      "sha256": "6d7a828311cb78e320df27fc52858b8f14fe700475662a293cb68639f38c965a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/integration/host-integration.md",
+      "sha256": "384d04b643efc06e509a01abba830ec98e2429014ef6ea2659236685294fda2c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/asic-verilog-quality.md",
+      "sha256": "702a5ec18aefadee2a66acb70549987338e0be74083427f72b352517e1612df6"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/erie-style.md",
+      "sha256": "e3b05290bfaae7f957ddb48fb7788e8f5c114a97d4bf3c3c4ff6b67cba3edbfa"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/rtl-md-constraints.md",
+      "sha256": "50b6e26a4935f4076d6551afea89e86f04210b67cd0bb7b2b7c4eb0553f49b37"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/testbench-patterns.md",
+      "sha256": "dfe5a8aaaea664cc56a201ad865824e36f33948638e5db7f8edf85680861388e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/verilog-code-comment-naming-standard.md",
+      "sha256": "5bc731cdcea29226f371a8952b68ab2dfe2d3fdd25f0342a6a3bc0ef27342a94"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/verilog-comment-placement.md",
+      "sha256": "a88c9b3ecae7047f17aa454249d9a5f9137be368e6d78a1433fd8562436dea1a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/rules/verilog-pattern-templates.md",
+      "sha256": "a0eaa8ee0e64d6615dc04f13911513b7dd7a62784e5b1146fdc192d7cab6b309"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/skill/skill-standards.md",
+      "sha256": "9c928ba808ed0a93a86da8943e8715ce8be62965c6cfd94f8b817cfade7e4430"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/workflows/verilog_dispatcher.md",
+      "sha256": "5d8c4e0309182bf3c28c8be929f1771a1c9b2ffbacb1be55c5fcae1804e20929"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/references/workflows/workflow-contracts.md",
+      "sha256": "80e4be641084b249f9d338e29242d2c4aef37a278ff0aa519f7f773994cdd23b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/reports/readable/deliverable_gate.md",
+      "sha256": "77634e51b451630cc26984cb7eb537783c207219bf98f7790c74a92e28d1a068"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/__init__.py",
+      "sha256": "b636b225e200fe1d49f997ece4a4f28a1e363ae2acd41aa75a187c43058379eb"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/__init__.py",
+      "sha256": "1bc488ed53ebcdabcef09c197f2ea4f12018985711c823e11ca32cffad31d375"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/corpus/analyze_verilog_style_corpus.py",
+      "sha256": "74efd81604029d4e550fc1b3bbc83a3be44c7ecfc4c33cd5e0b3b8008efeb7ff"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/existing_rtl.py",
+      "sha256": "fb153a28d4f34ca91647e677b816bf0ae75ac6c5e266bf5fec51c581ff6ed791"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/existing_rtl_improvement.py",
+      "sha256": "2740a2d3144aa2196fae8d8c03722169fc1547e0128a52f28509894b2afcb46f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/intervention.py",
+      "sha256": "58236f4df208b5b426ac3110bed37260006a41c0f21ca60f7d98f8ef54922d60"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/optimizer.py",
+      "sha256": "e80929965cda7c7d4438371c1630e1aa0042c4d7f0435eaa0e2b693393f14491"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/reflection.py",
+      "sha256": "b2b743f3adb7d3d270ed0157818d0094e875e784582f3a22fede6a0a35f16e85"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/semantic_contract.py",
+      "sha256": "f0f5ab8601ef1cc42c7b8e0b8cce7212b294f7c25efbf4f49c62390075ec5f98"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verifier.py",
+      "sha256": "a5953271ece43a3ffb42bd0b8bae556228f44f6177f0c923879a7d8d1335fc1c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_repair.py",
+      "sha256": "afc7a40106c35047e49f759dbb06818788f165c9e06dc5bc7141cd539b50f131"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_repair_core.py",
+      "sha256": "624e74056ea4640e6caaa1bb7d82e36f94bd6540b2259397908e8e83698659e5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_repair_patching.py",
+      "sha256": "cd5be5ee761e66e2f829cf5fc5f286dc90eb72011c530b337514cec78c047388"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_repair_support.py",
+      "sha256": "41281ca47c52ee9c344398351cdf32556dcc82947cb02746f443687dec222792"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_repair_testbench.py",
+      "sha256": "87d0aaa7def37b7fc65debee3259f0cbab60a319fcf13587e1ed4daa0ab1e7d9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/existing_rtl/verify_reporting.py",
+      "sha256": "1f13cfcc97c9a6fded6e62337b0fa788d7c58a8b0a8529c2ffe819f0503d4c8c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/__init__.py",
+      "sha256": "46af88261568ab4c4b56e33080a6314cf22071bea4b68364a646751c83dd3f0a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/existing_rtl_api.py",
+      "sha256": "b3a37cf2263e950215e4a9590249d6af0fca41d6316f2a63d0bd50a27b2e97d4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/quality_api.py",
+      "sha256": "9723452c8ad960f9097333fea112c4aee9a813e2b392909965a54489b542e303"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/representative_cases.py",
+      "sha256": "a0b5e6e0145983b8720596d2b9ef8d047bdbc7f4dc32d62a07e504c3754cf1b3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/verilog_api.py",
+      "sha256": "cadfb11b6094abeffa3ab708dc1df688963079650e5b29f37966ea5d703945c3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/facade/workflow_api.py",
+      "sha256": "3d6dd2d4552ba121c41adbb709753623d6488bed808054462e5ef3d667bfd1d3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/generation/tb_generator.py",
+      "sha256": "e529400b984043a8e6b5f7a722b97639b1d721e81a0f0038ff5ad08b4d85075c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/comment_placement.py",
+      "sha256": "851a3204607a85e1eaf592a51900231c5a69c64b7e7cadbe2723a770089fa5b0"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/deliverable_gate.py",
+      "sha256": "ab9179306ba655cb90ebcd05895728ac1743ea64695c44055e15bdfc4031a6c7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_ast.py",
+      "sha256": "24cbf5e42d1be75fe29927190926efdf01248c5ed3b1feff26228beed0a7bceb"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/__init__.py",
+      "sha256": "2ff29cd674d3145df86449874423084f5c05d01f57b98e271d9ba8184822bb2f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/analysis_mixin.py",
+      "sha256": "8e9c1de43db03c7d619498f2452b14cfa9e023b3a59e1da43eeb99bb27dfb2cf"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/banners.py",
+      "sha256": "4932773d753d69ff7f17934c5d249221fd3ab34ac77119833cd1bc4af2106ba4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/base.py",
+      "sha256": "11851608d41655fc4650e15e7ffc633f575675eecb7d1a267640d1862e9b596c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/builtin_backend.py",
+      "sha256": "3ec5ffb5da9ced8dfe594d223828b23120e75c44694fce1e39724314acab8448"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/constants.py",
+      "sha256": "1b9822dc3b16b244d91923604c56299f79e5917f6f6b919acd39195dc4e2188d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/control_node_parse_mixin.py",
+      "sha256": "35e27f2eb860d751f99f1898aa8589da2d03562258e825b5ed1833fffe53a002"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/control_parse_mixin.py",
+      "sha256": "b10134651b6a42cf04b3a0b279964ec966e1bbc48500edbec0e5567d6c1efaf9"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/engine.py",
+      "sha256": "97ff23507937b13c575d8b8ddd19eb491290e5f3e141d720ed82649223f33809"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/factory.py",
+      "sha256": "265df94620465ebf08adcdb0294fac415f478fa8051ef45557117f2ab0a918fc"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/file_discovery.py",
+      "sha256": "170c354c19e6e88cd879aa9340670c99d415a6e6b32911e1a7acae2ecf345f31"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/format_routing.py",
+      "sha256": "f14a6d8b193d6c40965372312ac565eba352c03808fb6c992658dde565b39194"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/guards.py",
+      "sha256": "888876620fae780af549404fd1df20fa3c678f0cc98399156fba2c5865b6e985"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/header_mixin.py",
+      "sha256": "d0252b456ed57de353da94c528a8a4a2723032c0eb35cb73c7e8cdf74ac78383"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/layout_mixin.py",
+      "sha256": "44691b3b72043a82188e350067c18f552627143f26842a36cd4e580631fcca19"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/lvalue_mixin.py",
+      "sha256": "9feeab8eab64e6ab806877f067d8f0e7e232c23795cf3bb812728f0097173c91"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/models.py",
+      "sha256": "7838a713e34e856d201de64a37653652f3266162dfd083c971dff0cbd49eb3c8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/parse_mixin.py",
+      "sha256": "5ad61d44177657d22efd3ce301e2d5832d6d78c8bf592d8bdfc6858b31292c89"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/rename_mixin.py",
+      "sha256": "9c67b95e36ce98640d15fcc125768440df388e34f46f0445a330fb0b8c2a018a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/render_mixin.py",
+      "sha256": "be45800bacda8ef4b7b685cc7bb2c9417fa2b0901419a4c35531d57000d9b719"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/scoring.py",
+      "sha256": "894b56a7d02c4835d3289acdd775ad3aaabf515bce7d50bc76d0f1ef182ecb6c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/statement_render_mixin.py",
+      "sha256": "bf5a15bb86c8fb4517b8a4e7923d196e00b95850bb0cd5e704c0d4b164e791bc"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/syntax_utils.py",
+      "sha256": "74a329ac6c1bcb1c1448597d937a4101c368c75a532ea1d102431baae6ae2d60"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_backend/textio.py",
+      "sha256": "9fe398f33b6aad7a54fb6cb0851ede0ad500887d9e7b589da8d9086920e11d4a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/formatter_config.py",
+      "sha256": "e9ad59fa3a85284feb7bdf5c3126cbae7c04d90be768f21611841eb5ec2d1e2f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/quality_gate.py",
+      "sha256": "d98cbed8823572a49b8ed2415055a66fae968cfbe112e480ecb504dd7dccc075"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/static_lint.py",
+      "sha256": "4e49608474d27d363be85c5af02fb38c7bd9a73299ef04da17fbc5a4b5379bf5"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/verify_verilog_comment_only.py",
+      "sha256": "a8fb3445283fbf8d524391978d6e397bed1b9c57eb762dc3ba5ed306de25e927"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/verilog_lint.py",
+      "sha256": "713025e03d1062e6ee564c66dac8bdcc3787d75943898807753d72fef5bc4221"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/quality/verilog_quality_gate.py",
+      "sha256": "468f1dc27b228512ec88dedc6e66cdbe91b5170628f936d9563dd8ae115ecaaa"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/remote/remote_selection.py",
+      "sha256": "cbd1f68f1c89365ec03592ce54ba643f3e8a264e581ead7be43c45dce6fb467a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/remote/remote_validate_verilog_skill.py",
+      "sha256": "a9a33b0fd503cfe5fadad16ef8857ef001ad8d332d0e30f3601ac2bee8e3892c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/toolchain/manage_skill_dependencies.py",
+      "sha256": "084ece6d1c97a028fbdb74f60c1586433d4bed68de170d81a09c7a9c1cfa3ff3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/toolchain/preflight_verilog_toolchain.py",
+      "sha256": "96e83dd7ec7deafc6edb2e42354bc3df70084f3572d5c8cac2fd098f8d1afe99"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/audit.py",
+      "sha256": "662ed09d0bd79c15e09f12c3fd4a2e037953582d9589086e251dedc970bdf8e4"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/eval_suite.py",
+      "sha256": "8f5ee0a19ef275ad3543747467d44e1cf259e9ed2635e37b7e1fb425e1d4a085"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/evaluation.py",
+      "sha256": "ea8fc7a5ddc8139f29b6bc3a678b5dcacfa16856cc27557eac063aadbd16f665"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/evidence.py",
+      "sha256": "d256b6eb70b7731589ddee4560a20560ae0c585f0d6006263d68bf6d30c2bf0c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/rulebook.py",
+      "sha256": "a7de9885b2ac3d9ff5395295deeb14c94af88f9cbad6ad5bce39195bb657f66f"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/skill_effectiveness.py",
+      "sha256": "40fc39e757690b141f3cb916cf39f96b4bf3efafefe34fa39c1b25a82df9026a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/skill_effectiveness_support.py",
+      "sha256": "50c1e05d3a5097f354b9ed510bdcf3b31896ddbd12628646debe46ef9b421e61"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/validate_verilog_skill.py",
+      "sha256": "8eacc2118bce5ddce663c41dec9addb1dd2d059e4331b92b2f421a487071d09e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/validation.py",
+      "sha256": "d55bc04099058b5e7287bad7f03ed9dcd9e8b8faccebcd6968a3dfc0f5877a14"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/validation_impl.py",
+      "sha256": "ffd79ac78bc2ce83118caab31bfccf3dbd12b28f01621034e696ddc4946e5e9e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/validation_models.py",
+      "sha256": "39f38c779cf1795bf63d4aa12f13bf3e334782440630490b1205a7d0584db089"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/validation_readiness.py",
+      "sha256": "b2589072f74f8e92b2fb1758f3192f555750613181baa610b6e09c2393257418"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/validation/verilog_generated_deliverable_gate.py",
+      "sha256": "f860c7248dfd39a51e71fbd6c1b8305b465d9b03c256ae2ba25c09267cdd20c0"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/version.py",
+      "sha256": "f39e63a3353c8e817f8e1de0841705298b5f25964f2151fdf3c3ed304800d05d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/__main__.py",
+      "sha256": "0a0f307219632e333fea9176afe7391ad80c1dde61f9106e7f8bbc830ed343bf"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/artifact_graph.py",
+      "sha256": "4e0f64a1a70e986bc462a2421f2f033fe1b16c7a9912658af7413e5145b82680"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli.py",
+      "sha256": "cf43f0ad5f6d535a9d0933ed2570cbdbb8e8144afbefd8f4925f35b50a9030db"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_audit_commands.py",
+      "sha256": "bc378fca492fa7885f30cd56672da72ffab17bfbc8ad11c73ee26b56ae68f78d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_existing_commands.py",
+      "sha256": "d0465a720cdada10aaba6fca1f7711af3fc6fc4ce5ed94947422f86a4a937da3"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_feedback_commands.py",
+      "sha256": "d463fb453fb53ede458829696d86ff7a2b4a72a99839812ebeedc0cfbed0d52a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_generation_commands.py",
+      "sha256": "e7453d1cd3a78457182634d2748b8cfb57c4e6c3054b5eefad3b4f66a2943e75"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_parser.py",
+      "sha256": "7cc4f77bb566b8a4cb84787f5021711d58b2acfddff147801891565250b85834"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_support.py",
+      "sha256": "a288b4fb2b44877b7b252a30a8380bc6114f6c73f7e9cf5d571cbde71e29050b"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/cli_workflow_commands.py",
+      "sha256": "2f7d1b0b3d0353f3157901d06e158b9e97481d939c16c12959e3462ca817d0b7"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/config.py",
+      "sha256": "af8630bd01a917813759b109f910cb31c77d272ce94dd711b5ca567da65d7e08"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/extractor.py",
+      "sha256": "413e95298054f32ed7f74c1259b35b8f63560fdc203b061abd5b5c033389d159"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/interface_contract.py",
+      "sha256": "6fdcc58d7a039387d9ec94aab0db98e4044a83cbd174333b416477f8bb82617a"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/interface_templates.py",
+      "sha256": "11ff7d0eb3df415d0188cb762494bcfbeb4ca97df29f14574d29d7e99b3cab4e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider.py",
+      "sha256": "9bb4afc572960fb1c1472057b41cc7e20a09c452488689a0aed0c8f990637aa8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_command.py",
+      "sha256": "80f4e42978401374171bc2ab05697c8eda0a64022edcbbea2e6ade70f5db21c1"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_mock.py",
+      "sha256": "fcdbaf383923a01692051c0ad3b9d58d09ff4ca2adee22892043e0daeaeafef8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_mock_comments.py",
+      "sha256": "5fca2d09609f3cf28fbd837f88639ba606e63e0f8da8a1b8d0be24bc57050504"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_mock_content.py",
+      "sha256": "c9e94efe808ca7f8aff660563820cea9edfe18848159c044b8fa91b920cbf28e"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_mock_rtl.py",
+      "sha256": "c8df5b6ec7229ac824bc6326c8c9888b307572fc73810294a10871cdfaede064"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/model_provider_mock_testbench.py",
+      "sha256": "dd3cb4a93bde787d24293f6ffaffa38e39b7e949534ab42afe0e2f23617c0967"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/pattern_templates.py",
+      "sha256": "28671d0de63dba8c274af1725243885cd55ed1b3086fb62f01bd1640b2f607c1"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/planning.py",
+      "sha256": "dfb3c30bb333cabe000772ffe3f70a1d2db71c469a861ec02c96d0877fee1a7c"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/prompt.py",
+      "sha256": "bdd162329eb865d7c199eddccd33e7257142142432ba5ff515e408e97786b470"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/requirements.py",
+      "sha256": "ea46a910c8179fc854ddc8e3012a1928d9ab9f06bd2ebf217f1ce717bb33a032"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/rtl_md_constraints.py",
+      "sha256": "cdcf2c2d6179dea0d50e23f9c1739dfc1df11e0259759a9fb104ff1c9a1768cf"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/spec.py",
+      "sha256": "b8f2eb5efa868ac194645c9ec0d74333973a6eb219f3a0f755d3ed4ba29dda3d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/trace.py",
+      "sha256": "2c592d852355365fd8ece4f3614b7942048c8ccc4c9d9612c6ab72c58e123485"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/use_case_templates.py",
+      "sha256": "a5117ce79526fc60fccb48ae6b3d55a2b9646df0475399a7d3bb962235331164"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/vectors.py",
+      "sha256": "282e3541c0e73da3c879d858e89777113db109551d99d49a896336f87222c4c8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow.py",
+      "sha256": "2ab876adf3f10e2daa44e510e11174415ab531ee23c61d0e991d3c4a0305a14d"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow_execution.py",
+      "sha256": "1a62a63a89bb784eeb2d1832c17c38260010279a9abd1d9e221b77f6b311c077"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow_gates.py",
+      "sha256": "3de0c375ab48d2cec23bd387ffdd9e6437113ff3b8e42879544c987914e514fd"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow_router.py",
+      "sha256": "b1acee6c50aaece1a6c75be2278160bbda010508c02014e1cdcd3c2d987a43a8"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow_stage.py",
+      "sha256": "33eecc612f9c2c800a712f0feb117dfcba24fb43d0aa8c9272c652dc32b7c3ea"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workflow_support.py",
+      "sha256": "18e4a1034c29f0e136ae33435796b56762a6a817497ce77cf17aa1cef514c214"
+    },
+    {
+      "path": ".claude/skills/erie-verilog-generator/scripts/python/workflow/workspace.py",
+      "sha256": "ad0b850bf5be789c0a6ab2e55e08ec3addaea55636569ad4f7a2795ff5f41fd4"
+    },
+    {
+      "path": "contracts/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md",
+      "sha256": "57ae3dcab234ae057f4021a1d79f96f2f1942b2b276ba072f3c6110a12dac195"
+    },
+    {
+      "path": "contracts/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md",
+      "sha256": "85249ce874c9c89dcb58b5cdb185fcce1e6a45f147cf07242cde733637eeeb0e"
+    },
+    {
+      "path": "contracts/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "sha256": "8a24361cbfa934c8091d42760ef35c68dfeff055675ddc8ff703df9f4e296fa4"
+    },
+    {
+      "path": "contracts/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md",
+      "sha256": "dd728925924ffd735060edb05158b3f6c61d02de4f51e9410221e5683942a681"
+    },
+    {
+      "path": "contracts/PPG_ADC_IDAC_INTEGRATION_SPEC.md",
+      "sha256": "207ec0e62c2ab9cdd9e56c69d2a5f7622b4ad96652ee231b06b9ff5286b82dc0"
+    },
+    {
+      "path": "contracts/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "sha256": "9adfbfce857cd77dcc731b38b6887ceff4934248bbe1e340cc8acd2adaa93999"
+    },
+    {
+      "path": "contracts/PPG_ADC_PROGRAMMABLE_RECONSTRUCTOR_INTERFACE_CONTRACT.md",
+      "sha256": "af8f8963e2599395232e350d9fc0a5444a49552dbdf0a995b79b9a5cceb2cb23"
+    },
+    {
+      "path": "contracts/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md",
+      "sha256": "19cb3e6f22bc488e9655d1ade40cba453323b279b1b92f885b164cf461086aaf"
+    },
+    {
+      "path": "contracts/PPG_ADC_S1_CALIBRATOR_TO_ROUTER_INTERFACE_CONTRACT.md",
+      "sha256": "ebb22e7a54586908122b8eee62d369ac1da5a47b1629c7a16ff20045fd62d7b8"
+    },
+    {
+      "path": "contracts/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md",
+      "sha256": "3e0a6c2ae7f7515fc975dc934f39b56366dc48bd42a171a887c55d7ed631420e"
+    },
+    {
+      "path": "contracts/PPG_ALIAS_MAPPING_TABLE.md",
+      "sha256": "a6f805da81fbdbc670a63cb867fe7bd374b9f200c586af4803cbb2e028733bba"
+    },
+    {
+      "path": "contracts/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md",
+      "sha256": "28f9443558c53934a62351907cb6565c51288ad73f28233e2d97e2670e35b04b"
+    },
+    {
+      "path": "contracts/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md",
+      "sha256": "f4500e2ddec8dad5792a9338fc44e4d7cf3c8e5d22bec44f94b33c548d13658b"
+    },
+    {
+      "path": "contracts/PPG_CHIP_DIGITAL_TOP_SPI_P2S_INTEGRATION_CONTRACT.md",
+      "sha256": "1e716cc0a0ef72c6efa6ff2d783d81c62430de0eaf60598fc694761de845235b"
+    },
+    {
+      "path": "contracts/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md",
+      "sha256": "8d71d06ad747f4357369266af524c42a45ad78ad2fb09dee9ca994e0f3a352dc"
+    },
+    {
+      "path": "contracts/PPG_CONTRACT_CLOSURE_MATRIX.md",
+      "sha256": "d9ec343187aaaae3dea885ae165f0e0256a120cfb5e3b8f0249eda25d07dcd2d"
+    },
+    {
+      "path": "contracts/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md",
+      "sha256": "f08332b4f3a9c8573bac9382fc0686d590844d749af18e9674e9122f407173b6"
+    },
+    {
+      "path": "contracts/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md",
+      "sha256": "7a19ee1f773ffade0ccc008da469e213d627ae082380eba6be9dceb832ab38da"
+    },
+    {
+      "path": "contracts/PPG_DYNAMIC_BASELINE_SLOPE_AND_UPWARD_CROSSING_INTERFACE_CONTRACT.md",
+      "sha256": "e950413295dbbd22fda112901987803f55d2b2ae3b0032ec8e6b7fecfe509b12"
+    },
+    {
+      "path": "contracts/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md",
+      "sha256": "f44eca4d9b5e0c89eb035bf216c91e81785e356e8ca7cd0f16bbe7ea20f2e198"
+    },
+    {
+      "path": "contracts/PPG_JOINT_TB_CANDIDATE_TEST_SPEC.md",
+      "sha256": "68dbe433d8100a67ff7a79048ce964af36285ad88ad061445541507bcefe31f5"
+    },
+    {
+      "path": "contracts/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md",
+      "sha256": "5ff28c692323af5af8a08f2bc32d7ff82e16a72093b4f922979d25ecf4cc8997"
+    },
+    {
+      "path": "contracts/PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md",
+      "sha256": "fde00484228efd7a47a8924d18d02e541dc305c39423406fc0d73798ecaa2c60"
+    },
+    {
+      "path": "contracts/PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md",
+      "sha256": "7992fc186e765a8e020aedcf057bb54f349d01d6af11d61e5146917cfe492360"
+    },
+    {
+      "path": "contracts/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md",
+      "sha256": "a95c3ed493bf295f7556ef89d9607c9856235629db4b79f642062502a02e5f25"
+    },
+    {
+      "path": "contracts/PPG_REAL_PPG_RAW_GENERATOR_TESTBENCH_CONTRACT.md",
+      "sha256": "f0c78989589d4620bb7ed0ebb75fc5c416f0d1ebf095f07a7ed1f5a942bcd8ea"
+    },
+    {
+      "path": "contracts/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md",
+      "sha256": "c3e8b21b3e5b7d9a99fc15d25c0dd70fa07f4faac9fc32db9376a074c1e81198"
+    },
+    {
+      "path": "contracts/PPG_SCHEDULER_SSW_AMI_PORT_CONNECTION_CHECKLIST.md",
+      "sha256": "7b7ed9b27ec81a6605a6e105b7af149065af18bf4932c04dd04aa3dccd65d05f"
+    },
+    {
+      "path": "contracts/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md",
+      "sha256": "389d31da4d80d45b1277c5b604729172704b39ad44cd8b3249e0c5b721784b6b"
+    },
+    {
+      "path": "contracts/TAPEOUT_FINAL_REVIEW_GUIDE.md",
+      "sha256": "2ee520ea55dc1f992bcf64f4220e00b202e10698ec50142c7607ee0e65be6d0d"
+    },
+    {
+      "path": "contracts/ppg_system_active_config_unpack_semantic_contract.md",
+      "sha256": "fbd9c105af1afb3efeba32efb86e399f7277e2d392317554377a5b3597957a7e"
+    },
+    {
+      "path": "contracts/ppg_system_config_manager_semantic_contract.md",
+      "sha256": "6fb1b1bbb2c43642699ab0be6170042ccfe607d4ab54a2aba7beebe392192bed"
+    },
+    {
+      "path": "rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v",
+      "sha256": "6d9d431b5ea5b446957f1f8d05ffb9a588646590f18aea8628af46b19af18094"
+    },
+    {
+      "path": "rtl/ppg_400hz_frame_calibration_scheduler/run_scheduler_synth.tcl",
+      "sha256": "ce86028be7f729ddd84002d4c9a4f6ae814f0559b256a5c34db68965fa197469"
+    },
+    {
+      "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+      "sha256": "2c0a91bbdf9d17220cf49514f914daa4de55d46fc4fcf80f0cdb96b9c1aee223"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/ppg_active_v4_control_plane_integration.v",
+      "sha256": "8b8b9dac5156385c6818bd0d35c6a017cb0a6a9df7821dcb07b69ea6762d8d19"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/run_ppg_active_v4_control_plane_integration_synth.tcl",
+      "sha256": "4b84b03f1971a05a08386f302eafcf613f607c0ef976319c87e35faf930ea1f3"
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+      "sha256": "80f227dfda7992b2a328afb6732c743843d57116b59abc311f5f6c1299003075"
+    },
+    {
+      "path": "rtl/ppg_adc_async_stage_capture/ppg_adc_async_stage_capture.v",
+      "sha256": "0433907ae5a0ba78c38f47beeab7cd527419abb0af177ea107a08422bc9fccf4"
+    },
+    {
+      "path": "rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v",
+      "sha256": "25414b2d46b77df64222b4be0cb28e13e4bfbfd8bbf6acd8cfdc0adb7e36eb83"
+    },
+    {
+      "path": "rtl/ppg_adc_dc_recovery/ppg_adc_dc_recovery.v",
+      "sha256": "c6f315a3e77f4315986deaa44732b3d04a2bc2353b486c7aa338b3ce1ca9389e"
+    },
+    {
+      "path": "rtl/ppg_adc_dc_recovery/run_ppg_adc_dc_recovery_synth.tcl",
+      "sha256": "0e0d89b204f6d594c9ad63d8335dd055972153b706323f26fc04d708bd33a397"
+    },
+    {
+      "path": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+      "sha256": "efef01dd4f61803af55992e5ff723a3a1a9ecfd1c96124b6a48f834cf5df2ae3"
+    },
+    {
+      "path": "rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v",
+      "sha256": "e73e5a16b75072c20154ab7bcfb36206d3a7338120f186b7d91a12a2a423a0b3"
+    },
+    {
+      "path": "rtl/ppg_adc_measurement_idac_integration/run_ppg_adc_measurement_idac_integration_synth.tcl",
+      "sha256": "500842d72112d319fe43cd920f5820d5c69a26baf5fbebed12762141c06b61a0"
+    },
+    {
+      "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+      "sha256": "c88096fae419566bdedc202fa3db5a8d9ba33d22d322b3fcbf2e457c90a85838"
+    },
+    {
+      "path": "rtl/ppg_adc_pipeline_overlap_corrector/ppg_adc_pipeline_overlap_corrector.v",
+      "sha256": "ffe33038bf789edf8bcdcb4d4098281be5ac37e301926a97fa85dd5f3026e43f"
+    },
+    {
+      "path": "rtl/ppg_adc_pipeline_overlap_corrector/run_ppg_adc_pipeline_overlap_corrector_synth.tcl",
+      "sha256": "89d3d5c244599d91c1320c730b36e29ba6604966cf724bb2d0aeca2eb2c824a8"
+    },
+    {
+      "path": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+      "sha256": "90f6b5adb06543be4a964bceeadb91c05ab5822ee5a74f0f5cbc2e3bbe38f858"
+    },
+    {
+      "path": "rtl/ppg_adc_programmable_reconstructor/ppg_adc_programmable_reconstructor.v",
+      "sha256": "71985a13ee4ab5437f6246c20e8acb3725c9b6c51751cf2293d038c43ef799c2"
+    },
+    {
+      "path": "rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v",
+      "sha256": "bf488bd2b7fa361b170acd452e944ebd95f7f43bb5fb02635f23074d5031f978"
+    },
+    {
+      "path": "rtl/ppg_adc_result_router/ppg_adc_result_router.v",
+      "sha256": "62d89fb81ec73642a3fcace94bf1c455d8b7bcd873c87c2f3bcbc1a973180f9e"
+    },
+    {
+      "path": "rtl/ppg_adc_result_router/run_ppg_adc_result_router_synth.tcl",
+      "sha256": "3faac433d29362ee222be975d71d278a3c1f7e7f05f33a3f917901d02c7fe4f1"
+    },
+    {
+      "path": "rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v",
+      "sha256": "b0bb67c5eebef62c0b248cb1adfafa7c1f5d729eafbee48183386439d9b32755"
+    },
+    {
+      "path": "rtl/ppg_adc_s1_programmable_calibrator/ppg_adc_s1_programmable_calibrator.v",
+      "sha256": "63a067a46f27c0817ec9efa02a2a8fab90b3633beada295504deffbab957baf5"
+    },
+    {
+      "path": "rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v",
+      "sha256": "402babe05d2c218fdaa426a4d2bd1d2179a111166b966ba2736a718454fa4c4a"
+    },
+    {
+      "path": "rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v",
+      "sha256": "03807ac5390e669f8591275ca61ffb98102cf09602536167d2759a85bf33fda9"
+    },
+    {
+      "path": "rtl/ppg_adc_s1_redundancy_corrector/tb_ppg_adc_s1_redundancy_corrector.v",
+      "sha256": "18f4bd318f358dd208adcc47616e1ac0bb4d736db8d720cd79ce9e3bfaa612c3"
+    },
+    {
+      "path": "rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v",
+      "sha256": "8a24e975b9b9c202dec4bf9991efbc1b469c0a5cac71f57998b532ef50c1ac93"
+    },
+    {
+      "path": "rtl/ppg_amb_recheck_scheduler/run_ppg_amb_recheck_scheduler_synth.tcl",
+      "sha256": "96d9b845fffe2811bd2d6d968245d69537cbd5a02322ccf58199468ddc21858c"
+    },
+    {
+      "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+      "sha256": "f8131d6af813ea885659f3de320821be60e9a9d47f9789dfec65f048222a135a"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/ppg_characterization_control_cdc.v",
+      "sha256": "a581bc31cc664faab548dfcaa9caeb47072f7979b4fef618f8e446bd3375fde7"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/run_ppg_characterization_control_cdc_synth.tcl",
+      "sha256": "0fad8084b4d03867d18f04dc9b48f22cf1f04f49a1baff25a12730d76ff0b50a"
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+      "sha256": "1e9e6857b1caaed33d1a66164b6e38e96e5727704c417bd81e82aef3c878b679"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/ppg_chip_digital_top.v",
+      "sha256": "658347d08bc6be67b756ae31d1769534e007c01066b5c2f857a4b4cf38839145"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/run_xsim_regression.sh",
+      "sha256": "31ce341cd3b36d48e0184ba832b2c9e38376fc75fedc2a08fa819508f25ef596"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+      "sha256": "8750a09e058a99af42b5ce02ab56221b1df87a99bdd91e9a6b9983692b19b8d3"
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/xsim_chip_digital_top_filelist.f",
+      "sha256": "9efeeff8a39519c0229cbdcdbf89ef1581de14b53c488671b1a54fd563df21e7"
+    },
+    {
+      "path": "rtl/ppg_coarse_detection_fir/ppg_coarse_detection_fir.v",
+      "sha256": "4331388132469ca151a85567ff63bd58d8fc5683c826b012dc480f02cbd4193a"
+    },
+    {
+      "path": "rtl/ppg_coarse_detection_fir/run_ppg_coarse_detection_fir_synth.tcl",
+      "sha256": "8c4257585e14a34b67443510cc72a2cf87d41aab07dd161dfb5183873ffc5150"
+    },
+    {
+      "path": "rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v",
+      "sha256": "b05a1dd0ea2703d509b69ff038d88ddd76e4b9d6ff919b290522192dc68d6120"
+    },
+    {
+      "path": "rtl/ppg_config_cdc_bridge/ppg_config_cdc_bridge.v",
+      "sha256": "264222349eff1257ceeeba518004afe97e1b33899a060d6e4ac7b4766ca72563"
+    },
+    {
+      "path": "rtl/ppg_control_top/_tmp_v13_filelist.f",
+      "sha256": "82e16f3caf227713f3e96959dca3051ce6f6a604185e427a0f35a26637ec3b62"
+    },
+    {
+      "path": "rtl/ppg_control_top/ppg_control_top.v",
+      "sha256": "1ee7c903066d1a436f7d2b53e59bdb0364755c7f2cb4fc6f4e9fc79cffb33ba7"
+    },
+    {
+      "path": "rtl/ppg_control_top/rtl_filelist.f",
+      "sha256": "db20a5998634205eede509dd85827d2c8a539e1d4093af6ac979189bc7a4ff7c"
+    },
+    {
+      "path": "rtl/ppg_control_top/run_xsim_regression.sh",
+      "sha256": "88b3f26068337ea3913942f10bc6efe61e6ede78e8a9ec38342001964e8f4b9d"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+      "sha256": "cc12736e977b6b0b4f52aba4154a678322176d4fe85cbfa974c1db0b1bfdd62c"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top.v",
+      "sha256": "158bb6bcf4cf27fd26d9de32bcfdc6db024997136b5d9ff9177f9c71f8d8b01f"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v",
+      "sha256": "a1de215a82b1ad319672fdf35ac7c459b09c8dafee269021f5b6730c1f92a45e"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+      "sha256": "16abbfb6a23b0f9a473b1129783007ad902318f21fc954dfe126dbe2212e67bb"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+      "sha256": "3093f5328aaaa55bd19e047a6d227e6e4ff3a41093b5e17fecaa830d7a615f89"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+      "sha256": "8854615af9cf670fead626318048220cff14583e353c8b850675efb7f8af50a7"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+      "sha256": "6bf8a9bc1c35e09433e6f06b076a880b4b4443535ce371e3333d22064490e112"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+      "sha256": "1477c628311828f01b9c8b3eb99c53c4a839dcfb57f12de4412cf26da4302afe"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+      "sha256": "9e376c7b7d257086e8e560170db7e0464186a292a3476b0f214affcf9d3195cc"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+      "sha256": "90f5dd5c3a93c1db8de83c3379c127ca603bf33e1e6c6184d93867897746b02b"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+      "sha256": "fd83f92bbc4266760e37c39c24acbab2916300320caadeb805a41f562c009386"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+      "sha256": "28bcb9b5b0f40d592109855d8b4e75c365853361d1a6a089067d72c59b66ec0c"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+      "sha256": "f9ff3a3f1e5dbb787d320dc9bb99690afc5e9f4de49a4835cfa4e7d62e4cc7de"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+      "sha256": "f2c146ae6c7431c60d7a4db4cd0c934a0a6a2126e047de9286e365222df86d8f"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+      "sha256": "b51fbbee27dd56234b21c095c0cd592958fb9599e1edbb60ce10af031d6696cc"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+      "sha256": "fe138c085d6837ab987844a4aed72c866d2b555bfaf801b66cc4b386131933ee"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+      "sha256": "9e269bc013c0d315dace17e7c55f3d19d6e8cfb024f17e0e7a0057dafc94e44d"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_robustness_corner_waveforms.v",
+      "sha256": "353166b34e7b536acf1eeeb8fe206b6d32bb17dd57f9314b645472a5592876bc"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+      "sha256": "cedb13527b5d2e9bacc64208a241c33a07388bc5b8e2e851566aaa21532ef034"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+      "sha256": "2edfd0987f176d695e195b2203159eef2fc549c6dbc3e89a139b2631086c2f87"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_real_raw_generator.vh",
+      "sha256": "46126063bad15f1e7eec1ccd0f41c3c051283f4e5506c9a62823ce5aed62a432"
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v",
+      "sha256": "221224f393b5e680f29b85ca243b3bddd707f9ab3a226da42a74067c71be4b1e"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_adc_anomaly_filelist.f",
+      "sha256": "7c6fb7ef7fdb086020838360b1148fca63646d66bcb2159b6ea83fb8fc571e6d"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_adc_numeric_scoreboard_filelist.f",
+      "sha256": "8cbae1b94888d97cce8f0465ebcb08aa7c40bc2ea2db965bcea6180b3248a111"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_baseline_cross_filelist.f",
+      "sha256": "d7f55216e92e6bac01f9bd04552685906da0afb2823d3457474ff725c09b3e98"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_diag_filelist.f",
+      "sha256": "5548558617fe0409391c2735640b90708d9978e16d132489ad02c850626620af"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_fir_tail_isolation_filelist.f",
+      "sha256": "77c1f2f39b89b25449954d689cba918128255bec7b93cbb1e872f1370d43e67d"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_idac_bus_isolation_filelist.f",
+      "sha256": "6e798a6b4c82a9155f89873918ded73b2abb4d0a2f0969f1376772c127ba7d53"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_injection_filelist.f",
+      "sha256": "91a26839d1f8e48ceb63544a4094af4cf5b6503a2939e6a13d82adc92fbbe0bd"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_input_light_static_matrix_filelist.f",
+      "sha256": "43a52cafe62c37b2037f9960afb5593fec48ec935149f1b3cfea25b5ab70ddef"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_lifecycle_fault_adc_anomaly_filelist.f",
+      "sha256": "3568c2a42a769a305252b59489d14770ad2effd1f9bfda038bc25c45480f5f34"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_long_10_cycles_filelist.f",
+      "sha256": "715487e92862ec70e49ec475c8abab9935f3a26b3b8e7ab9f65fd9d0ccbb7537"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_longrun_filelist.f",
+      "sha256": "0bd1cb784df859c9ee021935071526d1de9219e05b43edee1e7182a84b6f9b18"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_main_filelist.f",
+      "sha256": "bae43d6dd5e03dd8b85829861e7795dd0b8466149ea4553a6de54871d33ecbce"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_no_recheck_control_filelist.f",
+      "sha256": "b6af0391c1b9a4a5c62448d8dab98597804b1173407c0ff0da9db3fb426c0600"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_normal_slow_tracking_filelist.f",
+      "sha256": "49dee3e13374d4a9e94771d76edb191c2d47b2cc3d2ee0342c80d4e028405385"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_owner_identity_backpressure_filelist.f",
+      "sha256": "214f27a6adfcfef04bc1d012979323047760fb03abeb058b123a2883ce8f4c0d"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_peak_valley_return_filelist.f",
+      "sha256": "c10e8e3c86e480aa7faa98029d9bd497d50152ad61b2de9050e8aed9afdfb4fc"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_periodic_recheck_recovery_filelist.f",
+      "sha256": "d2df2e25cab376484b2316f83c424f48cb3814763bf6114a76754effee2a470b"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_raw_generator_selfcheck_filelist.f",
+      "sha256": "d6912e86fd32c3bd78b41f6ebbf1d58e5b360279c40782fdba6069e41e9fd64c"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_robustness_corner_waveforms_filelist.f",
+      "sha256": "f1d0aee760b2cdc1d9b39e4b83be4372834f5d001076b2f0a1fe6ca56ca9ff00"
+    },
+    {
+      "path": "rtl/ppg_control_top/xsim_startup_idac_calibration_filelist.f",
+      "sha256": "b154090893d2f801dbf53be4ffbfdcdce487f888ea5b5f8ff69d96c9f72acede"
+    },
+    {
+      "path": "rtl/ppg_digital_esd_shell/ppg_digital_esd_shell.v",
+      "sha256": "cf2672947f69872da7767ca9e1afb9900ed6bdb9325c43b1e73229ed3a5a1859"
+    },
+    {
+      "path": "rtl/ppg_digital_shell/ppg_digital_shell.v",
+      "sha256": "32c2e4c5fdfed6ef2d8b835a2a359efe1495bc2f4a74c9d4b891103e927a4b45"
+    },
+    {
+      "path": "rtl/ppg_dual_precision_top/ppg_dual_precision_top.v",
+      "sha256": "372685554cd6b1de5fa1d33023220bb5073bea75f54e1c83c76c792a630062c9"
+    },
+    {
+      "path": "rtl/ppg_dual_precision_top/tb_ppg_dual_precision_top.v",
+      "sha256": "55ebff7c86eaaad1cd14016954d22dc4e31174579bf27619a24894e0a0d92c25"
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/ppg_dynamic_baseline_cross_detector.v",
+      "sha256": "accef2613e5bc7cdc39b928fd9d30f57ab97b9844a75451d787629e4575840ad"
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/run_ppg_dynamic_baseline_cross_detector_synth.tcl",
+      "sha256": "b3a4ef6eaeae5bca4022a2581eb2aee9b26aed3202f394a136b7cd660c78cf07"
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_cross_detector.v",
+      "sha256": "e35ce19eec04ddcad7e051b17acdad7a29f50f4f3af04006f4c9fad8fd7ee5f7"
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence.v",
+      "sha256": "604dcc8faed6c8c7d6be630b0bcd169e2326ddf2dd7317a47a2bd2096c72675c"
+    },
+    {
+      "path": "rtl/ppg_idac_code_controller/ppg_idac_code_controller.v",
+      "sha256": "dde897268a746a8de56530883bacced1b3752068eefad8d196efe763c9f7df89"
+    },
+    {
+      "path": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+      "sha256": "563106677a28c392d73680c2abff0473628e9785f34cd65c9cf0c8085deea117"
+    },
+    {
+      "path": "rtl/ppg_normal_transaction_fork/ppg_normal_transaction_fork.v",
+      "sha256": "044c1accdb8217290dd547934cd8903a1a5b003dbd60473724173315f0db5c6c"
+    },
+    {
+      "path": "rtl/ppg_normal_transaction_fork/run_ppg_normal_transaction_fork_synth.tcl",
+      "sha256": "2a32662dfc77799d1ec448500f7ef35a3b769805198be96b0258b8ec447d285b"
+    },
+    {
+      "path": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+      "sha256": "59d909df3e69c76f943f1e43930d86aef1192ff8c05244e3907505fe9e28bd24"
+    },
+    {
+      "path": "rtl/ppg_p2s_packer/ppg_p2s_packer.v",
+      "sha256": "2e70af4d3bb2dc9312604e5afd742f4d04d2886f7c53e51e3c03307dec452a48"
+    },
+    {
+      "path": "rtl/ppg_peak_valley_window_detector/ppg_peak_valley_window_detector.v",
+      "sha256": "cc3689124072530536d436cac98a80063879f0fe8aa3fb96fb931f14c6ad0023"
+    },
+    {
+      "path": "rtl/ppg_peak_valley_window_detector/run_ppg_peak_valley_window_detector_synth.tcl",
+      "sha256": "a5c6d2d8160a5786b7243e8806f6f289c3b62e14b51863ea8f49d7d2283afeb0"
+    },
+    {
+      "path": "rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+      "sha256": "5f5c38b3cfa0a573918b155d50e4198cfd991c9f7a3bdd409c35841a7dd2289e"
+    },
+    {
+      "path": "rtl/ppg_precision_window_controller/ppg_precision_window_controller.v",
+      "sha256": "260cd2ebb8fc991885419d274da85c9604beaa7d49e16b8132113df1562a9f6d"
+    },
+    {
+      "path": "rtl/ppg_precision_window_controller/run_ppg_precision_window_controller_synth.tcl",
+      "sha256": "e5243dd91fd3bd482eb9d17916cb501b5f7912351da0a8313f64ffbc340d5630"
+    },
+    {
+      "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+      "sha256": "7f5a3762d3076f9dc953b1b9ff254c9a3b6132f86b0ed2084335cbf30efd29d0"
+    },
+    {
+      "path": "rtl/ppg_precision_window_integration/ppg_precision_window_integration.v",
+      "sha256": "e3ca5c0160096a53acd49184ec640160feb6f5e3502ba1a68f07ac35d18638ad"
+    },
+    {
+      "path": "rtl/ppg_precision_window_integration/run_ppg_precision_window_integration_synth.tcl",
+      "sha256": "7cb377585f9bc918629107d16707c5faca83525ce39f5e80627c8477ff625e4f"
+    },
+    {
+      "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+      "sha256": "dec8db2cdc84ac9b5a6ad0549a7415595f5fe1de64fa0c2bfa635cc91eaba027"
+    },
+    {
+      "path": "rtl/ppg_pulse_cdc_sync/ppg_pulse_cdc_sync.v",
+      "sha256": "97fdadf16f4662e461d0e9cef69565cffe94abb7eb52b542b9be3f6302fe00ca"
+    },
+    {
+      "path": "rtl/ppg_reset_sync/ppg_reset_sync.v",
+      "sha256": "3c00203a9ee77dc04abb631dac9eab7073463b51a51d96be34f2cdd9c60b466f"
+    },
+    {
+      "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "81f973b6b4c8ef33794e972dc90d0c060f50715294e08c3005778a7ce632c760"
+    },
+    {
+      "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/run_ppg_sar9_sar15_safe_selection_wrapper_synth.tcl",
+      "sha256": "048b0ad8f42df74c2401e9f4563b00ce1739851cfbaafc36a6bd23e72afff572"
+    },
+    {
+      "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "187cba2b6a5e91b9190af684be42ee617e0bea419041b9bccf2a0ca3af06d1d7"
+    },
+    {
+      "path": "rtl/ppg_spi_register_file/ppg_spi_register_file.v",
+      "sha256": "8603b8b5b1af62a5f6829e7363ced3e2c52fd5c37adceb09c8252168c692ef74"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/ppg_system_active_config_unpack.v",
+      "sha256": "cfa658691230f1cbe8d0b5703f28bfff939cc2456aba2dceb0a4597878104791"
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+      "sha256": "9a585b5c5f5b999aaf7c93c37800a6efce31ea2fc3d6603318b853b82f062a34"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/ppg_system_config_manager.v",
+      "sha256": "73388dcef606a6f383f1369761452e861cb100b697daa17e083ce830cc306c69"
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+      "sha256": "6a087d071cce631f1a51b7cd9b6922621e394a88e07d42348566330d8029d40b"
+    },
+    {
+      "path": "rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v",
+      "sha256": "304152c584aa5aaec7eb2fdb54c35d16fc500f5b4164895b093d9205473ee3a5"
+    },
+    {
+      "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+      "sha256": "582408c381581dbbfebcaff460b70c542fee3a778f23f2ec6a7e5fd6a8a57bbb"
+    },
+    {
+      "path": "rtl/ppg_timing_3200hz_validation/filelist.f",
+      "sha256": "c893d7e9a3b62ef3bc84f0872d5bf3a72656df23c1bd46189687117ccf7441d9"
+    },
+    {
+      "path": "rtl/ppg_timing_3200hz_validation/tb_ppg_timing_3200hz.v",
+      "sha256": "d2980f16903e9a2154da142ab5c097024bae79112e7581a21857717aad63b91e"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/check_tcl_syntax.tcl",
+      "sha256": "54bdee8e2bc5764ac6700e02b6848cc883e10b238aca9e277a5d3f983fbdc8d0"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/dc_flow.tcl",
+      "sha256": "e293301f4bb4b080a5985a1cc111d6f9b075f772919a205d8abf7d706ec73983"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/dc_flow_3200hz.tcl",
+      "sha256": "6874dc7c08174503a59989796b09eb579cbba42b00df121834d471bd6f9264f6"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/dc_setup.tcl",
+      "sha256": "6ad61fc6a3955f644287840275b6e2623116be57077cc37885bd7da7a195b393"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/dc_setup_3200hz.tcl",
+      "sha256": "77fe3ca60676f4c49a1ef47af68ef44113a36b27d64e548652962951bdd77104"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/ppg_timing_sar15.sdc",
+      "sha256": "3366ad8fe33ece7fa681a034126351211fb41ae7bc2ad1c0c5de8a3bc7bfd017"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/ppg_timing_sar15.v",
+      "sha256": "ecb76b7acc8151a3a90cfa07e144f34be1a3b32de7a1343e7970f889b19d1142"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/ppg_timing_sar15_3200hz.sdc",
+      "sha256": "c43130cdb07f55d9fb6eac97805217dfe64cd54e05ad8b1abcd604fdb41e6862"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/ppg_timing_sar15_3200hz.v",
+      "sha256": "f875decdac1a61379896f850c6fa9c2c633a08d8e2fbe1caeba8c775eab25e30"
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/tb_ppg_timing_sar15.v",
+      "sha256": "ad7bd75abe7fa1690dbb2b61aa4a72153e7883e2429cbfd9355f5eed6b28d515"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/check_tcl_syntax.tcl",
+      "sha256": "b9792ddc8311435f7ef0985256adfb34c7598146f13315bd56a01aef21e2a9d7"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/dc_flow.tcl",
+      "sha256": "2ff42cd25328a19a3960d9fd731eb134c14b42a1cbc8560efd17fbdc8c2b2e13"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/dc_flow_3200hz.tcl",
+      "sha256": "7d6bf0b57afe82a082dccc6d4960cfdb4816f572831e511fe393cfd823e391ef"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/dc_setup.tcl",
+      "sha256": "f5f14614710e13056aa25411449cb7c9a089eb7f9e881736e3b4797a4def97ca"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/dc_setup_3200hz.tcl",
+      "sha256": "d51e9711348d8f2f2ce231ec88b1ed8787d8d1db3f4d7aa539a78c9cf80d8afe"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/ppg_timing_sar9.sdc",
+      "sha256": "0dd31716b7f2563bd6da1db356ccc5b56d928701c0b3a7db522b20773bc54e5d"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/ppg_timing_sar9.v",
+      "sha256": "632bd51cd7a622780f35e655ceff8e873ea2f7d835814beabfad67172c7a7419"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/ppg_timing_sar9_3200hz.sdc",
+      "sha256": "c69120d148db0ae22c0c4fd16963378ec6ac4d801fbdfd2f43674f837f4d4828"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/ppg_timing_sar9_3200hz.v",
+      "sha256": "13054c1fd0bcb20952c46792955a0b5a1e9773d5f1bf11deccc20c8552697b70"
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/tb_ppg_timing_sar9.v",
+      "sha256": "7fe90a761992e07106aefd9241b74b6872fd32e92997b325c680aac28ca024c1"
+    },
+    {
+      "path": "tools/b_merge_tools/README.md",
+      "sha256": "41cf6edbf4ede45aa5167eddbc429de404e249f3078fc37564c19e45b3ad57fd"
+    },
+    {
+      "path": "tools/b_merge_tools/alias_draft_renamed.md",
+      "sha256": "cd91aa171c50055f613f933397ccf555f4258cdcfffe8d088a24ce0b77b43e36"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_apply.py",
+      "sha256": "f2b1045579f76b43ef69a550709139080bf03f57eabacfc59c5c8c3c8c94e050"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_check.py",
+      "sha256": "718ef0715a551c1859e376c5593a9bd86468e565f94b6cd8a10e38b6b9023400"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_history_allowlist.json",
+      "sha256": "9832630a690945b911e120a19de06dd5aeba8d272c5415175cc481a6bd02f00b"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_history_rules.py",
+      "sha256": "43961ec7334eaad7d3262fcfb30e15e38385ff13a5f58e7094252a08536ec4dc"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_inventory.py",
+      "sha256": "7238074b6a748053dcb8f799a07b5d09b60a46cc793b4362a0ac7ed6a5437ac3"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_manual_decisions.tsv",
+      "sha256": "ccd981b67889bb45f2f7b6f70aeb97e082bc47c482727ab99a1c3c9e3742183f"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_manual_seed.py",
+      "sha256": "438dd0f24d8708c14105c040e0e60185fa5dc5b62e569996a6c8fcbc6cb0efbe"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_mapping.py",
+      "sha256": "71ad167b1a827a0207108a9f47c34905e641653d9bc40ae12803fdd88e80cd49"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_resolve.py",
+      "sha256": "9f94a1b6f7cc23f0eb66b56e919c7f9cc56696dd83ed3cbc9c92378dc4296366"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_round3.py",
+      "sha256": "70263179ccb1d42e684ff12dc3bdc7c50ea502e2f88348ded2b2bed81499dd25"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_round3_decisions.tsv",
+      "sha256": "b16f34bdf2ee2ad7a71e425ae388b3043eeb5e19cb5a220708a3498baee1c85e"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_semantic_exceptions.json",
+      "sha256": "f629ee96f25e78544c7c0a33b0376cfdb01673d4c09437e4851d307c05e7b127"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_semantics.py",
+      "sha256": "5cebf0c62bcb59624344bceff0967ff746450dbb1f20bcddffd04c0821f77ef8"
+    },
+    {
+      "path": "tools/b_merge_tools/anchor_verify.py",
+      "sha256": "1fa2bc82c38cc61ef5d7a99796cf56070dd7ab7a067dca6f1687baf3f468c1d7"
+    },
+    {
+      "path": "tools/b_merge_tools/gate_compare.py",
+      "sha256": "34cf35e73d69405a20d5f00930508237a847dc0a9c9efc319a2bd7bf365c3f44"
+    },
+    {
+      "path": "tools/b_merge_tools/make_alias_draft_renamed.py",
+      "sha256": "9e4960e8bbdc5ef442f0e5e994e14f131041a6f40f2b17193e8cc80ccab5b675"
+    },
+    {
+      "path": "tools/b_merge_tools/manifest_digest.py",
+      "sha256": "eb2e19dca40059f3e36311fa5467dbad9d5e9e25e880b67a65712d3a78171536"
+    },
+    {
+      "path": "tools/b_merge_tools/regression_evidence.py",
+      "sha256": "d971919e20739edd4d98b4f9000882d1da1fe1978b28e01e5a8fe14684211b41"
+    },
+    {
+      "path": "tools/b_merge_tools/run_anchor_gate.sh",
+      "sha256": "090d088888adcb2396badb83bd979418acb53357049f82835d18e15d1e3fa556"
+    },
+    {
+      "path": "tools/b_merge_tools/strip_compare.py",
+      "sha256": "f044662e3e336b7334b0279577486f8222b75bff792a7daeb926007c3a158b8d"
+    },
+    {
+      "path": "tools/b_merge_tools/tb_rename.py",
+      "sha256": "192de59e64c3fd1e7f0e0fc9fc4a4bcd01b219dce31f06d4d679660c37cbc84b"
+    },
+    {
+      "path": "tools/b_merge_tools/tb_rename_bmi145.py",
+      "sha256": "9936401e20221a65e4d3bb81a0b837f5d2eb415665ea823651730a0fab9eb3c2"
+    },
+    {
+      "path": "tools/b_merge_tools/verlink.py",
+      "sha256": "26feae4a479584943e8d239a6061b87db10eecd170fcc9d04d9836b659920eb0"
+    },
+    {
+      "path": "tools/b_merge_tools/verlink_check.py",
+      "sha256": "78fa13c018b16c27068bf6ced92b53ddaeef7c388d049a17a9b162c27ba9130a"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_cross_domain_read_candidate_detector.py",
+      "sha256": "5e7f9f37e5b1ab1075cc698d5f345e5c0981442c8e7593c1e8054efd6b94ba9d"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_cross_domain_read_candidate_report.json",
+      "sha256": "eb2a94a104b313908f95412ec670693f639e82aebc53e99e3848932cd25ecf40"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_cross_domain_read_candidate_report.md",
+      "sha256": "7f970e43e51aac12412aa775e93a0a7cb45d47882880b4a87463e0e950bd4dcb"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_domain_reachability_report.json",
+      "sha256": "5959462e5162b5a83b59c645beb42ee0488b4b81be3e124d8a31e4edc06fc014"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_domain_reachability_report.md",
+      "sha256": "a13b222e06885e043116c7ed41f701c210a0d490697a3f1d2db574c856ddcad7"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_domain_reachability_tagger.py",
+      "sha256": "9afa49e8c5c6f19a190107bdd80503dde08b0fb6e2f69009fd9ab7af84fed04c"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_handrolled_class_classification_report.json",
+      "sha256": "f9e05a27958b5ff74749445347e6e025c81751ae926cf6c33798f3f998b58119"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_handrolled_class_classification_report.md",
+      "sha256": "842fc5f2cfb8965093eaf48991fec89fe998a30248f3357f5a9353a32057ab93"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_handrolled_class_classifier.py",
+      "sha256": "aa6ba6dc70eec0dc44ab09541671ca67d31f9b316076e6c3dda8bbcd10dd0445"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_phase4_multihop_assign_boundary_check.py",
+      "sha256": "b5f521c090c9bb0bbba61ff3a38f44fc37196a47d07f6870763b915e06018359"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_phase4_multihop_boundary_report.json",
+      "sha256": "6a37cd50a3b7c4e1c175ee7189ec66517e17c405b7bdc36c6750e44a39840ba5"
+    },
+    {
+      "path": "tools/cross_reference_tools/cdc_phase4_multihop_boundary_report.md",
+      "sha256": "a2b01cb6e20cf5294df77c26c45d7e7315571d61c9d3476c5b8416236858aff7"
+    },
+    {
+      "path": "tools/cross_reference_tools/prose_staleness_scanner.py",
+      "sha256": "eb345d71b8fa6510e2a43f706626b7ebaba6a7f1f4f54993fe3622e45259ce13"
+    },
+    {
+      "path": "tools/cross_reference_tools/prose_staleness_scanner_report.json",
+      "sha256": "a24a902eaf7d72128a505f277337ebba082a0c90f4076f01ea4d91a3371a864b"
+    },
+    {
+      "path": "tools/cross_reference_tools/reconcile_acceptance_ids.py",
+      "sha256": "cc268e43a965459d2a795561284a81904cb79ee193afed6fee6e95ead6225a00"
+    },
+    {
+      "path": "tools/cross_reference_tools/reconciliation_report.json",
+      "sha256": "8ce7bf2deb555a1f0eea705a2c9a2108f8da868851931cc8448927807c9871fe"
+    },
+    {
+      "path": "tools/cross_reference_tools/reconciliation_report.md",
+      "sha256": "6e96ee19efe3d10df41cff490ee9c12281657dfa0a8124d9f8baab491fc34a84"
+    },
+    {
+      "path": "tools/cross_reference_tools/reconciliation_report_verify_pvw_pwc_fir.json",
+      "sha256": "e9733d019bbe1535533fd966da042e7bfbda89b3a044d4b12efe71fb60f46de2"
+    },
+    {
+      "path": "tools/cross_reference_tools/regression_freshness_watchdog.py",
+      "sha256": "3cc9e6190be630950256bb68d98a29fd9a79f749ed365efb22813e199616d8c0"
+    },
+    {
+      "path": "tools/cross_reference_tools/regression_freshness_watchdog_report.json",
+      "sha256": "23f29105cccf06a6fa38b5c90d9caffb9e07ce90bfa37d6b8948b5fc8d0ccf2b"
+    },
+    {
+      "path": "tools/cross_reference_tools/regression_freshness_watchdog_report_verify_20260916.json",
+      "sha256": "a85f17e8b53722263525e02a8290b860ceae716b72538fe54ad2d5158359e6cb"
+    },
+    {
+      "path": "tools/cross_reference_tools/static_lint_semantic_sweep.py",
+      "sha256": "6e0eef79e8b26e67fb52c671b36626e50b94f8d3184d4e1b307e0e384bbaf333"
+    },
+    {
+      "path": "tools/cross_reference_tools/static_lint_semantic_sweep_report.json",
+      "sha256": "12c61b21c7ca421cfc3d15f22e4815c2a78661a62728369c9a9b37b3deb8a307"
+    },
+    {
+      "path": "tools/cross_reference_tools/watchdog_result_20260917.json",
+      "sha256": "cffe13397d4f5da315c5793edf617c40ae1ce8b6c6eac6b82cbd548ec65f296c"
+    },
+    {
+      "path": "tools/id_governance_scan/README.md",
+      "sha256": "f920e80b5cef53a13a1e537b9fcfd64397fae6d9dbaa0be151da59c8c6e91c5c"
+    },
+    {
+      "path": "tools/id_governance_scan/decisions.py",
+      "sha256": "9cd98e7af3292f3deeb05e4523f5972d2aa5319b6461da7f84fbe67094446101"
+    },
+    {
+      "path": "tools/id_governance_scan/e_check.py",
+      "sha256": "af73534e8dfd89a6f3a1e0d925a83a9c298c1d8faa052de42e797692b58b88b6"
+    },
+    {
+      "path": "tools/id_governance_scan/gen_table.py",
+      "sha256": "7ae32fb8132a31c5b822d1a5503bd775b6e9c4159cf18b8bf799bfbcfefaa641"
+    },
+    {
+      "path": "tools/id_governance_scan/join_ids.py",
+      "sha256": "e0732dd0fc4f22c2816efe4e72f738b3a1da43481fd3761e5ff31e2e52cd3ba7"
+    },
+    {
+      "path": "tools/id_governance_scan/rescan_diff.py",
+      "sha256": "472839382ea1544037fc54578a879b8a8825f5ca1183b88bcefd2d4361d39094"
+    },
+    {
+      "path": "tools/id_governance_scan/scan_contract_ids.py",
+      "sha256": "f4bbd4be9521d6a0ff12a6e8bdc6a04a0bb9135bda30215c89b942b661b234fe"
+    },
+    {
+      "path": "tools/id_governance_scan/scan_logs.py",
+      "sha256": "329cccd23105df245af88485ba8a17a5fd0867a5c69b993b8c3be349f2f1f504"
+    },
+    {
+      "path": "tools/id_governance_scan/scan_tb_labels.py",
+      "sha256": "cb7d27f91c0bfaa23bfb68aceb1edc481d03db2658e04d9a4d7744e83338217e"
+    },
+    {
+      "path": "tools/id_governance_scan/scan_tb_labels_lib.py",
+      "sha256": "c078b9b16ed43c6ef931c19e30ded18f2024074622a76212eebae7fd70d3d0e7"
+    },
+    {
+      "path": "tools/id_governance_scan/tb_stats.py",
+      "sha256": "51bd0007a9a9f8204dd6bc9a3f9ba8383df6838d980fa513861b63df7ef66479"
+    },
+    {
+      "path": "tools/run_unit_tb_regression.sh",
+      "sha256": "cb142ae26c503c52943fd5cbc76bcdc0e8eb74539f1bec3111795fe28b8f4b1b"
+    }
+  ]
+}

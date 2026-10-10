@@ -27,15 +27,16 @@
 | 空真/证据范围不足 V01–V03 | 1 | 2 | 0 | 3 |
 | 静默超时及其已防护对照 W01–W05 | 0 | 3 | 2 | 5 |
 | 回归判定 R01–R03 | 2 | 0 | 1 | 3 |
-| 当前清点总数 | **7** | **18** | **7** | **32** |
+| 同沿计数更新/读取竞争 Q01–Q02 | 0 | 2 | 0 | 2 |
+| 当前清点总数 | **7** | **20** | **7** | **34** |
 
-H01为历史已修项，另计1条，不混入当前未处置项。低风险条目中包括合同本来就规定的区间/最大时延，以及有明确失败兜底的等待；**32条不等于32个需要修复的缺陷**。无条件引用PASS有2处实际 `$display`；U03是2个穷尽分支的实际 `$display`，不能误称整个芯片TB无条件通过。
+H01为历史已修项，另计1条，不混入当前未处置项。低风险条目中包括合同本来就规定的区间/最大时延，以及有明确失败兜底的等待；**34条不等于34个需要修复的缺陷**。无条件引用PASS有2处实际 `$display`；U03是2个穷尽分支的实际 `$display`，不能误称整个芯片TB无条件通过。
 
 范围为49份 `rtl/**/tb_*.v`（系统20、芯片1、模块28）和control_top的2份 `.vh`，另读3个指定回归脚本；`legacy/`未扫描。全部文件的SHA256、formatter结构结果与候选数见 `V9_SOURCE_COVERAGE.json`；原文导航见 `V9_SCAN_CANDIDATES.tsv`，7023条候选包含NBA赋值、诊断和正常边界，不自动当成发现。
 
 技能路径：`.claude/skills/erie-verilog-generator/`，使用其 `quality.formatter_ast.build_ast_report_for_path`，未另建Verilog解析器。现有TB的部分clock/named always写法使formatter报 `always header normalization failed`，部分初始块也超出该parser模型；无module的头文件不能作为完整module AST验证。诊断原样保留，人工读取原文检查条件、调用方、存在性与最终终判，**不声称AST全通过**。
 
-交付矩阵：`compile/ast`只提供静态结构尝试及其限制；`readability/comment/naming/profile`对新增RTL不适用（没有新增/修改RTL）；`testbench`为只读证据审阅；`toolchain`未在V9运行仿真。技能依赖预检缺少remote SSH/FPGA开发技能，不使用远端或Vivado流程，亦不为本只读审计安装这些依赖。
+交付矩阵：`compile/ast`只提供静态结构尝试及其限制；`readability/comment/naming/profile`对新增RTL不适用（没有新增/修改RTL）；`testbench`为只读证据审阅；`toolchain`原静态清点阶段未运行仿真；后续Q01/Q02以仓库外Icarus 11 / XSIM 2019.2实验确认，实际TB/RTL未修改。原静态阶段的技能依赖预检缺少remote SSH/FPGA开发技能，未使用远端或Vivado流程，也未安装这些依赖；后续定因实验使用本机已有的XSIM 2019.2。
 
 ## 合同缩写（全部取自B分支）
 
@@ -339,3 +340,27 @@ if((cnt_measurement_result_valid + cnt_l10_stop_completion_discards + cnt_l10_st
 补充已核对的防护：AMI-08计数相等还有>0前提；LOST-EXCL有lost>0；NRE-03确认两色历史真实full、NRE-04/05确认真实cross/进入/返回；RRC-09等待满历史失败会加错误；TRK-07要求真正pending提交、码及epoch各加1；PRC-03要求实际饱和非零，PRC-06c要求实际timeout事件，PRC-09要求实际注入和恢复；Group1–4末尾有first-peak/cross/valley/tail存在性。它们不是零事件自动PASS。
 
 仍需RC1动态验证：7个高风险项的针对性负对照、T06/T07采样沿精确偏移、U03真实事件到SPI翻转位的逐次关联、T18逐窗membership，以及所有建议实施后的完整回归。本次仅清点，不将这些待验证项写成已关闭。
+
+## 后续仿真确认的TB同沿竞争（Q01–Q02）
+
+统筹已认可D04/D06定因结论。本节基于 `66bebdfabe9e1cb173c34a0ce44e48ba4230398d` 的仓库外实验，原32项增加两个独立机制，总数为高7、中20、低7、合计34。实验diff仅供证据审阅，没有应用到仓库TB。完整证据见 [定因报告](D04_D06_CAUSE_REPORT.md)、[逐拍TXN](TXN_EVIDENCE.tsv)、[运行汇总](RUN_RESULTS.json)。
+
+### Q01（中）：SMOKE-23 owner统计与等待读取同沿竞争
+
+- 位置：`rtl/ppg_control_top/tb_ppg_control_top.v`，owner计数/身份快照进程（基线1043–1060行）、SMOKE-23两个等待循环（2915/2930行）。
+- 机制：posedge监测进程以阻塞赋值更新owner计数和身份；主刺激也在同一Active区读取，影响退出等待和后续STOP排期。
+- 已确认影响：同一RUN15/frame1/sample2的RED NORMAL SAR9事务，在Icarus中于126039拍输出，在XSIM中于同拍STOP丢弃；STOP_ACK相差一拍，最终结果分别34/33。不是重复计数，也不是后续复位丢失。
+- 最小实验：两个读取点加#1，两边73 PASS、49 ADC/33 results、finish=1655648.5 ns，差异TXN同拍STOP丢弃。完整输出/丢弃身份序列一致，但其他未改场景仍有时序偏移；扩展错开计数/身份更新与读取后，全套运行期观测拍号一致。
+- 建议：owner计数/身份作为原子观测快照，在其更新结算后读取并决定STOP，不依赖Active区进程执行先后。SMOKE-17 ready同沿驱动仍是候选风险，单独调整未消除本次D06，不能误标为本次差异根因。
+- 证据：[最小diff](tb_ppg_control_top.minimal.diff)、[扩展时序diff](tb_ppg_control_top.full_timing.diff)。
+
+### Q02（中）：芯片lost统计与等待读取同沿竞争
+
+- 位置：`rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v`，`cnt_chip_lost`监视进程及`wait_chip_lost`（基线778–791行）。
+- 机制：计数进程在posedge阻塞递增，等待循环同沿读取，导致后续SPI/STOP排期差异；原始结束时刻相差1000 ns。
+- 最小实验：只在wait_chip_lost的posedge后加#1，保留等待计数增量和上限，两边20 PASS、0 FAIL、finish=11361750 ns，lost/START/STOP及结果事件序列、拍号一致。
+- TXN核对：原始两边输出的五笔正式结果身份/时刻/拍号完全相同，三笔completion-lost身份相同；未发现正式结果在一边输出、另一边丢弃的差异。
+- 建议：在计数结算后的#1或下降沿读取，并保持TB输入驱动与DUT采样沿错开。
+- 证据：[最小diff](tb_ppg_chip_digital_top.minimal.diff)、[扩展时序diff](tb_ppg_chip_digital_top.full_timing.diff)。
+
+两项均是已确认的TB竞争问题，不是RTL竞争或新增RTL缺陷数。实际修复和RC1的Icarus 12复核由统筹后续安排。
