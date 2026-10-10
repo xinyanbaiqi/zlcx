@@ -615,6 +615,7 @@ module tb_v2_sweep();
 	//===================<V2：ADC行为模型>===================//
 	reg [1:0] v2_done_mode;                  // DONE形态（+V2_ADC_DONE_MODE）
 	reg v2_idle_mode;                        // idle公式（+V2_ADC_IDLE_MODE）
+	reg [1:0] v2_idle_delay;                 // idle相对模型内部空闲的同步延迟（+V2_ADC_IDLE_DELAY）
 	reg v2_adc_rst_aferst;                   // ADC_RST取CLK_AFERST_LOW上升沿（+V2_ADC_RST_AFERST）
 	reg [7:0] v2_latency;                    // 当前事务时延，提交时按种子取值
 	reg [9:0] v2_raw1;                       // 当前事务Stage1码，提交时计算
@@ -634,10 +635,13 @@ module tb_v2_sweep();
 	wire [1:0] w_owner_slot = reg_owner_snapshot_is_calibration ? 2'd2 : (reg_owner_snapshot_color_ir ? 2'd1 : 2'd0); // 当前owner槽位
 	wire [1:0] w_fault_slot_eff = (v2_fault_slot == 2'd3) ? w_owner_slot : v2_fault_slot; // 任意槽位时等于当前槽位
 	always @(posedge i_clk) v2_aferst_prev <= o_clk_aferst_low;
+	// slot=ANY：首次命中后锁定到命中的槽位，避免其它槽位的序号1再次命中
+	always @(posedge i_clk) if(w_model_fault_hit && (v2_fault_slot == 2'd3)) v2_fault_slot = w_owner_slot;
 	v2_adc_behavior_model
 		v2_adc_behavior_model_Inst(
 			.i_clk(i_clk),
 			.i_rstn(i_rstn),
+			.i_q1(o_clk_9q1_low || o_clk_15q1_low),
 			.i_q3(o_clk_q3_low),
 			.i_txn_start(w_commit),
 			.i_adc_rst(v2_adc_rst_aferst && o_clk_aferst_low && !v2_aferst_prev),
@@ -648,6 +652,7 @@ module tb_v2_sweep();
 			.i_macro_tick(w_mtick),
 			.i_done_mode(v2_done_mode),
 			.i_idle_mode(v2_idle_mode),
+			.i_idle_delay(v2_idle_delay),
 			.i_latency(v2_latency),
 			.i_raw_stage1(v2_raw1),
 			.i_raw_stage2(v2_raw2),
@@ -670,7 +675,8 @@ module tb_v2_sweep();
 		);
 
 	// 每次owner提交时按种子取本事务时延与RAW值：NORMAL可选真实生理生成器，校准一律窗口内150
-	integer v2_seed;                         // 时延随机种子（+V2_SEED）
+	integer v2_seed;                         // 时延随机种子（+V2_SEED），$random会改写它
+	integer v2_seed_cfg;                     // 配置的初始种子，供结论行打印
 	integer v2_lat_min;                      // 时延下限（+V2_LAT_MIN）
 	integer v2_lat_max;                      // 时延上限（+V2_LAT_MAX）
 	reg v2_gen;                              // NORMAL事务用生理生成器（模式GEN_DUAL/RECHECK）
@@ -796,6 +802,50 @@ module tb_v2_sweep();
 				ppg_control_top_Inst.ami_fault_cause_o, w_ssw_fv, w_sched_fv, o_lifecycle_state);
 		end
 		if(w_lost && (v2_n_lost <= v2_detail_max)) $display("V2LOST t=%0t frame=%0d tick=%0d sf=%0d lt=%0d idx=%0d", $time, w_frame, w_mtick, w_sf, w_lt, w_cidx);
+	end
+
+	// 已知问题签名（只打印V2SIG，由汇总脚本归类，不影响监视器结论）
+	// KNOWN-FIX-7：本NORMAL帧内出现过STOP确认、abort或阻断故障，帧末仍发出o_normal_frame_complete_event
+	// KNOWN-FIX-4：RUN中manager的stop_episode_active仍为1（STOPPING排空完成与重复STOP同拍后卡住）
+	reg v2_frame_broken;                     // 本宏帧内出现过STOP确认、abort或阻断
+	integer v2_n_sig7, v2_n_sig4;            // 两类签名次数
+	initial begin v2_frame_broken = 1'b0; v2_n_sig7 = 0; v2_n_sig4 = 0; end
+	always @(posedge i_clk) begin
+		// 先用此前累积的打断状态检查完成事件（帧末完成事件可能与下一帧tick 0上的STOP同拍），再按本拍事件更新
+		if(ppg_control_top_Inst.sched_normal_frame_complete_event_o && v2_frame_broken) begin
+			v2_n_sig7 = v2_n_sig7 + 1;
+			if(v2_n_sig7 <= 3) $display("V2SIG KNOWN-FIX-7 t=%0t frame=%0d tick=%0d life=%b normal frame complete after STOP/abort/fault", $time, w_frame, w_mtick, o_lifecycle_state);
+		end
+		if(w_frame_start_ev || ppg_control_top_Inst.sched_normal_frame_complete_event_o) v2_frame_broken = 1'b0;
+		if(w_stop_ack_s || w_abort_s || o_system_fault_blocking) v2_frame_broken = 1'b1;
+		if((o_lifecycle_state == ST_RUN) && ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.o_stop_episode_active) begin
+			v2_n_sig4 = v2_n_sig4 + 1;
+			if(v2_n_sig4 == 1) $display("V2SIG KNOWN-FIX-4 t=%0t frame=%0d tick=%0d stop_episode_active stuck in RUN", $time, w_frame, w_mtick);
+		end
+	end
+
+	// 事务追踪（+V2_TRACE_FRAME=<n>）：帧号>=n时逐条打印起帧、提交、完成、作废、结果、IDAC提交、校准请求握手与故障
+	integer v2_trace_frame;                  // 开始追踪的帧号，-1关闭
+	initial if(!$value$plusargs("V2_TRACE_FRAME=%d", v2_trace_frame)) v2_trace_frame = -1;
+	always @(posedge i_clk) if((v2_trace_frame >= 0) && (w_frame >= v2_trace_frame)) begin
+		if(w_frame_start_ev) $display("V2TRACE t=%0t frame=%0d tick=%0d FRAME_START cal=%b", $time, w_frame, w_mtick, w_cal_frame);
+		if(w_commit) $display("V2TRACE t=%0t frame=%0d tick=%0d sf=%0d lt=%0d COMMIT idx=%0d type=%0d color=%b prec=%b", $time, w_frame, w_mtick, w_sf, w_lt,
+			ppg_control_top_Inst.sched_adc_owner_sample_index_o, ppg_control_top_Inst.sched_adc_owner_frame_type_o, ppg_control_top_Inst.sched_adc_owner_color_ir_o, ppg_control_top_Inst.sched_adc_owner_precision_mode_o);
+		if(w_done) $display("V2TRACE t=%0t frame=%0d tick=%0d sf=%0d lt=%0d DONE idx=%0d success=%b", $time, w_frame, w_mtick, w_sf, w_lt, w_cidx, w_done_success);
+		if(w_lost) $display("V2TRACE t=%0t frame=%0d tick=%0d sf=%0d lt=%0d LOST idx=%0d", $time, w_frame, w_mtick, w_sf, w_lt, w_cidx);
+		if(w_result) $display("V2TRACE t=%0t frame=%0d tick=%0d RESULT frame=%0d idx=%0d color=%b", $time, w_frame, w_mtick, o_result_frame_id, o_result_sample_index, o_result_color_ir);
+		if(w_idac_commit) $display("V2TRACE t=%0t frame=%0d tick=%0d IDAC_COMMIT", $time, w_frame, w_mtick);
+		if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_calibration_sample_valid && ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_sample_ready)
+			$display("V2TRACE t=%0t frame=%0d tick=%0d sf=%0d lt=%0d CALREQ_FIRE", $time, w_frame, w_mtick, w_sf, w_lt);
+		if(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_red_owner_deadline || ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_ir_owner_deadline ||
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_cal_owner_deadline)
+			$display("V2TRACE t=%0t frame=%0d tick=%0d sf=%0d lt=%0d OWNER_DEADLINE red=%b ir=%b cal=%b idle=%b", $time, w_frame, w_mtick, w_sf, w_lt,
+				ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_red_owner_deadline, ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_ir_owner_deadline,
+				ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_cal_owner_deadline, i_adc_physical_idle);
+		if(w_ami_fv || w_ssw_fv || w_sched_fv) $display("V2TRACE t=%0t frame=%0d tick=%0d FAULT ami=%b ssw=%b sched=%b", $time, w_frame, w_mtick, w_ami_fv, w_ssw_fv, w_sched_fv);
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_amb_recheck_accept) $display("V2TRACE t=%0t frame=%0d tick=%0d RECHECK_ACCEPT", $time, w_frame, w_mtick);
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_fine_window_start_event) $display("V2TRACE t=%0t frame=%0d tick=%0d PREC_TO_15", $time, w_frame, w_mtick);
+		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_precision_15_to_9_event) $display("V2TRACE t=%0t frame=%0d tick=%0d PREC_TO_9", $time, w_frame, w_mtick);
 	end
 
 	// 原因位图打印成列表
@@ -941,8 +991,8 @@ module tb_v2_sweep();
 		v2_idle_prev <= i_adc_physical_idle;
 		if(!v2_ev_landed) begin
 			if((v2_watch_stop && w_stop_ack_s) || (v2_watch_abort && w_abort_s) || (v2_watch_hit && w_model_fault_hit) ||
-				(v2_watch_rise && w_model_done_rise) || (v2_watch_idle && i_adc_physical_idle && !v2_idle_prev) ||
-				(v2_watch_diag && ppg_control_top_Inst.i_diag_clear_event) || (v2_watch_commit && o_commit_ack_event)) begin
+				(v2_watch_rise && w_model_done_rise && (v2_adc_behavior_model_Inst.reg_fault == 3'd2)) || (v2_watch_idle && (v2_adc_behavior_model_Inst.state_current == 3'd5) && (v2_adc_behavior_model_Inst.state_next == 3'd0)) ||
+				(v2_watch_diag && ppg_control_top_Inst.i_diag_clear_event) || (v2_watch_commit && ppg_control_top_Inst.ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.i_config_update_event)) begin
 				v2_ev_landed = 1'b1;
 				v2_ev_frame = w_frame;
 				v2_ev_tick = w_mtick;
@@ -967,8 +1017,8 @@ module tb_v2_sweep();
 				o_ami_integration_protocol_error_sticky, o_ssw_switch_protocol_error_sticky, o_ssw_transaction_mismatch_sticky, o_ssw_owner_deadline_timeout_sticky,
 				o_ssw_calibration_timeout_sticky, ppg_control_top_Inst.o_ami_owner_lost_sticky, i_adc_physical_idle, i_clk_stage1_dout_low_async, i_clk_stage2_dout_low_async);
 			nfail = mon_live_fail + mon_id_fail + mon_rc_stop_fail + mon_rc_start_fail + mon_rc_res_fail + mon_fi_fail + mon_bind_fail + mon_excl_fail;
-			$display("V2POINT point=%0s mode=%0s event=%0s slot=%0s frame=%0d tick=%0d sf=%0d lt=%0d param=%0d done_mode=%0d idle_mode=%0d lat=%0d..%0d seed=%0d landed=%b land_frame=%0d land_tick=%0d land_sf=%0d land_lt=%0d landing_ok=%b rule=%0s end=%0s life=%b blocking=%b restarts=%0d restart_ok=%b lost=%0d done=%0d results=%0d q3=%0d cycles=%0d mon_fail=%0d",
-				v2_point_str, v2_mode_str, v2_event_str, v2_slot_str, v2_target_frame, v2_target_tick, v2_target_sf, v2_target_lt, v2_param, v2_done_mode, v2_idle_mode, v2_lat_min, v2_lat_max, v2_seed,
+			$display("V2POINT point=%0s mode=%0s event=%0s slot=%0s frame=%0d tick=%0d sf=%0d lt=%0d param=%0d done_mode=%0d idle_mode=%0d idle_delay=%0d lat=%0d..%0d seed=%0d landed=%b land_frame=%0d land_tick=%0d land_sf=%0d land_lt=%0d landing_ok=%b rule=%0s end=%0s life=%b blocking=%b restarts=%0d restart_ok=%b lost=%0d done=%0d results=%0d q3=%0d cycles=%0d mon_fail=%0d",
+				v2_point_str, v2_mode_str, v2_event_str, v2_slot_str, v2_target_frame, v2_target_tick, v2_target_sf, v2_target_lt, v2_param, v2_done_mode, v2_idle_mode, v2_idle_delay, v2_lat_min, v2_lat_max, v2_seed_cfg,
 				v2_ev_landed, v2_ev_frame, v2_ev_tick, v2_ev_sf, v2_ev_lt, v2_landing_ok, v2_landing_rule, how, o_lifecycle_state, o_system_fault_blocking, v2_restarts, v2_restart_ok,
 				v2_n_lost, v2_n_done, v2_n_result, v2_n_q3_model, v2_cycle - v2_t_start_sim, nfail);
 			$display("V2_POINT_END");
@@ -1077,12 +1127,14 @@ module tb_v2_sweep();
 		if(!$value$plusargs("V2_POST=%d", v2_post_frames)) v2_post_frames = 3;
 		if(!$value$plusargs("V2_DETAIL=%d", v2_detail_max)) v2_detail_max = 8;
 		if(!$value$plusargs("V2_SEED=%d", v2_seed)) v2_seed = 1;
+		v2_seed_cfg = v2_seed;
 		if(!$value$plusargs("V2_LAT_MIN=%d", v2_lat_min)) v2_lat_min = 2;
 		if(!$value$plusargs("V2_LAT_MAX=%d", v2_lat_max)) v2_lat_max = 20;
 		begin : rd_adc
 			integer t;
 			if($value$plusargs("V2_ADC_DONE_MODE=%d", t)) v2_done_mode = t; else v2_done_mode = 2'd0;
 			if($value$plusargs("V2_ADC_IDLE_MODE=%d", t)) v2_idle_mode = t; else v2_idle_mode = 1'b0;
+			if($value$plusargs("V2_ADC_IDLE_DELAY=%d", t)) v2_idle_delay = t; else v2_idle_delay = 2'd0;
 			v2_adc_rst_aferst = $test$plusargs("V2_ADC_RST_AFERST");
 		end
 		v2_mode = (v2_mode_str == "DUAL9") ? 0 : (v2_mode_str == "RED15") ? 1 : (v2_mode_str == "SEARCH") ? 2 : (v2_mode_str == "RECHECK") ? 3 : (v2_mode_str == "GEN_DUAL") ? 4 : -1;
@@ -1126,10 +1178,10 @@ module tb_v2_sweep();
 			v2_landing_rule = "none";
 			v2_wait_frame_tick(v2_target_frame, v2_target_tick, 200000, ok);
 		end else if((ev == "STOP") || (ev == "START_DELAY")) begin
-			// STOP→调度器i_stop_ack_event实测3拍（tb_ppg_control_top_adc_anomaly.v l6_stop_at），故提前3拍发出
+			// 本TB的等待口径下（v2_wait_frame_tick在上升沿后判定、task_pulse_stop在下一下降沿拉高），STOP到调度器i_stop_ack_event实测2拍，故提前2拍发出
 			v2_landing_rule = "exact";
 			v2_watch_stop = 1'b1;
-			v2_wait_before_target(3, ok);
+			v2_wait_before_target(2, ok);
 			task_pulse_stop;
 		end else if(ev == "ABORT") begin
 			// 外部abort经control_top一级注册后进入调度器，提前1拍发出
@@ -1143,9 +1195,10 @@ module tb_v2_sweep();
 			v2_wait_before_target(0, ok);
 			v2_diag_clear;
 		end else if(ev == "COMMIT") begin
-			v2_landing_rule = "observe";
+			// source域配置更新经CDC到达manager的i_config_update_event实测3拍，故提前3拍发出；RUN中的提交按合同被拒绝
+			v2_landing_rule = "exact";
 			v2_watch_commit = 1'b1;
-			v2_wait_before_target(0, ok);
+			v2_wait_before_target(3, ok);
 			v2_build_config(v2_mode);
 			task_pulse_source_update;
 		end else if((ev == "LOST") || (ev == "FOREVER")) begin
@@ -1163,6 +1216,33 @@ module tb_v2_sweep();
 			v2_wait_frame_tick(v2_target_frame, 1, 200000, ok);
 			v2_arm_fault((ev == "LATE") ? 3'd2 : 3'd3, (slot_code == 3) ? 2'd0 : slot_code[1:0], 16'd1, 8'd1,
 				(v2_target_tick > q3_tick) ? 3'd0 : 3'd1, v2_target_tick[12:0]);
+		end else if(ev == "PREC_IR_LOST") begin
+			// F-1（必须覆盖场景1）：生理生成器驱动真实检测链，精度控制器接受切换请求（o_switch_pending上升）后，丢掉下一笔IR完成
+			v2_landing_rule = "observe";
+			v2_watch_hit = 1'b1;
+			begin : wait_switch
+				integer k;
+				k = 0;
+				while(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_switch_pending && (k < 5800000)) begin @(posedge i_clk); k = k + 1; end
+				ok = (k < 5800000);
+				$display("V2INFO PREC_IR_LOST switch_pending=%b after %0d cycles frame=%0d tick=%0d target=%b", ok, k, w_frame, w_mtick,
+					ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_switch_target_precision);
+			end
+			v2_target_frame = w_frame; v2_target_tick = w_mtick;
+			v2_arm_fault(3'd1, 2'd1, 16'd1, 8'd1, 3'd0, 13'd0);
+		end else if(ev == "RECHECK_CAL_BUSY") begin
+			// 必须覆盖场景2：周期重检接管后，第一笔重检校准转换不发DONE且ADC保持忙，越过校准帧帧尾，到下一宏帧tick 2000才回空闲
+			v2_landing_rule = "observe";
+			v2_watch_idle = 1'b1;
+			begin : wait_recheck
+				integer k;
+				k = 0;
+				while(!ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_amb_recheck_accept && (k < 7800000)) begin @(posedge i_clk); k = k + 1; end
+				ok = (k < 7800000);
+				$display("V2INFO RECHECK_CAL_BUSY recheck_accept=%b after %0d cycles frame=%0d tick=%0d", ok, k, w_frame, w_mtick);
+			end
+			v2_target_frame = w_frame; v2_target_tick = 2000;
+			v2_arm_fault(3'd3, 2'd2, 16'd1, 8'd1, 3'd1, 13'd2000);
 		end else begin
 			$display("V2ERROR unsupported event %0s", v2_event_str);
 			v2_finish_point("BAD_EVENT");
@@ -1175,7 +1255,8 @@ module tb_v2_sweep();
 			k = 0;
 			while(!v2_ev_landed && (v2_landing_rule != "none") && (k < 12000)) begin @(posedge i_clk); k = k + 1; end
 		end
-		if(v2_landing_rule == "exact") v2_landing_ok = v2_ev_landed && (v2_ev_frame == v2_target_frame + ((v2_watch_rise || v2_watch_idle) && (v2_fault_frame_offset != 0) ? 1 : 0)) && (v2_ev_tick == v2_target_tick);
+		if(v2_landing_rule == "exact") v2_landing_ok = v2_ev_landed && (v2_ev_frame == v2_target_frame + (((v2_watch_rise || v2_watch_idle) && (v2_fault_frame_offset != 0)) ? 1 : 0)) &&
+			(v2_ev_tick == v2_target_tick + ((v2_watch_rise && (v2_done_mode == 2'd0)) ? 1 : 0)); // 兼容脉冲在触发后一拍上升（与原响应进程一致）
 		else if(v2_landing_rule == "next_conv") v2_landing_ok = v2_ev_landed && (v2_ev_frame == v2_target_frame) && (v2_ev_tick >= v2_target_tick);
 		else v2_landing_ok = v2_ev_landed || (v2_landing_rule == "none");
 

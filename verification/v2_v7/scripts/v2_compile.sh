@@ -34,7 +34,7 @@ xvlog.bat -f $FL -i "$SRC/rtl/ppg_control_top" > xvlog.log 2>&1; rc_v=$?
 TOPS="tb_v2_sweep"
 rc_sv=0
 if [ $V7 -eq 1 ] && [ -f "$SRC/verification/v2_v7/assertions/v7_assertions.sv" ]; then
-  xvlog.bat -sv "$SRC/verification/v2_v7/assertions/v7_assertions.sv" > xvlog_sv.log 2>&1; rc_sv=$?
+  xvlog.bat -sv "$SRC/verification/v2_v7/assertions/v7_checkers.sv" "$SRC/verification/v2_v7/assertions/v7_assertions.sv" > xvlog_sv.log 2>&1; rc_sv=$?
 fi
 rc_e=1
 if [ $rc_v -eq 0 ] && [ $rc_sv -eq 0 ]; then

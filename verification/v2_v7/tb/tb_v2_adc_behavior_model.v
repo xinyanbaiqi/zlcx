@@ -43,13 +43,14 @@
 module tb_v2_adc_behavior_model();
 
 	//---------------配置参数区域---------------//
-	localparam integer C_EXPECTED_CHECKS = 41;       // 本自检预期执行的检查条数
+	localparam integer C_EXPECTED_CHECKS = 44;       // 本自检预期执行的检查条数
 
 	//---------------全局时钟与复位信号---------------//
 	reg i_clk;                                       // 2 MHz激励时钟
 	reg i_rstn;                                      // 模型低有效复位
 
 	//---------------模型激励信号---------------//
+	reg i_q1; // 人造CLK_Q1窗口电平
 	reg i_q3;                                        // 人造Q3窗口电平
 	reg i_txn_start;                                 // 人造事务启动单拍
 	reg i_adc_rst;                                   // 人造外部ADC_RST单拍
@@ -86,6 +87,9 @@ module tb_v2_adc_behavior_model();
 	integer cnt_cycle;                               // 自复位释放起的拍号
 	integer cnt_pass;                                // 通过检查数
 	integer cnt_fail;                                // 失败检查数
+	integer t_q1_seen; // 模型看到Q1高的首个拍号
+	integer t_s2_fall; // Stage2完成回低后首个拍号
+	reg flag_q1_prev_tb; // Q1上一拍值
 	integer t_q3_seen;                               // 模型看到Q3高的首个拍号
 	integer t_q3_fall_seen;                          // 模型看到Q3回低的首个拍号
 	integer t_s1_rise;                               // Stage1完成上升后首个拍号
@@ -107,6 +111,7 @@ module tb_v2_adc_behavior_model();
 		v2_adc_behavior_model_Inst(
 			.i_clk(i_clk),                           // 激励时钟
 			.i_rstn(i_rstn),                         // 激励复位
+			.i_q1(i_q1), // 人造Q1
 			.i_q3(i_q3),                             // 人造Q3
 			.i_txn_start(i_txn_start),               // 人造启动
 			.i_adc_rst(i_adc_rst),                   // 人造ADC_RST
@@ -116,7 +121,8 @@ module tb_v2_adc_behavior_model();
 			.i_frame_id(i_frame_id),                 // 人造帧号
 			.i_macro_tick(i_macro_tick),             // 人造相位
 			.i_done_mode(i_done_mode),               // 被测DONE形态
-			.i_idle_mode(i_idle_mode),               // 被测idle公式
+			.i_idle_mode(i_idle_mode),
+			.i_idle_delay(2'd0), // 自测不加同步延迟，沿口径与预期值一致               // 被测idle公式
 			.i_latency(i_latency),                   // 被测时延
 			.i_raw_stage1(i_raw_stage1),             // 激励Stage1码
 			.i_raw_stage2(i_raw_stage2),             // 激励Stage2码
@@ -163,6 +169,9 @@ module tb_v2_adc_behavior_model();
 	always @(posedge i_clk) begin
 		#1;
 		cnt_cycle = cnt_cycle + 1;                   // 拍号推进
+		if(i_q1 && !flag_q1_prev_tb && (t_q1_seen < 0)) t_q1_seen = cnt_cycle; // 模型在本沿看到Q1高
+		if(!o_clk_stage2_dout && flag_s2_prev && (t_s2_fall < 0)) t_s2_fall = cnt_cycle; // 记录首个Stage2回低
+		flag_q1_prev_tb = i_q1; // 推进Q1历史
 		if(i_q3 && !flag_q3_prev_tb && (t_q3_seen < 0)) t_q3_seen = cnt_cycle; // 模型在本沿看到Q3高
 		if(!i_q3 && flag_q3_prev_tb && (t_q3_fall_seen < 0)) t_q3_fall_seen = cnt_cycle; // 模型在本沿看到Q3回低
 		if(o_clk_stage1_dout && !flag_s1_prev) begin
@@ -205,6 +214,8 @@ module tb_v2_adc_behavior_model();
 	// 清空沿测量记录，开始新一次测量
 	task adcm_clear;
 		begin
+			t_q1_seen = -1; // 清Q1记录
+			t_s2_fall = -1; // 清Stage2回低记录
 			t_q3_seen = -1;                          // 清Q3记录
 			t_q3_fall_seen = -1;                     // 清Q3回低记录
 			t_s1_rise = -1;                          // 清Stage1上升记录
@@ -217,12 +228,23 @@ module tb_v2_adc_behavior_model();
 		end
 	endtask
 
-	// 在下降沿施加2拍宽的Q3窗口
+	// 施加一笔owner的模拟时序：Q1先拉高9拍，第7拍起Q3拉高2拍（与SAR9 RED的Q1 293、Q3 300相对位置一致）
 	task adcm_q3;
 		begin
-			@(negedge i_clk); i_q3 = 1'b1;           // Q3拉高
-			@(negedge i_clk);                        // 保持第2拍
-			@(negedge i_clk); i_q3 = 1'b0;           // Q3回低
+			@(negedge i_clk); i_q1 = 1'b1;           // Q1拉高
+			repeat(7) @(negedge i_clk);              // Q1领先Q3 7拍
+			i_q3 = 1'b1;                             // Q3拉高
+			@(negedge i_clk);                        // Q3保持第2拍
+			@(negedge i_clk); i_q3 = 1'b0; i_q1 = 1'b0; // Q3与Q1同拍回低
+		end
+	endtask
+
+	// 只施加Q3、不施加Q1，用于证明保持型DONE不被Q3清除
+	task adcm_q3_only;
+		begin
+			@(negedge i_clk); i_q3 = 1'b1;           // Q3单独拉高
+			@(negedge i_clk);                        // Q3保持第2拍
+			@(negedge i_clk); i_q3 = 1'b0;           // Q3单独回低
 		end
 	endtask
 
@@ -278,6 +300,8 @@ module tb_v2_adc_behavior_model();
 		flag_s1_prev = 1'b0;                         // 历史初值
 		flag_s2_prev = 1'b0;                         // 历史初值
 		flag_idle_prev = 1'b1;                       // 历史初值
+		flag_q1_prev_tb = 1'b0; // Q1历史初值
+		i_q1 = 1'b0; // Q1初值
 		flag_q3_prev_tb = 1'b0;                      // 历史初值
 		reg_dout1_prev = 10'd0;                      // 历史初值
 		reg_dout1_at_rise = 10'd0;                   // 记录初值
@@ -327,12 +351,14 @@ module tb_v2_adc_behavior_model();
 			i_latency = lat;
 			adcm_clear; adcm_q3; repeat(lat + 6) @(negedge i_clk);
 			adcm_check("LVL1-RISE-AT-LATENCY", (t_s1_rise == t_q3_seen + lat) && (n_s1_rise == 1)); // 恰好lat拍后上升
-			adcm_check("LVL1-HOLD-HIGH", (o_clk_stage1_dout === 1'b1) && ((t_s1_fall < 0) || (t_s1_fall == t_q3_seen))); // 上升后持续为高
+			adcm_check("LVL1-HOLD-HIGH", (o_clk_stage1_dout === 1'b1) && ((t_s1_fall < 0) || (t_s1_fall == t_q1_seen))); // 上升后持续为高
 		end
-		adcm_check("LVL1-IDLE-WINDOW", (t_idle_fall == t_q3_seen) && (t_idle_rise == t_s1_rise)); // 转换期间idle为低
+		adcm_check("LVL1-IDLE-WINDOW", (t_idle_fall == t_q1_seen) && (t_idle_rise == t_s1_rise)); // 从Q1起忙到完成上升
 		adcm_clear; adcm_q3; repeat(4) @(negedge i_clk);
-		adcm_check("LVL1-FALL-AT-NEXT-Q3", t_s1_fall == t_q3_seen); // 下次Q3当拍回低
+		adcm_check("LVL1-FALL-AT-NEXT-Q1", t_s1_fall == t_q1_seen); // 下一笔owner的Q1当拍回低
 		repeat(40) @(negedge i_clk);                 // 等本次30拍转换结束
+		adcm_clear; adcm_q3_only; repeat(40) @(negedge i_clk);
+		adcm_check("LVL1-Q3-ALONE-KEEPS", (t_s1_fall < 0) && (o_clk_stage1_dout === 1'b1)); // 没有Q1时DONE不回落
 
 		// 4 idle公式1：DONE保持高期间idle为低
 		i_idle_mode = 1'b1; i_latency = 8'd5;
@@ -361,9 +387,14 @@ module tb_v2_adc_behavior_model();
 		// 7 15位电平模式：Stage1比Stage2早2拍
 		adcm_reset;
 		i_done_mode = 2'd1; i_latency = 8'd12; i_owner_precision = 1'b1; i_active_precision = 1'b1;
+		adcm_q3; repeat(18) @(negedge i_clk);        // 第一笔15位让Stage2先变高
 		adcm_clear; adcm_q3; repeat(18) @(negedge i_clk);
-		adcm_check("LVL15-S1-BEFORE-S2", (t_s2_rise == t_q3_seen + 12) && (t_s1_rise == t_q3_seen + 10)); // 两级时序
-		adcm_check("LVL15-IDLE-AT-S2", t_idle_rise == t_s2_rise); // idle在最终完成时回高
+		adcm_check("LVL15-S1-LEADS-BY-6", (t_s2_rise == t_q3_seen + 12) && (t_s1_rise == t_q3_seen + 6)); // Stage1领先最终完成6拍
+		adcm_check("LVL15-S2-FALLS-AFTER-S1", (t_s2_fall == t_s1_rise + 1) && (t_s2_rise - t_s2_fall == 5)); // Stage2在Stage1上升后回落并低5拍
+		adcm_check("LVL15-IDLE-AT-S2", (t_idle_fall == t_q1_seen) && (t_idle_rise == t_s2_rise)); // idle从Q1忙到最终完成
+		i_latency = 8'd4;
+		adcm_clear; adcm_q3; repeat(12) @(negedge i_clk);
+		adcm_check("LVL15-MIN-LOW-4", (t_s1_rise == t_q3_seen + 1) && (t_s2_fall == t_q3_seen + 2) && (t_s2_rise == t_q3_seen + 6)); // 时延过短时Stage2仍至少低4拍
 		i_owner_precision = 1'b0; i_active_precision = 1'b0;
 
 		// 8 丢失：不发DONE，idle照常回1
@@ -372,7 +403,7 @@ module tb_v2_adc_behavior_model();
 		adcm_arm(3'd1, 2'd0, 16'd1, 8'd1);
 		adcm_clear; adcm_q3; repeat(16) @(negedge i_clk);
 		adcm_check("LOST-NO-DONE", n_s1_rise == 0); // 不发完成
-		adcm_check("LOST-IDLE-BACK", (t_idle_fall == t_q3_seen) && (t_idle_rise == t_q3_seen + 8)); // idle按时延回高
+		adcm_check("LOST-IDLE-BACK", (t_idle_fall == t_q1_seen) && (t_idle_rise == t_q3_seen + 8)); // idle按时延回高
 		adcm_clear; adcm_q3; repeat(16) @(negedge i_clk);
 		adcm_check("LOST-ONLY-SERIAL-1", n_s1_rise == 1); // 第2笔不再命中
 
@@ -431,7 +462,7 @@ module tb_v2_adc_behavior_model();
 		i_fault_frame_offset = 3'd0; i_fault_release_tick = i_macro_tick + 13'd100;
 		adcm_arm(3'd2, 2'd0, 16'd1, 8'd1);
 		adcm_clear; adcm_q3; repeat(120) @(negedge i_clk);
-		adcm_check("COMPAT-LATE-IDLE-THEN-PULSE", (n_s1_rise == 1) && (t_idle_fall == t_s1_rise) && (t_s1_rise > t_q3_seen + 90)); // 兼容迟到先空闲再脉冲
+		adcm_check("COMPAT-LATE-BUSY-THEN-PULSE", (n_s1_rise == 1) && (t_idle_fall == t_q3_fall_seen) && (t_idle_rise == t_s1_fall) && (t_s1_rise > t_q3_seen + 90)); // 兼容迟到：Q3关闭起保持忙，落点后发脉冲，脉冲结束才空闲
 
 		repeat(5) @(negedge i_clk);
 		if((cnt_fail == 0) && (cnt_pass == C_EXPECTED_CHECKS)) begin

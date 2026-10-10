@@ -19,7 +19,7 @@
 // Revision Date:   2026/10/10
 // History:
 //     Time          Version     Revised by     Contents
-// 2026/10/10        V1.0        Erie          Create file. Read-only owner identity scoreboard. The scheduler commit event opens one owner (frame, sample index, colour, frame type, precision); one cycle later the SSW owner registers and the AMI in-flight registers must hold the same identity and all three in-flight flags must be 1; outside the commit/close transition cycles the three flags must agree with the scoreboard. Exactly one AMI completion or void carrying the owner's sample index closes it. A successful NORMAL completion enters a 2-entry pending list (at most the RED and IR owners of one frame can be waiting for their results); every formal result must match and consume one pending entry, every identity-valid discard must match a pending entry or one of the last 2 closed owners, and a pending entry left unresolved for C_RESOLVE_MAX cycles is a failure. Violations while i_excl_window is high (the F-3 contract-premise window) are counted separately and not as failures. Failure codes on o_fail_code: 1 double commit, 2 record mismatch at commit+1, 3 in-flight flags disagree, 4 close without owner, 5 close index mismatch, 6 result without owner, 7 discard without owner, 8 unresolved completion, 9 owner open at START, 10 pending list overflow (reported, never silently dropped). Synthesizable checker core.
+// 2026/10/10        V1.0        Erie          Create file. Read-only owner identity scoreboard. The scheduler commit event opens one owner (frame, sample index, colour, frame type, precision); one cycle later the SSW owner registers and the AMI in-flight registers must hold the same identity and all three in-flight flags must be 1; outside the commit/close transition cycles the three flags must agree with the scoreboard. Exactly one AMI completion or void carrying the owner's sample index closes it. A successful NORMAL completion enters a 2-entry pending list (at most the RED and IR owners of one frame can be waiting for their results); every formal result must match and consume one pending entry, every identity-valid discard must match a pending entry, the open owner (a void and its reason-11 discard share one cycle, before the close history updates) or one of the last 2 closed owners, and a pending entry left unresolved for C_RESOLVE_MAX cycles is a failure. Violations while i_excl_window is high (the F-3 contract-premise window) are counted separately and not as failures. Failure codes on o_fail_code: 1 double commit, 2 record mismatch at commit+1, 3 in-flight flags disagree (counted once per contiguous disagreement episode), 4 close without owner, 5 close index mismatch, 6 result without owner, 7 discard without owner, 8 unresolved completion, 9 owner open at START, 10 pending list overflow (reported, never silently dropped). Synthesizable checker core.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -39,7 +39,7 @@
 // 修订日期:        2026年10月10日
 // 修订历史:
 //     时间          版本        修订人        修订内容
-// 2026年10月10日   V1.0        Erie          创建文件。只读owner身份记分板。调度器提交事件打开一个owner（帧号、序号、颜色、帧类型、精度）；下一拍SSW owner寄存器与AMI在途寄存器必须是同一身份，三方在途标志都为1；提交与关闭的过渡拍之外，三方标志必须与记分板开闭一致。恰好一次带该序号的AMI完成或作废关闭它。成功的NORMAL完成进入2项待决表（同一帧最多RED、IR两笔在等结果）；每个正式结果必须匹配并消费一项，每个身份有效的discard必须匹配一项待决或最近2个已关闭owner之一，待决项超过C_RESOLVE_MAX拍未了结判失败。i_excl_window为高（F-3合同前提窗口）期间的违例单独计数，不算失败。o_fail_code失败码：1重复提交，2提交后一拍记录不一致，3在途标志不一致，4无owner的关闭，5关闭序号不符，6无owner的结果，7无owner的discard，8完成未了结，9 START时owner仍打开，10待决表溢出（报告，绝不静默丢弃）。可综合检查核心。
+// 2026年10月10日   V1.0        Erie          创建文件。只读owner身份记分板。调度器提交事件打开一个owner（帧号、序号、颜色、帧类型、精度）；下一拍SSW owner寄存器与AMI在途寄存器必须是同一身份，三方在途标志都为1；提交与关闭的过渡拍之外，三方标志必须与记分板开闭一致。恰好一次带该序号的AMI完成或作废关闭它。成功的NORMAL完成进入2项待决表（同一帧最多RED、IR两笔在等结果）；每个正式结果必须匹配并消费一项，每个身份有效的discard必须匹配一项待决、当前打开的owner（作废与原因11 discard同拍，此时关闭历史尚未更新）或最近2个已关闭owner之一，待决项超过C_RESOLVE_MAX拍未了结判失败。i_excl_window为高（F-3合同前提窗口）期间的违例单独计数，不算失败。o_fail_code失败码：1重复提交，2提交后一拍记录不一致，3在途标志不一致（连续不一致段只计一次），4无owner的关闭，5关闭序号不符，6无owner的结果，7无owner的discard，8完成未了结，9 START时owner仍打开，10待决表溢出（报告，绝不静默丢弃）。可综合检查核心。
 
 // owner身份记分板：三方记录一致、每owner一次关闭、结果与discard都能对上owner
 module v2_mon_identity
@@ -143,12 +143,14 @@ module v2_mon_identity
 	// owner开闭状态与组合判定
 	reg flag_open;                          // 当前有owner打开
 	reg flag_commit_d1;                     // 上一拍发生提交
+	reg flag_inflight_bad_d1;               // 上一拍三方标志已不一致，同一段不一致只计一次
 	reg flag_first_timeout_seen;            // 先到待决项已经报过一次超时
 	reg flag_second_timeout_seen;           // 后到待决项的超时只计一次的闩
 	wire [34:0] flag_own_key;               // 当前owner的身份键与有效位
 	wire flag_close;                        // 本拍完成或作废
 	wire flag_record_bad;                   // 提交后一拍记录或标志不符
 	wire flag_inflight_bad;                 // 稳定期三方标志不一致
+	wire flag_inflight_new;                 // 三方标志不一致段的第一拍
 	wire flag_double_commit;                // 打开期间再次提交
 	wire flag_close_no_owner;               // 无owner的关闭
 	wire flag_close_idx_bad;                // 关闭序号不符
@@ -160,6 +162,7 @@ module v2_mon_identity
 	wire flag_disc_first;                   // discard了结先到项
 	wire flag_disc_second;                  // discard只能了结后到项
 	wire flag_hist_hit;                     // discard命中关闭历史
+	wire flag_disc_open_hit;                // discard属于当前打开（含本拍正在关闭）的owner
 	wire flag_late_first;                   // 先到项本拍首次越过了结时限
 	wire flag_late_second;                  // 后到项等结果超过C_RESOLVE_MAX
 	wire flag_result_bad;                   // 结果无命中
@@ -183,6 +186,7 @@ module v2_mon_identity
 	assign flag_close = i_done || i_lost;   // 完成或作废即关闭
 	assign flag_record_bad = flag_commit_d1 && flag_open && (!i_sched_inflight || !i_ssw_inflight || !i_ami_inflight || (i_ssw_frame != reg_own_frame) || (i_ssw_idx != reg_own_idx) || (i_ssw_color != reg_own_color) || (i_ssw_type != reg_own_type) || (i_ssw_prec != reg_own_prec) || (i_ami_frame != reg_own_frame) || (i_ami_idx != reg_own_idx) || (i_ami_color != reg_own_color) || (i_ami_type != reg_own_type) || (i_ami_prec != reg_own_prec)); // 提交后一拍三方身份与标志必须一致
 	assign flag_inflight_bad = !i_commit && !flag_commit_d1 && !flag_close && (flag_open ? !(i_sched_inflight && i_ssw_inflight && i_ami_inflight) : (i_sched_inflight || i_ssw_inflight || i_ami_inflight)); // 非过渡拍三方标志须与记分板开闭一致
+	assign flag_inflight_new = flag_inflight_bad && !flag_inflight_bad_d1; // 只在不一致段开始时报告
 	assign flag_double_commit = i_commit && flag_open && !flag_close; // 未关闭又提交
 	assign flag_close_no_owner = flag_close && !flag_open; // 关闭时记分板没有打开的owner
 	assign flag_close_idx_bad = flag_close && flag_open && (i_close_idx != reg_own_idx); // 关闭事件序号与打开的owner不同
@@ -196,12 +200,13 @@ module v2_mon_identity
 	assign flag_hist_hit = i_disc && ((reg_closed_last[35] && (reg_closed_last[34:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type})) || (reg_closed_prev[35] && (reg_closed_prev[34:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type}))); // discard属于最近两次关闭的owner
 	assign flag_late_first = reg_wait_first[34] && !flag_first_timeout_seen && (cnt_wait_first >= C_RESOLVE_MAX); // 先到项年龄达到时限且尚未报过
 	assign flag_late_second = reg_wait_second[34] && !flag_second_timeout_seen && (cnt_wait_second >= C_RESOLVE_MAX); // 后到项第一次超时的那一拍
+	assign flag_disc_open_hit = i_disc && flag_open && ({i_disc_frame, i_disc_idx, i_disc_color, i_disc_type} == {reg_own_frame, reg_own_idx, reg_own_color, reg_own_type}); // 作废与原因11 discard同拍时，关闭历史尚未更新
 	assign flag_result_bad = i_result && !flag_res_first && !flag_res_second; // 结果没有对应的成功完成
-	assign flag_disc_bad = i_disc && !flag_disc_first && !flag_disc_second && !flag_hist_hit; // discard既不在待决也不在历史
+	assign flag_disc_bad = i_disc && !flag_disc_first && !flag_disc_second && !flag_hist_hit && !flag_disc_open_hit; // discard既不在待决、历史，也不是当前owner
 	assign flag_unresolved = flag_late_first || flag_late_second; // 任一待决项刚超时
 	assign flag_open_at_start = i_start_ack && flag_open; // START时owner未关
 	assign flag_overflow = flag_push && reg_wait_first[34] && reg_wait_second[34]; // 两项都占用仍要入表
-	assign flag_any_bad = flag_double_commit || flag_record_bad || flag_inflight_bad || flag_close_no_owner || flag_close_idx_bad || flag_result_bad || flag_disc_bad || flag_unresolved || flag_open_at_start || flag_overflow; // 汇总违例
+	assign flag_any_bad = flag_double_commit || flag_record_bad || flag_inflight_new || flag_close_no_owner || flag_close_idx_bad || flag_result_bad || flag_disc_bad || flag_unresolved || flag_open_at_start || flag_overflow; // 汇总违例
 
 	//-------------输出信号连线-------------//
 	// 统计与违例事件送出
@@ -222,7 +227,7 @@ module v2_mon_identity
 			enc_fail_code = CODE_DOUBLE_COMMIT; // 重复提交优先
 		end else if(flag_record_bad)begin
 			enc_fail_code = CODE_RECORD;        // 记录不一致
-		end else if(flag_inflight_bad)begin
+		end else if(flag_inflight_new)begin
 			enc_fail_code = CODE_INFLIGHT;      // 在途标志不一致
 		end else if(flag_close_no_owner)begin
 			enc_fail_code = CODE_CLOSE_NO_OWNER; // 编码为无owner关闭
@@ -262,6 +267,15 @@ module v2_mon_identity
 			flag_commit_d1 <= 1'b0;             // 复位无提交历史
 		end else begin
 			flag_commit_d1 <= i_commit;         // 记录本拍是否提交
+		end
+	end
+
+	// 三方标志不一致段的历史
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			flag_inflight_bad_d1 <= 1'b0;       // 复位时无不一致段
+		end else begin
+			flag_inflight_bad_d1 <= flag_inflight_bad; // 记录本拍是否处于不一致段
 		end
 	end
 
