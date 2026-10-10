@@ -113,7 +113,7 @@ AMB_WINDOWS = {
     "o_clk_iref_idac_sar9_low": (10, 284), "o_en_sar9_iref": (202, 274),
     "o_en_sar9_amb_low": (222, 276), "o_idac_sar9ambn_low": (224, 276),
     "o_clk_iref_idac_low": (229, 269), "o_clk_aferst_low": (249, 261),
-    "o_clk_tiaen_low": (249, 269), "o_clk_9q1_low": (259, 268),
+    "o_clk_tiaen_low": (249, 269), "o_en_tia_low": (249, 269), "o_clk_9q1_low": (259, 268),
     "o_clk_q3_low": (265, 267),
 }
 STATIC_ONES = {
@@ -227,12 +227,15 @@ def contexts_for(scenario: dict) -> list[dict]:
             for color in colors:
                 base = frame * 5000 + (sub * 625 if kind != 2 else 0)
                 fire = base + (160 if color and kind == 2 else 0)
-                owner = base + (scenario.get("ir_owner_tick", 350) if color and kind == 2 else
-                                scenario.get("owner_tick", 1))
+                deadline = base + (scenario.get("normal_ir_owner_deadline", 443) if color and kind == 2 else
+                                   scenario.get("normal_red_owner_deadline", 283) if kind == 2 else 248)
+                owner = deadline if scenario.get("owner_at_deadline") else base + (
+                    scenario.get("ir_owner_tick", 350) if color and kind == 2 else scenario.get("owner_tick", 1))
                 miss = scenario.get("miss_owner") == ("cal" if kind != 2 else "ir" if color else "red")
                 pattern = scenario.get("patterns", [165, 90, 0, 255])[(frame + sub) % 4]
                 context = dict(frame=frame + 1, sub=sub, precision=precision, color=color, kind=kind,
-                               fire=fire, owner=None if miss else owner,
+                               fire=fire, owner=None if miss or owner > deadline else owner,
+                               requested_owner=owner, deadline=deadline,
                                done=base + (scenario.get("ir_done_tick", 510) if color and kind == 2 else
                                             scenario.get("done_tick", 335)),
                                center=base + (266 if kind != 2 else 460 if color else 300),
@@ -300,9 +303,9 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                       i_calibration_frame_active=int(tick >= 0 and kind != 2))
         if stop is not None and tick == stop:
             values["i_stop_ack_event"] = 1
-            # 用户/统筹 Q04：只有首个边沿已经出现的包络才能继续安全收尾。
-            active = [context for context in active if stop > context["center"] -
-                      (256 if not context["precision"] else 273)]
+            # 统筹订正Q04：已提交owner的槽必须完整运行；未提交且尚未预热才取消。
+            active = [context for context in active if context["sample"] in committed_samples or
+                      stop > context["center"] - (256 if not context["precision"] else 273)]
         if abort is not None and tick == abort:
             values["i_control_abort_event"] = 1
             active.clear()
@@ -342,6 +345,10 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
         if stop is not None and tick > stop and physical is None:
             safe_end = max((context["center"] + (18 if not context["precision"] else 8)
                             for context in active), default=stop)
+            if scenario.get("config_after_slot_end"):
+                # 保持RUN至预约末沿，避免外部强制回CONFIG掩盖待提交槽的STOP边界行为。
+                safe_end = max(safe_end, max((context["center"] + (18 if not context["precision"] else 8)
+                                             for context in contexts if context["fire"] < stop), default=stop))
             owner_end = max((context["done"] for context in scheduled), default=stop)
             if tick >= max(safe_end, owner_end, stop) + 2:
                 # 行为manager在包络结束且ADC空闲后返回CONFIG，不引入新预约。
@@ -370,8 +377,7 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                         value = context["amb"] if "ambn" in name else context["dc"] if "dcn" in name else context["led"] if name == "o_leddac" else 1
                         # 用户确认（10-10）Q06：采样相关窗口必须完整或整槽关闭。
                         # 黄金按整槽的按时提交资格定义完整窗口，不能逐拍接owner截短模板。
-                        deadline = (context["center"] - (18 if kind != 2 else 17))
-                        eligible = context["sample"] != 0 and context["owner"] is not None and context["owner"] <= deadline
+                        eligible = context["sample"] != 0 and context["owner"] is not None and context["owner"] <= context["deadline"]
                         if dest in SAMPLING and not eligible:
                             value = 0
                         if name == "o_leddac" and not eligible:

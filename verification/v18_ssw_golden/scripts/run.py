@@ -53,6 +53,8 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=TASK / "_runs" / "trial")
     parser.add_argument("--generate-only", action="store_true")
     parser.add_argument("--jobs", type=int, default=1, help="独立快照并行仿真数，默认串行")
+    parser.add_argument("--normal-red-owner-deadline", type=int, help="当前基线默认283；RC1修复后指定265")
+    parser.add_argument("--normal-ir-owner-deadline", type=int, help="当前基线默认443；RC1修复后指定425")
     args = parser.parse_args()
     repo, out = args.repo.resolve(), args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -62,6 +64,10 @@ def main() -> int:
     (out / "window_provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
     scenarios = json.loads(args.scenarios.read_text(encoding="utf-8"))
     selected = [case for case in scenarios if not args.select or args.select in case["name"]]
+    selected = [dict(case, **({"normal_red_owner_deadline": args.normal_red_owner_deadline}
+                              if args.normal_red_owner_deadline is not None else {}),
+                    **({"normal_ir_owner_deadline": args.normal_ir_owner_deadline}
+                       if args.normal_ir_owner_deadline is not None else {})) for case in selected]
     if not selected:
         raise ValueError("选择器没有命中场景")
     metadata = {case["name"]: generate(case, profiles, out / case["name"]) for case in selected}

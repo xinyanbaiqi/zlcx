@@ -1,9 +1,10 @@
 {
   "status": "PASS",
-  "scenarios": 148,
-  "checked_trace_hashes": 444,
-  "scenario_signal_rows": 4144,
+  "scenarios": 155,
+  "checked_trace_hashes": 465,
+  "scenario_signal_rows": 4340,
   "python_files": 9,
   "sar15_select_observed_equal_q1": true,
-  "report_scenario_rows": 148
+  "sar15_select_high_ticks": 42,
+  "report_scenario_rows": 155
 }

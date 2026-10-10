@@ -1,0 +1,228 @@
+[
+  {
+    "name": "cal_amb_a5",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      165,
+      165,
+      165,
+      165
+    ]
+  },
+  {
+    "name": "cal_amb_5a",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      90,
+      90,
+      90,
+      90
+    ]
+  },
+  {
+    "name": "cal_amb_00",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "cal_amb_ff",
+    "frame_type": 0,
+    "color": 0,
+    "precision": 0,
+    "patterns": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  {
+    "name": "owner_miss_cal",
+    "miss_owner": "cal",
+    "frame_type": 0
+  },
+  {
+    "name": "owner_at_deadline_cal",
+    "frame_type": 0,
+    "owner_tick": 248
+  },
+  {
+    "name": "cal_amb_candidate_sequence",
+    "frame_type": 0
+  },
+  {
+    "name": "stop_red_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 43
+  },
+  {
+    "name": "stop_ir_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 203
+  },
+  {
+    "name": "stop_red_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 26
+  },
+  {
+    "name": "stop_ir_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 186
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_before_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 9
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_after_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 11
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_before_q1",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 258
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_in_q3",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 266
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_after_q3",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 268
+  },
+  {
+    "name": "cal_lifecycle_stop_amb_before_end",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 283
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_before_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 9
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_after_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 11
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_before_q1",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 258
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_in_q3",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 266
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_after_q3",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 268
+  },
+  {
+    "name": "cal_lifecycle_abort_amb_before_end",
+    "frame_type": 0,
+    "color": 0,
+    "abort_tick": 283
+  },
+  {
+    "name": "cal_lifecycle_stop_dcs_red_before_preheat",
+    "frame_type": 1,
+    "color": 0,
+    "stop_tick": 9
+  },
+  {
+    "name": "cal_lifecycle_stop_dcs_ir_before_preheat",
+    "frame_type": 1,
+    "color": 1,
+    "stop_tick": 9
+  },
+  {
+    "name": "stop_unowned_red_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 43,
+    "config_after_slot_end": true,
+    "owner_tick": 49
+  },
+  {
+    "name": "stop_unowned_ir_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 203,
+    "config_after_slot_end": true,
+    "ir_owner_tick": 209
+  },
+  {
+    "name": "stop_unowned_red_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 26,
+    "config_after_slot_end": true,
+    "owner_tick": 32
+  },
+  {
+    "name": "stop_unowned_ir_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 186,
+    "config_after_slot_end": true,
+    "ir_owner_tick": 192
+  },
+  {
+    "name": "stop_unowned_cal_amb_before_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
+  },
+  {
+    "name": "stop_unowned_cal_dcs_red_before_preheat",
+    "frame_type": 1,
+    "color": 0,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
+  },
+  {
+    "name": "stop_unowned_cal_dcs_ir_before_preheat",
+    "frame_type": 1,
+    "color": 1,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
+  }
+]

@@ -21,8 +21,8 @@ def matrix() -> list[dict]:
     cases += [dict(name="owner_miss_red", miss_owner="red"),
               dict(name="owner_miss_ir", miss_owner="ir"),
               dict(name="owner_miss_cal", miss_owner="cal", frame_type=0)]
-    cases += [dict(name="owner_at_deadline_normal9", owner_tick=283, ir_owner_tick=443),
-              dict(name="owner_at_deadline_normal15", precision=1, owner_tick=283, ir_owner_tick=443),
+    cases += [dict(name="owner_at_deadline_normal9", owner_at_deadline=True),
+              dict(name="owner_at_deadline_normal15", precision=1, owner_at_deadline=True),
               dict(name="owner_at_deadline_cal", frame_type=0, owner_tick=248)]
     for precision in (0, 1):
         cases.append(dict(name=f"char_photodiode_red_sar{9 if not precision else 15}",
@@ -64,6 +64,16 @@ def matrix() -> list[dict]:
                   dict(name="owner_miss_ir_sar15", miss_owner="ir", precision=1)])
     cases.extend([dict(name="known_sar15_deadline_red_275", precision=1, optical_mode=1, owner_tick=275),
                   dict(name="known_sar15_deadline_ir_435", precision=1, optical_mode=2, ir_owner_tick=435)])
+    for precision in (0, 1):
+        for mode, color, center in ((1, "red", 300), (2, "ir", 460)):
+            first = center - (256 if not precision else 273)
+            cases.append(dict(name=f"stop_unowned_{color}_sar{9 if not precision else 15}_before_preheat",
+                              precision=precision, optical_mode=mode, stop_tick=first - 1,
+                              config_after_slot_end=True,
+                              **{"ir_owner_tick" if color == "ir" else "owner_tick": first + 5}))
+    for kind, color, label in ((0, 0, "amb"), (1, 0, "dcs_red"), (1, 1, "dcs_ir")):
+        cases.append(dict(name=f"stop_unowned_cal_{label}_before_preheat", frame_type=kind, color=color,
+                          stop_tick=9, owner_tick=15, config_after_slot_end=True))
     return cases
 
 
@@ -76,4 +86,7 @@ if __name__ == "__main__":
     path.with_name("extra_matrix.json").write_text(json.dumps(extras, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     known = [case for case in matrix() if case["name"].startswith("known_sar15_deadline")]
     path.with_name("known_deadline_matrix.json").write_text(json.dumps(known, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    affected = [case for case in matrix() if case.get("frame_type") == 0 or
+                "stop_tick" in case and "before_preheat" in case["name"]]
+    path.with_name("coord_revision_matrix.json").write_text(json.dumps(affected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(matrix())} scenarios")

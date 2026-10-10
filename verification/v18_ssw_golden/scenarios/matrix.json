@@ -436,14 +436,12 @@
   },
   {
     "name": "owner_at_deadline_normal9",
-    "owner_tick": 283,
-    "ir_owner_tick": 443
+    "owner_at_deadline": true
   },
   {
     "name": "owner_at_deadline_normal15",
     "precision": 1,
-    "owner_tick": 283,
-    "ir_owner_tick": 443
+    "owner_at_deadline": true
   },
   {
     "name": "owner_at_deadline_cal",
@@ -1123,5 +1121,61 @@
     "precision": 1,
     "optical_mode": 2,
     "ir_owner_tick": 435
+  },
+  {
+    "name": "stop_unowned_red_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 1,
+    "stop_tick": 43,
+    "config_after_slot_end": true,
+    "owner_tick": 49
+  },
+  {
+    "name": "stop_unowned_ir_sar9_before_preheat",
+    "precision": 0,
+    "optical_mode": 2,
+    "stop_tick": 203,
+    "config_after_slot_end": true,
+    "ir_owner_tick": 209
+  },
+  {
+    "name": "stop_unowned_red_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 1,
+    "stop_tick": 26,
+    "config_after_slot_end": true,
+    "owner_tick": 32
+  },
+  {
+    "name": "stop_unowned_ir_sar15_before_preheat",
+    "precision": 1,
+    "optical_mode": 2,
+    "stop_tick": 186,
+    "config_after_slot_end": true,
+    "ir_owner_tick": 192
+  },
+  {
+    "name": "stop_unowned_cal_amb_before_preheat",
+    "frame_type": 0,
+    "color": 0,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
+  },
+  {
+    "name": "stop_unowned_cal_dcs_red_before_preheat",
+    "frame_type": 1,
+    "color": 0,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
+  },
+  {
+    "name": "stop_unowned_cal_dcs_ir_before_preheat",
+    "frame_type": 1,
+    "color": 1,
+    "stop_tick": 9,
+    "owner_tick": 15,
+    "config_after_slot_end": true
   }
 ]

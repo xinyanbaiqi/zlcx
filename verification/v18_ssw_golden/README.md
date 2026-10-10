@@ -30,7 +30,7 @@ python -B .claude/skills/erie-verilog-generator/scripts/python/validation/verilo
 
 大体积逐拍文件、工具快照和运行日志留在忽略目录`_runs/`；提交包含小型机器可读结果、来源与迹线哈希，能够用相同脚本复现。独立性记录和未确认问题以`verification_reports/V18_SSW_EXPECTED_RULES.md`为准。
 
-最终矩阵含148场景。`scripts/build_scenarios.py`可重新生成数据；覆盖所有AMB/DC/LEDDAC码图样、RED/IR不同DC码、两向精度切换、五项owner缺失、三个owner截止点提交、两个SAR15窗口中途owner提交、普通与校准STOP/abort。`KNOWN-SAR15-DEADLINE`只作为已知问题证据，不计作新发现。
+最新矩阵含155场景，比9044d3a补充七项“owner未提交且首边沿前STOP”。`scripts/build_scenarios.py`可重新生成数据；`coord_revision_matrix.json`包含本次32项受影响重跑。原F06判定撤回，原F07与SAR15截短统一为`KNOWN-OWNER-DEADLINE`，已确认F02/F03/F05与其余观测分开标注。
 
 全矩阵运行后冻结并汇总最终规则：
 
@@ -40,3 +40,7 @@ python -B verification/v18_ssw_golden/scripts/check_comparator.py --expected ver
 ```
 
 `collect.py`同样接受`--repo`、`--sar9-template`、`--sar15-template`，供RC1移入legacy后的重跑使用。多个`--runs`路径从左到右覆盖；只有最新生成刺激和旧采集刺激SHA256一致才允许重用迹线。统计中的PASS是完整黄金符合性，采集TB打印的PASS仅表示时钟/稳定性和文件采集完成，不能相互替代。
+
+RC1修复后，run.py和collect.py同时增加`--normal-red-owner-deadline 265 --normal-ir-owner-deadline 425`。当前main默认仍为283/443，不能提前假定RTL已修复。截止点场景自动跟随参数；超新截止的历史275/435请求只记录requested_owner，不产生非法提交，按整槽抑制检查。这里只验证了新参数的黄金/刺激生成，未运行修复后的RTL。
+
+最新TIA规则：所有动态波形`o_en_tia_low == o_clk_tiaen_low`，包括AMB local[249,269)；STATIC仍为TIA=0/TIAEN=1。STOP先查实际owner fire/inflight；已提交owner应完整运行再以success=0释放，未提交且未开始才禁止启动。补充未提交场景保守保持RUN至预约末沿，是接口级压力输入，系统可达性须统筹结合manager/AMI核对。

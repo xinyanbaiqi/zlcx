@@ -17,6 +17,36 @@ from model import OUTPUTS, contexts_for, generate, load_windows
 from compare import compare
 
 FRONTEND = {"o_en_tia_low", "o_clk_aferst_low", "o_clk_tiaen_low"}
+REVIEW_STATUS = {
+    "V18-F01": "KNOWN-SSW-C1", "KNOWN-OWNER-DEADLINE": "KNOWN-OWNER-DEADLINE",
+    "V18-F02": "CONFIRMED-SSW-DEFECT", "V18-F03": "CONFIRMED-SSW-DEFECT",
+    "V18-F05": "CONFIRMED-SSW-DEFECT", "V18-F04": "USER-CONFIRMED-TIA-RULE-MISMATCH",
+    "V18-STOP-UNCOMMITTED": "SUPPLEMENTAL-STOP-OBSERVATION", "MATCH": "MATCH"
+}
+
+
+def relabel(evidence: Path) -> None:
+    """纯分类字段升级，不修改刺激、黄金、实际迹线或差异统计。"""
+    path = evidence / "trial_results.json"
+    package = json.loads(path.read_text(encoding="utf-8"))
+    counts = Counter()
+    for result in package["results"].values():
+        for info in result["signals"].values():
+            info["review_status"] = REVIEW_STATUS[info["classification"]]
+            if info["mismatch_ticks"]:
+                counts[info["review_status"]] += 1
+    package["summary"]["review_status_signal_pairs"] = dict(counts)
+    path.write_text(json.dumps(package, ensure_ascii=False, indent=2), encoding="utf-8")
+    csv_path = evidence / "signal_comparison.csv"
+    with csv_path.open(encoding="utf-8", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    for row in rows:
+        row["review_status"] = REVIEW_STATUS[row["classification"]]
+    with csv_path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    print(json.dumps(package["summary"], ensure_ascii=False, indent=2))
 
 
 def digest(path: Path) -> str:
@@ -25,25 +55,24 @@ def digest(path: Path) -> str:
 
 
 def classification(case: dict, signal: str) -> str:
-    """SAR15前端迟到owner窗口按统筹指定的已知问题单独登记。"""
-    if signal in FRONTEND and any(context["precision"] == 1 and context["owner"] is not None and
-                                  context["center"] - 34 <= context["owner"] <= context["center"] - 17
+    """统一已知owner截止截短；只有STOP前确实未提交的槽才检查禁止启动。"""
+    if signal in FRONTEND and any(context["owner"] is not None and context["kind"] == 2 and
+                                  context["center"] - (34 if context["precision"] else 17) <= context["owner"] <= context["deadline"]
                                   for context in contexts_for(case)):
-        return "KNOWN-SAR15-DEADLINE"
-    if "stop_tick" in case and "before_preheat" in case["name"] and signal != "o_en_15sar_low":
-        return "V18-F06"
+        return "KNOWN-OWNER-DEADLINE"
+    if "stop_tick" in case and "before_preheat" in case["name"] and signal != "o_en_15sar_low" and any(
+            context["sample"] == 0 and context["fire"] < case["stop_tick"] for context in contexts_for(case)):
+        return "V18-STOP-UNCOMMITTED"
     if signal in {"o_en_sar9_amb_low", "o_en_sar9_dc_low", "o_en_sar9_iref"}:
         return "V18-F01"
     if signal in {"o_leden1_low", "o_leden2_low"}:
         return "V18-F02"
     if signal == "o_en_15sar_low":
         return "V18-F03"
-    if case.get("frame_type") == 1 and signal == "o_en_tia_low":
+    if case.get("frame_type") in {0, 1} and signal == "o_en_tia_low":
         return "V18-F04"
     if case.get("frame_type") == 1 and signal == "o_leddac":
         return "V18-F05"
-    if signal in FRONTEND and case["name"] == "owner_at_deadline_normal9":
-        return "V18-F07"
     return "UNCLASSIFIED"
 
 
@@ -66,17 +95,29 @@ def ranges(rows: list[dict], signal: str, start: int, end: int, hexadecimal: boo
 def main() -> None:
     """后一个运行目录优先；任何刺激哈希不一致都拒绝沿用旧采集。"""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--runs", type=Path, nargs="+", required=True)
+    parser.add_argument("--runs", type=Path, nargs="+", default=[])
+    parser.add_argument("--relabel-only", action="store_true")
     parser.add_argument("--out", type=Path, default=TASK / "_runs/final")
     parser.add_argument("--evidence", type=Path, default=TASK / "scenarios/evidence")
     parser.add_argument("--repo", type=Path, default=TASK.parents[1])
     parser.add_argument("--sar9-template", type=Path)
     parser.add_argument("--sar15-template", type=Path)
+    parser.add_argument("--normal-red-owner-deadline", type=int)
+    parser.add_argument("--normal-ir-owner-deadline", type=int)
     args = parser.parse_args()
+    if args.relabel_only:
+        relabel(args.evidence)
+        return
+    if not args.runs:
+        parser.error("完整汇总必须提供--runs")
     repo = args.repo
     profiles, provenance = load_windows(args.sar9_template or repo / "rtl/ppg_timing_sar9/ppg_timing_sar9.v",
                                         args.sar15_template or repo / "rtl/ppg_timing_sar15/ppg_timing_sar15.v")
     cases = json.loads((TASK / "scenarios/matrix.json").read_text(encoding="utf-8"))
+    cases = [dict(case, **({"normal_red_owner_deadline": args.normal_red_owner_deadline}
+                           if args.normal_red_owner_deadline is not None else {}),
+                  **({"normal_ir_owner_deadline": args.normal_ir_owner_deadline}
+                     if args.normal_ir_owner_deadline is not None else {})) for case in cases]
     args.out.mkdir(parents=True, exist_ok=True)
     args.evidence.mkdir(parents=True, exist_ok=True)
     results, signal_table, known_ranges = {}, [], {}
@@ -112,6 +153,21 @@ def main() -> None:
                                       (folder / "stimulus.hex", folder / "expected.csv", folder / "actual.csv")}
         with (folder / "actual.csv").open(encoding="utf-8", newline="") as stream:
             actual_rows = list(csv.DictReader(stream))
+        if "stop_tick" in case:
+            stop = case["stop_tick"]
+            comparison["stop_owner_audit"] = dict(
+                stop_tick=stop,
+                owner_fires_before_stop=sum(int(row["owner_fire"].strip(), 16) for row in actual_rows[8:stop + 8]),
+                owner_inflight_before_stop=int(actual_rows[stop + 7]["o_adc_owner_inflight"].strip(), 16),
+                owner_inflight_at_stop=int(actual_rows[stop + 8]["o_adc_owner_inflight"].strip(), 16))
+            if name.startswith("stop_unowned"):
+                assert comparison["stop_owner_audit"]["owner_fires_before_stop"] == 0
+                assert comparison["stop_owner_audit"]["owner_inflight_at_stop"] == 0
+        # 用户最新规则：所有动态波形TIA与TIAEN相同；STATIC原始向量例外。
+        with (folder / "expected.csv").open(encoding="utf-8", newline="") as stream:
+            rule_rows = list(csv.DictReader(stream))
+        if not case.get("static"):
+            assert all(row["o_en_tia_low"] == row["o_clk_tiaen_low"] for row in rule_rows)
         comparison["protocol_sticky_rows"] = {signal: sum(int(row[signal].strip(), 16) != 0 for row in actual_rows)
                                                 for signal in ("o_switch_protocol_error_sticky", "o_transaction_mismatch_sticky",
                                                                "o_wrapper_fault_blocking")}
@@ -120,8 +176,10 @@ def main() -> None:
             raise RuntimeError(f"合法场景出现阻断诊断，需单独核查: {name}")
         for signal, info in comparison["signals"].items():
             info["classification"] = classification(case, signal) if info["mismatch_ticks"] else "MATCH"
+            info["review_status"] = REVIEW_STATUS.get(info["classification"], "UNCLASSIFIED")
             first = info["first"] or {}
             signal_table.append(dict(scenario=name, signal=signal, classification=info["classification"],
+                                     review_status=info["review_status"],
                                      compared_ticks=info["compared_ticks"], unknown_ticks=info["unknown_ticks"],
                                      mismatch_ticks=info["mismatch_ticks"], mismatch_bits=info["mismatch_bits"],
                                      first_tick=first.get("tick", ""), first_macro_tick=first.get("macro_tick", ""),
@@ -142,17 +200,20 @@ def main() -> None:
         (folder / "comparison.json").write_text(json.dumps(comparison, ensure_ascii=False, indent=2), encoding="utf-8")
     classes = Counter(info["classification"] for result in results.values() for info in result["signals"].values()
                       if info["mismatch_ticks"])
+    reviewed = Counter(info["review_status"] for result in results.values() for info in result["signals"].values()
+                       if info["mismatch_ticks"])
     summary = dict(scenarios=len(results), rows=sum(result["rows"] for result in results.values()),
                    status_counts=dict(Counter(result["status"] for result in results.values())),
                    compared_group_ticks=sum(info["compared_ticks"] for result in results.values() for info in result["signals"].values()),
                    unknown_group_ticks=sum(info["unknown_ticks"] for result in results.values() for info in result["signals"].values()),
                    mismatch_group_ticks=sum(info["mismatch_ticks"] for result in results.values() for info in result["signals"].values()),
-                   classification_signal_pairs=dict(classes), capture_sources=dict(sources),
+                   classification_signal_pairs=dict(classes), review_status_signal_pairs=dict(reviewed), capture_sources=dict(sources),
                    all_handshakes_match=True, unexpected_protocol_sticky_rows=0,
                    lifecycle_blocking_state_rows=sum(result["protocol_sticky_rows"]["o_wrapper_fault_blocking"] for result in results.values()),
                    clock_low_errors=sum(result["audit"]["clock_low_errors"] for result in results.values()),
                    stability_errors=sum(result["audit"]["stability_errors"] for result in results.values()))
     package = {"summary": summary, "results": results}
+    package["review_revision"] = "Coordinator follow-up to 9044d3a; user confirmations 2026-10-10"
     (args.evidence / "trial_results.json").write_text(json.dumps(package, ensure_ascii=False, indent=2), encoding="utf-8")
     (args.evidence / "window_provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
     (args.evidence / "owner_window_ranges.json").write_text(json.dumps(known_ranges, ensure_ascii=False, indent=2), encoding="utf-8")
