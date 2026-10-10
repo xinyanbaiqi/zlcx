@@ -1,0 +1,11 @@
+ANCHOR GATE: Python 3.8.5 /d/ppg_zlcx/export_871ff61/tools/b_merge_tools/anchor_check.py 
+stats {"symbol_anchors": 5356, "satisfies_anchors": 96, "label_anchors": 145, "section_refs": 2806, "old_anchor_history": 1169}; external refs 27; errors 0; file index walk (604 files)
+ANCHOR GATE PASSED
+repo=/d/ppg_zlcx/export_871ff61
+out=/d/ppg_zlcx/ppg_unit_tb_runs/export_871ff61_dcr
+vivado_bin=/d/vivado/2019.2/bin
+=== [hier] tb_ppg_adc_dc_recovery ===
+  PASS xvlog=0 xelab=0 xsim=0 finish=1 fail_lines=0 banner=Y dur=44s
+=== DONE: run=1 pass=1 fail=0 ===
+summary: /d/ppg_zlcx/ppg_unit_tb_runs/export_871ff61_dcr/unit_summary.tsv
+exit=0

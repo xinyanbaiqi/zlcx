@@ -1,0 +1,310 @@
+doc	line	old	action	arg1	arg2	reason
+PPG_CONTRACT_CLOSURE_MATRIX.md	934	ppg_control_top.v:295-299	sym	ppg_control_top.v	C_ADC_DRAIN_WATCHDOG_CYCLES	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：参数化位宽约束注释块，同alias P12行
+PPG_CONTRACT_CLOSURE_MATRIX.md	937	ppg_control_top.v:1378-1439	sym	ppg_control_top.v	ppg_system_fault_abort_supervisor_Inst	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内写明“C24 supervisor instantiation”
+PPG_CONTRACT_CLOSURE_MATRIX.md	999	C23:18	text	C23 §18		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1000	C17:3	text	C17 §3		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C10:2	text	C10 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C18:2-2	text	C18 §2–§2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C23:2	text	C23 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1001	C25:2	text	C25 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1002	C23:8	text	C23 §8		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1003	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	1324	ppg_control_top.v:121	sym	ppg_control_top.v	i_adc_physical_idle	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1332	ppg_control_top.v:114	sym	ppg_control_top.v	i_control_abort_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1334	ppg_control_top.v:113	sym	ppg_control_top.v	i_diag_clear_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1334	`:515`	text	C01 §5.2		第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“§5.2（当前:515）”指C01合同行
+PPG_CONTRACT_CLOSURE_MATRIX.md	1354	ppg_control_top.v:99	sym	ppg_control_top.v	i_source_rstn	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1365	ppg_control_top.v:130	sym	ppg_control_top.v	i_test_identity_inject_sample_index	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1368	ppg_control_top.v:131	sym	ppg_control_top.v	i_test_invalid_sample_valid	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1381	`:410`	sym	ppg_control_top.v	measurement_allow_new_transaction	第二轮：“Top内部网`measurement_allow_new_transaction`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1388	ppg_control_top.v:233	sym	ppg_control_top.v	o_characterization_control_reject_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1389	ppg_control_top.v:232	sym	ppg_control_top.v	o_characterization_control_update_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1390	ppg_control_top.v:231	sym	ppg_control_top.v	o_characterization_control_valid	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1391	ppg_control_top.v:234	sym	ppg_control_top.v	o_characterization_protocol_error_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1392	`:1539`	sym	ppg_control_top.v	o_characterization_control_reject_event	第二轮：“Top内部网`o_characterization_control_reject_event`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1392	`:233`	sym	ppg_control_top.v	o_characterization_control_reject_event	第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_reject_event`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1393	`:1538`	sym	ppg_control_top.v	o_characterization_control_update_event	第二轮：“Top内部网`o_characterization_control_update_event`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1393	`:232`	sym	ppg_control_top.v	o_characterization_control_update_event	第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_update_event`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1394	`:1537`	sym	ppg_control_top.v	o_characterization_control_valid	第二轮：“Top内部网`o_characterization_control_valid`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1394	`:231`	sym	ppg_control_top.v	o_characterization_control_valid	第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_control_valid`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1395	`:1524`	sym	ppg_control_top.v	o_ami_datapath_empty	第二轮：“Top内部网`o_ami_datapath_empty`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1395	`:218`	sym	ppg_control_top.v	o_ami_datapath_empty	第二轮：“→Top边界输出:N”即紧前Top内部网`o_ami_datapath_empty`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1398	`:1525`	sym	ppg_control_top.v	o_ami_idac_idle	第二轮：“Top内部网`o_ami_idac_idle`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1398	`:219`	sym	ppg_control_top.v	o_ami_idac_idle	第二轮：“→Top边界输出:N”即紧前Top内部网`o_ami_idac_idle`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1407	`:1540`	sym	ppg_control_top.v	o_characterization_protocol_error_sticky	第二轮：“Top内部网`o_characterization_protocol_error_sticky`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1407	`:234`	sym	ppg_control_top.v	o_characterization_protocol_error_sticky	第二轮：“→Top边界输出:N”即紧前Top内部网`o_characterization_protocol_error_sticky`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1407	`:1523`	sym	ppg_control_top.v	o_scheduler_protocol_error_sticky	第二轮：“Top内部网`o_scheduler_protocol_error_sticky`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1407	`:217`	sym	ppg_control_top.v	o_scheduler_protocol_error_sticky	第二轮：“→Top边界输出:N”即紧前Top内部网`o_scheduler_protocol_error_sticky`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1410	`:408`	sym	ppg_control_top.v	analog_run_enable	第二轮：“Top内部网`analog_run_enable`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1410	`:409`	sym	ppg_control_top.v	measurement_run_enable	第二轮：“Top内部网`measurement_run_enable`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1416	`:1536`	sym	ppg_control_top.v	o_source_characterization_update_ready	第二轮：“Top内部网`o_source_characterization_update_ready`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1416	`:230`	sym	ppg_control_top.v	o_source_characterization_update_ready	第二轮：“→Top边界输出:N”即紧前Top内部网`o_source_characterization_update_ready`同名输出端口
+PPG_CONTRACT_CLOSURE_MATRIX.md	1417	ppg_control_top.v:200	sym	ppg_control_top.v	o_start_ack_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1418	`:409`	sym	ppg_control_top.v	measurement_run_enable	第二轮：“Top内部网`measurement_run_enable`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1418	`:410`	sym	ppg_control_top.v	measurement_allow_new_transaction	第二轮：“Top内部网`measurement_allow_new_transaction`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1418	`:412`	sym	ppg_control_top.v	flag_measurement_start_ack_event	第二轮：“Top内部网`flag_measurement_start_ack_event`（:N）”，按格内网名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1419	ppg_control_top.v:201	sym	ppg_control_top.v	o_stop_ack_event	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1453	ppg_control_top.v:122	sym	ppg_control_top.v	i_analog_ready	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1453	`:74-77`	file	ppg_control_top.v		第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“RTL头注释:74-77已自述该缺口”，Top文件头注释，文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	1467	ppg_control_top.v:108	sym	ppg_control_top.v	i_source_test_mux_ctrl	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1468	ppg_control_top.v:134	sym	ppg_control_top.v	i_context_handover_stall_request	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1499	ppg_control_top.v:215	sym	ppg_control_top.v	o_scheduler_owner_deadline_timeout_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1500	ppg_control_top.v:216	sym	ppg_control_top.v	o_scheduler_completion_mismatch_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1501	ppg_control_top.v:217	sym	ppg_control_top.v	o_scheduler_protocol_error_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1502	ppg_control_top.v:222	sym	ppg_control_top.v	o_ssw_wrapper_idle	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1503	ppg_control_top.v:223	sym	ppg_control_top.v	o_ssw_switch_protocol_error_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1504	ppg_control_top.v:224	sym	ppg_control_top.v	o_ssw_transaction_mismatch_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1505	ppg_control_top.v:225	sym	ppg_control_top.v	o_ssw_owner_deadline_timeout_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1506	ppg_control_top.v:226	sym	ppg_control_top.v	o_ssw_calibration_timeout_sticky	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1509	ppg_control_top.v:119	sym	ppg_control_top.v	i_dout_stage2_low	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1510	ppg_control_top.v:120	sym	ppg_control_top.v	i_clk_stage2_dout_low_async	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1512	ppg_control_top.v:132	sym	ppg_control_top.v	i_test_saturation_inject_valid	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1513	ppg_control_top.v:133	sym	ppg_control_top.v	i_test_calibration_loss_inject_valid	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1571	ppg_control_top.v:292	sym	ppg_control_top.v	o_s2_raw	第二轮：G-FP-01台账“Top边界输入/输出（ppg_control_top.v:N）”指本行端口（第4列）；台账行号与写入时版本有偏移，按格内端口名
+PPG_CONTRACT_CLOSURE_MATRIX.md	1593	semantic_contract.md:297	csec	ppg_system_config_manager_semantic_contract.md		C02语义合同简写；行号取写入时该合同所在小节
+PPG_CONTRACT_CLOSURE_MATRIX.md	1593	`:88-100`	csec	ppg_system_config_manager_semantic_contract.md		续接左侧semantic_contract.md（C02），正式I/O表
+PPG_CONTRACT_CLOSURE_MATRIX.md	1640	semantic_contract.md:297	csec	ppg_system_config_manager_semantic_contract.md		C02语义合同简写
+PPG_CONTRACT_CLOSURE_MATRIX.md	1725	ppg_active_v4_control_plane_integration.v:784	sym	ppg_active_v4_control_plane_integration.v	o_stage1_weight_q16_0	“C03 wrapper (… area)”指C03的Stage1权重0导出端口；:784属Top，另条处理
+PPG_CONTRACT_CLOSURE_MATRIX.md	2220	`:1006`	sym	ppg_adc_measurement_idac_integration.v	o_calibration_sample_valid	左侧引文即AMI的assign o_calibration_sample_valid
+PPG_CONTRACT_CLOSURE_MATRIX.md	2221	`:1007`	sym	ppg_adc_measurement_idac_integration.v	o_calibration_frame_type	本行端口为AMI输出o_calibration_frame_type，锚点为其assign
+PPG_CONTRACT_CLOSURE_MATRIX.md	2224	`:1010`	sym	ppg_adc_measurement_idac_integration.v	o_calibration_request_reason	本行端口为AMI输出o_calibration_request_reason，锚点为其assign
+PPG_CONTRACT_CLOSURE_MATRIX.md	2255	`:1074`	sym	ppg_adc_measurement_idac_integration.v	o_idac_fault_blocking	左侧引文即AMI的assign o_idac_fault_blocking
+PPG_CONTRACT_CLOSURE_MATRIX.md	2257	`:2426,1076`	sym	ppg_adc_measurement_idac_integration.v	startup_search_complete_o	C17输出经AMI内部线startup_search_complete_o（右侧括注）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2258	`:2427,1077`	sym	ppg_adc_measurement_idac_integration.v	idac_idle_o	C17输出经AMI内部线idac_idle_o（右侧括注）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2505	`:993`	sym	ppg_precision_window_integration.v	i_normal_measurement_active	PWI内部把本端口同时送给amb_recheck_scheduler
+PPG_CONTRACT_CLOSURE_MATRIX.md	2517	`:442`	sym	ppg_precision_window_integration.v	dec_return_reason	括注符号dec_return_reason（PWI内部线）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2518	`:443`	sym	ppg_precision_window_integration.v	dec_return_frame_id	括注符号dec_return_frame_id（PWI内部线）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2572	`:942,946`	sym	ppg_adc_measurement_idac_integration.v	flag_detection_transfer,flag_result_fork_all_released	括注两个fork释放符号均在AMI
+PPG_CONTRACT_CLOSURE_MATRIX.md	2575	`:949,2506`	sym	ppg_adc_measurement_idac_integration.v	coarse_valid_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2576	`:949,2507`	sym	ppg_adc_measurement_idac_integration.v	coarse_recovery_calibrated_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2578	`:949,2509`	sym	ppg_adc_measurement_idac_integration.v	flag_unused_output_s1_sat_high	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2579	`:949`	sym	ppg_adc_measurement_idac_integration.v	coarse_saturation_low_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2580	`:949`	sym	ppg_adc_measurement_idac_integration.v	coarse_saturation_high_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2581	`:949,638`	sym	ppg_adc_measurement_idac_integration.v	config_epoch_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2582	`:949,639`	sym	ppg_adc_measurement_idac_integration.v	coef_epoch_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2583	`:949,640`	sym	ppg_adc_measurement_idac_integration.v	dc_result_coef_epoch_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2584	`:949,641`	sym	ppg_adc_measurement_idac_integration.v	result_precision_mode_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2585	`:949,642`	sym	ppg_adc_measurement_idac_integration.v	result_frame_id_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2586	`:949,643`	sym	ppg_adc_measurement_idac_integration.v	result_sample_index_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2587	`:949,644`	sym	ppg_adc_measurement_idac_integration.v	result_color_ir_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2588	`:949,645`	sym	ppg_adc_measurement_idac_integration.v	result_frame_type_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2589	`:949,646,2520`	sym	ppg_adc_measurement_idac_integration.v	result_amb_code_snapshot_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2590	`:949,647`	sym	ppg_adc_measurement_idac_integration.v	result_dc_code_snapshot_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2591	`:949,648`	sym	ppg_adc_measurement_idac_integration.v	result_amb_code_epoch_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2592	`:949,649`	sym	ppg_adc_measurement_idac_integration.v	result_dc_code_epoch_o	C05 unpack结果字段，AMI内同名解包线（payload解包assign）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2621	`:1001`	sym	ppg_adc_measurement_idac_integration.v	i_macro_frame_safe_boundary	AMI-hub行，端口i_macro_frame_safe_boundary在AMI内分送两个调度器
+PPG_CONTRACT_CLOSURE_MATRIX.md	2635	`:1138`	sym	ppg_adc_measurement_idac_integration.v	o_ami_fault_cause	左侧“o_ami_fault_cause=8'h04 dispatch”
+PPG_CONTRACT_CLOSURE_MATRIX.md	2636	`:84`	text	C10 §3		格内写明“§3 (:84, integration module scope)”；写入时:84已漂入§2，按格内节号与标题（§3 集成模块范围）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2652	`:2634`	sym	ppg_adc_measurement_idac_integration.v	o_transaction_start_fire	左侧“AMI's own o_transaction_start_fire”
+PPG_CONTRACT_CLOSURE_MATRIX.md	2682	`:190-200`	csec	PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md		“§6.1 (…)”指C11合同行
+PPG_CONTRACT_CLOSURE_MATRIX.md	2682	`:224-226`	csec	PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md		“§6.1 port table (…)”指C11合同行
+PPG_CONTRACT_CLOSURE_MATRIX.md	2682	ppg_adc_s1_programmable_calibrator.v:58-116	file	ppg_adc_s1_programmable_calibrator.v		整段端口声明（58-116），文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	2697	`:1855`	keep-auto			弱解析结果经人工核对接受
+PPG_CONTRACT_CLOSURE_MATRIX.md	2718	`:1986`	sym	ppg_adc_measurement_idac_integration.v	flag_router_calibration_applied	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2719	`:1987`	sym	ppg_adc_measurement_idac_integration.v	flag_router_saturation_low	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2720	`:1988`	sym	ppg_adc_measurement_idac_integration.v	flag_router_saturation_high	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2721	`:1989`	sym	ppg_adc_measurement_idac_integration.v	dec_router_config_epoch	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2722	`:1990`	sym	ppg_adc_measurement_idac_integration.v	dec_router_coef_epoch	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2723	`:1992`	sym	ppg_adc_measurement_idac_integration.v	dec_router_stage1_raw	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2724	`:1991`	sym	ppg_adc_measurement_idac_integration.v	dec_router_detect_code	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2725	`:1993`	sym	ppg_adc_measurement_idac_integration.v	dec_router_stage1_code_ext	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2726	`:1994`	sym	ppg_adc_measurement_idac_integration.v	dec_router_stage2_raw	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2727	`:1995`	sym	ppg_adc_measurement_idac_integration.v	flag_router_precision_mode	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2728	`:1996`	sym	ppg_adc_measurement_idac_integration.v	dec_router_frame_id	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2729	`:1997`	sym	ppg_adc_measurement_idac_integration.v	dec_router_sample_index	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2730	`:1998`	sym	ppg_adc_measurement_idac_integration.v	flag_router_color_ir	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2731	`:1999`	sym	ppg_adc_measurement_idac_integration.v	dec_router_frame_type	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2732	`:2000`	sym	ppg_adc_measurement_idac_integration.v	dec_router_amb_code_snapshot	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2733	`:2001`	sym	ppg_adc_measurement_idac_integration.v	dec_router_dc_code_snapshot	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2734	`:2002`	sym	ppg_adc_measurement_idac_integration.v	dec_router_amb_code_epoch	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2735	`:2003`	sym	ppg_adc_measurement_idac_integration.v	dec_router_dc_code_epoch	AMI内router输出线同时旁路给fork（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	2736	`:1985`	sym	ppg_adc_measurement_idac_integration.v	ppg_normal_transaction_fork_Inst	AMI内fork例化
+PPG_CONTRACT_CLOSURE_MATRIX.md	2760	`:1931`	sym	ppg_adc_measurement_idac_integration.v	flag_idac_search_dcs_ready	括注符号
+PPG_CONTRACT_CLOSURE_MATRIX.md	2927	`:2138`	keep-auto			弱解析结果经人工核对接受
+PPG_CONTRACT_CLOSURE_MATRIX.md	2985	`:482-500`	csec	PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md		“§11.5 (…)”指C15合同行
+PPG_CONTRACT_CLOSURE_MATRIX.md	2985	ppg_adc_dc_recovery.v:55-145	file	ppg_adc_dc_recovery.v		整段端口声明（55-145），文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	2990	`:2214`	keep-auto			弱解析结果经人工核对接受
+PPG_CONTRACT_CLOSURE_MATRIX.md	3027	`:949`	sym	ppg_adc_measurement_idac_integration.v	coarse_ppg_value_o	“unpacked at (:949) into coarse_ppg_value_o”，AMI结果解包
+PPG_CONTRACT_CLOSURE_MATRIX.md	3070	`:1377`	sym	ppg_control_top.v	ami_fault_active_o	Top内部线（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3079	`:1386`	sym	ppg_control_top.v	sched_fault_valid_o	Top内部线（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3089	`:1396`	sym	ppg_control_top.v	ssw_fault_valid_o	Top内部线（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3119	`:93-395`	file	ppg_adc_measurement_idac_integration.v		AMI全部265行端口声明，文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	3121	`:950`	sym	ppg_adc_measurement_idac_integration.v	flag_precision_takeover_safe	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3124	`:983`	sym	ppg_adc_measurement_idac_integration.v	transaction_start_ready_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3125	`:984`	sym	ppg_adc_measurement_idac_integration.v	o_transaction_start_fire	本行端口o_transaction_start_fire，锚点为其assign
+PPG_CONTRACT_CLOSURE_MATRIX.md	3126	`:985`	sym	ppg_adc_measurement_idac_integration.v	adc_transaction_complete_event_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3127	`:986`	sym	ppg_adc_measurement_idac_integration.v	adc_transaction_success_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3128	`:987`	sym	ppg_adc_measurement_idac_integration.v	adc_complete_sample_index_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3130	`:1015`	sym	ppg_adc_measurement_idac_integration.v	o_measurement_result_valid	本行端口，右侧引文为其assign
+PPG_CONTRACT_CLOSURE_MATRIX.md	3131	`:1017`	sym	ppg_adc_measurement_idac_integration.v	coarse_ppg_value_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3148	`:1034`	sym	ppg_adc_measurement_idac_integration.v	result_precision_mode_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3167	`:1149`	sym	ppg_adc_measurement_idac_integration.v	flag_detection_discard_trigger	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3182	`:1121,1174`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3188	`:1016`	sym	ppg_adc_measurement_idac_integration.v	result_sample_valid_o	AMI内部线/端口（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3189	ppg_idac_code_controller.v:2314	sym	ppg_adc_measurement_idac_integration.v	i_idac_code_safe_boundary	写入时C17不足2314行，该行号属AMI（C17例化端口连线）；符号i_idac_code_safe_boundary在AMI
+PPG_CONTRACT_CLOSURE_MATRIX.md	3215	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C10:7, 10	text	C10 §7、§10		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C13:3	text	C13 §4		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；C13自导入起从无§3.1（§3为Stage1校准字段），本行内容为generation标记交接，取§4.1 Generation and lifecycle pass-through（原文“.1”保留）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3216	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	C16:8-13	text	C16 §8–§13		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	C17:10-12	text	C17 §10–§12		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3217	`:928,1001`	sym	ppg_idac_code_controller.v	CTX_AMB_PENDING_VALID_BIT	写入时两行均为reg_context_next[CTX_AMB_PENDING_VALID_BIT]置位
+PPG_CONTRACT_CLOSURE_MATRIX.md	3228	`:1091,1276`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	flag_red_context_valid,flag_ir_context_valid	本行RED/IR波形上下文锁存，abort立即释放
+PPG_CONTRACT_CLOSURE_MATRIX.md	3228	`:1089,1274`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	flag_red_context_valid,flag_ir_context_valid	本行RED/IR波形上下文锁存，复位清零
+PPG_CONTRACT_CLOSURE_MATRIX.md	3229	`:421-422`	sym	ppg_dynamic_baseline_cross_detector.v	flag_reacquire_clear	左侧引文flag_reacquire_clear = i_reacquire_request_event
+PPG_CONTRACT_CLOSURE_MATRIX.md	3232	`:1499`	sym	ppg_adc_measurement_idac_integration.v	reg_adc_inflight_frame_id	“identity snapshot registers latch”指reg_adc_inflight_*身份快照
+PPG_CONTRACT_CLOSURE_MATRIX.md	3232	`:1604`	sym	ppg_adc_measurement_idac_integration.v	flag_adc_transaction_inflight	本行物理ADC owner，复位清零
+PPG_CONTRACT_CLOSURE_MATRIX.md	3240	ppg_idac_code_controller.v:26	file	ppg_idac_code_controller.v		RTL文件头V2.3修订记录，非代码行，文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	3241	ppg_400hz_frame_calibration_scheduler.v:421	sym	ppg_400hz_frame_calibration_scheduler.v	scheduler_fault_cause_o	右侧引文scheduler_fault_cause_o = …
+PPG_CONTRACT_CLOSURE_MATRIX.md	3241	`:419`	sym	ppg_400hz_frame_calibration_scheduler.v	B_COMPLETION_MISMATCH	调度器故障原因位（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3242	`:48`	file	ppg_sar9_sar15_safe_selection_wrapper.v		SSW文件头V1.4注记，非代码行，文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	3242	`:480`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“o_analog_safe/i_analog_safe ... inverse (:480)”
+PPG_CONTRACT_CLOSURE_MATRIX.md	3246	`:1171-1172`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	本行AMI集成协议sticky，START ACK/诊断清除
+PPG_CONTRACT_CLOSURE_MATRIX.md	3246	`:1170`	sym	ppg_adc_measurement_idac_integration.v	integration_protocol_error_sticky_o	本行AMI集成协议sticky，复位清除
+PPG_CONTRACT_CLOSURE_MATRIX.md	3247	`:521-526,592-613`	sym	ppg_system_config_manager.v	dec_error_code	本行C02命令拒绝（dec_error_code）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3263	C17:11	text	C17 §11		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3265	C23:19	text	C23 §19		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	C18:5	text	C18 §5		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3266	C23:8	text	C23 §8		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	C01:6	text	C01 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3267	C10:6	text	C10 §6		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C10:2	text	C10 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C18:2-2	text	C18 §2–§2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C23:2	text	C23 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3268	C25:2	text	C25 §2		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号
+PPG_CONTRACT_CLOSURE_MATRIX.md	3397	C10:11	text	C10 §11		写入人用冒号写节号（同格/同表为节号写法），解析器误作行号；写入时C10第11行为版本日期，同表“matrix 9.”亦为节号写法
+PPG_CONTRACT_CLOSURE_MATRIX.md	3401	`:66,70,124-143`	sym	ppg_config_cdc_bridge.v	flag_source_request	CDC桥源域寄存器（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3401	ppg_config_cdc_bridge.v:70-190	file	ppg_config_cdc_bridge.v		整段两域实现（70-190），文件级锚点
+PPG_CONTRACT_CLOSURE_MATRIX.md	3408	tb_ppg_precision_window_controller.v:737-758	label	tb_ppg_precision_window_controller.v	PWC-41 new legal START preserves protocol sticky	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：PWC-41的两条检查（另一条为switch-timeout sticky）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3456	wrapper.v:480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	SSW简写；:480为assign o_analog_safe
+PPG_CONTRACT_CLOSURE_MATRIX.md	3557	ppg_sar9_sar15_safe_selection_wrapper.v:480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	右侧引文assign o_analog_safe
+PPG_CONTRACT_CLOSURE_MATRIX.md	3561	`:400-402`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	i_macro_tick	SSW宏帧tick（括注符号）
+PPG_CONTRACT_CLOSURE_MATRIX.md	3585	ppg_sar9_sar15_safe_selection_wrapper.v:25,48,480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	:25/:48为文件头修订记录，:480为assign o_analog_safe
+PPG_CONTRACT_CLOSURE_MATRIX.md	3832	:2	not-anchor			第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“前8项:2项(G-FP-02/G-FP-06)”计数，不是行号
+PPG_ALIAS_MAPPING_TABLE.md	28	ppg_sar9_sar15_safe_selection_wrapper.v:602	tag	ppg_sar9_sar15_safe_selection_wrapper.v	TOP-01	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	34	ppg_sar9_sar15_safe_selection_wrapper.v:379	tag	ppg_sar9_sar15_safe_selection_wrapper.v	TOP-07	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	39	ppg_control_top.v:409	tag	ppg_control_top.v	TOP-12	行ID/本格点名ID在ppg_control_top.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	40	ppg_400hz_frame_calibration_scheduler.v:754	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-13	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	41	ppg_adc_measurement_idac_integration.v:1197	tag	ppg_adc_measurement_idac_integration.v	TOP-16	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	45	ppg_400hz_frame_calibration_scheduler.v:425	tag	ppg_400hz_frame_calibration_scheduler.v	TOP-20	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	45	ppg_system_config_manager.v:394-448	sym	ppg_system_config_manager.v	flag_snapshot_dc_qualification_valid	静态检查侧，写入时:448为该汇总资格
+PPG_ALIAS_MAPPING_TABLE.md	46	ppg_adc_measurement_idac_integration.v:905	tag	ppg_adc_measurement_idac_integration.v	TOP-21	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	48	ppg_adc_measurement_idac_integration.v:1010	tag	ppg_adc_measurement_idac_integration.v	TOP-23	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	86	:1024	not-anchor			“1024-bit CDC payload”位宽，不是行号
+PPG_ALIAS_MAPPING_TABLE.md	90	:12	text	PPG_CONTRACT_CLOSURE_MATRIX.md §12		第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“MATRIX.md:12.14节”用冒号写节号（§12.14），解析器误作第12行；原文“.14”保留
+PPG_ALIAS_MAPPING_TABLE.md	96	ppg_sar9_sar15_safe_selection_wrapper.v:480	sym	ppg_sar9_sar15_safe_selection_wrapper.v	o_analog_safe	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：写入时:480为assign o_analog_safe
+PPG_ALIAS_MAPPING_TABLE.md	108	ppg_adc_measurement_idac_integration.v:1605	sym	ppg_adc_measurement_idac_integration.v	flag_adc_transaction_inflight	本行“AMI物理ADC owner代表行”；写入时:1605为owner交接注释，AMI无G-FP-01本号标签
+PPG_ALIAS_MAPPING_TABLE.md	112	`:26`	file	ppg_idac_code_controller.v		C17文件头V2.3修订记录，文件级锚点
+PPG_ALIAS_MAPPING_TABLE.md	116	ppg_config_cdc_bridge.v:66-190	file	ppg_config_cdc_bridge.v		整段两域实现，文件级锚点
+PPG_ALIAS_MAPPING_TABLE.md	143	tb_ppg_control_top_startup_idac_calibration.v:1278-1305	label	tb_ppg_control_top_startup_idac_calibration.v	PASS SID-06 next-subframe waveform snapshot correctly reflects	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“已补真实断言…见…”指该TB的SID-06下一子帧检查
+PPG_ALIAS_MAPPING_TABLE.md	153	ppg_400hz_frame_calibration_scheduler.v:452	tag	ppg_400hz_frame_calibration_scheduler.v	LFA-01	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	154	ppg_400hz_frame_calibration_scheduler.v:452	tag	ppg_400hz_frame_calibration_scheduler.v	LFA-02	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	156	ppg_400hz_frame_calibration_scheduler.v:876	tag	ppg_400hz_frame_calibration_scheduler.v	LFA-05	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	167	ppg_400hz_frame_calibration_scheduler.v:737	tag	ppg_400hz_frame_calibration_scheduler.v	OIB-02	行ID/本格点名ID在ppg_400hz_frame_calibration_scheduler.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	168	ppg_adc_measurement_idac_integration.v:1024	tag	ppg_adc_measurement_idac_integration.v	OIB-03	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	170	ppg_adc_measurement_idac_integration.v:1745	tag	ppg_adc_measurement_idac_integration.v	OIB-07	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	172	PPG_SESSION_HANDOFF_20260826_2.md:1044-1047	external			会话交接文档未随本仓库快照入库，无法读取
+PPG_ALIAS_MAPPING_TABLE.md	175	PPG_SESSION_HANDOFF_20260826_2.md:1042-1044	external			会话交接文档未随本仓库快照入库，无法读取
+PPG_ALIAS_MAPPING_TABLE.md	176	PPG_SESSION_HANDOFF_20260826_2.md:1042-1044	external			会话交接文档未随本仓库快照入库，无法读取
+PPG_ALIAS_MAPPING_TABLE.md	177	ppg_sar9_sar15_safe_selection_wrapper.v:438	tag	ppg_sar9_sar15_safe_selection_wrapper.v	OIB-01	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	179	ppg_adc_measurement_idac_integration.v:1010	tag	ppg_adc_measurement_idac_integration.v	TOP-23	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已打@satisfies: TOP-23, TOP-24(…)”
+PPG_ALIAS_MAPPING_TABLE.md	246	`:381`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-05	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	246	`:673-674`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-05	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	246	`:727-728`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-05	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	247	`:381`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-06	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	247	`:673-674`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-06	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	247	`:389`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-06	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	248	`:381`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-07	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	248	`:727-728`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-07	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	248	`:388`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ILM-07	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	260	ppg_adc_measurement_idac_integration.v:1745	sym	ppg_adc_measurement_idac_integration.v	reg_result_fork_payload	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：右侧引文reg_result_fork_payload<=enc_dc_result_payload
+PPG_ALIAS_MAPPING_TABLE.md	270	ppg_adc_measurement_idac_integration.v:1745	tag	ppg_adc_measurement_idac_integration.v	ADCN-07	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	271	ppg_adc_measurement_idac_integration.v:1745	tag	ppg_adc_measurement_idac_integration.v	ADCN-08	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	277	ppg_idac_code_controller.v:879	tag	ppg_idac_code_controller.v	ISE-10	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“ISE-10直接追加到…(TRK-07/TRK-08既有锚点)”
+PPG_ALIAS_MAPPING_TABLE.md	277	`:808`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	reg_cal_amb_code	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内写明“SSW自己的…门控快照锁存(:808环境码”；写入时SSW:808为reg_cal_amb_code锁存，解析器误归C17
+PPG_ALIAS_MAPPING_TABLE.md	277	`:847`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	reg_cal_dc_code	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：同上“:847直流码”；写入时SSW:847为reg_cal_dc_code锁存
+PPG_ALIAS_MAPPING_TABLE.md	277	`:652,654,702,704`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-04	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：“锚定在SSW的NORMAL运行波形块”SAR9总线；写入时这些SSW行带ISE-04注释
+PPG_ALIAS_MAPPING_TABLE.md	277	`:642,644,692,694`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-05	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：同上SAR15总线；写入时这些SSW行带ISE-05注释
+PPG_ALIAS_MAPPING_TABLE.md	277	`:642,652`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-07	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“(:642,652追加ISE-07)”
+PPG_ALIAS_MAPPING_TABLE.md	277	`:615`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	reg_control_next	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06 STATIC_BIAS“无条件清零初值”；写入时SSW:615为reg_control_next默认清零
+PPG_ALIAS_MAPPING_TABLE.md	277	`:742`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	reg_cal_amb_code	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06 AMB总线；写入时SSW:742为reg_cal_amb_code码窗
+PPG_ALIAS_MAPPING_TABLE.md	277	`:745`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	CTRL_EN_9_DC	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06“EN_9_DC使能门控”；写入时SSW:745为CTRL_EN_9_DC赋值
+PPG_ALIAS_MAPPING_TABLE.md	277	`:747`	sym	ppg_sar9_sar15_safe_selection_wrapper.v	reg_cal_dc_code	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：ISE-06“DC9码窗”；写入时SSW:747为reg_cal_dc_code码窗
+PPG_ALIAS_MAPPING_TABLE.md	282	`:808`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-02	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	282	`:847`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-02	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	283	`:808`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-03	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	283	`:847`	tag	ppg_sar9_sar15_safe_selection_wrapper.v	ISE-03	行ID/本格点名ID在ppg_sar9_sar15_safe_selection_wrapper.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	296	:2026-09	not-anchor			“**历史**:2026-09-15”日期，不是行号
+PPG_ALIAS_MAPPING_TABLE.md	298	`:837`	csec	PPG_PEAK_VALLEY_WINDOW_DETECTOR_INTERFACE_CONTRACT.md		“PVW-37按合同:837”指C22合同行
+PPG_ALIAS_MAPPING_TABLE.md	302	`:312`	history			记录当时deliverable gate报告的FIR错误行号，属gate输出原文
+PPG_ALIAS_MAPPING_TABLE.md	303	`:3532`	text	PPG_CONTRACT_CLOSURE_MATRIX.md §12.13 Acceptance-D01-01行		“PWC-40有真实映射但矩阵:3532那一行…”；写入时:3532为续行，含PWC-40映射的行为§12.13 Acceptance-D01-01
+PPG_ALIAS_MAPPING_TABLE.md	303	`:10`	csec	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md		“FIR合同:10/:686散文”
+PPG_ALIAS_MAPPING_TABLE.md	303	`:686`	csec	PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md		“FIR合同:10/:686散文”
+PPG_ALIAS_MAPPING_TABLE.md	305	`:1099`	label	tb_ppg_peak_valley_window_detector.v	PVW-01 through PVW-48 ALL PASS	TB末尾cnt_pass/cnt_fail总判定，对应其PASS打印
+PPG_ALIAS_MAPPING_TABLE.md	309	tb_ppg_peak_valley_window_detector.v:534	label	tb_ppg_peak_valley_window_detector.v	PVW-01	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	310	tb_ppg_peak_valley_window_detector.v:536	label	tb_ppg_peak_valley_window_detector.v	PVW-02	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	311	tb_ppg_peak_valley_window_detector.v:538	label	tb_ppg_peak_valley_window_detector.v	PVW-03	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	313	tb_ppg_peak_valley_window_detector.v:550	label	tb_ppg_peak_valley_window_detector.v	PVW-05	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	314	tb_ppg_peak_valley_window_detector.v:560	label	tb_ppg_peak_valley_window_detector.v	PVW-06	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	315	tb_ppg_peak_valley_window_detector.v:571	label	tb_ppg_peak_valley_window_detector.v	PVW-07	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	316	tb_ppg_peak_valley_window_detector.v:586	label	tb_ppg_peak_valley_window_detector.v	PVW-08	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	317	tb_ppg_peak_valley_window_detector.v:595	label	tb_ppg_peak_valley_window_detector.v	PVW-09	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	317	tb_ppg_peak_valley_window_detector.v:615	label	tb_ppg_peak_valley_window_detector.v	PVW-09-WRAP	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-09-WRAP(…)”
+PPG_ALIAS_MAPPING_TABLE.md	319	tb_ppg_peak_valley_window_detector.v:614	label	tb_ppg_peak_valley_window_detector.v	PVW-11	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	320	tb_ppg_peak_valley_window_detector.v:627	label	tb_ppg_peak_valley_window_detector.v	PVW-12	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	321	tb_ppg_peak_valley_window_detector.v:642	label	tb_ppg_peak_valley_window_detector.v	PVW-13	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	322	tb_ppg_peak_valley_window_detector.v:658	label	tb_ppg_peak_valley_window_detector.v	PVW-14	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	323	tb_ppg_peak_valley_window_detector.v:671	label	tb_ppg_peak_valley_window_detector.v	PVW-15	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	324	tb_ppg_peak_valley_window_detector.v:678	label	tb_ppg_peak_valley_window_detector.v	PVW-16	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	325	tb_ppg_peak_valley_window_detector.v:683	label	tb_ppg_peak_valley_window_detector.v	PVW-17	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	326	tb_ppg_peak_valley_window_detector.v:692	label	tb_ppg_peak_valley_window_detector.v	PVW-18	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	327	tb_ppg_peak_valley_window_detector.v:703	label	tb_ppg_peak_valley_window_detector.v	PVW-19	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	328	tb_ppg_peak_valley_window_detector.v:711	label	tb_ppg_peak_valley_window_detector.v	PVW-20	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	329	tb_ppg_peak_valley_window_detector.v:724	label	tb_ppg_peak_valley_window_detector.v	PVW-21	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	330	tb_ppg_peak_valley_window_detector.v:733	label	tb_ppg_peak_valley_window_detector.v	PVW-22	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	331	tb_ppg_peak_valley_window_detector.v:741	label	tb_ppg_peak_valley_window_detector.v	PVW-23	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	332	tb_ppg_peak_valley_window_detector.v:761	label	tb_ppg_peak_valley_window_detector.v	PVW-24	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	333	tb_ppg_peak_valley_window_detector.v:772	label	tb_ppg_peak_valley_window_detector.v	PVW-25	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	334	tb_ppg_peak_valley_window_detector.v:781	label	tb_ppg_peak_valley_window_detector.v	PVW-26	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	335	tb_ppg_peak_valley_window_detector.v:790	label	tb_ppg_peak_valley_window_detector.v	PVW-27	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	336	tb_ppg_peak_valley_window_detector.v:797	label	tb_ppg_peak_valley_window_detector.v	PVW-28	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	337	tb_ppg_peak_valley_window_detector.v:806	label	tb_ppg_peak_valley_window_detector.v	PVW-29	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	338	tb_ppg_peak_valley_window_detector.v:816	label	tb_ppg_peak_valley_window_detector.v	PVW-30	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	339	tb_ppg_peak_valley_window_detector.v:829	label	tb_ppg_peak_valley_window_detector.v	PVW-31	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	340	tb_ppg_peak_valley_window_detector.v:838	label	tb_ppg_peak_valley_window_detector.v	PVW-32	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	340	tb_ppg_peak_valley_window_detector.v:875	label	tb_ppg_peak_valley_window_detector.v	PVW-32-BUSY	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-32-BUSY(…)”
+PPG_ALIAS_MAPPING_TABLE.md	342	tb_ppg_peak_valley_window_detector.v:854	label	tb_ppg_peak_valley_window_detector.v	PVW-34	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	343	tb_ppg_peak_valley_window_detector.v:865	label	tb_ppg_peak_valley_window_detector.v	PVW-35	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	345	tb_ppg_peak_valley_window_detector.v:905	label	tb_ppg_peak_valley_window_detector.v	PVW-37	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	346	tb_ppg_peak_valley_window_detector.v:915	label	tb_ppg_peak_valley_window_detector.v	PVW-38	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	347	tb_ppg_peak_valley_window_detector.v:921	label	tb_ppg_peak_valley_window_detector.v	PVW-39	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	347	tb_ppg_peak_valley_window_detector.v:636	label	tb_ppg_peak_valley_window_detector.v	PVW-39-WRAP	第二轮（统筹10-09裁定：带日期的现行结论一律转换）：格内“已补PVW-39-WRAP(…)”
+PPG_ALIAS_MAPPING_TABLE.md	348	tb_ppg_peak_valley_window_detector.v:969	label	tb_ppg_peak_valley_window_detector.v	PVW-40	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	349	tb_ppg_peak_valley_window_detector.v:978	label	tb_ppg_peak_valley_window_detector.v	PVW-41	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	350	tb_ppg_peak_valley_window_detector.v:989	label	tb_ppg_peak_valley_window_detector.v	PVW-42	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	351	tb_ppg_peak_valley_window_detector.v:1002	label	tb_ppg_peak_valley_window_detector.v	PVW-43	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	352	tb_ppg_peak_valley_window_detector.v:1036	label	tb_ppg_peak_valley_window_detector.v	PVW-44	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	353	tb_ppg_peak_valley_window_detector.v:1056	label	tb_ppg_peak_valley_window_detector.v	PVW-45	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	354	tb_ppg_peak_valley_window_detector.v:1096	label	tb_ppg_peak_valley_window_detector.v	PVW-46	行ID即TB check_case用例名；写入时行号已漂移
+PPG_ALIAS_MAPPING_TABLE.md	358	`:913-953`	csec	PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md		PWC合同验收表
+PPG_ALIAS_MAPPING_TABLE.md	362	`:914-953`	csec	PPG_PRECISION_WINDOW_CONTROLLER_INTERFACE_CONTRACT.md		PWC合同验收表
+PPG_ALIAS_MAPPING_TABLE.md	376	ppg_precision_window_controller.v:548	tag	ppg_precision_window_controller.v	PWC-11	行ID/本格点名ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	391	ppg_precision_window_controller.v:619	tag	ppg_precision_window_controller.v	PWC-26	行ID/本格点名ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	398	ppg_precision_window_controller.v:515	tag	ppg_precision_window_controller.v	PWC-33	行ID/本格点名ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	399	ppg_precision_window_controller.v:684	tag	ppg_precision_window_controller.v	PWC-34	行ID/本格点名ID在ppg_precision_window_controller.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	462	ppg_adc_measurement_idac_integration.v:1024	tag	ppg_adc_measurement_idac_integration.v	P01	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	462	`:1315`	tag	ppg_adc_measurement_idac_integration.v	P01	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	462	ppg_normal_transaction_fork.v:194-309	file	ppg_normal_transaction_fork.v		两分支所有权整段（194-309），文件级锚点
+PPG_ALIAS_MAPPING_TABLE.md	467	ppg_adc_measurement_idac_integration.v:1569	tag	ppg_adc_measurement_idac_integration.v	P06	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	468	ppg_adc_measurement_idac_integration.v:1493	tag	ppg_adc_measurement_idac_integration.v	P08	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	472	ppg_control_top.v:295-299	sym	ppg_control_top.v	C_ADC_DRAIN_WATCHDOG_CYCLES	参数化位宽约束注释块，紧邻C_ADC_DRAIN_WATCHDOG_CYCLES
+PPG_ALIAS_MAPPING_TABLE.md	474	ppg_adc_measurement_idac_integration.v:1223	tag	ppg_adc_measurement_idac_integration.v	P14	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	475	ppg_adc_measurement_idac_integration.v:1223	tag	ppg_adc_measurement_idac_integration.v	LFA-04	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	475	`:1493`	tag	ppg_adc_measurement_idac_integration.v	LFA-04	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	476	ppg_adc_measurement_idac_integration.v:1223	tag	ppg_adc_measurement_idac_integration.v	OIB-08	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	476	`:1493`	tag	ppg_adc_measurement_idac_integration.v	OIB-08	行ID/本格点名ID在ppg_adc_measurement_idac_integration.v有@satisfies标签
+PPG_ALIAS_MAPPING_TABLE.md	562	:6	not-anchor			“D01链…:6段”数量，不是行号
+PPG_ALIAS_MAPPING_TABLE.md	568	ppg_control_top.v:295-299	sym	ppg_control_top.v	C_ADC_DRAIN_WATCHDOG_CYCLES	同P12行

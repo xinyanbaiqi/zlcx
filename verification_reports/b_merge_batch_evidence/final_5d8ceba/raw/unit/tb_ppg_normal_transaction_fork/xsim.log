@@ -1,0 +1,71 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:59:19 2026
+# Process ID: 23596
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_normal_transaction_fork
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_normal_transaction_fork/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_normal_transaction_fork/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_normal_transaction_fork\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_normal_transaction_fork/xsim_script.tcl
+# xsim {snap_tb_ppg_normal_transaction_fork} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: FFK-01 reset clears both output valids
+PASS: FFK-01 empty fork accepts input after reset release
+PASS: FFK-02 one input creates one pending copy per branch (P13 independent storage)
+PASS: FFK-02 measurement receives the complete atomic payload
+PASS: FFK-02 tracking receives only the frozen IDAC fields
+PASS: FFK-02 no branch consumes while both ready inputs are low
+PASS: FFK-03 measurement consumes once while tracking remains pending (P13)
+PASS: FFK-03 tracking payload survives earlier measurement consumption
+PASS: FFK-03 consumed measurement copy is not repeated
+PASS: FFK-03 final tracking handshake releases the transaction
+PASS: FFK-04 tracking consumes once while measurement remains pending (P13)
+PASS: FFK-04 complete measurement payload remains stable after tracking
+PASS: FFK-04 consumed tracking copy is not presented twice
+PASS: FFK-05 both old consumers ready permit same-cycle replacement
+PASS: FFK-05 replacement keeps both branch valids asserted
+PASS: FFK-05 measurement output switches atomically to packet B
+PASS: FFK-05 tracking output switches atomically to packet B
+PASS: FFK-05 packet A is consumed exactly once on both branches
+PASS: FFK-05 packet B releases without an extra duplicate
+PASS: FFK-07 two consecutive packets preserve exact branch counts
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 measurement valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every measurement payload bit remains stable while stalled
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-06 tracking valid remains high during five-cycle backpressure (P13)
+PASS: FFK-06 every tracking field remains stable while IDAC is stalled
+PASS: FFK-08 ignored tracking semantics do not discard measurement
+PASS: FFK-08 measurement keeps the full transaction after IDAC ignore
+PASS: FFK-08 tracking fields remain the accepted packet after controller consumption
+PASS: FFK-08 both branches consume once even when IDAC mode ignores content
+PASS: FFK-09 precondition holds one pending transaction
+PASS: FFK-09 reset interruption clears both pending valids
+PASS: FFK-09 reset blocks new upstream acceptance
+PASS: FFK-09 reset interruption creates no spurious branch transfer
+PASS: FFK-09 fork returns empty after reset release
+PASS: FORK-GEN pending branches carry their latched RUN generation
+PASS: FORK-GEN matching discard clears both branches without transfer
+PASS: ppg_normal_transaction_fork completed FFK-01 through FFK-09
+$finish called at time : 38 us : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v" Line 544
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:59:21 2026...

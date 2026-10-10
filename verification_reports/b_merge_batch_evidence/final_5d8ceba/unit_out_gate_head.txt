@@ -1,0 +1,3 @@
+ANCHOR GATE: Python 3.14.7 /d/PPG/runs_5d8ceba/unit/tools/b_merge_tools/anchor_check.py 
+stats {"symbol_anchors": 5356, "satisfies_anchors": 96, "label_anchors": 145, "section_refs": 2806, "old_anchor_history": 1169}; external refs 27; errors 0; file index walk (608 files)
+ANCHOR GATE PASSED

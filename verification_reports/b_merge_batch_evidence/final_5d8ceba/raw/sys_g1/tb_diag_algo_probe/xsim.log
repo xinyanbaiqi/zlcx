@@ -1,0 +1,154 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 21:26:34 2026
+# Process ID: 27112
+# Current directory: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_diag_algo_probe/xsim.log -mode tcl -source {xsim.dir/snap_tb_diag_algo_probe/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top/xsim_regression_20260906/tb_diag_algo_probe/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_diag_algo_probe/xsim_script.tcl
+# xsim {snap_tb_diag_algo_probe} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS LONGRUN START accepted into RUN, measurement start latched t=5251000
+DIAG PROBE GEN t=158000000 color_ir=0 frame_id=0 target_code=229 unclamped=229 stage1_raw=457
+DIAG PROBE POST_DONE t=161004000 color_ir=0 frame_id=0 target_code=229 coarse_valid=0 coarse_value=0 calibrated_s1=0 calibrated_valid=0
+DIAG PROBE COARSE t=163750000 color_ir=0 frame_id=0 value=-1349
+DIAG PROBE GEN t=238000000 color_ir=1 frame_id=0 target_code=259 unclamped=259 stage1_raw=511
+DIAG PROBE POST_DONE t=241004000 color_ir=1 frame_id=0 target_code=259 coarse_valid=1 coarse_value=-1349 calibrated_s1=229 calibrated_valid=1
+DIAG PROBE GEN t=2658000000 color_ir=0 frame_id=1 target_code=235 unclamped=235 stage1_raw=463
+DIAG PROBE POST_DONE t=2661004000 color_ir=0 frame_id=1 target_code=235 coarse_valid=1 coarse_value=285 calibrated_s1=259 calibrated_valid=1
+DIAG PROBE GEN t=2738000000 color_ir=1 frame_id=1 target_code=257 unclamped=257 stage1_raw=509
+DIAG PROBE POST_DONE t=2741004000 color_ir=1 frame_id=1 target_code=257 coarse_valid=1 coarse_value=-1025 calibrated_s1=235 calibrated_valid=1
+DIAG PROBE GEN t=5158000000 color_ir=0 frame_id=2 target_code=233 unclamped=233 stage1_raw=461
+DIAG PROBE POST_DONE t=5161004000 color_ir=0 frame_id=2 target_code=233 coarse_valid=1 coarse_value=177 calibrated_s1=257 calibrated_valid=1
+DIAG PROBE GEN t=5238000000 color_ir=1 frame_id=2 target_code=264 unclamped=264 stage1_raw=524
+DIAG PROBE POST_DONE t=5241004000 color_ir=1 frame_id=2 target_code=264 coarse_valid=1 coarse_value=-1133 calibrated_s1=233 calibrated_valid=1
+DIAG PROBE GEN t=7658000000 color_ir=0 frame_id=3 target_code=232 unclamped=232 stage1_raw=460
+DIAG PROBE POST_DONE t=7661004000 color_ir=0 frame_id=3 target_code=232 coarse_valid=1 coarse_value=554 calibrated_s1=264 calibrated_valid=1
+DIAG PROBE GEN t=7738000000 color_ir=1 frame_id=3 target_code=262 unclamped=262 stage1_raw=522
+DIAG PROBE POST_DONE t=7741004000 color_ir=1 frame_id=3 target_code=262 coarse_valid=1 coarse_value=-1187 calibrated_s1=232 calibrated_valid=1
+DIAG PROBE GEN t=10158000000 color_ir=0 frame_id=4 target_code=237 unclamped=237 stage1_raw=473
+DIAG PROBE POST_DONE t=10161004000 color_ir=0 frame_id=4 target_code=237 coarse_valid=1 coarse_value=446 calibrated_s1=262 calibrated_valid=1
+DIAG PROBE GEN t=10238000000 color_ir=1 frame_id=4 target_code=268 unclamped=268 stage1_raw=536
+DIAG PROBE POST_DONE t=10241004000 color_ir=1 frame_id=4 target_code=268 coarse_valid=1 coarse_value=-918 calibrated_s1=237 calibrated_valid=1
+DIAG PROBE GEN t=12658000000 color_ir=0 frame_id=5 target_code=235 unclamped=235 stage1_raw=463
+DIAG PROBE POST_DONE t=12661004000 color_ir=0 frame_id=5 target_code=235 coarse_valid=1 coarse_value=770 calibrated_s1=268 calibrated_valid=1
+DIAG PROBE GEN t=12738000000 color_ir=1 frame_id=5 target_code=266 unclamped=266 stage1_raw=526
+DIAG PROBE POST_DONE t=12741004000 color_ir=1 frame_id=5 target_code=266 coarse_valid=1 coarse_value=-1025 calibrated_s1=235 calibrated_valid=1
+DIAG PROBE GEN t=15158000000 color_ir=0 frame_id=6 target_code=241 unclamped=241 stage1_raw=477
+DIAG PROBE POST_DONE t=15161004000 color_ir=0 frame_id=6 target_code=241 coarse_valid=1 coarse_value=662 calibrated_s1=266 calibrated_valid=1
+DIAG PROBE GEN t=15238000000 color_ir=1 frame_id=6 target_code=273 unclamped=273 stage1_raw=541
+DIAG PROBE POST_DONE t=15241004000 color_ir=1 frame_id=6 target_code=273 coarse_valid=1 coarse_value=-702 calibrated_s1=241 calibrated_valid=1
+DIAG PROBE GEN t=17658000000 color_ir=0 frame_id=7 target_code=239 unclamped=239 stage1_raw=475
+DIAG PROBE POST_DONE t=17661004000 color_ir=0 frame_id=7 target_code=239 coarse_valid=1 coarse_value=1040 calibrated_s1=273 calibrated_valid=1
+DIAG PROBE GEN t=17738000000 color_ir=1 frame_id=7 target_code=270 unclamped=270 stage1_raw=538
+DIAG PROBE POST_DONE t=17741004000 color_ir=1 frame_id=7 target_code=270 coarse_valid=1 coarse_value=-810 calibrated_s1=239 calibrated_valid=1
+DIAG PROBE GEN t=20158000000 color_ir=0 frame_id=8 target_code=244 unclamped=244 stage1_raw=488
+DIAG PROBE POST_DONE t=20161004000 color_ir=0 frame_id=8 target_code=244 coarse_valid=1 coarse_value=878 calibrated_s1=270 calibrated_valid=1
+DIAG PROBE GEN t=20238000000 color_ir=1 frame_id=8 target_code=268 unclamped=268 stage1_raw=536
+DIAG PROBE POST_DONE t=20241004000 color_ir=1 frame_id=8 target_code=268 coarse_valid=1 coarse_value=-540 calibrated_s1=244 calibrated_valid=1
+DIAG PROBE GEN t=22658000000 color_ir=0 frame_id=9 target_code=243 unclamped=243 stage1_raw=479
+DIAG PROBE POST_DONE t=22661004000 color_ir=0 frame_id=9 target_code=243 coarse_valid=1 coarse_value=770 calibrated_s1=268 calibrated_valid=1
+DIAG PROBE GEN t=22738000000 color_ir=1 frame_id=9 target_code=275 unclamped=275 stage1_raw=543
+DIAG PROBE POST_DONE t=22741004000 color_ir=1 frame_id=9 target_code=275 coarse_valid=1 coarse_value=-594 calibrated_s1=243 calibrated_valid=1
+DIAG PROBE GEN t=25158000000 color_ir=0 frame_id=10 target_code=241 unclamped=241 stage1_raw=477
+DIAG PROBE POST_DONE t=25161004000 color_ir=0 frame_id=10 target_code=241 coarse_valid=1 coarse_value=1147 calibrated_s1=275 calibrated_valid=1
+DIAG PROBE GEN t=25238000000 color_ir=1 frame_id=10 target_code=272 unclamped=272 stage1_raw=540
+DIAG PROBE POST_DONE t=25241004000 color_ir=1 frame_id=10 target_code=272 coarse_valid=1 coarse_value=-702 calibrated_s1=241 calibrated_valid=1
+DIAG PROBE GEN t=27658000000 color_ir=0 frame_id=11 target_code=246 unclamped=246 stage1_raw=490
+DIAG PROBE POST_DONE t=27661004000 color_ir=0 frame_id=11 target_code=246 coarse_valid=1 coarse_value=986 calibrated_s1=272 calibrated_valid=1
+DIAG PROBE GEN t=27738000000 color_ir=1 frame_id=11 target_code=279 unclamped=279 stage1_raw=555
+DIAG PROBE POST_DONE t=27741004000 color_ir=1 frame_id=11 target_code=279 coarse_valid=1 coarse_value=-432 calibrated_s1=246 calibrated_valid=1
+DIAG PROBE GEN t=30158000000 color_ir=0 frame_id=12 target_code=245 unclamped=245 stage1_raw=489
+DIAG PROBE POST_DONE t=30161004000 color_ir=0 frame_id=12 target_code=245 coarse_valid=1 coarse_value=1363 calibrated_s1=279 calibrated_valid=1
+DIAG PROBE GEN t=30238000000 color_ir=1 frame_id=12 target_code=277 unclamped=277 stage1_raw=553
+DIAG PROBE POST_DONE t=30241004000 color_ir=1 frame_id=12 target_code=277 coarse_valid=1 coarse_value=-486 calibrated_s1=245 calibrated_valid=1
+DIAG PROBE GEN t=32658000000 color_ir=0 frame_id=13 target_code=250 unclamped=250 stage1_raw=494
+DIAG PROBE POST_DONE t=32661004000 color_ir=0 frame_id=13 target_code=250 coarse_valid=1 coarse_value=1255 calibrated_s1=277 calibrated_valid=1
+DIAG PROBE GEN t=32738000000 color_ir=1 frame_id=13 target_code=283 unclamped=283 stage1_raw=559
+DIAG PROBE POST_DONE t=32741004000 color_ir=1 frame_id=13 target_code=283 coarse_valid=1 coarse_value=-217 calibrated_s1=250 calibrated_valid=1
+DIAG PROBE GEN t=35158000000 color_ir=0 frame_id=14 target_code=248 unclamped=248 stage1_raw=492
+DIAG PROBE POST_DONE t=35161004000 color_ir=0 frame_id=14 target_code=248 coarse_valid=1 coarse_value=1579 calibrated_s1=283 calibrated_valid=1
+DIAG PROBE GEN t=35238000000 color_ir=1 frame_id=14 target_code=281 unclamped=281 stage1_raw=557
+DIAG PROBE POST_DONE t=35241004000 color_ir=1 frame_id=14 target_code=281 coarse_valid=1 coarse_value=-324 calibrated_s1=248 calibrated_valid=1
+DIAG PROBE FIR_IN t=50170750000 frame_id=10 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-540 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=52670750000 frame_id=11 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-468 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=55170750000 frame_id=12 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-396 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=57670750000 frame_id=13 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-325 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=60170750000 frame_id=14 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-253 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=62670750000 frame_id=15 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-181 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=65170750000 frame_id=16 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-109 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=67670750000 frame_id=17 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=-37 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=70170750000 frame_id=18 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=35 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=72670750000 frame_id=19 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=107 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=75170750000 frame_id=20 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=179 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=77670750000 frame_id=21 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=250 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=80170750000 frame_id=22 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=322 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=82670750000 frame_id=23 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=395 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=85170750000 frame_id=24 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=467 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=87670750000 frame_id=25 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=539 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=90170750000 frame_id=26 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=610 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=92670750000 frame_id=27 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=682 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=95170750000 frame_id=28 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=754 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=97670750000 frame_id=29 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=826 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=100170750000 frame_id=30 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=898 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=102670750000 frame_id=31 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=970 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=105170750000 frame_id=32 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1042 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=107670750000 frame_id=33 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1114 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=110170750000 frame_id=34 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1185 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=112670750000 frame_id=35 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1257 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=115170750000 frame_id=36 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1329 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=117670750000 frame_id=37 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1401 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=120170750000 frame_id=38 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1473 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=122670750000 frame_id=39 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1545 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=125170750000 frame_id=40 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1617 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=127670750000 frame_id=41 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1688 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=130170750000 frame_id=42 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1760 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=132670750000 frame_id=43 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1832 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=135170750000 frame_id=44 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1904 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=137670750000 frame_id=45 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=1977 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=140170750000 frame_id=46 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=2049 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=142670750000 frame_id=47 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=2120 pv_cfg_valid=1
+DIAG PROBE FIR_IN t=145170750000 frame_id=48 qualified=1 win_sat_lo=0 win_sat_hi=0 fir_sat_lo=0 fir_sat_hi=0 precision=0 frame_type=2 filtered=2192 pv_cfg_valid=1
+DIAG PROBE PEAK t=192672250000 frame_id=63 value=2975
+DIAG longrun progress t=247741004000 red=100 ir=100 cal=0 elapsed_ns=247735753
+DIAG longrun progress t=497741004000 red=200 ir=200 cal=0 elapsed_ns=497735753
+DIAG PROBE VALLEY t=537671250000 frame_id=201 value=-402
+DIAG PROBE PEAK t=597697250000 frame_id=225 value=85
+DIAG longrun progress t=747741004000 red=300 ir=300 cal=0 elapsed_ns=747735753
+DIAG longrun progress t=997741004000 red=400 ir=400 cal=0 elapsed_ns=997735753
+DIAG PROBE VALLEY t=1020171250000 frame_id=395 value=-1003
+DIAG PROBE CROSS t=1057671250000 frame_id=411 baseline_q16=-19454066 slope_q16=-134541
+DIAG PROBE PEAK t=1192698750000 frame_id=464 value=3190
+DIAG longrun progress t=1247742504000 red=500 ir=500 cal=0 elapsed_ns=1247737253
+DIAG longrun progress t=1497742504000 red=600 ir=600 cal=0 elapsed_ns=1497737253
+DIAG PROBE VALLEY t=1537672750000 frame_id=601 value=-186
+DIAG PROBE RETURN_9BIT t=1537672750000 frame_id=605 reason=0
+DIAG PROBE PEAK t=1597697250000 frame_id=625 value=301
+DIAG longrun progress t=1747741004000 red=700 ir=700 cal=0 elapsed_ns=1747735753
+DIAG longrun progress t=1997741004000 red=800 ir=800 cal=0 elapsed_ns=1997735753
+DIAG PROBE VALLEY t=2020171250000 frame_id=795 value=-787
+DIAG PROBE CROSS t=2055171250000 frame_id=810 baseline_q16=-11717189 slope_q16=-169965
+DIAG PROBE PEAK t=2192698750000 frame_id=864 value=3406
+DIAG longrun progress t=2247742504000 red=900 ir=900 cal=0 elapsed_ns=2247737253
+DIAG longrun progress t=2497742504000 red=1000 ir=1000 cal=0 elapsed_ns=2497737253
+DIAG PROBE VALLEY t=2537672750000 frame_id=1001 value=29
+DIAG PROBE RETURN_9BIT t=2537672750000 frame_id=1005 reason=0
+DIAG PROBE PEAK t=2597697250000 frame_id=1025 value=517
+DIAG longrun progress t=2747741004000 red=1100 ir=1100 cal=0 elapsed_ns=2747735753
+PASS RAW-12 post-START run covers real_red=1200 real_ir=1200 elapsed_ns=2997732999 (>=1000) with no 32-bit overflow (time-typed)
+PASS RAW-13 time-typed 12s watchdog (C_SIM_TIMEOUT_NS=6000000000) did not fire and did not substitute for the frame/sample checks above
+DIAG longrun progress t=2997741004000 red=1200 ir=1200 cal=0 elapsed_ns=2997735753
+PASS LONGRUN STOP drained back to CONFIG without fault
+LONGRUN_TB_PASS real_red=1200 real_ir=1200 real_cal=0 elapsed_ns=2997732999 measurement_result_valid=2399
+$finish called at time : 2997746251 ns : File "D:/PPG/runs_5d8ceba/sys_g1/rtl/ppg_control_top/tb_diag_algo_probe.v" Line 873
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:09:46 . Memory (MB): peak = 239.590 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 13516 KB (Peak: 13516 KB), Simulation CPU Usage: 581671 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 21:36:21 2026...

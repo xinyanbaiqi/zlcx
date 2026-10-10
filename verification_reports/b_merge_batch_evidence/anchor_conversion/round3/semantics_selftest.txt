@@ -1,0 +1,13 @@
+OK   o_system_fault_cause         W1   -> ('o_system_fault_cause', 'W1')
+OK   C_W                          W1   -> ('C_W', 'W1')
+OK   i_transaction_sample_index   W2   -> ('i_transaction_sample_index', 'W2')
+OK   i_transaction_sample_index   W3   -> ('i_transaction_sample_index', 'W3')
+OK   analog_run_enable            W4   -> ('analog_run_enable', 'W4')
+OK   i_source_rstn                W5   -> ('i_source_rstn', 'W5')
+OK   flag_interval_hit            W6   -> ('flag_interval_hit', 'W6')
+OK   coarse_valid_o               W7   -> ('coarse_valid_o', 'W7')
+OK   None                         None -> (None, None)
+OK   None                         None -> (None, None)
+OK   z                            W1   -> ('z', 'W1')
+samples 11, failures 0
+exit=0

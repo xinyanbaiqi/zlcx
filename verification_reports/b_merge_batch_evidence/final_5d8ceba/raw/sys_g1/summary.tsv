@@ -1,0 +1,6 @@
+tb_name	filelist	snapshot	xvlog	xelab	xsim	pass_count	fail_count	finished	duration_s	log_dir
+tb_ppg_control_top_longrun	xsim_longrun_filelist.f	snap_tb_ppg_control_top_longrun	0	0	0	5	0	1	2016	xsim_regression_20260906/tb_ppg_control_top_longrun
+tb_diag_algo_probe	xsim_diag_filelist.f	snap_tb_diag_algo_probe	0	0	0	5	0	1	601	xsim_regression_20260906/tb_diag_algo_probe
+tb_ppg_real_raw_generator_selfcheck	xsim_raw_generator_selfcheck_filelist.f	snap_tb_ppg_real_raw_generator_selfcheck	0	0	0	40	0	1	8	xsim_regression_20260906/tb_ppg_real_raw_generator_selfcheck
+tb_ppg_control_top	xsim_main_filelist.f	snap_tb_ppg_control_top	0	0	0	73	0	1	25	xsim_regression_20260906/tb_ppg_control_top
+tb_ppg_control_top_baseline_cross	xsim_baseline_cross_filelist.f	snap_tb_ppg_control_top_baseline_cross	0	0	0	75	0	1	533	xsim_regression_20260906/tb_ppg_control_top_baseline_cross

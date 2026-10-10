@@ -1,0 +1,15 @@
+errors 29 -> 29 ; strict_warnings 1 -> 1
+by_rule baseline: {'VG014': 1, 'VG061': 2, 'VG066': 7, 'VG060': 3, 'COMMENT_COMMENT_PLACEMENT': 17}
+by_rule branch  : {'VG014': 1, 'VG061': 2, 'VG066': 7, 'VG060': 3, 'COMMENT_COMMENT_PLACEMENT': 17}
+per file (file, rule, severity): baseline -> branch
+  ppg_400hz_frame_calibration_scheduler.v comment_gate error: 4 -> 4
+  ppg_adc_measurement_idac_integration.v comment_gate error: 9 -> 9
+  ppg_adc_measurement_idac_integration.v comments.repeated_semantic error: 1 -> 1
+  ppg_adc_measurement_idac_integration.v output.bridge warning: 1 -> 1
+  ppg_adc_measurement_idac_integration.v regions.declaration error: 1 -> 1
+  ppg_adc_s1_redundancy_corrector.v comment_gate error: 3 -> 3
+  ppg_sar9_sar15_safe_selection_wrapper.v comments.region_anchor error: 3 -> 3
+  ppg_sar9_sar15_safe_selection_wrapper.v comments.repeated_semantic error: 6 -> 6
+  ppg_sar9_sar15_safe_selection_wrapper.v regions.assign error: 1 -> 1
+  ppg_system_fault_abort_supervisor.v comment_gate error: 1 -> 1
+issue (file, rule, severity, message without line numbers) differences: 0

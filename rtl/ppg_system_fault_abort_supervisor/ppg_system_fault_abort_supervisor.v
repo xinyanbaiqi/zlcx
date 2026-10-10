@@ -231,7 +231,7 @@ module ppg_system_fault_abort_supervisor
 			(i_ssw_fault_cause == 8'h21) ? (16'h0010) :
 			(i_ssw_fault_cause == 8'h22) ? (16'h0020) : (16'h0000)
 		) : (16'h0000)) |
-		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开；AMI连续完成丢失8'h06占bit 9、ADC长期忙8'h07占bit 10
+		(flag_watchdog_timeout_fire ? (16'h0040) : (16'h0000)); // 按合同3节固定cause到汇总位映射表逐路展开；AMI连续完成丢失8'h06占bit 9、ADC长期忙8'h07占bit 10 @satisfies: P09
 
 	//---------------输出信号连线---------------//
 	assign o_system_fault_blocking = system_fault_blocking_o; // 导出 o_system_fault_blocking
@@ -260,7 +260,7 @@ module ppg_system_fault_abort_supervisor
 		end else if(flag_new_any == 1'b1)begin
 			system_fault_blocking_o <= 1'b1;    // 新记录到达立即开启或维持episode
 		end else if(flag_episode_close_condition == 1'b1)begin
-			system_fault_blocking_o <= 1'b0;    // 全部本地条件恢复后关闭episode
+			system_fault_blocking_o <= 1'b0;    // 全部本地条件恢复后关闭episode；AMI阻断类故障经STOPPING排空、各lane落下后由此关闭，无需复位即可重新START @satisfies: SUP-08
 		end
 	end
 

@@ -1,0 +1,75 @@
+PASS BASELINE_CROSS STOP drained back to CONFIG without fault
+PASS BASELINE_CROSS main sequence reached target red=700 within watchdog budget
+PASS D01 Acceptance-D01-01a real in-flight state (C20 candidate_active=0, C22 active_peak_valid=1) safely drained at STOP with zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events (peak=5 valley=3 cross=1 return=1 unchanged) and C20/C22/C23 all settled to o_local_empty=1
+PASS D01 Acceptance-D01-01b 250 real RED transactions driven with peak_valley_config_valid=0 produced zero new formal PEAK/VALLEY/CROSS/RETURN_9BIT events, C20/C22/C23 o_local_empty held 1 throughout and C23 never entered FINE window
+PASS D01 Acceptance-D01-01b reversibility: real PEAK detection resumed (peak_count=6) immediately after restoring peak_valley_config_valid=1, confirming a single reversible gate with no second producer
+PASS GROUP12_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across real_red=1106 real_ir=1104 transactions
+PASS GROUP1_BASELINE_FORMULA recomputed B[f]=-19454066 matches RTL o_cross_baseline_q16 peak_value=85 peak_frame=225 cross_frame=411 frame_delta=186 slope=-134541
+PASS GROUP1_BSL04_CHECK_A first PEAK live_frame_id=77 peak_frame_id=63 diff=14 >= 10
+PASS GROUP1_EXISTENCE real PEAK/VALLEY warmup cycle observed peak_count=4 valley_count=3
+PASS GROUP1_PVW17_CHECK_B first PEAK frame_id=63 theoretical_rise_corner=60 diff=3 <= tol=11
+PASS GROUP2_BSL04_CHECK_A first CROSS live_frame_id=423 cross_frame_id=411 diff=12 >= 10
+PASS GROUP2_CODE_SNAPSHOT_STABILITY AMB/DC snapshot+epoch unchanged across transition amb_snapshot=64 amb_epoch=1 dc_snapshot=80 dc_epoch=1
+PASS GROUP2_EXISTENCE real CROSS/SAR15-entry/RETURN_9BIT cycle observed cross_count=1 return_count=1
+PASS GROUP2_REAL_DATAPATH cross frame_id=411 sample_index=822 traced to a real RED FIR handshake at candidate_start
+PASS GROUP2_SAFE_BOUNDARY fine_window_start_event committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle
+PASS GROUP2_SAMPLE_CONTINUITY sample_index continuous across transition pretransition=847 posttransition=848
+PASS JNT-01 (jnt 2/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-09 (jnt 54/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS LONGRUN START accepted into RUN, measurement start latched t=1134751000
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS N01 all four PWI consumers (FIR/baseline/peak-valley/precision) individually settled to local-empty after the discard broadcast cleared them
+PASS N01 real detection-generation discard fired at STOP while downstream datapath was genuinely non-empty (detection_pending_at_stop=0)
+PASS N08 scope-only detection discard correctly reported identity_valid=0 (AMI's own fork had already handed off before STOP)

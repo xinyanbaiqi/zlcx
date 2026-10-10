@@ -1,0 +1,27 @@
+# Final strip proof at f9e981b vs 7a8eabf (every .v file changed by the batch)
+
+## RTL: comments removed
+IDENTICAL rtl/ppg_400hz_frame_calibration_scheduler/ppg_400hz_frame_calibration_scheduler.v (raw changed)
+IDENTICAL rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v (raw changed)
+IDENTICAL rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v (raw changed)
+IDENTICAL rtl/ppg_amb_recheck_scheduler/ppg_amb_recheck_scheduler.v (raw changed)
+IDENTICAL rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v (raw changed)
+IDENTICAL rtl/ppg_system_fault_abort_supervisor/ppg_system_fault_abort_supervisor.v (raw changed)
+exit=0
+
+## TB: comments and string-literal bodies removed
+IDENTICAL rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v (raw changed)
+IDENTICAL rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v (raw changed)
+IDENTICAL rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v (raw changed)
+IDENTICAL rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v (raw changed)
+IDENTICAL rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v (raw changed)
+IDENTICAL rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v (raw changed)
+IDENTICAL rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v (raw changed)
+exit=0
+
+## RTL/TB changes since the final regression commit 5d8ceba
+ .../ppg_system_fault_abort_supervisor.v                                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+## Other changed files under rtl/ (non-.v)
+(none)

@@ -1,0 +1,75 @@
+PASS GROUP1_BASELINE_FORMULA recomputed B[f]=-19454066 matches RTL o_cross_baseline_q16 peak_value=85 peak_frame=225 cross_frame=411 frame_delta=186 slope=-134541
+PASS GROUP1_BSL04_CHECK_A first PEAK live_frame_id=77 peak_frame_id=63 diff=14 >= 10
+PASS GROUP1_EXISTENCE real PEAK/VALLEY warmup cycle observed peak_count=4 valley_count=3
+PASS GROUP1_PVW17_CHECK_B first PEAK frame_id=63 theoretical_rise_corner=60 diff=3 <= tol=11
+PASS GROUP2_BSL04_CHECK_A first CROSS live_frame_id=423 cross_frame_id=411 diff=12 >= 10
+PASS GROUP2_CODE_SNAPSHOT_STABILITY AMB/DC snapshot+epoch unchanged across transition amb_snapshot=64 amb_epoch=1 dc_snapshot=80 dc_epoch=1
+PASS GROUP2_EXISTENCE real CROSS/SAR15-entry/RETURN_9BIT cycle observed cross_count=1 return_count=1
+PASS GROUP2_REAL_DATAPATH cross frame_id=411 sample_index=822 traced to a real RED FIR handshake at candidate_start
+PASS GROUP2_SAFE_BOUNDARY fine_window_start_event committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle
+PASS GROUP2_SAMPLE_CONTINUITY sample_index continuous across transition pretransition=847 posttransition=848
+PASS GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 PEAK frame_id=464 bounded within [sar15_entry=424, last_real_red_sar15=467]
+PASS GROUP3_CENTER_SAMPLE_IDENTITY first SAR15 VALLEY frame_id=601 bounded within [sar15_entry=424, last_real_red_sar15=605]
+PASS GROUP3_EXISTENCE real SAR15-phase PEAK(frame_id=464)/VALLEY(frame_id=601)/safe-return cycle observed
+PASS GROUP3_PEAK_BEFORE_VALLEY_ORDER first SAR15 PEAK frame_id=464 strictly before first SAR15 VALLEY frame_id=601
+PASS GROUP3_PROTOCOL_STICKY all blocking scheduler/AMI/SSW/characterization/discard protocol-error stickies stayed 0 across real_red=700 real_ir=698 transactions
+PASS GROUP3_RETURN_REQUEST first RETURN_9BIT reason=VALLEY_CONFIRMED frame_id=605 >= confirmed_valley_frame_id=601 same_cycle=1
+PASS GROUP3_SAFE_RETURN_COMMIT SAR15->SAR9 return committed only with frame_safe_boundary+precision_takeover_safe+analog_safe asserted and physical ADC idle at the actual commit cycle
+PASS JNT-01 (jnt 2/54)
+PASS JNT-02-IR-PREESTABLISH (jnt 7/54)
+PASS JNT-02A (jnt 4/54)
+PASS JNT-02B (jnt 10/54)
+PASS JNT-03-IDAC (jnt 8/54)
+PASS JNT-03A (jnt 12/54)
+PASS JNT-03B (jnt 17/54)
+PASS JNT-04 (jnt 18/54)
+PASS JNT-04-IDAC (jnt 15/54)
+PASS JNT-05A (jnt 21/54)
+PASS JNT-05B (jnt 25/54)
+PASS JNT-06 (jnt 30/54)
+PASS JNT-07A (jnt 33/54)
+PASS JNT-07B (jnt 36/54)
+PASS JNT-07C (jnt 38/54)
+PASS JNT-07D (jnt 40/54)
+PASS JNT-07E (jnt 43/54)
+PASS JNT-07F (jnt 45/54)
+PASS JNT-08 (jnt 51/54)
+PASS JNT-09 (jnt 54/54)
+PASS JNT-09-STARTUP (jnt 53/54)
+PASS JNT-DONE-WAIT (jnt 16/54)
+PASS JNT-DONE-WAIT (jnt 24/54)
+PASS JNT-DONE-WAIT (jnt 37/54)
+PASS JNT-DONE-WAIT (jnt 44/54)
+PASS JNT-DONE-WAIT (jnt 50/54)
+PASS JNT-DONE-WAIT (jnt 9/54)
+PASS JNT-OWNER-WAIT (jnt 11/54)
+PASS JNT-OWNER-WAIT (jnt 20/54)
+PASS JNT-OWNER-WAIT (jnt 27/54)
+PASS JNT-OWNER-WAIT (jnt 3/54)
+PASS JNT-OWNER-WAIT (jnt 32/54)
+PASS JNT-OWNER-WAIT (jnt 39/54)
+PASS JNT-OWNER-WAIT (jnt 47/54)
+PASS JNT-PHASE-ORDER (jnt 13/54)
+PASS JNT-PHASE-ORDER (jnt 22/54)
+PASS JNT-PHASE-ORDER (jnt 28/54)
+PASS JNT-PHASE-ORDER (jnt 34/54)
+PASS JNT-PHASE-ORDER (jnt 41/54)
+PASS JNT-PHASE-ORDER (jnt 48/54)
+PASS JNT-PHASE-ORDER (jnt 5/54)
+PASS JNT-Q3-RELEASE (jnt 14/54)
+PASS JNT-Q3-RELEASE (jnt 23/54)
+PASS JNT-Q3-RELEASE (jnt 29/54)
+PASS JNT-Q3-RELEASE (jnt 35/54)
+PASS JNT-Q3-RELEASE (jnt 42/54)
+PASS JNT-Q3-RELEASE (jnt 49/54)
+PASS JNT-Q3-RELEASE (jnt 6/54)
+PASS JNT-STARTUP-READY (jnt 1/54)
+PASS JNT-STARTUP-READY (jnt 19/54)
+PASS JNT-STARTUP-READY (jnt 26/54)
+PASS JNT-STARTUP-READY (jnt 31/54)
+PASS JNT-STARTUP-READY (jnt 46/54)
+PASS JNT-STARTUP-READY (jnt 52/54)
+PASS LONGRUN START accepted into RUN, measurement start latched t=1134751000
+PASS LONGRUN legal NORMAL dual-optical MANUAL commit
+PASS PEAK_VALLEY_RETURN STOP drained back to CONFIG without fault
+PASS PEAK_VALLEY_RETURN main sequence reached target red=700 within watchdog budget

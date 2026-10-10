@@ -1,0 +1,5445 @@
+[
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 855,
+"file": "ppg_dual_precision_top.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 855,
+"file": "ppg_dual_precision_top.v",
+"sym": "i_source_clk",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 855,
+"file": "ppg_dual_precision_top.v",
+"sym": "i_source_rstn",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 855,
+"file": "ppg_dual_precision_top.v",
+"sym": "i_source_config",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1340,
+"file": "ppg_control_top.v",
+"sym": "i_active_config_valid",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1340,
+"file": "ppg_control_top.v",
+"sym": "o_active_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1340,
+"file": "ppg_control_top.v",
+"sym": "i_active_config_valid",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1340,
+"file": "ppg_control_top.v",
+"sym": "o_active_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1341,
+"file": "ppg_control_top.v",
+"sym": "i_active_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1342,
+"file": "ppg_control_top.v",
+"sym": "i_adc_idle",
+"connections": 4,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1342,
+"file": "ppg_control_top.v",
+"sym": "i_adc_idle",
+"connections": 4,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1342,
+"file": "ppg_control_top.v",
+"sym": "i_adc_idle",
+"connections": 4,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1342,
+"file": "ppg_control_top.v",
+"sym": "i_adc_idle",
+"connections": 4,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "o_allow_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "o_allow_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1343,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1344,
+"file": "ppg_control_top.v",
+"sym": "i_ami_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1344,
+"file": "ppg_control_top.v",
+"sym": "o_wrapper_fault_blocking",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "o_analog_safe",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "o_analog_safe",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1345,
+"file": "ppg_control_top.v",
+"sym": "o_analog_safe",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1346,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1346,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_frame_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1347,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_local_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1347,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_local_tick",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1348,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_subframe_index",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1348,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_subframe_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1351,
+"file": "ppg_control_top.v",
+"sym": "i_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1351,
+"file": "ppg_control_top.v",
+"sym": "o_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1352,
+"file": "ppg_control_top.v",
+"sym": "i_status_clear_event",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1353,
+"file": "ppg_control_top.v",
+"sym": "i_idac_code_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1353,
+"file": "ppg_control_top.v",
+"sym": "o_idac_code_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1353,
+"file": "ppg_control_top.v",
+"sym": "i_idac_code_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1353,
+"file": "ppg_control_top.v",
+"sym": "o_idac_code_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1354,
+"file": "ppg_control_top.v",
+"sym": "i_idac_idle",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1354,
+"file": "ppg_control_top.v",
+"sym": "o_idac_idle",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1355,
+"file": "ppg_control_top.v",
+"sym": "i_initial_precision",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1355,
+"file": "ppg_control_top.v",
+"sym": "o_initial_precision",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1356,
+"file": "ppg_control_top.v",
+"sym": "i_input_source",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1356,
+"file": "ppg_control_top.v",
+"sym": "o_input_source",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1356,
+"file": "ppg_control_top.v",
+"sym": "i_input_source",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1356,
+"file": "ppg_control_top.v",
+"sym": "o_input_source",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1357,
+"file": "ppg_control_top.v",
+"sym": "i_macro_frame_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1357,
+"file": "ppg_control_top.v",
+"sym": "o_macro_frame_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1357,
+"file": "ppg_control_top.v",
+"sym": "i_macro_frame_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1357,
+"file": "ppg_control_top.v",
+"sym": "o_macro_frame_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1358,
+"file": "ppg_control_top.v",
+"sym": "i_macro_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1358,
+"file": "ppg_control_top.v",
+"sym": "o_macro_tick",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1359,
+"file": "ppg_control_top.v",
+"sym": "i_measurement_result_discard_event",
+"connections": 1,
+"instances": [
+"ppg_system_fault_abort_supervisor_Inst(ppg_system_fault_abort_supervisor)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1360,
+"file": "ppg_control_top.v",
+"sym": "i_normal_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1360,
+"file": "ppg_control_top.v",
+"sym": "o_normal_frame_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1361,
+"file": "ppg_control_top.v",
+"sym": "i_normal_measurement_eligible",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1361,
+"file": "ppg_control_top.v",
+"sym": "o_normal_measurement_eligible",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1362,
+"file": "ppg_control_top.v",
+"sym": "i_optical_mode",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1362,
+"file": "ppg_control_top.v",
+"sym": "o_optical_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1362,
+"file": "ppg_control_top.v",
+"sym": "i_optical_mode",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1362,
+"file": "ppg_control_top.v",
+"sym": "o_optical_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1363,
+"file": "ppg_control_top.v",
+"sym": "i_precision_mode_committed",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_run_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_run_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_run_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1365,
+"file": "ppg_control_top.v",
+"sym": "o_run_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "o_run_generation",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "o_run_generation",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1366,
+"file": "ppg_control_top.v",
+"sym": "o_run_generation",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "o_run_profile",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "o_run_profile",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1367,
+"file": "ppg_control_top.v",
+"sym": "o_run_profile",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1368,
+"file": "ppg_control_top.v",
+"sym": "i_safe_frame_id",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1368,
+"file": "ppg_control_top.v",
+"sym": "o_safe_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1369,
+"file": "ppg_control_top.v",
+"sym": "i_sar_timing_idle",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1369,
+"file": "ppg_control_top.v",
+"sym": "o_sar_timing_idle",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1370,
+"file": "ppg_control_top.v",
+"sym": "i_source_update_valid",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1374,
+"file": "ppg_control_top.v",
+"sym": "i_source_update_valid",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1375,
+"file": "ppg_control_top.v",
+"sym": "i_ssw_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1375,
+"file": "ppg_control_top.v",
+"sym": "o_wrapper_fault_blocking",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1376,
+"file": "ppg_control_top.v",
+"sym": "i_start_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1376,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1376,
+"file": "ppg_control_top.v",
+"sym": "i_start_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1376,
+"file": "ppg_control_top.v",
+"sym": "i_start_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1376,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1377,
+"file": "ppg_control_top.v",
+"sym": "i_static_characterization_enable",
+"connections": 2,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1377,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1377,
+"file": "ppg_control_top.v",
+"sym": "i_static_characterization_enable",
+"connections": 2,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1377,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1378,
+"file": "ppg_control_top.v",
+"sym": "i_stop_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1378,
+"file": "ppg_control_top.v",
+"sym": "i_stop_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1378,
+"file": "ppg_control_top.v",
+"sym": "i_stop_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1379,
+"file": "ppg_control_top.v",
+"sym": "i_stop_episode_active",
+"connections": 1,
+"instances": [
+"ppg_system_fault_abort_supervisor_Inst(ppg_system_fault_abort_supervisor)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1379,
+"file": "ppg_control_top.v",
+"sym": "o_stop_episode_active",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1381,
+"file": "ppg_control_top.v",
+"sym": "i_switch_hold_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1381,
+"file": "ppg_control_top.v",
+"sym": "o_switch_hold_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1382,
+"file": "ppg_control_top.v",
+"sym": "i_system_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1387,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1387,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1388,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1388,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1389,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_color_ir",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1389,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_color_ir",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1390,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1390,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1391,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1391,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1392,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_frame_id",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1392,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1393,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_frame_type",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1393,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_type",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1394,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1394,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1395,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_sample_index",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1395,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_sample_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1396,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_start_valid",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1396,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_start_valid",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1398,
+"file": "ppg_control_top.v",
+"sym": "o_active_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1398,
+"file": "ppg_control_top.v",
+"sym": "i_active_config_valid",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1398,
+"file": "ppg_control_top.v",
+"sym": "i_active_config_valid",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1399,
+"file": "ppg_control_top.v",
+"sym": "o_allow_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1399,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1399,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1400,
+"file": "ppg_control_top.v",
+"sym": "o_analog_safe",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1400,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1400,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1400,
+"file": "ppg_control_top.v",
+"sym": "i_analog_safe",
+"connections": 3,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1401,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_frame_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1401,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1402,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_local_tick",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1402,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_local_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1403,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_sample_ready",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1403,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_sample_ready",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1404,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_sample_valid",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1404,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_sample_valid",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1405,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_subframe_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1405,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_subframe_index",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1406,
+"file": "ppg_control_top.v",
+"sym": "o_control_reject_event",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1407,
+"file": "ppg_control_top.v",
+"sym": "o_control_update_event",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1408,
+"file": "ppg_control_top.v",
+"sym": "o_control_valid",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1409,
+"file": "ppg_control_top.v",
+"sym": "o_protocol_error_sticky",
+"connections": 2,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1410,
+"file": "ppg_control_top.v",
+"sym": "o_control_reject_event",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1411,
+"file": "ppg_control_top.v",
+"sym": "o_control_update_event",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1412,
+"file": "ppg_control_top.v",
+"sym": "o_control_valid",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1413,
+"file": "ppg_control_top.v",
+"sym": "o_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1413,
+"file": "ppg_control_top.v",
+"sym": "i_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1415,
+"file": "ppg_control_top.v",
+"sym": "o_idac_code_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1415,
+"file": "ppg_control_top.v",
+"sym": "i_idac_code_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1415,
+"file": "ppg_control_top.v",
+"sym": "i_idac_code_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1416,
+"file": "ppg_control_top.v",
+"sym": "o_idac_idle",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1416,
+"file": "ppg_control_top.v",
+"sym": "i_idac_idle",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1417,
+"file": "ppg_control_top.v",
+"sym": "o_initial_precision",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1417,
+"file": "ppg_control_top.v",
+"sym": "i_initial_precision",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1418,
+"file": "ppg_control_top.v",
+"sym": "o_input_source",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1418,
+"file": "ppg_control_top.v",
+"sym": "i_input_source",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1418,
+"file": "ppg_control_top.v",
+"sym": "i_input_source",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1419,
+"file": "ppg_control_top.v",
+"sym": "o_macro_frame_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1419,
+"file": "ppg_control_top.v",
+"sym": "i_macro_frame_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1419,
+"file": "ppg_control_top.v",
+"sym": "i_macro_frame_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1420,
+"file": "ppg_control_top.v",
+"sym": "o_macro_tick",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1420,
+"file": "ppg_control_top.v",
+"sym": "i_macro_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1422,
+"file": "ppg_control_top.v",
+"sym": "o_normal_frame_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1422,
+"file": "ppg_control_top.v",
+"sym": "i_normal_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1423,
+"file": "ppg_control_top.v",
+"sym": "o_normal_measurement_eligible",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1423,
+"file": "ppg_control_top.v",
+"sym": "i_normal_measurement_eligible",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1424,
+"file": "ppg_control_top.v",
+"sym": "o_optical_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1424,
+"file": "ppg_control_top.v",
+"sym": "i_optical_mode",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1424,
+"file": "ppg_control_top.v",
+"sym": "i_optical_mode",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1425,
+"file": "ppg_control_top.v",
+"sym": "o_protocol_error_sticky",
+"connections": 2,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1425,
+"file": "ppg_control_top.v",
+"sym": "o_protocol_error_sticky",
+"connections": 2,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1428,
+"file": "ppg_control_top.v",
+"sym": "o_run_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1428,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1428,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1428,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1428,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1429,
+"file": "ppg_control_top.v",
+"sym": "o_run_generation",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1429,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1429,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1429,
+"file": "ppg_control_top.v",
+"sym": "i_run_generation",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1430,
+"file": "ppg_control_top.v",
+"sym": "o_run_profile",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1430,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1430,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1430,
+"file": "ppg_control_top.v",
+"sym": "i_run_profile",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1431,
+"file": "ppg_control_top.v",
+"sym": "o_safe_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1431,
+"file": "ppg_control_top.v",
+"sym": "i_safe_frame_id",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1432,
+"file": "ppg_control_top.v",
+"sym": "o_sar_timing_idle",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1432,
+"file": "ppg_control_top.v",
+"sym": "i_sar_timing_idle",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1433,
+"file": "ppg_control_top.v",
+"sym": "o_source_update_ready",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1434,
+"file": "ppg_control_top.v",
+"sym": "o_source_update_ready",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "o_static_characterization_enable",
+"connections": 1,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_static_characterization_enable",
+"connections": 2,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_static_characterization_enable",
+"connections": 2,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_run_enable",
+"connections": 4,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_start_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1436,
+"file": "ppg_control_top.v",
+"sym": "i_start_ack_event",
+"connections": 3,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1438,
+"file": "ppg_control_top.v",
+"sym": "o_stop_episode_active",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1438,
+"file": "ppg_control_top.v",
+"sym": "i_stop_episode_active",
+"connections": 1,
+"instances": [
+"ppg_system_fault_abort_supervisor_Inst(ppg_system_fault_abort_supervisor)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1439,
+"file": "ppg_control_top.v",
+"sym": "o_switch_hold_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1439,
+"file": "ppg_control_top.v",
+"sym": "i_switch_hold_new_transaction",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1457,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1457,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1458,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1458,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1459,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_color_ir",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1459,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_color_ir",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1460,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1460,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1461,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1461,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1462,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1462,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_frame_id",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1463,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_type",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1463,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_frame_type",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1464,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1464,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1465,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_sample_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1465,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_sample_index",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1466,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_start_valid",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1466,
+"file": "ppg_control_top.v",
+"sym": "i_transaction_start_valid",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1467,
+"file": "ppg_control_top.v",
+"sym": "o_wrapper_fault_blocking",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1467,
+"file": "ppg_control_top.v",
+"sym": "i_ssw_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1467,
+"file": "ppg_control_top.v",
+"sym": "o_wrapper_fault_blocking",
+"connections": 2,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1467,
+"file": "ppg_control_top.v",
+"sym": "i_ami_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1484,
+"file": "ppg_control_top.v",
+"sym": "o_config_transport_busy",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1484,
+"file": "ppg_control_top.v",
+"sym": "o_config_transport_busy",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1516,
+"file": "ppg_control_top.v",
+"sym": "o_launch_timeout_sticky",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1517,
+"file": "ppg_control_top.v",
+"sym": "o_owner_deadline_timeout_sticky",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1518,
+"file": "ppg_control_top.v",
+"sym": "o_completion_mismatch_sticky",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1519,
+"file": "ppg_control_top.v",
+"sym": "o_protocol_error_sticky",
+"connections": 2,
+"instances": [
+"ppg_characterization_control_cdc_Inst(ppg_characterization_control_cdc)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1520,
+"file": "ppg_control_top.v",
+"sym": "o_wrapper_idle",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1521,
+"file": "ppg_control_top.v",
+"sym": "o_switch_protocol_error_sticky",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1522,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_mismatch_sticky",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1523,
+"file": "ppg_control_top.v",
+"sym": "o_owner_deadline_timeout_sticky",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1524,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_timeout_sticky",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1548,
+"file": "ppg_control_top.v",
+"sym": "o_stage2_result_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1549,
+"file": "ppg_control_top.v",
+"sym": "o_dc_result_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1559,
+"file": "ppg_control_top.v",
+"sym": "o_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1560,
+"file": "ppg_control_top.v",
+"sym": "o_idac_idle",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1561,
+"file": "ppg_control_top.v",
+"sym": "o_integration_protocol_error_sticky",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1623,
+"file": "ppg_control_top.v",
+"sym": "i_adc_idle",
+"connections": 4,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1635,
+"file": "ppg_control_top.v",
+"sym": "i_static_characterization_enable",
+"connections": 2,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)",
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1639,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "i_active_config",
+"connections": 1,
+"instances": [
+"active_config_unpack_Inst(ppg_system_active_config_unpack)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1661,
+"file": "ppg_control_top.v",
+"sym": "o_input_source",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1662,
+"file": "ppg_control_top.v",
+"sym": "o_idac_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1663,
+"file": "ppg_control_top.v",
+"sym": "o_optical_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1664,
+"file": "ppg_control_top.v",
+"sym": "o_initial_precision",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1665,
+"file": "ppg_control_top.v",
+"sym": "o_amb_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1666,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_enable",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1667,
+"file": "ppg_control_top.v",
+"sym": "o_amb_polarity",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1668,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_polarity",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1669,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_calibration_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1670,
+"file": "ppg_control_top.v",
+"sym": "o_stage2_calibration_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1671,
+"file": "ppg_control_top.v",
+"sym": "o_dc9_recovery_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1672,
+"file": "ppg_control_top.v",
+"sym": "o_dc15_recovery_valid",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1673,
+"file": "ppg_control_top.v",
+"sym": "o_amb_manual_code",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1674,
+"file": "ppg_control_top.v",
+"sym": "o_amb_code_min",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1675,
+"file": "ppg_control_top.v",
+"sym": "o_amb_code_max",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1676,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_r_manual_code",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1677,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_r_code_min",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1678,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_r_code_max",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1679,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_ir_manual_code",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1680,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_ir_code_min",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1681,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_ir_code_max",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1682,
+"file": "ppg_control_top.v",
+"sym": "o_amb_threshold_low",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1683,
+"file": "ppg_control_top.v",
+"sym": "o_amb_threshold_high",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1684,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_threshold_low",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1685,
+"file": "ppg_control_top.v",
+"sym": "o_dcs_threshold_high",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1688,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_0",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1689,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_1",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1690,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_2",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1691,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_3",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1692,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_4",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1693,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_5",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1694,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_6",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1695,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_7",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1696,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_8",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1697,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_weight_q16_9",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1698,
+"file": "ppg_control_top.v",
+"sym": "o_stage1_offset_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1699,
+"file": "ppg_control_top.v",
+"sym": "o_stage2_gain_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1700,
+"file": "ppg_control_top.v",
+"sym": "o_stage2_offset_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1701,
+"file": "ppg_control_top.v",
+"sym": "o_dc9_recovery_gain_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1702,
+"file": "ppg_control_top.v",
+"sym": "o_dc15_recovery_gain_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1703,
+"file": "ppg_control_top.v",
+"sym": "o_amb_recheck_interval_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1704,
+"file": "ppg_control_top.v",
+"sym": "o_slope_mode",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1705,
+"file": "ppg_control_top.v",
+"sym": "o_fixed_slope_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1706,
+"file": "ppg_control_top.v",
+"sym": "o_alpha_q15",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1707,
+"file": "ppg_control_top.v",
+"sym": "o_beta_q15",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1708,
+"file": "ppg_control_top.v",
+"sym": "o_timing_adjust_ratio_q15",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1709,
+"file": "ppg_control_top.v",
+"sym": "o_slope_min_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1710,
+"file": "ppg_control_top.v",
+"sym": "o_slope_max_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1711,
+"file": "ppg_control_top.v",
+"sym": "o_baseline_delta_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1712,
+"file": "ppg_control_top.v",
+"sym": "o_cross_hysteresis_q16",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1713,
+"file": "ppg_control_top.v",
+"sym": "o_lead_min_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1714,
+"file": "ppg_control_top.v",
+"sym": "o_lead_max_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1716,
+"file": "ppg_control_top.v",
+"sym": "o_no_cross_limit",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1719,
+"file": "ppg_control_top.v",
+"sym": "o_direction_deadband",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1720,
+"file": "ppg_control_top.v",
+"sym": "o_min_peak_valley_amplitude",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1721,
+"file": "ppg_control_top.v",
+"sym": "o_min_peak_to_valley_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1722,
+"file": "ppg_control_top.v",
+"sym": "o_min_peak_to_peak_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1723,
+"file": "ppg_control_top.v",
+"sym": "o_max_fine_window_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1724,
+"file": "ppg_control_top.v",
+"sym": "o_max_reacquire_frames",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1740,
+"file": "ppg_control_top.v",
+"sym": "o_run_profile",
+"connections": 1,
+"instances": [
+"ppg_active_v4_control_plane_integration_Inst(ppg_active_v4_control_plane_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1871,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1872,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_frame_id",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1873,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_color_ir",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1874,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_frame_type",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1875,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1876,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1877,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1878,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1879,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_input_source",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1880,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_optical_mode",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1881,
+"file": "ppg_control_top.v",
+"sym": "i_waveform_leddac_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1885,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1886,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1887,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_sample_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1888,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_color_ir",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1889,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_frame_type",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1890,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1891,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1892,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1893,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1895,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_commit_event",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1896,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1897,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_frame_id",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1898,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_color_ir",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1899,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_frame_type",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1900,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_amb_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1901,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_dc_code_snapshot",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1902,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_amb_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1903,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_dc_code_epoch",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1904,
+"file": "ppg_control_top.v",
+"sym": "i_adc_owner_sample_index",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1912,
+"file": "ppg_control_top.v",
+"sym": "o_macro_frame_start_event",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1915,
+"file": "ppg_control_top.v",
+"sym": "o_startup_idac_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1917,
+"file": "ppg_control_top.v",
+"sym": "i_macro_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1918,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_subframe_index",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1919,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_local_tick",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1923,
+"file": "ppg_control_top.v",
+"sym": "i_normal_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1924,
+"file": "ppg_control_top.v",
+"sym": "i_calibration_frame_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1925,
+"file": "ppg_control_top.v",
+"sym": "o_transaction_inflight",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1926,
+"file": "ppg_control_top.v",
+"sym": "o_current_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1927,
+"file": "ppg_control_top.v",
+"sym": "o_next_sample_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1932,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_local_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1934,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1935,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_cause",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1936,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_identity_valid",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1937,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_frame_id",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1938,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_sample_index",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1939,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_color_ir",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1940,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_frame_type",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1941,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1942,
+"file": "ppg_control_top.v",
+"sym": "o_macro_frame_start_event",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 1942,
+"file": "ppg_control_top.v",
+"sym": "o_startup_idac_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2026,
+"file": "ppg_control_top.v",
+"sym": "o_precision_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2026,
+"file": "ppg_control_top.v",
+"sym": "o_precision_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2027,
+"file": "ppg_control_top.v",
+"sym": "o_precision_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2027,
+"file": "ppg_control_top.v",
+"sym": "o_precision_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2034,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_valid",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2035,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2036,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_cause",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2037,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_identity_valid",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2038,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_frame_id",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2039,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_sample_index",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2040,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_color_ir",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2041,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_frame_type",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2042,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2043,
+"file": "ppg_control_top.v",
+"sym": "o_precision_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2043,
+"file": "ppg_control_top.v",
+"sym": "o_calibration_wave_active",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2053,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_active_config_epoch",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2074,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_search_amb_valid",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2076,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_search_dcs_valid",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2096,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_track_valid",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2098,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_track_calibrated_s1_value",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2170,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_stop_ack_event",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2180,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_precision_takeover_safe",
+"connections": 1,
+"instances": [
+"ppg_precision_window_integration_Inst(ppg_precision_window_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2184,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_peak_valley_idle",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2211,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_sequence_done",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2212,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_sequence_failed",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2282,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_sequence_done",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2283,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_sequence_failed",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2293,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_recheck_done_event",
+"connections": 2,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)",
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2329,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_peak_ready",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2337,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_valley_ready",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2366,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_cross_slope_q16",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2367,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_cross_baseline_q16",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2374,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_reacquire_active",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2436,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_return_9bit_valid",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2438,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_return_reason",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2439,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_return_frame_id",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2484,
+"file": "ppg_control_top.v",
+"sym": "o_detection_fork_idle",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2485,
+"file": "ppg_control_top.v",
+"sym": "o_detector_idle",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2486,
+"file": "ppg_control_top.v",
+"sym": "o_cross_pending",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2487,
+"file": "ppg_control_top.v",
+"sym": "o_peak_pending",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2488,
+"file": "ppg_control_top.v",
+"sym": "o_valley_pending",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2489,
+"file": "ppg_control_top.v",
+"sym": "o_return_pending",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2490,
+"file": "ppg_control_top.v",
+"sym": "o_baseline_valid",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2491,
+"file": "ppg_control_top.v",
+"sym": "o_reacquire_active",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2492,
+"file": "ppg_control_top.v",
+"sym": "o_detector_fine_window_active",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2493,
+"file": "ppg_control_top.v",
+"sym": "o_slope_current_q16",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2494,
+"file": "ppg_control_top.v",
+"sym": "o_baseline_protocol_error_sticky",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2495,
+"file": "ppg_control_top.v",
+"sym": "o_fine_window_timeout_sticky",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2496,
+"file": "ppg_control_top.v",
+"sym": "o_reacquire_timeout_sticky",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2497,
+"file": "ppg_control_top.v",
+"sym": "o_peak_valley_protocol_error_sticky",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2521,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_characterization_mode",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2530,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_cross_config_epoch",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2530,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_cross_config_epoch",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2531,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_cross_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2531,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_cross_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2532,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_cross_dc_recovery_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2532,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_cross_dc_recovery_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2533,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_return_9bit_valid",
+"connections": 1,
+"instances": [
+"ppg_precision_window_controller_Inst(ppg_precision_window_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2542,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_active_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2543,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_fine_window_active",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2544,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_fine_window_start_event",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2545,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_fine_window_start_frame_id",
+"connections": 1,
+"instances": [
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": false
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2546,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_precision_15_to_9_event",
+"connections": 1,
+"instances": [
+"ppg_amb_recheck_scheduler_Inst(ppg_amb_recheck_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2548,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_reacquire_request_event",
+"connections": 1,
+"instances": [
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2570,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_recheck_accept_event",
+"connections": 3,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)",
+"ppg_dynamic_baseline_cross_detector_Inst(ppg_dynamic_baseline_cross_detector)",
+"ppg_peak_valley_window_detector_Inst(ppg_peak_valley_window_detector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2592,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_coarse_ppg_value",
+"connections": 1,
+"instances": [
+"ppg_precision_window_integration_Inst(ppg_precision_window_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2614,
+"file": "ppg_precision_window_integration.v",
+"sym": "i_result_ready",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2617,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_detection_qualified",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2618,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_window_saturation_low",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2619,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_window_saturation_high",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2620,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_fir_saturation_low",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2621,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_fir_saturation_high",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2626,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2627,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_dc_recovery_coef_epoch",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2628,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_precision_mode",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2629,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_frame_id",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2630,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_sample_index",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2631,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_color_ir",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2632,
+"file": "ppg_precision_window_integration.v",
+"sym": "o_frame_type",
+"connections": 1,
+"instances": [
+"ppg_coarse_detection_fir_Inst(ppg_coarse_detection_fir)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2639,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_frame_safe_boundary",
+"connections": 2,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)",
+"ppg_precision_window_integration_Inst(ppg_precision_window_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2691,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_result_valid",
+"connections": 4,
+"instances": [
+"ppg_adc_s1_programmable_calibrator_Inst(ppg_adc_s1_programmable_calibrator)",
+"ppg_adc_result_router_Inst(ppg_adc_result_router)",
+"ppg_adc_programmable_reconstructor_Inst(ppg_adc_programmable_reconstructor)",
+"ppg_adc_dc_recovery_Inst(ppg_adc_dc_recovery)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2700,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_result_valid",
+"connections": 4,
+"instances": [
+"ppg_adc_s1_programmable_calibrator_Inst(ppg_adc_s1_programmable_calibrator)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2781,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_search_amb_valid",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2816,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_datapath_discard_run_generation",
+"connections": 2,
+"instances": [
+"ppg_normal_transaction_fork_Inst(ppg_normal_transaction_fork)",
+"ppg_adc_pipeline_overlap_corrector_Inst(ppg_adc_pipeline_overlap_corrector)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2840,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "o_measurement_calibrated_s1_value",
+"connections": 1,
+"instances": [
+"ppg_normal_transaction_fork_Inst(ppg_normal_transaction_fork)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 2946,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_active_valid",
+"connections": 3,
+"instances": [
+"ppg_adc_s1_programmable_calibrator_Inst(ppg_adc_s1_programmable_calibrator)",
+"ppg_adc_programmable_reconstructor_Inst(ppg_adc_programmable_reconstructor)",
+"ppg_adc_dc_recovery_Inst(ppg_adc_dc_recovery)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3003,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "o_programmable_15_calibration_applied",
+"connections": 2,
+"instances": [
+"ppg_adc_programmable_reconstructor_Inst(ppg_adc_programmable_reconstructor)",
+"ppg_adc_dc_recovery_Inst(ppg_adc_dc_recovery)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3011,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "i_active_valid",
+"connections": 3,
+"instances": [
+"ppg_adc_s1_programmable_calibrator_Inst(ppg_adc_s1_programmable_calibrator)",
+"ppg_adc_programmable_reconstructor_Inst(ppg_adc_programmable_reconstructor)",
+"ppg_adc_dc_recovery_Inst(ppg_adc_dc_recovery)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3096,
+"file": "ppg_control_top.v",
+"sym": "o_ami_fault_run_generation",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3096,
+"file": "ppg_control_top.v",
+"sym": "o_ami_fault_active",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3118,
+"file": "ppg_control_top.v",
+"sym": "o_datapath_empty",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3124,
+"file": "ppg_control_top.v",
+"sym": "i_system_fault_discard_event",
+"connections": 1,
+"instances": [
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3142,
+"file": "ppg_control_top.v",
+"sym": "i_allow_new_transaction",
+"connections": 2,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)",
+"ppg_adc_measurement_idac_integration_Inst(ppg_adc_measurement_idac_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3258,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "o_controller_fault_blocking",
+"connections": 1,
+"instances": [
+"ppg_idac_code_controller_Inst(ppg_idac_code_controller)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3259,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_valid",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3259,
+"file": "ppg_control_top.v",
+"sym": "o_scheduler_fault_active",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3260,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_valid",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3260,
+"file": "ppg_control_top.v",
+"sym": "o_ssw_fault_cause",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+"line": 3405,
+"file": "ppg_dual_precision_top.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 40,
+"file": "ppg_control_top.v",
+"sym": "o_startup_idac_safe_boundary",
+"connections": 1,
+"instances": [
+"ppg_400hz_frame_calibration_scheduler_Inst(ppg_400hz_frame_calibration_scheduler)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 98,
+"file": "ppg_control_top.v",
+"sym": "o_analog_safe",
+"connections": 1,
+"instances": [
+"ppg_sar9_sar15_safe_selection_wrapper_Inst(ppg_sar9_sar15_safe_selection_wrapper)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 113,
+"file": "ppg_adc_measurement_idac_integration.v",
+"sym": "o_mode_fault_active",
+"connections": 1,
+"instances": [
+"ppg_precision_window_integration_Inst(ppg_precision_window_integration)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_dual_precision_top.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_control(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_characterization_control_cdc.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_characterization(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_active_v4_control_plane_integration.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"config_cdc_bridge_Inst(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+},
+{
+"doc": "PPG_ALIAS_MAPPING_TABLE.md",
+"line": 118,
+"file": "ppg_characterization_control_cdc.v",
+"sym": "C_CONFIG_WIDTH",
+"connections": 1,
+"instances": [
+"ppg_config_cdc_bridge_Inst_characterization(ppg_config_cdc_bridge)"
+],
+"module_discussed": true
+}
+]

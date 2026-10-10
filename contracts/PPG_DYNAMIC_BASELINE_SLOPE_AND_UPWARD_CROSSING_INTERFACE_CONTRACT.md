@@ -13,9 +13,9 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.1 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |
-| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.5 | Sole qualified FIR transaction source. |
-| C21 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md` | V1.2 | Normative arithmetic sub-rule for this module only. |
+| C18 | `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.2 | Sole PWI parent, V5 forwarding and discard broadcast boundary. |
+| C19 | `ppg_system_integration/PPG_COARSE_DETECTION_FIR_INTERFACE_CONTRACT.md` | V2.6 | Sole qualified FIR transaction source. |
+| C21 | `ppg_system_integration/PPG_DYNAMIC_BASELINE_ARITHMETIC_OPTIMIZATION_CONTRACT.md` | V1.3 | Normative arithmetic sub-rule for this module only. |
 
 V2.1相对V2属于不增加端口的小版本修订，新增冻结内容为：
 

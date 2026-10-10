@@ -1,0 +1,20 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:53:50 2026
+# Process ID: 21660
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_async_stage_capture
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_adc_async_stage_capture/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_async_stage_capture/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_async_stage_capture\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_adc_async_stage_capture/xsim_script.tcl
+# xsim {snap_tb_ppg_adc_async_stage_capture} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS ppg_adc_async_stage_capture explicit-frame checks
+$finish called at time : 36288 ns : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v" Line 332
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:53:52 2026...

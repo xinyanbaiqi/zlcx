@@ -1,0 +1,44 @@
+doc	base_line	line	old	result	detail
+PPG_CONTRACT_CLOSURE_MATRIX.md	1497	1515	`:632`	revert	`:632`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1577	1595	`:234`	revert	`:234`
+PPG_CONTRACT_CLOSURE_MATRIX.md	1585	1603	`:245`	revert	`:245`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2442`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`、`o_idac_idle`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2427`	revert	`:2427`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2321`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`、`i_clk`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2306`	revert	`:2306`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2427`	revert	`:2427`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:2306`	revert	`:2306`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	`:602-682`	rewrite	`ppg_idac_code_controller.v` `"输出信号连线"`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2147	2165	ppg_idac_code_controller.v:67-207	rewrite	`ppg_idac_code_controller.v` `ppg_idac_code_controller`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2092,2005`	revert	`:2092,2005`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2005,2092`	revert	`:2005,2092`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1336`	revert	`:1336`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:912`	revert	`:912`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:919`	rewrite	`ppg_adc_measurement_idac_integration.v` `flag_normal_track_qualified`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:912`	revert	`:912`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1351`	rewrite	`ppg_adc_measurement_idac_integration.v` `measurement_result_discard_run_generation_o`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1336`	revert	`:1336`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2389`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2374`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2374`	revert	`:2374`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2359`	revert	`:2359`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2135`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2074`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2107`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2105`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2086`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2092`	revert	`:2092`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2090`	revert	`:2090`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2071`	revert	`:2071`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2040`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2020`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2025`	revert	`:2025`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2005`	revert	`:2005`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1998`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`、`i_datapath_discard_run_generation`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1983`	revert	`:1983`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1987`	rewrite	`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`、`i_clk`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1972`	revert	`:1972`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:2005`	revert	`:2005`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:1972`	revert	`:1972`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	`:61-146`	rewrite	`ppg_normal_transaction_fork.v` `ppg_normal_transaction_fork`
+PPG_CONTRACT_CLOSURE_MATRIX.md	2860	2878	ppg_normal_transaction_fork.v:61-146	rewrite	`ppg_normal_transaction_fork.v` `ppg_normal_transaction_fork`

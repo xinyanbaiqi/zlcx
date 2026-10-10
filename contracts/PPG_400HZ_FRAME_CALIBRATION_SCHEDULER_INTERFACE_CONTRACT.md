@@ -1,5 +1,6 @@
 # PPG 400 Hz帧与校准事务调度器接口合同
 
+> V1.13修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-001~015，按基线`7a8eabf`调度器RTL V1.12改写，符号锚点格式为“文件 + 符号（§节）”）：① §4.2新增§4.2.1宏帧末拍衔接：F-009末拍直接起帧（`flag_frame_restart`、`flag_next_frame_inputs_eligible`）、F-010校准滚动受生命周期门控（`flag_calibration_rollover`）、起帧快照在末拍采样，以及FSC-03例外C；② §8.2新增§8.2.6启动搜索空闲边界（L-3，`flag_idle_idac_safe_boundary`）；③ §9.6、§10.4写明宏帧末不重挂在途owner（L-1）；④ §10.3写明截止当拍可提交、越过截止只收尾（L-4，`flag_candidate_expired`）；⑤ §10.4新增AMI超时作废释放（R3，`flag_owner_lost_match`），作废置失败的是当前宏帧（F-7）；⑥ §12.3写明“物理校准宏帧结束事实”的含义（F-9）；⑦ §13.3、§13.7端口表新增`i_idac_boundary_request`、`i_adc_transaction_lost_event`；⑧ §16.2写明调度器sticky与AMI历史诊断两套START规则；§16.3写明STOP不等帧结束；§16.5写明诊断清除门控与已知限制（重检期间owner截止sticky）；⑨ §18 FSC-03/17/19/38/46/49/50/54原行补充；§19证据状态声明订正。不改变任何时间点、端口位宽或既有编号含义。
 > V1.12修订日期：2026-10-04。合同补记批次3第二阶段：按任务C的结论关闭第10.3节的tick-248开放观察项。scheduler RTL V1.9（2026-10-01）把`o_cal_owner_deadline_event`改为`flag_cal_owner_deadline && !adc_owner_commit_event_o`（`ppg_400hz_frame_calibration_scheduler.v:569`），与内部截止分支`if(adc_owner_commit_event_o == 1'b0)`（`:738`）同一门控：截止事件只在截止点到达而owner仍未提交时发出，local tick 248当拍提交属于按时提交，不回报截止。本次相应修改：第10.3节两段（保留原文于删除线中）、第13.9节`o_cal_owner_deadline_event`行、FSC-50原行补充（不新开ID）。证据：`verification_reports/TASKC_TICK248_P2S_20261001.md`第1节（A/B仿真确认缺陷，tick 247与真正错过截止两组对照逐事件不变）、调度器单元TB V1.7新增检查（TB内编号FSC-60/61/62，本表未登记，见同步记录）、全套19-TB回归19/19 PASS。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_PHASE2_20261004.md`。
 > V1.11修订日期：2026-10-01。合同补记批次3：第10.4节的`owner_release`公式补上RTL中已有的RUN代际匹配项`i_run_generation == current_owner_run_generation`（`ppg_400hz_frame_calibration_scheduler.v:461`，`flag_completion_match`）。该规则本身早已由第15.1节规定（陈旧代际不得匹配、释放或重新绑定owner）；本次只让第10.4节公式与第15.1节及RTL一致，并加交叉引用，不新增规则。不涉及`o_cal_owner_deadline_event`的相关描述。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH3_20261001.md`。
 > V1.10修订日期：2026-09-30。合同补记批次2：V1.8修订记录已经描述、但正式端口表一直缺失的输入`i_owner_q3_window_closed`（`ppg_400hz_frame_calibration_scheduler.v:165`声明），本次补进第13.7节端口表；第10.4节补写它对完成成功判定的门控，即`flag_completion_success = flag_completion_match && i_adc_transaction_success && !B_INFLIGHT_DISCARD && i_owner_q3_window_closed`（`:462`）。调度器内部只有NORMAL事务用到这个判据，用来置位`B_RED_DONE`/`B_IR_DONE`（`:716-721`）。以下内容均不改变：owner释放条件`flag_completion_match`（`:461`，不含该门控）、owner截止、FSC-01至FSC-57的任何条款，以及`o_cal_owner_deadline_event`的相关描述。依据：本合同V1.8修订记录，以及该输出的生产者SSW合同C09 V1.9；真实证据为V1.8记录所引的`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v` LFA-06。合同同步记录见`verification_reports/CONTRACT_SYNC_BATCH2_20260930.md`。
@@ -57,12 +58,12 @@
 1. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
 3. C06 — `ppg_system_integration/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md` V1.3；
-4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
-5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.4；
-6. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.1；
-7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2.1；
-8. C17 — `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` V2.3；
-9. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.5。
+4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.11；
+5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.5；
+6. C18 — `ppg_system_integration/PPG_PRECISION_WINDOW_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.2；
+7. C16 — `ppg_system_integration/PPG_NORMAL_FORK_IDAC_TRACKING_AMB_RECHECK_INTERFACE_CONTRACT.md` V2.2；
+8. C17 — `ppg_system_integration/PPG_IDAC_CODE_CONTROLLER_V2_INTERFACE_CONTRACT.md` V2.4；
+9. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7。
 
 The fixed Q1/Q2/Q3 windows, handover and owner-deadline rules are defined in
 this contract. Timing RTL, regressions, logs and predecessor documents are
@@ -141,6 +142,20 @@ F_MACRO_FRAME       = 400 Hz
 ```
 
 宏帧计数范围为`0..4999`，在`4999 -> 0`时进入下一宏帧。
+
+#### 4.2.1 宏帧末拍衔接（V1.13补记）
+
+宏帧末拍（macro tick 4999）的下一宏帧建立方式冻结如下（`ppg_400hz_frame_calibration_scheduler.v` `flag_calibration_rollover`、`flag_frame_restart`）：
+
+1. **校准滚动**：当前为校准宏帧、校准请求仍活动、无未提交校准owner-pending、无在途owner，且已有保持的请求pending或本拍AMI校准请求valid时，末拍后直接进入下一校准宏帧的子帧0，中间不经空拍；同时照常输出`o_calibration_frame_complete_event`并递增`frame_id`。
+2. **直接起帧（F-009）**：不满足校准滚动、但下一帧资格在末拍已经成立时，末拍后直接建立下一宏帧，不经空拍。下一帧资格为：帧末处理后的校准请求pending（含本拍请求握手与未提交请求的跨帧重挂；已成为在途owner的请求不重挂，见§10.4），或无校准请求时的NORMAL/光学关闭起帧输入资格（`flag_next_frame_inputs_eligible`：`i_allow_new_transaction`，且光学关闭或`i_normal_measurement_eligible && !i_switch_hold_new_transaction`）。存在pending时下一帧为校准帧，否则为NORMAL帧。
+3. **生命周期门控（F-010）**：以上两条都要求本拍生命周期仍有效（`flag_lifecycle_active`：已START、`i_run_enable`、非STOP排空、本拍无STOP确认、无abort、无本地或外部阻断故障）且ACTIVE配置合法。STOP确认、abort、故障或RUN撤销落在末拍时，不滚动、不直接起帧，按主状态机的帧末处理结束本帧。
+4. **起帧快照**：直接起帧时，新宏帧的AMB/DC码及其epoch、精度、光学模式、输入来源和LEDDAC快照在上一宏帧末拍采样。IDAC提交在宏帧安全边界（tick 4760）或校准local tick 385，精度提交在tick 4760，末拍时这些输入早已稳定。
+5. 以上条件都不成立时，宏帧在末拍后结束；之后按`flag_frame_start_eligible`从空闲起帧，空闲起帧与直接起帧使用同一输入侧资格。
+
+因此相邻宏帧起点严格相差5000个2 MHz周期（FSC-03），唯一例外是下述例外C。
+
+**例外C（已知既有行为）**：校准宏帧末拍时校准owner仍在途、没有pending请求、NORMAL起帧资格不成立（例如启动搜索期），且AMI以电平保持校准请求。此时末拍不滚动（在途owner）、也不直接起帧（无pending且无NORMAL资格），校准请求要等宏帧结束后的空闲期握手，下一校准宏帧在其后一拍建立。相邻宏帧起点间隔因此大于5000：至少空2拍，具体由在途owner的释放时刻决定。回归实测为5004和5131拍；换回F-009之前的调度器结果相同，属既有行为。全套回归中4份带帧间隔监视器的TB没有出现其它非5000间隔（`verification_reports/F009_ROUND_20261008.md` §4）。
 
 ### 4.3 3200 Hz快速SAR9校准子周期
 
@@ -370,7 +385,7 @@ macro_tick = 4760
 
 ### 8.2 IDAC候选提交安全边界
 
-`o_idac_code_safe_boundary`是`ppg_idac_code_controller`把pending候选提交为committed码的唯一外部安全脉冲。它在NORMAL和快速校准期间采用不同的重复频率，但始终是2 MHz域单周期事件。
+`o_idac_code_safe_boundary`是`ppg_idac_code_controller`把pending候选提交为committed码的唯一外部安全脉冲。它在NORMAL和快速校准期间采用不同的重复频率，但始终是2 MHz域单周期事件。V1.13补记：它是四类边界的合并——START启动边界（§8.3）、宏帧安全边界（§8.2.1）、快速校准边界（§8.2.2）和启动搜索空闲边界（§8.2.6）（`ppg_400hz_frame_calibration_scheduler.v` `idac_code_safe_boundary_o`）。
 
 #### 8.2.1 NORMAL、单光和安全关闭RUN宏帧
 
@@ -467,6 +482,22 @@ o_idac_code_safe_boundary   = 1
 - 伪造NORMAL帧完成事件。
 
 `o_idac_code_safe_boundary`只提供提交时刻，不判断pending是否合法，也不直接修改IDAC码。pending所有权、提交优先级、码值钳位、实际变化判断和epoch更新仍全部属于`ppg_idac_code_controller`。
+
+#### 8.2.6 启动搜索空闲边界（V1.13补记，L-3）
+
+启动搜索期间，若校准结果在子帧7的local tick 385之后才被消费，IDAC的下一候选码没有校准边界可等；而调度器此时既没有校准请求、又没有NORMAL资格，不会起帧，也就不会产生宏帧边界。为避免这种互相等待的死锁，调度器在以下条件全部成立时补发一拍边界（`ppg_400hz_frame_calibration_scheduler.v` `flag_idle_idac_safe_boundary`）：
+
+```text
+i_idac_boundary_request          // AMI三路IDAC候选任一路待提交（Top合并AMB/DC_R/DC_IR pending_valid）
+&& 生命周期有效 && i_active_config_valid
+&& !i_normal_measurement_eligible // 仅启动搜索期，NORMAL资格不成立
+&& 本拍不会起帧                    // !flag_frame_start_eligible
+&& 无START启动边界pending、无活动宏帧、无校准请求pending
+&& 无RED/IR/校准owner-pending、无在途owner
+&& i_adc_idle && i_analog_safe && i_sar_timing_idle
+```
+
+该边界只提供提交时刻；IDAC提交后请求自然撤销。它只在无宏帧时出现，不增加NORMAL宏帧内的提交次数（FSC-38），也不得被精度控制器或重检调度器当作宏帧安全边界。
 
 ### 8.3 START后的IDAC启动安全边界
 
@@ -601,6 +632,7 @@ IDAC确认和搜索需求可能为：
 因此单阶段不能无条件保证在一个物理宏帧内完成。冻结行为为：
 
 - 当前阶段未完成时继续占用后续校准宏帧；
+- 跨宏帧保留的只是尚未提交owner的请求（请求pending或owner-pending）；宏帧末仍为在途owner的请求不重挂，由该owner的迟到完成或AMI超时作废后的重发推进（V1.13补记，L-1，见§10.4）；
 - 保持相同AMB/DC_R/DC_IR阶段身份；
 - `frame_id`按真实400 Hz边界继续递增；
 - 每笔新事务继续分配新`sample_index`；
@@ -719,7 +751,7 @@ owner identity sideband包含`precision_mode/frame_id/color_ir/frame_type/AMB co
 
 调度器禁止在`i_adc_owner_ready=0`时对AMI形成可握手valid，因而AMI与SSW不会出现一侧取得owner、另一侧未取得的半提交状态。不得由`i_transaction_start_fire`反向驱动SSW ready，也不得形成调度器、AMI和SSW三方组合环。
 
-owner必须在第4.5节截止点之内提交。截止点到达仍未fire时：
+owner必须在第4.5节截止点之内提交。截止点当拍仍允许按时提交（与SSW owner窗口`<=`截止一致）；越过截止点的候选不再形成可握手valid，只走下述截止收尾，不会出现截止与提交同拍（V1.13补记，L-4，`ppg_400hz_frame_calibration_scheduler.v` `flag_candidate_expired`、`transaction_start_valid_o`）。截止点到达仍未fire时：
 
 - 撤销该次owner-pending；
 - 不递增或跳过`sample_index`；
@@ -761,6 +793,20 @@ owner_release =
 **成功判定的Q3门控（V1.10补记，对应V1.8新增输入）**：上面“匹配完成且`success=1`”在RTL中的准确判据是`flag_completion_success = flag_completion_match && i_adc_transaction_success && !B_INFLIGHT_DISCARD && i_owner_q3_window_closed`（`ppg_400hz_frame_calibration_scheduler.v:462`）。其中`i_owner_q3_window_closed`来自SSW `o_owner_q3_window_closed`，含义是当前在途owner自身选定的Q3窗口已经关闭（按owner保持，见C09），用来保证早于本owner Q3窗口结束的`CLK_DOUT`不被计为成功。这项门控只影响成功判定，不影响owner释放：`flag_completion_match`（`:461`）不含此项，身份和RUN代际都匹配的完成事件照常释放owner。`flag_completion_success`在调度器内只有一个消费点（`:716-721`）：NORMAL事务据此置位`B_RED_DONE`或`B_IR_DONE`；校准事务的成功处理不经过这个判据。若匹配完成且`success=1`、但Q3窗口尚未关闭，owner照常释放，但不置位颜色完成位；由于`i_adc_transaction_success`为1，`B_FRAME_FAILED`也不会被置位（`:722-723`只在`success==0`时置位），所以这个NORMAL宏帧得不到完整成功的完成事件。
 
 真实完成必须经历`CLK_DOUT`两级同步、RAW锁存及事务身份接纳。Q3结束、模拟包络末沿、固定4拍延时或宏帧tick均不得伪造DONE。错误或迟到DONE不得归入下一事务；只有仍保留原始owner身份且sample index匹配的受控迟到完成，才可按上述`success=0`规则释放旧物理owner。
+
+**AMI超时作废释放（V1.13补记，R3/FSC-54）**：除真实完成外，唯一的另一条owner释放路径是AMI的完成丢失超时作废单拍`i_adc_transaction_lost_event`（AMI为唯一裁决点，判定条件见C10 §7.1）。它与`i_adc_transaction_complete_event`互斥，并复用`i_adc_complete_sample_index`作为作废身份：
+
+```text
+owner_lost_release =
+    i_adc_transaction_lost_event
+ && current_owner_inflight
+ && i_adc_complete_sample_index == current_owner_sample_index
+ && i_run_generation == current_owner_run_generation
+```
+
+（`ppg_400hz_frame_calibration_scheduler.v` `flag_owner_lost_match`）匹配时：释放在途owner；不置`success`、不置RED/IR颜色完成位、不计校准阶段成功；若该owner不是STOP/abort的受控丢弃owner，则把**当前宏帧**置为失败收尾，不产生该帧的NORMAL完成。owner跨宏帧在途时，置失败的是作废发生时的当前宏帧，不是作废事务的起始帧（F-7）。作废事件身份不匹配或当前无owner时，按错配DONE处理：置`o_completion_mismatch_sticky`并发出调度器故障记录。
+
+**校准owner跨宏帧（V1.13补记，L-1）**：校准宏帧末拍，未提交owner的请求（请求pending或owner-pending）跨宏帧重挂；已成为在途owner的请求不重挂。下一宏帧由该owner的迟到完成或作废后的AMI重发推进，避免下一宏帧发出拿不到owner的波形、迟到的`CLK_DOUT`被错绑到旧owner（`ppg_400hz_frame_calibration_scheduler.v`帧末处理中`B_CAL_REQ_PENDING`的重挂条件；`@satisfies: FSC-17`）。
 
 ## 11. IDAC码和epoch快照
 
@@ -818,6 +864,8 @@ IDAC阶段结果成功/失败事实
 
 若阶段需要延长，后续校准宏帧继续产生各自的物理完成事件，阶段身份保持不变，直到IDAC结果闭合。
 
+V1.13补记（F-9）：上式中的“物理校准宏帧结束事实”，指本阶段内出现过的任一次`o_calibration_frame_complete_event`，不要求晚于本阶段最后一笔样本。因此阶段跨宏帧延长（§9.6）或跨宏帧重试之后，阶段在后一宏帧中途得到结果时立即推进，下一阶段可以在同一物理校准宏帧的后续子帧开始（重检侧的表述见C16 §9.4）。下一阶段不会使用未生效的码：IDAC样本资格要求样本快照码和epoch等于当前已提交的码和epoch（C17）。
+
 ## 13. 冻结端口合同
 
 ### 13.1 参数
@@ -872,6 +920,7 @@ IDAC阶段结果成功/失败事实
 | `i_dcs_ir_code_epoch` | 4 | IR DC码版本 |
 | `i_leddac_r_code` | 8 | 独立已提交RED LEDDAC码，供波形上下文快照 |
 | `i_leddac_ir_code` | 8 | 独立已提交IR LEDDAC码，供波形上下文快照 |
+| `i_idac_boundary_request` | 1 | V1.13补记。AMI三路IDAC候选（AMB、DC_R、DC_IR）任一路等待安全边界提交；Top由三路`pending_valid`相或得到。只用于启动搜索空闲边界（§8.2.6） |
 
 ### 13.4 AMI校准请求输入
 
@@ -955,6 +1004,7 @@ i_transaction_start_fire
 | `i_adc_transaction_complete_event` | 1 | 当前物理ADC事务完成单拍 |
 | `i_adc_transaction_success` | 1 | 完成结果处理资格；0仍释放匹配owner，但禁止计为成功结果 |
 | `i_adc_complete_sample_index` | 参数化 | 完成事务身份回传 |
+| `i_adc_transaction_lost_event` | 1 | V1.13补记。AMI在途owner完成丢失超时作废单拍，与`i_adc_transaction_complete_event`互斥，身份取`i_adc_complete_sample_index`；匹配时释放owner但不计成功（§10.4） |
 | `i_owner_q3_window_closed` | 1 | 来自SSW `o_owner_q3_window_closed`，表示当前在途owner自身选定的Q3窗口已关闭。只进入成功判定`flag_completion_success`（`:460`），不参与owner释放；V1.8新增，V1.10补入本表，语义见第10.4节 |
 | `i_adc_idle` | 1 | 物理ADC和DONE已回到可启动状态 |
 | `i_analog_safe` | 1 | 模拟输出处于允许停止/切换状态 |
@@ -966,7 +1016,7 @@ i_transaction_start_fire
 | --- | ---: | --- |
 | `o_macro_frame_start_event` | 1 | 400 Hz宏帧起点单拍 |
 | `o_macro_frame_safe_boundary` | 1 | 下一宏帧准备前安全边界 |
-| `o_idac_code_safe_boundary` | 1 | NORMAL时每宏帧一次、快速校准时每子周期一次的IDAC唯一提交边界 |
+| `o_idac_code_safe_boundary` | 1 | NORMAL时每宏帧一次、快速校准时每子周期一次的IDAC唯一提交边界；另含START启动边界与启动搜索空闲边界（§8.2，V1.13补记） |
 | `o_startup_idac_safe_boundary` | 1 | 每次START后、首个宏帧前最多一次的IDAC启动提交边界 |
 | `o_safe_frame_id` | 参数化 | 下一400 Hz宏帧编号 |
 | `o_macro_tick` | 13 | 当前0至4999相位，供集成验证 |
@@ -1071,6 +1121,7 @@ digital drain or a Scheduler-generated idle indication.
 - 清除上一RUN的宏帧和校准所有权；
 - 清除调度器sticky；
 - 建立一次START后IDAC启动安全边界pending；
+- V1.13补记：调度器的历史sticky在新START清零（START把整个状态向量清零后只置STARTED和启动边界pending），而AMI的历史诊断（含`o_owner_lost_sticky`）在新START不清（C10 §15.1）。两套规则并存，软件需分别读取；
 - 等待该启动边界完成、ACTIVE、AMI和模拟资格后开始首个宏帧；
 - NORMAL_PPG仍由AMI先完成IDAC启动搜索，调度器不得提前发正式NORMAL。
 
@@ -1086,6 +1137,8 @@ digital drain or a Scheduler-generated idle indication.
 - `o_scheduler_idle`只有在事务和模拟时序均排空后置1；
 - sticky保留供软件读取。
 
+V1.13补记（STOP语义）：manager的STOPPING不等待当前宏帧结束。纯STOP（无abort）不清除已建立的宏帧：本帧的接管点立即封闭、owner-pending立即撤销，宏帧在CONFIG中以空帧形式自然走到tick 4999后结束。STOP落在新宏帧tick 0时，这段空帧约2.5 ms。这段空帧不触发任何STOPPING计时。
+
 ### 16.4 abort
 
 `i_control_abort_event`立即禁止未来启动，撤销未握手波形上下文、已接管但未提交的owner-pending及启动边界pending，并把已提交ADC owner标记为丢弃。scheduler和SSW必须保留该已提交owner的原始`sample_index`作为最小释放身份，直至AMI返回匹配完成旁带；匹配旁带无论`success`取值均只释放旧物理owner，且abort路径期望`success=0`。SSW立即失效旧波形驱动资格，但不得在物理owner释放前把该释放身份重新分配给新事务。迟到DONE不得复活旧波形、递增序号或产生正式完成事件。
@@ -1093,6 +1146,10 @@ digital drain or a Scheduler-generated idle indication.
 ### 16.5 诊断清除
 
 `i_diag_clear_event`只清除非活动历史sticky，不得解除当前在途事务、阻断故障根因或改变计数器。
+
+V1.13补记（清除门控，`ppg_400hz_frame_calibration_scheduler.v`诊断清除分支）：只有在无活动宏帧、无在途owner、无RED/IR/校准owner-pending、且无AMI/SSW外部阻断故障时，诊断清除才清掉`o_launch_timeout_sticky`、`o_owner_deadline_timeout_sticky`、`o_completion_mismatch_sticky`和`o_protocol_error_sticky`。RUN中宏帧首尾相接（§4.2.1），活动宏帧始终存在，所以**调度器历史sticky只能在RUN之外清除**。
+
+**已知限制（V1.13补记）**：周期重检期间，夹在两个校准宏帧之间的NORMAL宏帧会出现没有owner的RED/IR波形，RED/IR owner截止（283/443）因此触发并置位`o_owner_deadline_timeout_sticky`。所以周期重检期间该sticky不能作为异常指示。这是既有行为（`verification_reports/OWNER_LIFECYCLE_ROUND_20261007.md` §7.1(d)），其后续验证另行安排。
 
 ## 17. 禁止事项
 
@@ -1133,7 +1190,7 @@ digital drain or a Scheduler-generated idle indication.
 | --- | --- | --- |
 | FSC-01 | 异步复位 | valid、在途、计数、完成事件和sticky确定清零 |
 | FSC-02 | 新START | frame ID从0开始，首笔事务使用sample index 0且真实fire后下一序号变为1 |
-| FSC-03 | 400 Hz周期 | 相邻宏帧起点严格相差5000个2 MHz周期 |
+| FSC-03 | 400 Hz周期 | 相邻宏帧起点严格相差5000个2 MHz周期。V1.13原行补充：对所有帧末成立，包括宏帧末拍直接起帧与校准滚动（§4.2.1）；唯一例外是§4.2.1例外C |
 | FSC-04 | 双光NORMAL | RED后IR，各启动一次，禁止同时点亮 |
 | FSC-05 | 双光编号 | 两色frame ID相同，sample index连续且不同 |
 | FSC-06 | RED-only | 仅RED事务，接管点仍为macro tick 0 |
@@ -1147,9 +1204,9 @@ digital drain or a Scheduler-generated idle indication.
 | FSC-14 | DCS_CAL RED | SAR9、local tick 0接管，后续Q3为266 |
 | FSC-15 | DCS_CAL IR | SAR9、local tick 0接管，后续Q3同样为266 |
 | FSC-16 | 3200 Hz容量 | 子周期严格625 tick，每宏帧8个容量 |
-| FSC-17 | 校准请求资格与缓冲 | 仅RUN期NORMAL_PPG+PHOTODIODE+AMB/DCS+SAR9请求握手一次；非法请求无波形/owner/序号副作用；合法请求错过接管或owner截止后保留到下一子帧重试 |
+| FSC-17 | 校准请求资格与缓冲 | 仅RUN期NORMAL_PPG+PHOTODIODE+AMB/DCS+SAR9请求握手一次；非法请求无波形/owner/序号副作用；合法请求错过接管或owner截止后保留到下一子帧重试。V1.13原行补充：校准宏帧末仍为在途owner的请求不跨帧重挂（§10.4，L-1） |
 | FSC-18 | IDAC子周期提交 | 候选提交边界不触发精度或重检提交 |
-| FSC-19 | 阶段超过8笔 | 同阶段延长到下一宏帧，不伪造完成 |
+| FSC-19 | 阶段超过8笔 | 同阶段延长到下一宏帧，不伪造完成。V1.13原行补充：启动搜索期结果晚于子帧7 local tick 385时，由§8.2.6空闲边界提交下一候选，不得死锁 |
 | FSC-20 | 三阶段顺序 | AMB成功后固定DC_R、DC_IR，禁止跳序 |
 | FSC-21 | AMB码未改变 | 仍执行两色DC重验证 |
 | FSC-22 | 双光完成事件 | 两色完成后仅一拍，RED完成时不得提前输出 |
@@ -1168,7 +1225,7 @@ digital drain or a Scheduler-generated idle indication.
 | FSC-35 | 长时间回归 | RED/IR各自400 Hz，完成事件和计数无漂移 |
 | FSC-36 | AMI fire一致性 | 返回fire必须逐拍等于valid与ready；错配置协议sticky且不得伪造启动 |
 | FSC-37 | owner资格反压 | SSW owner未ready时不对AMI形成可握手valid，不消费序号；截止后置owner sticky |
-| FSC-38 | NORMAL IDAC边界 | 每个400 Hz宏帧只与宏帧安全边界同拍一次，双光不增加次数 |
+| FSC-38 | NORMAL IDAC边界 | 每个400 Hz宏帧只与宏帧安全边界同拍一次，双光不增加次数。V1.13原行补充：§8.2.6空闲边界只在无宏帧时出现，不计入宏帧内次数 |
 | FSC-39 | 快速校准IDAC边界 | 一个完整校准宏帧在指定8个tick各输出一拍 |
 | FSC-40 | 边界同拍 | macro tick 4760两路边界可同拍，但IDAC只提交一次且epoch最多递增一次 |
 | FSC-41 | 生命周期门控 | 非RUN、STOP、abort和阻断故障期间不产生新的IDAC提交脉冲 |
@@ -1176,15 +1233,15 @@ digital drain or a Scheduler-generated idle indication.
 | FSC-43 | 校准接管间隔 | 连续合格校准事务的接管点严格相隔625个2 MHz周期 |
 | FSC-44 | 迟到校准valid | local tick 0之后到达的请求不得在本子帧迟到启动，只能等待下一子帧tick 0 |
 | FSC-45 | 校准颜色同相位 | AMB、DCS RED和DCS IR均只在local tick 0接管，不因颜色移动 |
-| FSC-46 | RED独立owner | RED波形tick 0接管，ADC owner在deadline 283前独立提交 |
+| FSC-46 | RED独立owner | RED波形tick 0接管，ADC owner在deadline 283前独立提交。V1.13原行补充：tick 283当拍提交属按时；越过283的候选不再形成valid（§10.3，L-4） |
 | FSC-47 | IR并行预建立 | macro tick 160接管IR波形时允许RED owner仍在途，IR最早包络不漂移 |
 | FSC-48 | RED完成后IR owner | 仅真实RED DONE释放owner；IR在deadline 443前随后原子提交 |
-| FSC-49 | IR owner截止失败 | deadline 443仍无owner时不消费序号、不产生IR有效采样或NORMAL完成 |
-| FSC-50 | 校准owner截止 | local tick 248前提交；失败时安全收尾并重试同一校准请求。V1.12原行补充：local tick 248当拍提交仍属按时提交，不回报截止；截止点到达仍未提交时`o_cal_owner_deadline_event`恰好输出1个周期，AMI据此释放在途请求并重新握手同一候选（第10.3节，SID-05） |
+| FSC-49 | IR owner截止失败 | deadline 443仍无owner时不消费序号、不产生IR有效采样或NORMAL完成。V1.13原行补充：越过443的候选只走截止收尾，不与截止同拍提交（§10.3，L-4） |
+| FSC-50 | 校准owner截止 | local tick 248前提交；失败时安全收尾并重试同一校准请求。V1.12原行补充：local tick 248当拍提交仍属按时提交，不回报截止；截止点到达仍未提交时`o_cal_owner_deadline_event`恰好输出1个周期，AMI据此释放在途请求并重新握手同一候选（第10.3节，SID-05）。V1.13原行补充：越过local tick 248的候选不再形成valid（L-4） |
 | FSC-51 | owner原子提交 | AMI fire与SSW owner commit同拍且sample index逐位相同，无半提交 |
 | FSC-52 | 连续sample index | 仅owner fire递增；双光两个正式结果使用不同且连续序号 |
 | FSC-53 | SAR15跨色白名单 | 仅四项批准信号可跨RED/IR连续，其他控制及两路LED无额外重叠 |
-| FSC-54 | 真实完成链 | DONE来自CLK_DOUT同步、RAW锁存和身份接纳；匹配`success=1/0`均释放owner但只有1计为成功，错配或固定延时脉冲不得释放owner |
+| FSC-54 | 真实完成链 | DONE来自CLK_DOUT同步、RAW锁存和身份接纳；匹配`success=1/0`均释放owner但只有1计为成功，错配或固定延时脉冲不得释放owner。V1.13原行补充：AMI超时作废单拍按同一身份匹配释放owner、不计成功，并把当前宏帧置为失败收尾（§10.4，R3、F-7） |
 | FSC-55 | START启动边界 | 安全空闲后仅一拍IDAC边界，无宏帧、波形、ADC和计数推进 |
 | FSC-56 | 独立故障阻断 | AMI或SSW任一故障独立阻断新接管，本地fault无反馈组合环 |
 | FSC-57 | SAR9跨色白名单 | 仅`CLK_IREF_IDAC_SAR9_LOW`按`[44,318)`与`[204,478)`合并为连续`[44,478)`；其余SAR9控制无额外重叠 |
@@ -1203,7 +1260,7 @@ digital drain or a Scheduler-generated idle indication.
 - 不推断锁存器；
 - 不依赖`initial`形成ASIC功能状态。
 
-自检TB必须真实覆盖FSC-01至FSC-57。所有PASS必须来自信号比较，不得使用无条件PASS打印；不得再用“启动后固定4拍产生ADC完成”的桩模型替代真实CLK_DOUT完成路径。
+自检TB必须真实覆盖FSC-01至FSC-57。V1.13补记：这是要求，不是当前状态。调度器单元TB的检查标签是TB内场景序号，与本表同号条目含义不同（例如TB FSC-14对应本表FSC-03，TB FSC-32对应本表FSC-30），逐条对应关系与当前证据状态见别名表FSC对照行与矩阵§13（ID=FSC-01～FSC-57）。已知FSC-19/23/24/27/44当前无证据，FSC-18/34/35/48/53/57只有部分证据（`verification_reports/ID_GOVERNANCE_AUDIT_FOLLOWUP_20261005.md` §2；FSC-35按`verification_reports/SSW18_TICK385_INVESTIGATION_20261006.md` §5改判为部分）。所有PASS必须来自信号比较，不得使用无条件PASS打印；不得再用“启动后固定4拍产生ADC完成”的桩模型替代真实CLK_DOUT完成路径。
 
 质量闭环包括：
 

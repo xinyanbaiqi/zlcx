@@ -427,4 +427,6 @@ scheduler.transaction valid && AMI.transaction ready
 2. **三模块联合TB已退役**：第14节作为JNT-01~09证据引用的`tb_ppg_scheduler_ssw_ami_integration.v`，已于2026-09-30（commit `50a2b88`）`git mv`到`legacy/rtl/ppg_system_integration/`。原因见`legacy/README.md`：它落后于RTL（08-17之后新增的14个输入没有连接）；JNT-08仍按与合同矛盾的`success==1`断言；`$fopen`写死了原始开发树的绝对路径。
 3. **JNT-01~09证据的现承接方式**：由`rtl/ppg_control_top/`下的19-TB主回归承接，其中14份TB通过`` `include ``共用`rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh`执行JNT-01~09基线。该前缀源自上述联合TB，并已修正JNT-08的断言。最新一次全套回归见`verification_reports/REGRESSION_BASELINE_20260930.md`。
 
+4. **单模块“全部PASS”声明的订正（2026-10-09补记，B合同合并批次BMI-187）**：第1节、第14节及第43~45行、第420行等处“Scheduler FSC-01～FSC-57、AMI AMI-01～AMI-45、SSW SSW-01～SSW-52均为当前单模块PASS”的说法不成立，原文作为快照保留。原因：调度器单元TB的检查标签是TB内场景序号，与C08同号条目含义不同（TB FSC-14对应合同FSC-03，TB FSC-32对应合同FSC-30，其余多为部分覆盖或无对应）；AMI单元TB的AMI-13与C10 AMI-13同号不同义，另有27条只覆盖部分；SSW单元TB的SSW-18场景与C09 SSW-18同号不同义。各ID的当前证据状态见别名表与矩阵§13（依据`verification_reports/ID_GOVERNANCE_AUDIT_20261005.md`、`ID_GOVERNANCE_AUDIT_FOLLOWUP_20261005.md`）。
+
 本节只记录状态，不改变上文任何逐端口连接结论。这些连接的现行权威描述是C01、C08、C09和C10；本表仍是矩阵§2所定的non-normative design reference。

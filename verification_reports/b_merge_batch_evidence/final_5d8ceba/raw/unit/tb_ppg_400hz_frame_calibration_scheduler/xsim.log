@@ -1,0 +1,110 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:53:27 2026
+# Process ID: 17356
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_400hz_frame_calibration_scheduler
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_400hz_frame_calibration_scheduler/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_400hz_frame_calibration_scheduler/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_400hz_frame_calibration_scheduler\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_400hz_frame_calibration_scheduler/xsim_script.tcl
+# xsim {snap_tb_ppg_400hz_frame_calibration_scheduler} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS SCHT-1
+PASS SCHT-2
+PASS SCHT-3
+PASS SCHT-4
+PASS SCHT-5
+PASS SCHT-6
+PASS SCHT-7
+PASS SCHT-8
+PASS SCHT-9
+PASS SCHT-10
+PASS SCHT-11
+PASS SCHT-12
+PASS SCHT-13
+PASS SCHT-14
+PASS SCHT-15
+PASS SCHT-16
+PASS SCHT-17
+PASS SCHT-18
+PASS SCHT-19
+PASS SCHT-20
+PASS SCHT-21
+PASS SCHT-22
+PASS SCHT-23
+PASS SCHT-24
+PASS SCHT-25
+PASS SCHT-26
+PASS SCHT-27
+PASS SCHT-28
+PASS SCHT-29
+PASS SCHT-30
+PASS SCHT-31
+PASS SCHT-32
+PASS SCHT-33
+PASS SCHT-34
+PASS SCHT-35
+PASS SCHT-36
+PASS SCHT-37
+PASS SCHT-38
+PASS SCHT-39
+PASS SCHT-40
+PASS SCHT-41
+PASS SCHT-42
+PASS SCHT-43
+PASS SCHT-44
+PASS SCHT-45
+PASS SCHT-46
+PASS SCHT-47
+PASS SCHT-48
+PASS SCHT-49
+PASS SCHT-50
+PASS SCHT-51
+PASS SCHT-52
+PASS SCHT-53
+PASS SCHT-54
+PASS SCHT-55
+PASS SCHT-56
+PASS SCHT-57
+PASS SCHT-58
+PASS SCHT-59
+PASS SCHT-60
+PASS SCHT-61
+PASS SCHT-62
+PASS CAL-ROLLOVER-ABORT
+CAL_ROLLOVER_CANCEL case=0 idle_after=0 frame=2
+PASS CAL-ROLLOVER-STOP
+CAL_ROLLOVER_CANCEL case=1 idle_after=0 frame=2
+PASS LOST-REL
+PASS LOST-MISM
+PASS L1-NOREPEND
+PASS L4-EXPIRE
+PASS L4-ONTIME
+PASS L3-IDLEBND
+PASS L3-NOEXTRA
+F009_PERIOD NN period=5000 cal=0
+PASS FRAME-NN
+F009_PERIOD NC period=5000 cal=1 prev_cal=0
+PASS FRAME-NC
+F009_PERIOD CN period=5000 cal=0 prev_cal=1
+PASS FRAME-CN
+F009_PERIOD NC_LAST ready_at_last=1 period=5000 cal=1
+PASS FRAME-NC-LAST
+F009_SCAN kind=0 offset=0 frames_after=0 idle_after=1 ok=1
+F009_SCAN kind=0 offset=1 frames_after=0 idle_after=0 ok=1
+F009_SCAN kind=0 offset=2 frames_after=0 idle_after=4999 ok=1
+F009_SCAN kind=1 offset=0 frames_after=0 idle_after=0 ok=1
+F009_SCAN kind=1 offset=1 frames_after=0 idle_after=0 ok=1
+F009_SCAN kind=1 offset=2 frames_after=0 idle_after=0 ok=1
+PASS RESTART-STOP-SCAN
+PASS RESTART-ABORT-SCAN
+SCHT-1 through SCHT-62: pass=77 fail=0
+ALL SCHT-1 THROUGH SCHT-62 PASSED
+$finish called at time : 86763 us : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v" Line 1354
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:53:30 2026...

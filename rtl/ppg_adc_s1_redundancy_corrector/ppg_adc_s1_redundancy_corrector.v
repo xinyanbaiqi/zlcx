@@ -162,7 +162,7 @@ module ppg_adc_s1_redundancy_corrector
 	assign flag_capture_transfer = i_rstn && i_capture_valid && flag_context_valid && flag_output_buffer_available; // 只接收拥有对应上下文的RAW
 	assign flag_context_ready = (flag_context_valid == 1'b0) || flag_capture_transfer; // 允许空闲锁存或同拍替换上下文
 	assign flag_context_transfer = i_rstn && i_adc_transaction_start && flag_context_ready; // 接纳由顶层正式启动的新事务
-	assign flag_capture_drop = i_rstn && i_capture_valid && flag_capture_drop_armed && !flag_context_valid; // 无上下文时只吞掉已作废事务的迟到RAW，绝不绑定到下一笔上下文；owner生命周期轮方案甲
+	assign flag_capture_drop = i_rstn && i_capture_valid && flag_capture_drop_armed && !flag_context_valid; // 无上下文时只吞掉已作废事务的迟到RAW，绝不绑定到下一笔上下文；owner生命周期轮方案甲 @satisfies: AMI-40
 
 	// 高六个常规位提供8 LSB步进，低三位补充1 LSB分辨率，vdred单独校正
 	assign dec_base_code = {1'b0, i_capture_stage1_raw[9:4], 3'b000} +

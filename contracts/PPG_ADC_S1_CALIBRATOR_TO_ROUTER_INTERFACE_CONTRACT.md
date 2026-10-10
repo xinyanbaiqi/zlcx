@@ -11,9 +11,9 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, generation/discard and router integration ownership. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.5 | AMI parent, generation/discard and router integration ownership. |
 | C11 | `ppg_system_integration/PPG_ADC_S1_PROGRAMMABLE_CALIBRATOR_CONTRACT.md` | V1 | Sole upstream calibrated retained transaction. |
-| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.2 | Sole NORMAL downstream overlap boundary. |
+| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.3 | Sole NORMAL downstream overlap boundary. |
 
 ## 1. 连接目的
 

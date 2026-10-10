@@ -1,5 +1,6 @@
 # ppg_system_config_manager语义合同
 
+> V4.10修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-180，按基线`7a8eabf` manager RTL核对）：MGR-12原行补充，写明错误码0x05在当前RTL不可达（`ppg_system_config_manager.v` `ERROR_ENUM_ENCODING`只声明、未被错误码选择链使用；唯一的枚举检查`flag_snapshot_enum_valid`即`idac_mode!=2'b11`报0x15，由MGR-20覆盖）。不改变任何编码或行为。
 > V4.9 fail-closed D01 revision, 2026-08-20: the manager is the sole committed 1024-bit joint ACTIVE and config_epoch owner. The system closure verdict is owned solely by the current matrix audit and is `NOT_CLOSED` until every final defect count is zero. Implementation evidence is `EVIDENCE_PENDING`.
 > Normative status: V4.9 is the sole current manager interface and lifecycle authority. Earlier V4.3-V4.8 status, dependency-version and implementation-readiness statements are historical unless repeated by V4.9; they cannot remove a V4.9 port or change V4.9 lifecycle semantics.
 
@@ -22,9 +23,9 @@
 **规范依赖（可决定配置管理器语义）**
 
 1. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
-2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.6；
+2. C03 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_PLANE_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V1.7；
 3. C05 — `ppg_system_active_config_unpack/ppg_system_active_config_unpack_semantic_contract.md` V5字段解释；
-4. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.5（仅定义经Top/wrapper转发的`i_system_fault_blocking`语义，不授予manager直接supervisor端口）。
+4. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7（仅定义经Top/wrapper转发的`i_system_fault_blocking`语义，不授予manager直接supervisor端口）。
 
 **一致性引用（只用于对齐，不覆盖配置管理器责任）**
 
@@ -346,7 +347,7 @@ start_ready = active_valid
 | MGR-09标称CHARACTERIZATION提交 | READY、Stage1/Stage2校准epoch不变、DC恢复epoch递增 |
 | MGR-10 START资格不足 | error=0x0b，保持READY |
 | MGR-11命令冲突 | 无`i_stop_event`时维持既有拒绝/无动作规则；若同拍存在Top合并的`i_stop_event`，STOP优先进入或保持STOPPING，START/COMMIT/status-clear被拒绝并记录`error=0x01` |
-| MGR-12配置拒绝矩阵 | 覆盖0x03至0x06、0x08、0x09、0x0e和0x0f，ACTIVE与全部epoch不变 |
+| MGR-12配置拒绝矩阵 | 覆盖0x03至0x06、0x08、0x09、0x0e和0x0f，ACTIVE与全部epoch不变。V4.10原行补充：其中0x05（`ERROR_ENUM_ENCODING`）在当前RTL不可达，原归入它的IDAC保留编码自V4.9起报0x15并由MGR-20覆盖；本条可达的拒绝码为0x03、0x04、0x06、0x08、0x09、0x0e、0x0f |
 | MGR-13 CONFIG期STOP与事件单拍 | error=0x0c，所有事件下一拍自动回低 |
 | MGR-14 epoch回绕 | 四个8-bit epoch从8'hff合法递增后回到8'h00，interval=16'hffff合法 |
 | MGR-15非法内部状态 | error=0x0d，撤销资格并安全返回CONFIG |

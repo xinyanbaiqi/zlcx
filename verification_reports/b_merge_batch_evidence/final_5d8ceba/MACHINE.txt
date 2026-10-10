@@ -1,0 +1,55 @@
+终版5d8ceba回归（按REGRESSION_RUN_REQUEST.md第2节执行；与基线7a8eabf同一台机器、同一Vivado、同一分组）
+
+机器
+  CPU      : Intel(R) Core(TM) i5-10400 CPU @ 2.90GHz（12逻辑处理器），内存15.8 GB
+  操作系统 : Microsoft Windows 11 专业版 10.0.26200 build 26200
+  Shell    : GNU bash 5.3.9(1)-release (x86_64-pc-cygwin)（Git for Windows 2.54.0）
+  Vivado   : Vivado Simulator v2022.2   （xelab -version第一行）
+  VIVADO_BIN=/c/Xilinx/Vivado/2022.2/bin
+  Python   : 3.14.7（锚点门禁）
+
+时间（本机时区+0800）
+  开始 : 2026-10-09 20:52:43
+  结束 : 2026-10-09 22:10:23（最后一组sys_g4结束）
+  总耗时 : 1小时17分40秒
+  各组结束 : chip 20:53:16, unit 21:01:44, sys_g3 21:09:44, sys_g2 21:37:00, sys_g1 21:45:48, sys_g4 22:10:23
+
+导出与运行
+  每组一个独立目录：git -c core.autocrlf=false archive 5d8ceba | tar -x，根目录在仓库外的新目录（D:/PPG/runs_5d8ceba/），
+  未复用基线运行目录D:/PPG/runs_7a8eabf/。
+  sys_g1..sys_g4只改了rtl/ppg_control_top/run_xsim_regression.sh的ORDER=(...)数组；该文件去掉ORDER块后与未改的
+  导出副本（chip组）逐字节相同，各组ORDER与基线运行目录中的ORDER块逐字节相同。
+  6组同时启动并行运行（sys_g1..g4、chip、unit -g all），组内按ORDER串行。
+
+开跑前锚点门禁单独执行（另一个5d8ceba导出目录D:/PPG/runs_5d8ceba/gate_check/）
+  bash tools/b_merge_tools/run_anchor_gate.sh → errors 0; file index walk (608 files); ANCHOR GATE PASSED；退出码0
+
+分组（与REGRESSION_RUN_REQUEST.md 1.2一致；4组合起来恰为TB_FILELIST的20个，不重复不遗漏）
+  g1: tb_ppg_control_top_longrun tb_diag_algo_probe tb_ppg_real_raw_generator_selfcheck tb_ppg_control_top tb_ppg_control_top_baseline_cross
+  g2: tb_ppg_control_top_long_10_cycles tb_ppg_control_top_fir_tail_isolation tb_ppg_control_top_adc_numeric_scoreboard tb_ppg_control_top_idac_bus_isolation tb_ppg_control_top_injection
+  g3: tb_ppg_control_top_lifecycle_fault_adc_anomaly tb_ppg_control_top_input_light_static_matrix tb_ppg_control_top_normal_slow_tracking tb_ppg_control_top_no_recheck_control tb_ppg_control_top_owner_identity_backpressure
+  g4: tb_ppg_control_top_peak_valley_return tb_ppg_control_top_periodic_recheck_recovery tb_ppg_control_top_robustness_corner_waveforms tb_ppg_control_top_startup_idac_calibration tb_ppg_control_top_adc_anomaly
+  chip: rtl/ppg_chip_digital_top/run_xsim_regression.sh
+  unit: tools/run_unit_tb_regression.sh -o <run_root>/unit_runs -g all（UNIT_EXIT=0；unit.out开头ANCHOR GATE PASSED，见unit_out_gate_head.txt）
+
+结果（regression_evidence.py export）
+  系统TB : 20/20，xvlog/xelab/xsim全0，0 FAIL，$finish各1次      基线 20/20     一致
+  PASS行 : 1250（index.tsv中system各行pass_lines之和）            基线 1250      一致
+  芯片   : 20/0                                                    基线 20/0      一致
+  模块级 : 28/28                                                   基线 28/28     一致
+
+比对（regression_evidence.py compare baseline_7a8eabf final_5d8ceba，完整输出见compare.txt）
+  退出码0；TBs=49，problems=0；$finish时刻与文件名全部相同。
+  SAME 42；PASSDIFF+FINISH_LINE_SHIFT 7（tb_ppg_400hz_frame_calibration_scheduler、tb_ppg_adc_dc_recovery、
+  tb_ppg_adc_measurement_idac_integration、tb_ppg_control_top_lifecycle_fault_adc_anomaly、
+  tb_ppg_sar9_sar15_safe_selection_wrapper、tb_ppg_system_config_manager、tb_ppg_system_fault_abort_supervisor）；
+  $finish行号各后移2行。各TB的PASS行数基线=终版；差异行全部为TB标签改名及随之改写的横幅
+  （含BMI-145的MGR横幅），均与7a8eabf..5d8ceba中这7个TB的源码改动一致。
+
+锚点门禁负对照（全部回归跑完后，在D:/PPG/runs_5d8ceba/unit导出目录中注入坏锚点i_amb_enable→i_amb_enablX）
+  单跑tb_ppg_adc_dc_recovery：name-missing ppg_amb_recheck_scheduler.v i_amb_enablX；ANCHOR GATE FAILED；EXIT=1；
+  未生成输出目录gate_negctl/。输出见gate_negctl.out。该导出目录已作废。
+
+raw/目录
+  raw/<组>/summary.tsv（unit为unit_summary.tsv），raw/<组>/<tb>/xsim.log；组为sys_g1..sys_g4、chip、unit。
+  文件布局与baseline_7a8eabf/raw/逐路径相同（55个文件）。

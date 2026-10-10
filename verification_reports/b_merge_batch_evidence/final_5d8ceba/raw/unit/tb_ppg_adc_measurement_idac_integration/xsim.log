@@ -1,0 +1,114 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 20:54:19 2026
+# Process ID: 5760
+# Current directory: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_measurement_idac_integration
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_adc_measurement_idac_integration/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_measurement_idac_integration/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/unit_runs/tb_ppg_adc_measurement_idac_integration\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_adc_measurement_idac_integration/xsim_script.tcl
+# xsim {snap_tb_ppg_adc_measurement_idac_integration} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS AMI-01
+PASS AMI-35
+PASS AMI-36
+PASS AMI-14
+PASS AMI-15
+PASS AMI-02
+PASS AMI-37
+PASS AMI-30
+PASS AMI-04
+PASS AMI-06
+PASS AMI-09
+PASS AMI-10
+PASS AMI-23
+PASS AMI-31
+PASS AMI-03
+PASS AMI-33
+PASS AMI-34
+PASS AMI-38
+PASS AMI-05
+PASS AMI-11
+PASS AMI-12
+PASS FORK-HOLD
+PASS AMI-07
+PASS AMI-08
+PASS AMI-16
+PASS AMI-42
+PASS AMI-19
+PASS AMI-20
+PASS AMI-17
+PASS AMI-18
+PASS AMI-27
+PASS AMI-26
+PASS AMI-28
+PASS AMI-25
+PASS AMI-21
+PASS AMI-29
+PASS AMI-22
+PASS AMI-32
+PASS AMI-39
+PASS AMI-40
+PASS AMI-41
+PASS AMI-44
+PASS AMI-43
+PASS AMI-45
+PASS AMI-24
+PASS AMI-DISC-1
+PASS AMI-DISC-2
+PASS N08-01
+PASS AMI-SID05-1
+PASS AMI-SID05-2
+HIST_KEEP after_start sticky=1
+PASS HIST-KEEP
+PASS HIST-BLOCK
+PASS HIST-ABORT
+HIST_STOP_ONLY blocking=1 ami_fault_active=0 sticky_after_diag_clear=0
+PASS HIST-STOP
+PASS HIST-RERUN
+DISC_HELD discard frame=92 sample=920 color=0 type=2 precision=0
+PASS DISC-HELD
+DET_QUAL meas_first=1 mismatch=0
+PASS DET-QUAL
+LEAF_HOLD accepted_after=0 hold=1 effective=0
+PASS LEAF-HOLD
+OLR LOST-FIRE age_at_lost=4501 idx=960 disc_reason11=1
+PASS LOST-FIRE
+OLR DBG LOST-RECOV t=164060000 complete=178 lost=1 f06=0 f07=0 f02=6 red=0 ir=0 cal=0 fault_active=0 wrap_block=0 integ_block=0 inflight=0 age=6 sticky=1 idle=1 ready=1
+PASS LOST-RECOV
+PASS LSTK-START
+PASS LOST-IDLE
+OLR DBG WIN-BEFORE t=257200000 complete=183 lost=2 f06=0 f07=0 f02=6 red=0 ir=0 cal=0 fault_active=0 wrap_block=0 integ_block=0 inflight=0 age=4502 sticky=1 idle=1 ready=1
+PASS WIN-BEFORE
+OLR WIN-IN lost=1 complete=0 blocking=1 fault_active=1 f02=1
+OLR DBG WIN-IN t=302360000 complete=183 lost=3 f06=0 f07=0 f02=7 red=1 ir=0 cal=0 fault_active=1 wrap_block=1 integ_block=1 inflight=0 age=4501 sticky=1 idle=1 ready=0
+PASS WIN-IN
+PASS WIN-RECOV
+PASS WIN-AFTER
+OLR DBG K-RED2 t=440480000 complete=190 lost=6 f06=1 f07=0 f02=8 red=2 ir=0 cal=0 fault_active=1 wrap_block=1 integ_block=0 inflight=0 age=4501 sticky=1 idle=1 ready=0
+PASS K-RED2
+PASS LSTK-BLOCK
+PASS K-ABORT
+PASS LSTK-CLR
+OLR DBG K-CLEAR t=531680000 complete=194 lost=8 f06=1 f07=0 f02=8 red=1 ir=0 cal=0 fault_active=0 wrap_block=0 integ_block=0 inflight=0 age=4501 sticky=1 idle=1 ready=1
+PASS K-CLEAR
+OLR DBG K-SLOT t=622510000 complete=197 lost=10 f06=1 f07=0 f02=8 red=1 ir=1 cal=0 fault_active=0 wrap_block=0 integ_block=0 inflight=0 age=4501 sticky=1 idle=1 ready=1
+PASS K-SLOT
+OLR DBG LSTK-PRIO t=667590000 complete=197 lost=11 f06=2 f07=0 f02=8 red=1 ir=2 cal=0 fault_active=1 wrap_block=1 integ_block=0 inflight=0 age=4501 sticky=1 idle=1 ready=0
+PASS LSTK-PRIO
+PASS K-IR2
+OLR DBG BUSY-07 t=761340000 complete=200 lost=11 f06=2 f07=1 f02=8 red=0 ir=0 cal=0 fault_active=1 wrap_block=1 integ_block=0 inflight=1 age=9000 sticky=1 idle=0 ready=0
+PASS BUSY-07
+OLR DBG BUSY-VOID t=761380000 complete=200 lost=12 f06=2 f07=1 f02=8 red=1 ir=0 cal=0 fault_active=1 wrap_block=1 integ_block=0 inflight=0 age=9000 sticky=1 idle=1 ready=0
+PASS BUSY-VOID
+PASS WDRAW-LOST
+PASS LOST-EXCL
+AMI-01 through AMI-45 except AMI-13 (TB-local FORK-HOLD), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 78 real comparisons
+$finish called at time : 806750 ns : File "D:/PPG/runs_5d8ceba/unit/rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v" Line 2225
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 20:54:24 2026...

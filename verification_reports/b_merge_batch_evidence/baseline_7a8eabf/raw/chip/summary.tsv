@@ -1,0 +1,2 @@
+tb_name	filelist	snapshot	xvlog	xelab	xsim	pass_count	fail_count	finished	duration_s	log_dir
+tb_ppg_chip_digital_top	xsim_chip_digital_top_filelist.f	snap_tb_ppg_chip_digital_top	0	0	0	20	0	1	30	xsim_regression_20261009/tb_ppg_chip_digital_top

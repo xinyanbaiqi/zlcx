@@ -1,0 +1,6 @@
+errors 1 -> 1 ; strict_warnings 0 -> 0
+by_rule baseline: {'COMMENT_COMMENT_PLACEMENT': 1}
+by_rule branch  : {'COMMENT_COMMENT_PLACEMENT': 1}
+per file (file, rule, severity): baseline -> branch
+  ppg_system_fault_abort_supervisor.v comment_gate error: 1 -> 1
+issue (file, rule, severity, message without line numbers) differences: 0

@@ -1,0 +1,8 @@
+# anchor_check.py file index: git vs walk in the working tree (871ff61)
+## --index git
+stats {"symbol_anchors": 5356, "satisfies_anchors": 96, "label_anchors": 145, "section_refs": 2806, "old_anchor_history": 1169}; external refs 27; errors 0; file index git (851 files)
+## --index walk
+stats {"symbol_anchors": 5356, "satisfies_anchors": 96, "label_anchors": 145, "section_refs": 2806, "old_anchor_history": 1169}; external refs 27; errors 0; file index walk (606 files)
+
+JSON reports compared key by key: errors EQUAL, external_refs EQUAL, stats EQUAL, files EQUAL, info_count EQUAL.
+File counts differ (git 851 incl. 247 tracked files under .claude/; walk skips .git, __pycache__ and .claude, and also sees untracked working-tree files); results are identical.

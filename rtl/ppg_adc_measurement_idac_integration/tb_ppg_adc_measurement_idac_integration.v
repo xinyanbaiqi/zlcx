@@ -15,8 +15,8 @@
 // Dependencies:
 //      DUT and all real integration submodules
 //
-// Version:         V1.14
-// Revision Date:   2026-10-08
+// Version:         V1.15
+// Revision Date:   2026-10-09
 // History:
 // 2026-08-12           V1.0       Erie        Create file.
 // 2026-08-13           V1.1       Erie        Verify split safe-boundary routing.
@@ -33,6 +33,7 @@
 // 2026-10-05           V1.12      Erie        Simplify the V1.11 label printing: drop the write_case_id byte-by-byte task and print with $display("PASS %0s") / $display("FAIL %0s at %0t"). %0s suppresses the zero-byte left padding of the 11-character label in both xsim 2022.2 and Icarus (plain %s prints it as spaces, which is what V1.11 worked around), so the output is byte-identical to V1.11 and every unchanged label prints exactly as before V1.11. No check condition changes; 50 cases.
 // 2026-10-06           V1.13      Erie        ABCD review RTL round 1: eight TB-local checks appended after AMI-SID05-2 (pass gate 50 -> 58; banner regex unchanged). HIST-KEEP (F-022): a non-blocking protocol sticky survives STOP and a new START and is cleared only by diag_clear. HIST-BLOCK / HIST-ABORT / HIST-STOP / HIST-RERUN (N-1): with an integration-blocking cause (AMB start without an in-flight request) diag_clear is ignored during RUN; after abort releases the blocking, diag_clear clears the sticky; after a STOP-only end and a full drain, diag_clear clears the history although the blocking flag is still 1; in that idle state AMI fault-active also stays 1 (L-5, asserted as-is), and a START then clears the blocking and the lane but not the history. DISC-HELD (F-019): with result 92/920 held under backpressure and 93/930 already in the upstream fork, abort must report the discard identity of 92/920/RED/NORMAL/SAR9; the discard color/frame_type/precision outputs are now wired. DET-QUAL (F-021): the N08 back-to-back window without abort; a passive monitor requires the qualification PWI sees at each detection handshake to equal the value loaded with that transaction, and the formal-branch-first window must occur. LEAF-HOLD (F-044, P06 leaf evidence): the DUT is built with C_ENABLE_TEST_INJECTION=1 and the injection inputs are driven (0 everywhere else, so the effective enable and every earlier result are unchanged); after an identity injection is accepted, i_test_inject_enable is held low for 20 cycles and flag_test_identity_hold must stay 1. Negative controls: each check fails on the corresponding pre-fix or mutated RTL.
 // 2026-10-08           V1.14      Erie        Owner-lifecycle round step 3: new owner-age monitor and helper tasks olr_fresh_run / olr_wait_age / olr_wait_lost / olr_done_keep_idle / olr_abort_recover; 20 TB-local checks LOST-FIRE, LOST-RECOV, LSTK-START, LOST-IDLE, WIN-BEFORE (age 4497), WIN-IN (4499), WIN-RECOV, WIN-AFTER, K-RED2, LSTK-BLOCK, K-ABORT, LSTK-CLR, K-CLEAR, K-SLOT, LSTK-PRIO, K-IR2, BUSY-07, BUSY-VOID, WDRAW-LOST, LOST-EXCL; HIST-RERUN rewritten for L-5 (lane falls only after RUN-ended-and-drained, the late DONE still records cause 02); watchdog raised to 4 ms. Pass gate 58 -> 78.
+// 2026-10-09           V1.15      Erie        B merge batch (ID governance): check label AMI-13 -> TB-local FORK-HOLD (it tests backpressure hold, part of C10 AMI-12; contract AMI-13 same-edge replacement has no dynamic check); banner notes the exception. Checks and counts unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -49,7 +50,7 @@
 //      DUT及全部真实集成子模块
 //
 // 当前版本:        V1.14
-// 修订日期:        2026年10月08日
+// 修订日期:        2026年10月09日
 // 修订历史:
 // 2026-08-12           V1.0       Erie        创建文件
 // 2026-08-13           V1.1       Erie        验证两类安全边界独立路由
@@ -66,6 +67,7 @@
 // 2026-10-05           V1.12      Erie        简化V1.11的标签打印：删除逐字节打印任务write_case_id，改用$display("PASS %0s")和$display("FAIL %0s at %0t")。%0s在xsim 2022.2与Icarus中都不输出11字符标签左侧补齐的零字节（普通%s会把它们打成空格，V1.11正是为绕开这一点），输出与V1.11逐字节相同，未改名的标签与V1.11之前完全一致。检查条件不变，仍为50项。
 // 2026-10-06           V1.13      Erie        ABCD复核RTL第一轮：在AMI-SID05-2之后追加8项TB本地检查（判据50改为58，横幅正则不变）。HIST-KEEP（F-022）：非阻断协议sticky经STOP和新START仍保持，只由diag_clear清除。HIST-BLOCK/HIST-ABORT/HIST-STOP/HIST-RERUN（N-1）：存在集成阻断成因（无在途请求的AMB start）时RUN中diag_clear被忽略；abort解除阻断后diag_clear清除；只以STOP结束并排空后，阻断标志虽仍为1，diag_clear也能清掉历史；此时空闲期AMI fault-active同样仍为1（L-5，如实断言），随后START清除阻断与lane但不清历史。DISC-HELD（F-019）：92/920被反压持住、93/930已进入上游fork时abort，discard身份必须是92/920/RED/NORMAL/SAR9；接上discard的颜色/类型/精度输出。DET-QUAL（F-021）：N08背靠背窗口不abort，被动监视要求每次检测握手时PWI看到的资格等于该笔装入时的值，且正式分支先消费的窗口确实出现。LEAF-HOLD（F-044，P06叶子证据）：DUT以C_ENABLE_TEST_INJECTION=1构建并驱动注入输入（其余场景恒为0，有效使能与此前全部结果不变）；错误身份注入被接纳后把i_test_inject_enable拉低20拍，flag_test_identity_hold必须保持1。负对照：每项在对应修复前或变异RTL上失败
 // 2026-10-08           V1.14      Erie        owner生命周期轮第三步：新增owner年龄监视与辅助任务olr_fresh_run/olr_wait_age/olr_wait_lost/olr_done_keep_idle/olr_abort_recover；新增20项TB本地检查LOST-FIRE、LOST-RECOV、LSTK-START、LOST-IDLE、WIN-BEFORE（年龄4497）、WIN-IN（4499）、WIN-RECOV、WIN-AFTER、K-RED2、LSTK-BLOCK、K-ABORT、LSTK-CLR、K-CLEAR、K-SLOT、LSTK-PRIO、K-IR2、BUSY-07、BUSY-VOID、WDRAW-LOST、LOST-EXCL；HIST-RERUN按L-5改写（lane只在RUN结束且排空后落下，迟到DONE仍记cause 02）；看门狗放宽到4 ms。判据58改为78。
+// 2026-10-09           V1.15      Erie        B合并批次（编号治理）：检查标签AMI-13改为TB本地名FORK-HOLD（实测反压保持，属C10 AMI-12；合同AMI-13同拍替换无动态检查）；横幅注明此例外。判定与计数不变。
 
 module tb_ppg_adc_measurement_idac_integration ();
 
@@ -1421,7 +1423,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 		wait_measurement_result();
 		check_case("AMI-12", o_measurement_result_valid && (o_result_sample_index == 16'd102));
 		repeat(5) @(negedge i_clk);
-		check_case("AMI-13", o_measurement_result_valid && (o_result_sample_index == 16'd102));
+		check_case("FORK-HOLD", o_measurement_result_valid && (o_result_sample_index == 16'd102));
 		i_measurement_result_ready = 1'b1;
 		repeat(3) @(negedge i_clk);
 
@@ -2216,7 +2218,7 @@ module tb_ppg_adc_measurement_idac_integration ();
 		repeat(10) @(negedge i_clk);
 
 		if(cnt_fail == 0 && cnt_pass == 78)begin
-			$display("AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
+			$display("AMI-01 through AMI-45 except AMI-13 (TB-local FORK-HOLD), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: %0d real comparisons", cnt_pass);
 		end else begin
 			$display("AMI REGRESSION FAIL: pass=%0d fail=%0d", cnt_pass, cnt_fail);
 		end

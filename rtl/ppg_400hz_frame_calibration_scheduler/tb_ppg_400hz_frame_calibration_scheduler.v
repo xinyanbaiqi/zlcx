@@ -14,8 +14,8 @@
 //
 // Dependencies:       ppg_400hz_frame_calibration_scheduler.v
 //
-// Version:            V1.10
-// Revision Date:      2026-10-08
+// Version:            V1.11
+// Revision Date:      2026-10-09
 // History:
 // 2026-08-16          V1.3        Erie          Add independent-context FSC-01 through FSC-57 checks.
 // 2026-08-24          V1.4        Erie          Fix three issues found while re-running this self-check against the current (V1.6) scheduler RTL after the STOP-drain deadlock fix. (1) This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated as X at the DUT instantiation, making i_run_generation==state_current[B_INFLIGHT_GENERATION] compare X and fail every case depending on completion matching (17 of 57 cases); fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation and driving it at a fixed constant in drive_defaults (none of FSC-01 through FSC-57 exercise cross-generation rejection; that remains a coverage gap, not newly added here). (2) FSC-33's manual late-DONE drive raced against the still-active background auto-done generator: flag_auto_done_enable was left on, so its every-cycle non-blocking i_adc_transaction_complete_event<=1'b0 default silently overwrote the test's own blocking drive of the same signal at the same edge, so the DUT never actually sampled the manual completion pulse as 1; fixed by disabling flag_auto_done_enable before the manual drive. (3) FSC-44 asserted the pre-V1.6 behavior that a plain i_run_enable==0 (no STOP/abort) immediately clears B_FRAME_ACTIVE; V1.6 intentionally changed this so only abort clears it immediately, letting an already-open macro frame drain via natural tick advance per contract section 16.3 — fixed by asserting the still-valid immediate property (no new owner commit, frame legitimately stays active) and then waiting for the frame to reach MACRO_LAST_TICK to confirm it actually does drain and clear on its own, rather than weakening the check.
@@ -25,6 +25,7 @@
 // 2026-10-06          V1.8        Erie          ABCD review F-010: add TB-local checks CAL-ROLLOVER-ABORT and CAL-ROLLOVER-STOP (task check_local; no FSC-nn number is taken). With a level-held AMB calibration request, abort or STOP-ack is applied on tick 4999 of the second CAL macro frame; the scheduler must be idle within 4 cycles, frame_id must settle at 2 (natural end of frame 1) and stay there, and no new macro frame, owner or waveform may appear for 6000 cycles. Pass criterion 62 -> 64; banner unchanged. Negative control: scheduler V1.9 without the lifecycle term goes idle only after 5000 cycles at frame 3, both checks FAIL.
 // 2026-10-08          V1.9        Erie          Owner-lifecycle round (OWNER_LIFECYCLE_ROUND_20261007) step 3: inputs i_idac_boundary_request and i_adc_transaction_lost_event are now TB regs; new TB-local checks LOST-REL (matching void releases B_INFLIGHT, FRAME_FAILED), LOST-MISM (unmatched void -> COMPLETION_MISMATCH), L1-NOREPEND (no macro-end re-pend while B_INFLIGHT), L4-EXPIRE / L4-ONTIME (candidate expiry after the deadline vs on-time commit), L3-IDLEBND / L3-NOEXTRA (one-shot idle IDAC boundary). Pass gate 64 -> 71.
 // 2026-10-08          V1.10       Erie          ABCD review F-011/F-009: FSC-14 now requires a frame period of exactly 5000 (it accepted 5001; this TB's FSC-14 corresponds to contract FSC-03). New TB-local checks serving F-009: FRAME-NN (two consecutive NORMAL periods), FRAME-NC and FRAME-CN (NORMAL-to-CAL and CAL-to-NORMAL periods and frame modes), FRAME-NC-LAST (a calibration handshake exactly on the NORMAL last tick must give a CAL frame 5000 cycles later), RESTART-STOP-SCAN and RESTART-ABORT-SCAN (STOP-ack or abort on tick 4998, 4999 or the new frame's tick 0: no further frame, wave or owner; STOP on tick 0 lets that empty frame run out, abort idles at once). The frame-start monitor now also records the mode of each frame. Pass criterion 71 -> 77. Negative controls: restart disabled fails FSC-14 and FRAME-NN/NC/CN/NC-LAST (5001); restart without the lifecycle gate fails both scans (and FSC-44 and the CAL-ROLLOVER checks); taking the next-frame mode from state_current fails FRAME-NC-LAST.
+// 2026-10-09          V1.11       Erie          B merge batch (ID governance): label strings only. check_fsc prints the TB-local name SCHT-n (was FSC-n, a TB scenario number that does not share meaning with C08 FSC-nn; TB SCHT-14 = contract FSC-03, SCHT-32 = FSC-30, mapping in the alias table); both summary banners follow. check_fsc arguments, stimulus, checks and counts unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:           Erie
 // 开发人员:           Erie
@@ -40,7 +41,7 @@
 // 依赖文件:           ppg_400hz_frame_calibration_scheduler.v
 //
 // 当前版本:           V1.10
-// 修订日期:           2026年10月08日
+// 修订日期:           2026年10月09日
 // 修订历史:
 // 2026-08-16          V1.3        Erie          覆盖FSC-01至FSC-57及真实事务完成释放。
 // 2026-08-24          V1.4        Erie          拿V1.6 scheduler（STOP排空死锁修复后）重跑这份自检时发现并修复三个问题。(1)这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接，导致它在DUT里浮空为X，使i_run_generation==在途owner锁存代际这条比较恒为假，凡是依赖DONE完成匹配的用例全部假失败（57个里17个）；修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在drive_defaults里给它一个全程固定常量——FSC-01至FSC-57本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。(2)FSC-33手动驱动迟到DONE时，后台自动DONE生成器flag_auto_done_enable还开着，它每拍非阻塞写回的i_adc_transaction_complete_event<=1'b0默认值在同一个时钟沿悄悄覆盖了测试自己的阻塞驱动，DUT从未真正采样到手动置的1；修复：手动驱动前先关掉flag_auto_done_enable。(3)FSC-44断言的是V1.6修复前的行为——纯i_run_enable掉底（无STOP/abort）立即清B_FRAME_ACTIVE；V1.6按合同16.3节故意改成只有abort才立即清，纯run_enable掉底要靠tick自然推进把已经打开的宏帧走完；修复为断言仍然成立的即时性质（没有新owner提交、宏帧合法地保持活动）之后再等到MACRO_LAST_TICK验证它确实会自己走完释放，而不是简单削弱断言
@@ -50,6 +51,7 @@
 // 2026-10-06          V1.8        Erie          ABCD复核F-010：新增TB本地检查CAL-ROLLOVER-ABORT和CAL-ROLLOVER-STOP（check_local任务，不占用FSC编号）。电平保持AMB校准请求，在第二个CAL宏帧tick 4999施加abort或STOP确认；scheduler须在4拍内idle，frame_id停在2（帧1自然结束）并保持，6000拍内不得出现新宏帧、owner或波形。判据62改为64，横幅不变。负对照：去掉生命周期项的V1.9在5000拍后才idle且frame为3，两项均FAIL
 // 2026-10-08          V1.9        Erie          owner生命周期轮（OWNER_LIFECYCLE_ROUND_20261007）第三步：输入i_idac_boundary_request与i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-REL（匹配作废释放B_INFLIGHT并FRAME_FAILED）、LOST-MISM（不匹配作废记COMPLETION_MISMATCH）、L1-NOREPEND（B_INFLIGHT时宏帧末不重挂）、L4-EXPIRE/L4-ONTIME（截止后候选过期与按时提交对照）、L3-IDLEBND/L3-NOEXTRA（空闲IDAC边界只发一次）。判据64改为71。
 // 2026-10-08          V1.10       Erie          ABCD复核F-011/F-009：FSC-14改为要求帧周期严格5000（原先容许5001；本TB的FSC-14对应合同FSC-03）。新增服务F-009的TB本地检查：FRAME-NN（连续两个NORMAL周期）、FRAME-NC与FRAME-CN（NORMAL→CAL、CAL→NORMAL的周期与帧模式）、FRAME-NC-LAST（校准请求恰在NORMAL末拍握手，5000拍后必须是CAL帧）、RESTART-STOP-SCAN与RESTART-ABORT-SCAN（STOP确认或abort落在tick 4998、4999或新帧tick 0：不再起帧、无新波形或owner；STOP落在tick 0时该空帧走完，abort立即空闲）。宏帧起点监视器同时记录每帧模式。判据71改为77。负对照：去掉直接起帧时FSC-14与FRAME-NN/NC/CN/NC-LAST失败（5001）；去掉生命周期门控时两项扫描失败（FSC-44与CAL-ROLLOVER也失败）；下一帧模式改取state_current时FRAME-NC-LAST失败
+// 2026-10-09          V1.11       Erie          B合并批次（编号治理）：只改标签字符串。check_fsc打印TB本地名SCHT-n（原FSC-n是TB场景序号，与C08同号条目含义不同；TB SCHT-14=合同FSC-03，SCHT-32=FSC-30，对应关系见别名表），两行总横幅同步。check_fsc实参、激励、判定与计数均不变。
 module tb_ppg_400hz_frame_calibration_scheduler ();
 
 	parameter C_FRAME_ID_WIDTH = 16;
@@ -486,10 +488,10 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		begin
 			if(i_condition)begin
 				cnt_pass = cnt_pass + 1;
-				$display("PASS FSC-%0d", i_case_number);
+				$display("PASS SCHT-%0d", i_case_number);
 			end else begin
 				cnt_fail = cnt_fail + 1;
-				$display("FAIL FSC-%0d cycle=%0d tick=%0d", i_case_number, cnt_cycle, o_macro_tick);
+				$display("FAIL SCHT-%0d cycle=%0d tick=%0d", i_case_number, cnt_cycle, o_macro_tick);
 			end
 		end
 	endtask
@@ -1345,9 +1347,9 @@ module tb_ppg_400hz_frame_calibration_scheduler ();
 		check_local("RESTART-STOP-SCAN", flag_scan_stop_ok);
 		check_local("RESTART-ABORT-SCAN", flag_scan_abort_ok);
 
-		$display("FSC-01 through FSC-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
+		$display("SCHT-1 through SCHT-62: pass=%0d fail=%0d", cnt_pass, cnt_fail);
 		if(cnt_fail == 0 && cnt_pass == 77)begin
-			$display("ALL FSC-01 THROUGH FSC-62 PASSED");
+			$display("ALL SCHT-1 THROUGH SCHT-62 PASSED");
 		end
 		$finish;
 	end

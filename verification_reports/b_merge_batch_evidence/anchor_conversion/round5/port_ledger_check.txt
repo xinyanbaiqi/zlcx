@@ -1,0 +1,6 @@
+# 统筹 port_ledger_check.py（origin/main，只读）在 f5bbd5c 干净导出目录上运行
+rows_with_col5_anchor 493
+col5 wrong (file has same-name port but anchor symbol differs): 0 rows 0
+anchor file not found: 0 []
+anchor symbol absent from file: 0 []
+col5 anchors whose file lacks the row port: 0

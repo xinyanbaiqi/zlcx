@@ -1,0 +1,103 @@
+[PASS] FIR-01 MAC genuinely in flight before reset
+[PASS] FIR-01 asynchronous reset
+[PASS] FIR-01 payload and diagnostics freeze to reset value
+[PASS] FIR-01 reset cancels genuinely in-flight MAC
+[PASS] FIR-01 sample counts exactly zero after reset
+[PASS] FIR-02 first twenty samples
+[PASS] FIR-03 twenty-first sample and latency
+[PASS] FIR-04 unity DC gain
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-05 impulse coefficient response
+[PASS] FIR-06 negative half LSB away from zero
+[PASS] FIR-06 positive half LSB away from zero
+[PASS] FIR-07 negative signed endpoint
+[PASS] FIR-07 positive signed endpoint
+[PASS] FIR-08 independent dual-color histories
+[PASS] FIR-09 center metadata x[n-10]
+[PASS] FIR-10 precision metadata follows center
+[PASS] FIR-11 precision return keeps history
+[PASS] FIR-12 pending alone keeps histories
+[PASS] FIR-13 recheck accept clears both histories
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-14 recheck busy blocks FIR traffic
+[PASS] FIR-15 rewarm first twenty samples
+[PASS] FIR-15 rewarm twenty-first sample
+[PASS] FIR-16 slow DC tracking keeps history
+[PASS] FIR-17 uncalibrated sample keeps value but clears qualification
+[PASS] FIR-18 saturation OR and qualification
+[PASS] FIR-19 non-NORMAL input ignored
+[PASS] FIR-19 self-checking TB reports the integration protocol error
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-20 held output payload stable
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 bounded input backpressure
+[PASS] FIR-21 input resumes exactly once
+[PASS] FIR-22 commit follows eleven products
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-22 sequential MAC index
+[PASS] FIR-23 maximum sixteen-cycle processing
+[PASS] FIR-24 fully drained idle
+[PASS] FIR-24 pending output is not idle
+[PASS] FIR-25 START cancels in-flight MAC
+[PASS] FIR-25 STOP discard cancels in-flight MAC
+[PASS] FIR-25 abort discard cancels in-flight MAC
+[PASS] FIR-25 stale-generation discard keeps in-flight MAC
+[PASS] FIR-26 safe recheck takeover
+[PASS] FIR-26 unsafe recheck cannot revoke output
+[PASS] FIR-27 dual-color random wide-model regression
+[PASS] FIR-28 fifty-Hz attenuation
+[PASS] FIR-28 five-Hz response
+[PASS] FIR-28 ten-Hz response
+[PASS] FIR-28 twenty-Hz attenuation
+[PASS] FIR-29 center precision changes without clearing history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-29 precision change delayed by center history
+[PASS] FIR-30 timeout cancels partial result without clearing history
+[PASS] FIR-31 invalid transaction consumed once without history MAC or output
+[PASS] FIR-32 qualification orthogonal to sample_valid
+[PASS] FIR-33 invalid gap keeps legal history continuity

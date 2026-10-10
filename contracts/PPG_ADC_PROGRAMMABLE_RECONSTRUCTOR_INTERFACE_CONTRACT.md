@@ -11,8 +11,8 @@
 
 | Dependent Cxx | Active relative path | Required version | Dependency scope |
 | --- | --- | --- | --- |
-| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.4 | AMI parent, generation/discard and data-chain integration ownership. |
-| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.2 | Sole upstream overlap-corrected NORMAL transaction boundary. |
+| C10 | `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` | V2.5 | AMI parent, generation/discard and data-chain integration ownership. |
+| C13 | `ppg_system_integration/PPG_ADC_ROUTER_TO_PIPELINE_OVERLAP_INTERFACE_CONTRACT.md` | V1.3 | Sole upstream overlap-corrected NORMAL transaction boundary. |
 | C15 | `ppg_system_integration/PPG_ADC_DC_RECOVERY_INTERFACE_CONTRACT.md` | V1 | Sole downstream DC-recovery boundary. |
 
 ## 1. 模块职责

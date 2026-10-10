@@ -14,8 +14,8 @@
 //
 // Dependencies:    ppg_system_config_manager.v
 //
-// Version:         V4.10
-// Revision Date:   2026/10/06
+// Version:         V4.11
+// Revision Date:   2026/10/09
 // History:
 //     Time          Version     Revised by     Contents
 // 2026/08/06        V1.0        Erie          Create file.
@@ -24,6 +24,7 @@
 // 2026/08/13        V2.1        Erie          Verify the V4.1 profile and initial precision rule.
 // 2026/08/23        V4.9        Erie          Widen every snapshot to the 1024-bit V4+V5 joint payload with a legal V5 default block on every full rebuild; add MGR-17 through MGR-24 covering the new STATIC_BIAS/EXTERNAL_TEST_CURRENT/reserved-IDAC combination checks, run_generation and stop_episode_active observation, and the system_fault_blocking START gate; retarget MGR-12's reserved-IDAC-encoding step from 0x05 to 0x15 per the current contract's ERROR_RESERVED_IDAC_MODE reclassification. MGR-21 is intentionally not implemented here per the contract's own note that it requires the joint Scheduler+SSW+AMI testbench, not this standalone one.
 // 2026/10/06        V4.10       Erie          ABCD review F-023: add the RUN/STOPPING half of MGR-11: for STOP+START, STOP+status-clear and STOP+COMMIT, each in its own RUN, the STOP must enter STOPPING (and the repeated conflicting STOP must stay idempotent), close run/new-transaction permission, raise stop_episode_active, report 0x01, and leave generation, ACTIVE and config_epoch unchanged; drain must return to CONFIG. Info line MGR11_STOP_PRIORITY.
+// 2026/10/09        V4.11       Erie          B merge batch BMI-145 (ID governance): banner text only. The PASS banner no longer claims MGR-21, which this TB does not check (C02 requires the three-module joint TB); checks and counts unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -38,8 +39,8 @@
 //
 // 依赖文件:        ppg_system_config_manager.v
 //
-// 当前版本:        V4.10
-// 修订日期:        2026年10月06日
+// 当前版本:        V4.11
+// 修订日期:        2026年10月09日
 // 修订历史:
 //     时间          版本        修订人        修订内容
 // 2026年08月06日   V1.0        Erie          创建文件
@@ -48,6 +49,7 @@
 // 2026年08月13日   V2.1        Erie          验证运行类型与初始精度组合规则
 // 2026年08月23日   V4.9        Erie          全部快照扩展为1024-bit V4+V5联合载荷，每次整体重建都补一份合法V5默认档案；新增MGR-17至MGR-24覆盖STATIC_BIAS/EXTERNAL_TEST_CURRENT/保留IDAC编码组合校验、run_generation与stop_episode_active观测、系统阻断START门；MGR-12保留IDAC枚举步骤按当前合同ERROR_RESERVED_IDAC_MODE重分类从0x05改为0x15。MGR-21按合同注记必须在Scheduler+SSW+AMI联合TB中验证，本TB故意不实现
 // 2026年10月06日   V4.10       Erie          ABCD复核F-023：补MGR-11的RUN/STOPPING部分：STOP+START、STOP+status-clear、STOP+COMMIT各走一次独立RUN，STOP必须进入STOPPING（冲突的重复STOP保持幂等），关闭运行与新事务许可，置stop_episode_active，报0x01，代际、ACTIVE与config_epoch不变；排空后回CONFIG。信息行MGR11_STOP_PRIORITY
+// 2026年10月09日   V4.11       Erie          B合并批次BMI-145（编号治理）：只改横幅文字。PASS横幅不再宣称覆盖MGR-21（本TB无此检查，C02要求三模块联合TB验证）；判定与计数不变。
 
 // 对配置原子提交、生命周期命令、错误保持和STOPPING排空执行定向自检
 module tb_ppg_system_config_manager();
@@ -988,7 +990,7 @@ module tb_ppg_system_config_manager();
 		reg_mgr16_stage2_epoch = o_stage2_coef_epoch;
 		reg_mgr16_dc_epoch = o_dc_recovery_coef_epoch;
 		if(cnt_error == 0)begin
-			$display("PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed"); // 仅在全部MGR检查无误时报告通过
+			$display("PASS: ppg_system_config_manager MGR-01 through MGR-24 except MGR-21 (joint-TB item) all directed checks passed"); // 仅在全部MGR检查无误时报告通过
 		end else begin
 			$display("FAIL: ppg_system_config_manager detected %0d errors", cnt_error); // 汇总所有定向检查失败数量
 		end

@@ -1,0 +1,160 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 16:20:43 2026
+# Process ID: 24068
+# Current directory: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top/xsim_script.tcl}
+# Log file: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top/xsim.log
+# Journal file: D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS PARAM-FIXED control-top parameters equal the frozen product values (config 1024, epochs 8/8/8, code epoch 4, generation 8, frame/sample 16/16, manager and CDC bridge 1024/8)
+PASS PARAM-WDOG supervisor watchdog parameters are the frozen 5000/13 and legal (width >= clog2(cycles+1))
+PASS SMOKE-01 reset isolation
+PASS TOP-01 SSW o_s_in is the safe all-zero vector after reset
+PASS NPA-02 busy window confirmed (o_source_config_update_ready=0) before attempting the rejected second pulse
+PASS SMOKE-02 legal NORMAL MANUAL commit
+PASS NPA-02 busy-window second pulse correctly ignored (config_epoch=1) and o_source_config_update_ready polarity confirmed correct on both edges (ready returned after 1 source_clk cycle(s))
+F009_FRAME_FIRST t=215000 frame=0 type=NORMAL
+PASS SMOKE-03 START accepted into RUN
+DIAG bg_responder about to respond t=6214000 cnt_adc_response(before)=0 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=71214000 cnt_adc_response(before)=1 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=136214000 cnt_adc_response(before)=2 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=201214000 cnt_adc_response(before)=3 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=266214000 cnt_adc_response(before)=4 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=331214000 cnt_adc_response(before)=5 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-04 real ADC responses=6 measurement_result_valid=5
+PASS SMOKE-05 STOP drained back to CONFIG without fault
+PASS TOP-02 illegal V5 reserved field correctly rejected atomically, epoch unchanged at 1, ACTIVE config preserved
+PASS SMOKE-06 re-commit before inflight-stop scenario
+F009_FRAME_FIRST t=331663000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=337662000 cnt_adc_response(before)=6 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-06 confirmed B_INFLIGHT=1 before STOP
+PASS SMOKE-06 STOP-with-owner-inflight drained back to CONFIG without fault
+PASS SMOKE-07 re-commit before abort scenario
+F009_FRAME_FIRST t=338007000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=344006000 cnt_adc_response(before)=7 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=409006000 cnt_adc_response(before)=8 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=474006000 cnt_adc_response(before)=9 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-07 abort drained back to CONFIG without fault
+PASS SMOKE-08 re-commit before calibration-window-stop scenario
+F009_FRAME_FIRST t=474286000 frame=0 type=CAL
+PASS SMOKE-08 real calibration window opened at t=474313000 after 0 cycles
+DIAG bg_responder about to respond t=477763000 cnt_adc_response(before)=10 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=268 red_ctx=0 ir_ctx=0 cal_ctx=1
+PASS SMOKE-08 STOP-during-calibration-window drained back to CONFIG without fault
+PASS SMOKE-09 re-commit before TOP-16 no-shortcut-release scenario
+F009_FRAME_FIRST t=478095000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=484094000 cnt_adc_response(before)=11 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-09 owner stayed inflight for 3000 cycles with no shortcut release
+PASS SMOKE-09 real CLK_DOUT promptly released owner once delivered
+DIAG bg_responder about to respond t=549094000 cnt_adc_response(before)=12 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-10 physical idle perturbation alone did not fabricate completion
+PASS SMOKE-10 protocol completed normally after idle perturbation test
+PASS SMOKE-11 NORMAL RUN analog_run_enable and measurement_run_enable both 1
+PASS SMOKE-12 re-commit before TOP-13 RED-SAR9 scenario
+F009_FRAME_FIRST t=549543000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=553462000 cnt_adc_response(before)=13 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+DIAG bg_responder about to respond t=618462000 cnt_adc_response(before)=14 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+DIAG bg_responder about to respond t=683462000 cnt_adc_response(before)=15 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-12 pure RED fixed SAR9: 3 frames, exactly one RED transaction each, no IR, committed AMB/DC_R codes held, owner cleanly released
+DIAG bg_responder about to respond t=748462000 cnt_adc_response(before)=16 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-13 re-commit before TOP-14 RED-SAR15 scenario
+F009_FRAME_FIRST t=748794000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=752752000 cnt_adc_response(before)=17 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=305 red_ctx=1 ir_ctx=0 cal_ctx=0
+DIAG bg_responder about to respond t=817752000 cnt_adc_response(before)=18 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=305 red_ctx=1 ir_ctx=0 cal_ctx=0
+DIAG bg_responder about to respond t=882752000 cnt_adc_response(before)=19 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=305 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-13 pure RED fixed SAR15: 3 frames, exactly one RED transaction each, no IR, precision stayed SAR15 throughout, owner cleanly released
+DIAG bg_responder about to respond t=947752000 cnt_adc_response(before)=20 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=305 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-14 re-commit before TOP-15 dual-optical scenario
+F009_FRAME_FIRST t=947980000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=951899000 cnt_adc_response(before)=21 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=953979000 cnt_adc_response(before)=22 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1016899000 cnt_adc_response(before)=23 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1018979000 cnt_adc_response(before)=24 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1081899000 cnt_adc_response(before)=25 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1083979000 cnt_adc_response(before)=26 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-14 dual-optical produced both RED (3) and IR (3) real transactions
+PASS SMOKE-14 dual-optical drained back to CONFIG without fault
+PASS SMOKE-15 re-commit before TOP-04 calibration scenario
+F009_FRAME_FIRST t=1084350000 frame=0 type=CAL
+DIAG bg_responder about to respond t=1087827000 cnt_adc_response(before)=27 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=268 red_ctx=0 ir_ctx=0 cal_ctx=1
+PASS SMOKE-15 calibration Q3 centered on local tick 268, AMB snapshot=124 within legal candidate range
+PASS SMOKE-15 calibration scenario drained back to CONFIG without fault
+PASS SMOKE-16 re-commit before TOP-06 precision-consistency scenario
+F009_FRAME_FIRST t=1088159000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1092117000 cnt_adc_response(before)=28 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=305 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-16 scheduler/SSW/AMI agree on SAR15 owner precision for the same real transaction
+PASS SMOKE-16 precision-consistency scenario drained back to CONFIG without fault
+PASS SMOKE-17 re-commit before TOP-05 backpressure scenario
+F009_FRAME_FIRST t=1092397000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1096316000 cnt_adc_response(before)=29 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1098396000 cnt_adc_response(before)=30 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1161316000 cnt_adc_response(before)=31 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+PASS SMOKE-17 ADC owner activity (3 commits) progressed independently while output backpressured, held result never silently dropped
+PASS SMOKE-17 held result consumed promptly once output backpressure released
+DIAG bg_responder about to respond t=1163396000 cnt_adc_response(before)=32 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-17 backpressure scenario drained back to CONFIG without fault
+PASS SMOKE-18 re-commit before TOP-07 fixed-current scenario
+F009_FRAME_FIRST t=1163728000 frame=0 type=NORMAL
+PASS SMOKE-18 fixed-current mode boundary correct: EN_TEST=1, LEDEN1/2=0, LEDDAC=0
+DIAG bg_responder about to respond t=1167647000 cnt_adc_response(before)=33 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1169727000 cnt_adc_response(before)=34 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1232647000 cnt_adc_response(before)=35 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1234727000 cnt_adc_response(before)=36 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-18 SAR kept producing normal NORMAL-style intermittent RED (2) and IR (2) transactions under fixed current
+DIAG bg_responder about to respond t=1297647000 cnt_adc_response(before)=37 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-18 fixed-current scenario drained back to CONFIG without fault
+PASS SMOKE-19 V4 re-commit before STATIC_BIAS scenario
+PASS SMOKE-19 characterization CDC accepted static_characterization_enable=1, test_mux=5'b10101
+PASS SMOKE-19 STATIC_BIAS netlist static vector and S[4:0]=10101 match contract table
+PASS SMOKE-19 no real ADC owner commit and Scheduler/AMI/SSW stayed idle for 4000 steady-state cycles under STATIC_BIAS
+PASS SMOKE-19 TOP-18 STATIC_BIAS held measurement_run_enable at 0 for 4000 steady-state cycles
+PASS SMOKE-19 TOP-18 STATIC_BIAS correctly kept analog_run_enable at 1 (following RUN) while measurement_run_enable stayed 0
+PASS SMOKE-19 S[4:0] followed runtime test_mux_ctrl update to 01010 during STATIC_BIAS RUN
+PASS SMOKE-19 STATIC_BIAS scenario drained back to CONFIG without fault
+PASS SMOKE-20 static_characterization_enable=1 + input_source=PHOTODIODE correctly rejected with ERROR_STATIC_BIAS_INPUT_SOURCE
+PASS SMOKE-21 re-commit before TOP-20 calibration-source-eligibility scenario
+F009_FRAME_FIRST t=1435051000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1438970000 cnt_adc_response(before)=38 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1441050000 cnt_adc_response(before)=39 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1503970000 cnt_adc_response(before)=40 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1506050000 cnt_adc_response(before)=41 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-21 both calibration defenses held for the entire RUN while real RED (2) and IR (2) transactions kept happening: AMI's ami_calibration_sample_valid_o stayed 0 (structural source-side gate) and the scheduler's own o_calibration_sample_ready also stayed 0 throughout (receiver-side run_profile/input_source recheck, scheduler RTL V1.7)
+DIAG bg_responder about to respond t=1568970000 cnt_adc_response(before)=42 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=0 cal_ctx=0
+PASS SMOKE-21 calibration-source-eligibility scenario drained back to CONFIG without fault
+PASS SMOKE-22 NORMAL_PPG+SAR15 correctly rejected pre-COMMIT with error=8'h10; no legal path exists to reach a real SAR15 calibration request
+PASS SMOKE-23 re-commit before TOP-03 dual-optical identity scenario
+F009_FRAME_FIRST t=1569432000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1573351000 cnt_adc_response(before)=43 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1575431000 cnt_adc_response(before)=44 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+DIAG bg_responder about to respond t=1638351000 cnt_adc_response(before)=45 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=302 red_ctx=1 ir_ctx=1 cal_ctx=0
+PASS SMOKE-23 TOP-03: same frame_id (0/1), consecutive sample_index (RED 0->IR 1, RED 2->IR 3), same committed precision, and fixed Q3 phase (RED tick=1, IR tick=309) confirmed across two real macro frames
+DIAG bg_responder about to respond t=1640431000 cnt_adc_response(before)=46 lifecycle=11 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS SMOKE-23 dual-optical identity scenario drained back to CONFIG without fault
+PASS TOP-01 re-commit before stale-transaction reset scenario
+F009_FRAME_FIRST t=1640763000 frame=0 type=NORMAL
+PASS TOP-01 confirmed real in-flight owner before reset (frame_id=0)
+PASS TOP-01 reset during real in-flight transaction fully cleared state; stale transaction produced zero results (count stayed at 32)
+PASS TOP-01 re-commit after stale-transaction reset
+F009_FRAME_FIRST t=1643103000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1649102000 cnt_adc_response(before)=47 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS TOP-01 system produced a genuine new measurement result after reset+restart (count 32 -> 33)
+PASS TOP-01 stale-transaction scenario drained back to CONFIG without fault
+PASS TOP-09 re-commit before discard-event scenario
+F009_FRAME_FIRST t=1649434000 frame=0 type=NORMAL
+DIAG bg_responder about to respond t=1655433000 cnt_adc_response(before)=48 lifecycle=10 sched_idle=0 frame_active=1 macro_tick=462 red_ctx=0 ir_ctx=1 cal_ctx=0
+PASS TOP-09 confirmed a real held measurement result before STOP (still backpressured)
+PASS TOP-09 drain-to-CONFIG with a genuinely held result completed via 1 real o_measurement_result_discard_event pulse(s)
+PASS TOP-09 discard-event scenario drained back to CONFIG without fault
+PASS TOP-15 single-in-flight monitor checked 50 real owner commits across the full suite, zero reentrant
+SMOKE_TB_PASS real_adc_responses=49 measurement_result_valid=33
+$finish called at time : 1655648500 ps : File "D:/PPG/runs_7a8eabf/sys_g1/rtl/ppg_control_top/tb_ppg_control_top.v" Line 3216
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:08 . Memory (MB): peak = 239.242 ; gain = 0.000
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 16:20:53 2026...

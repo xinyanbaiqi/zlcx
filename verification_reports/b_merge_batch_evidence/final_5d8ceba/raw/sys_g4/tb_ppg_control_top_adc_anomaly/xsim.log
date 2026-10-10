@@ -1,0 +1,279 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct  9 22:05:01 2026
+# Process ID: 6704
+# Current directory: D:/PPG/runs_5d8ceba/sys_g4/rtl/ppg_control_top
+# Command line: xsim.exe -log xsim_regression_20260906/tb_ppg_control_top_adc_anomaly/xsim.log -mode tcl -source {xsim.dir/snap_tb_ppg_control_top_adc_anomaly/xsim_script.tcl}
+# Log file: D:/PPG/runs_5d8ceba/sys_g4/rtl/ppg_control_top/xsim_regression_20260906/tb_ppg_control_top_adc_anomaly/xsim.log
+# Journal file: D:/PPG/runs_5d8ceba/sys_g4/rtl/ppg_control_top\xsim.jou
+# Running On: DESKTOP-VU9H4FF, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 6, Host memory: 16920 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_tb_ppg_control_top_adc_anomaly/xsim_script.tcl
+# xsim {snap_tb_ppg_control_top_adc_anomaly} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+F009_FRAME_FIRST t=7250000 frame=0 type=NORMAL
+PASS SYS-N-BASELINE
+SYSRSP skip t=7658000000 cal=0 color=0 frame=3 sf=0 lt=302 mtick=302
+SYSMON LOST t=9758750000 frame=3 mtick=4503 sf=7 lt=128 idx=6 age=4502 cal=0 color=0
+SYSINFO LOST-RED age=4502 lost_frame=3 commit_frame=3 mtick=4503 red_res_frame=5 ir_res_frame=5
+PASS SYS-LOST-RED
+SYSRSP skip t=15238000000 cal=0 color=1 frame=6 sf=0 lt=462 mtick=462
+SYSMON LOST t=17412750000 frame=6 mtick=4811 sf=7 lt=436 idx=12 age=4502 cal=0 color=1
+PASS SYS-LOST-IR
+SYSRSP skip t=22658000000 cal=0 color=0 frame=9 sf=0 lt=302 mtick=302
+SYSMON LOST t=24758750000 frame=9 mtick=4503 sf=7 lt=128 idx=17 age=4502 cal=0 color=0
+SYSRSP skip t=27658000000 cal=0 color=0 frame=11 sf=0 lt=302 mtick=302
+SYSMON LOST t=29758750000 frame=11 mtick=4503 sf=7 lt=128 idx=20 age=4502 cal=0 color=0
+PASS SYS-K-CLEAR
+SYSRSP delayed RED DONE t=32707000000 mtick=400
+PASS SYS-LATE-RED
+SYSRSP skip t=37658000000 cal=0 color=0 frame=15 sf=0 lt=302 mtick=302
+SYSMON LOST t=39758750000 frame=15 mtick=4503 sf=7 lt=128 idx=27 age=4502 cal=0 color=0
+SYSRSP skip t=40158000000 cal=0 color=0 frame=16 sf=0 lt=302 mtick=302
+SYSMON LOST t=42258750000 frame=16 mtick=4503 sf=7 lt=128 idx=28 age=4502 cal=0 color=0
+SYSMON FAULT t=42258750000 ami=1 cause=06 ssw=0 sched=0 life=10
+SYSINFO K-RED2 lost=2 cause=06 color=0 type=2 summary=0200 ir_count=0
+PASS SYS-K-RED2
+PASS SYS-K-STOP
+F009_FRAME_FIRST t=42281250000 frame=0 type=NORMAL
+PASS SYS-RESTART-K
+SYSRSP skip t=49932000000 cal=0 color=0 frame=3 sf=0 lt=302 mtick=302
+SYSMON LOST t=52032750000 frame=3 mtick=4503 sf=7 lt=128 idx=6 age=4502 cal=0 color=0
+PASS SYS-DRAIN-LOST
+PASS SYS-RESTART-DRAIN
+F009_FRAME_FIRST t=52052250000 frame=0 type=NORMAL
+SYSRSP skip t=52203000000 cal=0 color=0 frame=0 sf=0 lt=302 mtick=302
+SYSMON LOST t=54303750000 frame=0 mtick=4503 sf=7 lt=128 idx=0 age=4502 cal=0 color=0
+SYSRSP skip t=54703000000 cal=0 color=0 frame=1 sf=0 lt=302 mtick=302
+SYSMON LOST t=56803750000 frame=1 mtick=4503 sf=7 lt=128 idx=1 age=4502 cal=0 color=0
+SYSMON FAULT t=56803750000 ami=1 cause=06 ssw=0 sched=0 life=10
+SYSMON FAULT t=56807750000 ami=1 cause=02 ssw=0 sched=0 life=00
+PASS SYS-LATE-DRAIN
+PASS SYS-L5-RESTART
+F009_FRAME_FIRST t=56836750000 frame=0 type=NORMAL
+SYSRSP skip t=56987500000 cal=0 color=0 frame=0 sf=0 lt=302 mtick=302
+SYSMON LOST t=59088250000 frame=0 mtick=4503 sf=7 lt=128 idx=0 age=4502 cal=0 color=0
+SYSMON FAULT t=59318250000 ami=1 cause=02 ssw=0 sched=0 life=00
+PASS SYS-LATE-IDLE
+PASS SYS-RESTART-IDLE
+F009_FRAME_FIRST t=59437250000 frame=0 type=NORMAL
+SYSRSP skip t=59588000000 cal=0 color=0 frame=0 sf=0 lt=302 mtick=302
+SYSMON LOST t=61688750000 frame=0 mtick=4503 sf=7 lt=128 idx=0 age=4502 cal=0 color=0
+SYSMON FAULT t=61901750000 ami=1 cause=02 ssw=0 sched=0 life=10
+PASS SYS-LATE-NEXTRUN
+F009_FRAME_FIRST t=61924250000 frame=0 type=NORMAL
+PASS SYS-RESTART-NEXTRUN
+SYSRSP skip t=64575000000 cal=0 color=0 frame=1 sf=0 lt=302 mtick=302
+PASS SYS-WIN-BEFORE
+SYSRSP skip t=69575000000 cal=0 color=0 frame=3 sf=0 lt=302 mtick=302
+SYSMON LOST t=71675750000 frame=3 mtick=4503 sf=7 lt=128 idx=5 age=4502 cal=0 color=0
+SYSMON FAULT t=71676750000 ami=1 cause=02 ssw=0 sched=0 life=10
+PASS SYS-WIN-IN
+PASS SYS-RESTART-WIN
+F009_FRAME_FIRST t=71715750000 frame=0 type=NORMAL
+SYSRSP skip t=71866500000 cal=0 color=0 frame=0 sf=0 lt=302 mtick=302
+SYSMON LOST t=73967250000 frame=0 mtick=4503 sf=7 lt=128 idx=0 age=4502 cal=0 color=0
+SYSMON FAULT t=74019750000 ami=1 cause=02 ssw=0 sched=0 life=10
+PASS SYS-WIN-AFTER
+PASS SYS-RESTART-WIN2
+F009_FRAME_FIRST t=74058750000 frame=0 type=NORMAL
+PASS SYS-BUSY-Q3
+SYSMON FAULT t=78559750000 ami=1 cause=07 ssw=0 sched=0 life=10
+PASS SYS-BUSY-07
+PASS SYS-BUSY-WDOG
+SYSMON LOST t=81062250000 frame=1 mtick=4005 sf=6 lt=255 idx=0 age=14006 cal=0 color=0
+PASS SYS-BUSY-RECOVER
+F009_FRAME_FIRST t=81081750000 frame=0 type=NORMAL
+PASS SYS-RESTART-BUSY
+F009_FRAME_FIRST t=86092750000 frame=0 type=CAL
+SYSRSP delayed calibration DONE t=86292500000 sf=0 lt=400
+PASS SYS-CAL-LATE385
+F009_FRAME_FIRST t=87182750000 frame=0 type=CAL
+SYSRSP delayed calibration DONE t=89670000000 sf=7 lt=600
+F009_FRAME_GAP t=89684750000 frame=1 interval=5004 idle=4 prev=CAL next=CAL gaps=1 frames=38
+PASS SYS-CAL-LATE6SF
+F009_FRAME_FIRST t=89837250000 frame=0 type=CAL
+SYSRSP skip t=90283500000 cal=1 color=0 frame=0 sf=1 lt=268 mtick=893
+SYSMON LOST t=92401250000 frame=1 mtick=0 sf=0 lt=0 idx=1 age=4502 cal=1 color=0
+F009_FRAME_GAP t=92402750000 frame=1 interval=5131 idle=131 prev=CAL next=CAL gaps=2 frames=40
+PASS SYS-CAL-LOST
+SYSMON NEXT-FRAME-AFTER-CAL-LOST t=92868250000 frame=0 normal=0
+F009_FRAME_FIRST t=92868250000 frame=0 type=CAL
+SYSRSP skip t=93002000000 cal=1 color=0 frame=0 sf=0 lt=268 mtick=268
+SYSMON LOST t=95119750000 frame=0 mtick=4503 sf=7 lt=128 idx=0 age=4502 cal=1 color=0
+SYSMON NEXT-FRAME-AFTER-CAL-LOST t=95368250000 frame=1 normal=0
+SYSRSP skip t=95502000000 cal=1 color=0 frame=1 sf=0 lt=268 mtick=268
+SYSMON LOST t=97619750000 frame=1 mtick=4503 sf=7 lt=128 idx=1 age=4502 cal=1 color=0
+SYSMON FAULT t=97619750000 ami=1 cause=06 ssw=0 sched=0 life=10
+PASS SYS-CAL-K2
+SYSMON NEXT-FRAME-AFTER-CAL-LOST t=97643250000 frame=0 normal=0
+F009_FRAME_FIRST t=97643250000 frame=0 type=CAL
+PASS SYS-RESTART-CAL
+F009_FRAME_FIRST t=98420750000 frame=0 type=CAL
+SYSINFO RECHECK-PROGRESS k=100000 frame=22 results=78 fine=0 return=0 pending=0 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=200000 frame=42 results=118 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=300000 frame=62 results=158 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=400000 frame=82 results=198 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=500000 frame=102 results=238 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=600000 frame=122 results=278 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=700000 frame=142 results=318 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=800000 frame=162 results=358 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=900000 frame=182 results=398 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1000000 frame=202 results=438 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1100000 frame=222 results=478 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1200000 frame=242 results=518 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1300000 frame=262 results=558 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1400000 frame=282 results=598 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1500000 frame=302 results=638 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1600000 frame=322 results=678 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1700000 frame=342 results=718 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1800000 frame=362 results=758 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=1900000 frame=382 results=798 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=2000000 frame=402 results=838 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=2100000 frame=422 results=878 fine=0 return=0 pending=1 accept=0 precision=0 life=10
+SYSINFO RECHECK-PROGRESS k=2200000 frame=442 results=918 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2300000 frame=462 results=958 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2400000 frame=482 results=998 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2500000 frame=502 results=1038 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2600000 frame=522 results=1078 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2700000 frame=542 results=1118 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2800000 frame=562 results=1158 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=2900000 frame=582 results=1198 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSINFO RECHECK-PROGRESS k=3000000 frame=602 results=1238 fine=1 return=0 pending=1 accept=0 precision=1 life=10
+SYSMON CALREQ t=1640801750000 frame=616 normal=1 cal=0 sf=7 lt=387 mtick=4762
+SYSRSP skip t=1641054500000 cal=1 color=0 frame=617 sf=0 lt=268 mtick=268
+SYSMON LOST t=1643172250000 frame=617 mtick=4503 sf=7 lt=128 idx=1248 age=4502 cal=1 color=0
+SYSMON CALREQ t=1643172750000 frame=617 normal=0 cal=1 sf=7 lt=129 mtick=4504
+SYSMON NEXT-FRAME-AFTER-CAL-LOST t=1643420750000 frame=618 normal=0
+SYSMON CALACC t=1643557750000 frame=618 normal=0 cal=1 sf=0 lt=274 mtick=274 amb=1 dcs=0
+SYSMON CALREQ t=1643559750000 frame=618 normal=0 cal=1 sf=0 lt=278 mtick=278
+SYSRSP busy start t=1643867000000 frame=618 sf=1 lt=268 deadline_sticky=1
+SYSRSP busy next frame t=1645920500000 frame=619 normal=1 sched_inflight=1
+SYSRSP busy release t=1646920500000 frame=619 mtick=2000
+SYSMON LOST t=1646921250000 frame=619 mtick=2001 sf=3 lt=126 idx=1250 age=6375 cal=1 color=0
+SYSMON CALREQ t=1646921750000 frame=619 normal=1 cal=0 sf=3 lt=127 mtick=2002
+SYSRSP skip t=1648420500000 cal=1 color=0 frame=618 sf=0 lt=0 mtick=0
+SYSMON NEXT-FRAME-AFTER-CAL-LOST t=1648420750000 frame=620 normal=0
+SYSMON CALACC t=1648557750000 frame=620 normal=0 cal=1 sf=0 lt=274 mtick=274 amb=0 dcs=1
+SYSMON CALREQ t=1648559250000 frame=620 normal=0 cal=1 sf=0 lt=277 mtick=277
+SYSMON CALACC t=1648870250000 frame=620 normal=0 cal=1 sf=1 lt=274 mtick=899 amb=0 dcs=1
+SYSINFO RECHECK accept=1 done=1 failed=0 done_frame=621 lost=2 next_after_cal_lost=2/11 bind=0 red_res=622 ir_res=622
+SYSINFO BUSY frame=618 red_deadline_mtick=2002 ir_deadline_mtick=2002 next_normal=1 next_commit=0 red_res_in_next=0 deadline_sticky 1->1 released=1 last_lost frame=619 age=6375 cal=1 ami07=0 live_fail=0
+PASS SYS-CAL-LOST-RETRY
+PASS SYS-CAL-BUSY-NORMAL
+F009_FRAME_FIRST t=1653667750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=1 ack_tick=1 ack_cal=0 ctx_orphan=1 cfg_tick=2 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1656177750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1656344750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=1 ack_tick=1 ack_cal=0 ctx_orphan=1 cfg_tick=2 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1658904750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1659071750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=1 ack_tick=1 ack_cal=0 ctx_orphan=1 cfg_tick=2 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1661681750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1661848750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=1 ack_tick=1 ack_cal=0 ctx_orphan=1 cfg_tick=2 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1664558750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1664725750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=2 ack_tick=2 ack_cal=0 ctx_orphan=0 cfg_tick=319 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1667394250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1667561250000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=2 ack_tick=2 ack_cal=0 ctx_orphan=0 cfg_tick=319 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1670279750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1670446750000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=2 ack_tick=2 ack_cal=0 ctx_orphan=0 cfg_tick=319 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1673215250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1673382250000 frame=0 type=NORMAL
+L6SCAN win=0 stop_tick=2 ack_tick=2 ack_cal=0 ctx_orphan=0 cfg_tick=319 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1676250750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1676417750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=161 ack_tick=161 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1676666250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1676833250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=161 ack_tick=161 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1677131750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1677298750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=161 ack_tick=161 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1677647250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1677814250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=161 ack_tick=161 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1678262750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1678429750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=200 ack_tick=200 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1678678250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1678845250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=200 ack_tick=200 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1679143750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1679310750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=200 ack_tick=200 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1679659250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1679826250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=200 ack_tick=200 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1680274750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1680441750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=250 ack_tick=250 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1680690250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1680857250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=250 ack_tick=250 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1681155750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1681322750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=250 ack_tick=250 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1681671250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1681838250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=250 ack_tick=250 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1682286750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1682453750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=300 ack_tick=300 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=0 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1682702250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1682869250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=300 ack_tick=300 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=100 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1683167750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1683334750000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=300 ack_tick=300 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=200 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1683683250000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1683850250000 frame=0 type=NORMAL
+L6SCAN win=1 stop_tick=300 ack_tick=300 ack_cal=0 ctx_orphan=0 cfg_tick=479 delay=400 first_frame_after_start=4 ok=1
+F009_FRAME_FIRST t=1684298750000 frame=0 type=NORMAL
+F009_FRAME_FIRST t=1684466750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=1 ack_tick=626 ack_cal=1 ctx_orphan=1 cfg_tick=628 delay=0 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1684790750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1684941750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=1 ack_tick=626 ack_cal=1 ctx_orphan=1 cfg_tick=628 delay=100 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1685315750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1685466750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=1 ack_tick=626 ack_cal=1 ctx_orphan=1 cfg_tick=628 delay=200 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1685890750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1686041750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=1 ack_tick=626 ack_cal=1 ctx_orphan=1 cfg_tick=628 delay=400 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1686565750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1686716750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=2 ack_tick=627 ack_cal=1 ctx_orphan=0 cfg_tick=910 delay=0 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1687181750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1687332750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=2 ack_tick=627 ack_cal=1 ctx_orphan=0 cfg_tick=910 delay=100 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1687847750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1687998750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=2 ack_tick=627 ack_cal=1 ctx_orphan=0 cfg_tick=910 delay=200 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1688563750000 frame=0 type=CAL
+F009_FRAME_FIRST t=1688714750000 frame=0 type=CAL
+L6SCAN win=2 stop_tick=2 ack_tick=627 ack_cal=1 ctx_orphan=0 cfg_tick=910 delay=400 first_frame_after_start=6 ok=1
+F009_FRAME_FIRST t=1689379750000 frame=0 type=CAL
+L6SCAN_SUMMARY cases=32 ctx_orphan_hits=8
+PASS SYS-RESTART-SCAN-RED
+PASS SYS-RESTART-SCAN-IR
+PASS SYS-RESTART-SCAN-CAL
+F009_FRAME_FIRST t=1689534250000 frame=0 type=NORMAL
+SYSMON FAULT t=1696535250000 ami=1 cause=07 ssw=0 sched=0 life=10
+PASS SYS-BUSY-FOREVER
+PASS SYS-MON-BIND
+PASS SYS-MON-EXCL
+PASS SYS-MON-LIVE
+SYSINFO totals lost=19 done=1387 results=1286 disc11=19 ami02=5 ami06=3 ami07=2 ssw_fault=0 sched_fault=0 skip=19
+ADC_ANOMALY_TB_PASS checks=40
+$finish called at time : 1714036750 ns : File "D:/PPG/runs_5d8ceba/sys_g4/rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v" Line 1865
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:05:20 . Memory (MB): peak = 239.578 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 14400 KB (Peak: 14400 KB), Simulation CPU Usage: 314702 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 22:10:23 2026...

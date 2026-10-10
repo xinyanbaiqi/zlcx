@@ -10,8 +10,8 @@
 // Simulations:     tb_ppg_sar9_sar15_safe_selection_wrapper
 // Referrences:     PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 // Dependencies:    ppg_sar9_sar15_safe_selection_wrapper.v
-// Version:         V1.8
-// Revision Date:   2026-10-08
+// Version:         V1.9
+// Revision Date:   2026-10-09
 // History:
 // 2026-08-15       V1.3.1      Codex       Add independent waveform and ADC-owner regression.
 // 2026-08-24       V1.4        Erie        Re-run this self-check against the current (V1.4) SSW RTL before depending on it for C01 TOP-20 integration evidence. This TB predated the DUT's V1.4 addition of i_run_generation, so the port was left entirely undeclared and floated at the DUT instantiation; unlike the scheduler's equivalent V1.4 gap (17 of 57 cases silently passed with a stale value), here every owner-identity match/release expression that depends on i_run_generation compares against an undriven net, and iverilog leaves an unconnected input floating as an indeterminate value rather than a clean constant, so the regression failed loudly and overtly (pass=12, error=109, FATAL) the first time it was actually run this session rather than passing quietly. Fixed by adding the C_RUN_GENERATION_WIDTH parameter, declaring/connecting i_run_generation, and driving it at a fixed constant in set_defaults; none of SSW-01 through SSW-52 exercise stale-generation rejection, so that remains a coverage gap, not newly added here. The new o_ssw_fault_* register group added alongside i_run_generation in RTL V1.4 is also not yet connected or asserted on by this TB; that is a separate, still-open coverage gap left for a future pass, not fixed here. All 52/52 pass after the fix.
@@ -19,6 +19,7 @@
 // 2026-10-06       V1.6        Erie        ABCD review F-035: add TB-local case ABT-DONE (no SSW-nn number taken): abort and a matching DONE in the same cycle must release the owner while the RED waveform is still cancelled, the wrapper must go idle, and after STOP, diag clear and a generation-2 START a new owner must be established and released. Pass criterion 52 -> 53; banner unchanged. Negative control: with abort-hold ahead of release (SSW V1.5 order) ABT-DONE fails 6 checks.
 // 2026-10-08       V1.7        Erie        Owner-lifecycle round step 3: input i_adc_transaction_lost_event is now a TB reg; new TB-local checks LOST-RLS / LOST-MSM (matching void releases the owner, wrong-index void keeps it and raises the mismatch), BIND-Q3 (L-1: a stale owner of frame N must not drive TIA/Q3 of the frame N+1 RED context nor mask its deadline sticky), S1-LATE / S1-ONTM (calibration owner of the current subframe still in flight at local tick 385 sets the non-blocking late sticky; on-time completion does not). Macro ticks 2..320 are stepped one by one so the context release tick 317 is not skipped. Pass gate 53 -> 58.
 // 2026-10-08       V1.8        Erie        ABCD L-6 (provisionally called N-2 in the working session): add TB-local case L6-START (no SSW contract number): a RED waveform context is taken over at tick 0 with no owner, STOP is acknowledged with the tick frozen, then START generation 2; requires sar timing idle, wrapper idle and analog safe after START, then a new waveform and owner work normally. Criterion 58->59. Negative control (old restore condition start ack && o_wrapper_idle) fails 4 checks.
+// 2026-10-09       V1.9        Erie        B merge batch (ID governance): case label SSW-18 -> TB-local CAL-ODL (it tests the calibration owner deadline, C09 SSW-37/38, not contract SSW-18). Checks unchanged.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Codex
@@ -30,7 +31,7 @@
 // 参考资料:        PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md
 // 依赖文件:        ppg_sar9_sar15_safe_selection_wrapper.v
 // 当前版本:        V1.8
-// 修订日期:        2026年10月08日
+// 修订日期:        2026年10月09日
 // 修订历史:
 // 2026-08-15       V1.3      Codex       增加SSW-01至SSW-48独立通道回归。
 // 2026-08-24       V1.4      Erie        为准备C01 TOP-20整机验收证据，先拿这份自检TB对当前V1.4 SSW RTL重跑一遍。这份TB早于DUT V1.4新增的i_run_generation端口，例化里从未声明也从未连接；和scheduler那次同类缺口不同（scheduler是17/57用旧值静默通过），这里owner身份匹配/释放全部依赖i_run_generation，而iverilog把未连接输入端浮空为不确定值而不是干净常量，导致本轮第一次真正跑这份回归时不是静默通过、而是直接响亮失败（pass=12、error=109、FATAL）。修复：新增C_RUN_GENERATION_WIDTH参数，声明并连接i_run_generation，在set_defaults里给它一个全程固定常量——SSW-01至SSW-52本来就没有一条测试跨代际拒绝，这次只是把浮空端口接上，不是新增覆盖，跨代际拒绝仍是待补覆盖项。RTL V1.4同时新增的o_ssw_fault_*故障记录组，这份TB目前也还没有连接或断言，这是另一个仍然待补的覆盖缺口，本次未修复。修复后52/52全过。
@@ -38,6 +39,7 @@
 // 2026-10-06       V1.6      Erie        ABCD复核F-035：新增TB本地用例ABT-DONE（不占用SSW编号）：abort与匹配DONE同拍时必须释放owner，同时RED波形仍被撤销，wrapper回到idle；随后STOP、诊断清除、第2代START后必须能建立并释放新owner。判据52改为53，横幅不变。负对照：恢复V1.5的abort保持优先顺序时ABT-DONE有6项失败
 // 2026-10-08       V1.7      Erie        owner生命周期轮第三步：输入i_adc_transaction_lost_event改为TB寄存器驱动；新增TB本地检查LOST-RLS/LOST-MSM（匹配作废释放owner，序号不符的作废保持owner并置错配）、BIND-Q3（L-1：帧N的旧owner不得驱动帧N+1 RED上下文的TIA/Q3，也不得掩盖其截止sticky）、S1-LATE/S1-ONTM（本子帧校准owner在local tick 385仍在途置非阻断迟到sticky，按时完成不置）。宏帧tick 2..320逐拍推进，避免跳过上下文释放tick 317。判据53改为58。
 // 2026-10-08       V1.8      Erie        ABCD L-6（工作会话中曾暂称N-2）：新增TB本地用例L6-START（不占SSW合同编号）：tick 0接管RED波形上下文且无owner，冻结tick下STOP确认，再以代际2 START；要求START后sar时序空闲、wrapper空闲、模拟安全，随后新波形与owner正常工作。判据58→59。负对照（恢复条件改回启动确认&&o_wrapper_idle）4项失败。
+// 2026-10-09       V1.9      Erie        B合并批次（编号治理）：用例标签SSW-18改为TB本地名CAL-ODL（实测校准owner截止，属C09 SSW-37/38，不是合同SSW-18）。判定不变。
 module tb_ppg_sar9_sar15_safe_selection_wrapper;
 
 	localparam [1:0] FRAME_TYPE_AMB    = 2'b00;
@@ -711,13 +713,13 @@ module tb_ppg_sar9_sar15_safe_selection_wrapper;
 		expect_true(o_transaction_mismatch_sticky && o_adc_owner_inflight && o_wrapper_fault_blocking, "mismatched DONE must preserve owner and raise a blocking diagnostic");
 		end_case("SSW-17");
 
-		begin_case("SSW-18");
+		begin_case("CAL-ODL");
 		reset_and_start;
 		send_waveform(1'b0, 1'b0, FRAME_TYPE_AMB, 16'd118, 8'h31, 8'h00, 4'h1, 4'h0, 8'h00);
 		expect_true(dut.flag_cal_context_valid, "calibration context must remain valid while its owner is pending");
 		cal_tick(10'd249);
 		expect_true(o_owner_deadline_timeout_sticky, "missing calibration owner must time out before the local tick-249 back-end window");
-		end_case("SSW-18");
+		end_case("CAL-ODL");
 
 		begin_case("SSW-19");
 		reset_and_start;

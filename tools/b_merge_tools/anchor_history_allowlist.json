@@ -1,0 +1,33 @@
+{
+ "note": "Lines of the closure matrix and the alias table that keep an old line-number anchor on purpose (\"> \" blocks, revision records, superseded entries, history, not an anchor, repository-external document); SHA-1 of the stripped line. Written by anchor_apply.py from verification_reports/b_merge_batch_evidence/anchor_conversion/anchor_mapping_table.tsv.",
+ "line_sha1": [
+  "06ab248834345219c519611d8ae7b65ada28dcfc",
+  "117f53fcc76f516766b533c34c6fd6bf86ee9e02",
+  "207540b4d1c178f0a99000eb167453043c1f407a",
+  "28e563403d013db09ce719ded0b4c79c1f59a4d1",
+  "32293c326c78a3aa3cc12f0b0811c6739d15c452",
+  "535a3796b706e051c8c8644f2a0e4933e9775e82",
+  "590f458cfd3e417772672efbbd47f9b62c861764",
+  "5acecd0e064c67101ce9290ce217750f1a2f2664",
+  "5e92b999c268cb81cd983d17d55d8b875061a357",
+  "6d10517cbdd37a9cc1ea18f827d5417cce394bf5",
+  "7048912d38798f0d91b612015d7e2c811a5c445c",
+  "75042ce73a8f3ae7ad9c80fdf8a2f9997a6e25e1",
+  "7839d3b3b048647d1edfde7bb22c716a977c5d68",
+  "7f95ff975542ecde4324e84c8a8b3aa778c78c77",
+  "8aa8c6e4add19da467e31399525c4b760c9aa97e",
+  "93cfe127c7ec1f4a19fb29e0499f46cd37fb6c5f",
+  "97b23ebdc7af07095c12f4ff908ade1216e5f5c8",
+  "a00d1e9105dbe6d647ab63a921ae9a5eabef3477",
+  "a2b262c60b072efe27df2bfd52ac89d6b3c9cef4",
+  "a73e8b157f53952c2bd767497121fe09e929e77a",
+  "b3dddd35b00b9111f92d87e83f03dc39bb8275fa",
+  "d6eb13225477b3d05d4bae19a5b773c0b868782f",
+  "e035c3897d74b0ee8285ca47479c035eb16dcbec",
+  "e664049ec8e10963c0ea02a773f0715822df9f4d",
+  "ed21c0d12b31ca3cd82677efb5912d44c002a9a7",
+  "ed702264c98810410fb49511a706a04433cb6c3c",
+  "ee51c3aa38ff05363a73b6ad32a5546c4e38895f",
+  "ee5a08c3f8666363ee8defff59d5485e07e0e176"
+ ]
+}

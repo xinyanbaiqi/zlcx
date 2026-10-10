@@ -1,10 +1,11 @@
 # PPG SAR9/SAR15安全选择Wrapper接口合同
 
+> V1.11修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-020~030，按基线`7a8eabf` SSW RTL V1.8改写，符号锚点格式为“文件 + 符号（§节）”）：① SSW-18、§5.4与`o_calibration_timeout_sticky`按S1修复后的RTL改写：迟到诊断只置sticky、不终止burst，条件是本子帧校准owner在local tick 385仍未完成，迟到结果由三道既有防护挡住而不复用旧码（`calibration_timeout_sticky_o`、`reg_owner_cal_subframe`）；② §5.3写明owner与帧/子帧绑定（L-1，`flag_red_has_owner`/`flag_ir_has_owner`/`flag_cal_has_owner`）和AMI超时作废释放（R3，`flag_owner_release`、`flag_done_mismatch`）；§7.6端口表新增`i_adc_transaction_lost_event`；③ §8.3写明abort与匹配完成同拍时完成优先释放（F-035，`adc_owner_inflight_o`）；④ 新增§8.3a START恢复（L-6，`flag_start_restore`）并新增验收条目SSW-53；⑤ SSW-16/17/22/34/38/42原行补充；§10门禁范围改为SSW-01至SSW-53，并订正状态声明；⑥ 统一版本号（F-047）：本版是唯一现行规范版本。不改变任何物理相位、Q1/Q2/Q3、owner截止或既有编号含义。
 > V1.10修订日期：2026-09-10。AMB_CAL单相积分改造：`ppg_sar9_sar15_safe_selection_wrapper.v`V1.5起，AMB_CAL（`reg_cal_frame_type==FRAME_TYPE_AMB`）期间`CTRL_Q2`（`o_clk_q2_low`）不再产生`[262,264)`脉冲，全程保持`0`；`CTRL_Q3`（`o_clk_q3_low`）在`[265,267)`的既有窗口完全不变，DCS_CAL的Q2/Q3行为也完全不变。详见第6.4节。第6.1节数字控制窗口表和第5.5节暗态采样描述已同步更新为该真实行为；不改变本合同SSW-01至SSW-52任何既有编号条款的行为定义本身，只改变AMB_CAL一种帧类型下CTRL_Q2这一项输出的实际取值。真实依据、根因和影响范围见第6.4节。
 > V1.9修订日期：2026-08-30。桶1 RTL会话（SID-11+LFA-06+OIB-01+LFA-10(b)专属会话）新增：（1）新状态输出`o_owner_q3_window_closed`——在途owner自身选定的Q3窗口是否已关闭（per-owner sticky，跨宏帧节拍环绕不丢失，owner释放/新owner建立时复位），供`ppg_400hz_frame_calibration_scheduler.v`门控`flag_completion_success`，防止早于Q3的CLK_DOUT冒充协议意义上的成功完成（LFA-06）；门控放在`flag_completion_success`而不是`flag_owner_release`/`flag_completion_match`上，owner身份匹配即合法释放槽位，避免"Q3若因异常提前完成而不再出现"导致owner永久卡在in-flight、连带`o_wrapper_idle`永远为假、`transaction_mismatch_sticky_o`永远清不掉的死锁——这是一次真实构造中发现并纠正的设计。（2）新增模块参数`C_ENABLE_TEST_INJECTION`（默认0，生产网表必须为0）和一对验证专属端口`i_test_inject_enable`/`i_context_handover_stall_request`，与`ppg_adc_measurement_idac_integration.v`已有的同名验证注入基础设施同一约定：只在`C_ENABLE_TEST_INJECTION!=0`且`i_test_inject_enable=1`时生效，允许在波形上下文接管tick合法压低`o_waveform_context_ready`，不构成协议违规。（3）`flag_switch_protocol_error_condition`第4个OR项（接管tick context_valid但ready仍为0）收窄为只在**排除掉上述反压注入这个因素后依然会不ready**时才判定为真协议违规——反压注入导致的接管未命中不再连带触发SSW阻断的`switch_protocol_error_sticky_o`，只留给Scheduler自己非阻断的`o_launch_timeout_sticky`独立表态，兑现本合同和Scheduler合同一贯宣称的"非阻断launch-timeout应可独立于阻断故障分类"。真实证据：`tb_ppg_control_top_owner_identity_backpressure.v`OIB-01（V1.1，iverilog+Vivado 2022.2 xsim双工具confirmed）和`tb_ppg_control_top_lifecycle_fault_adc_anomaly.v`LFA-06（V1.3，同样双工具confirmed）。不改变本合同SSW-01至SSW-52任何既有编号条款的行为；三项改动均为新增能力，不touch任何既有生产信号路径的既有行为。
 > V1.8 fail-closed integration review, 2026-08-20: generation tagging, physical-idle source mapping, STOP discard-pending owner release, SSW supervisor fault records and contract-vs-evidence terminology remain normative, but system closure is `NOT_CLOSED` until the matrix audit records zero defects. Implementation evidence is `EVIDENCE_PENDING`.
 > V1.8 change record: replaces non-normative RTL/netlist and stale dependency authority with current active contracts. It changes no physical phase, Q1/Q2/Q3, owner, waveform, abort or fault behavior.
-> Normative status: V1.9 is the sole current SSW interface and lifecycle authority (V1.9 is additive over V1.8, see the 2026-08-30 change record above). Earlier V1.3.x-V1.7 status and historical regression wording cannot classify missing joint implementation evidence as a contract-interface defect.
+> Normative status: ~~V1.9 is the sole current SSW interface and lifecycle authority (V1.9 is additive over V1.8, see the 2026-08-30 change record above).~~ V1.11 is the sole current SSW interface and lifecycle authority; V1.9, V1.10 and V1.11 are each additive over the previous revision (B merge batch 2026-10-09, F-047). Earlier V1.3.x-V1.7 status and historical regression wording cannot classify missing joint implementation evidence as a contract-interface defect.
 
 > Historical V1.3.2 freeze record (non-normative); V1.8 is the sole current normative revision.  
 > 冻结日期：2026-08-15  
@@ -63,9 +64,9 @@
 1. C01 — `ppg_system_integration/PPG_DIGITAL_TOP_INTERFACE_CONNECTION_CONTRACT.md` V1.10；
 2. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
 3. C06 — `ppg_system_integration/PPG_CHARACTERIZATION_INPUT_SOURCE_AND_STATIC_BIAS_CONTROL_CONTRACT.md` V1.3；
-4. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.12；
-5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.4；
-6. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.5。
+4. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.13；
+5. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.5；
+6. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7。
 
 The fixed phase, Q1/Q2/Q3, owner and safety-selection rules are defined in
 this contract. RTL, capture implementation, Spectre netlists, regressions and
@@ -351,6 +352,20 @@ owner_release =
  && i_adc_complete_sample_index == current_owner_sample_index
 ```
 
+V1.11补记（`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_owner_release`）：RTL中的释放条件还包括RUN代际匹配（§7.9）和AMI超时作废单拍（R3，见C10 §7.1）：
+
+```text
+owner_release =
+    (i_adc_transaction_complete_event || i_adc_transaction_lost_event)
+ && owner_inflight
+ && i_adc_complete_sample_index == current_owner_sample_index
+ && i_run_generation == current_owner_run_generation
+```
+
+作废单拍与完成单拍互斥，复用`i_adc_complete_sample_index`作为作废身份。匹配的作废释放owner，但不是完成：不产生成功处理，等同`success=0`的失败收尾。任一事件到达而不满足上式时为错配（`flag_done_mismatch`），处理同下文的sample index错配。
+
+**owner与帧/子帧绑定（V1.11补记，L-1）**：判定“某个波形槽当前有自己的owner”时，只认绑定到该槽当前上下文的owner——RED/IR要求owner提交时的`frame_id`等于该颜色当前上下文的帧号；校准还要求owner提交时的子帧号（`reg_owner_cal_subframe`）等于当前校准子帧号。跨帧（或跨子帧）残留的旧owner既不驱动新上下文的Q3，也不掩盖新上下文的owner截止抑制（§4.5、SSW-38）。这样上一宏帧在途的旧owner不会让下一宏帧无owner的波形照常采样，之后的`CLK_DOUT`也不会被错绑到旧owner。
+
 匹配完成事件无论`i_adc_transaction_success`为1还是0都必须释放当前物理owner。`success=1`允许本笔结果进入对应NORMAL或校准成功处理；`success=0`只执行owner释放和失败收尾，不得开放IDAC结果消费、颜色成功、校准成功或正式测量资格。sample index错配或当前无owner时不得释放任何owner，并置身份错配或阻断协议诊断。Q3结束、模拟包络末沿、固定延时或`i_adc_idle`不得释放owner。
 
 ### 5.4 IDAC候选码提交
@@ -370,7 +385,15 @@ owner_release =
 
 候选码不得在本轮预热、Q3、转换或RAW捕获期间改变。首个校准子帧的候选码必须在校准宏帧进入前已经准备好；否则该子帧不启动且不计入8次容量。
 
-若当前结果未能在local tick 385前支持下一候选码准备，IDAC控制器必须报告阶段失败。wrapper不得复用旧码并将其标记为新的搜索样本。
+~~若当前结果未能在local tick 385前支持下一候选码准备，IDAC控制器必须报告阶段失败。wrapper不得复用旧码并将其标记为新的搜索样本。~~
+
+V1.11改写（S1）：校准结果晚于本子帧local tick 385返回时，不终止burst，也不报告阶段失败。前提是ADC已在Q3（local tick 266）完成采样，迟到的只是读出。迟到结果由以下三道既有防护挡住，不会出现“旧码被当作新搜索样本”：
+
+1. AMI在本笔结果被消费之前不发出下一笔校准请求（单请求在途）；
+2. IDAC只接受样本快照码和epoch等于当前已提交码和epoch的样本（`ppg_idac_code_controller.v` `flag_amb_sample_qualified`、`flag_dcs_sample_qualified`）；
+3. IDAC只在安全边界提交下一候选（§5.4上文、C08 §8.2）。
+
+因此迟到结果作为它自己那笔码的合格样本被消费，下一候选在结果到达之后的第一个安全边界提交；其间的子帧不用旧码另做转换。唯一后果是该校准宏帧内的有效候选减少、搜索整体推迟。SSW对这种迟到只记非阻断诊断`o_calibration_timeout_sticky`（§7.8、SSW-18）。完成永远不返回的情形由AMI超时作废处理（C10 §7.1），不属于本节。
 
 ### 5.5 三种校准模拟组合
 
@@ -540,7 +563,8 @@ waveform_context_fire =
 | --- | ---: | --- | --- |
 | `i_adc_transaction_complete_event` | 1 | AMI数字捕获链 | 已同步RAW已被事务处理链接纳的完成单拍 |
 | `i_adc_transaction_success` | 1 | AMI数字捕获链 | 本笔完成处理资格；0仍释放匹配owner，但禁止进入IDAC或NORMAL处理 |
-| `i_adc_complete_sample_index` | `C_SAMPLE_INDEX_WIDTH` | AMI数字捕获链 | 已完成事务身份 |
+| `i_adc_complete_sample_index` | `C_SAMPLE_INDEX_WIDTH` | AMI数字捕获链 | 已完成事务身份；作废单拍时为作废owner的身份（V1.11补记） |
+| `i_adc_transaction_lost_event` | 1 | AMI | V1.11补记。在途owner完成丢失超时作废单拍，与`i_adc_transaction_complete_event`互斥；按序号与代际匹配时释放owner、不计成功，不匹配时按错配处理（§5.3） |
 | `i_adc_idle` | 1 | Top `flag_adc_physical_idle` | 物理ADC转换与Stage1/Stage2 DONE/CLK_DOUT返回均非活动的同步事实；不是AMI completion、数字排空或owner-release事件 |
 
 `i_adc_transaction_complete_event`不得由Q3结束、SAR控制波形末沿或wrapper内部计数伪造。它必须来自`CLK_DOUT`完成后两级同步、RAW锁存和事务归属完成的数字链。
@@ -599,7 +623,7 @@ o_s_in[4:0]
 | `o_switch_protocol_error_sticky` | 非法接管点、双模式同时活动或事务载荷非法 |
 | `o_transaction_mismatch_sticky` | ADC完成的sample_index与在途事务不一致 |
 | `o_owner_deadline_timeout_sticky` | 波形已接管但ADC owner未在冻结截止点前提交 |
-| `o_calibration_timeout_sticky` | 校准结果未能在下一候选码准备截止前完成 |
+| `o_calibration_timeout_sticky` | ~~校准结果未能在下一候选码准备截止前完成~~ V1.11改写（S1，`ppg_sar9_sar15_safe_selection_wrapper.v` `calibration_timeout_sticky_o`）：校准宏帧中，本子帧的校准owner（帧号与子帧号均绑定，§5.3）在local tick 385仍未完成时置1。非阻断历史诊断，不终止burst、不进入`o_wrapper_fault_blocking`或supervisor记录。复位、START恢复（§8.3a）或`o_wrapper_idle`时的诊断清除将其清零 |
 | `o_wrapper_fault_blocking` | 活动根因、协议错误或无法确认归属的错配汇总，阻止调度器启动新owner |
 | `o_ssw_fault_valid` | 给supervisor的注册一周期blocking-fault记录有效位；cause和identity在该周期稳定 |
 | `o_ssw_fault_active` | 未解决SSW blocking cause的注册状态；只在安全恢复谓词成立或复位后撤销 |
@@ -686,7 +710,22 @@ STOP不允许强制在Q1/Q2/Q3中间组合切换精度或颜色。
 -> 所有待启动预约失效
 ```
 
+V1.11补记（F-035，`ppg_sar9_sar15_safe_selection_wrapper.v` `adc_owner_inflight_o`）：abort与匹配完成（或匹配作废）落在同一拍时，完成优先释放物理owner；abort仍取消波形和结果资格。否则该owner会一直残留到复位。
+
 abort后的AMI匹配迟到完成应携带`success=0`。wrapper仍按第5.3节公式释放旧物理owner；如果异常收到匹配`success=1`，也必须释放物理owner，但该结果仍按丢弃处理并置协议诊断。释放前不得把旧owner身份重新分配给新事务。
+
+### 8.3a START恢复（V1.11补记，L-6）
+
+新RUN的`i_start_ack_event`到达、且没有在途owner、物理ADC空闲（`i_adc_idle`）时，SSW执行START恢复（`ppg_sar9_sar15_safe_selection_wrapper.v` `flag_start_restore`）：
+
+- 作废上一RUN残留的、尚未提交owner的RED/IR/校准波形上下文（`flag_red_context_valid`、`flag_ir_context_valid`、`flag_cal_context_valid`清零），与abort的撤销效果一致；
+- 撤销上一RUN残留的停止挂起（`flag_stop_pending`）；
+- 清除SSW历史sticky（`o_calibration_timeout_sticky`、`o_owner_deadline_timeout_sticky`、`o_switch_protocol_error_sticky`、`o_transaction_mismatch_sticky`）；
+- 恢复运行资格。
+
+前提：manager的STOPPING只在ADC空闲、数据链排空、IDAC空闲且模拟安全时完成（`ppg_system_config_manager.v` `flag_stopping_complete`），所以合法的START到达时不可能有已提交owner在途。若前提意外不成立（START时仍有在途owner或ADC忙），SSW不执行START恢复，也不会丢弃在途owner。
+
+背景（L-6）：STOP可能落在某个波形已被SSW接管、owner尚未提交的时刻（例如RED在tick 0接管后、tick 1 STOP）。此时STOPPING可以立即完成并回到CONFIG。新RUN的START之后调度器停在启动边界pending、宏帧tick冻结在0；而波形上下文只在波形末拍或abort时释放，tick冻结后到不了末拍，`o_sar_timing_idle`恒为0，启动边界永不出现，新RUN在无故障、无sticky的情况下永久停顿。本条规则消除了这一静默卡死。验收见SSW-53。
 
 `i_rstn=0`时立即清除波形槽、owner-pending、已提交数字owner及其释放身份，并把可撤销模拟控制置为复位安全向量。复位后旧DONE无法恢复合法身份，不得产生完成旁带或释放任何新owner；系统只能等待物理`i_adc_idle`重新建立后开始新的RUN。
 
@@ -830,13 +869,13 @@ SSW的独立回归不能替代调度器、SSW和AMI的真实三模块联合TB。
 | SSW-13 | 预热中改码 | 输出仍使用旧快照且置协议诊断或隔离新码 |
 | SSW-14 | 迟到波形接管 | 不启动波形、不移动Q3、置协议诊断 |
 | SSW-15 | AMI反压 | 波形预建立可继续，owner保持pending；截止前无fire不占用sample index |
-| SSW-16 | ADC完成匹配 | 相同sample index在`success=1/0`时均只释放当前ADC owner；0不得进入IDAC、NORMAL或校准成功处理 |
-| SSW-17 | ADC完成错配 | 保持owner保护并置mismatch sticky |
-| SSW-18 | 校准完成超时 | tick 385前未准备下一码则终止burst并置sticky |
+| SSW-16 | ADC完成匹配 | 相同sample index在`success=1/0`时均只释放当前ADC owner；0不得进入IDAC、NORMAL或校准成功处理。V1.11原行补充：序号与代际匹配的AMI作废单拍同样释放owner、不计成功（§5.3） |
+| SSW-17 | ADC完成错配 | 保持owner保护并置mismatch sticky。V1.11原行补充：序号或代际不符的作废单拍同样按错配处理 |
+| SSW-18 | 校准完成超时 | ~~tick 385前未准备下一码则终止burst并置sticky~~ V1.11改写（S1）：校准宏帧中本子帧校准owner（帧号与子帧号绑定）在local tick 385仍未完成时置`o_calibration_timeout_sticky`；非阻断，不终止burst；同一子帧owner按时完成时不置位（§5.4、§7.8） |
 | SSW-19 | SAR9到SAR15 | 仅接管点改变，先断后通，无双驱动 |
 | SSW-20 | SAR15到SAR9 | 同上，Q3仍保持规定位置 |
 | SSW-21 | STOP | 不接受新事务，当前包络安全结束后idle |
-| SSW-22 | abort | 未提交上下文撤销；已提交owner保留最小释放身份，匹配`success=0`迟到完成只释放owner且不得重新激活时序 |
+| SSW-22 | abort | 未提交上下文撤销；已提交owner保留最小释放身份，匹配`success=0`迟到完成只释放owner且不得重新激活时序。V1.11原行补充：abort与匹配完成同拍时完成优先释放owner（F-035，§8.3） |
 | SSW-23 | reset | 所有可撤销模拟控制进入安全向量 |
 | SSW-24 | 固定电流SAR9表征 | `EN_TEST=1`，`BOTH/RED_ONLY/IR_ONLY`分别产生规定的RED/IR事务，400 Hz SAR9固定，LED和LEDDAC全程为0；`OFF`无波形、owner或有效IDAC总线 |
 | SSW-25 | `o_clk_2m` | 始终与`i_clk`相位一致，无门控 |
@@ -848,15 +887,15 @@ SSW的独立回归不能替代调度器、SSW和AMI的真实三模块联合TB。
 | SSW-31 | STATIC_BIAS MUX | 已提交`S[4:0]`同一2 MHz边沿原子更新；其他模式输出0 |
 | SSW-32 | 表征CDC隔离 | 未提交shadow、STOP、abort或复位不得形成迟到的`EN_TEST`、S或码值更新 |
 | SSW-33 | 两通道分离 | waveform fire锁存模拟快照但不建立ADC owner；owner fire不改写模拟快照 |
-| SSW-34 | 双波形上下文 | RED owner在途时macro tick 160仍接管IR波形，两个上下文身份不交叉 |
+| SSW-34 | 双波形上下文 | RED owner在途时macro tick 160仍接管IR波形，两个上下文身份不交叉。V1.11原行补充：槽位“有owner”只认帧号（校准还要子帧号）与当前上下文一致的owner（§5.3，L-1） |
 | SSW-35 | RED owner截止 | 最晚tick 283提交；tick 284前资格确定且Q3仍为300 |
 | SSW-36 | IR owner截止 | RED真实完成后最晚tick 443提交；Q3仍为460 |
 | SSW-37 | CAL owner截止 | 最晚local tick 248提交，249开始的后段窗口前owner稳定 |
-| SSW-38 | owner失败抑制 | 过截止仍无owner时抑制Q1/Q2/Q3、LED和结果接纳，预建立安全收尾 |
+| SSW-38 | owner失败抑制 | 过截止仍无owner时抑制Q1/Q2/Q3、LED和结果接纳，预建立安全收尾。V1.11原行补充：跨帧/跨子帧残留的旧owner不算本上下文的owner，不得掩盖截止抑制（§5.3，L-1） |
 | SSW-39 | owner原子性 | commit只能在ready为1且identity匹配时接受，sample index只在该沿首次绑定 |
 | SSW-40 | 单owner约束 | RED owner未释放时IR owner ready保持0，但IR波形上下文不丢失 |
 | SSW-41 | SAR15跨色白名单 | 仅四项确认信号允许连续，其他输出和两路LED无额外重叠 |
-| SSW-42 | 真实DONE | Q3/包络末沿/固定4拍均不释放owner；匹配数字完成在`success=1/0`时均释放，只有1允许成功处理 |
+| SSW-42 | 真实DONE | Q3/包络末沿/固定4拍均不释放owner；匹配数字完成在`success=1/0`时均释放，只有1允许成功处理。V1.11原行补充：AMI超时作废是唯一另一条释放路径，按同一身份匹配，不计成功（§5.3） |
 | SSW-43 | 生命周期epoch | STOP安全收尾；abort保留最小释放身份而reset立即清除，任何迟到DONE均不得复活旧波形或结果 |
 | SSW-44 | SAR9跨色白名单 | 仅`o_clk_iref_idac_sar9_low`按RED `[44,318)`和IR `[204,478)`合并为连续`[44,478)`；三个SAR9使能及其他控制无额外重叠 |
 | SSW-45 | SAR9码总线精度隔离 | NORMAL/DCS使用非零AMB/DC快照时，只有SAR9对应两组总线按各自netlist码窗逐bit工作，SAR15两组逐tick保持`8'h00` |
@@ -867,6 +906,7 @@ SSW的独立回归不能替代调度器、SSW和AMI的真实三模块联合TB。
 | SSW-50 | CHARACTERIZATION光电二极管固定SAR15 RED | 同SSW-49，SAR15预热严格为`[27,308)`，精度全RUN固定且Q3=300 |
 | SSW-51 | CHARACTERIZATION固定模式非法组合 | 非法输入源/光学模式、`OFF`固定电流测量或尝试自动搜索/精度切换时，不产生波形、owner或有效IDAC码总线；合法外部固定电流模式仅为`BOTH/RED_ONLY/IR_ONLY` |
 | SSW-52 | STATIC_BIAS源资格 | 仅`input_source=1`进入静态状态；`input_source=0`拒绝且不产生波形、owner或有效IDAC码总线 |
+| SSW-53 | START恢复（V1.11新增，L-6） | 上一RUN在波形已接管、owner未提交时STOP；新RUN START确认时（无在途owner、ADC空闲）作废残留的未提交RED/IR/校准波形上下文与停止挂起，新RUN能正常接管并建立owner（§8.3a） |
 
 正式RTL完成后必须执行：
 
@@ -875,7 +915,7 @@ formatter-AST：0 error / 0 strict warning
 独立Verilog lint：0 error / 0 warning
 Vivado xvlog：通过
 Vivado xelab：通过
- Vivado xsim：SSW-01至SSW-52全部真实PASS
+ Vivado xsim：SSW-01至SSW-53全部真实PASS（V1.11：范围由SSW-52扩为SSW-53。这是要求，不是当前状态；TB检查标签与本表编号的对应关系及当前证据状态见别名表SSW对照行与矩阵§13，ID=SSW-01～SSW-53）
 Vivado综合：0 error / 0 critical warning，Latch=0，Blackbox=0，2 MHz时序满足
 ```
 

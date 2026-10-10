@@ -1,0 +1,203 @@
+SAME                         chip/tb_ppg_chip_digital_top
+SAME                         system/tb_diag_algo_probe
+SAME                         system/tb_ppg_control_top
+SAME                         system/tb_ppg_control_top_adc_anomaly
+SAME                         system/tb_ppg_control_top_adc_numeric_scoreboard
+SAME                         system/tb_ppg_control_top_baseline_cross
+SAME                         system/tb_ppg_control_top_fir_tail_isolation
+SAME                         system/tb_ppg_control_top_idac_bus_isolation
+SAME                         system/tb_ppg_control_top_injection
+SAME                         system/tb_ppg_control_top_input_light_static_matrix
+PASSDIFF(80/80 lines) FINISH_LINE_SHIFT system/tb_ppg_control_top_lifecycle_fault_adc_anomaly
+    +PASS AUTOABT-QUIET the supervisor's own automatic owner-scoped abort (flag_owner_abort_event, not this TB's own i_control_abort_event) already released the owner through the real original-identity path before any manual diag_clear/STOP, with no formal result fabricated -- diag_clear alone was never the mechanism that discarded it
+    -PASS LFA-11a the supervisor's own automatic owner-scoped abort (flag_owner_abort_event, not this TB's own i_control_abort_event) already released the owner through the real original-identity path before any manual diag_clear/STOP, with no formal result fabricated -- diag_clear alone was never the mechanism that discarded it
+    $finish line: baseline 2173 -> final 2175 (time and file equal)
+SAME                         system/tb_ppg_control_top_long_10_cycles
+SAME                         system/tb_ppg_control_top_longrun
+SAME                         system/tb_ppg_control_top_no_recheck_control
+SAME                         system/tb_ppg_control_top_normal_slow_tracking
+SAME                         system/tb_ppg_control_top_owner_identity_backpressure
+SAME                         system/tb_ppg_control_top_peak_valley_return
+SAME                         system/tb_ppg_control_top_periodic_recheck_recovery
+SAME                         system/tb_ppg_control_top_robustness_corner_waveforms
+SAME                         system/tb_ppg_control_top_startup_idac_calibration
+SAME                         system/tb_ppg_real_raw_generator_selfcheck
+PASSDIFF(77/77 lines) FINISH_LINE_SHIFT unit/tb_ppg_400hz_frame_calibration_scheduler
+    -PASS FSC-1
+    -PASS FSC-10
+    -PASS FSC-11
+    -PASS FSC-12
+    -PASS FSC-13
+    -PASS FSC-14
+    -PASS FSC-15
+    -PASS FSC-16
+    -PASS FSC-17
+    -PASS FSC-18
+    -PASS FSC-19
+    -PASS FSC-2
+    -PASS FSC-20
+    -PASS FSC-21
+    -PASS FSC-22
+    -PASS FSC-23
+    -PASS FSC-24
+    -PASS FSC-25
+    -PASS FSC-26
+    -PASS FSC-27
+    -PASS FSC-28
+    -PASS FSC-29
+    -PASS FSC-3
+    -PASS FSC-30
+    -PASS FSC-31
+    -PASS FSC-32
+    -PASS FSC-33
+    -PASS FSC-34
+    -PASS FSC-35
+    -PASS FSC-36
+    -PASS FSC-37
+    -PASS FSC-38
+    -PASS FSC-39
+    -PASS FSC-4
+    -PASS FSC-40
+    -PASS FSC-41
+    -PASS FSC-42
+    -PASS FSC-43
+    -PASS FSC-44
+    -PASS FSC-45
+    -PASS FSC-46
+    -PASS FSC-47
+    -PASS FSC-48
+    -PASS FSC-49
+    -PASS FSC-5
+    -PASS FSC-50
+    -PASS FSC-51
+    -PASS FSC-52
+    -PASS FSC-53
+    -PASS FSC-54
+    -PASS FSC-55
+    -PASS FSC-56
+    -PASS FSC-57
+    -PASS FSC-58
+    -PASS FSC-59
+    -PASS FSC-6
+    -PASS FSC-60
+    -PASS FSC-61
+    -PASS FSC-62
+    -PASS FSC-7
+    -PASS FSC-8
+    -PASS FSC-9
+    +PASS SCHT-1
+    +PASS SCHT-10
+    +PASS SCHT-11
+    +PASS SCHT-12
+    +PASS SCHT-13
+    +PASS SCHT-14
+    +PASS SCHT-15
+    +PASS SCHT-16
+    +PASS SCHT-17
+    +PASS SCHT-18
+    +PASS SCHT-19
+    +PASS SCHT-2
+    +PASS SCHT-20
+    +PASS SCHT-21
+    +PASS SCHT-22
+    +PASS SCHT-23
+    +PASS SCHT-24
+    +PASS SCHT-25
+    +PASS SCHT-26
+    +PASS SCHT-27
+    +PASS SCHT-28
+    +PASS SCHT-29
+    +PASS SCHT-3
+    +PASS SCHT-30
+    +PASS SCHT-31
+    +PASS SCHT-32
+    +PASS SCHT-33
+    +PASS SCHT-34
+    +PASS SCHT-35
+    +PASS SCHT-36
+    +PASS SCHT-37
+    +PASS SCHT-38
+    +PASS SCHT-39
+    +PASS SCHT-4
+    +PASS SCHT-40
+    +PASS SCHT-41
+    +PASS SCHT-42
+    +PASS SCHT-43
+    +PASS SCHT-44
+    +PASS SCHT-45
+    +PASS SCHT-46
+    +PASS SCHT-47
+    +PASS SCHT-48
+    +PASS SCHT-49
+    +PASS SCHT-5
+    +PASS SCHT-50
+    +PASS SCHT-51
+    +PASS SCHT-52
+    +PASS SCHT-53
+    +PASS SCHT-54
+    +PASS SCHT-55
+    +PASS SCHT-56
+    +PASS SCHT-57
+    +PASS SCHT-58
+    +PASS SCHT-59
+    +PASS SCHT-6
+    +PASS SCHT-60
+    +PASS SCHT-61
+    +PASS SCHT-62
+    +PASS SCHT-7
+    +PASS SCHT-8
+    +PASS SCHT-9
+    $finish line: baseline 1352 -> final 1354 (time and file equal)
+SAME                         unit/tb_ppg_active_v4_control_plane_integration
+SAME                         unit/tb_ppg_adc_async_stage_capture
+PASSDIFF(2/2 lines) FINISH_LINE_SHIFT unit/tb_ppg_adc_dc_recovery
+    -PASS ppg_adc_dc_recovery DCR-01..DCR-22
+    +PASS ppg_adc_dc_recovery directed DCR checks and DCRT-n vectors
+    $finish line: baseline 480 -> final 482 (time and file equal)
+PASSDIFF(79/79 lines) FINISH_LINE_SHIFT unit/tb_ppg_adc_measurement_idac_integration
+    -AMI-01 through AMI-45, AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 78 real comparisons
+    +AMI-01 through AMI-45 except AMI-13 (TB-local FORK-HOLD), AMI-DISC-1/2, AMI-SID05-1/2 plus N08-01 PASS: 78 real comparisons
+    -PASS AMI-13
+    +PASS FORK-HOLD
+    $finish line: baseline 2223 -> final 2225 (time and file equal)
+SAME                         unit/tb_ppg_adc_pipeline_overlap_corrector
+SAME                         unit/tb_ppg_adc_programmable_reconstructor
+SAME                         unit/tb_ppg_adc_result_router
+SAME                         unit/tb_ppg_adc_s1_programmable_calibrator
+SAME                         unit/tb_ppg_adc_s1_redundancy_corrector
+SAME                         unit/tb_ppg_amb_recheck_scheduler
+SAME                         unit/tb_ppg_characterization_control_cdc
+SAME                         unit/tb_ppg_coarse_detection_fir
+SAME                         unit/tb_ppg_dual_precision_top
+SAME                         unit/tb_ppg_dynamic_baseline_cross_detector
+SAME                         unit/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence
+SAME                         unit/tb_ppg_idac_code_controller
+SAME                         unit/tb_ppg_normal_transaction_fork
+SAME                         unit/tb_ppg_peak_valley_window_detector
+SAME                         unit/tb_ppg_precision_window_controller
+SAME                         unit/tb_ppg_precision_window_integration
+PASSDIFF(60/60 lines) FINISH_LINE_SHIFT unit/tb_ppg_sar9_sar15_safe_selection_wrapper
+    -[1227751000] SSW-18 PASS
+    +[1227751000] CAL-ODL PASS
+    $finish line: baseline 1245 -> final 1247 (time and file equal)
+SAME                         unit/tb_ppg_system_active_config_unpack
+PASSDIFF(1/1 lines) FINISH_LINE_SHIFT unit/tb_ppg_system_config_manager
+    -PASS: ppg_system_config_manager MGR-01 through MGR-24 all directed checks passed
+    +PASS: ppg_system_config_manager MGR-01 through MGR-24 except MGR-21 (joint-TB item) all directed checks passed
+    $finish line: baseline 995 -> final 997 (time and file equal)
+PASSDIFF(19/19 lines) FINISH_LINE_SHIFT unit/tb_ppg_system_fault_abort_supervisor
+    +PASS CLRBLK
+    +PASS EPI2ND
+    +PASS EPICLS
+    -PASS SUP03A
+    -PASS SUP06A
+    -PASS SUP09A
+    -PASS SUP10A
+    +PASS WDIDLE
+    -SUP-01 through SUP-10 PASS: 18 real comparisons
+    +SUP-01/02/04/06/07 and TB-local supervisor checks PASS: 18 real comparisons
+    $finish line: baseline 558 -> final 560 (time and file equal)
+SAME                         unit/tb_ppg_timing_3200hz
+SAME                         unit/tb_ppg_timing_sar15
+SAME                         unit/tb_ppg_timing_sar9
+TBs=49 problems(missing, or $finish time/file differs)=0

@@ -1,5 +1,6 @@
 # PPG ACTIVE V4控制平面集成Wrapper接口合同
 
+> V1.7修订日期：2026-10-09。B合同合并批次（`verification_reports/B_MERGE_BATCH_ITEMS.md` BMI-184，ID治理G6）：第13节工具验证要求的范围“AV4C-01～AV4C-19”订正为验收表实际上限AV4C-22（原文保留于删除线中）；内容不变。
 > V1.6 fail-closed D01 revision, 2026-08-20: Top-merged STOP, manager-local status-clear isolation, system-blocking START gating, generation forwarding and stop-episode forwarding remain normative. V4/V5 use one 1024-bit shadow/CDC/atomic COMMIT path; system closure remains `NOT_CLOSED` until the matrix audit records zero defects. Implementation evidence is `EVIDENCE_PENDING`.
 > V1.5 change record: replaces stale downstream dependency versions with the active contract set. It changes no wrapper port, CDC, lifecycle or hierarchy behavior.
 > Normative status: V1.6 is the sole current wrapper port and hierarchy authority. Earlier V1.0-V1.5 status, dependency-version and scope statements are historical unless repeated by V1.6; they cannot omit a V1.6 wrapper port or bypass the manager-wrapper boundary.
@@ -23,12 +24,12 @@
 本文与以下当前活动合同共同使用：
 
 1. C04 — `ppg_system_integration/PPG_ACTIVE_V4_CONTROL_CONNECTION_MAPPING_CONTRACT.md` V1.7；
-2. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.4；
-3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.12；
-4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.9；
-5. C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` V4.9；
-6. C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` V1.1；
-7. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.5。
+2. C10 — `ppg_system_integration/PPG_ADC_MEASUREMENT_AND_IDAC_INTEGRATION_WRAPPER_INTERFACE_CONTRACT.md` V2.5；
+3. C08 — `ppg_system_integration/PPG_400HZ_FRAME_CALIBRATION_SCHEDULER_INTERFACE_CONTRACT.md` V1.13；
+4. C09 — `ppg_system_integration/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md` V1.11；
+5. C02 — `ppg_system_config_manager/ppg_system_config_manager_semantic_contract.md` V4.10；
+6. C07 — `ppg_system_integration/PPG_CHARACTERIZATION_CONTROL_CDC_INTERFACE_CONTRACT.md` V1.2；
+7. C24 — `ppg_system_integration/PPG_SYSTEM_FAULT_ABORT_SUPERVISOR_INTERFACE_CONTRACT.md` V1.7。
 
 若字段所有权与本文冲突，以ACTIVE V4控制连接映射合同为准；若Wrapper端口和握手语义与本文冲突，以本文为准。
 
@@ -322,7 +323,7 @@ Wrapper自检TB至少覆盖：
 1. formatter-AST严格门：RTL和TB均为0 error、0 strict warning；
 2. 独立Verilog lint：0 error、0 warning；
 3. Vivado `xvlog`、`xelab`和`xsim`；
-4. AV4C-01～AV4C-19全部由真实信号比较通过；
+4. ~~AV4C-01～AV4C-19~~ AV4C-01～AV4C-22（B合并批次2026-10-09订正，范围按验收表，ID治理G6）全部由真实信号比较通过；
 5. Vivado综合：0 error、0 critical warning，Latch=0，Blackbox=0；
 6. 记录LUT、寄存器、DSP、WNS/TNS及非阻断警告。
 
