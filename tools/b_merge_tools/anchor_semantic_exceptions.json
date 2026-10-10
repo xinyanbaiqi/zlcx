@@ -28,6 +28,13 @@
    "anchor": "`ppg_peak_valley_window_detector.v` `o_return_9bit_valid`",
    "written": "return_pending_o",
    "reason": "矩阵2515行（基线）：括注名return_pending_o是AMI网、不在显式文件峰谷检测器中；本行端口i_return_9bit_valid，导入版本:440为assign o_return_9bit_valid（第三轮人工判定）"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "2cc647e13a87735bd42af60fcf825389a44d6382",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `REASON_RECHECK`, `REASON_RECHECK`",
+   "written": "(port ledger) o_calibration_request_reason",
+   "reason": "矩阵2242行（当前；基线2224行）：端口台账行o_calibration_request_reason，Producer格写“AMI-internal arbiter (`:N`, `REASON_RECHECK` (amb-recheck) or `REASON_STARTUP` (idac))”，锚点指向仲裁处的REASON_RECHECK，格内后随的写明名在转换后并入锚点名列表；锚点正确，不取本行端口（第三轮补正人工判定，anchor_check端口台账检查1c）"
   }
  ]
 }

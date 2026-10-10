@@ -26,6 +26,15 @@ What is checked (B merge batch brief, section 3.2):
      reported as information only (contract change records are history).
   4. Memory references ([[...]] and memory `....md`) are repository-external;
      they are listed and never counted as errors.
+  5. Semantic mode (matrix and alias table; default on, --no-semantic skips it;
+     coordinator review 2026-10-10 and its follow-up):
+     1b. a symbol anchor must name the symbol the cell writes next to it
+         (anchor_semantics.written_name, rules W1-W7 and W10);
+     1c. port ledger rows (| Cxx | src | input/output | `port` | ...): the port column is
+         the row's subject; an anchor into a file that carries that port must name it --
+         always in the RTL column (5th cell), elsewhere when nothing is written next to
+         it and none of its symbols relates to the row.
+     Hand-checked exceptions: anchor_semantic_exceptions.json (line SHA-1 + anchor text).
 
 Exit status: 0 when no error is found, 1 otherwise.
 """
@@ -40,13 +49,14 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from anchor_semantics import written_name, row_port  # noqa: E402
+from anchor_semantics import carries, related, row_port, written_name  # noqa: E402
 RENAMED = {'i_status_clear_event': 'i_diag_clear_event'}  # F-032 port rename after the anchor was written
 WALK_SKIP_DIRS = {'.git', '__pycache__', '.claude'}  # directory-walk index: no git metadata, bytecode or skill tree
 C_MAP_SECTION = '## 2. Active Contract Sources and Source Classification'
 
 FILE_TOKEN = re.compile(r'`([A-Za-z0-9_./-]+\.(?:v|vh))`')
 NAME_TOKEN = re.compile(r'\s*(?:[、,，/+]|and|和|及)?\s*`([^`]+)`')
+SYM_ANCHOR = re.compile(r'`[A-Za-z0-9_./-]+\.(?:v|vh)`(?:\s*(?:[、,，/+]|and|和|及)?\s*`[^`]+`)*')  # a whole symbol anchor
 IDENT = re.compile(r'^[A-Za-z_][A-Za-z0-9_$]*(?:\[[^\]]*\])?$')
 SAT_TAG = re.compile(r'^@satisfies:\s*([A-Za-z0-9_-]+(?:\s*,\s*[A-Za-z0-9_-]+)*)$')
 LABEL = re.compile(r'^"([^"`]{3,})"$')  # TB check label / PASS text, matched verbatim in the source
@@ -224,7 +234,8 @@ def main():
 
     errors, infos, external = [], [], []
     stats = {'symbol_anchors': 0, 'satisfies_anchors': 0, 'label_anchors': 0, 'section_refs': 0, 'old_anchor_history': 0,
-             'semantic_checked': 0}
+             'semantic_checked': 0, 'port_ledger_rows': 0, 'port_ledger_anchors': 0}
+    port_rows = set()
     sem_path = os.path.join(HERE, 'anchor_semantic_exceptions.json')
     sem_exceptions = set((x['line_sha1'], x['anchor']) for x in json.load(open(sem_path, encoding='utf-8'))['exceptions']) \
         if os.path.exists(sem_path) else set()
@@ -276,6 +287,32 @@ def main():
                     err(f, n, 'file-missing' if not cands else 'file-ambiguous', fname)
                     continue
                 src = source(cands[0])
+                # 1c. port ledger rows (follow-up to the 2026-10-10 review, W9): the port
+                # column is the row's subject. An anchor into a file that carries that port
+                # (declaration or instance connection `.port(`) must name it -- always in the
+                # RTL column (5th cell); elsewhere when nothing is written next to the anchor
+                # and none of its symbols relates to the row (same stem, named elsewhere in
+                # the row outside symbol anchors, or a written `family_*`).
+                port = row_port(line) if base in gated and not args.no_semantic else None
+                idents = [t for t in names if IDENT.match(t)]
+                if port and idents:
+                    port_rows.add((base, n))
+                    stats['port_ledger_anchors'] += 1
+                    if (port not in idents and RENAMED.get(port) not in idents and carries(src.raw_text, port)
+                            and (line_hash(line), line[fm.start():pos]) not in sem_exceptions):
+                        col5 = line[:fm.start()].count('|') == 5
+                        bare = SYM_ANCHOR.sub(' ', line)
+                        wild = [w for w in re.findall(r'([A-Za-z_][A-Za-z0-9_]*_)\*', line) if len(w) >= 8]
+                        wd = lambda x: r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(x)
+                        # use site: a code line of that file holds both the symbol and the port
+                        # (e.g. `assign flag_takeover_safe = ... && i_normal_fork_idle && ...`)
+                        loose = (written_name(line, fm.start(), pos, port)[0] is None
+                                 and not any(related(t, port) or re.search(wd(t), bare) or any(t.startswith(w) for w in wild)
+                                             or any(re.search(wd(t), c) and re.search(wd(port), c) for c in src.code)
+                                             for t in idents))
+                        if col5 or loose:
+                            err(f, n, 'port-mismatch', '%s %s but the row port `%s` is carried by that file (%s)'
+                                % (fname, '/'.join(idents), port, 'RTL column' if col5 else 'unrelated symbol'))
                 for tok in names:
                     sm = SAT_TAG.match(tok)
                     lm = LABEL.match(tok)
@@ -330,6 +367,7 @@ def main():
                     if base not in gated:
                         infos.append({'file': base, 'line': n, 'kind': 'contract-line-anchor', 'count': len(olds)})
 
+    stats['port_ledger_rows'] = len(port_rows)
     result = {'errors': errors, 'external_refs': external, 'stats': stats,
               'files': [os.path.basename(f) for f in files], 'info_count': len(infos)}
     if args.json:

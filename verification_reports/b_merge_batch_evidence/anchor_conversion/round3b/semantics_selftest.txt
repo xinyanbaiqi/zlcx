@@ -1,0 +1,20 @@
+OK   o_system_fault_cause         W1   -> ('o_system_fault_cause', 'W1')
+OK   C_W                          W1   -> ('C_W', 'W1')
+OK   i_transaction_sample_index   W2   -> ('i_transaction_sample_index', 'W2')
+OK   i_transaction_sample_index   W3   -> ('i_transaction_sample_index', 'W3')
+OK   analog_run_enable            W4   -> ('analog_run_enable', 'W4')
+OK   i_source_rstn                W5   -> ('i_source_rstn', 'W5')
+OK   flag_interval_hit            W6   -> ('flag_interval_hit', 'W6')
+OK   coarse_valid_o               W7   -> ('coarse_valid_o', 'W7')
+OK   None                         None -> (None, None)
+OK   None                         None -> (None, None)
+OK   z                            W1   -> ('z', 'W1')
+OK   o_macro_frame_start_event    W10  -> ('o_macro_frame_start_event', 'W10')
+OK   o_detector_idle              W10  -> ('o_detector_idle', 'W10')
+OK   related(o_sequence_failed, o_recheck_sequence_failed) = True
+OK   related(i_cross_valid, o_cross_valid) = True
+OK   related(o_protocol_error_sticky, o_baseline_protocol_error_sticky) = True
+OK   related(o_waveform_frame_id, o_transaction_precision_mode) = False
+OK   related(o_peak_valid, o_peak_pending) = False
+OK   related(o_valid, o_cross_valid) = False
+samples 19, failures 0

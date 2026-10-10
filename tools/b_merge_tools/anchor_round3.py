@@ -227,7 +227,10 @@ def main():
             continue
         if name or not plain:
             continue
-        if any(re.search(word(x), L) for x in plain):
+        # named in the row -- file names do not count (`ppg_adc_dc_recovery.v` does not
+        # name the AMI instance ppg_adc_dc_recovery)
+        Lw = re.sub(r'[A-Za-z0-9_./-]+\.(?:v|vh|md)\b', ' ', L)
+        if any(re.search(word(x), Lw) for x in plain):
             continue
         # a wildcard family the row writes (`reg_adc_inflight_*`) covers its members
         wild = [w for w in re.findall(r'([A-Za-z_][A-Za-z0-9_]*_)\*', L) if len(w) >= 8]   # not bare reg_*/flag_*
