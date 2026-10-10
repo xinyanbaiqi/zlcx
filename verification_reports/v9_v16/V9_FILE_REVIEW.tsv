@@ -1,0 +1,52 @@
+path	candidate_lines	formatter_modules	review_notes
+rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v	159	0	T09,T10,W03; 最终cnt_fail==0且cnt_pass==77；5000拍周期精确
+rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v	103	1	32拍等待无结果明确FAIL；busy退出后检查busy和快照；cnt_error终判
+rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v	45	0	精确显式frame捕获；timeout明确FAIL，末尾cnt_error终判
+rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v	36	0	DC黄金数值、资格/元数据精确；最终总横幅受错误累计控制
+rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v	223	1	T05,T06,V01,W01; 最终cnt_fail==0且cnt_pass==78，全局AMI-WATCHDOG
+rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v	47	1	1024-code定向/数值精确；cnt_error终判和明确watchdog
+rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v	35	0	定点结果/透传字段逐值比较及1024码遍历；明确watchdog
+rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v	44	0	互斥路由和反压字段精确；cnt_error终判/明确watchdog
+rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v	62	0	权重/舍入/饱和及字段精确；cnt_error终判/明确timeout
+rtl/ppg_adc_s1_redundancy_corrector/tb_ppg_adc_s1_redundancy_corrector.v	73	0	逐码重构/放弃上下文的精确比较；cnt_error终判/明确timeout
+rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v	89	0	重检资格及状态定向比较；FAIL: timeout和cnt_error终判
+rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v	49	0	W05; CCC结果等待80拍后明确FAIL；末尾cnt_error终判
+rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v	181	0	U03,W04; LOST-SPI计数精确、TC7有效周期>0，终判cnt_error==0
+rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v	96	0	T14,T15,W02,W05; 逐事务模型和完整PASS总数门
+rtl/ppg_control_top/tb_diag_algo_probe.v	85	0	T13,V02,W04; 缩短诊断配置，不能作为正式RAW-12闭合
+rtl/ppg_control_top/tb_ppg_control_top.v	508	0	W04; SMOKE正场景响应/owner前提，STOP排空超时加错误；终判cnt_error
+rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v	259	0	T07,W04; sys_check真实setup/事件/身份，全局watchdog
+rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v	168	0	W04; 每笔等待有guard，数值/身份精确，跟踪fire存在性
+rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v	331	0	T01,T02,W04; Group1/2与N01/N08/D01有存在性及超时失败
+rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v	329	0	T01,T02,T03,T04,W04; tail<=10且末尾要求实际tail/recovery
+rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v	206	0	W04; 活动/闲置总线精确，ISE-08分色冻结与自然epoch回绕
+rtl/ppg_control_top/tb_ppg_control_top_injection.v	126	0	W04; INJ-03真实结果valid/sample_valid/身份以及合法恢复
+rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v	294	0	W04; 配置、颜色/精度、static管脚精确；CDC超时/全局guard
+rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v	377	0	W04; LFA-02结果与discard存在性；LFA-10b标SKIP而非本地PASS
+rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v	360	0	T01,T02,T03,T04,T12,T13,W04,H01; 守恒已精确化
+rtl/ppg_control_top/tb_ppg_control_top_longrun.v	68	0	T13,V02,W04; watchdog打印FAIL，正式结果数仅打印
+rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v	148	0	W04; NRE-03真实两色full，NRE-04/05真实进入/返回/cross防空真
+rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v	214	0	W04; TRK-07 pending成功/码与epoch+1，TRK-08真实16次提交自然回绕
+rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v	303	0	W04; owner table逐笔精确，OIB-01/02要求真实诊断，OIB-03要求真实valid/释放
+rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v	285	0	T01,T02,T03,T04,W04; Group1/2/3末尾核对真实事件
+rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v	248	0	W04; RRC-09满窗超时FAIL，RRC-10真实进入，码/epoch精确
+rtl/ppg_control_top/tb_ppg_control_top_robustness_corner_waveforms.v	252	0	T17,T18,U01,U02,V03,W04; 饱和/timeout/注入恢复有存在性前提
+rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v	220	0	W04; SID请求存在性/码与epoch定向比较；Q3/全局guard
+rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh	48	0	T08,W04; 自建计数、Q3相位前提和54个子检查
+rtl/ppg_control_top/tb_ppg_real_raw_generator.vh	9	0	刺激库；无独立PASS终判；T16对应自检调用方，冻结公式/范围
+rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v	58	1	T16; 真实cnt_local_fail条件，RAWGEN_SELFCHECK_PASS受cnt_error控制
+rtl/ppg_dual_precision_top/tb_ppg_dual_precision_top.v	43	0	孤立模块仍在本次范围；精确定向比较与FAIL watchdog
+rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_cross_detector.v	127	0	W05; 42拍除法及黄金数值精确；cnt_fail==0且cnt_pass==65
+rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence.v	11	0	自包含算术等价；黄金整数逐值比较，零仿真时间的正常结束
+rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v	86	0	顺序/候选与提交/epoch精确；startup/periodic guard有断言，明确timeout
+rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v	55	0	W05; payload与单次分支消费定向比较；cnt_error终判
+rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v	75	0	W05; 精确峰谷frame/sample/value；cnt_pass==55且cnt_fail==0
+rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v	78	0	精确timeout临界/事件次数；cnt_error==0且cnt_pass==50
+rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v	64	0	T11; cnt_pass==5且cnt_fail==0，idle超时明确FAIL
+rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v	38	0	固定tick窗口不是容差；cnt_error==0且cnt_pass==59；$fatal watchdog
+rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v	12	1	具名字段逐bit解包；cnt_error终判
+rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v	113	0	状态/命令优先级/快照定向比较；cnt_error终判/明确timeout
+rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v	31	0	watchdog参数合法性>=不是行为容差；cnt_pass==18且cnt_fail==0
+rtl/ppg_timing_3200hz_validation/tb_ppg_timing_3200hz.v	30	0	旧评估联合TB；固定周期/窗口精确，明确timeout
+rtl/ppg_timing_sar15/tb_ppg_timing_sar15.v	47	0	旧评估模块；逐tick窗口布尔期望精确，不是放宽的时间窗口
+rtl/ppg_timing_sar9/tb_ppg_timing_sar9.v	75	0	旧评估模块；逐tick窗口布尔期望精确，不是放宽的时间窗口

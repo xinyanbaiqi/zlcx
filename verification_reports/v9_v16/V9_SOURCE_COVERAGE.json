@@ -1,0 +1,1201 @@
+{
+  "baseline": "bb3c1aba12474638fcbefd9b1f324ecfc7524544",
+  "skill": ".claude/skills/erie-verilog-generator",
+  "method": "formatter AST + textual navigation + manual review; candidates are not findings",
+  "files": [
+    {
+      "path": "rtl/ppg_400hz_frame_calibration_scheduler/tb_ppg_400hz_frame_calibration_scheduler.v",
+      "sha256": "f8fca7fbc8512fde1697c186b43455aa359f3ca1e76681fd7053730453618e7a",
+      "lines": 1355,
+      "candidate_lines": 159,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_active_v4_control_plane_integration/tb_ppg_active_v4_control_plane_integration.v",
+      "sha256": "80f227dfda7992b2a328afb6732c743843d57116b59abc311f5f6c1299003075",
+      "lines": 903,
+      "candidate_lines": 103,
+      "structures": [
+        {
+          "name": "tb_ppg_active_v4_control_plane_integration",
+          "counts": {
+            "functions": 0,
+            "tasks": 9,
+            "localparams": 7,
+            "decls": 116,
+            "assigns": 0,
+            "always": 0,
+            "initials": 4,
+            "instances": 1,
+            "raw_blocks": 0,
+            "preprocessor_prologue": 0,
+            "conditionals": 0,
+            "generates": 0
+          },
+          "initials": [
+            {
+              "line_start": 232,
+              "line_end": 235
+            },
+            {
+              "line_start": 241,
+              "line_end": 244
+            },
+            {
+              "line_start": 542,
+              "line_end": 873
+            },
+            {
+              "line_start": 898,
+              "line_end": 900
+            }
+          ],
+          "tasks": [
+            {
+              "name": null,
+              "line_start": 249,
+              "line_end": 253
+            },
+            {
+              "name": null,
+              "line_start": 257,
+              "line_end": 307
+            },
+            {
+              "name": null,
+              "line_start": 311,
+              "line_end": 348
+            },
+            {
+              "name": null,
+              "line_start": 352,
+              "line_end": 359
+            },
+            {
+              "name": null,
+              "line_start": 363,
+              "line_end": 370
+            },
+            {
+              "name": null,
+              "line_start": 374,
+              "line_end": 381
+            },
+            {
+              "name": null,
+              "line_start": 385,
+              "line_end": 394
+            },
+            {
+              "name": null,
+              "line_start": 398,
+              "line_end": 411
+            },
+            {
+              "name": null,
+              "line_start": 415,
+              "line_end": 428
+            }
+          ]
+        }
+      ],
+      "ast_diagnostics": []
+    },
+    {
+      "path": "rtl/ppg_adc_async_stage_capture/tb_ppg_adc_async_stage_capture.v",
+      "sha256": "25414b2d46b77df64222b4be0cb28e13e4bfbfd8bbf6acd8cfdc0adb7e36eb83",
+      "lines": 363,
+      "candidate_lines": 45,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_dc_recovery/tb_ppg_adc_dc_recovery.v",
+      "sha256": "c5a612f9b8e2a4a09cd62130037e71c8fd8c2ee906a2d6e0eb39a40c937a46f9",
+      "lines": 520,
+      "candidate_lines": 36,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_measurement_idac_integration/tb_ppg_adc_measurement_idac_integration.v",
+      "sha256": "5ad7f9571abea585886a14a92da5e9c34268a0b58a9ea0d2b795e2fa6e883dd9",
+      "lines": 2233,
+      "candidate_lines": 223,
+      "structures": [
+        {
+          "name": "tb_ppg_adc_measurement_idac_integration",
+          "counts": {
+            "functions": 0,
+            "tasks": 24,
+            "localparams": 4,
+            "decls": 299,
+            "assigns": 0,
+            "always": 4,
+            "initials": 2,
+            "instances": 1,
+            "raw_blocks": 0,
+            "preprocessor_prologue": 0,
+            "conditionals": 0,
+            "generates": 0
+          },
+          "initials": [
+            {
+              "line_start": 1150,
+              "line_end": 2179
+            },
+            {
+              "line_start": 2228,
+              "line_end": 2230
+            }
+          ],
+          "tasks": [
+            {
+              "name": null,
+              "line_start": 680,
+              "line_end": 694
+            },
+            {
+              "name": null,
+              "line_start": 697,
+              "line_end": 706
+            },
+            {
+              "name": null,
+              "line_start": 709,
+              "line_end": 720
+            },
+            {
+              "name": null,
+              "line_start": 723,
+              "line_end": 731
+            },
+            {
+              "name": null,
+              "line_start": 734,
+              "line_end": 740
+            },
+            {
+              "name": null,
+              "line_start": 766,
+              "line_end": 775
+            },
+            {
+              "name": null,
+              "line_start": 777,
+              "line_end": 789
+            },
+            {
+              "name": null,
+              "line_start": 792,
+              "line_end": 797
+            },
+            {
+              "name": null,
+              "line_start": 800,
+              "line_end": 805
+            },
+            {
+              "name": null,
+              "line_start": 808,
+              "line_end": 818
+            },
+            {
+              "name": null,
+              "line_start": 821,
+              "line_end": 828
+            },
+            {
+              "name": null,
+              "line_start": 831,
+              "line_end": 836
+            },
+            {
+              "name": null,
+              "line_start": 839,
+              "line_end": 870
+            },
+            {
+              "name": null,
+              "line_start": 873,
+              "line_end": 889
+            },
+            {
+              "name": null,
+              "line_start": 892,
+              "line_end": 917
+            },
+            {
+              "name": null,
+              "line_start": 920,
+              "line_end": 944
+            },
+            {
+              "name": null,
+              "line_start": 947,
+              "line_end": 962
+            },
+            {
+              "name": null,
+              "line_start": 965,
+              "line_end": 977
+            },
+            {
+              "name": null,
+              "line_start": 980,
+              "line_end": 985
+            },
+            {
+              "name": null,
+              "line_start": 988,
+              "line_end": 993
+            },
+            {
+              "name": null,
+              "line_start": 996,
+              "line_end": 1011
+            },
+            {
+              "name": null,
+              "line_start": 1014,
+              "line_end": 1023
+            },
+            {
+              "name": null,
+              "line_start": 1026,
+              "line_end": 1048
+            },
+            {
+              "name": null,
+              "line_start": 1051,
+              "line_end": 1065
+            }
+          ]
+        }
+      ],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_HARD_GATE",
+          "message": "unclosed_block_comment",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_pipeline_overlap_corrector/tb_ppg_adc_pipeline_overlap_corrector.v",
+      "sha256": "90f6b5adb06543be4a964bceeadb91c05ab5822ee5a74f0f5cbc2e3bbe38f858",
+      "lines": 878,
+      "candidate_lines": 47,
+      "structures": [
+        {
+          "name": "tb_ppg_adc_pipeline_overlap_corrector",
+          "counts": {
+            "functions": 4,
+            "tasks": 3,
+            "localparams": 7,
+            "decls": 91,
+            "assigns": 2,
+            "always": 0,
+            "initials": 3,
+            "instances": 1,
+            "raw_blocks": 0,
+            "preprocessor_prologue": 0,
+            "conditionals": 0,
+            "generates": 0
+          },
+          "initials": [
+            {
+              "line_start": null,
+              "line_end": null
+            },
+            {
+              "line_start": null,
+              "line_end": null
+            },
+            {
+              "line_start": 801,
+              "line_end": 803
+            }
+          ],
+          "tasks": [
+            {
+              "name": null,
+              "line_start": 249,
+              "line_end": 282
+            },
+            {
+              "name": null,
+              "line_start": 285,
+              "line_end": 325
+            },
+            {
+              "name": null,
+              "line_start": 328,
+              "line_end": 335
+            }
+          ]
+        }
+      ],
+      "ast_diagnostics": []
+    },
+    {
+      "path": "rtl/ppg_adc_programmable_reconstructor/tb_ppg_adc_programmable_reconstructor.v",
+      "sha256": "bf488bd2b7fa361b170acd452e944ebd95f7f43bb5fb02635f23074d5031f978",
+      "lines": 440,
+      "candidate_lines": 35,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_result_router/tb_ppg_adc_result_router.v",
+      "sha256": "b0bb67c5eebef62c0b248cb1adfafa7c1f5d729eafbee48183386439d9b32755",
+      "lines": 536,
+      "candidate_lines": 44,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_s1_programmable_calibrator/tb_ppg_adc_s1_programmable_calibrator.v",
+      "sha256": "402babe05d2c218fdaa426a4d2bd1d2179a111166b966ba2736a718454fa4c4a",
+      "lines": 681,
+      "candidate_lines": 62,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_adc_s1_redundancy_corrector/tb_ppg_adc_s1_redundancy_corrector.v",
+      "sha256": "18f4bd318f358dd208adcc47616e1ac0bb4d736db8d720cd79ce9e3bfaa612c3",
+      "lines": 687,
+      "candidate_lines": 73,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_amb_recheck_scheduler/tb_ppg_amb_recheck_scheduler.v",
+      "sha256": "f8131d6af813ea885659f3de320821be60e9a9d47f9789dfec65f048222a135a",
+      "lines": 673,
+      "candidate_lines": 89,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_characterization_control_cdc/tb_ppg_characterization_control_cdc.v",
+      "sha256": "1e9e6857b1caaed33d1a66164b6e38e96e5727704c417bd81e82aef3c878b679",
+      "lines": 504,
+      "candidate_lines": 49,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_chip_digital_top/tb_ppg_chip_digital_top.v",
+      "sha256": "8750a09e058a99af42b5ce02ab56221b1df87a99bdd91e9a6b9983692b19b8d3",
+      "lines": 1219,
+      "candidate_lines": 181,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_coarse_detection_fir/tb_ppg_coarse_detection_fir.v",
+      "sha256": "b05a1dd0ea2703d509b69ff038d88ddd76e4b9d6ff919b290522192dc68d6120",
+      "lines": 1191,
+      "candidate_lines": 96,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_diag_algo_probe.v",
+      "sha256": "cc12736e977b6b0b4f52aba4154a678322176d4fe85cbfa974c1db0b1bfdd62c",
+      "lines": 934,
+      "candidate_lines": 85,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top.v",
+      "sha256": "158bb6bcf4cf27fd26d9de32bcfdc6db024997136b5d9ff9177f9c71f8d8b01f",
+      "lines": 3261,
+      "candidate_lines": 508,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v",
+      "sha256": "a1de215a82b1ad319672fdf35ac7c459b09c8dafee269021f5b6730c1f92a45e",
+      "lines": 1910,
+      "candidate_lines": 259,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_adc_numeric_scoreboard.v",
+      "sha256": "16abbfb6a23b0f9a473b1129783007ad902318f21fc954dfe126dbe2212e67bb",
+      "lines": 1462,
+      "candidate_lines": 168,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_baseline_cross.v",
+      "sha256": "3093f5328aaaa55bd19e047a6d227e6e4ff3a41093b5e17fecaa830d7a615f89",
+      "lines": 1907,
+      "candidate_lines": 331,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_fir_tail_isolation.v",
+      "sha256": "8854615af9cf670fead626318048220cff14583e353c8b850675efb7f8af50a7",
+      "lines": 1712,
+      "candidate_lines": 329,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_idac_bus_isolation.v",
+      "sha256": "6bf8a9bc1c35e09433e6f06b076a880b4b4443535ce371e3333d22064490e112",
+      "lines": 1554,
+      "candidate_lines": 206,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_injection.v",
+      "sha256": "1477c628311828f01b9c8b3eb99c53c4a839dcfb57f12de4412cf26da4302afe",
+      "lines": 1111,
+      "candidate_lines": 126,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_input_light_static_matrix.v",
+      "sha256": "9e376c7b7d257086e8e560170db7e0464186a292a3476b0f214affcf9d3195cc",
+      "lines": 2247,
+      "candidate_lines": 294,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        },
+        {
+          "severity": "error",
+          "code": "FORMATTER_HARD_GATE",
+          "message": "unclosed_block_comment",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_lifecycle_fault_adc_anomaly.v",
+      "sha256": "4f150cf54922ed4b4c804f42f2f9e6ed3b1deb3cbf200feac1f825037ae3cb2b",
+      "lines": 2176,
+      "candidate_lines": 377,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_long_10_cycles.v",
+      "sha256": "fd83f92bbc4266760e37c39c24acbab2916300320caadeb805a41f562c009386",
+      "lines": 2019,
+      "candidate_lines": 360,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_longrun.v",
+      "sha256": "28bcb9b5b0f40d592109855d8b4e75c365853361d1a6a089067d72c59b66ec0c",
+      "lines": 862,
+      "candidate_lines": 68,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_no_recheck_control.v",
+      "sha256": "f9ff3a3f1e5dbb787d320dc9bb99690afc5e9f4de49a4835cfa4e7d62e4cc7de",
+      "lines": 1111,
+      "candidate_lines": 148,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_normal_slow_tracking.v",
+      "sha256": "f2c146ae6c7431c60d7a4db4cd0c934a0a6a2126e047de9286e365222df86d8f",
+      "lines": 1558,
+      "candidate_lines": 214,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_owner_identity_backpressure.v",
+      "sha256": "b51fbbee27dd56234b21c095c0cd592958fb9599e1edbb60ce10af031d6696cc",
+      "lines": 1982,
+      "candidate_lines": 303,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_peak_valley_return.v",
+      "sha256": "fe138c085d6837ab987844a4aed72c866d2b555bfaf801b66cc4b386131933ee",
+      "lines": 1581,
+      "candidate_lines": 285,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] Strict mode [unsupported_construct]: time reg_measurement_start_time; // accepted START事件锁存的time类型起点. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_periodic_recheck_recovery.v",
+      "sha256": "9e269bc013c0d315dace17e7c55f3d19d6e8cfb024f17e0e7a0057dafc94e44d",
+      "lines": 1564,
+      "candidate_lines": 248,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_robustness_corner_waveforms.v",
+      "sha256": "353166b34e7b536acf1eeeb8fe206b6d32bb17dd57f9314b645472a5592876bc",
+      "lines": 1779,
+      "candidate_lines": 252,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_control_top_startup_idac_calibration.v",
+      "sha256": "cedb13527b5d2e9bacc64208a241c33a07388bc5b8e2e851566aaa21532ef034",
+      "lines": 1551,
+      "candidate_lines": 220,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_jnt_baseline_prefix.vh",
+      "sha256": "2edfd0987f176d695e195b2203159eef2fc549c6dbc3e89a139b2631086c2f87",
+      "lines": 815,
+      "candidate_lines": 48,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] header parsing requires a module declaration.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_real_raw_generator.vh",
+      "sha256": "46126063bad15f1e7eec1ccd0f41c3c051283f4e5506c9a62823ce5aed62a432",
+      "lines": 363,
+      "candidate_lines": 9,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] header parsing requires a module declaration.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_control_top/tb_ppg_real_raw_generator_selfcheck.v",
+      "sha256": "221224f393b5e680f29b85ca243b3bddd707f9ab3a226da42a74067c71be4b1e",
+      "lines": 531,
+      "candidate_lines": 58,
+      "structures": [
+        {
+          "name": "tb_ppg_real_raw_generator_selfcheck",
+          "counts": {
+            "functions": 0,
+            "tasks": 14,
+            "localparams": 0,
+            "decls": 2,
+            "assigns": 0,
+            "always": 0,
+            "initials": 1,
+            "instances": 0,
+            "raw_blocks": 0,
+            "preprocessor_prologue": 0,
+            "conditionals": 0,
+            "generates": 0
+          },
+          "initials": [
+            {
+              "line_start": 481,
+              "line_end": 526
+            }
+          ],
+          "tasks": [
+            {
+              "name": null,
+              "line_start": 60,
+              "line_end": 97
+            },
+            {
+              "name": null,
+              "line_start": 100,
+              "line_end": 131
+            },
+            {
+              "name": null,
+              "line_start": 134,
+              "line_end": 159
+            },
+            {
+              "name": null,
+              "line_start": 162,
+              "line_end": 185
+            },
+            {
+              "name": null,
+              "line_start": 188,
+              "line_end": 214
+            },
+            {
+              "name": null,
+              "line_start": 217,
+              "line_end": 232
+            },
+            {
+              "name": null,
+              "line_start": 235,
+              "line_end": 264
+            },
+            {
+              "name": null,
+              "line_start": 267,
+              "line_end": 294
+            },
+            {
+              "name": null,
+              "line_start": 297,
+              "line_end": 322
+            },
+            {
+              "name": null,
+              "line_start": 325,
+              "line_end": 344
+            },
+            {
+              "name": null,
+              "line_start": 347,
+              "line_end": 378
+            },
+            {
+              "name": null,
+              "line_start": 381,
+              "line_end": 411
+            },
+            {
+              "name": null,
+              "line_start": 414,
+              "line_end": 445
+            },
+            {
+              "name": null,
+              "line_start": 448,
+              "line_end": 477
+            }
+          ]
+        }
+      ],
+      "ast_diagnostics": []
+    },
+    {
+      "path": "rtl/ppg_dual_precision_top/tb_ppg_dual_precision_top.v",
+      "sha256": "55ebff7c86eaaad1cd14016954d22dc4e31174579bf27619a24894e0a0d92c25",
+      "lines": 384,
+      "candidate_lines": 43,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_cross_detector.v",
+      "sha256": "e35ce19eec04ddcad7e051b17acdad7a29f50f4f3af04006f4c9fad8fd7ee5f7",
+      "lines": 1396,
+      "candidate_lines": 127,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_dynamic_baseline_cross_detector/tb_ppg_dynamic_baseline_phase_a_arithmetic_equivalence.v",
+      "sha256": "604dcc8faed6c8c7d6be630b0bcd169e2326ddf2dd7317a47a2bd2096c72675c",
+      "lines": 220,
+      "candidate_lines": 11,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_idac_code_controller/tb_ppg_idac_code_controller.v",
+      "sha256": "563106677a28c392d73680c2abff0473628e9785f34cd65c9cf0c8085deea117",
+      "lines": 948,
+      "candidate_lines": 86,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_normal_transaction_fork/tb_ppg_normal_transaction_fork.v",
+      "sha256": "59d909df3e69c76f943f1e43930d86aef1192ff8c05244e3907505fe9e28bd24",
+      "lines": 641,
+      "candidate_lines": 55,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_peak_valley_window_detector/tb_ppg_peak_valley_window_detector.v",
+      "sha256": "5f5c38b3cfa0a573918b155d50e4198cfd991c9f7a3bdd409c35841a7dd2289e",
+      "lines": 1225,
+      "candidate_lines": 75,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_precision_window_controller/tb_ppg_precision_window_controller.v",
+      "sha256": "7f5a3762d3076f9dc953b1b9ff254c9a3b6132f86b0ed2084335cbf30efd29d0",
+      "lines": 807,
+      "candidate_lines": 78,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_precision_window_integration/tb_ppg_precision_window_integration.v",
+      "sha256": "dec8db2cdc84ac9b5a6ad0549a7415595f5fe1de64fa0c2bfa635cc91eaba027",
+      "lines": 857,
+      "candidate_lines": 64,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_sar9_sar15_safe_selection_wrapper/tb_ppg_sar9_sar15_safe_selection_wrapper.v",
+      "sha256": "09a477d5256eea0c12bd71246d24a69ee024a2bb7fc7c65c132f1489b2575bf4",
+      "lines": 1257,
+      "candidate_lines": 38,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_active_config_unpack/tb_ppg_system_active_config_unpack.v",
+      "sha256": "9a585b5c5f5b999aaf7c93c37800a6efce31ea2fc3d6603318b853b82f062a34",
+      "lines": 340,
+      "candidate_lines": 12,
+      "structures": [
+        {
+          "name": "tb_ppg_system_active_config_unpack",
+          "counts": {
+            "functions": 0,
+            "tasks": 0,
+            "localparams": 1,
+            "decls": 71,
+            "assigns": 1,
+            "always": 0,
+            "initials": 1,
+            "instances": 1,
+            "raw_blocks": 0,
+            "preprocessor_prologue": 0,
+            "conditionals": 0,
+            "generates": 0
+          },
+          "initials": [
+            {
+              "line_start": null,
+              "line_end": null
+            }
+          ],
+          "tasks": []
+        }
+      ],
+      "ast_diagnostics": []
+    },
+    {
+      "path": "rtl/ppg_system_config_manager/tb_ppg_system_config_manager.v",
+      "sha256": "2c712f5e6e3a6e567bb3a90caf08ff5fc9dfc31dad8f40c2feca5cfce8bbcea9",
+      "lines": 1042,
+      "candidate_lines": 113,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] control parser strict failure.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_system_fault_abort_supervisor/tb_ppg_system_fault_abort_supervisor.v",
+      "sha256": "42b75659e5800752dd45e8cb40da007c51136f82b7066e7cbf929c14844ed7fc",
+      "lines": 568,
+      "candidate_lines": 31,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] always header normalization failed.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_timing_3200hz_validation/tb_ppg_timing_3200hz.v",
+      "sha256": "d2980f16903e9a2154da142ab5c097024bae79112e7581a21857717aad63b91e",
+      "lines": 266,
+      "candidate_lines": 30,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_timing_sar15/tb_ppg_timing_sar15.v",
+      "sha256": "ad7bd75abe7fa1690dbb2b61aa4a72153e7883e2429cbfd9355f5eed6b28d515",
+      "lines": 456,
+      "candidate_lines": 47,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    },
+    {
+      "path": "rtl/ppg_timing_sar9/tb_ppg_timing_sar9.v",
+      "sha256": "7fe90a761992e07106aefd9241b74b6872fd32e92997b325c680aac28ca024c1",
+      "lines": 548,
+      "candidate_lines": 75,
+      "structures": [],
+      "ast_diagnostics": [
+        {
+          "severity": "error",
+          "code": "FORMATTER_AST_PARSE",
+          "message": "> ERR: [Python] only single module sources are currently supported.",
+          "line": null,
+          "source": "formatter_ast"
+        }
+      ]
+    }
+  ]
+}
