@@ -29,12 +29,20 @@ What is checked (B merge batch brief, section 3.2):
   5. Semantic mode (matrix and alias table; default on, --no-semantic skips it;
      coordinator review 2026-10-10 and its follow-up):
      1b. a symbol anchor must name the symbol the cell writes next to it
-         (anchor_semantics.written_name, rules W1-W7 and W10);
+         (anchor_semantics.written_name, rules W1-W11);
      1c. port ledger rows (| Cxx | src | input/output | `port` | ...): the port column is
          the row's subject; an anchor into a file that carries that port must name it --
          always in the RTL column (5th cell), elsewhere when nothing is written next to
          it and none of its symbols relates to the row.
+     1d. every identifier of a symbol anchor must be stated by the row (named outside symbol
+         anchors, written next to it, row port / stem, written family, tag statement,
+         instance of a named module, connection to a named net -- see mention_basis);
+     1e. G-FP-05 "binding" anchors must name an instance of the "target declarations" module;
+     1f. an anchor the cell marks as superseded (anchor_history_rules.superseded_wording)
+         must stay history -- a converted symbol anchor there is an error.
      Hand-checked exceptions: anchor_semantic_exceptions.json (line SHA-1 + anchor text).
+  6. Pinned unlocated anchors "`X.v:N`（`<sha>`版，未能定位符号）" are legal: listed and
+     counted, the file must exist; they are not old line anchors.
 
 Exit status: 0 when no error is found, 1 otherwise.
 """
@@ -50,6 +58,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from anchor_semantics import carries, related, row_port, written_name  # noqa: E402
+from anchor_history_rules import superseded_wording  # noqa: E402
 RENAMED = {'i_status_clear_event': 'i_diag_clear_event'}  # F-032 port rename after the anchor was written
 WALK_SKIP_DIRS = {'.git', '__pycache__', '.claude'}  # directory-walk index: no git metadata, bytecode or skill tree
 C_MAP_SECTION = '## 2. Active Contract Sources and Source Classification'
@@ -391,6 +400,15 @@ def main():
                         insts = set(re.findall(r'(?<![A-Za-z0-9_])%s\s*(?:#\s*\((?:[^()]|\([^()]*\))*\))?\s*([A-Za-z_][A-Za-z0-9_]*)\s*\(' % re.escape(mod), src.code_text))
                         if not (insts & set(idents)) and (line_hash(line), line[fm.start():pos]) not in sem_exceptions:
                             err(f, n, 'binding-instance', '%s %s: not an instance of %s (instances: %s)' % (fname, '/'.join(idents), mod, '/'.join(sorted(insts)) or 'none'))
+                # 1f. explicitly superseded old anchor (coordinator review of 67707b3): the cell
+                # names this anchor itself as the stale / voided / wrong reference ("corrected
+                # from stale `:234` (unrelated ...)", "矩阵标`:N`", "**不是**`f.v:N`") -- it is
+                # history and must keep its original line number, never a converted symbol
+                if base in gated and not args.no_semantic:
+                    sw = superseded_wording(line, fm.start(), pos)
+                    if sw and (line_hash(line), line[fm.start():pos]) not in sem_exceptions:
+                        err(f, n, 'superseded-converted', '%s %s: the cell marks this anchor as superseded ("%s"); keep the old text as history'
+                            % (fname, '/'.join(t for t in names), sw))
                 # 1d. mention rule (coordinator review of 66bebdf, 2026-10-10): a symbol anchor in
                 # the matrix or the alias table must name something the row itself states.
                 if base in gated and not args.no_semantic and idents:

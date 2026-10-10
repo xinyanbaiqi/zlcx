@@ -422,14 +422,6 @@
   },
   {
    "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
-   "line_sha1": "4c631560f592509f349f3075ff377ade09bd5220",
-   "anchor": "`ppg_system_config_manager.v` `i_static_characterization_enable`、`flag_snapshot_static_bias_valid`、`flag_start_static_bias_valid`、`@satisfies: ILM-08, ILM-15`",
-   "written": "(rule 1d) ppg_system_config_manager.v i_static_characterization_enable/flag_snapshot_static_bias_valid/flag_start_static_bias_valid: not stated by the row (unstated: flag_snapshot_static_bias_valid/flag_start_s",
-   "reason": "基线1585行（`:370-377`）：第四轮（范围锚点逐条核对，规则1d）：格内“used in STATIC_BIAS combination checks at `:370-377`”：所指即flag_snapshot_static_bias_valid/flag_start_static_bias_valid两个组合检查，保留全部",
-   "rule": "1d"
-  },
-  {
-   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
    "line_sha1": "765e0fc7c2644080134e953d08dcf73a0b51c4fb",
    "anchor": "`ppg_amb_recheck_scheduler.v` `o_calibration_sample_valid`",
    "written": "(rule 1d) ppg_amb_recheck_scheduler.v o_calibration_sample_valid: not stated by the row (unstated: o_calibration_sample_valid)",
@@ -587,6 +579,70 @@
    "written": "(rule 1d) ppg_control_top.v i_analog_ready: not stated by the row (unstated: i_analog_ready)",
    "reason": "基线3585行（ppg_control_top.v:120）：第三轮（统筹10-10核对：格内写明的符号为准）：D03（cause 8'h22模拟收敛检测）引用的Top锚点即上方冻结决定段（矩阵3550-3553行）所述`i_analog_ready`（原解析i_clk_stage1_dout_low_async，行号漂移）",
    "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "a00d1e9105dbe6d647ab63a921ae9a5eabef3477",
+   "anchor": "`ppg_system_config_manager.v` `i_static_characterization_enable`、`flag_snapshot_static_bias_valid`、`flag_start_static_bias_valid`、`@satisfies: ILM-08, ILM-15`",
+   "written": "(rule 1d) ppg_system_config_manager.v i_static_characterization_enable/flag_snapshot_static_bias_valid/flag_start_static_bias_valid: not stated by the row (unstated: flag_snapshot_static_bias_valid/flag_start_s",
+   "reason": "基线1585行（`:370-377`）：第四轮（范围锚点逐条核对，规则1d）：格内“used in STATIC_BIAS combination checks at `:370-377`”：所指即flag_snapshot_static_bias_valid/flag_start_static_bias_valid两个组合检查，保留全部",
+   "rule": "1d"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "7f95ff975542ecde4324e84c8a8b3aa778c78c77",
+   "anchor": "`ppg_idac_code_controller.v` `ppg_idac_code_controller`",
+   "written": "(rule 1c) ppg_idac_code_controller.v ppg_idac_code_controller but the row port `o_idac_idle` is carried by that file (unrelated symbol)",
+   "reason": "基线2147行（ppg_idac_code_controller.v:67-207）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“`ppg_idac_code_controller.v:67-207`声明区”：所指为模块端口声明区，取模块名（原解析取本行端口o_idac_idle）",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_normal_transaction_fork.v` `ppg_normal_transaction_fork`",
+   "written": "(rule 1c) ppg_normal_transaction_fork.v ppg_normal_transaction_fork but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（ppg_normal_transaction_fork.v:61-146）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮：“与`ppg_normal_transaction_fork.v:61-146`独立核对的端口声明”：所指为模块端口声明区，取模块名（原解析取本行端口o_local_empty）",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `ppg_normal_transaction_fork_Inst`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v ppg_normal_transaction_fork_Inst but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（`:2020`）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“fork自身连接点21个（…→`:2020`-`:2040`）”：d18c695版AMI 2020~2040行为fork例化的端口连接",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `ppg_adc_pipeline_overlap_corrector_Inst`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v ppg_adc_pipeline_overlap_corrector_Inst but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（`:2086`）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“overlap_corrector例化连接点21个（…→`:2086`-`:2105`及`:2107`）”：d18c695版AMI为该例化的端口连接",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `ppg_idac_code_controller_Inst`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v ppg_idac_code_controller_Inst but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（`:2374`）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“IDAC控制器例化连接点16个（…→`:2374`-`:2389`）”：d18c695版AMI为该例化的端口连接",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `measurement_result_discard_run_generation_o`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v measurement_result_discard_run_generation_o but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（`:1351`）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“AMI内部信号（`:1336`→`:1351`）”：d18c695版AMI 1351行为measurement_result_discard_run_generation_o寄存器赋值",
+   "rule": "1c"
+  },
+  {
+   "doc": "PPG_CONTRACT_CLOSURE_MATRIX.md",
+   "line_sha1": "06ab248834345219c519611d8ae7b65ada28dcfc",
+   "anchor": "`ppg_adc_measurement_idac_integration.v` `flag_normal_track_qualified`",
+   "written": "(rule 1c) ppg_adc_measurement_idac_integration.v flag_normal_track_qualified but the row port `o_local_empty` is carried by that file (unrelated symbol)",
+   "reason": "基线2860行（`:919`）：uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；第五轮（同行审计注记中已核实的行号，原误归首个文件并取本行端口）：“`:912`→`:919`”：d18c695版AMI 919行为`assign flag_normal_track_qualified`（同2843行所述）",
+   "rule": "1c"
   }
  ]
 }
