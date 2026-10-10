@@ -23,11 +23,11 @@ def main() -> None:
                 entry["ticks"] += info["mismatch_ticks"]
                 entry["pairs"] += 1
     lines = ["# V18 SSW 全部模拟输出逐拍黄金试验报告", "",
-             "日期：2026-10-10（Asia/Shanghai）。分支：`v18-ssw-golden`。本版按统筹对`9044d3a`的核对意见订正；旧版分类统计已被本版替代。", "",
+             "日期：2026-10-10（Asia/Shanghai）。分支：`v18-ssw-golden`。本版纳入统筹对`9044d3a`、`b4e32fc`的后续确认；未提交owner的STOP最终按错过截止处理，旧版分类统计已被本版替代。", "",
              "基线main：`4863ec6e8f1298a7a9d543b3cd1a82e7a3d08fcb`；按任务书，RTL/TB与`7a8eabf`相同。C09取origin/b-merge-batch `66bebdfabe9e1cb173c34a0ce44e48ba4230398d` 的唯一指定接口合同V1.11。", "",
              "## 1. 结论", "",
              f"已完成{summary['scenarios']}个场景、{summary['rows']}行真实采集。最终规则下{summary['status_counts']['PASS']}个PASS、{summary['status_counts']['MISMATCH']}个MISMATCH，黄金待确认输出拍数为0。当前基线未达到逐拍零差异的通过标准。", "",
-             "F02、F03、F05为统筹确认的SSW缺陷；F04按用户更新的全动态状态TIA=TIAEN规则判定；F01为已登记SSW-C1的独立复现。原F07及SAR15截短统一列KNOWN-OWNER-DEADLINE。原F06未区分owner提交状态的结论撤回，已提交owner的完整续跑不再作为STOP差异。新增未提交owner的STOP覆盖与观测另列，未修改任何RTL或既有TB。", "",
+             "F02、F03、F05为统筹确认的SSW缺陷；F04按用户更新的全动态状态TIA=TIAEN规则判定；F01为已登记SSW-C1的独立复现。原F07及SAR15截短统一列KNOWN-OWNER-DEADLINE。原F06和V18-STOP-UNCOMMITTED判断撤回：已接管而未提交owner的STOP槽应继续预建立、整槽抑制采样。本次七项STOP业务检查全部符合最新规则，SAR15两项仍包含已确认的F03。未修改任何RTL或既有TB。", "",
              "全部计划波形/owner握手次数与实际一致；没有协议错误或身份错配sticky。时钟高低两相转发检查、上升沿后与下降沿后的控制稳定性检查均0失败。这里的稳定性是两点采样检查，不是连续模拟毛刺或PVT证明。", "",
              f"正式帧及硬复位共进行{summary['compared_group_ticks']}次输出组逐拍比较（28组/67位），差异组拍累计{summary['mismatch_group_ticks']}。正式帧前四拍配置准备期不判定未定义的配置接管延迟；硬复位四拍仍完整比较。", "",
              "## 2. 独立性声明", "",
@@ -80,7 +80,7 @@ def main() -> None:
              "| RED/IR不同DC码 | 2 | 同帧RED=3C、IR=C3，检验颜色码归属 |",
              "| KNOWN-OWNER-DEADLINE显式中途提交 | 2 | RED275、IR435，落在前端开始与现行截止之间 |",
              "| 首边沿前STOP且owner未提交（补充） | 7 | 两色×两精度NORMAL，以及AMB/DCS RED/DCS IR；计划提交均晚于STOP，实际owner fire为0 |", "",
-             "六个动作位置为首预热边沿前后、Q1前、Q3期间、Q3后、包络结束前。STOP之前已提交owner则槽完整运行、结果丢弃；尚未提交且未开始预热才禁止启动。abort/reset按C09 §8.3撤销，被丢弃样本不当作合法完整转换。", "",
+             "六个动作位置为首预热边沿前后、Q1前、Q3期间、Q3后、包络结束前。STOP之前已提交owner则槽完整运行、结果丢弃；已接管而未提交owner则按错过截止处理，IDAC/参考预建立照常至末沿，采样相关输出整槽抑制。abort/reset按C09 §8.3撤销，被丢弃样本不当作合法完整转换。", "",
              "## 5. 发现清单", "",
              "按场景×信号的首不符拍、期望/实际和差异拍数完整保存在`verification/v18_ssw_golden/scenarios/evidence/signal_comparison.csv`；以下为去重后的规则差异。没有根据名字推断电气极性或提出RTL补丁。", "",
              "| ID | 分类和行为 | 代表证据 | 依据 |", "|---|---|---|---|"]
@@ -89,12 +89,11 @@ def main() -> None:
         ("V18-F02", "NORMAL光电LEDEN早一拍；SAR9/SAR15均存在", "SAR9 RED tick298期望0/实际1，IR458；SAR15 RED295、IR455。Q3本身仍按中心300/460，LEDEN多出的首拍与模板不一致。", "SAR9 R_LED [33,35)、SAR15 R_LED [30,38)，C09 §4.2/4.6"),
         ("V18-F03", "SAR15选择电平没有在RUN整帧保持已提交精度", "normal_both_sar15_a5从tick0期望1/实际0，累计4958拍；选择电平实际仅跟随两段Q1，共42拍为1。两向4760提交和波形间空闲也检查。", "用户确认（10-10）Q02；C09 §8.5 STATIC例外"),
         ("V18-F04", "用户更新规则下AMB/DCS的TIA控制为0，与TIAEN不一致", "cal_amb_a5、cal_dcs_red_a5、cal_dcs_ir_a5：local [249,269)期望TIA=1/实际0，TIAEN实际为1；每个完整8子帧场景160拍。STATIC TIA=0/TIAEN=1是保留的例外。", "用户确认（10-10）最新F04规则；C09 §6.1 TIA静态0行作废"),
-        ("V18-F05", "DCS_CAL LEDDAC缺少码窗首拍", "DCS RED local264期望A5/实际00；IR期望5A/实际00；每子帧缺一拍。其LEDEN/Q3窗口仍正确。", "用户/统筹Q01；SAR9 R_LED_CODE平移到[264,267)"),
-        ("V18-STOP-UNCOMMITTED", "补充未提交owner分支：STOP后仍有预建立/码窗活动，单列待统筹核对", "新增七项stop_unowned场景实际owner fire=0、STOP时inflight=0；例如RED SAR9于43 STOP，44的参考时钟期望0/实际1。RUN保守保持至预约末沿，未用外部CONFIG提前强制关闭输出。", "最新Q04未提交owner且首边沿前STOP不得启动；完整观测和身份审计见后文")]
+        ("V18-F05", "DCS_CAL LEDDAC缺少码窗首拍", "DCS RED local264期望A5/实际00；IR期望5A/实际00；每子帧缺一拍。其LEDEN/Q3窗口仍正确。", "用户/统筹Q01；SAR9 R_LED_CODE平移到[264,267)")]
     for ident, behavior, evidence, basis in findings:
         lines.append(f"| {ident} | {behavior} | {evidence} | {basis} |")
     lines += ["", "| 分类 | 涉及场景 | 场景×信号项 | 差异组拍 |", "|---|---:|---:|---:|"]
-    for ident in ["V18-F01", "V18-F02", "V18-F03", "V18-F04", "V18-F05", "V18-STOP-UNCOMMITTED", "KNOWN-OWNER-DEADLINE"]:
+    for ident in ["V18-F01", "V18-F02", "V18-F03", "V18-F04", "V18-F05", "KNOWN-OWNER-DEADLINE"]:
         info = by_class[ident]
         lines.append(f"| {ident} | {len(info['scenarios'])} | {info['pairs']} | {info['ticks']} |")
     lines += ["", "### 统筹已确认的SSW缺陷", "",
@@ -106,7 +105,7 @@ def main() -> None:
               "| 标识 | 包含证据 |", "|---|---|",
               "| SSW-C1（F01） | 双光SAR9三个RED使能消失的独立复现 |",
               "| KNOWN-OWNER-DEADLINE | SAR15中途/截止提交截短，以及原F07的SAR9截止提交截短 |", "",
-              "F04是最新用户TIA规则下的输出不符；V18-STOP-UNCOMMITTED是补充身份分支观测。机器证据新增review_status字段，分别标注已确认缺陷、已知问题、用户规则不符、补充STOP观测；原F06/F07不再作为新发现统计。", ""]
+              "F04是最新用户TIA规则下的输出不符。机器证据review_status分别标注已确认缺陷、已知问题和用户规则不符；原F06、原STOP补充观测及F07不再作为新发现统计。", ""]
     lines += ["", "场景可能同时包含多类差异，上表各场景数不能相加。码总线另外记录逐bit XOR差异数，精度未选总线和STATIC零码均逐拍检查。", "",
               "## 6. KNOWN-OWNER-DEADLINE（已知，不计新发现）", "",
               "按统筹明确要求构造RED tick275、IR tick435提交。两者均真实接纳，位于前端窗口开始266/426与截止283/443之间。观察到前端各窗口被截短，输出如下：", "",
@@ -119,25 +118,21 @@ def main() -> None:
               "未来RC1将NORMAL两精度截止统一提前至RED265/IR425，截止当拍允许提交，受owner控制的边沿最早下一拍。本阶段仍在原main的283/443上采集，不提前把未修复RTL当作新截止版本。run.py和collect.py新增对应deadline参数，截止场景自动跟随；超新截止的历史275/435请求不发送非法提交，转为缺owner整槽抑制检查。", "",
               "## 6.1 F06撤回与STOP身份审计", "",
               "撤回旧F06的统一判定：owner已提交的RED及CAL槽即使STOP早于预热，也必须完整运行、真实DONE success=0释放，SSW的完整续跑符合订正规则。原F06不再出现在当前差异分类中。", "",
-              "身份审计同时显示旧IR-only首边沿前场景原本计划owner在350提交，晚于STOP，实际owner fire=0；它们不能按已提交owner分支消除观测。补充七项明确未提交owner的场景，RUN保守保持至预约末沿，以隔离SSW自身STOP行为；未强制提前CONFIG。其实际提交次数、STOP前/时inflight状态及每组输出差异均入机器证据。这组补充观测使用独立标识V18-STOP-UNCOMMITTED，不延用旧F06结论，也未将它冒称统筹已确认的F02/F03/F05。", "",
-              "补充场景是SSW接口级延迟排空压力输入；没有例化manager/AMI来证明该RUN保持序列在系统中的可达性。统筹可据此核对系统STOPPING的run_enable/相位条件。它不会被当作已经确认的系统级缺陷。", "",
-              "| 补充场景 | STOP拍 | STOP前owner fire | STOP时inflight | 首个不符信号/拍 |", "|---|---:|---:|---:|---|"]
+              "最新用户确认（10-10）取代此前“不得出现任何边沿”：波形已接管但owner未提交时，IDAC/参考13组预建立照常到末沿，采样相关10组整槽不出现。七项补充场景及旧IR-only未提交场景的预建立活动均符合此规则，不再列STOP差异。", "",
+              "统筹已确认系统可达：双光STOP落在160～204时RED owner在途，IR上下文已接管但尚未提交owner，STOP要等待RED完成，IR预建立仍从SAR9 tick204或SAR15 tick187开始。本机RUN保持到预约末沿与该系统行为一致；可达性不再列为待确认。此确认来自用户/统筹，本任务仍是SSW单元级采集，不声称已执行三模块联合仿真。", "",
+              "| 补充场景 | STOP拍 | STOP前owner fire | STOP时inflight | 预建立差异组拍 | 采样非零组拍 | 其他差异 |", "|---|---:|---:|---:|---:|---:|---|"]
     for name, result in results.items():
         if not name.startswith("stop_unowned"):
             continue
         audit = result["stop_owner_audit"]
-        mismatches = [(signal, info) for signal, info in result["signals"].items()
-                      if info["classification"] == "V18-STOP-UNCOMMITTED"]
-        first = "无该分支差异"
-        if mismatches:
-            first_signal, first_info = min(mismatches, key=lambda item: item[1]["first"]["tick"])
-            first = f"{first_signal} / {first_info['first']['tick']}"
-        lines.append(f"| {name} | {audit['stop_tick']} | {audit['owner_fires_before_stop']} | {audit['owner_inflight_at_stop']} | {first} |")
+        rule = result["stop_rule_audit"]
+        other = sorted({info["classification"] for info in result["signals"].values() if info["mismatch_ticks"]})
+        lines.append(f"| {name} | {audit['stop_tick']} | {audit['owner_fires_before_stop']} | {audit['owner_inflight_at_stop']} | {rule['preestablish_mismatch_group_ticks']} | {rule['sampling_nonzero_group_ticks']} | {', '.join(other) or '无'} |")
     lines += ["",
               "## 7. 驱动校验、黄金更新与问题清单", "",
               "Q01～Q06均已由用户转达答复并纳入规则表，没有未确定输出拍。Q02/Q03/Q06是用户确认意图，其余依据合同。C09现有正文的澄清由统筹负责，本分支没有改合同。", "",
               "修正并重跑的驱动问题：只有真实提交消耗sample index；STOP/abort后不再发布IDAC候选提交边界；行为manager等待预建立安全末沿、真实owner释放、物理ADC空闲后再延迟两拍返回CONFIG。它们是TB驱动修正，未作为SSW发现。", "",
-              f"本次重跑32项受影响场景（包含七项补充STOP），其余已有迹线按刺激SHA256完全一致才重用。最新规则对全部{len(results)}个场景重生成黄金并重比；没有用实际输出调整窗口。全部场景均有真实xsim采集、行数顺序检查和采集PASS日志。", "",
+              f"上一轮重跑32项受影响场景；本次按最终STOP规则重跑七项补充场景，另重跑两项因预建立继续至末沿而延长排空的旧IR场景。其余已有迹线按刺激SHA256完全一致才重用。最新规则对全部{len(results)}个场景重生成黄金并重比；没有用实际输出调整窗口。全部场景均有真实xsim采集、行数顺序检查和采集PASS日志。", "",
               "比较器8项完整性控制通过：正确迹线正对照、单IDAC bit翻转、提前一拍LED边沿、X值、缺一行、重复行、错误低相时钟、两边沿控制变化。七个主动错误都被正确判失败，单bit和首差异位置也核对。", "",
               f"协议错误/身份错配sticky累计0拍。排空相关场景记录到`o_wrapper_fault_blocking`为1的{summary['lifecycle_blocking_state_rows']}拍；该状态单独保存，不把瞬态排空阻断当作协议sticky，也不以它反推期望波形。", "",
               "尚未进行可选Spectre pulse参数核对（未收到网表路径）；没有运行RC1/Vivado 2022.2重跑、芯片顶层引脚复核或AMS/PVT联合验证。以上属于后续验证范围，不是黄金已拟合或当前SSW已闭合的证明。", "",

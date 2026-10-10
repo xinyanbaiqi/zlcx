@@ -6,5 +6,6 @@
   "python_files": 9,
   "sar15_select_observed_equal_q1": true,
   "sar15_select_high_ticks": 42,
-  "report_scenario_rows": 155
+  "report_scenario_rows": 155,
+  "uncommitted_stop_rule_cases_passed": 7
 }

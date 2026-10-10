@@ -276,7 +276,6 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
     active = []
     physical = None
     scheduled = []
-    committed_samples = set()
     input_rows, golden_rows = [], []
     uncertainty = {}
     for tick in range(-8, count):
@@ -303,9 +302,8 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                       i_calibration_frame_active=int(tick >= 0 and kind != 2))
         if stop is not None and tick == stop:
             values["i_stop_ack_event"] = 1
-            # 统筹订正Q04：已提交owner的槽必须完整运行；未提交且尚未预热才取消。
-            active = [context for context in active if context["sample"] in committed_samples or
-                      stop > context["center"] - (256 if not context["precision"] else 273)]
+            # 用户最新确认（10-10）：保留已接管槽的预建立；未提交owner的采样整槽关闭。
+            # 不撤销active，且后续禁止新提交；eligible按实际提交资格独立抑制采样输出。
         if abort is not None and tick == abort:
             values["i_control_abort_event"] = 1
             active.clear()
@@ -329,7 +327,6 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                 values["i_adc_owner_sample_index"] = context["sample"]
                 physical = context
                 scheduled.append(context)
-                committed_samples.add(context["sample"])
         for context in scheduled:
             if context["done"] == tick:
                 values.update(i_adc_transaction_complete_event=1,

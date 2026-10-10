@@ -24,14 +24,22 @@ def main() -> None:
     assert count == 155 and len({case["name"] for case in cases}) == count
     assert set(data["results"]) == {case["name"] for case in cases}
     assert data["summary"]["unknown_group_ticks"] == 0
+    stop_rule_cases = 0
     for name, result in data["results"].items():
         assert result["handshake_matches_plan"] and result["stimulus_unchanged_proven"]
         assert not result["structure_errors"]
         assert result["audit"]["clock_low_errors"] == result["audit"]["stability_errors"] == 0
+        if name.startswith("stop_unowned"):
+            assert result["stop_owner_audit"]["owner_fires_before_stop"] == 0
+            assert result["stop_owner_audit"]["owner_inflight_at_stop"] == 0
+            assert result["stop_rule_audit"]["preestablish_mismatch_group_ticks"] == 0
+            assert result["stop_rule_audit"]["sampling_nonzero_group_ticks"] == 0
+            stop_rule_cases += 1
         for filename, expected_digest in result["trace_sha256"].items():
             path = args.trace_root / name / filename
             assert hashlib.sha256(path.read_bytes()).hexdigest() == expected_digest, (name, filename)
     assert sum(result["rows"] for result in data["results"].values()) == 816240
+    assert stop_rule_cases == 7
     with (evidence / "signal_comparison.csv").open(encoding="utf-8", newline="") as stream:
         comparisons = list(csv.DictReader(stream))
     assert len(comparisons) == count * 28
@@ -57,7 +65,8 @@ def main() -> None:
     summary = dict(status="PASS", scenarios=count, checked_trace_hashes=count * 3,
                    scenario_signal_rows=count * 28, python_files=len(python_files),
                    sar15_select_observed_equal_q1=select_equals_q1, sar15_select_high_ticks=select_high_ticks,
-                   report_scenario_rows=count if not args.skip_report else "not_checked")
+                   report_scenario_rows=count if not args.skip_report else "not_checked",
+                   uncommitted_stop_rule_cases_passed=stop_rule_cases)
     (evidence / "delivery_checks.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False))
 

@@ -43,4 +43,6 @@ python -B verification/v18_ssw_golden/scripts/check_comparator.py --expected ver
 
 RC1修复后，run.py和collect.py同时增加`--normal-red-owner-deadline 265 --normal-ir-owner-deadline 425`。当前main默认仍为283/443，不能提前假定RTL已修复。截止点场景自动跟随参数；超新截止的历史275/435请求只记录requested_owner，不产生非法提交，按整槽抑制检查。这里只验证了新参数的黄金/刺激生成，未运行修复后的RTL。
 
-最新TIA规则：所有动态波形`o_en_tia_low == o_clk_tiaen_low`，包括AMB local[249,269)；STATIC仍为TIA=0/TIAEN=1。STOP先查实际owner fire/inflight；已提交owner应完整运行再以success=0释放，未提交且未开始才禁止启动。补充未提交场景保守保持RUN至预约末沿，是接口级压力输入，系统可达性须统筹结合manager/AMI核对。
+最新TIA规则：所有动态波形`o_en_tia_low == o_clk_tiaen_low`，包括AMB local[249,269)；STATIC仍为TIA=0/TIAEN=1。STOP先查实际owner fire/inflight；已提交owner完整运行再以success=0释放；已接管但未提交owner按错过截止处理，IDAC/参考13组照常预建立至末沿，采样相关10组整槽为0。“不得出现任何边沿”规则已撤回。统筹已确认RUN保持至预约末沿系统可达；典型情形是双光RED owner在途、IR上下文已接管但尚未提交。
+
+`stop_final_matrix.json`包含最新规则下七项补充STOP及两项排空时间随之改变的旧IR场景。机器证据为补充七项保存`stop_rule_audit`：预建立差异组拍与采样非零组拍必须均为0；SAR15剩余EN_15SAR差异仍归已确认F03。

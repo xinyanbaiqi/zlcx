@@ -3,40 +3,39 @@
     "scenarios": 155,
     "rows": 816240,
     "status_counts": {
-      "MISMATCH": 138,
-      "PASS": 17
+      "MISMATCH": 132,
+      "PASS": 23
     },
     "compared_group_ticks": 22837360,
     "unknown_group_ticks": 0,
-    "mismatch_group_ticks": 166430,
+    "mismatch_group_ticks": 159058,
     "classification_signal_pairs": {
       "V18-F02": 92,
       "V18-F01": 39,
       "V18-F03": 52,
       "V18-F04": 44,
       "V18-F05": 26,
-      "KNOWN-OWNER-DEADLINE": 12,
-      "V18-STOP-UNCOMMITTED": 61
+      "KNOWN-OWNER-DEADLINE": 12
+    },
+    "review_status_signal_pairs": {
+      "CONFIRMED-SSW-DEFECT": 170,
+      "KNOWN-SSW-C1": 39,
+      "USER-CONFIRMED-TIA-RULE-MISMATCH": 44,
+      "KNOWN-OWNER-DEADLINE": 12
     },
     "capture_sources": {
       "m3": 47,
-      "coord_revision": 32,
+      "coord_revision": 23,
       "m3_extra": 8,
       "m3_lifecycle": 66,
+      "stop_final": 9,
       "m3_known": 2
     },
     "all_handshakes_match": true,
     "unexpected_protocol_sticky_rows": 0,
     "lifecycle_blocking_state_rows": 6119,
     "clock_low_errors": 0,
-    "stability_errors": 0,
-    "review_status_signal_pairs": {
-      "CONFIRMED-SSW-DEFECT": 170,
-      "KNOWN-SSW-C1": 39,
-      "USER-CONFIRMED-TIA-RULE-MISMATCH": 44,
-      "KNOWN-OWNER-DEADLINE": 12,
-      "SUPPLEMENTAL-STOP-OBSERVATION": 61
-    }
+    "stability_errors": 0
   },
   "results": {
     "normal_both_sar9_a5": {
@@ -22031,7 +22030,7 @@
       }
     },
     "stop_ir_sar9_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -22112,21 +22111,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 431,
-            "tick": 423,
-            "macro_tick": 423,
-            "local_tick": 423,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 462,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -22159,21 +22151,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 212,
-            "tick": 204,
-            "macro_tick": 204,
-            "local_tick": 204,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 477,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -22226,55 +22211,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 424,
-            "tick": 416,
-            "macro_tick": 416,
-            "local_tick": 416,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 424,
-            "tick": 416,
-            "macro_tick": 416,
-            "local_tick": 416,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 404,
-            "tick": 396,
-            "macro_tick": 396,
-            "local_tick": 396,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -22307,38 +22271,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 426,
-            "tick": 418,
-            "macro_tick": 418,
-            "local_tick": 418,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
-          "mismatch_ticks": 44,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 176,
-          "first": {
-            "row": 434,
-            "tick": 426,
-            "macro_tick": 426,
-            "local_tick": 426,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
           "mismatch_ticks": 0,
@@ -22382,11 +22332,11 @@
         "optical_mode": 2,
         "stop_tick": 203
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
-        "stimulus.hex": "09af18c6ddcd68130ee980f795b3fe0837012a4ce7dd35703198c012dd9825b7",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "stimulus.hex": "190062c6ea5fbd9da9c26fb99aefef73a523de04cdddfc968445154d6a2cef5b",
+        "expected.csv": "40f057b53f55476483dd7056434d24fcc569cd7d3aae68824ff57277a186010d",
         "actual.csv": "7e36076866294a9f1c9c9f8217398ed348c4352cf3d50da1e818dfd31becf8c7"
       },
       "stop_owner_audit": {
@@ -30013,21 +29963,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 60,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 60,
-          "first": {
-            "row": 414,
-            "tick": 406,
-            "macro_tick": 406,
-            "local_tick": 406,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 465,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -30070,21 +30013,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
-          "mismatch_ticks": 281,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 281,
-          "first": {
-            "row": 195,
-            "tick": 187,
-            "macro_tick": 187,
-            "local_tick": 187,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_q2_low": {
           "mismatch_ticks": 0,
@@ -30117,10 +30053,10 @@
           "review_status": "MATCH"
         },
         "o_en_15sar_low": {
-          "mismatch_ticks": 188,
+          "mismatch_ticks": 470,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 188,
+          "mismatch_bits": 470,
           "first": {
             "row": 8,
             "tick": 0,
@@ -30129,7 +30065,7 @@
             "expected": 1,
             "actual": 0
           },
-          "last_tick": 187,
+          "last_tick": 469,
           "classification": "V18-F03",
           "review_status": "CONFIRMED-SSW-DEFECT"
         },
@@ -30164,55 +30100,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 215,
-            "tick": 207,
-            "macro_tick": 207,
-            "local_tick": 207,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_dc_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 215,
-            "tick": 207,
-            "macro_tick": 207,
-            "local_tick": 207,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_iref": {
-          "mismatch_ticks": 279,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 279,
-          "first": {
-            "row": 195,
-            "tick": 187,
-            "macro_tick": 187,
-            "local_tick": 187,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 465,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
           "mismatch_ticks": 0,
@@ -30235,38 +30150,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
-          "mismatch_ticks": 105,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 420,
-          "first": {
-            "row": 371,
-            "tick": 363,
-            "macro_tick": 363,
-            "local_tick": 363,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15dcn_low": {
-          "mismatch_ticks": 157,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 628,
-          "first": {
-            "row": 319,
-            "tick": 311,
-            "macro_tick": 311,
-            "local_tick": 311,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_s_in": {
           "mismatch_ticks": 0,
@@ -30290,11 +30191,11 @@
         "optical_mode": 2,
         "stop_tick": 186
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
-        "stimulus.hex": "e8f94b2cc50bc96cf16e7ca8a6e5dac7c0afdd1d0f8e498d7acbb5a701f1c6e5",
-        "expected.csv": "e69415239b7148499a398488443fded678423f22bfced1a81037020d597c5965",
+        "stimulus.hex": "12a58979744bcdf252145ecae982cc46b43d144edbf806791065d89cb8422747",
+        "expected.csv": "7036d814eeddbe84fe7970a57f55f265101c7f5ac2c58276691551a845469fa9",
         "actual.csv": "ebe612c58ea76ecea12b4a9a305e6574588e7bccc788d7a6032a04c1cca1a462"
       },
       "stop_owner_audit": {
@@ -49234,7 +49135,7 @@
       }
     },
     "stop_unowned_red_sar9_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -49315,21 +49216,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 271,
-            "tick": 263,
-            "macro_tick": 263,
-            "local_tick": 263,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 302,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -49362,21 +49256,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 52,
-            "tick": 44,
-            "macro_tick": 44,
-            "local_tick": 44,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 317,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -49429,55 +49316,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 264,
-            "tick": 256,
-            "macro_tick": 256,
-            "local_tick": 256,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 309,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 264,
-            "tick": 256,
-            "macro_tick": 256,
-            "local_tick": 256,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 309,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 244,
-            "tick": 236,
-            "macro_tick": 236,
-            "local_tick": 236,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -49510,38 +49376,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 266,
-            "tick": 258,
-            "macro_tick": 258,
-            "local_tick": 258,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 309,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
-          "mismatch_ticks": 44,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 176,
-          "first": {
-            "row": 274,
-            "tick": 266,
-            "macro_tick": 266,
-            "local_tick": 266,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 309,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
           "mismatch_ticks": 0,
@@ -49587,11 +49439,11 @@
         "config_after_slot_end": true,
         "owner_tick": 49
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "235e58532486de316c296281704778c02e729e4965ccb0bb9bc42b83fe666872",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "expected.csv": "e53cd2c079b6759b9f4bd0c4553829bd3d14183c6856dbdd1f301ef1a37310fa",
         "actual.csv": "1545731e2617496adb798a5ac3a05cb38bc3d6f8946a92e139d05eb3d5e68186"
       },
       "stop_owner_audit": {
@@ -49600,6 +49452,10 @@
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
       },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
+      },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
         "o_transaction_mismatch_sticky": 0,
@@ -49607,7 +49463,7 @@
       }
     },
     "stop_unowned_ir_sar9_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -49688,21 +49544,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 431,
-            "tick": 423,
-            "macro_tick": 423,
-            "local_tick": 423,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 462,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -49735,21 +49584,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 212,
-            "tick": 204,
-            "macro_tick": 204,
-            "local_tick": 204,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 477,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -49802,55 +49644,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 424,
-            "tick": 416,
-            "macro_tick": 416,
-            "local_tick": 416,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 424,
-            "tick": 416,
-            "macro_tick": 416,
-            "local_tick": 416,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 404,
-            "tick": 396,
-            "macro_tick": 396,
-            "local_tick": 396,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -49883,38 +49704,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 426,
-            "tick": 418,
-            "macro_tick": 418,
-            "local_tick": 418,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
-          "mismatch_ticks": 44,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 176,
-          "first": {
-            "row": 434,
-            "tick": 426,
-            "macro_tick": 426,
-            "local_tick": 426,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 469,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
           "mismatch_ticks": 0,
@@ -49960,11 +49767,11 @@
         "config_after_slot_end": true,
         "ir_owner_tick": 209
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "190062c6ea5fbd9da9c26fb99aefef73a523de04cdddfc968445154d6a2cef5b",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "expected.csv": "40f057b53f55476483dd7056434d24fcc569cd7d3aae68824ff57277a186010d",
         "actual.csv": "7e36076866294a9f1c9c9f8217398ed348c4352cf3d50da1e818dfd31becf8c7"
       },
       "stop_owner_audit": {
@@ -49972,6 +49779,10 @@
         "owner_fires_before_stop": 0,
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
+      },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
       },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
@@ -50061,21 +49872,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 60,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 60,
-          "first": {
-            "row": 254,
-            "tick": 246,
-            "macro_tick": 246,
-            "local_tick": 246,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 305,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -50118,21 +49922,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
-          "mismatch_ticks": 281,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 281,
-          "first": {
-            "row": 35,
-            "tick": 27,
-            "macro_tick": 27,
-            "local_tick": 27,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_q2_low": {
           "mismatch_ticks": 0,
@@ -50212,55 +50009,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 55,
-            "tick": 47,
-            "macro_tick": 47,
-            "local_tick": 47,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_dc_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 55,
-            "tick": 47,
-            "macro_tick": 47,
-            "local_tick": 47,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_iref": {
-          "mismatch_ticks": 279,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 279,
-          "first": {
-            "row": 35,
-            "tick": 27,
-            "macro_tick": 27,
-            "local_tick": 27,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 305,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
           "mismatch_ticks": 0,
@@ -50283,38 +50059,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
-          "mismatch_ticks": 105,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 420,
-          "first": {
-            "row": 211,
-            "tick": 203,
-            "macro_tick": 203,
-            "local_tick": 203,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15dcn_low": {
-          "mismatch_ticks": 157,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 628,
-          "first": {
-            "row": 159,
-            "tick": 151,
-            "macro_tick": 151,
-            "local_tick": 151,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 307,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_s_in": {
           "mismatch_ticks": 0,
@@ -50340,11 +50102,11 @@
         "config_after_slot_end": true,
         "owner_tick": 32
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "83d67b7259a688fc40a8004f53b3d05055d355ff3c0d0b5675099eee751f2254",
-        "expected.csv": "8a5666a0e489a7fffb7d923bca18b1d1bda14ee65519eae5e22023bc2cadc35b",
+        "expected.csv": "4cb40aa5d650c53a6336719086669cb1ae5958d047f142878ff6c002795e0f76",
         "actual.csv": "4e92660f45a404b441c582bba2f4df89c583c914c630eda7169edf632b93ea4a"
       },
       "stop_owner_audit": {
@@ -50352,6 +50114,10 @@
         "owner_fires_before_stop": 0,
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
+      },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
       },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
@@ -50441,21 +50207,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 60,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 60,
-          "first": {
-            "row": 414,
-            "tick": 406,
-            "macro_tick": 406,
-            "local_tick": 406,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 465,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -50498,21 +50257,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
-          "mismatch_ticks": 281,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 281,
-          "first": {
-            "row": 195,
-            "tick": 187,
-            "macro_tick": 187,
-            "local_tick": 187,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_q2_low": {
           "mismatch_ticks": 0,
@@ -50592,55 +50344,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 215,
-            "tick": 207,
-            "macro_tick": 207,
-            "local_tick": 207,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_dc_low": {
-          "mismatch_ticks": 261,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 261,
-          "first": {
-            "row": 215,
-            "tick": 207,
-            "macro_tick": 207,
-            "local_tick": 207,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_iref": {
-          "mismatch_ticks": 279,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 279,
-          "first": {
-            "row": 195,
-            "tick": 187,
-            "macro_tick": 187,
-            "local_tick": 187,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 465,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
           "mismatch_ticks": 0,
@@ -50663,38 +50394,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
-          "mismatch_ticks": 105,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 420,
-          "first": {
-            "row": 371,
-            "tick": 363,
-            "macro_tick": 363,
-            "local_tick": 363,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15dcn_low": {
-          "mismatch_ticks": 157,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 628,
-          "first": {
-            "row": 319,
-            "tick": 311,
-            "macro_tick": 311,
-            "local_tick": 311,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 467,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_s_in": {
           "mismatch_ticks": 0,
@@ -50720,11 +50437,11 @@
         "config_after_slot_end": true,
         "ir_owner_tick": 192
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "12a58979744bcdf252145ecae982cc46b43d144edbf806791065d89cb8422747",
-        "expected.csv": "4f28532bfaf90d5788264636ca8d60366f4a033d4ea5fa672f70a2fe8252a669",
+        "expected.csv": "7036d814eeddbe84fe7970a57f55f265101c7f5ac2c58276691551a845469fa9",
         "actual.csv": "ebe612c58ea76ecea12b4a9a305e6574588e7bccc788d7a6032a04c1cca1a462"
       },
       "stop_owner_audit": {
@@ -50733,6 +50450,10 @@
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
       },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
+      },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
         "o_transaction_mismatch_sticky": 0,
@@ -50740,7 +50461,7 @@
       }
     },
     "stop_unowned_cal_amb_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -50821,21 +50542,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 237,
-            "tick": 229,
-            "macro_tick": 229,
-            "local_tick": 229,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 268,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -50868,21 +50582,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 18,
-            "tick": 10,
-            "macro_tick": 10,
-            "local_tick": 10,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 283,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -50935,21 +50642,14 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 230,
-            "tick": 222,
-            "macro_tick": 222,
-            "local_tick": 222,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
           "mismatch_ticks": 0,
@@ -50962,21 +50662,14 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 210,
-            "tick": 202,
-            "macro_tick": 202,
-            "local_tick": 202,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 273,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -51009,21 +50702,14 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 232,
-            "tick": 224,
-            "macro_tick": 224,
-            "local_tick": 224,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
           "mismatch_ticks": 0,
@@ -51079,11 +50765,11 @@
         "owner_tick": 15,
         "config_after_slot_end": true
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "7e83ad6ee9b547eb420a7fa56dae96027f5760e68ce6492652e6f1d3bae65862",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "expected.csv": "aef85f0ba60a2f81e9eb36a3d9e143b4bc49048cc73fd1d670959fb15e18f8e1",
         "actual.csv": "47e4be07f3aa5e2d2176a07be550759eb3f8e4126b56073c08037a36eeb2a689"
       },
       "stop_owner_audit": {
@@ -51092,6 +50778,10 @@
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
       },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
+      },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
         "o_transaction_mismatch_sticky": 0,
@@ -51099,7 +50789,7 @@
       }
     },
     "stop_unowned_cal_dcs_red_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -51180,21 +50870,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 237,
-            "tick": 229,
-            "macro_tick": 229,
-            "local_tick": 229,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 268,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -51227,21 +50910,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 18,
-            "tick": 10,
-            "macro_tick": 10,
-            "local_tick": 10,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 283,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -51294,55 +50970,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 230,
-            "tick": 222,
-            "macro_tick": 222,
-            "local_tick": 222,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 230,
-            "tick": 222,
-            "macro_tick": 222,
-            "local_tick": 222,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 210,
-            "tick": 202,
-            "macro_tick": 202,
-            "local_tick": 202,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 273,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -51375,38 +51030,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 232,
-            "tick": 224,
-            "macro_tick": 224,
-            "local_tick": 224,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
-          "mismatch_ticks": 44,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 176,
-          "first": {
-            "row": 240,
-            "tick": 232,
-            "macro_tick": 232,
-            "local_tick": 232,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
           "mismatch_ticks": 0,
@@ -51452,11 +51093,11 @@
         "owner_tick": 15,
         "config_after_slot_end": true
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "fee15c9a5012bf9d57c1bf78a4ca8be97a211a5c1b8d183e4b6f45837831fea3",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "expected.csv": "2af3c2001314b2a3cbcb98960290b665c65af0839722247a210efe25083e7d0d",
         "actual.csv": "2db39b57a358a4397d22b4706d1d0044f0f4d2ee4f2df1be16317ce59a69d700"
       },
       "stop_owner_audit": {
@@ -51465,6 +51106,10 @@
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
       },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
+      },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
         "o_transaction_mismatch_sticky": 0,
@@ -51472,7 +51117,7 @@
       }
     },
     "stop_unowned_cal_dcs_ir_before_preheat": {
-      "status": "MISMATCH",
+      "status": "PASS",
       "rows": 5008,
       "structure_errors": [],
       "audit": {
@@ -51553,21 +51198,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_low": {
-          "mismatch_ticks": 40,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 40,
-          "first": {
-            "row": 237,
-            "tick": 229,
-            "macro_tick": 229,
-            "local_tick": 229,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 268,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_9q1_low": {
           "mismatch_ticks": 0,
@@ -51600,21 +51238,14 @@
           "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar9_low": {
-          "mismatch_ticks": 274,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 274,
-          "first": {
-            "row": 18,
-            "tick": 10,
-            "macro_tick": 10,
-            "local_tick": 10,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 283,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_clk_iref_idac_sar15_low": {
           "mismatch_ticks": 0,
@@ -51667,55 +51298,34 @@
           "review_status": "MATCH"
         },
         "o_en_sar9_amb_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 230,
-            "tick": 222,
-            "macro_tick": 222,
-            "local_tick": 222,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_dc_low": {
-          "mismatch_ticks": 54,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 54,
-          "first": {
-            "row": 230,
-            "tick": 222,
-            "macro_tick": 222,
-            "local_tick": 222,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar9_iref": {
-          "mismatch_ticks": 72,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 72,
-          "first": {
-            "row": 210,
-            "tick": 202,
-            "macro_tick": 202,
-            "local_tick": 202,
-            "expected": 0,
-            "actual": 1
-          },
-          "last_tick": 273,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_en_sar15_amb_low": {
           "mismatch_ticks": 0,
@@ -51748,38 +51358,24 @@
           "review_status": "MATCH"
         },
         "o_idac_sar9ambn_low": {
-          "mismatch_ticks": 52,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 208,
-          "first": {
-            "row": 232,
-            "tick": 224,
-            "macro_tick": 224,
-            "local_tick": 224,
-            "expected": 0,
-            "actual": 165
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar9dcn_low": {
-          "mismatch_ticks": 44,
+          "mismatch_ticks": 0,
           "compared_ticks": 5004,
           "unknown_ticks": 0,
-          "mismatch_bits": 176,
-          "first": {
-            "row": 240,
-            "tick": 232,
-            "macro_tick": 232,
-            "local_tick": 232,
-            "expected": 0,
-            "actual": 90
-          },
-          "last_tick": 275,
-          "classification": "V18-STOP-UNCOMMITTED",
-          "review_status": "SUPPLEMENTAL-STOP-OBSERVATION"
+          "mismatch_bits": 0,
+          "first": null,
+          "last_tick": null,
+          "classification": "MATCH",
+          "review_status": "MATCH"
         },
         "o_idac_sar15ambn_low": {
           "mismatch_ticks": 0,
@@ -51825,11 +51421,11 @@
         "owner_tick": 15,
         "config_after_slot_end": true
       },
-      "capture_source": "coord_revision",
+      "capture_source": "stop_final",
       "stimulus_unchanged_proven": true,
       "trace_sha256": {
         "stimulus.hex": "9debe387ea1323d5621db97eb3333650e814ab808fe72c6ddf9895b2eb8afa55",
-        "expected.csv": "33dc4daddbbda14d3d7cd83d614462ee1eae412ace06336227f8736d676733ce",
+        "expected.csv": "2af3c2001314b2a3cbcb98960290b665c65af0839722247a210efe25083e7d0d",
         "actual.csv": "2db39b57a358a4397d22b4706d1d0044f0f4d2ee4f2df1be16317ce59a69d700"
       },
       "stop_owner_audit": {
@@ -51838,6 +51434,10 @@
         "owner_inflight_before_stop": 0,
         "owner_inflight_at_stop": 0
       },
+      "stop_rule_audit": {
+        "preestablish_mismatch_group_ticks": 0,
+        "sampling_nonzero_group_ticks": 0
+      },
       "protocol_sticky_rows": {
         "o_switch_protocol_error_sticky": 0,
         "o_transaction_mismatch_sticky": 0,
@@ -51845,5 +51445,5 @@
       }
     }
   },
-  "review_revision": "Coordinator follow-up to 9044d3a; user confirmations 2026-10-10"
+  "review_revision": "Final uncommitted-owner STOP rule confirmed by user 2026-10-10; supersedes b4e32fc"
 }

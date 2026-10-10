@@ -89,4 +89,7 @@ if __name__ == "__main__":
     affected = [case for case in matrix() if case.get("frame_type") == 0 or
                 "stop_tick" in case and "before_preheat" in case["name"]]
     path.with_name("coord_revision_matrix.json").write_text(json.dumps(affected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    stop_final = [case for case in matrix() if case["name"].startswith("stop_unowned") or
+                  case["name"] in {"stop_ir_sar9_before_preheat", "stop_ir_sar15_before_preheat"}]
+    path.with_name("stop_final_matrix.json").write_text(json.dumps(stop_final, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(matrix())} scenarios")

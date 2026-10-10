@@ -1,18 +1,18 @@
 # V18 SSW 全部模拟输出逐拍黄金试验报告
 
-日期：2026-10-10（Asia/Shanghai）。分支：`v18-ssw-golden`。本版按统筹对`9044d3a`的核对意见订正；旧版分类统计已被本版替代。
+日期：2026-10-10（Asia/Shanghai）。分支：`v18-ssw-golden`。本版纳入统筹对`9044d3a`、`b4e32fc`的后续确认；未提交owner的STOP最终按错过截止处理，旧版分类统计已被本版替代。
 
 基线main：`4863ec6e8f1298a7a9d543b3cd1a82e7a3d08fcb`；按任务书，RTL/TB与`7a8eabf`相同。C09取origin/b-merge-batch `66bebdfabe9e1cb173c34a0ce44e48ba4230398d` 的唯一指定接口合同V1.11。
 
 ## 1. 结论
 
-已完成155个场景、816240行真实采集。最终规则下17个PASS、138个MISMATCH，黄金待确认输出拍数为0。当前基线未达到逐拍零差异的通过标准。
+已完成155个场景、816240行真实采集。最终规则下23个PASS、132个MISMATCH，黄金待确认输出拍数为0。当前基线未达到逐拍零差异的通过标准。
 
-F02、F03、F05为统筹确认的SSW缺陷；F04按用户更新的全动态状态TIA=TIAEN规则判定；F01为已登记SSW-C1的独立复现。原F07及SAR15截短统一列KNOWN-OWNER-DEADLINE。原F06未区分owner提交状态的结论撤回，已提交owner的完整续跑不再作为STOP差异。新增未提交owner的STOP覆盖与观测另列，未修改任何RTL或既有TB。
+F02、F03、F05为统筹确认的SSW缺陷；F04按用户更新的全动态状态TIA=TIAEN规则判定；F01为已登记SSW-C1的独立复现。原F07及SAR15截短统一列KNOWN-OWNER-DEADLINE。原F06和V18-STOP-UNCOMMITTED判断撤回：已接管而未提交owner的STOP槽应继续预建立、整槽抑制采样。本次七项STOP业务检查全部符合最新规则，SAR15两项仍包含已确认的F03。未修改任何RTL或既有TB。
 
 全部计划波形/owner握手次数与实际一致；没有协议错误或身份错配sticky。时钟高低两相转发检查、上升沿后与下降沿后的控制稳定性检查均0失败。这里的稳定性是两点采样检查，不是连续模拟毛刺或PVT证明。
 
-正式帧及硬复位共进行22837360次输出组逐拍比较（28组/67位），差异组拍累计166430。正式帧前四拍配置准备期不判定未定义的配置接管延迟；硬复位四拍仍完整比较。
+正式帧及硬复位共进行22837360次输出组逐拍比较（28组/67位），差异组拍累计159058。正式帧前四拍配置准备期不判定未定义的配置接管延迟；硬复位四拍仍完整比较。
 
 ## 2. 独立性声明
 
@@ -79,7 +79,7 @@ SSW目录中RTL、单元TB与综合脚本均未读取给代理、模型、端口
 | KNOWN-OWNER-DEADLINE显式中途提交 | 2 | RED275、IR435，落在前端开始与现行截止之间 |
 | 首边沿前STOP且owner未提交（补充） | 7 | 两色×两精度NORMAL，以及AMB/DCS RED/DCS IR；计划提交均晚于STOP，实际owner fire为0 |
 
-六个动作位置为首预热边沿前后、Q1前、Q3期间、Q3后、包络结束前。STOP之前已提交owner则槽完整运行、结果丢弃；尚未提交且未开始预热才禁止启动。abort/reset按C09 §8.3撤销，被丢弃样本不当作合法完整转换。
+六个动作位置为首预热边沿前后、Q1前、Q3期间、Q3后、包络结束前。STOP之前已提交owner则槽完整运行、结果丢弃；已接管而未提交owner则按错过截止处理，IDAC/参考预建立照常至末沿，采样相关输出整槽抑制。abort/reset按C09 §8.3撤销，被丢弃样本不当作合法完整转换。
 
 ## 5. 发现清单
 
@@ -92,16 +92,14 @@ SSW目录中RTL、单元TB与综合脚本均未读取给代理、模型、端口
 | V18-F03 | SAR15选择电平没有在RUN整帧保持已提交精度 | normal_both_sar15_a5从tick0期望1/实际0，累计4958拍；选择电平实际仅跟随两段Q1，共42拍为1。两向4760提交和波形间空闲也检查。 | 用户确认（10-10）Q02；C09 §8.5 STATIC例外 |
 | V18-F04 | 用户更新规则下AMB/DCS的TIA控制为0，与TIAEN不一致 | cal_amb_a5、cal_dcs_red_a5、cal_dcs_ir_a5：local [249,269)期望TIA=1/实际0，TIAEN实际为1；每个完整8子帧场景160拍。STATIC TIA=0/TIAEN=1是保留的例外。 | 用户确认（10-10）最新F04规则；C09 §6.1 TIA静态0行作废 |
 | V18-F05 | DCS_CAL LEDDAC缺少码窗首拍 | DCS RED local264期望A5/实际00；IR期望5A/实际00；每子帧缺一拍。其LEDEN/Q3窗口仍正确。 | 用户/统筹Q01；SAR9 R_LED_CODE平移到[264,267) |
-| V18-STOP-UNCOMMITTED | 补充未提交owner分支：STOP后仍有预建立/码窗活动，单列待统筹核对 | 新增七项stop_unowned场景实际owner fire=0、STOP时inflight=0；例如RED SAR9于43 STOP，44的参考时钟期望0/实际1。RUN保守保持至预约末沿，未用外部CONFIG提前强制关闭输出。 | 最新Q04未提交owner且首边沿前STOP不得启动；完整观测和身份审计见后文 |
 
 | 分类 | 涉及场景 | 场景×信号项 | 差异组拍 |
 |---|---:|---:|---:|
 | V18-F01 | 13 | 39 | 2880 |
 | V18-F02 | 74 | 92 | 108 |
-| V18-F03 | 52 | 52 | 152737 |
+| V18-F03 | 52 | 52 | 153019 |
 | V18-F04 | 44 | 44 | 2795 |
 | V18-F05 | 26 | 26 | 82 |
-| V18-STOP-UNCOMMITTED | 9 | 61 | 7654 |
 | KNOWN-OWNER-DEADLINE | 4 | 12 | 174 |
 
 ### 统筹已确认的SSW缺陷
@@ -119,7 +117,7 @@ SSW目录中RTL、单元TB与综合脚本均未读取给代理、模型、端口
 | SSW-C1（F01） | 双光SAR9三个RED使能消失的独立复现 |
 | KNOWN-OWNER-DEADLINE | SAR15中途/截止提交截短，以及原F07的SAR9截止提交截短 |
 
-F04是最新用户TIA规则下的输出不符；V18-STOP-UNCOMMITTED是补充身份分支观测。机器证据新增review_status字段，分别标注已确认缺陷、已知问题、用户规则不符、补充STOP观测；原F06/F07不再作为新发现统计。
+F04是最新用户TIA规则下的输出不符。机器证据review_status分别标注已确认缺陷、已知问题和用户规则不符；原F06、原STOP补充观测及F07不再作为新发现统计。
 
 
 场景可能同时包含多类差异，上表各场景数不能相加。码总线另外记录逐bit XOR差异数，精度未选总线和STATIC零码均逐拍检查。
@@ -143,19 +141,19 @@ F04是最新用户TIA规则下的输出不符；V18-STOP-UNCOMMITTED是补充身
 
 撤回旧F06的统一判定：owner已提交的RED及CAL槽即使STOP早于预热，也必须完整运行、真实DONE success=0释放，SSW的完整续跑符合订正规则。原F06不再出现在当前差异分类中。
 
-身份审计同时显示旧IR-only首边沿前场景原本计划owner在350提交，晚于STOP，实际owner fire=0；它们不能按已提交owner分支消除观测。补充七项明确未提交owner的场景，RUN保守保持至预约末沿，以隔离SSW自身STOP行为；未强制提前CONFIG。其实际提交次数、STOP前/时inflight状态及每组输出差异均入机器证据。这组补充观测使用独立标识V18-STOP-UNCOMMITTED，不延用旧F06结论，也未将它冒称统筹已确认的F02/F03/F05。
+最新用户确认（10-10）取代此前“不得出现任何边沿”：波形已接管但owner未提交时，IDAC/参考13组预建立照常到末沿，采样相关10组整槽不出现。七项补充场景及旧IR-only未提交场景的预建立活动均符合此规则，不再列STOP差异。
 
-补充场景是SSW接口级延迟排空压力输入；没有例化manager/AMI来证明该RUN保持序列在系统中的可达性。统筹可据此核对系统STOPPING的run_enable/相位条件。它不会被当作已经确认的系统级缺陷。
+统筹已确认系统可达：双光STOP落在160～204时RED owner在途，IR上下文已接管但尚未提交owner，STOP要等待RED完成，IR预建立仍从SAR9 tick204或SAR15 tick187开始。本机RUN保持到预约末沿与该系统行为一致；可达性不再列为待确认。此确认来自用户/统筹，本任务仍是SSW单元级采集，不声称已执行三模块联合仿真。
 
-| 补充场景 | STOP拍 | STOP前owner fire | STOP时inflight | 首个不符信号/拍 |
-|---|---:|---:|---:|---|
-| stop_unowned_red_sar9_before_preheat | 43 | 0 | 0 | o_clk_iref_idac_sar9_low / 44 |
-| stop_unowned_ir_sar9_before_preheat | 203 | 0 | 0 | o_clk_iref_idac_sar9_low / 204 |
-| stop_unowned_red_sar15_before_preheat | 26 | 0 | 0 | o_clk_iref_idac_sar15_low / 27 |
-| stop_unowned_ir_sar15_before_preheat | 186 | 0 | 0 | o_clk_iref_idac_sar15_low / 187 |
-| stop_unowned_cal_amb_before_preheat | 9 | 0 | 0 | o_clk_iref_idac_sar9_low / 10 |
-| stop_unowned_cal_dcs_red_before_preheat | 9 | 0 | 0 | o_clk_iref_idac_sar9_low / 10 |
-| stop_unowned_cal_dcs_ir_before_preheat | 9 | 0 | 0 | o_clk_iref_idac_sar9_low / 10 |
+| 补充场景 | STOP拍 | STOP前owner fire | STOP时inflight | 预建立差异组拍 | 采样非零组拍 | 其他差异 |
+|---|---:|---:|---:|---:|---:|---|
+| stop_unowned_red_sar9_before_preheat | 43 | 0 | 0 | 0 | 0 | 无 |
+| stop_unowned_ir_sar9_before_preheat | 203 | 0 | 0 | 0 | 0 | 无 |
+| stop_unowned_red_sar15_before_preheat | 26 | 0 | 0 | 0 | 0 | V18-F03 |
+| stop_unowned_ir_sar15_before_preheat | 186 | 0 | 0 | 0 | 0 | V18-F03 |
+| stop_unowned_cal_amb_before_preheat | 9 | 0 | 0 | 0 | 0 | 无 |
+| stop_unowned_cal_dcs_red_before_preheat | 9 | 0 | 0 | 0 | 0 | 无 |
+| stop_unowned_cal_dcs_ir_before_preheat | 9 | 0 | 0 | 0 | 0 | 无 |
 
 ## 7. 驱动校验、黄金更新与问题清单
 
@@ -163,7 +161,7 @@ Q01～Q06均已由用户转达答复并纳入规则表，没有未确定输出�
 
 修正并重跑的驱动问题：只有真实提交消耗sample index；STOP/abort后不再发布IDAC候选提交边界；行为manager等待预建立安全末沿、真实owner释放、物理ADC空闲后再延迟两拍返回CONFIG。它们是TB驱动修正，未作为SSW发现。
 
-本次重跑32项受影响场景（包含七项补充STOP），其余已有迹线按刺激SHA256完全一致才重用。最新规则对全部155个场景重生成黄金并重比；没有用实际输出调整窗口。全部场景均有真实xsim采集、行数顺序检查和采集PASS日志。
+上一轮重跑32项受影响场景；本次按最终STOP规则重跑七项补充场景，另重跑两项因预建立继续至末沿而延长排空的旧IR场景。其余已有迹线按刺激SHA256完全一致才重用。最新规则对全部155个场景重生成黄金并重比；没有用实际输出调整窗口。全部场景均有真实xsim采集、行数顺序检查和采集PASS日志。
 
 比较器8项完整性控制通过：正确迹线正对照、单IDAC bit翻转、提前一拍LED边沿、X值、缺一行、重复行、错误低相时钟、两边沿控制变化。七个主动错误都被正确判失败，单bit和首差异位置也核对。
 
@@ -268,7 +266,7 @@ python -B verification/v18_ssw_golden/scripts/run.py --repo . --simulator iveril
 | abort_red_sar9_in_q3 | 5008 | MISMATCH | 1 | V18-F02 |
 | abort_red_sar9_after_q3 | 5008 | MISMATCH | 1 | V18-F02 |
 | abort_red_sar9_before_end | 5008 | MISMATCH | 1 | V18-F02 |
-| stop_ir_sar9_before_preheat | 5008 | MISMATCH | 590 | V18-STOP-UNCOMMITTED |
+| stop_ir_sar9_before_preheat | 5008 | PASS | 0 | — |
 | stop_ir_sar9_after_preheat | 5008 | PASS | 0 | — |
 | stop_ir_sar9_before_q1 | 5008 | MISMATCH | 1 | V18-F02 |
 | stop_ir_sar9_in_q3 | 5008 | MISMATCH | 1 | V18-F02 |
@@ -292,7 +290,7 @@ python -B verification/v18_ssw_golden/scripts/run.py --repo . --simulator iveril
 | abort_red_sar15_in_q3 | 5008 | MISMATCH | 285 | V18-F02, V18-F03 |
 | abort_red_sar15_after_q3 | 5008 | MISMATCH | 285 | V18-F02, V18-F03 |
 | abort_red_sar15_before_end | 5008 | MISMATCH | 287 | V18-F02, V18-F03 |
-| stop_ir_sar15_before_preheat | 5008 | MISMATCH | 1592 | V18-F03, V18-STOP-UNCOMMITTED |
+| stop_ir_sar15_before_preheat | 5008 | MISMATCH | 470 | V18-F03 |
 | stop_ir_sar15_after_preheat | 5008 | MISMATCH | 470 | V18-F03 |
 | stop_ir_sar15_before_q1 | 5008 | MISMATCH | 492 | V18-F02, V18-F03 |
 | stop_ir_sar15_in_q3 | 5008 | MISMATCH | 492 | V18-F02, V18-F03 |
@@ -350,13 +348,13 @@ python -B verification/v18_ssw_golden/scripts/run.py --repo . --simulator iveril
 | owner_miss_ir_sar15 | 5008 | MISMATCH | 4980 | V18-F02, V18-F03 |
 | known_sar15_deadline_red_275 | 5008 | MISMATCH | 5010 | KNOWN-OWNER-DEADLINE, V18-F02, V18-F03 |
 | known_sar15_deadline_ir_435 | 5008 | MISMATCH | 5010 | KNOWN-OWNER-DEADLINE, V18-F02, V18-F03 |
-| stop_unowned_red_sar9_before_preheat | 5008 | MISMATCH | 590 | V18-STOP-UNCOMMITTED |
-| stop_unowned_ir_sar9_before_preheat | 5008 | MISMATCH | 590 | V18-STOP-UNCOMMITTED |
-| stop_unowned_red_sar15_before_preheat | 5008 | MISMATCH | 1714 | V18-F03, V18-STOP-UNCOMMITTED |
-| stop_unowned_ir_sar15_before_preheat | 5008 | MISMATCH | 1874 | V18-F03, V18-STOP-UNCOMMITTED |
-| stop_unowned_cal_amb_before_preheat | 5008 | MISMATCH | 492 | V18-STOP-UNCOMMITTED |
-| stop_unowned_cal_dcs_red_before_preheat | 5008 | MISMATCH | 590 | V18-STOP-UNCOMMITTED |
-| stop_unowned_cal_dcs_ir_before_preheat | 5008 | MISMATCH | 590 | V18-STOP-UNCOMMITTED |
+| stop_unowned_red_sar9_before_preheat | 5008 | PASS | 0 | — |
+| stop_unowned_ir_sar9_before_preheat | 5008 | PASS | 0 | — |
+| stop_unowned_red_sar15_before_preheat | 5008 | MISMATCH | 310 | V18-F03 |
+| stop_unowned_ir_sar15_before_preheat | 5008 | MISMATCH | 470 | V18-F03 |
+| stop_unowned_cal_amb_before_preheat | 5008 | PASS | 0 | — |
+| stop_unowned_cal_dcs_red_before_preheat | 5008 | PASS | 0 | — |
+| stop_unowned_cal_dcs_ir_before_preheat | 5008 | PASS | 0 | — |
 
 ## 10. 里程碑与边界
 

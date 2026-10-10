@@ -2,7 +2,7 @@
 
 日期：2026-10-10。基线：main `4863ec6e8f1298a7a9d543b3cd1a82e7a3d08fcb`。分支：`v18-ssw-golden`。
 
-本表已纳入统筹对`9044d3a`的后续订正：STOP按owner是否已提交分支处理，截止截短统一列KNOWN-OWNER-DEADLINE，所有动态波形的TIA与TIAEN相同（STATIC例外）。最新用户确认优先于旧答复和旧合同表，不从SSW输出反推规则。
+本表已纳入统筹对`9044d3a`和`b4e32fc`的后续订正：已接管但未提交owner的STOP槽按owner错过截止处理，预建立照常至末沿、采样整槽抑制；“不得出现任何边沿”答复撤回。截止截短统一列KNOWN-OWNER-DEADLINE，所有动态波形TIA与TIAEN相同（STATIC例外）。最新用户确认优先于旧答复和旧合同表，不从SSW输出反推规则。
 
 ## 1. 独立性与来源
 
@@ -73,7 +73,7 @@ C09 §7.7 实际列出 28 组输出（总线按组）；计划中的“32路”�
 3. **AMB_CAL**：按专用local窗口，TIA与TIAEN同为 `[249,269)`，受owner资格同时抑制；DC输出全部0、LED全关、Q2全关。**用户确认（10-10）**取代C09 §6.1 TIA静态0行。
 4. **DCS_CAL**：固定SAR9、AMB已确认码+当前色DC候选码，仅当前色 LED，Q3 local 266（C09 §4.4/4.7/5.5）。统筹确认Q01：取SAR9模板RED单色相对窗口平移到266，RED/IR同样local包络 `[10,284)`；颜色只决定LED1/2和DC快照，不保留160拍偏移。逐端口即上表N9列加266，另一颜色LED为0。AMB仍独立采用§6.1。
 5. **owner**：上下文先于 owner；只向最早 pending 槽提交；身份逐位一致且 ready=1。RED/IR/CAL 最晚 283/443/248 当拍提交，之后无owner时抑制 Q1/Q2/Q3、LED有效采样，已开始的预建立安全结束；不移动 Q3、不用 ADC idle 或固定延迟冒充DONE（C09 §4.5/5.3、C08 §10）。**用户确认（10-10）Q03：该槽LEDDAC同样保持 `8'h00`**，不得把“LEDEN=0”当作允许码总线非零的理由。
-6. **STOP（Q04订正）**：禁止新上下文/owner。**owner已在STOP之前提交**的槽应完整运行原模板包络，即使首个预热边沿尚未出现；结果丢弃，真实匹配 `success=0` DONE才释放。**owner未提交且首边沿之前STOP**的槽不再启动，之后不得出现该波形边沿；已开始但未提交owner的预建立仍安全收尾，采样相关窗口整槽抑制。行为manager等待安全末沿和物理ADC空闲后回CONFIG；新增未提交场景保守保持RUN至预约末沿，避免外部强制CONFIG掩盖错误。此前未区分owner的F06判断撤回。
+6. **STOP（用户确认10-10最新Q04）**：禁止新上下文/owner。**owner已在STOP之前提交**的槽完整运行原模板包络，结果丢弃、真实匹配 `success=0` DONE才释放。**波形已接管但owner未提交**的槽，无论STOP时是否已出现首个预热边沿，均按owner错过截止处理：IDAC/参考预建立照常运行至既定末沿；Q1/Q2/Q3、LEDEN、LEDDAC、EN_TIA、AFERST、TIAEN整槽不出现。行为manager等待安全末沿和物理ADC空闲后回CONFIG。旧F06及V18-STOP-UNCOMMITTED的“STOP后任何活动均是错误”判定撤回。
 7. **abort/reset**：abort撤销槽与pending，下一个控制更新进入活动核 disable 安全向量；reset立即清空可撤销控制与数字身份。模板动态向量 disable 时为全0，`o_clk_2m`仍转发；EN_TEST/MUX须隔离迟到控制提交（C09 §8.3、SSW-23/25/32）。
 8. **CHARACTERIZATION**：光电只允许 RED_ONLY、固定SAR9/15，复用NORMAL RED窗口；固定电流 BOTH/RED/IR、固定精度，EN_TEST=1、LED/LEDDAC=0、S=0，保留所选精度AMB/DC码窗口（C09 §8.4）。拒绝校准和OFF非法组合。
 9. **STATIC_BIAS**：只允许profile=CHARACTERIZATION、static=1、input_source=1；逐位按静态列，所有Q/LED/码总线0；MUX跟随已提交 `i_test_mux_ctrl`，五位同拍变化，不接受波形/owner（C09 §7.3/8.5）。统筹确认Q05：`static_test_commit_event`是上游CDC事件，不是SSW端口。模板历史静态覆盖与此不同，静态黄金以合同为准。
@@ -90,7 +90,7 @@ C09 §7.7 实际列出 28 组输出（总线按组）；计划中的“32路”�
 | Q01 | DCS_CAL模板和IR偏移 | 已确认：SAR9 RED相对窗口，local Q3=266，颜色不改时序 |
 | Q02 | N15精度选择电平保持范围 | 用户确认（10-10）：跟随已提交精度，4760提交，经输出寄存捕获后切换，RUN整帧保持；CAL/CONFIG/STATIC为0 |
 | Q03 | 无owner时LEDDAC抑制 | 用户确认（10-10）：与LEDEN一起清零 |
-| Q04 | 首个预热边沿之前STOP | **后续订正**：已提交owner完整运行并丢弃；未提交owner才禁止启动 |
+| Q04 | 波形已接管、owner未提交时STOP | **用户确认（10-10）最新订正**：预建立照常至末沿，采样整槽抑制；不得出现任何边沿的旧答复撤回 |
 | Q05 | STATIC MUX是否有SSW提交事件 | 已确认：无额外端口；跟随经上游CDC已提交输入，五位原子更新 |
 
 Q02的刺激/采样约定：已提交精度在对应tick的低相预置，下一上升沿由SSW输出寄存捕获，CSV在该沿后1ns观察；因此该CSV行代表已发生寄存捕获的输出。真实上游若在4760沿后发布提交值，消费者下一上升沿才看到它。重跑时不能靠任意移位实际波形来消除差异。
@@ -112,3 +112,9 @@ owner错过截止后，`o_en_tia_low`、`o_clk_aferst_low`、`o_clk_tiaen_low`�
 **用户确认（10-10）**：NORMAL、CHARACTERIZATION、AMB_CAL、DCS_CAL及owner错过截止时，`o_en_tia_low == o_clk_tiaen_low`，使用相同完整窗口和相同抑制资格。唯一例外STATIC_BIAS为TIA=0、TIAEN=1。原报告把AMB TIA=0当作正确的判断作废；按新规则重新运行所有AMB场景。
 
 可选 Spectre 参数复核：尚未进行，未收到网表路径；不据此等待或推迟其他里程碑。
+
+## 9. 未提交owner的STOP：逐组规则与可达性确认
+
+**用户确认（10-10）**：不受owner控制的13组预建立输出为两精度参考时钟、两精度IREF使能、两精度AMB/DC使能、四组IDAC码总线和公共`o_clk_iref_idac_low`；继续各自模板窗口至既定末沿。受owner控制的10组采样输出为两种Q1、Q2、Q3、两路LEDEN、LEDDAC、EN_TIA、AFERST、TIAEN；整槽为0。其余时钟、精度选择、输入源及STATIC相关模式规则不因此改变。
+
+统筹确认系统可达：双光STOP落在macro160～204时，RED owner仍在途，IR波形上下文已接管但owner未提交；STOP排空等待RED完成，IR仍按SAR9 tick204（SAR15 tick187）开始预建立。RUN保持到预约末沿与系统行为一致；不再把七个补充场景列为可达性待确认或STOP缺陷。

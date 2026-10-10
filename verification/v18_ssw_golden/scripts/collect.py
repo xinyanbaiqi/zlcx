@@ -13,15 +13,19 @@ from pathlib import Path
 
 TASK = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TASK / "golden"))
-from model import OUTPUTS, contexts_for, generate, load_windows
+from model import OUTPUTS, SAMPLING, contexts_for, generate, load_windows
 from compare import compare
 
 FRONTEND = {"o_en_tia_low", "o_clk_aferst_low", "o_clk_tiaen_low"}
+PREESTABLISH = {"o_clk_iref_idac_sar9_low", "o_clk_iref_idac_sar15_low", "o_en_sar9_iref",
+               "o_en_sar15_iref", "o_en_sar9_amb_low", "o_en_sar9_dc_low", "o_en_sar15_amb_low",
+               "o_en_sar15_dc_low", "o_idac_sar9ambn_low", "o_idac_sar9dcn_low",
+               "o_idac_sar15ambn_low", "o_idac_sar15dcn_low", "o_clk_iref_idac_low"}
 REVIEW_STATUS = {
     "V18-F01": "KNOWN-SSW-C1", "KNOWN-OWNER-DEADLINE": "KNOWN-OWNER-DEADLINE",
     "V18-F02": "CONFIRMED-SSW-DEFECT", "V18-F03": "CONFIRMED-SSW-DEFECT",
     "V18-F05": "CONFIRMED-SSW-DEFECT", "V18-F04": "USER-CONFIRMED-TIA-RULE-MISMATCH",
-    "V18-STOP-UNCOMMITTED": "SUPPLEMENTAL-STOP-OBSERVATION", "MATCH": "MATCH"
+    "MATCH": "MATCH"
 }
 
 
@@ -55,14 +59,11 @@ def digest(path: Path) -> str:
 
 
 def classification(case: dict, signal: str) -> str:
-    """统一已知owner截止截短；只有STOP前确实未提交的槽才检查禁止启动。"""
+    """已知截止截短与确认缺陷分开；未提交STOP的预建立是合法波形。"""
     if signal in FRONTEND and any(context["owner"] is not None and context["kind"] == 2 and
                                   context["center"] - (34 if context["precision"] else 17) <= context["owner"] <= context["deadline"]
                                   for context in contexts_for(case)):
         return "KNOWN-OWNER-DEADLINE"
-    if "stop_tick" in case and "before_preheat" in case["name"] and signal != "o_en_15sar_low" and any(
-            context["sample"] == 0 and context["fire"] < case["stop_tick"] for context in contexts_for(case)):
-        return "V18-STOP-UNCOMMITTED"
     if signal in {"o_en_sar9_amb_low", "o_en_sar9_dc_low", "o_en_sar9_iref"}:
         return "V18-F01"
     if signal in {"o_leden1_low", "o_leden2_low"}:
@@ -168,6 +169,16 @@ def main() -> None:
             rule_rows = list(csv.DictReader(stream))
         if not case.get("static"):
             assert all(row["o_en_tia_low"] == row["o_clk_tiaen_low"] for row in rule_rows)
+        if name.startswith("stop_unowned"):
+            sampling = SAMPLING | {"o_leddac"}
+            after_stop = list(zip(rule_rows[case["stop_tick"] + 8:], actual_rows[case["stop_tick"] + 8:]))
+            comparison["stop_rule_audit"] = dict(
+                preestablish_mismatch_group_ticks=sum(int(gold[signal]) != int(actual[signal].strip(), 16)
+                                                     for gold, actual in after_stop for signal in PREESTABLISH),
+                sampling_nonzero_group_ticks=sum(int(actual[signal].strip(), 16) != 0
+                                                for _, actual in after_stop for signal in sampling))
+            assert comparison["stop_rule_audit"]["preestablish_mismatch_group_ticks"] == 0
+            assert comparison["stop_rule_audit"]["sampling_nonzero_group_ticks"] == 0
         comparison["protocol_sticky_rows"] = {signal: sum(int(row[signal].strip(), 16) != 0 for row in actual_rows)
                                                 for signal in ("o_switch_protocol_error_sticky", "o_transaction_mismatch_sticky",
                                                                "o_wrapper_fault_blocking")}
@@ -213,7 +224,7 @@ def main() -> None:
                    clock_low_errors=sum(result["audit"]["clock_low_errors"] for result in results.values()),
                    stability_errors=sum(result["audit"]["stability_errors"] for result in results.values()))
     package = {"summary": summary, "results": results}
-    package["review_revision"] = "Coordinator follow-up to 9044d3a; user confirmations 2026-10-10"
+    package["review_revision"] = "Final uncommitted-owner STOP rule confirmed by user 2026-10-10; supersedes b4e32fc"
     (args.evidence / "trial_results.json").write_text(json.dumps(package, ensure_ascii=False, indent=2), encoding="utf-8")
     (args.evidence / "window_provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8")
     (args.evidence / "owner_window_ranges.json").write_text(json.dumps(known_ranges, ensure_ascii=False, indent=2), encoding="utf-8")
