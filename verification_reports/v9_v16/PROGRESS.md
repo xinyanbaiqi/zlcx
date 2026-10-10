@@ -8,6 +8,17 @@
 | 子任务 | 状态 | 证据 / 剩余 |
 | --- | --- | --- |
 | V9 | 已完成只读清点 | 49份TB+2份头文件+3入口；32条机制级清点（高7/中18/低7），历史已修1条。正文、逐文件表、SHA256/AST摘要、原文候选及可复用收集脚本。没有仿真或修复。 |
-| V16 | 环境核对中 | 无可用iverilog/vvp；winget无法启动。按可选任务记录跳过，不宣称任何双仿真器一致或不存在RTL竞争。 |
+| V16 | 已完成环境核对，实际试跑跳过 | 无可用iverilog/vvp；winget无法启动。49个TB逐项未跑，0个对比完成。git archive内存依赖/参考核对、重跑脚本计划模式与无工具失败退出已验证；动态编译/仿真/VPI未验证。 |
 
-每子任务完成后独立commit/push，仅推 `v9-v16`。提交号以Git历史为准，避免为了把本commit哈希写入本commit而递归改文件。
+V9本地提交：`dcd08e5`。V16另一次独立提交；最新提交号以Git历史为准，避免为了把本commit哈希写入本commit而递归改文件。
+
+推送状态：**尚未推送**。自动审批拒绝了 `git commit ...; git push -u origin v9-v16` 组合操作，理由是没有识别到 trusted user messages 对这些仓库衍生报告上传GitHub目的地的明确授权。随后只执行获准的本地commit。没有绕过拒绝；待用户明确批准把本分支审计报告推到 `xinyanbaiqi/zlcx` 的 `v9-v16` 后再执行push，不推其他分支。
+
+交付文件（均新增于本目录）：
+
+- `V9_TB_TOLERANCE_INVENTORY.md`、`V9_FILE_REVIEW.tsv`、`V9_SOURCE_COVERAGE.json`、`V9_SCAN_CANDIDATES.tsv`；
+- `V16_IVERILOG_CROSSCHECK_TRIAL.md`、`V16_TRIAL_RESULTS.json`；
+- `scripts/v9_collect_evidence.py`、`scripts/v16_crosscheck.py`、`scripts/v16_finish_probe.c`；
+- `PROGRESS.md`、`.gitignore`（忽略试跑目录和脚本缓存）。
+
+变更边界检查：所有既有跟踪文件无改动；V9全部51份源码SHA256保持不变，V9条目/风险计数与逐文件表一致；V16结果49行与20系统/1芯片/28模块清单一致，finish参考均可统一为fs。技能预检产生的新增pycache已清理；试跑临时目录不入库。
