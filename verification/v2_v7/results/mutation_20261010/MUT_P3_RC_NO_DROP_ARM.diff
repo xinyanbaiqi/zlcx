@@ -1,0 +1,11 @@
+--- ../base/rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v	2026-10-10 15:08:32.000000000 +0800
++++ src/rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v	2026-10-10 15:11:09.563993700 +0800
+@@ -311,7 +311,7 @@
+ 		end else if(flag_context_transfer == 1'b1 || flag_capture_drop == 1'b1)begin
+ 			flag_capture_drop_armed <= 1'b0; // 新事务接管或迟到RAW已被吞掉后撤防
+ 		end else if(i_transaction_abandon == 1'b1)begin
+-			flag_capture_drop_armed <= 1'b1; // 作废后等待可能的迟到RAW
++			flag_capture_drop_armed <= 1'b0; // 作废后等待可能的迟到RAW
+ 		end
+ 	end
+ 

@@ -1,0 +1,10 @@
+MUTATION_START 2026-10-10 15:10:50
+MUTANT MUT_P1_SSW_IGNORES_VOID file=rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v changed_lines=2 property=P1b_INFLIGHT_THREE_WAY
+MUTANT MUT_P3_RC_NO_DROP_ARM file=rtl/ppg_adc_s1_redundancy_corrector/ppg_adc_s1_redundancy_corrector.v changed_lines=2 property=P3_RC_CAPTURE_HAS_CONTEXT
+MUTANT MUT_P4_SSW_START_KEEPS_RED_CTX file=rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v changed_lines=2 property=P4_START_NO_RESIDUAL_CONTEXT
+MUTANT MUT_P5_LANE06_IGNORES_ABORT file=rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v changed_lines=2 property=P5_L5_CLEAR_NEVER_EFFECTIVE
+MUTRESULT MUT_P1_SSW_IGNORES_VOID KILLED | mutant: V7SUM P1b_INFLIGHT_THREE_WAY FAIL fails=53042 hits=72537 | base: V7SUM P1b_INFLIGHT_THREE_WAY PASS fails=0 hits=39968
+MUTRESULT MUT_P3_RC_NO_DROP_ARM KILLED | mutant: V7SUM P3_RC_CAPTURE_HAS_CONTEXT FAIL fails=499 hits=8241 | base: V7SUM P3_RC_CAPTURE_HAS_CONTEXT PASS fails=0 hits=8241
+MUTRESULT MUT_P4_SSW_START_KEEPS_RED_CTX KILLED | mutant: V7SUM P4_START_NO_RESIDUAL_CONTEXT FAIL fails=1 hits=2 | base: V7SUM P4_START_NO_RESIDUAL_CONTEXT PASS fails=0 hits=2
+MUTRESULT MUT_P5_LANE06_IGNORES_ABORT KILLED | mutant: V7SUM P5_L5_CLEAR_NEVER_EFFECTIVE FAIL fails=2 hits=38338 | base: V7SUM P5_L5_CLEAR_NEVER_EFFECTIVE PASS fails=0 hits=38338
+MUTATION_END 2026-10-10 15:12:27

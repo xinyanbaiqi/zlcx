@@ -1,0 +1,11 @@
+--- ../base/rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v	2026-10-10 15:08:32.000000000 +0800
++++ src/rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v	2026-10-10 15:11:23.311252400 +0800
+@@ -1294,7 +1294,7 @@
+ 		end else if(i_control_abort_event == 1'b1)begin
+ 			flag_red_context_valid <= 1'b0;     // 时序写入条件红光上下文有效红光专属可见光路低位编码端撤销期间保持
+ 		end else if(flag_start_restore == 1'b1)begin
+-			flag_red_context_valid <= 1'b0;     // 开机重启时丢弃旧运行遗留的可见光接管
++			flag_red_context_valid <= flag_red_context_valid;     // MUTANT
+ 		end else begin
+ 			if(flag_red_wave_last == 1'b1)begin
+ 				flag_red_context_valid <= 1'b0; // 时序写入条件红光上下文有效红光专属可见光路低位编码端波形末拍释放

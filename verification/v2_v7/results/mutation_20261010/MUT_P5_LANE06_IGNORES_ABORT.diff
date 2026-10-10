@@ -1,0 +1,11 @@
+--- ../base/rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v	2026-10-10 15:08:32.000000000 +0800
++++ src/rtl/ppg_adc_measurement_idac_integration/ppg_adc_measurement_idac_integration.v	2026-10-10 15:11:37.054206100 +0800
+@@ -1568,7 +1568,7 @@
+ 	always@(posedge i_clk or negedge i_rstn)begin
+ 		if(i_rstn == 1'b0)begin
+ 			flag_owner_lost_fault_hold <= 1'b0; // 复位解除连续丢失阻断
+-		end else if(i_start_ack_event == 1'b1 || i_control_abort_event == 1'b1)begin
++		end else if(i_start_ack_event == 1'b1)begin
+ 			flag_owner_lost_fault_hold <= 1'b0; // 新RUN或supervisor abort结束本episode的连续丢失阻断
+ 		end else if(flag_owner_lost_limit_reached == 1'b1)begin
+ 			flag_owner_lost_fault_hold <= 1'b1; // T-dead：同槽位连续k次作废，经supervisor升级为系统故障并STOP

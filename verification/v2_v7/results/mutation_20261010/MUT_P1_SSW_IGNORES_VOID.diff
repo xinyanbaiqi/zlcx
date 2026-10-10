@@ -1,0 +1,11 @@
+--- ../base/rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v	2026-10-10 15:08:32.000000000 +0800
++++ src/rtl/ppg_sar9_sar15_safe_selection_wrapper/ppg_sar9_sar15_safe_selection_wrapper.v	2026-10-10 15:10:55.428528800 +0800
+@@ -433,7 +433,7 @@
+ 	//其他信号连线
+ 	assign flag_owner_commit_fire = i_adc_owner_commit_event && o_adc_owner_ready && flag_owner_identity_match && !i_control_abort_event; // 组合连线条件结果所有权专用字段提交低位编码端
+ 	assign flag_owner_commit_error = i_adc_owner_commit_event && !flag_owner_commit_fire; // 组合连线条件结果所有权专用字段错误低位编码端
+-	assign flag_owner_release = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁
++	assign flag_owner_release = (i_adc_transaction_complete_event) && adc_owner_inflight_o && (i_adc_complete_sample_index == reg_owner_sample_index) && (i_run_generation == reg_owner_generation); // 组合连线条件结果所有权释放低位编码端，含代际校验防止陈旧代际释放owner；释放本身不额外要求Q3已关闭——早于Q3的DONE仍然合法释放槽位（物理上确有一次匹配身份的完成信号到达），只是不构成正式成功，Q3门控只作用于Scheduler侧的flag_completion_success，避免"Q3若因异常提前完成后不再出现"导致owner永久卡在in-flight、连带o_wrapper_idle永远不能为真、transaction_mismatch_sticky_o永远清不掉的死锁
+ 	assign flag_done_mismatch = (i_adc_transaction_complete_event || i_adc_transaction_lost_event) && !flag_owner_release; // 组合连线条件完成失配高位编码端低位编码端，与owner_release互补，代际或序号任一不符均视为失配；作废事件与完成事件同样以事件限定序号并按同一规则核对
+ 
+ 	//其他信号连线
