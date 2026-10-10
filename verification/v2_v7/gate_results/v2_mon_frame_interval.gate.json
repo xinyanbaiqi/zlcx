@@ -1,0 +1,1391 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_frame_interval.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_frame_interval.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 257,
+      "code_lines": 164,
+      "line_comments": 156,
+      "commented_code_lines": 87,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_frame_interval.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_frame_interval.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_frame_interval.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 257,
+              "module_count": 1,
+              "module_names": [
+                "v2_mon_frame_interval"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 48,
+              "end_count": 48,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_frame_active",
+                "i_cal_active",
+                "i_macro_tick",
+                "i_start_ack",
+                "i_excc_cond",
+                "i_frame_break",
+                "o_frame_count",
+                "o_first_count",
+                "o_excc_count",
+                "o_break_count",
+                "o_fail_count",
+                "o_gap_event",
+                "o_gap_class",
+                "o_gap_interval"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 12,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 69,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Macro-Frame Interval Monitor",
+            "module_name": "v2_mon_frame_interval",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 item 4",
+            "simulations": "verification/v2_v7/tb/tb_v2_monitor_selftest.v, verification/v2_v7/tb/tb_v2_sweep.v",
+            "references": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v V1.2 F-009 print-only monitor,",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。宏帧起点识别复制自tb_ppg_control_top_adc_anomaly.v V1.2的F-009监视器（帧在宏帧tick 0活动，且上一拍不活动或处于tick 4999）。把只打印监视器改为判定：相邻起点必须严格相差5000拍，例外只有：(1) START后第一帧；(2) 例外C，仅当前一校准帧tick 4999处实际观测到其条件（owner在途、无pending请求、NORMAL起帧资格不成立、AMI以电平保持校准请求）且间隔至少留出2个空拍时才放行；(3) 被STOP、abort或阻断故障结束的帧（C08第4.2.1节第3条，F-010）。每个非5000起点在o_gap_class上分类为FIRST/EXC-C/BREAK/FAIL。可综合检查核心。",
+              "宏帧间隔监视：非5000拍的起点间隔只在START首帧、条件成立的例外C、帧被打断时放行"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v2_mon_frame_interval",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "与DUT同源的2 MHz时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 48,
+                  "line_end": 48
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效监视器复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_frame_active",
+                  "comment": "NORMAL或校准宏帧活动电平",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_cal_active",
+                  "comment": "只区分校准帧，供例外C条件限定在校准帧末拍",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "[12:0]",
+                  "name": "i_macro_tick",
+                  "comment": "调度器宏帧相位",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_start_ack",
+                  "comment": "调度器收到的START确认单拍",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_excc_cond",
+                  "comment": "本拍满足例外C的帧末条件，仅在校准帧tick 4999采信",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_frame_break",
+                  "comment": "本拍有STOP确认、abort或阻断故障",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_frame_count",
+                  "comment": "已识别宏帧起点总数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_first_count",
+                  "comment": "START后首帧次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_excc_count",
+                  "comment": "按例外C放行次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_break_count",
+                  "comment": "按帧被打断放行次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_fail_count",
+                  "comment": "不允许的非5000间隔次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_gap_event",
+                  "comment": "本拍识别到一个非5000起点",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "output",
+                  "width": "[2:0]",
+                  "name": "o_gap_class",
+                  "comment": "该起点分类：1 FIRST、2 EXC-C、3 BREAK、4 FAIL",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_gap_interval",
+                  "comment": "该起点与上一起点的拍距",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 65,
+                  "line_end": 65
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "FRAME_TICKS",
+                  "value": "32'd5000",
+                  "decl_spec": "[31:0]",
+                  "comment": "FSC-03规定的相邻起点间隔",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "EXCC_MIN_INTERVAL",
+                  "value": "32'd5002",
+                  "decl_spec": "[31:0]",
+                  "comment": "例外C至少空2拍",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "LAST_TICK",
+                  "value": "13'd4999",
+                  "decl_spec": "[12:0]",
+                  "comment": "宏帧末拍相位",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CLASS_FIRST",
+                  "value": "3'd1",
+                  "decl_spec": "[2:0]",
+                  "comment": "START后首帧分类码",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CLASS_EXCC",
+                  "value": "3'd2",
+                  "decl_spec": "[2:0]",
+                  "comment": "例外C分类码",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CLASS_BREAK",
+                  "value": "3'd3",
+                  "decl_spec": "[2:0]",
+                  "comment": "帧被打断分类码",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CLASS_FAIL",
+                  "value": "3'd4",
+                  "decl_spec": "[2:0]",
+                  "comment": "不允许间隔分类码",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 75,
+                  "line_end": 75
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_cycle",
+                  "init": "",
+                  "comment": "监视器自有拍号",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 拍号与各分类计数"
+                  ],
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_last_start",
+                  "init": "",
+                  "comment": "上一起点拍号",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_frames",
+                  "init": "",
+                  "comment": "起点总数计数器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_first",
+                  "init": "",
+                  "comment": "FIRST分类计数器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_excc",
+                  "init": "",
+                  "comment": "按例外C放行的起点个数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_break",
+                  "init": "",
+                  "comment": "前帧被STOP、abort或故障结束而放行的起点个数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_fail",
+                  "init": "",
+                  "comment": "无任何放行理由的非5000起点个数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "kind": "reg",
+                  "width": "[12:0]",
+                  "name": "reg_prev_tick",
+                  "init": "",
+                  "comment": "上一拍宏帧相位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 上一拍相位快照"
+                  ],
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_prev_active",
+                  "init": "",
+                  "comment": "上一拍帧活动",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 帧起点识别与放行条件"
+                  ],
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_have_last",
+                  "init": "",
+                  "comment": "START后已有上一起点",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_excc_armed",
+                  "init": "",
+                  "comment": "前一校准帧末拍观测到例外C条件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 95,
+                  "line_end": 95
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_break_seen",
+                  "init": "",
+                  "comment": "上一起点之后出现过帧被打断事件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_frame_start",
+                  "init": "",
+                  "comment": "本拍是宏帧起点",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "kind": "wire",
+                  "width": "[31:0]",
+                  "name": "flag_interval",
+                  "init": "",
+                  "comment": "本起点与上一起点间隔",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_gap",
+                  "init": "",
+                  "comment": "本起点间隔不等于5000或为首帧",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "kind": "wire",
+                  "width": "[2:0]",
+                  "name": "flag_class",
+                  "init": "",
+                  "comment": "本起点分类",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 100,
+                  "line_end": 100
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_frame_start",
+                  "rhs": "i_frame_active && (i_macro_tick == 13'd0) && (!flag_prev_active || (reg_prev_tick == LAST_TICK)) && !i_start_ack",
+                  "comment": "F-009起点识别，START确认拍只清记录",
+                  "leading_comments": [
+                    "// 起点识别、间隔与分类"
+                  ],
+                  "delay": "",
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "lhs": "flag_interval",
+                  "rhs": "cnt_cycle - cnt_last_start",
+                  "comment": "两起点拍距",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 109,
+                  "line_end": 109
+                },
+                {
+                  "lhs": "flag_gap",
+                  "rhs": "flag_frame_start && (!flag_have_last || (flag_interval != FRAME_TICKS))",
+                  "comment": "需要分类的起点",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 110,
+                  "line_end": 110
+                },
+                {
+                  "lhs": "flag_class",
+                  "rhs": "!flag_have_last ? CLASS_FIRST : ((flag_excc_armed && (flag_interval >= EXCC_MIN_INTERVAL)) ? CLASS_EXCC : (flag_break_seen ? CLASS_BREAK : CLASS_FAIL))",
+                  "comment": "按放行条件优先级分类",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "lhs": "o_frame_count",
+                  "rhs": "cnt_frames",
+                  "comment": "起点总数供汇总",
+                  "leading_comments": [
+                    "// 计数与分类送出"
+                  ],
+                  "delay": "",
+                  "line_start": 115,
+                  "line_end": 115
+                },
+                {
+                  "lhs": "o_first_count",
+                  "rhs": "cnt_first",
+                  "comment": "首帧数供汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 116,
+                  "line_end": 116
+                },
+                {
+                  "lhs": "o_excc_count",
+                  "rhs": "cnt_excc",
+                  "comment": "例外C数供汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 117,
+                  "line_end": 117
+                },
+                {
+                  "lhs": "o_break_count",
+                  "rhs": "cnt_break",
+                  "comment": "打断数供汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 118,
+                  "line_end": 118
+                },
+                {
+                  "lhs": "o_fail_count",
+                  "rhs": "cnt_fail",
+                  "comment": "违例数供结论",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 119,
+                  "line_end": 119
+                },
+                {
+                  "lhs": "o_gap_event",
+                  "rhs": "flag_gap",
+                  "comment": "非5000起点单拍",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 120,
+                  "line_end": 120
+                },
+                {
+                  "lhs": "o_gap_class",
+                  "rhs": "flag_class",
+                  "comment": "分类码随间隔事件同拍送出",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 121,
+                  "line_end": 121
+                },
+                {
+                  "lhs": "o_gap_interval",
+                  "rhs": "flag_interval",
+                  "comment": "该起点拍距",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 122,
+                  "line_end": 122
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_cycle"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_cycle",
+                    "cnt_cycle"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 自有拍号"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_cycle <= 32'd0;                 // 复位清拍号",
+                    "end else begin",
+                    "cnt_cycle <= cnt_cycle + 32'd1;     // 每拍加一",
+                    "end"
+                  ],
+                  "line_start": 126,
+                  "line_end": 130
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_last_start"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_last_start",
+                    "cnt_last_start",
+                    "cnt_last_start"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 记录本起点拍号，供下一起点计算间隔"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_last_start <= 32'd0;            // 复位清起点拍号",
+                    "end else if(flag_frame_start == 1'b1)begin",
+                    "cnt_last_start <= cnt_cycle;        // 记录本起点",
+                    "end else begin",
+                    "cnt_last_start <= cnt_last_start;   // 非起点保持",
+                    "end"
+                  ],
+                  "line_start": 135,
+                  "line_end": 141
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_have_last"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_have_last",
+                    "flag_have_last",
+                    "flag_have_last",
+                    "flag_have_last"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// START后是否已有起点"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_have_last <= 1'b0;             // 复位后无起点",
+                    "end else if(i_start_ack == 1'b1)begin",
+                    "flag_have_last <= 1'b0;             // START后重新等待首帧",
+                    "end else if(flag_frame_start == 1'b1)begin",
+                    "flag_have_last <= 1'b1;             // 识别到起点后有参照",
+                    "end else begin",
+                    "flag_have_last <= flag_have_last;   // 其余保持",
+                    "end"
+                  ],
+                  "line_start": 146,
+                  "line_end": 154
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_prev_active"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_prev_active",
+                    "flag_prev_active"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 帧活动历史"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_prev_active <= 1'b0;           // 复位视为无帧",
+                    "end else begin",
+                    "flag_prev_active <= i_frame_active; // 记录本拍帧活动",
+                    "end"
+                  ],
+                  "line_start": 159,
+                  "line_end": 163
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_prev_tick"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_prev_tick",
+                    "reg_prev_tick"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 宏帧相位历史"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_prev_tick <= 13'd0;             // 复位清相位历史",
+                    "end else begin",
+                    "reg_prev_tick <= i_macro_tick;      // 记录本拍相位",
+                    "end"
+                  ],
+                  "line_start": 168,
+                  "line_end": 172
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_excc_armed"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_excc_armed",
+                    "flag_excc_armed",
+                    "flag_excc_armed",
+                    "flag_excc_armed"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 例外C条件锁存：只在校准帧末拍采信，到下一起点消费"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_excc_armed <= 1'b0;            // 复位不放行",
+                    "end else if(flag_frame_start == 1'b1)begin",
+                    "flag_excc_armed <= 1'b0;            // 起点消费放行资格",
+                    "end else if(i_cal_active && (i_macro_tick == LAST_TICK) && i_excc_cond)begin",
+                    "flag_excc_armed <= 1'b1;            // 校准帧末拍条件成立",
+                    "end else begin",
+                    "flag_excc_armed <= flag_excc_armed; // 等待下一起点",
+                    "end"
+                  ],
+                  "line_start": 177,
+                  "line_end": 185
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_break_seen"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_break_seen",
+                    "flag_break_seen",
+                    "flag_break_seen",
+                    "flag_break_seen"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 帧被打断事件锁存"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_break_seen <= 1'b0;            // 复位无打断",
+                    "end else if(flag_frame_start == 1'b1)begin",
+                    "flag_break_seen <= 1'b0;            // 新起点清打断记录",
+                    "end else if(i_frame_break == 1'b1)begin",
+                    "flag_break_seen <= 1'b1;            // 记录STOP、abort或阻断故障",
+                    "end else begin",
+                    "flag_break_seen <= flag_break_seen; // 保持到下一起点",
+                    "end"
+                  ],
+                  "line_start": 190,
+                  "line_end": 198
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_frames"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_frames",
+                    "cnt_frames",
+                    "cnt_frames"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 起点总数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_frames <= 32'd0;                // 复位清起点总数",
+                    "end else if(flag_frame_start == 1'b1)begin",
+                    "cnt_frames <= cnt_frames + 32'd1;   // 每个起点加一",
+                    "end else begin",
+                    "cnt_frames <= cnt_frames;           // 没有新起点时总数不变",
+                    "end"
+                  ],
+                  "line_start": 203,
+                  "line_end": 209
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_first"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_first",
+                    "cnt_first",
+                    "cnt_first"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// FIRST分类"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_first <= 32'd0;                 // 复位清首帧数",
+                    "end else if(flag_gap && (flag_class == CLASS_FIRST))begin",
+                    "cnt_first <= cnt_first + 32'd1;     // START后首帧",
+                    "end else begin",
+                    "cnt_first <= cnt_first;             // 其余起点不计首帧",
+                    "end"
+                  ],
+                  "line_start": 214,
+                  "line_end": 220
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_excc"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_excc",
+                    "cnt_excc",
+                    "cnt_excc"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// EXC-C分类"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_excc <= 32'd0;                  // 复位清例外C数",
+                    "end else if(flag_gap && (flag_class == CLASS_EXCC))begin",
+                    "cnt_excc <= cnt_excc + 32'd1;       // 条件成立的例外C",
+                    "end else begin",
+                    "cnt_excc <= cnt_excc;               // 非例外C起点保持",
+                    "end"
+                  ],
+                  "line_start": 225,
+                  "line_end": 231
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_break"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_break",
+                    "cnt_break",
+                    "cnt_break"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// BREAK分类"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_break <= 32'd0;                 // 复位清打断放行数",
+                    "end else if(flag_gap && (flag_class == CLASS_BREAK))begin",
+                    "cnt_break <= cnt_break + 32'd1;     // 前帧被打断",
+                    "end else begin",
+                    "cnt_break <= cnt_break;             // 非打断起点保持",
+                    "end"
+                  ],
+                  "line_start": 236,
+                  "line_end": 242
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_fail"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_fail",
+                    "cnt_fail",
+                    "cnt_fail"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// FAIL分类"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_fail <= 32'd0;                  // 复位清违例数",
+                    "end else if(flag_gap && (flag_class == CLASS_FAIL))begin",
+                    "cnt_fail <= cnt_fail + 32'd1;       // 不允许的间隔",
+                    "end else begin",
+                    "cnt_fail <= cnt_fail;               // 合法起点保持",
+                    "end"
+                  ],
+                  "line_start": 247,
+                  "line_end": 253
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 7,
+                "decls": 16,
+                "assigns": 12,
+                "always": 12,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 45,
+              "line_end": 257
+            }
+          ],
+          "source_metrics": {
+            "lines": 257,
+            "nonempty_lines": 233,
+            "line_comments": 156,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 187,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v2_mon_frame_interval.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

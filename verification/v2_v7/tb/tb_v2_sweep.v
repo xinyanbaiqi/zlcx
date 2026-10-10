@@ -606,11 +606,13 @@ module tb_v2_sweep();
 	wire w_active_prec = ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.o_active_precision_mode; // 实时提交精度
 	wire w_result = o_measurement_result_valid && i_measurement_result_ready; // 正式结果握手
 	wire w_run_or_stopping = (o_lifecycle_state == ST_RUN) || (o_lifecycle_state == ST_STOPPING); // 活性监视运行期
-	// 例外C帧末条件（C08 V1.13 §4.2.1）：在途owner、无pending请求、NORMAL起帧资格不成立、AMI以电平保持校准请求
+	// 例外C帧末条件（C08 V1.13 §4.2.1）：在途owner、无pending请求、NORMAL起帧资格不成立、AMI以电平保持校准请求。
+	// 第4项在RTL中是"AMI的校准请求尚未被消费"：或者valid保持，或者已被调度器接受、仍在AMI在途（flag_calibration_request_inflight）；
+	// 在途请求在作废时撤销、于帧末之后的空闲期重新握手，这正是合同所述"校准请求要等宏帧结束后的空闲期握手"（试跑实测间隔5131，与合同记载一致）
 	wire w_excc_cond = ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT] &&
 		!ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_CAL_REQ_PENDING] &&
 		!ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_next_frame_inputs_eligible &&
-		ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_calibration_sample_valid;
+		(ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_calibration_sample_valid || ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_calibration_request_inflight);
 
 	//===================<V2：ADC行为模型>===================//
 	reg [1:0] v2_done_mode;                  // DONE形态（+V2_ADC_DONE_MODE）
@@ -848,6 +850,16 @@ module tb_v2_sweep();
 		if(ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.o_precision_15_to_9_event) $display("V2TRACE t=%0t frame=%0d tick=%0d PREC_TO_9", $time, w_frame, w_mtick);
 	end
 
+	// 例外C条件逐项打印：每个校准宏帧末拍（tick 4999）一行，供帧间隔监视器的放行判定复核
+	always @(posedge i_clk) if(w_cal_frame && (w_mtick == 13'd4999))
+		$display("V2EXCC t=%0t frame=%0d inflight=%b req_pending=%b next_inputs_eligible=%b cal_sample_valid=%b cal_req_active=%b ami_cal_req_inflight=%b cond=%b", $time, w_frame,
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_INFLIGHT],
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_CAL_REQ_PENDING],
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.flag_next_frame_inputs_eligible,
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.i_calibration_sample_valid,
+			ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_control_top_Inst.ppg_400hz_frame_calibration_scheduler_Inst.B_CAL_REQ_ACTIVE],
+			ppg_control_top_Inst.ppg_adc_measurement_idac_integration_Inst.flag_calibration_request_inflight, w_excc_cond);
+
 	// 原因位图打印成列表
 	task v2_print_causes;
 		input [255:0] map;
@@ -976,6 +988,7 @@ module tb_v2_sweep();
 	integer v2_post_frames;                  // 恢复后至少再跑的宏帧数（+V2_POST）
 	integer v2_ev_frame, v2_ev_tick, v2_ev_sf, v2_ev_lt; // 事件实际落点
 	reg v2_ev_landed;                        // 事件已记录落点
+	reg v2_ev_active;                        // 落点那一拍是否有NORMAL或校准宏帧处于活动
 	reg v2_landing_ok;                       // 实际落点与目标一致
 	reg [8 * 16 - 1:0] v2_landing_rule;      // 落点核对口径
 	integer v2_restarts;                     // 恢复过程中START次数
@@ -998,6 +1011,7 @@ module tb_v2_sweep();
 				v2_ev_tick = w_mtick;
 				v2_ev_sf = w_sf;
 				v2_ev_lt = w_lt;
+				v2_ev_active = w_normal_frame || w_cal_frame;
 				$display("V2LAND t=%0t frame=%0d tick=%0d sf=%0d lt=%0d normal=%b cal=%b inflight=%b", $time, w_frame, w_mtick, w_sf, w_lt, w_normal_frame, w_cal_frame, w_sched_inflight);
 			end
 		end
@@ -1017,9 +1031,9 @@ module tb_v2_sweep();
 				o_ami_integration_protocol_error_sticky, o_ssw_switch_protocol_error_sticky, o_ssw_transaction_mismatch_sticky, o_ssw_owner_deadline_timeout_sticky,
 				o_ssw_calibration_timeout_sticky, ppg_control_top_Inst.o_ami_owner_lost_sticky, i_adc_physical_idle, i_clk_stage1_dout_low_async, i_clk_stage2_dout_low_async);
 			nfail = mon_live_fail + mon_id_fail + mon_rc_stop_fail + mon_rc_start_fail + mon_rc_res_fail + mon_fi_fail + mon_bind_fail + mon_excl_fail;
-			$display("V2POINT point=%0s mode=%0s event=%0s slot=%0s frame=%0d tick=%0d sf=%0d lt=%0d param=%0d done_mode=%0d idle_mode=%0d idle_delay=%0d lat=%0d..%0d seed=%0d landed=%b land_frame=%0d land_tick=%0d land_sf=%0d land_lt=%0d landing_ok=%b rule=%0s end=%0s life=%b blocking=%b restarts=%0d restart_ok=%b lost=%0d done=%0d results=%0d q3=%0d cycles=%0d mon_fail=%0d",
+			$display("V2POINT point=%0s mode=%0s event=%0s slot=%0s frame=%0d tick=%0d sf=%0d lt=%0d param=%0d done_mode=%0d idle_mode=%0d idle_delay=%0d lat=%0d..%0d seed=%0d landed=%b land_active=%b land_frame=%0d land_tick=%0d land_sf=%0d land_lt=%0d landing_ok=%b rule=%0s end=%0s life=%b blocking=%b restarts=%0d restart_ok=%b lost=%0d done=%0d results=%0d q3=%0d cycles=%0d mon_fail=%0d",
 				v2_point_str, v2_mode_str, v2_event_str, v2_slot_str, v2_target_frame, v2_target_tick, v2_target_sf, v2_target_lt, v2_param, v2_done_mode, v2_idle_mode, v2_idle_delay, v2_lat_min, v2_lat_max, v2_seed_cfg,
-				v2_ev_landed, v2_ev_frame, v2_ev_tick, v2_ev_sf, v2_ev_lt, v2_landing_ok, v2_landing_rule, how, o_lifecycle_state, o_system_fault_blocking, v2_restarts, v2_restart_ok,
+				v2_ev_landed, v2_ev_active, v2_ev_frame, v2_ev_tick, v2_ev_sf, v2_ev_lt, v2_landing_ok, v2_landing_rule, how, o_lifecycle_state, o_system_fault_blocking, v2_restarts, v2_restart_ok,
 				v2_n_lost, v2_n_done, v2_n_result, v2_n_q3_model, v2_cycle - v2_t_start_sim, nfail);
 			$display("V2_POINT_END");
 			$finish;
@@ -1036,7 +1050,9 @@ module tb_v2_sweep();
 			pre_tick = v2_target_tick - lead;
 			pre_frame = v2_target_frame;
 			if(pre_tick < 0) begin pre_tick = pre_tick + 5000; pre_frame = pre_frame - 1; end
-			v2_wait_frame_tick(pre_frame, pre_tick, (pre_frame + 3) * 5000 + 100000, ok);
+			// 目标在START后首帧的前lead拍之内（pre_frame<0）时无法提前等待：立即发出，落点如实记录并由落点核对标出
+			if(pre_frame < 0) ok = 1'b1;
+			else v2_wait_frame_tick(pre_frame, pre_tick, (pre_frame + 3) * 5000 + 100000, ok);
 		end
 	endtask
 
@@ -1106,7 +1122,7 @@ module tb_v2_sweep();
 		n_det_live = 0; n_det_bind = 0; n_det_excl = 0; n_det_fi = 0; n_det_rc = 0; n_det_id = 0;
 		v2_cause_seen = 256'd0; v2_local_cause_seen = 256'd0;
 		v2_n_lost = 0; v2_n_done = 0; v2_n_result = 0; v2_n_fault_ev = 0; v2_n_q3_model = 0;
-		v2_ev_landed = 1'b0; v2_landing_ok = 1'b0; v2_landing_rule = "none";
+		v2_ev_landed = 1'b0; v2_ev_active = 1'b0; v2_landing_ok = 1'b0; v2_landing_rule = "none";
 		v2_ev_frame = -1; v2_ev_tick = -1; v2_ev_sf = -1; v2_ev_lt = -1;
 		v2_restarts = 0; v2_restart_ok = 1'b0;
 		v2_watch_stop = 1'b0; v2_watch_abort = 1'b0; v2_watch_hit = 1'b0; v2_watch_rise = 1'b0; v2_watch_idle = 1'b0; v2_watch_diag = 1'b0; v2_watch_commit = 1'b0;
@@ -1255,8 +1271,8 @@ module tb_v2_sweep();
 			k = 0;
 			while(!v2_ev_landed && (v2_landing_rule != "none") && (k < 12000)) begin @(posedge i_clk); k = k + 1; end
 		end
-		if(v2_landing_rule == "exact") v2_landing_ok = v2_ev_landed && (v2_ev_frame == v2_target_frame + (((v2_watch_rise || v2_watch_idle) && (v2_fault_frame_offset != 0)) ? 1 : 0)) &&
-			(v2_ev_tick == v2_target_tick + ((v2_watch_rise && (v2_done_mode == 2'd0)) ? 1 : 0)); // 兼容脉冲在触发后一拍上升（与原响应进程一致）
+		if(v2_landing_rule == "exact") v2_landing_ok = v2_ev_landed && v2_ev_active && ((v2_ev_frame * 5000 + v2_ev_tick) ==
+			((v2_target_frame + (((v2_watch_rise || v2_watch_idle) && (v2_fault_frame_offset != 0)) ? 1 : 0)) * 5000 + v2_target_tick + ((v2_watch_rise && (v2_done_mode == 2'd0)) ? 1 : 0))); // 按绝对拍比较；兼容脉冲在触发后一拍上升（与原响应进程一致）
 		else if(v2_landing_rule == "next_conv") v2_landing_ok = v2_ev_landed && (v2_ev_frame == v2_target_frame) && (v2_ev_tick >= v2_target_tick);
 		else v2_landing_ok = v2_ev_landed || (v2_landing_rule == "none");
 

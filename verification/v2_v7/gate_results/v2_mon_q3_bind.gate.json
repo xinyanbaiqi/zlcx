@@ -1,0 +1,839 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_q3_bind.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_q3_bind.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 158,
+      "code_lines": 81,
+      "line_comments": 101,
+      "commented_code_lines": 41,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_q3_bind.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_q3_bind.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_q3_bind.v",
+            "syntax_confidence": 100,
+            "format_score": 92,
+            "rewrite_need_score": 10,
+            "rewrite_risk_score": 5,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 158,
+              "module_count": 1,
+              "module_names": [
+                "v2_mon_q3_bind"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 23,
+              "end_count": 23,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_q3",
+                "i_sched_inflight",
+                "i_commit",
+                "i_commit_cal",
+                "i_frame",
+                "i_subframe",
+                "o_q3_count",
+                "o_violation_count",
+                "o_violation_event"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 6,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 60,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 1,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Q3-to-Owner Binding Monitor",
+            "module_name": "v2_mon_q3_bind",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 item 5",
+            "simulations": "verification/v2_v7/tb/tb_v2_monitor_selftest.v, verification/v2_v7/tb/tb_v2_sweep.v",
+            "references": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v V1.2 lines 1010-1025 (SYSMON BIND-VIOLATION)",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。把tb_ppg_control_top_adc_anomaly.v V1.2的Q3与owner绑定监视复制改写为模块：锁存最近一次owner提交的帧号、子帧与是否校准；CLK_Q3每个上升沿都必须发生在调度器报告owner在途期间，与该次提交处于同一宏帧，校准owner还须处于同一校准子帧。可综合检查核心，V2MON行由TB打印。",
+              "Q3与owner绑定监视：每次Q3上升沿必须属于同帧（校准同子帧）提交的在途owner"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v2_mon_q3_bind",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "与DUT同源的2 MHz时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效监视器复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_q3",
+                  "comment": "DUT输出CLK_Q3电平",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_sched_inflight",
+                  "comment": "调度器报告的owner在途电平",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit",
+                  "comment": "调度器owner提交单拍",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit_cal",
+                  "comment": "提交的owner属于校准类型",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_frame",
+                  "comment": "调度器当前宏帧号",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "[2:0]",
+                  "name": "i_subframe",
+                  "comment": "调度器当前校准子帧号",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_q3_count",
+                  "comment": "已观测的Q3上升沿次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_violation_count",
+                  "comment": "绑定违例次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_violation_event",
+                  "comment": "本拍发生一次绑定违例",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_q3",
+                  "init": "",
+                  "comment": "Q3上升沿累计",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// Q3次数与违例次数"
+                  ],
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_violation",
+                  "init": "",
+                  "comment": "绑定违例累计",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "kind": "reg",
+                  "width": "[15:0]",
+                  "name": "reg_commit_frame",
+                  "init": "",
+                  "comment": "最近提交所在宏帧",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 最近一次提交的帧与子帧身份"
+                  ],
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "kind": "reg",
+                  "width": "[2:0]",
+                  "name": "reg_commit_subframe",
+                  "init": "",
+                  "comment": "最近提交所在校准子帧",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_commit_cal",
+                  "init": "",
+                  "comment": "最近提交是否为校准owner",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_q3_prev",
+                  "init": "",
+                  "comment": "上一拍Q3电平",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// Q3边沿与违例判定"
+                  ],
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_q3_rise",
+                  "init": "",
+                  "comment": "本拍Q3上升沿",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_violation",
+                  "init": "",
+                  "comment": "本拍Q3上升沿不属于合法在途owner",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 76,
+                  "line_end": 76
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_q3_rise",
+                  "rhs": "i_q3 && !flag_q3_prev",
+                  "comment": "Q3由低变高",
+                  "leading_comments": [
+                    "// 绑定判定组合逻辑"
+                  ],
+                  "delay": "",
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "lhs": "flag_violation",
+                  "rhs": "flag_q3_rise && (!i_sched_inflight || (reg_commit_frame != i_frame) || (reg_commit_cal && (reg_commit_subframe != i_subframe)))",
+                  "comment": "无owner、跨帧或校准跨子帧",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "lhs": "o_q3_count",
+                  "rhs": "cnt_q3",
+                  "comment": "Q3累计供汇总",
+                  "leading_comments": [
+                    "// 计数与事件送出"
+                  ],
+                  "delay": "",
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "lhs": "o_violation_count",
+                  "rhs": "cnt_violation",
+                  "comment": "违例累计供汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "lhs": "o_violation_event",
+                  "rhs": "flag_violation",
+                  "comment": "违例单拍供明细打印",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 91,
+                  "line_end": 91
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_q3_prev"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_q3_prev",
+                    "flag_q3_prev"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// Q3电平历史"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_q3_prev <= 1'b0;               // 复位时视Q3为低",
+                    "end else begin",
+                    "flag_q3_prev <= i_q3;               // 记录本拍Q3",
+                    "end"
+                  ],
+                  "line_start": 95,
+                  "line_end": 99
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_commit_frame"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_commit_frame",
+                    "reg_commit_frame",
+                    "reg_commit_frame"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 最近提交帧号"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_commit_frame <= 16'd0;          // 复位清提交帧",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_commit_frame <= i_frame;        // 提交拍锁存当前帧",
+                    "end else begin",
+                    "reg_commit_frame <= reg_commit_frame; // 两次提交之间保持",
+                    "end"
+                  ],
+                  "line_start": 104,
+                  "line_end": 110
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_commit_subframe"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_commit_subframe",
+                    "reg_commit_subframe",
+                    "reg_commit_subframe"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 最近提交子帧号"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_commit_subframe <= 3'd0;        // 复位清提交子帧",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_commit_subframe <= i_subframe;  // 子帧快照随提交刷新，否则不动",
+                    "end else begin",
+                    "reg_commit_subframe <= reg_commit_subframe; // 提交间隔内子帧快照不变",
+                    "end"
+                  ],
+                  "line_start": 115,
+                  "line_end": 121
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_commit_cal"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_commit_cal",
+                    "reg_commit_cal",
+                    "reg_commit_cal"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 最近提交类型"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_commit_cal <= 1'b0;             // 复位视为NORMAL",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_commit_cal <= i_commit_cal;     // 提交拍锁存类型",
+                    "end else begin",
+                    "reg_commit_cal <= reg_commit_cal;   // 类型快照保持到下次提交",
+                    "end"
+                  ],
+                  "line_start": 126,
+                  "line_end": 132
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_q3"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_q3",
+                    "cnt_q3",
+                    "cnt_q3"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// Q3次数累计"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_q3 <= 32'd0;                    // 复位清Q3次数",
+                    "end else if(flag_q3_rise == 1'b1)begin",
+                    "cnt_q3 <= cnt_q3 + 32'd1;           // 每个上升沿加一",
+                    "end else begin",
+                    "cnt_q3 <= cnt_q3;                   // 无上升沿保持",
+                    "end"
+                  ],
+                  "line_start": 137,
+                  "line_end": 143
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_violation"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_violation",
+                    "cnt_violation",
+                    "cnt_violation"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 违例次数累计"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_violation <= 32'd0;             // 复位清违例次数",
+                    "end else if(flag_violation == 1'b1)begin",
+                    "cnt_violation <= cnt_violation + 32'd1; // 每次违例加一",
+                    "end else begin",
+                    "cnt_violation <= cnt_violation;     // 无违例保持",
+                    "end"
+                  ],
+                  "line_start": 148,
+                  "line_end": 154
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 8,
+                "assigns": 5,
+                "always": 6,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 158
+            }
+          ],
+          "source_metrics": {
+            "lines": 158,
+            "nonempty_lines": 141,
+            "line_comments": 101,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 97,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v2_mon_q3_bind.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

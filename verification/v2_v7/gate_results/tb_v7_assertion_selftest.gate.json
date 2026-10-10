@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v7_assertion_selftest.sv",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG025": 2,
+    "VG042": 1
+  },
+  "errors": 4,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 4,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] only single module sources are currently supported.",
+      "path": "tb_v7_assertion_selftest.sv",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v7_assertion_selftest.sv",
+      "line": 131,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v7_assertion_selftest.sv",
+      "line": 132,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG042",
+      "severity": "error",
+      "message": "Comment coverage is too low for generated RTL (9.64%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+      "path": "tb_v7_assertion_selftest.sv",
+      "line": null,
+      "rule": "comments.coverage"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v7_assertion_selftest.sv",
+    "ok": false,
+    "strict": true,
+    "errors": 4,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] only single module sources are currently supported.",
+        "path": "tb_v7_assertion_selftest.sv",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v7_assertion_selftest.sv",
+        "line": 131,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v7_assertion_selftest.sv",
+        "line": 132,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG042",
+        "severity": "error",
+        "message": "Comment coverage is too low for generated RTL (9.64%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+        "path": "tb_v7_assertion_selftest.sv",
+        "line": null,
+        "rule": "comments.coverage"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 135,
+      "code_lines": 83,
+      "line_comments": 54,
+      "commented_code_lines": 8,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v7_assertion_selftest.sv",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v7_assertion_selftest.sv",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v7_assertion_selftest.sv",
+            "syntax_confidence": 90,
+            "format_score": 80,
+            "rewrite_need_score": 40,
+            "rewrite_risk_score": 15,
+            "decision": "preserve_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 135,
+              "module_count": 1,
+              "module_names": [
+                "tb_v7_assertion_selftest"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 12,
+              "end_count": 12,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 1,
+              "multi_target_always_count": 1,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 2,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 46,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 17,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "function_task_initial",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V7 Assertion Checker Negative/Positive Self-Check Testbench",
+            "module_name": "tb_v7_assertion_selftest",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.4 (negative controls, synthetic part)",
+            "simulations": "Vivado xsim 2022.2 (xvlog -sv)",
+            "references": "verification/v2_v7/assertions/v7_checkers.sv",
+            "version": "V1.0",
+            "dependency_lines": [
+              "v7_checkers.sv"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。v7_assertions.sv用到的四类检查器各例化两份：一份只用合规的人造序列驱动，结束时必须0失败且前件命中数非0；另一份在同一序列上加入已知个数的违反，结束时失败数必须恰好等于该个数。判定直接层次读取检查器自己的cnt_fail/cnt_hit，因此检查的是SVA的action块本身，而不是另写一份等价逻辑。只有全部用例通过才打印V7_SELFTEST_PASS。"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] only single module sources are currently supported."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] only single module sources are currently supported.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 135,
+            "nonempty_lines": 129,
+            "line_comments": 54,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 88,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_v7_assertion_selftest.sv"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

@@ -1,0 +1,3060 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_sweep.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 2,
+    "VG002": 2,
+    "VG060": 106,
+    "VG025": 63,
+    "VG042": 1
+  },
+  "errors": 174,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 2,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 2,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 174,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "tb_v2_sweep.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "unclosed_block_comment",
+      "path": "tb_v2_sweep.v",
+      "line": null,
+      "rule": "FORMATTER_HARD_GATE"
+    },
+    {
+      "code": "VG002",
+      "severity": "error",
+      "message": "Block comments are forbidden; use // line comments only.",
+      "path": "tb_v2_sweep.v",
+      "line": 18,
+      "rule": "comments.line_only"
+    },
+    {
+      "code": "VG002",
+      "severity": "error",
+      "message": "Block comments are forbidden; use // line comments only.",
+      "path": "tb_v2_sweep.v",
+      "line": 38,
+      "rule": "comments.line_only"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+      "path": "tb_v2_sweep.v",
+      "line": 416,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+      "path": "tb_v2_sweep.v",
+      "line": 417,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 418,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 419,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 420,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 421,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 422,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 423,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 424,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 425,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 426,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 427,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+      "path": "tb_v2_sweep.v",
+      "line": 428,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 429,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 52.",
+      "path": "tb_v2_sweep.v",
+      "line": 430,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_v2_sweep.v",
+      "line": 431,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 432,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 433,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_v2_sweep.v",
+      "line": 434,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 435,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 436,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 55.",
+      "path": "tb_v2_sweep.v",
+      "line": 437,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 441,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 442,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 443,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 444,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_v2_sweep.v",
+      "line": 445,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+      "path": "tb_v2_sweep.v",
+      "line": 446,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_v2_sweep.v",
+      "line": 447,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_v2_sweep.v",
+      "line": 448,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_v2_sweep.v",
+      "line": 449,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_v2_sweep.v",
+      "line": 450,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+      "path": "tb_v2_sweep.v",
+      "line": 451,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_v2_sweep.v",
+      "line": 452,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_v2_sweep.v",
+      "line": 453,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_v2_sweep.v",
+      "line": 454,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_v2_sweep.v",
+      "line": 455,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 63.",
+      "path": "tb_v2_sweep.v",
+      "line": 456,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+      "path": "tb_v2_sweep.v",
+      "line": 457,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_v2_sweep.v",
+      "line": 458,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 459,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_v2_sweep.v",
+      "line": 460,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+      "path": "tb_v2_sweep.v",
+      "line": 461,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 462,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 51.",
+      "path": "tb_v2_sweep.v",
+      "line": 463,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 470,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 481,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 482,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 58.",
+      "path": "tb_v2_sweep.v",
+      "line": 483,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 56.",
+      "path": "tb_v2_sweep.v",
+      "line": 484,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 492,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 578,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 579,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 616,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 617,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 618,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 619,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 620,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 621,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 622,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 623,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 624,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 625,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 626,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 627,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 628,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 629,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 630,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 631,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 632,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 633,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 634,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 678,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 679,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 680,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 681,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 682,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 701,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 702,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 789,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 790,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 810,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 811,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 828,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 52.",
+      "path": "tb_v2_sweep.v",
+      "line": 912,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 53.",
+      "path": "tb_v2_sweep.v",
+      "line": 914,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 953,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 954,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 966,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 967,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 968,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 969,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 970,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 971,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 972,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 973,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 974,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 975,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 976,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 978,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 979,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 980,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 981,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 982,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 983,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+      "path": "tb_v2_sweep.v",
+      "line": 984,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 550,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 551,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 637,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 639,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 706,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 793,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 794,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 795,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 796,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 797,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 798,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 801,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 804,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 817,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 819,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 820,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 823,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 831,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 832,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 834,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 835,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 836,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 837,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 838,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 840,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 845,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 846,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 847,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 848,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 861,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 909,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 916,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 917,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 931,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 957,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 985,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 993,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1077,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1092,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1117,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1118,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1119,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1120,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1121,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1122,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1123,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1124,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1125,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1126,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1127,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1128,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1129,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1131,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1132,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1135,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1136,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1137,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1213,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1215,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1258,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1260,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1261,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_sweep.v",
+      "line": 1271,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG042",
+      "severity": "error",
+      "message": "Comment coverage is too low for generated RTL (17.17%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+      "path": "tb_v2_sweep.v",
+      "line": null,
+      "rule": "comments.coverage"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_sweep.v",
+    "ok": false,
+    "strict": true,
+    "errors": 174,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_v2_sweep.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "unclosed_block_comment",
+        "path": "tb_v2_sweep.v",
+        "line": null,
+        "rule": "FORMATTER_HARD_GATE"
+      },
+      {
+        "code": "VG002",
+        "severity": "error",
+        "message": "Block comments are forbidden; use // line comments only.",
+        "path": "tb_v2_sweep.v",
+        "line": 18,
+        "rule": "comments.line_only"
+      },
+      {
+        "code": "VG002",
+        "severity": "error",
+        "message": "Block comments are forbidden; use // line comments only.",
+        "path": "tb_v2_sweep.v",
+        "line": 38,
+        "rule": "comments.line_only"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+        "path": "tb_v2_sweep.v",
+        "line": 416,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 48.",
+        "path": "tb_v2_sweep.v",
+        "line": 417,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 418,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 419,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 420,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 421,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 422,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 423,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 424,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 425,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 426,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 427,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 49.",
+        "path": "tb_v2_sweep.v",
+        "line": 428,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 429,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 52.",
+        "path": "tb_v2_sweep.v",
+        "line": 430,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_v2_sweep.v",
+        "line": 431,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 432,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 433,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_v2_sweep.v",
+        "line": 434,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 435,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 436,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 55.",
+        "path": "tb_v2_sweep.v",
+        "line": 437,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 441,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 442,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 443,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 444,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_v2_sweep.v",
+        "line": 445,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 54.",
+        "path": "tb_v2_sweep.v",
+        "line": 446,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_v2_sweep.v",
+        "line": 447,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_v2_sweep.v",
+        "line": 448,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_v2_sweep.v",
+        "line": 449,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_v2_sweep.v",
+        "line": 450,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 61.",
+        "path": "tb_v2_sweep.v",
+        "line": 451,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_v2_sweep.v",
+        "line": 452,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_v2_sweep.v",
+        "line": 453,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_v2_sweep.v",
+        "line": 454,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_v2_sweep.v",
+        "line": 455,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 63.",
+        "path": "tb_v2_sweep.v",
+        "line": 456,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 62.",
+        "path": "tb_v2_sweep.v",
+        "line": 457,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_v2_sweep.v",
+        "line": 458,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 459,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_v2_sweep.v",
+        "line": 460,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 60.",
+        "path": "tb_v2_sweep.v",
+        "line": 461,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 462,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 51.",
+        "path": "tb_v2_sweep.v",
+        "line": 463,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 77, aligned from region anchor column 77; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 470,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 481,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 482,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 58.",
+        "path": "tb_v2_sweep.v",
+        "line": 483,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 56.",
+        "path": "tb_v2_sweep.v",
+        "line": 484,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 101, aligned from region anchor column 101; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 492,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 578,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 579,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 616,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 617,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 618,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 619,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 620,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 621,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 622,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 623,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 624,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 625,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 626,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 627,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 628,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 629,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 630,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 631,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 632,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 633,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 634,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 678,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 679,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 680,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 681,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 682,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 701,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 702,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 789,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 790,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 810,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 811,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 828,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 52.",
+        "path": "tb_v2_sweep.v",
+        "line": 912,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 53.",
+        "path": "tb_v2_sweep.v",
+        "line": 914,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 953,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 954,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 966,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 967,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 968,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 969,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 970,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 971,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 972,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 973,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 974,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 975,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 976,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 978,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 979,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 980,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 981,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 982,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 983,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 57, aligned from region anchor column 57; got 45.",
+        "path": "tb_v2_sweep.v",
+        "line": 984,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 550,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 551,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 637,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 639,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 706,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 793,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 794,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 795,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 796,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 797,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 798,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 801,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 804,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 817,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 819,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 820,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 823,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 831,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 832,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 834,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 835,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 836,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 837,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 838,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 840,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 845,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 846,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 847,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 848,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 861,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 909,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 916,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 917,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 931,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 957,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 985,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 993,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1077,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1092,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1117,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1118,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1119,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1120,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1121,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1122,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1123,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1124,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1125,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1126,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1127,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1128,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1129,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1131,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1132,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1135,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1136,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1137,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1213,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1215,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1258,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1260,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1261,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_sweep.v",
+        "line": 1271,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG042",
+        "severity": "error",
+        "message": "Comment coverage is too low for generated RTL (17.17%); add semantic comments near declarations, assigns, always blocks, FSM, and instances.",
+        "path": "tb_v2_sweep.v",
+        "line": null,
+        "rule": "comments.coverage"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 1278,
+      "code_lines": 1083,
+      "line_comments": 311,
+      "commented_code_lines": 186,
+      "block_comment_markers": 2,
+      "formatter_decisions": {
+        "fail_no_write": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_sweep.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_sweep.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_sweep.v",
+            "syntax_confidence": 50,
+            "format_score": 62,
+            "rewrite_need_score": 75,
+            "rewrite_risk_score": 70,
+            "decision": "fail_no_write",
+            "allowed_transforms": [],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": true,
+            "hard_gates": [
+              "unclosed_block_comment"
+            ],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 1278,
+              "module_count": 1,
+              "module_names": [
+                "tb_v2_sweep"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 82,
+              "end_count": 82,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 11,
+              "multi_target_always_count": 5,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 31,
+              "complex_lvalue_count": 56,
+              "function_task_initial_count": 29,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 125,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 45,
+              "missing_reset_always_count": 11,
+              "output_redecl_count": 1,
+              "risk_flags": [
+                "complex_lvalue",
+                "function_task_initial",
+                "inline_wire_assign",
+                "output_bridge_candidate",
+                "rich_human_comments",
+                "unsafe_always_split"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Per-Tick Sweep Testbench (ppg_control_top + supervisor)",
+            "module_name": "tb_v2_sweep",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.3",
+            "simulations": "Vivado xsim 2022.2 (compiled once, one xsim run per sweep point via -testplusarg)",
+            "references": "verification_reports/PRE_TAPEOUT_CLOSURE_PLAN_20261009.md V2,",
+            "version": "V1.0",
+            "dependency_lines": [
+              "ppg_control_top.v and its full hierarchy (rtl/ppg_control_top/xsim_adc_anomaly_filelist.f),",
+              "rtl/ppg_control_top/tb_ppg_real_raw_generator.vh (included unmodified through -i),",
+              "verification/v2_v7/adc_model/v2_adc_behavior_model.v, verification/v2_v7/monitors/*.v",
+              "ppg_control_top.v及完整层次（xsim_adc_anomaly_filelist.f）、tb_ppg_real_raw_generator.vh（经-i原样包含）、",
+              "v2_adc_behavior_model.v、monitors/*.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日        V1.0          Erie                  创建文件。参数化单点扫描TB。从tb_ppg_control_top_adc_anomaly.v V1.2（main 2f0c0d0）原样复制：localparam与V5复位档案（第55~105行）、信号声明与ppg_control_top例化（第107~403行；四路ADC输入与i_adc_physical_idle改为由V2 ADC模型驱动的wire）、时钟（405~415）、配置task（417~479、481~493）、source/START/STOP脉冲task（507~534）、task_wait_config_result（536~551）、make_fixed_raw（641~654）、owner快照进程（659~675）、sys_build_search_config（1301~1307）。新写：以V2 ADC行为模型替代bg_adc_responder；六个常驻监视器核心及打印层（V2MON/V2MON-DETAIL行）；plusargs选择工作模式（DUAL9、RED15、SEARCH、RECHECK、GEN_DUAL）、事件（NONE、STOP、START_DELAY、ABORT、LOST、LATE、BUSY、FOREVER、DIAG_CLEAR、COMMIT）与目标落点（宏帧号+tick，或校准子帧+local tick）；单点流程：复位→配置→START→目标帧→注入→恢复（回CONFIG、等待、诊断清除、COMMIT、START）→后续若干帧→V2POINT结论行。每个点记录DUT实际看到事件的拍（V2LAND）并核对是否与目标一致。",
+              "V2逐拍扫描：单点参数化注入与常驻监视"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            },
+            {
+              "severity": "error",
+              "code": "FORMATTER_HARD_GATE",
+              "message": "unclosed_block_comment",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 1278,
+            "nonempty_lines": 1208,
+            "line_comments": 311,
+            "block_comment_markers": 2,
+            "tab_indented_lines": 1162,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_v2_sweep.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

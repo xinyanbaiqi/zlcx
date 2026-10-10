@@ -1,0 +1,746 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_liveness.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_liveness.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 138,
+      "code_lines": 68,
+      "line_comments": 92,
+      "commented_code_lines": 36,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_liveness.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_liveness.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_liveness.v",
+            "syntax_confidence": 100,
+            "format_score": 92,
+            "rewrite_need_score": 10,
+            "rewrite_risk_score": 5,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 138,
+              "module_count": 1,
+              "module_names": [
+                "v2_mon_liveness"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 17,
+              "end_count": 17,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_active",
+                "i_progress",
+                "i_fault_record",
+                "o_fail_count",
+                "o_max_noprog",
+                "o_stall_event",
+                "o_noprog"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 4,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 56,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 1,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Liveness Monitor",
+            "module_name": "v2_mon_liveness",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 item 1",
+            "simulations": "verification/v2_v7/tb/tb_v2_monitor_selftest.v, verification/v2_v7/tb/tb_v2_sweep.v",
+            "references": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v V1.2 generic liveness monitor",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。把tb_ppg_control_top_adc_anomaly.v V1.2第1079~1091行的通用活性监视复制改写为模块：生命周期处于RUN或STOPPING时，连续C_LIMIT拍（默认15000拍即3个宏帧）既无进展脉冲也无故障记录，记一次静默停滞。进展与故障输入由例化TB用只读层次观测预先求或，本模块不force任何信号。本模块为不含系统任务的可综合检查核心，V2MON-DETAIL明细与V2MON LIVENESS汇总行由例化TB依据o_stall_event、o_noprog、o_fail_count、o_max_noprog打印。",
+              "活性监视：RUN/STOPPING中连续C_LIMIT拍无进展且无故障记录即判静默停滞"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v2_mon_liveness",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "C_LIMIT",
+                  "value": "15000",
+                  "decl_spec": "integer",
+                  "comment": "判定静默停滞的连续无进展拍数",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 45,
+                  "line_end": 45
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "与DUT同源的2 MHz时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效监视器复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_active",
+                  "comment": "生命周期处于RUN或STOPPING",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_progress",
+                  "comment": "本拍有任一进展事件",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_fault_record",
+                  "comment": "本拍有故障记录或阻断保持",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_fail_count",
+                  "comment": "已判定的静默停滞次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_max_noprog",
+                  "comment": "观测到的最长无进展游程",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_stall_event",
+                  "comment": "本拍新判定一次停滞，供TB打印明细",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_noprog",
+                  "comment": "当前无进展游程长度",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_noprog",
+                  "init": "",
+                  "comment": "当前连续无进展拍数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 无进展游程、停滞次数与最长游程"
+                  ],
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_stall",
+                  "init": "",
+                  "comment": "已判定的停滞次数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_max_noprog",
+                  "init": "",
+                  "comment": "运行以来无进展游程的峰值寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "kind": "reg",
+                  "width": "[7:0]",
+                  "name": "cnt_detail",
+                  "init": "",
+                  "comment": "已打印的停滞明细条数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_reported",
+                  "init": "",
+                  "comment": "当前无进展游程已计入一次停滞",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 本游程是否已经报告"
+                  ],
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_reset_run",
+                  "init": "",
+                  "comment": "本拍结束无进展游程",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_new_stall",
+                  "init": "",
+                  "comment": "本拍首次越过停滞门限",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 73,
+                  "line_end": 73
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_reset_run",
+                  "rhs": "i_progress || i_fault_record || !i_active",
+                  "comment": "有进展、有故障或不在运行期都清游程",
+                  "leading_comments": [
+                    "// 游程重置与停滞判定"
+                  ],
+                  "delay": "",
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "lhs": "flag_new_stall",
+                  "rhs": "!flag_reset_run && (cnt_noprog >= C_LIMIT) && !flag_reported",
+                  "comment": "首次越限的那一拍",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "lhs": "o_fail_count",
+                  "rhs": "cnt_stall",
+                  "comment": "汇总给TB结论逻辑",
+                  "leading_comments": [
+                    "// 停滞计数送出"
+                  ],
+                  "delay": "",
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "lhs": "o_max_noprog",
+                  "rhs": "cnt_max_noprog",
+                  "comment": "最长游程供汇总行引用",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 87,
+                  "line_end": 87
+                },
+                {
+                  "lhs": "o_stall_event",
+                  "rhs": "flag_new_stall",
+                  "comment": "新停滞单拍供明细打印",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "lhs": "o_noprog",
+                  "rhs": "cnt_noprog",
+                  "comment": "游程长度供明细打印",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 89,
+                  "line_end": 89
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_noprog"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_noprog",
+                    "cnt_noprog",
+                    "cnt_noprog"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 无进展游程计数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_noprog <= 32'd0;                // 复位清游程",
+                    "end else if(flag_reset_run == 1'b1)begin",
+                    "cnt_noprog <= 32'd0;                // 进展或故障出现时游程归零",
+                    "end else begin",
+                    "cnt_noprog <= cnt_noprog + 32'd1;   // 运行期无进展累加",
+                    "end"
+                  ],
+                  "line_start": 93,
+                  "line_end": 99
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_max_noprog"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_max_noprog",
+                    "cnt_max_noprog",
+                    "cnt_max_noprog"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 最长游程记录"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_max_noprog <= 32'd0;            // 复位清最长游程",
+                    "end else if(cnt_noprog > cnt_max_noprog)begin",
+                    "cnt_max_noprog <= cnt_noprog;       // 刷新最长无进展游程",
+                    "end else begin",
+                    "cnt_max_noprog <= cnt_max_noprog;   // 未超过时保持",
+                    "end"
+                  ],
+                  "line_start": 104,
+                  "line_end": 110
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_reported"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_reported",
+                    "flag_reported",
+                    "flag_reported",
+                    "flag_reported"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 本游程已报告标志"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_reported <= 1'b0;              // 复位后未报告",
+                    "end else if(flag_reset_run == 1'b1)begin",
+                    "flag_reported <= 1'b0;              // 游程结束允许下次再报",
+                    "end else if(flag_new_stall == 1'b1)begin",
+                    "flag_reported <= 1'b1;              // 同一游程只计一次",
+                    "end else begin",
+                    "flag_reported <= flag_reported;     // 游程中保持报告状态",
+                    "end"
+                  ],
+                  "line_start": 115,
+                  "line_end": 123
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_stall"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_stall",
+                    "cnt_stall",
+                    "cnt_stall"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 停滞次数累计"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_stall <= 32'd0;                 // 复位清停滞次数",
+                    "end else if(flag_new_stall == 1'b1)begin",
+                    "cnt_stall <= cnt_stall + 32'd1;     // 每次新停滞加一",
+                    "end else begin",
+                    "cnt_stall <= cnt_stall;             // 无新停滞时保持",
+                    "end"
+                  ],
+                  "line_start": 128,
+                  "line_end": 134
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 7,
+                "assigns": 6,
+                "always": 4,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 138
+            }
+          ],
+          "source_metrics": {
+            "lines": 138,
+            "nonempty_lines": 124,
+            "line_comments": 92,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 78,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v2_mon_liveness.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

@@ -1,0 +1,2993 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_identity.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_identity.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 507,
+      "code_lines": 383,
+      "line_comments": 311,
+      "commented_code_lines": 223,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_identity.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_identity.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_identity.v",
+            "syntax_confidence": 100,
+            "format_score": 92,
+            "rewrite_need_score": 10,
+            "rewrite_risk_score": 5,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 507,
+              "module_count": 1,
+              "module_names": [
+                "v2_mon_identity"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 107,
+              "end_count": 107,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_start_ack",
+                "i_commit",
+                "i_commit_frame",
+                "i_commit_idx",
+                "i_commit_color",
+                "i_commit_type",
+                "i_commit_prec",
+                "i_sched_inflight",
+                "i_ssw_inflight",
+                "i_ssw_frame",
+                "i_ssw_idx",
+                "i_ssw_color",
+                "i_ssw_type",
+                "i_ssw_prec",
+                "i_ami_inflight",
+                "i_ami_frame",
+                "i_ami_idx",
+                "i_ami_color",
+                "i_ami_type",
+                "i_ami_prec",
+                "i_done",
+                "i_done_success",
+                "i_lost",
+                "i_close_idx",
+                "i_result",
+                "i_res_frame",
+                "i_res_idx",
+                "i_res_color",
+                "i_res_type",
+                "i_disc",
+                "i_disc_frame",
+                "i_disc_idx",
+                "i_disc_color",
+                "i_disc_type",
+                "i_excl_window",
+                "o_commit_count",
+                "o_close_count",
+                "o_result_count",
+                "o_discard_count",
+                "o_fail_count",
+                "o_excl_count",
+                "o_fail_event",
+                "o_fail_code"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 23,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 88,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 1,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Owner Identity Scoreboard",
+            "module_name": "v2_mon_identity",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 item 2",
+            "simulations": "verification/v2_v7/tb/tb_v2_monitor_selftest.v, verification/v2_v7/tb/tb_v2_sweep.v",
+            "references": "contracts/PPG_SAR9_SAR15_SAFE_SELECTION_WRAPPER_INTERFACE_CONTRACT.md V1.11 sections 5.3 and 8.3,",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。只读owner身份记分板。调度器提交事件打开一个owner（帧号、序号、颜色、帧类型、精度）；下一拍SSW owner寄存器与AMI在途寄存器必须是同一身份，三方在途标志都为1；提交与关闭的过渡拍之外，三方标志必须与记分板开闭一致。恰好一次带该序号的AMI完成或作废关闭它。成功的NORMAL完成进入2项待决表（同一帧最多RED、IR两笔在等结果）；每个正式结果必须匹配并消费一项，每个身份有效的discard必须匹配一项待决、当前打开的owner（作废与原因11 discard同拍，此时关闭历史尚未更新）或最近2个已关闭owner之一，待决项超过C_RESOLVE_MAX拍未了结判失败。i_excl_window为高（F-3合同前提窗口）期间的违例单独计数，不算失败。o_fail_code失败码：1重复提交，2提交后一拍记录不一致，3在途标志不一致（连续不一致段只计一次），4无owner的关闭，5关闭序号不符，6无owner的结果，7无owner的discard，8完成未了结，9 START时owner仍打开，10待决表溢出（报告，绝不静默丢弃）。可综合检查核心。",
+              "owner身份记分板：三方记录一致、每owner一次关闭、结果与discard都能对上owner"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v2_mon_identity",
+              "params": [
+                {
+                  "keyword": "parameter",
+                  "name": "C_RESOLVE_MAX",
+                  "value": "10000",
+                  "decl_spec": "integer",
+                  "comment": "成功NORMAL完成到结果或discard的最长拍数",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                }
+              ],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "与DUT同源的2 MHz时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效监视器复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_start_ack",
+                  "comment": "调度器收到的START确认",
+                  "group": "生命周期输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit",
+                  "comment": "调度器owner提交单拍",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_commit_frame",
+                  "comment": "提交载荷帧号",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_commit_idx",
+                  "comment": "提交载荷序号",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit_color",
+                  "comment": "提交载荷颜色",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_commit_type",
+                  "comment": "提交载荷帧类型",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit_prec",
+                  "comment": "提交载荷精度",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 63,
+                  "line_end": 63
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_sched_inflight",
+                  "comment": "调度器状态向量中的B_INFLIGHT",
+                  "group": "调度器提交输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 64,
+                  "line_end": 64
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ssw_inflight",
+                  "comment": "SSW物理owner在途寄存",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 66,
+                  "line_end": 66
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_ssw_frame",
+                  "comment": "SSW锁存的owner帧号",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 67,
+                  "line_end": 67
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_ssw_idx",
+                  "comment": "SSW锁存的owner序号",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ssw_color",
+                  "comment": "SSW锁存的owner颜色",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_ssw_type",
+                  "comment": "SSW锁存的owner帧类型",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ssw_prec",
+                  "comment": "SSW锁存的owner精度",
+                  "group": "SSW记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 71,
+                  "line_end": 71
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ami_inflight",
+                  "comment": "AMI唯一ADC事务所有权寄存",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 73,
+                  "line_end": 73
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_ami_frame",
+                  "comment": "AMI锁存的物理事务帧号",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_ami_idx",
+                  "comment": "AMI锁存的物理事务序号",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ami_color",
+                  "comment": "AMI锁存的物理事务颜色",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_ami_type",
+                  "comment": "AMI锁存的物理事务类型",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 77,
+                  "line_end": 77
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_ami_prec",
+                  "comment": "AMI锁存的物理事务精度",
+                  "group": "AMI记录输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_done",
+                  "comment": "AMI完成事件",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_done_success",
+                  "comment": "完成成功资格",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 81,
+                  "line_end": 81
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_lost",
+                  "comment": "AMI作废事件",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 82,
+                  "line_end": 82
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_close_idx",
+                  "comment": "完成或作废携带的序号",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_result",
+                  "comment": "正式结果握手",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 84,
+                  "line_end": 84
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_res_frame",
+                  "comment": "结果帧号",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 85,
+                  "line_end": 85
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_res_idx",
+                  "comment": "结果序号",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 86,
+                  "line_end": 86
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_res_color",
+                  "comment": "结果颜色",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 87,
+                  "line_end": 87
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_res_type",
+                  "comment": "结果帧类型",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_disc",
+                  "comment": "身份有效的测量结果discard事件",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 89,
+                  "line_end": 89
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_disc_frame",
+                  "comment": "discard帧号",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 90,
+                  "line_end": 90
+                },
+                {
+                  "direction": "input",
+                  "width": "[15:0]",
+                  "name": "i_disc_idx",
+                  "comment": "discard序号",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 91,
+                  "line_end": 91
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_disc_color",
+                  "comment": "discard颜色",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 92,
+                  "line_end": 92
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_disc_type",
+                  "comment": "discard帧类型",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 93,
+                  "line_end": 93
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_excl_window",
+                  "comment": "F-3合同前提窗口，期间违例不计失败",
+                  "group": "关闭与输出输入",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_commit_count",
+                  "comment": "owner提交次数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 96,
+                  "line_end": 96
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_close_count",
+                  "comment": "owner关闭次数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 97,
+                  "line_end": 97
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_result_count",
+                  "comment": "已匹配的正式结果数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 98,
+                  "line_end": 98
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_discard_count",
+                  "comment": "已匹配的discard数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 99,
+                  "line_end": 99
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_fail_count",
+                  "comment": "身份违例次数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 100,
+                  "line_end": 100
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_excl_count",
+                  "comment": "F-3窗口内违例次数",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 101,
+                  "line_end": 101
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_fail_event",
+                  "comment": "本拍发生身份违例",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 102,
+                  "line_end": 102
+                },
+                {
+                  "direction": "output",
+                  "width": "[3:0]",
+                  "name": "o_fail_code",
+                  "comment": "本拍违例的失败码",
+                  "group": "统计输出",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 103,
+                  "line_end": 103
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [
+                {
+                  "keyword": "localparam",
+                  "name": "FRAME_TYPE_NORMAL",
+                  "value": "2'b10",
+                  "decl_spec": "[1:0]",
+                  "comment": "NORMAL帧类型编码",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 107,
+                  "line_end": 107
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_DOUBLE_COMMIT",
+                  "value": "4'd1",
+                  "decl_spec": "[3:0]",
+                  "comment": "重复提交",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_RECORD",
+                  "value": "4'd2",
+                  "decl_spec": "[3:0]",
+                  "comment": "提交后一拍三方记录不一致",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 109,
+                  "line_end": 109
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_INFLIGHT",
+                  "value": "4'd3",
+                  "decl_spec": "[3:0]",
+                  "comment": "三方在途标志不一致",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 110,
+                  "line_end": 110
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_CLOSE_NO_OWNER",
+                  "value": "4'd4",
+                  "decl_spec": "[3:0]",
+                  "comment": "无owner时出现关闭",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 111,
+                  "line_end": 111
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_CLOSE_IDX",
+                  "value": "4'd5",
+                  "decl_spec": "[3:0]",
+                  "comment": "关闭序号与owner不符",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 112,
+                  "line_end": 112
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_RESULT",
+                  "value": "4'd6",
+                  "decl_spec": "[3:0]",
+                  "comment": "结果对不上待决owner",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 113,
+                  "line_end": 113
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_DISCARD",
+                  "value": "4'd7",
+                  "decl_spec": "[3:0]",
+                  "comment": "discard对不上任何owner",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 114,
+                  "line_end": 114
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_UNRESOLVED",
+                  "value": "4'd8",
+                  "decl_spec": "[3:0]",
+                  "comment": "成功完成长期未了结",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 115,
+                  "line_end": 115
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_OPEN_AT_START",
+                  "value": "4'd9",
+                  "decl_spec": "[3:0]",
+                  "comment": "START时owner仍打开",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 116,
+                  "line_end": 116
+                },
+                {
+                  "keyword": "localparam",
+                  "name": "CODE_OVERFLOW",
+                  "value": "4'd10",
+                  "decl_spec": "[3:0]",
+                  "comment": "待决表已满仍有成功完成",
+                  "leading_comments": [],
+                  "synthetic": false,
+                  "line_start": 117,
+                  "line_end": 117
+                }
+              ],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_commit",
+                  "init": "",
+                  "comment": "提交次数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 各类统计与两项待决的年龄"
+                  ],
+                  "line_start": 121,
+                  "line_end": 121
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_close",
+                  "init": "",
+                  "comment": "关闭次数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 122,
+                  "line_end": 122
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_result",
+                  "init": "",
+                  "comment": "匹配结果数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 123,
+                  "line_end": 123
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_discard",
+                  "init": "",
+                  "comment": "匹配discard数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 124,
+                  "line_end": 124
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_fail",
+                  "init": "",
+                  "comment": "违例次数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 125,
+                  "line_end": 125
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_excl",
+                  "init": "",
+                  "comment": "前提窗口违例次数寄存",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 126,
+                  "line_end": 126
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_wait_first",
+                  "init": "",
+                  "comment": "先到待决项已等待的拍数",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 127,
+                  "line_end": 127
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_wait_second",
+                  "init": "",
+                  "comment": "后到待决项的老化计时器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 128,
+                  "line_end": 128
+                },
+                {
+                  "kind": "reg",
+                  "width": "[15:0]",
+                  "name": "reg_own_frame",
+                  "init": "",
+                  "comment": "当前owner帧号",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 当前owner、两项待决与两项关闭历史，待决键为{有效,帧号,序号,颜色,类型低位}"
+                  ],
+                  "line_start": 132,
+                  "line_end": 132
+                },
+                {
+                  "kind": "reg",
+                  "width": "[15:0]",
+                  "name": "reg_own_idx",
+                  "init": "",
+                  "comment": "当前owner序号",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 133,
+                  "line_end": 133
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_own_color",
+                  "init": "",
+                  "comment": "当前owner颜色",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 134,
+                  "line_end": 134
+                },
+                {
+                  "kind": "reg",
+                  "width": "[1:0]",
+                  "name": "reg_own_type",
+                  "init": "",
+                  "comment": "当前owner帧类型",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 135,
+                  "line_end": 135
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "reg_own_prec",
+                  "init": "",
+                  "comment": "当前owner精度",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 136,
+                  "line_end": 136
+                },
+                {
+                  "kind": "reg",
+                  "width": "[34:0]",
+                  "name": "reg_wait_first",
+                  "init": "",
+                  "comment": "先入表的成功完成身份，有效位在最高位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 137,
+                  "line_end": 137
+                },
+                {
+                  "kind": "reg",
+                  "width": "[34:0]",
+                  "name": "reg_wait_second",
+                  "init": "",
+                  "comment": "先到项被占时，第二笔成功完成落在这里",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 138,
+                  "line_end": 138
+                },
+                {
+                  "kind": "reg",
+                  "width": "[35:0]",
+                  "name": "reg_closed_last",
+                  "init": "",
+                  "comment": "最近一次关闭的owner：有效位与完整身份",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 139,
+                  "line_end": 139
+                },
+                {
+                  "kind": "reg",
+                  "width": "[35:0]",
+                  "name": "reg_closed_prev",
+                  "init": "",
+                  "comment": "更早一次关闭的owner，由最近记录下移得到",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 140,
+                  "line_end": 140
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_open",
+                  "init": "",
+                  "comment": "当前有owner打开",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// owner开闭状态与组合判定"
+                  ],
+                  "line_start": 144,
+                  "line_end": 144
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_commit_d1",
+                  "init": "",
+                  "comment": "上一拍发生提交",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 145,
+                  "line_end": 145
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_inflight_bad_d1",
+                  "init": "",
+                  "comment": "上一拍三方标志已不一致，同一段不一致只计一次",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 146,
+                  "line_end": 146
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_first_timeout_seen",
+                  "init": "",
+                  "comment": "先到待决项已经报过一次超时",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 147,
+                  "line_end": 147
+                },
+                {
+                  "kind": "reg",
+                  "width": "",
+                  "name": "flag_second_timeout_seen",
+                  "init": "",
+                  "comment": "后到待决项的超时只计一次的闩",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 148,
+                  "line_end": 148
+                },
+                {
+                  "kind": "wire",
+                  "width": "[34:0]",
+                  "name": "flag_own_key",
+                  "init": "",
+                  "comment": "当前owner的身份键与有效位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 149,
+                  "line_end": 149
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_close",
+                  "init": "",
+                  "comment": "本拍完成或作废",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 150,
+                  "line_end": 150
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_record_bad",
+                  "init": "",
+                  "comment": "提交后一拍记录或标志不符",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 151,
+                  "line_end": 151
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_inflight_bad",
+                  "init": "",
+                  "comment": "稳定期三方标志不一致",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 152,
+                  "line_end": 152
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_inflight_new",
+                  "init": "",
+                  "comment": "三方标志不一致段的第一拍",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 153,
+                  "line_end": 153
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_double_commit",
+                  "init": "",
+                  "comment": "打开期间再次提交",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 154,
+                  "line_end": 154
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_close_no_owner",
+                  "init": "",
+                  "comment": "无owner的关闭",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 155,
+                  "line_end": 155
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_close_idx_bad",
+                  "init": "",
+                  "comment": "关闭序号不符",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 156,
+                  "line_end": 156
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_push",
+                  "init": "",
+                  "comment": "本拍成功NORMAL完成需入待决表",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 157,
+                  "line_end": 157
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_store_first",
+                  "init": "",
+                  "comment": "本拍成功完成写进先到项",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 158,
+                  "line_end": 158
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_store_second",
+                  "init": "",
+                  "comment": "先到项已占用，本拍写进后到项",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 159,
+                  "line_end": 159
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_res_first",
+                  "init": "",
+                  "comment": "正式结果与先到项身份相同",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 160,
+                  "line_end": 160
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_res_second",
+                  "init": "",
+                  "comment": "正式结果只与后到项身份相同",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 161,
+                  "line_end": 161
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_disc_first",
+                  "init": "",
+                  "comment": "discard了结先到项",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 162,
+                  "line_end": 162
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_disc_second",
+                  "init": "",
+                  "comment": "discard只能了结后到项",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 163,
+                  "line_end": 163
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_hist_hit",
+                  "init": "",
+                  "comment": "discard命中关闭历史",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 164,
+                  "line_end": 164
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_disc_open_hit",
+                  "init": "",
+                  "comment": "discard属于当前打开（含本拍正在关闭）的owner",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 165,
+                  "line_end": 165
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_late_first",
+                  "init": "",
+                  "comment": "先到项本拍首次越过了结时限",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 166,
+                  "line_end": 166
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_late_second",
+                  "init": "",
+                  "comment": "后到项等结果超过C_RESOLVE_MAX",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 167,
+                  "line_end": 167
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_result_bad",
+                  "init": "",
+                  "comment": "结果无命中",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 168,
+                  "line_end": 168
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_disc_bad",
+                  "init": "",
+                  "comment": "discard无命中",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 169,
+                  "line_end": 169
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_unresolved",
+                  "init": "",
+                  "comment": "有待决项刚超时",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 170,
+                  "line_end": 170
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_open_at_start",
+                  "init": "",
+                  "comment": "START时仍有owner",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 171,
+                  "line_end": 171
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_overflow",
+                  "init": "",
+                  "comment": "入表时无空位",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 172,
+                  "line_end": 172
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_any_bad",
+                  "init": "",
+                  "comment": "本拍任一违例",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 173,
+                  "line_end": 173
+                },
+                {
+                  "kind": "reg",
+                  "width": "[3:0]",
+                  "name": "enc_fail_code",
+                  "init": "",
+                  "comment": "本拍违例的最高优先失败码",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 违例优先级编码"
+                  ],
+                  "line_start": 177,
+                  "line_end": 177
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_own_key",
+                  "rhs": "{1'b1, reg_own_frame, reg_own_idx, reg_own_color, reg_own_type[0]}",
+                  "comment": "待决项恒为NORMAL，类型只需留低位",
+                  "leading_comments": [
+                    "// 单owner生命周期判定"
+                  ],
+                  "delay": "",
+                  "line_start": 185,
+                  "line_end": 185
+                },
+                {
+                  "lhs": "flag_close",
+                  "rhs": "i_done || i_lost",
+                  "comment": "完成或作废即关闭",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 186,
+                  "line_end": 186
+                },
+                {
+                  "lhs": "flag_record_bad",
+                  "rhs": "flag_commit_d1 && flag_open && (!i_sched_inflight || !i_ssw_inflight || !i_ami_inflight || (i_ssw_frame != reg_own_frame) || (i_ssw_idx != reg_own_idx) || (i_ssw_color != reg_own_color) || (i_ssw_type != reg_own_type) || (i_ssw_prec != reg_own_prec) || (i_ami_frame != reg_own_frame) || (i_ami_idx != reg_own_idx) || (i_ami_color != reg_own_color) || (i_ami_type != reg_own_type) || (i_ami_prec != reg_own_prec))",
+                  "comment": "提交后一拍三方身份与标志必须一致",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 187,
+                  "line_end": 187
+                },
+                {
+                  "lhs": "flag_inflight_bad",
+                  "rhs": "!i_commit && !flag_commit_d1 && !flag_close && (flag_open ? !(i_sched_inflight && i_ssw_inflight && i_ami_inflight) : (i_sched_inflight || i_ssw_inflight || i_ami_inflight))",
+                  "comment": "非过渡拍三方标志须与记分板开闭一致",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 188,
+                  "line_end": 188
+                },
+                {
+                  "lhs": "flag_inflight_new",
+                  "rhs": "flag_inflight_bad && !flag_inflight_bad_d1",
+                  "comment": "只在不一致段开始时报告",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 189,
+                  "line_end": 189
+                },
+                {
+                  "lhs": "flag_double_commit",
+                  "rhs": "i_commit && flag_open && !flag_close",
+                  "comment": "未关闭又提交",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 190,
+                  "line_end": 190
+                },
+                {
+                  "lhs": "flag_close_no_owner",
+                  "rhs": "flag_close && !flag_open",
+                  "comment": "关闭时记分板没有打开的owner",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 191,
+                  "line_end": 191
+                },
+                {
+                  "lhs": "flag_close_idx_bad",
+                  "rhs": "flag_close && flag_open && (i_close_idx != reg_own_idx)",
+                  "comment": "关闭事件序号与打开的owner不同",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 192,
+                  "line_end": 192
+                },
+                {
+                  "lhs": "flag_push",
+                  "rhs": "i_done && i_done_success && flag_open && (i_close_idx == reg_own_idx) && (reg_own_type == FRAME_TYPE_NORMAL)",
+                  "comment": "成功NORMAL完成入表",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 193,
+                  "line_end": 193
+                },
+                {
+                  "lhs": "flag_store_first",
+                  "rhs": "flag_push && !reg_wait_first[34]",
+                  "comment": "先到项空闲时由它接收",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 194,
+                  "line_end": 194
+                },
+                {
+                  "lhs": "flag_store_second",
+                  "rhs": "flag_push && reg_wait_first[34] && !reg_wait_second[34]",
+                  "comment": "先到项被占而后到项空闲时转写后到项",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 195,
+                  "line_end": 195
+                },
+                {
+                  "lhs": "flag_res_first",
+                  "rhs": "i_result && reg_wait_first[34] && (reg_wait_first[33:0] == {i_res_frame, i_res_idx, i_res_color, i_res_type[0]}) && (i_res_type == FRAME_TYPE_NORMAL)",
+                  "comment": "结果四元身份与先到项相符",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 196,
+                  "line_end": 196
+                },
+                {
+                  "lhs": "flag_res_second",
+                  "rhs": "i_result && reg_wait_second[34] && (reg_wait_second[33:0] == {i_res_frame, i_res_idx, i_res_color, i_res_type[0]}) && (i_res_type == FRAME_TYPE_NORMAL) && !flag_res_first",
+                  "comment": "先到项未命中时再比后到项",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 197,
+                  "line_end": 197
+                },
+                {
+                  "lhs": "flag_disc_first",
+                  "rhs": "i_disc && reg_wait_first[34] && (reg_wait_first[33:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type[0]}) && (i_disc_type == FRAME_TYPE_NORMAL)",
+                  "comment": "测量discard按身份了结先到项",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 198,
+                  "line_end": 198
+                },
+                {
+                  "lhs": "flag_disc_second",
+                  "rhs": "i_disc && reg_wait_second[34] && (reg_wait_second[33:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type[0]}) && (i_disc_type == FRAME_TYPE_NORMAL) && !flag_disc_first",
+                  "comment": "先到项未被discard命中时检查后到项",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 199,
+                  "line_end": 199
+                },
+                {
+                  "lhs": "flag_hist_hit",
+                  "rhs": "i_disc && ((reg_closed_last[35] && (reg_closed_last[34:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type})) || (reg_closed_prev[35] && (reg_closed_prev[34:0] == {i_disc_frame, i_disc_idx, i_disc_color, i_disc_type})))",
+                  "comment": "discard属于最近两次关闭的owner",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 200,
+                  "line_end": 200
+                },
+                {
+                  "lhs": "flag_late_first",
+                  "rhs": "reg_wait_first[34] && !flag_first_timeout_seen && (cnt_wait_first >= C_RESOLVE_MAX)",
+                  "comment": "先到项年龄达到时限且尚未报过",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 201,
+                  "line_end": 201
+                },
+                {
+                  "lhs": "flag_late_second",
+                  "rhs": "reg_wait_second[34] && !flag_second_timeout_seen && (cnt_wait_second >= C_RESOLVE_MAX)",
+                  "comment": "后到项第一次超时的那一拍",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 202,
+                  "line_end": 202
+                },
+                {
+                  "lhs": "flag_disc_open_hit",
+                  "rhs": "i_disc && flag_open && ({i_disc_frame, i_disc_idx, i_disc_color, i_disc_type} == {reg_own_frame, reg_own_idx, reg_own_color, reg_own_type})",
+                  "comment": "作废与原因11 discard同拍时，关闭历史尚未更新",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 203,
+                  "line_end": 203
+                },
+                {
+                  "lhs": "flag_result_bad",
+                  "rhs": "i_result && !flag_res_first && !flag_res_second",
+                  "comment": "结果没有对应的成功完成",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 204,
+                  "line_end": 204
+                },
+                {
+                  "lhs": "flag_disc_bad",
+                  "rhs": "i_disc && !flag_disc_first && !flag_disc_second && !flag_hist_hit && !flag_disc_open_hit",
+                  "comment": "discard既不在待决、历史，也不是当前owner",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 205,
+                  "line_end": 205
+                },
+                {
+                  "lhs": "flag_unresolved",
+                  "rhs": "flag_late_first || flag_late_second",
+                  "comment": "任一待决项刚超时",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 206,
+                  "line_end": 206
+                },
+                {
+                  "lhs": "flag_open_at_start",
+                  "rhs": "i_start_ack && flag_open",
+                  "comment": "START时owner未关",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 207,
+                  "line_end": 207
+                },
+                {
+                  "lhs": "flag_overflow",
+                  "rhs": "flag_push && reg_wait_first[34] && reg_wait_second[34]",
+                  "comment": "两项都占用仍要入表",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 208,
+                  "line_end": 208
+                },
+                {
+                  "lhs": "flag_any_bad",
+                  "rhs": "flag_double_commit || flag_record_bad || flag_inflight_new || flag_close_no_owner || flag_close_idx_bad || flag_result_bad || flag_disc_bad || flag_unresolved || flag_open_at_start || flag_overflow",
+                  "comment": "汇总违例",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 209,
+                  "line_end": 209
+                },
+                {
+                  "lhs": "o_commit_count",
+                  "rhs": "cnt_commit",
+                  "comment": "提交次数送汇总",
+                  "leading_comments": [
+                    "// 统计与违例事件送出"
+                  ],
+                  "delay": "",
+                  "line_start": 213,
+                  "line_end": 213
+                },
+                {
+                  "lhs": "o_close_count",
+                  "rhs": "cnt_close",
+                  "comment": "关闭次数送汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 214,
+                  "line_end": 214
+                },
+                {
+                  "lhs": "o_result_count",
+                  "rhs": "cnt_result",
+                  "comment": "匹配结果数送汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 215,
+                  "line_end": 215
+                },
+                {
+                  "lhs": "o_discard_count",
+                  "rhs": "cnt_discard",
+                  "comment": "匹配discard数送汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 216,
+                  "line_end": 216
+                },
+                {
+                  "lhs": "o_fail_count",
+                  "rhs": "cnt_fail",
+                  "comment": "违例次数送结论",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 217,
+                  "line_end": 217
+                },
+                {
+                  "lhs": "o_excl_count",
+                  "rhs": "cnt_excl",
+                  "comment": "前提窗口违例次数送汇总",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 218,
+                  "line_end": 218
+                },
+                {
+                  "lhs": "o_fail_event",
+                  "rhs": "flag_any_bad",
+                  "comment": "违例单拍供明细",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 219,
+                  "line_end": 219
+                },
+                {
+                  "lhs": "o_fail_code",
+                  "rhs": "enc_fail_code",
+                  "comment": "违例码供明细",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 220,
+                  "line_end": 220
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(*)",
+                  "targets": [
+                    "enc_fail_code"
+                  ],
+                  "clock": "",
+                  "reset": "",
+                  "trigger_kind": "comb",
+                  "is_combinational": true,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "always_comb",
+                  "target_count": 1,
+                  "lvalues": [
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code",
+                    "enc_fail_code"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 24,
+                  "leading_comments": [
+                    "// 失败码按优先级编码"
+                  ],
+                  "lines": [
+                    "enc_fail_code = 4'd0;                   // 默认无违例",
+                    "if(flag_double_commit)begin",
+                    "enc_fail_code = CODE_DOUBLE_COMMIT; // 重复提交优先",
+                    "end else if(flag_record_bad)begin",
+                    "enc_fail_code = CODE_RECORD;        // 记录不一致",
+                    "end else if(flag_inflight_new)begin",
+                    "enc_fail_code = CODE_INFLIGHT;      // 在途标志不一致",
+                    "end else if(flag_close_no_owner)begin",
+                    "enc_fail_code = CODE_CLOSE_NO_OWNER; // 编码为无owner关闭",
+                    "end else if(flag_close_idx_bad)begin",
+                    "enc_fail_code = CODE_CLOSE_IDX;     // 编码为关闭序号错配",
+                    "end else if(flag_result_bad)begin",
+                    "enc_fail_code = CODE_RESULT;        // 结果无owner",
+                    "end else if(flag_disc_bad)begin",
+                    "enc_fail_code = CODE_DISCARD;       // discard无owner",
+                    "end else if(flag_unresolved)begin",
+                    "enc_fail_code = CODE_UNRESOLVED;    // 编码为完成后久未出结果",
+                    "end else if(flag_open_at_start)begin",
+                    "enc_fail_code = CODE_OPEN_AT_START; // 编码为新RUN残留owner",
+                    "end else if(flag_overflow)begin",
+                    "enc_fail_code = CODE_OVERFLOW;      // 待决表溢出",
+                    "end else begin",
+                    "enc_fail_code = 4'd0;               // 本拍无任何违例",
+                    "end"
+                  ],
+                  "line_start": 224,
+                  "line_end": 247
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_open"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_open",
+                    "flag_open",
+                    "flag_open",
+                    "flag_open"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// owner开闭状态"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_open <= 1'b0;                  // 复位无owner",
+                    "end else if(i_commit == 1'b1)begin",
+                    "flag_open <= 1'b1;                  // 提交打开owner",
+                    "end else if(flag_close == 1'b1)begin",
+                    "flag_open <= 1'b0;                  // 完成或作废关闭owner",
+                    "end else begin",
+                    "flag_open <= flag_open;             // 其余保持开闭",
+                    "end"
+                  ],
+                  "line_start": 252,
+                  "line_end": 260
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_commit_d1"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_commit_d1",
+                    "flag_commit_d1"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 提交延迟一拍，供提交后一拍的三方记录比较"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_commit_d1 <= 1'b0;             // 复位无提交历史",
+                    "end else begin",
+                    "flag_commit_d1 <= i_commit;         // 记录本拍是否提交",
+                    "end"
+                  ],
+                  "line_start": 265,
+                  "line_end": 269
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_inflight_bad_d1"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_inflight_bad_d1",
+                    "flag_inflight_bad_d1"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 5,
+                  "leading_comments": [
+                    "// 三方标志不一致段的历史"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_inflight_bad_d1 <= 1'b0;       // 复位时无不一致段",
+                    "end else begin",
+                    "flag_inflight_bad_d1 <= flag_inflight_bad; // 记录本拍是否处于不一致段",
+                    "end"
+                  ],
+                  "line_start": 274,
+                  "line_end": 278
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_own_frame"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_own_frame",
+                    "reg_own_frame",
+                    "reg_own_frame"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 打开的owner帧号快照"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_own_frame <= 16'd0;             // 复位清owner帧号",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_own_frame <= i_commit_frame;    // 提交拍锁存帧号",
+                    "end else begin",
+                    "reg_own_frame <= reg_own_frame;     // 帧号保持到下次提交",
+                    "end"
+                  ],
+                  "line_start": 283,
+                  "line_end": 289
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_own_idx"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_own_idx",
+                    "reg_own_idx",
+                    "reg_own_idx"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 打开的owner序号快照，关闭事件据此核对"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_own_idx <= 16'd0;               // 复位清owner序号",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_own_idx <= i_commit_idx;        // 提交拍锁存序号",
+                    "end else begin",
+                    "reg_own_idx <= reg_own_idx;         // 序号快照不随关闭清除",
+                    "end"
+                  ],
+                  "line_start": 294,
+                  "line_end": 300
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_own_color"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_own_color",
+                    "reg_own_color",
+                    "reg_own_color"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 打开的owner颜色快照"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_own_color <= 1'b0;              // 复位颜色为RED",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_own_color <= i_commit_color;    // 提交拍锁存颜色",
+                    "end else begin",
+                    "reg_own_color <= reg_own_color;     // 颜色快照维持",
+                    "end"
+                  ],
+                  "line_start": 305,
+                  "line_end": 311
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_own_type"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_own_type",
+                    "reg_own_type",
+                    "reg_own_type"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 打开的owner类型快照，决定是否进入待决表"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_own_type <= 2'b00;              // 复位类型清零",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_own_type <= i_commit_type;      // 提交拍锁存类型",
+                    "end else begin",
+                    "reg_own_type <= reg_own_type;       // 类型快照维持",
+                    "end"
+                  ],
+                  "line_start": 316,
+                  "line_end": 322
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_own_prec"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_own_prec",
+                    "reg_own_prec",
+                    "reg_own_prec"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 打开的owner精度快照，供三方精度比较"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_own_prec <= 1'b0;               // 复位精度为SAR9",
+                    "end else if(i_commit == 1'b1)begin",
+                    "reg_own_prec <= i_commit_prec;      // 提交拍锁存精度",
+                    "end else begin",
+                    "reg_own_prec <= reg_own_prec;       // 精度快照维持",
+                    "end"
+                  ],
+                  "line_start": 327,
+                  "line_end": 333
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_wait_first"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_wait_first",
+                    "reg_wait_first",
+                    "reg_wait_first",
+                    "reg_wait_first",
+                    "reg_wait_first"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 11,
+                  "leading_comments": [
+                    "// 先到待决项：成功NORMAL完成写入，结果或discard了结，START清空"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_wait_first <= 35'd0;            // 复位清空先到项",
+                    "end else if(i_start_ack == 1'b1)begin",
+                    "reg_wait_first <= 35'd0;            // 新RUN丢弃上一RUN的先到项",
+                    "end else if(flag_store_first == 1'b1)begin",
+                    "reg_wait_first <= flag_own_key;     // 先到项记下成功完成的身份",
+                    "end else if(flag_res_first || flag_disc_first)begin",
+                    "reg_wait_first <= 35'd0;            // 先到项被结果或discard了结",
+                    "end else begin",
+                    "reg_wait_first <= reg_wait_first;   // 先到项状态不变",
+                    "end"
+                  ],
+                  "line_start": 338,
+                  "line_end": 348
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_wait_second"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_wait_second",
+                    "reg_wait_second",
+                    "reg_wait_second",
+                    "reg_wait_second",
+                    "reg_wait_second"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 11,
+                  "leading_comments": [
+                    "// 后到待决项：同帧第二笔成功完成在先到项未了结时的去处"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_wait_second <= 35'd0;           // 上电时后到项为空",
+                    "end else if(i_start_ack == 1'b1)begin",
+                    "reg_wait_second <= 35'd0;           // START开启新RUN，旧RUN的后到项作废",
+                    "end else if(flag_store_second == 1'b1)begin",
+                    "reg_wait_second <= flag_own_key;    // 后到项记下第二笔成功完成",
+                    "end else if(flag_res_second || flag_disc_second)begin",
+                    "reg_wait_second <= 35'd0;           // 命中后到项的结果或discard让它空出",
+                    "end else begin",
+                    "reg_wait_second <= reg_wait_second; // 后到项内容维持",
+                    "end"
+                  ],
+                  "line_start": 353,
+                  "line_end": 363
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_first_timeout_seen"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_first_timeout_seen",
+                    "flag_first_timeout_seen",
+                    "flag_first_timeout_seen",
+                    "flag_first_timeout_seen"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 先到项超时只报一次的闩"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_first_timeout_seen <= 1'b0;    // 复位时先到项尚未报过超时",
+                    "end else if(flag_store_first || flag_res_first || flag_disc_first || i_start_ack)begin",
+                    "flag_first_timeout_seen <= 1'b0;    // 先到项换新、了结或START时解除闩",
+                    "end else if(flag_late_first == 1'b1)begin",
+                    "flag_first_timeout_seen <= 1'b1;    // 先到项首次超时即置闩",
+                    "end else begin",
+                    "flag_first_timeout_seen <= flag_first_timeout_seen; // 先到项闩维持",
+                    "end"
+                  ],
+                  "line_start": 368,
+                  "line_end": 376
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "flag_second_timeout_seen"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "flag_second_timeout_seen",
+                    "flag_second_timeout_seen",
+                    "flag_second_timeout_seen",
+                    "flag_second_timeout_seen"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 后到项的超时报告状态，换新、了结或START时解除"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "flag_second_timeout_seen <= 1'b0;   // 上电时后到项闩清零",
+                    "end else if(flag_store_second || flag_res_second || flag_disc_second || i_start_ack)begin",
+                    "flag_second_timeout_seen <= 1'b0;   // 后到项被替换、了结或START时允许再次报告",
+                    "end else if(flag_late_second == 1'b1)begin",
+                    "flag_second_timeout_seen <= 1'b1;   // 后到项首次超时后置闩",
+                    "end else begin",
+                    "flag_second_timeout_seen <= flag_second_timeout_seen; // 未发生变化时闩维持原值",
+                    "end"
+                  ],
+                  "line_start": 381,
+                  "line_end": 389
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_wait_first"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_wait_first",
+                    "cnt_wait_first",
+                    "cnt_wait_first",
+                    "cnt_wait_first"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 先到项从入表起算的等待时长"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_wait_first <= 32'd0;            // 复位清先到项计时",
+                    "end else if(flag_store_first == 1'b1)begin",
+                    "cnt_wait_first <= 32'd0;            // 先到项新写入从0计",
+                    "end else if(reg_wait_first[34] == 1'b1)begin",
+                    "cnt_wait_first <= cnt_wait_first + 32'd1; // 先到项有效时逐拍老化",
+                    "end else begin",
+                    "cnt_wait_first <= 32'd0;            // 先到项空闲时计时为0",
+                    "end"
+                  ],
+                  "line_start": 394,
+                  "line_end": 402
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_wait_second"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_wait_second",
+                    "cnt_wait_second",
+                    "cnt_wait_second",
+                    "cnt_wait_second"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 9,
+                  "leading_comments": [
+                    "// 后到项老化计时，空闲时停在0"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_wait_second <= 32'd0;           // 上电时后到项计时器为0",
+                    "end else if(flag_store_second == 1'b1)begin",
+                    "cnt_wait_second <= 32'd0;           // 后到项刚写入，计时器归零",
+                    "end else if(reg_wait_second[34] == 1'b1)begin",
+                    "cnt_wait_second <= cnt_wait_second + 32'd1; // 后到项有效期间每拍加一",
+                    "end else begin",
+                    "cnt_wait_second <= 32'd0;           // 后到项空闲，计时器停在0",
+                    "end"
+                  ],
+                  "line_start": 407,
+                  "line_end": 415
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_closed_last"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_closed_last",
+                    "reg_closed_last",
+                    "reg_closed_last"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 最近一次关闭的owner"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_closed_last <= 36'd0;           // 复位清最近关闭记录",
+                    "end else if(flag_close && flag_open)begin",
+                    "reg_closed_last <= {1'b1, reg_own_frame, reg_own_idx, reg_own_color, reg_own_type}; // 记下刚关闭的owner",
+                    "end else begin",
+                    "reg_closed_last <= reg_closed_last; // 无关闭时最近记录不动",
+                    "end"
+                  ],
+                  "line_start": 420,
+                  "line_end": 426
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "reg_closed_prev"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "reg_closed_prev",
+                    "reg_closed_prev",
+                    "reg_closed_prev"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 每次关闭时把最近记录下移一级"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "reg_closed_prev <= 36'd0;           // 复位清次近关闭记录",
+                    "end else if(flag_close && flag_open)begin",
+                    "reg_closed_prev <= reg_closed_last; // 最近记录退到次近位置",
+                    "end else begin",
+                    "reg_closed_prev <= reg_closed_prev; // 无关闭时次近记录不动",
+                    "end"
+                  ],
+                  "line_start": 431,
+                  "line_end": 437
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_commit"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_commit",
+                    "cnt_commit",
+                    "cnt_commit"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 统计调度器提交事件的总数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_commit <= 32'd0;                // 复位清提交计数",
+                    "end else if(i_commit == 1'b1)begin",
+                    "cnt_commit <= cnt_commit + 32'd1;   // 每次提交加一",
+                    "end else begin",
+                    "cnt_commit <= cnt_commit;           // 无提交保持",
+                    "end"
+                  ],
+                  "line_start": 442,
+                  "line_end": 448
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_close"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_close",
+                    "cnt_close",
+                    "cnt_close"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 完成与作废合计的关闭次数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_close <= 32'd0;                 // 复位清关闭计数",
+                    "end else if(flag_close == 1'b1)begin",
+                    "cnt_close <= cnt_close + 32'd1;     // 完成或作废加一",
+                    "end else begin",
+                    "cnt_close <= cnt_close;             // 无关闭保持",
+                    "end"
+                  ],
+                  "line_start": 453,
+                  "line_end": 459
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_result"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_result",
+                    "cnt_result",
+                    "cnt_result"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 匹配结果数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_result <= 32'd0;                // 复位清结果匹配数",
+                    "end else if(i_result && !flag_result_bad)begin",
+                    "cnt_result <= cnt_result + 32'd1;   // 命中待决项的结果",
+                    "end else begin",
+                    "cnt_result <= cnt_result;           // 未命中或无结果保持",
+                    "end"
+                  ],
+                  "line_start": 464,
+                  "line_end": 470
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_discard"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_discard",
+                    "cnt_discard",
+                    "cnt_discard"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 匹配discard数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_discard <= 32'd0;               // 复位清discard匹配数",
+                    "end else if(i_disc && !flag_disc_bad)begin",
+                    "cnt_discard <= cnt_discard + 32'd1; // 能对上owner的discard",
+                    "end else begin",
+                    "cnt_discard <= cnt_discard;         // 未命中或无discard保持",
+                    "end"
+                  ],
+                  "line_start": 475,
+                  "line_end": 481
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_fail"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_fail",
+                    "cnt_fail",
+                    "cnt_fail"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 违例次数：前提窗口外计入"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_fail <= 32'd0;                  // 复位清违例计数",
+                    "end else if(flag_any_bad && !i_excl_window)begin",
+                    "cnt_fail <= cnt_fail + 32'd1;       // 窗口外违例加一",
+                    "end else begin",
+                    "cnt_fail <= cnt_fail;               // 无违例或窗口内保持",
+                    "end"
+                  ],
+                  "line_start": 486,
+                  "line_end": 492
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_excl"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_excl",
+                    "cnt_excl",
+                    "cnt_excl"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 前提窗口内违例次数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_excl <= 32'd0;                  // 复位清前提窗口计数",
+                    "end else if(flag_any_bad && i_excl_window)begin",
+                    "cnt_excl <= cnt_excl + 32'd1;       // F-3窗口内的违例单独记",
+                    "end else begin",
+                    "cnt_excl <= cnt_excl;               // 窗口外或无违例保持",
+                    "end"
+                  ],
+                  "line_start": 497,
+                  "line_end": 503
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 11,
+                "decls": 48,
+                "assigns": 33,
+                "always": 23,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 45,
+              "line_end": 507
+            }
+          ],
+          "source_metrics": {
+            "lines": 507,
+            "nonempty_lines": 471,
+            "line_comments": 311,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 423,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v2_mon_identity.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

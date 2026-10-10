@@ -20,7 +20,7 @@
 // Revision Date:   2026/10/10
 // History:
 //     Time          Version     Revised by     Contents
-// 2026/10/10        V1.0        Erie          Create file. Verification-only behaviour model of the 9-bit (Stage1) and 15-bit (Stage1+Stage2) pipeline SAR ADC seen by ppg_control_top. A conversion starts at the rising edge of the owner Q3 window; the selected CLK_DOUT rises i_latency cycles later with DOUT stable one cycle before the edge. Three DONE shapes are selectable: compatibility (the 5-cycle pulse issued one cycle after Q3 closes, equivalent to the bg_adc_responder of tb_ppg_control_top_adc_anomaly.v V1.2), and three level modes in which DONE stays high after the conversion: mode 1 is the held behaviour confirmed by the analog designer on 2026-10-10 (Stage1 DONE falls at the rising edge of the next owner transaction's Q1, CLK_9Q1_LOW or CLK_15Q1_LOW, and the ADC counts as busy from that Q1; on a 15-bit transaction Stage2 falls only after Stage1 has risen, stays low 5 cycles (at least 4) and rises at the end of the Stage2 comparison); mode 2 drops DONE at the transaction-start fire and is a non-physical contrast only; mode 3 drops it on an external pulse. Physical idle is either "no conversion in progress" or the C01 6.2.1 formula that also requires the selected DONE to be low, optionally delayed by 0..3 cycles (i_idle_delay) to mimic the single-point synchronizer outside ppg_control_top. Per-slot (RED/IR/CAL) fault injection by occurrence number: lost completion, late completion at an absolute frame/tick (the ADC stays busy until the late DONE in every mode, so a late DONE never arrives after physical idle), busy then recover without DONE, and busy forever.
+// 2026/10/10        V1.0        Erie          Create file. Verification-only behaviour model of the 9-bit (Stage1) and 15-bit (Stage1+Stage2) pipeline SAR ADC seen by ppg_control_top. A conversion starts at the rising edge of the owner Q3 window; the selected CLK_DOUT rises i_latency cycles later with DOUT stable one cycle before the edge. Three DONE shapes are selectable: compatibility (the 5-cycle pulse issued one cycle after Q3 closes, equivalent to the bg_adc_responder of tb_ppg_control_top_adc_anomaly.v V1.2), and three level modes in which DONE stays high after the conversion: mode 1 is the held behaviour confirmed by the analog designer on 2026-10-10 (Stage1 DONE falls at the rising edge of the next owner transaction's Q1, CLK_9Q1_LOW or CLK_15Q1_LOW, and the ADC counts as busy from that Q1; on a 15-bit transaction Stage2 falls only after Stage1 has risen, stays low 5 cycles (at least 4) and rises at the end of the Stage2 comparison); mode 2 drops DONE at the transaction-start fire and is a non-physical contrast only; mode 3 drops it on an external pulse. Physical idle is either "no conversion in progress" or the C01 6.2.1 formula that also requires the selected DONE to be low, optionally delayed by 0..3 cycles (i_idle_delay) to mimic the single-point synchronizer outside ppg_control_top. Per-slot (RED/IR/CAL) fault injection by occurrence number: lost completion, late completion at an absolute frame/tick, converted at conversion start into an absolute cycle count (frame offset x 5000 + tick - current tick) so that it still expires when frames stall behind an in-flight owner (the ADC stays busy until the late DONE in every mode, so a late DONE never arrives after physical idle), busy then recover without DONE, and busy forever.
 ///////////////////////////////////Chinese////////////////////////////////////////
 // 版权归属:        Erie
 // 开发人员:        Erie
@@ -40,7 +40,7 @@
 // 修订日期:        2026年10月10日
 // 修订历史:
 //     时间          版本        修订人        修订内容
-// 2026年10月10日   V1.0        Erie          创建文件。仅供验证的9位（Stage1）与15位（Stage1+Stage2）流水线SAR ADC行为模型。转换在owner的Q3窗口上升沿开始，所选CLK_DOUT在i_latency拍后上升，DOUT在上升沿前一拍已稳定。DONE形态可选：兼容模式（Q3关闭后一拍发出5拍脉冲，等价于tb_ppg_control_top_adc_anomaly.v V1.2的bg_adc_responder），以及三种电平模式，DONE在转换结束后保持高：模式1是模拟设计者2026-10-10确认的保持型行为（Stage1 DONE在下一笔有owner事务的Q1上升沿回落，即CLK_9Q1_LOW或CLK_15Q1_LOW，ADC从该Q1起算忙；15位事务Stage2在Stage1上升之后才回落，低5拍、最短4拍，在Stage2比较结束时上升）；模式2在事务启动fire时回落，非物理行为，只作对照；模式3由外部脉冲回落。物理空闲可取"无转换进行"或C01第6.2.1节"另要求所选DONE为低"的公式，可再按i_idle_delay延迟0~3拍，模拟ppg_control_top之外的单点同步器。按槽位（RED/IR/CAL）与序号注入故障：完成丢失、迟到到指定绝对帧/拍（各模式下迟到期间ADC都保持忙，迟到DONE不会出现在物理空闲之后）、忙后恢复不发DONE、永久忙。
+// 2026年10月10日   V1.0        Erie          创建文件。仅供验证的9位（Stage1）与15位（Stage1+Stage2）流水线SAR ADC行为模型。转换在owner的Q3窗口上升沿开始，所选CLK_DOUT在i_latency拍后上升，DOUT在上升沿前一拍已稳定。DONE形态可选：兼容模式（Q3关闭后一拍发出5拍脉冲，等价于tb_ppg_control_top_adc_anomaly.v V1.2的bg_adc_responder），以及三种电平模式，DONE在转换结束后保持高：模式1是模拟设计者2026-10-10确认的保持型行为（Stage1 DONE在下一笔有owner事务的Q1上升沿回落，即CLK_9Q1_LOW或CLK_15Q1_LOW，ADC从该Q1起算忙；15位事务Stage2在Stage1上升之后才回落，低5拍、最短4拍，在Stage2比较结束时上升）；模式2在事务启动fire时回落，非物理行为，只作对照；模式3由外部脉冲回落。物理空闲可取"无转换进行"或C01第6.2.1节"另要求所选DONE为低"的公式，可再按i_idle_delay延迟0~3拍，模拟ppg_control_top之外的单点同步器。按槽位（RED/IR/CAL）与序号注入故障：完成丢失、迟到到指定绝对帧/拍（转换开始时换算为绝对拍数：帧偏移×5000+目标相位−当前相位，因此在途owner使宏帧停顿时照样到期；各模式下迟到期间ADC都保持忙，迟到DONE不会出现在物理空闲之后）、忙后恢复不发DONE、永久忙。
 
 // 两级SAR ADC行为模型：Q3上升沿启动转换，按模式产生完成电平、物理空闲和故障
 module v2_adc_behavior_model
@@ -125,6 +125,7 @@ module v2_adc_behavior_model
 	reg [7:0] cnt_conv;                     // 转换开始后的已过拍数
 	reg [7:0] cnt_pre_busy;                 // Q1上升后等待Q3的拍数
 	reg [7:0] cnt_pulse;                    // 兼容脉冲已保持拍数
+	reg [16:0] cnt_since_start;             // 自转换开始起的绝对拍数，不依赖宏帧是否继续推进
 	reg [15:0] cnt_serial_red;              // RED槽位自武装以来的转换序号
 	reg [15:0] cnt_serial_ir;               // 红外事务转换开始次数，供按序号命中
 	reg [15:0] cnt_serial_cal;              // 校准事务转换开始次数，含AMB与DCS
@@ -139,7 +140,7 @@ module v2_adc_behavior_model
 	reg reg_precision;                      // 本次转换锁存的精度
 	reg [7:0] reg_conv_cycles;              // 本次转换锁存并下限为1的时延
 	reg [2:0] reg_fault;                    // 本次转换命中的故障类型
-	reg [15:0] reg_target_frame;            // 迟到或忙释放的目标帧号
+	reg [16:0] reg_release_wait;            // 转换开始拍到迟到或忙释放落点的绝对拍数，按5000拍宏帧换算
 	reg [9:0] reg_raw1;                     // 本次转换锁存的Stage1码
 	reg [9:0] reg_raw2;                     // 高精度残差码在转换开始拍的快照
 	reg [15:0] reg_serial;                  // 本次转换在槽位内的序号快照
@@ -156,7 +157,7 @@ module v2_adc_behavior_model
 	wire flag_q3_fall;                      // Q3下降沿：兼容模式响应起点
 	wire [15:0] flag_slot_serial_next;      // 本次转换将获得的槽位序号
 	wire flag_fault_hit;                    // 本次转换开始命中故障配置
-	wire [15:0] flag_frame_diff;            // 当前帧号减目标帧号
+	wire [16:0] flag_release_wait_next;     // 转换开始拍换算出的释放等待拍数
 	wire flag_release_point;                // 已到达迟到或忙释放的绝对落点
 	wire [7:0] flag_s1_rise_cycle;          // 本次转换Stage1上升所在的计数值
 	wire flag_s1_rise;                      // 本拍Stage1完成电平上升
@@ -185,8 +186,8 @@ module v2_adc_behavior_model
 	assign flag_q3_fall = !i_q3 && flag_q3_prev; // Q3由高变低的一拍
 	assign flag_slot_serial_next = (i_owner_slot == SLOT_RED) ? (cnt_serial_red + 16'd1) : ((i_owner_slot == SLOT_IR) ? (cnt_serial_ir + 16'd1) : (cnt_serial_cal + 16'd1)); // 按槽位取下一序号
 	assign flag_fault_hit = (i_fault_mode != FAULT_NONE) && (i_owner_slot == i_fault_slot) && (flag_slot_serial_next >= i_fault_serial) && ((i_fault_count == 8'd255) || (flag_slot_serial_next < (i_fault_serial + {8'd0, i_fault_count}))); // 槽位与序号区间同时命中
-	assign flag_frame_diff = i_frame_id - reg_target_frame; // 帧号差，最高位为1表示尚未到目标帧
-	assign flag_release_point = !flag_frame_diff[15] && ((flag_frame_diff != 16'd0) || (i_macro_tick >= i_fault_release_tick)); // 越过目标帧或在目标帧内到达目标相位
+	assign flag_release_wait_next = ({14'd0, i_fault_frame_offset} * 17'd5000) + {4'd0, i_fault_release_tick} - {4'd0, i_macro_tick}; // 偏移帧数乘5000加目标相位减当前相位
+	assign flag_release_point = (cnt_since_start >= reg_release_wait); // 按绝对拍数到达落点；宏帧因在途owner停顿时照样到期
 	assign flag_s1_rise_cycle = (flag_held && reg_precision) ? ((reg_conv_cycles > HELD15_S1_LEAD) ? (reg_conv_cycles - HELD15_S1_LEAD) : 8'd1) : ((reg_precision && (reg_conv_cycles > S2_LAG_CYCLES)) ? (reg_conv_cycles - S2_LAG_CYCLES) : reg_conv_cycles); // 15位时Stage1早于Stage2完成
 	assign flag_conv_end = (state_current == ST_CONVERT) && (cnt_conv == reg_conv_cycles); // 电平模式转换时延到达
 	assign flag_s2_fall = flag_held && reg_precision && (state_current == ST_CONVERT) && (((reg_fault == FAULT_NONE) && (cnt_conv == (flag_s1_rise_cycle + 8'd1))) || ((reg_fault != FAULT_NONE) && flag_conv_end)); // Stage1上升后一拍Stage2回落；故障事务在时延到时回落
@@ -515,14 +516,27 @@ module v2_adc_behavior_model
 		end
 	end
 
-	// 转换开始锁存绝对落点的目标帧号
+	// 转换开始锁存释放落点的绝对等待拍数
 	always@(posedge i_clk or negedge i_rstn)begin
 		if(i_rstn == 1'b0)begin
-			reg_target_frame <= 16'd0;          // 复位清零目标帧
+			reg_release_wait <= 17'd0;          // 复位清零等待拍数
 		end else if(o_conv_start_event == 1'b1)begin
-			reg_target_frame <= i_frame_id + {13'd0, i_fault_frame_offset}; // 当前帧加帧偏移
+			reg_release_wait <= flag_release_wait_next; // 以本转换开始拍为零点
 		end else begin
-			reg_target_frame <= reg_target_frame; // 等待期间目标帧不变
+			reg_release_wait <= reg_release_wait; // 等待期间落点不变
+		end
+	end
+
+	// 自转换开始起的绝对拍数
+	always@(posedge i_clk or negedge i_rstn)begin
+		if(i_rstn == 1'b0)begin
+			cnt_since_start <= 17'd0;           // 复位清零绝对拍数
+		end else if(o_conv_start_event == 1'b1)begin
+			cnt_since_start <= 17'd1;           // 以转换开始为原点，下一拍记作第1拍
+		end else if(cnt_since_start != 17'h1ffff)begin
+			cnt_since_start <= cnt_since_start + 17'd1; // 逐拍累加且饱和
+		end else begin
+			cnt_since_start <= cnt_since_start; // 饱和后保持
 		end
 	end
 

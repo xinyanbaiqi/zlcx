@@ -14,6 +14,7 @@ Classification (first matching rule wins):
   EXC-F1           system cause 04 together with an IR void at macro tick >= 4760 (registered F-1)
   NEW              any other system fault cause (each needs triage; tag lists the causes)
   KNOWN-FIX-7 / KNOWN-FIX-4   the corresponding V2SIG signature was printed (monitors otherwise clean)
+  EXC-C            the frame-interval monitor accepted a gap under the observed exception-C condition
   KNOWN-FIX-3      AMI integration-protocol sticky set at the end (AMI-C1 signature, monitors otherwise clean)
 V7 assertions (V7SUM lines): a failing assertion makes the point NEW, except P9a/P9b alone (MGR-C1, KNOWN-FIX-4)
 and P8 alone (IDAC idle with pending valid, an additional requirement of the repair round: KNOWN-FIX-P8).
@@ -87,6 +88,8 @@ def classify(d):
         return 'KNOWN-FIX-7', 'normal frame complete after STOP/abort/fault'
     if 'KNOWN-FIX-4' in d['sig']:
         return 'KNOWN-FIX-4', 'stop_episode_active stuck in RUN'
+    if d['mon'].get('FRAMEGAP', ('PASS',))[0] == 'EXC':
+        return 'EXC-C', 'conditioned exception C gap'
     if d['sticky'].get('ami_proto') == '1':
         return 'KNOWN-FIX-3', 'AMI integration protocol sticky'
     return 'PASS', ''

@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_checkers.sv",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG025": 6
+  },
+  "errors": 7,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 7,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] Strict mode [unsupported_construct]: int unsigned cnt_hit = 0; // 前件命中次数. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+      "path": "v7_checkers.sv",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 52,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 68,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 84,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 103,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 104,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_checkers.sv",
+      "line": 105,
+      "rule": "control.begin_end"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_checkers.sv",
+    "ok": false,
+    "strict": true,
+    "errors": 7,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] Strict mode [unsupported_construct]: int unsigned cnt_hit = 0; // 前件命中次数. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+        "path": "v7_checkers.sv",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 52,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 68,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 84,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 103,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 104,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_checkers.sv",
+        "line": 105,
+        "rule": "control.begin_end"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 110,
+      "code_lines": 63,
+      "line_comments": 68,
+      "commented_code_lines": 26,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_micro_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_checkers.sv",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_checkers.sv",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_checkers.sv",
+            "syntax_confidence": 100,
+            "format_score": 88,
+            "rewrite_need_score": 20,
+            "rewrite_risk_score": 15,
+            "decision": "preserve_micro_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 110,
+              "module_count": 4,
+              "module_names": [
+                "v7_chk_imp",
+                "v7_chk_imp_next",
+                "v7_chk_mutex",
+                "v7_chk_live"
+              ],
+              "endmodule_count": 4,
+              "begin_count": 5,
+              "end_count": 5,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_a",
+                "i_b"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 4,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 42,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 4,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "multi_module",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V7 Generic Protocol Property Checkers (SVA)",
+            "module_name": "v7_chk_imp, v7_chk_imp_next, v7_chk_mutex, v7_chk_live",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.4",
+            "simulations": "verification/v2_v7/tb/tb_v7_assertion_selftest.sv (self-check), bound into ppg_control_top by v7_assertions.sv",
+            "references": "verification_reports/PRE_TAPEOUT_CLOSURE_PLAN_20261009.md V7",
+            "version": "V1.0",
+            "dependency_lines": [
+              "None (SystemVerilog, compiled separately with xvlog -sv; the RTL stays Verilog-2001)",
+              "无（SystemVerilog，单独用xvlog -sv编译；RTL保持Verilog-2001）"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] multi-module sources are not supported by the builtin backend."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] Strict mode [unsupported_construct]: int unsigned cnt_hit = 0; // 前件命中次数. Suggestion: > ERR: [Python] Move this statement into a supported declaration, assign, always block, or instance block.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 110,
+            "nonempty_lines": 105,
+            "line_comments": 68,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 46,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v7_checkers.sv"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

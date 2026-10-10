@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_monitor_selftest.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 2,
+    "VG002": 2,
+    "VG025": 5
+  },
+  "errors": 9,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 2,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 2,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 2,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 9,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "unclosed_block_comment",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": null,
+      "rule": "FORMATTER_HARD_GATE"
+    },
+    {
+      "code": "VG002",
+      "severity": "error",
+      "message": "Block comments are forbidden; use // line comments only.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 13,
+      "rule": "comments.line_only"
+    },
+    {
+      "code": "VG002",
+      "severity": "error",
+      "message": "Block comments are forbidden; use // line comments only.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 32,
+      "rule": "comments.line_only"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 198,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 373,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 376,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 385,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_monitor_selftest.v",
+      "line": 386,
+      "rule": "control.begin_end"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_monitor_selftest.v",
+    "ok": false,
+    "strict": true,
+    "errors": 9,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "unclosed_block_comment",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": null,
+        "rule": "FORMATTER_HARD_GATE"
+      },
+      {
+        "code": "VG002",
+        "severity": "error",
+        "message": "Block comments are forbidden; use // line comments only.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 13,
+        "rule": "comments.line_only"
+      },
+      {
+        "code": "VG002",
+        "severity": "error",
+        "message": "Block comments are forbidden; use // line comments only.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 32,
+        "rule": "comments.line_only"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 198,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 373,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 376,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 385,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_monitor_selftest.v",
+        "line": 386,
+        "rule": "control.begin_end"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 390,
+      "code_lines": 281,
+      "line_comments": 145,
+      "commented_code_lines": 65,
+      "block_comment_markers": 2,
+      "formatter_decisions": {
+        "fail_no_write": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_monitor_selftest.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_monitor_selftest.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_monitor_selftest.v",
+            "syntax_confidence": 50,
+            "format_score": 80,
+            "rewrite_need_score": 40,
+            "rewrite_risk_score": 15,
+            "decision": "fail_no_write",
+            "allowed_transforms": [],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": true,
+            "hard_gates": [
+              "unclosed_block_comment"
+            ],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 390,
+              "module_count": 1,
+              "module_names": [
+                "tb_v2_monitor_selftest"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 15,
+              "end_count": 15,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 1,
+              "multi_target_always_count": 1,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 10,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 80,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 89,
+              "missing_reset_always_count": 1,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "function_task_initial",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Monitor Negative/Positive Self-Check Testbench",
+            "module_name": "tb_v2_monitor_selftest",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 (monitor negative controls)",
+            "simulations": "Vivado xsim 2022.2",
+            "references": "verification/v2_v7/monitors/*.v",
+            "version": "V1.0",
+            "dependency_lines": [
+              "v2_mon_liveness.v, v2_mon_q3_bind.v, v2_mon_void_excl.v, v2_mon_frame_interval.v, v2_mon_recovery.v, v2_mon_identity.v",
+              "六个监视器核心"
+            ],
+            "history_lines": [],
+            "history_lines_en": [
+              "2026/10/10        V1.0        Erie          Create file. Drives every monitor core without any DUT, once with a compliant synthetic sequence (the fail count must stay 0) and once per rule with a violating sequence (the fail count must rise by exactly the expected amount, and for the identity scoreboard the reported failure code must be the expected one). Small limits are used through parameters (liveness 20, recovery 50, identity resolve 100) so the sequences stay short; the frame-interval monitor runs real 5000-cycle frames. Each case prints MONST-PASS / MONST-FAIL; the closing line MONITOR_SELFTEST_PASS appears only if every case passed and the expected number of cases ran."
+            ],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。不接DUT，逐个驱动监视器核心：先用合规的人造序列（失败计数必须保持0），再对每条规则用违反序列（失败计数必须恰好增加预期值；身份记分板还要核对失败码）。通过参数缩小门限（活性20、恢复50、身份了结100）以缩短序列；帧间隔监视器用真实的5000拍帧。每个用例打印MONST-PASS/MONST-FAIL，只有全部通过且用例数等于预期时才打印MONITOR_SELFTEST_PASS。",
+              "监视器自检：人造合规与违反序列"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            },
+            {
+              "severity": "error",
+              "code": "FORMATTER_HARD_GATE",
+              "message": "unclosed_block_comment",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 390,
+            "nonempty_lines": 361,
+            "line_comments": 145,
+            "block_comment_markers": 2,
+            "tab_indented_lines": 319,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_v2_monitor_selftest.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 2
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

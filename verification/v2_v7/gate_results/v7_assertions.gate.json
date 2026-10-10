@@ -1,0 +1,2873 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_assertions.sv",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG060": 15,
+    "VG025": 3,
+    "VG009": 1,
+    "VG011": 8,
+    "VG013": 4,
+    "VG030": 16,
+    "VG021": 2,
+    "VG024": 19,
+    "VG031": 1,
+    "VG041": 5,
+    "VG040": 15,
+    "VG063": 7,
+    "VG064": 22,
+    "VG066": 1
+  },
+  "errors": 95,
+  "strict_warnings": 24,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 95,
+      "warnings": 24,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 55,
+      "warnings": 24,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 8,
+      "warnings": 5,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 71.",
+      "path": "v7_assertions.sv",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 63.",
+      "path": "v7_assertions.sv",
+      "line": 56,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 67.",
+      "path": "v7_assertions.sv",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 93.",
+      "path": "v7_assertions.sv",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 91, aligned from region anchor column 64; got 94.",
+      "path": "v7_assertions.sv",
+      "line": 60,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 78, aligned from region anchor column 64; got 94.",
+      "path": "v7_assertions.sv",
+      "line": 64,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 84, aligned from region anchor column 64; got 94.",
+      "path": "v7_assertions.sv",
+      "line": 67,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+      "path": "v7_assertions.sv",
+      "line": 68,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 93.",
+      "path": "v7_assertions.sv",
+      "line": 70,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 84, aligned from region anchor column 64; got 92.",
+      "path": "v7_assertions.sv",
+      "line": 75,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 88, aligned from region anchor column 64; got 92.",
+      "path": "v7_assertions.sv",
+      "line": 76,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 70.",
+      "path": "v7_assertions.sv",
+      "line": 77,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+      "path": "v7_assertions.sv",
+      "line": 78,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 28.",
+      "path": "v7_assertions.sv",
+      "line": 83,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+      "path": "v7_assertions.sv",
+      "line": 84,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_assertions.sv",
+      "line": 69,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_assertions.sv",
+      "line": 79,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "v7_assertions.sv",
+      "line": 85,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG009",
+      "severity": "error",
+      "message": "Module `v7_bind_control_top` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "ports.group_comments"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 44,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 45,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 47,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 48,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 49,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 50,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 51,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG011",
+      "severity": "error",
+      "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+      "path": "v7_assertions.sv",
+      "line": 52,
+      "rule": "ports.no_kind_keyword"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Flag-like signal `w_done` should use `flag_` prefix unless it is an output bridge.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "naming.flag"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Register `r_commit_d1` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "naming.register_signal"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Register `r_life_prev` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "naming.register_signal"
+    },
+    {
+      "code": "VG013",
+      "severity": "error",
+      "message": "Register `r_mgr_state_prev` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "naming.register_signal"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 55,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 56,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 57,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 58,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 59,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 60,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 61,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 62,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 65,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 70,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 72,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 75,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 76,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 77,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 80,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG030",
+      "severity": "error",
+      "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+      "path": "v7_assertions.sv",
+      "line": 83,
+      "rule": "assign.inline_wire"
+    },
+    {
+      "code": "VG021",
+      "severity": "error",
+      "message": "Sequential always `always@(posedge i_clk)` must include an active-low reset in the sensitivity list.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "always.reset"
+    },
+    {
+      "code": "VG021",
+      "severity": "error",
+      "message": "Sequential always `always@(posedge i_clk)` must include an active-low reset in the sensitivity list.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "always.reset"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p1a` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p1b` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p1c` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p2` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p3` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p4` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p5` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p6` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p7` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p8` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9a` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9b` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9c` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9d` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9e` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9f` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9g` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9h` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG024",
+      "severity": "warning",
+      "message": "Instance `u_p9i` should follow `<module>_Inst_<role>` naming when practical.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "instance.naming"
+    },
+    {
+      "code": "VG031",
+      "severity": "error",
+      "message": "Non-trivial RTL must use fixed Erie region banners.",
+      "path": "v7_assertions.sv",
+      "line": null,
+      "rule": "regions.banner"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_commit` should be Chinese-first and semantic, not only fallback text.",
+      "path": "v7_assertions.sv",
+      "line": 47,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_done` should be Chinese-first and semantic, not only fallback text.",
+      "path": "v7_assertions.sv",
+      "line": 48,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_lost` should be Chinese-first and semantic, not only fallback text.",
+      "path": "v7_assertions.sv",
+      "line": 49,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_life` should be Chinese-first and semantic, not only fallback text.",
+      "path": "v7_assertions.sv",
+      "line": 50,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG041",
+      "severity": "warning",
+      "message": "Comment for port `i_result` should be Chinese-first and semantic, not only fallback text.",
+      "path": "v7_assertions.sv",
+      "line": 51,
+      "rule": "comments.semantic"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "signal `w_lanes` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 72,
+      "rule": "comments.coverage"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Always block `always@(posedge i_clk or negedge i_rstn)` should have a nearby leading comment explaining behavior.",
+      "path": "v7_assertions.sv",
+      "line": 69,
+      "rule": "comments.always"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Always block `always@(posedge i_clk)` should have a nearby leading comment explaining behavior.",
+      "path": "v7_assertions.sv",
+      "line": 79,
+      "rule": "comments.always"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Always block `always@(posedge i_clk)` should have a nearby leading comment explaining behavior.",
+      "path": "v7_assertions.sv",
+      "line": 85,
+      "rule": "comments.always"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p1a` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 88,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p1b` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 89,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p1c` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 91,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p2` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 94,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p3` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 96,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p4` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 100,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p5` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 103,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p6` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 106,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p7` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 108,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p8` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 110,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG040",
+      "severity": "error",
+      "message": "Instance `u_p9b` should have a leading function/connection comment.",
+      "path": "v7_assertions.sv",
+      "line": 119,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 122,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 126,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 129,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 132,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 137,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 141,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG063",
+      "severity": "error",
+      "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+      "path": "v7_assertions.sv",
+      "line": 145,
+      "rule": "comments.instance"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 90,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 92,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 97,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 98,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 101,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 104,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 111,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 112,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 118,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 120,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 121,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 124,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 125,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 128,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 131,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 134,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 135,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 139,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 140,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 143,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 144,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG064",
+      "severity": "error",
+      "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+      "path": "v7_assertions.sv",
+      "line": 147,
+      "rule": "comments.instance_mapping"
+    },
+    {
+      "code": "VG066",
+      "severity": "error",
+      "message": "Comment for signal `w_ami_key` repeats or closely reuses comment from signal `w_ssw_key`; write entity-specific RTL intent.",
+      "path": "v7_assertions.sv",
+      "line": 65,
+      "rule": "comments.repeated_semantic"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_assertions.sv",
+    "ok": false,
+    "strict": true,
+    "errors": 95,
+    "warnings": 24,
+    "issues": [
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 71.",
+        "path": "v7_assertions.sv",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 63.",
+        "path": "v7_assertions.sv",
+        "line": 56,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 67.",
+        "path": "v7_assertions.sv",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 93.",
+        "path": "v7_assertions.sv",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 91, aligned from region anchor column 64; got 94.",
+        "path": "v7_assertions.sv",
+        "line": 60,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 78, aligned from region anchor column 64; got 94.",
+        "path": "v7_assertions.sv",
+        "line": 64,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 84, aligned from region anchor column 64; got 94.",
+        "path": "v7_assertions.sv",
+        "line": 67,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+        "path": "v7_assertions.sv",
+        "line": 68,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 93.",
+        "path": "v7_assertions.sv",
+        "line": 70,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 84, aligned from region anchor column 64; got 92.",
+        "path": "v7_assertions.sv",
+        "line": 75,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 88, aligned from region anchor column 64; got 92.",
+        "path": "v7_assertions.sv",
+        "line": 76,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 70.",
+        "path": "v7_assertions.sv",
+        "line": 77,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+        "path": "v7_assertions.sv",
+        "line": 78,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 28.",
+        "path": "v7_assertions.sv",
+        "line": 83,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 64, aligned from region anchor column 64; got 92.",
+        "path": "v7_assertions.sv",
+        "line": 84,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_assertions.sv",
+        "line": 69,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_assertions.sv",
+        "line": 79,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "v7_assertions.sv",
+        "line": 85,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG009",
+        "severity": "error",
+        "message": "Module `v7_bind_control_top` port list should use Chinese group comments such as 全局信号, 用户接口, or protocol 接口 groups.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "ports.group_comments"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 44,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 45,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 47,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 48,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 49,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 50,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 51,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG011",
+        "severity": "error",
+        "message": "Port declarations must not include wire/reg/logic in final ANSI header style.",
+        "path": "v7_assertions.sv",
+        "line": 52,
+        "rule": "ports.no_kind_keyword"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Flag-like signal `w_done` should use `flag_` prefix unless it is an output bridge.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "naming.flag"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Register `r_commit_d1` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "naming.register_signal"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Register `r_life_prev` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "naming.register_signal"
+      },
+      {
+        "code": "VG013",
+        "severity": "error",
+        "message": "Register `r_mgr_state_prev` should use reg_/cnt_/state_/flag_/enc_/dec_ prefix or `_o` output suffix.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "naming.register_signal"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 55,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 56,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 57,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 58,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 59,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 60,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 61,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 62,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 65,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 70,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 72,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 75,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 76,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 77,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 80,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG030",
+        "severity": "error",
+        "message": "Inline wire initialization is forbidden; declare wire and use a separate assign.",
+        "path": "v7_assertions.sv",
+        "line": 83,
+        "rule": "assign.inline_wire"
+      },
+      {
+        "code": "VG021",
+        "severity": "error",
+        "message": "Sequential always `always@(posedge i_clk)` must include an active-low reset in the sensitivity list.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "always.reset"
+      },
+      {
+        "code": "VG021",
+        "severity": "error",
+        "message": "Sequential always `always@(posedge i_clk)` must include an active-low reset in the sensitivity list.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "always.reset"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p1a` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p1b` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p1c` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p2` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p3` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p4` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p5` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p6` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p7` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p8` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9a` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9b` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9c` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9d` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9e` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9f` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9g` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9h` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG024",
+        "severity": "warning",
+        "message": "Instance `u_p9i` should follow `<module>_Inst_<role>` naming when practical.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "instance.naming"
+      },
+      {
+        "code": "VG031",
+        "severity": "error",
+        "message": "Non-trivial RTL must use fixed Erie region banners.",
+        "path": "v7_assertions.sv",
+        "line": null,
+        "rule": "regions.banner"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_commit` should be Chinese-first and semantic, not only fallback text.",
+        "path": "v7_assertions.sv",
+        "line": 47,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_done` should be Chinese-first and semantic, not only fallback text.",
+        "path": "v7_assertions.sv",
+        "line": 48,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_lost` should be Chinese-first and semantic, not only fallback text.",
+        "path": "v7_assertions.sv",
+        "line": 49,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_life` should be Chinese-first and semantic, not only fallback text.",
+        "path": "v7_assertions.sv",
+        "line": 50,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG041",
+        "severity": "warning",
+        "message": "Comment for port `i_result` should be Chinese-first and semantic, not only fallback text.",
+        "path": "v7_assertions.sv",
+        "line": 51,
+        "rule": "comments.semantic"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "signal `w_lanes` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 72,
+        "rule": "comments.coverage"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Always block `always@(posedge i_clk or negedge i_rstn)` should have a nearby leading comment explaining behavior.",
+        "path": "v7_assertions.sv",
+        "line": 69,
+        "rule": "comments.always"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Always block `always@(posedge i_clk)` should have a nearby leading comment explaining behavior.",
+        "path": "v7_assertions.sv",
+        "line": 79,
+        "rule": "comments.always"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Always block `always@(posedge i_clk)` should have a nearby leading comment explaining behavior.",
+        "path": "v7_assertions.sv",
+        "line": 85,
+        "rule": "comments.always"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p1a` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 88,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p1b` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 89,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p1c` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 91,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p2` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 94,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p3` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 96,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p4` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 100,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p5` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 103,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p6` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 106,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p7` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 108,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p8` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 110,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG040",
+        "severity": "error",
+        "message": "Instance `u_p9b` should have a leading function/connection comment.",
+        "path": "v7_assertions.sv",
+        "line": 119,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 122,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 126,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 129,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 132,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 137,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 141,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG063",
+        "severity": "error",
+        "message": "Instance comment must have exactly one blank line above unless it follows a region banner.",
+        "path": "v7_assertions.sv",
+        "line": 145,
+        "rule": "comments.instance"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 90,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 92,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 97,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 98,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 101,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 104,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 111,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 112,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 118,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 120,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 121,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 124,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 125,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 128,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 131,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 134,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 135,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 139,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 140,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_a` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 143,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 144,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG064",
+        "severity": "error",
+        "message": "instance mapping `.i_b` should have a same-line semantic comment.",
+        "path": "v7_assertions.sv",
+        "line": 147,
+        "rule": "comments.instance_mapping"
+      },
+      {
+        "code": "VG066",
+        "severity": "error",
+        "message": "Comment for signal `w_ami_key` repeats or closely reuses comment from signal `w_ssw_key`; write entity-specific RTL intent.",
+        "path": "v7_assertions.sv",
+        "line": 65,
+        "rule": "comments.repeated_semantic"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 152,
+      "code_lines": 90,
+      "line_comments": 84,
+      "commented_code_lines": 26,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_assertions.sv",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_assertions.sv",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\assertions\\v7_assertions.sv",
+            "syntax_confidence": 100,
+            "format_score": 82,
+            "rewrite_need_score": 30,
+            "rewrite_risk_score": 5,
+            "decision": "preserve_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 152,
+              "module_count": 1,
+              "module_names": [
+                "v7_bind_control_top"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 0,
+              "end_count": 0,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_commit",
+                "i_done",
+                "i_lost",
+                "i_life",
+                "i_result",
+                "i_fault"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 3,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 16,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 58,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 1,
+              "missing_reset_always_count": 2,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "inline_wire_assign",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V7 First-Batch Protocol Assertions bound into ppg_control_top",
+            "module_name": "v7_bind_control_top (+ bind statement)",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.4, properties 1-9",
+            "simulations": "verification/v2_v7/tb/tb_v2_sweep.v (xelab elaborates the bind); any TB that instantiates ppg_control_top",
+            "references": "PRE_TAPEOUT_CLOSURE_PLAN_20261009.md V7; p0-closure V1_CONFLICT_*.md (assertion suggestions, property 9)",
+            "version": "V1.0",
+            "dependency_lines": [
+              "v7_checkers.sv; the RTL is not modified (bind + read-only upward hierarchical references)",
+              "v7_checkers.sv；不修改RTL（bind加只读的向上层次引用）"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。`bind ppg_control_top`把v7_bind_control_top挂到该模块的每个实例上，因此以后加进全部系统TB时无需改动这些TB。模块内通过相对于被绑定ppg_control_top实例的向上层次名，只读访问调度器、SSW、AMI（含捕获、S1冗余校正器、IDAC控制器、精度窗口控制器、重检调度器）、manager与supervisor的信号。性质清单与名称见verification_reports/V2_V7_FRAMEWORK_TRIAL_20261010.md的V7表。"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] Sequential reset is missing: Strict mode [clock_reset_violation]: sequential always block is missing an active-low reset: always@(posedge i_clk). Suggestion: Add 'or negedge i_rstn' and a low-active reset branch before formatting."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v7_bind_control_top",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "ppg_control_top的2 MHz时钟",
+                  "group": "",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 44,
+                  "line_end": 44
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "ppg_control_top的低有效复位",
+                  "group": "",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 45,
+                  "line_end": 45
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_commit",
+                  "comment": "sched_adc_owner_commit_event_o",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_done",
+                  "comment": "ami_adc_transaction_complete_event_o",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 48,
+                  "line_end": 48
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_lost",
+                  "comment": "ami_adc_transaction_lost_event_o",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 49,
+                  "line_end": 49
+                },
+                {
+                  "direction": "input",
+                  "width": "[1:0]",
+                  "name": "i_life",
+                  "comment": "o_lifecycle_state",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_result",
+                  "comment": "o_measurement_result_valid && i_measurement_result_ready",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_fault",
+                  "comment": "ami/sched/ssw fault_valid或o_system_fault_blocking",
+                  "group": "",
+                  "section": "ppg_control_top作用域内的简单名信号经bind端口传入（简单名不做向上查找，带点的层次名才会）",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_commit",
+                  "init": "i_commit",
+                  "comment": "owner提交",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 55,
+                  "line_end": 55
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_done",
+                  "init": "i_done",
+                  "comment": "AMI完成",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 56,
+                  "line_end": 56
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_lost",
+                  "init": "i_lost",
+                  "comment": "AMI作废",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 57,
+                  "line_end": 57
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_close",
+                  "init": "w_done || w_lost",
+                  "comment": "owner关闭",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 58,
+                  "line_end": 58
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_sched_inflight",
+                  "init": "ppg_400hz_frame_calibration_scheduler_Inst.o_transaction_inflight",
+                  "comment": "调度器在途",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 59,
+                  "line_end": 59
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_ssw_inflight",
+                  "init": "ppg_sar9_sar15_safe_selection_wrapper_Inst.o_adc_owner_inflight",
+                  "comment": "SSW在途",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_ami_inflight",
+                  "init": "ppg_adc_measurement_idac_integration_Inst.flag_adc_transaction_inflight",
+                  "comment": "AMI在途",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "kind": "wire",
+                  "width": "[36:0]",
+                  "name": "w_ssw_key",
+                  "init": "{ppg_sar9_sar15_safe_selection_wrapper_Inst.reg_owner_frame_id, ppg_sar9_sar15_safe_selection_wrapper_Inst.reg_owner_sample_index, ppg_sar9_sar15_safe_selection_wrapper_Inst.reg_owner_color_ir, ppg_sar9_sar15_safe_selection_wrapper_Inst.reg_owner_frame_type, ppg_sar9_sar15_safe_selection_wrapper_Inst.reg_owner_precision_mode}",
+                  "comment": "SSW记录的owner身份",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "kind": "wire",
+                  "width": "[36:0]",
+                  "name": "w_ami_key",
+                  "init": "{ppg_adc_measurement_idac_integration_Inst.reg_adc_inflight_frame_id, ppg_adc_measurement_idac_integration_Inst.reg_adc_inflight_sample_index, ppg_adc_measurement_idac_integration_Inst.reg_adc_inflight_color_ir, ppg_adc_measurement_idac_integration_Inst.reg_adc_inflight_frame_type, ppg_adc_measurement_idac_integration_Inst.reg_adc_inflight_precision_mode}",
+                  "comment": "AMI记录的owner身份",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 65,
+                  "line_end": 65
+                },
+                {
+                  "kind": "logic",
+                  "width": "",
+                  "name": "r_commit_d1",
+                  "init": "",
+                  "comment": "上一拍提交",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 68,
+                  "line_end": 68
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_stable",
+                  "init": "!w_commit && !r_commit_d1 && !w_close",
+                  "comment": "非提交/关闭过渡拍",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 70,
+                  "line_end": 70
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_lanes",
+                  "init": "ppg_adc_measurement_idac_integration_Inst.flag_test_identity_hold || ppg_adc_measurement_idac_integration_Inst.flag_owner_protocol_fault_hold || ppg_adc_measurement_idac_integration_Inst.flag_recovery_context_fault_hold || ppg_adc_measurement_idac_integration_Inst.flag_owner_lost_fault_hold || ppg_adc_measurement_idac_integration_Inst.flag_adc_busy_fault_hold",
+                  "comment": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// AMI故障lane 01/02/03/06/07（L-5、性质6）"
+                  ],
+                  "line_start": 72,
+                  "line_end": 72
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_ami_start",
+                  "init": "ppg_adc_measurement_idac_integration_Inst.i_start_ack_event",
+                  "comment": "AMI看到的START",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 75,
+                  "line_end": 75
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_ami_abort",
+                  "init": "ppg_adc_measurement_idac_integration_Inst.i_control_abort_event",
+                  "comment": "AMI看到的abort合并事件",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 76,
+                  "line_end": 76
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_life_run",
+                  "init": "(i_life == 2'b10) || (i_life == 2'b11)",
+                  "comment": "RUN或STOPPING",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 77,
+                  "line_end": 77
+                },
+                {
+                  "kind": "logic",
+                  "width": "[1:0]",
+                  "name": "r_life_prev",
+                  "init": "",
+                  "comment": "生命周期前值",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_progress",
+                  "init": "w_done || w_lost || i_result || ppg_adc_measurement_idac_integration_Inst.o_amb_code_update || ppg_adc_measurement_idac_integration_Inst.o_dcs_r_code_update || ppg_adc_measurement_idac_integration_Inst.o_dcs_ir_code_update || (i_life != r_life_prev)",
+                  "comment": "活性进展",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "w_fault",
+                  "init": "i_fault",
+                  "comment": "故障记录或阻断",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 83,
+                  "line_end": 83
+                },
+                {
+                  "kind": "logic",
+                  "width": "[2:0]",
+                  "name": "r_mgr_state_prev",
+                  "init": "",
+                  "comment": "manager上一拍状态",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 84,
+                  "line_end": 84
+                }
+              ],
+              "assigns": [],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "r_commit_d1"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "r_commit_d1",
+                    "r_commit_d1"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 1,
+                  "leading_comments": [],
+                  "lines": [
+                    "if(!i_rstn) r_commit_d1 <= 1'b0; else r_commit_d1 <= w_commit;"
+                  ],
+                  "line_start": 69,
+                  "line_end": 69
+                },
+                {
+                  "header": "always@(posedge i_clk)",
+                  "targets": [
+                    "r_life_prev"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": false,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "r_life_prev"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 1,
+                  "leading_comments": [],
+                  "lines": [
+                    "r_life_prev <= i_life;"
+                  ],
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "header": "always@(posedge i_clk)",
+                  "targets": [
+                    "r_mgr_state_prev"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": false,
+                  "references_state": true,
+                  "block_kind": "state_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "r_mgr_state_prev"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 1,
+                  "leading_comments": [],
+                  "lines": [
+                    "r_mgr_state_prev <= ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.state_current;"
+                  ],
+                  "line_start": 85,
+                  "line_end": 85
+                }
+              ],
+              "instances": [
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p1a",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P1a_OWNER_UNIQUE_COMMIT\")) u_p1a(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(w_commit), .i_b(!w_sched_inflight || w_close));",
+                  "line_start": 88,
+                  "line_end": 88
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p1b",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P1b_INFLIGHT_THREE_WAY\")) u_p1b(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(w_stable),\n\t\t.i_b((w_sched_inflight == w_ssw_inflight) && (w_ssw_inflight == w_ami_inflight)));",
+                  "line_start": 89,
+                  "line_end": 90
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p1c",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P1c_OWNER_IDENTITY_SSW_AMI\")) u_p1c(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(w_ssw_inflight && w_ami_inflight && !w_commit),\n\t\t.i_b(w_ssw_key == w_ami_key));",
+                  "line_start": 91,
+                  "line_end": 92
+                },
+                {
+                  "module_name": "v7_chk_mutex",
+                  "instance_name": "u_p2",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_mutex #(.C_NAME(\"P2_VOID_COMPLETE_MUTEX\")) u_p2(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(w_done), .i_b(w_lost));",
+                  "line_start": 94,
+                  "line_end": 94
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p3",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P3_RC_CAPTURE_HAS_CONTEXT\")) u_p3(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_adc_async_stage_capture_Inst.flag_capture_pending || ppg_adc_measurement_idac_integration_Inst.ppg_adc_s1_redundancy_corrector_Inst.i_capture_valid),\n\t\t.i_b(ppg_adc_measurement_idac_integration_Inst.ppg_adc_s1_redundancy_corrector_Inst.flag_context_valid || ppg_adc_measurement_idac_integration_Inst.ppg_adc_s1_redundancy_corrector_Inst.flag_capture_drop_armed));",
+                  "line_start": 96,
+                  "line_end": 98
+                },
+                {
+                  "module_name": "v7_chk_imp_next",
+                  "instance_name": "u_p4",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp_next #(.C_NAME(\"P4_START_NO_RESIDUAL_CONTEXT\")) u_p4(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(ppg_sar9_sar15_safe_selection_wrapper_Inst.i_start_ack_event),\n\t\t.i_b(!ppg_sar9_sar15_safe_selection_wrapper_Inst.flag_red_context_valid && !ppg_sar9_sar15_safe_selection_wrapper_Inst.flag_ir_context_valid && !ppg_sar9_sar15_safe_selection_wrapper_Inst.flag_cal_context_valid));",
+                  "line_start": 100,
+                  "line_end": 101
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p5",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P5_L5_CLEAR_NEVER_EFFECTIVE\")) u_p5(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.flag_run_context_drained && !w_ami_start && !w_ami_abort), .i_b(!w_lanes));",
+                  "line_start": 103,
+                  "line_end": 104
+                },
+                {
+                  "module_name": "v7_chk_imp_next",
+                  "instance_name": "u_p6",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp_next #(.C_NAME(\"P6_LANES_FALL_AFTER_START_ABORT\")) u_p6(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(w_ami_start || w_ami_abort), .i_b(!w_lanes));",
+                  "line_start": 106,
+                  "line_end": 106
+                },
+                {
+                  "module_name": "v7_chk_live",
+                  "instance_name": "u_p7",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_live #(.C_NAME(\"P7_BOUNDED_LIVENESS\"), .C_LIMIT(15000)) u_p7(.i_clk(i_clk), .i_rstn(i_rstn), .i_active(w_life_run), .i_progress(w_progress), .i_fault(w_fault));",
+                  "line_start": 108,
+                  "line_end": 108
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p8",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P8_IDAC_IDLE_NO_PENDING\")) u_p8(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.state_current == 5'd0),\n\t\t.i_b(!ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_amb_pending_valid && !ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_r_pending_valid &&\n\t\t\t!ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_ir_pending_valid && !ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_amb_sample_request &&\n\t\t\t!ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_sample_request));",
+                  "line_start": 110,
+                  "line_end": 114
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9a",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_MGR：stop_ack的上一拍状态必为RUN或STOPPING；CONFIG/READY时stop_episode_active为0（MGR-C1护栏）"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9a_MGR_STOP_ACK_FROM_RUN\")) u_p9a(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.o_stop_ack_event),\n\t\t.i_b((r_mgr_state_prev == 3'b010) || (r_mgr_state_prev == 3'b011)));",
+                  "line_start": 117,
+                  "line_end": 118
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9b",
+                  "has_params": true,
+                  "leading_comments": [],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9b_MGR_IDLE_NO_STOP_EPISODE\")) u_p9b(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a((ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.state_current == 3'b000) || (ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.state_current == 3'b001)),\n\t\t.i_b(!ppg_active_v4_control_plane_integration_Inst.config_manager_Inst.o_stop_episode_active));",
+                  "line_start": 119,
+                  "line_end": 121
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9c",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_IDAC：AMB重检期间无DCS pending"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9c_IDAC_RECHECK_NO_DCS_PENDING\")) u_p9c(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.state_current == 5'd9),\n\t\t.i_b(!ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_r_pending_valid && !ppg_adc_measurement_idac_integration_Inst.ppg_idac_code_controller_Inst.o_dcs_ir_pending_valid));",
+                  "line_start": 123,
+                  "line_end": 125
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9d",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_SSW：START确认拍flag_start_restore必成立"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9d_SSW_START_RESTORE\")) u_p9d(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(ppg_sar9_sar15_safe_selection_wrapper_Inst.i_start_ack_event),\n\t\t.i_b(ppg_sar9_sar15_safe_selection_wrapper_Inst.flag_start_restore));",
+                  "line_start": 127,
+                  "line_end": 128
+                },
+                {
+                  "module_name": "v7_chk_mutex",
+                  "instance_name": "u_p9e",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_RDC：吞掉迟到RAW的拍不得同时配对"
+                  ],
+                  "text": "v7_chk_mutex #(.C_NAME(\"P9e_RC_DROP_NOT_TRANSFER\")) u_p9e(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_adc_s1_redundancy_corrector_Inst.flag_capture_drop), .i_b(ppg_adc_measurement_idac_integration_Inst.ppg_adc_s1_redundancy_corrector_Inst.flag_capture_transfer));",
+                  "line_start": 130,
+                  "line_end": 131
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9f",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_PWC（V1-PWC-C3护栏）：精度控制器IDLE时无pending来源位"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9f_PWC_IDLE_NO_PENDING_SOURCE\")) u_p9f(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.state_current == 3'd0),\n\t\t.i_b(!ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.flag_pending_cross &&\n\t\t\t!ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_precision_window_controller_Inst.flag_pending_return));",
+                  "line_start": 133,
+                  "line_end": 136
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9g",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_SCH：未START时调度器不发出任何上下文、请求ready或事务valid"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9g_SCH_NOT_STARTED_QUIET\")) u_p9g(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(!ppg_400hz_frame_calibration_scheduler_Inst.state_current[ppg_400hz_frame_calibration_scheduler_Inst.B_STARTED]),\n\t\t.i_b(!ppg_400hz_frame_calibration_scheduler_Inst.o_waveform_context_valid && !ppg_400hz_frame_calibration_scheduler_Inst.o_calibration_sample_ready && !ppg_400hz_frame_calibration_scheduler_Inst.o_transaction_start_valid));",
+                  "line_start": 138,
+                  "line_end": 140
+                },
+                {
+                  "module_name": "v7_chk_mutex",
+                  "instance_name": "u_p9h",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_RCK：重检请求transfer拍不会同时被IDAC消费"
+                  ],
+                  "text": "v7_chk_mutex #(.C_NAME(\"P9h_RCK_TRANSFER_NOT_ACCEPTED\")) u_p9h(.i_clk(i_clk), .i_rstn(i_rstn),\n\t\t.i_a(ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_amb_recheck_scheduler_Inst.flag_calibration_transfer),\n\t\t.i_b(ppg_adc_measurement_idac_integration_Inst.ppg_precision_window_integration_Inst.ppg_amb_recheck_scheduler_Inst.flag_matching_sample_accepted));",
+                  "line_start": 142,
+                  "line_end": 144
+                },
+                {
+                  "module_name": "v7_chk_imp",
+                  "instance_name": "u_p9i",
+                  "has_params": true,
+                  "leading_comments": [
+                    "// V1_CONFLICT_AMI：校准请求fire拍不得同时撤销或被消费"
+                  ],
+                  "text": "v7_chk_imp #(.C_NAME(\"P9i_AMI_CAL_FIRE_EXCLUSIVE\")) u_p9i(.i_clk(i_clk), .i_rstn(i_rstn), .i_a(ppg_adc_measurement_idac_integration_Inst.calibration_request_fire_o),\n\t\t.i_b(!ppg_adc_measurement_idac_integration_Inst.flag_calibration_request_withdraw && !ppg_adc_measurement_idac_integration_Inst.flag_amb_sample_accepted && !ppg_adc_measurement_idac_integration_Inst.flag_dcs_sample_accepted));",
+                  "line_start": 146,
+                  "line_end": 147
+                }
+              ],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 19,
+                "assigns": 0,
+                "always": 3,
+                "initials": 0,
+                "instances": 19,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 41,
+              "line_end": 148
+            }
+          ],
+          "source_metrics": {
+            "lines": 152,
+            "nonempty_lines": 148,
+            "line_comments": 84,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 104,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v7_assertions.sv"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

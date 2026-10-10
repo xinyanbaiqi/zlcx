@@ -1,0 +1,3256 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_adc_behavior_model.v",
+  "strict": true,
+  "delivery_ready": false,
+  "repair_required": true,
+  "rerun_required_after_repair": true,
+  "delivery_issues_by_rule": {
+    "VG000": 1,
+    "VG060": 178,
+    "VG025": 8
+  },
+  "errors": 187,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 1,
+      "warnings": 0,
+      "files": 1,
+      "modules": 0,
+      "parse_errors": 1,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 187,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "testbench_static_gate"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [
+    {
+      "code": "VG000",
+      "severity": "error",
+      "message": "> ERR: [Python] control parser strict failure.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": null,
+      "rule": "FORMATTER_AST_PARSE"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 46,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 49,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 50,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 14.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 53,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 54,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 55,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 56,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 57,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 58,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 59,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 60,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 61,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 62,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 63,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 64,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 65,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 66,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 67,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 68,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 69,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 70,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 71,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 72,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 73,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 76,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 77,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 78,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 79,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 80,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 81,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 82,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 83,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 84,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 87,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 88,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 89,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 23.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 90,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 23.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 91,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 25.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 92,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 93,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 94,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 95,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 96,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 97,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 98,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 99,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 100,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 101,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 102,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 103,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 104,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 105,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 106,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 107,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 112,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 113,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 25.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 114,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 115,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 116,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 117,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 118,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 119,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 121,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 122,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 123,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 33.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 125,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 126,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 127,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 128,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 129,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 130,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 131,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 132,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 133,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 136,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 137,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 138,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 139,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 142,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 143,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 144,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 149,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 150,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 157,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 158,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 160,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 161,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 163,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 171,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 32.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 174,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 178,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 180,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 52, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 181,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 186,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 191,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 192,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 193,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 194,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 195,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 201,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 202,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 205,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 208,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 28.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 217,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 28.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 218,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 219,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 220,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 221,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 222,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 223,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 224,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 225,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 226,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 227,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 234,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 235,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 236,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 237,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 245,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 246,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 247,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 254,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 255,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 262,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 263,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 269,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 270,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 271,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 272,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 274,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 275,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 276,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 277,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 278,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 279,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 45, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 286,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 287,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 288,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 289,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 295,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 296,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 297,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 298,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 299,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 300,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 301,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 302,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 32.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 303,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 21.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 304,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 305,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 306,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 307,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 308,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 309,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 310,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 311,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 312,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 313,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 314,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 315,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 316,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 317,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 318,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 319,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 320,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 321,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 322,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 323,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 324,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 325,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 326,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 327,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 328,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 329,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 330,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 359,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 390,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG060",
+      "severity": "error",
+      "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 473,
+      "rule": "comments.region_anchor"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 172,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 173,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 175,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 176,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 184,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 187,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 189,
+      "rule": "control.begin_end"
+    },
+    {
+      "code": "VG025",
+      "severity": "error",
+      "message": "Control statements must use explicit begin/end blocks.",
+      "path": "tb_v2_adc_behavior_model.v",
+      "line": 190,
+      "rule": "control.begin_end"
+    }
+  ],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_adc_behavior_model.v",
+    "ok": false,
+    "strict": true,
+    "errors": 187,
+    "warnings": 0,
+    "issues": [
+      {
+        "code": "VG000",
+        "severity": "error",
+        "message": "> ERR: [Python] control parser strict failure.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": null,
+        "rule": "FORMATTER_AST_PARSE"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 46,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 49,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 50,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 14.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 53,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 54,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 55,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 56,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 57,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 58,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 59,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 60,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 61,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 62,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 63,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 64,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 65,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 66,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 67,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 68,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 69,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 70,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 71,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 72,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 73,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 76,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 77,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 78,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 79,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 80,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 81,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 82,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 83,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 52; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 84,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 87,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 88,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 89,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 23.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 90,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 23.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 91,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 25.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 92,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 93,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 94,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 95,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 96,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 97,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 98,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 99,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 100,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 101,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 102,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 103,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 104,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 105,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 106,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 107,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 112,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 113,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 25.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 114,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 115,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 116,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 117,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 118,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 119,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 121,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 122,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 123,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 33.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 125,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 126,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 127,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 128,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 129,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 130,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 131,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 132,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 133,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 136,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 137,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 138,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 139,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 142,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 51, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 143,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 48; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 144,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 149,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 150,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 157,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 158,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 160,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 161,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 54, aligned from region anchor column 54; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 163,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 171,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 32.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 174,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 178,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 180,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 52, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 181,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 186,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 191,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 192,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 193,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 194,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 50; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 195,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 201,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 202,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 205,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 208,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 28.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 217,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 28.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 218,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 219,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 220,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 221,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 222,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 223,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 224,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 225,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 226,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 227,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 234,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 235,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 236,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 237,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 245,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 246,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 247,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 254,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 255,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 262,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 48, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 263,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 269,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 270,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 271,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 272,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 274,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 275,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 276,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 277,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 278,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 50, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 279,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 45, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 286,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 287,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 288,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 44, aligned from region anchor column 44; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 289,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 295,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 296,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 297,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 298,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 299,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 300,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 301,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 302,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 32.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 303,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 21.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 304,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 305,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 306,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 307,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 308,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 309,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 310,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 311,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 312,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 313,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 314,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 315,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 316,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 317,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 318,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 319,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 320,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 321,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 322,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 323,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 324,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 325,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 326,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 327,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 328,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 329,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 330,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 359,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 390,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG060",
+        "severity": "error",
+        "message": "Inline comment must start at display column 46, aligned from region anchor column 46; got 53.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 473,
+        "rule": "comments.region_anchor"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 172,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 173,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 175,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 176,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 184,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 187,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 189,
+        "rule": "control.begin_end"
+      },
+      {
+        "code": "VG025",
+        "severity": "error",
+        "message": "Control statements must use explicit begin/end blocks.",
+        "path": "tb_v2_adc_behavior_model.v",
+        "line": 190,
+        "rule": "control.begin_end"
+      }
+    ],
+    "metrics": {
+      "files": 1,
+      "modules": 0,
+      "lines": 476,
+      "code_lines": 366,
+      "line_comments": 306,
+      "commented_code_lines": 232,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "preserve_format": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_adc_behavior_model.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_adc_behavior_model.v",
+          "profile": "formatter-normalize",
+          "ok": false,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\tb\\tb_v2_adc_behavior_model.v",
+            "syntax_confidence": 90,
+            "format_score": 80,
+            "rewrite_need_score": 40,
+            "rewrite_risk_score": 15,
+            "decision": "preserve_format",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [
+              {
+                "code": "missing_reset",
+                "severity": "lint",
+                "message": "Sequential always block lacks an obvious reset; formatter must not synthesize reset logic."
+              }
+            ],
+            "metrics": {
+              "line_count": 476,
+              "module_count": 1,
+              "module_names": [
+                "tb_v2_adc_behavior_model"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 25,
+              "end_count": 25,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [],
+              "unprefixed_port_count": 0,
+              "always_count": 2,
+              "multi_target_always_count": 2,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 10,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 74,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 52,
+              "missing_reset_always_count": 1,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "function_task_initial",
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 ADC Behaviour Model Self-Check Testbench",
+            "module_name": "tb_v2_adc_behavior_model",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.1",
+            "simulations": "Vivado xsim 2022.2",
+            "references": "verification/v2_v7/adc_model/v2_adc_behavior_model.v",
+            "version": "V1.0",
+            "dependency_lines": [
+              "v2_adc_behavior_model.v"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。不接DUT，直接向模型施加人造Q3窗口、事务启动与ADC_RST脉冲，逐拍测量各输出沿：兼容脉冲（宽5拍、Q3关闭后一拍、仅脉冲期间idle为低）、三种电平模式（Q3上升沿后恰好i_latency拍上升，保持到所选ADC_RST事件）、两种idle公式、15位Stage1先于Stage2、DOUT先于上升沿稳定、丢失/迟到/忙后恢复/永久忙故障、按槽位序号命中。每项检查打印ADCM-PASS或ADCM-FAIL及实测值；只有全部通过且检查数等于预期时才打印ADCM_SELFTEST_PASS。",
+              "ADC行为模型自检：人造激励逐拍测量完成电平、码线与物理空闲"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "> ERR: [Python] control parser strict failure."
+          ],
+          "diagnostics": [
+            {
+              "severity": "error",
+              "code": "FORMATTER_AST_PARSE",
+              "message": "> ERR: [Python] control parser strict failure.",
+              "line": null,
+              "source": "formatter_ast"
+            }
+          ],
+          "modules": [],
+          "source_metrics": {
+            "lines": 476,
+            "nonempty_lines": 440,
+            "line_comments": 306,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 398,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "tb_v2_adc_behavior_model.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 0,
+        "parse_errors": 1
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}

@@ -1,0 +1,628 @@
+{
+  "version": 1,
+  "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_void_excl.v",
+  "strict": true,
+  "delivery_ready": true,
+  "repair_required": false,
+  "rerun_required_after_repair": false,
+  "delivery_issues_by_rule": {},
+  "errors": 0,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast+static_lint"
+    },
+    "ast": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "files": 1,
+      "modules": 1,
+      "parse_errors": 0,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": true
+    },
+    "comment": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "issues": 0,
+      "metrics": {
+        "scanned_files": 0,
+        "code_lines": 0,
+        "same_line_comment_lines": 0,
+        "violations": 0,
+        "by_construct": {}
+      },
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": true,
+      "status": "passed",
+      "errors": 0,
+      "warnings": 0,
+      "rulebook_path": "D:\\PPG\\verilog\\ppg_github_release\\.claude\\skills\\erie-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "issues": [],
+  "quality_gate": {
+    "version": 1,
+    "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_void_excl.v",
+    "ok": true,
+    "strict": true,
+    "errors": 0,
+    "warnings": 0,
+    "issues": [],
+    "metrics": {
+      "files": 1,
+      "modules": 1,
+      "lines": 117,
+      "code_lines": 49,
+      "line_comments": 81,
+      "commented_code_lines": 26,
+      "block_comment_markers": 0,
+      "formatter_decisions": {
+        "already_standard": 1
+      },
+      "encodings": {
+        "utf-8": 1
+      }
+    },
+    "ast_report": {
+      "version": 1,
+      "root": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_void_excl.v",
+      "profile": "formatter-normalize",
+      "files": [
+        {
+          "version": 1,
+          "path": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_void_excl.v",
+          "profile": "formatter-normalize",
+          "ok": true,
+          "score": {
+            "file": "D:\\PPG\\verilog\\ppg_github_release\\verification\\v2_v7\\monitors\\v2_mon_void_excl.v",
+            "syntax_confidence": 100,
+            "format_score": 100,
+            "rewrite_need_score": 0,
+            "rewrite_risk_score": 5,
+            "decision": "already_standard",
+            "allowed_transforms": [
+              "indent",
+              "spacing",
+              "blank_lines",
+              "trailing_whitespace",
+              "comment_alignment",
+              "ordered_header_layout"
+            ],
+            "blocked_transforms": [
+              "port_sort",
+              "param_sort",
+              "signal_rename",
+              "region_reorder",
+              "always_split",
+              "output_bridge",
+              "inline_wire_rewrite",
+              "header_rebuild",
+              "reset_synthesis"
+            ],
+            "hard_fail": false,
+            "hard_gates": [],
+            "diagnostics": [],
+            "metrics": {
+              "line_count": 117,
+              "module_count": 1,
+              "module_names": [
+                "v2_mon_void_excl"
+              ],
+              "endmodule_count": 1,
+              "begin_count": 12,
+              "end_count": 12,
+              "case_count": 0,
+              "endcase_count": 0,
+              "generate_count": 0,
+              "endgenerate_count": 0,
+              "preprocessor_open_count": 0,
+              "preprocessor_close_count": 0,
+              "port_names": [
+                "i_clk",
+                "i_rstn",
+                "i_done",
+                "i_lost",
+                "o_done_count",
+                "o_lost_count",
+                "o_violation_count",
+                "o_violation_event"
+              ],
+              "unprefixed_port_count": 0,
+              "always_count": 3,
+              "multi_target_always_count": 0,
+              "case_always_multi_target_count": 0,
+              "inline_wire_assign_count": 0,
+              "complex_lvalue_count": 0,
+              "function_task_initial_count": 0,
+              "generate_or_preprocessor_count": 0,
+              "vendor_instance_count": 0,
+              "comment_line_count": 55,
+              "trailing_whitespace_count": 0,
+              "dense_statement_lines": 0,
+              "missing_reset_always_count": 0,
+              "output_redecl_count": 0,
+              "risk_flags": [
+                "rich_human_comments"
+              ]
+            }
+          },
+          "header": {
+            "company": "Erie",
+            "engineer": "Erie",
+            "create_date": "2026/10/10",
+            "revision_date": "2026/10/10",
+            "design_name": "V2 Resident Void/Completion Exclusivity Monitor",
+            "module_name": "v2_mon_void_excl",
+            "description": "verification_reports/V2_V7_FRAMEWORK_BRIEF_20261010.md section 3.2 item 6",
+            "simulations": "verification/v2_v7/tb/tb_v2_monitor_selftest.v, verification/v2_v7/tb/tb_v2_sweep.v",
+            "references": "rtl/ppg_control_top/tb_ppg_control_top_adc_anomaly.v V1.2 lines 1037-1047 (cnt_excl_violation)",
+            "version": "V1.0",
+            "dependency_lines": [
+              "无"
+            ],
+            "history_lines": [],
+            "history_lines_en": [],
+            "history_lines_cn": [
+              "2026年10月10日   V1.0        Erie          创建文件。把tb_ppg_control_top_adc_anomaly.v V1.2的作废与完成互斥计数复制改写为模块：AMI的完成丢失作废事件与完成事件不得同拍出现。同时统计作废与完成次数，供TB说明检查不是空真。可综合检查核心。",
+              "作废与完成互斥监视：同一拍不得既作废又完成"
+            ],
+            "extra_lines": []
+          },
+          "formatter_violations": [
+            "Source does not match the enforced formatter template."
+          ],
+          "diagnostics": [],
+          "modules": [
+            {
+              "index": 0,
+              "name": "v2_mon_void_excl",
+              "params": [],
+              "ports": [
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_clk",
+                  "comment": "与DUT同源的2 MHz时钟",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 46,
+                  "line_end": 46
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_rstn",
+                  "comment": "低有效监视器复位",
+                  "group": "全局信号",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 47,
+                  "line_end": 47
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_done",
+                  "comment": "AMI完成事件单拍",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 50,
+                  "line_end": 50
+                },
+                {
+                  "direction": "input",
+                  "width": "",
+                  "name": "i_lost",
+                  "comment": "AMI完成丢失作废单拍",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 51,
+                  "line_end": 51
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_done_count",
+                  "comment": "完成事件累计",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 52,
+                  "line_end": 52
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_lost_count",
+                  "comment": "作废事件累计",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 53,
+                  "line_end": 53
+                },
+                {
+                  "direction": "output",
+                  "width": "[31:0]",
+                  "name": "o_violation_count",
+                  "comment": "同拍既作废又完成的次数",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 54,
+                  "line_end": 54
+                },
+                {
+                  "direction": "output",
+                  "width": "",
+                  "name": "o_violation_event",
+                  "comment": "本拍发生互斥违例",
+                  "group": "用户接口",
+                  "section": "",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "subgroup": "",
+                  "synthetic": false,
+                  "line_start": 55,
+                  "line_end": 55
+                }
+              ],
+              "body_preamble_blocks": [],
+              "localparams": [],
+              "decls": [
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_complete",
+                  "init": "",
+                  "comment": "完成事件计数器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 完成、作废与违例次数"
+                  ],
+                  "line_start": 60,
+                  "line_end": 60
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_lost",
+                  "init": "",
+                  "comment": "作废事件计数器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 61,
+                  "line_end": 61
+                },
+                {
+                  "kind": "reg",
+                  "width": "[31:0]",
+                  "name": "cnt_violation",
+                  "init": "",
+                  "comment": "互斥违例计数器",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [],
+                  "line_start": 62,
+                  "line_end": 62
+                },
+                {
+                  "kind": "wire",
+                  "width": "",
+                  "name": "flag_violation",
+                  "init": "",
+                  "comment": "本拍完成与作废同时为1",
+                  "signed": false,
+                  "unpacked": "",
+                  "attributes": "",
+                  "suffix": "",
+                  "leading_comments": [
+                    "// 互斥判定"
+                  ],
+                  "line_start": 66,
+                  "line_end": 66
+                }
+              ],
+              "assigns": [
+                {
+                  "lhs": "flag_violation",
+                  "rhs": "i_done && i_lost",
+                  "comment": "两事件同拍即违例",
+                  "leading_comments": [
+                    "// 互斥判定组合逻辑"
+                  ],
+                  "delay": "",
+                  "line_start": 74,
+                  "line_end": 74
+                },
+                {
+                  "lhs": "o_done_count",
+                  "rhs": "cnt_complete",
+                  "comment": "完成次数供汇总说明非空真",
+                  "leading_comments": [
+                    "// 计数与事件送出"
+                  ],
+                  "delay": "",
+                  "line_start": 78,
+                  "line_end": 78
+                },
+                {
+                  "lhs": "o_lost_count",
+                  "rhs": "cnt_lost",
+                  "comment": "作废次数供汇总说明非空真",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 79,
+                  "line_end": 79
+                },
+                {
+                  "lhs": "o_violation_count",
+                  "rhs": "cnt_violation",
+                  "comment": "违例次数供结论",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 80,
+                  "line_end": 80
+                },
+                {
+                  "lhs": "o_violation_event",
+                  "rhs": "flag_violation",
+                  "comment": "违例单拍供明细",
+                  "leading_comments": [],
+                  "delay": "",
+                  "line_start": 81,
+                  "line_end": 81
+                }
+              ],
+              "always": [
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_complete"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_complete",
+                    "cnt_complete",
+                    "cnt_complete"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 完成次数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_complete <= 32'd0;              // 复位清完成次数",
+                    "end else if(i_done == 1'b1)begin",
+                    "cnt_complete <= cnt_complete + 32'd1; // 每次完成加一",
+                    "end else begin",
+                    "cnt_complete <= cnt_complete;       // 无完成保持",
+                    "end"
+                  ],
+                  "line_start": 85,
+                  "line_end": 91
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_lost"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_lost",
+                    "cnt_lost",
+                    "cnt_lost"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 作废次数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_lost <= 32'd0;                  // 复位清作废次数",
+                    "end else if(i_lost == 1'b1)begin",
+                    "cnt_lost <= cnt_lost + 32'd1;       // 每次作废加一",
+                    "end else begin",
+                    "cnt_lost <= cnt_lost;               // 无作废保持",
+                    "end"
+                  ],
+                  "line_start": 96,
+                  "line_end": 102
+                },
+                {
+                  "header": "always@(posedge i_clk or negedge i_rstn)",
+                  "targets": [
+                    "cnt_violation"
+                  ],
+                  "clock": "i_clk",
+                  "reset": "i_rstn",
+                  "trigger_kind": "seq",
+                  "is_combinational": false,
+                  "contains_case": false,
+                  "contains_if": true,
+                  "references_state": false,
+                  "block_kind": "main_task_always",
+                  "target_count": 1,
+                  "lvalues": [
+                    "cnt_violation",
+                    "cnt_violation",
+                    "cnt_violation"
+                  ],
+                  "has_complex_lvalues": false,
+                  "line_count": 7,
+                  "leading_comments": [
+                    "// 违例次数"
+                  ],
+                  "lines": [
+                    "if(i_rstn == 1'b0)begin",
+                    "cnt_violation <= 32'd0;             // 复位清违例次数",
+                    "end else if(flag_violation == 1'b1)begin",
+                    "cnt_violation <= cnt_violation + 32'd1; // 同拍冲突加一",
+                    "end else begin",
+                    "cnt_violation <= cnt_violation;     // 无冲突保持",
+                    "end"
+                  ],
+                  "line_start": 107,
+                  "line_end": 113
+                }
+              ],
+              "instances": [],
+              "generates": [],
+              "initials": [],
+              "functions": [],
+              "tasks": [],
+              "raw_blocks": [],
+              "conditionals": [],
+              "counts": {
+                "functions": 0,
+                "tasks": 0,
+                "localparams": 0,
+                "decls": 4,
+                "assigns": 5,
+                "always": 3,
+                "initials": 0,
+                "instances": 0,
+                "raw_blocks": 0,
+                "preprocessor_prologue": 0,
+                "conditionals": 0,
+                "generates": 0
+              },
+              "line_start": 43,
+              "line_end": 117
+            }
+          ],
+          "source_metrics": {
+            "lines": 117,
+            "nonempty_lines": 104,
+            "line_comments": 81,
+            "block_comment_markers": 0,
+            "tab_indented_lines": 60,
+            "space_indented_lines": 0,
+            "has_timescale": true,
+            "has_bilingual_header": true
+          },
+          "encoding": "utf-8",
+          "relative_path": "v2_mon_void_excl.v"
+        }
+      ],
+      "summary": {
+        "files": 1,
+        "modules": 1,
+        "parse_errors": 0
+      }
+    }
+  },
+  "static_lint": [],
+  "comment_gate": {
+    "issues": [],
+    "metrics": {
+      "scanned_files": 0,
+      "code_lines": 0,
+      "same_line_comment_lines": 0,
+      "violations": 0,
+      "by_construct": {}
+    }
+  }
+}
