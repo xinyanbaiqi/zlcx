@@ -22,6 +22,8 @@ and returns the written name, or None when the cell writes nothing there:
   W7  "(`name`," right before the anchor (same parenthesis) -> name
   W10 an instance port connection right after the anchor, optionally after "is":
       `` `ppg_control_top.v:932` is `.o_macro_frame_start_event()` `` -> o_macro_frame_start_event
+  W11 a backticked assignment right after the anchor:
+      `` `ppg_sar9...v:440` `ssw_fault_cause_o = flag_blocking_fault ? 8'h21 : 8'h00` `` -> ssw_fault_cause_o
 
 `related(sym, port)` -- a symbol relates to the row's port when the i_/o_-stripped stems
 are equal or one contains the other (a module port named differently from the Top port,
@@ -40,6 +42,7 @@ TOP_NET = re.compile(r'Top内部网`(' + ID + r')`（`?$')
 TOP_EDGE = re.compile(r'Top边界(?:输入|输出)（`?$')
 TICK_BEFORE_PAREN = re.compile(r'`(' + ID + r')`\s*[（(]`?$')
 CONN_AFTER = re.compile(r'^`?\s*(?:is\s+)?`\.(' + ID + r')\s*\(')
+ASSIGN_AFTER = re.compile(r'^`?\s*`(?:assign\s+)?(' + ID + r')\s*(?:<=|=)(?!=)')
 SAME_PAREN = re.compile(r'[（(]`(' + ID + r')`\s*[,，、]\s*`?$')
 KEYWORDS = {'input', 'output', 'inout', 'wire', 'reg', 'signed', 'parameter', 'localparam', 'integer'}
 
@@ -62,6 +65,9 @@ def written_name(line, s, e, port=None):
     m = CONN_AFTER.match(line[e:])
     if m:
         return m.group(1), 'W10'
+    m = ASSIGN_AFTER.match(line[e:])
+    if m:
+        return m.group(1), 'W11'
     pre = line[max(0, s - 200):s]
     m = MOD_PORT.search(pre)
     if m:
@@ -128,6 +134,9 @@ SAMPLES = [
     ('Consumer: **none** -- `ppg_control_top.v:932` is `.o_macro_frame_start_event()`, an open port', 'ppg_control_top.v:932',
      'o_macro_frame_start_event', 'W10'),
     ('Consumer: `ppg_control_top.v:1298` `.o_detector_idle()`, empty per contract', 'ppg_control_top.v:1298', 'o_detector_idle', 'W10'),
+    ("stickies (`ppg_sar9_sar15_safe_selection_wrapper.v:440` `ssw_fault_cause_o = flag_blocking_fault ? 8'h21 : 8'h00`; x)",
+     'ppg_sar9_sar15_safe_selection_wrapper.v:440', 'ssw_fault_cause_o', 'W11'),
+    ('compare (`ppg_x.v:5` `a == b`) only', 'ppg_x.v:5', None, None),
 ]
 RELATED = [('o_sequence_failed', 'o_recheck_sequence_failed', True), ('i_cross_valid', 'o_cross_valid', True),
            ('o_protocol_error_sticky', 'o_baseline_protocol_error_sticky', True), ('o_waveform_frame_id', 'o_transaction_precision_mode', False),

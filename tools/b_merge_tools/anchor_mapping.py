@@ -143,6 +143,7 @@ def main():
                 source, note = 'manual', d['reason']
         else:
             raise SystemExit('no decision for %s:%d %s (%s)' % (r['file'], r['line'], r['text'], st))
+        # later review files override earlier ones (round 4 after round 3), see the loader
         rv = review.get((r['file'], r['line'], r['text']))
         if rv is not None and cls == 'convert':
             if rv['action'] == 'sym':
@@ -151,7 +152,13 @@ def main():
             elif rv['action'] == 'tag':
                 new = '`%s` `@satisfies: %s`' % (rv['arg1'], rv['arg2'])
                 source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
-            elif rv['action'] == 'note':
+            elif rv['action'] == 'text':
+                new = rv['arg1']
+                source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
+            elif rv['action'] in ('history', 'not-anchor'):
+                cls, new = rv['action'], ''
+                source, note = 'manual', (rv['reason'] + ('；此前：' + note if note else '')).rstrip('；')
+            elif rv['action'] in ('note', 'keep'):
                 note = (rv['reason'] + ('；' + note if note else '')).rstrip('；')
         if cls == 'convert' and r.get('uncertain'):
             note = ('uncertain：同格后文有带日期的勘误/补记但未明示作废前文，按“拿不准时默认转换”处理；' + note).rstrip('；')
