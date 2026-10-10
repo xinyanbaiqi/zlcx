@@ -20,6 +20,12 @@ and returns the written name, or None when the cell writes nothing there:
   W6  a backticked identifier right before "(" / "（" that opens the anchor's parenthesis
       -> that identifier
   W7  "(`name`," right before the anchor (same parenthesis) -> name
+  W10 an instance port connection right after the anchor, optionally after "is":
+      `` `ppg_control_top.v:932` is `.o_macro_frame_start_event()` `` -> o_macro_frame_start_event
+
+`related(sym, port)` -- a symbol relates to the row's port when the i_/o_-stripped stems
+are equal or one contains the other (a module port named differently from the Top port,
+e.g. o_sequence_failed for o_recheck_sequence_failed).
 
 Run directly for the self-test (constructed samples per rule plus negative cases).
 """
@@ -33,6 +39,7 @@ MOD_PORT_DECL = re.compile(r'(?:^|[^A-Za-z0-9_.`])(' + ID + r')\.(' + ID + r')�
 TOP_NET = re.compile(r'Top内部网`(' + ID + r')`（`?$')
 TOP_EDGE = re.compile(r'Top边界(?:输入|输出)（`?$')
 TICK_BEFORE_PAREN = re.compile(r'`(' + ID + r')`\s*[（(]`?$')
+CONN_AFTER = re.compile(r'^`?\s*(?:is\s+)?`\.(' + ID + r')\s*\(')
 SAME_PAREN = re.compile(r'[（(]`(' + ID + r')`\s*[,，、]\s*`?$')
 KEYWORDS = {'input', 'output', 'inout', 'wire', 'reg', 'signed', 'parameter', 'localparam', 'integer'}
 
@@ -52,6 +59,9 @@ def written_name(line, s, e, port=None):
         n = decl_name(m.group(1))
         if n:
             return n, 'W1'
+    m = CONN_AFTER.match(line[e:])
+    if m:
+        return m.group(1), 'W10'
     pre = line[max(0, s - 200):s]
     m = MOD_PORT.search(pre)
     if m:
@@ -82,6 +92,24 @@ def row_port(line):
     return None
 
 
+def carries(text, name):
+    """True when Verilog source text declares `name` (input/output/inout/wire/reg) or
+    connects it as an instance port `.name(` -- a file 'has' the row's port (W9/W9b)."""
+    w = r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(name)
+    return (re.search(r'^\s*(?:input|output|inout|wire|reg)\b[^;/\n]*?' + w, text, re.M) is not None
+            or re.search(r'\.\s*%s\s*\(' % re.escape(name), text) is not None)
+
+
+def stem(name):
+    return re.sub(r'^(?:i|o|io)_', '', name)
+
+
+def related(sym, port):
+    """True when sym and the row port share a stem (equal, or one contains the other)."""
+    a, b = stem(sym), stem(port)
+    return a == b or (len(b) >= 6 and b in sym) or (len(a) >= 8 and a in b)
+
+
 # --------------------------------------------------------------------------- self-test
 SAMPLES = [
     ('| C01 | src | output | `o_system_fault_cause` | `ppg_control_top.v:248` `output [7:0] o_system_fault_cause` | x |',
@@ -97,7 +125,13 @@ SAMPLES = [
     ('see `ppg_x.v:12` for details', 'ppg_x.v:12', None, None),
     ('Consumer: `assign o_x = y;` (`:1006`) -> AMI', '`:1006`', None, None),
     ('| C01 | src | input | `i_x` | wrapper.i_y（`ppg_top.v:5` `wire z` | x |', 'ppg_top.v:5', 'z', 'W1'),
+    ('Consumer: **none** -- `ppg_control_top.v:932` is `.o_macro_frame_start_event()`, an open port', 'ppg_control_top.v:932',
+     'o_macro_frame_start_event', 'W10'),
+    ('Consumer: `ppg_control_top.v:1298` `.o_detector_idle()`, empty per contract', 'ppg_control_top.v:1298', 'o_detector_idle', 'W10'),
 ]
+RELATED = [('o_sequence_failed', 'o_recheck_sequence_failed', True), ('i_cross_valid', 'o_cross_valid', True),
+           ('o_protocol_error_sticky', 'o_baseline_protocol_error_sticky', True), ('o_waveform_frame_id', 'o_transaction_precision_mode', False),
+           ('o_peak_valid', 'o_peak_pending', False), ('o_valid', 'o_cross_valid', False)]
 
 
 def self_test():
@@ -108,7 +142,11 @@ def self_test():
         ok = got == (want, rule)
         bad += not ok
         print('%s %-28s %-4s -> %s' % ('OK  ' if ok else 'FAIL', want, rule, got))
-    print('samples %d, failures %d' % (len(SAMPLES), bad))
+    for a, b, want in RELATED:
+        ok = related(a, b) == want
+        bad += not ok
+        print('%s related(%s, %s) = %s' % ('OK  ' if ok else 'FAIL', a, b, related(a, b)))
+    print('samples %d, failures %d' % (len(SAMPLES) + len(RELATED), bad))
     return 1 if bad else 0
 
 
