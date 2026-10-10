@@ -49,9 +49,7 @@ def collect() -> None:
                 tags.append("termination")
             if tags:
                 hits.append(number)
-                context = " ".join(item.strip() for item in lines[max(0, number-3):number+2]
-                                   if item.strip() and not item.strip().startswith("//"))
-                candidates.append([relative, number, ",".join(tags), code, context])
+                candidates.append([relative, number, ",".join(tags), code])
         try:
             ast = build_ast_report_for_path(path)
             structures = [{"name": module["name"], "counts": module.get("counts", {}),
@@ -72,7 +70,7 @@ def collect() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     with (OUT / "V9_SCAN_CANDIDATES.tsv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream, delimiter="\t")
-        writer.writerow(["path", "line", "tags", "source", "nearby_source"])
+        writer.writerow(["path", "line", "tags", "source"])
         writer.writerows(candidates)
     (OUT / "V9_SOURCE_COVERAGE.json").write_text(json.dumps({
         "baseline": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),

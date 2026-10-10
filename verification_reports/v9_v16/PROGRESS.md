@@ -2,7 +2,7 @@
 
 - 日期：2026-10-10；远程：`https://github.com/xinyanbaiqi/zlcx.git`；工作分支：`v9-v16`，从main `bb3c1aba12474638fcbefd9b1f324ecfc7524544`创建，已执行 `git fetch origin`。
 - V9合同语义及V16参考基线：`origin/b-merge-batch` = `66bebdfabe9e1cb173c34a0ce44e48ba4230398d`。
-- 原项目目录仅有未跟踪的V1报告和无remote的空Git仓库，且Windows环境不允许在Documents目录创建普通目录/写Git文件（返回No such file）。原目录未改动。实际独立检出位于本次任务获准写入目录：`C:/Users/DAWN/.codex/visualizations/2026/10/10/01a123bb-a6f4-70d0-bcee-3c6128be5f05/zlcx`。
+- 原项目目录仅有未跟踪的V1报告和无remote的空Git仓库，且Windows环境不允许在原目录创建普通目录/写Git文件（返回No such file）。原目录未改动；在本次任务另一个获准写入目录建立了独立检出。本报告不记录本机账号或绝对私有路径。
 - 边界：既有RTL/TB/合同/回归脚本不修改；新增交付仅在 `verification_reports/v9_v16/`。使用仓库erie-verilog-generator，保留formatter限制，未以临时解析器替代。
 
 | 子任务 | 状态 | 证据 / 剩余 |
@@ -12,7 +12,7 @@
 
 V9本地提交：`dcd08e5`。V16另一次独立提交；最新提交号以Git历史为准，避免为了把本commit哈希写入本commit而递归改文件。
 
-推送状态：**尚未推送**。自动审批拒绝了 `git commit ...; git push -u origin v9-v16` 组合操作，理由是没有识别到 trusted user messages 对这些仓库衍生报告上传GitHub目的地的明确授权。随后只执行获准的本地commit。没有绕过拒绝；待用户明确批准把本分支审计报告推到 `xinyanbaiqi/zlcx` 的 `v9-v16` 后再执行push，不推其他分支。
+推送授权：2026-10-10统筹已明确同意把本分支的新增审计报告与脚本推送到 `xinyanbaiqi/zlcx` 的 `v9-v16`，并要求新增范围、体积、敏感信息自查。此前自动审批未识别到明确上传授权，因此当时只提交本地；取得本次授权后完成自查，以显式分支refspec只推 `v9-v16`。实际推送结果及最终提交号以Git远程引用和交付回复为准。
 
 交付文件（均新增于本目录）：
 
@@ -22,3 +22,5 @@ V9本地提交：`dcd08e5`。V16另一次独立提交；最新提交号以Git历
 - `PROGRESS.md`、`.gitignore`（忽略试跑目录和脚本缓存）。
 
 变更边界检查：所有既有跟踪文件无改动；V9全部51份源码SHA256保持不变，V9条目/风险计数与逐文件表一致；V16结果49行与20系统/1芯片/28模块清单一致，finish参考均可统一为fs。技能预检产生的新增pycache已清理；试跑临时目录不入库。
+
+推送前整理：候选TSV保留每个候选的位置、类别和单行原文，去掉重复的相邻多行上下文；原文完整内容从对应基线源码读取。文件检查不含账号凭据、令牌、邮箱或本机绝对路径；没有纳入仿真日志、波形或编译产物。
