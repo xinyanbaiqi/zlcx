@@ -1,0 +1,464 @@
+{
+  "0": {
+    "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\10\\01a123ce-417a-79f0-b6cb-53ac3801aef4\\zlcx\\rtl\\ppg_timing_sar9\\ppg_timing_sar9.v",
+    "sha256": "bc21c96137d0ff43b979914bbf5a0836a01e908748d5d1089623259ee938df30",
+    "center": 34,
+    "parameters": {
+      "C_FRAME_TICKS": 5000,
+      "FRAME_LAST_TICK": 4999,
+      "FRAME_PRESTART_TICK": 4761,
+      "SAR9_PRESTART_TICK": 4778,
+      "IR_OFFSET_TICK": 160,
+      "OPTICAL_MODE_LATCH_TICK": 4760,
+      "R_Q3_CENTER_TICK": 34,
+      "IR_Q3_CENTER_TICK": 194,
+      "R_EN_TIA_START": 17,
+      "R_EN_TIA_END": 37,
+      "R_AFERST_START": 17,
+      "R_AFERST_END": 29,
+      "R_Q1_START": 27,
+      "R_Q1_END": 36,
+      "R_Q2_START": 30,
+      "R_Q2_END": 32,
+      "R_LED_CODE_START": 32,
+      "R_LED_CODE_END": 35,
+      "R_LED_START": 33,
+      "R_LED_END": 35,
+      "R_IDAC_CLOCK_START": 4997,
+      "R_IDAC_CLOCK_END": 37,
+      "R_SAR9_IREF_START": 4778,
+      "R_SAR9_IREF_END": 52,
+      "R_ENABLE_IREF_START": 4970,
+      "R_ENABLE_IREF_END": 42,
+      "R_ENABLE_CODE_START": 4990,
+      "R_ENABLE_CODE_END": 44,
+      "R_IDAC_AMB_START": 4992,
+      "R_IDAC_AMB_END": 44,
+      "R_IDAC_DC_START": 0,
+      "R_IDAC_DC_END": 44,
+      "IR_EN_TIA_START": 177,
+      "IR_EN_TIA_END": 197,
+      "IR_AFERST_START": 177,
+      "IR_AFERST_END": 189,
+      "IR_Q1_START": 187,
+      "IR_Q1_END": 196,
+      "IR_Q2_START": 190,
+      "IR_Q2_END": 192,
+      "IR_LED_CODE_START": 192,
+      "IR_LED_CODE_END": 195,
+      "IR_LED_START": 193,
+      "IR_LED_END": 195,
+      "IR_IDAC_CLOCK_START": 157,
+      "IR_IDAC_CLOCK_END": 197,
+      "IR_SAR9_IREF_START": 4938,
+      "IR_SAR9_IREF_END": 212,
+      "IR_ENABLE_IREF_START": 130,
+      "IR_ENABLE_IREF_END": 202,
+      "IR_ENABLE_CODE_START": 150,
+      "IR_ENABLE_CODE_END": 204,
+      "IR_IDAC_AMB_START": 152,
+      "IR_IDAC_AMB_END": 204,
+      "IR_IDAC_DC_START": 160,
+      "IR_IDAC_DC_END": 204,
+      "CODE_SNAPSHOT_WIDTH": 48,
+      "CODE_LED_R_LSB": 0,
+      "CODE_LED_R_MSB": 7,
+      "CODE_LED_IR_LSB": 8,
+      "CODE_LED_IR_MSB": 15,
+      "CODE_AMB_R_LSB": 16,
+      "CODE_AMB_R_MSB": 23,
+      "CODE_AMB_IR_LSB": 24,
+      "CODE_AMB_IR_MSB": 31,
+      "CODE_DC_R_LSB": 32,
+      "CODE_DC_R_MSB": 39,
+      "CODE_DC_IR_LSB": 40,
+      "CODE_DC_IR_MSB": 47,
+      "STATIC_CODE_SNAPSHOT_WIDTH": 32,
+      "STATIC_SAR9_AMB_LSB": 0,
+      "STATIC_SAR9_AMB_MSB": 7,
+      "STATIC_SAR9_DC_LSB": 8,
+      "STATIC_SAR9_DC_MSB": 15,
+      "STATIC_SAR15_AMB_LSB": 16,
+      "STATIC_SAR15_AMB_MSB": 23,
+      "STATIC_SAR15_DC_LSB": 24,
+      "STATIC_SAR15_DC_MSB": 31,
+      "CONTROL_WIDTH": 40,
+      "CTRL_FRAME_START": 0,
+      "CTRL_EN_TIA": 1,
+      "CTRL_LEDDAC_LSB": 2,
+      "CTRL_LEDDAC_MSB": 9,
+      "CTRL_LEDEN1": 10,
+      "CTRL_LEDEN2": 11,
+      "CTRL_CLK_IREF_IDAC": 12,
+      "CTRL_CLK_IREF_LED": 13,
+      "CTRL_CLK_9Q1": 14,
+      "CTRL_CLK_AFERST": 15,
+      "CTRL_CLK_IREF_SAR9": 16,
+      "CTRL_CLK_Q2": 17,
+      "CTRL_CLK_Q3": 18,
+      "CTRL_CLK_TIAEN": 19,
+      "CTRL_EN_SAR9_AMB": 20,
+      "CTRL_EN_SAR9_DC": 21,
+      "CTRL_EN_SAR9_IREF": 22,
+      "CTRL_IDAC_AMB_LSB": 23,
+      "CTRL_IDAC_AMB_MSB": 30,
+      "CTRL_IDAC_DC_LSB": 31,
+      "CTRL_IDAC_DC_MSB": 38,
+      "CTRL_EN_TEST": 39
+    },
+    "mapping": {
+      "o_en_tia_low": [
+        "R_EN_TIA_START",
+        "R_EN_TIA_END"
+      ],
+      "o_clk_tiaen_low": [
+        "R_EN_TIA_START",
+        "R_EN_TIA_END"
+      ],
+      "o_clk_aferst_low": [
+        "R_AFERST_START",
+        "R_AFERST_END"
+      ],
+      "o_clk_9q1_low": [
+        "R_Q1_START",
+        "R_Q1_END"
+      ],
+      "o_clk_q2_low": [
+        "R_Q2_START",
+        "R_Q2_END"
+      ],
+      "o_clk_q3_low": [
+        "R_LED_START",
+        "R_LED_END"
+      ],
+      "o_leddac": [
+        "R_LED_CODE_START",
+        "R_LED_CODE_END"
+      ],
+      "o_leden1_low": [
+        "R_LED_START",
+        "R_LED_END"
+      ],
+      "o_clk_iref_idac_low": [
+        "R_IDAC_CLOCK_START",
+        "R_IDAC_CLOCK_END"
+      ],
+      "o_clk_iref_idac_sar9_low": [
+        "R_SAR9_IREF_START",
+        "R_SAR9_IREF_END"
+      ],
+      "o_en_sar9_iref": [
+        "R_ENABLE_IREF_START",
+        "R_ENABLE_IREF_END"
+      ],
+      "o_en_sar9_amb_low": [
+        "R_ENABLE_CODE_START",
+        "R_ENABLE_CODE_END"
+      ],
+      "o_en_sar9_dc_low": [
+        "R_ENABLE_CODE_START",
+        "R_ENABLE_CODE_END"
+      ],
+      "o_idac_sar9ambn_low": [
+        "R_IDAC_AMB_START",
+        "R_IDAC_AMB_END"
+      ],
+      "o_idac_sar9dcn_low": [
+        "R_IDAC_DC_START",
+        "R_IDAC_DC_END"
+      ]
+    },
+    "windows": {
+      "o_en_tia_low": [
+        -17,
+        3
+      ],
+      "o_clk_tiaen_low": [
+        -17,
+        3
+      ],
+      "o_clk_aferst_low": [
+        -17,
+        -5
+      ],
+      "o_clk_9q1_low": [
+        -7,
+        2
+      ],
+      "o_clk_q2_low": [
+        -4,
+        -2
+      ],
+      "o_clk_q3_low": [
+        -1,
+        1
+      ],
+      "o_leddac": [
+        -2,
+        1
+      ],
+      "o_leden1_low": [
+        -1,
+        1
+      ],
+      "o_clk_iref_idac_low": [
+        -37,
+        3
+      ],
+      "o_clk_iref_idac_sar9_low": [
+        -256,
+        18
+      ],
+      "o_en_sar9_iref": [
+        -64,
+        8
+      ],
+      "o_en_sar9_amb_low": [
+        -44,
+        10
+      ],
+      "o_en_sar9_dc_low": [
+        -44,
+        10
+      ],
+      "o_idac_sar9ambn_low": [
+        -42,
+        10
+      ],
+      "o_idac_sar9dcn_low": [
+        -34,
+        10
+      ]
+    },
+    "envelope": [
+      -256,
+      18
+    ]
+  },
+  "1": {
+    "path": "C:\\Users\\DAWN\\.codex\\visualizations\\2026\\10\\10\\01a123ce-417a-79f0-b6cb-53ac3801aef4\\zlcx\\rtl\\ppg_timing_sar15\\ppg_timing_sar15.v",
+    "sha256": "23406c4eb636468a9cc8d75b6b5219caadb60a3ac2b327a04500d08325cfa467",
+    "center": 34,
+    "parameters": {
+      "C_FRAME_TICKS": 5000,
+      "FRAME_LAST_TICK": 4999,
+      "PRESTART_TICK": 4761,
+      "IR_OFFSET_TICK": 160,
+      "OPTICAL_MODE_LATCH_TICK": 4760,
+      "R_EN_TIA_END": 39,
+      "R_AFERST_END": 20,
+      "R_Q1_START": 18,
+      "R_Q1_END": 39,
+      "R_Q2_START": 21,
+      "R_Q2_END": 29,
+      "R_LED_CODE_START": 29,
+      "R_LED_CODE_END": 38,
+      "R_LED_START": 30,
+      "R_LED_END": 38,
+      "R_IDAC_CLOCK_START": 4980,
+      "R_IDAC_CLOCK_END": 40,
+      "R_IDAC_DC_START": 4885,
+      "R_IDAC_AMB_START": 4937,
+      "R_IDAC_CODE_END": 42,
+      "IR_EN_TIA_START": 160,
+      "IR_EN_TIA_END": 199,
+      "IR_AFERST_START": 160,
+      "IR_AFERST_END": 180,
+      "IR_Q1_START": 178,
+      "IR_Q1_END": 199,
+      "IR_Q2_START": 181,
+      "IR_Q2_END": 189,
+      "IR_LED_CODE_START": 189,
+      "IR_LED_CODE_END": 198,
+      "IR_LED_START": 190,
+      "IR_LED_END": 198,
+      "IR_IDAC_CLOCK_START": 140,
+      "IR_IDAC_CLOCK_END": 200,
+      "IR_IDAC_DC_START": 45,
+      "IR_IDAC_AMB_START": 97,
+      "IR_IDAC_CODE_END": 202,
+      "R_SHARED_IREF_START": 4761,
+      "R_SHARED_ENABLE_START": 4781,
+      "R_SHARED_IREF_END": 40,
+      "R_SHARED_CONTROL_END": 42,
+      "IR_SHARED_IREF_START": 4921,
+      "IR_SHARED_ENABLE_START": 4941,
+      "IR_SHARED_IREF_END": 200,
+      "IR_SHARED_CONTROL_END": 202,
+      "CODE_SNAPSHOT_WIDTH": 48,
+      "CODE_LED_R_LSB": 0,
+      "CODE_LED_R_MSB": 7,
+      "CODE_LED_IR_LSB": 8,
+      "CODE_LED_IR_MSB": 15,
+      "CODE_AMB_R_LSB": 16,
+      "CODE_AMB_R_MSB": 23,
+      "CODE_AMB_IR_LSB": 24,
+      "CODE_AMB_IR_MSB": 31,
+      "CODE_DC_R_LSB": 32,
+      "CODE_DC_R_MSB": 39,
+      "CODE_DC_IR_LSB": 40,
+      "CODE_DC_IR_MSB": 47,
+      "STATIC_CODE_SNAPSHOT_WIDTH": 32,
+      "STATIC_SAR9_AMB_LSB": 0,
+      "STATIC_SAR9_AMB_MSB": 7,
+      "STATIC_SAR9_DC_LSB": 8,
+      "STATIC_SAR9_DC_MSB": 15,
+      "STATIC_SAR15_AMB_LSB": 16,
+      "STATIC_SAR15_AMB_MSB": 23,
+      "STATIC_SAR15_DC_LSB": 24,
+      "STATIC_SAR15_DC_MSB": 31,
+      "CONTROL_WIDTH": 41,
+      "CTRL_FRAME_START": 0,
+      "CTRL_EN_TIA": 1,
+      "CTRL_LEDDAC_LSB": 2,
+      "CTRL_LEDDAC_MSB": 9,
+      "CTRL_LEDEN1": 10,
+      "CTRL_LEDEN2": 11,
+      "CTRL_CLK_IREF_IDAC": 12,
+      "CTRL_CLK_IREF_LED": 13,
+      "CTRL_CLK_15Q1": 14,
+      "CTRL_CLK_AFERST": 15,
+      "CTRL_CLK_IREF_SAR15": 16,
+      "CTRL_CLK_Q2": 17,
+      "CTRL_CLK_Q3": 18,
+      "CTRL_CLK_TIAEN": 19,
+      "CTRL_EN_SAR15_AMB": 20,
+      "CTRL_EN_SAR15_DC": 21,
+      "CTRL_EN_SAR15_IREF": 22,
+      "CTRL_IDAC_AMB_LSB": 23,
+      "CTRL_IDAC_AMB_MSB": 30,
+      "CTRL_IDAC_DC_LSB": 31,
+      "CTRL_IDAC_DC_MSB": 38,
+      "CTRL_EN_15SAR": 39,
+      "CTRL_EN_TEST": 40
+    },
+    "mapping": {
+      "o_en_tia_low": [
+        null,
+        "R_EN_TIA_END"
+      ],
+      "o_clk_tiaen_low": [
+        null,
+        "R_EN_TIA_END"
+      ],
+      "o_clk_aferst_low": [
+        null,
+        "R_AFERST_END"
+      ],
+      "o_clk_15q1_low": [
+        "R_Q1_START",
+        "R_Q1_END"
+      ],
+      "o_clk_q2_low": [
+        "R_Q2_START",
+        "R_Q2_END"
+      ],
+      "o_clk_q3_low": [
+        "R_LED_START",
+        "R_LED_END"
+      ],
+      "o_leddac": [
+        "R_LED_CODE_START",
+        "R_LED_CODE_END"
+      ],
+      "o_leden1_low": [
+        "R_LED_START",
+        "R_LED_END"
+      ],
+      "o_clk_iref_idac_low": [
+        "R_IDAC_CLOCK_START",
+        "R_IDAC_CLOCK_END"
+      ],
+      "o_clk_iref_idac_sar15_low": [
+        "R_SHARED_IREF_START",
+        "R_SHARED_CONTROL_END"
+      ],
+      "o_en_sar15_iref": [
+        "R_SHARED_IREF_START",
+        "R_SHARED_IREF_END"
+      ],
+      "o_en_sar15_amb_low": [
+        "R_SHARED_ENABLE_START",
+        "R_SHARED_CONTROL_END"
+      ],
+      "o_en_sar15_dc_low": [
+        "R_SHARED_ENABLE_START",
+        "R_SHARED_CONTROL_END"
+      ],
+      "o_idac_sar15ambn_low": [
+        "R_IDAC_AMB_START",
+        "R_IDAC_CODE_END"
+      ],
+      "o_idac_sar15dcn_low": [
+        "R_IDAC_DC_START",
+        "R_IDAC_CODE_END"
+      ]
+    },
+    "windows": {
+      "o_en_tia_low": [
+        -34,
+        5
+      ],
+      "o_clk_tiaen_low": [
+        -34,
+        5
+      ],
+      "o_clk_aferst_low": [
+        -34,
+        -14
+      ],
+      "o_clk_15q1_low": [
+        -16,
+        5
+      ],
+      "o_clk_q2_low": [
+        -13,
+        -5
+      ],
+      "o_clk_q3_low": [
+        -4,
+        4
+      ],
+      "o_leddac": [
+        -5,
+        4
+      ],
+      "o_leden1_low": [
+        -4,
+        4
+      ],
+      "o_clk_iref_idac_low": [
+        -54,
+        6
+      ],
+      "o_clk_iref_idac_sar15_low": [
+        -273,
+        8
+      ],
+      "o_en_sar15_iref": [
+        -273,
+        6
+      ],
+      "o_en_sar15_amb_low": [
+        -253,
+        8
+      ],
+      "o_en_sar15_dc_low": [
+        -253,
+        8
+      ],
+      "o_idac_sar15ambn_low": [
+        -97,
+        8
+      ],
+      "o_idac_sar15dcn_low": [
+        -149,
+        8
+      ]
+    },
+    "envelope": [
+      -273,
+      8
+    ]
+  }
+}

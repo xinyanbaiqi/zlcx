@@ -1,0 +1,272 @@
+{
+  "owner_at_deadline_normal9/0/o_clk_aferst_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        283,
+        295
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        295
+      ]
+    ]
+  },
+  "owner_at_deadline_normal9/0/o_clk_tiaen_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        283,
+        303
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        303
+      ]
+    ]
+  },
+  "owner_at_deadline_normal9/0/o_en_tia_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        283,
+        303
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        303
+      ]
+    ]
+  },
+  "owner_at_deadline_normal9/1/o_clk_aferst_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        443,
+        455
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        455
+      ]
+    ]
+  },
+  "owner_at_deadline_normal9/1/o_clk_tiaen_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        443,
+        463
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        463
+      ]
+    ]
+  },
+  "owner_at_deadline_normal9/1/o_en_tia_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        443,
+        463
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        463
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/0/o_clk_aferst_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        266,
+        286
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        286
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/0/o_clk_tiaen_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        266,
+        305
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        305
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/0/o_en_tia_low": {
+    "owner_tick": 283,
+    "expected": [
+      [
+        266,
+        305
+      ]
+    ],
+    "actual": [
+      [
+        284,
+        305
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/1/o_clk_aferst_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        426,
+        446
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        446
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/1/o_clk_tiaen_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        426,
+        465
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        465
+      ]
+    ]
+  },
+  "owner_at_deadline_normal15/1/o_en_tia_low": {
+    "owner_tick": 443,
+    "expected": [
+      [
+        426,
+        465
+      ]
+    ],
+    "actual": [
+      [
+        444,
+        465
+      ]
+    ]
+  },
+  "known_sar15_deadline_red_275/0/o_clk_aferst_low": {
+    "owner_tick": 275,
+    "expected": [
+      [
+        266,
+        286
+      ]
+    ],
+    "actual": [
+      [
+        276,
+        286
+      ]
+    ]
+  },
+  "known_sar15_deadline_red_275/0/o_clk_tiaen_low": {
+    "owner_tick": 275,
+    "expected": [
+      [
+        266,
+        305
+      ]
+    ],
+    "actual": [
+      [
+        276,
+        305
+      ]
+    ]
+  },
+  "known_sar15_deadline_red_275/0/o_en_tia_low": {
+    "owner_tick": 275,
+    "expected": [
+      [
+        266,
+        305
+      ]
+    ],
+    "actual": [
+      [
+        276,
+        305
+      ]
+    ]
+  },
+  "known_sar15_deadline_ir_435/1/o_clk_aferst_low": {
+    "owner_tick": 435,
+    "expected": [
+      [
+        426,
+        446
+      ]
+    ],
+    "actual": [
+      [
+        436,
+        446
+      ]
+    ]
+  },
+  "known_sar15_deadline_ir_435/1/o_clk_tiaen_low": {
+    "owner_tick": 435,
+    "expected": [
+      [
+        426,
+        465
+      ]
+    ],
+    "actual": [
+      [
+        436,
+        465
+      ]
+    ]
+  },
+  "known_sar15_deadline_ir_435/1/o_en_tia_low": {
+    "owner_tick": 435,
+    "expected": [
+      [
+        426,
+        465
+      ]
+    ],
+    "actual": [
+      [
+        436,
+        465
+      ]
+    ]
+  }
+}

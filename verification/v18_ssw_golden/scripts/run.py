@@ -85,7 +85,8 @@ def main() -> int:
         """每个进程使用自己的工具目录，不共享仿真日志或WDB。"""
         name = case["name"]
         folder = out / name
-        case_build = folder / "simulator"
+        # Vivado 2019.2不支持过长Windows路径；快照使用独立短编号目录。
+        case_build = out / "sims" / f"s{selected.index(case):03d}"
         shutil.copytree(build, case_build, dirs_exist_ok=True)
         stim, actual = folder / "stimulus.hex", folder / "actual.csv"
         if args.simulator == "xsim":

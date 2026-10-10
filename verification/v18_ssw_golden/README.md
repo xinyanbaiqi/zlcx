@@ -29,3 +29,14 @@ python -B .claude/skills/erie-verilog-generator/scripts/python/validation/verilo
 ```
 
 大体积逐拍文件、工具快照和运行日志留在忽略目录`_runs/`；提交包含小型机器可读结果、来源与迹线哈希，能够用相同脚本复现。独立性记录和未确认问题以`verification_reports/V18_SSW_EXPECTED_RULES.md`为准。
+
+最终矩阵含148场景。`scripts/build_scenarios.py`可重新生成数据；覆盖所有AMB/DC/LEDDAC码图样、RED/IR不同DC码、两向精度切换、五项owner缺失、三个owner截止点提交、两个SAR15窗口中途owner提交、普通与校准STOP/abort。`KNOWN-SAR15-DEADLINE`只作为已知问题证据，不计作新发现。
+
+全矩阵运行后冻结并汇总最终规则：
+
+```powershell
+python -B verification/v18_ssw_golden/scripts/collect.py --runs verification/v18_ssw_golden/_runs/full --out verification/v18_ssw_golden/_runs/final --evidence verification/v18_ssw_golden/scenarios/evidence
+python -B verification/v18_ssw_golden/scripts/check_comparator.py --expected verification/v18_ssw_golden/_runs/full/normal_both_sar9_a5/expected.csv
+```
+
+`collect.py`同样接受`--repo`、`--sar9-template`、`--sar15-template`，供RC1移入legacy后的重跑使用。多个`--runs`路径从左到右覆盖；只有最新生成刺激和旧采集刺激SHA256一致才允许重用迹线。统计中的PASS是完整黄金符合性，采集TB打印的PASS仅表示时钟/稳定性和文件采集完成，不能相互替代。

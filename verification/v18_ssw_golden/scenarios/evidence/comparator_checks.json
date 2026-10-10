@@ -1,0 +1,142 @@
+{
+  "positive_control": {
+    "status": "PASS",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {}
+  },
+  "single_idac_bit": {
+    "status": "MISMATCH",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {
+      "o_idac_sar9ambn_low": {
+        "mismatch_ticks": 1,
+        "compared_ticks": 5004,
+        "unknown_ticks": 0,
+        "mismatch_bits": 1,
+        "first": {
+          "row": 266,
+          "tick": 258,
+          "macro_tick": 258,
+          "local_tick": 258,
+          "expected": 165,
+          "actual": 229
+        },
+        "last_tick": 258
+      }
+    }
+  },
+  "early_led_edge": {
+    "status": "MISMATCH",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {
+      "o_leden1_low": {
+        "mismatch_ticks": 1,
+        "compared_ticks": 5004,
+        "unknown_ticks": 0,
+        "mismatch_bits": 1,
+        "first": {
+          "row": 306,
+          "tick": 298,
+          "macro_tick": 298,
+          "local_tick": 298,
+          "expected": 0,
+          "actual": 1
+        },
+        "last_tick": 298
+      }
+    }
+  },
+  "unknown_logic": {
+    "status": "MISMATCH",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {
+      "o_idac_sar9ambn_low": {
+        "mismatch_ticks": 1,
+        "compared_ticks": 5004,
+        "unknown_ticks": 0,
+        "mismatch_bits": 1,
+        "first": {
+          "row": 266,
+          "tick": 258,
+          "macro_tick": 258,
+          "local_tick": 258,
+          "expected": 165,
+          "actual": "xx"
+        },
+        "last_tick": 258
+      }
+    }
+  },
+  "missing_row": {
+    "status": "MISMATCH",
+    "structure_errors": [
+      "row count expected=5008 actual=5007"
+    ],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {}
+  },
+  "duplicate_row": {
+    "status": "MISMATCH",
+    "structure_errors": [
+      "nonsequential/duplicate row at 5007"
+    ],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {}
+  },
+  "wrong_clock_low": {
+    "status": "MISMATCH",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 1,
+      "stability_errors": 0
+    },
+    "mismatch_signals": {}
+  },
+  "control_changes_between_edges": {
+    "status": "MISMATCH",
+    "structure_errors": [],
+    "audit": {
+      "wave_fire": 0,
+      "owner_fire": 0,
+      "clock_low_errors": 0,
+      "stability_errors": 1
+    },
+    "mismatch_signals": {}
+  }
+}

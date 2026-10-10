@@ -1,0 +1,14 @@
+[
+  {
+    "name": "known_sar15_deadline_red_275",
+    "precision": 1,
+    "optical_mode": 1,
+    "owner_tick": 275
+  },
+  {
+    "name": "known_sar15_deadline_ir_435",
+    "precision": 1,
+    "optical_mode": 2,
+    "ir_owner_tick": 435
+  }
+]

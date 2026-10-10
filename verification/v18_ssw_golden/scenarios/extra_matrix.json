@@ -1,0 +1,99 @@
+[
+  {
+    "name": "owner_miss_red",
+    "miss_owner": "red"
+  },
+  {
+    "name": "owner_miss_ir",
+    "miss_owner": "ir"
+  },
+  {
+    "name": "owner_miss_cal",
+    "miss_owner": "cal",
+    "frame_type": 0
+  },
+  {
+    "name": "normal_led_patterns_sar9",
+    "precisions": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "led_patterns": [
+      0,
+      255,
+      165,
+      90
+    ],
+    "ir_led_patterns": [
+      255,
+      0,
+      90,
+      165
+    ]
+  },
+  {
+    "name": "normal_color_codes_sar9",
+    "precision": 0,
+    "dc_patterns": [
+      60,
+      60,
+      60,
+      60
+    ],
+    "ir_dc_patterns": [
+      195,
+      195,
+      195,
+      195
+    ]
+  },
+  {
+    "name": "normal_led_patterns_sar15",
+    "precisions": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "led_patterns": [
+      0,
+      255,
+      165,
+      90
+    ],
+    "ir_led_patterns": [
+      255,
+      0,
+      90,
+      165
+    ]
+  },
+  {
+    "name": "normal_color_codes_sar15",
+    "precision": 1,
+    "dc_patterns": [
+      60,
+      60,
+      60,
+      60
+    ],
+    "ir_dc_patterns": [
+      195,
+      195,
+      195,
+      195
+    ]
+  },
+  {
+    "name": "owner_miss_red_sar15",
+    "miss_owner": "red",
+    "precision": 1
+  },
+  {
+    "name": "owner_miss_ir_sar15",
+    "miss_owner": "ir",
+    "precision": 1
+  }
+]

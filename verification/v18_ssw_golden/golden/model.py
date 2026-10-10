@@ -123,7 +123,7 @@ STATIC_ONES = {
     "o_en_sar9_dc_low", "o_en_sar15_amb_low", "o_en_sar15_dc_low",
 }
 SAMPLING = {"o_clk_9q1_low", "o_clk_15q1_low", "o_clk_q2_low", "o_clk_q3_low",
-            "o_leden1_low", "o_leden2_low"}
+            "o_leden1_low", "o_leden2_low", "o_en_tia_low", "o_clk_aferst_low", "o_clk_tiaen_low"}
 
 
 def _arithmetic(expression: str, values: dict[str, int]) -> int:
@@ -236,10 +236,20 @@ def contexts_for(scenario: dict) -> list[dict]:
                                done=base + (scenario.get("ir_done_tick", 510) if color and kind == 2 else
                                             scenario.get("done_tick", 335)),
                                center=base + (266 if kind != 2 else 460 if color else 300),
-                               amb=pattern, dc=(255 ^ pattern) if kind != 0 else 0,
-                               led=(90 if color else 165), epoch=(frame + sub) % 16,
-                               sample=len(contexts) + 1)
+                               amb=pattern, dc=scenario.get("ir_dc_patterns" if color else "dc_patterns",
+                                                           [255 ^ pattern] * 4)[(frame + sub) % 4] if kind != 0 else 0,
+                               led=scenario.get("ir_led_patterns" if color else "led_patterns",
+                                                [90 if color else 165] * 4)[(frame + sub) % 4],
+                               epoch=(frame + sub) % 16, sample=0)
                 contexts.append(context)
+    # C08 §7.2：只有真正提交的owner消耗序号；截止失败不能跳号。
+    next_sample = 1
+    for context in contexts:
+        if context["owner"] is not None and all(scenario.get(action) is None or
+                                                context["owner"] < scenario[action]
+                                                for action in ("stop_tick", "abort_tick")):
+            context["sample"] = next_sample
+            next_sample += 1
     return contexts
 
 
@@ -263,6 +273,7 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
     active = []
     physical = None
     scheduled = []
+    committed_samples = set()
     input_rows, golden_rows = [], []
     uncertainty = {}
     for tick in range(-8, count):
@@ -289,10 +300,16 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                       i_calibration_frame_active=int(tick >= 0 and kind != 2))
         if stop is not None and tick == stop:
             values["i_stop_ack_event"] = 1
+            # 用户/统筹 Q04：只有首个边沿已经出现的包络才能继续安全收尾。
+            active = [context for context in active if stop > context["center"] -
+                      (256 if not context["precision"] else 273)]
         if abort is not None and tick == abort:
             values["i_control_abort_event"] = 1
             active.clear()
         canceled = (stop is not None and tick >= stop) or (abort is not None and tick >= abort)
+        if canceled:
+            # C08 §8.2.4：STOP/abort后不再发候选提交安全脉冲。
+            values["i_idac_code_safe_boundary"] = 0
         for context in contexts:
             if context["fire"] == tick and not canceled:
                 values["i_waveform_context_valid"] = 1
@@ -309,6 +326,7 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                 values["i_adc_owner_sample_index"] = context["sample"]
                 physical = context
                 scheduled.append(context)
+                committed_samples.add(context["sample"])
         for context in scheduled:
             if context["done"] == tick:
                 values.update(i_adc_transaction_complete_event=1,
@@ -321,11 +339,22 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                           i_waveform_leddac_code_snapshot=17, i_waveform_amb_code_epoch=15,
                           i_waveform_dc_code_epoch=14)
         values["i_adc_idle"] = int(physical is None)
+        if stop is not None and tick > stop and physical is None:
+            safe_end = max((context["center"] + (18 if not context["precision"] else 8)
+                            for context in active), default=stop)
+            owner_end = max((context["done"] for context in scheduled), default=stop)
+            if tick >= max(safe_end, owner_end, stop) + 2:
+                # 行为manager在包络结束且ADC空闲后返回CONFIG，不引入新预约。
+                values.update(i_run_enable=0, i_normal_frame_active=0, i_calibration_frame_active=0)
         input_rows.append(pack_input(values))
         expected = {name: 0 for name in names}
         expected["o_clk_2m"] = 1
         if tick >= 0:
             expected["o_en_test"] = scenario.get("input_source", 0)
+            # 用户确认（10-10）Q02：选择电平跟随已提交精度，不限于包络。
+            # 刺激在低相提交，CSV在随后注册边沿之后采样，已包含输出寄存捕获延迟。
+            expected["o_en_15sar_low"] = int(kind == 2 and not scenario.get("static") and
+                                             values["i_run_enable"] and committed)
             if scenario.get("static"):
                 expected.update({name: 1 for name in STATIC_ONES})
                 expected["o_s_in"] = values["i_test_mux_ctrl"]
@@ -339,34 +368,20 @@ def generate(scenario: dict, profiles: dict, directory: Path) -> dict:
                             continue
                         dest = "o_leden2_low" if name == "o_leden1_low" and context["color"] else name
                         value = context["amb"] if "ambn" in name else context["dc"] if "dcn" in name else context["led"] if name == "o_leddac" else 1
-                        owned = context["owner"] is not None and context["owner"] <= tick
-                        if dest in SAMPLING and not owned:
+                        # 用户确认（10-10）Q06：采样相关窗口必须完整或整槽关闭。
+                        # 黄金按整槽的按时提交资格定义完整窗口，不能逐拍接owner截短模板。
+                        deadline = (context["center"] - (18 if kind != 2 else 17))
+                        eligible = context["sample"] != 0 and context["owner"] is not None and context["owner"] <= deadline
+                        if dest in SAMPLING and not eligible:
                             value = 0
-                        if name == "o_leddac" and not owned:
-                            value = None  # Q03：合同未逐端口定义LED有效采样的码抑制。
+                        if name == "o_leddac" and not eligible:
+                            value = 0  # 用户确认（10-10）Q03：无owner采样抑制也清LEDDAC。
                         if scenario.get("input_source") and dest in {"o_leddac", "o_leden1_low", "o_leden2_low"}:
                             value = 0
                         if expected[dest] is not None:
                             expected[dest] = None if value is None else expected[dest] | value
-                    if context["precision"]:
-                        expected["o_en_15sar_low"] = None  # Q02：不从实际输出反推保持范围。
-                if kind == 1:
-                    # Q01：校准模板未确认，保留确定的隔离与不选颜色规则。
-                    fixed_zero = {"o_clk_buf_low", "o_clk_15q1_low", "o_clk_iref_idac_sar15_low",
-                                  "o_en_15sar_low", "o_en_sar15_amb_low", "o_en_sar15_dc_low",
-                                  "o_en_sar15_iref", "o_idac_sar15ambn_low", "o_idac_sar15dcn_low",
-                                  "o_s_in", "o_en_test", "o_leden2_low" if scenario.get("color", 0) == 0 else "o_leden1_low"}
-                    for name in names:
-                        if name not in fixed_zero and name != "o_clk_2m":
-                            expected[name] = None
-                if stop is not None and tick >= stop:
-                    for context in active:
-                        first = context["center"] - (256 if not context["precision"] else 273)
-                        if stop < first:
-                            # Q04：尚未开始包络，不能猜STOP后是否仍执行预建立。
-                            for name in names:
-                                if name not in {"o_clk_2m", "o_en_test", "o_s_in"}:
-                                    expected[name] = None
+            if abort is not None and tick >= abort:
+                expected["o_en_15sar_low"] = 0  # C09 §8.3活动核disable安全向量。
         for name, value in expected.items():
             if value is None:
                 uncertainty[name] = uncertainty.get(name, 0) + 1
