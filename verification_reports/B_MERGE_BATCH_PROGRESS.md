@@ -9,7 +9,7 @@
 ## 当前状态
 
 - **已完成**：克隆仓库、切出分支、首次回复、用户答复落定（条目1）；在仓库根目录重开会话并加载skill（条目2）；阶段0基线回归已在后台启动（条目2）。
-- **当前项**：统筹10-10核对意见及其跟进已执行（条目19、20）。
+- **当前项**：统筹10-10核对意见、其跟进、以及对66bebdf的核对意见已执行（条目19~21）。
 - **下一步**：等统筹审阅更新后的报告。
 - **未决问题**：无。“回归机Vivado须为2022.2”已确认（`ea60432`的MACHINE.txt为Vivado Simulator v2022.2）。
 
@@ -246,3 +246,34 @@
   - 负对照：一行三个模块锚点中只把AMI一个换成AMI相邻端口，以及Consumer换相邻连接、W10换相邻连接，3处恰好各报1处；未改副本与--no-semantic均为0报错。
   - 写入`de06123`；§12.4a重算`4010f2e`（仅M01，26/26）。RTL、TB不变，不重跑回归。
 - 证据：`anchor_conversion/round3b/`（review.md、port_negctl.md、verify.txt、check_on_77d281a.txt、check_head_after_write.txt、semantics_selftest.txt）。
+
+### 条目21（2026-10-10）：锚点第四轮——低置信逐条判定与同类扩查（统筹对66bebdf的核对意见）
+
+- 依据：`verification_reports/coord_review_20261010/B_MERGE_BATCH_REVIEW_20261010.md`（main `2f0c0d0`）。未把main合进本分支，只用`git show origin/main:`阅读。
+- 统筹第一部分已确认：端口台账493行0错误、门禁、§12.4a 26/26、BMI-912。
+- 第二部分：“低置信保留原解析”不成立，统筹点名了至少17条错误。
+- 第三部分执行情况：
+  - (1) 56条逐条判定，见`anchor_conversion/round4/review.md`第一部分：
+    - 改正31条；
+    - 恢复原文4条（历史3、非锚点1）；
+    - 钉住版本“未能定位符号”2条；
+    - 核对确认原解析即正确符号18条；
+    - ppg_dual_precision_top.v 1条按§1.11本批不改。
+  - (2) 同类扩查：
+    - G-FP-05 18个binding锚点：17个改为例化名+参数，规则1e核对；dual_precision 1行不改。
+    - 裸行号文件归属：改正14处。
+    - 范围锚点：核对31处。
+    - 例化端口连接：核对481个锚点，改正3处。
+    - 登记BMI-913（3369行own-default计数与RTL不符）。
+  - (3) 门禁：
+    - 新增1d（符号须由本行述及，否则例外表写明理由）、1e（binding须为target模块例化）。
+    - 钉住版本形式识别为合法。
+    - 例外表74条。
+    - 负对照：统筹指定的参数绑定行恢复现文，门禁失败；另3种各按预期报出。
+  - (4) 报告§8、附录A与round3b/review.md已更新。
+- 提交：
+  - 快照`0647563`；
+  - 写入`4f33535`（rewrite 112、revert 5，anchor_verify 0不符）；
+  - §12.4a重算`dcffe68`。
+- 干净导出（dcffe68）结果：门禁通过，manifest_digest 26/26；统筹的`port_ledger_check.py`报493行、0错误、无文件或符号缺失，输出见`round4/port_ledger_check.txt`。
+- RTL、TB未改动，不重跑回归。
